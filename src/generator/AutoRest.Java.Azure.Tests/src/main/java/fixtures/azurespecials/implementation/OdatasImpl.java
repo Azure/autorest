@@ -31,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Odatas.
  */
-public final class OdatasImpl implements Odatas {
+public class OdatasImpl implements Odatas {
     /** The Retrofit service to perform REST calls. */
     private OdatasService service;
     /** The service client containing this operation class. */

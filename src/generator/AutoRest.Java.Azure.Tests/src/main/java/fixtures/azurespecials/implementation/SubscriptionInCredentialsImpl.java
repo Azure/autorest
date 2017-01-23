@@ -32,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInCredentials.
  */
-public final class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
+public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInCredentialsService service;
     /** The service client containing this operation class. */

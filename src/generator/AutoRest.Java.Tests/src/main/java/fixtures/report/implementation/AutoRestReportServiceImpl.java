@@ -32,7 +32,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestReportService class.
  */
-public final class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
+public class AutoRestReportServiceImpl extends ServiceClient implements AutoRestReportService {
     /**
      * The Retrofit service to perform REST calls.
      */

@@ -14,12 +14,11 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
  */
-public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
+public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 

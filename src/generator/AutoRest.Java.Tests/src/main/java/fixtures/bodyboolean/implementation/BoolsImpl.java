@@ -31,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Bools.
  */
-public final class BoolsImpl implements Bools {
+public class BoolsImpl implements Bools {
     /** The Retrofit service to perform REST calls. */
     private BoolsService service;
     /** The service client containing this operation class. */

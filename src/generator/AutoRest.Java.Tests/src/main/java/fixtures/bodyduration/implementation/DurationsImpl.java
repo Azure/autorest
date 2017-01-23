@@ -32,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Durations.
  */
-public final class DurationsImpl implements Durations {
+public class DurationsImpl implements Durations {
     /** The Retrofit service to perform REST calls. */
     private DurationsService service;
     /** The service client containing this operation class. */

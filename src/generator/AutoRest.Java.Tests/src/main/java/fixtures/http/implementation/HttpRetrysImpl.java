@@ -35,7 +35,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpRetrys.
  */
-public final class HttpRetrysImpl implements HttpRetrys {
+public class HttpRetrysImpl implements HttpRetrys {
     /** The Retrofit service to perform REST calls. */
     private HttpRetrysService service;
     /** The service client containing this operation class. */

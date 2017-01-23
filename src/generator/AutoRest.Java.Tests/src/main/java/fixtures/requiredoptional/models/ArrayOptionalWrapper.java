@@ -11,6 +11,7 @@
 package fixtures.requiredoptional.models;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ArrayOptionalWrapper model.
@@ -19,6 +20,7 @@ public class ArrayOptionalWrapper {
     /**
      * The value property.
      */
+    @JsonProperty(value = "value")
     private List<String> value;
 
     /**

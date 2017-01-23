@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestDurationTestService class.
  */
-public final class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
+public class AutoRestDurationTestServiceImpl extends ServiceClient implements AutoRestDurationTestService {
 
     /**
      * The Durations object to access its operations.

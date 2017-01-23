@@ -34,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in AvailabilitySets.
  */
-public final class AvailabilitySetsImpl implements AvailabilitySets {
+public class AvailabilitySetsImpl implements AvailabilitySets {
     /** The Retrofit service to perform REST calls. */
     private AvailabilitySetsService service;
     /** The service client containing this operation class. */

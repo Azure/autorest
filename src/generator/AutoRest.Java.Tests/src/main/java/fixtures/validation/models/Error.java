@@ -10,6 +10,7 @@
 
 package fixtures.validation.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Error model.
@@ -18,16 +19,19 @@ public class Error {
     /**
      * The code property.
      */
+    @JsonProperty(value = "code")
     private Integer code;
 
     /**
      * The message property.
      */
+    @JsonProperty(value = "message")
     private String message;
 
     /**
      * The fields property.
      */
+    @JsonProperty(value = "fields")
     private String fields;
 
     /**

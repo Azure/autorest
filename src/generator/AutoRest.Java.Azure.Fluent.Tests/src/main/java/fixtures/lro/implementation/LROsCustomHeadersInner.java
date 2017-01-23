@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LROsCustomHeaders.
  */
-public final class LROsCustomHeadersInner {
+public class LROsCustomHeadersInner {
     /** The Retrofit service to perform REST calls. */
     private LROsCustomHeadersService service;
     /** The service client containing this operation class. */

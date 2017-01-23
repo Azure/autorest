@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestIntegerTestService class.
  */
-public final class AutoRestIntegerTestServiceImpl extends ServiceClient implements AutoRestIntegerTestService {
+public class AutoRestIntegerTestServiceImpl extends ServiceClient implements AutoRestIntegerTestService {
 
     /**
      * The Ints object to access its operations.

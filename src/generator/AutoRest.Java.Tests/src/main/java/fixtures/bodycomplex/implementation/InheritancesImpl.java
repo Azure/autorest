@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Inheritances.
  */
-public final class InheritancesImpl implements Inheritances {
+public class InheritancesImpl implements Inheritances {
     /** The Retrofit service to perform REST calls. */
     private InheritancesService service;
     /** The service client containing this operation class. */

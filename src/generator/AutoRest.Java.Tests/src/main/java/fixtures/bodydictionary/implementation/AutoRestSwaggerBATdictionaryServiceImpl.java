@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
  */
-public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient implements AutoRestSwaggerBATdictionaryService {
+public class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient implements AutoRestSwaggerBATdictionaryService {
 
     /**
      * The Dictionarys object to access its operations.

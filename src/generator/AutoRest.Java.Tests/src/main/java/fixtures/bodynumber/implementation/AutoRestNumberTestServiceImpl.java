@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestNumberTestService class.
  */
-public final class AutoRestNumberTestServiceImpl extends ServiceClient implements AutoRestNumberTestService {
+public class AutoRestNumberTestServiceImpl extends ServiceClient implements AutoRestNumberTestService {
 
     /**
      * The Numbers object to access its operations.

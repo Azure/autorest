@@ -37,7 +37,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Formdatas.
  */
-public final class FormdatasImpl implements Formdatas {
+public class FormdatasImpl implements Formdatas {
     /** The Retrofit service to perform REST calls. */
     private FormdatasService service;
     /** The service client containing this operation class. */

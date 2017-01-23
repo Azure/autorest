@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseEnum operation.
@@ -19,6 +20,7 @@ public class HeaderResponseEnumHeaders {
      * response with header values "GREY" or null. Possible values include:
      * 'White', 'black', 'GREY'.
      */
+    @JsonProperty(value = "value")
     private GreyscaleColors value;
 
     /**

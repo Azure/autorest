@@ -15,7 +15,6 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -34,7 +33,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
  */
-public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
+public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     /** The Retrofit service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
     /** the {@link AzureClient} used for long running operations. */

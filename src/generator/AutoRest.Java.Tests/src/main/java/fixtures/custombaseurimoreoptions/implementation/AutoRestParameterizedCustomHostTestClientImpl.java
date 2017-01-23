@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
  */
-public final class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
+public class AutoRestParameterizedCustomHostTestClientImpl extends ServiceClient implements AutoRestParameterizedCustomHostTestClient {
 
     /** The subscription id with value 'test12'. */
     private String subscriptionId;

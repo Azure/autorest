@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ArrayWrapper model.
@@ -19,6 +20,7 @@ public class ArrayWrapper {
     /**
      * The array property.
      */
+    @JsonProperty(value = "array")
     private List<String> array;
 
     /**

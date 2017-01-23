@@ -30,7 +30,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Headers.
  */
-public final class HeadersInner {
+public class HeadersInner {
     /** The Retrofit service to perform REST calls. */
     private HeadersService service;
     /** The service client containing this operation class. */

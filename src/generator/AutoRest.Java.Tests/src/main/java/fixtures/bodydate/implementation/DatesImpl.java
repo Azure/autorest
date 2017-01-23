@@ -32,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Dates.
  */
-public final class DatesImpl implements Dates {
+public class DatesImpl implements Dates {
     /** The Retrofit service to perform REST calls. */
     private DatesService service;
     /** The service client containing this operation class. */

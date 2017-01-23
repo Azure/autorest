@@ -32,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in SkipUrlEncodings.
  */
-public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
+public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     /** The Retrofit service to perform REST calls. */
     private SkipUrlEncodingsService service;
     /** The service client containing this operation class. */

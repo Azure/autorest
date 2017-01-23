@@ -31,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Bytes.
  */
-public final class BytesImpl implements Bytes {
+public class BytesImpl implements Bytes {
     /** The Retrofit service to perform REST calls. */
     private BytesService service;
     /** The service client containing this operation class. */

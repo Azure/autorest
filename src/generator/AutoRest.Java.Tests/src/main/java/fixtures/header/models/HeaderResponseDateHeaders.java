@@ -11,6 +11,7 @@
 package fixtures.header.models;
 
 import org.joda.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseDate operation.
@@ -19,6 +20,7 @@ public class HeaderResponseDateHeaders {
     /**
      * response with header values "2010-01-01" or "0001-01-01".
      */
+    @JsonProperty(value = "value")
     private LocalDate value;
 
     /**

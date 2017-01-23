@@ -31,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionLocals.
  */
-public final class ApiVersionLocalsImpl implements ApiVersionLocals {
+public class ApiVersionLocalsImpl implements ApiVersionLocals {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionLocalsService service;
     /** The service client containing this operation class. */

@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Ints.
  */
-public final class IntsImpl implements Ints {
+public class IntsImpl implements Ints {
     /** The Retrofit service to perform REST calls. */
     private IntsService service;
     /** The service client containing this operation class. */

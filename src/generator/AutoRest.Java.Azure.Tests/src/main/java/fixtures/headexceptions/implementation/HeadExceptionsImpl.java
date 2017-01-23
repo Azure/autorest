@@ -29,7 +29,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HeadExceptions.
  */
-public final class HeadExceptionsImpl implements HeadExceptions {
+public class HeadExceptionsImpl implements HeadExceptions {
     /** The Retrofit service to perform REST calls. */
     private HeadExceptionsService service;
     /** The service client containing this operation class. */

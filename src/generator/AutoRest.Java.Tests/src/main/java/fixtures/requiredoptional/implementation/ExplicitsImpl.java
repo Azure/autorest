@@ -44,7 +44,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Explicits.
  */
-public final class ExplicitsImpl implements Explicits {
+public class ExplicitsImpl implements Explicits {
     /** The Retrofit service to perform REST calls. */
     private ExplicitsService service;
     /** The service client containing this operation class. */

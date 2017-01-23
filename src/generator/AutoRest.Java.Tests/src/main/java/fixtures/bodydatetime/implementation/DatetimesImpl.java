@@ -32,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Datetimes.
  */
-public final class DatetimesImpl implements Datetimes {
+public class DatetimesImpl implements Datetimes {
     /** The Retrofit service to perform REST calls. */
     private DatetimesService service;
     /** The service client containing this operation class. */

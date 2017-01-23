@@ -14,14 +14,13 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient;
 import fixtures.azureparametergrouping.AutoRestParameterGroupingTestService;
 import fixtures.azureparametergrouping.ParameterGroupings;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
  */
-public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
+public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient implements AutoRestParameterGroupingTestService {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 

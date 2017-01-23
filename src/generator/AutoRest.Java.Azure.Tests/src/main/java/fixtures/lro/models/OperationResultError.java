@@ -10,6 +10,7 @@
 
 package fixtures.lro.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The OperationResultError model.
@@ -18,11 +19,13 @@ public class OperationResultError {
     /**
      * The error code for an operation failure.
      */
+    @JsonProperty(value = "code")
     private Integer code;
 
     /**
      * The detailed arror message.
      */
+    @JsonProperty(value = "message")
     private String message;
 
     /**

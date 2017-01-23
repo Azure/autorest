@@ -35,7 +35,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Implicits.
  */
-public final class ImplicitsImpl implements Implicits {
+public class ImplicitsImpl implements Implicits {
     /** The Retrofit service to perform REST calls. */
     private ImplicitsService service;
     /** The service client containing this operation class. */

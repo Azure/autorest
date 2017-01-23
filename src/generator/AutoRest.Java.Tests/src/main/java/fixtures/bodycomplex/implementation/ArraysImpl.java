@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Arrays.
  */
-public final class ArraysImpl implements Arrays {
+public class ArraysImpl implements Arrays {
     /** The Retrofit service to perform REST calls. */
     private ArraysService service;
     /** The service client containing this operation class. */

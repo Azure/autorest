@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Polymorphisms.
  */
-public final class PolymorphismsImpl implements Polymorphisms {
+public class PolymorphismsImpl implements Polymorphisms {
     /** The Retrofit service to perform REST calls. */
     private PolymorphismsService service;
     /** The service client containing this operation class. */

@@ -12,6 +12,7 @@ package fixtures.bodycomplex.models;
 
 import com.microsoft.rest.DateTimeRfc1123;
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Datetimerfc1123Wrapper model.
@@ -20,11 +21,13 @@ public class Datetimerfc1123Wrapper {
     /**
      * The field property.
      */
+    @JsonProperty(value = "field")
     private DateTimeRfc1123 field;
 
     /**
      * The now property.
      */
+    @JsonProperty(value = "now")
     private DateTimeRfc1123 now;
 
     /**

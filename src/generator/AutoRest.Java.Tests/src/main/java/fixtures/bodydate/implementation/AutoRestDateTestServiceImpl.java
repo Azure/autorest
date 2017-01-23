@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestDateTestService class.
  */
-public final class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRestDateTestService {
+public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRestDateTestService {
 
     /**
      * The Dates object to access its operations.

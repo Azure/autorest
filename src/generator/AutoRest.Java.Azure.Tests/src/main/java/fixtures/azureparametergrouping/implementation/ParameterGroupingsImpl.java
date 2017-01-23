@@ -38,7 +38,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupings.
  */
-public final class ParameterGroupingsImpl implements ParameterGroupings {
+public class ParameterGroupingsImpl implements ParameterGroupings {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingsService service;
     /** The service client containing this operation class. */

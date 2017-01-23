@@ -30,7 +30,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpFailures.
  */
-public final class HttpFailuresImpl implements HttpFailures {
+public class HttpFailuresImpl implements HttpFailures {
     /** The Retrofit service to perform REST calls. */
     private HttpFailuresService service;
     /** The service client containing this operation class. */

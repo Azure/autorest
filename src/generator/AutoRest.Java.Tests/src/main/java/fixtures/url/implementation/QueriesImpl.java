@@ -37,7 +37,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Queries.
  */
-public final class QueriesImpl implements Queries {
+public class QueriesImpl implements Queries {
     /** The Retrofit service to perform REST calls. */
     private QueriesService service;
     /** The service client containing this operation class. */

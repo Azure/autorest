@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService class.
  */
-public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
+public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
 
     /**
      * The Strings object to access its operations.

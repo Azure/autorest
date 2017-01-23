@@ -34,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Basics.
  */
-public final class BasicsImpl implements Basics {
+public class BasicsImpl implements Basics {
     /** The Retrofit service to perform REST calls. */
     private BasicsService service;
     /** The service client containing this operation class. */

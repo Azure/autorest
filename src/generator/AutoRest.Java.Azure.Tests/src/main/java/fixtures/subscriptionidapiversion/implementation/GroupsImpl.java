@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Groups.
  */
-public final class GroupsImpl implements Groups {
+public class GroupsImpl implements Groups {
     /** The Retrofit service to perform REST calls. */
     private GroupsService service;
     /** The service client containing this operation class. */

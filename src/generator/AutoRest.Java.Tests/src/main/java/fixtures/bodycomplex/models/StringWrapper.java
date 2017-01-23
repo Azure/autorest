@@ -19,11 +19,13 @@ public class StringWrapper {
     /**
      * The field property.
      */
+    @JsonProperty(value = "field")
     private String field;
 
     /**
      * The empty property.
      */
+    @JsonProperty(value = "empty")
     private String empty;
 
     /**

@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Datetimerfc1123s.
  */
-public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
+public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /** The Retrofit service to perform REST calls. */
     private Datetimerfc1123sService service;
     /** The service client containing this operation class. */

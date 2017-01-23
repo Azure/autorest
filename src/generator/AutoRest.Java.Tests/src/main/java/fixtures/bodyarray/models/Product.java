@@ -19,6 +19,7 @@ public class Product {
     /**
      * The integer property.
      */
+    @JsonProperty(value = "integer")
     private Integer integer;
 
     /**

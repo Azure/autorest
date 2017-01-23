@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpServerFailures.
  */
-public final class HttpServerFailuresImpl implements HttpServerFailures {
+public class HttpServerFailuresImpl implements HttpServerFailures {
     /** The Retrofit service to perform REST calls. */
     private HttpServerFailuresService service;
     /** The service client containing this operation class. */

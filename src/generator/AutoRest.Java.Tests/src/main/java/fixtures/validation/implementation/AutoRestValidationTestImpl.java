@@ -39,7 +39,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
  */
-public final class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
+public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
      * The Retrofit service to perform REST calls.
      */

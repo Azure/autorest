@@ -43,7 +43,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Primitives.
  */
-public final class PrimitivesImpl implements Primitives {
+public class PrimitivesImpl implements Primitives {
     /** The Retrofit service to perform REST calls. */
     private PrimitivesService service;
     /** The service client containing this operation class. */

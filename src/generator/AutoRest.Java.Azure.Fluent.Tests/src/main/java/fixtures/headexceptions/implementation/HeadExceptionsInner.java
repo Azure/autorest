@@ -28,7 +28,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HeadExceptions.
  */
-public final class HeadExceptionsInner {
+public class HeadExceptionsInner {
     /** The Retrofit service to perform REST calls. */
     private HeadExceptionsService service;
     /** The service client containing this operation class. */

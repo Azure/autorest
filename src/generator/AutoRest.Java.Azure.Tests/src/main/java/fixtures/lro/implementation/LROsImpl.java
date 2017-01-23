@@ -61,7 +61,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LROs.
  */
-public final class LROsImpl implements LROs {
+public class LROsImpl implements LROs {
     /** The Retrofit service to perform REST calls. */
     private LROsService service;
     /** The service client containing this operation class. */

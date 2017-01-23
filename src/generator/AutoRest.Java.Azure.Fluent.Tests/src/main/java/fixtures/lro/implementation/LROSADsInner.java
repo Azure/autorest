@@ -34,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LROSADs.
  */
-public final class LROSADsInner {
+public class LROSADsInner {
     /** The Retrofit service to perform REST calls. */
     private LROSADsService service;
     /** The service client containing this operation class. */

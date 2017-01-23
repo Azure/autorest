@@ -21,7 +21,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  */
-public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
+public class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient implements AutoRestRequiredOptionalTestService {
 
     /** number of items to skip. */
     private String requiredGlobalPath;

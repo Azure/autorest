@@ -27,7 +27,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestComplexTestService class.
  */
-public final class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
+public class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
 
     /** API ID. */
     private String apiVersion;

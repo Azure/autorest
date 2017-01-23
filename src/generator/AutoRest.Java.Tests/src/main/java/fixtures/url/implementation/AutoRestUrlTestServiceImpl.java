@@ -22,7 +22,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestUrlTestService class.
  */
-public final class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRestUrlTestService {
+public class AutoRestUrlTestServiceImpl extends ServiceClient implements AutoRestUrlTestService {
 
     /** A string value 'globalItemStringPath' that appears in the path. */
     private String globalStringPath;

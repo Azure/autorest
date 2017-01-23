@@ -14,14 +14,13 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
  */
-public final class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
+public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 

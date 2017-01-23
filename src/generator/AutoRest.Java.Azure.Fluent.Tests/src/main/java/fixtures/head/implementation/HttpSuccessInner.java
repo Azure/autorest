@@ -28,7 +28,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
-public final class HttpSuccessInner {
+public class HttpSuccessInner {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */

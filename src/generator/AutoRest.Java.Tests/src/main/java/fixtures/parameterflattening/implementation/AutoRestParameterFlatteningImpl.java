@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 /**
  * Initializes a new instance of the AutoRestParameterFlattening class.
  */
-public final class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
+public class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
 
     /**
      * The AvailabilitySets object to access its operations.

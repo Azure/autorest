@@ -10,6 +10,7 @@
 
 package fixtures.lro.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for putNoHeaderInRetry operation.
@@ -19,6 +20,7 @@ public class LROsPutNoHeaderInRetryHeaders {
      * Location to poll for result status: will be set to
      * /lro/putasync/noheader/202/200/operationResults.
      */
+    @JsonProperty(value = "location")
     private String location;
 
     /**

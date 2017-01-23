@@ -43,7 +43,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
  */
-public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
+public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     /**
      * The Retrofit service to perform REST calls.
      */

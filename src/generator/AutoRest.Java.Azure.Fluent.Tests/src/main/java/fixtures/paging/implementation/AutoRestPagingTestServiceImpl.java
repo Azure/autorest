@@ -14,12 +14,11 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
  */
-public final class AutoRestPagingTestServiceImpl extends AzureServiceClient {
+public class AutoRestPagingTestServiceImpl extends AzureServiceClient {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 

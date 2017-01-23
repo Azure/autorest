@@ -34,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LRORetrys.
  */
-public final class LRORetrysInner {
+public class LRORetrysInner {
     /** The Retrofit service to perform REST calls. */
     private LRORetrysService service;
     /** The service client containing this operation class. */

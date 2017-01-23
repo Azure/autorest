@@ -14,14 +14,13 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.RestClient;
 import fixtures.headexceptions.AutoRestHeadExceptionTestService;
 import fixtures.headexceptions.HeadExceptions;
 
 /**
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceImpl class.
  */
-public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient implements AutoRestHeadExceptionTestService {
+public class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClient implements AutoRestHeadExceptionTestService {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 

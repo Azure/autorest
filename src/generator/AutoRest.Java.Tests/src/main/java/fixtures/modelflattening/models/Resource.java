@@ -20,29 +20,31 @@ public class Resource {
     /**
      * Resource Id.
      */
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /**
      * Resource Type.
      */
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "type", access = JsonProperty.Access.WRITE_ONLY)
     private String type;
 
     /**
      * The tags property.
      */
+    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
      * Resource Location.
      */
+    @JsonProperty(value = "location")
     private String location;
 
     /**
      * Resource Name.
      */
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /**

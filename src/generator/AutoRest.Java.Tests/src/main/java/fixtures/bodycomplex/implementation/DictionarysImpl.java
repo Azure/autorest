@@ -33,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Dictionarys.
  */
-public final class DictionarysImpl implements Dictionarys {
+public class DictionarysImpl implements Dictionarys {
     /** The Retrofit service to perform REST calls. */
     private DictionarysService service;
     /** The service client containing this operation class. */
