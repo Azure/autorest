@@ -1,8 +1,8 @@
 # Literate Configuration 
 
 ## About the Literate file formats
-The literate configuration format is [CommonMark](http://spec.commonmark.org/) document that has embedded code 
-blocks for machine readable sections. The this encourages easy-to-author documentation while permitting the specificity 
+The literate configuration format is a [CommonMark](http://spec.commonmark.org/) document that has embedded code 
+blocks for machine readable sections. This encourages easy-to-author documentation while permitting the specificity 
 desired when authoring and processing instructions.
 
 ### Notable Features
@@ -15,7 +15,7 @@ desired when authoring and processing instructions.
 Passing settings on the command line will be continue to be supported for continutity, the
 preference going forward would be to build an accompanying file to drive the execution.
 
-The implementation of the command line will to translate the existing command-line-parameters into 
+The implementation of the command line will be to translate the existing command-line-parameters into 
 an in-memory configuration document and feed that to the configuration processing system to ensure 
 that the rest of the system doesn't require any extra effort to process.
 
@@ -23,37 +23,36 @@ that the rest of the system doesn't require any extra effort to process.
 
 The Literate configuration file is a CommonMark (aka Markdown) file that has code blocks. 
 
-If the configuration file is actually named `Readme.md` it serves dual-purpose as both the documnentation that 
+If the configuration file is actually named `Readme.md` it serves dual-purpose as both the documentation that 
 a user sees in github where instructuions for use can be, as well as the storage for configuration information.
 
 A configuration file should also _document_ how to use the configuration file, without assuming that the user knows
 how to use any of the tools required.
 
 > Example: a configuration `readme.md` that starts off with instructions on how to use it.
-
-~~~ markdown
-# My API 
-
-## Getting Started 
-To build the SDKs for My API, simply [Install AutoRest](#Installing-AutoRest) and run:
-> `Autorest.exe readme.md`
-
-To see additional help and options, run:
-> `Autorest.exe help readme.md`
-
-### Installing AutoRest
-AutoRest is most easily installed via the Node JS package `autorest`:
-> npm install -g autorest 
-
-For other options on installation see [Installing AutoRest](https://aka.ms/installing-autorest.md) on the AutoRest github page.
-
-## AutoRest configuration ...
-``` yaml
-autorest: 
-  minimum-version: 1.0
-  # (more settings here...)
-```
-~~~
+> ~~~ markdown
+> # My API 
+> 
+> ## Getting Started 
+> To build the SDKs for My API, simply [Install AutoRest](#Installing-AutoRest) and run:
+> > `Autorest.exe readme.md`
+> 
+> To see additional help and options, run:
+> > `Autorest.exe help readme.md`
+> 
+> ### Installing AutoRest
+> AutoRest is most easily installed via the Node JS package `autorest`:
+> > npm install -g autorest 
+> 
+> For other options on installation see [Installing AutoRest](https://aka.ms/installing-autorest.md) on the AutoRest github page.
+> 
+> ## AutoRest configuration ...
+> ``` yaml
+> autorest: 
+>   minimum-version: 1.0
+>   # (more settings here...)
+> ```
+> ~~~
 
 
 ### Configuration element conventions
