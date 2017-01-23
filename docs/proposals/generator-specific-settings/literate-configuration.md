@@ -50,7 +50,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/insta
 ## AutoRest configuration ...
 ``` yaml
 autorest: 
-  minimum-version: 1.0
+  minimum-version: 1.0 # specify the version of Autorest to use
   # (more settings here...)
 ```
 ~~~
@@ -200,7 +200,7 @@ JSONPath is similar to XPath, but is designed for JSON (and YAML) documents. Thi
 >|n/a|	`[start:end:step]`|	array slice operator borrowed from ES4.|
 >|`[]`	|`?()`|	applies a filter (script) expression.|
 >|n/a	|`()`|	script expression, using the underlying script engine.|
->|`()`	|n/a	|grouping in Xpath|
+>|`()`	|n/a	|grouping in XPath|
 
 Among the many virtues of JSONPath, an expression can be virtually exactly as you'd expect to identify a specific node with JSON, ie:
 
@@ -281,103 +281,111 @@ ruby:
 
 ### Directives - global or per-language
 
-Directives are nodes that change generation **behavior** based on the selection of a set of nodes in the Swagger DOM. See  [Swagger DOM Query Format](#Swagger-DOM-Query-Format) 
+Directives are nodes that change generation **behavior** based on the selection of a set of nodes in the Swagger DOM. See  [Swagger DOM Query Format](#Swagger-DOM-Query-Format)
+
+Directives are specified as a collection of `directive` objects fall under the `directive:` setting.
+
+A `directive` object appears as follows:
 
 ``` yaml
-#
+from: <swagger-document-selection> # based on swagger namespaces
+where: <json-path-query>           # a JSONPath expression to select the nodes in the swagger DOM
+set: <object>                      # an object that has a series of key-value settings to apply to the selected nodes.
+<other-directive-targets> : <*>    # other directives that don't set properties on the node, but rather are directed towards parts of autorest.
 ```
 
-`Settings` vs `Options`
+If the `from` isn't set, the default is to apply the directive to all the Literate Swagger DOMs
 
+If the `where` isn't set, the default is to apply the directive to all the nodes in the selected Literate Swagger DOMs
 
+> Example: overriding a `method-group` name 
 
 ``` yaml
-Namespace: MyApp.MyNameSpace
-Modeler : default # options are 'default' or 'composite' 
-OutputFolder : Foo
-Input:
-  - swagger/MySpec.json
-  - swagger/MySpec2.json
-
-
-generation-option:
-  - 
-
+directive: # an array of directive objects
+  - from: My Spec # specify a specific document 'namespace' (aka title)
+    where: $..[@operationId="blob_*"]
+    set:
+      method-group: Blobber # override the method-group for a given set of operations matching blob_*
+  
 csharp:
-  azure: true
-  namespace: System.MyApp.MyNameSpace
-  use-date-time-offset: true
-  merge-inputs: true
-  options:
-    - from: My Spec
+  directive:
+    - from: My Spec # specify a specific document 'namespace' (aka title)
       where: $..[@operationId="blob_*"]
       set:
-        method-group: Blobber
-    
-
-Generator:
-  Azure.CSharp:
-    Namespace: System.MyApp.MyNameSpace  # override the default/global setting above.
-    OutputFolder : .\output\cs
-    useDateTimeOffset : true # example cmdline parameter usage
-    Input:
-      - swagger/MyCompositeSwagger.json # instead of using what was passed in, just use the composite for that one.
-    
-    SomeCustomData:
-      foo : 100
-      bar: true
-      bin : 'right'
-
-    operations:
-      My Api/blobs_list:
-        method_name : ListBlobsForMe
-        
-      My API: # client title
-        blobs_list: # operation_id
-          methodgroup : Blobber
-          method: ListBlobsInContainer
-
-        blobs_list_or_die_trying: #handle multiple underscores in method
-          methodgroup : Blobber
-          method: ListBlobsWithDeathAsAsPossibility
-    
-        
-    
-  
-  Azure.Ruby:
-    Namespace: my_app::my_name_space  # override the default/global setting above.
-    OutputFolder : .\output\ruby
-
+        method-group: AzureBlob # per-language (csharp) override for method-group name
 ```
 
-
-
+> Example: disabling a validation for a couple of docs
 
 ``` yaml
-autorest:
-  version: 2.0 # requires autorest before 2.0
-
-  minimum-version: 2.0
-
-  maximum-version: 2.8
-
-project-root: https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/    # think of this as a CD to the root where inputs are relative from.
-output-root : "$(this)/Generated"                                                     # this is where all output files are generated relative to.
-inputs:
-  - arm-machinelearning/2016-05-01-preview/swagger/webservices.md       # point to the individual autorest config files 
-  - arm-machinelearning/2016-05-01-preview/swagger/commitmentPlans.md   # point to the individual autorest config files
-
-
-set repoRoot=%~dp0..\..\..\..
-set generateFolder=%~dp0Generated
-set webServicesGenerateFolder=%generateFolder%\WebServices
-set commitmentPlansGenerateFolder=%generateFolder%\CommitmentPlans
-
-if exist %generateFolder% rd /S /Q  %generateFolder%
-
-call "%repoRoot%\tools\autorest.gen.cmd" %webServicesSpecFile% Microsoft.Azure.Management.MachineLearning.WebServices %autoRestVersion% %webServicesGenerateFolder%
-call "%repoRoot%\tools\autorest.gen.cmd" %commitmentPlansSpecFile% Microsoft.Azure.Management.MachineLearning.CommitmentPlans %autoRestVersion% %commitmentPlansGenerateFolder%
-
-endlocal
-
+directive: 
+  - from: # specify multiple document 'namespace's (aka title)
+      - My API
+      - SomeOther API
+    suppress-validations:
+      - VE1025 # codes for validation suppression
+      - VE1104   
 ```
+
+> Example: applying `x-ms` Swagger Extensions to the DOM:
+
+``` yaml
+directive:
+  - where: definitions.myobject.properties.foo
+    set:
+      client-flatten: true    # you can omit the x-ms prefix, it's ok, we'll figure it out.
+      x-ms-client-name: HELLO # or you can specify the x-ms prefix. 
+      enum:
+        name: MyEnum
+        modelAsString: false
+```
+
+In this example, rather than specifying the information in the swagger file (because it doesn't affect the wire data) we specify the extension usage as directives for code generation.
+
+
+## AutoRest Settings 
+
+The collection of AutoRest settings that is currently available on the command line can be expressed in Literate Configuration.
+
+#### Important additions: 
+The notion of the version/minimum/maximum version to use of AutoRest. The purpose of this is to get to the point where you don't have to ever actively install a given version of AutoRest. 
+Instead, you install any version of AutoRest that supports Literate Configuration, and if the configuration calls for a different version of AutoRest, we download and install AutoRest into a version-specific folder (in say `$env:AppData`...) and pass thru the work to that version.
+
+Then, once you've installed AutoRest, you can use any arbitrary version by just specifying it.
+
+
+#### Any-language settings
+
+|Setting|Example|Purpose|
+|-------|-------|-------|
+|version|`version: 1.0.0-Nightly20170107` | Specify a specific version of AutoRest to use for the code generation (try to use `minimum-version` and `maximum-version` if possible) |
+|minium-version|`version: 1.0` | Specify a minimum version of AutoRest to use for the code generation |
+|maximum-version|`version: 1.999` | Specify a maximum version of AutoRest to use for the code generation |
+|azure|`azure-arm:true` | specifies that that the generation is designed to create an Azure Resource Manager SDK |
+|add-credentials| `add-credentials: true` | If true, the generated client includes a ServiceClientCredentials property and constructor parameter. Authentication behaviors are implemented by extending the ServiceClientCredentials type.|
+|client-name| `client-name: MyClient ` |  Name to use for the generated client type. By default, uses the value of the 'Title' field from the Swagger input. |
+|generation-mode| `generation-mode: ['rest-client', 'rest-server'] `| The code generation mode. Possible values: rest, rest-client, rest-server. Determines whether AutoRest generates the client or server side code for given spec.|
+|header-text| `header-text: MIT` | Text to include as a header comment in generated files. Use NONE to suppress the default header. |
+|input-file| `input-file: foo.json` | The location of the input specification. |
+|modeler| `modeler: composite` |  The Modeler to use on the input. If not specified, defaults to Swagger.|
+|models-name|`models-name: foo` |  Name to use for the generated client models namespace and folder name. Not supported by all code generators. |
+|namespace|`namespace:Microsoft.Azure.MyLib`| The namespace to use for generated code.|
+|output-folder| `output-folder: c:/output` | The location for generated files. If not specified, uses "Generated" as the default. |
+|output-file| `output-file: foo.cs` | If set, will cause generated code to be output to a single file. Not supported by all code generators.|
+|package-name|`package-name: somePackage`| Package name of then generated code package. Should be then names wanted for the package in then package manager. |
+|package-version|`package-version: 1.0.5`| Package version of then generated code package. Should be then version wanted for the package in then package manager.|
+|payload-flatteningthreshold|`payload-flatteningthreshold: 2`| The maximum number of properties in the request body. If the number of properties in the request body is less than or equal to this value, these properties will be represented as method arguments. |
+
+#### CSharp Settings
+|Setting|Example|Purpose|
+|-------|-------|-------|
+|disable-simplifier| `disable-simplfier:true` | Disables c# post-codegeneration simplifier|
+|internal-constructors| `internal-constructors: true` | Indicates whether ctor needs to be generated with internal protection level. |
+|sync-methods| `sync-methods: true `| Specifies mode for generating sync wrappers. |
+|use-date-time-offset| `use-date-time-offset: true` | Indicates whether to use DateTimeOffset instead of DateTime to model date-time types |
+
+#### NodeJS Settings:
+|Setting|Example|Purpose|
+|-------|-------|-------|
+|disable-typescript|`disable-typescript: true` | Disables TypeScript generation. |
+
