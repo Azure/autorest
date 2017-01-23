@@ -119,10 +119,6 @@ namespace AutoRest.Python.Azure
                 }
             }
 
-            if (!ignoreNextLink && !findNextLink)
-            {
-                throw new KeyNotFoundException($"Couldn't find the nextLink property specified by extension on operation {methodName} and property {body.SerializedName}");
-            }
             if (!findItem)
             {
                 throw new KeyNotFoundException("Couldn't find the item property specified by extension");
