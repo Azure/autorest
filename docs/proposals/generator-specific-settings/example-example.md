@@ -1,6 +1,6 @@
 # RedisCache Create Example
 
-## Reqeusts
+## Requests
 
 ``` message (request)
 PUT http://localhost:10000/testaccount1/containersc5d3e7c5509046d2aa3f8bb095593T?timeout=30 HTTP/1.1
@@ -8,7 +8,7 @@ x-ms-version: 2016-05-31
 x-ms-blob-type: PageBlob
 x-ms-blob-content-length: 1024
 x-ms-date: Wed, 11 Jan 2017 09:16:29 GMT
-Content-Length: 0
+Content-Length: 23
 
 {
   "foo":"bizzzzz"
@@ -22,7 +22,7 @@ x-ms-version: 2016-05-31
 x-ms-blob-type: PageBlob
 x-ms-blob-content-length: 1024
 x-ms-date: Wed, 11 Jan 2017 09:16:29 GMT
-Content-Length: 0
+Content-Length: 23
 ```
 
 ``` json (request-body)
