@@ -8,7 +8,7 @@ desired when authoring and processing instructions.
 ### Notable Features
 
 - Choose a specific version (or a valid range?) of AutoRest to run (discovery/acquring when necessary.)
-- Specifiy the swager files that it applies to.
+- Specifiy the swagger files that it applies to.
 
 ### Continutity with pre-existing AutoRest scripts 
 
