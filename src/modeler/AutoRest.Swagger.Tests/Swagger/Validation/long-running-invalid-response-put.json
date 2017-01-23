@@ -1,0 +1,50 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "LongRunningResponseForPutValidation",
+    "description": "The 200 or 201 response code is not modeled for a long running put operation",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "put": {
+        "operationId": "Foo_Create",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "Accepted."
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

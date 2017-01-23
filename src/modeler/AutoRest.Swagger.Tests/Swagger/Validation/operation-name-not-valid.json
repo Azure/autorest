@@ -1,0 +1,85 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operation name not valid",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "get": {
+        "operationId": "Noun_NotNamedGet",
+        "summary": "Foo get path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/foo1": {
+      "put": {
+        "operationId": "Noun_NotNamedCreate",
+        "summary": "Foo2 create path",
+        "description": "Foo2 operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/foo2": {
+      "delete": {
+        "operationId": "Noun_NotNamedDelete",
+        "summary": "Foo2 delete path",
+        "description": "Foo2 operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/foo3": {
+      "get": {
+        "operationId": "Noun_List",
+        "summary": "Foo3 path",
+        "description": "Foo3 list operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

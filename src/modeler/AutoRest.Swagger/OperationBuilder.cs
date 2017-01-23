@@ -41,7 +41,6 @@ namespace AutoRest.Swagger
             {
                 throw new ArgumentNullException("swaggerModeler");
             }
-
             this._operation = operation;
             this._swaggerModeler = swaggerModeler;
             this._effectiveProduces = operation.Produces.Any() ? operation.Produces : swaggerModeler.ServiceDefinition.Produces;

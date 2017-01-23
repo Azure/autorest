@@ -144,8 +144,7 @@ namespace AutoRest.Swagger
             }
             catch (JsonException ex)
             {
-                throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture, "{0}. {1}",
-                    Resources.ErrorParsingSpec, ex.Message), ex);
+                throw ErrorManager.CreateError("{0}. {1}", Resources.ErrorParsingSpec, ex.Message);
             }
         }
     }

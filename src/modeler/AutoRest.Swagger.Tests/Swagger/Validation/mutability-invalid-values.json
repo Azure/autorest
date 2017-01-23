@@ -1,0 +1,86 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mutability extension used with invalid values.",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "Noun_Verb",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "parameters": [
+          {
+            "name": "foo1",
+            "description": "Name of the domain.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource Model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id",
+          "x-ms-mutability": [ "readWrite" ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Resource name",
+          "x-ms-mutability": [ "read", "create", "update", "delete" ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags",
+          "x-ms-mutability": [ "create", "read", "update" ]
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

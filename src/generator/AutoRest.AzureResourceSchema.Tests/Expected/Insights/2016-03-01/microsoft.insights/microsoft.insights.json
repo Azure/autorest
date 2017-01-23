@@ -1,0 +1,533 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2016-03-01/microsoft.insights.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "microsoft.insights",
+  "description": "microsoft insights Resource Types",
+  "resourceDefinitions": {
+    "alertrules": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "microsoft.insights/alertrules"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2016-03-01"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Azure resource name"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Resource tags"
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/AlertRule"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "apiVersion",
+        "location",
+        "properties"
+      ],
+      "description": "microsoft.insights/alertrules"
+    }
+  },
+  "definitions": {
+    "AlertRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name of the alert rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "the description of the alert rule that will be included in the alert email."
+        },
+        "isEnabled": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the flag that indicates whether the alert rule is enabled."
+        },
+        "condition": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleCondition"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the condition that results in the alert rule being activated."
+        },
+        "actions": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleAction"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
+        }
+      },
+      "required": [
+        "name",
+        "isEnabled"
+      ],
+      "description": "An alert rule."
+    },
+    "LocationThresholdRuleCondition": {
+      "type": "object",
+      "properties": {
+        "dataSource": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleDataSource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the resource from which the rule collects its data."
+        },
+        "windowSize": {
+          "type": "string",
+          "format": "duration",
+          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold. If specified then it must be between 5 minutes and 1 day."
+        },
+        "failedLocationCount": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the number of locations that must fail to activate the alert."
+        }
+      },
+      "required": [
+        "failedLocationCount"
+      ],
+      "description": "A rule condition based on a certain number of locations failing."
+    },
+    "ManagementEventAggregationCondition": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "GreaterThan",
+                "GreaterThanOrEqual",
+                "LessThan",
+                "LessThanOrEqual"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the condition operator."
+        },
+        "threshold": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the condition threshold."
+        },
+        "windowSize": {
+          "type": "string",
+          "format": "duration",
+          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold. If specified then it must be between 5 minutes and 1 day."
+        }
+      },
+      "description": "A management event aggregation condition."
+    },
+    "ManagementEventRuleCondition": {
+      "type": "object",
+      "properties": {
+        "dataSource": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleDataSource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the resource from which the rule collects its data."
+        },
+        "aggregation": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ManagementEventAggregationCondition"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the aggregation condition."
+        }
+      },
+      "description": "A management event rule condition."
+    },
+    "RuleAction": {
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "odata.type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "Microsoft.Azure.Management.Insights.Models.RuleEmailAction",
+                    "Microsoft.Azure.Management.Insights.Models.RuleWebhookAction"
+                  ]
+                },
+                {
+                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RuleEmailAction"
+            },
+            {
+              "$ref": "#/definitions/RuleWebhookAction"
+            }
+          ]
+        }
+      ],
+      "description": "The action that is performed when the alert rule becomes active, and when an alert condition is resolved."
+    },
+    "RuleCondition": {
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "odata.type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+                    "Microsoft.Azure.Management.Insights.Models.LocationThresholdRuleCondition",
+                    "Microsoft.Azure.Management.Insights.Models.ManagementEventRuleCondition"
+                  ]
+                },
+                {
+                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ThresholdRuleCondition"
+            },
+            {
+              "$ref": "#/definitions/LocationThresholdRuleCondition"
+            },
+            {
+              "$ref": "#/definitions/ManagementEventRuleCondition"
+            }
+          ]
+        }
+      ],
+      "description": "The condition that results in the alert rule being activated."
+    },
+    "RuleDataSource": {
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "odata.type": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+                    "Microsoft.Azure.Management.Insights.Models.RuleManagementEventDataSource"
+                  ]
+                },
+                {
+                  "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RuleMetricDataSource"
+            },
+            {
+              "$ref": "#/definitions/RuleManagementEventDataSource"
+            }
+          ]
+        }
+      ],
+      "description": "The resource from which the rule collects its data."
+    },
+    "RuleEmailAction": {
+      "type": "object",
+      "properties": {
+        "sendToServiceOwners": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the flag to send e-mails to the service owners. Whether the administrators (service and co-adiminstrators) of the service should be notified when the alert is activated."
+        },
+        "customEmails": {
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the list of administrator's custom email addresses notifiy of the activation of the alert."
+        }
+      },
+      "description": "Specifies the action to send email when the rule condition is evaluated."
+    },
+    "RuleManagementEventClaimsDataSource": {
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "type": "string",
+          "description": "the email address."
+        }
+      },
+      "description": "The claims for a rule management event data source."
+    },
+    "RuleManagementEventDataSource": {
+      "type": "object",
+      "properties": {
+        "eventName": {
+          "type": "string",
+          "description": "the event name."
+        },
+        "eventSource": {
+          "type": "string",
+          "description": "the event source."
+        },
+        "level": {
+          "type": "string",
+          "description": "the level."
+        },
+        "operationName": {
+          "type": "string",
+          "description": "The name of the operation that should be checked for. If no name is provided, any operation will match."
+        },
+        "resourceGroupName": {
+          "type": "string",
+          "description": "the resource group name."
+        },
+        "resourceProviderName": {
+          "type": "string",
+          "description": "the resource provider name."
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "the resource uri."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation that should be checked for. If no status is provided, any status will match."
+        },
+        "subStatus": {
+          "type": "string",
+          "description": "the substatus."
+        },
+        "claims": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleManagementEventClaimsDataSource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the claims."
+        }
+      },
+      "description": "A rule management event data source."
+    },
+    "RuleMetricDataSource": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string",
+          "description": "the resource identifier of the resource the rule monitors."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "the name of the metric that defines what the rule monitors."
+        }
+      },
+      "description": "A rule metric data source."
+    },
+    "RuleWebhookAction": {
+      "type": "object",
+      "properties": {
+        "serviceUri": {
+          "type": "string",
+          "description": "the service uri to Post the notitication."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the dictionary of custom properties to include with the post operation."
+        }
+      },
+      "description": "Specifies the action to post to service when the rule condition is evaluated."
+    },
+    "ThresholdRuleCondition": {
+      "type": "object",
+      "properties": {
+        "dataSource": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/RuleDataSource"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the resource from which the rule collects its data."
+        },
+        "operator": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "GreaterThan",
+                "GreaterThanOrEqual",
+                "LessThan",
+                "LessThanOrEqual"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the operator used to compare the data and the threshold."
+        },
+        "threshold": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the threshold value that activates the alert."
+        },
+        "windowSize": {
+          "type": "string",
+          "format": "duration",
+          "description": "the period of time (in ISO 8601 duration format) that is used to monitor alert activity based on the threshold. If specified then it must be between 5 minutes and 1 day."
+        },
+        "timeAggregation": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "Average",
+                "Minimum",
+                "Maximum",
+                "Total",
+                "Last"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "the time aggregation operator. How the data that is collected should be combined over time. The default value is the PrimaryAggregationType of the Metric."
+        }
+      },
+      "required": [
+        "operator",
+        "threshold"
+      ],
+      "description": "A rule condition based on a metric crossing a threshold."
+    }
+  }
+}

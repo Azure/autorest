@@ -1,0 +1,1899 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-06-01",
+    "title": "HybridDataManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [ "https" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridData/dataManagers": {
+      "get": {
+        "tags": [ "DataManagers" ],
+        "description": "Lists all the data manager resources available under the subscription.",
+        "operationId": "DataManagers_List",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of data manager resources available under the subscription.",
+            "schema": { "$ref": "#/definitions/DataManagerList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": null }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers": {
+      "get": {
+        "tags": [ "DataManagers" ],
+        "description": "Lists all the data manager resources available under the given resource group.",
+        "operationId": "DataManagers_ListByResourceGroup",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of data manager resources by resource group.",
+            "schema": { "$ref": "#/definitions/DataManagerList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": null }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}": {
+      "get": {
+        "tags": [ "DataManagers" ],
+        "description": "Gets information about the specified data manager resource.",
+        "operationId": "DataManagers_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data Manager Resource object.",
+            "schema": { "$ref": "#/definitions/DataManager" }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [ "DataManagers" ],
+        "description": "Creates a new data manager resource with the specified parameters. Existing resources cannot be updated with this API and should instead be updated with the Update data manager resource API.",
+        "operationId": "DataManagers_Create",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataManagerResource",
+            "in": "body",
+            "description": "Data manager resource details from request body.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataManager" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data Manager Resource object.",
+            "schema": { "$ref": "#/definitions/DataManager" }
+          },
+          "201": {
+            "description": "Data Manager Resource created.",
+            "schema": { "$ref": "#/definitions/DataManager" }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [ "DataManagers" ],
+        "description": "Deletes a data manager resource in Microsoft Azure.",
+        "operationId": "DataManagers_Delete",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The delete will be performed only if the ETag of the data manager resource on the server matches this value.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Data Manager Resource deleted." },
+          "204": { "description": "Data Manager Resource deleted." }
+        },
+        "deprecated": false
+      },
+      "patch": {
+        "tags": [ "DataManagers" ],
+        "description": "Updates the properties of an existing data manager resource.",
+        "operationId": "DataManagers_Update",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataManagerUpdateParameter",
+            "in": "body",
+            "description": "Data manager update parameters from request body.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataManagerUpdateParameter" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Defines the If-Match condition. The patch will be performed only if the ETag of the data manager resource on the server matches this value.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data Manager Resource object.",
+            "schema": { "$ref": "#/definitions/DataManager" }
+          },
+          "201": {
+            "description": "Data Manager Resource updated.",
+            "schema": { "$ref": "#/definitions/DataManager" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices": {
+      "get": {
+        "tags": [ "DataServices" ],
+        "description": "This method gets all the data services.",
+        "operationId": "DataServices_ListByDataManager",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of data services.",
+            "schema": { "$ref": "#/definitions/DataServiceList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}": {
+      "get": {
+        "tags": [ "DataServices" ],
+        "description": "Gets the data service that match the data service name given.",
+        "operationId": "DataServices_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service that is being queried.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data service that matches the name.",
+            "schema": { "$ref": "#/definitions/DataService" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions": {
+      "get": {
+        "tags": [ "JobDefinitions" ],
+        "description": "This method gets all the job definitions of the given data service name.",
+        "operationId": "JobDefinitions_ListByDataService",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of interest.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of job definitions of the given data service type.",
+            "schema": { "$ref": "#/definitions/JobDefinitionList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobDefinitionFilter",
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}": {
+      "get": {
+        "tags": [ "JobDefinitions" ],
+        "description": "This method gets job definition object by name.",
+        "operationId": "JobDefinitions_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service name of the job definition",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The job definition name that is being queried.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The job definition that matches the criteria.",
+            "schema": { "$ref": "#/definitions/JobDefinition" }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [ "JobDefinitions" ],
+        "description": "Creates or updates a job definition.",
+        "operationId": "JobDefinitions_CreateOrUpdate",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The job definition name to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinition",
+            "in": "body",
+            "description": "Job Definition object to be created or updated.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/JobDefinition" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "JobDefinition object.",
+            "schema": { "$ref": "#/definitions/JobDefinition" }
+          },
+          "202": { "description": "Accepted request for create/update." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [ "JobDefinitions" ],
+        "description": "This method deletes the given job definition.",
+        "operationId": "JobDefinitions_Delete",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The job definition name to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "202": { "description": "Accepted request for JobDefinition deletion." },
+          "204": { "description": "JobDefinition deleted." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs": {
+      "get": {
+        "tags": [ "Jobs" ],
+        "description": "This method gets all the jobs of a given job definition.",
+        "operationId": "Jobs_ListByJobDefinition",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the job definition for which jobs are needed.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of jobs.",
+            "schema": { "$ref": "#/definitions/JobList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobFilter",
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}": {
+      "get": {
+        "tags": [ "Jobs" ],
+        "description": "This method gets a data manager job given the jobId.",
+        "operationId": "Jobs_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the job definition of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job id of the job queried.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "$expand is supported on details parameter for job, which provides details on the job stages.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The job that matches the given criteria.",
+            "schema": { "$ref": "#/definitions/Job" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/cancel": {
+      "post": {
+        "tags": [ "Jobs" ],
+        "description": "Cancels the given job.",
+        "operationId": "Jobs_Cancel",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the job definition of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job id of the job queried.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "202": { "description": "Accepted job cancellation request." },
+          "204": { "description": "Job cancelled." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/jobs/{jobId}/resume": {
+      "post": {
+        "tags": [ "Jobs" ],
+        "description": "Resumes the given job.",
+        "operationId": "Jobs_Resume",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "The name of the job definition of the job.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job id of the job queried.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "202": { "description": "Accepted job resume request." },
+          "204": { "description": "Job resumed." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/listResults": {
+      "post": {
+        "tags": [ "JobDefinitions" ],
+        "description": "This method returns a list of data service results specific to a job definition.",
+        "operationId": "JobDefinitions_ListResults",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "dataServiceResultQuery",
+            "in": "body",
+            "description": "Query to retrieve data service results based on the query type.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataServiceResultQuery" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of data service results based on the query.",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/DataServiceResult" }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": null }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobDefinitions/{jobDefinitionName}/run": {
+      "post": {
+        "tags": [ "JobDefinitions" ],
+        "description": "This method runs a job instance of the given job definition.",
+        "operationId": "JobDefinitions_Run",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The data service type of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobDefinitionName",
+            "in": "path",
+            "description": "Name of the job definition.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runParameters",
+            "in": "body",
+            "description": "Run time parameters for the job definition.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/RunParameters" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "202": { "description": "Job run accepted." },
+          "204": { "description": "Job run started." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataServices/{dataServiceName}/jobs": {
+      "get": {
+        "tags": [ "Jobs" ],
+        "description": "This method gets all the jobs of a data service type in a given resource.",
+        "operationId": "Jobs_ListByDataService",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataServiceName",
+            "in": "path",
+            "description": "The name of the data service of interest.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of jobs that match the service and resource.",
+            "schema": { "$ref": "#/definitions/JobList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobFilter",
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStores": {
+      "get": {
+        "tags": [ "DataStores" ],
+        "description": "Gets all the data stores/repositories in the given resource.",
+        "operationId": "DataStores_ListByDataManager",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of data stores/repositories in the given resource.",
+            "schema": { "$ref": "#/definitions/DataStoreList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/DataStoreFilter",
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStores/{dataStoreName}": {
+      "get": {
+        "tags": [ "DataStores" ],
+        "description": "This method gets the data store/repository by name.",
+        "operationId": "DataStores_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataStoreName",
+            "in": "path",
+            "description": "The data store/repository name queried.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data store/repository which matches the name given.",
+            "schema": { "$ref": "#/definitions/DataStore" }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [ "DataStores" ],
+        "description": "Creates or updates the data store/repository in the data manager.",
+        "operationId": "DataStores_CreateOrUpdate",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataStoreName",
+            "in": "path",
+            "description": "The data store/repository name to be created or updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataStore",
+            "in": "body",
+            "description": "The data store/repository object to be created or updated.",
+            "required": true,
+            "schema": { "$ref": "#/definitions/DataStore" }
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data store/repository object.",
+            "schema": { "$ref": "#/definitions/DataStore" }
+          },
+          "202": { "description": "Accepted request for create/update." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [ "DataStores" ],
+        "description": "This method deletes the given data store/repository.",
+        "operationId": "DataStores_Delete",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataStoreName",
+            "in": "path",
+            "description": "The data store/repository name to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "202": { "description": "Accepted request for DataStore deletion." },
+          "204": { "description": "DataStore deleted." }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes": {
+      "get": {
+        "tags": [ "DataStoreTypes" ],
+        "description": "Gets all the data store/repository types that the resource supports.",
+        "operationId": "DataStoreTypes_ListByDataManager",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of data store types that are supported.",
+            "schema": { "$ref": "#/definitions/DataStoreTypeList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/dataStoreTypes/{dataStoreTypeName}": {
+      "get": {
+        "tags": [ "DataStoreTypes" ],
+        "description": "Gets the data store/repository type given its name.",
+        "operationId": "DataStoreTypes_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "dataStoreTypeName",
+            "in": "path",
+            "description": "The data store/repository type name for which details are needed.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data store/repository type.",
+            "schema": { "$ref": "#/definitions/DataStoreType" }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/jobDefinitions": {
+      "get": {
+        "tags": [ "JobDefinitions" ],
+        "description": "This method gets all the job definitions of the given data manager resource.",
+        "operationId": "JobDefinitions_ListByDataManager",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of job definitions in that resource.OK",
+            "schema": { "$ref": "#/definitions/JobDefinitionList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobDefinitionFilter",
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/jobs": {
+      "get": {
+        "tags": [ "Jobs" ],
+        "description": "This method gets all the jobs at the data manager resource level.",
+        "operationId": "Jobs_ListByDataManager",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData Filter options",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of jobs in the resource specified.",
+            "schema": { "$ref": "#/definitions/JobList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-odata": "#/definitions/JobFilter",
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/publicKeys": {
+      "get": {
+        "tags": [ "PublicKeys" ],
+        "description": "This method gets the list view of public keys, however it will only have one element.",
+        "operationId": "PublicKeys_ListByDataManager",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of public keys.",
+            "schema": { "$ref": "#/definitions/PublicKeyList" }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridData/dataManagers/{dataManagerName}/publicKeys/{publicKeyName}": {
+      "get": {
+        "tags": [ "PublicKeys" ],
+        "description": "This method gets the public keys.",
+        "operationId": "PublicKeys_Get",
+        "consumes": [ "application/json" ],
+        "produces": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "publicKeyName",
+            "in": "path",
+            "description": "Name of the public key.",
+            "required": true,
+            "type": "string"
+          },
+          { "$ref": "#/parameters/subscriptionIdParameter" },
+          { "$ref": "#/parameters/resourceGroupNameParameter" },
+          { "$ref": "#/parameters/dataManagerNameParameter" },
+          { "$ref": "#/parameters/apiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "The public keys.",
+            "schema": { "$ref": "#/definitions/PublicKey" }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "CustomerSecret": {
+      "description": "The pair of customer secret.",
+      "required": [ "keyIdentifier", "keyValue", "algorithm" ],
+      "type": "object",
+      "properties": {
+        "keyIdentifier": {
+          "description": "The identifier to the data service input object which this secret corresponds to.",
+          "type": "string"
+        },
+        "keyValue": {
+          "description": "It contains the encrypted customer secret.",
+          "type": "string"
+        },
+        "algorithm": {
+          "description": "The encryption algorithm used to encrypt data.",
+          "enum": [ "RSA1_5", "RSA_OAEP" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SupportedAlgorithm",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "DataManager": {
+      "description": "The DataManager resource.",
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "properties": {
+        "etag": {
+          "description": "Etag of the Resource.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerList": {
+      "description": "DataManager resources Collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of data manager resources.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/DataManager" }
+        }
+      }
+    },
+    "DataManagerUpdateParameter": {
+      "description": "The DataManagerUpdateParameter.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku type."
+        },
+        "tags": {
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "DataService": {
+      "description": "Data Service.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataServiceProperties",
+          "description": "DataService properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataServiceList": {
+      "description": "Data Service Collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of data services.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/DataService" }
+        },
+        "nextLink": {
+          "description": "Link for the next set of data services.",
+          "type": "string"
+        }
+      }
+    },
+    "DataServiceProperties": {
+      "description": "Data Service properties.",
+      "required": [ "state" ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "State of the data service.",
+          "enum": [ "Disabled", "Enabled", "Supported" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
+        },
+        "supportedDataSinkTypes": {
+          "description": "Supported data store types which can be used as a sink.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "supportedDataSourceTypes": {
+          "description": "Supported data store types which can be used as a source.",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "DataServiceResult": {
+      "description": "Query result for a particular data service.",
+      "type": "object",
+      "properties": {
+        "queryType": {
+          "description": "The type of result which is returned after the execution of the query.",
+          "enum": [ "FileMetadata", "SnapshotFileMetadata" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataServiceResultQueryType",
+            "modelAsString": false
+          }
+        }
+      },
+      "discriminator": "queryType"
+    },
+    "DataServiceResultQuery": {
+        "description": "Query for a particular data service result.",
+        "required": [ "queryType" ],
+        "type": "object",
+        "properties": {
+            "queryType": {
+                "description": "Query type which specifies which data service result needs to be queried.",
+                "enum": [ "FileMetadata", "SnapshotFileMetadata" ],
+                "type": "string",
+                "x-ms-enum": {
+                    "name": "DataServiceResultQueryType",
+                    "modelAsString": false
+                }
+            }
+        },
+        "discriminator": "queryType"    
+    },
+    "DataStore": {
+      "description": "Data store entity.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataStoreProperties",
+          "description": "DataStore properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataStoreFilter": {
+      "description": "Contains the information about the filters for the DataStore entity.",
+      "type": "object",
+      "properties": {
+        "dataStoreTypeId": {
+          "description": "The data store type id.",
+          "type": "string"
+        }
+      }
+    },
+    "DataStoreList": {
+      "description": "Data Store Entity Collection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of data stores.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/DataStore" }
+        },
+        "nextLink": {
+          "description": "Link for the next set of data stores.",
+          "type": "string"
+        }
+      }
+    },
+    "DataStoreProperties": {
+      "description": "Data Store for sources and sinks",
+      "required": [ "state", "dataStoreTypeId" ],
+      "type": "object",
+      "properties": {
+        "repositoryId": {
+          "description": "Arm Id for the manager resource to which the data source is associated. This is optional.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the data source.",
+          "enum": [ "Disabled", "Enabled", "Supported" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
+        },
+        "extendedProperties": {
+          "description": "A generic json used differently by each data source type.",
+          "type": "object"
+        },
+        "dataStoreTypeId": {
+          "description": "The arm id of the data store type.",
+          "type": "string"
+        },
+        "customerSecrets": {
+          "description": "List of customer secrets containing a key identifier and key value. The key identifier is a way for the specific data source to understand the key. Value contains customer secret encrypted by the encryptionKeys.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/CustomerSecret" }
+        }
+      }
+    },
+    "DataStoreType": {
+      "description": "Data Store Type entity.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataStoreTypeProperties",
+          "description": "DataStoreType properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DataStoreTypeList": {
+      "description": "Data Store Type Collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of DataStoreType.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/DataStoreType" }
+        },
+        "nextLink": {
+          "description": "Link for the next set of data store types.",
+          "type": "string"
+        }
+      }
+    },
+    "DataStoreTypeProperties": {
+      "description": "Data Store Type properties.",
+      "required": [ "state" ],
+      "type": "object",
+      "properties": {
+        "repositoryType": {
+          "description": "Arm type for the manager resource to which the data source type is associated. This is optional.",
+          "type": "string"
+        },
+        "state": {
+          "description": "State of the data store type.",
+          "enum": [ "Disabled", "Enabled", "Supported" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
+        },
+        "supportedDataServicesAsSink": {
+          "description": "Supported data services where it can be used as a sink.",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "supportedDataServicesAsSource": {
+          "description": "Supported data services where it can be used as a source.",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "DmsBaseObject": {
+      "description": "Base class for all objects under DataManager.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the object.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the object.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the object.",
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "description": "Top level error for the job.",
+      "required": [ "code" ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code that can be used to programmatically identify the error.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Describes the error in detail and provides debugging information.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "Error Details",
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "Error code.",
+          "type": "integer"
+        },
+        "recommendedAction": {
+          "description": "Recommended action for the error.",
+          "type": "string"
+        },
+        "exceptionMessage": {
+          "description": "Contains the non localized exception message",
+          "type": "string"
+        }
+      }
+    },
+    "FileMetadata": {
+      "description": "Data service result for query type FileMetadata.",
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DataServiceResult" } ],
+      "properties": {
+        "fileId": {
+          "description": "Unique identifier for a file.",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "Name of the file.",
+          "type": "string"
+        },
+        "path": {
+          "description": "Path of the file.",
+          "type": "string"
+        },
+        "extension": {
+          "description": "Extension of the file.",
+          "type": "string"
+        },
+        "createdBy": {
+          "description": "User who created the file.",
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "Date when the file was created.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "FileMetadata"
+    },
+    "FileMetadataQuery": {
+      "description": "Query for File Metadata.",
+      "required": [ "searchCriteria", "queryType" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DataServiceResultQuery" } ],
+      "properties": {
+        "searchCriteria": {
+          "description": "Criteria which governs the search.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "FileMetadata"
+    },
+    "Job": {
+      "description": "Data service job.",
+      "required": [ "status", "startTime", "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
+      "properties": {
+        "status": {
+          "description": "Status of the job.",
+          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Time at which the job was started in UTC ISO 8601 format.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "Time at which the job ended in UTC ISO 8601 format.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Job properties.",
+          "x-ms-client-flatten": true
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Top level error for the job."
+        }
+      }
+    },
+    "JobDefinition": {
+      "description": "Job Definition.",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobDefinitionProperties",
+          "description": "JobDefinition properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobDefinitionFilter": {
+      "description": "Contains the supported job definition filters.",
+      "required": [ "state" ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "The state of the job definition.",
+          "enum": [ "Disabled", "Enabled", "Supported" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
+        },
+        "datasource": {
+          "description": "The data source associated with the job definition",
+          "type": "string"
+        },
+        "lastmodified": {
+          "format": "date-time",
+          "description": "The last modified date time of the data source.",
+          "type": "string"
+        }
+      }
+    },
+    "JobDefinitionList": {
+      "description": "Job Definition Entity Collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of job definitions.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/JobDefinition" }
+        },
+        "nextLink": {
+          "description": "Link for the next set of job definitions.",
+          "type": "string"
+        }
+      }
+    },
+    "JobDefinitionProperties": {
+      "description": "Job Definition",
+      "required": [ "dataSourceId", "dataSinkId", "state" ],
+      "type": "object",
+      "properties": {
+        "dataSourceId": {
+          "description": "Data Source Id associated to the job definition.",
+          "type": "string"
+        },
+        "dataSinkId": {
+          "description": "Data Sink Id associated to the job definition.",
+          "type": "string"
+        },
+        "schedules": {
+          "description": "Schedule for running the job definition",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Schedule" }
+        },
+        "state": {
+          "description": "State of the job definition.",
+          "enum": [ "Disabled", "Enabled", "Supported" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "State",
+            "modelAsString": false
+          }
+        },
+        "lastModifiedTime": {
+          "format": "date-time",
+          "description": "Last modified time of the job definition.",
+          "type": "string"
+        },
+        "userConfirmation": {
+          "description": "Enum to detect if user confirmation is required. If not passed will default to NotRequired.",
+          "default": "NotRequired",
+          "enum": [ "NotRequired", "Required" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UserConfirmation",
+            "modelAsString": false
+          }
+        },
+        "dataServiceInput": {
+          "description": "A generic json used differently by each data service type.",
+          "type": "object"
+        },
+        "customerSecrets": {
+          "description": "List of customer secrets containing a key identifier and key value. The key identifier is a way for the specific data source to understand the key. Value contains customer secret encrypted by the encryptionKeys.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/CustomerSecret" }
+        }
+      }
+    },
+    "JobDetails": {
+      "description": "Job details.",
+      "type": "object",
+      "properties": {
+        "jobStages": {
+          "description": "List of stages that ran in the job",
+          "type": "array",
+          "items": { "$ref": "#/definitions/JobStages" }
+        },
+        "jobDefinition": {
+          "$ref": "#/definitions/JobDefinition",
+          "description": "JobDefinition at the time of the run"
+        },
+        "errorDetails": {
+          "description": "Error details for failure. This is optional.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/ErrorDetails" }
+        },
+        "itemDetailsLink": {
+          "description": "Item Details Link to download files or see details",
+          "type": "string"
+        }
+      }
+    },
+    "JobFilter": {
+      "description": "Contains the information about the filters for the job entity.",
+      "required": [ "status" ],
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The status of the job entity.",
+          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "The start time of the job entity.",
+          "type": "string"
+        }
+      }
+    },
+    "JobList": {
+      "description": "Job Entity Collection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of jobs.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/Job" }
+        },
+        "nextLink": {
+          "description": "Link for the next set of jobs.",
+          "type": "string"
+        }
+      }
+    },
+    "JobProperties": {
+      "description": "Job Properties",
+      "required": [ "isCancellable" ],
+      "type": "object",
+      "properties": {
+        "isCancellable": {
+          "description": "Describes whether the job is cancellable.",
+          "type": "boolean"
+        },
+        "bytesProcessed": {
+          "format": "int64",
+          "description": "Number of bytes processed by the job as of now.",
+          "type": "integer"
+        },
+        "itemsProcessed": {
+          "format": "int64",
+          "description": "Number of items processed by the job as of now",
+          "type": "integer"
+        },
+        "totalBytesToProcess": {
+          "format": "int64",
+          "description": "Number of bytes to be processed by the job in total.",
+          "type": "integer"
+        },
+        "totalItemsToProcess": {
+          "format": "int64",
+          "description": "Number of items to be processed by the job in total",
+          "type": "integer"
+        },
+        "details": {
+          "$ref": "#/definitions/JobDetails",
+          "description": "Details of a job run. This field will only be sent for expand details filter."
+        },
+        "dataSourceName": {
+          "description": "Name of the data source on which the job was triggered.",
+          "type": "string"
+        },
+        "dataSinkName": {
+          "description": "Name of the data sink on which the job was triggered.",
+          "type": "string"
+        }
+      }
+    },
+    "JobStages": {
+      "description": "Job stages.",
+      "required": [ "stageStatus" ],
+      "type": "object",
+      "properties": {
+        "stageName": {
+          "description": "Name of the job stage.",
+          "type": "string"
+        },
+        "stageStatus": {
+          "description": "Status of the job stage.",
+          "enum": [ "None", "InProgress", "Succeeded", "WaitingForAction", "Failed", "Cancelled", "Cancelling" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobStatus",
+            "modelAsString": false
+          }
+        },
+        "jobStageDetails": {
+          "description": "Job Stage Details",
+          "type": "object"
+        },
+        "errorDetails": {
+          "description": "Error details for the stage. This is optional",
+          "type": "array",
+          "items": { "$ref": "#/definitions/ErrorDetails" }
+        }
+      }
+    },
+    "Key": {
+      "description": "Key entity.",
+      "required": [ "keyModulus", "keyExponent", "encryptionChunkSizeInBytes" ],
+      "type": "object",
+      "properties": {
+        "keyModulus": {
+          "description": "Modulus of the encryption key.",
+          "type": "string"
+        },
+        "keyExponent": {
+          "description": "Exponent of the encryption key.",
+          "type": "string"
+        },
+        "encryptionChunkSizeInBytes": {
+          "format": "int32",
+          "description": "The maximum byte size that can be encrypted by the key. For a key size larger than the size, break into chunks and encrypt each chunk, append each encrypted chunk with : to mark the end of the chunk.",
+          "type": "integer"
+        }
+      }
+    },
+    "PublicKey": {
+      "description": "Public key",
+      "required": [ "properties" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DmsBaseObject" } ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicKeyProperties",
+          "description": "Public key property.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PublicKeyList": {
+      "description": "PublicKey Entity Collection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of public keys.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/PublicKey" }
+        },
+        "nextLink": {
+          "description": "Link for the next set of public keys.",
+          "type": "string"
+        }
+      }
+    },
+    "PublicKeyProperties": {
+      "description": "PublicKey Properties",
+      "required": [ "dataServiceLevel1Key", "dataServiceLevel2Key" ],
+      "type": "object",
+      "properties": {
+        "dataServiceLevel1Key": {
+          "$ref": "#/definitions/Key",
+          "description": "Level one public key for encryption"
+        },
+        "dataServiceLevel2Key": {
+          "$ref": "#/definitions/Key",
+          "description": "Level two public key for encryption"
+        }
+      }
+    },
+    "Resource": {
+      "description": "Model of the Resource.",
+      "required": [ "location" ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Resource Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The Resource Name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The Resource type.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "The list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups).",
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The sku type."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "RunParameters": {
+      "description": "Run parameters for a job.",
+      "type": "object",
+      "properties": {
+        "userConfirmation": {
+          "description": "Enum to detect if user confirmation is required. If not passed will default to NotRequired.",
+          "default": "NotRequired",
+          "enum": [ "NotRequired", "Required" ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UserConfirmation",
+            "modelAsString": false
+          }
+        },
+        "dataServiceInput": {
+          "description": "A generic json used differently by each data service type.",
+          "type": "object"
+        },
+        "customerSecrets": {
+          "description": "List of customer secrets containing a key identifier and key value. The key identifier is a way for the specific data source to understand the key. Value contains customer secret encrypted by the encryptionKeys.",
+          "type": "array",
+          "items": { "$ref": "#/definitions/CustomerSecret" }
+        }
+      }
+    },
+    "Schedule": {
+      "description": "Schedule for the job run.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the schedule.",
+          "type": "string"
+        },
+        "policyList": {
+          "description": "A list of repetition intervals in ISO 8601 format.",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "Sku": {
+      "description": "The sku type.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The sku name. Required for data manager creation, optional for update.",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The sku tier. This is based on the SKU name.",
+          "type": "string"
+        }
+      }
+    },
+    "SnapshotFileMetadata": {
+      "description": "Data service result for query type SnapshotFileMetadata.",
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DataServiceResult" } ],
+      "properties": {
+        "fileId": {
+          "description": "Unique identifier for file.",
+          "type": "string"
+        },
+        "snapshotId": {
+          "description": "Unique identifier for snapshot.",
+          "type": "string"
+        },
+        "length": {
+          "format": "int64",
+          "description": "Size of the file.",
+          "type": "integer"
+        },
+        "lastModifiedBy": {
+          "description": "User who last modified the file.",
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "format": "date-time",
+          "description": "Date when the file was last modified.",
+          "type": "string"
+        },
+        "lastAccessedBy": {
+          "description": "User who last accessed the file.",
+          "type": "string"
+        },
+        "lastAccessedDate": {
+          "format": "date-time",
+          "description": "Date when the file was last accessed.",
+          "type": "string"
+        },
+        "isDeleted": {
+          "description": "Is the file deleted.",
+          "type": "boolean"
+        },
+        "versionNumber": {
+          "description": "Version number of the file.",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags associated with the file.",
+          "type": "string"
+        },
+        "snapshotName": {
+          "description": "The snapshot name with which the metadata is associated.",
+          "type": "string"
+        },
+        "snapshotCreationDate": {
+          "format": "date-time",
+          "description": "The creation date of the snapshot with which the metadata is associated.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "SnapshotFileMetadata"
+    },
+    "SnapshotFileMetadataQuery": {
+      "description": "Query for Snapshot File Metadata.",
+      "required": [ "fileId", "queryType" ],
+      "type": "object",
+      "allOf": [ { "$ref": "#/definitions/DataServiceResultQuery" } ],
+      "properties": {
+        "fileId": {
+          "description": "Unique identifier for file.",
+          "type": "string"
+        },
+        "searchStartDate": {
+          "format": "date-time",
+          "description": "The start date from when the snapshots need to be searched.",
+          "type": "string"
+        },
+        "searchEndDate": {
+          "format": "date-time",
+          "description": "The end date till when the snapshots need to be searched.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "SnapshotFileMetadata"
+    }
+  },
+  "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API Version",
+      "required": true,
+      "type": "string"
+    },
+    "dataManagerNameParameter": {
+      "name": "dataManagerName",
+      "in": "path",
+      "description": "The name of the DataManager Resource within the specified resource group. DataManager names must be between 3 and 24 characters in length and use any alphanumeric and underscore only",
+      "required": true,
+      "type": "string",
+      "maxLength": 24,
+      "minLength": 3,
+      "pattern": "^[-\\w\\.]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Resource Group Name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Subscription Id",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": { "user_impersonation": "impersonate your user account" }
+    }
+  },
+  "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+}

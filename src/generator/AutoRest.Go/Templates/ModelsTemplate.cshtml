@@ -3,16 +3,21 @@
 @using System.Linq;
 
 @using AutoRest.Go
-@using AutoRest.Core.ClientModel
-@using AutoRest.Go.TemplateModels
+@using AutoRest.Core.Model
+@using AutoRest.Go.Model
 @using AutoRest.Go.Templates
 @using AutoRest.Core.Utilities
 
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.ModelsTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.CodeModelGo>
 @{
-    var imports = Model.Imports;
+    var imports = Model.ModelImports;
+    var enums = Model.EnumTypes.Cast<EnumTypeGo>().ToList();
+    enums.Sort(delegate(EnumTypeGo lhs, EnumTypeGo rhs) { return lhs.Name.FixedValue.CompareTo(rhs.Name); });
+
+    var modelTypes = Model.ModelTypes.Cast<CompositeTypeGo>().ToList();
+    modelTypes.Sort(delegate (CompositeTypeGo x, CompositeTypeGo y) { return x.Name.FixedValue.CompareTo(y.Name.FixedValue); });
 }
-package @Model.PackageName
+package @Model.Namespace
 @EmptyLine
 @Header("// ")
 
@@ -29,14 +34,14 @@ foreach (var import in imports)
 @EmptyLine
 }
 
-@foreach (var enumTemplateModel in Model.EnumTemplateModels) {
-@:@(Include<EnumTemplate, EnumTemplateModel>(new EnumTemplate(), enumTemplateModel))
+@foreach (var e in enums) {
+@:@(Include(new EnumTemplate(), e))
 @EmptyLine
 @:
 }
 
-@foreach (var modelTemplateModel in Model.ModelTemplateModels) {
-@:@(Include<ModelTemplate, ModelTemplateModel>(new ModelTemplate(), modelTemplateModel))
+@foreach (var mt in modelTypes) {
+@:@(Include(new ModelTemplate(), mt))
 @EmptyLine
 @:
 }
