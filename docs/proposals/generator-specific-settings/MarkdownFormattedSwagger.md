@@ -22,18 +22,109 @@ The `deprecated_operation` that we have here is a fantastic idea. You should use
 
 I really like cheeses that are fruity. The API:
 
+#### parameter 1
+Needs to be fun.
+
+#### parameter 2
+Should be left-handed
+
 ``` yaml 
 paths:
   /operation:
     get:
       operationId: deprecated_operation
       deprecated: true
+      documentation: '#/descriptions/Subheadings-can-be-fun-too'
       responses:
         200:
           description: OK
           schema:
             $ref: '#/definitions/ResultObject'
 ```
+
+## Method abc
+
+### Subheadings can be fun too.
+
+I really like cheeses that are fruity. The API:
+
+### parameter 1
+Needs to be fun.
+
+### parameter 2
+Should be left-handed
+
+``` yaml 
+paths:
+  /operation:
+    get:
+      operationId: deprecated_operation
+      deprecated: true
+      documentation: '#/descriptions/Subheadings-can-be-fun-too'
+```
+
+# parameter 1 
+asasdasd
+asd aasd 
+
+``` yaml
+paths:
+  /operation:
+    get:
+      paramters:
+        - foo           
+```        
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResultObject'
+```
+
+
+
+
+### Subheadings can be fun too.
+
+I really like cheeses that are fruity. The API:
+
+
+
+``` yaml 
+paths:
+  /operation:
+    get:
+      operationId: deprecated_operation
+      deprecated: true
+      documentation: '#/descriptions/Subheadings-can-be-fun-too'
+      parameters:
+```
+
+#### parameter 1
+Should be left-handed
+
+``` yaml (continued)
+        - foo
+``` 
+#### parameter 1
+Needs to be fun.
+
+
+``` yaml (continued)         
+        - bar 
+```
+
+``` yaml (continued)
+      responses:
+        200:
+```         
+### OK- looks good to me.
+
+``` yaml (continued)
+          schema:
+            $ref: '#/definitions/ResultObject'
+```
+
 
 ## MyOperation Number Two
 
