@@ -55,3 +55,4 @@ not able to process a Literate file.
   
   The specification for the [Literate Test Data](./literate-test-data.md) 
 
+  The specification for the [Literate Metadata](./literate-metadata.md) 
