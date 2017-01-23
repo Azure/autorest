@@ -32,7 +32,7 @@ namespace AutoRest.Python.Azure
             AzureExtensions.ParseODataExtension(codeModel);
             SwaggerExtensions.FlattenModels(codeModel);
             ParameterGroupExtensionHelper.AddParameterGroups(codeModel);
-            AzureExtensions.AddAzureProperties(codeModel);
+            AddAzureProperties(codeModel);
             AzureExtensions.SetDefaultResponses(codeModel);
             CorrectFilterParameters(codeModel);
 
@@ -233,6 +233,29 @@ namespace AutoRest.Python.Azure
                 {
                     filterParameter.ModelType = New<PrimaryType>(KnownPrimaryType.String);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Creates azure specific properties.
+        /// </summary>
+        /// <param name="codeModelient"></param>
+        private static void AddAzureProperties(CodeModel codeModel)
+        {
+            var acceptLanguage = codeModel.Properties
+                .FirstOrDefault(p => AzureExtensions.AcceptLanguage.EqualsIgnoreCase(p.SerializedName));
+
+            AzureExtensions.AddAzureProperties(codeModel);
+            codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "long_running_operation_retry_timeout"));
+            codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "generate_client_request_id"));
+            codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "accept_language"));
+
+            if (acceptLanguage != null) // && acceptLanguage.DefaultValue != "en-US"
+            {
+                acceptLanguage.IsReadOnly = true;
+                acceptLanguage.IsRequired = false;
+                acceptLanguage.ModelType = New<PrimaryType>(KnownPrimaryType.String);
+                codeModel.Add(acceptLanguage);
             }
         }
     }

@@ -63,7 +63,7 @@ namespace AutoRest.Python.Azure.Model
                 var param = string.Join(", ", requireParams);
                 if (!string.IsNullOrEmpty(param))
                 {
-                    param += ", ";
+                    param = ", " + param;
                 }
                 return param;
             }
