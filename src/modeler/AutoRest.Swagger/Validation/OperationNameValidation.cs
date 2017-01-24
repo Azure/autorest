@@ -2,17 +2,23 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
-using AutoRest.Swagger.Model;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
     public class OperationNameValidation : TypedRule<string>
     {
-        private const string NOUN_VERB_PATTERN = "^(\\w+)?_(\\w+)$";
+        private static readonly Regex GET_NOUN_VERB_PATTERN = new Regex(@"^(\w+)_(Get|List)", RegexOptions.IgnoreCase);
+        private static readonly Regex GET_VERB_PATTERN = new Regex(@"^(Get|List)", RegexOptions.IgnoreCase);
+        private static readonly Regex PUT_NOUN_VERB_PATTERN = new Regex(@"^(\w+)_(Create)", RegexOptions.IgnoreCase);
+        private static readonly Regex PUT_VERB_PATTERN = new Regex(@"^(Create)", RegexOptions.IgnoreCase);
+        private static readonly Regex PATCH_NOUN_VERB_PATTERN = new Regex(@"^(\w+)_(Update)", RegexOptions.IgnoreCase);
+        private static readonly Regex PATCH_VERB_PATTERN = new Regex(@"^(Update)", RegexOptions.IgnoreCase);
+        private static readonly Regex DELETE_NOUN_VERB_PATTERN = new Regex(@"^(\w+)_(Delete)", RegexOptions.IgnoreCase);
+        private static readonly Regex DELETE_VERB_PATTERN = new Regex(@"^(Delete)", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// The template message for this Rule. 
@@ -50,20 +56,19 @@ namespace AutoRest.Swagger.Validation
 
             if (httpVerb.Equals("GET", StringComparison.InvariantCultureIgnoreCase))
             {
-                isOperationNameValid = (entity.Contains("_") && (entity.EndsWith("_Get") || entity.Contains("_List"))) || 
-                    (entity.StartsWith("get") || entity.StartsWith("list"));
+                isOperationNameValid = GET_NOUN_VERB_PATTERN.IsMatch(entity) || GET_VERB_PATTERN.IsMatch(entity);
             }
             else if (httpVerb.Equals("PUT", StringComparison.InvariantCultureIgnoreCase))
             {
-                isOperationNameValid = (entity.Contains("_") && entity.EndsWith("_Create")) || entity.StartsWith("create");
+                isOperationNameValid = PUT_NOUN_VERB_PATTERN.IsMatch(entity) || PUT_VERB_PATTERN.IsMatch(entity);
             }
             else if (httpVerb.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
             {
-                isOperationNameValid = (entity.Contains("_") && entity.EndsWith("_Update")) || entity.StartsWith("update");
+                isOperationNameValid = PATCH_NOUN_VERB_PATTERN.IsMatch(entity) || PATCH_VERB_PATTERN.IsMatch(entity);
             }
             else if (httpVerb.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
             {
-                isOperationNameValid = (entity.Contains("_") && entity.EndsWith("_Delete")) || entity.StartsWith("update");
+                isOperationNameValid = DELETE_NOUN_VERB_PATTERN.IsMatch(entity) || DELETE_VERB_PATTERN.IsMatch(entity);
             }
 
             return isOperationNameValid;
