@@ -12,7 +12,6 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Headers.
  */
-public final class HeadersImpl implements fixtures.azurespecials.Headers {
+public class HeadersImpl implements fixtures.azurespecials.Headers {
     /** The Retrofit service to perform REST calls. */
     private HeadersService service;
     /** The service client containing this operation class. */
@@ -56,11 +55,11 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeadersService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId" })
         @POST("azurespecials/customNamedRequestId")
         Observable<Response<ResponseBody>> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         Observable<Response<ResponseBody>> customNamedRequestIdParamGrouping(@Header("accept-language") String acceptLanguage, @Header("foo-client-request-id") String fooClientRequestId, @Header("User-Agent") String userAgent);
 
@@ -72,7 +71,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param fooClientRequestId The fooRequestId
      */
     public void customNamedRequestId(String fooClientRequestId) {
-        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().getBody();
+        customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
     }
 
     /**
@@ -83,7 +82,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -96,7 +95,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
         return customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -126,7 +125,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);
@@ -138,7 +137,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().getBody();
+        customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().body();
     }
 
     /**
@@ -149,7 +148,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**
@@ -162,7 +161,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
         return customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).map(new Func1<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -194,7 +193,7 @@ public final class HeadersImpl implements fixtures.azurespecials.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders> customNamedRequestIdParamGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdParamGroupingHeaders.class);

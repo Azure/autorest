@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Dictionarys.
  */
-public final class DictionarysImpl implements Dictionarys {
+public class DictionarysImpl implements Dictionarys {
     /** The Retrofit service to perform REST calls. */
     private DictionarysService service;
     /** The service client containing this operation class. */
@@ -56,27 +55,27 @@ public final class DictionarysImpl implements Dictionarys {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionarysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getValid" })
         @GET("complex/dictionary/typed/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys putValid" })
         @PUT("complex/dictionary/typed/valid")
         Observable<Response<ResponseBody>> putValid(@Body DictionaryWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getEmpty" })
         @GET("complex/dictionary/typed/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys putEmpty" })
         @PUT("complex/dictionary/typed/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body DictionaryWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getNull" })
         @GET("complex/dictionary/typed/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Dictionarys getNotProvided" })
         @GET("complex/dictionary/typed/notprovided")
         Observable<Response<ResponseBody>> getNotProvided();
 
@@ -88,7 +87,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -98,7 +97,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -110,7 +109,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -136,7 +135,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DictionaryWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -148,7 +147,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      */
     public void putValid(DictionaryWrapper complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -159,7 +158,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -172,7 +171,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -203,7 +202,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -215,7 +214,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -225,7 +224,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -237,7 +236,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -263,7 +262,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DictionaryWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -275,7 +274,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param complexBody Please put an empty dictionary
      */
     public void putEmpty(DictionaryWrapper complexBody) {
-        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -286,7 +285,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -299,7 +298,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putEmptyWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -330,7 +329,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -342,7 +341,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -352,7 +351,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -364,7 +363,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -390,7 +389,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DictionaryWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -402,7 +401,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the DictionaryWrapper object if successful.
      */
     public DictionaryWrapper getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -412,7 +411,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) {
-        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -424,7 +423,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<DictionaryWrapper>, DictionaryWrapper>() {
             @Override
             public DictionaryWrapper call(ServiceResponse<DictionaryWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -450,7 +449,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<DictionaryWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DictionaryWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DictionaryWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DictionaryWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

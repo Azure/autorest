@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Arrays.
  */
-public final class ArraysImpl implements Arrays {
+public class ArraysImpl implements Arrays {
     /** The Retrofit service to perform REST calls. */
     private ArraysService service;
     /** The service client containing this operation class. */
@@ -56,23 +55,23 @@ public final class ArraysImpl implements Arrays {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArraysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getValid" })
         @GET("complex/array/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays putValid" })
         @PUT("complex/array/valid")
         Observable<Response<ResponseBody>> putValid(@Body ArrayWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getEmpty" })
         @GET("complex/array/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays putEmpty" })
         @PUT("complex/array/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body ArrayWrapper complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Arrays getNotProvided" })
         @GET("complex/array/notprovided")
         Observable<Response<ResponseBody>> getNotProvided();
 
@@ -84,7 +83,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -94,7 +93,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -106,7 +105,7 @@ public final class ArraysImpl implements Arrays {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
             public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -132,7 +131,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ArrayWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -144,7 +143,7 @@ public final class ArraysImpl implements Arrays {
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      */
     public void putValid(ArrayWrapper complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -155,7 +154,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -168,7 +167,7 @@ public final class ArraysImpl implements Arrays {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -199,7 +198,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -211,7 +210,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -221,7 +220,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -233,7 +232,7 @@ public final class ArraysImpl implements Arrays {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
             public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -259,7 +258,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ArrayWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -271,7 +270,7 @@ public final class ArraysImpl implements Arrays {
      * @param complexBody Please put an empty array
      */
     public void putEmpty(ArrayWrapper complexBody) {
-        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -282,7 +281,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -295,7 +294,7 @@ public final class ArraysImpl implements Arrays {
         return putEmptyWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -326,7 +325,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -338,7 +337,7 @@ public final class ArraysImpl implements Arrays {
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -348,7 +347,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -360,7 +359,7 @@ public final class ArraysImpl implements Arrays {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<ArrayWrapper>, ArrayWrapper>() {
             @Override
             public ArrayWrapper call(ServiceResponse<ArrayWrapper> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -386,7 +385,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ArrayWrapper, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

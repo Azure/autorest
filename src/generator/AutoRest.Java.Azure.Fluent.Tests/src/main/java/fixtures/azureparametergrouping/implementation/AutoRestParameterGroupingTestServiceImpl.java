@@ -12,13 +12,13 @@ package fixtures.azureparametergrouping.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestParameterGroupingTestServiceImpl class.
  */
-public final class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
+public class AutoRestParameterGroupingTestServiceImpl extends AzureServiceClient {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
@@ -128,10 +128,8 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
      * @param credentials the management credentials for Azure
      */
     public AutoRestParameterGroupingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
@@ -35,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Basics.
  */
-public final class BasicsImpl implements Basics {
+public class BasicsImpl implements Basics {
     /** The Retrofit service to perform REST calls. */
     private BasicsService service;
     /** The service client containing this operation class. */
@@ -57,27 +56,27 @@ public final class BasicsImpl implements Basics {
      * used by Retrofit to perform actually REST calls.
      */
     interface BasicsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getValid" })
         @GET("complex/basic/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics putValid" })
         @PUT("complex/basic/valid")
         Observable<Response<ResponseBody>> putValid(@Body Basic complexBody, @Query("api-version") String apiVersion);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getInvalid" })
         @GET("complex/basic/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getEmpty" })
         @GET("complex/basic/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getNull" })
         @GET("complex/basic/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Basics getNotProvided" })
         @GET("complex/basic/notprovided")
         Observable<Response<ResponseBody>> getNotProvided();
 
@@ -89,7 +88,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -99,7 +98,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -111,7 +110,7 @@ public final class BasicsImpl implements Basics {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -137,7 +136,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Basic, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -149,7 +148,7 @@ public final class BasicsImpl implements Basics {
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      */
     public void putValid(Basic complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -160,7 +159,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -173,7 +172,7 @@ public final class BasicsImpl implements Basics {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -204,7 +203,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -216,7 +215,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -226,7 +225,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -238,7 +237,7 @@ public final class BasicsImpl implements Basics {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -264,7 +263,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Basic, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -276,7 +275,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -286,7 +285,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -298,7 +297,7 @@ public final class BasicsImpl implements Basics {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -324,7 +323,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Basic, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -336,7 +335,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -346,7 +345,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -358,7 +357,7 @@ public final class BasicsImpl implements Basics {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -384,7 +383,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Basic, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -396,7 +395,7 @@ public final class BasicsImpl implements Basics {
      * @return the Basic object if successful.
      */
     public Basic getNotProvided() {
-        return getNotProvidedWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNotProvidedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -406,7 +405,7 @@ public final class BasicsImpl implements Basics {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
-        return ServiceCall.create(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -418,7 +417,7 @@ public final class BasicsImpl implements Basics {
         return getNotProvidedWithServiceResponseAsync().map(new Func1<ServiceResponse<Basic>, Basic>() {
             @Override
             public Basic call(ServiceResponse<Basic> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -444,7 +443,7 @@ public final class BasicsImpl implements Basics {
     }
 
     private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Basic, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

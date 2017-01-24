@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Cat model.
@@ -19,11 +20,13 @@ public class Cat extends Pet {
     /**
      * The color property.
      */
+    @JsonProperty(value = "color")
     private String color;
 
     /**
      * The hates property.
      */
+    @JsonProperty(value = "hates")
     private List<Dog> hates;
 
     /**

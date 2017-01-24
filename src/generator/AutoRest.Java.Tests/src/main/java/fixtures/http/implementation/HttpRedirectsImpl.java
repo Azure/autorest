@@ -15,7 +15,6 @@ import fixtures.http.HttpRedirects;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.HttpRedirectsDelete307Headers;
@@ -52,7 +51,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpRedirects.
  */
-public final class HttpRedirectsImpl implements HttpRedirects {
+public class HttpRedirectsImpl implements HttpRedirects {
     /** The Retrofit service to perform REST calls. */
     private HttpRedirectsService service;
     /** The service client containing this operation class. */
@@ -74,63 +73,63 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpRedirectsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects head300" })
         @HEAD("http/redirect/300")
         Observable<Response<Void>> head300();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects get300" })
         @GET("http/redirect/300")
         Observable<Response<ResponseBody>> get300();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects head301" })
         @HEAD("http/redirect/301")
         Observable<Response<Void>> head301();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects get301" })
         @GET("http/redirect/301")
         Observable<Response<ResponseBody>> get301();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects put301" })
         @PUT("http/redirect/301")
         Observable<Response<ResponseBody>> put301(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects head302" })
         @HEAD("http/redirect/302")
         Observable<Response<Void>> head302();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects get302" })
         @GET("http/redirect/302")
         Observable<Response<ResponseBody>> get302();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects patch302" })
         @PATCH("http/redirect/302")
         Observable<Response<ResponseBody>> patch302(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects post303" })
         @POST("http/redirect/303")
         Observable<Response<ResponseBody>> post303(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects head307" })
         @HEAD("http/redirect/307")
         Observable<Response<Void>> head307();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects get307" })
         @GET("http/redirect/307")
         Observable<Response<ResponseBody>> get307();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects put307" })
         @PUT("http/redirect/307")
         Observable<Response<ResponseBody>> put307(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects patch307" })
         @PATCH("http/redirect/307")
         Observable<Response<ResponseBody>> patch307(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects post307" })
         @POST("http/redirect/307")
         Observable<Response<ResponseBody>> post307(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpRedirects delete307" })
         @HTTP(path = "http/redirect/307", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete307(@Body Boolean booleanValue);
 
@@ -141,7 +140,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head300() {
-        head300WithServiceResponseAsync().toBlocking().single().getBody();
+        head300WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -151,7 +150,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head300Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head300WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head300WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -163,7 +162,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head300WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -189,7 +188,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead300Headers> head300Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(300, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -202,7 +201,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> get300() {
-        return get300WithServiceResponseAsync().toBlocking().single().getBody();
+        return get300WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -212,7 +211,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.createWithHeaders(get300WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get300WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -224,7 +223,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get300WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers>, List<String>>() {
             @Override
             public List<String> call(ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -250,7 +249,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<List<String>, HttpRedirectsGet300Headers> get300Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(300, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
@@ -262,7 +261,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head301() {
-        head301WithServiceResponseAsync().toBlocking().single().getBody();
+        head301WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -272,7 +271,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head301WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -284,7 +283,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head301WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -310,7 +309,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead301Headers> head301Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(301, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -322,7 +321,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void get301() {
-        get301WithServiceResponseAsync().toBlocking().single().getBody();
+        get301WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -332,7 +331,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(get301WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -344,7 +343,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get301WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -370,7 +369,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsGet301Headers> get301Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(301, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -382,7 +381,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void put301() {
-        put301WithServiceResponseAsync().toBlocking().single().getBody();
+        put301WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -392,7 +391,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put301WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -404,7 +403,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put301WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -436,7 +435,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void put301(Boolean booleanValue) {
-        put301WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put301WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -447,7 +446,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put301WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put301WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -460,7 +459,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put301WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -487,7 +486,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPut301Headers> put301Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(301, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPut301Headers.class);
@@ -498,7 +497,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head302() {
-        head302WithServiceResponseAsync().toBlocking().single().getBody();
+        head302WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -508,7 +507,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head302WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -520,7 +519,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head302WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -546,7 +545,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead302Headers> head302Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -558,7 +557,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void get302() {
-        get302WithServiceResponseAsync().toBlocking().single().getBody();
+        get302WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -568,7 +567,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(get302WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -580,7 +579,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get302WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -606,7 +605,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsGet302Headers> get302Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -618,7 +617,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void patch302() {
-        patch302WithServiceResponseAsync().toBlocking().single().getBody();
+        patch302WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -628,7 +627,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch302WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -640,7 +639,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch302WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -672,7 +671,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void patch302(Boolean booleanValue) {
-        patch302WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch302WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -683,7 +682,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch302WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch302WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -696,7 +695,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch302WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -723,7 +722,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPatch302Headers> patch302Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(302, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HttpRedirectsPatch302Headers.class);
@@ -734,7 +733,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void post303() {
-        post303WithServiceResponseAsync().toBlocking().single().getBody();
+        post303WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -744,7 +743,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post303Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post303WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post303WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -756,7 +755,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post303WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -788,7 +787,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void post303(Boolean booleanValue) {
-        post303WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post303WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -799,7 +798,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post303WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post303WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -812,7 +811,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post303WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -839,7 +838,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPost303Headers> post303Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(303, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -851,7 +850,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void head307() {
-        head307WithServiceResponseAsync().toBlocking().single().getBody();
+        head307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -861,7 +860,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(head307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(head307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -873,7 +872,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return head307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -899,7 +898,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsHead307Headers> head307Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -911,7 +910,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void get307() {
-        get307WithServiceResponseAsync().toBlocking().single().getBody();
+        get307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -921,7 +920,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(get307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(get307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -933,7 +932,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return get307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -959,7 +958,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsGet307Headers> get307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -971,7 +970,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void put307() {
-        put307WithServiceResponseAsync().toBlocking().single().getBody();
+        put307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -981,7 +980,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -993,7 +992,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1025,7 +1024,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void put307(Boolean booleanValue) {
-        put307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1036,7 +1035,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(put307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(put307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1049,7 +1048,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return put307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1076,7 +1075,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPut307Headers> put307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1088,7 +1087,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void patch307() {
-        patch307WithServiceResponseAsync().toBlocking().single().getBody();
+        patch307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1098,7 +1097,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1110,7 +1109,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1142,7 +1141,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void patch307(Boolean booleanValue) {
-        patch307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1153,7 +1152,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(patch307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(patch307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1166,7 +1165,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return patch307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1193,7 +1192,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPatch307Headers> patch307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1205,7 +1204,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void post307() {
-        post307WithServiceResponseAsync().toBlocking().single().getBody();
+        post307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1215,7 +1214,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1227,7 +1226,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1259,7 +1258,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void post307(Boolean booleanValue) {
-        post307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1270,7 +1269,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1283,7 +1282,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return post307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1310,7 +1309,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsPost307Headers> post307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1322,7 +1321,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      *
      */
     public void delete307() {
-        delete307WithServiceResponseAsync().toBlocking().single().getBody();
+        delete307WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1332,7 +1331,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete307WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1344,7 +1343,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return delete307WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1376,7 +1375,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @param booleanValue Simple boolean value true
      */
     public void delete307(Boolean booleanValue) {
-        delete307WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete307WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1387,7 +1386,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete307WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1400,7 +1399,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
         return delete307WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1427,7 +1426,7 @@ public final class HttpRedirectsImpl implements HttpRedirects {
     }
 
     private ServiceResponseWithHeaders<Void, HttpRedirectsDelete307Headers> delete307Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(307, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

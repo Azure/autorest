@@ -28,7 +28,7 @@ namespace AutoRest.Core.Model
         protected EnumType()
         {
             Values = new List<EnumValue>();
-            Name.OnGet += s => string.IsNullOrEmpty(s) ? "enum" : s;
+            Name.OnGet += s => string.IsNullOrEmpty(s) ? "enum" : CodeNamer.Instance.GetTypeName(s);
         }
 
         /// <summary>

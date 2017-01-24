@@ -26,41 +26,44 @@ public class Product {
     /**
      * Non required int betwen 0 and 100 exclusive.
      */
+    @JsonProperty(value = "capacity")
     private Integer capacity;
 
     /**
      * Image URL representing the product.
      */
+    @JsonProperty(value = "image")
     private String image;
 
     /**
      * The child property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "child", required = true)
     private ChildProduct child;
 
     /**
      * The constChild property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "constChild", required = true)
     private ConstantProduct constChild;
 
     /**
      * Constant int.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "constInt", required = true)
     private int constInt;
 
     /**
      * Constant string.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "constString", required = true)
     private String constString;
 
     /**
      * Constant string as Enum. Possible values include:
      * 'constant_string_as_enum'.
      */
+    @JsonProperty(value = "constStringAsEnum")
     private EnumConst constStringAsEnum;
 
     /**

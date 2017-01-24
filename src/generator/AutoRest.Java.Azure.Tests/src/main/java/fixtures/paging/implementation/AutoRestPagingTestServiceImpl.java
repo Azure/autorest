@@ -12,15 +12,15 @@ package fixtures.paging.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import fixtures.paging.AutoRestPagingTestService;
 import fixtures.paging.Pagings;
 
 /**
  * Initializes a new instance of the AutoRestPagingTestServiceImpl class.
  */
-public final class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
+public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
@@ -130,10 +130,8 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
      * @param credentials the management credentials for Azure
      */
     public AutoRestPagingTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

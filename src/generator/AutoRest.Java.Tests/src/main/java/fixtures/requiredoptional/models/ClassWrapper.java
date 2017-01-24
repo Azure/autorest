@@ -19,7 +19,7 @@ public class ClassWrapper {
     /**
      * The value property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "value", required = true)
     private Product value;
 
     /**

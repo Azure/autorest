@@ -20,13 +20,14 @@ import fixtures.bodycomplex.Polymorphisms;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import fixtures.bodycomplex.Readonlypropertys;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestComplexTestService class.
  */
-public final class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
+public class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
 
     /** API ID. */
     private String apiVersion;
@@ -192,6 +193,16 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      */
     public AutoRestComplexTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestComplexTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestComplexTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

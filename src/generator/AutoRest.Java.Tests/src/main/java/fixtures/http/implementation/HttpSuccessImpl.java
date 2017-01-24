@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -36,7 +35,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
-public final class HttpSuccessImpl implements HttpSuccess {
+public class HttpSuccessImpl implements HttpSuccess {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
@@ -58,75 +57,75 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head200" })
         @HEAD("http/success/200")
         Observable<Response<Void>> head200();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess get200" })
         @GET("http/success/200")
         Observable<Response<ResponseBody>> get200();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put200" })
         @PUT("http/success/200")
         Observable<Response<ResponseBody>> put200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch200" })
         @PATCH("http/success/200")
         Observable<Response<ResponseBody>> patch200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post200" })
         @POST("http/success/200")
         Observable<Response<ResponseBody>> post200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete200" })
         @HTTP(path = "http/success/200", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete200(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put201" })
         @PUT("http/success/201")
         Observable<Response<ResponseBody>> put201(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post201" })
         @POST("http/success/201")
         Observable<Response<ResponseBody>> post201(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put202" })
         @PUT("http/success/202")
         Observable<Response<ResponseBody>> put202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch202" })
         @PATCH("http/success/202")
         Observable<Response<ResponseBody>> patch202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post202" })
         @POST("http/success/202")
         Observable<Response<ResponseBody>> post202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete202" })
         @HTTP(path = "http/success/202", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete202(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head204" })
         @HEAD("http/success/204")
         Observable<Response<Void>> head204();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess put204" })
         @PUT("http/success/204")
         Observable<Response<ResponseBody>> put204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess patch204" })
         @PATCH("http/success/204")
         Observable<Response<ResponseBody>> patch204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess post204" })
         @POST("http/success/204")
         Observable<Response<ResponseBody>> post204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess delete204" })
         @HTTP(path = "http/success/204", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete204(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpSuccess head404" })
         @HEAD("http/success/404")
         Observable<Response<Void>> head404();
 
@@ -137,7 +136,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void head200() {
-        head200WithServiceResponseAsync().toBlocking().single().getBody();
+        head200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -147,7 +146,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -159,7 +158,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -185,7 +184,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
@@ -197,7 +196,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the boolean object if successful.
      */
     public boolean get200() {
-        return get200WithServiceResponseAsync().toBlocking().single().getBody();
+        return get200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -207,7 +206,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(get200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -219,7 +218,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return get200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -245,7 +244,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Boolean> get200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -256,7 +255,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put200() {
-        put200WithServiceResponseAsync().toBlocking().single().getBody();
+        put200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -266,7 +265,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -278,7 +277,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -310,7 +309,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put200(Boolean booleanValue) {
-        put200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -321,7 +320,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -334,7 +333,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -361,7 +360,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -372,7 +371,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void patch200() {
-        patch200WithServiceResponseAsync().toBlocking().single().getBody();
+        patch200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -382,7 +381,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -394,7 +393,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -426,7 +425,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void patch200(Boolean booleanValue) {
-        patch200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -437,7 +436,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -450,7 +449,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -477,7 +476,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> patch200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -488,7 +487,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post200() {
-        post200WithServiceResponseAsync().toBlocking().single().getBody();
+        post200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -498,7 +497,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -510,7 +509,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -542,7 +541,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post200(Boolean booleanValue) {
-        post200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -553,7 +552,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -566,7 +565,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -593,7 +592,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -604,7 +603,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void delete200() {
-        delete200WithServiceResponseAsync().toBlocking().single().getBody();
+        delete200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -614,7 +613,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -626,7 +625,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -658,7 +657,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void delete200(Boolean booleanValue) {
-        delete200WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete200WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -669,7 +668,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete200WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete200WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -682,7 +681,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete200WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -709,7 +708,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> delete200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -720,7 +719,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put201() {
-        put201WithServiceResponseAsync().toBlocking().single().getBody();
+        put201WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -730,7 +729,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put201WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -742,7 +741,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -774,7 +773,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put201(Boolean booleanValue) {
-        put201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put201WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -785,7 +784,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put201WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put201WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -798,7 +797,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -825,7 +824,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(201, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -836,7 +835,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post201() {
-        post201WithServiceResponseAsync().toBlocking().single().getBody();
+        post201WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -846,7 +845,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post201WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post201WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -858,7 +857,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post201WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -890,7 +889,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post201(Boolean booleanValue) {
-        post201WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post201WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -901,7 +900,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post201WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post201WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -914,7 +913,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post201WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -941,7 +940,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(201, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -952,7 +951,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put202() {
-        put202WithServiceResponseAsync().toBlocking().single().getBody();
+        put202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -962,7 +961,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -974,7 +973,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1006,7 +1005,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put202(Boolean booleanValue) {
-        put202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1017,7 +1016,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1030,7 +1029,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1057,7 +1056,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1068,7 +1067,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void patch202() {
-        patch202WithServiceResponseAsync().toBlocking().single().getBody();
+        patch202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1078,7 +1077,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1090,7 +1089,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1122,7 +1121,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void patch202(Boolean booleanValue) {
-        patch202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1133,7 +1132,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1146,7 +1145,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1173,7 +1172,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> patch202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1184,7 +1183,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post202() {
-        post202WithServiceResponseAsync().toBlocking().single().getBody();
+        post202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1194,7 +1193,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1206,7 +1205,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1238,7 +1237,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post202(Boolean booleanValue) {
-        post202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1249,7 +1248,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1262,7 +1261,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1289,7 +1288,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1300,7 +1299,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void delete202() {
-        delete202WithServiceResponseAsync().toBlocking().single().getBody();
+        delete202WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1310,7 +1309,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete202WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete202WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1322,7 +1321,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete202WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1354,7 +1353,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void delete202(Boolean booleanValue) {
-        delete202WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete202WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1365,7 +1364,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete202WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete202WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1378,7 +1377,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete202WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1405,7 +1404,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> delete202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1416,7 +1415,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void head204() {
-        head204WithServiceResponseAsync().toBlocking().single().getBody();
+        head204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1426,7 +1425,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1438,7 +1437,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1464,7 +1463,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
@@ -1475,7 +1474,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void put204() {
-        put204WithServiceResponseAsync().toBlocking().single().getBody();
+        put204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1485,7 +1484,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1497,7 +1496,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1529,7 +1528,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void put204(Boolean booleanValue) {
-        put204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        put204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1540,7 +1539,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(put204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(put204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1553,7 +1552,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return put204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1580,7 +1579,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> put204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1591,7 +1590,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void patch204() {
-        patch204WithServiceResponseAsync().toBlocking().single().getBody();
+        patch204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1601,7 +1600,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(patch204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1613,7 +1612,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1645,7 +1644,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void patch204(Boolean booleanValue) {
-        patch204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        patch204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1656,7 +1655,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(patch204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(patch204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1669,7 +1668,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return patch204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1696,7 +1695,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> patch204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1707,7 +1706,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void post204() {
-        post204WithServiceResponseAsync().toBlocking().single().getBody();
+        post204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1717,7 +1716,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1729,7 +1728,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1761,7 +1760,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void post204(Boolean booleanValue) {
-        post204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        post204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1772,7 +1771,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(post204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1785,7 +1784,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return post204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1812,7 +1811,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> post204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1823,7 +1822,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void delete204() {
-        delete204WithServiceResponseAsync().toBlocking().single().getBody();
+        delete204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1833,7 +1832,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1845,7 +1844,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1877,7 +1876,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @param booleanValue Simple boolean value true
      */
     public void delete204(Boolean booleanValue) {
-        delete204WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        delete204WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -1888,7 +1887,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete204WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1901,7 +1900,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return delete204WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1928,7 +1927,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> delete204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1939,7 +1938,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      *
      */
     public void head404() {
-        head404WithServiceResponseAsync().toBlocking().single().getBody();
+        head404WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1949,7 +1948,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1961,7 +1960,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1987,7 +1986,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

@@ -19,13 +19,14 @@ import fixtures.http.HttpServerFailures;
 import fixtures.http.HttpRetrys;
 import fixtures.http.MultipleResponses;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
  */
-public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
+public class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClient implements AutoRestHttpInfrastructureTestService {
 
     /**
      * The HttpFailures object to access its operations.
@@ -155,6 +156,16 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      */
     public AutoRestHttpInfrastructureTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestHttpInfrastructureTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestHttpInfrastructureTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

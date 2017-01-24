@@ -17,7 +17,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import fixtures.header.implementation.AutoRestSwaggerBATHeaderServiceImpl;
-import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
 import fixtures.header.models.HeaderResponseByteHeaders;
@@ -59,7 +58,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("User-Agent") != null) {
                         Assert.assertEquals("overwrite", headers.get("User-Agent"));
                         lock.countDown();
@@ -78,7 +77,7 @@ public class HeaderOperationsTests {
     public void paramProtectedKey() throws Exception {
         try {
             client.headers().paramProtectedKey("text/html");
-        } catch (ErrorException ex) {
+        } catch (RuntimeException ex) {
             // OkHttp can actually overwrite header "Content-Type"
         }
     }
@@ -90,7 +89,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("Content-Type") != null) {
                         Assert.assertTrue(headers.get("Content-Type").contains("text/html"));
                         lock.countDown();
@@ -118,7 +117,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("1", headers.get("value"));
                         lock.countDown();
@@ -136,7 +135,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-2", headers.get("value"));
                         lock.countDown();
@@ -164,7 +163,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("105", headers.get("value"));
                         lock.countDown();
@@ -182,7 +181,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-2", headers.get("value"));
                         lock.countDown();
@@ -210,7 +209,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("0.07", headers.get("value"));
                         lock.countDown();
@@ -228,7 +227,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-3", headers.get("value"));
                         lock.countDown();
@@ -256,7 +255,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("7e+120", headers.get("value"));
                         lock.countDown();
@@ -274,7 +273,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("-3", headers.get("value"));
                         lock.countDown();
@@ -302,7 +301,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("true", headers.get("value"));
                         lock.countDown();
@@ -320,7 +319,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("false", headers.get("value"));
                         lock.countDown();
@@ -349,7 +348,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("The quick brown fox jumps over the lazy dog", headers.get("value"));
                         lock.countDown();
@@ -367,7 +366,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("null", headers.get("value"));
                         lock.countDown();
@@ -385,7 +384,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("", headers.get("value"));
                         lock.countDown();
@@ -413,7 +412,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("2010-01-01", headers.get("value"));
                         lock.countDown();
@@ -431,7 +430,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("0001-01-01", headers.get("value"));
                         lock.countDown();
@@ -458,7 +457,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("P123DT22H14M12.011S", headers.get("value"));
                         lock.countDown();
@@ -486,7 +485,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("Fri, 01 Jan 2010 12:34:56 GMT", headers.get("value"));
                         lock.countDown();
@@ -504,7 +503,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("Mon, 01 Jan 0001 00:00:00 GMT", headers.get("value"));
                         lock.countDown();
@@ -533,7 +532,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("2010-01-01T12:34:56Z", headers.get("value"));
                         lock.countDown();
@@ -551,7 +550,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("0001-01-01T00:00:00Z", headers.get("value"));
                         lock.countDown();
@@ -578,7 +577,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         byte[] value = Base64.decodeBase64(headers.get("value"));
                         String actual = new String(value, Charset.forName("UTF-8"));
@@ -608,7 +607,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("GREY", headers.get("value"));
                         lock.countDown();
@@ -626,7 +625,7 @@ public class HeaderOperationsTests {
             .subscribe(new Action1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>>() {
                 @Override
                 public void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
-                    Headers headers = response.getResponse().headers();
+                    Headers headers = response.response().headers();
                     if (headers.get("value") != null) {
                         Assert.assertEquals("", headers.get("value"));
                         lock.countDown();

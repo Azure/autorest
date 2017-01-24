@@ -10,11 +10,19 @@
 
 package fixtures.parameterflattening;
 
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestParameterFlattening class.
  */
 public interface AutoRestParameterFlattening {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

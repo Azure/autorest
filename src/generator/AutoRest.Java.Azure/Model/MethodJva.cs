@@ -14,6 +14,8 @@ using AutoRest.Java.Model;
 using AutoRest.Core.Utilities.Collections;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace AutoRest.Java.Azure.Model
 {
@@ -72,7 +74,7 @@ namespace AutoRest.Java.Azure.Model
                 }
                 else
                 {
-                    return "ServiceException";
+                    return "RestException";
                 }
             }
         }
@@ -95,6 +97,21 @@ namespace AutoRest.Java.Azure.Model
                 };
                 par.Name.FixedValue = Group.IsNullOrEmpty() ? "this.userAgent()" : "this.client.userAgent()";
                 parameters.Add(par);
+
+                if (IsPagingNextOperation)
+                {
+                    parameters.RemoveAll(p => p.Location == ParameterLocation.Path);
+                    parameters.Insert(0, new ParameterJv
+                    {
+                        Name = "nextUrl",
+                        SerializedName = "nextUrl",
+                        ModelType = New<PrimaryType>(KnownPrimaryType.String),
+                        Documentation = "The URL to get the next page of items.",
+                        Location = ParameterLocation.Path,
+                        IsRequired = true
+                    });
+                }
+
                 return parameters;
             }
         }
@@ -105,6 +122,10 @@ namespace AutoRest.Java.Azure.Model
             get
             {
                 var declaration = base.MethodParameterApiDeclaration;
+                if (IsPagingNextOperation)
+                {
+                    declaration = declaration.Replace("@Path(\"nextUrl\")", "@Url");
+                }
                 foreach (var parameter in RetrofitParameters.Where(p => 
                     p.Location == ParameterLocation.Path || p.Location == ParameterLocation.Query))
                 {
@@ -115,10 +136,6 @@ namespace AutoRest.Java.Azure.Model
                             string.Format(CultureInfo.InvariantCulture, "@{0}(\"{1}\")", parameter.Location.ToString(), parameter.SerializedName),
                             string.Format(CultureInfo.InvariantCulture, "@{0}(value = \"{1}\", encoded = true)", parameter.Location.ToString(), parameter.SerializedName));
                     }
-                }
-                if (IsPagingNextOperation)
-                {
-                    declaration = declaration.Replace("@Path(\"nextLink\")", "@Url");
                 }
                 return declaration;
             }
@@ -326,7 +343,7 @@ namespace AutoRest.Java.Azure.Model
         {
             get
             {
-                return "AzureServiceResponseBuilder";
+                return "AzureResponseBuilder";
             }
         }
 
@@ -404,7 +421,7 @@ namespace AutoRest.Java.Azure.Model
                 string invocation;
                 MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation);
 
-                builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.getBody()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
+                builder.AppendLine("PagedList<{0}> result = new PagedList<{0}>(response.body()) {{", ((SequenceType)ReturnType.Body).ElementType.Name)
                     .Indent().AppendLine("@Override")
                     .AppendLine("public Page<{0}> nextPage(String {1}) throws {2}, IOException {{",
                         ((SequenceType)ReturnType.Body).ElementType.Name,
@@ -412,7 +429,7 @@ namespace AutoRest.Java.Azure.Model
                         OperationExceptionTypeString)
                         .Indent();
                         TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
-                        builder.AppendLine("return {0}({1}).getBody();", 
+                        builder.AppendLine("return {0}({1}).body();", 
                             invocation, filterRequired ? nextMethod.MethodDefaultParameterInvocation : nextMethod.MethodParameterInvocation)
                     .Outdent().AppendLine("}")
                 .Outdent().AppendLine("};");
@@ -424,7 +441,7 @@ namespace AutoRest.Java.Azure.Model
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0}<{1}<{2}>> response = {3}Delegate(call.execute());",
                     ReturnTypeJva.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
-                builder.AppendLine("{0} result = response.getBody().getItems();", this.ReturnType.Body.Name);
+                builder.AppendLine("{0} result = response.body().items();", this.ReturnType.Body.Name);
                 return builder.ToString();
             }
             else
@@ -442,12 +459,12 @@ namespace AutoRest.Java.Azure.Model
                 {
                     if (ReturnType.Headers != null)
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getHeaders(), response.getResponse())",
+                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.headers(), response.response())",
                             ReturnTypeJva.ClientResponseType);
                     }
                     else
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.getResponse())",
+                        return string.Format(CultureInfo.InvariantCulture, "new {0}<>(result, response.response())",
                             ReturnTypeJva.ClientResponseType);
                     }
                 }
@@ -466,13 +483,13 @@ namespace AutoRest.Java.Azure.Model
                 builder.AppendLine("{0} result = {1}Delegate(response);",
                     ReturnTypeJva.WireResponseTypeString, this.Name);
                 builder.AppendLine("if (serviceCallback != null) {").Indent();
-                builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
-                builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
-                    .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                builder.AppendLine("serviceCallback.load(result.body().items());");
+                builder.AppendLine("if (result.body().nextPageLink() != null").Indent().Indent()
+                    .AppendLine("&& serviceCallback.progress(result.body().items()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
                 string invocation;
                 MethodJva nextMethod = GetPagingNextMethodWithInvocation(out invocation, true);
                 TransformPagingGroupedParameter(builder, nextMethod, filterRequired);
-                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
+                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.body().nextPageLink(), {1});",
                     invocation,
                     filterRequired ? nextMethod.MethodRequiredParameterInvocationWithCallback : nextMethod.MethodParameterInvocationWithCallback);
                 builder.AppendLine(nextCall.Replace(
@@ -481,20 +498,20 @@ namespace AutoRest.Java.Azure.Model
                 builder.AppendLine("} else {").Indent();
                 if (ReturnType.Headers == null)
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.headers(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
                 if (ReturnType.Headers == null)
                 {
-                builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), response));", ReturnTypeJva.ClientResponseType);
+                builder.AppendLine("serviceCall.success(new {0}<>(result.body().items(), response));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCall.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCall.success(new {0}<>(result.body().items(), result.headers(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 return builder.ToString();
             }
@@ -502,10 +519,10 @@ namespace AutoRest.Java.Azure.Model
             {
                 var builder = new IndentedStringBuilder();
                 builder.AppendLine("{0} result = {1}Delegate(response);", ReturnTypeJva.WireResponseTypeString, this.Name);
-                builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
-                builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
-                builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
-                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}Async(result.getBody().getNextPageLink(), {1});",
+                builder.AppendLine("serviceCallback.load(result.body().items());");
+                builder.AppendLine("if (result.body().nextPageLink() != null").Indent().Indent();
+                builder.AppendLine("&& serviceCallback.progress(result.body().items()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}Async(result.body().nextPageLink(), {1});",
                     this.Name,
                     filterRequired ? MethodRequiredParameterInvocationWithCallback : MethodParameterInvocationWithCallback);
                 builder.AppendLine(nextCall.Replace(
@@ -514,11 +531,11 @@ namespace AutoRest.Java.Azure.Model
                 builder.AppendLine("} else {").Indent();
                 if (ReturnType.Headers == null)
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(serviceCallback.get(), result.headers(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 builder.Outdent().AppendLine("}");
                 return builder.ToString();
@@ -531,11 +548,11 @@ namespace AutoRest.Java.Azure.Model
                     ReturnTypeJva.ClientResponseType, returnTypeBody.PageImplType, returnTypeBody.ElementType.Name, this.Name.ToCamelCase());
                 if (ReturnType.Headers == null)
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(result.body().items(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 else
                 {
-                    builder.AppendLine("serviceCallback.success(new {0}<>(result.getBody().getItems(), result.getHeaders(), result.getResponse()));", ReturnTypeJva.ClientResponseType);
+                    builder.AppendLine("serviceCallback.success(new {0}<>(result.body().items(), result.headers(), result.response()));", ReturnTypeJva.ClientResponseType);
                 }
                 return builder.ToString();
             }
@@ -623,26 +640,6 @@ namespace AutoRest.Java.Azure.Model
             }
         }
 
-        [JsonIgnore]
-        public override string ServiceCallConstruction
-        {
-            get
-            {
-                if (this.IsPagingNextOperation)
-                {
-                    return "serviceCall.newCall(call);";
-                }
-                else if (this.IsPagingOperation)
-                {
-                    var sequenceType = ReturnType.Body as SequenceTypeJva;
-                    return string.Format(CultureInfo.InvariantCulture,
-                        "final ServiceCall<List<{0}>> serviceCall = ServiceCall.create(call);",
-                        sequenceType != null ? sequenceType.ElementType.Name.ToString() : "Void");
-                }
-                return base.ServiceCallConstruction;
-            }
-        }
-
         public override string ClientResponse(bool filterRequired = false)
         {
             if (this.IsPagingOperation || this.IsPagingNextOperation)
@@ -650,10 +647,10 @@ namespace AutoRest.Java.Azure.Model
                 IndentedStringBuilder builder = new IndentedStringBuilder();
                 builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
                 builder.AppendLine("{0} body = null;", ReturnTypeJva.ServiceCallGenericParameterString)
-                    .AppendLine("if (result.getBody() != null) {")
-                    .Indent().AppendLine("{0}", ReturnTypeJva.ConvertBodyToClientType("result.getBody()", "body"))
+                    .AppendLine("if (result.body() != null) {")
+                    .Indent().AppendLine("{0}", ReturnTypeJva.ConvertBodyToClientType("result.body()", "body"))
                     .Outdent().AppendLine("}");
-                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.getResponse());",
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.response());",
                     ReturnTypeJva.ServiceCallGenericParameterString);
                 return builder.ToString();
             }
@@ -661,13 +658,36 @@ namespace AutoRest.Java.Azure.Model
             {
                 IndentedStringBuilder builder = new IndentedStringBuilder();
                 builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", ReturnTypeJva.GenericBodyWireTypeString, this.Name);
-                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(result.getBody().getItems(), result.getResponse());",
+                builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(result.body().items(), result.response());",
                     ReturnTypeJva.ServiceCallGenericParameterString);
                 return builder.ToString();
             }
             else
             {
                 return base.ClientResponse(filterRequired);
+            }
+        }
+
+        [JsonIgnore]
+        public override string ServiceCallFactoryMethod
+        {
+            get
+            {
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
+                    if (ReturnType.Headers == null)
+                    {
+                        return "fromPageResponse";
+                    }
+                    else
+                    {
+                        return "fromHeaderPageResponse";
+                    }
+                }
+                else
+                {
+                    return base.ServiceCallFactoryMethod;
+                }
             }
         }
 
@@ -683,6 +703,24 @@ namespace AutoRest.Java.Azure.Model
                 }
                 builder.Append(" * @param serviceCallback the async ServiceCallback to handle successful and failed responses.");
                 return builder.ToString();
+            }
+        }
+
+        [JsonIgnore]
+        public string NextUrlConstruction
+        {
+            get
+            {
+                var builder = new StringBuilder("String.format(");
+                var regex = new Regex("{\\w+}");
+                var matches = regex.Matches(Url);
+                builder.Append("\"").Append(regex.Replace(Url, "%s").TrimStart('/')).Append("\"");
+                foreach (Match match in matches)
+                {
+                    var sn = match.Value.Trim('{', '}');
+                    builder.Append(", " + base.RetrofitParameters.First(p => p.SerializedName == sn).WireName);
+                }
+                return builder.Append(")").ToString();
             }
         }
 
@@ -720,9 +758,7 @@ namespace AutoRest.Java.Azure.Model
                 var imports = base.ImplImports;
                 if (this.IsLongRunningOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
-                    imports.Remove("com.microsoft.rest.ServiceResponseCallback");
-                    imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
+                    imports.Remove("com.microsoft.azure.AzureResponseBuilder");
                     this.Responses.Select(r => r.Value.Body).Concat(new IModelType[] { DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
                         .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))
@@ -747,6 +783,11 @@ namespace AutoRest.Java.Azure.Model
                     imports.Add("com.microsoft.azure.PagedList");
                     imports.Add("com.microsoft.azure.AzureServiceCall");
                     imports.AddRange(ctype.ImportSafe());
+                }
+                if (this.IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.Url");
                 }
                 if (this.IsPagingNonPollingOperation)
                 {

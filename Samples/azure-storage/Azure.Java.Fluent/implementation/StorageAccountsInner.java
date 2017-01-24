@@ -5,7 +5,6 @@ package petstore.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in StorageAccounts.
  */
-public final class StorageAccountsInner {
+public class StorageAccountsInner {
     /** The Retrofit service to perform REST calls. */
     private StorageAccountsService service;
     /** The service client containing this operation class. */
@@ -54,43 +53,43 @@ public final class StorageAccountsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface StorageAccountsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts checkNameAvailability" })
         @POST("subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability")
         Observable<Response<ResponseBody>> checkNameAvailability(@Path("subscriptionId") String subscriptionId, @Body StorageAccountCheckNameAvailabilityParametersInner accountName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts create" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
         Observable<Response<ResponseBody>> create(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountCreateParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts beginCreate" })
         @PUT("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
         Observable<Response<ResponseBody>> beginCreate(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountCreateParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts delete" })
         @HTTP(path = "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts getProperties" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
         Observable<Response<ResponseBody>> getProperties(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts update" })
         @PATCH("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}")
         Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountUpdateParametersInner parameters, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts listKeys" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys")
         Observable<Response<ResponseBody>> listKeys(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts")
         Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts listByResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts")
         Observable<Response<ResponseBody>> listByResourceGroup(@Path("resourceGroupName") String resourceGroupName, @Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.StorageAccounts regenerateKey" })
         @POST("subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey")
         Observable<Response<ResponseBody>> regenerateKey(@Path("resourceGroupName") String resourceGroupName, @Path("accountName") String accountName, @Path("subscriptionId") String subscriptionId, @Body StorageAccountRegenerateKeyParametersInner regenerateKey, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -103,7 +102,7 @@ public final class StorageAccountsInner {
      * @return the CheckNameAvailabilityResultInner object if successful.
      */
     public CheckNameAvailabilityResultInner checkNameAvailability(StorageAccountCheckNameAvailabilityParametersInner accountName) {
-        return checkNameAvailabilityWithServiceResponseAsync(accountName).toBlocking().single().getBody();
+        return checkNameAvailabilityWithServiceResponseAsync(accountName).toBlocking().single().body();
     }
 
     /**
@@ -114,7 +113,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<CheckNameAvailabilityResultInner> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParametersInner accountName, final ServiceCallback<CheckNameAvailabilityResultInner> serviceCallback) {
-        return ServiceCall.create(checkNameAvailabilityWithServiceResponseAsync(accountName), serviceCallback);
+        return ServiceCall.fromResponse(checkNameAvailabilityWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
@@ -127,7 +126,7 @@ public final class StorageAccountsInner {
         return checkNameAvailabilityWithServiceResponseAsync(accountName).map(new Func1<ServiceResponse<CheckNameAvailabilityResultInner>, CheckNameAvailabilityResultInner>() {
             @Override
             public CheckNameAvailabilityResultInner call(ServiceResponse<CheckNameAvailabilityResultInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -164,7 +163,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<CheckNameAvailabilityResultInner> checkNameAvailabilityDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<CheckNameAvailabilityResultInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<CheckNameAvailabilityResultInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<CheckNameAvailabilityResultInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -179,7 +178,7 @@ public final class StorageAccountsInner {
      * @return the StorageAccountInner object if successful.
      */
     public StorageAccountInner create(String resourceGroupName, String accountName, StorageAccountCreateParametersInner parameters) {
-        return createWithServiceResponseAsync(resourceGroupName, accountName, parameters).toBlocking().last().getBody();
+        return createWithServiceResponseAsync(resourceGroupName, accountName, parameters).toBlocking().last().body();
     }
 
     /**
@@ -192,7 +191,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountInner> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParametersInner parameters, final ServiceCallback<StorageAccountInner> serviceCallback) {
-        return ServiceCall.create(createWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
+        return ServiceCall.fromResponse(createWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
     }
 
     /**
@@ -207,7 +206,7 @@ public final class StorageAccountsInner {
         return createWithServiceResponseAsync(resourceGroupName, accountName, parameters).map(new Func1<ServiceResponse<StorageAccountInner>, StorageAccountInner>() {
             @Override
             public StorageAccountInner call(ServiceResponse<StorageAccountInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -250,7 +249,7 @@ public final class StorageAccountsInner {
      * @return the StorageAccountInner object if successful.
      */
     public StorageAccountInner beginCreate(String resourceGroupName, String accountName, StorageAccountCreateParametersInner parameters) {
-        return beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters).toBlocking().single().getBody();
+        return beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters).toBlocking().single().body();
     }
 
     /**
@@ -263,7 +262,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountInner> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParametersInner parameters, final ServiceCallback<StorageAccountInner> serviceCallback) {
-        return ServiceCall.create(beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
+        return ServiceCall.fromResponse(beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
     }
 
     /**
@@ -278,7 +277,7 @@ public final class StorageAccountsInner {
         return beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters).map(new Func1<ServiceResponse<StorageAccountInner>, StorageAccountInner>() {
             @Override
             public StorageAccountInner call(ServiceResponse<StorageAccountInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -323,7 +322,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<StorageAccountInner> beginCreateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<StorageAccountInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<StorageAccountInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccountInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -337,7 +336,7 @@ public final class StorageAccountsInner {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      */
     public void delete(String resourceGroupName, String accountName) {
-        deleteWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().getBody();
+        deleteWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().body();
     }
 
     /**
@@ -349,7 +348,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsync(String resourceGroupName, String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(deleteWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+        return ServiceCall.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
     }
 
     /**
@@ -363,7 +362,7 @@ public final class StorageAccountsInner {
         return deleteWithServiceResponseAsync(resourceGroupName, accountName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -403,7 +402,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<Void> deleteDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -417,7 +416,7 @@ public final class StorageAccountsInner {
      * @return the StorageAccountInner object if successful.
      */
     public StorageAccountInner getProperties(String resourceGroupName, String accountName) {
-        return getPropertiesWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().getBody();
+        return getPropertiesWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().body();
     }
 
     /**
@@ -429,7 +428,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountInner> getPropertiesAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountInner> serviceCallback) {
-        return ServiceCall.create(getPropertiesWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+        return ServiceCall.fromResponse(getPropertiesWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
     }
 
     /**
@@ -443,7 +442,7 @@ public final class StorageAccountsInner {
         return getPropertiesWithServiceResponseAsync(resourceGroupName, accountName).map(new Func1<ServiceResponse<StorageAccountInner>, StorageAccountInner>() {
             @Override
             public StorageAccountInner call(ServiceResponse<StorageAccountInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -483,7 +482,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<StorageAccountInner> getPropertiesDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<StorageAccountInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<StorageAccountInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccountInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -498,7 +497,7 @@ public final class StorageAccountsInner {
      * @return the StorageAccountInner object if successful.
      */
     public StorageAccountInner update(String resourceGroupName, String accountName, StorageAccountUpdateParametersInner parameters) {
-        return updateWithServiceResponseAsync(resourceGroupName, accountName, parameters).toBlocking().single().getBody();
+        return updateWithServiceResponseAsync(resourceGroupName, accountName, parameters).toBlocking().single().body();
     }
 
     /**
@@ -511,7 +510,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountInner> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParametersInner parameters, final ServiceCallback<StorageAccountInner> serviceCallback) {
-        return ServiceCall.create(updateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
+        return ServiceCall.fromResponse(updateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
     }
 
     /**
@@ -526,7 +525,7 @@ public final class StorageAccountsInner {
         return updateWithServiceResponseAsync(resourceGroupName, accountName, parameters).map(new Func1<ServiceResponse<StorageAccountInner>, StorageAccountInner>() {
             @Override
             public StorageAccountInner call(ServiceResponse<StorageAccountInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -571,7 +570,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<StorageAccountInner> updateDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<StorageAccountInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<StorageAccountInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccountInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -585,7 +584,7 @@ public final class StorageAccountsInner {
      * @return the StorageAccountKeysInner object if successful.
      */
     public StorageAccountKeysInner listKeys(String resourceGroupName, String accountName) {
-        return listKeysWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().getBody();
+        return listKeysWithServiceResponseAsync(resourceGroupName, accountName).toBlocking().single().body();
     }
 
     /**
@@ -597,7 +596,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountKeysInner> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeysInner> serviceCallback) {
-        return ServiceCall.create(listKeysWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+        return ServiceCall.fromResponse(listKeysWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
     }
 
     /**
@@ -611,7 +610,7 @@ public final class StorageAccountsInner {
         return listKeysWithServiceResponseAsync(resourceGroupName, accountName).map(new Func1<ServiceResponse<StorageAccountKeysInner>, StorageAccountKeysInner>() {
             @Override
             public StorageAccountKeysInner call(ServiceResponse<StorageAccountKeysInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -651,7 +650,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<StorageAccountKeysInner> listKeysDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<StorageAccountKeysInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<StorageAccountKeysInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccountKeysInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -663,7 +662,7 @@ public final class StorageAccountsInner {
      * @return the List&lt;StorageAccountInner&gt; object if successful.
      */
     public List<StorageAccountInner> list() {
-        return listWithServiceResponseAsync().toBlocking().single().getBody();
+        return listWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -673,7 +672,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<StorageAccountInner>> listAsync(final ServiceCallback<List<StorageAccountInner>> serviceCallback) {
-        return ServiceCall.create(listWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(listWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -685,7 +684,7 @@ public final class StorageAccountsInner {
         return listWithServiceResponseAsync().map(new Func1<ServiceResponse<List<StorageAccountInner>>, List<StorageAccountInner>>() {
             @Override
             public List<StorageAccountInner> call(ServiceResponse<List<StorageAccountInner>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -708,7 +707,7 @@ public final class StorageAccountsInner {
                 public Observable<ServiceResponse<List<StorageAccountInner>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<StorageAccountInner>> result = listDelegate(response);
-                        ServiceResponse<List<StorageAccountInner>> clientResponse = new ServiceResponse<List<StorageAccountInner>>(result.getBody().getItems(), result.getResponse());
+                        ServiceResponse<List<StorageAccountInner>> clientResponse = new ServiceResponse<List<StorageAccountInner>>(result.body().items(), result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -718,7 +717,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<PageImpl<StorageAccountInner>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<StorageAccountInner>, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageAccountInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<StorageAccountInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -731,7 +730,7 @@ public final class StorageAccountsInner {
      * @return the List&lt;StorageAccountInner&gt; object if successful.
      */
     public List<StorageAccountInner> listByResourceGroup(String resourceGroupName) {
-        return listByResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
+        return listByResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().body();
     }
 
     /**
@@ -742,7 +741,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<StorageAccountInner>> listByResourceGroupAsync(String resourceGroupName, final ServiceCallback<List<StorageAccountInner>> serviceCallback) {
-        return ServiceCall.create(listByResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+        return ServiceCall.fromResponse(listByResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**
@@ -755,7 +754,7 @@ public final class StorageAccountsInner {
         return listByResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<List<StorageAccountInner>>, List<StorageAccountInner>>() {
             @Override
             public List<StorageAccountInner> call(ServiceResponse<List<StorageAccountInner>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -782,7 +781,7 @@ public final class StorageAccountsInner {
                 public Observable<ServiceResponse<List<StorageAccountInner>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<StorageAccountInner>> result = listByResourceGroupDelegate(response);
-                        ServiceResponse<List<StorageAccountInner>> clientResponse = new ServiceResponse<List<StorageAccountInner>>(result.getBody().getItems(), result.getResponse());
+                        ServiceResponse<List<StorageAccountInner>> clientResponse = new ServiceResponse<List<StorageAccountInner>>(result.body().items(), result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -792,7 +791,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<PageImpl<StorageAccountInner>> listByResourceGroupDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<StorageAccountInner>, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<PageImpl<StorageAccountInner>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<StorageAccountInner>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -807,7 +806,7 @@ public final class StorageAccountsInner {
      * @return the StorageAccountKeysInner object if successful.
      */
     public StorageAccountKeysInner regenerateKey(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParametersInner regenerateKey) {
-        return regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey).toBlocking().single().getBody();
+        return regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey).toBlocking().single().body();
     }
 
     /**
@@ -820,7 +819,7 @@ public final class StorageAccountsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<StorageAccountKeysInner> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParametersInner regenerateKey, final ServiceCallback<StorageAccountKeysInner> serviceCallback) {
-        return ServiceCall.create(regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey), serviceCallback);
+        return ServiceCall.fromResponse(regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey), serviceCallback);
     }
 
     /**
@@ -835,7 +834,7 @@ public final class StorageAccountsInner {
         return regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey).map(new Func1<ServiceResponse<StorageAccountKeysInner>, StorageAccountKeysInner>() {
             @Override
             public StorageAccountKeysInner call(ServiceResponse<StorageAccountKeysInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -880,7 +879,7 @@ public final class StorageAccountsInner {
     }
 
     private ServiceResponse<StorageAccountKeysInner> regenerateKeyDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<StorageAccountKeysInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<StorageAccountKeysInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<StorageAccountKeysInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

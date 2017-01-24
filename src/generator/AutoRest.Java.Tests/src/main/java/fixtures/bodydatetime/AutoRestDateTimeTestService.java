@@ -10,11 +10,19 @@
 
 package fixtures.bodydatetime;
 
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestDateTimeTestService class.
  */
 public interface AutoRestDateTimeTestService {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

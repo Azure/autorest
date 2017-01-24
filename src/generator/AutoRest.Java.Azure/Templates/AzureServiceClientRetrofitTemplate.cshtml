@@ -16,11 +16,15 @@ if (method.RequestContentType == "multipart/form-data" || method.RequestContentT
 }
 else
 {
-@:    @@Headers("Content-Type: @method.RequestContentType")
+@:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.FullyQualifiedDomainName @method.Name" })
 }
 if (method.HttpMethod == HttpMethod.Delete)
 {
 @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
+}
+else if (method.IsPagingNextOperation)
+{
+@:    @@GET
 }
 else
 {

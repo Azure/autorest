@@ -4,6 +4,7 @@
 package petstore.models;
 
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The StorageAccountProperties model.
@@ -14,6 +15,7 @@ public class StorageAccountProperties {
      * called. Possible values include: 'Creating', 'ResolvingDNS',
      * 'Succeeded'.
      */
+    @JsonProperty(value = "provisioningState")
     private ProvisioningState provisioningState;
 
     /**
@@ -21,6 +23,7 @@ public class StorageAccountProperties {
      * 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
      * 'Premium_LRS'.
      */
+    @JsonProperty(value = "accountType")
     private AccountType accountType;
 
     /**
@@ -28,11 +31,13 @@ public class StorageAccountProperties {
      * queue or table object.Note that StandardZRS and PremiumLRS accounts only
      * return the blob endpoint.
      */
+    @JsonProperty(value = "primaryEndpoints")
     private Endpoints primaryEndpoints;
 
     /**
      * Gets the location of the primary for the storage account.
      */
+    @JsonProperty(value = "primaryLocation")
     private String primaryLocation;
 
     /**
@@ -40,6 +45,7 @@ public class StorageAccountProperties {
      * account is available or unavailable. Possible values include:
      * 'Available', 'Unavailable'.
      */
+    @JsonProperty(value = "statusOfPrimary")
     private AccountStatus statusOfPrimary;
 
     /**
@@ -48,6 +54,7 @@ public class StorageAccountProperties {
      * element is not returned if there has never been a failover instance.
      * Only available if the accountType is StandardGRS or StandardRAGRS.
      */
+    @JsonProperty(value = "lastGeoFailoverTime")
     private DateTime lastGeoFailoverTime;
 
     /**
@@ -55,6 +62,7 @@ public class StorageAccountProperties {
      * account. Only available if the accountType is StandardGRS or
      * StandardRAGRS.
      */
+    @JsonProperty(value = "secondaryLocation")
     private String secondaryLocation;
 
     /**
@@ -63,16 +71,19 @@ public class StorageAccountProperties {
      * is StandardGRS or StandardRAGRS. Possible values include: 'Available',
      * 'Unavailable'.
      */
+    @JsonProperty(value = "statusOfSecondary")
     private AccountStatus statusOfSecondary;
 
     /**
      * Gets the creation date and time of the storage account in UTC.
      */
+    @JsonProperty(value = "creationTime")
     private DateTime creationTime;
 
     /**
      * Gets the user assigned custom domain assigned to this storage account.
      */
+    @JsonProperty(value = "customDomain")
     private CustomDomain customDomain;
 
     /**
@@ -80,6 +91,7 @@ public class StorageAccountProperties {
      * queue or table object from the secondary location of the storage
      * account. Only available if the accountType is StandardRAGRS.
      */
+    @JsonProperty(value = "secondaryEndpoints")
     private Endpoints secondaryEndpoints;
 
     /**

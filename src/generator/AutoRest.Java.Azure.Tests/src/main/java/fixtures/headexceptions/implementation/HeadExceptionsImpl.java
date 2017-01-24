@@ -13,7 +13,6 @@ package fixtures.headexceptions.implementation;
 import retrofit2.Retrofit;
 import fixtures.headexceptions.HeadExceptions;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -30,7 +29,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HeadExceptions.
  */
-public final class HeadExceptionsImpl implements HeadExceptions {
+public class HeadExceptionsImpl implements HeadExceptions {
     /** The Retrofit service to perform REST calls. */
     private HeadExceptionsService service;
     /** The service client containing this operation class. */
@@ -52,15 +51,15 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeadExceptionsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head200" })
         @HEAD("http/success/200")
         Observable<Response<Void>> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head204" })
         @HEAD("http/success/204")
         Observable<Response<Void>> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.headexceptions.HeadExceptions head404" })
         @HEAD("http/success/404")
         Observable<Response<Void>> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -71,7 +70,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      *
      */
     public void head200() {
-        head200WithServiceResponseAsync().toBlocking().single().getBody();
+        head200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -81,7 +80,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -93,7 +92,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -119,7 +118,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -129,7 +128,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      *
      */
     public void head204() {
-        head204WithServiceResponseAsync().toBlocking().single().getBody();
+        head204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -139,7 +138,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -151,7 +150,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -177,7 +176,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }
@@ -187,7 +186,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      *
      */
     public void head404() {
-        head404WithServiceResponseAsync().toBlocking().single().getBody();
+        head404WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -197,7 +196,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -209,7 +208,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -235,7 +234,7 @@ public final class HeadExceptionsImpl implements HeadExceptions {
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .buildEmpty(response);
     }

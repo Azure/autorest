@@ -38,11 +38,11 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
 @if (@Model.ReturnTypeJva.BodyClientType.ResponseVariant.Name == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().body();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().getBody();
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().last().body();
 }
 }
 @EmptyLine
@@ -87,7 +87,7 @@ public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeJva.ClientResponseTypeString, @Model.ReturnTypeJva.GenericBodyClientTypeString>() {
         @@Override
         public @Model.ReturnTypeJva.GenericBodyClientTypeString call(@Model.ReturnTypeJva.ClientResponseTypeString response) {
-            return response.getBody();
+            return response.body();
         }
     });
 }
@@ -160,11 +160,11 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
 @if (@Model.ReturnTypeResponseName == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().getBody();
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().body();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().getBody();
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().last().body();
 }
 }
 @EmptyLine
@@ -209,7 +209,7 @@ public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJva.ClientResponseTypeString, @Model.ReturnTypeJva.GenericBodyClientTypeString>() {
         @@Override
         public @Model.ReturnTypeJva.GenericBodyClientTypeString call(@Model.ReturnTypeJva.ClientResponseTypeString response) {
-            return response.getBody();
+            return response.body();
         }
     });
 }

@@ -29,17 +29,19 @@ public class Fish {
     /**
      * The species property.
      */
+    @JsonProperty(value = "species")
     private String species;
 
     /**
      * The length property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "length", required = true)
     private double length;
 
     /**
      * The siblings property.
      */
+    @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
     /**

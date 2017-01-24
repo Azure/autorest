@@ -1,5 +1,7 @@
 package fixtures.head;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,8 +12,8 @@ public class HttpSuccessTests {
     private static AutoRestHeadTestServiceImpl client;
 
     @BeforeClass
-    public static void setup() {
-        client = new AutoRestHeadTestServiceImpl("http://localhost:3000", null);
+    public static void setup() throws Exception {
+        client = new AutoRestHeadTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

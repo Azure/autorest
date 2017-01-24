@@ -12,7 +12,6 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -31,7 +30,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Odatas.
  */
-public final class OdatasInner {
+public class OdatasInner {
     /** The Retrofit service to perform REST calls. */
     private OdatasService service;
     /** The service client containing this operation class. */
@@ -53,7 +52,7 @@ public final class OdatasInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface OdatasService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Odatas getWithFilter" })
         @GET("azurespecials/odata/filter")
         Observable<Response<ResponseBody>> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -64,7 +63,7 @@ public final class OdatasInner {
      *
      */
     public void getWithFilter() {
-        getWithFilterWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithFilterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -74,7 +73,7 @@ public final class OdatasInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithFilterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWithFilterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -86,7 +85,7 @@ public final class OdatasInner {
         return getWithFilterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -122,7 +121,7 @@ public final class OdatasInner {
      * @param orderby The orderby parameter with value id.
      */
     public void getWithFilter(String filter, Integer top, String orderby) {
-        getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().getBody();
+        getWithFilterWithServiceResponseAsync(filter, top, orderby).toBlocking().single().body();
     }
 
     /**
@@ -135,7 +134,7 @@ public final class OdatasInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
+        return ServiceCall.fromResponse(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
     }
 
     /**
@@ -150,7 +149,7 @@ public final class OdatasInner {
         return getWithFilterWithServiceResponseAsync(filter, top, orderby).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -179,7 +178,7 @@ public final class OdatasInner {
     }
 
     private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

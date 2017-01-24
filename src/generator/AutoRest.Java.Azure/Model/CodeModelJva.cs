@@ -37,7 +37,6 @@ namespace AutoRest.Java.Azure.Model
             {
                 var imports = base.InterfaceImports;
                 imports.Add("com.microsoft.azure.AzureClient");
-                imports.Add("com.microsoft.azure.RestClient");
                 return imports.OrderBy(i => i).ToList();
             }
         }
@@ -49,7 +48,6 @@ namespace AutoRest.Java.Azure.Model
             {
                 var imports = base.ImplImports.ToList();
                 imports.Add("com.microsoft.azure.AzureClient");
-                imports.Add("com.microsoft.azure.RestClient");
                 imports.Remove("com.microsoft.rest.ServiceClient");
                 imports.Remove("okhttp3.OkHttpClient");
                 imports.Remove("retrofit2.Retrofit");

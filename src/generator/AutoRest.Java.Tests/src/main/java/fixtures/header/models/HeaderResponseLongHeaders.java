@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseLong operation.
@@ -18,6 +19,7 @@ public class HeaderResponseLongHeaders {
     /**
      * response with header value "value": 105 or -2.
      */
+    @JsonProperty(value = "value")
     private Long value;
 
     /**
