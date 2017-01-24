@@ -3,6 +3,7 @@
 
 package petstore.implementation;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The access keys for the storage account.
@@ -11,11 +12,13 @@ public class StorageAccountKeysInner {
     /**
      * Gets the value of key 1.
      */
+    @JsonProperty(value = "key1")
     private String key1;
 
     /**
      * Gets the value of key 2.
      */
+    @JsonProperty(value = "key2")
     private String key2;
 
     /**

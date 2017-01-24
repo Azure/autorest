@@ -5,8 +5,8 @@ package petstore.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import petstore.StorageAccounts;
 import petstore.StorageManagementClient;
 import petstore.Usages;
@@ -14,7 +14,7 @@ import petstore.Usages;
 /**
  * Initializes a new instance of the StorageManagementClientImpl class.
  */
-public final class StorageManagementClientImpl extends AzureServiceClient implements StorageManagementClient {
+public class StorageManagementClientImpl extends AzureServiceClient implements StorageManagementClient {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
@@ -172,10 +172,8 @@ public final class StorageManagementClientImpl extends AzureServiceClient implem
      * @param credentials the management credentials for Azure
      */
     public StorageManagementClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

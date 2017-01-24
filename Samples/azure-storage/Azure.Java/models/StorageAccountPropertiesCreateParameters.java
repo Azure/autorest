@@ -13,7 +13,7 @@ public class StorageAccountPropertiesCreateParameters {
      * Gets or sets the account type. Possible values include: 'Standard_LRS',
      * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "accountType", required = true)
     private AccountType accountType;
 
     /**

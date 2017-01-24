@@ -4,6 +4,7 @@
 package petstore.models;
 
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The parameters to update on the account.
@@ -12,11 +13,13 @@ public class StorageAccountUpdateParameters {
     /**
      * Resource tags.
      */
+    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
      * The properties property.
      */
+    @JsonProperty(value = "properties")
     private StorageAccountPropertiesUpdateParameters properties;
 
     /**
