@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
         internal static void Copy(this IFileSystem fileSystem, string source)
         {
-            Copy(fileSystem, source, (File.Exists(source)? Path.GetFileName(source): source));
+            Copy(fileSystem, source, (File.Exists(source) ? Path.GetFileName(source) : source));
         }
 
         internal static void Copy(this IFileSystem fileSystem, string source, string destination)
@@ -45,10 +45,6 @@ namespace AutoRest.CSharp.Unit.Tests
             }
             
             // if copying a directory
-            if (fileSystem.DirectoryExists(destination))
-            {
-                fileSystem.DeleteDirectory(destination);
-            }
             fileSystem.CreateDirectory(destination);
         
             // Copy dirs recursively

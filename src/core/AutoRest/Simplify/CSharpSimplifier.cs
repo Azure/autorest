@@ -104,8 +104,7 @@ namespace AutoRest.Simplify
                         Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
 
                     // Write out the files back to their original location
-                    var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
-                    Settings.Instance.FileSystem.WriteFile(output, text);
+                    Settings.Instance.FileSystem.WriteFile(document.Name, text);
                 }
             }
         }

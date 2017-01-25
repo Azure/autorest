@@ -89,11 +89,6 @@ namespace AutoRest.Core.Utilities
             }
         }
 
-        public void DeleteDirectory(string directory)
-        {
-            Directory.Delete(directory, true);
-        }
-
         public string[] GetFiles(string startDirectory, string filePattern, SearchOption options)
         {
             return Directory.GetFiles(startDirectory, filePattern, options);
@@ -113,8 +108,6 @@ namespace AutoRest.Core.Utilities
         {
             return Directory.GetDirectories(startDirectory, filePattern, options);
         }
-
-        public string CurrentDirectory => Directory.GetCurrentDirectory();
 
         public Uri GetParentDir(string path)
         {

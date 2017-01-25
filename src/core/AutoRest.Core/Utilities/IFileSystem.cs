@@ -20,8 +20,6 @@ namespace AutoRest.Core.Utilities
 
         void DeleteFile(string path);
 
-        void DeleteDirectory(string directory);
-
         bool DirectoryExists(string path);
 
         void CreateDirectory(string path);
@@ -31,8 +29,6 @@ namespace AutoRest.Core.Utilities
         string[] GetDirectories(string startDirectory, string filePattern, SearchOption options);
 
         string[] GetFiles(string startDirectory, string filePattern, SearchOption options);
-
-        string CurrentDirectory { get; }
 
         Uri GetParentDir(string path);
     }
