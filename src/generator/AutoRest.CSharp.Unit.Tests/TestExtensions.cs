@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     Modeler = modeler,
                     CodeGenerator = codeGenerator,
-                    FileSystem = fileSystem,
+                    FileSystemInput = fileSystem,
                     OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
             }
 
-            return fileSystem;
+            return settings.FileSystemOutput;
         }
 
         internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)

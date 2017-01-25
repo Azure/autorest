@@ -24,7 +24,7 @@ namespace AutoRest
                 {
                     Modeler = "Swagger",
                     CodeGenerator = codeGenerator,
-                    FileSystem = fs,
+                    FileSystemInput = fs,
                     OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     Input = "input.json"

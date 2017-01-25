@@ -62,7 +62,7 @@ namespace AutoRest.Swagger.Tests
                 : settings.Namespace;
 
             AutoRest.Core.AutoRestController.Generate();
-            Assert.NotEmpty(((MemoryFileSystem)settings.FileSystemOutput).VirtualStore);
+            Assert.NotEmpty(settings.FileSystemOutput.VirtualStore);
 
             var actualFiles = settings.FileSystemOutput.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];

@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
-                    FileSystem = fileSystem,
+                    FileSystemInput = fileSystem,
                     OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     ModelsName = modelsName
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     // Expected Files
                     Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
 
-                    var result = await Compile(fileSystem);
+                    var result = await Compile(settings.FileSystemOutput);
 
                     // filter the warnings
                     var warnings = result.Messages.Where(

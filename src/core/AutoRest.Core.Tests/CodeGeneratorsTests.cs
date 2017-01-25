@@ -36,13 +36,13 @@ namespace AutoRest.Core.Tests
                 var settings = new Settings
                 {
                     CodeGenerator = "CSharp",
-                    FileSystem = _fileSystem,
+                    FileSystemInput = _fileSystem,
                     OutputDirectory = Path.GetTempPath()
                 };
                 SampleCodeGenerator codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
                 Assert.Contains(Path.Combine(settings.OutputDirectory, settings.ModelsName),
-                    _fileSystem.VirtualStore.Keys);
+                    settings.FileSystemOutput.VirtualStore.Keys);
             }
         }
 
@@ -78,7 +78,7 @@ namespace AutoRest.Core.Tests
                 var settings = new Settings
                 {
                     CodeGenerator = "CSharp",
-                    FileSystem = _fileSystem,
+                    FileSystemInput = _fileSystem,
                     OutputDirectory = Path.GetTempPath()
                 };
                 string existingContents = "this is dummy";
@@ -100,19 +100,19 @@ namespace AutoRest.Core.Tests
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
                     Input = "RedisResource.json",
-                    FileSystem = _fileSystem,
+                    FileSystemInput = _fileSystem,
                     OutputDirectory = Path.GetTempPath(),
                     OutputFileName = "test.file.cs"
                 };
 
                 string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
                 string existingContents = "this is dummy";
-                _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
+                settings.FileSystemOutput.VirtualStore[path] = new StringBuilder(existingContents);
                 var codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
-                Assert.DoesNotContain(existingContents, _fileSystem.VirtualStore[path].ToString());
-                Assert.Equal(4, _fileSystem.VirtualStore.Count);
-                Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
+                Assert.DoesNotContain(existingContents, settings.FileSystemOutput.VirtualStore[path].ToString());
+                Assert.Equal(4, settings.FileSystemOutput.VirtualStore.Count);
+                Assert.True(settings.FileSystemOutput.VirtualStore.ContainsKey(path));
                 Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
                 Assert.True(_fileSystem.VirtualStore.ContainsKey("RedisResource.json"));
             }
