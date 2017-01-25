@@ -17,6 +17,7 @@ namespace AutoRest.Swagger.Model
     /// Swagger schema object.
     /// </summary>
     [Serializable]
+    [Rule(typeof(NotBothReadonlyRequired))]
     [Rule(typeof(ModelTypeIncomplete))]
     public class Schema : SwaggerObject
     {
