@@ -22,8 +22,6 @@ namespace AutoRest.Core.Utilities
 
         void DeleteDirectory(string directory);
 
-        void EmptyDirectory(string directory);
-
         bool DirectoryExists(string path);
 
         void CreateDirectory(string path);
