@@ -203,5 +203,15 @@ namespace AutoRest.Core.Utilities
                 _virtualStore?.Clear();
             }
         }
+
+        public void CommitToDisk(string targetDirectory)
+        {
+            foreach (var file in VirtualStore)
+            {
+                var targetFileName = Path.Combine(targetDirectory, file.Key);
+                Directory.CreateDirectory(Path.GetDirectoryName(targetFileName));
+                File.WriteAllText(targetFileName, file.Value.ToString());
+            }
+        }
     }
 }

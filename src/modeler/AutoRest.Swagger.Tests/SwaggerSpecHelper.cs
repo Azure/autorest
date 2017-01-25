@@ -43,10 +43,10 @@ namespace AutoRest.Swagger.Tests
             }
             var settings = Settings.Instance;
 
-            settings.FileSystem = new MemoryFileSystem();
-            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
-            settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
-            settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+            settings.FileSystemInput = new MemoryFileSystem();
+            settings.FileSystemInput.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
+            settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
+            settings.FileSystemInput.WriteFile(settings.Input, File.ReadAllText(settings.Input));
 
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
@@ -62,9 +62,9 @@ namespace AutoRest.Swagger.Tests
                 : settings.Namespace;
 
             AutoRest.Core.AutoRestController.Generate();
-            Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
+            Assert.NotEmpty(((MemoryFileSystem)settings.FileSystemOutput).VirtualStore);
 
-            var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var actualFiles = settings.FileSystemOutput.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
             Assert.Equal(expectedFiles.Length, actualFiles.Length);
 
@@ -72,7 +72,7 @@ namespace AutoRest.Swagger.Tests
             {
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
-                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystem.ReadFileAsText(actualFile));
+                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystemOutput.ReadFileAsText(actualFile));
             }
         }
 

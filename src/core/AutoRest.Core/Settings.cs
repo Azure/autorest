@@ -60,7 +60,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
             // requests for settings.
             Singleton<Settings>.Instance = this;
 
-            FileSystem = new FileSystem();
+            FileSystemInput = new FileSystem();
+            FileSystemOutput = new MemoryFileSystem();
             OutputDirectory = Path.Combine(Environment.CurrentDirectory, "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRestController.Version);
@@ -74,7 +75,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Gets or sets the IFileSystem used by code generation.
         /// </summary>
-        public IFileSystem FileSystem { get; set; }
+        public IFileSystem FileSystemInput { get; set; }
+
+        /// <summary>
+        /// Gets or sets the IFileSystem used by code generation.
+        /// </summary>
+        public MemoryFileSystem FileSystemOutput { get; set; }
 
         /// <summary>
         /// Custom provider specific settings.
@@ -367,7 +373,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             autoRestSettings.CustomSettings = settings;
             if (!string.IsNullOrEmpty(autoRestSettings.CodeGenSettings))
             {
-                var settingsContent = autoRestSettings.FileSystem.ReadFileAsText(autoRestSettings.CodeGenSettings);
+                var settingsContent = autoRestSettings.FileSystemInput.ReadFileAsText(autoRestSettings.CodeGenSettings);
                 var codeGenSettingsDictionary =
                     JsonConvert.DeserializeObject<Dictionary<string, object>>(settingsContent);
                 foreach (var pair in codeGenSettingsDictionary)

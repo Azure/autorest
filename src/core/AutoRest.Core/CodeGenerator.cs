@@ -18,8 +18,6 @@ namespace AutoRest.Core
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class CodeGenerator
     {
-        private bool firstTimeWriteSingleFile = true;
-
         protected CodeGenerator()
         {
         }
@@ -97,13 +95,6 @@ namespace AutoRest.Core
                 }
 
                 filePath = Path.Combine(Settings.Instance.OutputDirectory, Settings.Instance.OutputFileName);
-
-                if (firstTimeWriteSingleFile)
-                {
-                    // for SingleFileGeneration clean the file before writing only if its the first time
-                    Settings.Instance.FileSystem.DeleteFile(filePath);
-                    firstTimeWriteSingleFile = false;
-                }
             }
             else
             {
@@ -114,15 +105,14 @@ namespace AutoRest.Core
                     throw new Exception($"Duplicate File Generation: {filePath}");
                 }
                 FileList.Add(filePath);
-                Settings.Instance.FileSystem.DeleteFile(filePath);
             }
             // Make sure the directory exist
-            Settings.Instance.FileSystem.CreateDirectory(Path.GetDirectoryName(filePath));
+            Settings.Instance.FileSystemOutput.CreateDirectory(Path.GetDirectoryName(filePath));
 
             var lineEnding = filePath.LineEnding();
 
             using (StringReader streamReader = new StringReader(template))
-            using (TextWriter textWriter = Settings.Instance.FileSystem.GetTextWriter(filePath))
+            using (TextWriter textWriter = Settings.Instance.FileSystemOutput.GetTextWriter(filePath))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)

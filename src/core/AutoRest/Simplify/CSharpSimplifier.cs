@@ -37,9 +37,9 @@ namespace AutoRest.Simplify
             var op = new AzureAsyncOperation();
             var restOp = new RestException();
 
-            var files = Settings.Instance.FileSystem.GetFiles(Settings.Instance.OutputDirectory, "*.cs",
+            var files = Settings.Instance.FileSystemOutput.GetFiles(Settings.Instance.OutputDirectory, "*.cs",
                     SearchOption.AllDirectories).
-                ToDictionary(each => each, each => Settings.Instance.FileSystem.ReadFileAsText(each));
+                ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadFileAsText(each));
 
             var projectId = ProjectId.CreateNewId();
             var solution = new AdhocWorkspace().CurrentSolution
@@ -104,7 +104,7 @@ namespace AutoRest.Simplify
                         Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
 
                     // Write out the files back to their original location
-                    Settings.Instance.FileSystem.WriteFile(document.Name, text);
+                    Settings.Instance.FileSystemOutput.WriteFile(document.Name, text);
                 }
             }
         }

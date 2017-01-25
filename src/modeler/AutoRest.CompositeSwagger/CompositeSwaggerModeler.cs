@@ -56,21 +56,21 @@ namespace AutoRest.CompositeSwagger
             for (var i = 0; i < compositeSwaggerModel.Documents.Count; i++)
             {
                 var compositeDocument = compositeSwaggerModel.Documents[i];
-                if (!Settings.FileSystem.IsCompletePath(compositeDocument) || !Settings.FileSystem.FileExists(compositeDocument))
+                if (!Settings.FileSystemInput.IsCompletePath(compositeDocument) || !Settings.FileSystemInput.FileExists(compositeDocument))
                 {
                     // Otherwise, root it from the current path
-                    compositeSwaggerModel.Documents[i] = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(Settings.Input), compositeDocument);
+                    compositeSwaggerModel.Documents[i] = Settings.FileSystemInput.MakePathRooted(Settings.FileSystemInput.GetParentDir(Settings.Input), compositeDocument);
                 }
             }
 
             // construct merged swagger document
             var mergedSwagger = new YamlMappingNode();
-            mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+            mergedSwagger.Set("info", (Settings.FileSystemInput.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
 
             // merge child swaggers
             foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
             {
-                var childSwaggerRaw = Settings.FileSystem.ReadFileAsText(childSwaggerPath);
+                var childSwaggerRaw = Settings.FileSystemInput.ReadFileAsText(childSwaggerPath);
                 childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
                 var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
                 if (childSwagger == null)
@@ -128,7 +128,7 @@ namespace AutoRest.CompositeSwagger
         
         private CompositeServiceDefinition Parse(string input)
         {
-            var inputBody = Settings.FileSystem.ReadFileAsText(input);
+            var inputBody = Settings.FileSystemInput.ReadFileAsText(input);
             try
             {
                 var settings = new JsonSerializerSettings
