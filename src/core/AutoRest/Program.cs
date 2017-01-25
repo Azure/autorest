@@ -55,10 +55,6 @@ namespace AutoRest
                             {
                                 settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
                             }
-                            else if (settings.InputFolder != null)
-                            {
-                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
-                            }
                             else
                             {
                                 settings.Namespace = "default";

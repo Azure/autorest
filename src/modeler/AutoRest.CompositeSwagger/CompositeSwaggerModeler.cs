@@ -59,7 +59,7 @@ namespace AutoRest.CompositeSwagger
                 if (!Settings.FileSystem.IsCompletePath(compositeDocument) || !Settings.FileSystem.FileExists(compositeDocument))
                 {
                     // Otherwise, root it from the current path
-                    compositeSwaggerModel.Documents[i] = Settings.FileSystem.MakePathRooted(Settings.InputFolder, compositeDocument);
+                    compositeSwaggerModel.Documents[i] = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(Settings.Input), compositeDocument);
                 }
             }
 

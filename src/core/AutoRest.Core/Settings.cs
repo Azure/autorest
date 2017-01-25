@@ -76,22 +76,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         public IFileSystem FileSystem { get; set; }
 
-        private Uri _inputFolder = null;
-        /// <summary>
-        /// Gets the Uri for the path to the folder that contains the input specification file.
-        /// </summary>
-        public Uri InputFolder
-        {
-            get
-            {
-                if (_inputFolder == null && Input != null)
-                {
-                    _inputFolder = this.FileSystem.GetParentDir(Input);
-                }
-                return _inputFolder;
-            }
-        }
-
         /// <summary>
         /// Custom provider specific settings.
         /// </summary>
