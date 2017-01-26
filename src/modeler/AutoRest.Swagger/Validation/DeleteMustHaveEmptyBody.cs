@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
+    /// <summary>
+    /// Validates if the body of the delete operation is empty.
+    /// </summary>
     public class DeleteMustHaveEmptyBody : TypedRule<Dictionary<string, Operation>>
     {
         /// <summary>
@@ -28,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         /// An <paramref name="operationDefinition"/> fails this rule if delete operation has a body.
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
-        /// <returns></returns>
+        /// <returns>true if delete operation does not have a body. false otherwise.</returns>
         public override bool IsValid(Dictionary<string, Operation> operationDefinition, RuleContext context)
         {
             foreach (string httpVerb in operationDefinition.Keys)

@@ -7,10 +7,12 @@ using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
+    /// <summary>
+    /// Validates if the Operations API has been implemented
+    /// </summary>
     public class OperationsAPIImplementationValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
@@ -27,10 +29,10 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="operationDefinition"/> fails this rule if delete operation has a body.
+        /// Validates if the Operations API has been implemented
         /// </summary>
-        /// <param name="operationDefinition">Operation Definition to validate</param>
-        /// <returns></returns>
+        /// <param name="paths">API paths</param>
+        /// <returns>true if the operations API has been implemented. false otherwise.</returns>
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths) => paths.Any(path => path.Key.Trim().ToLower().EndsWith("/operations"));
     }
 }

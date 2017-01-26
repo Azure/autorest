@@ -10,6 +10,10 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
+    /// <summary>
+    /// Validates the HTTP verb. Allowed values for the HTTP Verb are
+    /// delete, get, put, patch, head, options, post.
+    /// </summary>
     public class HttpVerbValidation : TypedRule<Dictionary<string, Operation>>
     {
         private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST)$", RegexOptions.IgnoreCase);
@@ -31,7 +35,7 @@ namespace AutoRest.Swagger.Validation
         /// An <paramref name="operationDefinition"/> fails this rule if it does not have the correct HTTP Verb.
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
-        /// <returns></returns>
+        /// <returns>true if the validation succeeds. false otherwise.</returns>
         public override bool IsValid(Dictionary<string, Operation> operationDefinition)
         {
             foreach(string httpVerb in operationDefinition.Keys)

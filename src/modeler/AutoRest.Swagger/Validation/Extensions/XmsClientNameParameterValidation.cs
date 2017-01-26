@@ -10,9 +10,9 @@ using AutoRest.Swagger.Model;
 namespace AutoRest.Swagger.Validation
 {
     /// <summary>
-    /// Validates if the name of property and x-ms-client-name(if exists) does not match.
+    /// Validates if the name of parameter and x-ms-client-name(if exists) does not match.
     /// </summary>
-    public class XmsClientNameValidation : TypedRule<Dictionary<string, Schema>>
+    public class XmsClientNameParameterValidation : TypedRule<SwaggerParameter>
     {
         private static readonly string extensionToCheck = "x-ms-client-name";
 
@@ -34,21 +34,14 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns>true if the validation succeeds. false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions)
+        public override bool IsValid(SwaggerParameter parameter)
         {
-            foreach (string key in definitions.Keys)
+            if(parameter.Extensions != null && parameter.Extensions.Count != 0)
             {
-                Schema schema = definitions.GetValueOrNull(key);
-                if(schema != null)
+                string valueToCompare = (string)parameter.Extensions.GetValueOrNull(extensionToCheck);
+                if (valueToCompare != null && valueToCompare.Equals(parameter.Name))
                 {
-                    if(schema.Extensions != null && schema.Extensions.Count !=0)
-                    {
-                        string valueToCompare = (string)schema.Extensions.GetValueOrNull(extensionToCheck);
-                        if (valueToCompare != null && valueToCompare.Equals(key))
-                        {
-                            return false;
-                        }
-                    }
+                    return false;
                 }
             }
             return true;

@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
+    /// <summary>
+    /// Validates if the response of Put/Get/Patch are same.
+    /// </summary>
     public class PutGetPatchResponseValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
@@ -27,11 +30,12 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="operationDefinition"/> fails this rule if delete operation has a body.
+        /// Validates if the response of Put/Get/Patch are same.
         /// </summary>
-        /// <param name="operationDefinition">Operation Definition to validate</param>
-        /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths)
+        /// <param name="paths">paths to validate</param>
+        /// <param name="formatParameters">The noun to be put in the failure message</param>
+        /// <returns>true if the response is same for Put/Get/Patch responses.false otherwise.</returns>
+        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
         {
             foreach(KeyValuePair<string, Dictionary<string, Operation>> pathCombination in paths)
             {
@@ -52,8 +56,11 @@ namespace AutoRest.Swagger.Validation
                         {
                             foreach(KeyValuePair<string, OperationResponse> response in responses)
                             {
-                                if(response.Value != null && response.Value.Schema != null && response.Value.Schema.Reference != null)
+                                if(response.Value != null && response.Value.Schema != null && response.Value.Schema.Reference != null && response.Key.Equals("200"))
+                                {
                                     responseSchemaReference.Add(response.Value.Schema.Reference);
+                                    break;
+                                }
                             }                            
                         }
                     }
@@ -61,9 +68,11 @@ namespace AutoRest.Swagger.Validation
 
                 if (responseSchemaReference.Distinct().Count() > 1)
                 {
+                    formatParameters = new object[] { pathCombination.Key };
                     return false;
-                }                    
-            }            
+                }
+            }
+            formatParameters = new object[0];
             return true;
         }
     }

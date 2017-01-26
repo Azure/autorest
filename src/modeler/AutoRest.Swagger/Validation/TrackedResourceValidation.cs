@@ -33,11 +33,12 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="definitions"/> fails this rule if it does not have all valid properties.
+        /// Validation fails iof tracked resource fails to meet one of the four required criteria.
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
+        /// <param name="formatParameters">The noun to be put in the failure message</param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context)
+        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
             List<Operation> getOperations = this.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
             
@@ -45,7 +46,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (!exemptedNames.IsMatch(definition.Key) && this.IsTrackedResource(definition.Value, definitions))
                 {
-                    /*bool getCheck = getOperations.Any(operation =>
+                    bool getCheck = getOperations.Any(operation =>
                         operation.Responses.Any(response => 
                             response.Key.Equals("200") && 
                             response.Value.Schema != null && 
@@ -54,29 +55,42 @@ namespace AutoRest.Swagger.Validation
                      );
                     if(!getCheck)
                     {
+                        formatParameters = new object[2];
+                        formatParameters[0] = definition.Key;
+                        formatParameters[1] = 1;
                         return false;
                     }
 
                     bool listByResourceGroupCheck = this.listByXCheck(getOperations, listByRgRegEx, definition.Key, definitions);
                     if (!listByResourceGroupCheck)
                     {
+                        formatParameters = new object[2];
+                        formatParameters[0] = definition.Key;
+                        formatParameters[1] = 2;
                         return false;
                     }
 
                     bool listBySubscriptionIdCheck = this.listByXCheck(getOperations, listBySidRegEx, definition.Key, definitions);
                     if (!listBySubscriptionIdCheck)
                     {
+                        formatParameters = new object[2];
+                        formatParameters[0] = definition.Key;
+                        formatParameters[1] = 3;
                         return false;
-                    }*/
+                    }
 
                     bool schemaResult = this.HandleSchema(definition.Value, definitions);
                     if(!schemaResult)
                     {
+                        formatParameters = new object[2];
+                        formatParameters[0] = definition.Key;
+                        formatParameters[1] = 4;
                         return false;
                     }
                 }
             }
 
+            formatParameters = new object[0];
             return true;
         }
 

@@ -9,6 +9,10 @@ using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
+    /// <summary>
+    /// Validates if GUID is used in any of the properties.
+    /// GUID usage is not recommended in general.
+    /// </summary>
     public class GuidValidation : TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
@@ -22,35 +26,39 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="definitions"/> fails this rule if it does not have all valid properties.
+        /// An <paramref name="definitions"/> fails this rule if one of the property has GUID,
+        /// i.e. if the type of the definition is string and the format is uuid.
         /// </summary>
-        /// <param name="definitions">Operation Definition to validate</param>
-        /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions)
+        /// <param name="definitions">Operation Definitions to validate</param>
+        /// <param name="formatParameters">The noun to be put in the failure message</param>
+        /// <returns>true if there is no GUID. false otherwise.</returns>
+        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
             if(definitions != null)
             {
                 foreach (KeyValuePair<string, Schema> definition in definitions)
                 {
-                    if (!this.HandleSchema((Schema)definition.Value, definitions))
+                    if (!this.HandleSchema((Schema)definition.Value, definitions, out formatParameters, definition.Key))
                     {
+                        formatParameters[1] = definition.Key;
                         return false;
                     }
                 }
             }
-            
+            formatParameters = new object[0];
             return true;
         }
 
-        private bool HandleSchema(Schema definition, Dictionary<string, Schema> definitions)
+        private bool HandleSchema(Schema definition, Dictionary<string, Schema> definitions, out object[] formatParameters, string name)
         {
-            // Note: This could be a reference to another definition. But, that definition could
-            // be handled seperately.
+            // This could be a reference to another definition. But, that definition could be handled seperately.
             if(definition.Type == DataType.String && definition.Format != null && definition.Format.Equals("uuid", System.StringComparison.InvariantCultureIgnoreCase))
             {
+                formatParameters = new object[2];
+                formatParameters[0] = name ;
                 return false;
             }            
 
@@ -58,13 +66,13 @@ namespace AutoRest.Swagger.Validation
             {
                 foreach (KeyValuePair<string, Schema> property in definition.Properties)
                 {
-                    if (!this.HandleSchema((Schema)property.Value, definitions))
+                    if (!this.HandleSchema((Schema)property.Value, definitions, out formatParameters, property.Key))
                     {
                         return false;
                     }
                 }
             }
-
+            formatParameters = new object[0];
             return true;
         }
     }

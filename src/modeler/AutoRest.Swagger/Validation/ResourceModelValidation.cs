@@ -9,6 +9,11 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
+    /// <summary>
+    /// Validates the structure of Resource Model that it must contain id,
+    /// name, type, location, tags with everything as readonly except location 
+    /// and tags.
+    /// </summary>
     public class ResourceModelValidation: TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
@@ -25,10 +30,10 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="definitions"/> fails this rule if it does not have all valid properties.
+        /// Validates the structure of Resource Model
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
-        /// <returns></returns>
+        /// <returns>true if the resource model is valid.false otherwise.</returns>
         public override bool IsValid(Dictionary<string, Schema> definitions)
         {
             foreach(string key in definitions.Keys)

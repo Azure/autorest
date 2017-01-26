@@ -258,7 +258,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Usage of Guid is not recommanded.
+        ///    Looks up a localized string similar to Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded.
         /// </summary>
         public static string GuidUsageNotValid {
             get {
@@ -510,7 +510,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to The PUT/GET/PATCH operations must have same schema response..
+        ///    Looks up a localized string similar to {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response..
         /// </summary>
         public static string PutGetPatchResponseInvalid {
             get {
@@ -546,6 +546,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties..
+        /// </summary>
+        public static string SkuModelIsNotValid {
+            get {
+                return ResourceManager.GetString("SkuModelIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
         /// </summary>
         public static string SupportedSchemesWarningMessage {
@@ -564,7 +573,12 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to A Tracked Resource must have 1. A Get Operation 2. A ListByResourceGroup operation with x-ms-pageable extension and 3. A ListBySubscriptionId operation with x-ms-pageable extension..
+        ///    Looks up a localized string similar to Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+        ///    A Tracked Resource must have: 
+        ///    1. A Get Operation 
+        ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 
+        ///    3. A ListBySubscriptionId operation with x-ms-pageable extension.
+        ///    4. Type, Location, Tags should not be used in the properties..
         /// </summary>
         public static string TrackedResourceIsNotValid {
             get {
@@ -600,7 +614,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
+        ///    Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
         /// </summary>
         public static string XmsClientNameInValid {
             get {
