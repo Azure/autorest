@@ -23,7 +23,7 @@ namespace AutoRest.CSharp
             if (modelType is DictionaryType)
                 return $"{XmlDeserializationClass}.CreateDictionaryXmlDeserializer({GenerateDeserializer(cm, (modelType as DictionaryType).ValueType, (modelType as DictionaryType).ValueType.AsNullableType((modelType as DictionaryTypeCs).IsNullable))})";
             if (modelType is SequenceType)
-                return $"{XmlDeserializationClass}.CreateListXmlDeserializer({GenerateDeserializer(cm, (modelType as SequenceType).ElementType)}, \"{((modelType as SequenceType).XmlIsWrapped ? (modelType as SequenceType).ElementXmlName : "null")}\")";
+                return $"{XmlDeserializationClass}.CreateListXmlDeserializer({GenerateDeserializer(cm, (modelType as SequenceType).ElementType)}, {((modelType as SequenceType).XmlIsWrapped ? $"\"{(modelType as SequenceType).ElementXmlName}\"" : "null")})";
             if ((modelType as EnumType)?.ModelAsString == false)
                 return $"{XmlDeserializationClass}.ToDeserializer(e => ({name})e.Value.Parse{modelType.Name}())";
             if ((modelType as PrimaryType)?.KnownPrimaryType == KnownPrimaryType.ByteArray)
