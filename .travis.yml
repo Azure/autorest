@@ -6,12 +6,6 @@ addons:
     sources:
     - deadsnakes
     packages:
-    # Packages required for android build
-    - libc6-i386
-    - lib32stdc++6
-    - lib32gcc1
-    - lib32ncurses5
-    - lib32z1
     # packages for python
     - python3.5
 before_install:
@@ -30,12 +24,6 @@ install:
   - gem install bundler
   - bundle install
   - pip install --user tox
-  # Install android SDK
-  - mkdir android
-  - wget -qO- "http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz" | tar -zxv -C ./android
-  - echo y | ./android/android-sdk-linux/tools/android update sdk --all --filter platform-tools,android-23,build-tools-23.0.1 --no-ui --force
-  - echo y | ./android/android-sdk-linux/tools/android update sdk --all --filter extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force
-  - export ANDROID_HOME=`pwd`/android/android-sdk-linux
   # Install NetCore RC2
   - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list' 
   - sudo apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893

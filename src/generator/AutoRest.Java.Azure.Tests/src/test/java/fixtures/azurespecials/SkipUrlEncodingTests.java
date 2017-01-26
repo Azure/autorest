@@ -1,5 +1,6 @@
 package fixtures.azurespecials;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,7 +16,7 @@ public class SkipUrlEncodingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl, null).skipUrlEncodings();
+        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl, new BasicAuthenticationCredentials(null, null)).skipUrlEncodings();
     }
 
     @Test

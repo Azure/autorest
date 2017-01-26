@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
@@ -38,7 +37,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Formdatas.
  */
-public final class FormdatasImpl implements Formdatas {
+public class FormdatasImpl implements Formdatas {
     /** The Retrofit service to perform REST calls. */
     private FormdatasService service;
     /** The service client containing this operation class. */
@@ -65,7 +64,7 @@ public final class FormdatasImpl implements Formdatas {
         @Streaming
         Observable<Response<ResponseBody>> uploadFile(@Part("fileContent") RequestBody fileContent, @Part("fileName") String fileName);
 
-        @Headers("Content-Type: application/octet-stream")
+        @Headers({ "Content-Type: application/octet-stream", "x-ms-logging-context: fixtures.bodyformdata.Formdatas uploadFileViaBody" })
         @PUT("formdata/stream/uploadfile")
         @Streaming
         Observable<Response<ResponseBody>> uploadFileViaBody(@Body RequestBody fileContent);
@@ -80,7 +79,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) {
-        return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().getBody();
+        return uploadFileWithServiceResponseAsync(fileContent, fileName).toBlocking().single().body();
     }
 
     /**
@@ -92,7 +91,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
+        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
     }
 
     /**
@@ -106,7 +105,7 @@ public final class FormdatasImpl implements Formdatas {
         return uploadFileWithServiceResponseAsync(fileContent, fileName).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -141,7 +140,7 @@ public final class FormdatasImpl implements Formdatas {
     }
 
     private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -154,7 +153,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) {
-        return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().getBody();
+        return uploadFileViaBodyWithServiceResponseAsync(fileContent).toBlocking().single().body();
     }
 
     /**
@@ -165,7 +164,7 @@ public final class FormdatasImpl implements Formdatas {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
+        return ServiceCall.fromResponse(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
     }
 
     /**
@@ -178,7 +177,7 @@ public final class FormdatasImpl implements Formdatas {
         return uploadFileViaBodyWithServiceResponseAsync(fileContent).map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -209,7 +208,7 @@ public final class FormdatasImpl implements Formdatas {
     }
 
     private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

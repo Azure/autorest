@@ -2,7 +2,10 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
+import fixtures.paging.implementation.ProductInner;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,10 +14,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.implementation.PagingGetMultiplePagesWithOffsetOptionsInner;
-import fixtures.paging.implementation.ProductInner;
-
 import static org.junit.Assert.fail;
 
 public class PagingTests {
@@ -22,7 +21,7 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", null);
+        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 
     @Test
@@ -106,7 +105,7 @@ public class PagingTests {
             List<ProductInner> response = client.pagings().getSinglePagesFailure();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+            Assert.assertNotNull(ex.response());
         }
     }
 
@@ -117,18 +116,13 @@ public class PagingTests {
             response.size();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+            Assert.assertNotNull(ex.response());
         }
     }
 
     @Test
     public void getMultiplePagesFailureUri() throws Exception {
-        try {
-            List<ProductInner> response = client.pagings().getMultiplePagesFailureUri();
-            response.size();
-            fail();
-        } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
-        }
+        List<ProductInner> response = client.pagings().getMultiplePagesFailureUri();
+        Assert.assertEquals(1, response.size());
     }
 }

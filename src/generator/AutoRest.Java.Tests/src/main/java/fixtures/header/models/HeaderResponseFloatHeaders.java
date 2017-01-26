@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseFloat operation.
@@ -18,6 +19,7 @@ public class HeaderResponseFloatHeaders {
     /**
      * response with header value "value": 0.07 or -3.0.
      */
+    @JsonProperty(value = "value")
     private Double value;
 
     /**

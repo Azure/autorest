@@ -18,6 +18,8 @@ namespace AutoRest.AzureResourceSchema
         private IDictionary<string, JsonSchema> properties;
         private IList<string> requiredList;
         private IList<JsonSchema> oneOfList;
+        private IList<JsonSchema> anyOfList;
+        private IList<JsonSchema> allOfList;
 
         /// <summary>
         /// A reference to the location in the parent schema where this schema's definition can be
@@ -124,6 +126,22 @@ namespace AutoRest.AzureResourceSchema
         }
 
         /// <summary>
+        /// The list of anyOf options that exist for this JSON schema.
+        /// </summary>
+        public IList<JsonSchema> AnyOf
+        {
+            get { return anyOfList; }
+        }
+
+        /// <summary>
+        /// The list of allOf options that exist for this JSON schema.
+        /// </summary>
+        public IList<JsonSchema> AllOf
+        {
+            get { return allOfList; }
+        }
+
+        /// <summary>
         /// The schemas that describe the properties of a matching JSON value.
         /// </summary>
         public IDictionary<string,JsonSchema> Properties
@@ -137,6 +155,27 @@ namespace AutoRest.AzureResourceSchema
         public IList<string> Required
         {
             get { return requiredList; }
+        }
+
+        public bool IsEmpty()
+        {
+            return Ref == null &&
+                   Items == null &&
+                   AdditionalProperties == null &&
+                   Minimum == null &&
+                   Maximum == null &&
+                   Pattern == null &&
+                   IsEmpty(enumList) &&
+                   IsEmpty(properties) &&
+                   IsEmpty(requiredList) &&
+                   IsEmpty(oneOfList) &&
+                   IsEmpty(anyOfList) &&
+                   IsEmpty(allOfList);
+        }
+
+        private static bool IsEmpty<T>(IEnumerable<T> values)
+        {
+            return values == null || !values.Any();
         }
 
         /// <summary>
@@ -273,6 +312,28 @@ namespace AutoRest.AzureResourceSchema
         }
 
         /// <summary>
+        /// Add the provided JSON schema as an option for the anyOf property of this JSON schema.
+        /// </summary>
+        /// <param name="anyOfOption"></param>
+        /// <returns></returns>
+        public JsonSchema AddAnyOf(JsonSchema anyOfOption)
+        {
+            if (anyOfOption == null)
+            {
+                throw new ArgumentNullException(nameof(anyOfOption));
+            }
+
+            if (anyOfList == null)
+            {
+                anyOfList = new List<JsonSchema>();
+            }
+
+            anyOfList.Add(anyOfOption);
+
+            return this;
+        }
+
+        /// <summary>
         /// Add the provided JSON schema as an option for the oneOf property of this JSON schema.
         /// </summary>
         /// <param name="oneOfOption"></param>
@@ -290,6 +351,28 @@ namespace AutoRest.AzureResourceSchema
             }
 
             oneOfList.Add(oneOfOption);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Add the provided JSON schema as an option for the allOf property of this JSON schema.
+        /// </summary>
+        /// <param name="allOfOption"></param>
+        /// <returns></returns>
+        public JsonSchema AddAllOf(JsonSchema allOfOption)
+        {
+            if (allOfOption == null)
+            {
+                throw new ArgumentNullException(nameof(allOfOption));
+            }
+
+            if (allOfList == null)
+            {
+                allOfList = new List<JsonSchema>();
+            }
+
+            allOfList.Add(allOfOption);
 
             return this;
         }
@@ -313,6 +396,8 @@ namespace AutoRest.AzureResourceSchema
             result.properties = Clone(Properties);
             result.requiredList = Clone(Required);
             result.oneOfList = Clone(OneOf);
+            result.anyOfList = Clone(AnyOf);
+            result.allOfList = Clone(AllOf);
             return result;
         }
 

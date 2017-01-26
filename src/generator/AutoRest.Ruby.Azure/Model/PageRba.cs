@@ -20,7 +20,7 @@ namespace AutoRest.Ruby.Azure.Model
 
         public string ItemName { get; private set; }
 
-        public CompositeType ItemType
+        public IModelType ItemType
         {
             get
             {
@@ -31,7 +31,7 @@ namespace AutoRest.Ruby.Azure.Model
                 Property property = Properties.FirstOrDefault(p => p.ModelType is SequenceType);
                 if (property != null)
                 {
-                    return ((SequenceType)property.ModelType).ElementType as CompositeType;
+                    return ((SequenceType)property.ModelType).ElementType;
                 }
                 else
                 {

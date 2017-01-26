@@ -4,8 +4,9 @@
 @using System.Linq
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
-@using AutoRest.Java.Azure.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureServiceClientTemplateModel>
+@using AutoRest.Java.Azure.Model
+@using AutoRest.Java.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.CodeModelJva>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -23,8 +24,8 @@ package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 /**
  * Initializes a new instance of the @(Model.Name)Impl class.
  */
-public final class @(Model.Name)Impl@(Model.ParentDeclaration) {
-@if (Model.MethodTemplateModels.Any())
+public class @(Model.Name)Impl@(Model.ParentDeclaration) {
+@if (Model.RootMethods.Any())
 {
 @:    /** The Retrofit service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
@@ -39,50 +40,50 @@ public final class @(Model.Name)Impl@(Model.ParentDeclaration) {
     public AzureClient getAzureClient() {
         return this.azureClient;
     }
-@foreach (var property in Model.Properties)
+@foreach (var property in Model.PropertiesEx)
 {
 @EmptyLine
-@:    /** @(property.Documentation.Period()) */
-@:    private @(property.Type) @(property.Name.ToCamelCase());
+@:    /** @(property.Documentation.ToString().Period()) */
+@:    private @(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase());
 @EmptyLine
 @:    /**
-@:     * Gets @(property.Documentation.Period())
+@:     * Gets @(property.Documentation.ToString().Period())
 @:     *
 @:     * @@return the @(property.Name) value.
 @:     */
-@:    public @(property.Type) @(property.Name.ToCamelCase())() {
+@:    public @(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase())() {
 @:        return this.@(property.Name.ToCamelCase());
 @:    }
 if(!property.IsReadOnly)
 {
 @EmptyLine
 @:    /**
-@:     * Sets @(property.Documentation.Period())
+@:     * Sets @(property.Documentation.ToString().Period())
 @:     *
 @:     * @@param @(property.Name.ToCamelCase()) the @(property.Name) value.
 @:     * @@return the service client itself
 @:     */
-@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.Type) @(property.Name.ToCamelCase())) {
+@:    public @(Model.Name)Impl with@(property.Name.ToPascalCase())(@(property.ModelType.ServiceResponseVariant().Name) @(property.Name.ToCamelCase())) {
 @:        this.@(property.Name.ToCamelCase()) = @(property.Name.ToCamelCase());
 @:        return this;
 @:    }
 }
 }
 
-@foreach (var operation in Model.Operations)
+@foreach (var operation in Model.AllOperations)
 {
 @EmptyLine
 @:    /**
 @:     * The @(operation.MethodGroupDeclarationType) object to access its operations.
 @:     */
-@:    private @(operation.MethodGroupDeclarationType) @(operation.MethodGroupName);
+@:    private @(operation.MethodGroupDeclarationType) @(operation.Name);
 @EmptyLine
 @:    /**
 @:     * Gets the @(operation.MethodGroupDeclarationType) object to access its operations.
 @:     * @@return the @(operation.MethodGroupDeclarationType) object.
 @:     */
-@:    public @(operation.MethodGroupDeclarationType) @(operation.MethodGroupName)() {
-@:        return this.@(operation.MethodGroupName);
+@:    public @(operation.MethodGroupDeclarationType) @(operation.Name)() {
+@:        return this.@(operation.Name);
 @:    }
 }
 @EmptyLine
@@ -106,10 +107,8 @@ if(!property.IsReadOnly)
      * @@param credentials the management credentials for Azure
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 @EmptyLine
     /**
@@ -159,17 +158,17 @@ else
 </text>
 }
     protected void initialize() {
-@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+@foreach (var property in Model.PropertiesEx.Where(p => p.DefaultValue != null))
 {
         @:this.@(property.Name) = @(property.DefaultValue);
 }
-@foreach (var operation in Model.Operations)
+@foreach (MethodGroupJva operation in Model.AllOperations)
 {
-@:        this.@(operation.MethodGroupName) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
+@:        this.@(operation.Name) = new @(operation.MethodGroupImplType)(restClient().retrofit(), this);
 }
         @Model.SetDefaultHeaders
         this.azureClient = new AzureClient(this);
-@if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 @:        initializeService();
 }
@@ -187,7 +186,7 @@ else
                 getClass().getPackage().getImplementationVersion(),
                 "@Model.Name, @Model.ApiVersion");
     }
-@if (Model.MethodTemplateModels.Any())
+@if (Model.RootMethods.Any())
 {
 @EmptyLine
 <text>
@@ -196,22 +195,21 @@ else
     }
 </text>
 @EmptyLine
-if (Model.MethodTemplateModels.Any())
+if (Model.RootMethods.Any())
 {
 @:    @Include(new AzureServiceClientRetrofitTemplate(), Model)
 @EmptyLine
 }
 <text>
-@foreach (var method in Model.MethodTemplateModels)
+@foreach (MethodJva method in Model.RootMethods)
 {
-    var methodModel = (AzureMethodTemplateModel)method;
-    if (methodModel.IsPagingOperation || methodModel.IsPagingNextOperation)
+    if (method.IsPagingOperation || method.IsPagingNextOperation)
     {
-    @:@(Include(new PagingMethodTemplate(), methodModel))
+    @:@(Include(new PagingMethodTemplate(), method))
     }
     else
     {
-    @:@(Include(new AzureMethodTemplate(), methodModel))
+    @:@(Include(new AzureMethodTemplate(), method))
     }
     @EmptyLine
 }

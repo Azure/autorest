@@ -1,5 +1,6 @@
 package fixtures.subscriptionidapiversion;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,7 +15,7 @@ public class GroupTests {
 
     @BeforeClass
     public static void setup() {
-        client = new MicrosoftAzureTestUrlImpl("http://localhost:3000", null);
+        client = new MicrosoftAzureTestUrlImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

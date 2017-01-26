@@ -19,6 +19,7 @@ public class DoubleWrapper {
     /**
      * The field1 property.
      */
+    @JsonProperty(value = "field1")
     private Double field1;
 
     /**

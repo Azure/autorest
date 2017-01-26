@@ -12,7 +12,6 @@ package fixtures.lro.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -35,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LROs.
  */
-public final class LROsInner {
+public class LROsInner {
     /** The Retrofit service to perform REST calls. */
     private LROsService service;
     /** The service client containing this operation class. */
@@ -57,291 +56,291 @@ public final class LROsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface LROsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200Succeeded" })
         @PUT("lro/put/200/succeeded")
         Observable<Response<ResponseBody>> put200Succeeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200Succeeded" })
         @PUT("lro/put/200/succeeded")
         Observable<Response<ResponseBody>> beginPut200Succeeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         Observable<Response<ResponseBody>> put200SucceededNoState(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200SucceededNoState" })
         @PUT("lro/put/200/succeeded/nostate")
         Observable<Response<ResponseBody>> beginPut200SucceededNoState(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put202Retry200" })
         @PUT("lro/put/202/retry/200")
         Observable<Response<ResponseBody>> put202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut202Retry200" })
         @PUT("lro/put/202/retry/200")
         Observable<Response<ResponseBody>> beginPut202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         Observable<Response<ResponseBody>> put201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingSucceeded200" })
         @PUT("lro/put/201/creating/succeeded/200")
         Observable<Response<ResponseBody>> beginPut201CreatingSucceeded200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         Observable<Response<ResponseBody>> put200UpdatingSucceeded204(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200UpdatingSucceeded204" })
         @PUT("lro/put/200/updating/succeeded/200")
         Observable<Response<ResponseBody>> beginPut200UpdatingSucceeded204(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         Observable<Response<ResponseBody>> put201CreatingFailed200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut201CreatingFailed200" })
         @PUT("lro/put/201/created/failed/200")
         Observable<Response<ResponseBody>> beginPut201CreatingFailed200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs put200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         Observable<Response<ResponseBody>> put200Acceptedcanceled200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPut200Acceptedcanceled200" })
         @PUT("lro/put/200/accepted/canceled/200")
         Observable<Response<ResponseBody>> beginPut200Acceptedcanceled200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         Observable<Response<ResponseBody>> putNoHeaderInRetry(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutNoHeaderInRetry" })
         @PUT("lro/put/noheader/202/200")
         Observable<Response<ResponseBody>> beginPutNoHeaderInRetry(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         Observable<Response<ResponseBody>> putAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetrySucceeded" })
         @PUT("lro/putasync/retry/succeeded")
         Observable<Response<ResponseBody>> beginPutAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         Observable<Response<ResponseBody>> putAsyncNoRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrySucceeded" })
         @PUT("lro/putasync/noretry/succeeded")
         Observable<Response<ResponseBody>> beginPutAsyncNoRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         Observable<Response<ResponseBody>> putAsyncRetryFailed(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncRetryFailed" })
         @PUT("lro/putasync/retry/failed")
         Observable<Response<ResponseBody>> beginPutAsyncRetryFailed(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         Observable<Response<ResponseBody>> putAsyncNoRetrycanceled(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoRetrycanceled" })
         @PUT("lro/putasync/noretry/canceled")
         Observable<Response<ResponseBody>> beginPutAsyncNoRetrycanceled(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         Observable<Response<ResponseBody>> putAsyncNoHeaderInRetry(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNoHeaderInRetry" })
         @PUT("lro/putasync/noheader/201/200")
         Observable<Response<ResponseBody>> beginPutAsyncNoHeaderInRetry(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putNonResource" })
         @PUT("lro/putnonresource/202/200")
         Observable<Response<ResponseBody>> putNonResource(@Body SkuInner sku, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutNonResource" })
         @PUT("lro/putnonresource/202/200")
         Observable<Response<ResponseBody>> beginPutNonResource(@Body SkuInner sku, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         Observable<Response<ResponseBody>> putAsyncNonResource(@Body SkuInner sku, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncNonResource" })
         @PUT("lro/putnonresourceasync/202/200")
         Observable<Response<ResponseBody>> beginPutAsyncNonResource(@Body SkuInner sku, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putSubResource" })
         @PUT("lro/putsubresource/202/200")
         Observable<Response<ResponseBody>> putSubResource(@Body SubProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutSubResource" })
         @PUT("lro/putsubresource/202/200")
         Observable<Response<ResponseBody>> beginPutSubResource(@Body SubProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs putAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         Observable<Response<ResponseBody>> putAsyncSubResource(@Body SubProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPutAsyncSubResource" })
         @PUT("lro/putsubresourceasync/202/200")
         Observable<Response<ResponseBody>> beginPutAsyncSubResource(@Body SubProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Accepted200Succeeded" })
         @HTTP(path = "lro/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Accepted200Succeeded" })
         @HTTP(path = "lro/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202DeletingFailed200" })
         @HTTP(path = "lro/delete/provisioning/202/deleting/200/failed", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202DeletingFailed200" })
         @HTTP(path = "lro/delete/provisioning/202/deleting/200/failed", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteProvisioning202Deletingcanceled200" })
         @HTTP(path = "lro/delete/provisioning/202/deleting/200/canceled", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteProvisioning202Deletingcanceled200" })
         @HTTP(path = "lro/delete/provisioning/202/deleting/200/canceled", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs delete204Succeeded" })
         @HTTP(path = "lro/delete/204/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete204Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDelete204Succeeded" })
         @HTTP(path = "lro/delete/204/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDelete204Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs delete202Retry200" })
         @HTTP(path = "lro/delete/202/retry/200", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDelete202Retry200" })
         @HTTP(path = "lro/delete/202/retry/200", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDelete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs delete202NoRetry204" })
         @HTTP(path = "lro/delete/202/noretry/204", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete202NoRetry204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDelete202NoRetry204" })
         @HTTP(path = "lro/delete/202/noretry/204", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDelete202NoRetry204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteNoHeaderInRetry" })
         @HTTP(path = "lro/delete/noheader", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteNoHeaderInRetry" })
         @HTTP(path = "lro/delete/noheader", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoHeaderInRetry" })
         @HTTP(path = "lro/deleteasync/noheader/202/204", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoHeaderInRetry" })
         @HTTP(path = "lro/deleteasync/noheader/202/204", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrySucceeded" })
         @HTTP(path = "lro/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrySucceeded" })
         @HTTP(path = "lro/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncNoRetrySucceeded" })
         @HTTP(path = "lro/deleteasync/noretry/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncNoRetrySucceeded" })
         @HTTP(path = "lro/deleteasync/noretry/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetryFailed" })
         @HTTP(path = "lro/deleteasync/retry/failed", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetryFailed" })
         @HTTP(path = "lro/deleteasync/retry/failed", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs deleteAsyncRetrycanceled" })
         @HTTP(path = "lro/deleteasync/retry/canceled", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginDeleteAsyncRetrycanceled" })
         @HTTP(path = "lro/deleteasync/retry/canceled", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs post200WithPayload" })
         @POST("lro/post/payload/200")
         Observable<Response<ResponseBody>> post200WithPayload(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPost200WithPayload" })
         @POST("lro/post/payload/200")
         Observable<Response<ResponseBody>> beginPost200WithPayload(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs post202Retry200" })
         @POST("lro/post/202/retry/200")
         Observable<Response<ResponseBody>> post202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPost202Retry200" })
         @POST("lro/post/202/retry/200")
         Observable<Response<ResponseBody>> beginPost202Retry200(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs post202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         Observable<Response<ResponseBody>> post202NoRetry204(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPost202NoRetry204" })
         @POST("lro/post/202/noretry/204")
         Observable<Response<ResponseBody>> beginPost202NoRetry204(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> postAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrySucceeded" })
         @POST("lro/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> beginPostAsyncRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         Observable<Response<ResponseBody>> postAsyncNoRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncNoRetrySucceeded" })
         @POST("lro/postasync/noretry/succeeded")
         Observable<Response<ResponseBody>> beginPostAsyncNoRetrySucceeded(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         Observable<Response<ResponseBody>> postAsyncRetryFailed(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetryFailed" })
         @POST("lro/postasync/retry/failed")
         Observable<Response<ResponseBody>> beginPostAsyncRetryFailed(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs postAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         Observable<Response<ResponseBody>> postAsyncRetrycanceled(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROs beginPostAsyncRetrycanceled" })
         @POST("lro/postasync/retry/canceled")
         Observable<Response<ResponseBody>> beginPostAsyncRetrycanceled(@Body ProductInner product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -350,10 +349,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded() {
-        return put200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -363,7 +362,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -375,7 +374,7 @@ public final class LROsInner {
         return put200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -397,7 +396,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Succeeded(ProductInner product) {
-        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200SucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -408,7 +407,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -421,7 +420,7 @@ public final class LROsInner {
         return put200SucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -444,7 +443,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded() {
-        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -454,7 +453,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -466,7 +465,7 @@ public final class LROsInner {
         return beginPut200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -499,7 +498,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Succeeded(ProductInner product) {
-        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200SucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -510,7 +509,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -523,7 +522,7 @@ public final class LROsInner {
         return beginPut200SucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -551,7 +550,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -561,10 +560,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState() {
-        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -574,7 +573,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -586,7 +585,7 @@ public final class LROsInner {
         return put200SucceededNoStateWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -608,7 +607,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200SucceededNoState(ProductInner product) {
-        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200SucceededNoStateWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -619,7 +618,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -632,7 +631,7 @@ public final class LROsInner {
         return put200SucceededNoStateWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -655,7 +654,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState() {
-        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -665,7 +664,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededNoStateAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededNoStateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -677,7 +676,7 @@ public final class LROsInner {
         return beginPut200SucceededNoStateWithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -710,7 +709,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200SucceededNoState(ProductInner product) {
-        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200SucceededNoStateWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -721,7 +720,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200SucceededNoStateAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200SucceededNoStateWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -734,7 +733,7 @@ public final class LROsInner {
         return beginPut200SucceededNoStateWithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -762,7 +761,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200SucceededNoStateDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -771,10 +770,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200() {
-        return put202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -784,7 +783,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -796,7 +795,7 @@ public final class LROsInner {
         return put202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -818,7 +817,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put202Retry200(ProductInner product) {
-        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -829,7 +828,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -842,7 +841,7 @@ public final class LROsInner {
         return put202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -865,7 +864,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200() {
-        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -875,7 +874,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -887,7 +886,7 @@ public final class LROsInner {
         return beginPut202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -920,7 +919,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut202Retry200(ProductInner product) {
-        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -931,7 +930,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut202Retry200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -944,7 +943,7 @@ public final class LROsInner {
         return beginPut202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -972,7 +971,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -981,10 +980,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -994,7 +993,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1006,7 +1005,7 @@ public final class LROsInner {
         return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1028,7 +1027,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1039,7 +1038,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1052,7 +1051,7 @@ public final class LROsInner {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1075,7 +1074,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1085,7 +1084,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1097,7 +1096,7 @@ public final class LROsInner {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1130,7 +1129,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1141,7 +1140,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1154,7 +1153,7 @@ public final class LROsInner {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1182,7 +1181,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -1192,10 +1191,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204() {
-        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1205,7 +1204,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1217,7 +1216,7 @@ public final class LROsInner {
         return put200UpdatingSucceeded204WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1239,7 +1238,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200UpdatingSucceeded204(ProductInner product) {
-        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1250,7 +1249,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1263,7 +1262,7 @@ public final class LROsInner {
         return put200UpdatingSucceeded204WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1286,7 +1285,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204() {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1296,7 +1295,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200UpdatingSucceeded204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200UpdatingSucceeded204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1308,7 +1307,7 @@ public final class LROsInner {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1341,7 +1340,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200UpdatingSucceeded204(ProductInner product) {
-        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1352,7 +1351,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200UpdatingSucceeded204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200UpdatingSucceeded204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1365,7 +1364,7 @@ public final class LROsInner {
         return beginPut200UpdatingSucceeded204WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1393,7 +1392,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200UpdatingSucceeded204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1402,10 +1401,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200() {
-        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1415,7 +1414,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1427,7 +1426,7 @@ public final class LROsInner {
         return put201CreatingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1449,7 +1448,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingFailed200(ProductInner product) {
-        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingFailed200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1460,7 +1459,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1473,7 +1472,7 @@ public final class LROsInner {
         return put201CreatingFailed200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1496,7 +1495,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200() {
-        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1506,7 +1505,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1518,7 +1517,7 @@ public final class LROsInner {
         return beginPut201CreatingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1551,7 +1550,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingFailed200(ProductInner product) {
-        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingFailed200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1562,7 +1561,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut201CreatingFailed200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingFailed200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1575,7 +1574,7 @@ public final class LROsInner {
         return beginPut201CreatingFailed200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1603,7 +1602,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut201CreatingFailed200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -1613,10 +1612,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200() {
-        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1626,7 +1625,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1638,7 +1637,7 @@ public final class LROsInner {
         return put200Acceptedcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1660,7 +1659,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner put200Acceptedcanceled200(ProductInner product) {
-        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1671,7 +1670,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> put200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(put200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1684,7 +1683,7 @@ public final class LROsInner {
         return put200Acceptedcanceled200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1707,7 +1706,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200() {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1717,7 +1716,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200Acceptedcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200Acceptedcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1729,7 +1728,7 @@ public final class LROsInner {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1762,7 +1761,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut200Acceptedcanceled200(ProductInner product) {
-        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1773,7 +1772,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPut200Acceptedcanceled200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.create(beginPut200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut200Acceptedcanceled200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1786,7 +1785,7 @@ public final class LROsInner {
         return beginPut200Acceptedcanceled200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<ProductInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponse<ProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1814,7 +1813,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<ProductInner> beginPut200Acceptedcanceled200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1823,10 +1822,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry() {
-        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1836,7 +1835,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1848,7 +1847,7 @@ public final class LROsInner {
         return putNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1870,7 +1869,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putNoHeaderInRetry(ProductInner product) {
-        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1881,7 +1880,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1894,7 +1893,7 @@ public final class LROsInner {
         return putNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1917,7 +1916,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry() {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1927,7 +1926,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1939,7 +1938,7 @@ public final class LROsInner {
         return beginPutNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1972,7 +1971,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutNoHeaderInRetry(ProductInner product) {
-        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1983,7 +1982,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1996,7 +1995,7 @@ public final class LROsInner {
         return beginPutNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2024,7 +2023,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutNoHeaderInRetryHeadersInner> beginPutNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutNoHeaderInRetryHeadersInner.class);
@@ -2033,10 +2032,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2046,7 +2045,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2058,7 +2057,7 @@ public final class LROsInner {
         return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2080,7 +2079,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetrySucceeded(ProductInner product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2091,7 +2090,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2104,7 +2103,7 @@ public final class LROsInner {
         return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2127,7 +2126,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2137,7 +2136,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2149,7 +2148,7 @@ public final class LROsInner {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2182,7 +2181,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetrySucceeded(ProductInner product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2193,7 +2192,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2206,7 +2205,7 @@ public final class LROsInner {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2234,7 +2233,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetrySucceededHeadersInner> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncRetrySucceededHeadersInner.class);
@@ -2243,10 +2242,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded() {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2256,7 +2255,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2268,7 +2267,7 @@ public final class LROsInner {
         return putAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2290,7 +2289,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrySucceeded(ProductInner product) {
-        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2301,7 +2300,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2314,7 +2313,7 @@ public final class LROsInner {
         return putAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2337,7 +2336,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded() {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2347,7 +2346,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2359,7 +2358,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2392,7 +2391,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2403,7 +2402,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2416,7 +2415,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2444,7 +2443,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrySucceededHeadersInner> beginPutAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncNoRetrySucceededHeadersInner.class);
@@ -2453,10 +2452,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed() {
-        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2466,7 +2465,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2478,7 +2477,7 @@ public final class LROsInner {
         return putAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2500,7 +2499,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRetryFailed(ProductInner product) {
-        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2511,7 +2510,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2524,7 +2523,7 @@ public final class LROsInner {
         return putAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2547,7 +2546,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed() {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2557,7 +2556,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetryFailedAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2569,7 +2568,7 @@ public final class LROsInner {
         return beginPutAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2602,7 +2601,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRetryFailed(ProductInner product) {
-        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2613,7 +2612,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2626,7 +2625,7 @@ public final class LROsInner {
         return beginPutAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2654,7 +2653,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncRetryFailedHeadersInner> beginPutAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncRetryFailedHeadersInner.class);
@@ -2663,10 +2662,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled() {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2676,7 +2675,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2688,7 +2687,7 @@ public final class LROsInner {
         return putAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2710,7 +2709,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoRetrycanceled(ProductInner product) {
-        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2721,7 +2720,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2734,7 +2733,7 @@ public final class LROsInner {
         return putAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2757,7 +2756,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled() {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2767,7 +2766,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrycanceledAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2779,7 +2778,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2812,7 +2811,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoRetrycanceled(ProductInner product) {
-        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -2823,7 +2822,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoRetrycanceledAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2836,7 +2835,7 @@ public final class LROsInner {
         return beginPutAsyncNoRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2864,7 +2863,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoRetrycanceledHeadersInner> beginPutAsyncNoRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncNoRetrycanceledHeadersInner.class);
@@ -2873,10 +2872,10 @@ public final class LROsInner {
     /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry() {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -2886,7 +2885,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2898,7 +2897,7 @@ public final class LROsInner {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2920,7 +2919,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncNoHeaderInRetry(ProductInner product) {
-        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -2931,7 +2930,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> putAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2944,7 +2943,7 @@ public final class LROsInner {
         return putAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2967,7 +2966,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry() {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2977,7 +2976,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoHeaderInRetryAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2989,7 +2988,7 @@ public final class LROsInner {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3022,7 +3021,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncNoHeaderInRetry(ProductInner product) {
-        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3033,7 +3032,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPutAsyncNoHeaderInRetryAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3046,7 +3045,7 @@ public final class LROsInner {
         return beginPutAsyncNoHeaderInRetryWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3074,7 +3073,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPutAsyncNoHeaderInRetryHeadersInner> beginPutAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(201, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPutAsyncNoHeaderInRetryHeadersInner.class);
@@ -3083,10 +3082,10 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object  if successful.
+     * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource() {
-        return putNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3096,7 +3095,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3108,7 +3107,7 @@ public final class LROsInner {
         return putNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3130,7 +3129,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putNonResource(SkuInner sku) {
-        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
+        return putNonResourceWithServiceResponseAsync(sku).toBlocking().last().body();
     }
 
     /**
@@ -3141,7 +3140,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(putNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3154,7 +3153,7 @@ public final class LROsInner {
         return putNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3177,7 +3176,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource() {
-        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3187,7 +3186,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3199,7 +3198,7 @@ public final class LROsInner {
         return beginPutNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3232,7 +3231,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutNonResource(SkuInner sku) {
-        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
+        return beginPutNonResourceWithServiceResponseAsync(sku).toBlocking().single().body();
     }
 
     /**
@@ -3243,7 +3242,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(beginPutNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3256,7 +3255,7 @@ public final class LROsInner {
         return beginPutNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3284,7 +3283,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SkuInner> beginPutNonResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<SkuInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3293,10 +3292,10 @@ public final class LROsInner {
     /**
      * Long running put request with non resource.
      *
-     * @return the SkuInner object  if successful.
+     * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource() {
-        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3306,7 +3305,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3318,7 +3317,7 @@ public final class LROsInner {
         return putAsyncNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3340,7 +3339,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner putAsyncNonResource(SkuInner sku) {
-        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().getBody();
+        return putAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().last().body();
     }
 
     /**
@@ -3351,7 +3350,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> putAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(putAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3364,7 +3363,7 @@ public final class LROsInner {
         return putAsyncNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3387,7 +3386,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource() {
-        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3397,7 +3396,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutAsyncNonResourceAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncNonResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3409,7 +3408,7 @@ public final class LROsInner {
         return beginPutAsyncNonResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3442,7 +3441,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPutAsyncNonResource(SkuInner sku) {
-        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().getBody();
+        return beginPutAsyncNonResourceWithServiceResponseAsync(sku).toBlocking().single().body();
     }
 
     /**
@@ -3453,7 +3452,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPutAsyncNonResourceAsync(SkuInner sku, final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncNonResourceWithServiceResponseAsync(sku), serviceCallback);
     }
 
     /**
@@ -3466,7 +3465,7 @@ public final class LROsInner {
         return beginPutAsyncNonResourceWithServiceResponseAsync(sku).map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3494,7 +3493,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SkuInner> beginPutAsyncNonResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<SkuInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3503,10 +3502,10 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object  if successful.
+     * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource() {
-        return putSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3516,7 +3515,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3528,7 +3527,7 @@ public final class LROsInner {
         return putSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3550,7 +3549,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putSubResource(SubProductInner product) {
-        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putSubResourceWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3561,7 +3560,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3574,7 +3573,7 @@ public final class LROsInner {
         return putSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3597,7 +3596,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource() {
-        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3607,7 +3606,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3619,7 +3618,7 @@ public final class LROsInner {
         return beginPutSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3652,7 +3651,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutSubResource(SubProductInner product) {
-        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutSubResourceWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3663,7 +3662,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3676,7 +3675,7 @@ public final class LROsInner {
         return beginPutSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3704,7 +3703,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SubProductInner> beginPutSubResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SubProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<SubProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<SubProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3713,10 +3712,10 @@ public final class LROsInner {
     /**
      * Long running put request with sub resource.
      *
-     * @return the SubProductInner object  if successful.
+     * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource() {
-        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3726,7 +3725,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3738,7 +3737,7 @@ public final class LROsInner {
         return putAsyncSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3760,7 +3759,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner putAsyncSubResource(SubProductInner product) {
-        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncSubResourceWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -3771,7 +3770,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> putAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(putAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(putAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3784,7 +3783,7 @@ public final class LROsInner {
         return putAsyncSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3807,7 +3806,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource() {
-        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3817,7 +3816,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutAsyncSubResourceAsync(final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncSubResourceWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3829,7 +3828,7 @@ public final class LROsInner {
         return beginPutAsyncSubResourceWithServiceResponseAsync().map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3862,7 +3861,7 @@ public final class LROsInner {
      * @return the SubProductInner object if successful.
      */
     public SubProductInner beginPutAsyncSubResource(SubProductInner product) {
-        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncSubResourceWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -3873,7 +3872,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SubProductInner> beginPutAsyncSubResourceAsync(SubProductInner product, final ServiceCallback<SubProductInner> serviceCallback) {
-        return ServiceCall.create(beginPutAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPutAsyncSubResourceWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3886,7 +3885,7 @@ public final class LROsInner {
         return beginPutAsyncSubResourceWithServiceResponseAsync(product).map(new Func1<ServiceResponse<SubProductInner>, SubProductInner>() {
             @Override
             public SubProductInner call(ServiceResponse<SubProductInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3914,7 +3913,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SubProductInner> beginPutAsyncSubResourceDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SubProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<SubProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<SubProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -3926,7 +3925,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -3936,7 +3935,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3948,7 +3947,7 @@ public final class LROsInner {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3969,7 +3968,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3979,7 +3978,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3991,7 +3990,7 @@ public final class LROsInner {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4017,7 +4016,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Accepted200SucceededHeadersInner> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -4030,7 +4029,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202DeletingFailed200() {
-        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4040,7 +4039,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4052,7 +4051,7 @@ public final class LROsInner {
         return deleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4073,7 +4072,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202DeletingFailed200() {
-        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4083,7 +4082,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4095,7 +4094,7 @@ public final class LROsInner {
         return beginDeleteProvisioning202DeletingFailed200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4121,7 +4120,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202DeletingFailed200HeadersInner> beginDeleteProvisioning202DeletingFailed200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -4134,7 +4133,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Deletingcanceled200() {
-        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4144,7 +4143,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> deleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4156,7 +4155,7 @@ public final class LROsInner {
         return deleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4177,7 +4176,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Deletingcanceled200() {
-        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4187,7 +4186,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4199,7 +4198,7 @@ public final class LROsInner {
         return beginDeleteProvisioning202Deletingcanceled200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4225,7 +4224,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDeleteProvisioning202Deletingcanceled200HeadersInner> beginDeleteProvisioning202Deletingcanceled200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -4237,7 +4236,7 @@ public final class LROsInner {
      *
      */
     public void delete204Succeeded() {
-        delete204SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        delete204SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4247,7 +4246,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(delete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4259,7 +4258,7 @@ public final class LROsInner {
         return delete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4279,7 +4278,7 @@ public final class LROsInner {
      *
      */
     public void beginDelete204Succeeded() {
-        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete204SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4289,7 +4288,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4301,7 +4300,7 @@ public final class LROsInner {
         return beginDelete204SucceededWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4327,7 +4326,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<Void> beginDelete204SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -4339,7 +4338,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner delete202Retry200() {
-        return delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        return delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4349,7 +4348,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> delete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4361,7 +4360,7 @@ public final class LROsInner {
         return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4382,7 +4381,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202Retry200() {
-        return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4392,7 +4391,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDelete202Retry200Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4404,7 +4403,7 @@ public final class LROsInner {
         return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4430,7 +4429,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDelete202Retry200HeadersInner> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -4443,7 +4442,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner delete202NoRetry204() {
-        return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return delete202NoRetry204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4453,7 +4452,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> delete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4465,7 +4464,7 @@ public final class LROsInner {
         return delete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4486,7 +4485,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDelete202NoRetry204() {
-        return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDelete202NoRetry204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4496,7 +4495,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginDelete202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4508,7 +4507,7 @@ public final class LROsInner {
         return beginDelete202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4534,7 +4533,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsDelete202NoRetry204HeadersInner> beginDelete202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -4546,7 +4545,7 @@ public final class LROsInner {
      *
      */
     public void deleteNoHeaderInRetry() {
-        deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4556,7 +4555,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4568,7 +4567,7 @@ public final class LROsInner {
         return deleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4588,7 +4587,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteNoHeaderInRetry() {
-        beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4598,7 +4597,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4610,7 +4609,7 @@ public final class LROsInner {
         return beginDeleteNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4636,7 +4635,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> beginDeleteNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -4648,7 +4647,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncNoHeaderInRetry() {
-        deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4658,7 +4657,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4670,7 +4669,7 @@ public final class LROsInner {
         return deleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4690,7 +4689,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncNoHeaderInRetry() {
-        beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4700,7 +4699,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4712,7 +4711,7 @@ public final class LROsInner {
         return beginDeleteAsyncNoHeaderInRetryWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4738,7 +4737,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> beginDeleteAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -4750,7 +4749,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncRetrySucceeded() {
-        deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4760,7 +4759,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4772,7 +4771,7 @@ public final class LROsInner {
         return deleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4792,7 +4791,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncRetrySucceeded() {
-        beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4802,7 +4801,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4814,7 +4813,7 @@ public final class LROsInner {
         return beginDeleteAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4840,7 +4839,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeadersInner> beginDeleteAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncRetrySucceededHeadersInner.class);
@@ -4851,7 +4850,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncNoRetrySucceeded() {
-        deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4861,7 +4860,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4873,7 +4872,7 @@ public final class LROsInner {
         return deleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4893,7 +4892,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncNoRetrySucceeded() {
-        beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4903,7 +4902,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4915,7 +4914,7 @@ public final class LROsInner {
         return beginDeleteAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4941,7 +4940,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeadersInner> beginDeleteAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncNoRetrySucceededHeadersInner.class);
@@ -4952,7 +4951,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncRetryFailed() {
-        deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -4962,7 +4961,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4974,7 +4973,7 @@ public final class LROsInner {
         return deleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4994,7 +4993,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncRetryFailed() {
-        beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5004,7 +5003,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5016,7 +5015,7 @@ public final class LROsInner {
         return beginDeleteAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5042,7 +5041,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeadersInner> beginDeleteAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncRetryFailedHeadersInner.class);
@@ -5053,7 +5052,7 @@ public final class LROsInner {
      *
      */
     public void deleteAsyncRetrycanceled() {
-        deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5063,7 +5062,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5075,7 +5074,7 @@ public final class LROsInner {
         return deleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5095,7 +5094,7 @@ public final class LROsInner {
      *
      */
     public void beginDeleteAsyncRetrycanceled() {
-        beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5105,7 +5104,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5117,7 +5116,7 @@ public final class LROsInner {
         return beginDeleteAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5143,7 +5142,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeadersInner> beginDeleteAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncRetrycanceledHeadersInner.class);
@@ -5155,7 +5154,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner post200WithPayload() {
-        return post200WithPayloadWithServiceResponseAsync().toBlocking().last().getBody();
+        return post200WithPayloadWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5165,7 +5164,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> post200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(post200WithPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post200WithPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5177,7 +5176,7 @@ public final class LROsInner {
         return post200WithPayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5198,7 +5197,7 @@ public final class LROsInner {
      * @return the SkuInner object if successful.
      */
     public SkuInner beginPost200WithPayload() {
-        return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost200WithPayloadWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5208,7 +5207,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SkuInner> beginPost200WithPayloadAsync(final ServiceCallback<SkuInner> serviceCallback) {
-        return ServiceCall.create(beginPost200WithPayloadWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPost200WithPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5220,7 +5219,7 @@ public final class LROsInner {
         return beginPost200WithPayloadWithServiceResponseAsync().map(new Func1<ServiceResponse<SkuInner>, SkuInner>() {
             @Override
             public SkuInner call(ServiceResponse<SkuInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5246,7 +5245,7 @@ public final class LROsInner {
     }
 
     private ServiceResponse<SkuInner> beginPost200WithPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<SkuInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<SkuInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<SkuInner>() { }.getType())
                 .register(200, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -5258,7 +5257,7 @@ public final class LROsInner {
      *
      */
     public void post202Retry200() {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5268,7 +5267,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5280,7 +5279,7 @@ public final class LROsInner {
         return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5301,7 +5300,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void post202Retry200(ProductInner product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5312,7 +5311,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5325,7 +5324,7 @@ public final class LROsInner {
         return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5347,7 +5346,7 @@ public final class LROsInner {
      *
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5357,7 +5356,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5369,7 +5368,7 @@ public final class LROsInner {
         return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5401,7 +5400,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void beginPost202Retry200(ProductInner product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5412,7 +5411,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5425,7 +5424,7 @@ public final class LROsInner {
         return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5453,7 +5452,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsPost202Retry200HeadersInner> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPost202Retry200HeadersInner.class);
@@ -5462,10 +5461,10 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204() {
-        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5475,7 +5474,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> post202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5487,7 +5486,7 @@ public final class LROsInner {
         return post202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5509,7 +5508,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner post202NoRetry204(ProductInner product) {
-        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return post202NoRetry204WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5520,7 +5519,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> post202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202NoRetry204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202NoRetry204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5533,7 +5532,7 @@ public final class LROsInner {
         return post202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5556,7 +5555,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204() {
-        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5566,7 +5565,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPost202NoRetry204Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoRetry204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoRetry204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5578,7 +5577,7 @@ public final class LROsInner {
         return beginPost202NoRetry204WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5611,7 +5610,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPost202NoRetry204(ProductInner product) {
-        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPost202NoRetry204WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5622,7 +5621,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPost202NoRetry204Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202NoRetry204WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202NoRetry204WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5635,7 +5634,7 @@ public final class LROsInner {
         return beginPost202NoRetry204WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5663,7 +5662,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPost202NoRetry204HeadersInner> beginPost202NoRetry204Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPost202NoRetry204HeadersInner.class);
@@ -5672,10 +5671,10 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded() {
-        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5685,7 +5684,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5697,7 +5696,7 @@ public final class LROsInner {
         return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5719,7 +5718,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncRetrySucceeded(ProductInner product) {
-        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5730,7 +5729,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5743,7 +5742,7 @@ public final class LROsInner {
         return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5766,7 +5765,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded() {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5776,7 +5775,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5788,7 +5787,7 @@ public final class LROsInner {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5821,7 +5820,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncRetrySucceeded(ProductInner product) {
-        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -5832,7 +5831,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5845,7 +5844,7 @@ public final class LROsInner {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5873,7 +5872,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -5883,10 +5882,10 @@ public final class LROsInner {
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the ProductInner object  if successful.
+     * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded() {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -5896,7 +5895,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5908,7 +5907,7 @@ public final class LROsInner {
         return postAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5930,7 +5929,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner postAsyncNoRetrySucceeded(ProductInner product) {
-        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return postAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -5941,7 +5940,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> postAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -5954,7 +5953,7 @@ public final class LROsInner {
         return postAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -5977,7 +5976,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded() {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -5987,7 +5986,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncNoRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -5999,7 +5998,7 @@ public final class LROsInner {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6032,7 +6031,7 @@ public final class LROsInner {
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPostAsyncNoRetrySucceeded(ProductInner product) {
-        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6043,7 +6042,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ProductInner> beginPostAsyncNoRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6056,7 +6055,7 @@ public final class LROsInner {
         return beginPostAsyncNoRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner>, ProductInner>() {
             @Override
             public ProductInner call(ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6084,7 +6083,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> beginPostAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<ProductInner, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
                 .registerError(CloudException.class)
@@ -6096,7 +6095,7 @@ public final class LROsInner {
      *
      */
     public void postAsyncRetryFailed() {
-        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -6106,7 +6105,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6118,7 +6117,7 @@ public final class LROsInner {
         return postAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6139,7 +6138,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void postAsyncRetryFailed(ProductInner product) {
-        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -6150,7 +6149,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6163,7 +6162,7 @@ public final class LROsInner {
         return postAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6185,7 +6184,7 @@ public final class LROsInner {
      *
      */
     public void beginPostAsyncRetryFailed() {
-        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6195,7 +6194,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetryFailedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6207,7 +6206,7 @@ public final class LROsInner {
         return beginPostAsyncRetryFailedWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6239,7 +6238,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void beginPostAsyncRetryFailed(ProductInner product) {
-        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetryFailedWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6250,7 +6249,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetryFailedAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetryFailedWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6263,7 +6262,7 @@ public final class LROsInner {
         return beginPostAsyncRetryFailedWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6291,7 +6290,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeadersInner> beginPostAsyncRetryFailedDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncRetryFailedHeadersInner.class);
@@ -6302,7 +6301,7 @@ public final class LROsInner {
      *
      */
     public void postAsyncRetrycanceled() {
-        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -6312,7 +6311,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6324,7 +6323,7 @@ public final class LROsInner {
         return postAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6345,7 +6344,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void postAsyncRetrycanceled(ProductInner product) {
-        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -6356,7 +6355,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6369,7 +6368,7 @@ public final class LROsInner {
         return postAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6391,7 +6390,7 @@ public final class LROsInner {
      *
      */
     public void beginPostAsyncRetrycanceled() {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -6401,7 +6400,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrycanceledWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -6413,7 +6412,7 @@ public final class LROsInner {
         return beginPostAsyncRetrycanceledWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6445,7 +6444,7 @@ public final class LROsInner {
      * @param product Product to put
      */
     public void beginPostAsyncRetrycanceled(ProductInner product) {
-        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetrycanceledWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -6456,7 +6455,7 @@ public final class LROsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrycanceledAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrycanceledWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -6469,7 +6468,7 @@ public final class LROsInner {
         return beginPostAsyncRetrycanceledWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -6497,7 +6496,7 @@ public final class LROsInner {
     }
 
     private ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeadersInner> beginPostAsyncRetrycanceledDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncRetrycanceledHeadersInner.class);

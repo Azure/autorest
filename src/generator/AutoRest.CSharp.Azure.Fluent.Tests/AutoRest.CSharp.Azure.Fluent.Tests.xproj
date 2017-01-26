@@ -7,7 +7,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.Props' )" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>947EA2A0-1730-4CC2-B042-C5471DAB78F1</ProjectGuid>
+    <ProjectGuid>8464a22c-0c8e-4c84-85a8-0ace787bdc75</ProjectGuid>
     <RootNamespace>AutoRest.CSharp.Azure.Fluent.Tests</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
@@ -18,6 +18,6 @@
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
-  <Import Project="$(SolutionDir)Tools\Autorest.xproj.targets"/>
-  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets"  Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.targets')" />
+  <Import Project="$(SolutionDir)Tools\Autorest.xproj.targets" />
+  <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.targets" Condition="Exists('$(VSToolsPath)\DotNet\Microsoft.DotNet.targets')" />
 </Project>

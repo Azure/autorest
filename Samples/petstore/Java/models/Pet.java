@@ -15,34 +15,38 @@ public class Pet {
      * The id of the pet.
      * A more detailed description of the id of the pet.
      */
+    @JsonProperty(value = "id")
     private Long id;
 
     /**
      * The category property.
      */
+    @JsonProperty(value = "category")
     private Category category;
 
     /**
      * The name property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "name", required = true)
     private String name;
 
     /**
      * The photoUrls property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "photoUrls", required = true)
     private List<String> photoUrls;
 
     /**
      * The tags property.
      */
+    @JsonProperty(value = "tags")
     private List<Tag> tags;
 
     /**
      * pet status in the store. Possible values include: 'available',
      * 'pending', 'sold'.
      */
+    @JsonProperty(value = "status")
     private String status;
 
     /**

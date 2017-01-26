@@ -16,7 +16,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
@@ -51,7 +50,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Headers.
  */
-public final class HeadersImpl implements fixtures.header.Headers {
+public class HeadersImpl implements fixtures.header.Headers {
     /** The Retrofit service to perform REST calls. */
     private HeadersService service;
     /** The service client containing this operation class. */
@@ -73,119 +72,119 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeadersService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramExistingKey" })
         @POST("header/param/existingkey")
         Observable<Response<ResponseBody>> paramExistingKey(@Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseExistingKey" })
         @POST("header/response/existingkey")
         Observable<Response<ResponseBody>> responseExistingKey();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramProtectedKey" })
         @POST("header/param/protectedkey")
         Observable<Response<ResponseBody>> paramProtectedKey(@Header("Content-Type") String contentType);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseProtectedKey" })
         @POST("header/response/protectedkey")
         Observable<Response<ResponseBody>> responseProtectedKey();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramInteger" })
         @POST("header/param/prim/integer")
         Observable<Response<ResponseBody>> paramInteger(@Header("scenario") String scenario, @Header("value") int value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseInteger" })
         @POST("header/response/prim/integer")
         Observable<Response<ResponseBody>> responseInteger(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramLong" })
         @POST("header/param/prim/long")
         Observable<Response<ResponseBody>> paramLong(@Header("scenario") String scenario, @Header("value") long value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseLong" })
         @POST("header/response/prim/long")
         Observable<Response<ResponseBody>> responseLong(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramFloat" })
         @POST("header/param/prim/float")
         Observable<Response<ResponseBody>> paramFloat(@Header("scenario") String scenario, @Header("value") double value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseFloat" })
         @POST("header/response/prim/float")
         Observable<Response<ResponseBody>> responseFloat(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDouble" })
         @POST("header/param/prim/double")
         Observable<Response<ResponseBody>> paramDouble(@Header("scenario") String scenario, @Header("value") double value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDouble" })
         @POST("header/response/prim/double")
         Observable<Response<ResponseBody>> responseDouble(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramBool" })
         @POST("header/param/prim/bool")
         Observable<Response<ResponseBody>> paramBool(@Header("scenario") String scenario, @Header("value") boolean value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseBool" })
         @POST("header/response/prim/bool")
         Observable<Response<ResponseBody>> responseBool(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramString" })
         @POST("header/param/prim/string")
         Observable<Response<ResponseBody>> paramString(@Header("scenario") String scenario, @Header("value") String value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseString" })
         @POST("header/response/prim/string")
         Observable<Response<ResponseBody>> responseString(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDate" })
         @POST("header/param/prim/date")
         Observable<Response<ResponseBody>> paramDate(@Header("scenario") String scenario, @Header("value") LocalDate value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDate" })
         @POST("header/response/prim/date")
         Observable<Response<ResponseBody>> responseDate(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDatetime" })
         @POST("header/param/prim/datetime")
         Observable<Response<ResponseBody>> paramDatetime(@Header("scenario") String scenario, @Header("value") DateTime value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDatetime" })
         @POST("header/response/prim/datetime")
         Observable<Response<ResponseBody>> responseDatetime(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDatetimeRfc1123" })
         @POST("header/param/prim/datetimerfc1123")
         Observable<Response<ResponseBody>> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDatetimeRfc1123" })
         @POST("header/response/prim/datetimerfc1123")
         Observable<Response<ResponseBody>> responseDatetimeRfc1123(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramDuration" })
         @POST("header/param/prim/duration")
         Observable<Response<ResponseBody>> paramDuration(@Header("scenario") String scenario, @Header("value") Period value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseDuration" })
         @POST("header/response/prim/duration")
         Observable<Response<ResponseBody>> responseDuration(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramByte" })
         @POST("header/param/prim/byte")
         Observable<Response<ResponseBody>> paramByte(@Header("scenario") String scenario, @Header("value") String value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseByte" })
         @POST("header/response/prim/byte")
         Observable<Response<ResponseBody>> responseByte(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers paramEnum" })
         @POST("header/param/prim/enum")
         Observable<Response<ResponseBody>> paramEnum(@Header("scenario") String scenario, @Header("value") GreyscaleColors value);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers responseEnum" })
         @POST("header/response/prim/enum")
         Observable<Response<ResponseBody>> responseEnum(@Header("scenario") String scenario);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.header.Headers customRequestId" })
         @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         Observable<Response<ResponseBody>> customRequestId();
 
@@ -197,7 +196,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      */
     public void paramExistingKey(String userAgent) {
-        paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().getBody();
+        paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().body();
     }
 
     /**
@@ -208,7 +207,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
+        return ServiceCall.fromResponse(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
     }
 
     /**
@@ -221,7 +220,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramExistingKeyWithServiceResponseAsync(userAgent).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -251,7 +250,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -262,7 +261,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      */
     public void responseExistingKey() {
-        responseExistingKeyWithServiceResponseAsync().toBlocking().single().getBody();
+        responseExistingKeyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -272,7 +271,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -284,7 +283,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseExistingKeyWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -310,7 +309,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseExistingKeyHeaders.class);
@@ -322,7 +321,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      */
     public void paramProtectedKey(String contentType) {
-        paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().getBody();
+        paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().body();
     }
 
     /**
@@ -333,7 +332,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
+        return ServiceCall.fromResponse(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
     }
 
     /**
@@ -346,7 +345,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramProtectedKeyWithServiceResponseAsync(contentType).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -376,7 +375,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -387,7 +386,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      */
     public void responseProtectedKey() {
-        responseProtectedKeyWithServiceResponseAsync().toBlocking().single().getBody();
+        responseProtectedKeyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -397,7 +396,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -409,7 +408,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseProtectedKeyWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -435,7 +434,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseProtectedKeyHeaders.class);
@@ -448,7 +447,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 1 or -2
      */
     public void paramInteger(String scenario, int value) {
-        paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -460,7 +459,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -474,7 +473,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramIntegerWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -505,7 +504,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -517,7 +516,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseInteger(String scenario) {
-        responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -528,7 +527,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -541,7 +540,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseIntegerWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -571,7 +570,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseIntegerHeaders.class);
@@ -584,7 +583,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 105 or -2
      */
     public void paramLong(String scenario, long value) {
-        paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -596,7 +595,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -610,7 +609,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramLongWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -641,7 +640,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -653,7 +652,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseLong(String scenario) {
-        responseLongWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseLongWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -664,7 +663,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseLongWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseLongWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -677,7 +676,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseLongWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -707,7 +706,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseLongHeaders.class);
@@ -720,7 +719,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 0.07 or -3.0
      */
     public void paramFloat(String scenario, double value) {
-        paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -732,7 +731,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -746,7 +745,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramFloatWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -777,7 +776,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -789,7 +788,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseFloat(String scenario) {
-        responseFloatWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseFloatWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -800,7 +799,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -813,7 +812,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseFloatWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -843,7 +842,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseFloatHeaders.class);
@@ -856,7 +855,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values 7e120 or -3.0
      */
     public void paramDouble(String scenario, double value) {
-        paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -868,7 +867,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -882,7 +881,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDoubleWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -913,7 +912,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -925,7 +924,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      */
     public void responseDouble(String scenario) {
-        responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -936,7 +935,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -949,7 +948,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDoubleWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -979,7 +978,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDoubleHeaders.class);
@@ -992,7 +991,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values true or false
      */
     public void paramBool(String scenario, boolean value) {
-        paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1004,7 +1003,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1018,7 +1017,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramBoolWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1049,7 +1048,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1061,7 +1060,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      */
     public void responseBool(String scenario) {
-        responseBoolWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseBoolWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1072,7 +1071,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1085,7 +1084,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseBoolWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1115,7 +1114,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseBoolHeaders.class);
@@ -1127,7 +1126,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void paramString(String scenario) {
-        paramStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        paramStringWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1138,7 +1137,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramStringWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromResponse(paramStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1151,7 +1150,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramStringWithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1188,7 +1187,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      */
     public void paramString(String scenario, String value) {
-        paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1200,7 +1199,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1214,7 +1213,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramStringWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1245,7 +1244,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1257,7 +1256,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void responseString(String scenario) {
-        responseStringWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseStringWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1268,7 +1267,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseStringWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1281,7 +1280,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseStringWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1311,7 +1310,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseStringHeaders.class);
@@ -1324,7 +1323,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      */
     public void paramDate(String scenario, LocalDate value) {
-        paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1336,7 +1335,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1350,7 +1349,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDateWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1384,7 +1383,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1396,7 +1395,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void responseDate(String scenario) {
-        responseDateWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDateWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1407,7 +1406,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDateWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDateWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1420,7 +1419,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDateWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1450,7 +1449,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDateHeaders.class);
@@ -1463,7 +1462,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      */
     public void paramDatetime(String scenario, DateTime value) {
-        paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1475,7 +1474,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1489,7 +1488,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDatetimeWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1523,7 +1522,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1535,7 +1534,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void responseDatetime(String scenario) {
-        responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1546,7 +1545,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1559,7 +1558,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDatetimeWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1589,7 +1588,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDatetimeHeaders.class);
@@ -1601,7 +1600,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void paramDatetimeRfc1123(String scenario) {
-        paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1612,7 +1611,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1625,7 +1624,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDatetimeRfc1123WithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1666,7 +1665,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) {
-        paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1678,7 +1677,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1692,7 +1691,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1727,7 +1726,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1739,7 +1738,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      */
     public void responseDatetimeRfc1123(String scenario) {
-        responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1750,7 +1749,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1763,7 +1762,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDatetimeRfc1123WithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1793,7 +1792,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDatetimeRfc1123Headers.class);
@@ -1806,7 +1805,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      */
     public void paramDuration(String scenario, Period value) {
-        paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1818,7 +1817,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1832,7 +1831,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramDurationWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1866,7 +1865,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1878,7 +1877,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      */
     public void responseDuration(String scenario) {
-        responseDurationWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseDurationWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -1889,7 +1888,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1902,7 +1901,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseDurationWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1932,7 +1931,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDurationHeaders.class);
@@ -1945,7 +1944,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      */
     public void paramByte(String scenario, byte[] value) {
-        paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
@@ -1957,7 +1956,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1971,7 +1970,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramByteWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2006,7 +2005,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2018,7 +2017,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      */
     public void responseByte(String scenario) {
-        responseByteWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseByteWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -2029,7 +2028,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseByteWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseByteWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2042,7 +2041,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseByteWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2072,7 +2071,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseByteHeaders.class);
@@ -2084,7 +2083,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void paramEnum(String scenario) {
-        paramEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        paramEnumWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -2095,7 +2094,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromResponse(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2108,7 +2107,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return paramEnumWithServiceResponseAsync(scenario).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2142,36 +2141,36 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
+     * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      */
     public void paramEnum(String scenario, GreyscaleColors value) {
-        paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().getBody();
+        paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().body();
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
+     * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
+        return ServiceCall.fromResponse(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
+     * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
         return paramEnumWithServiceResponseAsync(scenario, value).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2180,7 +2179,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
+     * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario, GreyscaleColors value) {
@@ -2202,7 +2201,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> paramEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2214,7 +2213,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      */
     public void responseEnum(String scenario) {
-        responseEnumWithServiceResponseAsync(scenario).toBlocking().single().getBody();
+        responseEnumWithServiceResponseAsync(scenario).toBlocking().single().body();
     }
 
     /**
@@ -2225,7 +2224,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
+        return ServiceCall.fromHeaderResponse(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2238,7 +2237,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return responseEnumWithServiceResponseAsync(scenario).map(new Func1<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2268,7 +2267,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseEnumHeaders.class);
@@ -2279,7 +2278,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      *
      */
     public void customRequestId() {
-        customRequestIdWithServiceResponseAsync().toBlocking().single().getBody();
+        customRequestIdWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2289,7 +2288,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(customRequestIdWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(customRequestIdWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2301,7 +2300,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
         return customRequestIdWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2327,7 +2326,7 @@ public final class HeadersImpl implements fixtures.header.Headers {
     }
 
     private ServiceResponse<Void> customRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

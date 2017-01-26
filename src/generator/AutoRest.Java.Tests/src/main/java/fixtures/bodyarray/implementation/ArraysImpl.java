@@ -18,7 +18,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
@@ -43,7 +42,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Arrays.
  */
-public final class ArraysImpl implements Arrays {
+public class ArraysImpl implements Arrays {
     /** The Retrofit service to perform REST calls. */
     private ArraysService service;
     /** The service client containing this operation class. */
@@ -65,263 +64,263 @@ public final class ArraysImpl implements Arrays {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArraysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getNull" })
         @GET("array/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getInvalid" })
         @GET("array/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getEmpty" })
         @GET("array/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putEmpty" })
         @PUT("array/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body List<String> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanTfft" })
         @GET("array/prim/boolean/tfft")
         Observable<Response<ResponseBody>> getBooleanTfft();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putBooleanTfft" })
         @PUT("array/prim/boolean/tfft")
         Observable<Response<ResponseBody>> putBooleanTfft(@Body List<Boolean> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidNull" })
         @GET("array/prim/boolean/true.null.false")
         Observable<Response<ResponseBody>> getBooleanInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBooleanInvalidString" })
         @GET("array/prim/boolean/true.boolean.false")
         Observable<Response<ResponseBody>> getBooleanInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntegerValid" })
         @GET("array/prim/integer/1.-1.3.300")
         Observable<Response<ResponseBody>> getIntegerValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putIntegerValid" })
         @PUT("array/prim/integer/1.-1.3.300")
         Observable<Response<ResponseBody>> putIntegerValid(@Body List<Integer> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidNull" })
         @GET("array/prim/integer/1.null.zero")
         Observable<Response<ResponseBody>> getIntInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getIntInvalidString" })
         @GET("array/prim/integer/1.integer.0")
         Observable<Response<ResponseBody>> getIntInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongValid" })
         @GET("array/prim/long/1.-1.3.300")
         Observable<Response<ResponseBody>> getLongValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putLongValid" })
         @PUT("array/prim/long/1.-1.3.300")
         Observable<Response<ResponseBody>> putLongValid(@Body List<Long> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidNull" })
         @GET("array/prim/long/1.null.zero")
         Observable<Response<ResponseBody>> getLongInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getLongInvalidString" })
         @GET("array/prim/long/1.integer.0")
         Observable<Response<ResponseBody>> getLongInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatValid" })
         @GET("array/prim/float/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> getFloatValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putFloatValid" })
         @PUT("array/prim/float/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> putFloatValid(@Body List<Double> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidNull" })
         @GET("array/prim/float/0.0-null-1.2e20")
         Observable<Response<ResponseBody>> getFloatInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getFloatInvalidString" })
         @GET("array/prim/float/1.number.0")
         Observable<Response<ResponseBody>> getFloatInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleValid" })
         @GET("array/prim/double/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> getDoubleValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDoubleValid" })
         @PUT("array/prim/double/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> putDoubleValid(@Body List<Double> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidNull" })
         @GET("array/prim/double/0.0-null-1.2e20")
         Observable<Response<ResponseBody>> getDoubleInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDoubleInvalidString" })
         @GET("array/prim/double/1.number.0")
         Observable<Response<ResponseBody>> getDoubleInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringValid" })
         @GET("array/prim/string/foo1.foo2.foo3")
         Observable<Response<ResponseBody>> getStringValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putStringValid" })
         @PUT("array/prim/string/foo1.foo2.foo3")
         Observable<Response<ResponseBody>> putStringValid(@Body List<String> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithNull" })
         @GET("array/prim/string/foo.null.foo2")
         Observable<Response<ResponseBody>> getStringWithNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getStringWithInvalid" })
         @GET("array/prim/string/foo.123.foo2")
         Observable<Response<ResponseBody>> getStringWithInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidValid" })
         @GET("array/prim/uuid/valid")
         Observable<Response<ResponseBody>> getUuidValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putUuidValid" })
         @PUT("array/prim/uuid/valid")
         Observable<Response<ResponseBody>> putUuidValid(@Body List<UUID> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getUuidInvalidChars" })
         @GET("array/prim/uuid/invalidchars")
         Observable<Response<ResponseBody>> getUuidInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateValid" })
         @GET("array/prim/date/valid")
         Observable<Response<ResponseBody>> getDateValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateValid" })
         @PUT("array/prim/date/valid")
         Observable<Response<ResponseBody>> putDateValid(@Body List<LocalDate> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidNull" })
         @GET("array/prim/date/invalidnull")
         Observable<Response<ResponseBody>> getDateInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateInvalidChars" })
         @GET("array/prim/date/invalidchars")
         Observable<Response<ResponseBody>> getDateInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeValid" })
         @GET("array/prim/date-time/valid")
         Observable<Response<ResponseBody>> getDateTimeValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeValid" })
         @PUT("array/prim/date-time/valid")
         Observable<Response<ResponseBody>> putDateTimeValid(@Body List<DateTime> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidNull" })
         @GET("array/prim/date-time/invalidnull")
         Observable<Response<ResponseBody>> getDateTimeInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeInvalidChars" })
         @GET("array/prim/date-time/invalidchars")
         Observable<Response<ResponseBody>> getDateTimeInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDateTimeRfc1123Valid" })
         @GET("array/prim/date-time-rfc1123/valid")
         Observable<Response<ResponseBody>> getDateTimeRfc1123Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDateTimeRfc1123Valid" })
         @PUT("array/prim/date-time-rfc1123/valid")
         Observable<Response<ResponseBody>> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDurationValid" })
         @GET("array/prim/duration/valid")
         Observable<Response<ResponseBody>> getDurationValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDurationValid" })
         @PUT("array/prim/duration/valid")
         Observable<Response<ResponseBody>> putDurationValid(@Body List<Period> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getByteValid" })
         @GET("array/prim/byte/valid")
         Observable<Response<ResponseBody>> getByteValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putByteValid" })
         @PUT("array/prim/byte/valid")
         Observable<Response<ResponseBody>> putByteValid(@Body List<byte[]> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getByteInvalidNull" })
         @GET("array/prim/byte/invalidnull")
         Observable<Response<ResponseBody>> getByteInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getBase64Url" })
         @GET("array/prim/base64url/valid")
         Observable<Response<ResponseBody>> getBase64Url();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexNull" })
         @GET("array/complex/null")
         Observable<Response<ResponseBody>> getComplexNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexEmpty" })
         @GET("array/complex/empty")
         Observable<Response<ResponseBody>> getComplexEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemNull" })
         @GET("array/complex/itemnull")
         Observable<Response<ResponseBody>> getComplexItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexItemEmpty" })
         @GET("array/complex/itemempty")
         Observable<Response<ResponseBody>> getComplexItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getComplexValid" })
         @GET("array/complex/valid")
         Observable<Response<ResponseBody>> getComplexValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putComplexValid" })
         @PUT("array/complex/valid")
         Observable<Response<ResponseBody>> putComplexValid(@Body List<Product> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayNull" })
         @GET("array/array/null")
         Observable<Response<ResponseBody>> getArrayNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayEmpty" })
         @GET("array/array/empty")
         Observable<Response<ResponseBody>> getArrayEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemNull" })
         @GET("array/array/itemnull")
         Observable<Response<ResponseBody>> getArrayItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayItemEmpty" })
         @GET("array/array/itemempty")
         Observable<Response<ResponseBody>> getArrayItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getArrayValid" })
         @GET("array/array/valid")
         Observable<Response<ResponseBody>> getArrayValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putArrayValid" })
         @PUT("array/array/valid")
         Observable<Response<ResponseBody>> putArrayValid(@Body List<List<String>> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryNull" })
         @GET("array/dictionary/null")
         Observable<Response<ResponseBody>> getDictionaryNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryEmpty" })
         @GET("array/dictionary/empty")
         Observable<Response<ResponseBody>> getDictionaryEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemNull" })
         @GET("array/dictionary/itemnull")
         Observable<Response<ResponseBody>> getDictionaryItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryItemEmpty" })
         @GET("array/dictionary/itemempty")
         Observable<Response<ResponseBody>> getDictionaryItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays getDictionaryValid" })
         @GET("array/dictionary/valid")
         Observable<Response<ResponseBody>> getDictionaryValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyarray.Arrays putDictionaryValid" })
         @PUT("array/dictionary/valid")
         Observable<Response<ResponseBody>> putDictionaryValid(@Body List<Map<String, String>> arrayBody);
 
@@ -333,7 +332,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -343,7 +342,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -355,7 +354,7 @@ public final class ArraysImpl implements Arrays {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -381,7 +380,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -393,7 +392,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -403,7 +402,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -415,7 +414,7 @@ public final class ArraysImpl implements Arrays {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -441,7 +440,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -453,7 +452,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -463,7 +462,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -475,7 +474,7 @@ public final class ArraysImpl implements Arrays {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -501,7 +500,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -513,7 +512,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value
      */
     public void putEmpty(List<String> arrayBody) {
-        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -524,7 +523,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -537,7 +536,7 @@ public final class ArraysImpl implements Arrays {
         return putEmptyWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -568,7 +567,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -580,7 +579,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanTfft() {
-        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -590,7 +589,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -602,7 +601,7 @@ public final class ArraysImpl implements Arrays {
         return getBooleanTfftWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
             @Override
             public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -628,7 +627,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -640,7 +639,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Boolean&gt; value
      */
     public void putBooleanTfft(List<Boolean> arrayBody) {
-        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -651,7 +650,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -664,7 +663,7 @@ public final class ArraysImpl implements Arrays {
         return putBooleanTfftWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -695,7 +694,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -707,7 +706,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -717,7 +716,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -729,7 +728,7 @@ public final class ArraysImpl implements Arrays {
         return getBooleanInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
             @Override
             public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -755,7 +754,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -767,7 +766,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -777,7 +776,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -789,7 +788,7 @@ public final class ArraysImpl implements Arrays {
         return getBooleanInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Boolean>>, List<Boolean>>() {
             @Override
             public List<Boolean> call(ServiceResponse<List<Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -815,7 +814,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Boolean>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -827,7 +826,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntegerValid() {
-        return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntegerValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -837,7 +836,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntegerValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntegerValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -849,7 +848,7 @@ public final class ArraysImpl implements Arrays {
         return getIntegerValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -875,7 +874,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -887,7 +886,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Integer&gt; value
      */
     public void putIntegerValid(List<Integer> arrayBody) {
-        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -898,7 +897,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -911,7 +910,7 @@ public final class ArraysImpl implements Arrays {
         return putIntegerValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -942,7 +941,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -954,7 +953,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidNull() {
-        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -964,7 +963,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -976,7 +975,7 @@ public final class ArraysImpl implements Arrays {
         return getIntInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1002,7 +1001,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1014,7 +1013,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidString() {
-        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1024,7 +1023,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1036,7 +1035,7 @@ public final class ArraysImpl implements Arrays {
         return getIntInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Integer>>, List<Integer>>() {
             @Override
             public List<Integer> call(ServiceResponse<List<Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1062,7 +1061,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1074,7 +1073,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongValid() {
-        return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1084,7 +1083,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1096,7 +1095,7 @@ public final class ArraysImpl implements Arrays {
         return getLongValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
             @Override
             public List<Long> call(ServiceResponse<List<Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1122,7 +1121,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Long>> getLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Long>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1134,7 +1133,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Long&gt; value
      */
     public void putLongValid(List<Long> arrayBody) {
-        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1145,7 +1144,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1158,7 +1157,7 @@ public final class ArraysImpl implements Arrays {
         return putLongValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1189,7 +1188,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1201,7 +1200,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidNull() {
-        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1211,7 +1210,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1223,7 +1222,7 @@ public final class ArraysImpl implements Arrays {
         return getLongInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
             @Override
             public List<Long> call(ServiceResponse<List<Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1249,7 +1248,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Long>> getLongInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Long>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1261,7 +1260,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidString() {
-        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1271,7 +1270,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1283,7 +1282,7 @@ public final class ArraysImpl implements Arrays {
         return getLongInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Long>>, List<Long>>() {
             @Override
             public List<Long> call(ServiceResponse<List<Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1309,7 +1308,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Long>> getLongInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Long>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Long>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1321,7 +1320,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatValid() {
-        return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1331,7 +1330,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1343,7 +1342,7 @@ public final class ArraysImpl implements Arrays {
         return getFloatValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1369,7 +1368,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1381,7 +1380,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      */
     public void putFloatValid(List<Double> arrayBody) {
-        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1392,7 +1391,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1405,7 +1404,7 @@ public final class ArraysImpl implements Arrays {
         return putFloatValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1436,7 +1435,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1448,7 +1447,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidNull() {
-        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1458,7 +1457,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1470,7 +1469,7 @@ public final class ArraysImpl implements Arrays {
         return getFloatInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1496,7 +1495,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1508,7 +1507,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidString() {
-        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1518,7 +1517,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1530,7 +1529,7 @@ public final class ArraysImpl implements Arrays {
         return getFloatInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1556,7 +1555,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1568,7 +1567,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleValid() {
-        return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1578,7 +1577,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1590,7 +1589,7 @@ public final class ArraysImpl implements Arrays {
         return getDoubleValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1616,7 +1615,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1628,7 +1627,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Double&gt; value
      */
     public void putDoubleValid(List<Double> arrayBody) {
-        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1639,7 +1638,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1652,7 +1651,7 @@ public final class ArraysImpl implements Arrays {
         return putDoubleValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1683,7 +1682,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1695,7 +1694,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1705,7 +1704,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1717,7 +1716,7 @@ public final class ArraysImpl implements Arrays {
         return getDoubleInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1743,7 +1742,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1755,7 +1754,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1765,7 +1764,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1777,7 +1776,7 @@ public final class ArraysImpl implements Arrays {
         return getDoubleInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Double>>, List<Double>>() {
             @Override
             public List<Double> call(ServiceResponse<List<Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1803,7 +1802,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1815,7 +1814,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringValid() {
-        return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1825,7 +1824,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1837,7 +1836,7 @@ public final class ArraysImpl implements Arrays {
         return getStringValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
             @Override
             public List<String> call(ServiceResponse<List<String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1863,7 +1862,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1875,7 +1874,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;String&gt; value
      */
     public void putStringValid(List<String> arrayBody) {
-        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1886,7 +1885,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1899,7 +1898,7 @@ public final class ArraysImpl implements Arrays {
         return putStringValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1930,7 +1929,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1942,7 +1941,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithNull() {
-        return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1952,7 +1951,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringWithNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1964,7 +1963,7 @@ public final class ArraysImpl implements Arrays {
         return getStringWithNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
             @Override
             public List<String> call(ServiceResponse<List<String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1990,7 +1989,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getStringWithNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2002,7 +2001,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithInvalid() {
-        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2012,7 +2011,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.create(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2024,7 +2023,7 @@ public final class ArraysImpl implements Arrays {
         return getStringWithInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<String>>, List<String>>() {
             @Override
             public List<String> call(ServiceResponse<List<String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2050,7 +2049,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2062,7 +2061,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidValid() {
-        return getUuidValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUuidValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2072,7 +2071,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
-        return ServiceCall.create(getUuidValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUuidValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2084,7 +2083,7 @@ public final class ArraysImpl implements Arrays {
         return getUuidValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UUID>>, List<UUID>>() {
             @Override
             public List<UUID> call(ServiceResponse<List<UUID>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2110,7 +2109,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<UUID>> getUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<UUID>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2122,7 +2121,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;UUID&gt; value
      */
     public void putUuidValid(List<UUID> arrayBody) {
-        putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2133,7 +2132,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUuidValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putUuidValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2146,7 +2145,7 @@ public final class ArraysImpl implements Arrays {
         return putUuidValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2177,7 +2176,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putUuidValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2189,7 +2188,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidInvalidChars() {
-        return getUuidInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUuidInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2199,7 +2198,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
-        return ServiceCall.create(getUuidInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUuidInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2211,7 +2210,7 @@ public final class ArraysImpl implements Arrays {
         return getUuidInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<UUID>>, List<UUID>>() {
             @Override
             public List<UUID> call(ServiceResponse<List<UUID>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2237,7 +2236,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<UUID>> getUuidInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<UUID>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<UUID>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<UUID>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2249,7 +2248,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateValid() {
-        return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2259,7 +2258,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2271,7 +2270,7 @@ public final class ArraysImpl implements Arrays {
         return getDateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
             @Override
             public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2297,7 +2296,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<LocalDate>> getDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2309,7 +2308,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;LocalDate&gt; value
      */
     public void putDateValid(List<LocalDate> arrayBody) {
-        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2320,7 +2319,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2333,7 +2332,7 @@ public final class ArraysImpl implements Arrays {
         return putDateValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2364,7 +2363,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2376,7 +2375,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2386,7 +2385,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2398,7 +2397,7 @@ public final class ArraysImpl implements Arrays {
         return getDateInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
             @Override
             public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2424,7 +2423,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2436,7 +2435,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2446,7 +2445,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2458,7 +2457,7 @@ public final class ArraysImpl implements Arrays {
         return getDateInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<LocalDate>>, List<LocalDate>>() {
             @Override
             public List<LocalDate> call(ServiceResponse<List<LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2484,7 +2483,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<LocalDate>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2496,7 +2495,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeValid() {
-        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2506,7 +2505,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2518,7 +2517,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2544,7 +2543,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2556,7 +2555,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTime&gt; value
      */
     public void putDateTimeValid(List<DateTime> arrayBody) {
-        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2567,7 +2566,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2580,7 +2579,7 @@ public final class ArraysImpl implements Arrays {
         return putDateTimeValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2611,7 +2610,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2623,7 +2622,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2633,7 +2632,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2645,7 +2644,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2671,7 +2670,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2683,7 +2682,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2693,7 +2692,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2705,7 +2704,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2731,7 +2730,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTime>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2743,7 +2742,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2753,7 +2752,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2765,7 +2764,7 @@ public final class ArraysImpl implements Arrays {
         return getDateTimeRfc1123ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<DateTime>>, List<DateTime>>() {
             @Override
             public List<DateTime> call(ServiceResponse<List<DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2783,15 +2782,15 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
                         List<DateTime> body = null;
-                        if (result.getBody() != null) {
+                        if (result.body() != null) {
                             body = new ArrayList<DateTime>();
-                            for (DateTimeRfc1123 item : result.getBody()) {
+                            for (DateTimeRfc1123 item : result.body()) {
                                 DateTime value;
-                                value = item.getDateTime();
+                                value = item.dateTime();
                                 body.add(value);
                             }
                         }
-                        ServiceResponse<List<DateTime>> clientResponse = new ServiceResponse<List<DateTime>>(body, result.getResponse());
+                        ServiceResponse<List<DateTime>> clientResponse = new ServiceResponse<List<DateTime>>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2801,7 +2800,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<DateTimeRfc1123>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<DateTimeRfc1123>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<DateTimeRfc1123>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2813,7 +2812,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      */
     public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
-        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2824,7 +2823,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2837,7 +2836,7 @@ public final class ArraysImpl implements Arrays {
         return putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2873,7 +2872,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2885,7 +2884,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Period&gt; object if successful.
      */
     public List<Period> getDurationValid() {
-        return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDurationValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2895,7 +2894,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
-        return ServiceCall.create(getDurationValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDurationValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2907,7 +2906,7 @@ public final class ArraysImpl implements Arrays {
         return getDurationValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Period>>, List<Period>>() {
             @Override
             public List<Period> call(ServiceResponse<List<Period>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2933,7 +2932,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Period>> getDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Period>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Period>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Period>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2945,7 +2944,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Period&gt; value
      */
     public void putDurationValid(List<Period> arrayBody) {
-        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2956,7 +2955,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2969,7 +2968,7 @@ public final class ArraysImpl implements Arrays {
         return putDurationValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3000,7 +2999,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3012,7 +3011,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteValid() {
-        return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3022,7 +3021,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3034,7 +3033,7 @@ public final class ArraysImpl implements Arrays {
         return getByteValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
             @Override
             public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3060,7 +3059,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<byte[]>> getByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<byte[]>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3072,7 +3071,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;byte[]&gt; value
      */
     public void putByteValid(List<byte[]> arrayBody) {
-        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3083,7 +3082,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3096,7 +3095,7 @@ public final class ArraysImpl implements Arrays {
         return putByteValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3127,7 +3126,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3139,7 +3138,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteInvalidNull() {
-        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3149,7 +3148,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3161,7 +3160,7 @@ public final class ArraysImpl implements Arrays {
         return getByteInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
             @Override
             public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3187,7 +3186,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<byte[]>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<byte[]>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3199,7 +3198,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getBase64Url() {
-        return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBase64UrlWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3209,7 +3208,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
-        return ServiceCall.create(getBase64UrlWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBase64UrlWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3221,7 +3220,7 @@ public final class ArraysImpl implements Arrays {
         return getBase64UrlWithServiceResponseAsync().map(new Func1<ServiceResponse<List<byte[]>>, List<byte[]>>() {
             @Override
             public List<byte[]> call(ServiceResponse<List<byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3239,15 +3238,15 @@ public final class ArraysImpl implements Arrays {
                     try {
                         ServiceResponse<List<Base64Url>> result = getBase64UrlDelegate(response);
                         List<byte[]> body = null;
-                        if (result.getBody() != null) {
+                        if (result.body() != null) {
                             body = new ArrayList<byte[]>();
-                            for (Base64Url item : result.getBody()) {
+                            for (Base64Url item : result.body()) {
                                 byte[] value;
-                                value = item.getDecodedBytes();
+                                value = item.decodedBytes();
                                 body.add(value);
                             }
                         }
-                        ServiceResponse<List<byte[]>> clientResponse = new ServiceResponse<List<byte[]>>(body, result.getResponse());
+                        ServiceResponse<List<byte[]>> clientResponse = new ServiceResponse<List<byte[]>>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3257,7 +3256,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Base64Url>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Base64Url>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Base64Url>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Base64Url>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3269,7 +3268,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexNull() {
-        return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3279,7 +3278,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3291,7 +3290,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3317,7 +3316,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Product>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3329,7 +3328,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexEmpty() {
-        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3339,7 +3338,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3351,7 +3350,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3377,7 +3376,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Product>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3389,7 +3388,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemNull() {
-        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3399,7 +3398,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3411,7 +3410,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3437,7 +3436,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Product>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3449,7 +3448,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemEmpty() {
-        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3459,7 +3458,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3471,7 +3470,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3497,7 +3496,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Product>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3509,7 +3508,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexValid() {
-        return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3519,7 +3518,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
-        return ServiceCall.create(getComplexValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3531,7 +3530,7 @@ public final class ArraysImpl implements Arrays {
         return getComplexValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Product>>, List<Product>>() {
             @Override
             public List<Product> call(ServiceResponse<List<Product>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3557,7 +3556,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Product>> getComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Product>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Product>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Product>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3569,7 +3568,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Product&gt; value
      */
     public void putComplexValid(List<Product> arrayBody) {
-        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3580,7 +3579,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3593,7 +3592,7 @@ public final class ArraysImpl implements Arrays {
         return putComplexValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3624,7 +3623,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3636,7 +3635,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayNull() {
-        return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3646,7 +3645,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3658,7 +3657,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3684,7 +3683,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3696,7 +3695,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayEmpty() {
-        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3706,7 +3705,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3718,7 +3717,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3744,7 +3743,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3756,7 +3755,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemNull() {
-        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3766,7 +3765,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3778,7 +3777,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3804,7 +3803,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3816,7 +3815,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3826,7 +3825,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3838,7 +3837,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3864,7 +3863,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3876,7 +3875,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayValid() {
-        return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3886,7 +3885,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3898,7 +3897,7 @@ public final class ArraysImpl implements Arrays {
         return getArrayValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<List<String>>>, List<List<String>>>() {
             @Override
             public List<List<String>> call(ServiceResponse<List<List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3924,7 +3923,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<List<String>>> getArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3936,7 +3935,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      */
     public void putArrayValid(List<List<String>> arrayBody) {
-        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3947,7 +3946,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3960,7 +3959,7 @@ public final class ArraysImpl implements Arrays {
         return putArrayValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3991,7 +3990,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4003,7 +4002,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4013,7 +4012,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4025,7 +4024,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4051,7 +4050,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4063,7 +4062,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4073,7 +4072,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4085,7 +4084,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4111,7 +4110,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4123,7 +4122,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4133,7 +4132,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4145,7 +4144,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4171,7 +4170,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4183,7 +4182,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4193,7 +4192,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4205,7 +4204,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4231,7 +4230,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4243,7 +4242,7 @@ public final class ArraysImpl implements Arrays {
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4253,7 +4252,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4265,7 +4264,7 @@ public final class ArraysImpl implements Arrays {
         return getDictionaryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Map<String, String>>>, List<Map<String, String>>>() {
             @Override
             public List<Map<String, String>> call(ServiceResponse<List<Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4291,7 +4290,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<List<Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<List<Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<List<Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4303,7 +4302,7 @@ public final class ArraysImpl implements Arrays {
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
-        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -4314,7 +4313,7 @@ public final class ArraysImpl implements Arrays {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4327,7 +4326,7 @@ public final class ArraysImpl implements Arrays {
         return putDictionaryValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4358,7 +4357,7 @@ public final class ArraysImpl implements Arrays {
     }
 
     private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

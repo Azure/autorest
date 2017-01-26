@@ -33,6 +33,7 @@
     <file src="binaries/net45/AutoRest.Python.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Ruby.Azure.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Ruby.dll" target="tools" />
+    <file src="binaries/net45/AutoRest.Go.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Swagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
     <file src="binaries/net45/YamlDotNet.dll" target="tools" />

@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The DatetimeWrapper model.
@@ -19,11 +20,13 @@ public class DatetimeWrapper {
     /**
      * The field property.
      */
+    @JsonProperty(value = "field")
     private DateTime field;
 
     /**
      * The now property.
      */
+    @JsonProperty(value = "now")
     private DateTime now;
 
     /**

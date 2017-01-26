@@ -12,7 +12,6 @@ package fixtures.subscriptionidapiversion.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Groups.
  */
-public final class GroupsInner {
+public class GroupsInner {
     /** The Retrofit service to perform REST calls. */
     private GroupsService service;
     /** The service client containing this operation class. */
@@ -54,7 +53,7 @@ public final class GroupsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface GroupsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.subscriptionidapiversion.Groups getSampleResourceGroup" })
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         Observable<Response<ResponseBody>> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -67,7 +66,7 @@ public final class GroupsInner {
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
-        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().getBody();
+        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().body();
     }
 
     /**
@@ -78,7 +77,7 @@ public final class GroupsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
-        return ServiceCall.create(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+        return ServiceCall.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**
@@ -91,7 +90,7 @@ public final class GroupsInner {
         return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroupInner>, SampleResourceGroupInner>() {
             @Override
             public SampleResourceGroupInner call(ServiceResponse<SampleResourceGroupInner> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -127,7 +126,7 @@ public final class GroupsInner {
     }
 
     private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroupInner, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<SampleResourceGroupInner, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<SampleResourceGroupInner>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

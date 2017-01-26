@@ -10,6 +10,7 @@
 
 package fixtures.paging;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The OperationResult model.
@@ -20,6 +21,7 @@ public class OperationResult {
      * 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
      * 'Updated', 'Deleting', 'Deleted', 'OK'.
      */
+    @JsonProperty(value = "status")
     private String status;
 
     /**

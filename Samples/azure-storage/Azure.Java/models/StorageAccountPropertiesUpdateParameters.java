@@ -3,6 +3,7 @@
 
 package petstore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The StorageAccountPropertiesUpdateParameters model.
@@ -15,14 +16,16 @@ public class StorageAccountPropertiesUpdateParameters {
      * include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      * 'Standard_RAGRS', 'Premium_LRS'.
      */
+    @JsonProperty(value = "accountType")
     private AccountType accountType;
 
     /**
      * User domain assigned to the storage account. Name is the CNAME source.
-     * Only one custom domain is supported per storage account at this time.
-     * To clear the existing custom domain, use an empty string for the
-     * custom domain name property.
+     * Only one custom domain is supported per storage account at this time. To
+     * clear the existing custom domain, use an empty string for the custom
+     * domain name property.
      */
+    @JsonProperty(value = "customDomain")
     private CustomDomain customDomain;
 
     /**

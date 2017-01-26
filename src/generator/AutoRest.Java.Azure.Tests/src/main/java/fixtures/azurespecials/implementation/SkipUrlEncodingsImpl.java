@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.SkipUrlEncodings;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -33,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in SkipUrlEncodings.
  */
-public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
+public class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     /** The Retrofit service to perform REST calls. */
     private SkipUrlEncodingsService service;
     /** The service client containing this operation class. */
@@ -55,31 +54,31 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * used by Retrofit to perform actually REST calls.
      */
     interface SkipUrlEncodingsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodPathValid" })
         @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         Observable<Response<ResponseBody>> getMethodPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathPathValid" })
         @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
         Observable<Response<ResponseBody>> getPathPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerPathValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
         Observable<Response<ResponseBody>> getSwaggerPathValid(@Path(value = "unencodedPathParam", encoded = true) String unencodedPathParam, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryValid" })
         @GET("azurespecials/skipUrlEncoding/method/query/valid")
         Observable<Response<ResponseBody>> getMethodQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getMethodQueryNull" })
         @GET("azurespecials/skipUrlEncoding/method/query/null")
         Observable<Response<ResponseBody>> getMethodQueryNull(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getPathQueryValid" })
         @GET("azurespecials/skipUrlEncoding/path/query/valid")
         Observable<Response<ResponseBody>> getPathQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SkipUrlEncodings getSwaggerQueryValid" })
         @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
         Observable<Response<ResponseBody>> getSwaggerQueryValid(@Query(value = "q1", encoded = true) String q1, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -91,7 +90,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      */
     public void getMethodPathValid(String unencodedPathParam) {
-        getMethodPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
+        getMethodPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().body();
     }
 
     /**
@@ -102,7 +101,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
+        return ServiceCall.fromResponse(getMethodPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
     }
 
     /**
@@ -115,7 +114,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getMethodPathValidWithServiceResponseAsync(unencodedPathParam).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -145,7 +144,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -157,7 +156,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      */
     public void getPathPathValid(String unencodedPathParam) {
-        getPathPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().getBody();
+        getPathPathValidWithServiceResponseAsync(unencodedPathParam).toBlocking().single().body();
     }
 
     /**
@@ -168,7 +167,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
+        return ServiceCall.fromResponse(getPathPathValidWithServiceResponseAsync(unencodedPathParam), serviceCallback);
     }
 
     /**
@@ -181,7 +180,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getPathPathValidWithServiceResponseAsync(unencodedPathParam).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -211,7 +210,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -222,7 +221,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      */
     public void getSwaggerPathValid() {
-        getSwaggerPathValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerPathValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -232,7 +231,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerPathValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerPathValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -244,7 +243,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getSwaggerPathValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -271,7 +270,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -283,7 +282,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      */
     public void getMethodQueryValid(String q1) {
-        getMethodQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
+        getMethodQueryValidWithServiceResponseAsync(q1).toBlocking().single().body();
     }
 
     /**
@@ -294,7 +293,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryValidWithServiceResponseAsync(q1), serviceCallback);
+        return ServiceCall.fromResponse(getMethodQueryValidWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -307,7 +306,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getMethodQueryValidWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -337,7 +336,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -348,7 +347,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      */
     public void getMethodQueryNull() {
-        getMethodQueryNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodQueryNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -358,7 +357,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodQueryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -370,7 +369,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getMethodQueryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -402,7 +401,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param q1 Unencoded query parameter with value null
      */
     public void getMethodQueryNull(String q1) {
-        getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().getBody();
+        getMethodQueryNullWithServiceResponseAsync(q1).toBlocking().single().body();
     }
 
     /**
@@ -413,7 +412,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodQueryNullWithServiceResponseAsync(q1), serviceCallback);
+        return ServiceCall.fromResponse(getMethodQueryNullWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -426,7 +425,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getMethodQueryNullWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -453,7 +452,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -465,7 +464,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      */
     public void getPathQueryValid(String q1) {
-        getPathQueryValidWithServiceResponseAsync(q1).toBlocking().single().getBody();
+        getPathQueryValidWithServiceResponseAsync(q1).toBlocking().single().body();
     }
 
     /**
@@ -476,7 +475,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathQueryValidWithServiceResponseAsync(q1), serviceCallback);
+        return ServiceCall.fromResponse(getPathQueryValidWithServiceResponseAsync(q1), serviceCallback);
     }
 
     /**
@@ -489,7 +488,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getPathQueryValidWithServiceResponseAsync(q1).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -519,7 +518,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -530,7 +529,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      *
      */
     public void getSwaggerQueryValid() {
-        getSwaggerQueryValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerQueryValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -540,7 +539,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerQueryValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerQueryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -552,7 +551,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
         return getSwaggerQueryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -579,7 +578,7 @@ public final class SkipUrlEncodingsImpl implements SkipUrlEncodings {
     }
 
     private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

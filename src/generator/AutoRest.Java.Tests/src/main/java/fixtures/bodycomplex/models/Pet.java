@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Pet model.
@@ -18,11 +19,13 @@ public class Pet {
     /**
      * The id property.
      */
+    @JsonProperty(value = "id")
     private Integer id;
 
     /**
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**

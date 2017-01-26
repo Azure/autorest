@@ -12,11 +12,19 @@ import petstore.models.Order;
 import petstore.models.Pet;
 import petstore.models.User;
 import rx.Observable;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for SwaggerPetstore class.
  */
 public interface SwaggerPetstore {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */
@@ -525,7 +533,7 @@ public interface SwaggerPetstore {
      * Deletes a pet.
      *
      * @param petId Pet id to delete
-     * @param apiKey 
+     * @param apiKey the String value
      */
     void deletePet(long petId, String apiKey);
 
@@ -533,7 +541,7 @@ public interface SwaggerPetstore {
      * Deletes a pet.
      *
      * @param petId Pet id to delete
-     * @param apiKey 
+     * @param apiKey the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
@@ -1076,7 +1084,7 @@ public interface SwaggerPetstore {
     /**
      * Get user by user name.
      *
-     * @param username The name that needs to be fetched. Use user1 for testing. 
+     * @param username The name that needs to be fetched. Use user1 for testing.
      * @return the User object if successful.
      */
     User getUserByName(String username);
@@ -1084,7 +1092,7 @@ public interface SwaggerPetstore {
     /**
      * Get user by user name.
      *
-     * @param username The name that needs to be fetched. Use user1 for testing. 
+     * @param username The name that needs to be fetched. Use user1 for testing.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */

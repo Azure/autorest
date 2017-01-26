@@ -13,13 +13,14 @@ package fixtures.bodyboolean.implementation;
 import fixtures.bodyboolean.AutoRestBoolTestService;
 import fixtures.bodyboolean.Bools;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestBoolTestService class.
  */
-public final class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRestBoolTestService {
+public class AutoRestBoolTestServiceImpl extends ServiceClient implements AutoRestBoolTestService {
 
     /**
      * The Bools object to access its operations.
@@ -71,6 +72,16 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
      */
     public AutoRestBoolTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestBoolTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestBoolTestServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

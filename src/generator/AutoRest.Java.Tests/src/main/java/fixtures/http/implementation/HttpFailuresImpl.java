@@ -13,11 +13,10 @@ package fixtures.http.implementation;
 import retrofit2.Retrofit;
 import fixtures.http.HttpFailures;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -31,7 +30,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpFailures.
  */
-public final class HttpFailuresImpl implements HttpFailures {
+public class HttpFailuresImpl implements HttpFailures {
     /** The Retrofit service to perform REST calls. */
     private HttpFailuresService service;
     /** The service client containing this operation class. */
@@ -53,15 +52,15 @@ public final class HttpFailuresImpl implements HttpFailures {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpFailuresService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getEmptyError" })
         @GET("http/failure/emptybody/error")
         Observable<Response<ResponseBody>> getEmptyError();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getNoModelError" })
         @GET("http/failure/nomodel/error")
         Observable<Response<ResponseBody>> getNoModelError();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpFailures getNoModelEmpty" })
         @GET("http/failure/nomodel/empty")
         Observable<Response<ResponseBody>> getNoModelEmpty();
 
@@ -73,7 +72,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getEmptyError() {
-        return getEmptyErrorWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyErrorWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -83,19 +82,19 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getEmptyErrorAsync() {
         return getEmptyErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -103,7 +102,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync() {
         return service.getEmptyError()
@@ -121,7 +120,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -133,7 +132,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelError() {
-        return getNoModelErrorWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNoModelErrorWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -143,19 +142,19 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getNoModelErrorAsync() {
         return getNoModelErrorWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -163,7 +162,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty error form server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync() {
         return service.getNoModelError()
@@ -180,8 +179,8 @@ public final class HttpFailuresImpl implements HttpFailures {
             });
     }
 
-    private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Boolean, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
@@ -192,7 +191,7 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the boolean object if successful.
      */
     public boolean getNoModelEmpty() {
-        return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNoModelEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -202,19 +201,19 @@ public final class HttpFailuresImpl implements HttpFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get empty response from server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<Boolean> getNoModelEmptyAsync() {
         return getNoModelEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -222,7 +221,7 @@ public final class HttpFailuresImpl implements HttpFailures {
     /**
      * Get empty response from server.
      *
-     * @return the observable to the boolean object
+     * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync() {
         return service.getNoModelEmpty()
@@ -239,8 +238,8 @@ public final class HttpFailuresImpl implements HttpFailures {
             });
     }
 
-    private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Boolean> getNoModelEmptyDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Boolean, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }

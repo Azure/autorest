@@ -13,7 +13,6 @@ package fixtures.lro.implementation;
 import retrofit2.Retrofit;
 import fixtures.lro.LRORetrys;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -43,7 +42,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LRORetrys.
  */
-public final class LRORetrysImpl implements LRORetrys {
+public class LRORetrysImpl implements LRORetrys {
     /** The Retrofit service to perform REST calls. */
     private LRORetrysService service;
     /** The service client containing this operation class. */
@@ -65,59 +64,59 @@ public final class LRORetrysImpl implements LRORetrys {
      * used by Retrofit to perform actually REST calls.
      */
     interface LRORetrysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys put201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         Observable<Response<ResponseBody>> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPut201CreatingSucceeded200" })
         @PUT("lro/retryerror/put/201/creating/succeeded/200")
         Observable<Response<ResponseBody>> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys putAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
         Observable<Response<ResponseBody>> putAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPutAsyncRelativeRetrySucceeded" })
         @PUT("lro/retryerror/putasync/retry/succeeded")
         Observable<Response<ResponseBody>> beginPutAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys deleteProvisioning202Accepted200Succeeded" })
         @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteProvisioning202Accepted200Succeeded" })
         @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys delete202Retry200" })
         @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDelete202Retry200" })
         @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDelete202Retry200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys deleteAsyncRelativeRetrySucceeded" })
         @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> deleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginDeleteAsyncRelativeRetrySucceeded" })
         @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> beginDeleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys post202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
         Observable<Response<ResponseBody>> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPost202Retry200" })
         @POST("lro/retryerror/post/202/retry/200")
         Observable<Response<ResponseBody>> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys postAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> postAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LRORetrys beginPostAsyncRelativeRetrySucceeded" })
         @POST("lro/retryerror/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> beginPostAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -126,10 +125,10 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -139,7 +138,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -151,7 +150,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -173,7 +172,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -184,7 +183,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -197,7 +196,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -220,7 +219,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -230,7 +229,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -242,7 +241,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -275,7 +274,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -286,7 +285,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -299,7 +298,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -327,7 +326,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponse<Product> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(201, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -337,10 +336,10 @@ public final class LRORetrysImpl implements LRORetrys {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded() {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -350,7 +349,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -362,7 +361,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -384,7 +383,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product putAsyncRelativeRetrySucceeded(Product product) {
-        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -395,7 +394,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -408,7 +407,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return putAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -431,7 +430,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded() {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -441,7 +440,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -453,7 +452,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -486,7 +485,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRelativeRetrySucceeded(Product product) {
-        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -497,7 +496,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -510,7 +509,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -538,7 +537,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> beginPutAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
@@ -550,7 +549,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product deleteProvisioning202Accepted200Succeeded() {
-        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -560,7 +559,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -572,7 +571,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return deleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -593,7 +592,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the Product object if successful.
      */
     public Product beginDeleteProvisioning202Accepted200Succeeded() {
-        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -603,7 +602,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -615,7 +614,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -641,7 +640,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> beginDeleteProvisioning202Accepted200SucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(202, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -653,7 +652,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void delete202Retry200() {
-        delete202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -663,7 +662,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(delete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -675,7 +674,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return delete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -695,7 +694,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void beginDelete202Retry200() {
-        beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -705,7 +704,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -717,7 +716,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginDelete202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -743,7 +742,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> beginDelete202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LRORetrysDelete202Retry200Headers.class);
@@ -754,7 +753,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void deleteAsyncRelativeRetrySucceeded() {
-        deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -764,7 +763,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(deleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -776,7 +775,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -796,7 +795,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
-        beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -806,7 +805,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -818,7 +817,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -844,7 +843,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> beginDeleteAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders.class);
@@ -855,7 +854,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void post202Retry200() {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -865,7 +864,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -877,7 +876,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -898,7 +897,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      */
     public void post202Retry200(Product product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -909,7 +908,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -922,7 +921,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -944,7 +943,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -954,7 +953,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -966,7 +965,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -998,7 +997,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1009,7 +1008,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1022,7 +1021,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1050,7 +1049,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LRORetrysPost202Retry200Headers.class);
@@ -1061,7 +1060,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void postAsyncRelativeRetrySucceeded() {
-        postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -1071,7 +1070,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1083,7 +1082,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return postAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1104,7 +1103,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      */
     public void postAsyncRelativeRetrySucceeded(Product product) {
-        postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -1115,7 +1114,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1128,7 +1127,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1150,7 +1149,7 @@ public final class LRORetrysImpl implements LRORetrys {
      *
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
-        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1160,7 +1159,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1172,7 +1171,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1204,7 +1203,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @param product Product to put
      */
     public void beginPostAsyncRelativeRetrySucceeded(Product product) {
-        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -1215,7 +1214,7 @@ public final class LRORetrysImpl implements LRORetrys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1228,7 +1227,7 @@ public final class LRORetrysImpl implements LRORetrys {
         return beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1256,7 +1255,7 @@ public final class LRORetrysImpl implements LRORetrys {
     }
 
     private ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> beginPostAsyncRelativeRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);

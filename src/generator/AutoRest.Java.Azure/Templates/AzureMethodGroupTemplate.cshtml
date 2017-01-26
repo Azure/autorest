@@ -2,8 +2,8 @@
 @using AutoRest.Java.Azure.Templates
 @using System.Linq;
 @using AutoRest.Java
-@using AutoRest.Java.Azure.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@using AutoRest.Java.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodGroupJva>
 /**
 @Header(" * ").TrimMultilineHeader()
  */
@@ -19,9 +19,9 @@ package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 
 /**
  * An instance of this class provides access to all the operations defined
- * in @(Model.MethodGroupType).
+ * in @(Model.TypeName).
  */
-public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
+public class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
     /** The Retrofit service to perform REST calls. */
     private @Model.MethodGroupServiceType service;
     /** The service client containing this operation class. */
@@ -43,16 +43,15 @@ public final class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
 
     @EmptyLine
 
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (MethodJva method in Model.Methods)
     {
-    var methodModel = (AzureMethodTemplateModel)method;
-    if (methodModel.IsPagingOperation || methodModel.IsPagingNextOperation)
+    if (method.IsPagingOperation || method.IsPagingNextOperation)
     {
-    @:@(Include(new PagingMethodTemplate(), methodModel))
+    @:@(Include(new PagingMethodTemplate(), method))
     }
     else
     {
-    @:@(Include(new AzureMethodTemplate(), methodModel))
+    @:@(Include(new AzureMethodTemplate(), method))
     }
     @EmptyLine
     }

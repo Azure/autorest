@@ -42,7 +42,7 @@ func (s *ModelFlatteningSuite) TestGetArray(c *chk.C) {
 			Tags:     &map[string]*string{"tag1": &tag1, "tag2": &tag2},
 			Name:     &name,
 			Type:     &typ,
-			Properties: &FlattenedProductProperties{
+			FlattenedProductProperties: &FlattenedProductProperties{
 				ProvisioningState:       &provisioningState,
 				ProvisioningStateValues: "OK",
 				Pname: &pname,
@@ -79,7 +79,7 @@ func (s *ModelFlatteningSuite) TestGetDictionary(c *chk.C) {
 			Tags:     &map[string]*string{"tag1": &tag1, "tag2": &tag2},
 			Name:     &name,
 			Type:     &typ,
-			Properties: &FlattenedProductProperties{
+			FlattenedProductProperties: &FlattenedProductProperties{
 				ProvisioningState:       &provisioningState,
 				ProvisioningStateValues: "OK",
 				Pname: &pname,
@@ -116,7 +116,7 @@ func (s *ModelFlatteningSuite) TestGetResourceCollection(c *chk.C) {
 			Tags:     &map[string]*string{"tag1": &tag1, "tag2": &tag2},
 			Name:     &name,
 			Type:     &typ,
-			Properties: &FlattenedProductProperties{
+			FlattenedProductProperties: &FlattenedProductProperties{
 				ProvisioningState:       &provisioningState,
 				ProvisioningStateValues: "OK",
 				Pname: &pname,
@@ -148,7 +148,7 @@ func (s *ModelFlatteningSuite) TestGetResourceCollection(c *chk.C) {
 			Tags:     &map[string]*string{"tag1": &tag1, "tag2": &tag2},
 			Name:     &name4,
 			Type:     &typ4,
-			Properties: &FlattenedProductProperties{
+			FlattenedProductProperties: &FlattenedProductProperties{
 				ProvisioningState:       &provisioningState4,
 				ProvisioningStateValues: "OK",
 				Pname: &pname4,
@@ -182,12 +182,12 @@ func (s *ModelFlatteningSuite) TestGetResourceCollection(c *chk.C) {
 func (s *ModelFlatteningSuite) TestPostFlattenedSimpleProduct(c *chk.C) {
 	id, description, displayName, capacity, odata := "123", "product description", "max name", "Large", "http://foo"
 	arg := SimpleProduct{
-		BaseProductID:          &id,
-		BaseProductDescription: &description,
-		Details: &SimpleProductProperties{
+		ProductID:   &id,
+		Description: &description,
+		SimpleProductProperties: &SimpleProductProperties{
 			MaxProductDisplayName: &displayName,
-			MaxProductCapacity:    &capacity,
-			MaxProductImage: &ProductURL{
+			Capacity:              &capacity,
+			ProductURL: &ProductURL{
 				Odatavalue: &odata,
 			},
 		},
@@ -216,7 +216,7 @@ func (s *ModelFlatteningSuite) TestPutArray(c *chk.C) {
 func (s *ModelFlatteningSuite) TestPutDictionary(c *chk.C) {
 	jsonBlob := `{"Resource1":{"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"},"properties":{"p.name":"Product1","type":"Flat"}},
 					"Resource2":{"location":"Building 44", "properties":{"p.name":"Product2","type":"Flat"}}}`
-	type resourceDictionary map[string]FlattenedProduct
+	type resourceDictionary map[string]*FlattenedProduct
 	var r resourceDictionary
 
 	_ = json.Unmarshal([]byte(jsonBlob), &r)
@@ -241,12 +241,12 @@ func (s *ModelFlatteningSuite) TestPutSimpleProduct(c *chk.C) {
 	id, description, displayName, capacity, odata, genericValue := "123", "product description",
 		"max name", "Large", "http://foo", "https://generic"
 	arg := &SimpleProduct{
-		BaseProductID:          &id,
-		BaseProductDescription: &description,
-		Details: &SimpleProductProperties{
+		ProductID:   &id,
+		Description: &description,
+		SimpleProductProperties: &SimpleProductProperties{
 			MaxProductDisplayName: &displayName,
-			MaxProductCapacity:    &capacity,
-			MaxProductImage: &ProductURL{
+			Capacity:              &capacity,
+			ProductURL: &ProductURL{
 				Odatavalue:   &odata,
 				GenericValue: &genericValue,
 			},
@@ -263,12 +263,12 @@ func (s *ModelFlatteningSuite) TestPutSimpleProductWithGrouping(c *chk.C) {
 	id, description, displayName, capacity, odata := "123", "product description",
 		"max name", "Large", "http://foo"
 	arg := &SimpleProduct{
-		BaseProductID:          &id,
-		BaseProductDescription: &description,
-		Details: &SimpleProductProperties{
+		ProductID:   &id,
+		Description: &description,
+		SimpleProductProperties: &SimpleProductProperties{
 			MaxProductDisplayName: &displayName,
-			MaxProductCapacity:    &capacity,
-			MaxProductImage: &ProductURL{
+			Capacity:              &capacity,
+			ProductURL: &ProductURL{
 				Odatavalue: &odata,
 			},
 		},

@@ -19,12 +19,13 @@ public class ReadonlyObj {
     /**
      * The id property.
      */
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /**
      * The size property.
      */
+    @JsonProperty(value = "size")
     private Integer size;
 
     /**
