@@ -1,0 +1,49 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.Templates
+@inherits AutoRest.Core.Template<CodeModelCs>
+@Header("// ")
+using System;
+using System.Threading.Tasks;
+using Microsoft.Perks.JsonRpc;
+@EmptyLine
+namespace @Settings.Namespace
+{
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    @if (!string.IsNullOrWhiteSpace(Model.Documentation))
+    {
+    @:/// <summary>
+    @:@WrapComment("/// ", Model.Documentation.EscapeXmlComment())
+    @:/// </summary>
+    }
+
+    public partial class @Model.Name : I@(Model.Name)
+    {
+        @(Include(new RpcHostClientBodyTemplate(), Model))
+
+        /// <summary>
+        /// Initializes client properties.
+        /// </summary>
+        private void Initialize()
+        {
+        @foreach (var operation in Model.AllOperations) 
+        {
+            @:this.@(operation.NameForProperty) = new @(operation.TypeName)(this);
+        }
+
+        @foreach (var property in Model.Properties.Where(p => !p.DefaultValue.IsNullOrEmpty()))
+        {
+            @:this.@(property.Name) = @(property.DefaultValue);
+        }
+        }
+        public void Dispose()
+        {
+
+        }
+    }
+}

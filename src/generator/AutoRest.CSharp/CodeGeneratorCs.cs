@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
@@ -13,6 +14,8 @@ using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.CSharp.Templates.Rest.Client;
 using AutoRest.CSharp.Templates.Rest.Common;
+using AutoRest.CSharp.Templates.JsonRpc.Server;
+using AutoRest.CSharp.Templates.JsonRpc.Client;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Extensions;
 
@@ -30,7 +33,7 @@ namespace AutoRest.CSharp
 
         public override string ImplementationFileExtension => ".cs";
 
-        private async Task GenerateServerSideCode(CodeModelCs codeModel)
+        private async Task GenerateRestServerSideCode(CodeModelCs codeModel)
         {
             foreach (string methodGrp in codeModel.MethodGroupNames)
             {
@@ -42,15 +45,10 @@ namespace AutoRest.CSharp
                     await Write(serviceControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
                 }
             }
-            // Models
-            foreach (CompositeTypeCs model in codeModel.ModelTypes.Union(codeModel.HeaderTypes))
-            {
-                var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
-            }
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
         }
 
-        private async Task GenerateClientSideCode(CodeModelCs codeModel)
+        private async Task GenerateRestClientSideCode(CodeModelCs codeModel)
         {
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
@@ -111,23 +109,86 @@ namespace AutoRest.CSharp
         {
             if (Settings.Instance.CodeGenerationMode.IsNullOrEmpty() || Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-client"))
             {
-                Logger.Instance.Log(Category.Info, "Defaulting to generate client side Code");
-                await GenerateClientSideCode(codeModel);
-            } 
+                Logger.Instance.Log(Category.Info, "Defaulting to generate client side code");
+                await GenerateRestClientSideCode(codeModel);
+            }
             else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest"))
             {
-                Logger.Instance.Log(Category.Info, "Generating client side Code");
-                await GenerateClientSideCode(codeModel);
-                Logger.Instance.Log(Category.Info, "Generating server side Code");
-                await GenerateServerSideCode(codeModel);
+                Logger.Instance.Log(Category.Info, "Generating client side code");
+                await GenerateRestClientSideCode(codeModel);
+                Logger.Instance.Log(Category.Info, "Generating server side code");
+                await GenerateRestServerSideCode(codeModel);
             }
             else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("rest-server"))
             {
-                Logger.Instance.Log(Category.Info, "Generating server side Code");
-                await GenerateServerSideCode(codeModel);
+                Logger.Instance.Log(Category.Info, "Generating server side code");
+                await GenerateRestServerSideCode(codeModel);
             }
+            
+        }
+
+        private async Task GenerateModels(IEnumerable<CompositeType> codeModels)
+        {
+            // Models
+            foreach (CompositeTypeCs model in codeModels)
+            {
+                var modelTemplate = new ModelTemplate { Model = model };
+                await Write(modelTemplate, Path.Combine(Settings.Instance.ModelsName, $"{model.Name}{ImplementationFileExtension}"));
+            }
+        }
+
+        private async Task GenerateJsonRpcClientCode(CodeModelCs codeModel)
+        {
+            // rpc host client
+            var rpcHostClientTemplate = new RpcHostClientTemplate { Model = codeModel };
+            await Write(rpcHostClientTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+
+
+            // client interface
+            var rpcClientInterfaceTemplate = new RpcClientInterfaceTemplate { Model = codeModel };
+            await Write(rpcClientInterfaceTemplate, $"I{codeModel.Name}{ImplementationFileExtension}");
+            
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
+
+            // operations
+            foreach (MethodGroupCs methodGroup in codeModel.Operations)
+            {
+
+                if (!methodGroup.Name.IsNullOrEmpty())
+                {
+                    // Operation
+                    var operationsTemplate = new RpcClientMethodGroupTemplate { Model = methodGroup };
+                    await Write(operationsTemplate, $"{operationsTemplate.Model.TypeName}{ImplementationFileExtension}");
+                    
+                    // Operation interface
+                    var operationsInterfaceTemplate = new RpcClientMethodGroupInterfaceTemplate { Model = (MethodGroupCs)codeModel.Operations.Where((m) => { return m.Name == methodGroup.Name; }).First() };
+                    await Write(operationsInterfaceTemplate, $"I{operationsInterfaceTemplate.Model.Name}{ImplementationFileExtension}");
+                }
+
+                var operationExtensionsTemplate = new RpcClientExtensionsTemplate { Model = methodGroup };
+                await Write(operationExtensionsTemplate, $"{methodGroup.ExtensionTypeName}Extensions{ImplementationFileExtension}");
+            }
+        }
+
+
+        private async Task GenerateJsonRpcServerCode(CodeModelCs codeModel)
+        {
+            // for each plugin path generate a controller that can handle a request, this should be
+            // similar to generating a rest server for the given spec
+            foreach (string methodGrp in codeModel.MethodGroupNames)
+            {
+                using (NewContext)
+                {
+                    codeModel.Name = methodGrp;
+                    var serverControllerTemplate = new AutoRest.CSharp.Templates.JsonRpc.Server.RpcServerControllerTemplate { Model = codeModel };
+                    await Write(serverControllerTemplate, $"{codeModel.Name}{ImplementationFileExtension}");
+
+                }
+            }
+            await GenerateModels(codeModel.ModelTypes.Union(codeModel.HeaderTypes));
 
         }
+
 
         /// <summary>
         /// Generates C# code for service client.
@@ -146,6 +207,16 @@ namespace AutoRest.CSharp
             {
                 Logger.Instance.Log(Category.Info, "Generating Rest Code");
                 await GenerateRestCode(codeModel);
+            }
+            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("jsonrpc-server"))
+            {
+                Logger.Instance.Log(Category.Info, "Generating json rpc server code");
+                await GenerateJsonRpcServerCode(codeModel);
+            }
+            else if (Settings.Instance.CodeGenerationMode.EqualsIgnoreCase("jsonrpc-client"))
+            {
+                Logger.Instance.Log(Category.Info, "Generating json rpc client code");
+                await GenerateJsonRpcClientCode(codeModel);
             }
             else
             {

@@ -114,6 +114,11 @@ namespace AutoRest.CSharp.Model
         public string GetAsyncMethodInvocationArgs(string customHeaderReference, string cancellationTokenReference = "cancellationToken") => string.Join(", ", LocalParameters.Select(each => (string)each.Name).Concat(new[] { customHeaderReference, cancellationTokenReference }));
 
         /// <summary>
+        /// Get the invocation args for an invocation with an async method without custom header reference
+        /// </summary>
+        public string GetAsyncMethodInvocationArgsWithoutCustomHeader(string cancellationTokenReference = "cancellationToken") => string.Join(", ", LocalParameters.Select(each => (string)each.Name).Concat(new[] { cancellationTokenReference }));
+
+        /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
         /// exclude global parameters
         /// </summary>

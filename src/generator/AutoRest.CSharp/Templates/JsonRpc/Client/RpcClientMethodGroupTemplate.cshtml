@@ -1,0 +1,50 @@
+﻿@using AutoRest.CSharp.Model
+@using AutoRest.CSharp.Templates
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodGroupCs>
+@Header("// ")
+@EmptyLine
+namespace @Settings.Namespace
+{
+    using System.IO;
+    using Microsoft.Rest;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+@foreach (var usingString in Model.Usings) {
+    @:using @usingString;
+}
+@EmptyLine
+    /// <summary>
+    /// @(Model.TypeName) operations.
+    /// </summary>
+    public partial class @(Model.TypeName) : Microsoft.Rest.ServiceClient<@Model.Name>, I@(Model.TypeName)
+    {
+        /// <summary>
+        /// Initializes a new instance of the @(Model.TypeName) class.
+        /// </summary>
+        /// <param name='client'>
+        /// Reference to the service client.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        public @(Model.TypeName)(@Model.CodeModel.Name rpcClient)
+        {
+            if (rpcClient == null) 
+            {
+                throw new System.ArgumentNullException("RpcClient");
+            }
+            this.RpcClient = rpcClient;
+        }
+        @EmptyLine
+        /// <summary>
+        /// Gets a reference to the @Model.CodeModel.Name
+        /// </summary>
+        public @Model.CodeModel.Name RpcClient { get; private set; }
+        @EmptyLine
+        @foreach (MethodCs method in Model.Methods)
+        {
+        @:@(Include(new RpcClientMethodTemplate(), method))
+        @EmptyLine
+        }
+    }
+}

@@ -1,0 +1,820 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Language Server Protocol",
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "paths": {
+        "/LanguageServer/initialize": {
+            "post": {
+                "description": "Initialize the connection",
+                "summary": "Initialize the connection",
+                "operationId": "initialize",
+                "parameters": [
+                    {
+                        "name": "InitializeParams",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/InitializeParams"
+                        },
+                        "description": "parameters to initialize client-server communication"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "initialize successful",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/InitializeResult"
+                        }
+                    },
+                    "default": {
+                        "description": "Error message if operation is unsuccessful, shoudl default be this??",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/InitializeError"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/shutdown": {
+            "post": {
+                "description": "request server to shutdown",
+                "summary": "asks the server to shut down, but to not exit ",
+                "operationId": "shutdown",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "shutdown successful"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/exit": {
+            "put": {
+                "description": "notification to ask the server to exit its process",
+                "summary": "request server to shutdown",
+                "operationId": "exit",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/initialized": {
+            "head": {
+                "description": "notification sent from the client to the server after the client is fully initialized",
+                "summary": "notification sent from the client to the server after the client is fully initialized",
+                "operationId": "initialized",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/didOpen": {
+            "put": {
+                "description": "notification signal newly opened text documents",
+                "summary": "notification signal newly opened text documents",
+                "operationId": "textDocument_didOpen",
+                "parameters": [
+                    {
+                        "name": "DidChangeTextDocumentParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DidOpenTextDocumentParams"
+                        },
+                        "description": "params to signal newly opened text docs"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/workspace/didChangeConfiguration": {
+            "put": {
+                "description": "notifitication signal the change of configuration settings.",
+                "summary": "notification signal the change of configuration settings.",
+                "operationId": "workspace_didChangeConfiguration",
+                "parameters": [
+                    {
+                        "name": "DidChangeConfigurationParams",
+                        "in": "body",
+                        "schema":{
+                            "$ref":"CommonModels.json#/definitions/DidChangeConfigurationParams"
+                        },
+                        "description": "The configurations that were changed"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/didChange": {
+            "put": {
+                "description": "notification signal changes to a text document",
+                "summary": "notification signal changes to a text document",
+                "operationId": "textDocument_didChange",
+                "parameters": [
+                    {
+                        "name": "DidChangeTextDocumentParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DidChangeTextDocumentParams"
+                        },
+                        "description": "OK"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/willSave": {
+            "put": {
+                "description": "will save notification is sent from the client to the server before the document is actually saved",
+                "summary": "will save notification is sent from the client to the server before the document is actually saved",
+                "operationId": "textDocument_willSave",
+                "parameters": [
+                    {
+                        "name": "WillSaveTextDocumentParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/WillSaveTextDocumentParams"
+                        },
+                        "description": "params to notify document saved"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/willSaveWaitUntil": {
+            "post": {
+                "description": "save request is sent from the client to the server before the document is actually saved. return an array of TextEdits which will be applied to the text document before it is saved",
+                "summary": "save request is sent from the client to the server before the document is actually saved. return an array of TextEdits which will be applied to the text document before it is saved",
+                "operationId": "textDocument_willSaveWaitUntil",
+                "parameters": [
+                    {
+                        "name": "WillSaveTextDocumentParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/WillSaveTextDocumentParams"
+                        },
+                        "description": "params to save the document"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of textedits to be applied to doc",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/TextEdit"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/didSave": {
+            "put": {
+                "description": "notification sent from the client to the server when the document was saved in the client",
+                "summary": "notification is sent from the client to the server when the document was saved in the client",
+                "operationId": "textDocument_didSave",
+                "parameters": [
+                    {
+                        "name": "DidSaveTextDocumentParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DidSaveTextDocumentParams"
+                        },
+                        "description": "params to notify document saved"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/didClose": {
+            "put": {
+                "description": "notification sent from the client to the server when the document got closed in the client.",
+                "summary": "notification sent from the client to the server when the document got closed in the client.",
+                "operationId": "textDocument_didClose",
+                "parameters": [
+                    {
+                        "name": "DidCloseTextDocumentParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DidCloseTextDocumentParams"
+                        },
+                        "description": "Params to notify saved document"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/workspace/didChangeWatchedFiles": {
+            "put": {
+                "description": "notification sent from the client to the server when the client detects changes to files watched by the language client.",
+                "summary": "notification sent from the client to the server when the client detects changes to files watched by the language client.",
+                "operationId": "workspace_didChangeWatchedFiles",
+                "parameters": [
+                    {
+                        "name": "DidChangeWatchedFilesParams",
+                        "in": "body",
+                        "schema": {
+                            "description": "the actual file events",
+                            "type": "object",
+                            "properties": {
+                                "changes":{
+                                    "type":"array",
+                                    "items": {
+                                        "$ref": "CommonModels.json#/definitions/FileEvent"
+                                    },
+                                    "description": "file event objects describing changes"
+                                }                                
+                            },
+                            "required": [ "changes" ]
+                        },
+                        "description": "params to notify fileevents"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/completion": {
+            "post": {
+                "description": "request sent to compute completion items at a given cursor position.",
+                "summary": "request sent to compute completion items at a given cursor position.",
+                "operationId": "textDocument_completion",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "TextDocumentPositionParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/TextDocumentPositionParams"
+                        },
+                        "description": "params to specify position within the document"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "list of completion items",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CompletionList"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/completionItem/resolve": {
+            "post": {
+                "description": "request to resolve additional information for a given completion item.",
+                "summary": "request to resolve additional information for a given completion item.",
+                "operationId": "textDocument_completionItemResolve",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "CompletionItem",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CompletionItem"
+                        },
+                        "description": "params to specify the completion item to resolve"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "resolved completion item",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CompletionItem"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/hover": {
+            "post": {
+                "description": "request hover information at a given text document position.",
+                "summary": "request hover information at a given text document position.",
+                "operationId": "textDocument_hover",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "TextDocumentPositionParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/TextDocumentPositionParams"
+                        },
+                        "description": "params to specify position within the text document."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "hover operation result",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/Hover"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/signatureHelp": {
+            "post": {
+                "description": "request signature information at a given cursor position",
+                "summary": "request signature information at a given cursor position",
+                "operationId": "textDocument_signatureHelp",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "TextDocumentPositionParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/TextDocumentPositionParams"
+                        },
+                        "description": "params to specify position within the text document."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "signature help result",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/SignatureHelp"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/definition": {
+            "post": {
+                "description": "request to resolve the definition location of a symbol at a given text document position.",
+                "summary": "request to resolve the definition location of a symbol at a given text document position.",
+                "operationId": "textDocument_definition",
+                "parameters": [
+                    {
+                        "name": "TextDocumentPositionParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/TextDocumentPositionParams"
+                        },
+                        "description": "params to specify position within the text document."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location array with definitions",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/Location"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/references": {
+            "post": {
+                "description": "request to resolve project-wide references for the symbol denoted by the given text document position.",
+                "summary": "request to  resolve project-wide references for the symbol denoted by the given text document position.",
+                "operationId": "textDocument_references",
+                "parameters": [
+                    {
+                        "name": "ReferenceParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/ReferenceParams"
+                        },
+                        "description": "params to specify position within the text document."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location array with references",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/Location"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/documentHighlight": {
+            "post": {
+                "description": "request to resolve a document highlights for a given text document position.",
+                "summary": "request to resolve a document highlights for a given text document position.",
+                "operationId": "textDocument_documentHighlight",
+                "parameters": [
+                    {
+                        "name": "TextDocumentPositionParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/TextDocumentPositionParams"
+                        },
+                        "description": "params to specify position within the text document."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of document highlights",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/DocumentHighlight"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/documentSymbol": {
+            "post": {
+                "description": "request to list all symbols found in a given text document.",
+                "summary": "request to list all symbols found in a given text document.",
+                "operationId": "textDocument_documentSymbol",
+                "parameters": [
+                    {
+                        "name": "DocumentSymbolParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentSymbolParams"
+                        },
+                        "description": "params to specify the document symbols"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of document symbol info",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/SymbolInformation"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/workspace/symbol": {
+            "post": {
+                "description": "request to list project-wide symbols matching the query string.",
+                "summary": "request to list project-wide symbols matching the query string.",
+                "operationId": "workspace_symbol",
+                "parameters": [
+                    {
+                        "name": "WorkspaceSymbolParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/WorkspaceSymbolParams"
+                        },
+                        "description": "Params to specify the workspace symbols"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of workspace symbol infos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/SymbolInformation"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/codeAction": {
+            "post": {
+                "description": "request to compute commands for a given text document and range.",
+                "summary": "request to compute commands for a given text document and range.",
+                "operationId": "textDocument_codeAction",
+                "parameters": [
+                    {
+                        "name": "CodeActionParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CodeActionParams"
+                        },
+                        "description": "Params for the CodeActionRequest"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of commands result",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/Command"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/codeLens": {
+            "post": {
+                "description": "request to compute code lenses for a given text document.",
+                "summary": "request to compute code lenses for a given text document.",
+                "operationId": "textDocument_codeLens",
+                "parameters": [
+                    {
+                        "name": "CodeLensParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CodeLensParams"
+                        },
+                        "description": "Params for codelens request"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of codelens",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/CodeLens"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/codeLens/resolve": {
+            "post": {
+                "description": "request to resolve the command for a given code lens item.",
+                "summary": "request to resolve the command for a given code lens item.",
+                "operationId": "textDocument_codeLensResolve",
+                "parameters": [
+                    {
+                        "name": "CodeLens",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CodeLens"
+                        },
+                        "description": "params for codelens resolve request"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "resolved codelens object",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/CodeLens"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/documentLink": {
+            "post": {
+                "description": "request to the server to request the location of links in a document.",
+                "summary": "request to the server to request the location of links in a document.",
+                "operationId": "textDocument_documentLink",
+                "parameters": [
+                    {
+                        "name": "DocumentLinkParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentLinkParams"
+                        },
+                        "description": "params to request location of links"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of documents' links",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/DocumentLink"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/documentLink/resolve": {
+            "post": {
+                "description": "request to resolve the target of a given document link.",
+                "summary": "request to resolve the target of a given document link.",
+                "operationId": "textDocument_documentLinkResolve",
+                "parameters": [
+                    {
+                        "name": "DocumentLink",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentLink"
+                        },
+                        "description": "params for document link resolve request"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "document link obj result",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentLink"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/formatting": {
+            "post": {
+                "description": "request to format a whole document.",
+                "summary": "request to format a whole document.",
+                "operationId": "textDocument_formatting",
+                "parameters": [
+                    {
+                        "name": "DocumentFormattingParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentFormattingParams"
+                        },
+                        "description": "params to request format document"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of formatting edits",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/TextEdit"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/rangeFormatting": {
+            "post": {
+                "description": "request to format range in document.",
+                "summary": "request to format range in document.",
+                "operationId": "textDocument_rangeFormatting",
+                "parameters": [
+                    {
+                        "name": "DocumentRangeFormattingParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentRangeFormattingParams"
+                        },
+                        "description": "params to request formatting for a document range"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of formatting edits",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/TextEdit"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/onTypeFormatting": {
+            "post": {
+                "description": "request to format parts of the document during typing.",
+                "summary": "request to format parts of the document during typing.",
+                "operationId": "textDocument_onTypeFormatting",
+                "parameters": [
+                    {
+                        "name": "DocumentOnTypeFormattingParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/DocumentOnTypeFormattingParams"
+                        },
+                        "description": "params to request ontype formatting"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "array of formatting edits",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "CommonModels.json#/definitions/TextEdit"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/textDocument/rename": {
+            "post": {
+                "description": "request to perform a workspace-wide rename of a symbol.",
+                "summary": "request to perform a workspace-wide rename of a symbol.",
+                "operationId": "textDocument_rename",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "RenameParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/RenameParams"
+                        },
+                        "description": "params to request rename of a symbol"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "workspace edits result",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/WorkspaceEdit"
+                        }
+                    }
+                }
+            }
+        },
+        "/LanguageServer/workspace/executeCommand": {
+            "post": {
+                "description": "request to trigger command execution",
+                "summary": "request to trigger command execution",
+                "operationId": "workspace_executeCommand",
+                "parameters": [
+                    {
+                        "name": "ExecuteCommandParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/ExecuteCommandParams"
+                        },
+                        "description": "params to execute command in workspace"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "results of command executions",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
