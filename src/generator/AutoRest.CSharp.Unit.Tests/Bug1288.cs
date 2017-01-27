@@ -29,8 +29,8 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(modeler: "CompositeSwagger"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\CompositeModel.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\Param1.cs"));
+                Assert.True(fileSystem.FileExists(@"CompositeModel.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\Param1.cs"));
 
                 var result = await Compile(fileSystem);
 

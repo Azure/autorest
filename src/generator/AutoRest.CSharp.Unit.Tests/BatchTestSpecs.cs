@@ -47,8 +47,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 using (var memoryFileSystem = GenerateCodeForTestFromSpec(dirName: file))
                 {
                     // Expected Files
-                    Assert.True(memoryFileSystem.GetFiles(@"GeneratedCode\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
-                    Assert.True(memoryFileSystem.GetFiles(@"GeneratedCode\Models\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
+                    Assert.True(memoryFileSystem.GetFiles(@"", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
+                    Assert.True(memoryFileSystem.GetFiles(@"Models\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
 
                     var result = await Compile(memoryFileSystem);
 

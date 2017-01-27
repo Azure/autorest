@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Unit.Tests
             assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
                 
             var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
+                fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
                     .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
                 ManagedAssets.FrameworkAssemblies.Concat(
                     AppDomain.CurrentDomain.GetAssemblies()

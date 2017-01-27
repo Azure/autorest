@@ -27,8 +27,7 @@ namespace AutoRest.Ruby
         public CodeGeneratorRb() 
         {
             // todo: make sure this doesn't happen more than once.
-            Settings.Instance.OutputDirectory = Path.Combine(Settings.Instance.OutputDirectory,
-                GeneratedFolderName);
+            Settings.Instance.OutputDirectory = Path.Combine(Settings.Instance.OutputDirectory, GeneratedFolderName);
         }
 
         /// <summary>

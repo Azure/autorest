@@ -75,7 +75,6 @@ namespace AutoRest.CSharp.Unit.Tests
                     Modeler = modeler,
                     CodeGenerator = codeGenerator,
                     FileSystemInput = fileSystem,
-                    OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };

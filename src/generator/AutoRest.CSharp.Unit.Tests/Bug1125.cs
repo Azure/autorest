@@ -28,12 +28,12 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObjectWithDefault.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObjectWithMinMax.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObjectWithExclusiveMinMax.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ParamObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ParamObjectWithDefault.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObjectWithDefault.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObjectWithMinMax.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObjectWithExclusiveMinMax.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ParamObject.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ParamObjectWithDefault.cs"));
 
                 var result = await Compile(fileSystem);
 

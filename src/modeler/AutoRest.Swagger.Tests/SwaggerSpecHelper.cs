@@ -23,7 +23,6 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                     {
                         Input = specFile,
-                        OutputDirectory = "X:\\Output",
                         Header = "MICROSOFT_MIT_NO_VERSION",
                         Modeler = modeler,
                         PayloadFlatteningThreshold = 1,
@@ -62,9 +61,8 @@ namespace AutoRest.Swagger.Tests
                 : settings.Namespace;
 
             AutoRest.Core.AutoRestController.Generate();
-            Assert.NotEmpty(settings.FileSystemOutput.VirtualStore);
 
-            var actualFiles = settings.FileSystemOutput.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var actualFiles = settings.FileSystemOutput.GetFiles("", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
             Assert.Equal(expectedFiles.Length, actualFiles.Length);
 

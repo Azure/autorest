@@ -41,8 +41,7 @@ namespace AutoRest.Core.Tests
                 };
                 SampleCodeGenerator codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
-                Assert.Contains(Path.Combine(settings.OutputDirectory, settings.ModelsName),
-                    settings.FileSystemOutput.VirtualStore.Keys);
+                Assert.Contains(Path.Combine(settings.ModelsName), settings.FileSystemOutput.VirtualStore.Keys);
             }
         }
 
@@ -82,7 +81,7 @@ namespace AutoRest.Core.Tests
                     OutputDirectory = Path.GetTempPath()
                 };
                 string existingContents = "this is dummy";
-                string path = Path.Combine(settings.OutputDirectory, settings.ModelsName, "Pet.cs");
+                string path = Path.Combine(settings.ModelsName, "Pet.cs");
                 settings.FileSystemOutput.VirtualStore[path] = new StringBuilder(existingContents);
                 var codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
@@ -105,7 +104,7 @@ namespace AutoRest.Core.Tests
                     OutputFileName = "test.file.cs"
                 };
 
-                string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
+                string path = Path.Combine("test.file.cs");
                 string existingContents = "this is dummy";
                 settings.FileSystemOutput.VirtualStore[path] = new StringBuilder(existingContents);
                 var codeGenerator = new SampleCodeGenerator();

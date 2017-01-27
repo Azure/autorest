@@ -37,8 +37,7 @@ namespace AutoRest.Simplify
             var op = new AzureAsyncOperation();
             var restOp = new RestException();
 
-            var files = Settings.Instance.FileSystemOutput.GetFiles(Settings.Instance.OutputDirectory, "*.cs",
-                    SearchOption.AllDirectories).
+            var files = Settings.Instance.FileSystemOutput.GetFiles("", "*.cs", SearchOption.AllDirectories).
                 ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadFileAsText(each));
 
             var projectId = ProjectId.CreateNewId();

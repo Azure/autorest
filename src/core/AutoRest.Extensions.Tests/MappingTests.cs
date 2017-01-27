@@ -34,7 +34,7 @@ namespace AutoRest.Extensions.Tests
                 CodeGeneratorCs generator = new CodeGeneratorCs();
 
                 generator.Generate(clientModel).GetAwaiter().GetResult();
-                string body = settings.FileSystemOutput.ReadFileAsText(Path.Combine(settings.OutputDirectory, "Payload.cs"));
+                string body = settings.FileSystemOutput.ReadFileAsText("Payload.cs");
                 Assert.True(body.ContainsMultiline(@"
                 MinProduct minProduct = new MinProduct();
                 if (baseProductId != null || baseProductDescription != null || maxProductReference != null)

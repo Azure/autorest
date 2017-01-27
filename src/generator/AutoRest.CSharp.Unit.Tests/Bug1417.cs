@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPIExtensions.cs"));
 
                 var result = await Compile(fileSystem);
 

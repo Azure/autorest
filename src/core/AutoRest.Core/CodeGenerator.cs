@@ -94,11 +94,11 @@ namespace AutoRest.Core
                     return;
                 }
 
-                filePath = Path.Combine(Settings.Instance.OutputDirectory, Settings.Instance.OutputFileName);
+                filePath = Settings.Instance.OutputFileName;
             }
             else
             {
-                filePath = Path.Combine(Settings.Instance.OutputDirectory, fileName);
+                filePath = fileName;
                 // cleans file before writing
                 if (FileList.Contains(filePath))
                 {

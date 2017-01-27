@@ -206,11 +206,20 @@ namespace AutoRest.Core.Utilities
 
         public void CommitToDisk(string targetDirectory)
         {
-            foreach (var file in VirtualStore)
+            foreach (var entry in VirtualStore)
             {
-                var targetFileName = Path.Combine(targetDirectory, file.Key);
-                Directory.CreateDirectory(Path.GetDirectoryName(targetFileName));
-                File.WriteAllText(targetFileName, file.Value.ToString());
+                if (entry.Value.ToString() == FolderKey)
+                {
+                    var targetDirName = Path.Combine(targetDirectory, entry.Key);
+                    Directory.CreateDirectory(targetDirName);
+                }
+                else
+                {
+                    var targetFileName = Path.Combine(targetDirectory, entry.Key);
+                    var targetFileDir = Path.GetDirectoryName(targetFileName);
+                    Directory.CreateDirectory(targetFileDir);
+                    File.WriteAllText(targetFileName, entry.Value.ToString());
+                }
             }
         }
     }
