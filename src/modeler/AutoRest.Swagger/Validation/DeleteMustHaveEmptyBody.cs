@@ -42,6 +42,9 @@ namespace AutoRest.Swagger.Validation
                     if (operation == null)
                         return false;
 
+                    if (operation.Parameters == null)
+                        continue;
+
                     foreach(SwaggerParameter parameter in operation.Parameters)
                     {
                         if(parameter.Reference == null)

@@ -49,7 +49,8 @@ namespace AutoRest.Swagger.Validation
                     bool getCheck = getOperations.Any(operation =>
                         operation.Responses.Any(response => 
                             response.Key.Equals("200") && 
-                            response.Value.Schema != null && 
+                            response.Value.Schema != null &&
+                            response.Value.Schema.Reference != null &&
                             response.Value.Schema.Reference.EndsWith("/"+definition.Key)
                         )
                      );
