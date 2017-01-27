@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
-using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest
+namespace AutoRest.Preview
 {
     public static class AutoRestPipeline
     {
@@ -25,7 +23,6 @@ namespace AutoRest
                     Modeler = "Swagger",
                     CodeGenerator = codeGenerator,
                     FileSystemInput = fs,
-                    OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     Input = "input.json"
                 };
@@ -35,7 +32,7 @@ namespace AutoRest
 
                 GenerateCodeInto(processMessages);
 
-                return fs;
+                return settings.FileSystemOutput;
             }
         }
 
