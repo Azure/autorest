@@ -110,8 +110,7 @@ namespace AutoRest.CSharp.Unit.Tests
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
-            return fs;
+            return dirName.GenerateCodeInto(fs, codeGenerator, modeler);
         }
 
         protected virtual void WriteLine(object value)
