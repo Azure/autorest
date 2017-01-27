@@ -113,7 +113,7 @@ foreach (var parameter in Model.LocalParameters)
     }
     else
     {
-    @:await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
+    @:(await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false)).Dispose();
     }
 @:}
 
