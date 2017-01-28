@@ -141,15 +141,15 @@ namespace AutoRest.CSharp.Model
             {
                 if (ReturnType.Body != null && ReturnType.Headers != null)
                 {
-                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)},{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType)},{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
                 }
                 if (ReturnType.Body != null)
                 {
-                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return $"Microsoft.Rest.HttpOperationResponse<{ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType)}>";
                 }
                 if (ReturnType.Headers != null)
                 {
-                    return $"Microsoft.Rest.HttpOperationHeaderResponse<{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head)}>";
+                    return $"Microsoft.Rest.HttpOperationHeaderResponse<{ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType)}>";
                 }
 
                 return "Microsoft.Rest.HttpOperationResponse";
@@ -167,12 +167,12 @@ namespace AutoRest.CSharp.Model
                 if (ReturnType.Body != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "System.Threading.Tasks.Task<{0}>", ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head));
+                        "System.Threading.Tasks.Task<{0}>", ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType));
                 }
                 else if (ReturnType.Headers != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "System.Threading.Tasks.Task<{0}>", ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head));
+                        "System.Threading.Tasks.Task<{0}>", ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType));
                 }
                 else
                 {
@@ -261,11 +261,11 @@ namespace AutoRest.CSharp.Model
             {
                 if (ReturnType.Body != null)
                 {
-                    return ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head);
+                    return ReturnType.Body.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType);
                 }
                 if (ReturnType.Headers != null)
                 {
-                    return ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head);
+                    return ReturnType.Headers.AsNullableType(HttpMethod != HttpMethod.Head && IsXNullableReturnType);
                 }
                 else
                 {

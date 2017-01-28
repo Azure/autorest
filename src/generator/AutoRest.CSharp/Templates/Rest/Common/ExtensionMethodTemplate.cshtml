@@ -5,20 +5,20 @@
 @using AutoRest.CSharp
 @inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
 @{
-if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
-{
-    if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+    if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
     {
+        if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+        {
 @:/// <summary>
 @:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
         if (!String.IsNullOrEmpty(Model.ExternalDocsUrl))
-        {
+            {
 @:/// <see href="@Model.ExternalDocsUrl" />
         }
 @:/// </summary>
     }
-    if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
-    {
+        if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+        {
 @:/// <remarks>
 @:@WrapComment("/// ", Model.Description.EscapeXmlComment())
 @:/// </remarks>
@@ -27,7 +27,7 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @:/// The operations group for this extension method.
 @:/// </param>
     foreach (var parameter in Model.LocalParameters)
-    {
+        {
 @:/// <param name='@parameter.Name'>
 @:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
 @:/// </param>
@@ -36,6 +36,7 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 {
 @:[System.Obsolete()]
 }
+
 @:public static @Model.ReturnTypeString @(Model.Name)(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(false)))
 @:{
     if (Model.ReturnType.Body != null)
