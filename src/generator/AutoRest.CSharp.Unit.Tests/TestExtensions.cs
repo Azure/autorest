@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Unit.Tests
             // if copying a file
             if (File.Exists(source))
             {
-                fileSystem.WriteFile(destination, File.ReadAllText(source));
+                fileSystem.WriteAllText(destination, File.ReadAllText(source));
                 return;
             }
             
@@ -146,7 +146,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 var target = Path.Combine(outputFolder, file.Substring(file.IndexOf(":", StringComparison.Ordinal) + 1));
                 Directory.CreateDirectory(Path.GetDirectoryName(target));
-                File.WriteAllText(target, fileSystem.ReadFileAsText(file));
+                File.WriteAllText(target, fileSystem.ReadAllText(file));
             }
 
             return outputFolder;

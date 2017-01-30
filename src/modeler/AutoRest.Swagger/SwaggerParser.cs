@@ -28,7 +28,7 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            var swaggerDocument = fileSystem.ReadFileAsText(path);
+            var swaggerDocument = fileSystem.ReadAllText(path);
             return Parse(path, swaggerDocument);
         }
 
@@ -77,7 +77,7 @@ namespace AutoRest.Swagger
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
-                        var externalDefinitionString = Settings.FileSystemInput.ReadFileAsText(filePath);
+                        var externalDefinitionString = Settings.FileSystemInput.ReadAllText(filePath);
                         externalFiles[filePath] = JObject.Parse(externalDefinitionString);
                     }
                 }

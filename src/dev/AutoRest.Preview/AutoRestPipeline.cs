@@ -27,8 +27,8 @@ namespace AutoRest.Preview
                     Input = "input.json"
                 };
 
-                fs.WriteFile(settings.Input, json);
-                fs.WriteFile("AutoRest.json", autoRestJson);
+                fs.WriteAllText(settings.Input, json);
+                fs.WriteAllText("AutoRest.json", autoRestJson);
 
                 GenerateCodeInto(processMessages);
 

@@ -43,9 +43,9 @@ namespace AutoRest.Swagger.Tests
             var settings = Settings.Instance;
 
             settings.FileSystemInput = new MemoryFileSystem();
-            settings.FileSystemInput.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
+            settings.FileSystemInput.WriteAllText("AutoRest.json", File.ReadAllText("AutoRest.json"));
             settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
-            settings.FileSystemInput.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+            settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
 
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
@@ -70,7 +70,7 @@ namespace AutoRest.Swagger.Tests
             {
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
-                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystemOutput.ReadFileAsText(actualFile));
+                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystemOutput.ReadAllText(actualFile));
             }
         }
 

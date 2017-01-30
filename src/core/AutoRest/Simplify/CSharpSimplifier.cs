@@ -38,7 +38,7 @@ namespace AutoRest.Simplify
             var restOp = new RestException();
 
             var files = Settings.Instance.FileSystemOutput.GetFiles("", "*.cs", SearchOption.AllDirectories).
-                ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadFileAsText(each));
+                ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadAllText(each));
 
             var projectId = ProjectId.CreateNewId();
             var solution = new AdhocWorkspace().CurrentSolution
@@ -103,7 +103,7 @@ namespace AutoRest.Simplify
                         Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
 
                     // Write out the files back to their original location
-                    Settings.Instance.FileSystemOutput.WriteFile(document.Name, text);
+                    Settings.Instance.FileSystemOutput.WriteAllText(document.Name, text);
                 }
             }
         }

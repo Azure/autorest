@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 // Should also succeed.
                 Assert.True(result.Succeeded);
 
-                string genCode = fileSystem.ReadFileAsText(@"PetOperations.cs");
+                string genCode = fileSystem.ReadAllText(@"PetOperations.cs");
                 const string nullStreamPattern = @"(?:.+)+(if \(streamContents == null\))(?:.+)+";
                 var regexResult = Regex.Match(genCode, nullStreamPattern, RegexOptions.Singleline);
                 Assert.False(regexResult.Success);

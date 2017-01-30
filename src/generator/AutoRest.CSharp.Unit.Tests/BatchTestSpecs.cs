@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Unit.Tests
             foreach (string file in files)
             {
                 // Comment this block out if not needed
-                if (!fs.ReadFileAsText(file).Contains(@"""swagger"": ""2.0"""))
+                if (!fs.ReadAllText(file).Contains(@"""swagger"": ""2.0"""))
                 {
                     //skip files that are not swagger files.
                     continue;

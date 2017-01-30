@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 
             var compiler = new CSharpCompiler(
                 fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
+                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(),
                 ManagedAssets.FrameworkAssemblies.Concat(
                     AppDomain.CurrentDomain.GetAssemblies()
                         .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location) )

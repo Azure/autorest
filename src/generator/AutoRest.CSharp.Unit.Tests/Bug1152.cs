@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = "Bug1152".GenerateCodeInto(fileSystem : CreateMockFilesystem(), modeler : "Swagger"))
             {
                 Assert.True(fileSystem.FileExists(@"Models\TestObject.cs"));
-                var testObject = fileSystem.ReadFileAsText(@"Models\TestObject.cs");
+                var testObject = fileSystem.ReadAllText(@"Models\TestObject.cs");
 
                 Assert.DoesNotContain(@"\\\\", Regex.Match(testObject, "Default is.*").Value);
             }

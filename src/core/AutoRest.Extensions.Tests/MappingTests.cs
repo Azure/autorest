@@ -25,16 +25,16 @@ namespace AutoRest.Extensions.Tests
                     OutputDirectory = Path.GetTempPath()
                 };
                 settings.FileSystemInput = new MemoryFileSystem();
-                settings.FileSystemInput.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
+                settings.FileSystemInput.WriteAllText("AutoRest.json", File.ReadAllText("AutoRest.json"));
                 settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
-                settings.FileSystemInput.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+                settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
 
                 var modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();
                 CodeGeneratorCs generator = new CodeGeneratorCs();
 
                 generator.Generate(clientModel).GetAwaiter().GetResult();
-                string body = settings.FileSystemOutput.ReadFileAsText("Payload.cs");
+                string body = settings.FileSystemOutput.ReadAllText("Payload.cs");
                 Assert.True(body.ContainsMultiline(@"
                 MinProduct minProduct = new MinProduct();
                 if (baseProductId != null || baseProductDescription != null || maxProductReference != null)

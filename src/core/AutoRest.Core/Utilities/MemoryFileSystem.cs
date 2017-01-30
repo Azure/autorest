@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
-    // TODO: MemoryFileSystem is for testing. Consider moving to test project.
     public class MemoryFileSystem : IFileSystem, IDisposable
     {
         private const string FolderKey = "Folder";
@@ -50,7 +49,7 @@ namespace AutoRest.Core.Utilities
             }
         }
         
-        public void WriteFile(string path, string contents)
+        public void WriteAllText(string path, string contents)
         {
             var directory = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty((directory)) && !VirtualStore.ContainsKey(directory))
@@ -69,7 +68,7 @@ namespace AutoRest.Core.Utilities
             VirtualStore[path] = result;
         }
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             if (VirtualStore.ContainsKey(path))
             {
@@ -100,14 +99,6 @@ namespace AutoRest.Core.Utilities
         public bool FileExists(string path)
         {
             return VirtualStore.ContainsKey(path);
-        }
-
-        public void DeleteFile(string path)
-        {
-            if (VirtualStore.ContainsKey(path))
-            {
-                VirtualStore.Remove(path);
-            }
         }
 
         public bool DirectoryExists(string path)

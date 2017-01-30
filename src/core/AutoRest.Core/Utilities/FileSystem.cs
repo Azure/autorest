@@ -12,7 +12,7 @@ namespace AutoRest.Core.Utilities
 {
     public class FileSystem : IFileSystem
     {
-        public void WriteFile(string path, string contents)
+        public void WriteAllText(string path, string contents)
         {
             var eol = path.LineEnding();
             var lines = contents.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
@@ -55,7 +55,7 @@ namespace AutoRest.Core.Utilities
             return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
         }
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             path = path.AdjustGithubUrl();
             using (var client = new WebClient())
@@ -79,14 +79,6 @@ namespace AutoRest.Core.Utilities
         public bool FileExists(string path)
         {
             return File.Exists(path);
-        }
-
-        public void DeleteFile(string path)
-        {
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
         }
 
         public string[] GetFiles(string startDirectory, string filePattern, SearchOption options)

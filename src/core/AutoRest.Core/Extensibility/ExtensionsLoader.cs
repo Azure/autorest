@@ -149,7 +149,7 @@ namespace AutoRest.Core.Extensibility
             {
                 return null;
             }
-            return settings.FileSystemInput.ReadFileAsText(path);
+            return settings.FileSystemInput.ReadAllText(path);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
