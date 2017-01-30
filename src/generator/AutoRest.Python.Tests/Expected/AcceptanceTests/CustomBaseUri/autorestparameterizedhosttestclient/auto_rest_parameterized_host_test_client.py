@@ -24,11 +24,10 @@ class AutoRestParameterizedHostTestClientConfiguration(Configuration):
     :param host: A string value that is used as a global part of the
      parameterized host
     :type host: str
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, host, filepath=None):
+            self, host):
 
         if host is None:
             raise ValueError("Parameter 'host' must not be None.")
@@ -36,7 +35,7 @@ class AutoRestParameterizedHostTestClientConfiguration(Configuration):
             raise TypeError("Parameter 'host' must be str.")
         base_url = 'http://{accountName}{host}'
 
-        super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestparameterizedhosttestclient/{}'.format(VERSION))
 
@@ -55,13 +54,12 @@ class AutoRestParameterizedHostTestClient(object):
     :param host: A string value that is used as a global part of the
      parameterized host
     :type host: str
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, host, filepath=None):
+            self, host):
 
-        self.config = AutoRestParameterizedHostTestClientConfiguration(host, filepath)
+        self.config = AutoRestParameterizedHostTestClientConfiguration(host)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
