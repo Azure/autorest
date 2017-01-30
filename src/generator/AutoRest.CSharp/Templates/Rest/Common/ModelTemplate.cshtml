@@ -54,7 +54,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 && p.IsRequired
                 && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
-            @:@(property.Name) = new @(property.ModelTypeName)();
+            @:this.@(property.Name) = new @(property.ModelTypeName)();
             }
         }
 </text>
@@ -88,7 +88,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                      && p.IsRequired
                      && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
-            @:@(property.Name) = new @(property.ModelTypeName)();
+            @:this.@(property.Name) = new @(property.ModelTypeName)();
             }
 
             foreach (var property in Model.Properties.Where(p => !p.IsConstant))
@@ -100,7 +100,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 }
                 else
                 {
-            @:@(property.Name) = @propName;
+            @:this.@(property.Name) = @propName;
                 }
             }            
 
@@ -116,7 +116,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             foreach (var property in Model.Properties.Where(p => p.IsConstant))
             {
-            @:@(property.Name) = @(property.DefaultValue);
+            @:this.@(property.Name) = @(property.DefaultValue);
             }
         @:}
         }
@@ -208,7 +208,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             foreach (PropertyCs property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant && p.IsNullable() ))
             {
                 anythingToValidate = true;
-            @:if (@property.Name == null)
+            @:if (this.@property.Name == null)
             @:{
                 @:throw new Microsoft.Rest.ValidationException(Microsoft.Rest.ValidationRules.CannotBeNull, "@property.Name");
             @:}
