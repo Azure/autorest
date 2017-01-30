@@ -935,5 +935,75 @@ namespace AutoRest.Swagger.Tests
                 Assert.True(dictionaryProperty.SupportsAdditionalProperties);
             }
         }
+
+        [Fact]
+        public void TestTreatErrorAsDefault()
+        {
+            using (NewContext)
+            {
+                new Settings {
+                    Namespace = "Test",
+                    Input = Path.Combine("Swagger", "swagger-error-ignore.json")
+                };
+                Modeler modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+
+                var description =
+                    "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.";
+                var summary = "Product Types";
+
+                Assert.NotNull(codeModel);
+                Assert.Equal(2, codeModel.Properties.Count);
+                Assert.True(
+                    codeModel.Properties.Any(p => p.Name.EqualsIgnoreCase("subscriptionId")));
+                Assert.True(
+                    codeModel.Properties.Any(p => p.Name.EqualsIgnoreCase("apiVersion")));
+                Assert.Equal("2014-04-01-preview", codeModel.ApiVersion);
+                Assert.Equal("https://management.azure.com/", codeModel.BaseUrl);
+                Assert.Equal("Some cool documentation.", codeModel.Documentation);
+                //var allMethods = codeModel.Operations.SelectMany(each => each.Methods);
+                Assert.Equal(2, codeModel.Methods.Count);
+                Assert.Equal("List", codeModel.Methods[0].Name);
+                Assert.NotEmpty(codeModel.Methods[0].Description);
+                Assert.Equal(description, codeModel.Methods[0].Description);
+                Assert.NotEmpty(codeModel.Methods[0].Summary);
+                Assert.Equal(summary, codeModel.Methods[0].Summary);
+                Assert.Equal(HttpMethod.Get, codeModel.Methods[0].HttpMethod);
+                Assert.Equal(3, codeModel.Methods[0].Parameters.Count);
+                Assert.Equal("subscriptionId", codeModel.Methods[0].Parameters[0].Name);
+                Assert.NotNull(codeModel.Methods[0].Parameters[0].ClientProperty);
+                Assert.Equal("resourceGroupName", codeModel.Methods[0].Parameters[1].Name);
+                Assert.Equal("resourceGroupName", codeModel.Methods[0].Parameters[1].SerializedName);
+                Assert.Equal("Resource Group ID.", codeModel.Methods[0].Parameters[1].Documentation);
+                Assert.Equal(true, codeModel.Methods[0].Parameters[0].IsRequired);
+                Assert.Equal(ParameterLocation.Path, codeModel.Methods[0].Parameters[0].Location);
+                Assert.Equal("String", codeModel.Methods[0].Parameters[0].ModelType.ToString());
+                Assert.Equal("Reset", codeModel.Methods[1].Name);
+                Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "Product").Name);
+                Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "Product").SerializedName);
+                Assert.Equal("The product title.", codeModel.ModelTypes.First(m => m.Name == "Product").Summary);
+                Assert.Equal("The product documentation.",
+                    codeModel.ModelTypes.First(m => m.Name == "Product").Documentation);
+                Assert.Equal("A product id.",
+                    codeModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Summary);
+                Assert.Equal("ProductId", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[0].Name);
+                Assert.Equal("product_id",
+                    codeModel.ModelTypes.First(m => m.Name == "Product").Properties[0].SerializedName);
+                Assert.Null(codeModel.Methods[1].ReturnType.Body);
+                Assert.Null(codeModel.Methods[1].Responses[HttpStatusCode.NoContent].Body);
+                Assert.Equal(3, codeModel.Methods[1].Parameters.Count);
+                Assert.Equal("subscriptionId", codeModel.Methods[1].Parameters[0].Name);
+                Assert.Null(codeModel.Methods[1].Parameters[0].ClientProperty);
+                Assert.Equal("resourceGroupName", codeModel.Methods[1].Parameters[1].Name);
+                Assert.Equal("apiVersion", codeModel.Methods[1].Parameters[2].Name);
+
+                Assert.Equal("Capacity", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Name);
+                Assert.Equal("100", codeModel.ModelTypes.First(m => m.Name == "Product").Properties[3].DefaultValue);
+
+                Assert.DoesNotContain(HttpStatusCode.Gone, codeModel.Methods[0].Responses.Keys);
+                Assert.DoesNotContain(HttpStatusCode.Forbidden, codeModel.Methods[1].Responses.Keys);
+
+            }
+        }
     }
 }

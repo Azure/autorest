@@ -650,7 +650,7 @@ Properties in SwaggerSchema do not contain a required field. Instead, Each defin
 ```
 
 ### Error Modeling
-At runtime, if the server returns an unexpected status code,  the generated client throws an exception of type `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model (in property `Body`). The error model must be defined as the schema of the `default` response.
+At runtime, if the server returns an unexpected status code,  the generated client throws an exception of type `HttpOperationException`. The exception instance will contain the request of type `HttpRequestMessage` (in property `Request`), the response of type `HttpResponseMessage` (in property `Response`), and the error model (in property `Body`). The error model must be defined as the schema of the `default` response. You may specify any number of responses that return the error model, and they will all be treated as errors and throw.
 
 **Example:**
 A response of
