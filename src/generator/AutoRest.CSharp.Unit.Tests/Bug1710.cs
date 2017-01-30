@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
         }
 
         /// <summary>
-        ///     https://github.com/Azure/autorest/issues/1754
+        ///     https://github.com/Azure/autorest/issues/1710
         ///     Verifies autorest succesfully generates code for empty path object
         /// </summary>
         [Fact]
