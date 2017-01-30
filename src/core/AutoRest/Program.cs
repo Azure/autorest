@@ -44,7 +44,7 @@ namespace AutoRest
                         // internal preprocesor
                         if (settings.Preprocessor)
                         {
-                            Console.Write(InternalPreprocessor(settings.FileSystem.ReadFileAsText(settings.Input)));
+                            Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadAllText(settings.Input)));
                             return 0;
                         }
 
@@ -54,10 +54,6 @@ namespace AutoRest
                             if (settings.Input != null)
                             {
                                 settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
-                            }
-                            else if (settings.InputFolder != null)
-                            {
-                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
                             }
                             else
                             {
@@ -87,6 +83,9 @@ namespace AutoRest
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                             }
+                            Settings.Instance.FileSystemOutput.CommitToDisk(Settings.Instance.OutputFileName == null
+                                ? Settings.Instance.OutputDirectory
+                                : Path.GetDirectoryName(Settings.Instance.OutputFileName));
                         }
                     }
                     catch (Exception exception)

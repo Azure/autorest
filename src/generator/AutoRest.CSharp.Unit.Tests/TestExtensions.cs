@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
         internal static void Copy(this IFileSystem fileSystem, string source)
         {
-            Copy(fileSystem, source, (File.Exists(source)? Path.GetFileName(source): source));
+            Copy(fileSystem, source, (File.Exists(source) ? Path.GetFileName(source) : source));
         }
 
         internal static void Copy(this IFileSystem fileSystem, string source, string destination)
@@ -40,15 +40,11 @@ namespace AutoRest.CSharp.Unit.Tests
             // if copying a file
             if (File.Exists(source))
             {
-                fileSystem.WriteFile(destination, File.ReadAllText(source));
+                fileSystem.WriteAllText(destination, File.ReadAllText(source));
                 return;
             }
             
             // if copying a directory
-            if (fileSystem.DirectoryExists(destination))
-            {
-                fileSystem.DeleteDirectory(destination);
-            }
             fileSystem.CreateDirectory(destination);
         
             // Copy dirs recursively
@@ -78,8 +74,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     Modeler = modeler,
                     CodeGenerator = codeGenerator,
-                    FileSystem = fileSystem,
-                    OutputDirectory = "GeneratedCode",
+                    FileSystemInput = fileSystem,
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };
@@ -127,7 +122,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
             }
 
-            return fileSystem;
+            return settings.FileSystemOutput;
         }
 
         internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
@@ -138,8 +133,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 try
                 {
-                    fileSystem.EmptyDirectory(outputFolder);
-                    fileSystem.DeleteDirectory(outputFolder);
+                    Directory.Delete(outputFolder, true);
                 }
                 catch
                 {
@@ -152,7 +146,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 var target = Path.Combine(outputFolder, file.Substring(file.IndexOf(":", StringComparison.Ordinal) + 1));
                 Directory.CreateDirectory(Path.GetDirectoryName(target));
-                File.WriteAllText(target, fileSystem.ReadFileAsText(file));
+                File.WriteAllText(target, fileSystem.ReadAllText(file));
             }
 
             return outputFolder;

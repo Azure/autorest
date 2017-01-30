@@ -26,10 +26,10 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIExtensions.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\CowbellOKResponse.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\CowbellOKResponseModel.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\CowbellOKResponseModelModel.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPIExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\CowbellOKResponse.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\CowbellOKResponseModel.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\CowbellOKResponseModelModel.cs"));
 
                 var result = await Compile(fileSystem);
 

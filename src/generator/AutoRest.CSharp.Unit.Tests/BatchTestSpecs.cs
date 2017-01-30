@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Unit.Tests
             foreach (string file in files)
             {
                 // Comment this block out if not needed
-                if (!fs.ReadFileAsText(file).Contains(@"""swagger"": ""2.0"""))
+                if (!fs.ReadAllText(file).Contains(@"""swagger"": ""2.0"""))
                 {
                     //skip files that are not swagger files.
                     continue;
@@ -47,8 +47,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 using (var memoryFileSystem = GenerateCodeForTestFromSpec(dirName: file))
                 {
                     // Expected Files
-                    Assert.True(memoryFileSystem.GetFiles(@"GeneratedCode\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
-                    Assert.True(memoryFileSystem.GetFiles(@"GeneratedCode\Models\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
+                    Assert.True(memoryFileSystem.GetFiles(@"", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
+                    Assert.True(memoryFileSystem.GetFiles(@"Models\", "*.cs", SearchOption.TopDirectoryOnly).GetUpperBound(0) > 0);
 
                     var result = await Compile(memoryFileSystem);
 

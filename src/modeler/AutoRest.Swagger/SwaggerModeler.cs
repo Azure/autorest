@@ -68,7 +68,7 @@ namespace AutoRest.Swagger
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
             return Build(serviceDefinition);
         }
 
@@ -175,8 +175,8 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystemInput);
+            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 

@@ -121,34 +121,35 @@ namespace AutoRest.Core.Extensibility
             return modeler;
         }
 
+        [Obsolete("that information should be part of the input file 'bag'")]
         public static string GetConfigurationFileContent(Settings settings)
         {
             if (settings == null)
             {
                 throw new ArgumentNullException("settings");
             }
-            if (settings.FileSystem == null)
+            if (settings.FileSystemInput == null)
             {
                 throw new InvalidOperationException("FileSystem is null in settings.");
             }
 
             string path = ConfigurationFileName;
-            if (!settings.FileSystem.FileExists(path))
+            if (!settings.FileSystemInput.FileExists(path))
             {
                 path = Path.Combine(Directory.GetCurrentDirectory(), ConfigurationFileName);
             }
 
-            if (!settings.FileSystem.FileExists(path))
+            if (!settings.FileSystemInput.FileExists(path))
             {
                 path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location),
                     ConfigurationFileName);
             }
 
-            if (!settings.FileSystem.FileExists(path))
+            if (!settings.FileSystemInput.FileExists(path))
             {
                 return null;
             }
-            return settings.FileSystem.ReadFileAsText(path);
+            return settings.FileSystemInput.ReadAllText(path);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
