@@ -52,6 +52,12 @@
                 "summary": "asks the server to shut down, but to not exit ",
                 "operationId": "shutdown",
                 "parameters": [],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "shutdown successful"
@@ -65,6 +71,9 @@
                 "summary": "request server to shutdown",
                 "operationId": "exit",
                 "parameters": [],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -100,6 +109,9 @@
                         "description": "params to signal newly opened text docs"
                     }
                 ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -121,6 +133,9 @@
                         },
                         "description": "The configurations that were changed"
                     }
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -144,6 +159,9 @@
                         "description": "OK"
                     }
                 ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -166,6 +184,9 @@
                         "description": "params to notify document saved"
                     }
                 ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -187,6 +208,12 @@
                         },
                         "description": "params to save the document"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -216,6 +243,9 @@
                         "description": "params to notify document saved"
                     }
                 ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -237,6 +267,9 @@
                         },
                         "description": "Params to notify saved document"
                     }
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -270,6 +303,9 @@
                         },
                         "description": "params to notify fileevents"
                     }
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -417,6 +453,12 @@
                         "description": "params to specify position within the text document."
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "Location array with definitions",
@@ -444,6 +486,12 @@
                         },
                         "description": "params to specify position within the text document."
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -473,6 +521,12 @@
                         "description": "params to specify position within the text document."
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "array of document highlights",
@@ -500,6 +554,12 @@
                         },
                         "description": "params to specify the document symbols"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -529,6 +589,12 @@
                         "description": "Params to specify the workspace symbols"
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "array of workspace symbol infos",
@@ -556,6 +622,12 @@
                         },
                         "description": "Params for the CodeActionRequest"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -585,6 +657,12 @@
                         "description": "Params for codelens request"
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "array of codelens",
@@ -613,6 +691,12 @@
                         "description": "params for codelens resolve request"
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "resolved codelens object",
@@ -637,6 +721,12 @@
                         },
                         "description": "params to request location of links"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -666,6 +756,12 @@
                         "description": "params for document link resolve request"
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "document link obj result",
@@ -690,6 +786,12 @@
                         },
                         "description": "params to request format document"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -719,6 +821,12 @@
                         "description": "params to request formatting for a document range"
                     }
                 ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "array of formatting edits",
@@ -746,6 +854,12 @@
                         },
                         "description": "params to request ontype formatting"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -805,6 +919,12 @@
                         },
                         "description": "params to execute command in workspace"
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
