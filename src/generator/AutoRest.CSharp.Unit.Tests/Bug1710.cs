@@ -63,7 +63,6 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 Assert.NotNull(testApiExtensions);
                 var testExtensionMethod = testApiExtensions.GetMethod("GetInt");
                 Assert.False(testExtensionMethod.ReturnType.IsNullableValueType());
-
             }
         }
     }
