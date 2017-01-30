@@ -1,0 +1,49 @@
+﻿namespace XmlSerialization {
+
+    using System;
+    using Test;
+    using Test.Models;
+
+    public class Program {
+        public int Main(string baseUri) {
+            var client = new SimpleAPI();
+            client.BaseUri = new Uri(baseUri);
+            var result = client.Service.ListContainers();
+            
+            var r2 = client.Service.SetServiceProperties(new StorageServiceProperties {
+                Logging = new StorageServicePropertiesLogging {
+                    Version = "1.0",
+                    Delete = true,
+                    Read = false,
+                    Write = true,
+                    RetentionPolicy = new RetentionPolicy {
+                        Enabled = true,
+                        Days = 7
+                    }
+                },
+                HourMetrics = new Metrics {
+                    Version = "1.0",
+                    Enabled = true,
+                    IncludeAPIs = false,
+                    RetentionPolicy = new RetentionPolicy {
+                        Enabled = true,
+                        Days = 7
+                    }
+                },
+                MinuteMetrics = new Metrics {
+                    Version = "1.0",
+                    Enabled = true,
+                    IncludeAPIs = true,
+                    RetentionPolicy = new RetentionPolicy {
+                        Enabled = true,
+                        Days = 7
+                    }
+                },
+
+
+            });
+
+            return 0;
+        }
+    }
+}

@@ -104,6 +104,8 @@ namespace Fixtures.AdditionalProperties
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -166,7 +168,7 @@ namespace Fixtures.AdditionalProperties
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

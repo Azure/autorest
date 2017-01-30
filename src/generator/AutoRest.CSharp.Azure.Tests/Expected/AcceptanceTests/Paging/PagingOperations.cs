@@ -105,6 +105,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -152,7 +154,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -189,7 +191,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -304,6 +306,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("timeout", Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(timeout, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -351,7 +355,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -388,7 +392,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -504,6 +508,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("timeout", Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(timeout, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -551,7 +557,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -588,7 +594,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -724,6 +730,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("timeout", Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(timeout, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -771,7 +779,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -808,7 +816,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -882,6 +890,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -929,7 +939,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -966,7 +976,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1041,6 +1051,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1088,7 +1100,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1125,7 +1137,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1198,6 +1210,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1245,7 +1259,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1282,7 +1296,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1355,6 +1369,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1402,7 +1418,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1439,7 +1455,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1512,6 +1528,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1559,7 +1577,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1596,7 +1614,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1696,6 +1714,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1743,7 +1763,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1780,7 +1800,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1888,6 +1908,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1935,7 +1957,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1972,7 +1994,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2081,6 +2103,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2128,7 +2152,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2165,7 +2189,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2281,6 +2305,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2328,7 +2354,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2365,7 +2391,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2452,6 +2478,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2499,7 +2527,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2536,7 +2564,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2665,6 +2693,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("timeout", Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(timeout, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2712,7 +2742,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2749,7 +2779,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2879,6 +2909,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("timeout", Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(timeout, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2926,7 +2958,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2963,7 +2995,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page1<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3092,6 +3124,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("timeout", Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(timeout, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3139,7 +3173,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3176,7 +3210,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3264,6 +3298,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3311,7 +3347,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3348,7 +3384,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3437,6 +3473,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3484,7 +3522,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3521,7 +3559,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3608,6 +3646,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3655,7 +3695,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3692,7 +3732,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3779,6 +3819,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3826,7 +3868,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3863,7 +3905,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3950,6 +3992,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3997,7 +4041,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4034,7 +4078,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Product>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

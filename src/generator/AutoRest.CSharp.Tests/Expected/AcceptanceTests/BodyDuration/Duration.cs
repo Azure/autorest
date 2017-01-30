@@ -86,6 +86,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -126,7 +128,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -155,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.TimeSpan?>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -211,6 +213,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -254,7 +258,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -321,6 +325,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -361,7 +367,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -390,7 +396,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.TimeSpan?>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -446,6 +452,8 @@ namespace Fixtures.AcceptanceTestsBodyDuration
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -486,7 +494,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -515,7 +523,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.TimeSpan?>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
