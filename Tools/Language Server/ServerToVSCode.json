@@ -24,6 +24,9 @@
                         "description": "message to display"
                     }
                 ],
+                "consumes":[
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "message displayed"
@@ -46,6 +49,12 @@
                         },
                         "description": "message to display"
                     }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -73,6 +82,9 @@
                         "description": "message to log"
                     }
                 ],
+                "consumes":[
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "message logged"
@@ -92,6 +104,9 @@
                         "in": "path",
                         "type": "string"
                     }
+                ],
+                "consumes":[
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -115,6 +130,12 @@
                         }
                     }
                 ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "capability registered"
@@ -136,6 +157,12 @@
                             "$ref": "CommonModels.json#/definitions/UnregistrationParams"
                         }
                     }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
@@ -159,6 +186,9 @@
                         }
                     }
                 ],
+                "consumes":[
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "diagnostics received"
@@ -180,6 +210,12 @@
                             "$ref": "CommonModels.json#/definitions/ApplyWorkspaceEditParams"
                         }
                     }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
