@@ -1,0 +1,28 @@
+﻿---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+- application/json
+paths:
+  "/someOp":
+    get:
+      operationId: getInt
+      responses:
+        '200':
+          description: OK
+          x-nullable: false
+          schema:
+            type: integer
+        default:
+          description: default description
+          x-nullable: false
+          schema:
+            "$ref": "#/definitions/ErrorObj"
+definitions:
+  ErrorObj:
+    properties:
+      prop0:
+        type: string
+    description: default error obj

@@ -296,12 +296,12 @@ else
         @:{
             if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
-            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            @:@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType)) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
             else
             {
             @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+            @:@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType)) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
             }
             @:if (_errorBody != null)
             @:{
@@ -363,7 +363,7 @@ else
         @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
         @:try
         @:{
-            @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+            @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
         @:}
         @:catch (Newtonsoft.Json.JsonException ex)
         @:{
@@ -390,7 +390,7 @@ else
     @:string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
     @:try
     @:{
-        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType))>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
     @:}
     @:catch (Newtonsoft.Json.JsonException ex)
     @:{
