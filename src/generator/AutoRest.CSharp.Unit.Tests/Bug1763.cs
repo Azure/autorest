@@ -5,6 +5,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
@@ -62,6 +63,16 @@ namespace AutoRest.CSharp.Unit.Tests
                     return member.Name == "_id";
                 });
                 Assert.NotNull(idMember);
+
+                // now read from the file to ensure we use this. to access the members
+                var codeText = fileSystem.ReadFileAsText(@"GeneratedCode\Models\Pet.cs");
+                // get hold of the ctor
+                var regex = new Regex(Regex.Escape("public Pet(int _id, string name = default(string))") + @"[^}]+");
+                var match = regex.Match(codeText);
+                Assert.NotNull(match);
+                // verify the ctor has proper assignments
+                Assert.True(match.Groups[0].Value.Contains("this._id = _id"));
+                Assert.True(match.Groups[0].Value.Contains("this.Name = name"));
             }
         }
     }
