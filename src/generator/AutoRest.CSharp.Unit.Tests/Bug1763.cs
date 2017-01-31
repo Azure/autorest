@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
         /// <summary>
         ///     https://github.com/Azure/autorest/issues/1763
-        ///     Verifies autorest succesfully generates code for empty path object
+        ///     Verifies autorest succesfully generates code for models with properties starting with '_'
         /// </summary>
         [Fact]
         public async Task VerifyUnderscoredClassMembers()
