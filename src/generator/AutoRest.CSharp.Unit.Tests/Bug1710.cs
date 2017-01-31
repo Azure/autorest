@@ -20,7 +20,9 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
 
         /// <summary>
         ///     https://github.com/Azure/autorest/issues/1710
-        ///     Verifies autorest succesfully generates code for empty path object
+        ///     Verifies autorest respects the XNullable flag 
+        ///     for response objects and generates method signatures 
+        ///     with appropriate return types
         /// </summary>
         [Fact]
         public async Task VerifyNonNullableReturnTypes()
