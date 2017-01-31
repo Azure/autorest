@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
@@ -65,6 +66,16 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 Assert.NotNull(testApi);
                 var testApiMethod = testApi.GetMethod("PutAsync");
                 Assert.NotNull(testApiMethod);
+
+                var codeText = fileSystem.ReadFileAsText(@"GeneratedCode\TestOperationsExtensions.cs");
+                // get hold of the async func
+                var methodSignature = "public static async System.Threading.Tasks.Task PutAsync(this ITestOperations operations, MyParam param = default(MyParam), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))";
+                var regex = new Regex(Regex.Escape(methodSignature) + @"[^}]+");
+                var match = regex.Match(codeText);
+                Assert.NotNull(match);
+                
+                // verify the function calls dispose on HTTPResponse object
+                Assert.True(match.Groups[0].Value.Contains(".Dispose()"));
             }
         }
     }
