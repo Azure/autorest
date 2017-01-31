@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
@@ -13,18 +14,22 @@ namespace AutoRest.Swagger.Validation
 {
     public class UniqueResourcePaths : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
-        // Ignore everything within /es except when we find microsoft.* and capture that group
-        private readonly Regex apiRegExp = new Regex(@"(?:/[^/]+)+/(?i)microsoft(?-i).([^/]+)(?:/[^/]+)+");
+        private readonly Regex resPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/");
 
         /// <summary>
         /// This rule passes if the paths contain reference to exactly one of the namespace resources
         /// </summary>
-        /// <param name="paths"></param>
-        /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths) 
-            => paths.Keys.Select(path => 
-                    { return apiRegExp.Match(path).Success ? apiRegExp.Match(path).Groups?[0]?.Value.ToString().ToLowerInvariant() : null; })
-                                      .Where(p=>p!=null).Distinct().Count() <= 1;
+        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
+        {
+            var resources = paths.Keys
+                .SelectMany(path => resPathPattern.Matches(path)
+                    .OfType<Match>()
+                    .Select(match => match.Groups["resPath"].Value.ToString()))
+                .Distinct()
+                .ToList();
+            formatParameters = new [] { string.Join(", ", resources) };
+            return resources.Count <= 1;
+        }
 
         /// <summary>
         /// The template message for this Rule. 
