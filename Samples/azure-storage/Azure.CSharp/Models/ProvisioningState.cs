@@ -9,7 +9,7 @@ namespace Petstore.Models
     /// <summary>
     /// Defines values for ProvisioningState.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum ProvisioningState
     {
         [EnumMember(Value = "Creating")]
@@ -18,6 +18,39 @@ namespace Petstore.Models
         ResolvingDNS,
         [EnumMember(Value = "Succeeded")]
         Succeeded
+    }
+    internal static class ProvisioningStateEnumExtension
+    {
+        internal static string ToSerializedValue(this ProvisioningState? value )  =>
+            value == null ? null : (( ProvisioningState )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this ProvisioningState value )
+        {
+            switch( value )
+            {
+                case ProvisioningState.Creating:
+                    return "Creating";
+                case ProvisioningState.ResolvingDNS:
+                    return "ResolvingDNS";
+                case ProvisioningState.Succeeded:
+                    return "Succeeded";
+            }
+            return null;
+        }
+
+        internal static ProvisioningState? ParseProvisioningState( this string value )
+        {
+            switch( value )
+            {
+                case "Creating":
+                    return ProvisioningState.Creating;
+                case "ResolvingDNS":
+                    return ProvisioningState.ResolvingDNS;
+                case "Succeeded":
+                    return ProvisioningState.Succeeded;
+            }
+            return null;
+        }
     }
 }
 

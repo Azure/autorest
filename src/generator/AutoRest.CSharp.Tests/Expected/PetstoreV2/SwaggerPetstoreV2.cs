@@ -415,7 +415,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
                     }
@@ -701,10 +702,11 @@ namespace Fixtures.PetstoreV2
                 {
                     IList<Pet> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), "null"))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
                     }
@@ -862,10 +864,11 @@ namespace Fixtures.PetstoreV2
                 {
                     IList<Pet> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), "null"))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
                     }
@@ -1007,7 +1010,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
                     }
@@ -1423,7 +1427,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int?)e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
                     }
@@ -1577,7 +1582,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
                     }
@@ -1741,7 +1747,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
                     }
@@ -2419,7 +2426,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
                     }
@@ -2686,7 +2694,8 @@ namespace Fixtures.PetstoreV2
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => User.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, DeserializationSettings);
                     }
