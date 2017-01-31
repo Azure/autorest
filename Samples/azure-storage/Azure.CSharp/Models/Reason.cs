@@ -9,7 +9,7 @@ namespace Petstore.Models
     /// <summary>
     /// Defines values for Reason.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Reason
     {
         [EnumMember(Value = "AccountNameInvalid")]
