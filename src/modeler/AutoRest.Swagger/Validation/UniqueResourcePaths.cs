@@ -26,9 +26,9 @@ namespace AutoRest.Swagger.Validation
                     .OfType<Match>()
                     .Select(match => match.Groups["resPath"].Value.ToString()))
                 .Distinct()
-                .ToList();
+                .ToArray();
             formatParameters = new [] { string.Join(", ", resources) };
-            return resources.Count <= 1;
+            return resources.Length <= 1;
         }
 
         /// <summary>
