@@ -10,9 +10,9 @@ using System.Collections.Generic;
 namespace AutoRest.Swagger.Validation
 {
     /// <summary>
-    /// Validates if the body of the delete operation is empty.
+    /// Validates if the request body of the delete operation is empty.
     /// </summary>
-    public class DeleteMustHaveEmptyBody : TypedRule<Dictionary<string, Operation>>
+    public class DeleteMustHaveEmptyRequestBody : TypedRule<Dictionary<string, Operation>>
     {
         /// <summary>
         /// The template message for this Rule. 
@@ -20,7 +20,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.DeleteMustHaveEmptyBody;
+        public override string MessageTemplate => Resources.DeleteMustHaveEmptyRequestBody;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -28,7 +28,7 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
 
         /// <summary>
-        /// An <paramref name="operationDefinition"/> fails this rule if delete operation has a body.
+        /// An <paramref name="operationDefinition"/> fails this rule if delete operation does not have an empty request body.
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
         /// <returns>true if delete operation does not have a body. false otherwise.</returns>

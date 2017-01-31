@@ -21,7 +21,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.GuidUsageNotValid;
+        public override string MessageTemplate => Resources.GuidUsageNotRecommended;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)

@@ -159,11 +159,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in body..
+        ///    Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in the request body..
         /// </summary>
-        public static string DeleteMustHaveEmptyBody {
+        public static string DeleteMustHaveEmptyRequestBody {
             get {
-                return ResourceManager.GetString("DeleteMustHaveEmptyBody", resourceCulture);
+                return ResourceManager.GetString("DeleteMustHaveEmptyRequestBody", resourceCulture);
             }
         }
         
@@ -258,11 +258,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded.
+        ///    Looks up a localized string similar to Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board..
         /// </summary>
-        public static string GuidUsageNotValid {
+        public static string GuidUsageNotRecommended {
             get {
-                return ResourceManager.GetString("GuidUsageNotValid", resourceCulture);
+                return ResourceManager.GetString("GuidUsageNotRecommended", resourceCulture);
             }
         }
         

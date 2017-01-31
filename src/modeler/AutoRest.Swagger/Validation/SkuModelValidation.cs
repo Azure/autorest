@@ -41,7 +41,6 @@ namespace AutoRest.Swagger.Validation
             definitions.Any(definition =>
                 definition.Key.Equals("sku", System.StringComparison.InvariantCultureIgnoreCase) &&
                 definition.Value.Properties != null &&
-                definition.Value.Properties.Count <= 5 &&
                 definition.Value.Properties.Any(property =>
                     property.Key.Equals("name", System.StringComparison.InvariantCultureIgnoreCase) &&
                     property.Value.Type == Model.DataType.String

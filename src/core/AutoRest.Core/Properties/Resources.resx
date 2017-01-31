@@ -210,8 +210,8 @@
   <data name="XmsClientNameInValid" xml:space="preserve">
     <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
   </data>
-  <data name="DeleteMustHaveEmptyBody" xml:space="preserve">
-    <value>'Delete' operation cannot have parameters in body.</value>
+  <data name="DeleteMustHaveEmptyRequestBody" xml:space="preserve">
+    <value>'Delete' operation cannot have parameters in the request body.</value>
   </data>
   <data name="SkuModelIsNotValid" xml:space="preserve">
     <value>Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties.</value>
@@ -308,8 +308,8 @@
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
   </data>
-  <data name="GuidUsageNotValid" xml:space="preserve">
-    <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded</value>
+  <data name="GuidUsageNotRecommended" xml:space="preserve">
+    <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
   <data name="OperationNameNotValid" xml:space="preserve">
     <value>'GET' operation must use method name 'Get' or Method name start with 'List', 'PUT' operation must use method name 'Create', 'PATCH' operation must use method name 'Update' and 'DELETE' operation must use method name 'Delete'.</value>

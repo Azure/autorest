@@ -82,7 +82,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
         [CollectionRule(typeof(HttpVerbValidation))]
-        [CollectionRule(typeof(DeleteMustHaveEmptyBody))]
+        [CollectionRule(typeof(DeleteMustHaveEmptyRequestBody))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
