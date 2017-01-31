@@ -91,5 +91,46 @@ namespace AutoRest.Core.Model
         }
 
         public virtual bool IsPolymorphicDiscriminator => true == (Parent as CompositeType)?.BasePolymorphicDiscriminator?.EqualsIgnoreCase(Name.RawValue);
+
+        /// <summary>
+        /// Represents the path for getting to this property when holding the JSON node of the parent object in your hand.
+        /// </summary>
+        public IEnumerable<string> RealPath { get; set; }
+
+        /// <summary>
+        /// Represents the path for getting to this property when holding the XML node of the parent object in your hand.
+        /// </summary>
+        public IEnumerable<string> RealXmlPath
+        {
+            get
+            {
+                // special case: sequence types are usually inlined into parent
+                if (ModelType is SequenceType && !XmlIsWrapped)
+                {
+                    yield break;
+                }
+
+                // special case: inline property (like additional properties and such)
+                if (RealPath?.Any() != true)
+                {
+                    yield break;
+                }
+
+                yield return XmlName;
+            }
+        }
+
+        public XmlProperties XmlProperties { get; set; }
+
+        [JsonIgnore]
+        public string XmlName => XmlProperties?.Name ?? RealPath.FirstOrDefault() ?? Name;
+        [JsonIgnore]
+        public string XmlNamespace => XmlProperties?.Namespace ?? ModelType.XmlNamespace;
+        [JsonIgnore]
+        public string XmlPrefix => XmlProperties?.Prefix ?? ModelType.XmlPrefix;
+        [JsonIgnore]
+        public bool XmlIsWrapped => XmlProperties?.Wrapped ?? ModelType.XmlIsWrapped;
+        [JsonIgnore]
+        public bool XmlIsAttribute => XmlProperties?.Attribute ?? ModelType.XmlIsAttribute;
     }
 }

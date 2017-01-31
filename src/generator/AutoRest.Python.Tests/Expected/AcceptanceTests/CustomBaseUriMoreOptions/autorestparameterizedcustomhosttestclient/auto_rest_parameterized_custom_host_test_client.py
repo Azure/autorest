@@ -26,11 +26,10 @@ class AutoRestParameterizedCustomHostTestClientConfiguration(Configuration):
     :param dns_suffix: A string value that is used as a global part of the
      parameterized host. Default value 'host'.
     :type dns_suffix: str
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, subscription_id, dns_suffix, filepath=None):
+            self, subscription_id, dns_suffix):
 
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
@@ -42,7 +41,7 @@ class AutoRestParameterizedCustomHostTestClientConfiguration(Configuration):
             raise TypeError("Parameter 'dns_suffix' must be str.")
         base_url = '{vault}{secret}{dnsSuffix}'
 
-        super(AutoRestParameterizedCustomHostTestClientConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestParameterizedCustomHostTestClientConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestparameterizedcustomhosttestclient/{}'.format(VERSION))
 
@@ -64,13 +63,12 @@ class AutoRestParameterizedCustomHostTestClient(object):
     :param dns_suffix: A string value that is used as a global part of the
      parameterized host. Default value 'host'.
     :type dns_suffix: str
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, subscription_id, dns_suffix, filepath=None):
+            self, subscription_id, dns_suffix):
 
-        self.config = AutoRestParameterizedCustomHostTestClientConfiguration(subscription_id, dns_suffix, filepath)
+        self.config = AutoRestParameterizedCustomHostTestClientConfiguration(subscription_id, dns_suffix)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

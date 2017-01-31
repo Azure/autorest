@@ -103,6 +103,8 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -143,7 +145,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

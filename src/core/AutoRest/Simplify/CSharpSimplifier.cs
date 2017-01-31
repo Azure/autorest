@@ -18,18 +18,21 @@ namespace AutoRest.Simplify
     public class CSharpSimplifier
     {
         private static MetadataReference mscorlib;
+        private static MetadataReference newtonsoft;
+        private static MetadataReference xml;
 
         private static MetadataReference Mscorlib
         {
-            get
-            {
-                if (mscorlib == null)
-                {
-                    mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-                }
+            get {return mscorlib ?? (mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location));}
+        }
 
-                return mscorlib;
-            }
+        private static MetadataReference Xml {
+            get {return xml ?? (xml = MetadataReference.CreateFromFile($"{Path.GetDirectoryName(typeof(object).Assembly.Location)}\\System.Xml.Linq.dll"));}
+        }
+
+        private static MetadataReference Newtonsoft
+        {
+            get {return newtonsoft ?? (newtonsoft = MetadataReference.CreateFromFile(typeof(Newtonsoft.Json.JsonObjectAttribute).Assembly.Location));}
         }
 
         public async Task Run()
@@ -45,17 +48,13 @@ namespace AutoRest.Simplify
             var solution = new AdhocWorkspace().CurrentSolution
                 .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
                 .AddMetadataReference(projectId, Mscorlib)
+                .AddMetadataReference(projectId, Xml)
+                .AddMetadataReference(projectId, Newtonsoft)
                 .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(
-                        a =>
-                            string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",
-                                StringComparison.OrdinalIgnoreCase) == 0)
+                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",StringComparison.OrdinalIgnoreCase) == 0)
                     .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
                 .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(
-                        a =>
-                            string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",
-                                StringComparison.OrdinalIgnoreCase) == 0)
+                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",StringComparison.OrdinalIgnoreCase) == 0)
                     .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
                 .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
                     .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)

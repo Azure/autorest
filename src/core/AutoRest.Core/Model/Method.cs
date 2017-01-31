@@ -226,6 +226,11 @@ namespace AutoRest.Core.Model
         public string RequestContentType { get; set; }
 
         /// <summary>
+        ///  The potential response content types.
+        /// </summary>
+        public string[] ResponseContentTypes { get; set;}
+
+        /// <summary>
         /// Gets vendor extensions dictionary.
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; } = new Dictionary<string, object>();

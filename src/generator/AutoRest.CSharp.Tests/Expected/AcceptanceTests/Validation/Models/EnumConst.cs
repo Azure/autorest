@@ -17,11 +17,36 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     /// <summary>
     /// Defines values for EnumConst.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum EnumConst
     {
         [EnumMember(Value = "constant_string_as_enum")]
         ConstantStringAsEnum
+    }
+    internal static class EnumConstEnumExtension
+    {
+        internal static string ToSerializedValue(this EnumConst? value )  =>
+            value == null ? null : (( EnumConst )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this EnumConst value )
+        {
+            switch( value )
+            {
+                case EnumConst.ConstantStringAsEnum:
+                    return "constant_string_as_enum";
+            }
+            return null;
+        }
+
+        internal static EnumConst? ParseEnumConst( this string value )
+        {
+            switch( value )
+            {
+                case "constant_string_as_enum":
+                    return EnumConst.ConstantStringAsEnum;
+            }
+            return null;
+        }
     }
 }
 

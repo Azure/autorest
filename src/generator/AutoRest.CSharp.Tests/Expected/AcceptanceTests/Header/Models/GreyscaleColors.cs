@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// <summary>
     /// Defines values for GreyscaleColors.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum GreyscaleColors
     {
         [EnumMember(Value = "White")]
@@ -26,6 +26,39 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         Black,
         [EnumMember(Value = "GREY")]
         GREY
+    }
+    internal static class GreyscaleColorsEnumExtension
+    {
+        internal static string ToSerializedValue(this GreyscaleColors? value )  =>
+            value == null ? null : (( GreyscaleColors )value).ToSerializedValue();
+
+        internal static string ToSerializedValue(this GreyscaleColors value )
+        {
+            switch( value )
+            {
+                case GreyscaleColors.White:
+                    return "White";
+                case GreyscaleColors.Black:
+                    return "black";
+                case GreyscaleColors.GREY:
+                    return "GREY";
+            }
+            return null;
+        }
+
+        internal static GreyscaleColors? ParseGreyscaleColors( this string value )
+        {
+            switch( value )
+            {
+                case "White":
+                    return GreyscaleColors.White;
+                case "black":
+                    return GreyscaleColors.Black;
+                case "GREY":
+                    return GreyscaleColors.GREY;
+            }
+            return null;
+        }
     }
 }
 
