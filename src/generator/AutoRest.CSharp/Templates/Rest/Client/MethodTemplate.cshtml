@@ -222,11 +222,11 @@ else
                 if (!Model.RequestBody.IsNullable()) {
                     if (Model.RequestBody.ModelType is SequenceType && (Model.RequestBody.ModelType as SequenceType).ElementType is CompositeType)
                     { // for primitive sequences for now
-    @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => x.XmlSerialize(new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)")))).ToString();
+    @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => x.XmlSerialize(new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)")))).ToString();
                     }
                     else if (Model.RequestBody.ModelType is SequenceType)
                     { // for primitive sequences for now
-    @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
+    @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
                     }
                     else
                     {
@@ -241,11 +241,11 @@ else
     @:{
                     if (Model.RequestBody.ModelType is SequenceType && (Model.RequestBody.ModelType as SequenceType).ElementType is CompositeType)
                     { // for primitive sequences for now
-        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => x.XmlSerialize(new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)")))).ToString();
+        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => x.XmlSerialize(new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)")))).ToString();
                     }
                     else if (Model.RequestBody.ModelType is SequenceType)
                     { // for primitive sequences for now
-        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", @(Model.RequestBody.Name).Select(x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
+        @:_requestContent = new System.Xml.Linq.XElement("@Model.RequestBody.ModelType.XmlName", System.Linq.Enumerable.Select(@(Model.RequestBody.Name), x => new System.Xml.Linq.XElement("@((Model.RequestBody.ModelType as SequenceType).ElementXmlName)", x))).ToString();
                     }
                     else
                     {
