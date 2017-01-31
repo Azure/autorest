@@ -20,7 +20,9 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
 
         /// <summary>
         ///     https://github.com/Azure/autorest/issues/1754
-        ///     Verifies autorest succesfully generates code for empty path object
+        ///     Verifies autorest succesfully generates code 
+        ///     for async extension methods that calls .Dispose()
+        ///     on HTTP response objects
         /// </summary>
         [Fact]
         public async Task EnsureHttpMessageAsyncDispose()
