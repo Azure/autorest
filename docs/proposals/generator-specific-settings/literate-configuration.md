@@ -240,15 +240,11 @@ Once a file is loaded, it's never referred to in configuration by it's file name
 > 
 > When the documents each have a different `namespace`, the nodes can be referred to seperately, even if the final output of AutoRest is a single, merged SDK.
 
-### Swagger DOM Query Format
-In order to make it possible to remove most of the AutoRest-specific extensions from the Swagger DOM, it is necessary to be able to refer to one or more nodes in the swagger document and apply options to those nodes.
-
-
 ## Configuration sections
 
 The general layout of the Literate Configuration DOM is :
 
-### Settings - drv
+### Settings 
 Settings are top-level key-value pairs that AutoRest uses to create the Literate Swagger DOM and control the pipeline.
 
 These generally include the things that have been traditionally passed on the cmdline. Ie:
@@ -278,6 +274,27 @@ ruby:
   namespace: Microsoft::Azure::MyApp::MyNameSpace # another alternative
   output-folder : $(output-folder)/ruby/sdk # relative to the global value.
 ```
+
+### Swagger DOM Query Format
+In order to make it possible to remove most of the AutoRest-specific extensions from
+the Swagger DOM, it is necessary to be able to refer to one or more nodes in the 
+swagger document and apply options to those nodes.
+
+#### Querying the swagger DOM.
+
+In order to accurately query nodes in the Swagger DOM for a specific set, we have a JSON/YAML object that is used to specify what we're looking for.
+
+The query is basically two things: the list of swagger documents and the nodes inside of those documents:
+
+``` yaml
+from: <swagger-document-selection> # based on swagger namespaces (aka, the swagger 'title')
+where: <json-path-query>           # a JSONPath expression to select the nodes in the swagger DOM
+```
+
+If the `from` isn't set, the default is to apply the directive to all the Literate Swagger DOMs
+
+If the `where` isn't set, the default is to apply the directive to all the nodes in the selected Literate Swagger DOMs
+
 
 ### Directives - global or per-language
 
@@ -309,11 +326,29 @@ directive: # an array of directive objects
   
 csharp:
   directive:
+    # change blob method group name to AzureBlob
     - from: My Spec # specify a specific document 'namespace' (aka title)
       where: $..[@operationId="blob_*"]
       set:
         method-group: AzureBlob # per-language (csharp) override for method-group name
+
+    # change 
+    - from: My Spec # specify a specific document 'namespace' (aka title)
+      where: $..[@operationId="glob_*_*"] # take nodes where it has more than one underscore
+      transform: 
+        - mytransformer
 ```
+
+``` js transformer=mytransformer
+// assume that the nodes are given as a collection of nodes.
+for( nodename in nodes ) {
+  nodes[nodename].methodgroup = nodes[nodename].methodgroup.replace(/(glob_.*)_(.*)/ig,'AzureGlob_$1');
+}
+
+// return the nodes to the colllection.
+return nodes;
+```
+
 
 > Example: disabling a validation for a couple of docs
 
