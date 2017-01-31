@@ -61,8 +61,7 @@ namespace AutoRest.Ruby.Azure
             foreach (CompositeTypeRba model in codeModel.ModelTypes)
             {
                 if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool)model.Extensions[AzureExtensions.ExternalExtension])
-                    || model.Name == "Resource" || model.Name == "SubResource")
+                    (bool)model.Extensions[AzureExtensions.ExternalExtension]))
                 {
                     continue;
                 }
@@ -73,8 +72,11 @@ namespace AutoRest.Ruby.Azure
                     continue;
                 }
 
-                var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                var modelTemplate = new AzureModelTemplate { Model = model };
+                if(!CompositeTypeRba.nameRegEx.IsMatch(model.Name.ToString()) || !CompositeTypeRba.IsResourceModelsMatchStandardDefinition(model))
+                {
+                    await Write(modelTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                }
             }
             // Paged Models
             foreach (var pageModel in codeModel.pageModels)
