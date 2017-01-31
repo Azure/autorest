@@ -28,21 +28,10 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
     :param host: A string value that is used as a global part of the
      parameterized host
     :type host: str
-    :param accept_language: Gets or sets the preferred language for the
-     response.
-    :type accept_language: str
-    :param long_running_operation_retry_timeout: Gets or sets the retry
-     timeout in seconds for Long Running Operations. Default value is 30.
-    :type long_running_operation_retry_timeout: int
-    :param generate_client_request_id: When set to true a unique
-     x-ms-client-request-id value is generated and included in each request.
-     Default is true.
-    :type generate_client_request_id: bool
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, credentials, host, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, filepath=None):
+            self, credentials, host):
 
         if credentials is None:
             raise ValueError("Parameter 'credentials' must not be None.")
@@ -50,20 +39,15 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
             raise ValueError("Parameter 'host' must not be None.")
         if not isinstance(host, str):
             raise TypeError("Parameter 'host' must be str.")
-        if accept_language is not None and not isinstance(accept_language, str):
-            raise TypeError("Optional parameter 'accept_language' must be str.")
         base_url = 'http://{accountName}{host}'
 
-        super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestparameterizedhosttestclient/{}'.format(VERSION))
         self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.host = host
-        self.accept_language = accept_language
-        self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
-        self.generate_client_request_id = generate_client_request_id
 
 
 class AutoRestParameterizedHostTestClient(object):
@@ -81,23 +65,12 @@ class AutoRestParameterizedHostTestClient(object):
     :param host: A string value that is used as a global part of the
      parameterized host
     :type host: str
-    :param accept_language: Gets or sets the preferred language for the
-     response.
-    :type accept_language: str
-    :param long_running_operation_retry_timeout: Gets or sets the retry
-     timeout in seconds for Long Running Operations. Default value is 30.
-    :type long_running_operation_retry_timeout: int
-    :param generate_client_request_id: When set to true a unique
-     x-ms-client-request-id value is generated and included in each request.
-     Default is true.
-    :type generate_client_request_id: bool
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, credentials, host, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, filepath=None):
+            self, credentials, host):
 
-        self.config = AutoRestParameterizedHostTestClientConfiguration(credentials, host, accept_language, long_running_operation_retry_timeout, generate_client_request_id, filepath)
+        self.config = AutoRestParameterizedHostTestClientConfiguration(credentials, host)
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

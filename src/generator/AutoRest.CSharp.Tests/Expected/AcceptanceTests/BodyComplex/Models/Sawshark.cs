@@ -14,7 +14,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    [Newtonsoft.Json.JsonObject("sawshark")]
+    [JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
         /// <summary>

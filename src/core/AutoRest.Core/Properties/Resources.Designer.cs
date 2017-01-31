@@ -632,7 +632,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to More than one resource path is not allowed in a single spec.
+        ///    Looks up a localized string similar to More than one resource path is not allowed in a single spec (found: {0})..
         /// </summary>
         public static string UniqueResourcePathsWarning {
             get {

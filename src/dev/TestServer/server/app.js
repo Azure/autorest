@@ -36,6 +36,7 @@ var azureSpecial = require('./routes/azureSpecials');
 var parameterGrouping = require('./routes/azureParameterGrouping.js');
 var validation = require('./routes/validation.js');
 var customUri = require('./routes/customUri.js');
+var xml = require('./routes/xml.js'); // XML serialization
 var util = require('util');
 
 var app = express();
@@ -506,6 +507,7 @@ app.use('/subscriptions', new azureUrl(azurecoverage).router);
 app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
 app.use('/validation', new validation(coverage).router);
 app.use('/customUri', new customUri(coverage).router);
+app.use('/xml', new xml().router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

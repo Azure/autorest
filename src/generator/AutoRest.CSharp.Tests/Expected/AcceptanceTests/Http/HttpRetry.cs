@@ -83,6 +83,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("HEAD");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -123,7 +125,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -191,6 +193,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -237,7 +241,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -305,6 +309,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("PATCH");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -351,7 +357,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -415,6 +421,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -455,7 +463,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -523,6 +531,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -569,7 +579,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -637,6 +647,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("DELETE");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -683,7 +695,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -751,6 +763,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -797,7 +811,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -865,6 +879,8 @@ namespace Fixtures.AcceptanceTestsHttp
             _httpRequest.Method = new System.Net.Http.HttpMethod("PATCH");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -911,7 +927,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

@@ -87,6 +87,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -127,7 +129,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -156,7 +158,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -212,6 +214,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -252,7 +256,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -281,7 +285,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -347,6 +351,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -393,7 +399,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -460,6 +466,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -500,7 +508,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -529,7 +537,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -585,6 +593,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -625,7 +635,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -654,7 +664,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -710,6 +720,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -750,7 +762,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -779,7 +791,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -835,6 +847,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -875,7 +889,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -904,7 +918,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -961,6 +975,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1001,7 +1017,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1030,7 +1046,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1096,6 +1112,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1142,7 +1160,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1209,6 +1227,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1249,7 +1269,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1278,7 +1298,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1334,6 +1354,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1374,7 +1396,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1403,7 +1425,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1459,6 +1481,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1499,7 +1523,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1528,7 +1552,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1594,6 +1618,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1640,7 +1666,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1707,6 +1733,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1747,7 +1775,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1776,7 +1804,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1832,6 +1860,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1872,7 +1902,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1901,7 +1931,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1957,6 +1987,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1997,7 +2029,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2026,7 +2058,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2092,6 +2124,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2138,7 +2172,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2205,6 +2239,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2245,7 +2281,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2274,7 +2310,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2330,6 +2366,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2370,7 +2408,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2399,7 +2437,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2455,6 +2493,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2495,7 +2535,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2524,7 +2564,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2590,6 +2630,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2636,7 +2678,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2703,6 +2745,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2743,7 +2787,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2772,7 +2816,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2828,6 +2872,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2868,7 +2914,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2897,7 +2943,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2953,6 +2999,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2993,7 +3041,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3022,7 +3070,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3088,6 +3136,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3134,7 +3184,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3201,6 +3251,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3241,7 +3293,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3270,7 +3322,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3326,6 +3378,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3366,7 +3420,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3395,7 +3449,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3451,6 +3505,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3491,7 +3547,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3520,7 +3576,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3586,6 +3642,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3632,7 +3690,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3699,6 +3757,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3739,7 +3799,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3768,7 +3828,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3824,6 +3884,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3864,7 +3926,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3893,7 +3955,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3950,6 +4012,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3990,7 +4054,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4019,7 +4083,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -4086,6 +4150,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4132,7 +4198,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4199,6 +4265,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4239,7 +4307,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4268,7 +4336,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -4324,6 +4392,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4364,7 +4434,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4393,7 +4463,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -4450,6 +4520,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4490,7 +4562,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4519,7 +4591,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -4586,6 +4658,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4632,7 +4706,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4699,6 +4773,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4739,7 +4815,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4768,7 +4844,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -4824,6 +4900,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4864,7 +4942,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4893,7 +4971,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -4951,6 +5029,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4991,7 +5071,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5020,7 +5100,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -5087,6 +5167,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5133,7 +5215,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5201,6 +5283,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5241,7 +5325,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5270,7 +5354,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.TimeSpan?>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -5336,6 +5420,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5382,7 +5468,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5450,6 +5536,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5490,7 +5578,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5519,7 +5607,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -5586,6 +5674,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5632,7 +5722,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5700,6 +5790,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5740,7 +5832,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5769,7 +5861,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -5826,6 +5918,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5866,7 +5960,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -5895,7 +5989,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, new Base64UrlJsonConverter());
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -5951,6 +6045,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -5991,7 +6087,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6020,7 +6116,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6076,6 +6172,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6116,7 +6214,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6145,7 +6243,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6202,6 +6300,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6242,7 +6342,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6271,7 +6371,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6328,6 +6428,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6368,7 +6470,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6397,7 +6499,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6454,6 +6556,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6494,7 +6598,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6523,7 +6627,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6591,6 +6695,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6637,7 +6743,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6704,6 +6810,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6744,7 +6852,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6773,7 +6881,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6829,6 +6937,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6869,7 +6979,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -6898,7 +7008,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -6955,6 +7065,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -6995,7 +7107,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7024,7 +7136,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7081,6 +7193,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7121,7 +7235,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7150,7 +7264,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7207,6 +7321,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7247,7 +7363,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7276,7 +7392,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7343,6 +7459,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7389,7 +7507,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7456,6 +7574,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7496,7 +7616,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7525,7 +7645,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7582,6 +7702,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7622,7 +7744,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7651,7 +7773,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7709,6 +7831,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7749,7 +7873,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7778,7 +7902,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7836,6 +7960,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -7876,7 +8002,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -7905,7 +8031,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -7963,6 +8089,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -8003,7 +8131,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -8032,7 +8160,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -8100,6 +8228,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -8146,7 +8276,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

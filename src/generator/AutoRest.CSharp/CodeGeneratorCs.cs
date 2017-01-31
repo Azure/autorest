@@ -104,7 +104,13 @@ namespace AutoRest.CSharp
                 var exceptionTemplate = new ExceptionTemplate { Model = exceptionType, };
                 await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName, $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
             }
-
+            
+            // Xml Serialization
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                var xmlSerializationTemplate = new XmlSerializationTemplate();
+                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
+            }
         }
 
         private async Task GenerateRestCode(CodeModelCs codeModel)
@@ -153,7 +159,6 @@ namespace AutoRest.CSharp
                     string.Format(CultureInfo.InvariantCulture,
                         string.Format(AutoRest.Core.Properties.Resources.ParameterValueIsNotValid, Settings.Instance.CodeGenerationMode, "server/client"), "CodeGenerator"));
             }
-            
         }
     }
 }
