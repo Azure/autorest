@@ -116,7 +116,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
             foreach (var property in Model.Properties.Where(p => p.IsConstant))
             {
-            @:this.@(property.Name) = @(property.DefaultValue);
+            @:@(property.Name) = @(property.DefaultValue);
             }
         @:}
         }
