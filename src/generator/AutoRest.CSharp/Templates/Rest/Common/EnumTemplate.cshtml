@@ -22,7 +22,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @:        [System.Runtime.Serialization.EnumMember(Value = "@Model.Values.Last().SerializedName")]
 @:        @(Model.Values.Last().MemberName)
     @:}
-<text>
+    if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
     internal static class @(Model.ClassName)EnumExtension 
     {
         internal static string ToSerializedValue(this @(Model.ClassName)? value )  => 
@@ -56,7 +56,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         }
         
     }
-</text>
+</text>}
     
     }
     else

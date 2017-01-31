@@ -701,7 +701,7 @@ namespace Fixtures.PetstoreV2
                 {
                     IList<Pet> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), "null"))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }else
@@ -862,7 +862,7 @@ namespace Fixtures.PetstoreV2
                 {
                     IList<Pet> _tmp_ = null;
                     if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
-                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), "null"))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
                     }else
