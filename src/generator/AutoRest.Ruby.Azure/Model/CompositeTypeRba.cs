@@ -16,9 +16,9 @@ namespace AutoRest.Ruby.Azure.Model
     /// </summary>
     public class CompositeTypeRba : CompositeTypeRb
     {
-        public  static readonly Regex resourceOrSubResourceRegEx = new Regex(@"^(RESOURCE|SUBRESOURCE)$", RegexOptions.IgnoreCase);
-        private static readonly Regex subResourceRegEx           = new Regex(@"^(ID)$", RegexOptions.IgnoreCase);
-        private static readonly Regex resourceRegEx              = new Regex(@"^(ID|NAME|TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
+        public static readonly Regex resourceOrSubResourceRegEx = new Regex(@"^(RESOURCE|SUBRESOURCE)$", RegexOptions.IgnoreCase);
+        private static readonly Regex subResourceRegEx = new Regex(@"^(ID)$", RegexOptions.IgnoreCase);
+        private static readonly Regex resourceRegEx = new Regex(@"^(ID|NAME|TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Initializes a new instance of the AzureModelTemplateModel class.
@@ -108,7 +108,6 @@ namespace AutoRest.Ruby.Azure.Model
 
             return true;
         }
-
 
         /// <summary>
         /// Gets the list of modules/classes which need to be included.

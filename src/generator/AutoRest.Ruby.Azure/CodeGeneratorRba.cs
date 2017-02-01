@@ -66,14 +66,14 @@ namespace AutoRest.Ruby.Azure
                     continue;
                 }
 
-                if ( codeModel.pageModels.Any( each => each.Name.EqualsIgnoreCase(model.Name ) ) )
+                if (codeModel.pageModels.Any( each => each.Name.EqualsIgnoreCase(model.Name)))
                 {
                     // Skip, handled in the .pageModels section below.
                     continue;
                 }
 
                 var modelTemplate = new AzureModelTemplate { Model = model };
-                if (!CompositeTypeRba.resourceOrSubResourceRegEx.IsMatch(model.Name.ToString()) || !CompositeTypeRba.IsResourceModelMatchingStandardDefinition(model))
+                if (!CompositeTypeRba.resourceOrSubResourceRegEx.IsMatch(model.Name) || !CompositeTypeRba.IsResourceModelMatchingStandardDefinition(model))
                 {
                     await Write(modelTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
                 }
