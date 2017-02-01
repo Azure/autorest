@@ -66,7 +66,7 @@ namespace AutoRest.Ruby.Azure
                     continue;
                 }
 
-                if (codeModel.pageModels.Any( each => each.Name.EqualsIgnoreCase(model.Name)))
+                if (codeModel.pageModels.Any(each => each.Name.EqualsIgnoreCase(model.Name)))
                 {
                     // Skip, handled in the .pageModels section below.
                     continue;
