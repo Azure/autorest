@@ -283,6 +283,50 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
             messages.AssertOnlyValidationMessage(typeof(MutabilityWithReadOnlyRule), 2);
         }
+
+        [Fact]
+        public void VersionFormatValidated()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-version-validation-fail.json"));
+            messages.AssertOnlyValidationMessage(typeof(APIVersionPattern), 1);
+        }
+
+        [Fact]
+        public void GuidUsageValidated()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-guid-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(GuidValidation), 1);
+        }
+
+        [Fact]
+        public void DeleteRequestBodyValidated()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-delete-request-body-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(DeleteMustHaveEmptyRequestBody), 1);
+        }
+
+        [Fact]
+        public void ResourceExtensionValidated()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-ext-msresource-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(ResourceIsMsResourceValidation), 1);
+        }
+
+        [Fact]
+        public void MsClientNameExtensionValidated()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-ext-msclientname-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(XmsClientNameValidation), 1);
+        }
+
+        [Fact]
+        public void OperationsApiValidated()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-operations-api-validation.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationsAPIImplementationValidation), 1);
+        }
+
+
     }
 
     #region Positive tests

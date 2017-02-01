@@ -37,15 +37,29 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="definitions">to be validated</param>
         /// <returns>true if valid.false otherwise</returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions) =>
-            definitions.Any(definition =>
-                definition.Key.Equals("sku", System.StringComparison.InvariantCultureIgnoreCase) &&
-                definition.Value.Properties != null &&
-                definition.Value.Properties.Any(property =>
-                    property.Key.Equals("name", System.StringComparison.InvariantCultureIgnoreCase) &&
-                    property.Value.Type == Model.DataType.String
-                ) &&
-                definition.Value.Properties.All(property => propertiesRegEx.IsMatch(property.Key))
-            );
+        public override bool IsValid(Dictionary<string, Schema> definitions)
+        {
+            foreach(KeyValuePair<string, Schema> definition in definitions)
+            {
+                if(definition.Key.Equals("sku", System.StringComparison.InvariantCultureIgnoreCase))
+                {
+                    Schema schema = definition.Value;
+                    if (schema.Properties == null)
+                        return false;
+
+                    bool hasName = schema.Properties.Any(property =>
+                        property.Key.Equals("name", System.StringComparison.InvariantCultureIgnoreCase) &&
+                        property.Value.Type == Model.DataType.String);
+
+                    if (!hasName)
+                        return false;
+
+                    if (!schema.Properties.All(property => propertiesRegEx.IsMatch(property.Key)))
+                        return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
