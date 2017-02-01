@@ -68,7 +68,7 @@ namespace AutoRest.Ruby.Azure.Model
 
         /// <summary>
         /// Checks if the provided definition of models 'Resource'/'SubResource' matches the standard definition,
-        /// as defined in MsResAzure. For other models, it returns false.
+        /// as defined in MsRestAzure. For other models, it returns false.
         /// </summary>
         /// <param name="model">to be validated</param>
         /// <returns></returns>
