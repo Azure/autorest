@@ -16,9 +16,9 @@ namespace AutoRest.Ruby.Azure.Model
     /// </summary>
     public class CompositeTypeRba : CompositeTypeRb
     {
-        public static readonly Regex nameRegEx         = new Regex(@"^(RESOURCE|SUBRESOURCE)$", RegexOptions.IgnoreCase);
-        private static readonly Regex subResourceRegEx = new Regex(@"^(ID)$", RegexOptions.IgnoreCase);
-        private static readonly Regex resourceRegEx    = new Regex(@"^(ID|NAME|TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
+        public  static readonly Regex resourceOrSubResourceRegEx = new Regex(@"^(RESOURCE|SUBRESOURCE)$", RegexOptions.IgnoreCase);
+        private static readonly Regex subResourceRegEx           = new Regex(@"^(ID)$", RegexOptions.IgnoreCase);
+        private static readonly Regex resourceRegEx              = new Regex(@"^(ID|NAME|TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Initializes a new instance of the AzureModelTemplateModel class.
@@ -50,7 +50,7 @@ namespace AutoRest.Ruby.Azure.Model
                 if (this.BaseModelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) ||
                     this.BaseModelType.Extensions.ContainsKey(AzureExtensions.AzureResourceExtension))
                 {
-                    if(!nameRegEx.IsMatch(typeName) || !IsResourceModelsMatchStandardDefinition(this))
+                    if (!resourceOrSubResourceRegEx.IsMatch(typeName) || !IsResourceModelMatchingStandardDefinition(this))
                     {
                         typeName = "MsRestAzure::" + typeName;
                     }
@@ -58,30 +58,46 @@ namespace AutoRest.Ruby.Azure.Model
 
                 return " < " + typeName;
             }
-            else if (nameRegEx.IsMatch(this.Name.ToString()))
+            else if (resourceOrSubResourceRegEx.IsMatch(this.Name))
             {
-                return " < " + "MsRestAzure::" + this.Name.ToString();
+                return " < " + "MsRestAzure::" + this.Name;
             }
 
             return string.Empty;
         }
 
-        public static bool IsResourceModelsMatchStandardDefinition(CompositeType model)
+        /// <summary>
+        /// Checks if the provided definition of models 'Resource'/'SubResource' matches the standard definition. 
+        /// For other models, it returns false. 
+        /// </summary>
+        /// <param name="model">to be validated</param>
+        /// <returns></returns>
+        public static bool IsResourceModelMatchingStandardDefinition(CompositeType model)
         {
             string modelName = model.Name.ToString();
-            if (
-                (modelName.Equals("SubResource", StringComparison.InvariantCultureIgnoreCase) &&
-                    model.Properties.All(property => subResourceRegEx.IsMatch(property.Name.ToString()))) ||
-                (modelName.Equals("Resource", StringComparison.InvariantCultureIgnoreCase) &&
-                    model.Properties.All(property => resourceRegEx.IsMatch(property.Name.ToString())))
-               )
+            if (modelName.Equals("SubResource", StringComparison.InvariantCultureIgnoreCase) &&
+                model.Properties.All(property => subResourceRegEx.IsMatch(property.Name.ToString())))
             {
                 return true;
             }
+
+            if(modelName.Equals("Resource", StringComparison.InvariantCultureIgnoreCase) &&
+               model.Properties.All(property => resourceRegEx.IsMatch(property.Name.ToString())))
+            {
+                return true;
+            }
+
             return false;
         }
 
-        public static bool ShouldAccessorGenerated(CompositeType model, string propertyName)
+        /// <summary>
+        /// Determines if the accessor needs to be generated. For Resource/SubResource models, accessors are generated only
+        /// for properties that are not in the standard definition.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public static bool NeedsAccessor(CompositeType model, string propertyName)
         {
             string modelName = model.Name.ToString();
             if((modelName.Equals("SubResource", StringComparison.InvariantCultureIgnoreCase) && subResourceRegEx.IsMatch(propertyName)) ||
@@ -89,6 +105,7 @@ namespace AutoRest.Ruby.Azure.Model
             {
                 return false;
             }
+
             return true;
         }
 

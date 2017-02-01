@@ -44,12 +44,11 @@ module @(Settings.Namespace)
     @EmptyLine
     }
     
-    @foreach (var property in Model.PropertyTemplateModels.Where( each => !each.IsPolymorphicDiscriminator))
+    @foreach (var property in Model.PropertyTemplateModels.Where(each => !each.IsPolymorphicDiscriminator))
     {
-        @if (CompositeTypeRba.ShouldAccessorGenerated(Model, property.Name))
+        @if (CompositeTypeRba.NeedsAccessor(Model, property.Name))
         {
       @:@WrapComment("# ", string.Format("@return {0}{1}", property.ModelType.GetYardDocumentation(), CompositeTypeRb.GetPropertyDocumentationString(property)))
-      // @:@(property.IsReadOnly ? "attr_reader" : "attr_accessor") :@property.Name
       @:attr_accessor :@property.Name
       @EmptyLine
       @:

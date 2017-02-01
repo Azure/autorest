@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.Core.Model;
 using AutoRest.Extensions.Azure;
 using AutoRest.Ruby.Model;
@@ -24,7 +22,7 @@ namespace AutoRest.Ruby.Azure.Model
         {
             return (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
                     (bool) model.Extensions[AzureExtensions.ExternalExtension]) 
-                    ||CompositeTypeRba.IsResourceModelsMatchStandardDefinition(model);
+                    ||CompositeTypeRba.IsResourceModelMatchingStandardDefinition(model);
         }
 
         /// <summary>
