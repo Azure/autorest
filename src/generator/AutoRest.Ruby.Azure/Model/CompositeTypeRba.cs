@@ -67,8 +67,8 @@ namespace AutoRest.Ruby.Azure.Model
         }
 
         /// <summary>
-        /// Checks if the provided definition of models 'Resource'/'SubResource' matches the standard definition. 
-        /// For other models, it returns false. 
+        /// Checks if the provided definition of models 'Resource'/'SubResource' matches the standard definition,
+        /// as defined in MsResAzure. For other models, it returns false.
         /// </summary>
         /// <param name="model">to be validated</param>
         /// <returns></returns>
@@ -92,7 +92,7 @@ namespace AutoRest.Ruby.Azure.Model
 
         /// <summary>
         /// Determines if the accessor needs to be generated. For Resource/SubResource models, accessors are generated only
-        /// for properties that are not in the standard definition.
+        /// for properties that are not in the standard definition, as defined in MsRestAzure.
         /// </summary>
         /// <param name="model"></param>
         /// <param name="propertyName"></param>
