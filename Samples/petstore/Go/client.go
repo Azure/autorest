@@ -999,6 +999,14 @@ func NewWithBaseURI(baseURI string, ) ManagementClient {
     //
     // body is order placed for purchasing the pet
     func (client ManagementClient) PlaceOrder(body *Order) (result Order, err error) {
+        if err := validation.Validate([]validation.Validation{
+             { TargetValue: body,
+              Constraints: []validation.Constraint{	{Target: "body", Name: validation.Null, Rule: false ,
+             Chain: []validation.Constraint{	{Target: "body.ID", Name: validation.ReadOnly, Rule: true, Chain: nil },
+             }}}}}); err != nil {
+                 return result, validation.NewErrorWithValidationError(err, "petstore.ManagementClient","PlaceOrder")
+        }
+
         req, err := client.PlaceOrderPreparer(body)
         if err != nil {
             return result, autorest.NewErrorWithError(err, "petstore.ManagementClient", "PlaceOrder", nil , "Failure preparing request")
