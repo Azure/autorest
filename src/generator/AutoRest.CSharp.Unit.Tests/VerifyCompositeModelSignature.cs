@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem: CreateMockFilesystem(), modeler: "Swagger"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\TestAllOfObject.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\TestAllOfObject.cs"));
 
                 var result = await Compile(fileSystem);
 

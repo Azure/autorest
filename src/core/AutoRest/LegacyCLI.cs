@@ -30,7 +30,7 @@ namespace AutoRest
                 // internal preprocesor
                 if (settings.Preprocessor)
                 {
-                    Console.Write(InternalPreprocessor(settings.FileSystem.ReadFileAsText(settings.Input)));
+                    Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadFileAsText(settings.Input)));
                 }
 
                 // determine some reasonable default namespace
@@ -39,11 +39,6 @@ namespace AutoRest
                     if (settings.Input != null)
                     {
                         settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
-                    }
-                    else if (settings.InputFolder != null)
-                    {
-                        settings.Namespace =
-                            Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
                     }
                     else
                     {

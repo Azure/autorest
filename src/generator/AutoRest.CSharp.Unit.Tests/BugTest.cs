@@ -111,8 +111,7 @@ namespace AutoRest.CSharp.Unit.Tests
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string[] inputFiles = null)
         {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, inputFiles);
-            return fs;
+            return dirName.GenerateCodeInto(fs, codeGenerator, inputFiles);
         }
 
         protected virtual void WriteLine(object value)
@@ -179,8 +178,8 @@ namespace AutoRest.CSharp.Unit.Tests
             assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
                 
             var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
+                fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
+                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(),
                 ManagedAssets.FrameworkAssemblies.Concat(
                     AppDomain.CurrentDomain.GetAssemblies()
                         .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location) )

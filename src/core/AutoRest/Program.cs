@@ -93,6 +93,11 @@ namespace AutoRest
                     bool generationFailed = false;
                     Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
                     AutoRestController.Generate(new FileSystem(), configuration).GetAwaiter().GetResult();
+
+                    Settings.Instance.FileSystemOutput.CommitToDisk(Settings.Instance.OutputFileName == null
+                        ? Settings.Instance.OutputDirectory
+                        : Path.GetDirectoryName(Settings.Instance.OutputFileName));
+
                     return (int)(generationFailed ? ExitCode.Error : ExitCode.Success);
                 }
                 catch (Exception exception)

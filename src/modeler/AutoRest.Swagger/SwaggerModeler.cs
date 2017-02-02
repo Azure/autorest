@@ -229,8 +229,8 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystem);
+            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystemInput);
+            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystemInput);
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 

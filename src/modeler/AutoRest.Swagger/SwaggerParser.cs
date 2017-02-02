@@ -29,7 +29,7 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            var swaggerDocument = fileSystem.ReadFileAsText(path);
+            var swaggerDocument = fileSystem.ReadAllText(path);
             return Parse(path, swaggerDocument);
         }
 
@@ -71,14 +71,14 @@ namespace AutoRest.Swagger
                     entityPath = "#" + splitReference[1];
                     value.Value = entityPath;
                     // Make sure the filePath is either an absolute uri, or a rooted path
-                    if (!Settings.FileSystem.IsCompletePath(filePath))
+                    if (!Settings.FileSystemInput.IsCompletePath(filePath))
                     {
                         // Otherwise, root it from the directory (one level up) of the current swagger file path
-                        filePath = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(currentFilePath), filePath);
+                        filePath = Settings.FileSystemInput.MakePathRooted(Settings.FileSystemInput.GetParentDir(currentFilePath), filePath);
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
-                        var externalDefinitionString = Settings.FileSystem.ReadFileAsText(filePath);
+                        var externalDefinitionString = Settings.FileSystemInput.ReadAllText(filePath);
                         externalFiles[filePath] = JObject.Parse(externalDefinitionString);
                     }
                 }

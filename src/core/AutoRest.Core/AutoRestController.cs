@@ -80,10 +80,10 @@ namespace AutoRest.Core
                     codeModel.Namespace = configuration.Namespace;  // TODO: defaults?
                     codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
 
-                    if (validationErrorFound)
-                    {
-                        Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
-                    }
+                    //if (validationErrorFound)
+                    //{
+                    //    Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
+                    //}
                 }
 
             }

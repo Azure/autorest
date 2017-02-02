@@ -45,19 +45,19 @@ namespace AutoRest.AzureResourceSchema
         private string EnsureUniqueFileName(string subdir, string fileName)
         {
             int i = 0;
-            var filePath = Path.Combine(Settings.Instance.OutputDirectory, subdir, fileName);
-            while (File.Exists(filePath))
+            var filePath = Path.Combine(subdir, fileName);
+            while (Settings.Instance.FileSystemOutput.FileExists(filePath))
             {
                 var name = Path.GetFileNameWithoutExtension(fileName);
                 var ext = Path.GetExtension(fileName);
 
-                fileName = string.Format("{0}{1}{2}{3}{4}", subdir, Path.DirectorySeparatorChar, name, i, ext);
-                filePath = Path.Combine(Settings.Instance.OutputDirectory, subdir, fileName);
+                fileName = $"{subdir}{Path.DirectorySeparatorChar}{name}{i}{ext}";
+                filePath = Path.Combine(subdir, fileName);
 
                 ++i;
             }
 
-            return string.Format("{0}{1}{2}", subdir, Path.DirectorySeparatorChar, fileName);
+            return $"{subdir}{Path.DirectorySeparatorChar}{fileName}";
         }
     }
 }

@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
-    // TODO: MemoryFileSystem is for testing. Consider moving to test project.
     public class MemoryFileSystem : IFileSystem, IDisposable
     {
         private const string FolderKey = "Folder";
@@ -50,7 +49,7 @@ namespace AutoRest.Core.Utilities
             }
         }
         
-        public void WriteFile(string path, string contents)
+        public void WriteAllText(string path, string contents)
         {
             var directory = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty((directory)) && !VirtualStore.ContainsKey(directory))
@@ -69,7 +68,7 @@ namespace AutoRest.Core.Utilities
             VirtualStore[path] = result;
         }
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             if (VirtualStore.ContainsKey(path))
             {
@@ -100,36 +99,6 @@ namespace AutoRest.Core.Utilities
         public bool FileExists(string path)
         {
             return VirtualStore.ContainsKey(path);
-        }
-
-        public void DeleteFile(string path)
-        {
-            if (VirtualStore.ContainsKey(path))
-            {
-                VirtualStore.Remove(path);
-            }
-        }
-
-        public void DeleteDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
-
-        public void EmptyDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
         }
 
         public bool DirectoryExists(string path)
@@ -225,11 +194,23 @@ namespace AutoRest.Core.Utilities
                 _virtualStore?.Clear();
             }
         }
-        public string CurrentDirectory
+
+        public void CommitToDisk(string targetDirectory)
         {
-            get
+            foreach (var entry in VirtualStore)
             {
-                return "";
+                if (entry.Value.ToString() == FolderKey)
+                {
+                    var targetDirName = Path.Combine(targetDirectory, entry.Key);
+                    Directory.CreateDirectory(targetDirName);
+                }
+                else
+                {
+                    var targetFileName = Path.Combine(targetDirectory, entry.Key);
+                    var targetFileDir = Path.GetDirectoryName(targetFileName);
+                    Directory.CreateDirectory(targetFileDir);
+                    File.WriteAllText(targetFileName, entry.Value.ToString());
+                }
             }
         }
     }
