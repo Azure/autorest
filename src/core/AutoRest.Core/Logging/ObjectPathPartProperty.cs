@@ -17,7 +17,7 @@ namespace AutoRest.Core.Logging
 
         public string Property { get; }
 
-        public override string XPath => $"/{Property}";
+        public override string XPath => Property.StartsWith("/") ? Property : $"/{Property}";
 
         public override YamlNode SelectNode(ref YamlNode node)
         {
