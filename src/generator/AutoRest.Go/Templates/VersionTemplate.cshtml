@@ -21,13 +21,16 @@ const (
     major = "@(Model.Version[0])"
     minor = "@(Model.Version[1])"
     patch = "@(Model.Version[2])"
-    // Always begin a "tag" with a dash (as per http://semver.org)
-    tag   = "-beta"
+    tag   = "@(Model.Version[3])"
 
     userAgentFormat = "Azure-SDK-For-Go/%s arm-%s/%s"
 )
 
-var userAgent string
+// cached results of UserAgent and Version to prevent repeated operations.
+var (
+    userAgent string
+    version string
+)
 
 @EmptyLine
 // UserAgent returns the UserAgent string to use when sending http.Requests.
@@ -39,8 +42,6 @@ func UserAgent() string {
 }
 
 @EmptyLine
-var version string
-
 // Version returns the semantic version (see http://semver.org) of the client.
 func Version() string {
     if version == "" {
