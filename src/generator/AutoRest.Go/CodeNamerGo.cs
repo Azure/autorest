@@ -11,6 +11,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Model;
 using AutoRest.Go.Model;
+using System.Text;
 
 namespace AutoRest.Go
 {
@@ -412,20 +413,12 @@ namespace AutoRest.Go
         // camelCase or PascalCase.
         private string EnsureNameCase(string name)
         {
-            List<string> words = new List<string>();
-            new List<string>(name.ToWords())
-                .ForEach(s =>
-                {
-                    if (CommonInitialisms.Contains(s))
-                    {
-                        words.Add(s.ToUpper());
-                    }
-                    else
-                    {
-                        words.Add(s);
-                    }
-                });
-            return String.Join(String.Empty, words.ToArray());
+            var builder = new StringBuilder();
+            foreach(var s in name.ToWords())
+            {
+                builder.Append(CommonInitialisms.Contains(s) ? s.ToUpper() : s);
+            }
+            return builder.ToString();
         }
 
         public static string[] SDKVersionFromPackageVersion(string v)

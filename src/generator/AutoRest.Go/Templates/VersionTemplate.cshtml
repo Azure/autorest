@@ -24,18 +24,32 @@ const (
     // Always begin a "tag" with a dash (as per http://semver.org)
     tag   = "-beta"
 
-    semVerFormat = "%s.%s.%s%s"
     userAgentFormat = "Azure-SDK-For-Go/%s arm-%s/%s"
 )
+
+var userAgent string
 
 @EmptyLine
 // UserAgent returns the UserAgent string to use when sending http.Requests.
 func UserAgent() string {
-    return fmt.Sprintf(userAgentFormat, Version(), "@(Model.Namespace)", "@(Model.ApiVersion)")
+    if userAgent == "" {
+        userAgent = fmt.Sprintf(userAgentFormat, Version(), "@(Model.Namespace)", "@(Model.ApiVersion)")
+    }
+    return userAgent
 }
 
 @EmptyLine
+var version string
+
 // Version returns the semantic version (see http://semver.org) of the client.
 func Version() string {
-    return fmt.Sprintf(semVerFormat, major, minor, patch, tag)
+    if version == "" {
+        versionBuilder := bytes.NewBufferString(fmt.Sprintf("%d.%d.%d", major, minor, patch))
+        if tag != "" {
+            versionBuilder.WriteRune('-')
+            versionBuilder.WriteString(strings.TrimPrefix(tag, "-"))
+        }
+        version = string(versionBuilder.Bytes())
+    }
+    return version
 }
