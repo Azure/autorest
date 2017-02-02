@@ -52,7 +52,7 @@ namespace AutoRest.Core.Extensibility
                 {
                     try
                     {
-                        var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                        var config = JsonConvert.DeserializeObject<AutoRestConfigurationEx>(configurationFile);
                         plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
                         Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
                     }
@@ -101,7 +101,7 @@ namespace AutoRest.Core.Extensibility
             {
                 try
                 {
-                    var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
+                    var config = JsonConvert.DeserializeObject<AutoRestConfigurationEx>(configurationFile);
                     modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
                     Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
                 }

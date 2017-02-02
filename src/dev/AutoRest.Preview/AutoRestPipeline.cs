@@ -51,29 +51,14 @@ namespace AutoRest
                 {
                     var codeModel = modeler.Build();
 
-                    // After swagger Parser
-                    codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                    // After swagger Parser
-                    codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
                     using (plugin.Activate())
                     {
                         // load model into language-specific code model
                         codeModel = plugin.Serializer.Load(codeModel);
 
-                        // we've loaded the model, run the extensions for after it's loaded
-                        codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-
                         // apply language-specific tranformation (more than just language-specific types)
                         // used to be called "NormalizeClientModel" . 
                         codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                        // next set of extensions
-                        codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-                        // next set of extensions
-                        codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                         // Generate code from CodeModel.
                         plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();

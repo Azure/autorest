@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -243,14 +244,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool AddCredentials { get; set; }
 
         /// <summary>
-        /// If set to true, behave in a way consistent with earlier builds of AutoRest..
-        /// </summary>
-        [SettingsInfo(
-            "If true, the code generated will be generated in a way consistent with earlier builds of AutoRest" +
-            "But, will not necessarily be according to latest best practices..")]
-        public bool QuirksMode { get; set; } = true;
-
-        /// <summary>
         /// If set to true, skips the validation step. (WILL BE REMOVED)
         /// </summary>
         [SettingsAlias("skipvalidation")]
@@ -315,13 +308,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("preprocessor")]
         public bool Preprocessor { get; set; }
 
-        /// <summary>
-        /// Factory method to generate CodeGenerationSettings from command line arguments.
-        /// Matches dictionary keys to the settings properties.
-        /// </summary>
-        /// <param name="arguments">Command line arguments</param>
-        /// <returns>CodeGenerationSettings</returns>
-        public static Settings Create(string[] arguments)
+        private static Dictionary<string, object> ParseArgs(string[] arguments)
         {
             var argsDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             if (arguments != null && arguments.Length > 0)
@@ -349,11 +336,22 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 }
                 AddArgumentToDictionary(key, value, argsDictionary);
             }
-            else
-            {
-                argsDictionary["?"] = String.Empty;
-            }
+            return argsDictionary;
+        }
 
+        /// <summary>
+        /// Factory method to generate CodeGenerationSettings from command line arguments.
+        /// Matches dictionary keys to the settings properties.
+        /// </summary>
+        /// <param name="arguments">Command line arguments</param>
+        /// <returns>CodeGenerationSettings</returns>
+        public static Settings Create(string[] arguments)
+        {
+            var argsDictionary = ParseArgs(arguments);
+            if (argsDictionary.Count == 0)
+            {
+                argsDictionary["?"] = string.Empty;
+            }
             return Create(argsDictionary);
         }
 
@@ -487,6 +485,23 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     Logger.Instance.Log(Category.Warning, Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
+        }
+
+        public static bool IsLegacyCommand(string[] args) => ParseArgs(args).Count > 0;
+
+        public AutoRestConfiguration CreateConfiguration()
+        {
+            if (this.Modeler == "Composite")
+                throw new NotImplementedException(); // TODO
+
+            var inputFiles = new[] { Input };
+
+            return new AutoRestConfiguration
+            {
+                Namespace = Namespace,
+                InputFiles = inputFiles,
+                OutputFolder = OutputDirectory
+            };
         }
     }
 }

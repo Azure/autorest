@@ -125,13 +125,13 @@ namespace AutoRest
                               "$parameter$", "$parameter-desc$");
 
             // Parse autorest.json
-            AutoRestConfiguration autorestConfig = new AutoRestConfiguration();
+            AutoRestConfigurationEx autorestConfig = new AutoRestConfigurationEx();
             string configurationFile = ExtensionsLoader.GetConfigurationFileContent(settings);
             if (configurationFile != null)
             {
                 try
                 {
-                    autorestConfig = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);                    
+                    autorestConfig = JsonConvert.DeserializeObject<AutoRestConfigurationEx>(configurationFile);                    
                 }
                 catch
                 {

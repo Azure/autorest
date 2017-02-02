@@ -13,7 +13,7 @@ using AutoRest.Core.Utilities;
 #pragma warning disable CS3002
 #pragma warning disable CS3008
 
-namespace AutoRest.Simplify
+namespace AutoRest.Core.Simplify
 {
     public class AddUsingsRewriter : CSharpSyntaxRewriter
     {

@@ -13,7 +13,7 @@ using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
 
-namespace AutoRest.Simplify
+namespace AutoRest.Core.Simplify
 {
     public class CSharpSimplifier
     {

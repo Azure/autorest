@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 #pragma warning disable CS3001
 #pragma warning disable CS3002
  
-namespace AutoRest.Simplify
+namespace AutoRest.Core.Simplify
 {
     // From Roslyn FAQ: https://github.com/dotnet/roslyn/blob/56f605c41915317ccdb925f66974ee52282609e7/src/Samples/CSharp/APISampleUnitTests/FAQ.cs
     public class SimplifyNamesRewriter : CSharpSyntaxRewriter

@@ -10,6 +10,8 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Configuration;
+using AutoRest.Core.Simplify;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
@@ -34,15 +36,11 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        public static void Generate()
+        public static void Generate(AutoRestConfiguration configuration)
         {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
             
-            CodeModel codeModel = null;
+            CodeModel codeModel;
             
             var modeler = ExtensionsLoader.GetModeler();
 
@@ -55,12 +53,6 @@ namespace AutoRest.Core
 
                     // generate model from swagger 
                     codeModel = modeler.Build();
-
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
 
                     if (validationErrorFound)
                     {
@@ -92,38 +84,24 @@ namespace AutoRest.Core
                     // load model into language-specific code model
                     codeModel = plugin.Serializer.Load(modelAsJson);
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-     
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
-
                     // Generate code from CodeModel.
                     plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                }
+
+                // TODO: make me a proper pipeline step, make async
+                if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                 }
             }
             catch (Exception exception)
             {
                 throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
             }
-        }
-
-        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
-        {
-            /*
-             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
-                 codeModel = extension.Transform(codeModel);
-            */
-
-            return codeModel;
         }
 
         /// <summary>

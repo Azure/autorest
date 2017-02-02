@@ -61,8 +61,8 @@ namespace AutoRest.Core.Parsing
             }
             catch (Exception e)
             {
-                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML/JSON.");
-                Logger.Instance.Log(Category.Warning, e.ToString());
+                Logger.Instance.Log(Category.Debug, "Parsed document is not valid YAML/JSON.");
+                Logger.Instance.Log(Category.Debug, e.ToString());
             }
             return doc;
         }

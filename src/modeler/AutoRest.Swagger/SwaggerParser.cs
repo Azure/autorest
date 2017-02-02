@@ -115,7 +115,7 @@ namespace AutoRest.Swagger
             if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
             {
                 Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
-                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
+                swaggerDocument = LiterateYamlParser.Parse(swaggerDocument);
             }
             // normalize YAML to JSON since that's what we process
             swaggerDocument = swaggerDocument.EnsureYamlIsJson();
