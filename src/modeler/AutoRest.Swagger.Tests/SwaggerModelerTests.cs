@@ -798,12 +798,11 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Modeler = "Swagger",
                     CodeGenerator = "CSharp",
                     Input = Path.Combine("Swagger", "swagger-x-ms-code-generation-settings.json"),
                     Header = "NONE"
                 };
-                var modeler = ExtensionsLoader.GetModeler();
+                var modeler = ExtensionsLoader.GetModeler("Swagger");
                 var client = modeler.Build();
                 var plugin = ExtensionsLoader.GetPlugin() as PluginCs;
                 Assert.NotNull(plugin);
@@ -822,13 +821,12 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Modeler = "Swagger",
                     CodeGenerator = "CSharp",
                     Input = Path.Combine("Swagger", "swagger-x-ms-parameterized-host.json"),
                     Header = "NONE"
                 };
 
-                var modeler = ExtensionsLoader.GetModeler();
+                var modeler = ExtensionsLoader.GetModeler("Swagger");
                 var client = modeler.Build();
 
                 var hostExtension = client.Extensions["x-ms-parameterized-host"] as JObject;

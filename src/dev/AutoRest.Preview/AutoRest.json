@@ -39,13 +39,5 @@
         "Azure.CSharp.Fluent": {
           "type": "PluginCsaf, AutoRest.CSharp.Azure.Fluent"
         }
-    },
-  "modelers": {
-    "Swagger": {
-      "type": "SwaggerModeler, AutoRest.Swagger"
-    },
-    "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
     }
-  }
 }

@@ -9,12 +9,14 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Parsing;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using AutoRest.Core.Validation;
+using YamlDotNet.RepresentationModel;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
@@ -29,17 +31,7 @@ namespace AutoRest.Swagger
 
         public SwaggerModeler() 
         {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-
             DefaultProtocol = TransferProtocolScheme.Http;
-        }
-
-        public override string Name
-        {
-            get { return "Swagger"; }
         }
 
         /// <summary>
@@ -61,15 +53,84 @@ namespace AutoRest.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        public override CodeModel Build()
+        public override CodeModel Build(IFileSystem fs, string[] inputFiles)
         {
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
+            if (inputFiles.Length == 1)
             {
-                throw ErrorManager.CreateError(Resources.InputRequired);
+                var serviceDefinition = SwaggerParser.Load(inputFiles[0], fs);
+                return Build(serviceDefinition);
             }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-            return Build(serviceDefinition);
+
+            // composite mode
+            // Ensure all the docs are absolute URIs or rooted paths
+            for (var i = 0; i < inputFiles.Length; i++)
+            {
+                var compositeDocument = inputFiles[i];
+                if (!Settings.FileSystem.IsCompletePath(compositeDocument) || !Settings.FileSystem.FileExists(compositeDocument))
+                {
+                    // Otherwise, root it from the current path
+                    inputFiles[i] = Settings.FileSystem.MakePathRooted(Settings.InputFolder, compositeDocument);
+                }
+            }
+
+            // construct merged swagger document
+            var mergedSwagger = new YamlMappingNode();
+            mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+
+            // merge child swaggers
+            foreach (var childSwaggerPath in inputFiles)
+            {
+                var childSwaggerRaw = Settings.FileSystem.ReadFileAsText(childSwaggerPath);
+                childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
+                var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
+                if (childSwagger == null)
+                {
+                    throw ErrorManager.CreateError("Failed parsing referenced Swagger file {0}.", childSwaggerPath);
+                }
+
+                // remove info
+                var info = childSwagger.Get("info") as YamlMappingNode;
+                var version = info.Get("version");
+                info.Remove("title");
+                info.Remove("description");
+                info.Remove("version");
+
+                // fix up api version
+                var apiVersionParam = (childSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
+                if (apiVersionParamName != null)
+                {
+                    var paths =
+                        ((childSwagger.Get("paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>()).Concat
+                        ((childSwagger.Get("x-ms-paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>());
+                    var methods = paths.OfType<YamlMappingNode>().SelectMany(path => path.Children.Values.OfType<YamlMappingNode>());
+                    var parameters = methods.SelectMany(method => (method.Get("parameters") as YamlSequenceNode)?.Children?.OfType<YamlMappingNode>() ?? Enumerable.Empty<YamlMappingNode>());
+                    var apiVersionParams = parameters.Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
+                    foreach (var param in apiVersionParams)
+                    {
+                        param.Remove("$ref");
+                        foreach (var child in (apiVersionParam?.Value as YamlMappingNode).Children)
+                        {
+                            param.Children.Add(child);
+                        }
+                        param.Set("enum", new YamlSequenceNode(version));
+                    }
+                }
+
+                // merge
+                mergedSwagger = mergedSwagger.MergeWith(childSwagger);
+            }
+            // remove apiVersion client property
+            var mergedSwaggerApiVersionParam = (mergedSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+            var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode)?.Value;
+            if (mergedSwaggerApiVersionParamName != null)
+            {
+                (mergedSwagger.Get("parameters") as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);
+            }
+
+            // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            return Build(SwaggerParser.Parse(inputFiles[0], mergedSwagger.Serialize()));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]

@@ -30,13 +30,5 @@
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
         }
-    },
-  "modelers": {
-    "Swagger": {
-      "type": "SwaggerModeler, AutoRest.Swagger"
-    },
-    "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
     }
-  }
 }

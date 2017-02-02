@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Configuration;
+using AutoRest.Core.Legacy;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -334,7 +335,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
                         value = argument;
                     }
                 }
-                AddArgumentToDictionary(key, value, argsDictionary);
+                if (key != null)
+                {
+                    AddArgumentToDictionary(key, value, argsDictionary);
+                }
             }
             return argsDictionary;
         }
@@ -357,7 +361,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private static void AddArgumentToDictionary(string key, string value, IDictionary<string, object> argsDictionary)
         {
-            key = key ?? "Default";
             value = value ?? String.Empty;
             argsDictionary[key] = value;
         }
@@ -491,10 +494,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         public AutoRestConfiguration CreateConfiguration()
         {
-            if (this.Modeler == "Composite")
-                throw new NotImplementedException(); // TODO
+            var inputFiles = new [] { Input };
 
-            var inputFiles = new[] { Input };
+            if (Modeler == "Composite")
+            {
+                inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystem, Input);
+            }
 
             return new AutoRestConfiguration
             {

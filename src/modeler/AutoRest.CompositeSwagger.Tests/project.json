@@ -35,7 +35,7 @@
     "AutoRest.Core": {
       "target": "project"
     },
-    "AutoRest.CompositeSwagger": {
+    "AutoRest.Swagger": {
       "target": "project"
     }
   }

@@ -30,7 +30,6 @@
     "Newtonsoft.Json": "[9.0.1,10.0)",
     "AutoRest.Core": { "target": "project","type": "build"  },
     "AutoRest.Swagger": { "target": "project", "type": "build" },
-    "AutoRest.CompositeSwagger": { "target": "project", "type": "build" },
     "AutoRest.CSharp": { "target": "project", "type": "build" },
     "AutoRest.CSharp.Azure": { "target": "project", "type": "build" },
     "AutoRest.NodeJS": { "target": "project", "type": "build" }

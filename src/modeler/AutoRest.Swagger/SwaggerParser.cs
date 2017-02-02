@@ -14,6 +14,7 @@ using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -107,7 +108,6 @@ namespace AutoRest.Swagger
                     
                 }
             }
-            return;
         }
 
         public static string Normalize(string path, string swaggerDocument)
@@ -139,7 +139,8 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SchemaRequiredItemConverter());
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
-
+                
+                Singleton<ServiceDefinition>.Instance = swaggerService; // TODO: nope
                 return swaggerService;
             }
             catch (JsonException ex)

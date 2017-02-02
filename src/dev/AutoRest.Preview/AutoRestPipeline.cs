@@ -22,9 +22,7 @@ namespace AutoRest
                 var fs = new MemoryFileSystem();
                 var settings = new Settings
                 {
-                    Modeler = "Swagger",
                     CodeGenerator = codeGenerator,
-                    FileSystem = fs,
                     OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     Input = "input.json"
@@ -33,23 +31,23 @@ namespace AutoRest
                 fs.WriteFile(settings.Input, json);
                 fs.WriteFile("AutoRest.json", autoRestJson);
 
-                GenerateCodeInto(processMessages);
+                GenerateCodeInto(fs, processMessages);
 
                 return fs;
             }
         }
 
-        private static void GenerateCodeInto(Action<IEnumerable<LogMessage>> processMessages)
+        private static void GenerateCodeInto(IFileSystem fs, Action<IEnumerable<LogMessage>> processMessages)
         {
             using (NewContext)
             {
                 var plugin = ExtensionsLoader.GetPlugin();
-                var modeler = ExtensionsLoader.GetModeler();
+                var modeler = ExtensionsLoader.GetModeler(Settings.Instance.Modeler);
                 var messages = new List<LogMessage>();
                 Logger.Instance.AddListener(new SignalingLogListener(Category.Info, message => messages.Add(message)));
                 try
                 {
-                    var codeModel = modeler.Build();
+                    var codeModel = modeler.Build(fs, new [] { Settings.Instance.Input });
 
                     using (plugin.Activate())
                     {

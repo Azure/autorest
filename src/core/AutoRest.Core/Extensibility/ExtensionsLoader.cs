@@ -76,47 +76,20 @@ namespace AutoRest.Core.Extensibility
         /// <summary>
         /// Gets the modeler specified in the provided Settings.
         /// </summary>
-        /// <param name="settings">The code generation settings</param>
         /// <returns>Modeler specified in Settings.Modeler</returns>
-        public static Modeler GetModeler()
+        [Obsolete("no (dedicated) composite modeler will mean: no parameter")]
+        public static Modeler GetModeler(string modelerName)
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingModeler);
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
-            }
 
-            if (string.IsNullOrEmpty(Settings.Instance.Modeler))
+            Modeler modeler = LoadTypeFromAssembly<Modeler>(new Dictionary<string, AutoRestProviderConfiguration>
             {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture,
-                        Resources.ParameterValueIsMissing, "Modeler"));
-            }
-
-            Modeler modeler = null;
-
-            string configurationFile = GetConfigurationFileContent(Settings.Instance);
-
-            if (configurationFile != null)
-            {
-                try
-                {
-                    var config = JsonConvert.DeserializeObject<AutoRestConfigurationEx>(configurationFile);
-                    modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
-                    Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
-                }
-                catch (Exception ex)
-                {
-                    throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
-                }
-            }
-            else
-            {
-                throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
-            }
+                { "Swagger", new AutoRestProviderConfiguration {TypeName = "SwaggerModeler, AutoRest.Swagger"} },
+                { "CompositeSwagger", new AutoRestProviderConfiguration {TypeName ="CompositeSwaggerModeler, AutoRest.CompositeSwagger"} },
+            }, modelerName);
 
             Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,
-                Settings.Instance.Modeler,
+                modelerName,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
         }
@@ -157,7 +130,7 @@ namespace AutoRest.Core.Extensibility
         {
             T instance = default(T);
 
-            if (Settings.Instance != null && section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
+            if (section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
             {
                 string fullTypeName = section[key].TypeName;
                 if (string.IsNullOrEmpty(fullTypeName))

@@ -12,16 +12,5 @@
         "includeCredentials": "false"
       }
     }
-  },
-  "modelers": {
-    "Swagger": {
-      "type": "SwaggerServiceModelBuilder, AutoRest.Swagger",
-      "settings": {
-        "requireOperationId": "false"
-      }
-    },
-    "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
-    }
   }
 }

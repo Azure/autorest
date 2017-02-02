@@ -87,13 +87,5 @@
     "Go": {
       "type": "GoCodeGenerator, AutoRest.Go"
     }
-  },
-  "modelers": {
-    "Swagger": {
-      "type": "SwaggerModeler, AutoRest.Swagger"
-    },
-    "CompositeSwagger": {
-      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
-    }
   }
 }

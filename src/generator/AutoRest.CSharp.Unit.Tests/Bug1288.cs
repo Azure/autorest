@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task CompositeSwaggerWithPayloadFlattening()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec(modeler: "CompositeSwagger"))
+            using (var fileSystem = GenerateCodeForTestFromSpec(inputFiles: new [] { "swagger-composite-payload-flatten-spec1.json", "swagger-composite-payload-flatten-spec2.json" }))
             {
                 // Expected Files
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\CompositeModel.cs"));

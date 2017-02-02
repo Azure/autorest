@@ -10,8 +10,10 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoRest.Core.Configuration;
 using AutoRest.Core.Simplify;
+using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
@@ -36,23 +38,24 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        public static void Generate(AutoRestConfiguration configuration)
+        public static async Task Generate(IFileSystem fs, AutoRestConfiguration configuration)
         {
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
             
             CodeModel codeModel;
             
-            var modeler = ExtensionsLoader.GetModeler();
+            var modeler = ExtensionsLoader.GetModeler("Swagger");
 
             try
             {
                 using (NewContext)
                 {
                     bool validationErrorFound = false;
-                    Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
+                    // TODO
+                    //Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
 
                     // generate model from swagger 
-                    codeModel = modeler.Build();
+                    codeModel = modeler.Build(fs, configuration.InputFiles);
 
                     if (validationErrorFound)
                     {
@@ -70,8 +73,6 @@ namespace AutoRest.Core
 
             Console.ResetColor();
             Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
-
-            Settings.Instance.Validate();
             try
             {
                 var genericSerializer = new ModelSerializer<CodeModel>();
@@ -89,13 +90,14 @@ namespace AutoRest.Core
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
                     // Generate code from CodeModel.
-                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                    await plugin.CodeGenerator.Generate(codeModel);
                 }
 
                 // TODO: make me a proper pipeline step, make async
-                if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                // pull setting from language specific config!
+                //if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                 {
-                    new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
+                    await new CSharpSimplifier().Run().ConfigureAwait(false);
                 }
             }
             catch (Exception exception)
@@ -114,7 +116,7 @@ namespace AutoRest.Core
                 throw new ArgumentNullException("settings");
             }
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            Modeler modeler = ExtensionsLoader.GetModeler();
+            Modeler modeler = ExtensionsLoader.GetModeler("Swagger");
 
             try
             {

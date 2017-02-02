@@ -24,17 +24,8 @@ namespace AutoRest
 
             using (NewContext)
             {
-                bool generationFailed = false;
-                Settings settings = null;
-
-                settings = Settings.Create(args);
-
-                // set up logging
-                Logger.Instance.AddListener(new ConsoleLogListener(
-                    settings.Debug ? Category.Debug : Category.Warning,
-                    settings.ValidationLevel,
-                    settings.Verbose));
-                Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
+                Settings settings = Settings.Create(args);
+                settings.Validate();
 
                 // internal preprocesor
                 if (settings.Preprocessor)

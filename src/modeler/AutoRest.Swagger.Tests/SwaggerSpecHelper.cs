@@ -61,7 +61,7 @@ namespace AutoRest.Swagger.Tests
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
 
-            AutoRest.Core.AutoRestController.Generate(settings.CreateConfiguration());
+            AutoRestController.Generate(settings.CreateConfiguration()).GetAwaiter().GetResult();
             Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
 
             var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();

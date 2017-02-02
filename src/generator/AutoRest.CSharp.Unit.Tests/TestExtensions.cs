@@ -57,13 +57,12 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string[] inputFiles=null)
         {
             using (NewContext)
             {
                 var settings = new Settings
                 {
-                    Modeler = modeler,
                     CodeGenerator = codeGenerator,
                     FileSystem = fileSystem,
                     OutputDirectory = "GeneratedCode",
@@ -71,20 +70,32 @@ namespace AutoRest.CSharp.Unit.Tests
                     CodeGenerationMode = "rest-client"
                 };
 
-                return testName.GenerateCodeInto(fileSystem, settings);
+                return testName.GenerateCodeInto(fileSystem, settings, inputFiles);
             }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem fileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem fileSystem, Settings settings, string[] inputFiles=null)
         {
             // copy the whole input directory into the memoryfilesystem.
             fileSystem.CopyFolder("Resource", testName,"");
 
             // find the appropriately named .yaml or .json file for the swagger. 
-            foreach (var ext in new[] {".yaml", ".json", ".md"}) {
-                var name = testName + ext;
-                if (fileSystem.FileExists(name)) {
-                    settings.Input = name;
+            if (inputFiles == null)
+            {
+                if (settings.Input != null)
+                {
+                    inputFiles = new[] {settings.Input};
+                }
+                else
+                {
+                    foreach (var ext in new[] {".yaml", ".json", ".md"})
+                    {
+                        var name = testName + ext;
+                        if (fileSystem.FileExists(name))
+                        {
+                            inputFiles = new[] {name};
+                        }
+                    }
                 }
             }
 
@@ -93,8 +104,8 @@ namespace AutoRest.CSharp.Unit.Tests
             }
 
             var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler();
-            var codeModel = modeler.Build();
+            var modeler = ExtensionsLoader.GetModeler("Swagger");
+            var codeModel = modeler.Build(inputFiles);
             
             using (plugin.Activate())
             {

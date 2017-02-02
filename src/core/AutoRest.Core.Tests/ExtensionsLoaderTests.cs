@@ -75,31 +75,14 @@ namespace AutoRest.Core.Tests
         }
 
         [Fact]
-        public void ModelerLoadsFromJsonFile()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings
-                {
-                    Modeler = "Swagger",
-                    Input = "RedisResource.json",
-                    FileSystem = _fileSystem
-                };
-                Modeler modeler = ExtensionsLoader.GetModeler();
-
-                Assert.Equal("Swagger", modeler.Name);
-            }
-        }
-
-        [Fact]
         public void InvalidModelerNameThrowsException()
         {
             using (NewContext)
             {
                 string modeler = "Foo.Bar";
-                var settings = new Settings {Modeler = modeler, FileSystem = _fileSystem};
+                var settings = new Settings {FileSystem = _fileSystem};
                 AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetModeler(),
+                    () => ExtensionsLoader.GetModeler(modeler),
                     string.Format("Plugin {0} does not have an assembly name in AutoRest.json", modeler));
             }
         }
@@ -114,8 +97,8 @@ namespace AutoRest.Core.Tests
             }
             using (NewContext)
             {
-                var settings = new Settings {Modeler = string.Empty, FileSystem = _fileSystem};
-                Assert.Throws<ArgumentException>(() => ExtensionsLoader.GetModeler());
+                var settings = new Settings {FileSystem = _fileSystem};
+                Assert.Throws<ArgumentException>(() => ExtensionsLoader.GetModeler(string.Empty));
             }
         }
 
