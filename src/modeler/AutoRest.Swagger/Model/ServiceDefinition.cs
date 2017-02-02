@@ -91,6 +91,7 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
+        [Rule(typeof(BooleanPropertyNotRecommended))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
