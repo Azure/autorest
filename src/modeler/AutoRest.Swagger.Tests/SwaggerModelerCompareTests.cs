@@ -210,7 +210,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Paths", error.Path.XPath);
+            Assert.Equal("#/paths/api/Paths", error.Path.XPath);
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Operations", error.Path.XPath);
+            Assert.Equal("#/paths/api/Operations", error.Path.XPath);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Operations/post", error.Path.XPath);
+            Assert.Equal("#/paths/api/Operations/post", error.Path.XPath);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/a", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/{a}/get/a", error.Path.XPath);
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters/get/x-ar", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/get/x-ar", error.Path.XPath);
         }
 
 
@@ -281,7 +281,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/c", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/{a}/get/c", error.Path.XPath);
         }
 
         /// <summary>
@@ -295,7 +295,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters/get/x-cr", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/get/x-cr", error.Path.XPath);
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/b", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/{a}/get/b", error.Path.XPath);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Info, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/d", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/{a}/get/d", error.Path.XPath);
         }
 
         /// <summary>
@@ -337,7 +337,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.Skip(1).First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/e", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/{a}/get/e", error.Path.XPath);
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(missing);
             var error = missing.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters~1{a}/get/f", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/{a}/get/f", error.Path.XPath);
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(changed);
             var error = changed.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Parameters/post/registry/properties/b", error.Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/post/registry/properties/b", error.Path.XPath);
         }
 
         /// <summary>
@@ -393,7 +393,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(removed);
             var error = removed.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/200", error.Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/200", error.Path.XPath);
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace AutoRest.Swagger.Tests
             Assert.NotEmpty(removed);
             var error = removed.First();
             Assert.Equal(Category.Error, error.Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/202", error.Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/202", error.Path.XPath);
         }
 
         /// <summary>
@@ -421,10 +421,10 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(2, removed.Length);
 
             Assert.Equal(Category.Error, removed[0].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/201", removed[0].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/201", removed[0].Path.XPath);
 
             Assert.Equal(Category.Error, removed[1].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/400/properties/id", removed[1].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/400/properties/id", removed[1].Path.XPath);
         }
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace AutoRest.Swagger.Tests
             var removed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.XPath.Contains("Responses")).ToArray();
             Assert.Equal(1, removed.Length);
             Assert.Equal(Category.Error, removed[0].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/400/properties/id", removed[0].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/400/properties/id", removed[0].Path.XPath);
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace AutoRest.Swagger.Tests
             var added = messages.Where(m => m.Id == ComparisonMessages.AddingHeader.Id).ToArray();
             Assert.Equal(1, added.Length);
             Assert.Equal(Category.Info, added[0].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/200/x-c", added[0].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/200/x-c", added[0].Path.XPath);
         }
 
         /// <summary>
@@ -463,7 +463,7 @@ namespace AutoRest.Swagger.Tests
             var removed = messages.Where(m => m.Id == ComparisonMessages.RemovingHeader.Id).ToArray();
             Assert.Equal(1, removed.Length);
             Assert.Equal(Category.Error, removed[0].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/200/x-a", removed[0].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/200/x-a", removed[0].Path.XPath);
         }
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace AutoRest.Swagger.Tests
             var changed = messages.Where(m => m.Id == ComparisonMessages.TypeChanged.Id && m.Path.XPath.Contains("Responses")).ToArray();
             Assert.Equal(1, changed.Length);
             Assert.Equal(Category.Error, changed[0].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/200/x-b", changed[0].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/200/x-b", changed[0].Path.XPath);
         }
 
         /// <summary>
@@ -494,10 +494,10 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(Category.Error, changed[1].Severity);
             Assert.Equal(Category.Error, changed[2].Severity);
             Assert.Equal(Category.Error, changed[3].Severity);
-            Assert.Equal("#/paths/~1api~1Parameters/get/a", changed[0].Path.XPath);
-            Assert.Equal("#/paths/~1api~1Parameters/get/b", changed[1].Path.XPath);
-            Assert.Equal("#/paths/~1api~1Parameters/put/a/properties/a", changed[2].Path.XPath);
-            Assert.Equal("#/paths/~1api~1Parameters/put/a/properties/b", changed[3].Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/get/a", changed[0].Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/get/b", changed[1].Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/put/a/properties/a", changed[2].Path.XPath);
+            Assert.Equal("#/paths/api/Parameters/put/a/properties/b", changed[3].Path.XPath);
         }
 
         /// <summary>
@@ -532,8 +532,8 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(Category.Error, changed[1].Severity);
             Assert.Equal(Category.Error, changed[2].Severity);
             Assert.Equal(Category.Error, changed[3].Severity);
-            Assert.Equal("#/paths/~1api~1Responses/get/200/properties/a", changed[0].Path.XPath);
-            Assert.Equal("#/paths/~1api~1Responses/get/200/properties/b", changed[1].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/200/properties/a", changed[0].Path.XPath);
+            Assert.Equal("#/paths/api/Responses/get/200/properties/b", changed[1].Path.XPath);
         }
 
         /// <summary>
