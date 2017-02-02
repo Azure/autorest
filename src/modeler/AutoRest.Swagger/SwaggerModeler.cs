@@ -75,12 +75,12 @@ namespace AutoRest.Swagger
 
             // construct merged swagger document
             var mergedSwagger = new YamlMappingNode();
-            mergedSwagger.Set("info", (fs.ReadFileAsText(inputFiles[0]).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+            mergedSwagger.Set("info", (fs.ReadAllText(inputFiles[0]).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
 
             // merge child swaggers
             foreach (var childSwaggerPath in inputFiles)
             {
-                var childSwaggerRaw = fs.ReadFileAsText(childSwaggerPath);
+                var childSwaggerRaw = fs.ReadAllText(childSwaggerPath);
                 childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
                 var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
                 if (childSwagger == null)

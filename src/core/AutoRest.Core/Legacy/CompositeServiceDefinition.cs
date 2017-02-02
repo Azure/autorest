@@ -29,7 +29,7 @@ namespace AutoRest.Core.Legacy
 
         public static string[] GetInputFiles(IFileSystem fs, string compositeSwaggerFile)
         {
-            var inputBody = fs.ReadFileAsText(compositeSwaggerFile);
+            var inputBody = fs.ReadAllText(compositeSwaggerFile);
             var parentDir = fs.GetParentDir(compositeSwaggerFile);
             try
             {

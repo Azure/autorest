@@ -488,7 +488,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
             if (Modeler == "Composite")
             {
-                inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystem, Input);
+                inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystemInput, Input);
             }
 
             var config = AutoRestConfiguration.Create();

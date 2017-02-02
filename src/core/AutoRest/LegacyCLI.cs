@@ -30,7 +30,7 @@ namespace AutoRest
                 // internal preprocesor
                 if (settings.Preprocessor)
                 {
-                    Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadFileAsText(settings.Input)));
+                    Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadAllText(settings.Input)));
                 }
 
                 // determine some reasonable default namespace
