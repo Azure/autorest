@@ -11,21 +11,22 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ListOperationNamingWarning : TypedRule<ServiceDefinition>
+    public class ListOperationNamingWarning : TypedRule<Dictionary<string,Dictionary<string, Operation>>>
     {
         private readonly string XmsPageable = "x-ms-pageable";
         private readonly Regex regex = new Regex(@".+_List(\w*)$", RegexOptions.IgnoreCase);
-        public override IEnumerable<ValidationMessage> GetValidationMessages(ServiceDefinition entity, RuleContext context)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string,Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
-            var listingOperations = entity.Paths.Values.SelectMany(op => op.Where(pair => pair.Key.Equals("get") || pair.Key.Equals("post")).Select(pair => pair.Value));
-            foreach (var op in listingOperations)
+            var serviceDefinition = (ServiceDefinition)context.Root;
+            var listingOperations = entity.Values.SelectMany(opDict=>opDict.Where(pair => pair.Key.Equals("get") || pair.Key.Equals("post")));
+            foreach (var opPair in listingOperations)
             {
                 // if the operation id is already of the type _list we can skip this check
-                if (regex.IsMatch(op.OperationId)) continue;
+                if (regex.IsMatch(opPair.Value.OperationId)) continue;
 
                 string opName = string.Empty;
-                if((opName = GetXmsNullableOrArrayResponseOperation(op, entity))!=string.Empty)
+                if((opName = GetXmsNullableOrArrayResponseOperation(opPair.Value, serviceDefinition))!=string.Empty)
                 {
                     yield return new ValidationMessage(context.Path, this, opName);
                 }
