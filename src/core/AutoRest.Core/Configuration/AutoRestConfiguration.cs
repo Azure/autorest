@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using YamlDotNet.Serialization;
@@ -11,6 +12,11 @@ namespace AutoRest.Core.Configuration
 {
     public class AutoRestConfiguration
     {
+        public static AutoRestConfiguration Create()
+        {
+            return AutoRestConfigurationParser.Parse("{}");
+        }
+
         [YamlMember(Alias = "autorest")]
         public object AutoRest { get; set; }
 
@@ -29,6 +35,10 @@ namespace AutoRest.Core.Configuration
         public string ModelsName { get; set; }
         public object ClientName { get; set; }
         public bool ValidationLinter { get; set; }
+        [YamlMember(Alias = "plugins")]
+        public IDictionary<string, AutoRestProviderConfiguration> Plugins { get; set; }
+        public string CodeGenerator { get; set; }
+        public bool AddCredentials { get; set; }
 
         public bool Validate()
         {
@@ -47,6 +57,14 @@ namespace AutoRest.Core.Configuration
             //{
 
             //};
+        }
+
+        public void LegacyActivateGeneratorSettings()
+        {
+            new Settings
+            {
+                AddCredentials = AddCredentials
+            };
         }
     }
 }

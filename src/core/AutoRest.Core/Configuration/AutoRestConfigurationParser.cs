@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Parsing;
@@ -43,7 +44,7 @@ namespace AutoRest.Core.Configuration
 
     public class AutoRestConfigurationParser
     {
-        public static AutoRestConfiguration Parse(string configurationText, Dictionary<string, string> settings)
+        public static AutoRestConfiguration Parse(string configurationText, Dictionary<string, string> settings = null)
         {
             // deliteralize
             if (!configurationText.IsYaml())
@@ -51,7 +52,7 @@ namespace AutoRest.Core.Configuration
                 Logger.Instance.Log(Category.Info, "Parsing literate configuration");
                 Func<string, string> variableEvaluator = name =>
                 {
-                    if (settings.ContainsKey(name))
+                    if (settings?.ContainsKey(name) == true)
                     {
                         return settings[name];
                     }
@@ -62,8 +63,12 @@ namespace AutoRest.Core.Configuration
                 configurationText = LiterateYamlParser.Parse(configurationText, variableEvaluator);
             }
 
+            configurationText = YamlExtensions.MergeYamlObjects(
+                configurationText.ParseYaml(), 
+                File.ReadAllText(Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location), "AutoRest.json")).ParseYaml()).Serialize();
+
             // load
-            var d = new Deserializer();
+            var d = new Deserializer(ignoreUnmatched: true);
             d.NodeDeserializers.Add(new YamlScalarAsArrayDeserializer());
             return d.Deserialize<AutoRestConfiguration>(new StringReader(configurationText));
         }

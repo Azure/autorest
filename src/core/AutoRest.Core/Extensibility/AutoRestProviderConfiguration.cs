@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
+using YamlDotNet.Serialization;
 
 namespace AutoRest.Core.Extensibility
 {
@@ -15,12 +16,14 @@ namespace AutoRest.Core.Extensibility
         /// <summary>
         /// Gets of sets provider name in 'type, assembly name' format.
         /// </summary>
+        [YamlMember(Alias = "type")]
         [JsonProperty("type")]
         public string TypeName { get; set; }
 
         /// <summary>
         /// Gets of sets provider specific settings.
         /// </summary>
+        [YamlMember(Alias = "settings")]
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Required for JSON serialization.")]
         public IDictionary<string, string> Settings { get; set; }
     }

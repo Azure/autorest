@@ -501,12 +501,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystem, Input);
             }
 
-            return new AutoRestConfiguration
-            {
-                Namespace = Namespace,
-                InputFiles = inputFiles,
-                OutputFolder = OutputDirectory
-            };
+            var config = AutoRestConfiguration.Create();
+            config.AddCredentials = AddCredentials;
+            config.CodeGenerator = CodeGenerator;
+            config.InputFiles = inputFiles;
+            config.Namespace = Namespace;
+            config.OutputFolder = OutputDirectory;
+            return config;
         }
     }
 }

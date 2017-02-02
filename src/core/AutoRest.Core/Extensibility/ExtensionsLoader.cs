@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -23,15 +24,15 @@ namespace AutoRest.Core.Extensibility
         internal const string ConfigurationFileName = "AutoRest.json";
 
 
-        public static IAnyPlugin GetPlugin()
+        public static IAnyPlugin GetPlugin(AutoRestConfiguration configuration)
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
-            if (Settings.Instance == null)
+            if (configuration == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException("configuration");
             }
 
-            if (string.IsNullOrEmpty(Settings.Instance.CodeGenerator))
+            if (string.IsNullOrEmpty(configuration.CodeGenerator))
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -40,37 +41,26 @@ namespace AutoRest.Core.Extensibility
 
             IAnyPlugin plugin = null;
 
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
+            if (configuration.CodeGenerator.EqualsIgnoreCase("None"))
             {
                 plugin = new NoOpPlugin();
             }
             else
             {
-                string configurationFile = GetConfigurationFileContent(Settings.Instance);
-
-                if (configurationFile != null)
+                try
                 {
-                    try
-                    {
-                        var config = JsonConvert.DeserializeObject<AutoRestConfigurationEx>(configurationFile);
-                        plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
-                        Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
-                    }
+                    plugin = LoadTypeFromAssembly<IAnyPlugin>(configuration.Plugins, configuration.CodeGenerator);
+                    //Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
+                    throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
                 }
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
-                Settings.Instance.CodeGenerator,
+                configuration.CodeGenerator,
                 plugin.GetType().Assembly.GetName().Version);
             return plugin;
-
         }
 
         /// <summary>

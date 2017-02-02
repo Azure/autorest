@@ -92,7 +92,7 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
+            var plugin = ExtensionsLoader.GetPlugin(configuration);
 
             Console.ResetColor();
             Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
@@ -100,6 +100,8 @@ namespace AutoRest.Core
             {
                 var genericSerializer = new ModelSerializer<CodeModel>();
                 var modelAsJson = genericSerializer.ToJson(codeModel);
+
+                configuration.LegacyActivateGeneratorSettings();
 
                 // ensure once we're doing language-specific work, that we're working
                 // in context provided by the language-specific transformer. 

@@ -33,9 +33,7 @@ namespace AutoRest.Core.Extensibility
             _namer = namer;
 
             // apply custom settings to the GeneratorSettings 
-            Core.Settings.PopulateSettings(_generatorSettings, Core.Settings.Instance.CustomSettings);
-
-
+            // Core.Settings.PopulateSettings(_generatorSettings, Core.Settings.Instance.CustomSettings); // TODO? even used?
         }
 
         protected Plugin()

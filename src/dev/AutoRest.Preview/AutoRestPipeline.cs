@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AutoRest.Core;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
@@ -41,7 +42,9 @@ namespace AutoRest
         {
             using (NewContext)
             {
-                var plugin = ExtensionsLoader.GetPlugin();
+                var config = AutoRestConfiguration.Create();
+                config.CodeGenerator = Settings.Instance.CodeGenerator;
+                var plugin = ExtensionsLoader.GetPlugin(config);
                 var modeler = ExtensionsLoader.GetModeler(Settings.Instance.Modeler);
                 var messages = new List<LogMessage>();
                 Logger.Instance.AddListener(new SignalingLogListener(Category.Info, message => messages.Add(message)));
