@@ -30,6 +30,7 @@ namespace AutoRest.Core.Legacy
         public static string[] GetInputFiles(IFileSystem fs, string compositeSwaggerFile)
         {
             var inputBody = fs.ReadFileAsText(compositeSwaggerFile);
+            var parentDir = fs.GetParentDir(compositeSwaggerFile);
             try
             {
                 var settings = new JsonSerializerSettings
@@ -38,7 +39,7 @@ namespace AutoRest.Core.Legacy
                     MetadataPropertyHandling = MetadataPropertyHandling.Ignore
                 };
                 var csd = JsonConvert.DeserializeObject<CompositeServiceDefinition>(inputBody, settings);
-                return new[] {compositeSwaggerFile}.Concat(csd.Documents).ToArray();
+                return new[] {compositeSwaggerFile}.Concat(csd.Documents.Select(doc => fs.MakePathRooted(parentDir, doc))).ToArray();
             }
             catch (JsonException ex)
             {

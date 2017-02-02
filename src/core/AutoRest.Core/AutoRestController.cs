@@ -54,8 +54,31 @@ namespace AutoRest.Core
                     // TODO
                     //Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
 
+                    configuration.LegacyActivateModelerSettings();
+
+                    var serviceDefinition = modeler.Parse(fs, configuration.InputFiles);
+
+                    if (configuration.ValidationLinter)
+                    {
+                        // Look for semantic errors and warnings in the document.
+                        var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                        foreach (var validationEx in validator.GetValidationExceptions(serviceDefinition))
+                        {
+                            Logger.Instance.Log(validationEx);
+                        }
+                    }
+
+                    // TODO: meh, needed?
+                    if (string.IsNullOrEmpty(serviceDefinition.Info.Title))
+                    {
+                        serviceDefinition.Info.Title = configuration.ClientName;
+                    }
+
                     // generate model from swagger 
-                    codeModel = modeler.Build(fs, configuration.InputFiles);
+                    codeModel = modeler.Build(serviceDefinition);
+
+                    codeModel.Namespace = configuration.Namespace;  // TODO: defaults?
+                    codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
 
                     if (validationErrorFound)
                     {
@@ -116,7 +139,7 @@ namespace AutoRest.Core
                 throw new ArgumentNullException("settings");
             }
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            Modeler modeler = ExtensionsLoader.GetModeler("Swagger");
+            dynamic modeler = ExtensionsLoader.GetModeler("Swagger"); // TODO *cough*
 
             try
             {

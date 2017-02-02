@@ -78,14 +78,13 @@ namespace AutoRest.Core.Extensibility
         /// </summary>
         /// <returns>Modeler specified in Settings.Modeler</returns>
         [Obsolete("no (dedicated) composite modeler will mean: no parameter")]
-        public static Modeler GetModeler(string modelerName)
+        public static dynamic GetModeler(string modelerName)
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingModeler);
 
-            Modeler modeler = LoadTypeFromAssembly<Modeler>(new Dictionary<string, AutoRestProviderConfiguration>
+            var modeler = LoadTypeFromAssembly<dynamic>(new Dictionary<string, AutoRestProviderConfiguration>
             {
                 { "Swagger", new AutoRestProviderConfiguration {TypeName = "SwaggerModeler, AutoRest.Swagger"} },
-                { "CompositeSwagger", new AutoRestProviderConfiguration {TypeName ="CompositeSwaggerModeler, AutoRest.CompositeSwagger"} },
             }, modelerName);
 
             Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,

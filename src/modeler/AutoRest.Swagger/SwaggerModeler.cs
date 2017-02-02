@@ -21,7 +21,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
-    public class SwaggerModeler : Modeler
+    public class SwaggerModeler
     {
         private const string BaseUriParameterName = "BaseUri";
 
@@ -53,13 +53,12 @@ namespace AutoRest.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        public override CodeModel Build(IFileSystem fs, string[] inputFiles)
+        public ServiceDefinition Parse(IFileSystem fs, string[] inputFiles)
         {
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (inputFiles.Length == 1)
             {
-                var serviceDefinition = SwaggerParser.Load(inputFiles[0], fs);
-                return Build(serviceDefinition);
+                return SwaggerParser.Load(inputFiles[0], fs);
             }
 
             // composite mode
@@ -67,21 +66,21 @@ namespace AutoRest.Swagger
             for (var i = 0; i < inputFiles.Length; i++)
             {
                 var compositeDocument = inputFiles[i];
-                if (!Settings.FileSystem.IsCompletePath(compositeDocument) || !Settings.FileSystem.FileExists(compositeDocument))
+                if (!fs.IsCompletePath(compositeDocument) || !fs.FileExists(compositeDocument))
                 {
                     // Otherwise, root it from the current path
-                    inputFiles[i] = Settings.FileSystem.MakePathRooted(Settings.InputFolder, compositeDocument);
+                    inputFiles[i] = fs.MakePathRooted(fs.GetParentDir(inputFiles[0]), compositeDocument);
                 }
             }
 
             // construct merged swagger document
             var mergedSwagger = new YamlMappingNode();
-            mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+            mergedSwagger.Set("info", (fs.ReadFileAsText(inputFiles[0]).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
 
             // merge child swaggers
             foreach (var childSwaggerPath in inputFiles)
             {
-                var childSwaggerRaw = Settings.FileSystem.ReadFileAsText(childSwaggerPath);
+                var childSwaggerRaw = fs.ReadFileAsText(childSwaggerPath);
                 childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
                 var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
                 if (childSwagger == null)
@@ -130,22 +129,13 @@ namespace AutoRest.Swagger
             }
 
             // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
-            return Build(SwaggerParser.Parse(inputFiles[0], mergedSwagger.Serialize()));
+            return SwaggerParser.Parse(inputFiles[0], mergedSwagger.Serialize());
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (!Settings.SkipValidation)
-            {
-                // Look for semantic errors and warnings in the document.
-                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
-                {
-                    Logger.Instance.Log(validationEx);
-                }
-            }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
@@ -229,16 +219,18 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override IEnumerable<ComparisonMessage> Compare()
+        public IEnumerable<ComparisonMessage> Compare()
         {
+            var settings = Settings.Instance;
+
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
+            if (string.IsNullOrWhiteSpace(settings.Input) || string.IsNullOrWhiteSpace(settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystem);
+            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystem);
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
@@ -259,15 +251,16 @@ namespace AutoRest.Swagger
 
         private void UpdateSettings()
         {
+            var settings = new Settings(); // TODO: Note: this is the kind of settings we WANT in a pipeline model! Custom customizations for the current stage!
             if (ServiceDefinition.Info.CodeGenerationSettings != null)
             {
                 foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
                 {
                     //Don't overwrite settings that come in from the command line
-                    if (!this.Settings.CustomSettings.ContainsKey(key))
-                        this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                    if (!settings.CustomSettings.ContainsKey(key))
+                        settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
                 }
-                Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
+                Settings.PopulateSettings(settings, settings.CustomSettings);
             }
         }
 
@@ -287,17 +280,15 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InfoSectionMissing);
             }
 
-            CodeModel = New<CodeModel>();
-
-            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
+            if (ServiceDefinition.Info.Title == null)
             {
                 throw ErrorManager.CreateError(Resources.TitleMissing);
             }
 
+            CodeModel = New<CodeModel>();
+
             CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
 
-            CodeModel.Namespace = Settings.Namespace;
-            CodeModel.ModelsName = Settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
             CodeModel.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)

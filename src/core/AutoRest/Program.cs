@@ -92,7 +92,7 @@ namespace AutoRest
 
                     bool generationFailed = false;
                     Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
-                    AutoRestController.Generate(new FileSystem(), configuration);
+                    AutoRestController.Generate(new FileSystem(), configuration).GetAwaiter().GetResult();
                     return (int)(generationFailed ? ExitCode.Error : ExitCode.Success);
                 }
                 catch (Exception exception)

@@ -26,6 +26,10 @@ namespace AutoRest.Core.Configuration
         [YamlMember(Alias = "log-file")]
         public string LogFile { get; set; }
 
+        public string ModelsName { get; set; }
+        public object ClientName { get; set; }
+        public bool ValidationLinter { get; set; }
+
         public bool Validate()
         {
             // TODO
@@ -35,6 +39,14 @@ namespace AutoRest.Core.Configuration
                 return false;
             }
             return true;
+        }
+
+        public void LegacyActivateModelerSettings()
+        {
+            //new Settings
+            //{
+
+            //};
         }
     }
 }
