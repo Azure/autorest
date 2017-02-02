@@ -132,86 +132,101 @@ namespace AutoRest.Swagger
             return SwaggerParser.Parse(inputFiles[0], mergedSwagger.Serialize());
         }
 
+        [Obsolete("that's not how we do it")]
+        public CodeModel Build()
+        {
+            return Build(Parse(Settings.Instance.FileSystemInput, new[] {Settings.Instance.Input}));
+        }
+
+        [Obsolete("that's not how we do it")]
+        public CodeModel Build(IFileSystem fs, string[] inputFiles)
+        {
+            return Build(Parse(fs, inputFiles));
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
-            // Update settings
-            UpdateSettings();
-
-            InitializeClientModel();
-            BuildCompositeTypes();
-
-            // Build client parameters
-            foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
+            using (NewContext)
             {
-                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(this)).Build();
+                // Update settings
+                UpdateSettings();
 
-                var clientProperty = New<Property>();
-                clientProperty.LoadFrom(parameter);
-                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
+                InitializeClientModel();
+                BuildCompositeTypes();
 
-                CodeModel.Add(clientProperty);
-            }
-
-            var  methods = new List<Method>();
-            // Build methods
-            foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
-            {
-                foreach (var verb in path.Value.Keys)
+                // Build client parameters
+                foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
                 {
-                    var operation = path.Value[verb];
-                    if (string.IsNullOrWhiteSpace(operation.OperationId))
-                    {
-                        throw ErrorManager.CreateError(
-                            string.Format(CultureInfo.InvariantCulture,
-                                Resources.OperationIdMissing,
-                                verb,
-                                path.Key));
-                    }
-                    var methodName = GetMethodName(operation);
-                    var methodGroup = GetMethodGroup(operation);
+                    var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(this)).Build();
 
-                    if (verb.ToHttpMethod() != HttpMethod.Options)
-                    {
-                        string url = path.Key;
-                        if (url.Contains("?"))
-                        {
-                            url = url.Substring(0, url.IndexOf('?'));
-                        }
-                        var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
-                        method.Group = methodGroup;
-                        
-                        methods.Add(method);
-                        if (method.DefaultResponse.Body is CompositeType)
-                        {
-                            CodeModel.AddError((CompositeType)method.DefaultResponse.Body);
-                        }
-                    }
-                    else
-                    {
-                        Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
-                    }
-                }
-            }
+                    var clientProperty = New<Property>();
+                    clientProperty.LoadFrom(parameter);
+                    clientProperty.RealPath = new string[] {parameter.SerializedName.Value};
 
-            // Set base type
-            foreach (var typeName in GeneratedTypes.Keys)
-            {
-                var objectType = GeneratedTypes[typeName];
-                if (ExtendedTypes.ContainsKey(typeName))
-                {
-                    objectType.BaseModelType = GeneratedTypes[ExtendedTypes[typeName]];
+                    CodeModel.Add(clientProperty);
                 }
 
-                CodeModel.Add(objectType);
-            }
-            CodeModel.AddRange(methods);
-            
+                var methods = new List<Method>();
+                // Build methods
+                foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
+                {
+                    foreach (var verb in path.Value.Keys)
+                    {
+                        var operation = path.Value[verb];
+                        if (string.IsNullOrWhiteSpace(operation.OperationId))
+                        {
+                            throw ErrorManager.CreateError(
+                                string.Format(CultureInfo.InvariantCulture,
+                                    Resources.OperationIdMissing,
+                                    verb,
+                                    path.Key));
+                        }
+                        var methodName = GetMethodName(operation);
+                        var methodGroup = GetMethodGroup(operation);
 
-            return CodeModel;
+                        if (verb.ToHttpMethod() != HttpMethod.Options)
+                        {
+                            string url = path.Key;
+                            if (url.Contains("?"))
+                            {
+                                url = url.Substring(0, url.IndexOf('?'));
+                            }
+                            var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
+                            method.Group = methodGroup;
+
+                            methods.Add(method);
+                            if (method.DefaultResponse.Body is CompositeType)
+                            {
+                                CodeModel.AddError((CompositeType) method.DefaultResponse.Body);
+                            }
+                        }
+                        else
+                        {
+                            Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
+                        }
+                    }
+                }
+
+                // Set base type
+                foreach (var typeName in GeneratedTypes.Keys)
+                {
+                    var objectType = GeneratedTypes[typeName];
+                    if (ExtendedTypes.ContainsKey(typeName))
+                    {
+                        objectType.BaseModelType = GeneratedTypes[ExtendedTypes[typeName]];
+                    }
+
+                    CodeModel.Add(objectType);
+                }
+                CodeModel.AddRange(methods);
+
+
+                return CodeModel;
+            }
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using AutoRest.Core;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -43,7 +44,6 @@ namespace AutoRest.Swagger.Tests
             var settings = Settings.Instance;
 
             settings.FileSystemInput = new MemoryFileSystem();
-            settings.FileSystemInput.WriteAllText("AutoRest.json", File.ReadAllText("AutoRest.json"));
             settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
 
@@ -52,17 +52,17 @@ namespace AutoRest.Swagger.Tests
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
 
-            var name = ExtensionsLoader.GetPlugin().Settings.Name;
+            var name = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin(settings.CodeGenerator)).Settings.Name;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
                 ? "Fixtures." + (name.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
                     Replace(".js", "").Replace(".", "").
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
+            settings.DisableSimplifier = true;
+            var fsOut = AutoRestController.Generate(settings.FileSystemInput, settings.CreateConfiguration()).GetAwaiter().GetResult();
 
-            AutoRestController.Generate(settings.CreateConfiguration()).GetAwaiter().GetResult();
-
-            var actualFiles = settings.FileSystemOutput.GetFiles("", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var actualFiles = fsOut.GetFiles("", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
             Assert.Equal(expectedFiles.Length, actualFiles.Length);
 
@@ -70,7 +70,7 @@ namespace AutoRest.Swagger.Tests
             {
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
-                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystemOutput.ReadAllText(actualFile));
+                EnsureFilesMatch(File.ReadAllText(expectedFile), fsOut.ReadAllText(actualFile));
             }
         }
 

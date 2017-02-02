@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Parsing;
+using AutoRest.Core.Properties;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
@@ -64,8 +66,8 @@ namespace AutoRest.Core.Configuration
             }
 
             configurationText = YamlExtensions.MergeYamlObjects(
-                configurationText.ParseYaml(), 
-                File.ReadAllText(Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location), "AutoRest.json")).ParseYaml()).Serialize();
+                configurationText.ParseYaml(),
+                Resources.ConfigurationKnownPlugins.ParseYaml()).Serialize();
 
             // load
             var d = new Deserializer(ignoreUnmatched: true);

@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using System.IO;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Model;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
@@ -26,7 +27,6 @@ namespace AutoRest.Core.Tests
 
         private void SetupMock()
         {
-            _fileSystem.WriteAllText("AutoRest.json", File.ReadAllText(Path.Combine("Resource", "AutoRest.json")));
             _fileSystem.WriteAllText("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
@@ -37,13 +37,12 @@ namespace AutoRest.Core.Tests
             {
                 var settings = new Settings
                 {
-                    CodeGenerator = "NodeJS",
                     FileSystemInput = _fileSystem,
                     Input = "X:\\RedisResource.json",
                     OutputDirectory = "X:\\Output"
                 };
-
-                var language = ExtensionsLoader.GetPlugin();
+                
+                var language = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("NodeJS"));
                 settings.Validate();
 
                 Assert.Equal("NodeJS", language.Settings.Name);
@@ -55,8 +54,8 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings {CodeGenerator = "CSharp", FileSystemInput = _fileSystem};
-                var language = ExtensionsLoader.GetPlugin();
+                var settings = new Settings {FileSystemInput = _fileSystem};
+                var language = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp"));
 
                 Assert.Equal("CSharp", language.Settings.Name);
             }
@@ -67,9 +66,9 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings {CodeGenerator = "CSharp", FileSystemInput = _fileSystem};
+                var settings = new Settings {FileSystemInput = _fileSystem};
 
-                var language = ExtensionsLoader.GetPlugin();
+                var language = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp"));
                 Assert.Equal("CSharp", language.Settings.Name);
             }
         }
@@ -92,7 +91,7 @@ namespace AutoRest.Core.Tests
             using (NewContext)
             {
                 var settings = new Settings { FileSystemInput = _fileSystem};
-                Assert.Throws<ArgumentException>(() => ExtensionsLoader.GetModeler(string.Empty));
+                Assert.Throws<CodeGenerationException>(() => ExtensionsLoader.GetModeler(string.Empty));
             }
         }
 
@@ -104,83 +103,13 @@ namespace AutoRest.Core.Tests
                 string codeGenerator = "Foo.Bar";
                 var settings = new Settings
                 {
-                    CodeGenerator = codeGenerator,
                     FileSystemInput = _fileSystem
                 };
             
 
             AssertThrows<CodeGenerationException>(
-                () => ExtensionsLoader.GetPlugin(),
-                $"Plugin {codeGenerator} does not have an assembly name in AutoRest.json");
-            }
-        }
-
-        [Fact]
-        public void InvalidJsonFileThrowsException()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings {CodeGenerator = "JavaScript", FileSystemInput = _fileSystem};
-
-                _fileSystem.WriteAllText("AutoRest.json", "{'foo': 'bar'}");
-                AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetPlugin(),
-                    $"Plugin {"JavaScript"} does not have an assembly name in AutoRest.json");
-
-            }
-
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "JavaScript", FileSystemInput = _fileSystem};
-                _fileSystem.WriteAllText("AutoRest.json", "{'foo': ");
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "Error parsing AutoRest.json file");
-            }
-            
-        }
-
-        [Fact]
-        public void NoJsonFileThrowsException()
-        {
-            using (NewContext)
-            {
-                var fs = new MemoryFileSystem();
-                foreach (var file in _fileSystem.GetFiles("", "*", SearchOption.AllDirectories))
-                {
-                    if (file != "AutoRest.json")
-                    {
-                        fs.WriteAllText(file, _fileSystem.ReadAllText(file));
-                    }
-                }
-
-                new Settings { CodeGenerator = "JavaScript", FileSystemInput = fs };
-
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "AutoRest.json was not found in the current directory");
-            }
-        }
-
-        [Fact]
-        public void InvalidTypeThrowsException()
-        {
-            using (NewContext)
-            {
-                _fileSystem.WriteAllText("AutoRest.json",
-                    File.ReadAllText(Path.Combine("Resource", "AutoRestWithInvalidType.json")));
-
-                new Settings {CodeGenerator = "CSharp", FileSystemInput = _fileSystem};
-
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "Plugin CSharp does not have an assembly name in AutoRest.json");
-            }
-
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "Java", FileSystemInput = _fileSystem};
-                AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetPlugin(),
-                    "Plugin Java does not have an assembly name in AutoRest.json");
+                () => ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin(codeGenerator)),
+                $"Plugin {codeGenerator} does not have an assembly name in configuration");
             }
         }
 

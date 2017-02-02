@@ -51,6 +51,10 @@ namespace AutoRest.Core.Utilities
         /// <returns></returns>
         public string MakePathRooted(Uri rootPath, string relativePath)
         {
+            if (IsCompletePath(relativePath))
+            {
+                return relativePath;
+            }
             var combined = new Uri(Path.Combine(rootPath.ToString(), relativePath));
             return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
         }
@@ -78,7 +82,7 @@ namespace AutoRest.Core.Utilities
 
         public bool FileExists(string path)
         {
-            return File.Exists(path);
+            return File.Exists(path) || File.Exists(new Uri(path).LocalPath);
         }
 
         public string[] GetFiles(string startDirectory, string filePattern, SearchOption options)

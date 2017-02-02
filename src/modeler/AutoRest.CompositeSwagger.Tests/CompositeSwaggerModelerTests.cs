@@ -7,11 +7,12 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 using System;
 using AutoRest.Core.Legacy;
 using AutoRest.Core.Utilities;
+using AutoRest.Swagger;
 
 namespace AutoRest.CompositeSwagger.Tests
 {
     [Collection("AutoRest Tests")]
-    public class CompositeSwaggerModelerTests
+    public class SwaggerModelerTests
     {
         [Fact]
         public void CompositeSwaggerWithTwoModels()
@@ -23,8 +24,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-good1.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                var clientModel = modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
+                var modeler = new SwaggerModeler();
+                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
                 Assert.Equal("2014-04-01-preview",
                     clientModel.Methods.FirstOrDefault(m => m.Name == "SimpleGet")
                         .Parameters.FirstOrDefault(p => p.SerializedName == "api-version")
@@ -50,8 +51,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-good2.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                var clientModel = modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
+                var modeler = new SwaggerModeler();
+                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
 
                 Assert.Equal(2, clientModel.Methods.Count);
                 Assert.Equal(2, clientModel.ModelTypes.Count);
@@ -70,8 +71,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-good3.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                var clientModel = modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
+                var modeler = new SwaggerModeler();
+                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
 
                 Assert.Equal(2, clientModel.Methods.Count);
                 Assert.Equal(2, clientModel.ModelTypes.Count);
@@ -89,8 +90,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-conflict-in-global-param.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<Exception>(() => modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                var modeler = new SwaggerModeler();
+                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
             }
         }
 
@@ -104,8 +105,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-conflict-in-model.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<Exception>(() => modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                var modeler = new SwaggerModeler();
+                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
             }
         }
 
@@ -119,8 +120,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-conflict-in-settings.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<Exception>(() => modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                var modeler = new SwaggerModeler();
+                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
             }
         }
 
@@ -134,8 +135,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-empty.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<CodeGenerationException>(() => modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                var modeler = new SwaggerModeler();
+                Assert.Throws<CodeGenerationException>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
             }
         }
 
@@ -149,8 +150,8 @@ namespace AutoRest.CompositeSwagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "composite-swagger-empty2.json")
                 };
-                Modeler modeler = new CompositeSwaggerModeler();
-                Assert.Throws<CodeGenerationException>(() => modeler.Build(CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                var modeler = new SwaggerModeler();
+                Assert.Throws<NullReferenceException>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
             }
         }
     }

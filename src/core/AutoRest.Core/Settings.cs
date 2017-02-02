@@ -494,10 +494,22 @@ Licensed under the MIT License. See License.txt in the project root for license 
             var config = AutoRestConfiguration.Create();
             config.AddCredentials = AddCredentials;
             config.CodeGenerator = CodeGenerator;
+            config.DisableSimplifier = DisableSimplifier;
             config.InputFiles = inputFiles;
+            config.ModelsName = ModelsName;
             config.Namespace = Namespace;
             config.OutputFolder = OutputDirectory;
             return config;
+        }
+
+        [Obsolete]
+        public static void ActivateConfiguration(AutoRestConfiguration config)
+        {
+            new Settings
+            {
+                AddCredentials = config.AddCredentials,
+                Namespace = config.Namespace
+            };
         }
     }
 }

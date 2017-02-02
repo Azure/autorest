@@ -17,6 +17,14 @@ namespace AutoRest.Core.Configuration
             return AutoRestConfigurationParser.Parse("{}");
         }
 
+        [Obsolete]
+        public static AutoRestConfiguration CreateForPlugin(string codeGen)
+        {
+            var res = Create();
+            res.CodeGenerator = codeGen;
+            return res;
+        }
+
         [YamlMember(Alias = "autorest")]
         public object AutoRest { get; set; }
 
@@ -40,6 +48,9 @@ namespace AutoRest.Core.Configuration
         public string CodeGenerator { get; set; }
         public bool AddCredentials { get; set; }
 
+        [Obsolete("gen specific")]
+        public bool DisableSimplifier { get; set; }
+
         public bool Validate()
         {
             // TODO
@@ -49,22 +60,6 @@ namespace AutoRest.Core.Configuration
                 return false;
             }
             return true;
-        }
-
-        public void LegacyActivateModelerSettings()
-        {
-            //new Settings
-            //{
-
-            //};
-        }
-
-        public void LegacyActivateGeneratorSettings()
-        {
-            new Settings
-            {
-                AddCredentials = AddCredentials
-            };
         }
     }
 }

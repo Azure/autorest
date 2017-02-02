@@ -18,12 +18,6 @@ namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
     {
-        /// <summary>
-        /// The name of the AutoRest configuration file.
-        /// </summary>
-        internal const string ConfigurationFileName = "AutoRest.json";
-
-
         public static IAnyPlugin GetPlugin(AutoRestConfiguration configuration)
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
@@ -47,15 +41,8 @@ namespace AutoRest.Core.Extensibility
             }
             else
             {
-                try
-                {
-                    plugin = LoadTypeFromAssembly<IAnyPlugin>(configuration.Plugins, configuration.CodeGenerator);
-                    //Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-                }
-                catch (Exception ex)
-                {
-                    throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
-                }
+                plugin = LoadTypeFromAssembly<IAnyPlugin>(configuration.Plugins, configuration.CodeGenerator);
+                //Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
                 configuration.CodeGenerator,
@@ -81,37 +68,6 @@ namespace AutoRest.Core.Extensibility
                 modelerName,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
-        }
-
-        [Obsolete("that information should be part of the input file 'bag'")]
-        public static string GetConfigurationFileContent(Settings settings)
-        {
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-            if (settings.FileSystemInput == null)
-            {
-                throw new InvalidOperationException("FileSystem is null in settings.");
-            }
-
-            string path = ConfigurationFileName;
-            if (!settings.FileSystemInput.FileExists(path))
-            {
-                path = Path.Combine(Directory.GetCurrentDirectory(), ConfigurationFileName);
-            }
-
-            if (!settings.FileSystemInput.FileExists(path))
-            {
-                path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location),
-                    ConfigurationFileName);
-            }
-
-            if (!settings.FileSystemInput.FileExists(path))
-            {
-                return null;
-            }
-            return settings.FileSystemInput.ReadAllText(path);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]

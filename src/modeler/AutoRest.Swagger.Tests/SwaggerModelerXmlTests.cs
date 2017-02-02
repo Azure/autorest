@@ -30,7 +30,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-xml.yaml")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 foreach (var modelType in codeModel.ModelTypes)
                 {
@@ -53,7 +53,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-xml.yaml")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
                 {
@@ -73,7 +73,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-xml-paths.yaml")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
                 foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
                 {

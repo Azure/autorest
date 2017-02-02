@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
@@ -39,7 +40,7 @@ namespace AutoRest.Core.Legacy
                     MetadataPropertyHandling = MetadataPropertyHandling.Ignore
                 };
                 var csd = JsonConvert.DeserializeObject<CompositeServiceDefinition>(inputBody, settings);
-                return new[] {compositeSwaggerFile}.Concat(csd.Documents.Select(doc => fs.MakePathRooted(parentDir, doc))).ToArray();
+                return new[] { fs.MakePathRooted(parentDir, Path.GetFileName(compositeSwaggerFile)) }.Concat(csd.Documents.Select(doc => fs.MakePathRooted(parentDir, doc))).ToArray();
             }
             catch (JsonException ex)
             {

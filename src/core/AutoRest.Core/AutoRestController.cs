@@ -38,12 +38,12 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        public static async Task Generate(IFileSystem fs, AutoRestConfiguration configuration)
+        public static async Task<MemoryFileSystem> Generate(IFileSystem fsInput, AutoRestConfiguration configuration)
         {
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            
+
             CodeModel codeModel;
-            
+
             var modeler = ExtensionsLoader.GetModeler("Swagger");
 
             try
@@ -53,10 +53,8 @@ namespace AutoRest.Core
                     bool validationErrorFound = false;
                     // TODO
                     //Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
-
-                    configuration.LegacyActivateModelerSettings();
-
-                    var serviceDefinition = modeler.Parse(fs, configuration.InputFiles);
+                    
+                    var serviceDefinition = modeler.Parse(fsInput, configuration.InputFiles);
 
                     if (configuration.ValidationLinter)
                     {
@@ -77,7 +75,7 @@ namespace AutoRest.Core
                     // generate model from swagger 
                     codeModel = modeler.Build(serviceDefinition);
 
-                    codeModel.Namespace = configuration.Namespace;  // TODO: defaults?
+                    codeModel.Namespace = configuration.Namespace; // TODO: defaults?
                     codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
 
                     //if (validationErrorFound)
@@ -96,38 +94,43 @@ namespace AutoRest.Core
 
             Console.ResetColor();
             Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
-            try
+
+            using (NewContext)
             {
-                var genericSerializer = new ModelSerializer<CodeModel>();
-                var modelAsJson = genericSerializer.ToJson(codeModel);
-
-                configuration.LegacyActivateGeneratorSettings();
-
-                // ensure once we're doing language-specific work, that we're working
-                // in context provided by the language-specific transformer. 
-                using (plugin.Activate())
+                Settings.ActivateConfiguration(configuration);
+                try
                 {
-                    // load model into language-specific code model
-                    codeModel = plugin.Serializer.Load(modelAsJson);
+                    var genericSerializer = new ModelSerializer<CodeModel>();
+                    var modelAsJson = genericSerializer.ToJson(codeModel);
 
-                    // apply language-specific tranformation (more than just language-specific types)
-                    // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                    // ensure once we're doing language-specific work, that we're working
+                    // in context provided by the language-specific transformer. 
+                    using (plugin.Activate())
+                    {
+                        // load model into language-specific code model
+                        codeModel = plugin.Serializer.Load(modelAsJson);
 
-                    // Generate code from CodeModel.
-                    await plugin.CodeGenerator.Generate(codeModel);
+                        // apply language-specific tranformation (more than just language-specific types)
+                        // used to be called "NormalizeClientModel" . 
+                        codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                        // Generate code from CodeModel.
+                        await plugin.CodeGenerator.Generate(codeModel);
+                    }
+
+                    // TODO: make me a proper pipeline step, make async
+                    // pull setting from language specific config!
+                    if (!configuration.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                    {
+                        await new CSharpSimplifier().Run().ConfigureAwait(false);
+                    }
+                }
+                catch (Exception exception)
+                {
+                    throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
                 }
 
-                // TODO: make me a proper pipeline step, make async
-                // pull setting from language specific config!
-                //if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
-                {
-                    await new CSharpSimplifier().Run().ConfigureAwait(false);
-                }
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
+                return Settings.Instance.FileSystemOutput;
             }
         }
 

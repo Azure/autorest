@@ -9,7 +9,7 @@ using YamlDotNet.Serialization;
 namespace AutoRest.Core.Extensibility
 {
     /// <summary>
-    /// In-memory representation of provider configuration in AutoRest.json file.
+    /// In-memory representation of provider configuration.
     /// </summary>
     public class AutoRestProviderConfiguration
     {

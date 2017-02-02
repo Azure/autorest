@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using System.Globalization;
+using AutoRest.Core.Configuration;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -62,7 +63,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-simple-spec.json")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 var description =
@@ -129,7 +130,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-external-ref-no-definitions.json")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
@@ -147,7 +148,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-external-ref.json")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
@@ -167,7 +168,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-external-ref.json")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
@@ -188,7 +189,7 @@ namespace AutoRest.Swagger.Tests
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-external-ref-no-definitions.json")
                 };
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
@@ -798,13 +799,12 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    CodeGenerator = "CSharp",
                     Input = Path.Combine("Swagger", "swagger-x-ms-code-generation-settings.json"),
                     Header = "NONE"
                 };
                 var modeler = ExtensionsLoader.GetModeler("Swagger");
                 var client = modeler.Build();
-                var plugin = ExtensionsLoader.GetPlugin() as PluginCs;
+                var plugin = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp")) as PluginCs;
                 Assert.NotNull(plugin);
                 settings.Validate();
 
@@ -852,7 +852,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine("Swagger", "swagger-simple-spec.yaml")
                 };
 
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
@@ -870,7 +870,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine("Swagger", "swagger-additional-properties.yaml")
                 };
 
-                Modeler modeler = new SwaggerModeler();
+                var modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);

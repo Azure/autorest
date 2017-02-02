@@ -12,8 +12,6 @@ namespace AutoRest.Preview
 {
     public static class AutoRestPipeline
     {
-        private static readonly string autoRestJson = File.ReadAllText("AutoRest.json");
-        
         public static MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator, Action<IEnumerable<LogMessage>> processMessages)
         {
             using (NewContext)
@@ -27,7 +25,6 @@ namespace AutoRest.Preview
                 };
 
                 fs.WriteAllText(settings.Input, json);
-                fs.WriteAllText("AutoRest.json", autoRestJson);
 
                 GenerateCodeInto(fs, processMessages);
 

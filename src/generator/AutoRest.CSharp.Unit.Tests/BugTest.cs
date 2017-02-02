@@ -96,12 +96,7 @@ namespace AutoRest.CSharp.Unit.Tests
         {
         }
 
-        protected virtual MemoryFileSystem CreateMockFilesystem()
-        {
-            var fs = new MemoryFileSystem();
-            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
-            return fs;
-        }
+        protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string[] inputFiles = null)
         {

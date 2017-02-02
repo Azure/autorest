@@ -7,6 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -112,28 +113,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(settings.Input)) {
+            if (inputFiles == null) {
                 throw new Exception($"Can't find swagger file ${testName} [.yaml] [.json] [.md]");
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler("Swagger");
-            var codeModel = modeler.Build(inputFiles);
-            
-            using (plugin.Activate())
-            {
-                // load model into language-specific code model
-                codeModel = plugin.Serializer.Load(codeModel);
-
-                // apply language-specific tranformation (more than just language-specific types)
-                // used to be called "NormalizeClientModel" . 
-                codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-                
-                // Generate code from CodeModel.
-                plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
-            }
-
-            return settings.FileSystemOutput;
+            var config = settings.CreateConfiguration();
+            config.InputFiles = inputFiles;
+            config.DisableSimplifier = true;
+            return AutoRestController.Generate(fileSystem, config).GetAwaiter().GetResult();
         }
 
         internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
