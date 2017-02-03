@@ -506,6 +506,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             config.Header = Header;
             config.PayloadFlatteningThreshold = PayloadFlatteningThreshold;
             config.CustomSettings = CustomSettings;
+            config.ValidationLinter = true;
             return config;
         }
 
