@@ -22,7 +22,7 @@ package @(Settings.Namespace.ToLower()).@(Model.ImplPackage);
 /**
  * Initializes a new instance of the @Model.Name class.
  */
-public final class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @if (Model.RootMethods.Any())
 {
 @:    /**
@@ -116,6 +116,16 @@ if(!property.IsReadOnly)
      */
     @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param restClient the REST client containing pre-configured settings
+     */
+    public @(Model.Name)Impl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

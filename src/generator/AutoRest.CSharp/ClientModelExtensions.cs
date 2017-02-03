@@ -343,7 +343,7 @@ namespace AutoRest.CSharp
 
             if (constraints != null && constraints.Any())
             {
-                AppendConstraintValidations(valueReference, constraints, sb, (type as PrimaryType)?.KnownFormat ?? KnownFormat.none);
+                AppendConstraintValidations(valueReference, constraints, sb, type);
             }
 
             if (sequence != null && sequence.ShouldValidateChain())
@@ -405,12 +405,12 @@ namespace AutoRest.CSharp
 #endif             
         }
 
-        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, KnownFormat format)
+        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)
         {
             foreach (var constraint in constraints.Keys)
             {
                 string constraintCheck;
-                string constraintValue = (format == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
+                string constraintValue = ((type as PrimaryType)?.KnownFormat == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:
@@ -442,7 +442,14 @@ namespace AutoRest.CSharp
                         break;
                     case Constraint.Pattern:
                         constraintValue = ToLiteral(constraintValue);
-                        constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
+                        if (type is DictionaryType)
+                        {
+                            constraintCheck = $"!System.Linq.Enumerable.All({valueReference}.Values, value => System.Text.RegularExpressions.Regex.IsMatch(value, {constraintValue}))";
+                        }
+                        else
+                        {
+                            constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
+                        }
                         break;
                     case Constraint.UniqueItems:
                         if ("true".EqualsIgnoreCase(constraints[constraint]))

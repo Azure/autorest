@@ -72,7 +72,8 @@ namespace AutoRest.CSharp.Unit.Tests {
                     startInfo =
                         new ProcessStartInfo(exe,
                             args.Aggregate(
-                                $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
+                                // $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
+                                "",
                                 (s, o) => $"{s} {Q}{o}{Q}"));
                     startInfo.EnvironmentVariables.Add("ATOM_SHELL_INTERNAL_RUN_AS_NODE", "1");
                     startInfo.UseShellExecute = false;
@@ -108,7 +109,7 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         protected virtual MemoryFileSystem CreateMockFilesystem() {
             var fs = new MemoryFileSystem();
-            fs.Copy(Path.Combine("Resource", "AutoRest.json"));
+            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
             return fs;
         }
 
@@ -180,7 +181,6 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
                 .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(), _assemblies);
-
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
 
 #if false

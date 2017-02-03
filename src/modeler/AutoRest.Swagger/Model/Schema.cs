@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using System.Globalization;
 
+using AutoRest.Core.Model;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ namespace AutoRest.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         [CollectionRule(typeof(AvoidNestedProperties))]
+        [Rule(typeof(XmsClientNameValidation))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }
@@ -65,6 +67,11 @@ namespace AutoRest.Swagger.Model
         /// Defines the set of schemas this shema is composed of
         /// </summary>
         public IList<Schema> AllOf { get; set; }
+
+        /// <summary>
+        /// A metadata object that allows for more fine-tuned XML model definitions.
+        /// </summary>
+        public XmlProperties Xml { get; set; }
 
         [JsonIgnore]
         internal bool IsReferenced { get; set; }
@@ -221,7 +228,7 @@ namespace AutoRest.Swagger.Model
             }
         }
 
-        private static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
+        public static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
         {
             if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
             {

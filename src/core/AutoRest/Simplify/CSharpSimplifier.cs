@@ -36,7 +36,9 @@ namespace AutoRest.Simplify
                 typeof(File).GetAssembly().Location,
                 typeof(HttpStatusCode).GetAssembly().Location,
                 typeof(System.Net.Http.HttpClient).GetAssembly().Location,
-                typeof(object).GetAssembly().Location
+                typeof(object).GetAssembly().Location,
+                typeof(XElement).GetAssembly().Location,
+                typeof(JsonConvert).GetAssembly().Location
             };
 
 

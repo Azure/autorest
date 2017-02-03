@@ -44,7 +44,7 @@ namespace AutoRest.Java.Model
             {
                 if (ModelType.IsPrimaryType(KnownPrimaryType.Base64Url))
                 {
-                    return string.Format("this.{0}.getDecodedBytes()", Name, CultureInfo.InvariantCulture);
+                    return string.Format("this.{0}.decodedBytes()", Name, CultureInfo.InvariantCulture);
                 }
                 else if (ModelType.IsPrimaryType(KnownPrimaryType.UnixTime))
                 {
@@ -52,7 +52,7 @@ namespace AutoRest.Java.Model
                 }
                 else if (ModelType.Name != ((IModelTypeJv)ModelType).ResponseVariant.Name)
                 {
-                    return string.Format("this.{0}.get{1}()", Name, ((IModelTypeJv)ModelType).ResponseVariant.Name, CultureInfo.InvariantCulture);
+                    return string.Format("this.{0}.{1}()", Name, ((IModelTypeJv)ModelType).ResponseVariant.Name.ToCamelCase(), CultureInfo.InvariantCulture);
                 }
                 else
                 {

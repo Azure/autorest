@@ -78,7 +78,7 @@ namespace AutoRest.Core.Model
         protected Method()
         {
             InitializeCollections();
-            Name.OnGet += n => CodeNamer.Instance.GetMethodName(n);
+            Name.OnGet += n => CodeNamer.Instance.GetMethodName(n.Else("unnamed_method"));
             Group.OnGet += groupName => CodeNamer.Instance.GetMethodGroupName(groupName);
         }
 
@@ -224,6 +224,11 @@ namespace AutoRest.Core.Model
         /// Gets or sets the content type.
         /// </summary>
         public string RequestContentType { get; set; }
+
+        /// <summary>
+        ///  The potential response content types.
+        /// </summary>
+        public string[] ResponseContentTypes { get; set;}
 
         /// <summary>
         /// Gets vendor extensions dictionary.

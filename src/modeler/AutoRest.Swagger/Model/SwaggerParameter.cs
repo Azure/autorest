@@ -15,6 +15,7 @@ namespace AutoRest.Swagger.Model
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
     [Rule(typeof(ParameterDescriptionRequired))]
+    [Rule(typeof(XmsClientNameParameterValidation))]
     public class SwaggerParameter : SwaggerObject
     {
         private bool _isRequired;

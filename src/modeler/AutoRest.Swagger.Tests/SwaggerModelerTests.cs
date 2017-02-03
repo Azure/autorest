@@ -497,7 +497,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("Double double", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[5]));
                 Assert.Equal("Decimal decimal", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[6]));
                 Assert.Equal("String string", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[7]));
-                Assert.Equal("enum color1", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[8]));
+                Assert.Equal("enum color", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[8]));
                 Assert.Equal("ByteArray byte", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[9]));
                 Assert.Equal("Boolean boolean", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[10]));
                 Assert.Equal("Date date", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[11]));
@@ -507,7 +507,7 @@ namespace AutoRest.Swagger.Tests
 
                 var variableEnumInPath =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group .IsNullOrEmpty())
-                        .Parameters.First(p => p.Name == "color1" && p.Location == ParameterLocation.Path)
+                        .Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path)
                         .ModelType as EnumType;
                 Assert.NotNull(variableEnumInPath);
                 Assert.Equal(variableEnumInPath.Values,
@@ -518,7 +518,7 @@ namespace AutoRest.Swagger.Tests
 
                 var variableEnumInQuery =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group.IsNullOrEmpty())
-                        .Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Query)
+                        .Parameters.First(p => p.Name == "color1" && p.Location == ParameterLocation.Query)
                         .ModelType as EnumType;
                 Assert.NotNull(variableEnumInQuery);
                 Assert.Equal(variableEnumInQuery.Values,
@@ -588,7 +588,7 @@ namespace AutoRest.Swagger.Tests
                     new[] {new EnumValue {Name = "red"}, new EnumValue {Name = "green"}, new EnumValue {Name = "blue"}}
                         .ToList());
                 Assert.True(refEnum.ModelAsString);
-                Assert.Equal("refColors", refEnum.Name);
+                Assert.Equal("RefColors", refEnum.Name);
 
 
                 Assert.Equal(2, codeModel.EnumTypes.Count);

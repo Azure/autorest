@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "2016-08-10",
     "title": "Swagger Petstore",
     "license": {
       "name": "MIT"
@@ -19,6 +19,34 @@
     "application/json"
   ],
   "paths": {
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description":  "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description":  "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/pets": {
       "get": {
         "summary": "List all pets",
@@ -81,7 +109,7 @@
     "/pets/{petId}": {
       "get": {
         "summary": "Info for a specific pet",
-        "operationId": "showPetById",
+        "operationId": "getPetById",
         "description": "foo",
         "tags": [
           "pets"
@@ -271,6 +299,45 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description":  "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Operations"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Description of Operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name",
+          "type": "string"
+        },
+        "display": {
+          "description":  "foo",
+          "properties": {
+            "provider": {
+              "description": "Service provider",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
         }
       }
     }

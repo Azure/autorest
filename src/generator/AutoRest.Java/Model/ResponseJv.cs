@@ -280,11 +280,11 @@ namespace AutoRest.Java.Model
             string format;
             if (Headers == null)
             {
-                format = "new {0}({1}, {2}.getResponse())";
+                format = "new {0}({1}, {2}.response())";
             }
             else
             {
-                format = "new {0}({1}, {2}.getHeaders(), {2}.getResponse())";
+                format = "new {0}({1}, {2}.headers(), {2}.response())";
             }
             return string.Format(format, serviceResponse, body, response);
         }
@@ -362,7 +362,7 @@ namespace AutoRest.Java.Model
             }
             else if (type.IsPrimaryType(KnownPrimaryType.DateTimeRfc1123))
             {
-                return target + " = " + source + ".getDateTime();";
+                return target + " = " + source + ".dateTime();";
             }
             else if (type.IsPrimaryType(KnownPrimaryType.UnixTime))
             {
@@ -370,7 +370,7 @@ namespace AutoRest.Java.Model
             }
             else if (type.IsPrimaryType(KnownPrimaryType.Base64Url))
             {
-                return target + " = " + source + ".getDecodedBytes();";
+                return target + " = " + source + ".decodedBytes();";
             }
             else
             {

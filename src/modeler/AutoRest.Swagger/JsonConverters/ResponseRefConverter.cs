@@ -26,7 +26,7 @@ namespace AutoRest.Swagger.JsonConverters
             JObject jo = JObject.Load(reader);
             string referencePath = null;
             // Unwrap if it's a reference object
-            if (jo.First.Path == "$ref")
+            if ((jo.First != null) && (jo.First.Path == "$ref"))
             {
                 referencePath = jo.GetValue("$ref", StringComparison.Ordinal).ToString();
                 // Shorthand notation

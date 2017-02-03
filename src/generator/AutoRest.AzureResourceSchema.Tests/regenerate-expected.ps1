@@ -6,15 +6,17 @@ rmdir -recurse -force -ea 0 .\Expected
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\CDN\2015-06-01\cdn.json -OutputDirectory .\Expected\CDN\2015-06-01\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\CDN\2016-04-02\cdn.json -OutputDirectory .\Expected\CDN\2016-04-02\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\CognitiveServices\2016-02-01-preview\cognitiveservices.json -OutputDirectory .\Expected\CognitiveServices\2016-02-01-preview\
+..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\CommitmentPlans\2016-05-01-preview\commitmentPlans.json -OutputDirectory .\Expected\CommitmentPlans\2016-05-01-preview\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\Compute\2015-06-15\compute.json -OutputDirectory .\Expected\Compute\2015-06-15\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\Compute\2016-03-30\compute.json -OutputDirectory .\Expected\Compute\2016-03-30\
+..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\Compute\2016-03-30b\compute.json -OutputDirectory .\Expected\Compute\2016-03-30b\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\ContainerService\2016-03-30\containerService.json -OutputDirectory .\Expected\ContainerService\2016-03-30\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\DataLakeAnalytics\2015-10-01-preview\account.json -OutputDirectory .\Expected\DataLakeAnalytics\2015-10-01-preview\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\DataLakeStore\2015-10-01-preview\account.json -OutputDirectory .\Expected\DataLakeStore\2015-10-01-preview\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\DevTestLabs\2015-05-21-preview\DTL.json -OutputDirectory .\Expected\DevTestLabs\2015-05-21-preview\
-ren .\Expected\DevTestLabs\2015-05-21-preview\Microsoft.DevTestLab.json Microsoft.DevTestLabs.json
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\DNS\2015-05-04-preview\dns.json -OutputDirectory .\Expected\DNS\2015-05-04-preview\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\DNS\2016-04-01\dns.json -OutputDirectory .\Expected\DNS\2016-04-01\
+..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\Insights\2016-03-01\insightsManagementClient.json -OutputDirectory .\Expected\Insights\2016-03-01\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\Logic\2015-02-01-preview\logic.json -OutputDirectory .\Expected\Logic\2015-02-01-preview\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\Logic\2016-06-01\logic.json -OutputDirectory .\Expected\Logic\2016-06-01\
 ..\..\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe -CodeGenerator AzureResourceSchema -Input Swagger\MachineLearning\2016-05-01-preview\webservices.json -OutputDirectory .\Expected\MachineLearning\2016-05-01-preview\
