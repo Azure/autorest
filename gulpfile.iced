@@ -19,7 +19,8 @@ global.pkgs = ->
 # test projects 
 global.tests = ->
   source 'src/**/*[Tt]ests.csproj'
-
+    .pipe except /AutoRest.Tests/ig #not used yet.
+    
 # assemblies that we sign
 global.assemblies = -> 
   source "src/**/bin/#{configuration}/**/*.dll"   # the dlls in the ouptut folders
