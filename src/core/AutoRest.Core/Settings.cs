@@ -440,7 +440,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                     property.SetValue(entityToPopulate, intValues);
                                 }
                             }
-                            else
+                            else if (property.CanWrite)
                             {
                                 property.SetValue(entityToPopulate,
                                     Convert.ChangeType(setting.Value, property.PropertyType, CultureInfo.InvariantCulture), null);
