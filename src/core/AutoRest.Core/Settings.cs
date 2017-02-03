@@ -523,6 +523,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             settings.PackageVersion = config.PackageVersion;
             settings.Header = config.Header;
             settings.PayloadFlatteningThreshold = config.PayloadFlatteningThreshold;
+            settings.CustomSettings = config.CustomSettings;
         }
     }
 }

@@ -155,8 +155,6 @@ namespace AutoRest.Swagger
             ServiceDefinition = serviceDefinition;
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
-            // Update settings
-            UpdateSettings();
 
             InitializeClientModel();
             CodeModel.ModelsName = overrideModelsName;
@@ -266,25 +264,6 @@ namespace AutoRest.Swagger
             return LogMessages
                 .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
                 .Concat(comparisonMessages);
-        }
-
-        private void UpdateSettings()
-        {
-            var settings = Settings.Instance;
-            if (settings != null)
-            {
-                // TODO: Note: this is the kind of settings we WANT in a pipeline model! Custom customizations for the current stage!
-                if (ServiceDefinition.Info.CodeGenerationSettings != null)
-                {
-                    foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
-                    {
-                        //Don't overwrite settings that come in from the command line
-                        if (!settings.CustomSettings.ContainsKey(key))
-                            settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
-                    }
-                    Settings.PopulateSettings(settings, settings.CustomSettings);
-                }
-            }
         }
 
         /// <summary>

@@ -55,6 +55,23 @@ namespace AutoRest.Core
 
                     var serviceDefinition = modeler.Parse(fsInput, configuration.InputFiles);
 
+                    // EXCEPTIONAL REVERSE DATAFLOW: put custom generator settings into configuration
+                    if (serviceDefinition.Info.CodeGenerationSettings != null)
+                    {
+                        if (configuration.CustomSettings == null)
+                        {
+                            configuration.CustomSettings = new Dictionary<string, object>();
+                        }
+                        foreach (var key in serviceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
+                        {
+                            //Don't overwrite settings that come in from the command line
+                            if (!configuration.CustomSettings.ContainsKey(key))
+                            {
+                                configuration.CustomSettings[key] = serviceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                            }
+                        }
+                    }
+
                     if (configuration.ValidationLinter)
                     {
                         // Look for semantic errors and warnings in the document.
@@ -74,7 +91,6 @@ namespace AutoRest.Core
                     // generate model from swagger 
                     codeModel = modeler.Build(serviceDefinition, configuration.ModelsName, configuration.Namespace);
                 }
-
                 catch (Exception exception)
                 {
                     throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
