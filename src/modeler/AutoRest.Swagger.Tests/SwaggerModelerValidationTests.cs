@@ -201,6 +201,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void ListByOperationsValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "listby-operations.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation));
+        }
+
+        [Fact]
         public void InvalidConstraintValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "swagger-validation.json"));

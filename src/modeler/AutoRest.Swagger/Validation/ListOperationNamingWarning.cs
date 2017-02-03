@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Validation
     public class ListOperationNamingWarning : TypedRule<Dictionary<string,Dictionary<string, Operation>>>
     {
         private readonly string XmsPageable = "x-ms-pageable";
-        private readonly Regex regex = new Regex(@".+_List(\w*)$", RegexOptions.IgnoreCase);
+        private readonly Regex regex = new Regex(@".+_List(.*)$", RegexOptions.IgnoreCase);
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string,Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
@@ -26,33 +26,13 @@ namespace AutoRest.Swagger.Validation
                 if (regex.IsMatch(opPair.Value.OperationId)) continue;
 
                 string opName = string.Empty;
-                if((opName = GetXmsNullableOrArrayResponseOperation(opPair.Value, serviceDefinition))!=string.Empty)
+                if(AutoRest.Swagger.Model.Utilities.ValidationUtilities.IsXmsPageableOrArrayResponseOperation(opPair.Value, serviceDefinition))
                 {
                     yield return new ValidationMessage(context.Path, this, opName);
                 }
             }
         }
-
-        // if the operation is xmsnullable type, it must be named a list operation
-        // if the operation has response type 200 that returns an object which has an array of some type
-        // we should mark it as a list operation
-        private string GetXmsNullableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
-        {
-            if (op.Extensions.ContainsKey(XmsPageable) && op.Extensions[XmsPageable] != null)  return string.Empty;
-
-            if (!op.Responses.ContainsKey("200")) return string.Empty;
-
-            if (!(op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) ?? true))
-            {
-                var modelLink = op.Responses["200"].Schema.Reference;
-                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties.Values.First(type => type.Type == DataType.Array) != null)
-                {
-                    return op.OperationId;
-                }
-            }
-            return string.Empty;
-        }
-
+        
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
