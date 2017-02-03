@@ -1,6 +1,6 @@
 {
   "name": "autorest-build",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Tools for AutoRest build processes",
   "main": "index.js",
   "scripts": {
@@ -20,22 +20,22 @@
   },
   "homepage": "https://github.com/Azure/autorest#readme",
   "devDependencies": {
-    "chalk": "^1.1.2",
-    "coffee-script": "^1.11.1",
-    "del": "^2.2.2",
+    "del": "^1.2.0",
+    "glob": "^5.0.13",
     "gulp": "^3.9.1",
-    "gulp-dependencies-changed": "^1.0.2",
-    "gulp-filter": "^5.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-unzip": "^0.2.0",
-    "gulp-zip": "^4.0.0",
-    "iced-coffee-script": "*",
-    "run-sequence": "*",
-    "marked": "^0.3.6",
-    "marked-terminal": "^2.0.0",
-    "shelljs": "^0.7.6",
-    "through2": "^2.0.3",
-    "vinyl-paths": "^2.1.0",
-    "yargs": "^6.6.0"
+    "gulp-debug": "^2.1.2",
+    "gulp-dotnet-assembly-info": "^0.1.10",
+    "gulp-env": "^0.4.0",
+    "gulp-msbuild": "^0.3.2",
+    "gulp-replace": "^0.5.3",
+    "gulp-shell": "^0.5.2",
+    "gulp-spawn": "^0.3.0",
+    "gulp-util": "^3.0.7",
+    "merge2": "^0.3.6",
+    "q": "^1.4.1",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.2",
+    "through2": "^2.0.0",
+    "xml2js": "^0.4.9"
   }
 }
