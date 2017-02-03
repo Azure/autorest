@@ -36,7 +36,7 @@ namespace AutoRest.Go
 
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
         // See https://github.com/golang/lint/blob/master/lint.go for detail.
-        private static string[] CommonInitialisms => new string[] {
+        private string[] CommonInitialisms => new string[] {
                                                             "Acl",
                                                             "Api",
                                                             "Ascii",
@@ -76,7 +76,7 @@ namespace AutoRest.Go
                                                             "Xss",
                                                         };
 
-        public static string[] UserDefinedNames => new string[] {
+        public string[] UserDefinedNames => new string[] {
                                                             "UserAgent",
                                                             "Version",
                                                             "APIVersion",

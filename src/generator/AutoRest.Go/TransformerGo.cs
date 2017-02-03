@@ -102,7 +102,7 @@ namespace AutoRest.Go
             cmg.EnumTypes.Cast<EnumTypeGo>().OrderBy(etg => etg.Name.Value)
                 .ForEach(em =>
                 {
-                    if (em.Values.Where(v => topLevelNames.Contains(v.Name) || CodeNamerGo.UserDefinedNames.Contains(v.Name)).Count() > 0)
+                    if (em.Values.Where(v => topLevelNames.Contains(v.Name) || CodeNamerGo.Instance.UserDefinedNames.Contains(v.Name)).Count() > 0)
                     {
                         em.HasUniqueNames = false;
                     }
@@ -136,7 +136,7 @@ namespace AutoRest.Go
                     name = $"{name}Type";
                 }
 
-                if (CodeNamerGo.UserDefinedNames.Contains(name))
+                if (CodeNamerGo.Instance.UserDefinedNames.Contains(name))
                 {
                     name = $"{name}{cmg.Namespace.Capitalize()}";
                 }
