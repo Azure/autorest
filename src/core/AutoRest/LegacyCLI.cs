@@ -20,8 +20,6 @@ namespace AutoRest
     {
         public static AutoRestConfiguration Process(string[] args)
         {
-            int exitCode = (int) ExitCode.Error;
-
             using (NewContext)
             {
                 Settings settings = Settings.Create(args);

@@ -99,6 +99,7 @@ namespace AutoRest.Extensions
 
                         if (!string.IsNullOrEmpty(parametersJson))
                         {
+                            var serviceDefinition = Singleton<ServiceDefinition>.Instance;
                             var jsonSettings = new JsonSerializerSettings
                             {
                                 TypeNameHandling = TypeNameHandling.None,
@@ -111,7 +112,10 @@ namespace AutoRest.Extensions
                             foreach (var swaggerParameter in swaggerParams)
                             {
                                 // Build parameter
-                                var parameterBuilder = new ParameterBuilder(swaggerParameter, new SwaggerModeler()); // TODO: ohoh, Build might have to be called on that one!
+                                var modeler = new SwaggerModeler();
+                                modeler.ServiceDefinition = serviceDefinition;
+                                modeler.CodeModel = codeModel;
+                                var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
                                 var parameter = parameterBuilder.Build();
 
                                 // check to see if the parameter exists in properties, and needs to have its name normalized
@@ -138,7 +142,6 @@ namespace AutoRest.Extensions
 
                             }
 
-                            var serviceDefinition = Singleton<ServiceDefinition>.Instance;
                             if (useSchemePrefix)
                             {
                                 codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",

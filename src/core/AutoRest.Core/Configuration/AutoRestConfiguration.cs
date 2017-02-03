@@ -51,9 +51,13 @@ namespace AutoRest.Core.Configuration
         [Obsolete("gen specific")]
         public bool DisableSimplifier { get; set; }
 
+        public IDictionary<string, object> CustomSettings { get; set; }
+
         public string OutputFile { get; set; }
         public string PackageName { get; set; }
         public string PackageVersion { get; set; }
+        public string Header { get; internal set; }
+        public int PayloadFlatteningThreshold { get; internal set; }
 
         public bool Validate()
         {

@@ -80,14 +80,14 @@ namespace AutoRest.Core
                     throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
                 }
 
-                var plugin = ExtensionsLoader.GetPlugin(configuration);
-
-                Console.ResetColor();
-                Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
-
                 using (NewContext)
                 {
                     Settings.ActivateConfiguration(configuration);
+                    var plugin = ExtensionsLoader.GetPlugin(configuration);
+
+                    Console.ResetColor();
+                    Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
+
                     try
                     {
                         var genericSerializer = new ModelSerializer<CodeModel>();

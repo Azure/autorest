@@ -457,7 +457,7 @@ namespace AutoRest.Swagger
             if (swaggerParameter.Reference != null)
             {
                 string referenceKey = swaggerParameter.Reference.StripParameterPath();
-                if (!ServiceDefinition.Parameters.ContainsKey(referenceKey))
+                if (ServiceDefinition.Parameters.ContainsKey(referenceKey) != true)
                 {
                     throw new ArgumentException(
                         string.Format(CultureInfo.InvariantCulture,

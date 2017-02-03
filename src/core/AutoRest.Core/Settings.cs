@@ -503,6 +503,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
             config.OutputFolder = OutputDirectory;
             config.PackageName = PackageName;
             config.PackageVersion = PackageVersion;
+            config.Header = Header;
+            config.PayloadFlatteningThreshold = PayloadFlatteningThreshold;
+            config.CustomSettings = CustomSettings;
             return config;
         }
 
@@ -518,6 +521,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
             settings.Input = config.InputFiles.FirstOrDefault();
             settings.PackageName = config.PackageName;
             settings.PackageVersion = config.PackageVersion;
+            settings.Header = config.Header;
+            settings.PayloadFlatteningThreshold = config.PayloadFlatteningThreshold;
         }
     }
 }
