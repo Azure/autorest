@@ -204,7 +204,11 @@ namespace AutoRest.Swagger.Tests
         public void ListByOperationsValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "listby-operations.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation));
+            Assert.Equal(messages.Count(), 3);
+            foreach (var message in messages)
+            {
+                Assert.True(message.Type == typeof(ListByOperationsValidation));
+            }
         }
 
         [Fact]

@@ -38,9 +38,36 @@
         ]
       }
     },
-    "msdn/internal/ResourceGroups/{resourceGroupName}/Subscriptions/{subscriptionId}/providers/Microsoft.TestProvider/{testnamespace}/CloudDocuDB": {
+    "msdn/internal/Subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/myresource": {
       "get": {
-        "operationId": "CloudDocuDB_ListByMicrosoftTestProvider",
+        "operationId": "myresource_ListByResourceGroup1",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "msdn/internal/Subscriptions/{subscriptionId}/myresource": {
+      "get": {
+        "operationId": "myresource1_List",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {

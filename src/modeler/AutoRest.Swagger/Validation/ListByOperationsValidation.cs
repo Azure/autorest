@@ -14,6 +14,7 @@ namespace AutoRest.Swagger.Validation
     public class ListByOperationsValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         private readonly Regex ListByRegex = new Regex(@".+_listby.+$", RegexOptions.IgnoreCase);
+        private readonly Regex UrlRegex = new Regex(@"(\/[^\/]+)+$", RegexOptions.IgnoreCase);
         private readonly Regex RgRegex = new Regex(@"(\/[^\/]+)*\/ResourceGroups\/\{[^\/]+}(\/[^\/]+)*$", RegexOptions.IgnoreCase);
         private readonly Regex SubscriptionRegex = new Regex(@"(\/[^\/]+)*\/Subscriptions\/\{[^\/]+}(\/[^\/]+)*$", RegexOptions.IgnoreCase);
         private readonly Regex ParentRegex = new Regex(@"[^\/]+\/providers(\/[^\/]+)+$", RegexOptions.IgnoreCase);
@@ -45,20 +46,20 @@ namespace AutoRest.Swagger.Validation
                 }).Where(opId=> opId!=null);
 
                 // if there are no operations matching our conditions, skip
-                if (listOpIds.Count() == 0)
+                if (IsNullOrEmpty(listOpIds))
                 { continue;  }
 
                 // populate valid list operation names for given path
                 var opNames = GetValidListOpNames(pathObj.Key);
                 
                 // if url does not match any of the predefined regexes, skip
-                if (opNames.Count() == 0)
+                if (IsNullOrEmpty(opNames))
                 { continue; }
 
                 // find if there are any operations that violate the rule
                 var errOpIds = listOpIds.Where(opId => !opNames.Contains(opId.ToLower()));
                 // no violations found, skip
-                if (errOpIds.Count() == 0)
+                if (IsNullOrEmpty(errOpIds))
                 { continue; }
 
                 foreach (var errOpId in errOpIds)
@@ -70,26 +71,26 @@ namespace AutoRest.Swagger.Validation
 
         private IEnumerable<string> GetValidListOpNames(string path)
         {
-            // construct _listbyparent
-            var match = ParentRegex.Match(path);
-            var caps = match.Groups[1].Captures;
-            int index = caps.Count - 1;
-            while (index>=0 && PathParameterRegex.IsMatch(caps[index].Value))
-            {
-                index--;
-            }
-            var methodGrp = caps[index].Value;
-            methodGrp = methodGrp.Substring(1);
             var opList = new List<string>();
-            index--;
-            while (index >= 0 && PathParameterRegex.IsMatch(caps[index].Value))
+            var methodGrp = GetMethodGroup(path);
+            if (methodGrp == string.Empty)
+            { return opList; }
+
+            // construct _listbyparent
+            var match = ParentRegex.Match(path.Substring(0, path.IndexOf(methodGrp)-1));
+            if (match.Success)
             {
-                index--;
+                var caps = match.Groups[1].Captures;
+                int index = caps.Count - 1;
+                while (index >= 0 && PathParameterRegex.IsMatch(caps[index].Value))
+                {
+                    index--;
+                }
+                // if due to some reason the parent we find is of the form "foo.bar", let's recommend the
+                // operation id be named as "_listbyfoobar"
+                if (index > -1)
+                { opList.Add(string.Format(ListByTemplate, methodGrp, caps[index].Value.Substring(1)).Replace(".", string.Empty).ToLower()); }
             }
-            // if due to some reason the parent we find is of the form "foo.bar", let's recommend the
-            // operation id be named as "_listbyfoobar"
-            if (index > -1)
-            { opList.Add(string.Format(ListByTemplate, methodGrp, caps[index].Value.Substring(1)).Replace(".", string.Empty).ToLower()); }
 
             // construct _listbyresourcegroup
             if (RgRegex.IsMatch(path))
@@ -103,6 +104,23 @@ namespace AutoRest.Swagger.Validation
             }
             
             return opList;
+        }
+
+        private string GetMethodGroup(string path)
+        {
+            var match = UrlRegex.Match(path);
+            var caps = match.Groups[1].Captures;
+            int index = caps.Count - 1;
+            while (index >= 0 && PathParameterRegex.IsMatch(caps[index].Value))
+            {
+                index--;
+            }
+            return (index > -1) ? caps[index].Value.Substring(1) : string.Empty;
+        }
+
+        private bool IsNullOrEmpty(IEnumerable<object> enumerable)
+        {
+            return enumerable == null || !enumerable.Any();
         }
 
         /// <summary>
