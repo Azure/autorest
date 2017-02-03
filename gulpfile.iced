@@ -20,6 +20,7 @@ global.pkgs = ->
 global.tests = ->
   source 'src/**/*[Tt]ests.csproj'
     .pipe except /AutoRest.Tests/ig #not used yet.
+    .pipe except /AutoRest.AzureResourceSchema.Tests/ig
     
 # assemblies that we sign
 global.assemblies = -> 
