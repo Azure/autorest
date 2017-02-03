@@ -23,12 +23,12 @@ namespace AutoRest.Swagger.Validation
             foreach (var opPair in listingOperations)
             {
                 // if the operation id is already of the type _list we can skip this check
-                if (regex.IsMatch(opPair.Value.OperationId)) continue;
+                if (regex.IsMatch(opPair.Value.OperationId))
+                { continue; }
 
-                string opName = string.Empty;
                 if(AutoRest.Swagger.Model.Utilities.ValidationUtilities.IsXmsPageableOrArrayResponseOperation(opPair.Value, serviceDefinition))
                 {
-                    yield return new ValidationMessage(context.Path, this, opName);
+                    yield return new ValidationMessage(context.Path, this, opPair.Value.OperationId);
                 }
             }
         }
