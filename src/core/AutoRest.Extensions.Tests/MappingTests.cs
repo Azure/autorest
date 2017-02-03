@@ -20,15 +20,10 @@ namespace AutoRest.Extensions.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-payload-flatten.json"),
                     PayloadFlatteningThreshold = 3
                 };
-                settings.FileSystemInput = new MemoryFileSystem();
-                settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
-                settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
-
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(new FileSystem(), new [] { Path.Combine("Swagger", "swagger-payload-flatten.json") });
                 CodeGeneratorCs generator = new CodeGeneratorCs();
 
                 generator.Generate(clientModel).GetAwaiter().GetResult();

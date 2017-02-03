@@ -146,13 +146,7 @@ namespace AutoRest.Swagger
             return SwaggerParser.Parse(inputFiles[0], mergedSwagger.Serialize());
         }
 
-        [Obsolete("that's not how we do it")]
-        public CodeModel Build()
-        {
-            return Build(Parse(Settings.Instance.FileSystemInput, new[] {Settings.Instance.Input}));
-        }
-
-        [Obsolete("that's not how we do it")]
+        [Obsolete("these are multiple pipeline steps!")]
         public CodeModel Build(IFileSystem fs, string[] inputFiles)
         {
             return Build(Parse(fs, inputFiles));

@@ -20,18 +20,14 @@ namespace AutoRest.Swagger.Tests
 {
     public class SwaggerModelerXmlTests
     {
+        private CodeModel BuildCodeModelFromFile(string fileName) => new SwaggerModeler().Build(new FileSystem(), new[] { fileName });
+
         [Fact]
         public void TestNameOverrideRules()
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
-                };
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = BuildCodeModelFromFile(Path.Combine("Swagger", "swagger-xml.yaml"));
                 foreach (var modelType in codeModel.ModelTypes)
                 {
                     Assert.Equal(modelType.Documentation, modelType.XmlName);
@@ -48,13 +44,7 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
-                };
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = BuildCodeModelFromFile(Path.Combine("Swagger", "swagger-xml.yaml"));
                 foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
                 {
                     Assert.Equal(property.Name, string.Join(".", property.RealPath));
@@ -68,13 +58,7 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml-paths.yaml")
-                };
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var codeModel = BuildCodeModelFromFile(Path.Combine("Swagger", "swagger-xml-paths.yaml"));
                 foreach (var property in codeModel.ModelTypes.SelectMany(m => m.Properties))
                 {
                     var expectedRealPath = property.Documentation.StartsWith("CUSTOM_")
