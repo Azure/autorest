@@ -27,6 +27,12 @@ global['rename'] = require('gulp-rename')
 # tools
 csu = "c:/ci-signing/adxsdk/tools/csu/csu.exe"
 
+global.versionsuffix = if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
+
+global.version = argv.version or cat "#{basefolder}/VERSION"
+global.configuration = argv.configuration or "debug"
+global.force = argv.force or false
+
 marked.setOptions {
   renderer: new TerminalRenderer({
     heading: chalk.green.bold,
@@ -64,17 +70,28 @@ global['source'] = (globs, options ) ->
 global['destination'] = (globs, options ) -> 
   gulp.dest( globs, options) 
 
-global['task'] = (name, deps, fn) ->
+global['task'] = (name, description, deps, fn) ->
+  throw "Invalid task name " if typeof name isnt 'string' 
+  throw "Invalid task description #{name} " if typeof description isnt 'string' 
+
   if typeof deps == 'function'
     fn = deps
     deps = []
+
+  # chain the task if it's a repeat
   if name of gulp.tasks
     prev = gulp.tasks[name]
     while prev.name of gulp.tasks
       prev.name = 'before:(' + prev.name + ')'
     deps.unshift prev.name
     gulp.tasks[prev.name] = prev
+  
+  # add the new task.
   gulp.task name, deps, fn
+  
+  # set the description
+  gulp.tasks[name].description = description
+
   return
 
 set '+e'
@@ -132,18 +149,25 @@ global['exists'] = (path) ->
   return test '-f', path 
 
 global['newer'] = (first,second) ->
-
   f = fs.statSync(first).mtime
   s = fs.statSync(second).mtime
-  
   return f > s 
+
+global['flattenEncode'] = (path) ->
+  path.basename = "#{ path.dirname.replace(/[\/\\]/g, '_') }_#{path.basename}" 
+  path.dirname = ""
+
+global['flattenDecode'] = (path) ->
+  f = path.basename.match(/^(.*)_(.*)$/ )
+  path.basename = "#{f[1].replace(/[_]/g, '/') }/#{f[2]}"
+  path.dirname = ""
 
 global['guid'] = ->
   x = -> Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
   "#{x()}#{x()}-#{x()}-#{x()}-#{x()}-#{x()}#{x()}#{x()}"
 
 global['codesign'] = (description, keywords, input, output, certificate1, certificate2, done)-> 
-  done = if not done? then done else if not certificate2? then certificate2 else if not certificate1? then certificate1 else ()->
+  done = if done? then done else if certificate2? then certificate2 else if certificate1? then certificate1 else ()->
   certificate1 = if typeof certificate1 is 'number' then certificate1 else 72
   certificate2 = if typeof certificate2 is 'number' then certificate2 else 401
 
@@ -176,4 +200,158 @@ global['codesign'] = (description, keywords, input, output, certificate1, certif
     echo "done codesigning"
     done();
 
+
+###############################################
+# Common Tasks
+
+###############################################
+task 'clean-packages', 'cleans out the contents of the packages folder', ->  
+  rm '-rf', packages
+  mkdir packages 
+
+###############################################
+task 'clean','calls dotnet-clean on the solution', ['clean-packages'], -> 
+  exec "dotnet clean #{solution} /nologo"
+
+
+###############################################
+task 'build','builds the project',['restore'], (done) ->
+  exec "dotnet build -c #{configuration} #{solution} /nologo /m:1", (code, stdout, stderr) ->
+    if code 
+      throw error "Build Failed #{ stderr }"
+    echo "done build"
+    done();
+
+###############################################
+task 'policheck-assemblies','', -> 
+  source 'src/**/*.dll'
+    .pipe except /install|testapp|tests/ig 
+    .pipe policheck()
+
+###############################################
+task 'sign-packages','' ,(done) ->
+  return done() # if configuration isnt "release"
+
+###############################################  
+task 'publish-packages','Publishes the packages to the NuGet Repository', (done) ->
+  return done() if configuration isnt "release"
+  source "#{packages}/*.nupkg"
+    .pipe publishPackages()
+
+############################################### 
+task 'sign-assemblies','', (done) -> 
+  # skip signing if we're not doing a release build
+  return done() if configuration isnt "release"
   
+  workdir = "#{process.env.tmp}/gulp/#{guid()}"
+  echo warning workdir
+  mkdir workdir 
+
+  unsigned  = "#{workdir}/unsigned"
+  mkdir unsigned 
+  echo warning unsigned
+
+  signed  = "#{workdir}/signed"
+  mkdir signed
+  echo warning signed
+
+  assemblies() 
+    # rename the files to flatten folder names out of the way.
+    .pipe rename (path) -> 
+      flattenEncode path
+    
+    # copy the files to the destination before signing 
+    .pipe destination(unsigned)
+
+    .on 'end', () =>
+      # after the files are in the folder, we can call the signing utility
+      codesign "Microsoft Azure SDK (Perks)",
+        "Microsoft Azure .NET SDK"
+        unsigned,
+        signed,
+        () ->
+          # after signing, files are in the signed directory
+          source "#{signed}/*"
+            .pipe rename (path) -> 
+              flattenDecode path 
+            .pipe destination "#{__dirname}/src"            
+            .on 'end', () => 
+              # cleanup!
+              echo warning workdir
+              rm '-rf', workdir
+              done()
+    
+    return;
+
+############################################### 
+task 'restore','restores the dotnet packages for the projects', -> 
+  projects()
+    .pipe where (each) ->  # check for project.assets.json files are up to date  
+      return true if force
+      assets = "#{folder each.path}/obj/project.assets.json"
+      return false if (exists assets) and (newer assets, each.path)
+      return true
+    .pipe dotnet "restore"
+
+############################################### 
+task 'pack', '', ['clean-packages'] , ->
+  # package the projects
+  pkgs()
+    .pipe dotnet "pack -c #{configuration} --no-build --output #{packages} #{versionsuffix}"
+
+############################################### 
+task 'package','From scratch build, sign, and package ', (done) -> 
+  run 'clean',
+    'restore'
+    'build'
+    'sign-assemblies'
+    'pack' 
+    'sign-packages'
+    -> done()
+
+############################################### 
+task 'test', 'runs dotnet tests',['restore'] , (done) ->
+  tests()
+    .pipe dotnet "test"
+
+############################################### 
+task 'increment-version', 'increments the version and updates the project files', ->
+  newversion = version.split '.'
+  newversion[newversion.length-1]++
+  newversion = newversion.join '.' 
+  global.version = newversion
+  run 'set-version'
+
+############################################### 
+task 'set-version', 'updates version in the the project files', ->
+  # write the version number to the version file
+  version .to "#{global.basefolder}/VERSION"
+  
+  # update src/common/common.proj
+  packageinfo = cat "#{basefolder}/src/common/common.proj"
+  packageinfo = packageinfo.replace /.VersionPrefix.*..VersionPrefix./,"<VersionPrefix>#{version}</VersionPrefix>" 
+  packageinfo .to "#{basefolder}/src/common/common.proj"
+
+  # we have to clean, because version references between projects have changed.
+  run 'clean'
+
+###############################################
+task 'default','', ->
+  cmds = ""
+
+  for name, t of gulp.tasks 
+    cmds += "\n  gulp **#{name}** - #{t.description}" if t.description? and t.description.length
+  switches = ""
+
+  echo marked  """
+# Usage
+# =======
+
+## gulp commands  
+#{cmds}
+
+## available switches  
+  *--force*          specify when you want to force an action (restore, etc)
+  *--configuration*  'debug' or 'release'
+#{switches}
+"""

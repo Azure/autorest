@@ -1,9 +1,6 @@
 <Project ToolsVersion="15.0">
-  <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0" />
-  </ItemGroup>
-
   <PropertyGroup Condition="$(Common) == '*Undefined*' OR $(Common) == '' " >
+    <VersionPrefix>1.0.1</VersionPrefix>
     <Common>$(MsBuildThisFileDirectory)</Common>
     <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir>
   </PropertyGroup>
