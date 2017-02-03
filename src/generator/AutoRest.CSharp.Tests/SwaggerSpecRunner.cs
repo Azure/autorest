@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Tests
                 var settings = new Settings
                 {
                     Input = specFile,
-                    OutputDirectory = "X:\\Output",
                     Header = "MICROSOFT_MIT_NO_VERSION",
                     Modeler = modeler,
                     CodeGenerator = generator,

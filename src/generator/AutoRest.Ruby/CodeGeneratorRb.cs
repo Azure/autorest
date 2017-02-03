@@ -22,13 +22,7 @@ namespace AutoRest.Ruby
         /// <summary>
         ///     Name of the generated sub-folder inside ourput directory.
         /// </summary>
-        private const string GeneratedFolderName = "generated";
-
-        public CodeGeneratorRb() 
-        {
-            // todo: make sure this doesn't happen more than once.
-            Settings.Instance.OutputDirectory = Path.Combine(Settings.Instance.OutputDirectory, GeneratedFolderName);
-        }
+        protected const string GeneratedFolderName = "generated";
 
         /// <summary>
         ///     Gets the file extension of the generated code files.
@@ -59,14 +53,14 @@ namespace AutoRest.Ruby
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
             await Write(serviceClientTemplate,
-                Path.Combine(GeneratorSettingsRb.Instance.sdkPath, CodeNamer.UnderscoreCase(codeModel.Name) + ImplementationFileExtension));
+                Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.sdkPath, CodeNamer.UnderscoreCase(codeModel.Name) + ImplementationFileExtension));
 
             // Method groups
             foreach (MethodGroupRb group in codeModel.Operations.Where( each => !each.IsCodeModelMethodGroup))
             {
                 var groupTemplate = new MethodGroupTemplate { Model = group };
                 await Write(groupTemplate,
-                    Path.Combine(GeneratorSettingsRb.Instance.sdkPath, CodeNamer.UnderscoreCase(@group.TypeName) + ImplementationFileExtension));
+                    Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.sdkPath, CodeNamer.UnderscoreCase(@group.TypeName) + ImplementationFileExtension));
             }
 
             // Models
@@ -74,7 +68,7 @@ namespace AutoRest.Ruby
             {
                 var modelTemplate = new ModelTemplate { Model = model };
                 await Write(modelTemplate,
-                    Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                    Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
             }
 
             // Enums
@@ -82,7 +76,7 @@ namespace AutoRest.Ruby
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
                 await Write(enumTemplate,
-                    Path.Combine(GeneratorSettingsRb.Instance.modelsPath,CodeNamer.UnderscoreCase(enumTemplate.Model.Name) + ImplementationFileExtension));
+                    Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.modelsPath,CodeNamer.UnderscoreCase(enumTemplate.Model.Name) + ImplementationFileExtension));
             }
 
             // Requirements
@@ -90,21 +84,22 @@ namespace AutoRest.Ruby
             {
                 Model = new RequirementsRb(codeModel, this)
             };
-            await Write(requirementsTemplate,
-                    CodeNamer.UnderscoreCase(GeneratorSettingsRb.Instance.packageName ?? GeneratorSettingsRb.Instance.sdkName) + ImplementationFileExtension);
+            await Write(requirementsTemplate, 
+                Path.Combine(GeneratedFolderName, 
+                    CodeNamer.UnderscoreCase(GeneratorSettingsRb.Instance.packageName ?? GeneratorSettingsRb.Instance.sdkName) + ImplementationFileExtension));
 
             // Version File
             if (!string.IsNullOrEmpty(GeneratorSettingsRb.Instance.packageVersion))
             {
                 var versionTemplate = new VersionTemplate { Model = GeneratorSettingsRb.Instance.packageVersion };
-                await Write(versionTemplate, Path.Combine(GeneratorSettingsRb.Instance.sdkPath, "version" + ImplementationFileExtension));
+                await Write(versionTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.sdkPath, "version" + ImplementationFileExtension));
             }
 
             // Module Definition File
             if (!string.IsNullOrEmpty(Settings.Instance.Namespace))
             {
                 var modTemplate = new ModuleDefinitionTemplate{ Model = GeneratorSettingsRb.Instance.ModuleDeclarations };
-                await Write(modTemplate, Path.Combine(GeneratorSettingsRb.Instance.sdkPath, "module_definition" + ImplementationFileExtension));
+                await Write(modTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.sdkPath, "module_definition" + ImplementationFileExtension));
             }
         }
     }

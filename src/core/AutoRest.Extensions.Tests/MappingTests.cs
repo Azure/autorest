@@ -21,8 +21,7 @@ namespace AutoRest.Extensions.Tests
                 {
                     Namespace = "Test",
                     Input = Path.Combine("Swagger", "swagger-payload-flatten.json"),
-                    PayloadFlatteningThreshold = 3,
-                    OutputDirectory = Path.GetTempPath()
+                    PayloadFlatteningThreshold = 3
                 };
                 settings.FileSystemInput = new MemoryFileSystem();
                 settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));

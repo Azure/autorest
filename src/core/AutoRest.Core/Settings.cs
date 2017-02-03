@@ -501,6 +501,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
             config.Namespace = Namespace;
             config.OutputFile = OutputFileName;
             config.OutputFolder = OutputDirectory;
+            config.PackageName = PackageName;
+            config.PackageVersion = PackageVersion;
             return config;
         }
 
@@ -511,7 +513,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 new Settings
                 {
                     AddCredentials = config.AddCredentials,
-                    Namespace = config.Namespace
+                    Namespace = config.Namespace,
+                    Input = config.InputFiles.FirstOrDefault(),
+                    PackageName = config.PackageName,
+                    PackageVersion = config.PackageVersion
                 };
         }
     }
