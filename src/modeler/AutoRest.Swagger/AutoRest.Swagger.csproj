@@ -1,19 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
-  <Import Project="$(common)common-imports.proj" />
-  <Import Project="$(common)target-framework-library.proj" />
-  <Import Project="$(common)fix-resgen.proj" />
+  <Import Project="$(common)common-package-references.proj" />
+  <Import Project="$(common)project-library.proj" />
+  <Import Project="$(common)transform-designer-cs.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
+  
   <PropertyGroup>
     <AssemblyName>AutoRest.Swagger</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator Extensions</PackageTags>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="**\*.cs" />
-    <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>

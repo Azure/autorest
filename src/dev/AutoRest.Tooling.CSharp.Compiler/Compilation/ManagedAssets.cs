@@ -14,42 +14,7 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
 {
     public static class ManagedAssets
     {
-        public static string RuntimeDirectory => AppContext.BaseDirectory;
-
-        public static IEnumerable<string> FrameworkAssemblies => new[]
-        {
-                    "mscorlib.dll",
-                    "System.dll",
-                    "System.Core.dll",
-                    "System.Linq.Expressions.dll",
-                    "System.Net.dll",
-                    "System.Net.Http.dll",
-                    "System.Runtime.dll",
-                    "System.Threading.Tasks.dll",
-                    "System.Xml.dll",
-                    "System.Xml.Linq.dll",
-                    "Microsoft.CSharp.dll"
-                }.Select(each => Path.Combine(RuntimeDirectory, each));
-
-        // Framework assemblies
-        private static readonly IEnumerable<MetadataReference> frameworkAssemblies =
-            LoadReferences(
-                AppContext.BaseDirectory,
-                "mscorlib.dll",
-                "System.dll",
-                "System.Core.dll",
-                "System.Linq.Expressions.dll",
-                "System.Net.dll",
-                "System.Net.Http.dll",
-                "System.Runtime.dll",
-                "System.Threading.Tasks.dll",
-                "System.Xml.dll",
-                "System.Xml.Linq.dll",
-                "Microsoft.CSharp.dll");
-
-
-        public static IEnumerable<MetadataReference> All { get; } = frameworkAssemblies
-            .ToArray();
+        private static string RuntimeDirectory => AppContext.BaseDirectory;
 
         public static string ReferencesPath { get; } = "";
 
@@ -57,21 +22,17 @@ namespace Microsoft.Rest.CSharp.Compiler.Compilation
 
         private static string GetManifestResource(string name)
         {
-            using (var reader = new StreamReader(
-                typeof(ManagedAssets).GetTypeInfo().Assembly.GetManifestResourceStream(name)))
+            using (var reader = new StreamReader(typeof(ManagedAssets).GetTypeInfo().Assembly.GetManifestResourceStream(name)))
             {
                 return reader.ReadToEnd();
             }
         }
-
+        
         private static IEnumerable<MetadataReference> LoadReferences(string baseDirectory, params string[] assemblyNames)
         {
-            var references =
-                from assemblyName in assemblyNames
+            return (from assemblyName in assemblyNames
                 let path = Path.Combine(baseDirectory, assemblyName)
-                select MetadataReference.CreateFromFile(path, MetadataReferenceProperties.Assembly);
-
-            return references.ToArray();
+                select MetadataReference.CreateFromFile(path, MetadataReferenceProperties.Assembly)).ToArray();
         }
 
         #endregion

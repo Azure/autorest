@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
                 var testOperations = asm.ExportedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperations");
                 Assert.NotNull(testOperations);
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
                 var testOperations = asm.DefinedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperations");
                 Assert.NotNull(testOperations);

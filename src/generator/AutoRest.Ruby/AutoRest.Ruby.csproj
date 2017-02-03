@@ -1,25 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
-  <Import Project="$(common)common-imports.proj" />
-  <Import Project="$(common)target-framework-library.proj" />
-  <Import Project="$(common)fix-resgen.proj" />
+  <Import Project="$(common)common-package-references.proj" />
+  <Import Project="$(common)project-library.proj" />
+  <Import Project="$(common)transform-designer-cs.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
-  <Import Project="$(common)compile-cshtml.proj" />
-  <Import Project="$(common)eval-csharp-targets.proj" />
-  
+   
   <PropertyGroup>
     <AssemblyName>AutoRest.Ruby</AssemblyName>
     <PackageTags>Microsoft AutoRest Ruby Generator</PackageTags>
   </PropertyGroup>
   
-  <ItemGroup Condition="$(DesignTimeBuild) == true">
-    <Compile Include="**\*.cs" />
-    <None Include="**\*.cshtml" />
-    <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
     <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Extensions/AutoRest.Extensions.csproj" />

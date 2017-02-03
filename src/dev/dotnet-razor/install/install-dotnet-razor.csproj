@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
-  <Import Project="$(common)common-imports.proj" />
-  <Import Project="$(common)target-framework-library.proj" />
+  <Import Project="$(common)common-package-references.proj" />
+  <Import Project="$(common)project-library.proj" />
   <PropertyGroup>
     <AssemblyName>install-dotnet-razor</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <XCompile Include="**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0"/>

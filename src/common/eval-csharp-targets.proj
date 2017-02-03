@@ -1,9 +1,0 @@
-<Project ToolsVersion="4.0" InitialTargets="EnumerateCompileAndEmbeddedResource" >
- <Target Name="EnumerateCompileAndEmbeddedResource" BeforeTargets="Compile" Condition="$(DesignTimeBuild) != true AND $(_ProjectRestoreType) != 'NETCore'" >
-   <ItemGroup Condition="$(DesignTimeBuild) != true">
-    <Compile Include="**\*.cs" Exclude="obj\**" />
-    <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
-   </ItemGroup>
-  </Target>
-</Project>  

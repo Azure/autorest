@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
-  <Import Project="$(common)common-imports.proj" />
+  <Import Project="$(common)common-package-references.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
-  <Import Project="$(common)eval-csharp-targets.proj" />
+   
   <PropertyGroup>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <OutputType>Exe</OutputType>
@@ -11,12 +11,7 @@
     <AssemblyName>AutoRest.Preview</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator Previewer</PackageTags>
   </PropertyGroup>
-  <ItemGroup Condition="$(DesignTimeBuild) == true">
-    <Compile Include="**\*.cs" />
-    <None Include="**\*.cshtml" />
-    <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
-  </ItemGroup>
+
   <ItemGroup>
     <Content Include="AutoRest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

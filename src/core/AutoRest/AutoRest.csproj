@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
-  <Import Project="$(common)common-imports.proj" />
-  <Import Project="$(common)fix-resgen.proj" />
+  <Import Project="$(common)common-package-references.proj" />
+  <Import Project="$(common)transform-designer-cs.proj" />
   <Import Project="$(common)package-info.proj" />
   <Import Project="$(common)package-fallback.proj" />
-  <Import Project="$(common)eval-csharp-targets.proj" />
+ 
   <PropertyGroup>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
-    <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64</RuntimeIdentifiers>
+    <!-- <RuntimeIdentifiers>win7-x64;ubuntu.14.04-x64</RuntimeIdentifiers> -->
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp1.0;net461</TargetFrameworks>
     <!-- <TargetFramework>net461</TargetFramework> -->
@@ -15,19 +15,13 @@
     <AssemblyName>AutoRest</AssemblyName>
     <PackageTags>Microsoft AutoRest Generator</PackageTags>
   </PropertyGroup>
-  <ItemGroup Condition="$(DesignTimeBuild) == true">
-    <Compile Include="**\*.cs" />
-    <None Include="**\*.cshtml" />
-    <EmbeddedResource Include="**\*.resx" />
-    <EmbeddedResource Include="compiler\resources\**\*" />
-  </ItemGroup>
+ 
   <ItemGroup>
     <Content Include="AutoRest.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.App" Version="1.1.0" Condition="$(TargetFramework)=='netcoreapp1.0'" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="2.0.0-rc2" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="2.0.0-rc2" />

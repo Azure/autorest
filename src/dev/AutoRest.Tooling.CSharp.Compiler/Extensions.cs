@@ -23,6 +23,6 @@ namespace Microsoft.Rest.CSharp.Compiler
                     NullValueHandling = NullValueHandling.Ignore,
                     ObjectCreationHandling = ObjectCreationHandling.Reuse
                 });
-        }
+        } 
     }
 }

@@ -14,26 +14,12 @@ using Microsoft.Rest;
 using Microsoft.Rest.Azure;
 using AutoRest.Core.Utilities;
 using System.Net;
+using System.Reflection;
 
 namespace AutoRest.Simplify
 {
     public class CSharpSimplifier
     {
-        private static MetadataReference mscorlib;
-
-        private static MetadataReference Mscorlib
-        {
-            get
-            {
-                if (mscorlib == null)
-                {
-                    mscorlib = MetadataReference.CreateFromFile(typeof(object).GetAssembly().Location);
-                }
-
-                return mscorlib;
-            }
-        }
-
         public async Task Run()
         {
             var op = new AzureAsyncOperation();
@@ -43,20 +29,22 @@ namespace AutoRest.Simplify
                     SearchOption.AllDirectories).
                 ToDictionary(each => each, each => Settings.Instance.FileSystem.ReadFileAsText(each));
 
+            var assemblies = new[] {
+                typeof(IAzureClient).GetAssembly().Location,
+                typeof(RestException).GetAssembly().Location,
+                typeof(Uri).GetAssembly().Location,
+                typeof(File).GetAssembly().Location,
+                typeof(HttpStatusCode).GetAssembly().Location,
+                typeof(System.Net.Http.HttpClient).GetAssembly().Location,
+                typeof(object).GetAssembly().Location
+            };
+
+
             var projectId = ProjectId.CreateNewId();
             var solution = new AdhocWorkspace().CurrentSolution
-                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
-                .AddMetadataReference(projectId, Mscorlib)
-                // Microsoft.Rest.ClientRuntime.Azure.dll
-                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(IAzureClient).GetAssembly().Location))
-                // Microsoft.Rest.ClientRuntime.dll
-                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(RestException).GetAssembly().Location))
-                // System.dll
-                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Uri).GetAssembly().Location))
-                // System.IO.dll
-                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(File).GetAssembly().Location))
-                // System.Net.Primitives.dll
-                .AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(HttpStatusCode).GetAssembly().Location));
+                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp);
+            // add assemblies
+            solution = assemblies.Aggregate(solution, (current, asm) => current.AddMetadataReference(projectId, MetadataReference.CreateFromFile(asm)));
 
             // Add existing files
             foreach (var file in files.Keys)
