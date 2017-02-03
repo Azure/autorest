@@ -489,6 +489,17 @@ Licensed under the MIT License. See License.txt in the project root for license 
             if (Modeler == "CompositeSwagger")
             {
                 inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystemInput, Input);
+
+                // Ensure all the docs are absolute URIs or rooted paths
+                for (var i = 0; i < inputFiles.Length; i++)
+                {
+                    var compositeDocument = inputFiles[i];
+                    if (!FileSystemInput.IsCompletePath(compositeDocument) || !FileSystemInput.FileExists(compositeDocument))
+                    {
+                        // Otherwise, root it from the current path
+                        inputFiles[i] = FileSystemInput.MakePathRooted(FileSystemInput.GetParentDir(inputFiles[0]), compositeDocument);
+                    }
+                }
             }
 
             var config = AutoRestConfiguration.Create();

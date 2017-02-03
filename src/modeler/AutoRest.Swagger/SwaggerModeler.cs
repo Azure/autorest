@@ -53,28 +53,11 @@ namespace AutoRest.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        public ServiceDefinition Parse(IFileSystem fs, string[] inputFiles)
+        public ServiceDefinition Parse(IFileSystem fs, string[] inputFiles, bool azure = false)
         {
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (inputFiles.Length == 1)
-            {
-                if (Settings.Instance == null) // TODO
-                    new Settings();
-                Settings.Instance.FileSystemInput = fs;
-                return SwaggerParser.Load(inputFiles[0], fs);
-            }
 
-            // composite mode
-            // Ensure all the docs are absolute URIs or rooted paths
-            for (var i = 0; i < inputFiles.Length; i++)
-            {
-                var compositeDocument = inputFiles[i];
-                if (!fs.IsCompletePath(compositeDocument) || !fs.FileExists(compositeDocument))
-                {
-                    // Otherwise, root it from the current path
-                    inputFiles[i] = fs.MakePathRooted(fs.GetParentDir(inputFiles[0]), compositeDocument);
-                }
-            }
+            var strParameters = "parameters";
 
             // construct merged swagger document
             var mergedSwagger = new YamlMappingNode();
@@ -105,37 +88,46 @@ namespace AutoRest.Swagger
                 info.Remove("description");
                 info.Remove("version");
 
-                // fix up api version
-                var apiVersionParam = (childSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
-                var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
-                if (apiVersionParamName != null)
-                {
-                    var paths =
-                        ((childSwagger.Get("paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>()).Concat
-                        ((childSwagger.Get("x-ms-paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>());
-                    var methods = paths.OfType<YamlMappingNode>().SelectMany(path => path.Children.Values.OfType<YamlMappingNode>());
-                    var parameters = methods.SelectMany(method => (method.Get("parameters") as YamlSequenceNode)?.Children?.OfType<YamlMappingNode>() ?? Enumerable.Empty<YamlMappingNode>());
-                    var apiVersionParams = parameters.Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
-                    foreach (var param in apiVersionParams)
+                if (azure)
+                { 
+                    // fix up api version
+                    var apiVersionParam = (childSwagger.Get(strParameters) as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                    var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
+                    if (apiVersionParamName != null)
                     {
-                        param.Remove("$ref");
-                        foreach (var child in (apiVersionParam?.Value as YamlMappingNode).Children)
+                        var paths =
+                            ((childSwagger.Get("paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>()).Concat
+                            ((childSwagger.Get("x-ms-paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>());
+                        var methods = paths.OfType<YamlMappingNode>().SelectMany(path => path.Children.Values.OfType<YamlMappingNode>());
+                        var parameters = methods.Select(method => method.Get(strParameters)).OfType<YamlSequenceNode>();
+                        var parametersCommon = paths.OfType<YamlMappingNode>().Select(path => path.Get(strParameters)).OfType<YamlSequenceNode>();
+                        var paramValues = parameters.Concat(parametersCommon).SelectMany(param => param.Children.OfType<YamlMappingNode>());
+                        var apiVersionParams = paramValues.Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/{strParameters}/{apiVersionParamName}");
+                        foreach (var param in apiVersionParams)
                         {
-                            param.Children.Add(child);
+                            param.Remove("$ref");
+                            foreach (var child in (apiVersionParam?.Value as YamlMappingNode).Children)
+                            {
+                                param.Children.Add(child);
+                            }
+                            param.Set("enum", new YamlSequenceNode(version));
                         }
-                        param.Set("enum", new YamlSequenceNode(version));
                     }
                 }
 
                 // merge
                 mergedSwagger = mergedSwagger.MergeWith(childSwagger);
             }
-            // remove apiVersion client property
-            var mergedSwaggerApiVersionParam = (mergedSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
-            var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode)?.Value;
-            if (mergedSwaggerApiVersionParamName != null)
-            {
-                (mergedSwagger.Get("parameters") as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);
+
+            if (azure)
+            { 
+                // remove api-version client property
+                var mergedSwaggerApiVersionParam = (mergedSwagger.Get(strParameters) as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode)?.Value;
+                if (mergedSwaggerApiVersionParamName != null)
+                {
+                    (mergedSwagger.Get(strParameters) as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);
+                }
             }
 
             // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
