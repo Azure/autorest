@@ -58,7 +58,14 @@ namespace AutoRest.Swagger
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (inputFiles.Length == 1)
             {
-                return SwaggerParser.Load(inputFiles[0], fs);
+                using (NewContext)
+                {
+                    new Settings
+                    {
+                        FileSystemInput = fs
+                    };
+                    return SwaggerParser.Load(inputFiles[0], fs);
+                }
             }
 
             // composite mode
@@ -81,7 +88,14 @@ namespace AutoRest.Swagger
             foreach (var childSwaggerPath in inputFiles)
             {
                 var childSwaggerRaw = fs.ReadAllText(childSwaggerPath);
-                childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
+                using (NewContext)
+                {
+                    new Settings
+                    {
+                        FileSystemInput = fs
+                    };
+                    childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
+                }
                 var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
                 if (childSwagger == null)
                 {

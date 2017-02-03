@@ -74,9 +74,6 @@ namespace AutoRest.Core
                     // generate model from swagger 
                     codeModel = modeler.Build(serviceDefinition);
 
-                    codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
-                    codeModel.Namespace = configuration.Namespace; // TODO: defaults?
-
                     //if (validationErrorFound)
                     //{
                     //    Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
@@ -107,6 +104,9 @@ namespace AutoRest.Core
                         {
                             // load model into language-specific code model
                             codeModel = plugin.Serializer.Load(modelAsJson);
+
+                            codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
+                            codeModel.Namespace = configuration.Namespace; // TODO: defaults?
 
                             // apply language-specific tranformation (more than just language-specific types)
                             // used to be called "NormalizeClientModel" . 
