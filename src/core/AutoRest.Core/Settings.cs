@@ -514,6 +514,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 {
                     AddCredentials = config.AddCredentials,
                     Namespace = config.Namespace,
+                    ModelsName = config.ModelsName,
                     Input = config.InputFiles.FirstOrDefault(),
                     PackageName = config.PackageName,
                     PackageVersion = config.PackageVersion
