@@ -72,12 +72,7 @@ namespace AutoRest.Core
                     }
 
                     // generate model from swagger 
-                    codeModel = modeler.Build(serviceDefinition);
-
-                    //if (validationErrorFound)
-                    //{
-                    //    Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
-                    //}
+                    codeModel = modeler.Build(serviceDefinition, configuration.ModelsName, configuration.Namespace);
                 }
 
                 catch (Exception exception)

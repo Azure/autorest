@@ -140,7 +140,7 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
                 
-                Singleton<ServiceDefinition>.Instance = swaggerService; // TODO: that's a nono
+                Singleton<ServiceDefinition>.Instance = swaggerService; // TODO: that's a nono (damn parameterized host)
                 return swaggerService;
             }
             catch (JsonException ex)

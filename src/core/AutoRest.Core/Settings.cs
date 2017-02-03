@@ -510,15 +510,14 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static void ActivateConfiguration(AutoRestConfiguration config)
         {
             if (Instance == null)
-                new Settings
-                {
-                    AddCredentials = config.AddCredentials,
-                    Namespace = config.Namespace,
-                    ModelsName = config.ModelsName,
-                    Input = config.InputFiles.FirstOrDefault(),
-                    PackageName = config.PackageName,
-                    PackageVersion = config.PackageVersion
-                };
+                new Settings();
+            var settings = Instance;
+            settings.AddCredentials = config.AddCredentials;
+            settings.Namespace = config.Namespace;
+            settings.ModelsName = config.ModelsName;
+            settings.Input = config.InputFiles.FirstOrDefault();
+            settings.PackageName = config.PackageName;
+            settings.PackageVersion = config.PackageVersion;
         }
     }
 }

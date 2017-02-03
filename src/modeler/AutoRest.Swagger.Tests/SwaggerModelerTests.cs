@@ -686,10 +686,7 @@ namespace AutoRest.Swagger.Tests
                     CodeGenerator = "CSharp",
                     Header = "NONE"
                 };
-                var codeModel = BuildCodeModelFromFile(Path.Combine("Swagger", "swagger-x-ms-parameterized-host.json"));
-
-                var modeler = ExtensionsLoader.GetModeler();
-                var client = modeler.Build(new FileSystem(), Path.Combine("Swagger", "swagger-x-ms-parameterized-host.json"));
+                var client = BuildCodeModelFromFile(Path.Combine("Swagger", "swagger-x-ms-parameterized-host.json"));
 
                 var hostExtension = client.Extensions["x-ms-parameterized-host"] as JObject;
                 Assert.NotNull(hostExtension);

@@ -58,14 +58,10 @@ namespace AutoRest.Swagger
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (inputFiles.Length == 1)
             {
-                using (NewContext)
-                {
-                    new Settings
-                    {
-                        FileSystemInput = fs
-                    };
-                    return SwaggerParser.Load(inputFiles[0], fs);
-                }
+                if (Settings.Instance == null) // TODO
+                    new Settings();
+                Settings.Instance.FileSystemInput = fs;
+                return SwaggerParser.Load(inputFiles[0], fs);
             }
 
             // composite mode
@@ -154,7 +150,7 @@ namespace AutoRest.Swagger
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability",
              "CA1506:AvoidExcessiveClassCoupling")]
-        public CodeModel Build(ServiceDefinition serviceDefinition)
+        public CodeModel Build(ServiceDefinition serviceDefinition, string overrideModelsName = null, string overrideNamespace = null)
         {
             ServiceDefinition = serviceDefinition;
 
@@ -163,6 +159,8 @@ namespace AutoRest.Swagger
             UpdateSettings();
 
             InitializeClientModel();
+            CodeModel.ModelsName = overrideModelsName;
+            CodeModel.Namespace = overrideNamespace;
             BuildCompositeTypes();
 
             // Build client parameters
