@@ -19,6 +19,8 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// This rule passes if the paths contain reference to exactly one of the namespace resources
         /// </summary>
+        /// <param name="paths"></param>
+        /// <returns></returns>
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
         {
             var resources = paths.Keys
