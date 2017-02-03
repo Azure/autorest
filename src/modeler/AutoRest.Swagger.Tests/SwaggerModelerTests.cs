@@ -662,16 +662,10 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Header = "NONE"
-                };
-                var codeModel = BuildCodeModelFromFile(Path.Combine("Swagger", "swagger-x-ms-code-generation-settings.json"));
-                var plugin = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp")) as PluginCs;
-                Assert.NotNull(plugin);
-
-                Assert.Equal("MIT", settings.Header);
-                Assert.Equal(true, plugin.Settings.InternalConstructors);
+                var config = AutoRestConfiguration.CreateForPlugin("CSharp");
+                config.InputFiles = new[] {Path.Combine("Swagger", "swagger-x-ms-code-generation-settings.json")};
+                AutoRestController.Generate(new FileSystem(), config);
+                Assert.Equal("MIT", config.Header);
             }
         }
 

@@ -70,6 +70,9 @@ namespace AutoRest.Core
                                 configuration.CustomSettings[key] = serviceDefinition.Info.CodeGenerationSettings.Extensions[key];
                             }
                         }
+                        if (configuration.CustomSettings.ContainsKey("ft"))
+                            configuration.PayloadFlatteningThreshold = Convert.ToInt32(configuration.CustomSettings["ft"]);
+                        Settings.PopulateSettings(configuration, configuration.CustomSettings);
                     }
 
                     if (configuration.ValidationLinter)
