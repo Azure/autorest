@@ -144,89 +144,87 @@ namespace AutoRest.Swagger
             return Build(Parse(fs, inputFiles));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability",
+             "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
-            using (NewContext)
+            // Update settings
+            UpdateSettings();
+
+            InitializeClientModel();
+            BuildCompositeTypes();
+
+            // Build client parameters
+            foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
             {
-                // Update settings
-                UpdateSettings();
+                var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(this)).Build();
 
-                InitializeClientModel();
-                BuildCompositeTypes();
+                var clientProperty = New<Property>();
+                clientProperty.LoadFrom(parameter);
+                clientProperty.RealPath = new string[] {parameter.SerializedName.Value};
 
-                // Build client parameters
-                foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
-                {
-                    var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(this)).Build();
-
-                    var clientProperty = New<Property>();
-                    clientProperty.LoadFrom(parameter);
-                    clientProperty.RealPath = new string[] {parameter.SerializedName.Value};
-
-                    CodeModel.Add(clientProperty);
-                }
-
-                var methods = new List<Method>();
-                // Build methods
-                foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
-                {
-                    foreach (var verb in path.Value.Keys)
-                    {
-                        var operation = path.Value[verb];
-                        if (string.IsNullOrWhiteSpace(operation.OperationId))
-                        {
-                            throw ErrorManager.CreateError(
-                                string.Format(CultureInfo.InvariantCulture,
-                                    Resources.OperationIdMissing,
-                                    verb,
-                                    path.Key));
-                        }
-                        var methodName = GetMethodName(operation);
-                        var methodGroup = GetMethodGroup(operation);
-
-                        if (verb.ToHttpMethod() != HttpMethod.Options)
-                        {
-                            string url = path.Key;
-                            if (url.Contains("?"))
-                            {
-                                url = url.Substring(0, url.IndexOf('?'));
-                            }
-                            var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
-                            method.Group = methodGroup;
-
-                            methods.Add(method);
-                            if (method.DefaultResponse.Body is CompositeType)
-                            {
-                                CodeModel.AddError((CompositeType) method.DefaultResponse.Body);
-                            }
-                        }
-                        else
-                        {
-                            Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
-                        }
-                    }
-                }
-
-                // Set base type
-                foreach (var typeName in GeneratedTypes.Keys)
-                {
-                    var objectType = GeneratedTypes[typeName];
-                    if (ExtendedTypes.ContainsKey(typeName))
-                    {
-                        objectType.BaseModelType = GeneratedTypes[ExtendedTypes[typeName]];
-                    }
-
-                    CodeModel.Add(objectType);
-                }
-                CodeModel.AddRange(methods);
-
-
-                return CodeModel;
+                CodeModel.Add(clientProperty);
             }
+
+            var methods = new List<Method>();
+            // Build methods
+            foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
+            {
+                foreach (var verb in path.Value.Keys)
+                {
+                    var operation = path.Value[verb];
+                    if (string.IsNullOrWhiteSpace(operation.OperationId))
+                    {
+                        throw ErrorManager.CreateError(
+                            string.Format(CultureInfo.InvariantCulture,
+                                Resources.OperationIdMissing,
+                                verb,
+                                path.Key));
+                    }
+                    var methodName = GetMethodName(operation);
+                    var methodGroup = GetMethodGroup(operation);
+
+                    if (verb.ToHttpMethod() != HttpMethod.Options)
+                    {
+                        string url = path.Key;
+                        if (url.Contains("?"))
+                        {
+                            url = url.Substring(0, url.IndexOf('?'));
+                        }
+                        var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
+                        method.Group = methodGroup;
+
+                        methods.Add(method);
+                        if (method.DefaultResponse.Body is CompositeType)
+                        {
+                            CodeModel.AddError((CompositeType) method.DefaultResponse.Body);
+                        }
+                    }
+                    else
+                    {
+                        Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
+                    }
+                }
+            }
+
+            // Set base type
+            foreach (var typeName in GeneratedTypes.Keys)
+            {
+                var objectType = GeneratedTypes[typeName];
+                if (ExtendedTypes.ContainsKey(typeName))
+                {
+                    objectType.BaseModelType = GeneratedTypes[ExtendedTypes[typeName]];
+                }
+
+                CodeModel.Add(objectType);
+            }
+            CodeModel.AddRange(methods);
+
+
+            return CodeModel;
         }
 
         /// <summary>
@@ -266,16 +264,20 @@ namespace AutoRest.Swagger
 
         private void UpdateSettings()
         {
-            var settings = new Settings(); // TODO: Note: this is the kind of settings we WANT in a pipeline model! Custom customizations for the current stage!
-            if (ServiceDefinition.Info.CodeGenerationSettings != null)
+            var settings = Settings.Instance;
+            if (settings != null)
             {
-                foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
+                // TODO: Note: this is the kind of settings we WANT in a pipeline model! Custom customizations for the current stage!
+                if (ServiceDefinition.Info.CodeGenerationSettings != null)
                 {
-                    //Don't overwrite settings that come in from the command line
-                    if (!settings.CustomSettings.ContainsKey(key))
-                        settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                    foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
+                    {
+                        //Don't overwrite settings that come in from the command line
+                        if (!settings.CustomSettings.ContainsKey(key))
+                            settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                    }
+                    Settings.PopulateSettings(settings, settings.CustomSettings);
                 }
-                Settings.PopulateSettings(settings, settings.CustomSettings);
             }
         }
 

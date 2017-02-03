@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string[] inputFiles=null)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string[] inputFiles=null, string clientName = null)
         {
             using (NewContext)
             {
@@ -81,7 +81,8 @@ namespace AutoRest.CSharp.Unit.Tests
                     CodeGenerator = codeGenerator,
                     FileSystemInput = fileSystem,
                     Namespace = "Test",
-                    CodeGenerationMode = "rest-client"
+                    CodeGenerationMode = "rest-client",
+                    ClientName = clientName
                 };
 
                 return testName.GenerateCodeInto(fileSystem, settings, inputFiles);

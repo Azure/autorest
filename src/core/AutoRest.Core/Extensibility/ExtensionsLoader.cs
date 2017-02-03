@@ -42,7 +42,10 @@ namespace AutoRest.Core.Extensibility
             else
             {
                 plugin = LoadTypeFromAssembly<IAnyPlugin>(configuration.Plugins, configuration.CodeGenerator);
-                //Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
+                if (Settings.Instance != null)
+                {
+                    Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
+                }
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
                 configuration.CodeGenerator,

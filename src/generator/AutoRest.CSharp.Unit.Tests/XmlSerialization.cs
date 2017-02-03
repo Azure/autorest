@@ -1,6 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
+
+using System.IO;
+using AutoRest.Core.Utilities;
+
 namespace AutoRest.CSharp.Unit.Tests {
     using System;
     using System.Collections;
@@ -24,9 +28,10 @@ namespace AutoRest.CSharp.Unit.Tests {
         public async Task CheckXmlSerialization() {
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "CSharp"))
             {
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\StorageServiceProperties.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));
-                
+                Assert.True(fileSystem.FileExists(@"Models\StorageServiceProperties.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
+                fileSystem.WriteAllText("Program.cs", new FileSystem().ReadAllText(Path.Combine("Resource", "XmlSerialization", "GeneratedCode", "Program._cs")));
+
                 var result = await Compile(fileSystem);
                 
                 // filter the warnings
@@ -52,7 +57,7 @@ namespace AutoRest.CSharp.Unit.Tests {
                 var asm = Assembly.Load(result.Output.GetBuffer());
                 Assert.NotNull(asm);
 
-                using (var service =new ServiceController()) {
+                using (var service = new ServiceController()) {
 
                     var program = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "XmlSerialization.Program");
                     

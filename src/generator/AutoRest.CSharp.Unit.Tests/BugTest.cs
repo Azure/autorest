@@ -98,15 +98,15 @@ namespace AutoRest.CSharp.Unit.Tests
 
         protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string[] inputFiles = null)
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string[] inputFiles = null, string clientName = null)
         {
-           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, inputFiles);
+           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, inputFiles, clientName);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string[] inputFiles = null)
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string[] inputFiles = null, string clientName = null)
         {
             var fs = CreateMockFilesystem();
-            return dirName.GenerateCodeInto(fs, codeGenerator, inputFiles);
+            return dirName.GenerateCodeInto(fs, codeGenerator, inputFiles, clientName);
         }
 
         protected virtual void WriteLine(object value)

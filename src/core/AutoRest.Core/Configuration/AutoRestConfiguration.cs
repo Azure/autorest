@@ -41,7 +41,7 @@ namespace AutoRest.Core.Configuration
         public string LogFile { get; set; }
 
         public string ModelsName { get; set; }
-        public object ClientName { get; set; }
+        public string ClientName { get; set; }
         public bool ValidationLinter { get; set; }
         [YamlMember(Alias = "plugins")]
         public IDictionary<string, AutoRestProviderConfiguration> Plugins { get; set; }

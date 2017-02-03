@@ -44,16 +44,15 @@ namespace AutoRest.Core
 
             CodeModel codeModel;
 
-            var modeler = ExtensionsLoader.GetModeler("Swagger");
-
-            try
+            using (NewContext)
             {
-                using (NewContext)
+                var modeler = ExtensionsLoader.GetModeler("Swagger");
+                try
                 {
                     bool validationErrorFound = false;
                     // TODO
                     //Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
-                    
+
                     var serviceDefinition = modeler.Parse(fsInput, configuration.InputFiles);
 
                     if (configuration.ValidationLinter)
@@ -66,8 +65,8 @@ namespace AutoRest.Core
                         }
                     }
 
-                    // TODO: meh, needed?
-                    if (string.IsNullOrEmpty(serviceDefinition.Info.Title))
+                    // TODO: meh
+                    if (!string.IsNullOrEmpty(configuration.ClientName))
                     {
                         serviceDefinition.Info.Title = configuration.ClientName;
                     }
@@ -75,62 +74,63 @@ namespace AutoRest.Core
                     // generate model from swagger 
                     codeModel = modeler.Build(serviceDefinition);
 
-                    codeModel.Namespace = configuration.Namespace; // TODO: defaults?
-                    codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
-
                     //if (validationErrorFound)
                     //{
                     //    Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
                     //}
                 }
 
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
-            }
-
-            var plugin = ExtensionsLoader.GetPlugin(configuration);
-
-            Console.ResetColor();
-            Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
-
-            using (NewContext)
-            {
-                Settings.ActivateConfiguration(configuration);
-                try
-                {
-                    var genericSerializer = new ModelSerializer<CodeModel>();
-                    var modelAsJson = genericSerializer.ToJson(codeModel);
-
-                    // ensure once we're doing language-specific work, that we're working
-                    // in context provided by the language-specific transformer. 
-                    using (plugin.Activate())
-                    {
-                        // load model into language-specific code model
-                        codeModel = plugin.Serializer.Load(modelAsJson);
-
-                        // apply language-specific tranformation (more than just language-specific types)
-                        // used to be called "NormalizeClientModel" . 
-                        codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                        // Generate code from CodeModel.
-                        await plugin.CodeGenerator.Generate(codeModel);
-                    }
-
-                    // TODO: make me a proper pipeline step, make async
-                    // pull setting from language specific config!
-                    if (!configuration.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
-                    {
-                        await new CSharpSimplifier().Run().ConfigureAwait(false);
-                    }
-                }
                 catch (Exception exception)
                 {
-                    throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
+                    throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
                 }
 
-                return Settings.Instance.FileSystemOutput;
+                var plugin = ExtensionsLoader.GetPlugin(configuration);
+
+                Console.ResetColor();
+                Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
+
+                using (NewContext)
+                {
+                    Settings.ActivateConfiguration(configuration);
+                    try
+                    {
+                        var genericSerializer = new ModelSerializer<CodeModel>();
+                        var modelAsJson = genericSerializer.ToJson(codeModel);
+
+                        // ensure once we're doing language-specific work, that we're working
+                        // in context provided by the language-specific transformer. 
+                        using (plugin.Activate())
+                        {
+                            // load model into language-specific code model
+                            codeModel = plugin.Serializer.Load(modelAsJson);
+
+                            codeModel.Namespace = configuration.Namespace; // TODO: defaults?
+                            codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
+
+                            // apply language-specific tranformation (more than just language-specific types)
+                            // used to be called "NormalizeClientModel" . 
+                            codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                            // Generate code from CodeModel.
+                            await plugin.CodeGenerator.Generate(codeModel);
+                        }
+
+                        // TODO: make me a proper pipeline step, make async
+                        // pull setting from language specific config!
+                        if (!configuration.DisableSimplifier &&
+                            Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                        {
+                            await new CSharpSimplifier().Run().ConfigureAwait(false);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
+                    }
+
+                    return Settings.Instance.FileSystemOutput;
+                }
             }
         }
 
