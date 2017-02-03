@@ -10,7 +10,6 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
-using AutoRest.CSharp;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
