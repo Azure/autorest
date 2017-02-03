@@ -55,7 +55,7 @@ namespace AutoRest.Core.Logging
                 targetStream.WriteLine($"{message.Severity.ToString().ToUpperInvariant()}: {message.Message}");
                 if (message.Path != null)
                 {
-                    targetStream.WriteLine($"\tPath: {message.Path.XPath}");
+                    targetStream.WriteLine($"\tPath: {message.Path.ReadablePath}");
                 }
                 if (message.VerboseData != null)
                 {
