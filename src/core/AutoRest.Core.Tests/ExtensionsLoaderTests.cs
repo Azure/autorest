@@ -73,28 +73,6 @@ namespace AutoRest.Core.Tests
             }
         }
 
-        public void InvalidModelerNameThrowsException()
-        {
-            using (NewContext)
-            {
-                string modeler = "Foo.Bar";
-                var settings = new Settings { FileSystemInput = _fileSystem};
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetModeler(modeler),
-                    string.Format("Plugin {0} does not have an assembly name in AutoRest.json", modeler));
-            }
-        }
-
-        [Fact]
-        public void NullOrEmptyAutoRestSettings()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings { FileSystemInput = _fileSystem};
-                Assert.Throws<CodeGenerationException>(() => ExtensionsLoader.GetModeler(string.Empty));
-            }
-        }
-
         [Fact]
         public void InvalidLanguageNameThrowsException()
         {

@@ -46,7 +46,7 @@ namespace AutoRest.Core
 
             using (NewContext)
             {
-                var modeler = ExtensionsLoader.GetModeler("Swagger");
+                var modeler = ExtensionsLoader.GetModeler();
                 try
                 {
                     bool validationErrorFound = false;
@@ -73,6 +73,9 @@ namespace AutoRest.Core
 
                     // generate model from swagger 
                     codeModel = modeler.Build(serviceDefinition);
+
+                    codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
+                    codeModel.Namespace = configuration.Namespace; // TODO: defaults?
 
                     //if (validationErrorFound)
                     //{
@@ -104,9 +107,6 @@ namespace AutoRest.Core
                         {
                             // load model into language-specific code model
                             codeModel = plugin.Serializer.Load(modelAsJson);
-
-                            codeModel.Namespace = configuration.Namespace; // TODO: defaults?
-                            codeModel.ModelsName = configuration.ModelsName; // TODO: defaults?
 
                             // apply language-specific tranformation (more than just language-specific types)
                             // used to be called "NormalizeClientModel" . 
@@ -144,7 +144,7 @@ namespace AutoRest.Core
                 throw new ArgumentNullException("settings");
             }
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            dynamic modeler = ExtensionsLoader.GetModeler("Swagger"); // TODO *cough*
+            dynamic modeler = ExtensionsLoader.GetModeler(); // TODO *cough*
 
             try
             {

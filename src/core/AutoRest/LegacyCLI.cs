@@ -18,7 +18,7 @@ namespace AutoRest
 {
     static class LegacyCLI
     {
-        public static AutoRestConfiguration GenerateConfiguration(string[] args)
+        public static AutoRestConfiguration Process(string[] args)
         {
             int exitCode = (int) ExitCode.Error;
 

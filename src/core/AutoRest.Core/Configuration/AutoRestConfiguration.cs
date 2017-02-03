@@ -51,6 +51,8 @@ namespace AutoRest.Core.Configuration
         [Obsolete("gen specific")]
         public bool DisableSimplifier { get; set; }
 
+        public string OutputFile { get; set; }
+
         public bool Validate()
         {
             // TODO

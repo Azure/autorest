@@ -499,6 +499,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             config.InputFiles = inputFiles;
             config.ModelsName = ModelsName;
             config.Namespace = Namespace;
+            config.OutputFile = OutputFileName;
             config.OutputFolder = OutputDirectory;
             return config;
         }

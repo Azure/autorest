@@ -802,7 +802,7 @@ namespace AutoRest.Swagger.Tests
                     Input = Path.Combine("Swagger", "swagger-x-ms-code-generation-settings.json"),
                     Header = "NONE"
                 };
-                var modeler = ExtensionsLoader.GetModeler("Swagger");
+                var modeler = ExtensionsLoader.GetModeler();
                 var client = modeler.Build();
                 var plugin = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp")) as PluginCs;
                 Assert.NotNull(plugin);
@@ -826,7 +826,7 @@ namespace AutoRest.Swagger.Tests
                     Header = "NONE"
                 };
 
-                var modeler = ExtensionsLoader.GetModeler("Swagger");
+                var modeler = ExtensionsLoader.GetModeler();
                 var client = modeler.Build();
 
                 var hostExtension = client.Extensions["x-ms-parameterized-host"] as JObject;

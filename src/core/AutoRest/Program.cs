@@ -33,7 +33,7 @@ namespace AutoRest
                     if (Settings.IsLegacyCommand(args))
                     {
                         Logger.Instance.Log(Category.Warning, "Detected legacy command line arguments.");
-                        configuration = LegacyCLI.GenerateConfiguration(args);
+                        configuration = LegacyCLI.Process(args);
                         if (configuration == null)
                         {
                             return (int) ExitCode.Success;
@@ -94,9 +94,9 @@ namespace AutoRest
                     Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
                     var fsOut = AutoRestController.Generate(new FileSystem(), configuration).GetAwaiter().GetResult();
 
-                    fsOut.CommitToDisk(Settings.Instance.OutputFileName == null
-                        ? Settings.Instance.OutputDirectory
-                        : Path.GetDirectoryName(Settings.Instance.OutputFileName));
+                    fsOut.CommitToDisk(configuration.OutputFile == null
+                        ? configuration.OutputFolder
+                        : Path.GetDirectoryName(configuration.OutputFile));
 
                     return (int)(generationFailed ? ExitCode.Error : ExitCode.Success);
                 }

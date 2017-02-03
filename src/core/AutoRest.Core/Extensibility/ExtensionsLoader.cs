@@ -57,18 +57,17 @@ namespace AutoRest.Core.Extensibility
         /// Gets the modeler specified in the provided Settings.
         /// </summary>
         /// <returns>Modeler specified in Settings.Modeler</returns>
-        [Obsolete("no (dedicated) composite modeler will mean: no parameter")]
-        public static dynamic GetModeler(string modelerName)
+        public static dynamic GetModeler()
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingModeler);
 
             var modeler = LoadTypeFromAssembly<dynamic>(new Dictionary<string, AutoRestProviderConfiguration>
             {
                 { "Swagger", new AutoRestProviderConfiguration {TypeName = "SwaggerModeler, AutoRest.Swagger"} },
-            }, modelerName);
+            }, "Swagger");
 
             Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,
-                modelerName,
+                "Swagger",
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
         }
@@ -120,6 +119,7 @@ namespace AutoRest.Core.Extensibility
 
                     if (!section[key].Settings.IsNullOrEmpty())
                     {
+                        throw new NotImplementedException("UNEXPECTED");
                         foreach (var settingFromFile in section[key].Settings)
                         {
                             Settings.Instance.CustomSettings[settingFromFile.Key] = settingFromFile.Value;

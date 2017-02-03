@@ -39,7 +39,7 @@ namespace AutoRest.Preview
                 var config = AutoRestConfiguration.Create();
                 config.CodeGenerator = Settings.Instance.CodeGenerator;
                 var plugin = ExtensionsLoader.GetPlugin(config);
-                var modeler = ExtensionsLoader.GetModeler(Settings.Instance.Modeler);
+                var modeler = ExtensionsLoader.GetModeler();
                 var messages = new List<LogMessage>();
                 Logger.Instance.AddListener(new SignalingLogListener(Category.Info, message => messages.Add(message)));
                 try
