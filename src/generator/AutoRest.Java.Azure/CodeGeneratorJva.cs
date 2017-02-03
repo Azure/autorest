@@ -21,7 +21,7 @@ namespace AutoRest.Java.Azure
 {
     public class CodeGeneratorJva : CodeGeneratorJv
     {
-        private const string ClientRuntimePackage = "com.microsoft.rest:azure-client-runtime:1.0.0-SNAPSHOT from snapshot repo http://adxsnapshots.azurewebsites.net/";
+        private const string ClientRuntimePackage = "com.microsoft.azure:azure-client-runtime:1.0.0-beta5-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
         private const string _packageInfoFileName = "package-info.java";
         
         public override bool IsSingleFileGenerationSupported => true;

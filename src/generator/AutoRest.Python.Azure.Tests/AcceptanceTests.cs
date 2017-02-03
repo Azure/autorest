@@ -24,7 +24,10 @@ namespace AutoRest.Python.Azure.Tests
         public static void SampleTestForGeneratingPython()
         {
             SwaggerSpecHelper.RunTests(
-                SwaggerPath("storage.json"), ExpectedPath("StorageManagementClient"),plugin:"Azure.Python");
+                SwaggerPath("storage.json"),
+                ExpectedPath("StorageManagementClient"),
+                plugin:"Azure.Python",
+                nameSpace: "fixtures.acceptancetestsstoragemanagementclient");
         }
     }
 }

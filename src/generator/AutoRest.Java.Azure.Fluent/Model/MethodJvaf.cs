@@ -97,16 +97,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
 
                 var imports = base.ImplImports;
-                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "ServiceException")
+                if (OperationExceptionTypeString != "CloudException" && OperationExceptionTypeString != "RestException")
                 {
                     imports.RemoveAll(i => new CompositeTypeJva(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                     imports.AddRange(new CompositeTypeJvaf(OperationExceptionTypeString) { CodeModel = CodeModel }.ImportSafe());
                 }
                 if (this.IsLongRunningOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
-                    imports.Remove("com.microsoft.rest.ServiceResponseCallback");
-                    imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
+                    imports.Remove("com.microsoft.azure.AzureResponseBuilder");
                     this.Responses.Select(r => r.Value.Body).Concat(new IModelType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportSafe())
                         .Where(i => !this.Parameters.Any(p => p.ModelType.ImportSafe().Contains(i)))

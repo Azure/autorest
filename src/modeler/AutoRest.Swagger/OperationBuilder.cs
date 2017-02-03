@@ -29,6 +29,7 @@ namespace AutoRest.Swagger
         private SwaggerModeler _swaggerModeler;
         private Operation _operation;
         private const string APP_JSON_MIME = "application/json";
+        private const string APP_XML_MIME = "application/xml";
 
         public OperationBuilder(Operation operation, SwaggerModeler swaggerModeler)
         {
@@ -40,7 +41,6 @@ namespace AutoRest.Swagger
             {
                 throw new ArgumentNullException("swaggerModeler");
             }
-
             this._operation = operation;
             this._swaggerModeler = swaggerModeler;
             this._effectiveProduces = operation.Produces.Any() ? operation.Produces : swaggerModeler.ServiceDefinition.Produces;
@@ -51,27 +51,37 @@ namespace AutoRest.Swagger
         {
             EnsureUniqueMethodName(methodName, methodGroup);
 
-            var method = New<Method>(new 
+            var method = New<Method>(new
             {
                 HttpMethod = httpMethod,
                 Url = url,
                 Name = methodName,
                 SerializedName = _operation.OperationId
             });
-            
+
+            // assume that without specifying Consumes, that a service will consume JSON
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
-            string produce = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
-            if (!string.IsNullOrEmpty(produce))
+            
+
+            // does the method Consume JSON or XML?
+            string serviceConsumes = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase)) ?? _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(serviceConsumes))
             {
-                method.RequestContentType = produce;
+                method.RequestContentType = serviceConsumes;
             }
 
-            if (method.RequestContentType.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) &&
+
+            // if they accept JSON or XML, and don't specify the charset, lets default to utf-8
+            if ((method.RequestContentType.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) ||
+                method.RequestContentType.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase)) &&
                 method.RequestContentType.IndexOf("charset=", StringComparison.OrdinalIgnoreCase) == -1)
             {
                 // Enable UTF-8 charset
                 method.RequestContentType += "; charset=utf-8";
             }
+
+            // if the method produces xml, make sure that the method knows that.
+            method.ResponseContentTypes = _effectiveProduces.ToArray();
 
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;
@@ -96,22 +106,41 @@ namespace AutoRest.Swagger
 
             var headerTypeName = string.Format(CultureInfo.InvariantCulture,
                 "{0}-{1}-Headers", methodGroup, methodName).Trim('-');
-            var headerType = New<CompositeType>(headerTypeName,new
+            var headerType = New<CompositeType>(headerTypeName, new
             {
                 SerializedName = headerTypeName,
+                RealPath = new string[] { headerTypeName },
                 Documentation = string.Format(CultureInfo.InvariantCulture, "Defines headers for {0} operation.", methodName)
             });
             responseHeaders.ForEach(h =>
             {
-                
-                var property = New<Property>(new
+                if (h.Value.Extensions != null && h.Value.Extensions.ContainsKey("x-ms-header-collection-prefix"))
                 {
-                    Name = h.Key,
-                    SerializedName = h.Key,
-                    ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
-                    Documentation = h.Value.Description
-                });
-                headerType.Add(property);
+                    var property = New<Property>(new
+                    {
+                        Name = h.Key,
+                        SerializedName = h.Key,
+                        RealPath = new string[] { h.Key },
+                        Extensions = h.Value.Extensions,
+                        ModelType = New<DictionaryType>(new
+                        {
+                            ValueType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key)
+                        })
+                    });
+                    headerType.Add(property);
+                }
+                else
+                {
+                    var property = New<Property>(new
+                    {
+                        Name = h.Key,
+                        SerializedName = h.Key,
+                        RealPath = new string[] { h.Key },
+                        ModelType = h.Value.GetBuilder(this._swaggerModeler).BuildServiceType(h.Key),
+                        Documentation = h.Value.Description
+                    });
+                    headerType.Add(property);
+                }
             });
 
             if (!headerType.Properties.Any())
@@ -320,7 +349,7 @@ namespace AutoRest.Swagger
         {
             bool handled = false;
             IModelType serviceType;
-            if (SwaggerOperationProducesJson())
+            if (SwaggerOperationProducesSomethingDeserializable())
             {
                 if (TryBuildResponseBody(methodName, response,
                     s => GenerateResponseObjectName(s, responseStatusCode), out serviceType))
@@ -368,7 +397,7 @@ namespace AutoRest.Swagger
         private void TryBuildDefaultResponse(string methodName, OperationResponse response, Method method, IModelType headerType)
         {
             IModelType errorModel = null;
-            if (SwaggerOperationProducesJson())
+            if (SwaggerOperationProducesSomethingDeserializable())
             {
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
@@ -382,7 +411,7 @@ namespace AutoRest.Swagger
         {
             bool handled = false;
             responseType = null;
-            if (SwaggerOperationProducesJson())
+            if (SwaggerOperationProducesSomethingDeserializable())
             {
                 if (response.Schema != null)
                 {
@@ -405,17 +434,12 @@ namespace AutoRest.Swagger
             return handled;
         }
 
-        private bool SwaggerOperationProducesJson()
+        private bool SwaggerOperationProducesSomethingDeserializable()
         {
-            return _effectiveProduces != null &&
-                   _effectiveProduces.Any(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
+            return true == _effectiveProduces?.Any(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) || s.StartsWith(APP_XML_MIME, StringComparison.OrdinalIgnoreCase));
         }
 
-        private bool SwaggerOperationProducesNotEmpty()
-        {
-            return _effectiveProduces != null
-                && _effectiveProduces.Any();
-        }
+        private bool SwaggerOperationProducesNotEmpty() => true == _effectiveProduces?.Any();
 
         private void EnsureUniqueMethodName(string methodName, string methodGroup)
         {

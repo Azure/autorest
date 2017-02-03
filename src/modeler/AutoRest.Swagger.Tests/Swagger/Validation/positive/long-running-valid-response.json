@@ -1,0 +1,180 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "LongRunningValidResponse",
+    "description": "long running put operations' responses are modeled correctly with aleast one successful terminal code",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/foo": {
+      "put": {
+        "operationId": "Foo_Create",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StorageAccount"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Foo_Post",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "201": {
+            "description": "Created."
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Foo_Delete",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "204": {
+            "description": "No Content."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageAccount": {
+      "properties": {
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the Kind.",
+          "enum": [
+            "Storage",
+            "BlobStorage"
+          ],
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "The storage account."
+    },
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Operations"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Description of Operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name",
+          "type": "string"
+        },
+        "display": {
+          "description": "foo",
+          "properties": {
+            "provider": {
+              "description": "Service provider",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Error": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The code of the error"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message of the error"
+        }
+      },
+      "description": "An error result"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

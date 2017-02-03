@@ -2,6 +2,7 @@
 using System.Globalization;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
+using AutoRest.Core;
 
 namespace AutoRest.Java.Model
 {
@@ -9,7 +10,7 @@ namespace AutoRest.Java.Model
     {
         public EnumTypeJv()
         {
-            Name.OnGet += name => string.IsNullOrEmpty(name) || name == "enum" ? "String" : name;
+            Name.OnGet += name => string.IsNullOrEmpty(name) || name == "enum" ? "String" : CodeNamer.Instance.GetTypeName(name);
         }
 
         [JsonIgnore]

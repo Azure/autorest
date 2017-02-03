@@ -195,6 +195,41 @@
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
   </data>
+  <data name="APIVersionFormatIsNotValid" xml:space="preserve">
+    <value>API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview.</value>
+  </data>
+  <data name="HttpVerbIsNotValid" xml:space="preserve">
+    <value>Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. </value>
+  </data>
+  <data name="ResourceModelIsNotValid" xml:space="preserve">
+    <value>The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only</value>
+  </data>
+  <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
+    <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
+  </data>
+  <data name="XmsClientNameInValid" xml:space="preserve">
+    <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
+  </data>
+  <data name="DeleteMustHaveEmptyRequestBody" xml:space="preserve">
+    <value>'Delete' operation cannot have parameters in the request body.</value>
+  </data>
+  <data name="SkuModelIsNotValid" xml:space="preserve">
+    <value>Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties.</value>
+  </data>
+  <data name="PutGetPatchResponseInvalid" xml:space="preserve">
+    <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
+  </data>
+  <data name="OperationsAPINotImplemented" xml:space="preserve">
+    <value>Operations API must be implemented for the service.</value>
+  </data>
+  <data name="TrackedResourceIsNotValid" xml:space="preserve">
+    <value>Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+    A Tracked Resource must have: 
+    1. A Get Operation 
+    2. A ListByResourceGroup operation with x-ms-pageable extension and 
+    3. A ListBySubscriptionId operation with x-ms-pageable extension.
+    4. Type, Location, Tags should not be used in the properties.</value>
+  </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>
@@ -268,9 +303,24 @@
     <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
   </data>
   <data name="UniqueResourcePathsWarning" xml:space="preserve">
-    <value>More than one resource path is not allowed in a single spec</value>
+    <value>More than one resource path is not allowed in a single spec (found: {0}).</value>
   </data>
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
+  </data>
+  <data name="GuidUsageNotRecommended" xml:space="preserve">
+    <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
+  </data>
+  <data name="OperationNameNotValid" xml:space="preserve">
+    <value>'GET' operation must use method name 'Get' or Method name start with 'List', 'PUT' operation must use method name 'Create', 'PATCH' operation must use method name 'Update' and 'DELETE' operation must use method name 'Delete'.</value>
+  </data>
+  <data name="LongRunningResponseNotValid" xml:space="preserve">
+    <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
+  </data>
+  <data name="InvalidMutabilityValues" xml:space="preserve">
+    <value>Valid values for an x-ms-mutability extension are 'create', 'read' and 'update'. Applied extension contains invalid value(s): '{0}'.</value>
+  </data>
+  <data name="InvalidMutabilityValueForReadOnly" xml:space="preserve">
+    <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
   </data>
 </root>

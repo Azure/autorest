@@ -50,10 +50,7 @@ namespace AutoRest.Java
             }
 
             List<string> settings = new List<string>();
-            if (property.Name != property.SerializedName)
-            {
-                settings.Add(string.Format(CultureInfo.InvariantCulture, "value = \"{0}\"", property.SerializedName));
-            }
+            settings.Add(string.Format(CultureInfo.InvariantCulture, "value = \"{0}\"", property.SerializedName));
             if (property.IsRequired)
             {
                 settings.Add("required = true");

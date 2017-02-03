@@ -27,7 +27,7 @@ namespace AutoRest.AzureResourceSchema.Markdown
             if (!_dest.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                 return $"[{_s}](#{_dest})";
             else
-                return $"[{_s}]({_dest})";
+                return $"[{_s}](#{_dest})";
         }
     }
 }

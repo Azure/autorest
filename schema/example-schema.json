@@ -7,6 +7,14 @@
   "description": "Describes the format of an example defined using the x-ms-examples extension.",
   "additionalProperties": false,
   "properties": {
+    "operationId": {
+      "description": "The operationId in the swagger specification for which the example is being provided.",
+      "type": "string"
+    },
+    "title": {
+      "description": "The title in the swagger spec that uniquely identifies the swagger spec.",
+      "type": "string"
+    },
     "parameters": {
       "$ref": "#/xmsParametersExample"
     },

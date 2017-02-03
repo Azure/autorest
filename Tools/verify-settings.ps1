@@ -203,32 +203,6 @@ function Find-OrAdd ( $cmd , $folders = @("${env:ProgramFiles(x86)}","${env:Prog
     }
 }
 
-Function Get-AndroidHomeFromRegistry
-{
-    # if ([Environment]::Is64BitOperatingSystem)
-    # powershell v1 doesn't have is 64 bit flag.
-    if ([environment]::GetEnvironmentVariable("ProgramFiles(x86)"))
-    {
-        $androidRegistryKey = "HKLM:\SOFTWARE\Wow6432Node\Android SDK Tools"
-    }
-    else
-    {
-        $androidRegistryKey = "HKLM:\SOFTWARE\Android SDK Tools"
-    }
-
-    if (Test-Path $androidRegistryKey)
-    {
-        $path = (Get-ItemProperty $androidRegistryKey Path).Path
-
-        if (-not (Test-Path $path))
-        {
-            $path = $null
-        }
-    }
-
-    return $path
-}
-
 find-orAdd "dotnet.exe" -hint "See: https://www.microsoft.com/net/core#windows"
 find-orAdd "msbuild.exe" -hint "Install Visual studio 2015"
 
@@ -239,7 +213,7 @@ find-orAdd "gulp.cmd" -hint "maybe use 'npm install -g gulp'" -folders @("${env:
 
 find-orAdd "ruby.exe" (@() +  ((dir -ea 0 c:\ruby*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see http://rubyinstaller.org/downloads/"
 
-find-orAdd "gradle.bat" ( @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see http://gradle.org/gradle-download/"
+find-orAdd "mvn.cmd" ( @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "see https://maven.apache.org/download.cgi"
 
 find-orAdd "python.exe" (@() +  ((dir -ea 0 c:\python*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools")) -hint "https://www.python.org/downloads/"
 find-orAdd "tox.exe" (@() +  ((dir -ea 0 c:\python*).fullname) + @( "${env:ProgramFiles(x86)}","${env:ProgramFiles}","c:\tools"))   -hint "maybe use 'pip install tox'"
@@ -256,19 +230,6 @@ if( (!$env:JAVA_HOME) -or (!(test-path  -PathType Container $env:JAVA_HOME )) ) 
     } else {
         write-host -fore red "Environment variable JAVA_HOME not set correctly."
         $failing = $true
-    }
-}
-
-# use this to add the missing SDK
-# .\Install-AndroidSDK.ps1  -RequestedAndroidPackages android-23 -apilevel 23
-
-if( (!$env:ANDROID_HOME) -or (!(test-path  -PathType Container $env:ANDROID_HOME )) ) {
-    $android = Get-AndroidHomeFromRegistry
-    if (! $android ) {
-        write-host -fore red "Environment variable ANDROID_HOME not set correctly."
-        $failing = $true
-    } else {
-        $env:ANDROID_HOME= $android
     }
 }
 

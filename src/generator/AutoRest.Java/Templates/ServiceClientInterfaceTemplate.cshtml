@@ -23,6 +23,13 @@ package @(Settings.Namespace.ToLower());
  */
 public interface @Model.Name {
     /**
+     * Gets the REST client.
+     *
+     * @@return the {@@link RestClient} object.
+    */
+    RestClient restClient();
+@EmptyLine
+    /**
      * The default base URL.
      */
     String DEFAULT_BASE_URL = "@Model.BaseUrl";

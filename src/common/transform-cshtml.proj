@@ -1,44 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" InitialTargets="InstallRazor;CompileCshtml"> <!--  ;CompileCshtml -->
-  <!-- Place this line at the top of any msbuild script (ie, csproj, etc) -->
-  <PropertyGroup><PowerShell># 2>nul || type %~df0|C:\Windows\system32\find.exe /v "setlocal"|C:\Windows\system32\find.exe /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell></PropertyGroup>
-
-  <Target Name="InstallRazor"  Condition="$(_ProjectRestoreType) == 'NETCore' AND !Exists('$(USERPROFILE)/.nuget/packages/.tools/dotnet-razor')" >
-    <!-- When doing a dotnet restore, we want to ensure that the dotnet-razor tool gets installed -->
-    <Message Text="Making sure we have dotnet-razor" Importance="high" />
-    <PropertyGroup>
-      <InstallRazor>$(Powershell)
-        #
-        # ensure that dotnet-razor package is built and installed.
-        #
-        pushd $(SolutionDir)/src/dev/dotnet-razor
-        
-        # remove anything here.
-        @("obj", "bin", "install\obj", "install\bin", "$env:USERPROFILE\.nuget\packages\dotnet-razor\", "$env:USERPROFILE\.nuget\packages\.tools\dotnet-razor\") |% { $null = rmdir -ea 0 -recurse -force $_ }
-        
-        $null = mkdir -ea 0 ".\bin\Release"
-        $null = mkdir -ea 0 ".\bin\Debug"
-        
-        # build this tool
-        dotnet restore
-        dotnet pack
-
-        # trick dotnet into installing the package that we just built.
-        cd install
-        dotnet restore
-        popd
-      </InstallRazor>
-      
-    </PropertyGroup>
-    <Exec Condition="$(SolutionDir) != '' " Command="$(InstallRazor)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
-  
-  </Target>
-  <Target Name="CompileCshtml" BeforeTargets="EnumerateInputs" >
-    <Message Text="Ensuring cshtml files are generated into .cs files [$(MSBuildProjectName)]" Importance="high" />
-    <Exec Condition="$(SolutionDir) != ''" Command="dotnet razor $(MSBuildProjectDirectory) $(RootNamespace)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" IgnoreExitCode="true" /> 
-  </Target>
-
+<Project ToolsVersion="4.0">
   <ItemGroup>
-    <DotNetCliToolReference Include="dotnet-razor" Version="1.0.0" />
+    <DotNetCliToolReference Include="dotnet-Perks.CodeGen" Version="1.0.0" />
+    <PackageReference Include="dotnet-Perks.CodeGen" Version="1.0.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>

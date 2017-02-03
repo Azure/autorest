@@ -37,6 +37,7 @@ namespace AutoRest.Extensions
         public const string PositionInOperation = "positionInOperation";
         public const string ParameterLocationExtension = "x-ms-parameter-location";
         public const string ExternalExtension = "x-ms-external";
+        public const string HeaderCollectionPrefix = "x-ms-header-collection-prefix";
 
         private static bool hostChecked = false;
 
@@ -412,6 +413,7 @@ namespace AutoRest.Extensions
                 {
                     var bodyParameterType = bodyParameter.ModelType as CompositeType;
                     if (bodyParameterType != null && 
+                        !bodyParameterType.BaseIsPolymorphic &&
                         (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant && !p.IsReadOnly) <= Settings.Instance.PayloadFlatteningThreshold ||
                          bodyParameter.ShouldBeFlattened()))
                     {

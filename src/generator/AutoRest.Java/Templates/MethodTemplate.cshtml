@@ -29,11 +29,11 @@
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
 @if (@Model.ReturnTypeResponseName == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().body();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().getBody();
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().body();
 }
 }
 @EmptyLine
@@ -85,7 +85,7 @@ public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, @Model.ReturnTypeJv.GenericBodyClientTypeString>() {
         @@Override
         public @Model.ReturnTypeJv.GenericBodyClientTypeString call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
-            return response.getBody();
+            return response.body();
         }
     });
 }
@@ -181,11 +181,11 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
 @if (@Model.ReturnTypeResponseName == "void")
 {
-@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();
+@:    @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().body();
 }
 else
 {
-@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().getBody();
+@:    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().body();
 }
 }
 @EmptyLine
@@ -237,7 +237,7 @@ public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, @Model.ReturnTypeJv.GenericBodyClientTypeString>() {
         @@Override
         public @Model.ReturnTypeJv.GenericBodyClientTypeString call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
-            return response.getBody();
+            return response.body();
         }
     });
 }
@@ -305,7 +305,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 }
 @EmptyLine
 private @Model.ReturnTypeJv.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.ReturnTypeJv.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).mapperAdapter())
+    return @(Model.ClientReference).restClient().responseBuilderFactory().<@Model.ReturnTypeJv.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>newInstance(@(Model.ClientReference).serializerAdapter())
 @foreach (var response in Model.Responses)
 {
 

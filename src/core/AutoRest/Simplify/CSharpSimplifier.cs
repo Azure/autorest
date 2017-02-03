@@ -6,12 +6,14 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using AutoRest.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
+using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 using System.Net;
 using System.Reflection;
@@ -36,7 +38,9 @@ namespace AutoRest.Simplify
                 typeof(File).GetAssembly().Location,
                 typeof(HttpStatusCode).GetAssembly().Location,
                 typeof(System.Net.Http.HttpClient).GetAssembly().Location,
-                typeof(object).GetAssembly().Location
+                typeof(object).GetAssembly().Location,
+                typeof(XElement).GetAssembly().Location,
+                typeof(JsonConvert).GetAssembly().Location
             };
 
 

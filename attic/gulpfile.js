@@ -361,23 +361,6 @@ gulp.task('regenerate:expected:javaazurefluent', function(cb){
   }, cb);
 })
 
-gulp.task('test:clientruntime:java:init', ['test:java:init'], function(){
-  return gulp.src('./').pipe(shell(basePathOrThrow() + '/gradlew :client-runtime:check'));
-});
-gulp.task('test:clientruntime:javaazure:init', ['test:clientruntime:java:init'], function(){
-  return gulp.src('./').pipe(shell(basePathOrThrow() + '/gradlew :azure-client-runtime:check'));
-});
-
-gulp.task('test:java:init', function(cb){
-   if(fs.existsSync(basePathOrThrow()+'/src/client')){
-     // clean the src/client dir
-     del.sync(['./src/client/'], cb);
-   } 
-   fs.mkdir(basePathOrThrow()+'/src/client/');
-   //clone the Java ClientRuntime repo
-   return gulp.src('./').pipe(shell('git clone --branch v1.0.0-beta3 https://github.com/azure/autorest-clientruntime-for-java.git src/client/Java --depth=1'));
-});
-
 gulp.task('regenerate:expected:java', function(cb){
   mappings = {};
   for (var key in defaultMappings) {
@@ -792,8 +775,8 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 gulp.task('test:python', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Tests/'}, cb) });
 gulp.task('test:python:azure', function(cb){ runAsync('tox', {cwd: './src/generator/AutoRest.Python.Azure.Tests/'}, cb) });
 
-gulp.task('test:java', ['test:java:init', 'test:clientruntime:java:init', 'test:clientruntime:javaazure:init'], shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
-gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
+gulp.task('test:java', shell.task('mvn test -pl src/generator/AutoRest.Java.Tests', {verbosity: 3}));
+gulp.task('test:java:azure', shell.task('mvn test -pl src/generator/AutoRest.Java.Azure.Tests', {verbosity: 3}));
 
 gulp.task('test:go', ['regenerate:expected:go'], shell.task([
     'glide up',

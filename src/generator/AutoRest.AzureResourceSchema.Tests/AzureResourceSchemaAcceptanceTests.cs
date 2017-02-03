@@ -53,6 +53,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         }
 
         [Fact]
+        public static void CommitmentPlans_2016_05_01_preview()
+        {
+            RunSwaggerTest("CommitmentPlans", "2016-05-01-preview", "commitmentplans.json");
+        }
+
+        [Fact]
         public static void Compute_2015_06_15()
         {
             RunSwaggerTest("Compute", "2015-06-15", "compute.json");
@@ -62,6 +68,12 @@ namespace AutoRest.AzureResourceSchema.Tests
         public static void Compute_2016_03_30()
         {
             RunSwaggerTest("Compute", "2016-03-30", "compute.json");
+        }
+
+        [Fact]
+        public static void Compute_2016_03_30b()
+        {
+            RunSwaggerTest("Compute", "2016-03-30b", "compute.json");
         }
 
         [Fact]

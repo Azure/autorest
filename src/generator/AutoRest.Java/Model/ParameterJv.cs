@@ -103,7 +103,7 @@ namespace AutoRest.Java.Model
                 else if (sequence != null)
                 {
                     return string.Format(CultureInfo.InvariantCulture,
-                        "{0} {1} = {2}.mapperAdapter().serializeList({3}, CollectionFormat.{4});",
+                        "{0} {1} = {2}.serializerAdapter().serializeList({3}, CollectionFormat.{4});",
                         WireType.Name,
                         WireName,
                         clientReference,
@@ -265,7 +265,7 @@ namespace AutoRest.Java.Model
                     }
                     else if (this.ModelType is SequenceType)
                     {
-                        imports.Add("com.microsoft.rest.serializer.CollectionFormat");
+                        imports.Add("com.microsoft.rest.CollectionFormat");
                     }
                 }
                 if (ModelType.IsPrimaryType(KnownPrimaryType.Stream) && Location == Core.Model.ParameterLocation.Body)
