@@ -486,7 +486,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         {
             var inputFiles = new [] { Input };
 
-            if (Modeler == "Composite")
+            if (Modeler == "CompositeSwagger")
             {
                 inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystemInput, Input);
             }

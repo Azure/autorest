@@ -42,7 +42,7 @@ namespace AutoRest
                         using (var writer = new StringWriter())
                         {
                             new Serializer().Serialize(writer, configuration);
-                            Console.WriteLine(writer); // TODO
+                            //Console.WriteLine(writer); // TODO
                         }
                     }
                     else
