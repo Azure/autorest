@@ -249,23 +249,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void codeModelWithCircularDependencyThrowsError()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
-                };
-                var modeler = new SwaggerModeler();
-                var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
-                Assert.Contains("circular", ex.Message, StringComparison.OrdinalIgnoreCase);
-                Assert.Contains("siamese", ex.Message, StringComparison.OrdinalIgnoreCase);
-            }
-        }
-
-        [Fact]
         public void TestcodeModelWithRecursiveTypes()
         {
             using (NewContext)
@@ -493,7 +476,7 @@ namespace AutoRest.Swagger.Tests
                 Assert.Equal("Double double", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[5]));
                 Assert.Equal("Decimal decimal", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[6]));
                 Assert.Equal("String string", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[7]));
-                Assert.Equal("enum color1", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[8]));
+                Assert.Equal("enum color", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[8]));
                 Assert.Equal("ByteArray byte", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[9]));
                 Assert.Equal("Boolean boolean", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[10]));
                 Assert.Equal("Date date", CreateCSharpDeclarationString(codeModel.Methods[0].Parameters[11]));
@@ -503,7 +486,7 @@ namespace AutoRest.Swagger.Tests
 
                 var variableEnumInPath =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group .IsNullOrEmpty())
-                        .Parameters.First(p => p.Name == "color1" && p.Location == ParameterLocation.Path)
+                        .Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Path)
                         .ModelType as EnumType;
                 Assert.NotNull(variableEnumInPath);
                 Assert.Equal(variableEnumInPath.Values,
@@ -514,7 +497,7 @@ namespace AutoRest.Swagger.Tests
 
                 var variableEnumInQuery =
                     codeModel.Methods.First(m => m.Name == "List" && m.Group.IsNullOrEmpty())
-                        .Parameters.First(p => p.Name == "color" && p.Location == ParameterLocation.Query)
+                        .Parameters.First(p => p.Name == "color1" && p.Location == ParameterLocation.Query)
                         .ModelType as EnumType;
                 Assert.NotNull(variableEnumInQuery);
                 Assert.Equal(variableEnumInQuery.Values,

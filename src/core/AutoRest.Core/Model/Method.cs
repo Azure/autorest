@@ -78,7 +78,7 @@ namespace AutoRest.Core.Model
         protected Method()
         {
             InitializeCollections();
-            Name.OnGet += n => CodeNamer.Instance.GetMethodName(n);
+            Name.OnGet += n => CodeNamer.Instance.GetMethodName(n.Else("unnamed_method"));
             Group.OnGet += groupName => CodeNamer.Instance.GetMethodGroupName(groupName);
         }
 
