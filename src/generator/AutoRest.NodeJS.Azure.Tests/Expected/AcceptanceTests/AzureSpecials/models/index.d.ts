@@ -56,4 +56,3 @@ export interface OdataFilter {
 export interface HeaderCustomNamedRequestIdParamGroupingParameters {
   fooClientRequestId: string;
 }
-

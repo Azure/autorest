@@ -78,4 +78,3 @@ namespace Fixtures.MirrorSequences.Models
         }
     }
 }
-

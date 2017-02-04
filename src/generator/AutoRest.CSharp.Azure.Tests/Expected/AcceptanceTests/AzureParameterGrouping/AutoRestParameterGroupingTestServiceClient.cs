@@ -303,4 +303,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         }
     }
 }
-

@@ -79,4 +79,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
     }
 }
-

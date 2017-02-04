@@ -1292,4 +1292,3 @@ func NewWithBaseURI(baseURI string, ) ManagementClient {
         result.Response = resp
         return
     }
-

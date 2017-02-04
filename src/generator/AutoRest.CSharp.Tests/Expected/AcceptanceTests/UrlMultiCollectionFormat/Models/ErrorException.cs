@@ -98,4 +98,3 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
 #endif
     }
 }
-

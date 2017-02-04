@@ -98,4 +98,3 @@ namespace Fixtures.AcceptanceTestsBodyNumber.Models
 #endif
     }
 }
-

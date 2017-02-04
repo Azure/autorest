@@ -1,4 +1,3 @@
-
 namespace Petstore
 {
     using Microsoft.Rest;
@@ -46,4 +45,3 @@ namespace Petstore
 
     }
 }
-

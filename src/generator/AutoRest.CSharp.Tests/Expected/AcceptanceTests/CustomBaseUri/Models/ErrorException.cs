@@ -98,4 +98,3 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 #endif
     }
 }
-

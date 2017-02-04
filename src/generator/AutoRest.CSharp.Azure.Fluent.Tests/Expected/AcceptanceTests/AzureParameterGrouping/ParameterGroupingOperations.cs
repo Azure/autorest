@@ -748,4 +748,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
 
     }
 }
-

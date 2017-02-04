@@ -98,4 +98,3 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync.Models
 #endif
     }
 }
-

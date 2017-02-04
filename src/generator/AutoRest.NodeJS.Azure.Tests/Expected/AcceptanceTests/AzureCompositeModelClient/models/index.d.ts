@@ -432,4 +432,3 @@ export interface ReadonlyObj {
   id?: string;
   size?: number;
 }
-

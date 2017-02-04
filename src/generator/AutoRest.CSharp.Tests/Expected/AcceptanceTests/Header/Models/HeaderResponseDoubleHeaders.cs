@@ -42,4 +42,3 @@ namespace Fixtures.AcceptanceTestsHeader.Models
 
     }
 }
-

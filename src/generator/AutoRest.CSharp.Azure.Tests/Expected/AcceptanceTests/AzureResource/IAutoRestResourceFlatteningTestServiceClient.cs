@@ -138,4 +138,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
     }
 }
-

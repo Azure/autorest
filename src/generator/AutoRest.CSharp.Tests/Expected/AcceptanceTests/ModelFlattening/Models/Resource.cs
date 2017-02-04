@@ -68,4 +68,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
     }
 }
-

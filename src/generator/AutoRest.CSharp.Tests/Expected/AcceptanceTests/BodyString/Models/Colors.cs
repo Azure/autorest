@@ -28,4 +28,3 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         BlueColor
     }
 }
-

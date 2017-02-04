@@ -28,4 +28,3 @@ namespace Fixtures.AcceptanceTestsUrl.Models
         Bluecolor
     }
 }
-

@@ -34,4 +34,3 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 
     }
 }
-

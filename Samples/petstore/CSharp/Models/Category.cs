@@ -1,4 +1,3 @@
-
 namespace Petstore.Models
 {
     using Newtonsoft.Json;
@@ -74,4 +73,3 @@ namespace Petstore.Models
         }
     }
 }
-

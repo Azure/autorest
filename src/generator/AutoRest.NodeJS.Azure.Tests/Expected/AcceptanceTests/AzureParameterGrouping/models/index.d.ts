@@ -100,4 +100,3 @@ export interface ParameterGroupingPostMultiParamGroupsSecondParamGroup {
   headerTwo?: string;
   queryTwo?: number;
 }
-

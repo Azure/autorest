@@ -99,4 +99,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
 #endif
     }
 }
-

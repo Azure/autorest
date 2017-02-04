@@ -15,4 +15,3 @@ from .version import VERSION
 __all__ = ['MicrosoftAzureTestUrl']
 
 __version__ = VERSION
-

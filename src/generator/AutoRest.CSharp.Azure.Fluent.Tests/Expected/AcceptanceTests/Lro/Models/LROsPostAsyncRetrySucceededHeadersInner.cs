@@ -65,4 +65,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     }
 }
-

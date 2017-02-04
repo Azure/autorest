@@ -453,4 +453,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
 
     }
 }
-

@@ -49,4 +49,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 
     }
 }
-

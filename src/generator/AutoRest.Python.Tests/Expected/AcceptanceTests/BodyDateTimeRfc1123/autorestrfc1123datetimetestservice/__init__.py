@@ -15,4 +15,3 @@ from .version import VERSION
 __all__ = ['AutoRestRFC1123DateTimeTestService']
 
 __version__ = VERSION
-

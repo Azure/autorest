@@ -781,4 +781,3 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
 
     }
 }
-

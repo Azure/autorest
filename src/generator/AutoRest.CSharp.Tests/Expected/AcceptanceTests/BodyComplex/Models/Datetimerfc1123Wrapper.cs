@@ -44,4 +44,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
-

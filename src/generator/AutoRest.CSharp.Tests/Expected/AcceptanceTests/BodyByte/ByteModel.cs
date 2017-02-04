@@ -683,4 +683,3 @@ namespace Fixtures.AcceptanceTestsBodyByte
 
     }
 }
-

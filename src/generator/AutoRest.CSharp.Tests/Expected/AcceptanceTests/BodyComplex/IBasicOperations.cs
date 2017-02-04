@@ -122,4 +122,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         Task<HttpOperationResponse<Basic>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

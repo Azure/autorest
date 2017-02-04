@@ -204,4 +204,3 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
 
     }
 }
-

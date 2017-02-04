@@ -284,4 +284,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         Task<AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> BeginPostAsyncRelativeRetrySucceededWithHttpMessagesAsync(ProductInner product = default(ProductInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

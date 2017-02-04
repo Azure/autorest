@@ -125,4 +125,3 @@ export interface OperationResult {
   status?: string;
   error?: OperationResultError;
 }
-

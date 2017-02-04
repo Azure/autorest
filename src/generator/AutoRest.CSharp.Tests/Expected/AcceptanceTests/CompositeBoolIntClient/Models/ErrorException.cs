@@ -98,4 +98,3 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient.Models
 #endif
     }
 }
-

@@ -1753,4 +1753,3 @@ namespace Fixtures.AcceptanceTestsBodyInteger
 
     }
 }
-

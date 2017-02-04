@@ -64,4 +64,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         Task<AzureOperationHeaderResponse<HeaderCustomNamedRequestIdParamGroupingHeaders>> CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

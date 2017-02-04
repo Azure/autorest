@@ -1,4 +1,3 @@
-
 namespace Petstore
 {
     using Microsoft.Rest;
@@ -306,4 +305,3 @@ namespace Petstore
         Task<AzureOperationResponse<StorageAccount>> BeginCreateWithHttpMessagesAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

@@ -41,4 +41,3 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         Task<HttpOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

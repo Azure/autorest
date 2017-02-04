@@ -213,4 +213,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
     }
 }
-
