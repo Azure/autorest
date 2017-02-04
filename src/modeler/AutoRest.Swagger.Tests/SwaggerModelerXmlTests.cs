@@ -27,7 +27,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
+                    Input = Path.Combine("Resource","Swagger", "swagger-xml.yaml")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -50,7 +50,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
+                    Input = Path.Combine("Resource","Swagger", "swagger-xml.yaml")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -70,7 +70,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml-paths.yaml")
+                    Input = Path.Combine("Resource","Swagger", "swagger-xml-paths.yaml")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();

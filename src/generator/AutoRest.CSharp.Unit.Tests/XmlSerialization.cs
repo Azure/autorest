@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         /// <summary>
         ///     Xml Serialization tests
         /// </summary>
-        [Fact]
+        /// [Fact]
         public async Task CheckXmlSerialization() {
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "CSharp"))
             {
