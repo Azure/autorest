@@ -41,7 +41,6 @@
   },
 
   "dependencies": {
-    "System.Xml.Linq" : { "version": "3.5.21022.801", "type":"build"},
     "System.Xml.XDocument" : { "version": "4.0.0", "type":"build"},
     "Newtonsoft.Json": {"version": "[9.0.1,10.0)", "type":"build"},
     "AutoRest.Core": { "target": "project" ,"type":"build"},

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
+using AutoRest.Core.Logging;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
@@ -44,20 +45,29 @@ namespace AutoRest.Core.Simplify
                 ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadAllText(each));
 
             var projectId = ProjectId.CreateNewId();
-            var solution = new AdhocWorkspace().CurrentSolution
-                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
-                .AddMetadataReference(projectId, Mscorlib)
-                .AddMetadataReference(projectId, Xml)
-                .AddMetadataReference(projectId, Newtonsoft)
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single());
+            Solution solution;
+            try
+            { 
+                solution = new AdhocWorkspace().CurrentSolution
+                    .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
+                    .AddMetadataReference(projectId, Mscorlib)
+                    .AddMetadataReference(projectId, Xml)
+                    .AddMetadataReference(projectId, Newtonsoft)
+                    .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",StringComparison.OrdinalIgnoreCase) == 0)
+                        .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
+                    .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",StringComparison.OrdinalIgnoreCase) == 0)
+                        .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
+                    .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)
+                        .Select(a => MetadataReference.CreateFromFile(a.Location)).Single());
+            }
+            catch(Exception e)
+            {
+                Logger.Instance.Log(Category.Warning, $"Failed to load assemblies for simplifier: {e}");
+                return;
+            }
 
             // Add existing files
             foreach (var file in files.Keys)
