@@ -19,13 +19,8 @@ namespace AutoRest.CompositeSwagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-good1.json")
-                };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
+                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-good1.json")), true);
                 Assert.Equal("2014-04-01-preview",
                     clientModel.Methods.FirstOrDefault(m => m.Name == "SimpleGet")
                         .Parameters.FirstOrDefault(p => p.SerializedName == "api-version")
@@ -46,13 +41,8 @@ namespace AutoRest.CompositeSwagger.Tests
 
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-good2.json")
-                };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
+                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-good2.json")));
 
                 Assert.Equal(2, clientModel.Methods.Count);
                 Assert.Equal(2, clientModel.ModelTypes.Count);
@@ -66,13 +56,8 @@ namespace AutoRest.CompositeSwagger.Tests
 
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-good3.json")
-                };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input));
+                var clientModel = modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-good3.json")));
 
                 Assert.Equal(2, clientModel.Methods.Count);
                 Assert.Equal(2, clientModel.ModelTypes.Count);
@@ -85,13 +70,8 @@ namespace AutoRest.CompositeSwagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-conflict-in-global-param.json")
-                };
                 var modeler = new SwaggerModeler();
-                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-conflict-in-global-param.json"))));
             }
         }
 
@@ -100,13 +80,8 @@ namespace AutoRest.CompositeSwagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-conflict-in-model.json")
-                };
                 var modeler = new SwaggerModeler();
-                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-conflict-in-model.json"))));
             }
         }
 
@@ -115,13 +90,8 @@ namespace AutoRest.CompositeSwagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-conflict-in-settings.json")
-                };
                 var modeler = new SwaggerModeler();
-                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                Assert.Throws<Exception>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-conflict-in-settings.json"))));
             }
         }
 
@@ -130,13 +100,8 @@ namespace AutoRest.CompositeSwagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-empty.json")
-                };
                 var modeler = new SwaggerModeler();
-                Assert.Throws<CodeGenerationException>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                Assert.Throws<CodeGenerationException>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-empty.json"))));
             }
         }
 
@@ -145,13 +110,8 @@ namespace AutoRest.CompositeSwagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "composite-swagger-empty2.json")
-                };
                 var modeler = new SwaggerModeler();
-                Assert.Throws<NullReferenceException>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Settings.Instance.Input)));
+                Assert.Throws<NullReferenceException>(() => modeler.Build(new FileSystem(), CompositeServiceDefinition.GetInputFiles(new FileSystem(), Path.Combine("Swagger", "composite-swagger-empty2.json"))));
             }
         }
     }

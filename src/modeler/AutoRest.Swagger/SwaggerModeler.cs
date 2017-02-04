@@ -135,9 +135,9 @@ namespace AutoRest.Swagger
         }
 
         [Obsolete("these are multiple pipeline steps!")]
-        public CodeModel Build(IFileSystem fs, string[] inputFiles)
+        public CodeModel Build(IFileSystem fs, string[] inputFiles, bool inlineApiVersion = false)
         {
-            return Build(Parse(fs, inputFiles));
+            return Build(Parse(fs, inputFiles, inlineApiVersion));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability",
