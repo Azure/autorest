@@ -48,7 +48,7 @@ namespace AutoRest.Core.Utilities
                 return new Uri(Path.GetDirectoryName(path), UriKind.Relative);
             }
         }
-        
+
         public void WriteAllText(string path, string contents)
         {
             VirtualStore[path] = new StringBuilder(contents);
@@ -85,7 +85,7 @@ namespace AutoRest.Core.Utilities
         public bool FileExists(string path)
             => VirtualStore.ContainsKey(path);
 
-        public bool DirectoryExists(string path) 
+        public bool DirectoryExists(string path)
             => VirtualStore.Keys.Any(key => key.StartsWith(path, StringComparison.Ordinal));
 
         public void CreateDirectory(string path)
@@ -183,7 +183,7 @@ namespace AutoRest.Core.Utilities
                     var targetFileName = Path.Combine(targetDirectory, entry.Key);
                     var targetFileDir = Path.GetDirectoryName(targetFileName);
                     fs.CreateDirectory(targetFileDir);
-                    fs.WriteAllText(targetFileName, entry.Value.ToString());
+                    fs.WriteAllText(targetFileName, entry.Value.ToString().Trim());
                 }
             }
         }
