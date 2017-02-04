@@ -42,6 +42,7 @@ namespace AutoRest.Core.Extensibility
             else
             {
                 plugin = LoadTypeFromAssembly<IAnyPlugin>(configuration.Plugins, configuration.CodeGenerator);
+                //if (configuration.CodeGenerator.Contains())
                 Settings.PopulateSettings(plugin.Settings, configuration.CustomSettings);
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,

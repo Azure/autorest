@@ -73,7 +73,10 @@ namespace AutoRest.Core
                         if (configuration.CustomSettings.ContainsKey("ft"))
                             configuration.PayloadFlatteningThreshold = Convert.ToInt32(configuration.CustomSettings["ft"]);
                         if (configuration.CustomSettings.ContainsKey("name"))
+                        {
                             configuration.ClientName = Convert.ToString(configuration.CustomSettings["name"]);
+                            configuration.CustomSettings.Remove("name");
+                        }
                         Settings.PopulateSettings(configuration, configuration.CustomSettings);
                     }
 
