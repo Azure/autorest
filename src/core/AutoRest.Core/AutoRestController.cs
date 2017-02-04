@@ -53,7 +53,7 @@ namespace AutoRest.Core
                     // TODO
                     //Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
 
-                    var serviceDefinition = modeler.Parse(fsInput, configuration.InputFiles, configuration.CodeGenerator.Contains("Azure"));
+                    var serviceDefinition = modeler.Parse(fsInput, configuration.InputFiles, configuration.InlineApiVersion);
 
                     // EXCEPTIONAL REVERSE DATAFLOW: put custom generator settings into configuration
                     if (serviceDefinition.Info.CodeGenerationSettings != null)

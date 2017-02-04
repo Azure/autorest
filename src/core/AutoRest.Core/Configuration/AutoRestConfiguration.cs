@@ -58,6 +58,7 @@ namespace AutoRest.Core.Configuration
         public string PackageVersion { get; set; }
         public string Header { get; internal set; }
         public int PayloadFlatteningThreshold { get; internal set; }
+        public bool InlineApiVersion { get; set; }
 
         public bool Validate()
         {

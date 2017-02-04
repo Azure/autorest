@@ -113,15 +113,6 @@ namespace AutoRest.Core.Extensibility
                                      t.FullName == typeName);
 
                     instance = (T)loadedType.GetConstructor(Type.EmptyTypes).Invoke(null);
-
-                    if (!section[key].Settings.IsNullOrEmpty())
-                    {
-                        throw new NotImplementedException("UNEXPECTED");
-                        foreach (var settingFromFile in section[key].Settings)
-                        {
-                            Settings.Instance.CustomSettings[settingFromFile.Key] = settingFromFile.Value;
-                        }
-                    }
                 }
                 catch (Exception ex)
                 {

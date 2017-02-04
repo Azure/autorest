@@ -484,10 +484,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         public AutoRestConfiguration CreateConfiguration()
         {
-            var inputFiles = new [] { Input };
+            var config = AutoRestConfiguration.Create();
 
+            var inputFiles = new [] { Input };
             if (Modeler == "CompositeSwagger")
             {
+                config.InlineApiVersion = CodeGenerator.Contains("Azure");
                 inputFiles = CompositeServiceDefinition.GetInputFiles(FileSystemInput, Input);
 
                 // Ensure all the docs are absolute URIs or rooted paths
@@ -501,13 +503,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     }
                 }
             }
+            config.InputFiles = inputFiles;
 
-            var config = AutoRestConfiguration.Create();
             config.AddCredentials = AddCredentials;
             config.CodeGenerator = CodeGenerator;
             config.ClientName = ClientName;
             config.DisableSimplifier = DisableSimplifier;
-            config.InputFiles = inputFiles;
             config.ModelsName = ModelsName;
             config.Namespace = Namespace;
             config.OutputFile = OutputFileName;

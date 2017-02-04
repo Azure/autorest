@@ -53,7 +53,7 @@ namespace AutoRest.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        public ServiceDefinition Parse(IFileSystem fs, string[] inputFiles, bool azure = false)
+        public ServiceDefinition Parse(IFileSystem fs, string[] inputFiles, bool inlineApiVersion = false)
         {
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
 
@@ -88,7 +88,7 @@ namespace AutoRest.Swagger
                 info.Remove("description");
                 info.Remove("version");
 
-                if (azure)
+                if (inlineApiVersion)
                 { 
                     // fix up api version
                     var apiVersionParam = (childSwagger.Get(strParameters) as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
@@ -119,7 +119,7 @@ namespace AutoRest.Swagger
                 mergedSwagger = mergedSwagger.MergeWith(childSwagger);
             }
 
-            if (azure)
+            if (inlineApiVersion)
             { 
                 // remove api-version client property
                 var mergedSwaggerApiVersionParam = (mergedSwagger.Get(strParameters) as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
