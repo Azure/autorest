@@ -15,3 +15,4 @@ from .version import VERSION
 __all__ = ['AutoRestParameterizedCustomHostTestClient']
 
 __version__ = VERSION
+

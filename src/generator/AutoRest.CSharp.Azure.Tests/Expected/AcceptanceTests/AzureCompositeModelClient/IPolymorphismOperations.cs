@@ -138,3 +138,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         Task<AzureOperationResponse> PutValidMissingRequiredWithHttpMessagesAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

@@ -63,3 +63,4 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
 
     }
 }
+

@@ -70,3 +70,4 @@ namespace Fixtures.AcceptanceTestsHttp
         Task<HttpOperationResponse<bool?>> GetNoModelEmptyWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

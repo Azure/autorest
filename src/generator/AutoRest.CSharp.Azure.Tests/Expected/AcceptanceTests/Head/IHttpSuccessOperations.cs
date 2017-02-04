@@ -62,3 +62,4 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         Task<AzureOperationResponse<bool>> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

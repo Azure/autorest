@@ -40,3 +40,4 @@ namespace Fixtures.AdditionalProperties.Models
 
     }
 }
+

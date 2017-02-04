@@ -670,3 +670,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 
     }
 }
+

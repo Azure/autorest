@@ -247,3 +247,4 @@ namespace Fixtures.AcceptanceTestsHttp
         Task<HttpOperationHeaderResponse<HttpRedirectsDelete307Headers>> Delete307WithHttpMessagesAsync(bool? booleanValue = default(bool?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

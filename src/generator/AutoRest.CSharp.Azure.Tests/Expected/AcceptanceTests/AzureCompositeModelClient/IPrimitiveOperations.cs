@@ -403,3 +403,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         Task<AzureOperationResponse> PutByteWithHttpMessagesAsync(byte[] field = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

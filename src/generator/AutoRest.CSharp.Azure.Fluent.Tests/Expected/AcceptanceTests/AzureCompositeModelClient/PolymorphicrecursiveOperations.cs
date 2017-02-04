@@ -413,3 +413,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 
     }
 }
+

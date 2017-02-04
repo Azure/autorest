@@ -42,3 +42,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         Task<AzureOperationResponse> GetWithFilterWithHttpMessagesAsync(ODataQuery<OdataFilterInner> odataQuery = default(ODataQuery<OdataFilterInner>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

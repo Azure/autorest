@@ -159,3 +159,4 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         }
     }
 }
+

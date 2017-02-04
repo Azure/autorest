@@ -99,3 +99,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration.Models
 #endif
     }
 }
+

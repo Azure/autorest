@@ -24,3 +24,4 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         ConstantStringAsEnum
     }
 }
+

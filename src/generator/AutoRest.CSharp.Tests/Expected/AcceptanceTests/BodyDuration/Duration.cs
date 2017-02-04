@@ -542,3 +542,4 @@ namespace Fixtures.AcceptanceTestsBodyDuration
 
     }
 }
+

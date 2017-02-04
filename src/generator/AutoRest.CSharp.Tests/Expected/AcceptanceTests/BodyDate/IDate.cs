@@ -148,3 +148,4 @@ namespace Fixtures.AcceptanceTestsBodyDate
         Task<HttpOperationResponse<System.DateTime?>> GetMinDateWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

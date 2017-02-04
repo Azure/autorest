@@ -92,3 +92,4 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
     }
 }
+

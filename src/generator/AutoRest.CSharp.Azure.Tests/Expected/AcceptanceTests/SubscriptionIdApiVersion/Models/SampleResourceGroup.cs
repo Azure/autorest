@@ -45,3 +45,4 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 
     }
 }
+

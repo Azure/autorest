@@ -85,3 +85,4 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         Task<HttpOperationResponse<System.TimeSpan?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

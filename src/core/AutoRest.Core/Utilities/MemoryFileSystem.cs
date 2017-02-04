@@ -183,7 +183,7 @@ namespace AutoRest.Core.Utilities
                     var targetFileName = Path.Combine(targetDirectory, entry.Key);
                     var targetFileDir = Path.GetDirectoryName(targetFileName);
                     fs.CreateDirectory(targetFileDir);
-                    fs.WriteAllText(targetFileName, entry.Value.ToString().Trim());
+                    fs.WriteAllText(targetFileName, entry.Value.ToString());
                 }
             }
         }

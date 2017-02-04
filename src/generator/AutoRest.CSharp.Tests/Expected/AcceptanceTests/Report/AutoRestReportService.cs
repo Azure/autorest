@@ -275,3 +275,4 @@ namespace Fixtures.AcceptanceTestsReport
 
     }
 }
+

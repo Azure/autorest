@@ -71,3 +71,4 @@ namespace Fixtures.AcceptanceTestsBodyFile
         Task<HttpOperationResponse<Stream>> GetEmptyFileWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

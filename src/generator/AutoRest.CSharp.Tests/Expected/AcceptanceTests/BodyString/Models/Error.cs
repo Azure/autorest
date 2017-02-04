@@ -40,3 +40,4 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
 
     }
 }
+

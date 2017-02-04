@@ -96,3 +96,4 @@ type User struct {
     Phone *string `json:"phone,omitempty"`
     UserStatus *int32 `json:"userStatus,omitempty"`
 }
+

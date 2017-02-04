@@ -36,3 +36,4 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
+

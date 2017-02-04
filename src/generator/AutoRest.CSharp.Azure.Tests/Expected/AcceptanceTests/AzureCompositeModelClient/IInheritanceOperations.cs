@@ -61,3 +61,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(Siamese complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

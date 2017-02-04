@@ -1,3 +1,4 @@
+
 namespace Petstore.Models
 {
     using Microsoft.Rest;
@@ -75,3 +76,4 @@ namespace Petstore.Models
         }
     }
 }
+

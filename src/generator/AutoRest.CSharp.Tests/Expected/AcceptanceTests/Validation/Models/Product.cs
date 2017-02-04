@@ -150,3 +150,4 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         }
     }
 }
+

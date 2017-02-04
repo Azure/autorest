@@ -48,3 +48,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         }
     }
 }
+

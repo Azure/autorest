@@ -46,3 +46,4 @@ namespace Fixtures.AcceptanceTestsValidation.Models
 
     }
 }
+

@@ -40,3 +40,4 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 
     }
 }
+
