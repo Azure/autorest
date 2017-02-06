@@ -38,7 +38,8 @@ module.exports =
     if name of gulp.tasks
       prev = gulp.tasks[name]
       while prev.name of gulp.tasks
-        prev.name = 'before:(' + prev.name + ')'
+        prev.name = "before #{name} - #{prev.description}"
+        prev.description = ''
       deps.unshift prev.name
       gulp.tasks[prev.name] = prev
     

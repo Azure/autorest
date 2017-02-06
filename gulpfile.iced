@@ -35,9 +35,9 @@ Import
       .pipe where (each) ->                         # take only files that are the same name as a folder they are in. (so, no deps.)
         return true for folder in split each.path when folder is basename each.path 
 
-task 'go', 'mytask', -> 
-  await exec 'dotnet build src/core/AutoRest/AutoRest.csproj',  defer code,stdout,stderr
-  exec 'dotnet build src/dev/AutoRest.Preview/AutoRest.Preview.csproj'
 
 task 'clean','Cleans the the solution', ['clean-packages'], -> 
   exec "git checkout #{basefolder}/packages"  
+
+task 'autorest', 'Runs AutoRest', -> 
+  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{process.argv.slice(3).join(' ')}"
