@@ -5,8 +5,7 @@
     <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir>
   </PropertyGroup>
 
-  <Target Name="CleanTemplatesOutputAndIntermediate" AfterTargets="Clean" >
-    <ItemGroup><GeneratedFiles Include="$(MSBuildProjectDirectory)\Templates\**\*.cs" /></ItemGroup>
+  <Target Name="Nuke" >
     <RemoveDir Directories="$(BaseOutputPath)" />
     <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
     <Delete Files="@(GeneratedFiles)" />

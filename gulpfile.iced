@@ -2,31 +2,37 @@
 global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
-require './local_modules/gulp.iced'
+require './src/local_modules/gulp.iced'
 
 # globals
 global.solution = "#{basefolder}/AutoRest.sln"
 global.packages = "#{basefolder}/packages"
 
+# tasks required for this build 
+Tasks "dotnet"
+
 # projects that we want to include
-global.projects = ->
-  source 'src/**/*.csproj'
+Import
+  # which projects to care about
+  projects:() ->
+    source 'src/**/*.csproj'
 
-global.pkgs = ->
-  source 'src/**/*.csproj'
-    .pipe except /tests/ig
+  # which projects to package
+  pkgs:() ->
+    source 'src/**/*.csproj'
+      .pipe except /tests/ig
 
-# test projects 
-global.tests = ->
-  source 'src/**/*[Tt]ests.csproj'
-    .pipe except /AutoRest.Tests/ig #not used yet.
-    .pipe except /AutoRest.AzureResourceSchema.Tests/ig
-    .pipe except /AutoRest.Swagger.Tests/ig
+  # test projects 
+  tests:() ->
+    source 'src/**/*[Tt]ests.csproj'
+      .pipe except /AutoRest.Tests/ig #not used yet.
+      .pipe except /AutoRest.AzureResourceSchema.Tests/ig
+      .pipe except /AutoRest.Swagger.Tests/ig
     
-# assemblies that we sign
-global.assemblies = -> 
-  source "src/**/bin/#{configuration}/**/*.dll"   # the dlls in the ouptut folders
-    .pipe except /tests/ig        # except of course, test dlls
-    .pipe where (each) ->                         # take only files that are the same name as a folder they are in. (so, no deps.)
-      return true for folder in split each.path when folder is basename each.path 
+  # assemblies that we sign
+  assemblies: () -> 
+    source "src/**/bin/#{configuration}/**/*.dll"   # the dlls in the ouptut folders
+      .pipe except /tests/ig        # except of course, test dlls
+      .pipe where (each) ->                         # take only files that are the same name as a folder they are in. (so, no deps.)
+        return true for folder in split each.path when folder is basename each.path 
 
