@@ -32,7 +32,7 @@ namespace AutoRest
 
                     if (Settings.IsLegacyCommand(args))
                     {
-                        Logger.Instance.Log(Category.Warning, "Detected legacy command line arguments.");
+                        // Logger.Instance.Log(Category.Warning, "Detected legacy command line arguments."); // TODO: let's go stealth for now
                         configuration = LegacyCLI.Process(args);
                         if (configuration == null)
                         {
@@ -55,31 +55,44 @@ namespace AutoRest
                             commandLineArgs = new CommandLineArguments {Help = true};
                         }
 
-                        // if no help was requested, assume default config file
+                        // if no help was requested, try default config file
                         if (commandLineArgs.ConfigurationFilePath == null && !commandLineArgs.Help)
                         {
-                            Logger.Instance.Log(Category.Info, $"No configuration file specified. Assuming default configuration file '{DefaultConfigurationFileName}'.");
-                            commandLineArgs.ConfigurationFilePath = DefaultConfigurationFileName;
+                            Logger.Instance.Log(Category.Info, $"No configuration file specified.");
+                            if (File.Exists(DefaultConfigurationFileName))
+                            {
+                                Logger.Instance.Log(Category.Warning, $"Using default configuration file '{DefaultConfigurationFileName}'.");
+                                commandLineArgs.ConfigurationFilePath = DefaultConfigurationFileName;
+                            }
+                            else
+                            {
+                                commandLineArgs = new CommandLineArguments { Help = true };
+                            }
                         }
 
                         // try load config file, otherwise show help
-                        if (!File.Exists(commandLineArgs.ConfigurationFilePath))
+                        if (commandLineArgs.ConfigurationFilePath != null && !File.Exists(commandLineArgs.ConfigurationFilePath))
                         {
                             Logger.Instance.Log(Category.Warning, $"Configuration file {commandLineArgs.ConfigurationFilePath} not found.");
                             commandLineArgs = new CommandLineArguments {Help = true};
                         }
 
-                        // show generic help if requested
-                        if (commandLineArgs.ConfigurationFilePath == null && commandLineArgs.Help)
-                        {
-                            ShowUsage();
-                            return (int) ExitCode.Success;
-                        }
+                        string configurationFile = commandLineArgs.ConfigurationFilePath != null
+                            ? new WebClient().DownloadString(commandLineArgs.ConfigurationFilePath)
+                            : null;
 
-                        var configurationFile = new WebClient().DownloadString(commandLineArgs.ConfigurationFilePath);
+                        // show help if requested
                         if (commandLineArgs.Help)
                         {
-                            throw new NotImplementedException("no config specific help yet"); // TODO
+                            if (configurationFile == null)
+                            {
+                                ShowUsage();
+                                return (int)ExitCode.Success;
+                            }
+                            else
+                            {
+                                throw new NotImplementedException("no config specific help yet"); // TODO
+                            }
                         }
 
                         configuration = AutoRestConfigurationParser.Parse(configurationFile, commandLineArgs.Settings);
@@ -111,7 +124,9 @@ namespace AutoRest
 
         private static void ShowUsage()
         {
-            // TODO
+            Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, new Settings()));
+            return;
+            // TODO: abandon old help and show new
             Console.WriteLine("AutoRest.exe [help] [<configuration file>.md] [--<key>=<value> ...]");
             Console.WriteLine($"will assume {DefaultConfigurationFileName} as configuration file if none is specified");
         }
