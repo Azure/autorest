@@ -4,15 +4,14 @@ global.basefolder = "#{__dirname}"
 # use our tweaked version of gulp with iced coffee.
 require './src/local_modules/gulp.iced'
 
-# globals
-global.solution = "#{basefolder}/AutoRest.sln"
-global.packages = "#{basefolder}/packages"
-
 # tasks required for this build 
 Tasks "dotnet"
 
-# projects that we want to include
+# Settings
 Import
+  solution: "#{basefolder}/AutoRest.sln"
+  packages: "#{basefolder}/packages"
+
   # which projects to care about
   projects:() ->
     source 'src/**/*.csproj'
@@ -36,3 +35,9 @@ Import
       .pipe where (each) ->                         # take only files that are the same name as a folder they are in. (so, no deps.)
         return true for folder in split each.path when folder is basename each.path 
 
+task 'go', 'mytask', -> 
+  await exec 'dotnet build src/core/AutoRest/AutoRest.csproj',  defer code,stdout,stderr
+  exec 'dotnet build src/dev/AutoRest.Preview/AutoRest.Preview.csproj'
+
+task 'clean','Cleans the the solution', ['clean-packages'], -> 
+  exec "git checkout #{basefolder}/packages"  
