@@ -82,6 +82,7 @@ namespace AutoRest.Go
                                                             "ManagementClient",
                                                             "NewWithBaseURI",
                                                             "New",
+                                                            "NewWithoutDefaults",
                                                         };
 
         public IReadOnlyDictionary<HttpStatusCode, string> StatusCodeToGoString;

@@ -28,46 +28,87 @@ import (
 const (
     // APIVersion is the version of the @(Model.ServiceName)
     APIVersion = "@Model.ApiVersion"
-    @EmptyLine
-    // DefaultBaseURI is the default URI used for the service @(Model.ServiceName)
-    DefaultBaseURI = "@Model.BaseUrl"
+    @if (!Model.IsCustomBaseUri)
+    {
+        @EmptyLine
+        @:// DefaultBaseURI is the default URI used for the service @(Model.ServiceName)
+        @:DefaultBaseURI = "@Model.BaseUrl"
+    }
+    else
+    {
+        @(Model.ConstGlobalDefaultParameters)
+    }
 )
 
 @EmptyLine
 @WrapComment("// ", Model.ClientDocumentation)
 type @(Model.BaseClient) struct {
     autorest.Client
-    BaseURI string
+    @if (!Model.IsCustomBaseUri)
+    {
+        @:BaseURI string
+    }    
     APIVersion string
     @foreach (var p in Model.Properties)
     {
-    if (!p.SerializedName.FixedValue.IsApiVersion())
-    {
+        if (!p.SerializedName.FixedValue.IsApiVersion())
+        {
     @:@(string.Format((p.IsRequired || p.ModelType.CanBeEmpty()
-                                    ? "{0} {1}": "{0} *{1}"),
-                                    p.Name, p.ModelType.Name))
-    }
+                                                  ? "{0} {1}" : "{0} *{1}"),
+                                                  p.Name, p.ModelType.Name))
     }
 }
+}
+
 
 @EmptyLine
 @WrapComment("// ", string.Format("New creates an instance of the {0} client.", Model.BaseClient))
 func New(@(Model.GlobalParameters))@(Model.BaseClient) {
-    return NewWithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+    @if (!Model.IsCustomBaseUri)
+    {
+        @:return NewWithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+    }
+    else
+    {
+        @:return NewWithoutDefaults(@(Model.HelperGlobalDefaultParameters))
+    }
 }
 
+@if (!Model.IsCustomBaseUri)
+{
+    @EmptyLine
+    @WrapComment("// ", string.Format("NewWithBaseURI creates an instance of the {0} client.", Model.BaseClient))
+    @:func NewWithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.BaseClient) {
+        @:return @(Model.BaseClient){
+            @:Client: autorest.NewClientWithUserAgent(UserAgent()),
+            @:BaseURI: baseURI,
+            @:APIVersion: APIVersion,
+            @foreach (var p in Model.Properties)
+            {
+                if (!p.SerializedName.Value.IsApiVersion())
+                {
+            @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
+            }
+        }
+}
+else
+{
 @EmptyLine
-@WrapComment("// ", string.Format("NewWithBaseURI creates an instance of the {0} client.", Model.BaseClient))
-func NewWithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.BaseClient) {
-   return @(Model.BaseClient){
-        Client: autorest.NewClientWithUserAgent(UserAgent()),
-        BaseURI: baseURI,
-        APIVersion: APIVersion,
-        @foreach (var p in Model.Properties)
+@WrapComment("// ", string.Format("NewWithoutDefaults lots of tantrums creates an instance of the {0} client.", Model.BaseClient))
+@EmptyLine
+@:func NewWithoutDefaults(@(Model.GlobalDefaultParameters)) @(Model.BaseClient) {
+    @:return @(Model.BaseClient){
+        @:Client: autorest.NewClientWithUserAgent(UserAgent()),
+        @:APIVersion: APIVersion,
+        @foreach(var p in Model.Properties)
         {
         if (!p.SerializedName.Value.IsApiVersion())
         {
+        if (p.DefaultValue.FixedValue.IsNullOrEmpty())
+        {
         @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
+        }
+        }
         }
         }
     }

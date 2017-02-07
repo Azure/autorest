@@ -34,15 +34,24 @@ type @(Model.ClientName) struct {
 
 @WrapComment("// ", string.Format("New{0} creates an instance of the {0} client.", Model.ClientName))
 func New@(Model.ClientName)(@(Model.GlobalParameters)) @(Model.ClientName) {
-    return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
-}
+    @if (!Model.IsCustomBaseUri)
+    {
+        @:return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+    }
+    else
+    {
+        @:return @(Model.ClientName){ New(@(Model.HelperGlobalParameters))}
+    }
 @EmptyLine
 
-@WrapComment("// ", string.Format("New{0}WithBaseURI creates an instance of the {0} client.", Model.ClientName))
-func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
-    return @(Model.ClientName){NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
+@if (!Model.IsCustomBaseUri)
+{
+    @WrapComment("// ", string.Format("New{0}WithBaseURI creates an instance of the {0} client.", Model.ClientName))
+    @:func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
+        @:return @(Model.ClientName){ NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
+    }
+    @EmptyLine
 }
-@EmptyLine
 
 @foreach (var method in methods)
 {
