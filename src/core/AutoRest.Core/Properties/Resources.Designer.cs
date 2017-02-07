@@ -60,6 +60,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: &quot;{0}&quot;..
+        /// </summary>
+        public static string AllowedTopLevelProperties {
+            get {
+                return ResourceManager.GetString("AllowedTopLevelProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to For better generated code quality, define schemas instead of using anonymous types..
         /// </summary>
         public static string AnonymousTypesDiscouraged {
