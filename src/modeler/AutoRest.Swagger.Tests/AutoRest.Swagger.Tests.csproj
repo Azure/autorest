@@ -11,7 +11,7 @@
   </PropertyGroup>
  
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
-    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
+    <ProjectReference Include="../../../src/core/AutoRest.Core/AutoRest.Core.csproj" />
+    <ProjectReference Include="../../../src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
   </ItemGroup>
 </Project>

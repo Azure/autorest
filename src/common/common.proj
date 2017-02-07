@@ -2,7 +2,9 @@
   <PropertyGroup Condition="$(Common) == '*Undefined*' OR $(Common) == '' " >
     <VersionPrefix>1.0.1</VersionPrefix>
     <Common>$(MsBuildThisFileDirectory)</Common>
-    <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir>
+    <GenerateFullPaths>true</GenerateFullPaths>
+    <!-- <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir> -->
+    <SolutionDir>$(Common)../../</SolutionDir>
   </PropertyGroup>
 
   <Target Name="Nuke" >
