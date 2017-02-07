@@ -173,3 +173,4 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         }
     }
 }
+

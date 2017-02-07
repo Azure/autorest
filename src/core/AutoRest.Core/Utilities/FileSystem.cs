@@ -25,10 +25,13 @@ namespace AutoRest.Core.Utilities
             // write out the file, with correct line endings for file.
             using (var writer = GetTextWriter(path))
             {
-                foreach (var line in lines)
+                for (var i = 0; i < lines.Length; ++i)
                 {
-                    writer.Write(line);
-                    writer.Write(eol);
+                    if (i != 0)
+                    {
+                        writer.Write(eol);
+                    }
+                    writer.Write(lines[i]);
                 }
             }
         }

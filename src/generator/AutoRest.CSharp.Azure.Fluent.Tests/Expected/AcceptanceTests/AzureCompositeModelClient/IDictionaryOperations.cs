@@ -118,3 +118,4 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         Task<AzureOperationResponse<DictionaryWrapperInner>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

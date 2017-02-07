@@ -156,3 +156,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

@@ -396,3 +396,4 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         Task<HttpOperationResponse<decimal?>> GetSmallDecimalWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

@@ -44,3 +44,4 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     }
 }
+

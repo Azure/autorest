@@ -15,3 +15,4 @@ from .version import VERSION
 __all__ = ['AutoRestPagingTestService']
 
 __version__ = VERSION
+

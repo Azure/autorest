@@ -118,3 +118,4 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
 
     }
 }
+

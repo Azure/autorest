@@ -57,3 +57,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         }
     }
 }
+

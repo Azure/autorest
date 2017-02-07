@@ -532,3 +532,4 @@ namespace Fixtures.AcceptanceTestsHttp
         Task<HttpOperationResponse<A>> Get200ModelA202ValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

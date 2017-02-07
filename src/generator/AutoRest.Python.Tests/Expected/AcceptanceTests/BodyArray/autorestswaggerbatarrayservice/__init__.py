@@ -15,3 +15,4 @@ from .version import VERSION
 __all__ = ['AutoRestSwaggerBATArrayService']
 
 __version__ = VERSION
+

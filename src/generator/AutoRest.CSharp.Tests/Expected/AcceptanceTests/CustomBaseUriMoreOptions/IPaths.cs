@@ -50,3 +50,4 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         Task<HttpOperationResponse> GetEmptyWithHttpMessagesAsync(string vault, string secret, string keyName, string keyVersion = "v1", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

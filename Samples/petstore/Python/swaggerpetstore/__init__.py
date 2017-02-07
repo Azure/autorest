@@ -8,3 +8,4 @@ from .version import VERSION
 __all__ = ['SwaggerPetstore']
 
 __version__ = VERSION
+

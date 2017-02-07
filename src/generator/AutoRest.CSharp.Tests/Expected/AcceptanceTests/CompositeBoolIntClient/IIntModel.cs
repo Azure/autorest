@@ -241,3 +241,4 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         Task<HttpOperationResponse<System.DateTime?>> GetNullUnixTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

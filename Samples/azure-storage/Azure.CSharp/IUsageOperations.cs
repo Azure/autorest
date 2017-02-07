@@ -1,3 +1,4 @@
+
 namespace Petstore
 {
     using Microsoft.Rest;
@@ -35,3 +36,4 @@ namespace Petstore
         Task<AzureOperationResponse<IEnumerable<Usage>>> ListWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

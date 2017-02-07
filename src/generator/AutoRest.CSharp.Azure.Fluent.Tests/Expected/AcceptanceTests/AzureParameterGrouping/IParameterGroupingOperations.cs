@@ -94,3 +94,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         Task<AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

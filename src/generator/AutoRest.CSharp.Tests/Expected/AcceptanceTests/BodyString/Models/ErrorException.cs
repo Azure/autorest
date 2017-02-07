@@ -98,3 +98,4 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
 #endif
     }
 }
+

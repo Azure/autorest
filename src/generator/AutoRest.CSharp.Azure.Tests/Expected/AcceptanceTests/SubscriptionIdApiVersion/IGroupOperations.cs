@@ -47,3 +47,4 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         Task<AzureOperationResponse<SampleResourceGroup>> GetSampleResourceGroupWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

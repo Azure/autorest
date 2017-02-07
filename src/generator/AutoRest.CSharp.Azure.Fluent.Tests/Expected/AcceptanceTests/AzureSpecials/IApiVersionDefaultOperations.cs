@@ -88,3 +88,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         Task<AzureOperationResponse> GetSwaggerGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

@@ -98,3 +98,4 @@ namespace Fixtures.AcceptanceTestsBodyDateTime.Models
 #endif
     }
 }
+

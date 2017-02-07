@@ -110,3 +110,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         Task<AzureOperationResponse> PostSwaggerGlobalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

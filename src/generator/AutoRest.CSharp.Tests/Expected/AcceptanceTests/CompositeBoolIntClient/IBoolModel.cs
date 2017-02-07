@@ -116,3 +116,4 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
         Task<HttpOperationResponse<bool?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

@@ -45,3 +45,4 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
 
     }
 }
+

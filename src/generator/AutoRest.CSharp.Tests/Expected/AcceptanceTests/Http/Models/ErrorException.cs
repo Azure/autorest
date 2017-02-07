@@ -98,3 +98,4 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 #endif
     }
 }
+

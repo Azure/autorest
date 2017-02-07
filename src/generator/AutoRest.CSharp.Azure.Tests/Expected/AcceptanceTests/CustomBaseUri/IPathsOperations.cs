@@ -43,3 +43,4 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

@@ -38,3 +38,4 @@ namespace Fixtures.AdditionalProperties
         Task<HttpOperationResponse> PetsWithHttpMessagesAsync(Pet pet, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
+

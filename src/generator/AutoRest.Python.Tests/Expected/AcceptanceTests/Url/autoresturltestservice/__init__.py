@@ -15,3 +15,4 @@ from .version import VERSION
 __all__ = ['AutoRestUrlTestService']
 
 __version__ = VERSION
+

@@ -652,3 +652,4 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
 
     }
 }
+

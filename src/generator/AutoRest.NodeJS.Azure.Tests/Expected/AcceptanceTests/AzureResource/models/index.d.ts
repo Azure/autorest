@@ -90,3 +90,4 @@ export interface ResourceCollection {
   arrayofresources?: FlattenedProduct[];
   dictionaryofresources?: { [propertyName: string]: FlattenedProduct };
 }
+

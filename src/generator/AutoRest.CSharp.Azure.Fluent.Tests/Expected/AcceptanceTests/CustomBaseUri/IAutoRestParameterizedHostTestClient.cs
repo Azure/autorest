@@ -69,3 +69,4 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
 
     }
 }
+
