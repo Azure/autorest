@@ -54,14 +54,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 // try to load the assembly
                 var asm = Assembly.Load(result.Output.GetBuffer());
                 Assert.NotNull(asm);
-                var petModel = asm.ExportedTypes.First((type) =>
-                {
-                    return type.FullName == "Test.Models.Pet";
-                });
-                var idMember = petModel.GetMembers().First((member) =>
-                {
-                    return member.Name == "_id";
-                });
+                var petModel = asm.ExportedTypes.First(type => type.FullName == "Test.Models.Pet" );
+                var idMember = petModel.GetMembers().First(member => member.Name == "_id" );
                 Assert.NotNull(idMember);
 
                 // now read from the file to ensure we use this. to access the members
