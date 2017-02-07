@@ -37,11 +37,13 @@ module.exports =
     # chain the task if it's a repeat
     if name of gulp.tasks
       prev = gulp.tasks[name]
-      while prev.name of gulp.tasks
-        prev.name = "before #{name} - #{prev.description}"
-        prev.description = ''
-      deps.unshift prev.name
-      gulp.tasks[prev.name] = prev
+
+      # reset the name of this task to be a 'child'' task
+      name = "#{name}/#{description}"
+      description = ''
+
+      # add this task as a dependency of the original task.
+      prev.dep.unshift name
     
     # add the new task.
     gulp.task name, deps, fn
@@ -114,3 +116,7 @@ module.exports =
   guid: ->
     x = -> Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
     "#{x()}#{x()}-#{x()}-#{x()}-#{x()}-#{x()}#{x()}#{x()}"
+
+# build task for tsc 
+module.exports.task 'build', 'builds project', -> 
+  echo "Building project in #{basefolder}"

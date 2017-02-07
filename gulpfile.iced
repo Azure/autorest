@@ -5,7 +5,8 @@ global.basefolder = "#{__dirname}"
 require './src/local_modules/gulp.iced'
 
 # tasks required for this build 
-Tasks "dotnet"
+Tasks "dotnet", 
+  "Typescript"
 
 # Settings
 Import
@@ -43,3 +44,7 @@ task 'autorest', 'Runs AutoRest', ->
   # Run AutoRest from the original current directory.
   cd process.env.INIT_CWD
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{process.argv.slice(3).join(' ')}"
+
+task 'autorest-ng', "Runs AutoRest (via node)", ->
+  cd process.env.INIT_CWD
+  exec "node #{basefolder}/src/AutoRest/autorest.js #{process.argv.slice(3).join(' ')}"
