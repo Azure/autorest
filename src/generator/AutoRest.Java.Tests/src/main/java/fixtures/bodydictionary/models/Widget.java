@@ -19,6 +19,7 @@ public class Widget {
     /**
      * The integer property.
      */
+    @JsonProperty(value = "integer")
     private Integer integer;
 
     /**

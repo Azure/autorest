@@ -30,12 +30,13 @@ public class Shark extends Fish {
     /**
      * The age property.
      */
+    @JsonProperty(value = "age")
     private Integer age;
 
     /**
      * The birthday property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "birthday", required = true)
     private DateTime birthday;
 
     /**

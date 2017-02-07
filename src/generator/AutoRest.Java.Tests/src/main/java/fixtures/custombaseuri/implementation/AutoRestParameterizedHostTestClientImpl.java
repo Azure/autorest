@@ -13,13 +13,14 @@ package fixtures.custombaseuri.implementation;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.Paths;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
  */
-public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient implements AutoRestParameterizedHostTestClient {
+public class AutoRestParameterizedHostTestClientImpl extends ServiceClient implements AutoRestParameterizedHostTestClient {
 
     /** A string value that is used as a global part of the parameterized host. */
     private String host;
@@ -94,6 +95,16 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      */
     private AutoRestParameterizedHostTestClientImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterizedHostTestClient client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestParameterizedHostTestClientImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

@@ -14,13 +14,14 @@ import fixtures.bodystring.AutoRestSwaggerBATService;
 import fixtures.bodystring.Strings;
 import fixtures.bodystring.Enums;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATService class.
  */
-public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
+public class AutoRestSwaggerBATServiceImpl extends ServiceClient implements AutoRestSwaggerBATService {
 
     /**
      * The Strings object to access its operations.
@@ -85,6 +86,16 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
      */
     public AutoRestSwaggerBATServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestSwaggerBATService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestSwaggerBATServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

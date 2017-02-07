@@ -19,7 +19,7 @@ public class StringWrapper {
     /**
      * The value property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "value", required = true)
     private String value;
 
     /**

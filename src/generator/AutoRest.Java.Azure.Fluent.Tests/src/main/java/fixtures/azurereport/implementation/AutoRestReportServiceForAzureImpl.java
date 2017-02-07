@@ -13,9 +13,8 @@ package fixtures.azurereport.implementation;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.AzureServiceResponseBuilder;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -33,7 +32,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzureImpl class.
  */
-public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
+public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     /** The Retrofit service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
     /** the {@link AzureClient} used for long running operations. */
@@ -132,10 +131,8 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param credentials the management credentials for Azure
      */
     public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**
@@ -177,7 +174,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceForAzureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurereport.AutoRestReportServiceForAzure getReport" })
         @GET("report/azure")
         Observable<Response<ResponseBody>> getReport(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -189,7 +186,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
-        return getReportWithServiceResponseAsync().toBlocking().single().getBody();
+        return getReportWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -199,7 +196,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getReportWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -211,7 +208,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         return getReportWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -237,7 +234,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

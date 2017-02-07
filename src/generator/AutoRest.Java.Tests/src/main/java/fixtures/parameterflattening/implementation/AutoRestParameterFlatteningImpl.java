@@ -13,13 +13,14 @@ package fixtures.parameterflattening.implementation;
 import fixtures.parameterflattening.AutoRestParameterFlattening;
 import fixtures.parameterflattening.AvailabilitySets;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestParameterFlattening class.
  */
-public final class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
+public class AutoRestParameterFlatteningImpl extends ServiceClient implements AutoRestParameterFlattening {
 
     /**
      * The AvailabilitySets object to access its operations.
@@ -71,6 +72,16 @@ public final class AutoRestParameterFlatteningImpl extends ServiceClient impleme
      */
     public AutoRestParameterFlatteningImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestParameterFlattening client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestParameterFlatteningImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

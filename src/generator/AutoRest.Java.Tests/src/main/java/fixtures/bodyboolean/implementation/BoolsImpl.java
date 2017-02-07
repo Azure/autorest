@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Bools.
  */
-public final class BoolsImpl implements Bools {
+public class BoolsImpl implements Bools {
     /** The Retrofit service to perform REST calls. */
     private BoolsService service;
     /** The service client containing this operation class. */
@@ -54,27 +53,27 @@ public final class BoolsImpl implements Bools {
      * used by Retrofit to perform actually REST calls.
      */
     interface BoolsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getTrue" })
         @GET("bool/true")
         Observable<Response<ResponseBody>> getTrue();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putTrue" })
         @PUT("bool/true")
         Observable<Response<ResponseBody>> putTrue(@Body boolean boolBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getFalse" })
         @GET("bool/false")
         Observable<Response<ResponseBody>> getFalse();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools putFalse" })
         @PUT("bool/false")
         Observable<Response<ResponseBody>> putFalse(@Body boolean boolBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getNull" })
         @GET("bool/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyboolean.Bools getInvalid" })
         @GET("bool/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
@@ -86,7 +85,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getTrue() {
-        return getTrueWithServiceResponseAsync().toBlocking().single().getBody();
+        return getTrueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -96,7 +95,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -108,7 +107,7 @@ public final class BoolsImpl implements Bools {
         return getTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -134,7 +133,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -146,7 +145,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      */
     public void putTrue(boolean boolBody) {
-        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
+        putTrueWithServiceResponseAsync(boolBody).toBlocking().single().body();
     }
 
     /**
@@ -157,7 +156,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
+        return ServiceCall.fromResponse(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -170,7 +169,7 @@ public final class BoolsImpl implements Bools {
         return putTrueWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -197,7 +196,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -209,7 +208,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getFalse() {
-        return getFalseWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFalseWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -219,7 +218,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -231,7 +230,7 @@ public final class BoolsImpl implements Bools {
         return getFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -257,7 +256,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -269,7 +268,7 @@ public final class BoolsImpl implements Bools {
      * @param boolBody the boolean value
      */
     public void putFalse(boolean boolBody) {
-        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().getBody();
+        putFalseWithServiceResponseAsync(boolBody).toBlocking().single().body();
     }
 
     /**
@@ -280,7 +279,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
+        return ServiceCall.fromResponse(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -293,7 +292,7 @@ public final class BoolsImpl implements Bools {
         return putFalseWithServiceResponseAsync(boolBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -320,7 +319,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -332,7 +331,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -342,7 +341,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -354,7 +353,7 @@ public final class BoolsImpl implements Bools {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -380,7 +379,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -392,7 +391,7 @@ public final class BoolsImpl implements Bools {
      * @return the boolean object if successful.
      */
     public boolean getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -402,7 +401,7 @@ public final class BoolsImpl implements Bools {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -414,7 +413,7 @@ public final class BoolsImpl implements Bools {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -440,7 +439,7 @@ public final class BoolsImpl implements Bools {
     }
 
     private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

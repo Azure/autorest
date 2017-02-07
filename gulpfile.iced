@@ -336,7 +336,7 @@ task 'regenerate-ruby', "regenerate expected swaggers for Ruby", ->
   }
 
 task 'regenerate-javaazure', "regenerate expected swaggers for Java Azure", ->
-  mappings = {};
+  mappings = {}
   for key of defaultAzureMappings
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
   regenExpected {
@@ -349,7 +349,7 @@ task 'regenerate-javaazure', "regenerate expected swaggers for Java Azure", ->
   }
 
 task 'regenerate-javaazurefluent', "regenerate expected swaggers for Java Azure Fluent", ->
-  mappings = {};
+  mappings = {}
   for key of defaultAzureMappings
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
   regenExpected {
@@ -362,7 +362,7 @@ task 'regenerate-javaazurefluent', "regenerate expected swaggers for Java Azure 
   }
 
 task 'regenerate-java', "regenerate expected swaggers for Java", ->
-  mappings = {};
+  mappings = {}
   for key of defaultMappings
     mappings[key.substring(16).toLowerCase()] = defaultMappings[key]
   regenExpected {
@@ -578,7 +578,7 @@ task 'regenerate-samples', "regenerate samples", ['regenerate-samples:azure'], -
   autorestConfigPath = "#{basefolder}/AutoRest.json"
   content = fs.readFileSync(autorestConfigPath).toString()
   if (content.charCodeAt(0) == 0xFEFF)
-    content = content.slice(1);
+    content = content.slice(1)
   autorestConfig = JSON.parse(content)
   for lang of autorestConfig.plugins
     if (!lang.match(/^Azure\..+/))
@@ -598,7 +598,7 @@ task 'regenerate-samples:azure', "regenerate Azure samples", ->
   autorestConfigPath = "#{basefolder}/AutoRest.json"
   content = fs.readFileSync(autorestConfigPath).toString()
   if (content.charCodeAt(0) == 0xFEFF)
-    content = content.slice(1);
+    content = content.slice(1)
   autorestConfig = JSON.parse(content)
   for lang of autorestConfig.plugins
     if (!lang.match(/^Azure\..+/))

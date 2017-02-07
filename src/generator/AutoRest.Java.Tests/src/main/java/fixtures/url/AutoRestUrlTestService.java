@@ -10,11 +10,19 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestUrlTestService class.
  */
 public interface AutoRestUrlTestService {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

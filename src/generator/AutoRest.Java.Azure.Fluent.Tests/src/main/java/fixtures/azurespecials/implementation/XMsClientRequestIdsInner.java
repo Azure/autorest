@@ -12,7 +12,6 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -31,7 +30,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in XMsClientRequestIds.
  */
-public final class XMsClientRequestIdsInner {
+public class XMsClientRequestIdsInner {
     /** The Retrofit service to perform REST calls. */
     private XMsClientRequestIdsService service;
     /** The service client containing this operation class. */
@@ -53,11 +52,11 @@ public final class XMsClientRequestIdsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface XMsClientRequestIdsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds get" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         Observable<Response<ResponseBody>> get(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.XMsClientRequestIds paramGet" })
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         Observable<Response<ResponseBody>> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -68,7 +67,7 @@ public final class XMsClientRequestIdsInner {
      *
      */
     public void get() {
-        getWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -78,7 +77,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -90,7 +89,7 @@ public final class XMsClientRequestIdsInner {
         return getWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -116,7 +115,7 @@ public final class XMsClientRequestIdsInner {
     }
 
     private ServiceResponse<Void> getDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -127,7 +126,7 @@ public final class XMsClientRequestIdsInner {
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      */
     public void paramGet(String xMsClientRequestId) {
-        paramGetWithServiceResponseAsync(xMsClientRequestId).toBlocking().single().getBody();
+        paramGetWithServiceResponseAsync(xMsClientRequestId).toBlocking().single().body();
     }
 
     /**
@@ -138,7 +137,7 @@ public final class XMsClientRequestIdsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
+        return ServiceCall.fromResponse(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
     }
 
     /**
@@ -151,7 +150,7 @@ public final class XMsClientRequestIdsInner {
         return paramGetWithServiceResponseAsync(xMsClientRequestId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -181,7 +180,7 @@ public final class XMsClientRequestIdsInner {
     }
 
     private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

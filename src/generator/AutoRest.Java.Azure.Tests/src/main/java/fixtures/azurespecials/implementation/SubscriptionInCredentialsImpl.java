@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.SubscriptionInCredentials;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -33,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInCredentials.
  */
-public final class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
+public class SubscriptionInCredentialsImpl implements SubscriptionInCredentials {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInCredentialsService service;
     /** The service client containing this operation class. */
@@ -55,23 +54,23 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * used by Retrofit to perform actually REST calls.
      */
     interface SubscriptionInCredentialsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postMethodGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/global/null/{subscriptionId}")
         Observable<Response<ResponseBody>> postMethodGlobalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postMethodGlobalNotProvidedValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/globalNotProvided/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postMethodGlobalNotProvidedValid(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postPathGlobalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postPathGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInCredentials postSwaggerGlobalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postSwaggerGlobalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -82,7 +81,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postMethodGlobalValid() {
-        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -92,7 +91,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -104,7 +103,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -133,7 +132,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     }
 
     private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -144,7 +143,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postMethodGlobalNull() {
-        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -154,7 +153,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -166,7 +165,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postMethodGlobalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -195,7 +194,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     }
 
     private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -206,7 +205,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postMethodGlobalNotProvidedValid() {
-        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -216,7 +215,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -228,7 +227,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -260,7 +259,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     }
 
     private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -271,7 +270,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postPathGlobalValid() {
-        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -281,7 +280,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -293,7 +292,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -322,7 +321,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     }
 
     private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -333,7 +332,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      *
      */
     public void postSwaggerGlobalValid() {
-        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        postSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -343,7 +342,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -355,7 +354,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
         return postSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -384,7 +383,7 @@ public final class SubscriptionInCredentialsImpl implements SubscriptionInCreden
     }
 
     private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

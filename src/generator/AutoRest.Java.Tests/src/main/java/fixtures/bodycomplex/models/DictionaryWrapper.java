@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The DictionaryWrapper model.
@@ -19,6 +20,7 @@ public class DictionaryWrapper {
     /**
      * The defaultProgram property.
      */
+    @JsonProperty(value = "defaultProgram")
     private Map<String, String> defaultProgram;
 
     /**

@@ -12,13 +12,13 @@ package fixtures.custombaseuri.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClientImpl class.
  */
-public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient {
+public class AutoRestParameterizedHostTestClientImpl extends AzureServiceClient {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
@@ -151,10 +151,8 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
      * @param credentials the management credentials for Azure
      */
     private AutoRestParameterizedHostTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseByte operation.
@@ -18,6 +19,7 @@ public class HeaderResponseByteHeaders {
     /**
      * response with header values "啊齄丂狛狜隣郎隣兀﨩".
      */
+    @JsonProperty(value = "value")
     private byte[] value;
 
     /**

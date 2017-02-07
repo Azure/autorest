@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Polymorphicrecursives.
  */
-public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
+public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /** The Retrofit service to perform REST calls. */
     private PolymorphicrecursivesService service;
     /** The service client containing this operation class. */
@@ -56,11 +55,11 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphicrecursivesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives getValid" })
         @GET("complex/polymorphicrecursive/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphicrecursives putValid" })
         @PUT("complex/polymorphicrecursive/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
 
@@ -72,7 +71,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -82,7 +81,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -94,7 +93,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Fish>, Fish>() {
             @Override
             public Fish call(ServiceResponse<Fish> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -120,7 +119,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Fish, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -184,7 +183,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      }
      */
     public void putValid(Fish complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -247,7 +246,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -312,7 +311,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -395,7 +394,7 @@ public final class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

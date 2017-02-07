@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodydatetime.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -33,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Datetimes.
  */
-public final class DatetimesImpl implements Datetimes {
+public class DatetimesImpl implements Datetimes {
     /** The Retrofit service to perform REST calls. */
     private DatetimesService service;
     /** The service client containing this operation class. */
@@ -55,79 +54,79 @@ public final class DatetimesImpl implements Datetimes {
      * used by Retrofit to perform actually REST calls.
      */
     interface DatetimesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getNull" })
         @GET("datetime/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getInvalid" })
         @GET("datetime/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getOverflow" })
         @GET("datetime/overflow")
         Observable<Response<ResponseBody>> getOverflow();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUnderflow" })
         @GET("datetime/underflow")
         Observable<Response<ResponseBody>> getUnderflow();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putUtcMaxDateTime" })
         @PUT("datetime/max/utc")
         Observable<Response<ResponseBody>> putUtcMaxDateTime(@Body DateTime datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcLowercaseMaxDateTime" })
         @GET("datetime/max/utc/lowercase")
         Observable<Response<ResponseBody>> getUtcLowercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcUppercaseMaxDateTime" })
         @GET("datetime/max/utc/uppercase")
         Observable<Response<ResponseBody>> getUtcUppercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalPositiveOffsetMaxDateTime" })
         @PUT("datetime/max/localpositiveoffset")
         Observable<Response<ResponseBody>> putLocalPositiveOffsetMaxDateTime(@Body DateTime datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetLowercaseMaxDateTime" })
         @GET("datetime/max/localpositiveoffset/lowercase")
         Observable<Response<ResponseBody>> getLocalPositiveOffsetLowercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetUppercaseMaxDateTime" })
         @GET("datetime/max/localpositiveoffset/uppercase")
         Observable<Response<ResponseBody>> getLocalPositiveOffsetUppercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalNegativeOffsetMaxDateTime" })
         @PUT("datetime/max/localnegativeoffset")
         Observable<Response<ResponseBody>> putLocalNegativeOffsetMaxDateTime(@Body DateTime datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetUppercaseMaxDateTime" })
         @GET("datetime/max/localnegativeoffset/uppercase")
         Observable<Response<ResponseBody>> getLocalNegativeOffsetUppercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetLowercaseMaxDateTime" })
         @GET("datetime/max/localnegativeoffset/lowercase")
         Observable<Response<ResponseBody>> getLocalNegativeOffsetLowercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putUtcMinDateTime" })
         @PUT("datetime/min/utc")
         Observable<Response<ResponseBody>> putUtcMinDateTime(@Body DateTime datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getUtcMinDateTime" })
         @GET("datetime/min/utc")
         Observable<Response<ResponseBody>> getUtcMinDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalPositiveOffsetMinDateTime" })
         @PUT("datetime/min/localpositiveoffset")
         Observable<Response<ResponseBody>> putLocalPositiveOffsetMinDateTime(@Body DateTime datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalPositiveOffsetMinDateTime" })
         @GET("datetime/min/localpositiveoffset")
         Observable<Response<ResponseBody>> getLocalPositiveOffsetMinDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes putLocalNegativeOffsetMinDateTime" })
         @PUT("datetime/min/localnegativeoffset")
         Observable<Response<ResponseBody>> putLocalNegativeOffsetMinDateTime(@Body DateTime datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetime.Datetimes getLocalNegativeOffsetMinDateTime" })
         @GET("datetime/min/localnegativeoffset")
         Observable<Response<ResponseBody>> getLocalNegativeOffsetMinDateTime();
 
@@ -139,7 +138,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -149,7 +148,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -161,7 +160,7 @@ public final class DatetimesImpl implements Datetimes {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -187,7 +186,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -199,7 +198,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -209,7 +208,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -221,7 +220,7 @@ public final class DatetimesImpl implements Datetimes {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -247,7 +246,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -259,7 +258,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getOverflow() {
-        return getOverflowWithServiceResponseAsync().toBlocking().single().getBody();
+        return getOverflowWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -269,7 +268,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getOverflowWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -281,7 +280,7 @@ public final class DatetimesImpl implements Datetimes {
         return getOverflowWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -307,7 +306,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -319,7 +318,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUnderflow() {
-        return getUnderflowWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUnderflowWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -329,7 +328,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnderflowWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -341,7 +340,7 @@ public final class DatetimesImpl implements Datetimes {
         return getUnderflowWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -367,7 +366,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -379,7 +378,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
-        putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -390,7 +389,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -403,7 +402,7 @@ public final class DatetimesImpl implements Datetimes {
         return putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -433,7 +432,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -445,7 +444,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -455,7 +454,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -467,7 +466,7 @@ public final class DatetimesImpl implements Datetimes {
         return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -493,7 +492,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -505,7 +504,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -515,7 +514,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -527,7 +526,7 @@ public final class DatetimesImpl implements Datetimes {
         return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -553,7 +552,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -565,7 +564,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      */
     public void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody) {
-        putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -576,7 +575,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -589,7 +588,7 @@ public final class DatetimesImpl implements Datetimes {
         return putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -619,7 +618,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalPositiveOffsetMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -631,7 +630,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalPositiveOffsetLowercaseMaxDateTime() {
-        return getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -641,7 +640,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -653,7 +652,7 @@ public final class DatetimesImpl implements Datetimes {
         return getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -679,7 +678,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -691,7 +690,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalPositiveOffsetUppercaseMaxDateTime() {
-        return getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -701,7 +700,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -713,7 +712,7 @@ public final class DatetimesImpl implements Datetimes {
         return getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -739,7 +738,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -751,7 +750,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      */
     public void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody) {
-        putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -762,7 +761,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -775,7 +774,7 @@ public final class DatetimesImpl implements Datetimes {
         return putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -805,7 +804,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalNegativeOffsetMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -817,7 +816,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalNegativeOffsetUppercaseMaxDateTime() {
-        return getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -827,7 +826,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -839,7 +838,7 @@ public final class DatetimesImpl implements Datetimes {
         return getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -865,7 +864,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -877,7 +876,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalNegativeOffsetLowercaseMaxDateTime() {
-        return getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -887,7 +886,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -899,7 +898,7 @@ public final class DatetimesImpl implements Datetimes {
         return getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -925,7 +924,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -937,7 +936,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
-        putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -948,7 +947,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -961,7 +960,7 @@ public final class DatetimesImpl implements Datetimes {
         return putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -991,7 +990,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1003,7 +1002,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1013,7 +1012,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1025,7 +1024,7 @@ public final class DatetimesImpl implements Datetimes {
         return getUtcMinDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1051,7 +1050,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1063,7 +1062,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      */
     public void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody) {
-        putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -1074,7 +1073,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -1087,7 +1086,7 @@ public final class DatetimesImpl implements Datetimes {
         return putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1117,7 +1116,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalPositiveOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1129,7 +1128,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalPositiveOffsetMinDateTime() {
-        return getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1139,7 +1138,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1151,7 +1150,7 @@ public final class DatetimesImpl implements Datetimes {
         return getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1177,7 +1176,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1189,7 +1188,7 @@ public final class DatetimesImpl implements Datetimes {
      * @param datetimeBody the DateTime value
      */
     public void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody) {
-        putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -1200,7 +1199,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -1213,7 +1212,7 @@ public final class DatetimesImpl implements Datetimes {
         return putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1243,7 +1242,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<Void> putLocalNegativeOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1255,7 +1254,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the DateTime object if successful.
      */
     public DateTime getLocalNegativeOffsetMinDateTime() {
-        return getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1265,7 +1264,7 @@ public final class DatetimesImpl implements Datetimes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1277,7 +1276,7 @@ public final class DatetimesImpl implements Datetimes {
         return getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1303,7 +1302,7 @@ public final class DatetimesImpl implements Datetimes {
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTime, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTime, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTime>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

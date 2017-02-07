@@ -11,6 +11,7 @@
 package fixtures.bodycomplex.models;
 
 import org.joda.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The DateWrapper model.
@@ -19,11 +20,13 @@ public class DateWrapper {
     /**
      * The field property.
      */
+    @JsonProperty(value = "field")
     private LocalDate field;
 
     /**
      * The leap property.
      */
+    @JsonProperty(value = "leap")
     private LocalDate leap;
 
     /**

@@ -18,7 +18,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
@@ -42,7 +41,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Dictionarys.
  */
-public final class DictionarysImpl implements Dictionarys {
+public class DictionarysImpl implements Dictionarys {
     /** The Retrofit service to perform REST calls. */
     private DictionarysService service;
     /** The service client containing this operation class. */
@@ -64,263 +63,263 @@ public final class DictionarysImpl implements Dictionarys {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionarysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNull" })
         @GET("dictionary/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmpty" })
         @GET("dictionary/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putEmpty" })
         @PUT("dictionary/empty")
         Observable<Response<ResponseBody>> putEmpty(@Body Map<String, String> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullValue" })
         @GET("dictionary/nullvalue")
         Observable<Response<ResponseBody>> getNullValue();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getNullKey" })
         @GET("dictionary/nullkey")
         Observable<Response<ResponseBody>> getNullKey();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getEmptyStringKey" })
         @GET("dictionary/keyemptystring")
         Observable<Response<ResponseBody>> getEmptyStringKey();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getInvalid" })
         @GET("dictionary/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanTfft" })
         @GET("dictionary/prim/boolean/tfft")
         Observable<Response<ResponseBody>> getBooleanTfft();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putBooleanTfft" })
         @PUT("dictionary/prim/boolean/tfft")
         Observable<Response<ResponseBody>> putBooleanTfft(@Body Map<String, Boolean> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidNull" })
         @GET("dictionary/prim/boolean/true.null.false")
         Observable<Response<ResponseBody>> getBooleanInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBooleanInvalidString" })
         @GET("dictionary/prim/boolean/true.boolean.false")
         Observable<Response<ResponseBody>> getBooleanInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntegerValid" })
         @GET("dictionary/prim/integer/1.-1.3.300")
         Observable<Response<ResponseBody>> getIntegerValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putIntegerValid" })
         @PUT("dictionary/prim/integer/1.-1.3.300")
         Observable<Response<ResponseBody>> putIntegerValid(@Body Map<String, Integer> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidNull" })
         @GET("dictionary/prim/integer/1.null.zero")
         Observable<Response<ResponseBody>> getIntInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getIntInvalidString" })
         @GET("dictionary/prim/integer/1.integer.0")
         Observable<Response<ResponseBody>> getIntInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongValid" })
         @GET("dictionary/prim/long/1.-1.3.300")
         Observable<Response<ResponseBody>> getLongValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putLongValid" })
         @PUT("dictionary/prim/long/1.-1.3.300")
         Observable<Response<ResponseBody>> putLongValid(@Body Map<String, Long> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidNull" })
         @GET("dictionary/prim/long/1.null.zero")
         Observable<Response<ResponseBody>> getLongInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getLongInvalidString" })
         @GET("dictionary/prim/long/1.integer.0")
         Observable<Response<ResponseBody>> getLongInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatValid" })
         @GET("dictionary/prim/float/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> getFloatValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putFloatValid" })
         @PUT("dictionary/prim/float/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> putFloatValid(@Body Map<String, Double> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidNull" })
         @GET("dictionary/prim/float/0.0-null-1.2e20")
         Observable<Response<ResponseBody>> getFloatInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getFloatInvalidString" })
         @GET("dictionary/prim/float/1.number.0")
         Observable<Response<ResponseBody>> getFloatInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleValid" })
         @GET("dictionary/prim/double/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> getDoubleValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDoubleValid" })
         @PUT("dictionary/prim/double/0--0.01-1.2e20")
         Observable<Response<ResponseBody>> putDoubleValid(@Body Map<String, Double> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidNull" })
         @GET("dictionary/prim/double/0.0-null-1.2e20")
         Observable<Response<ResponseBody>> getDoubleInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDoubleInvalidString" })
         @GET("dictionary/prim/double/1.number.0")
         Observable<Response<ResponseBody>> getDoubleInvalidString();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringValid" })
         @GET("dictionary/prim/string/foo1.foo2.foo3")
         Observable<Response<ResponseBody>> getStringValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putStringValid" })
         @PUT("dictionary/prim/string/foo1.foo2.foo3")
         Observable<Response<ResponseBody>> putStringValid(@Body Map<String, String> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithNull" })
         @GET("dictionary/prim/string/foo.null.foo2")
         Observable<Response<ResponseBody>> getStringWithNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getStringWithInvalid" })
         @GET("dictionary/prim/string/foo.123.foo2")
         Observable<Response<ResponseBody>> getStringWithInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateValid" })
         @GET("dictionary/prim/date/valid")
         Observable<Response<ResponseBody>> getDateValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateValid" })
         @PUT("dictionary/prim/date/valid")
         Observable<Response<ResponseBody>> putDateValid(@Body Map<String, LocalDate> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidNull" })
         @GET("dictionary/prim/date/invalidnull")
         Observable<Response<ResponseBody>> getDateInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateInvalidChars" })
         @GET("dictionary/prim/date/invalidchars")
         Observable<Response<ResponseBody>> getDateInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeValid" })
         @GET("dictionary/prim/date-time/valid")
         Observable<Response<ResponseBody>> getDateTimeValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeValid" })
         @PUT("dictionary/prim/date-time/valid")
         Observable<Response<ResponseBody>> putDateTimeValid(@Body Map<String, DateTime> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidNull" })
         @GET("dictionary/prim/date-time/invalidnull")
         Observable<Response<ResponseBody>> getDateTimeInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeInvalidChars" })
         @GET("dictionary/prim/date-time/invalidchars")
         Observable<Response<ResponseBody>> getDateTimeInvalidChars();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDateTimeRfc1123Valid" })
         @GET("dictionary/prim/date-time-rfc1123/valid")
         Observable<Response<ResponseBody>> getDateTimeRfc1123Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDateTimeRfc1123Valid" })
         @PUT("dictionary/prim/date-time-rfc1123/valid")
         Observable<Response<ResponseBody>> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDurationValid" })
         @GET("dictionary/prim/duration/valid")
         Observable<Response<ResponseBody>> getDurationValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDurationValid" })
         @PUT("dictionary/prim/duration/valid")
         Observable<Response<ResponseBody>> putDurationValid(@Body Map<String, Period> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteValid" })
         @GET("dictionary/prim/byte/valid")
         Observable<Response<ResponseBody>> getByteValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putByteValid" })
         @PUT("dictionary/prim/byte/valid")
         Observable<Response<ResponseBody>> putByteValid(@Body Map<String, byte[]> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getByteInvalidNull" })
         @GET("dictionary/prim/byte/invalidnull")
         Observable<Response<ResponseBody>> getByteInvalidNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getBase64Url" })
         @GET("dictionary/prim/base64url/valid")
         Observable<Response<ResponseBody>> getBase64Url();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexNull" })
         @GET("dictionary/complex/null")
         Observable<Response<ResponseBody>> getComplexNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexEmpty" })
         @GET("dictionary/complex/empty")
         Observable<Response<ResponseBody>> getComplexEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemNull" })
         @GET("dictionary/complex/itemnull")
         Observable<Response<ResponseBody>> getComplexItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexItemEmpty" })
         @GET("dictionary/complex/itemempty")
         Observable<Response<ResponseBody>> getComplexItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getComplexValid" })
         @GET("dictionary/complex/valid")
         Observable<Response<ResponseBody>> getComplexValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putComplexValid" })
         @PUT("dictionary/complex/valid")
         Observable<Response<ResponseBody>> putComplexValid(@Body Map<String, Widget> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayNull" })
         @GET("dictionary/array/null")
         Observable<Response<ResponseBody>> getArrayNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayEmpty" })
         @GET("dictionary/array/empty")
         Observable<Response<ResponseBody>> getArrayEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemNull" })
         @GET("dictionary/array/itemnull")
         Observable<Response<ResponseBody>> getArrayItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayItemEmpty" })
         @GET("dictionary/array/itemempty")
         Observable<Response<ResponseBody>> getArrayItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getArrayValid" })
         @GET("dictionary/array/valid")
         Observable<Response<ResponseBody>> getArrayValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putArrayValid" })
         @PUT("dictionary/array/valid")
         Observable<Response<ResponseBody>> putArrayValid(@Body Map<String, List<String>> arrayBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryNull" })
         @GET("dictionary/dictionary/null")
         Observable<Response<ResponseBody>> getDictionaryNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryEmpty" })
         @GET("dictionary/dictionary/empty")
         Observable<Response<ResponseBody>> getDictionaryEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemNull" })
         @GET("dictionary/dictionary/itemnull")
         Observable<Response<ResponseBody>> getDictionaryItemNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryItemEmpty" })
         @GET("dictionary/dictionary/itemempty")
         Observable<Response<ResponseBody>> getDictionaryItemEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys getDictionaryValid" })
         @GET("dictionary/dictionary/valid")
         Observable<Response<ResponseBody>> getDictionaryValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydictionary.Dictionarys putDictionaryValid" })
         @PUT("dictionary/dictionary/valid")
         Observable<Response<ResponseBody>> putDictionaryValid(@Body Map<String, Map<String, String>> arrayBody);
 
@@ -332,7 +331,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -342,7 +341,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -354,7 +353,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -380,7 +379,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Integer>> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -392,7 +391,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -402,7 +401,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -414,7 +413,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -440,7 +439,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -452,7 +451,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, String&gt; value
      */
     public void putEmpty(Map<String, String> arrayBody) {
-        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -463,7 +462,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -476,7 +475,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putEmptyWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -507,7 +506,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -519,7 +518,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullValue() {
-        return getNullValueWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullValueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -529,7 +528,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getNullValueWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullValueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -541,7 +540,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNullValueWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -567,7 +566,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getNullValueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -579,7 +578,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getNullKey() {
-        return getNullKeyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullKeyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -589,7 +588,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getNullKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -601,7 +600,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getNullKeyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -627,7 +626,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -639,7 +638,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getEmptyStringKey() {
-        return getEmptyStringKeyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyStringKeyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -649,7 +648,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getEmptyStringKeyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyStringKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -661,7 +660,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getEmptyStringKeyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -687,7 +686,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -699,7 +698,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -709,7 +708,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -721,7 +720,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -747,7 +746,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -759,7 +758,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanTfft() {
-        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanTfftWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -769,7 +768,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanTfftWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -781,7 +780,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getBooleanTfftWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
             @Override
             public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -807,7 +806,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Boolean>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -819,7 +818,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      */
     public void putBooleanTfft(Map<String, Boolean> arrayBody) {
-        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -830,7 +829,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putBooleanTfftWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -843,7 +842,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putBooleanTfftWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -874,7 +873,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -886,7 +885,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidNull() {
-        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -896,7 +895,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -908,7 +907,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getBooleanInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
             @Override
             public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -934,7 +933,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Boolean>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -946,7 +945,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Boolean&gt; object if successful.
      */
     public Map<String, Boolean> getBooleanInvalidString() {
-        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBooleanInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -956,7 +955,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
-        return ServiceCall.create(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -968,7 +967,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getBooleanInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Boolean>>, Map<String, Boolean>>() {
             @Override
             public Map<String, Boolean> call(ServiceResponse<Map<String, Boolean>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -994,7 +993,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Boolean>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Boolean>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Boolean>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1006,7 +1005,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntegerValid() {
-        return getIntegerValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntegerValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1016,7 +1015,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getIntegerValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntegerValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1028,7 +1027,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getIntegerValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1054,7 +1053,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1066,7 +1065,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Integer&gt; value
      */
     public void putIntegerValid(Map<String, Integer> arrayBody) {
-        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1077,7 +1076,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putIntegerValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1090,7 +1089,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putIntegerValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1121,7 +1120,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1133,7 +1132,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidNull() {
-        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1143,7 +1142,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1155,7 +1154,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getIntInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1181,7 +1180,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1193,7 +1192,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getIntInvalidString() {
-        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getIntInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1203,7 +1202,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Integer>> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.create(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1215,7 +1214,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getIntInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Integer>>, Map<String, Integer>>() {
             @Override
             public Map<String, Integer> call(ServiceResponse<Map<String, Integer>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1241,7 +1240,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Integer>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1253,7 +1252,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongValid() {
-        return getLongValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1263,7 +1262,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceCall.create(getLongValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1275,7 +1274,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getLongValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
             @Override
             public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1301,7 +1300,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Long>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Long>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1313,7 +1312,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Long&gt; value
      */
     public void putLongValid(Map<String, Long> arrayBody) {
-        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1324,7 +1323,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putLongValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1337,7 +1336,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putLongValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1368,7 +1367,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1380,7 +1379,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidNull() {
-        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1390,7 +1389,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1402,7 +1401,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getLongInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
             @Override
             public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1428,7 +1427,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Long>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Long>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1440,7 +1439,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Long&gt; object if successful.
      */
     public Map<String, Long> getLongInvalidString() {
-        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getLongInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1450,7 +1449,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Long>> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
-        return ServiceCall.create(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getLongInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1462,7 +1461,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getLongInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Long>>, Map<String, Long>>() {
             @Override
             public Map<String, Long> call(ServiceResponse<Map<String, Long>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1488,7 +1487,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Long>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Long>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Long>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1500,7 +1499,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatValid() {
-        return getFloatValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1510,7 +1509,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getFloatValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1522,7 +1521,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getFloatValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1548,7 +1547,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1560,7 +1559,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Double&gt; value
      */
     public void putFloatValid(Map<String, Double> arrayBody) {
-        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1571,7 +1570,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putFloatValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1584,7 +1583,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putFloatValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1615,7 +1614,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1627,7 +1626,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidNull() {
-        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1637,7 +1636,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1649,7 +1648,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getFloatInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1675,7 +1674,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1687,7 +1686,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getFloatInvalidString() {
-        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFloatInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1697,7 +1696,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFloatInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1709,7 +1708,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getFloatInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1735,7 +1734,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1747,7 +1746,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleValid() {
-        return getDoubleValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1757,7 +1756,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1769,7 +1768,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDoubleValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1795,7 +1794,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1807,7 +1806,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Double&gt; value
      */
     public void putDoubleValid(Map<String, Double> arrayBody) {
-        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -1818,7 +1817,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDoubleValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -1831,7 +1830,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putDoubleValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1862,7 +1861,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1874,7 +1873,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidNull() {
-        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1884,7 +1883,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1896,7 +1895,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDoubleInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1922,7 +1921,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1934,7 +1933,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Double&gt; object if successful.
      */
     public Map<String, Double> getDoubleInvalidString() {
-        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDoubleInvalidStringWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1944,7 +1943,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Double>> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
-        return ServiceCall.create(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDoubleInvalidStringWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1956,7 +1955,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDoubleInvalidStringWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Double>>, Map<String, Double>>() {
             @Override
             public Map<String, Double> call(ServiceResponse<Map<String, Double>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1982,7 +1981,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Double>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Double>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Double>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1994,7 +1993,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringValid() {
-        return getStringValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2004,7 +2003,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getStringValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2016,7 +2015,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getStringValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2042,7 +2041,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2054,7 +2053,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, String&gt; value
      */
     public void putStringValid(Map<String, String> arrayBody) {
-        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2065,7 +2064,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putStringValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2078,7 +2077,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putStringValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2109,7 +2108,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2121,7 +2120,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithNull() {
-        return getStringWithNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2131,7 +2130,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getStringWithNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2143,7 +2142,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getStringWithNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2169,7 +2168,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2181,7 +2180,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, String&gt; object if successful.
      */
     public Map<String, String> getStringWithInvalid() {
-        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getStringWithInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2191,7 +2190,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, String>> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
-        return ServiceCall.create(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getStringWithInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2203,7 +2202,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getStringWithInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, String>>, Map<String, String>>() {
             @Override
             public Map<String, String> call(ServiceResponse<Map<String, String>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2229,7 +2228,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, String>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, String>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, String>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2241,7 +2240,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateValid() {
-        return getDateValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2251,7 +2250,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2263,7 +2262,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
             @Override
             public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2289,7 +2288,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, LocalDate>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2301,7 +2300,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      */
     public void putDateValid(Map<String, LocalDate> arrayBody) {
-        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2312,7 +2311,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2325,7 +2324,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putDateValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2356,7 +2355,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2368,7 +2367,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidNull() {
-        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2378,7 +2377,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2390,7 +2389,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
             @Override
             public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2416,7 +2415,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, LocalDate>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2428,7 +2427,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, LocalDate&gt; object if successful.
      */
     public Map<String, LocalDate> getDateInvalidChars() {
-        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2438,7 +2437,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
-        return ServiceCall.create(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2450,7 +2449,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, LocalDate>>, Map<String, LocalDate>>() {
             @Override
             public Map<String, LocalDate> call(ServiceResponse<Map<String, LocalDate>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2476,7 +2475,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, LocalDate>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, LocalDate>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, LocalDate>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2488,7 +2487,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeValid() {
-        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2498,7 +2497,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2510,7 +2509,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2536,7 +2535,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, DateTime>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2548,7 +2547,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      */
     public void putDateTimeValid(Map<String, DateTime> arrayBody) {
-        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2559,7 +2558,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2572,7 +2571,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putDateTimeValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2603,7 +2602,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2615,7 +2614,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidNull() {
-        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2625,7 +2624,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2637,7 +2636,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateTimeInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2663,7 +2662,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, DateTime>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2675,7 +2674,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeInvalidChars() {
-        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeInvalidCharsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2685,7 +2684,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeInvalidCharsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2697,7 +2696,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateTimeInvalidCharsWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2723,7 +2722,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, DateTime>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, DateTime>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, DateTime>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2735,7 +2734,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, DateTime&gt; object if successful.
      */
     public Map<String, DateTime> getDateTimeRfc1123Valid() {
-        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDateTimeRfc1123ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2745,7 +2744,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
-        return ServiceCall.create(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDateTimeRfc1123ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2757,7 +2756,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDateTimeRfc1123ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, DateTime>>, Map<String, DateTime>>() {
             @Override
             public Map<String, DateTime> call(ServiceResponse<Map<String, DateTime>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2775,15 +2774,15 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<Map<String, DateTimeRfc1123>> result = getDateTimeRfc1123ValidDelegate(response);
                         Map<String, DateTime> body = null;
-                        if (result.getBody() != null) {
+                        if (result.body() != null) {
                             body = new HashMap<String, DateTime>();
-                            for (Map.Entry<String, DateTimeRfc1123> entry : result.getBody().entrySet()) {
+                            for (Map.Entry<String, DateTimeRfc1123> entry : result.body().entrySet()) {
                                 DateTime value;
-                                value = entry.getValue().getDateTime();
+                                value = entry.getValue().dateTime();
                                 body.put(entry.getKey(), value);
                             }
                         }
-                        ServiceResponse<Map<String, DateTime>> clientResponse = new ServiceResponse<Map<String, DateTime>>(body, result.getResponse());
+                        ServiceResponse<Map<String, DateTime>> clientResponse = new ServiceResponse<Map<String, DateTime>>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -2793,7 +2792,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, DateTimeRfc1123>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, DateTimeRfc1123>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, DateTimeRfc1123>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2805,7 +2804,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      */
     public void putDateTimeRfc1123Valid(Map<String, DateTime> arrayBody) {
-        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2816,7 +2815,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDateTimeRfc1123ValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2829,7 +2828,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2865,7 +2864,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2877,7 +2876,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Period&gt; object if successful.
      */
     public Map<String, Period> getDurationValid() {
-        return getDurationValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDurationValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2887,7 +2886,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Period>> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
-        return ServiceCall.create(getDurationValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDurationValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2899,7 +2898,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDurationValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Period>>, Map<String, Period>>() {
             @Override
             public Map<String, Period> call(ServiceResponse<Map<String, Period>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2925,7 +2924,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Period>> getDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Period>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Period>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Period>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -2937,7 +2936,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Period&gt; value
      */
     public void putDurationValid(Map<String, Period> arrayBody) {
-        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -2948,7 +2947,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDurationValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -2961,7 +2960,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putDurationValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2992,7 +2991,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3004,7 +3003,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteValid() {
-        return getByteValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3014,7 +3013,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3026,7 +3025,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getByteValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
             @Override
             public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3052,7 +3051,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, byte[]>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, byte[]>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3064,7 +3063,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      */
     public void putByteValid(Map<String, byte[]> arrayBody) {
-        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3075,7 +3074,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putByteValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3088,7 +3087,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putByteValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3119,7 +3118,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3131,7 +3130,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getByteInvalidNull() {
-        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getByteInvalidNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3141,7 +3140,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceCall.create(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getByteInvalidNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3153,7 +3152,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getByteInvalidNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
             @Override
             public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3179,7 +3178,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, byte[]>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, byte[]>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, byte[]>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3191,7 +3190,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, byte[]&gt; object if successful.
      */
     public Map<String, byte[]> getBase64Url() {
-        return getBase64UrlWithServiceResponseAsync().toBlocking().single().getBody();
+        return getBase64UrlWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3201,7 +3200,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, byte[]>> getBase64UrlAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
-        return ServiceCall.create(getBase64UrlWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBase64UrlWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3213,7 +3212,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getBase64UrlWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, byte[]>>, Map<String, byte[]>>() {
             @Override
             public Map<String, byte[]> call(ServiceResponse<Map<String, byte[]>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3231,15 +3230,15 @@ public final class DictionarysImpl implements Dictionarys {
                     try {
                         ServiceResponse<Map<String, Base64Url>> result = getBase64UrlDelegate(response);
                         Map<String, byte[]> body = null;
-                        if (result.getBody() != null) {
+                        if (result.body() != null) {
                             body = new HashMap<String, byte[]>();
-                            for (Map.Entry<String, Base64Url> entry : result.getBody().entrySet()) {
+                            for (Map.Entry<String, Base64Url> entry : result.body().entrySet()) {
                                 byte[] value;
-                                value = entry.getValue().getDecodedBytes();
+                                value = entry.getValue().decodedBytes();
                                 body.put(entry.getKey(), value);
                             }
                         }
-                        ServiceResponse<Map<String, byte[]>> clientResponse = new ServiceResponse<Map<String, byte[]>>(body, result.getResponse());
+                        ServiceResponse<Map<String, byte[]>> clientResponse = new ServiceResponse<Map<String, byte[]>>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -3249,7 +3248,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Base64Url>> getBase64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Base64Url>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Base64Url>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Base64Url>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3261,7 +3260,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexNull() {
-        return getComplexNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3271,7 +3270,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3283,7 +3282,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getComplexNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3309,7 +3308,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Widget>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3321,7 +3320,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexEmpty() {
-        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3331,7 +3330,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3343,7 +3342,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getComplexEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3369,7 +3368,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Widget>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3381,7 +3380,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemNull() {
-        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3391,7 +3390,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3403,7 +3402,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getComplexItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3429,7 +3428,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Widget>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3441,7 +3440,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexItemEmpty() {
-        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3451,7 +3450,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3463,7 +3462,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getComplexItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3489,7 +3488,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Widget>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3501,7 +3500,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Widget&gt; object if successful.
      */
     public Map<String, Widget> getComplexValid() {
-        return getComplexValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getComplexValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3511,7 +3510,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Widget>> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
-        return ServiceCall.create(getComplexValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getComplexValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3523,7 +3522,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getComplexValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Widget>>, Map<String, Widget>>() {
             @Override
             public Map<String, Widget> call(ServiceResponse<Map<String, Widget>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3549,7 +3548,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Widget>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Widget>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Widget>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3561,7 +3560,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Widget&gt; value
      */
     public void putComplexValid(Map<String, Widget> arrayBody) {
-        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3572,7 +3571,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putComplexValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3585,7 +3584,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putComplexValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3616,7 +3615,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3628,7 +3627,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayNull() {
-        return getArrayNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3638,7 +3637,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3650,7 +3649,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getArrayNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3676,7 +3675,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3688,7 +3687,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayEmpty() {
-        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3698,7 +3697,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3710,7 +3709,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getArrayEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3736,7 +3735,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3748,7 +3747,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemNull() {
-        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3758,7 +3757,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3770,7 +3769,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getArrayItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3796,7 +3795,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3808,7 +3807,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayItemEmpty() {
-        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3818,7 +3817,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3830,7 +3829,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getArrayItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3856,7 +3855,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3868,7 +3867,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, List&lt;String&gt;&gt; object if successful.
      */
     public Map<String, List<String>> getArrayValid() {
-        return getArrayValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -3878,7 +3877,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, List<String>>> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
-        return ServiceCall.create(getArrayValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3890,7 +3889,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getArrayValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, List<String>>>, Map<String, List<String>>>() {
             @Override
             public Map<String, List<String>> call(ServiceResponse<Map<String, List<String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3916,7 +3915,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, List<String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, List<String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, List<String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3928,7 +3927,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      */
     public void putArrayValid(Map<String, List<String>> arrayBody) {
-        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -3939,7 +3938,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putArrayValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -3952,7 +3951,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putArrayValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -3983,7 +3982,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -3995,7 +3994,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryNull() {
-        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4005,7 +4004,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4017,7 +4016,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDictionaryNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4043,7 +4042,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4055,7 +4054,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryEmpty() {
-        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4065,7 +4064,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4077,7 +4076,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDictionaryEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4103,7 +4102,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4115,7 +4114,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemNull() {
-        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryItemNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4125,7 +4124,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryItemNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4137,7 +4136,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDictionaryItemNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4163,7 +4162,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4175,7 +4174,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryItemEmpty() {
-        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryItemEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4185,7 +4184,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryItemEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4197,7 +4196,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDictionaryItemEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4223,7 +4222,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4235,7 +4234,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the Map&lt;String, Map&lt;String, String&gt;&gt; object if successful.
      */
     public Map<String, Map<String, String>> getDictionaryValid() {
-        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -4245,7 +4244,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
-        return ServiceCall.create(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4257,7 +4256,7 @@ public final class DictionarysImpl implements Dictionarys {
         return getDictionaryValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, Map<String, String>>>, Map<String, Map<String, String>>>() {
             @Override
             public Map<String, Map<String, String>> call(ServiceResponse<Map<String, Map<String, String>>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4283,7 +4282,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, Map<String, String>>, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Map<String, Map<String, String>>, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Map<String, Map<String, String>>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -4295,7 +4294,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      */
     public void putDictionaryValid(Map<String, Map<String, String>> arrayBody) {
-        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().getBody();
+        putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
     }
 
     /**
@@ -4306,7 +4305,7 @@ public final class DictionarysImpl implements Dictionarys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryValidWithServiceResponseAsync(arrayBody), serviceCallback);
     }
 
     /**
@@ -4319,7 +4318,7 @@ public final class DictionarysImpl implements Dictionarys {
         return putDictionaryValidWithServiceResponseAsync(arrayBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -4350,7 +4349,7 @@ public final class DictionarysImpl implements Dictionarys {
     }
 
     private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

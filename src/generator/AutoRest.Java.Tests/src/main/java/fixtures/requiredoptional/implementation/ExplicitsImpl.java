@@ -13,11 +13,10 @@ package fixtures.requiredoptional.implementation;
 import retrofit2.Retrofit;
 import fixtures.requiredoptional.Explicits;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.serializer.CollectionFormat;
+import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
@@ -45,7 +44,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Explicits.
  */
-public final class ExplicitsImpl implements Explicits {
+public class ExplicitsImpl implements Explicits {
     /** The Retrofit service to perform REST calls. */
     private ExplicitsService service;
     /** The service client containing this operation class. */
@@ -67,91 +66,91 @@ public final class ExplicitsImpl implements Explicits {
      * used by Retrofit to perform actually REST calls.
      */
     interface ExplicitsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerParameter" })
         @POST("reqopt/requied/integer/parameter")
         Observable<Response<ResponseBody>> postRequiredIntegerParameter(@Body int bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerParameter" })
         @POST("reqopt/optional/integer/parameter")
         Observable<Response<ResponseBody>> postOptionalIntegerParameter(@Body Integer bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerProperty" })
         @POST("reqopt/requied/integer/property")
         Observable<Response<ResponseBody>> postRequiredIntegerProperty(@Body IntWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerProperty" })
         @POST("reqopt/optional/integer/property")
         Observable<Response<ResponseBody>> postOptionalIntegerProperty(@Body IntOptionalWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredIntegerHeader" })
         @POST("reqopt/requied/integer/header")
         Observable<Response<ResponseBody>> postRequiredIntegerHeader(@Header("headerParameter") int headerParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalIntegerHeader" })
         @POST("reqopt/optional/integer/header")
         Observable<Response<ResponseBody>> postOptionalIntegerHeader(@Header("headerParameter") Integer headerParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringParameter" })
         @POST("reqopt/requied/string/parameter")
         Observable<Response<ResponseBody>> postRequiredStringParameter(@Body String bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringParameter" })
         @POST("reqopt/optional/string/parameter")
         Observable<Response<ResponseBody>> postOptionalStringParameter(@Body String bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringProperty" })
         @POST("reqopt/requied/string/property")
         Observable<Response<ResponseBody>> postRequiredStringProperty(@Body StringWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringProperty" })
         @POST("reqopt/optional/string/property")
         Observable<Response<ResponseBody>> postOptionalStringProperty(@Body StringOptionalWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredStringHeader" })
         @POST("reqopt/requied/string/header")
         Observable<Response<ResponseBody>> postRequiredStringHeader(@Header("headerParameter") String headerParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalStringHeader" })
         @POST("reqopt/optional/string/header")
         Observable<Response<ResponseBody>> postOptionalStringHeader(@Header("bodyParameter") String bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassParameter" })
         @POST("reqopt/requied/class/parameter")
         Observable<Response<ResponseBody>> postRequiredClassParameter(@Body Product bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassParameter" })
         @POST("reqopt/optional/class/parameter")
         Observable<Response<ResponseBody>> postOptionalClassParameter(@Body Product bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredClassProperty" })
         @POST("reqopt/requied/class/property")
         Observable<Response<ResponseBody>> postRequiredClassProperty(@Body ClassWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalClassProperty" })
         @POST("reqopt/optional/class/property")
         Observable<Response<ResponseBody>> postOptionalClassProperty(@Body ClassOptionalWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayParameter" })
         @POST("reqopt/requied/array/parameter")
         Observable<Response<ResponseBody>> postRequiredArrayParameter(@Body List<String> bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayParameter" })
         @POST("reqopt/optional/array/parameter")
         Observable<Response<ResponseBody>> postOptionalArrayParameter(@Body List<String> bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayProperty" })
         @POST("reqopt/requied/array/property")
         Observable<Response<ResponseBody>> postRequiredArrayProperty(@Body ArrayWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayProperty" })
         @POST("reqopt/optional/array/property")
         Observable<Response<ResponseBody>> postOptionalArrayProperty(@Body ArrayOptionalWrapper bodyParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postRequiredArrayHeader" })
         @POST("reqopt/requied/array/header")
         Observable<Response<ResponseBody>> postRequiredArrayHeader(@Header("headerParameter") String headerParameter);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.requiredoptional.Explicits postOptionalArrayHeader" })
         @POST("reqopt/optional/array/header")
         Observable<Response<ResponseBody>> postOptionalArrayHeader(@Header("headerParameter") String headerParameter);
 
@@ -164,7 +163,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerParameter(int bodyParameter) {
-        return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -175,7 +174,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -188,7 +187,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredIntegerParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -215,7 +214,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -225,7 +224,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalIntegerParameter() {
-        postOptionalIntegerParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalIntegerParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -235,7 +234,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -247,7 +246,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -279,7 +278,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Integer value
      */
     public void postOptionalIntegerParameter(Integer bodyParameter) {
-        postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -290,7 +289,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -303,7 +302,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -330,7 +329,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -343,7 +342,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerProperty(IntWrapper bodyParameter) {
-        return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -354,7 +353,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -367,7 +366,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredIntegerPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -398,7 +397,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -408,7 +407,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalIntegerProperty() {
-        postOptionalIntegerPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalIntegerPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -418,7 +417,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -430,7 +429,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -462,7 +461,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the IntOptionalWrapper value
      */
     public void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) {
-        postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -473,7 +472,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -486,7 +485,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -514,7 +513,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -527,7 +526,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredIntegerHeader(int headerParameter) {
-        return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -538,7 +537,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -551,7 +550,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredIntegerHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -578,7 +577,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -588,7 +587,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalIntegerHeader() {
-        postOptionalIntegerHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalIntegerHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -598,7 +597,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -610,7 +609,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -642,7 +641,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the Integer value
      */
     public void postOptionalIntegerHeader(Integer headerParameter) {
-        postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -653,7 +652,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -666,7 +665,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalIntegerHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -693,7 +692,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -706,7 +705,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringParameter(String bodyParameter) {
-        return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -717,7 +716,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -730,7 +729,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredStringParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -760,7 +759,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -770,7 +769,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalStringParameter() {
-        postOptionalStringParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalStringParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -780,7 +779,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -792,7 +791,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -824,7 +823,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value
      */
     public void postOptionalStringParameter(String bodyParameter) {
-        postOptionalStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalStringParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -835,7 +834,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -848,7 +847,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -875,7 +874,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -888,7 +887,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringProperty(StringWrapper bodyParameter) {
-        return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -899,7 +898,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -912,7 +911,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredStringPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -943,7 +942,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -953,7 +952,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalStringProperty() {
-        postOptionalStringPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalStringPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -963,7 +962,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -975,7 +974,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1007,7 +1006,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the StringOptionalWrapper value
      */
     public void postOptionalStringProperty(StringOptionalWrapper bodyParameter) {
-        postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1018,7 +1017,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1031,7 +1030,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1059,7 +1058,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1072,7 +1071,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredStringHeader(String headerParameter) {
-        return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -1083,7 +1082,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredStringHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredStringHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -1096,7 +1095,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredStringHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1126,7 +1125,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1136,7 +1135,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalStringHeader() {
-        postOptionalStringHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalStringHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1146,7 +1145,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1158,7 +1157,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1190,7 +1189,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the String value
      */
     public void postOptionalStringHeader(String bodyParameter) {
-        postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1201,7 +1200,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalStringHeaderWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalStringHeaderWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1214,7 +1213,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalStringHeaderWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1241,7 +1240,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1254,7 +1253,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassParameter(Product bodyParameter) {
-        return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1265,7 +1264,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1278,7 +1277,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredClassParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1309,7 +1308,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1319,7 +1318,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalClassParameter() {
-        postOptionalClassParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalClassParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1329,7 +1328,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1341,7 +1340,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1373,7 +1372,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the Product value
      */
     public void postOptionalClassParameter(Product bodyParameter) {
-        postOptionalClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalClassParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1384,7 +1383,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1397,7 +1396,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1425,7 +1424,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1438,7 +1437,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredClassProperty(ClassWrapper bodyParameter) {
-        return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1449,7 +1448,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1462,7 +1461,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredClassPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1493,7 +1492,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1503,7 +1502,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalClassProperty() {
-        postOptionalClassPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalClassPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1513,7 +1512,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1525,7 +1524,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1557,7 +1556,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ClassOptionalWrapper value
      */
     public void postOptionalClassProperty(ClassOptionalWrapper bodyParameter) {
-        postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1568,7 +1567,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalClassPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1581,7 +1580,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalClassPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1609,7 +1608,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1622,7 +1621,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayParameter(List<String> bodyParameter) {
-        return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1633,7 +1632,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1646,7 +1645,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredArrayParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1677,7 +1676,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1687,7 +1686,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalArrayParameter() {
-        postOptionalArrayParameterWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalArrayParameterWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1697,7 +1696,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayParameterWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayParameterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1709,7 +1708,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayParameterWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1741,7 +1740,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the List&lt;String&gt; value
      */
     public void postOptionalArrayParameter(List<String> bodyParameter) {
-        postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1752,7 +1751,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayParameterWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1765,7 +1764,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayParameterWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1793,7 +1792,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1806,7 +1805,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayProperty(ArrayWrapper bodyParameter) {
-        return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1817,7 +1816,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1830,7 +1829,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredArrayPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1861,7 +1860,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1871,7 +1870,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalArrayProperty() {
-        postOptionalArrayPropertyWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalArrayPropertyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1881,7 +1880,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayPropertyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayPropertyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1893,7 +1892,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayPropertyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1925,7 +1924,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param bodyParameter the ArrayOptionalWrapper value
      */
     public void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) {
-        postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().getBody();
+        postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
     }
 
     /**
@@ -1936,7 +1935,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -1949,7 +1948,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayPropertyWithServiceResponseAsync(bodyParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1977,7 +1976,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1990,7 +1989,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the Error object if successful.
      */
     public Error postRequiredArrayHeader(List<String> headerParameter) {
-        return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -2001,7 +2000,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(postRequiredArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -2014,7 +2013,7 @@ public final class ExplicitsImpl implements Explicits {
         return postRequiredArrayHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2030,7 +2029,7 @@ public final class ExplicitsImpl implements Explicits {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postRequiredArrayHeader(headerParameterConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Error>>>() {
                 @Override
@@ -2046,7 +2045,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -2056,7 +2055,7 @@ public final class ExplicitsImpl implements Explicits {
      *
      */
     public void postOptionalArrayHeader() {
-        postOptionalArrayHeaderWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalArrayHeaderWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2066,7 +2065,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayHeaderWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2078,7 +2077,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayHeaderWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2090,7 +2089,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync() {
         final List<String> headerParameter = null;
-        String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -2111,7 +2110,7 @@ public final class ExplicitsImpl implements Explicits {
      * @param headerParameter the List&lt;String&gt; value
      */
     public void postOptionalArrayHeader(List<String> headerParameter) {
-        postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().getBody();
+        postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).toBlocking().single().body();
     }
 
     /**
@@ -2122,7 +2121,7 @@ public final class ExplicitsImpl implements Explicits {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalArrayHeaderWithServiceResponseAsync(headerParameter), serviceCallback);
     }
 
     /**
@@ -2135,7 +2134,7 @@ public final class ExplicitsImpl implements Explicits {
         return postOptionalArrayHeaderWithServiceResponseAsync(headerParameter).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2148,7 +2147,7 @@ public final class ExplicitsImpl implements Explicits {
      */
     public Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync(List<String> headerParameter) {
         Validator.validate(headerParameter);
-        String headerParameterConverted = this.client.mapperAdapter().serializeList(headerParameter, CollectionFormat.CSV);
+        String headerParameterConverted = this.client.serializerAdapter().serializeList(headerParameter, CollectionFormat.CSV);
         return service.postOptionalArrayHeader(headerParameterConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -2164,7 +2163,7 @@ public final class ExplicitsImpl implements Explicits {
     }
 
     private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

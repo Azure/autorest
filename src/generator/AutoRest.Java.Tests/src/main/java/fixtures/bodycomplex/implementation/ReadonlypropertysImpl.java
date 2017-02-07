@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Readonlypropertys.
  */
-public final class ReadonlypropertysImpl implements Readonlypropertys {
+public class ReadonlypropertysImpl implements Readonlypropertys {
     /** The Retrofit service to perform REST calls. */
     private ReadonlypropertysService service;
     /** The service client containing this operation class. */
@@ -56,11 +55,11 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * used by Retrofit to perform actually REST calls.
      */
     interface ReadonlypropertysService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys getValid" })
         @GET("complex/readonlyproperty/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Readonlypropertys putValid" })
         @PUT("complex/readonlyproperty/valid")
         Observable<Response<ResponseBody>> putValid(@Body ReadonlyObj complexBody);
 
@@ -72,7 +71,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the ReadonlyObj object if successful.
      */
     public ReadonlyObj getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -82,7 +81,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -94,7 +93,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<ReadonlyObj>, ReadonlyObj>() {
             @Override
             public ReadonlyObj call(ServiceResponse<ReadonlyObj> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -120,7 +119,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     }
 
     private ServiceResponse<ReadonlyObj> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ReadonlyObj, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<ReadonlyObj, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<ReadonlyObj>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -132,7 +131,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @param complexBody the ReadonlyObj value
      */
     public void putValid(ReadonlyObj complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -143,7 +142,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -156,7 +155,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -187,7 +186,7 @@ public final class ReadonlypropertysImpl implements Readonlypropertys {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

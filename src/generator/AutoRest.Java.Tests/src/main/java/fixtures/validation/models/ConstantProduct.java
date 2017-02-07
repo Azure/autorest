@@ -19,13 +19,13 @@ public class ConstantProduct {
     /**
      * Constant string.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "constProperty", required = true)
     private String constProperty;
 
     /**
      * Constant string2.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "constProperty2", required = true)
     private String constProperty2;
 
     /**
