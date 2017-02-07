@@ -93,9 +93,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/existingkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (userAgent != null)
@@ -106,6 +106,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("User-Agent", userAgent);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -146,7 +148,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -205,11 +207,13 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/existingkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -250,7 +254,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -273,9 +277,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseExistingKeyHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseExistingKeyHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -336,9 +340,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/protectedkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (contentType != null)
@@ -349,6 +353,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("Content-Type", contentType);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -389,7 +395,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -448,11 +454,13 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/protectedkey").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -493,7 +501,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -516,9 +524,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseProtectedKeyHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseProtectedKeyHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -584,9 +592,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/integer").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -602,6 +610,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -642,7 +652,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -715,9 +725,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/integer").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -728,6 +738,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -768,7 +780,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -791,9 +803,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseIntegerHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseIntegerHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -859,9 +871,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/long").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -877,6 +889,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -917,7 +931,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -990,9 +1004,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/long").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1003,6 +1017,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1043,7 +1059,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1066,9 +1082,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseLongHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseLongHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1134,9 +1150,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/float").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1152,6 +1168,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1192,7 +1210,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1265,9 +1283,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/float").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1278,6 +1296,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1318,7 +1338,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1341,9 +1361,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseFloatHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseFloatHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1409,9 +1429,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/double").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1427,6 +1447,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1467,7 +1489,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1540,9 +1562,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/double").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1553,6 +1575,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1593,7 +1617,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1616,9 +1640,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDoubleHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDoubleHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1684,9 +1708,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/bool").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1702,6 +1726,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1742,7 +1768,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1815,9 +1841,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/bool").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1828,6 +1854,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1868,7 +1896,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1891,9 +1919,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseBoolHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseBoolHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1962,9 +1990,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/string").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -1983,6 +2011,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", value);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2023,7 +2053,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2098,9 +2128,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/string").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2111,6 +2141,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2151,7 +2183,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2174,9 +2206,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseStringHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseStringHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2242,9 +2274,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/date").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2260,6 +2292,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2300,7 +2334,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2373,9 +2407,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/date").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2386,6 +2420,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2426,7 +2462,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2449,9 +2485,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDateHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDateHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2519,9 +2555,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetime").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2537,6 +2573,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2577,7 +2615,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2651,9 +2689,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetime").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2664,6 +2702,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2704,7 +2744,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2727,9 +2767,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2797,9 +2837,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/datetimerfc1123").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2818,6 +2858,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2858,7 +2900,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2932,9 +2974,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/datetimerfc1123").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -2945,6 +2987,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2985,7 +3029,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3008,9 +3052,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDatetimeRfc1123Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3076,9 +3120,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/duration").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -3094,6 +3138,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 _httpRequest.Headers.Remove("value");
             }
             _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3134,7 +3180,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3207,9 +3253,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/duration").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -3220,6 +3266,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3260,7 +3308,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3283,9 +3331,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDurationHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseDurationHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3355,9 +3403,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/byte").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -3376,6 +3424,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3416,7 +3466,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3489,9 +3539,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/byte").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -3502,6 +3552,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3542,7 +3594,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3565,9 +3617,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseByteHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseByteHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3635,9 +3687,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/param/prim/enum").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -3656,6 +3708,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, Client.SerializationSettings).Trim('"'));
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3696,7 +3750,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3770,9 +3824,9 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/response/prim/enum").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (scenario != null)
@@ -3783,6 +3837,8 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3823,7 +3879,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3846,9 +3902,9 @@ namespace Fixtures.AcceptanceTestsHeader
             _result.Response = _httpResponse;
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseEnumHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderResponseEnumHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3896,11 +3952,13 @@ namespace Fixtures.AcceptanceTestsHeader
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3941,7 +3999,7 @@ namespace Fixtures.AcceptanceTestsHeader
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

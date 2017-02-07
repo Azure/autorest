@@ -43,7 +43,7 @@ task 'autorest', 'Runs AutoRest', ->
   autorest process.argv.slice(3)
 
 autorest = (args) ->
-  console.log "AutoRest #{args.join(' ')}"
+  echo marked "*AutoRest* #{args.join(' ')}"
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}"
 
 # NOTE: probably wanna rename the 'test' task in dotnet.iced to something more specific

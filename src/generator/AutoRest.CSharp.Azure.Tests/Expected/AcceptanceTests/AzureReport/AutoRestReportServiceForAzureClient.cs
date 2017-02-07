@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureReport
 {
-    using Fixtures.Azure;
+    using Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;
@@ -35,12 +35,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        public Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; private set; }
+        public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; private set; }
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Credentials needed for the client to connect to Azure.
@@ -269,27 +269,27 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             AcceptLanguage = "en-US";
             LongRunningOperationRetryTimeout = 30;
             GenerateClientRequestId = true;
-            SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
+            SerializationSettings = new JsonSerializerSettings
             {
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                Formatting = Formatting.Indented,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
+            DeserializationSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -353,6 +353,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -399,7 +401,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -432,7 +434,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

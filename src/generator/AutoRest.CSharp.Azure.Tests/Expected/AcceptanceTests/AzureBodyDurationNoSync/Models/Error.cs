@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync.Models
 {
-    using Fixtures.AcceptanceTestsAzureBodyDurationNoSync;
+    using AcceptanceTestsAzureBodyDurationNoSync;
     using Newtonsoft.Json;
     using System.Linq;
 

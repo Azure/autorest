@@ -104,6 +104,8 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -150,7 +152,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -183,7 +185,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.TimeSpan?>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -256,6 +258,8 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -305,7 +309,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -393,6 +397,8 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -439,7 +445,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -472,7 +478,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.TimeSpan?>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -545,6 +551,8 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -591,7 +599,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -624,7 +632,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.TimeSpan?>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

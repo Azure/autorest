@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
+    using AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Linq;
 

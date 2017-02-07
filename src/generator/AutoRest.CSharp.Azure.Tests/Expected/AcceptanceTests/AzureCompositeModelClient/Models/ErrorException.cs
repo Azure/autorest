@@ -8,13 +8,16 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
+    using AcceptanceTestsAzureCompositeModelClient;
     using Microsoft.Rest;
+    using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Security;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if LEGACY
+#if !PORTABLE
     [System.Serializable]
 #endif
     public class ErrorException : RestException
@@ -60,13 +63,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
         }
 
-#if LEGACY
+#if !PORTABLE
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected ErrorException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        protected ErrorException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
@@ -80,7 +83,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Thrown when a required parameter is null
         /// </exception>
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)

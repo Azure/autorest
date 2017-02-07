@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
-    using Fixtures.Azure;
+    using Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -133,6 +133,8 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -179,7 +181,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -212,7 +214,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<SampleResourceGroup>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

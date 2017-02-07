@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
+    using Azure;
+    using AcceptanceTestsSubscriptionIdApiVersion;
     using Newtonsoft.Json;
     using System.Linq;
 

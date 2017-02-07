@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
     /// <summary>
     /// Defines values for Colors.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum Colors
     {
         [EnumMember(Value = "red color")]

@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsHead
 {
-    using Fixtures.Azure;
+    using Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Newtonsoft.Json;
@@ -101,6 +101,8 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -148,7 +150,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -173,7 +175,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            _result.Body = _statusCode == System.Net.HttpStatusCode.OK;
+            _result.Body = _statusCode == HttpStatusCode.OK;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -238,6 +240,8 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -285,7 +289,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -310,7 +314,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            _result.Body = _statusCode == System.Net.HttpStatusCode.NoContent;
+            _result.Body = _statusCode == HttpStatusCode.NoContent;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -375,6 +379,8 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -422,7 +428,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -447,7 +453,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            _result.Body = _statusCode == System.Net.HttpStatusCode.NoContent;
+            _result.Body = _statusCode == HttpStatusCode.NoContent;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();

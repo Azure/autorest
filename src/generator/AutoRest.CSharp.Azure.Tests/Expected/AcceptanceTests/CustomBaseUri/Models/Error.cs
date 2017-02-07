@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
 {
-    using Fixtures.Azure;
-    using Fixtures.Azure.AcceptanceTestsCustomBaseUri;
+    using Azure;
+    using AcceptanceTestsCustomBaseUri;
     using Newtonsoft.Json;
     using System.Linq;
 

@@ -78,11 +78,13 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/server/501").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("HEAD");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -123,7 +125,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -149,7 +151,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, Client.DeserializationSettings);
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -196,11 +198,13 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/server/501").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -241,7 +245,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -267,7 +271,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, Client.DeserializationSettings);
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -318,11 +322,13 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/server/505").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -340,7 +346,7 @@ namespace Fixtures.AcceptanceTestsHttp
             if(booleanValue != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(booleanValue, Client.SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Send Request
@@ -369,7 +375,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -395,7 +401,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, Client.DeserializationSettings);
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -446,11 +452,13 @@ namespace Fixtures.AcceptanceTestsHttp
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "http/failure/server/505").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("DELETE");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("DELETE");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -468,7 +476,7 @@ namespace Fixtures.AcceptanceTestsHttp
             if(booleanValue != null)
             {
                 _requestContent = Microsoft.Rest.Serialization.SafeJsonConvert.SerializeObject(booleanValue, Client.SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Send Request
@@ -497,7 +505,7 @@ namespace Fixtures.AcceptanceTestsHttp
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -523,7 +531,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, Client.DeserializationSettings);
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)

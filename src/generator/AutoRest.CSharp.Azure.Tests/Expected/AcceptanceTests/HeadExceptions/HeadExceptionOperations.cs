@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
 {
-    using Fixtures.Azure;
+    using Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using System.Collections;
@@ -100,6 +100,8 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -228,6 +230,8 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -356,6 +360,8 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
