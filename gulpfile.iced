@@ -26,7 +26,7 @@ Import
     source 'src/**/*[Tt]ests.csproj'
       .pipe except /AutoRest.Tests/ig #not used yet.
       .pipe except /AutoRest.AzureResourceSchema.Tests/ig
-      .pipe except /AutoRest.Swagger.Tests/ig
+      #.pipe except /AutoRest.Swagger.Tests/ig
     
   # assemblies that we sign
   assemblies: () -> 
