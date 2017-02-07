@@ -34,7 +34,7 @@ task 'clean','calls dotnet-clean on the solution', ['clean-packages'], ->
 
 ###############################################
 task 'build','builds the project',['restore'], (done) ->
-  exec "dotnet build -c #{configuration} #{solution} /nologo", (code, stdout, stderr) ->
+  exec "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
     if code 
       throw error "Build Failed #{ stderr }"
     echo "done build"

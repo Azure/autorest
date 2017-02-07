@@ -4,6 +4,7 @@
     <Common>$(MsBuildThisFileDirectory)</Common>
     <GenerateFullPaths>true</GenerateFullPaths>
     <!-- <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir> -->
+    <Common>$(MsBuildThisFileDirectory)</Common>
     <SolutionDir>$(Common)../../</SolutionDir>
   </PropertyGroup>
 
