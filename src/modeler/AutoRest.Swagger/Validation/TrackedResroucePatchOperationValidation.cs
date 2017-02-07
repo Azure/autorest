@@ -44,7 +44,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (!exemptedNames.IsMatch(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    if (!patchOperations.Any(op => op.Parameters.Any(p => p.Schema.AllOf.First() == definition.Value || p.Reference.ToString() == definition.Value)))
+                    if (!patchOperations.Any(op => op.Parameters.Any(p => p.Schema.AllOf.First().Reference == definition.Value.Reference || p.Reference == definition.Value.Reference)))
                     {
                         // if no patch operation takes in the current tracked resource as a request parameter, 
                         // the tracked resource does not have a corresponding patch operation, grounds to call
@@ -53,6 +53,7 @@ namespace AutoRest.Swagger.Validation
                     }
                 }
             }
+            return true;
         }
     }
 
