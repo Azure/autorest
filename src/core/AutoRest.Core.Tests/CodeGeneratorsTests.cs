@@ -32,12 +32,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    CodeGenerator = "CSharp",
-                    FileSystemInput = _fileSystem,
-                    OutputDirectory = Path.GetTempPath()
-                };
+                var settings = new Settings();
                 SampleCodeGenerator codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
                 Assert.Contains(Path.Combine(settings.ModelsName), settings.FileSystemOutput.VirtualStore.Keys);
@@ -73,12 +68,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    CodeGenerator = "CSharp",
-                    FileSystemInput = _fileSystem,
-                    OutputDirectory = Path.GetTempPath()
-                };
+                var settings = new Settings();
                 string existingContents = "this is dummy";
                 string path = Path.Combine(settings.ModelsName, "Pet.cs");
                 settings.FileSystemOutput.VirtualStore[path] = new StringBuilder(existingContents);
@@ -95,11 +85,8 @@ namespace AutoRest.Core.Tests
             {
                 var settings = new Settings
                 {
-                    Modeler = "Swagger",
-                    CodeGenerator = "CSharp",
                     Input = "RedisResource.json",
                     FileSystemInput = _fileSystem,
-                    OutputDirectory = Path.GetTempPath(),
                     OutputFileName = "test.file.cs"
                 };
 

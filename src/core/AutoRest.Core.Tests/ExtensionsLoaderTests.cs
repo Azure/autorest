@@ -35,16 +35,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    FileSystemInput = _fileSystem,
-                    Input = "X:\\RedisResource.json",
-                    OutputDirectory = "X:\\Output"
-                };
-                
                 var language = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("NodeJS"));
-                settings.Validate();
-
                 Assert.Equal("NodeJS", language.Settings.Name);
             }
         }
@@ -54,20 +45,6 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings {FileSystemInput = _fileSystem};
-                var language = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp"));
-
-                Assert.Equal("CSharp", language.Settings.Name);
-            }
-        }
-
-        [Fact]
-        public void LanguageWithoutSettingsLoadsFromJsonFile()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings {FileSystemInput = _fileSystem};
-
                 var language = ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin("CSharp"));
                 Assert.Equal("CSharp", language.Settings.Name);
             }
@@ -79,15 +56,9 @@ namespace AutoRest.Core.Tests
             using (NewContext)
             {
                 string codeGenerator = "Foo.Bar";
-                var settings = new Settings
-                {
-                    FileSystemInput = _fileSystem
-                };
-            
-
-            AssertThrows<CodeGenerationException>(
-                () => ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin(codeGenerator)),
-                $"Plugin {codeGenerator} does not have an assembly name in configuration");
+                AssertThrows<CodeGenerationException>(
+                    () => ExtensionsLoader.GetPlugin(AutoRestConfiguration.CreateForPlugin(codeGenerator)),
+                    $"Plugin {codeGenerator} does not have an assembly name in configuration");
             }
         }
 

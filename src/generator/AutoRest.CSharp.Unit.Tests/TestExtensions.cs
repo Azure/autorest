@@ -79,7 +79,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 var settings = new Settings
                 {
                     CodeGenerator = codeGenerator,
-                    FileSystemInput = fileSystem,
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client",
                     ClientName = clientName

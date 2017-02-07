@@ -33,7 +33,6 @@ namespace AutoRest.CSharp.Unit.Tests
                 var settings = new Settings
                 {
                     CodeGenerator = "CSharp",
-                    FileSystemInput = fileSystem,
                     OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-server"
