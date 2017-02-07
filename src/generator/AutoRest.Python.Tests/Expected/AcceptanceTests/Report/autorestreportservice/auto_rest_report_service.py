@@ -22,16 +22,15 @@ class AutoRestReportServiceConfiguration(Configuration):
     attributes.
 
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, base_url=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestReportServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestReportServiceConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestreportservice/{}'.format(VERSION))
 
@@ -43,13 +42,12 @@ class AutoRestReportService(object):
     :vartype config: AutoRestReportServiceConfiguration
 
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, base_url=None):
 
-        self.config = AutoRestReportServiceConfiguration(base_url, filepath)
+        self.config = AutoRestReportServiceConfiguration(base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

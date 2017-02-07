@@ -296,6 +296,7 @@ task 'regenerate-python', "regenerate expected swaggers for Python", ->
     'outputBaseDir': 'src/generator/AutoRest.Python.Tests',
     'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
     'mappings': mappings,
+    'nsPrefix': "Fixtures"
     'outputDir': 'Expected',
     'codeGenerator': 'Python',
     'flatteningThreshold': '1'
@@ -310,6 +311,7 @@ task 'regenerate-pythonazure', "regenerate expected swaggers for Python Azure", 
     'outputBaseDir': 'src/generator/AutoRest.Python.Azure.Tests',
     'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
     'mappings': mappings,
+    'nsPrefix': "Fixtures"
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.Python',
     'flatteningThreshold': '1'
