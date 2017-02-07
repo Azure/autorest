@@ -12,9 +12,56 @@ using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class TrackedResourceValidation : TypedRule<Dictionary<string, Schema>>
+    public class TrackedResourcePatchOperationValidation : TypedRule<Dictionary<string, Schema>>
     {
         private readonly Regex exemptedNames = new Regex(@"^(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
+
+
+        /// <summary>
+        /// The template message for this Rule. 
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.TrackedResourceIsNotValid;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Warning;
+
+        /// <summary>
+        /// Validation fails if the tracked resource does not have a corresponding 
+        /// "patch" operation in the service definition
+        /// </summary>
+        /// <param name="definitions">Operation Definition to validate</param>
+        /// <param name="formatParameters">The noun to be put in the failure message</param>
+        /// <returns></returns>
+        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context)
+        {
+            List<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", (ServiceDefinition)context.Root);
+            foreach (KeyValuePair<string, Schema> definition in definitions)
+            {
+                if (!exemptedNames.IsMatch(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
+                {
+                    if (!patchOperations.Any(op => op.Parameters.Any(p => p.Schema.AllOf.First() == definition.Value || p.Reference.ToString() == definition.Value)))
+                    {
+                        // if no patch operation takes in the current tracked resource as a request parameter, 
+                        // the tracked resource does not have a corresponding patch operation, grounds to call
+                        // the swagger invalid!
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+namespace AutoRest.Swagger.Validation
+{
+    public class TrackedResourceValidation : TypedRule<Dictionary<string, Schema>>
+    {
         private readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
         private readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
         private readonly Regex propertiesRegEx = new Regex(@"^(TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
@@ -40,21 +87,21 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
-            List<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
-            
+            List<Operation> getOperations = this.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
+
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
                 if (!exemptedNames.IsMatch(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
                     bool getCheck = getOperations.Any(operation =>
-                        operation.Responses.Any(response => 
-                            response.Key.Equals("200") && 
+                        operation.Responses.Any(response =>
+                            response.Key.Equals("200") &&
                             response.Value.Schema != null &&
                             response.Value.Schema.Reference != null &&
-                            response.Value.Schema.Reference.EndsWith("/"+definition.Key)
+                            response.Value.Schema.Reference.EndsWith("/" + definition.Key)
                         )
                      );
-                    if(!getCheck)
+                    if (!getCheck)
                     {
                         formatParameters = new object[2];
                         formatParameters[0] = definition.Key;
@@ -81,7 +128,7 @@ namespace AutoRest.Swagger.Validation
                     }
 
                     bool schemaResult = this.HandleSchema(definition.Value, definitions);
-                    if(!schemaResult)
+                    if (!schemaResult)
                     {
                         formatParameters = new object[2];
                         formatParameters[0] = definition.Key;
@@ -97,7 +144,7 @@ namespace AutoRest.Swagger.Validation
 
         private bool HandleProperties(Dictionary<string, Schema> properties, Dictionary<string, Schema> definitions)
         {
-            foreach(KeyValuePair<string, Schema> property in properties)
+            foreach (KeyValuePair<string, Schema> property in properties)
             {
                 if (propertiesRegEx.IsMatch(property.Key))
                 {
@@ -120,13 +167,13 @@ namespace AutoRest.Swagger.Validation
             {
                 Schema resultSchema = Schema.FindReferencedSchema(schema.Reference, definitions);
                 bool schemaResult = this.HandleSchema(resultSchema, definitions);
-                if(!schemaResult)
+                if (!schemaResult)
                 {
                     return false;
                 }
             }
 
-            if(schema.Properties != null)
+            if (schema.Properties != null)
             {
                 bool propertiesResult = this.HandleProperties(schema.Properties, definitions);
                 if (!propertiesResult)
@@ -155,5 +202,7 @@ namespace AutoRest.Swagger.Validation
             Schema schema = Schema.FindReferencedSchema(reference, definitions);
             return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items != null && property.Value.Items.Reference.EndsWith("/" + referenceToMatch));
         }
+
+        
     }
 }
