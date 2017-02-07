@@ -11,9 +11,36 @@
   ],
   "basePath": "/",
   "paths": {
-    "/foo": {
-      "post": {
-        "operationId": "Noun_Verb",
+    "/ResourceGroups/{resourceGroupName}/Subscriptions/{subscriptionId}/providers/Microsoft.TestProvider/{testnamespace}/CloudDocuDB": {
+      "get": {
+        "operationId": "CloudDocuDB_ListByMicrosoftTestProvider",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "msdn/internal/Subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/myresource": {
+      "get": {
+        "operationId": "myresource_ListByResourceGroup",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {
@@ -59,14 +86,12 @@
           }
         }
       }
-    }
-  },
-  "x-ms-paths": {
-    "/foo?{id}": {
+    },
+    "msdn/internal/Subscriptions/{subscriptionId}/myresource": {
       "get": {
-        "operationId": "foo_getByID",
-        "summary": "Foo get path",
-        "description": "Foo get operation",
+        "operationId": "myresource_List",
+        "summary": "Foo path",
+        "description": "Foo operation",
         "responses": {
           "default": {
             "description": "Unexpected error"
@@ -104,13 +129,6 @@
       "required": true,
       "type": "string",
       "description": "test api version"
-    },
-    "id": {
-      "name": "api-id",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "test api id"
     }
   },
   "definitions": {

@@ -13,7 +13,7 @@
   "paths": {
     "/foo": {
       "post": {
-        "operationId": "Noun_Verb",
+        "operationId": "foo_list",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {
@@ -64,7 +64,7 @@
   "x-ms-paths": {
     "/foo?{id}": {
       "get": {
-        "operationId": "foo_getByID",
+        "operationId": "foo_listModels",
         "summary": "Foo get path",
         "description": "Foo get operation",
         "responses": {

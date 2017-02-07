@@ -65,6 +65,28 @@
         ]
       }
     },
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          }
+        }
+      }
+    },
     "msdn/internal/Subscriptions/{subscriptionId}/myresource": {
       "get": {
         "operationId": "myresource1_List",
@@ -127,6 +149,18 @@
         "prop0": {
           "description": "some property",
           "type": "string"
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Operations"
         }
       }
     }

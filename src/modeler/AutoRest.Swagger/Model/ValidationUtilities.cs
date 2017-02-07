@@ -1,4 +1,7 @@
-﻿using AutoRest.Core.Utilities;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +13,17 @@ namespace AutoRest.Swagger.Model.Utilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
 
-        // determine if the 
+        // determine if the operation returns an array type or is of xmspageable type
         public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
         {
+            // if xmspageable type, return true
             if (op.Extensions.GetValue<object>(XmsPageable) != null) return true;
 
-            if (!(op.Responses?.ContainsKey("200")??false)) return false;
+            // if a success response is not defined, we have nothing to check, return false
+            if ((op.Responses?.ContainsKey("200") ?? false) !=true) return false;
 
-            if (!((op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty)) ?? true))
+            // if we have a non-null response schema, and the schema is of type array, return true
+            if (((op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty)) ?? true)!=true)
             {
                 var modelLink = op.Responses["200"].Schema.Reference;
                 if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array)??false)
@@ -25,6 +31,7 @@ namespace AutoRest.Swagger.Model.Utilities
                     return true;
                 }
             }
+
             return false;
         }
 
