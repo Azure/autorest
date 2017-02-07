@@ -40,4 +40,6 @@ task 'clean','Cleans the the solution', ['clean-packages'], ->
   exec "git checkout #{basefolder}/packages"  
 
 task 'autorest', 'Runs AutoRest', -> 
+  # Run AutoRest from the original current directory.
+  cd process.env.INIT_CWD
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{process.argv.slice(3).join(' ')}"

@@ -45,6 +45,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private string _header;
 
+        public static string AutoRestFolder{ get;set;}
+
         public Settings()
         {
             if (!Context.IsActive)

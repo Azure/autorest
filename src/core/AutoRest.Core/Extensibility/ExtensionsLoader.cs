@@ -146,6 +146,11 @@ namespace AutoRest.Core.Extensibility
 
             if (!settings.FileSystem.FileExists(path))
             {
+                path = Path.Combine(Settings.AutoRestFolder,ConfigurationFileName);
+            }
+
+            if (!settings.FileSystem.FileExists(path))
+            {
                 return null;
             }
             return settings.FileSystem.ReadFileAsText(path);
