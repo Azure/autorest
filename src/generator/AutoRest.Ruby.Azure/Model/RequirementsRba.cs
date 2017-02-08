@@ -22,7 +22,7 @@ namespace AutoRest.Ruby.Azure.Model
         {
             return (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
                     (bool) model.Extensions[AzureExtensions.ExternalExtension]) 
-                    || model.Name == "Resource" || model.Name == "SubResource";
+                    ||CompositeTypeRba.IsResourceModelMatchingStandardDefinition(model);
         }
 
         /// <summary>

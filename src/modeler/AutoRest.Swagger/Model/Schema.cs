@@ -37,6 +37,7 @@ namespace AutoRest.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         [CollectionRule(typeof(AvoidNestedProperties))]
+        [Rule(typeof(XmsClientNameValidation))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }
@@ -228,7 +229,7 @@ namespace AutoRest.Swagger.Model
             }
         }
 
-        private static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
+        public static Schema FindReferencedSchema(string reference, IDictionary<string, Schema> definitions)
         {
             if (reference != null && reference.StartsWith("#", StringComparison.Ordinal))
             {
