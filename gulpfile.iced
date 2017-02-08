@@ -406,13 +406,13 @@ task 'regenerate-csazurefluent', "regenerate expected swaggers for C# Azure Flue
 
 task 'regenerate-cs', "regenerate expected swaggers for C#", ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], ->
   mappings = mergeOptions({
-    'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
-    'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
-    'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
-    'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
-    'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
-    'Additional.Properties': 'Swagger/swagger-additional-properties.yaml',
-    'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json',
+    'Mirror.RecursiveTypes': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-recursive-type.json',
+    'Mirror.Primitives': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-primitives.json',
+    'Mirror.Sequences': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-sequences.json',
+    'Mirror.Polymorphic': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-polymorphic.json',
+    'Internal.Ctors': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-internal-ctors.json',
+    'Additional.Properties': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-additional-properties.yaml',
+    'DateTimeOffset': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-datetimeoffset.json',
     'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
   }, defaultMappings)
   regenExpected {
@@ -427,7 +427,7 @@ task 'regenerate-cs', "regenerate expected swaggers for C#", ['regenerate-cswith
 
 task 'regenerate-cswithcreds', "regenerate expected swaggers for C# with credentials", ->
   mappings = {
-    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
+    'PetstoreV2': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
@@ -442,7 +442,7 @@ task 'regenerate-cswithcreds', "regenerate expected swaggers for C# with credent
 
 task 'regenerate-csallsync', "regenerate expected swaggers for C# with all synchronous methods", ->
   mappings = {
-    'PetstoreV2AllSync': 'Swagger/swagger.2.0.example.v2.json',
+    'PetstoreV2AllSync': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
@@ -457,7 +457,7 @@ task 'regenerate-csallsync', "regenerate expected swaggers for C# with all synch
 
 task 'regenerate-csnosync', "regenerate expected swaggers for C# with no synchronous methods", ->
   mappings = {
-    'PetstoreV2NoSync': 'Swagger/swagger.2.0.example.v2.json',
+    'PetstoreV2NoSync': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
