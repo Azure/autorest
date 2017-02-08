@@ -15,16 +15,16 @@ namespace AutoRest.Swagger.Validation
     public class ListOperationNamingWarning : TypedRule<Dictionary<string,Dictionary<string, Operation>>>
     {
         private readonly string XmsPageable = "x-ms-pageable";
-        private readonly Regex regex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
+        private readonly Regex ListRegex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string,Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
             var serviceDefinition = (ServiceDefinition)context.Root;
-            var listingOperations = entity.Values.SelectMany(opDict=>opDict.Where(pair => pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")));
-            foreach (var opPair in listingOperations)
+            var listOperations = entity.Values.SelectMany(opDict=>opDict.Where(pair => pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")));
+            foreach (var opPair in listOperations)
             {
                 // if the operation id is already of the type _list we can skip this check
-                if (regex.IsMatch(opPair.Value.OperationId))
+                if (ListRegex.IsMatch(opPair.Value.OperationId))
                 {
                     continue;
                 }
