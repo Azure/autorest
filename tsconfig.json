@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+      "target": "es2016",
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "sourceMap": true,
+      "types" : ["node"]
+  },
+  "include": [
+      "src/autorest/**/*.ts",
+      "src/installer/**/*.ts"
+  ]
+}

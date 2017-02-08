@@ -1,0 +1,11 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "omnisharp.projectLoadTimeout": 200,
+    "files.exclude": {
+        "attic/*": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true
+    }
+}
