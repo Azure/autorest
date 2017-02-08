@@ -13,9 +13,60 @@
   "paths": {
     "/foo": {
       "post": {
-        "operationId": "Noun_Verb",
+        "operationId": "foo_list",
         "summary": "Foo path",
         "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/foo?{id}": {
+      "get": {
+        "operationId": "foo_listModels",
+        "summary": "Foo get path",
+        "description": "Foo get operation",
         "responses": {
           "default": {
             "description": "Unexpected error"
@@ -53,6 +104,13 @@
       "required": true,
       "type": "string",
       "description": "test api version"
+    },
+    "id": {
+      "name": "api-id",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api id"
     }
   },
   "definitions": {
@@ -73,6 +131,18 @@
         "prop0": {
           "description": "some property",
           "type": "string"
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Operations"
         }
       }
     }

@@ -13,7 +13,7 @@
   "paths": {
     "/ResourceGroups/{resourceGroupName}/Subscriptions/{subscriptionId}/providers/Microsoft.TestProvider/{testnamespace}/CloudDocuDB": {
       "get": {
-        "operationId": "CloudDocuDB_ListByMicrosoftTestProvider1",
+        "operationId": "CloudDocuDB_ListByMicrosoftTestProvider",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {
@@ -40,7 +40,7 @@
     },
     "msdn/internal/Subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/myresource": {
       "get": {
-        "operationId": "myresource_ListByResourceGroup1",
+        "operationId": "myresource_ListByResourceGroup",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {
@@ -89,7 +89,7 @@
     },
     "msdn/internal/Subscriptions/{subscriptionId}/myresource": {
       "get": {
-        "operationId": "myresource1_List",
+        "operationId": "myresource_List",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {

@@ -197,7 +197,7 @@ namespace AutoRest.Swagger.Tests
         public void ListOperationsNamingValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "list-operation-naming.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning));
+            messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 2);
         }
 
         [Fact]
@@ -449,6 +449,26 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "tracking-resource-patch-valid-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 0);
+        }
+
+        /// Verifies that list by operations (operations that are named as *_listby*) are correctly named
+        /// </summary>
+        [Fact]
+        public void ListByOperationsCorrectlyNamed()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "listby-operations-valid-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
+        }
+
+        /// <summary>
+        /// Verifies that listing operations (any operation that returns an array or is of xmspageable type) 
+        /// are correctly named
+        /// </summary>
+        [Fact]
+        public void ListingOperationsCorrectlyNamed()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "list-operations-valid-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
         }
 
     }

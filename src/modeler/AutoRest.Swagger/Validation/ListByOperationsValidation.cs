@@ -7,6 +7,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Model.Utilities;
 using System.Linq;
 
 namespace AutoRest.Swagger.Validation
@@ -14,10 +15,10 @@ namespace AutoRest.Swagger.Validation
     public class ListByOperationsValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         private readonly Regex ListByRegex = new Regex(@".+_listby.+$", RegexOptions.IgnoreCase);
-        private readonly Regex UrlRegex = new Regex(@"(\/[^\/]+)+$", RegexOptions.IgnoreCase);
+        private readonly Regex UrlRegex = new Regex(@"(?<urltoken>\/[^\/]+)+$", RegexOptions.IgnoreCase);
         private readonly Regex RgRegex = new Regex(@"(\/[^\/]+)*\/ResourceGroups\/\{[^\/]+}(\/[^\/]+)*$", RegexOptions.IgnoreCase);
         private readonly Regex SubscriptionRegex = new Regex(@"(\/[^\/]+)*\/Subscriptions\/\{[^\/]+}(\/[^\/]+)*$", RegexOptions.IgnoreCase);
-        private readonly Regex ParentRegex = new Regex(@"[^\/]+\/providers(\/[^\/]+)+$", RegexOptions.IgnoreCase);
+        private readonly Regex ParentRegex = new Regex(@"[^\/]+\/providers(?<parent>\/[^\/]+)+$", RegexOptions.IgnoreCase);
         private readonly Regex PathParameterRegex = new Regex(@"\/\{\w+\}$", RegexOptions.IgnoreCase);
         private readonly string ListByTemplate = "{0}_ListBy{1}";
         private readonly string ListTemplate = "{0}_List";
@@ -33,74 +34,96 @@ namespace AutoRest.Swagger.Validation
             {
                 var listOpIds = pathObj.Value.Select(pair => {
                     // if the operation is not a get or a post, skip
-                    if (!(pair.Key.Equals("get") || pair.Key.Equals("post")))
-                    { return null; }
+                    if (!(pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")))
+                    {
+                        return null;
+                    }
+
                     // if the operation id is not of the form *_list(by), skip
                     if (!(ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list")))
-                    { return null; }
+                    {
+                        return null;
+                    }
+
                     // if the operation does not return an array type or is not an xms pageable type, skip
-                    if (!(AutoRest.Swagger.Model.Utilities.ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition)))
-                    { return null; }
+                    if (!(ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition)))
+                    {
+                        return null;
+                    }
+
                     // if all conditions pass, return the operation id
                     return pair.Value.OperationId;
                 }).Where(opId=> opId!=null);
 
                 // if there are no operations matching our conditions, skip
                 if (IsNullOrEmpty(listOpIds))
-                { continue;  }
+                {
+                    continue;
+                }
 
                 // populate valid list operation names for given path
-                var opNames = GetValidListOpNames(pathObj.Key);
+                List<string> opNames = GetValidListOpNames(pathObj.Key);
                 
                 // if url does not match any of the predefined regexes, skip
-                if (IsNullOrEmpty(opNames))
-                { continue; }
+                if (opNames == null || opNames.Count==0)
+                {
+                    continue;
+                }
 
                 // find if there are any operations that violate the rule
                 var errOpIds = listOpIds.Where(opId => !opNames.Contains(opId.ToLower()));
+                
                 // no violations found, skip
                 if (IsNullOrEmpty(errOpIds))
-                { continue; }
-
+                {
+                    continue;
+                }
+                // aggregate suggested op names in a single readable string for the formatter
+                var suggestedNames = opNames.Aggregate((curr, next)=> curr+","+ next);
                 foreach (var errOpId in errOpIds)
                 {
-                    yield return new ValidationMessage(context.Path, this, errOpId);
+                    var stringParams = new List<string>() { errOpId };
+                    stringParams.AddRange(opNames);
+                    yield return new ValidationMessage(context.Path, this, errOpId, suggestedNames);
                 }
             }
         }
 
-        private IEnumerable<string> GetValidListOpNames(string path)
+        private List<string> GetValidListOpNames(string path)
         {
             var opList = new List<string>();
             var methodGrp = GetMethodGroup(path);
-            if (methodGrp == string.Empty)
-            { return opList; }
+            if (methodGrp == string.Empty || !SubscriptionRegex.IsMatch(path))
+            {
+                return opList;
+            }
 
+            // construct _listbysubscriptionid
+            opList.Add(string.Format(ListByTemplate, methodGrp, SubscriptionId).ToLower());
+            opList.Add(string.Format(ListTemplate, methodGrp).ToLower());
+
+            // construct _listbyresourcegroup
+            if ((RgRegex.IsMatch(path)))
+            {
+                opList.Add(string.Format(ListByTemplate, methodGrp, ResourceGroup).ToLower());
+            }
+            else
+            {
+                return opList;
+            }
+            
             // construct _listbyparent
             var match = ParentRegex.Match(path.Substring(0, path.IndexOf(methodGrp)-1));
             if (match.Success)
             {
-                var caps = match.Groups[1].Captures;
-                int index = caps.Count - 1;
-                while (index >= 0 && PathParameterRegex.IsMatch(caps[index].Value))
-                {
-                    index--;
-                }
+                var caps = match.Groups["parent"].Captures.OfType<Capture>().Reverse();
+                var capture = caps.FirstOrDefault(cap => !PathParameterRegex.IsMatch(cap.Value));
                 // if due to some reason the parent we find is of the form "foo.bar", let's recommend the
                 // operation id be named as "_listbyfoobar"
-                if (index > -1)
-                { opList.Add(string.Format(ListByTemplate, methodGrp, caps[index].Value.Substring(1)).Replace(".", string.Empty).ToLower()); }
-            }
-
-            // construct _listbyresourcegroup
-            if (RgRegex.IsMatch(path))
-            { opList.Add(string.Format(ListByTemplate, methodGrp, ResourceGroup).ToLower()); }
-
-            // construct _listbysubscriptionid
-            if (SubscriptionRegex.IsMatch(path))
-            {
-                opList.Add(string.Format(ListByTemplate, methodGrp, SubscriptionId).ToLower());
-                opList.Add(string.Format(ListTemplate, methodGrp).ToLower());
+                if (capture != null)
+                {
+                    opList.Add(string.Format(ListByTemplate, methodGrp, capture.Value.Substring(1)).Replace(".", string.Empty).ToLower());
+                }
             }
             
             return opList;
@@ -109,13 +132,10 @@ namespace AutoRest.Swagger.Validation
         private string GetMethodGroup(string path)
         {
             var match = UrlRegex.Match(path);
-            var caps = match.Groups[1].Captures;
-            int index = caps.Count - 1;
-            while (index >= 0 && PathParameterRegex.IsMatch(caps[index].Value))
-            {
-                index--;
-            }
-            return (index > -1) ? caps[index].Value.Substring(1) : string.Empty;
+            var caps = match.Groups["urltoken"].Captures.OfType<Capture>().Reverse();
+            var capture = caps.FirstOrDefault(cap => !PathParameterRegex.IsMatch(cap.Value));
+            
+            return (capture!=null) ? capture.Value.Substring(1) : string.Empty;
         }
 
         private bool IsNullOrEmpty(IEnumerable<object> enumerable)
@@ -129,7 +149,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Operation {0} must be named as MethodGroup_ListByResourceGroup, MethodGroup_ListByParent or MethodGroup_List(BySubscriptionId)";
+        public override string MessageTemplate => "Operation {0} must be one of: {1}";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)

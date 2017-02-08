@@ -91,6 +91,7 @@ namespace AutoRest.Swagger.Model
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [JsonProperty("x-ms-paths")]
+        [Rule(typeof(ListOperationNamingWarning))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
