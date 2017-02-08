@@ -50,10 +50,16 @@ task 'autorest-ng', "Runs AutoRest (via node)", ->
 autorest = (args) ->
   # Run AutoRest from the original current directory.
   cd process.env.INIT_CWD
-  echo marked "*AutoRest* #{args.join(' ')}"
+  echo info "AutoRest #{args.join(' ')}"
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}"
 
-# NOTE: probably wanna rename the 'test' task in dotnet.iced to something more specific
+############################################### 
+task 'test', "runs all tests", ->
+  run 'test-cs',
+      'test-node'
+      'test-ruby'
+      'test-python'
+      'test-go'
 
 ############################################### 
 task 'test-node', 'runs NodeJS tests', ->

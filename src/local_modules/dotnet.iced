@@ -129,7 +129,7 @@ task 'package','From scratch build, sign, and package ', (done) ->
     -> done()
 
 ############################################### 
-task 'test', 'runs dotnet tests',['restore'] , (done) ->
+task 'test-cs', 'runs dotnet tests',['restore'] , (done) ->
   tests()
     .pipe dotnet "test"
 
