@@ -1,0 +1,270 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DnsManagementClient",
+    "description": "The DNS Management Client.",
+    "version": "2016-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_Get",
+        "description": "Gets a DNS zone. Retrieves the zone properties, but not the record sets within the zone.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the DNS zone (without a terminating dot)."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_ListByResourceGroup",
+        "description": "Lists the DNS zones within a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return. If not specified, returns up to 100 record sets."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones": {
+      "get": {
+        "tags": [
+          "Zones"
+        ],
+        "operationId": "Zones_List",
+        "description": "Lists the DNS zones in all resource groups in a subscription.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of DNS zones to return. If not specified, returns up to 100 zones."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/ZoneListResult"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/Zone"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ZoneListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Zone"
+          },
+          "description": "Information about the DNS zones."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The continuation token for the next page of results."
+        }
+      },
+      "description": "The response to a Zone List or ListAll operation."
+    },
+    "Zone": {
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "The etag of the zone."
+        },
+        "location": {
+          "type": "string",
+          "description": "The etag of the zone."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ZoneProperties",
+          "description": "The properties of the zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a DNS zone."
+    },
+    "ZoneProperties": {
+      "properties": {
+        "maxNumberOfRecordSets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of record sets that can be created in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored."
+        },
+        "numberOfRecordSets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current number of record sets in this DNS zone.  This is a read-only property and any attempt to set this value will be ignored."
+        },
+        "nameServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.",
+          "readOnly": true
+        }
+      },
+      "description": "Represents the properties of the zone."
+    },
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the Azure subscription ID, which uniquely identifies the Microsoft Azure subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Specifies the API version."
+    }
+  }
+}

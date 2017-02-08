@@ -19,6 +19,8 @@ namespace AutoRest.Core.Logging
 
         public override string XPath => $"[{Index + 1}]";
 
+        public override string ReadablePath => XPath;
+
         public override YamlNode SelectNode(ref YamlNode node)
         {
             var snode = node as YamlSequenceNode;

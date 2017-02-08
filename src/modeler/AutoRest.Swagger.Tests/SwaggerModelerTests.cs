@@ -249,23 +249,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void codeModelWithCircularDependencyThrowsError()
-        {
-            using (NewContext)
-            {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-allOf-circular.json")
-                };
-                var modeler = new SwaggerModeler();
-                var ex = Assert.Throws<InvalidOperationException>(() => modeler.Build());
-                Assert.Contains("circular", ex.Message, StringComparison.OrdinalIgnoreCase);
-                Assert.Contains("siamese", ex.Message, StringComparison.OrdinalIgnoreCase);
-            }
-        }
-
-        [Fact]
         public void TestcodeModelWithRecursiveTypes()
         {
             using (NewContext)

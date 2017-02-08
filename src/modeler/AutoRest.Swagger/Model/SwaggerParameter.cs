@@ -16,6 +16,7 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     [Serializable]
     [Rule(typeof(ParameterDescriptionRequired))]
+    [Rule(typeof(XmsClientNameParameterValidation))]
     public class SwaggerParameter : SwaggerObject
     {
         private bool _isRequired;
