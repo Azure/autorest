@@ -4,5 +4,6 @@ namespace AutoRest.TypeScript.SuperAgent.Model
 {
     public class CodeModelTs : CodeModel
     {
+        
     }
 }

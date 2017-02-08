@@ -136,6 +136,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TypeScript", "TypeScript", 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.TypeScript.SuperAgent", "src\generator\AutoRest.TypeScript.SuperAgent\AutoRest.TypeScript.SuperAgent.xproj", "{2F19209C-3A73-4864-8DA3-3BC82BD4A061}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AutoRest.TypeScript.SuperAgent.Tests", "src\generator\AutoRest.TypeScript.SuperAgent.Tests\AutoRest.TypeScript.SuperAgent.Tests.xproj", "{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -286,6 +288,10 @@ Global
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -339,5 +345,6 @@ Global
 		{D35E97FD-E360-4DAA-96D0-DA45F32150B9} = {A9C01442-1E93-4C2D-9182-B61C9F53C3FF}
 		{E9D3F4E8-BAE0-487B-89B5-6E271D9848B8} = {EF9E346D-70C6-45F5-8FF9-9B734F4A1298}
 		{2F19209C-3A73-4864-8DA3-3BC82BD4A061} = {E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}
+		{D56ED99A-FEB0-4A63-8517-4CDA86965A0B} = {E9D3F4E8-BAE0-487B-89B5-6E271D9848B8}
 	EndGlobalSection
 EndGlobal

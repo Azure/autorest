@@ -9,6 +9,7 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
 using AutoRest.TypeScript.SuperAgent.Properties;
+using AutoRest.TypeScript.SuperAgent.Templates;
 
 namespace AutoRest.TypeScript.SuperAgent
 {
@@ -26,25 +27,22 @@ namespace AutoRest.TypeScript.SuperAgent
         /// <summary>
         /// Generates TypeScript code and outputs it in the file system.
         /// </summary>
-        /// <param name="codeModel"></param>
         /// <returns></returns>
-        public override Task Generate(CodeModel cm)
+        public override async Task Generate(CodeModel cm)
         {
-            //var disableTypeScriptGeneration = DependencyInjection.Singleton<GeneratorSettingsTs>.Instance.DisableTypeScriptGeneration;
-
             var codeModel = cm as CodeModelTs;
             if (codeModel == null)
             {
                 throw new InvalidCastException("CodeModel is not a TypeScript code model.");
             }
 
-            throw new NotImplementedException();
+            if (codeModel.ModelTypes.Any())
+            {
+                var serviceClientTemplate = new ModelTemplate {Model = codeModel};
+                await Write(serviceClientTemplate, "model.ts");
+            }
 
             /*
-
-            // Service client
-            var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, codeModel.Name.ToCamelCase() + ".js");
 
             if (!disableTypeScriptGeneration)
             {
