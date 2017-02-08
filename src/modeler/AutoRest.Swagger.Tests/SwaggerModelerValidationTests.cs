@@ -451,7 +451,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ListingOperationsCorrectlyNamed()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "listing-operations-valid-naming.json"));
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "list-operations-valid-naming.json"));
             messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
         }
 
