@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourcePatchOperationValidation : TypedRule<Dictionary<string, Schema>>
     {
-        private readonly Regex exemptedNames = new Regex(@"^(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
+        private readonly Regex resNames = new Regex(@"(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
         
         /// <summary>
         /// The template message for this Rule. 
@@ -38,9 +38,9 @@ namespace AutoRest.Swagger.Validation
             List<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", (ServiceDefinition)context.Root);
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                if (!exemptedNames.IsMatch(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
+                if (resNames.IsMatch(definition.Key) || ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    if(!patchOperations.Any(op => op.Responses["200"].Schema.Reference == definition.Key))
+                    if(!patchOperations.Any(op => (op.Responses["200"].Schema?.Reference?.StripDefinitionPath()??string.Empty) == definition.Key))
                     {
                         // if no patch operation returns current tracked resource as a response, 
                         // the tracked resource does not have a corresponding patch operation, grounds to call

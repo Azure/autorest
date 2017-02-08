@@ -369,6 +369,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void TrackedResourcePatchOperationValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "tracking-resource-patch-operation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 1);
+        }
+
+        [Fact]
         public void TrackedResource3Validation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "swagger-tracked-resource-3-validation.json"));
@@ -433,6 +440,17 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "long-running-valid-response.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
         }
+
+        /// <summary>
+        /// Verifies that tracking resource has a patch operation
+        /// </summary>
+        [Fact]
+        public void TrackingResourcePatchOperationValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "tracking-resource-patch-valid-operation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 0);
+        }
+
     }
 
     #endregion
