@@ -79,7 +79,7 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
                 // aggregate suggested op names in a single readable string for the formatter
-                var suggestedNames = opNames.Aggregate((curr, next)=> curr+","+ next);
+                var suggestedNames = opNames.Aggregate((curr, next)=> curr+", "+ next);
                 foreach (var errOpId in errOpIds)
                 {
                     var stringParams = new List<string>() { errOpId };
