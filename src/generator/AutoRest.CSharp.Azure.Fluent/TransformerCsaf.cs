@@ -19,11 +19,11 @@ namespace AutoRest.CSharp.Azure.Fluent
             var codeModel = cs as CodeModelCsaf;
             Settings.Instance.AddCredentials = true;
 
-            // Do parameter transformations
-            TransformParameters(codeModel);
-
             // todo: these should be turned into individual transformers
             AzureExtensions.NormalizeAzureClientModel(codeModel);
+
+            // Do parameter transformations
+            TransformParameters(codeModel);
 
             // Fluent Specific stuff.
             NormalizeResourceTypes(codeModel);
