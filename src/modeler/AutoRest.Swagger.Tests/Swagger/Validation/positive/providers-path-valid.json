@@ -11,7 +11,7 @@
   ],
   "basePath": "/",
   "paths": {
-    "/Subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/providers/Microsoft.Services/Microsoft.Providers/{providerName}/ResourceType": {
+    "/Subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/providers/DefaultNamespace/Microsoft.Services/{serviceName}/Microsoft.Providers/{providerName}": {
       "post": {
         "operationId": "Noun_Verb",
         "summary": "Foo path",

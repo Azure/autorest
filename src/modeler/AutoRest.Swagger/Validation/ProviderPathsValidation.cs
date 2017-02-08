@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class ProviderPathsValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
-        private readonly Regex FullRegex = new Regex(@"\/Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/[^\/]+\/(\/[^\/^\{]+\/\{[^\}]+\})+$", RegexOptions.IgnoreCase);
+        private readonly Regex FullRegex = new Regex(@"\/Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/[^\/]+(\/[^\/]+\/\{[^\}]+\})+$", RegexOptions.IgnoreCase);
         private readonly Regex ProviderRegex = new Regex(@"Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/.+$", RegexOptions.IgnoreCase);
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
@@ -26,7 +26,9 @@ namespace AutoRest.Swagger.Validation
             {
                 // if url is not of the providers pattern or if it ends with /operations, skip
                 if (!ProviderRegex.IsMatch(pathObj.Key) || pathObj.Key.EndsWith("/operations"))
-                { continue; }
+                {
+                    continue;
+                }
 
                 if (!FullRegex.IsMatch(pathObj.Key))
                 {

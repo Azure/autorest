@@ -427,6 +427,17 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "long-running-valid-response.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
         }
+
+        /// <summary>
+        /// Verifies that a providers path is of proper format
+        /// </summary>
+        [Fact]
+        public void ProvidersPathValidJson()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "providers-path-valid.json"));
+            messages.AssertOnlyValidationWarning(typeof(ProviderPathsValidation), 0);
+        }
+
     }
 
     #endregion
