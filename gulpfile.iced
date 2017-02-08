@@ -77,12 +77,12 @@ regenExpected = (opts) ->
   outputDir = if !!opts.outputBaseDir then "#{opts.outputBaseDir}/#{opts.outputDir}" else opts.outputDir
   for key of opts.mappings
     optsMappingsValue = opts.mappings[key]
-    mappingBaseDir = if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue
+    swaggerFile = if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue
     args = [
       '-SkipValidation',
       '-CodeGenerator', opts.codeGenerator,
       '-OutputDirectory', "#{outputDir}/#{key}",
-      '-Input', (if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{mappingBaseDir}" else mappingBaseDir),
+      '-Input', (if !!opts.inputBaseDir then "#{opts.inputBaseDir}/#{swaggerFile}" else swaggerFile),
       '-Header', (if !!opts.header then opts.header else 'MICROSOFT_MIT_NO_VERSION')      
     ]
 
@@ -110,126 +110,126 @@ regenExpected = (opts) ->
     autorest args
 
 defaultMappings = {
-  'AcceptanceTests/ParameterFlattening': '../../dev/TestServer/swagger/parameter-flattening.json',
-  'AcceptanceTests/BodyArray': '../../dev/TestServer/swagger/body-array.json',
-  'AcceptanceTests/BodyBoolean': '../../dev/TestServer/swagger/body-boolean.json',
-  'AcceptanceTests/BodyByte': '../../dev/TestServer/swagger/body-byte.json',
-  'AcceptanceTests/BodyComplex': '../../dev/TestServer/swagger/body-complex.json',
-  'AcceptanceTests/BodyDate': '../../dev/TestServer/swagger/body-date.json',
-  'AcceptanceTests/BodyDateTime': '../../dev/TestServer/swagger/body-datetime.json',
-  'AcceptanceTests/BodyDateTimeRfc1123': '../../dev/TestServer/swagger/body-datetime-rfc1123.json',
-  'AcceptanceTests/BodyDuration': '../../dev/TestServer/swagger/body-duration.json',
-  'AcceptanceTests/BodyDictionary': '../../dev/TestServer/swagger/body-dictionary.json',
-  'AcceptanceTests/BodyFile': '../../dev/TestServer/swagger/body-file.json',
-  'AcceptanceTests/BodyFormData': '../../dev/TestServer/swagger/body-formdata.json',
-  'AcceptanceTests/BodyInteger': '../../dev/TestServer/swagger/body-integer.json',
-  'AcceptanceTests/BodyNumber': '../../dev/TestServer/swagger/body-number.json',
-  'AcceptanceTests/BodyString': '../../dev/TestServer/swagger/body-string.json',
-  'AcceptanceTests/Header': '../../dev/TestServer/swagger/header.json',
-  'AcceptanceTests/Http': '../../dev/TestServer/swagger/httpInfrastructure.json',
-  'AcceptanceTests/Report': '../../dev/TestServer/swagger/report.json',
-  'AcceptanceTests/RequiredOptional': '../../dev/TestServer/swagger/required-optional.json',
-  'AcceptanceTests/Url': '../../dev/TestServer/swagger/url.json',
-  'AcceptanceTests/Validation': '../../dev/TestServer/swagger/validation.json',
-  'AcceptanceTests/CustomBaseUri': '../../dev/TestServer/swagger/custom-baseUrl.json',
-  'AcceptanceTests/CustomBaseUriMoreOptions': '../../dev/TestServer/swagger/custom-baseUrl-more-options.json',
-  'AcceptanceTests/ModelFlattening': '../../dev/TestServer/swagger/model-flattening.json'
+  'AcceptanceTests/ParameterFlattening': 'parameter-flattening.json',
+  'AcceptanceTests/BodyArray': 'body-array.json',
+  'AcceptanceTests/BodyBoolean': 'body-boolean.json',
+  'AcceptanceTests/BodyByte': 'body-byte.json',
+  'AcceptanceTests/BodyComplex': 'body-complex.json',
+  'AcceptanceTests/BodyDate': 'body-date.json',
+  'AcceptanceTests/BodyDateTime': 'body-datetime.json',
+  'AcceptanceTests/BodyDateTimeRfc1123': 'body-datetime-rfc1123.json',
+  'AcceptanceTests/BodyDuration': 'body-duration.json',
+  'AcceptanceTests/BodyDictionary': 'body-dictionary.json',
+  'AcceptanceTests/BodyFile': 'body-file.json',
+  'AcceptanceTests/BodyFormData': 'body-formdata.json',
+  'AcceptanceTests/BodyInteger': 'body-integer.json',
+  'AcceptanceTests/BodyNumber': 'body-number.json',
+  'AcceptanceTests/BodyString': 'body-string.json',
+  'AcceptanceTests/Header': 'header.json',
+  'AcceptanceTests/Http': 'httpInfrastructure.json',
+  'AcceptanceTests/Report': 'report.json',
+  'AcceptanceTests/RequiredOptional': 'required-optional.json',
+  'AcceptanceTests/Url': 'url.json',
+  'AcceptanceTests/Validation': 'validation.json',
+  'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json',
+  'AcceptanceTests/CustomBaseUriMoreOptions': 'custom-baseUrl-more-options.json',
+  'AcceptanceTests/ModelFlattening': 'model-flattening.json'
 }
 
 rubyMappings = {
-  'boolean':['../../dev/TestServer/swagger/body-boolean.json', 'BooleanModule'],
-  'integer':['../../dev/TestServer/swagger/body-integer.json','IntegerModule'],
-  'number':['../../dev/TestServer/swagger/body-number.json','NumberModule'],
-  'string':['../../dev/TestServer/swagger/body-string.json','StringModule'],
-  'byte':['../../dev/TestServer/swagger/body-byte.json','ByteModule'],
-  'array':['../../dev/TestServer/swagger/body-array.json','ArrayModule'],
-  'dictionary':['../../dev/TestServer/swagger/body-dictionary.json','DictionaryModule'],
-  'date':['../../dev/TestServer/swagger/body-date.json','DateModule'],
-  'datetime':['../../dev/TestServer/swagger/body-datetime.json','DatetimeModule'],
-  'datetime_rfc1123':['../../dev/TestServer/swagger/body-datetime-rfc1123.json','DatetimeRfc1123Module'],
-  'duration':['../../dev/TestServer/swagger/body-duration.json','DurationModule'],
-  'complex':['../../dev/TestServer/swagger/body-complex.json','ComplexModule'],
-  'url':['../../dev/TestServer/swagger/url.json','UrlModule'],
-  'url_items':['../../dev/TestServer/swagger/url.json','UrlModule'],
-  'url_query':['../../dev/TestServer/swagger/url.json','UrlModule'],
-  'header_folder':['../../dev/TestServer/swagger/header.json','HeaderModule'],
-  'http_infrastructure':['../../dev/TestServer/swagger/httpInfrastructure.json','HttpInfrastructureModule'],
-  'required_optional':['../../dev/TestServer/swagger/required-optional.json','RequiredOptionalModule'],
-  'report':['../../dev/TestServer/swagger/report.json','ReportModule'],
-  'model_flattening':['../../dev/TestServer/swagger/model-flattening.json', 'ModelFlatteningModule'],
-  'parameter_flattening':['../../dev/TestServer/swagger/parameter-flattening.json', 'ParameterFlatteningModule'],
-  'validation':['../../dev/TestServer/swagger/validation.json', 'ValidationModule'],
-  'custom_base_uri':['../../dev/TestServer/swagger/custom-baseUrl.json', 'CustomBaseUriModule'],
-  'custom_base_uri_more':['../../dev/TestServer/swagger/custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule']
+  'boolean':['body-boolean.json', 'BooleanModule'],
+  'integer':['body-integer.json','IntegerModule'],
+  'number':['body-number.json','NumberModule'],
+  'string':['body-string.json','StringModule'],
+  'byte':['body-byte.json','ByteModule'],
+  'array':['body-array.json','ArrayModule'],
+  'dictionary':['body-dictionary.json','DictionaryModule'],
+  'date':['body-date.json','DateModule'],
+  'datetime':['body-datetime.json','DatetimeModule'],
+  'datetime_rfc1123':['body-datetime-rfc1123.json','DatetimeRfc1123Module'],
+  'duration':['body-duration.json','DurationModule'],
+  'complex':['body-complex.json','ComplexModule'],
+  'url':['url.json','UrlModule'],
+  'url_items':['url.json','UrlModule'],
+  'url_query':['url.json','UrlModule'],
+  'header_folder':['header.json','HeaderModule'],
+  'http_infrastructure':['httpInfrastructure.json','HttpInfrastructureModule'],
+  'required_optional':['required-optional.json','RequiredOptionalModule'],
+  'report':['report.json','ReportModule'],
+  'model_flattening':['model-flattening.json', 'ModelFlatteningModule'],
+  'parameter_flattening':['parameter-flattening.json', 'ParameterFlatteningModule'],
+  'validation':['validation.json', 'ValidationModule'],
+  'custom_base_uri':['custom-baseUrl.json', 'CustomBaseUriModule'],
+  'custom_base_uri_more':['custom-baseUrl-more-options.json', 'CustomBaseUriMoreModule']
 }
 
 goMappings = {
-  'body-array':['../../dev/TestServer/swagger/body-array.json','arraygroup'],
-  'body-boolean':['../../dev/TestServer/swagger/body-boolean.json', 'booleangroup'],
-  'body-byte':['../../dev/TestServer/swagger/body-byte.json','bytegroup'],
-  'body-complex':['../../dev/TestServer/swagger/body-complex.json','complexgroup'],
-  'body-date':['../../dev/TestServer/swagger/body-date.json','dategroup'],
-  'body-datetime-rfc1123':['../../dev/TestServer/swagger/body-datetime-rfc1123.json','datetimerfc1123group'],
-  'body-datetime':['../../dev/TestServer/swagger/body-datetime.json','datetimegroup'],
-  'body-dictionary':['../../dev/TestServer/swagger/body-dictionary.json','dictionarygroup'],
-  'body-duration':['../../dev/TestServer/swagger/body-duration.json','durationgroup'],
-  'body-file':['../../dev/TestServer/swagger/body-file.json', 'filegroup'],
-  'body-formdata':['../../dev/TestServer/swagger/body-formdata.json', 'formdatagroup'],
-  'body-integer':['../../dev/TestServer/swagger/body-integer.json','integergroup'],
-  'body-number':['../../dev/TestServer/swagger/body-number.json','numbergroup'],
-  'body-string':['../../dev/TestServer/swagger/body-string.json','stringgroup'],
-  'custom-baseurl':['../../dev/TestServer/swagger/custom-baseUrl.json', 'custombaseurlgroup'],
-  'header':['../../dev/TestServer/swagger/header.json','headergroup'],
-  'httpinfrastructure':['../../dev/TestServer/swagger/httpInfrastructure.json','httpinfrastructuregroup'],
-  'model-flattening':['../../dev/TestServer/swagger/model-flattening.json', 'modelflatteninggroup'],
-  'report':['../../dev/TestServer/swagger/report.json','report'],
-  'required-optional':['../../dev/TestServer/swagger/required-optional.json','optionalgroup'],
-  'url':['../../dev/TestServer/swagger/url.json','urlgroup'],
-  'validation':['../../dev/TestServer/swagger/validation.json', 'validationgroup'],
-  'paging':['../../dev/TestServer/swagger/paging.json', 'paginggroup'],
-  'azurereport':['../../dev/TestServer/swagger/azure-report.json', 'azurereport']
+  'body-array':['body-array.json','arraygroup'],
+  'body-boolean':['body-boolean.json', 'booleangroup'],
+  'body-byte':['body-byte.json','bytegroup'],
+  'body-complex':['body-complex.json','complexgroup'],
+  'body-date':['body-date.json','dategroup'],
+  'body-datetime-rfc1123':['body-datetime-rfc1123.json','datetimerfc1123group'],
+  'body-datetime':['body-datetime.json','datetimegroup'],
+  'body-dictionary':['body-dictionary.json','dictionarygroup'],
+  'body-duration':['body-duration.json','durationgroup'],
+  'body-file':['body-file.json', 'filegroup'],
+  'body-formdata':['body-formdata.json', 'formdatagroup'],
+  'body-integer':['body-integer.json','integergroup'],
+  'body-number':['body-number.json','numbergroup'],
+  'body-string':['body-string.json','stringgroup'],
+  'custom-baseurl':['custom-baseUrl.json', 'custombaseurlgroup'],
+  'header':['header.json','headergroup'],
+  'httpinfrastructure':['httpInfrastructure.json','httpinfrastructuregroup'],
+  'model-flattening':['model-flattening.json', 'modelflatteninggroup'],
+  'report':['report.json','report'],
+  'required-optional':['required-optional.json','optionalgroup'],
+  'url':['url.json','urlgroup'],
+  'validation':['validation.json', 'validationgroup'],
+  'paging':['paging.json', 'paginggroup'],
+  'azurereport':['azure-report.json', 'azurereport']
 }
 
 
 defaultAzureMappings = {
-  'AcceptanceTests/Lro': '../../dev/TestServer/swagger/lro.json',
-  'AcceptanceTests/Paging': '../../dev/TestServer/swagger/paging.json',
-  'AcceptanceTests/AzureReport': '../../dev/TestServer/swagger/azure-report.json',
-  'AcceptanceTests/AzureParameterGrouping': '../../dev/TestServer/swagger/azure-parameter-grouping.json',
-  'AcceptanceTests/AzureResource': '../../dev/TestServer/swagger/azure-resource.json',
-  'AcceptanceTests/Head': '../../dev/TestServer/swagger/head.json',
-  'AcceptanceTests/HeadExceptions': '../../dev/TestServer/swagger/head-exceptions.json',
-  'AcceptanceTests/SubscriptionIdApiVersion': '../../dev/TestServer/swagger/subscriptionId-apiVersion.json',
-  'AcceptanceTests/AzureSpecials': '../../dev/TestServer/swagger/azure-special-properties.json',
-  'AcceptanceTests/CustomBaseUri': '../../dev/TestServer/swagger/custom-baseUrl.json'
+  'AcceptanceTests/Lro': 'lro.json',
+  'AcceptanceTests/Paging': 'paging.json',
+  'AcceptanceTests/AzureReport': 'azure-report.json',
+  'AcceptanceTests/AzureParameterGrouping': 'azure-parameter-grouping.json',
+  'AcceptanceTests/AzureResource': 'azure-resource.json',
+  'AcceptanceTests/Head': 'head.json',
+  'AcceptanceTests/HeadExceptions': 'head-exceptions.json',
+  'AcceptanceTests/SubscriptionIdApiVersion': 'subscriptionId-apiVersion.json',
+  'AcceptanceTests/AzureSpecials': 'azure-special-properties.json',
+  'AcceptanceTests/CustomBaseUri': 'custom-baseUrl.json'
 }
 
 compositeMappings = {
-  'AcceptanceTests/CompositeBoolIntClient': '../../dev/TestServer/swagger/composite-swagger.json'
+  'AcceptanceTests/CompositeBoolIntClient': 'composite-swagger.json'
 }
 
 azureCompositeMappings = {
-  'AcceptanceTests/AzureCompositeModelClient': '../../dev/TestServer/swagger/azure-composite-swagger.json'
+  'AcceptanceTests/AzureCompositeModelClient': 'azure-composite-swagger.json'
 }
 
 nodeAzureMappings = {
-  'AcceptanceTests/StorageManagementClient': '../../dev/TestServer/swagger/storage.json'
+  'AcceptanceTests/StorageManagementClient': 'storage.json'
 }
 
 nodeMappings = {
-  'AcceptanceTests/ComplexModelClient': '../../dev/TestServer/swagger/complex-model.json'
+  'AcceptanceTests/ComplexModelClient': 'complex-model.json'
 }
 
 rubyAzureMappings = {
-  'head':['../../dev/TestServer/swagger/head.json', 'HeadModule'],
-  'head_exceptions':['../../dev/TestServer/swagger/head-exceptions.json', 'HeadExceptionsModule'],
-  'paging':['../../dev/TestServer/swagger/paging.json', 'PagingModule'],
-  'azure_resource':['../../dev/TestServer/swagger/azure-resource.json', 'AzureResourceModule'],
-  'lro':['../../dev/TestServer/swagger/lro.json', 'LroModule'],
-  'azure_url':['../../dev/TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
-  'azure_special_properties': ['../../dev/TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
-  'azure_report':['../../dev/TestServer/swagger/azure-report.json', 'AzureReportModule'],
-  'parameter_grouping':['../../dev/TestServer/swagger/azure-parameter-grouping.json', 'ParameterGroupingModule']
+  'head':['head.json', 'HeadModule'],
+  'head_exceptions':['head-exceptions.json', 'HeadExceptionsModule'],
+  'paging':['paging.json', 'PagingModule'],
+  'azure_resource':['azure-resource.json', 'AzureResourceModule'],
+  'lro':['lro.json', 'LroModule'],
+  'azure_url':['subscriptionId-apiVersion.json', 'AzureUrlModule'],
+  'azure_special_properties': ['azure-special-properties.json', 'AzureSpecialPropertiesModule'],
+  'azure_report':['azure-report.json', 'AzureReportModule'],
+  'parameter_grouping':['azure-parameter-grouping.json', 'ParameterGroupingModule']
 }
 
 mergeOptions = (obj1, obj2) ->
@@ -243,7 +243,7 @@ mergeOptions = (obj1, obj2) ->
 task 'regenerate-nodecomposite', "regenerate expected composite swaggers for NodeJS", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.NodeJS.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': compositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -255,7 +255,7 @@ task 'regenerate-nodecomposite', "regenerate expected composite swaggers for Nod
 task 'regenerate-nodeazurecomposite', "regenerate expected composite swaggers for NodeJS Azure", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.NodeJS.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -269,7 +269,7 @@ task 'regenerate-nodeazure', "regenerate expected swaggers for NodeJS Azure", ['
     nodeAzureMappings[p] = defaultAzureMappings[p]
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': nodeAzureMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.NodeJS',
@@ -281,7 +281,7 @@ task 'regenerate-node', "regenerate expected swaggers for NodeJS", ['regenerate-
     nodeMappings[p] = defaultMappings[p]
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': nodeMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
@@ -290,11 +290,11 @@ task 'regenerate-node', "regenerate expected swaggers for NodeJS", ['regenerate-
 
 task 'regenerate-python', "regenerate expected swaggers for Python", ->
   mappings = mergeOptions({ 
-    'AcceptanceTests/UrlMultiCollectionFormat' : '../../dev/TestServer/swagger/url-multi-collectionFormat.json'
+    'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
   }, defaultMappings)
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Python.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'nsPrefix': "Fixtures"
     'outputDir': 'Expected',
@@ -304,12 +304,12 @@ task 'regenerate-python', "regenerate expected swaggers for Python", ->
 
 task 'regenerate-pythonazure', "regenerate expected swaggers for Python Azure", ->
   mappings = mergeOptions({ 
-    'AcceptanceTests/AzureBodyDuration': '../../dev/TestServer/swagger/body-duration.json',
-    'AcceptanceTests/StorageManagementClient': '../../dev/TestServer/swagger/storage.json'
+    'AcceptanceTests/AzureBodyDuration': 'body-duration.json',
+    'AcceptanceTests/StorageManagementClient': 'storage.json'
   }, defaultAzureMappings)
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Python.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'nsPrefix': "Fixtures"
     'outputDir': 'Expected',
@@ -320,7 +320,7 @@ task 'regenerate-pythonazure', "regenerate expected swaggers for Python Azure", 
 task 'regenerate-rubyazure', "regenerate expected swaggers for Ruby Azure", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Ruby.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': rubyAzureMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
@@ -330,7 +330,7 @@ task 'regenerate-rubyazure', "regenerate expected swaggers for Ruby Azure", ->
 task 'regenerate-ruby', "regenerate expected swaggers for Ruby", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Ruby.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': rubyMappings,
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Ruby',
@@ -343,7 +343,7 @@ task 'regenerate-javaazure', "regenerate expected swaggers for Java Azure", ->
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Java.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Azure.Java',
@@ -356,7 +356,7 @@ task 'regenerate-javaazurefluent', "regenerate expected swaggers for Java Azure 
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Java.Azure.Fluent.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Azure.Java.Fluent',
@@ -369,7 +369,7 @@ task 'regenerate-java', "regenerate expected swaggers for Java", ->
     mappings[key.substring(16).toLowerCase()] = defaultMappings[key]
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Java.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Java',
@@ -378,11 +378,11 @@ task 'regenerate-java', "regenerate expected swaggers for Java", ->
 
 task 'regenerate-csazure', "regenerate expected swaggers for C# Azure", ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], ->
   mappings = mergeOptions({
-    'AcceptanceTests/AzureBodyDuration': '../../dev/TestServer/swagger/body-duration.json'
+    'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
@@ -392,11 +392,11 @@ task 'regenerate-csazure', "regenerate expected swaggers for C# Azure", ['regene
 
 task 'regenerate-csazurefluent', "regenerate expected swaggers for C# Azure Fluent", ['regenerate-csazurefluentcomposite','regenerate-csazurefluentallsync', 'regenerate-csazurefluentnosync'], ->
   mappings = mergeOptions({
-    'AcceptanceTests/AzureBodyDuration': '../../dev/TestServer/swagger/body-duration.json'
+    'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp.Fluent',
@@ -413,11 +413,11 @@ task 'regenerate-cs', "regenerate expected swaggers for C#", ['regenerate-cswith
     'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
     'Additional.Properties': 'Swagger/swagger-additional-properties.yaml',
     'DateTimeOffset': 'Swagger/swagger-datetimeoffset.json',
-    'AcceptanceTests/UrlMultiCollectionFormat' : '../../dev/TestServer/swagger/url-multi-collectionFormat.json'
+    'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
   }, defaultMappings)
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -431,7 +431,7 @@ task 'regenerate-cswithcreds', "regenerate expected swaggers for C# with credent
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -446,7 +446,7 @@ task 'regenerate-csallsync', "regenerate expected swaggers for C# with all synch
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -461,7 +461,7 @@ task 'regenerate-csnosync', "regenerate expected swaggers for C# with no synchro
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'CSharp',
@@ -472,11 +472,11 @@ task 'regenerate-csnosync', "regenerate expected swaggers for C# with no synchro
 
 task 'regenerate-csazureallsync', "regenerate expected swaggers for C# Azure with all synchronous methods", ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationAllSync': '../../dev/TestServer/swagger/body-duration.json'
+    'AcceptanceTests/AzureBodyDurationAllSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
@@ -487,11 +487,11 @@ task 'regenerate-csazureallsync', "regenerate expected swaggers for C# Azure wit
 
 task 'regenerate-csazurefluentallsync', "regenerate expected swaggers for C# Azure Fluent with all synchronous methods", ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationAllSync': '../../dev/TestServer/swagger/body-duration.json'
+    'AcceptanceTests/AzureBodyDurationAllSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp.Fluent',
@@ -502,11 +502,11 @@ task 'regenerate-csazurefluentallsync', "regenerate expected swaggers for C# Azu
 
 task 'regenerate-csazurenosync', "regenerate expected swaggers for C# Azure with no synchronous methods", ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationNoSync': '../../dev/TestServer/swagger/body-duration.json'
+    'AcceptanceTests/AzureBodyDurationNoSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp',
@@ -517,11 +517,11 @@ task 'regenerate-csazurenosync', "regenerate expected swaggers for C# Azure with
 
 task 'regenerate-csazurefluentnosync', "regenerate expected swaggers for C# Azure Fluent with no synchronous methods", ->
   mappings = {
-    'AcceptanceTests/AzureBodyDurationNoSync': '../../dev/TestServer/swagger/body-duration.json'
+    'AcceptanceTests/AzureBodyDurationNoSync': 'body-duration.json'
   }
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': mappings,
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.CSharp.Fluent',
@@ -533,7 +533,7 @@ task 'regenerate-csazurefluentnosync', "regenerate expected swaggers for C# Azur
 task 'regenerate-cscomposite', "regenerate expected composite swaggers for C#", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': compositeMappings,
     'modeler' : 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -545,7 +545,7 @@ task 'regenerate-cscomposite', "regenerate expected composite swaggers for C#", 
 task 'regenerate-csazurecomposite', "regenerate expected composite swaggers for C# Azure", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -557,7 +557,7 @@ task 'regenerate-csazurecomposite', "regenerate expected composite swaggers for 
 task 'regenerate-csazurefluentcomposite', "regenerate expected composite swaggers for C# Azure Fluent", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': azureCompositeMappings,
     'modeler': 'CompositeSwagger',
     'outputDir': 'Expected',
@@ -569,14 +569,14 @@ task 'regenerate-csazurefluentcomposite', "regenerate expected composite swagger
 task 'regenerate-go', "regenerate expected swaggers for Go", ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Go.Tests',
-    'inputBaseDir': 'src/generator/AutoRest.Go.Tests',
+    'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': goMappings,
     'outputDir': 'src/tests/generated',
     'codeGenerator': 'Go'
   }
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests'
 
-task 'regenerate-samples', "regenerate samples", ['regenerate-samples-azure'], ->
+task 'regenerate-samples', "regenerate samples", ['regenerate-samplesazure'], ->
   content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)
@@ -594,7 +594,7 @@ task 'regenerate-samples', "regenerate samples", ['regenerate-samples-azure'], -
         'codeGenerator': lang
       }
 
-task 'regenerate-samples-azure', "regenerate Azure samples", ->
+task 'regenerate-samplesazure', "regenerate Azure samples", ->
   content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)
@@ -627,7 +627,6 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
       'regenerate-javaazure'
       'regenerate-javaazurefluent'
       'regenerate-go'
-      -> done()
 
 task 'regenerate-delete', "regenerate expected code for tests", ->
   rm "-rf",
@@ -642,4 +641,3 @@ task 'regenerate-delete', "regenerate expected code for tests", ->
     'src/generator/AutoRest.NodeJS.Azure.Tests/Expected'
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
-  done()

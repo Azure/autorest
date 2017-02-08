@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureResource;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureResource;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Newtonsoft.Json;
