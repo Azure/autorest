@@ -100,7 +100,7 @@ namespace AutoRest.Preview
                         highlights.Add(new Highlight {
                             Start = start,
                             End = start + len,
-                            Message = $"{message.Severity}: [{message.Path.XPath}] {message.Message}"
+                            Message = $"{message.Severity}: [{message.Path.JsonPath}] {message.Message}"
                         });
                     } catch  {
                         

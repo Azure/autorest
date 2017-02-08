@@ -35,11 +35,20 @@ namespace AutoRest
                     {
                         settings = Settings.Create(args);
 
+                        var jsonValidationLogListener = new JsonValidationLogListener();
+
                         // set up logging
-                        Logger.Instance.AddListener(new ConsoleLogListener(
-                            settings.Debug ? Category.Debug : Category.Warning,
-                            settings.ValidationLevel,
-                            settings.Verbose));
+                        if (settings.Json)
+                        {
+                            Logger.Instance.AddListener(jsonValidationLogListener);
+                        }
+                        else
+                        {
+                            Logger.Instance.AddListener(new ConsoleLogListener(
+                                settings.Debug ? Category.Debug : Category.Warning,
+                                settings.ValidationLevel,
+                                settings.Verbose));
+                        }
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
 
                         // internal preprocesor
@@ -90,6 +99,10 @@ namespace AutoRest
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                             }
+                        }
+                        if (settings.Json)
+                        {
+                            Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
                         }
                     }
                     catch (Exception exception)

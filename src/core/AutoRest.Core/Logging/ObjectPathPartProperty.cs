@@ -11,8 +11,6 @@ namespace AutoRest.Core.Logging
 {
     public class ObjectPathPartProperty : ObjectPathPart
     {
-        private static string SanitizeXPathProperty(string property) => property.Replace("/", "~1");
-
         public ObjectPathPartProperty(string property)
         {
             Property = property;
@@ -20,7 +18,7 @@ namespace AutoRest.Core.Logging
 
         public string Property { get; }
 
-        public override string XPath => $"/{SanitizeXPathProperty(Property)}";
+        public override string JsonPath => Property.All(char.IsLetter) ? $".{Property}" : $"['{Property.Replace("'", @"\'")}']";
 
         public override string ReadablePath => Property.StartsWith("/") ? Property : $"/{Property}";
 

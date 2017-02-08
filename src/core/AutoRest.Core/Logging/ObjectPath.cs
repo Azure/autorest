@@ -28,7 +28,7 @@ namespace AutoRest.Core.Logging
 
         public IEnumerable<ObjectPathPart> Path { get; }
         
-        public string XPath => "#" + string.Concat(Path.Select(p => p.XPath));
+        public string JsonPath => "$" + string.Concat(Path.Select(p => p.JsonPath));
 
         public string ReadablePath => "#" + string.Concat(Path.Select(p => p.ReadablePath));
 
