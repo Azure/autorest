@@ -27,11 +27,10 @@ class AutoRestValidationTestConfiguration(Configuration):
     :param api_version: Required string following pattern \\d{2}-\\d{2}-\\d{4}
     :type api_version: str
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, subscription_id, api_version, base_url=None, filepath=None):
+            self, subscription_id, api_version, base_url=None):
 
         if subscription_id is None:
             raise ValueError("Parameter 'subscription_id' must not be None.")
@@ -44,7 +43,7 @@ class AutoRestValidationTestConfiguration(Configuration):
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestValidationTestConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestValidationTestConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestvalidationtest/{}'.format(VERSION))
 
@@ -63,13 +62,12 @@ class AutoRestValidationTest(object):
     :param api_version: Required string following pattern \\d{2}-\\d{2}-\\d{4}
     :type api_version: str
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, subscription_id, api_version, base_url=None, filepath=None):
+            self, subscription_id, api_version, base_url=None):
 
-        self.config = AutoRestValidationTestConfiguration(subscription_id, api_version, base_url, filepath)
+        self.config = AutoRestValidationTestConfiguration(subscription_id, api_version, base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

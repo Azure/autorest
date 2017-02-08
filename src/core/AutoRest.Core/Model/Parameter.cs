@@ -26,11 +26,32 @@ namespace AutoRest.Core.Model
             Name.OnGet += v => CodeNamer.Instance.GetParameterName(Extensions.GetValue<string>("x-ms-client-name").Else(v));
         }
 
+        private Method _method;
         /// <summary>
         /// The method that this parameter belongs to.
         /// </summary>
         [JsonIgnore]
-        public Method Method { get; set; }
+        public Method Method
+        {
+            get { return _method; }
+            set
+            {
+                // when the reference to the parent is set
+                // we should disambiguate the name 
+                // it is imporant that this reference gets set before 
+                // the item is actually added to the containing collection.
+
+                if (!ReferenceEquals(_method, value))
+                {
+                    // only perform disambiguation if this item is not already 
+                    // referencing the parent 
+                    _method = value;
+
+                    // (which implies that it's in the collection, but I can't prove that.)
+                    Disambiguate();
+                }
+            }
+        }
 
         /// <summary>
         /// Indicates whether the parameter should be set via a property on the client instance 

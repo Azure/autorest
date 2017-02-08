@@ -21,6 +21,8 @@ namespace AutoRest.Core.Logging
 
         public override string XPath => $"/{SanitizeXPathProperty(Property)}";
 
+        public override string ReadablePath => Property.StartsWith("/") ? Property : $"/{Property}";
+
         public override YamlNode SelectNode(ref YamlNode node)
         {
             var child = (node as YamlMappingNode)?.

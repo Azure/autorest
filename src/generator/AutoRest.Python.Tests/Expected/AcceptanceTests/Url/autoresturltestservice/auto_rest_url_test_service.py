@@ -29,11 +29,10 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
     :param global_string_query: should contain value null
     :type global_string_query: str
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, global_string_path, global_string_query=None, base_url=None, filepath=None):
+            self, global_string_path, global_string_query=None, base_url=None):
 
         if global_string_path is None:
             raise ValueError("Parameter 'global_string_path' must not be None.")
@@ -44,7 +43,7 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autoresturltestservice/{}'.format(VERSION))
 
@@ -71,13 +70,12 @@ class AutoRestUrlTestService(object):
     :param global_string_query: should contain value null
     :type global_string_query: str
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, global_string_path, global_string_query=None, base_url=None, filepath=None):
+            self, global_string_path, global_string_query=None, base_url=None):
 
-        self.config = AutoRestUrlTestServiceConfiguration(global_string_path, global_string_query, base_url, filepath)
+        self.config = AutoRestUrlTestServiceConfiguration(global_string_path, global_string_query, base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

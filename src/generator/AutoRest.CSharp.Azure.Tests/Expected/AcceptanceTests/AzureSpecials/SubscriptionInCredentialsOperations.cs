@@ -114,6 +114,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -160,7 +162,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -258,6 +260,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -304,7 +308,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -409,6 +413,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -455,7 +461,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -552,6 +558,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -598,7 +606,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -695,6 +703,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -741,7 +751,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

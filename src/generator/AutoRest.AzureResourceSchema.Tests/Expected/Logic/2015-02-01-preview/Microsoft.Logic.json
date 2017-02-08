@@ -1,0 +1,373 @@
+{
+  "id": "http://schema.management.azure.com/schemas/2015-02-01-preview/Microsoft.Logic.json#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Microsoft.Logic",
+  "description": "Microsoft Logic Resource Types",
+  "resourceDefinitions": {
+    "workflows": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Logic/workflows"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-02-01-preview"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the resource location."
+        },
+        "tags": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the resource tags."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WorkflowProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the workflow properties."
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/workflows_accessKeys_childResource"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Logic/workflows"
+    },
+    "workflows_accessKeys": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Logic/workflows/accessKeys"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-02-01-preview"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WorkflowAccessKeyProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the workflow access key properties."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Logic/workflows/accessKeys"
+    }
+  },
+  "definitions": {
+    "ContentHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the algorithm."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets the value."
+        }
+      }
+    },
+    "ContentLink": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the content link URI."
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "Gets or sets the content version."
+        },
+        "contentSize": {
+          "oneOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the content size."
+        },
+        "contentHash": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContentHash"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the content hash."
+        },
+        "metadata": {
+          "description": "Gets or sets the metadata."
+        }
+      }
+    },
+    "ResourceReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
+        }
+      }
+    },
+    "Sku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "NotSpecified",
+                "Free",
+                "Shared",
+                "Basic",
+                "Standard",
+                "Premium"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the name."
+        },
+        "plan": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ResourceReference"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the reference to plan."
+        }
+      }
+    },
+    "WorkflowAccessKeyProperties": {
+      "type": "object",
+      "properties": {
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the not-before time."
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Gets or sets the not-after time."
+        }
+      }
+    },
+    "WorkflowParameter": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "NotSpecified",
+            "String",
+            "SecureString",
+            "Int",
+            "Float",
+            "Bool",
+            "Array",
+            "Object",
+            "SecureObject"
+          ],
+          "description": "Gets or sets the type."
+        },
+        "value": {
+          "description": "Gets or sets the value."
+        },
+        "metadata": {
+          "description": "Gets or sets the metadata."
+        }
+      }
+    },
+    "WorkflowProperties": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "NotSpecified",
+                "Enabled",
+                "Disabled",
+                "Deleted",
+                "Suspended"
+              ]
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the state."
+        },
+        "sku": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/Sku"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the sku."
+        },
+        "definitionLink": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContentLink"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the link to definition."
+        },
+        "definition": {
+          "description": "Gets or sets the definition."
+        },
+        "parametersLink": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContentLink"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the link to parameters."
+        },
+        "parameters": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/WorkflowParameter"
+              }
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the parameters."
+        }
+      }
+    },
+    "workflows_accessKeys_childResource": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "accessKeys"
+          ]
+        },
+        "apiVersion": {
+          "type": "string",
+          "enum": [
+            "2015-02-01-preview"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the resource id."
+        },
+        "properties": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/WorkflowAccessKeyProperties"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Gets or sets the workflow access key properties."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "apiVersion",
+        "properties"
+      ],
+      "description": "Microsoft.Logic/workflows/accessKeys"
+    }
+  }
+}
