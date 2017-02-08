@@ -55,6 +55,29 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/Subscriptions/{subscriptionId}/ResourceGroups/{resourceGroupName}/providers/DefaultNamespace/Microsoft.Services/{serviceName}/Microsoft.Providers/{providerName}?id={id}": {
+      "post": {
+        "operationId": "Noun_Verb",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "Https"
+        ]
+      }
+    }
+  },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",

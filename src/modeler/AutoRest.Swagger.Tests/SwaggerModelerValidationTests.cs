@@ -141,7 +141,7 @@ namespace AutoRest.Swagger.Tests
         public void ProvidersPathValidate()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "providers-path.json"));
-            messages.AssertOnlyValidationWarning(typeof(ProviderPathsValidation));
+            messages.AssertOnlyValidationWarning(typeof(ProvidersPathValidation), 2);
         }
 
 
@@ -435,7 +435,7 @@ namespace AutoRest.Swagger.Tests
         public void ProvidersPathValidJson()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "positive", "providers-path-valid.json"));
-            messages.AssertOnlyValidationWarning(typeof(ProviderPathsValidation), 0);
+            messages.AssertOnlyValidationWarning(typeof(ProvidersPathValidation), 0);
         }
 
     }

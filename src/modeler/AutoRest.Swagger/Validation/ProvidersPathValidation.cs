@@ -13,9 +13,9 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation 
 {
-    public class ProviderPathsValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
+    public class ProvidersPathValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
-        private readonly Regex FullRegex = new Regex(@"\/Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/[^\/]+(\/[^\/]+\/\{[^\}]+\})+$", RegexOptions.IgnoreCase);
+        private readonly Regex FullRegex = new Regex(@"\/Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/[^\/]+(\/[^\/]+\/\{[^\}]+\})*(\/[^\/]+)?([\?]?[^\/]+)*$", RegexOptions.IgnoreCase);
         private readonly Regex ProviderRegex = new Regex(@"Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/.+$", RegexOptions.IgnoreCase);
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
@@ -25,12 +25,12 @@ namespace AutoRest.Swagger.Validation
             foreach (var pathObj in entity)
             {
                 // if url is not of the providers pattern or if it ends with /operations, skip
-                if (!ProviderRegex.IsMatch(pathObj.Key) || pathObj.Key.EndsWith("/operations"))
+                if (!ProviderRegex.IsMatch(pathObj.Key))
                 {
                     continue;
                 }
 
-                if (!FullRegex.IsMatch(pathObj.Key))
+                if (!FullRegex.IsMatch(pathObj.Key.TrimEnd('/')))
                 {
                     yield return new ValidationMessage(context.Path, this, pathObj.Key);
                 }
@@ -43,7 +43,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Path {0} must follow the pattern Subscriptions/{{subscriptionId}}/ResourceGroups/{{resourceGroupName}}/providers/typename1/{{typename1type}}/typename2/{{typename2type}}/operations";
+        public override string MessageTemplate => "Path {0} must follow the pattern Subscriptions/{{subscriptionId}}/ResourceGroups/{{resourceGroupName}}/providers/namespace/typename1/{{typename1type}}/typename2/{{typename2type}}/operations";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
