@@ -176,8 +176,7 @@ namespace Petstore.Models
             if (deserializeStatus(payload, "status", out resultStatus))
             {
                 result.Status = resultStatus;
-            }
-            return result;
+            }            return result;
         }
     }
 }

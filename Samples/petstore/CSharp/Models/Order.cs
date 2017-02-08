@@ -137,8 +137,7 @@ namespace Petstore.Models
             if (deserializeComplete(payload, "complete", out resultComplete))
             {
                 result.Complete = resultComplete;
-            }
-            return result;
+            }            return result;
         }
     }
 }

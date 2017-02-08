@@ -589,7 +589,7 @@ task 'regenerate-samples', "regenerate samples", ['regenerate-samples-azure'], -
         'outputBaseDir': "#{basefolder}/Samples/petstore/#{lang}",
         'inputBaseDir': 'Samples',
         'mappings': { '': ['petstore/petstore.json', 'Petstore'] },
-        'nsPrefix': "",
+        'nsPrefix': "Petstore",
         'outputDir': "",
         'codeGenerator': lang
       }
@@ -607,7 +607,7 @@ task 'regenerate-samples-azure', "regenerate Azure samples", ->
         'outputBaseDir': "#{basefolder}/Samples/azure-storage/#{lang}",
         'inputBaseDir': 'Samples',
         'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
-        'nsPrefix': "",
+        'nsPrefix': "Petstore",
         'outputDir': "",
         'codeGenerator': lang
       }
