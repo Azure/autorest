@@ -1,9 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -29,9 +26,8 @@ namespace Petstore.Models
         /// <summary>
         /// Gets or sets the list Storage Resource Usages.
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public System.Collections.Generic.IList<Usage> Value { get; set; }
 
     }
 }
-

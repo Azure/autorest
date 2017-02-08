@@ -13,13 +13,14 @@ public class CustomDomain {
     /**
      * Gets or sets the custom domain name. Name is the CNAME source.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "name", required = true)
     private String name;
 
     /**
      * Indicates whether indirect CName validation is enabled. Default value is
      * false. This should only be set on updates.
      */
+    @JsonProperty(value = "useSubDomain")
     private Boolean useSubDomain;
 
     /**

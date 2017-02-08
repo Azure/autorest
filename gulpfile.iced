@@ -576,9 +576,8 @@ task 'regenerate-go', "regenerate expected swaggers for Go", ->
   }
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests'
 
-task 'regenerate-samples', "regenerate samples", ['regenerate-samples:azure'], ->
-  autorestConfigPath = "#{basefolder}/AutoRest.json"
-  content = fs.readFileSync(autorestConfigPath).toString()
+task 'regenerate-samples', "regenerate samples", ['regenerate-samples-azure'], ->
+  content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)
   autorestConfig = JSON.parse(content)
@@ -586,32 +585,30 @@ task 'regenerate-samples', "regenerate samples", ['regenerate-samples:azure'], -
     if (!lang.match(/^Azure\..+/))
       regenExpected {
         'modeler': 'Swagger',
-        'Header': 'NONE',
+        'header': 'NONE',
         'outputBaseDir': "#{basefolder}/Samples/petstore/#{lang}",
         'inputBaseDir': 'Samples',
-        'mappings': { '': 'petstore/petstore.json' },
         'mappings': { '': ['petstore/petstore.json', 'Petstore'] },
         'nsPrefix': "",
-        'outputDir': 'src/tests/generated',
+        'outputDir': "",
         'codeGenerator': lang
       }
 
-task 'regenerate-samples:azure', "regenerate Azure samples", ->
-  autorestConfigPath = "#{basefolder}/AutoRest.json"
-  content = fs.readFileSync(autorestConfigPath).toString()
+task 'regenerate-samples-azure', "regenerate Azure samples", ->
+  content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)
   autorestConfig = JSON.parse(content)
   for lang of autorestConfig.plugins
-    if (!lang.match(/^Azure\..+/))
+    if (lang.match(/^Azure\.[^.]+$/))
       regenExpected {
         'modeler': 'Swagger',
-        'Header': 'NONE',
+        'header': 'NONE',
         'outputBaseDir': "#{basefolder}/Samples/azure-storage/#{lang}",
         'inputBaseDir': 'Samples',
-        'mappings': { '': ['petstore/azure-storage/azure-storage.json', 'Petstore'] },
+        'mappings': { '': ['azure-storage/azure-storage.json', 'Petstore'] },
         'nsPrefix': "",
-        'outputDir': 'src/tests/generated',
+        'outputDir': "",
         'codeGenerator': lang
       }
 

@@ -1,8 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Microsoft.Rest;
-    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountCheckNameAvailabilityParametersInner
@@ -25,12 +23,12 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -48,4 +46,3 @@ namespace Petstore.Models
         }
     }
 }
-

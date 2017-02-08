@@ -3,6 +3,7 @@
 
 package petstore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Category model.
@@ -11,11 +12,13 @@ public class Category {
     /**
      * The id property.
      */
+    @JsonProperty(value = "id")
     private Long id;
 
     /**
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**

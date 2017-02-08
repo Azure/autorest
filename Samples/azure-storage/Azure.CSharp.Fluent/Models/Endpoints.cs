@@ -1,7 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -33,27 +32,26 @@ namespace Petstore.Models
         /// <summary>
         /// Gets the blob endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "blob")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "blob")]
         public string Blob { get; set; }
 
         /// <summary>
         /// Gets the queue endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "queue")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "queue")]
         public string Queue { get; set; }
 
         /// <summary>
         /// Gets the table endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "table")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "table")]
         public string Table { get; set; }
 
         /// <summary>
         /// Gets the file endpoint.
         /// </summary>
-        [JsonProperty(PropertyName = "file")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "file")]
         public string File { get; set; }
 
     }
 }
-

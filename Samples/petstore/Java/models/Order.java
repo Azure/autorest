@@ -13,33 +13,38 @@ public class Order {
     /**
      * The id property.
      */
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
 
     /**
      * The petId property.
      */
+    @JsonProperty(value = "petId")
     private Long petId;
 
     /**
      * The quantity property.
      */
+    @JsonProperty(value = "quantity")
     private Integer quantity;
 
     /**
      * The shipDate property.
      */
+    @JsonProperty(value = "shipDate")
     private DateTime shipDate;
 
     /**
      * Order Status. Possible values include: 'placed', 'approved',
      * 'delivered'.
      */
+    @JsonProperty(value = "status")
     private String status;
 
     /**
      * The complete property.
      */
+    @JsonProperty(value = "complete")
     private Boolean complete;
 
     /**

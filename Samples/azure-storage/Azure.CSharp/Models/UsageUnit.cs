@@ -9,7 +9,7 @@ namespace Petstore.Models
     /// <summary>
     /// Defines values for UsageUnit.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum UsageUnit
     {
         [EnumMember(Value = "Count")]
