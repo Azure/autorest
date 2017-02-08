@@ -5,8 +5,8 @@
   <Import Project="$(common)project-xunittest.proj" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <!-- <TargetFramework>netcoreapp1.0</TargetFramework> -->
-    <TargetFramework>net461</TargetFramework>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <!-- <TargetFramework>net461</TargetFramework> -->
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
   </PropertyGroup>
   <ItemGroup>

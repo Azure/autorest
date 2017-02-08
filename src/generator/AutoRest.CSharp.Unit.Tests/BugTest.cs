@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests {
     using Xunit.Abstractions;
     using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
     using System.Reflection;
-#if netstandard1_0
+#if !LEGACY
     using System.Runtime.Loader;
 #else     
 #endif    
@@ -39,10 +39,10 @@ namespace AutoRest.CSharp.Unit.Tests {
         };
 
         protected Assembly LoadAssembly(MemoryStream stream) {
-#if netstandard1_0            
+#if !Legacy
             return AssemblyLoadContext.Default.LoadFromStream(stream);
 #else 
-            return Assembly.Load(stream.ToArray());
+           return Assembly.Load(stream.ToArray());
 #endif            
         }
 

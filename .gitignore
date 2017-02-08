@@ -199,6 +199,11 @@ src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
+src/[Aa]uto[Rr]est/*.js
+src/installer/*.js
+
+*.js.map
+
 # backup files
 *~
 

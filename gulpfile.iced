@@ -16,6 +16,7 @@ Import
   # which projects to care about
   projects:() ->
     source 'src/**/*.csproj'
+      .pipe except /preview|unit/ig
 
   # which projects to package
   pkgs:() ->

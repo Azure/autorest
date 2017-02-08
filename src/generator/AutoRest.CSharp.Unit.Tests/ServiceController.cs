@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Configuration;
+// using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
