@@ -62,15 +62,15 @@ module.exports =
   splitPath: (path) ->
     s = path.match /^(.+)[\\\/]([^\/]+)$/  or [path, '',path]
     f = s[2].match(/^(.*)([\\.].*)$/ ) or [s[2],s[2],'']
-    d = path.match /^(.:)[\\\/]?(.*)$/ or ['',path]
+    d = (path.match /^(.:)[\\\/]?(.*)$/ ) or ['','',path]
     return {
       fullname : path
       folder : s[1]
       filename : s[2]
       basename : f[1]
       extension : f[2]
-      drive:  d[1]
-      folders: d[2].split /[\\\/]/
+      drive:  d[1] or ''
+      folders: (d[2].split /[\\\/]/ )or path
     }
 
   folder: (path) ->

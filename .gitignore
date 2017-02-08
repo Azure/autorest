@@ -199,5 +199,8 @@ src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
+# backup files
+*~
+
 #client runtime
 src/client/**/*

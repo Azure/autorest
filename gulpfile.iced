@@ -6,7 +6,7 @@ require './src/local_modules/gulp.iced'
 
 # tasks required for this build 
 Tasks "dotnet", 
-  "Typescript"
+  "typescript"
 
 # Settings
 Import

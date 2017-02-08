@@ -55,6 +55,8 @@ namespace AutoRest.Core.Utilities
             return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
         }
 
+
+
         public string ReadFileAsText(string path)
         {
             path = path.AdjustGithubUrl();
@@ -63,7 +65,7 @@ namespace AutoRest.Core.Utilities
 
             if (!uri.IsAbsoluteUri)
             {
-                return ReadFileAsText(Path.Combine(CurrentDirectory, path));
+                return File.ReadAllText(Path.Combine(CurrentDirectory, path));
             }
 
             if (uri.IsFile)

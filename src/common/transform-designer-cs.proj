@@ -21,6 +21,6 @@
       </ResGenFix>
       
     </PropertyGroup>
-    <Exec Condition="$(SolutionDir) != '' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
+    <Exec Condition="$(SolutionDir) != '' AND $(OS) =='WINDOWS_NT' " Command="$(ResGenFix)" EchoOff="true" WorkingDirectory="$(MSBuildProjectDirectory)" /> 
   </Target>
 </Project>
