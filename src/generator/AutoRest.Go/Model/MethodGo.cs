@@ -194,7 +194,7 @@ namespace AutoRest.Go.Model
                 decorators.Add(HTTPMethodDecorator);
                 if (!this.IsCustomBaseUri)
                 {
-                    decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)", CodeModel.BaseUrl));
+                    decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)"));
                 }
                 else
                 {

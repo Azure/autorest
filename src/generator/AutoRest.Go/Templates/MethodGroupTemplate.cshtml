@@ -36,20 +36,27 @@ type @(Model.ClientName) struct {
 func New@(Model.ClientName)(@(Model.GlobalParameters)) @(Model.ClientName) {
     @if (!Model.IsCustomBaseUri)
     {
-        @:return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+        <text>
+        return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+        </text>
     }
     else
     {
-        @:return @(Model.ClientName){ New(@(Model.HelperGlobalParameters))}
+        <text>
+        return @(Model.ClientName){ New(@(Model.HelperGlobalParameters))}
+        </text>
     }
+}
 @EmptyLine
 
 @if (!Model.IsCustomBaseUri)
 {
     @WrapComment("// ", string.Format("New{0}WithBaseURI creates an instance of the {0} client.", Model.ClientName))
-    @:func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
-        @:return @(Model.ClientName){ NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
+    <text>
+    func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
+        return @(Model.ClientName){ NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
     }
+    </text>
     @EmptyLine
 }
 

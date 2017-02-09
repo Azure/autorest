@@ -53,11 +53,11 @@ type @(Model.BaseClient) struct {
     {
         if (!p.SerializedName.FixedValue.IsApiVersion())
         {
-    @:@(string.Format((p.IsRequired || p.ModelType.CanBeEmpty()
+            @:@(string.Format((p.IsRequired || p.ModelType.CanBeEmpty()
                                                   ? "{0} {1}" : "{0} *{1}"),
                                                   p.Name, p.ModelType.Name))
+        }
     }
-}
 }
 
 
@@ -70,7 +70,7 @@ func New(@(Model.GlobalParameters))@(Model.BaseClient) {
     }
     else
     {
-        @:return NewWithoutDefaults(@(Model.HelperGlobalDefaultParameters))
+        @:return NewWithoutDefaults(@(Model.HelperAllGlobalParameters))
     }
 }
 
@@ -99,8 +99,8 @@ else
 {
     <text>
     @EmptyLine
-    @WrapComment("// ", string.Format("NewWithoutDefaults lots of tantrums creates an instance of the {0} client.", Model.BaseClient))
-    func NewWithoutDefaults(@(Model.GlobalDefaultParameters)) @(Model.BaseClient) {
+    @WrapComment("// ", string.Format("NewWithoutDefaults creates an instance of the {0} client.", Model.BaseClient))
+    func NewWithoutDefaults(@(Model.AllGlobalParameters)) @(Model.BaseClient) {
         return @(Model.BaseClient){
             Client: autorest.NewClientWithUserAgent(UserAgent()),
             APIVersion: APIVersion,
@@ -108,10 +108,7 @@ else
             {
                 if (!p.SerializedName.Value.IsApiVersion())
                 {
-                    if (p.DefaultValue.FixedValue.IsNullOrEmpty())
-                    {
                     @:@(string.Format("{0}: {1},", p.Name, p.Name.Value.ToSentence()))
-                    }
                 }
             }
         }

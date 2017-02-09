@@ -83,7 +83,7 @@ namespace AutoRest.Go.Model
                 return "client." + ApiVersionName;
             }
             var value = IsClientProperty
-                ? "client." + CodeNamerGo.Instance.PascalCase(Name.Value)
+                ? "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
                 : Name.Value;
 
             var format = IsRequired || ModelType.CanBeEmpty()

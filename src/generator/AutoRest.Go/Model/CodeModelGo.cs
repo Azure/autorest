@@ -187,6 +187,39 @@ namespace AutoRest.Go.Model
             }
         }
 
+
+        public string AllGlobalParameters
+        {
+            get
+            {
+                if (GlobalParameters.IsNullOrEmpty())
+                {
+                    return GlobalDefaultParameters;
+                }
+                if (GlobalDefaultParameters.IsNullOrEmpty())
+                {
+                    return GlobalParameters;
+                }
+                return string.Join(", ", new string[] {GlobalParameters, GlobalDefaultParameters});
+            }
+        }
+
+        public string HelperAllGlobalParameters
+        {
+            get
+            {
+                if (HelperGlobalParameters.IsNullOrEmpty())
+                {
+                    return HelperGlobalDefaultParameters;
+                }
+                if (HelperGlobalDefaultParameters.IsNullOrEmpty())
+                {
+                    return HelperGlobalParameters;
+                }
+                return string.Join(", ", new string[] {HelperGlobalParameters, HelperGlobalDefaultParameters});
+            }
+        }
+
         public IEnumerable<MethodGo> ClientMethods
         {
             get
