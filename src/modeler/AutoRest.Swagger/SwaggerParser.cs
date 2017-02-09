@@ -96,7 +96,7 @@ namespace AutoRest.Swagger
                     {
                         currentDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, currentFilePath, entityType, modelName, externalFiles[filePath]);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, filePath, entityType, modelName, externalFiles[filePath]);
                     }
                     else
                     {
