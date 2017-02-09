@@ -148,11 +148,8 @@ namespace AutoRest.Swagger
                 headerType = null;
             }
 
-            
             // Response format
             List<Stack<IModelType>> typesList = BuildResponses(method, headerType);
-
-            method.IsXNullableReturnType = (_operation.Responses.Keys.All(key => _operation.Responses[key].Extensions?.Get<bool>("x-nullable") ?? true ));
 
             method.ReturnType = BuildMethodReturnType(typesList, headerType);
             if (method.Responses.Count == 0)
@@ -253,9 +250,16 @@ namespace AutoRest.Swagger
                             response.Key));
                     }
                 }
+                BuildResponseExtensions(response.Key, response.Value);
             }
 
             return typesList;
+        }
+
+        // set response extensions map
+        private void BuildResponseExtensions(string responseStatusCode, OperationResponse response)
+        {
+            response.Extensions = _operation.Responses[responseStatusCode].Extensions;
         }
 
         private Response BuildMethodReturnType(List<Stack<IModelType>> types, IModelType headerType)
