@@ -38,8 +38,11 @@ namespace AutoRest.TypeScript.SuperAgent
 
             if (codeModel.ModelTypes.Any())
             {
-                var serviceClientTemplate = new ModelTemplate {Model = codeModel};
-                await Write(serviceClientTemplate, "model.ts");
+                var modelTemplate = new ModelTemplate {Model = codeModel};
+                await Write(modelTemplate, "model.ts");
+
+                var clientTemplate = new ClientTemplate { Model = codeModel };
+                await Write(clientTemplate, "api.ts");
             }
 
             /*

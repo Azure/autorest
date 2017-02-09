@@ -13,7 +13,7 @@
 @:export class @(model.Name)Response {
     foreach (var property in model.Properties)
     {
-    @:"@(property.Name.ToCamelCase())" : "@(property.ModelTypeName.ToCamelCase())";
+@:    "@(property.Name.ToCamelCase())" : "@(property.ModelTypeName.ToCamelCase())";
     }
 @:}
 @:
@@ -24,7 +24,7 @@
 @:export class @(method.Responses[HttpStatusCode.OK].Body.ClassName)Request {
     foreach (var p in method.Parameters)
     {
-    @:"@(p.Name.Value)" : "@(p.ModelTypeName)";
+@:    "@(p.Name.Value)" : "@(p.ModelTypeName)";
     }
 @:}
 }
