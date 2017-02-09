@@ -1,8 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Microsoft.Rest;
-    using Newtonsoft.Json;
     using System.Linq;
 
     public partial class StorageAccountRegenerateKeyParametersInner
@@ -24,7 +22,7 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "keyName")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "keyName")]
         public string KeyName { get; set; }
 
         /// <summary>
@@ -42,4 +40,3 @@ namespace Petstore.Models
         }
     }
 }
-

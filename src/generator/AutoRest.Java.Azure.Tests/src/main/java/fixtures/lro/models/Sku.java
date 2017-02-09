@@ -10,6 +10,7 @@
 
 package fixtures.lro.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Sku model.
@@ -18,11 +19,13 @@ public class Sku {
     /**
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**
      * The id property.
      */
+    @JsonProperty(value = "id")
     private String id;
 
     /**

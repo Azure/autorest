@@ -13,7 +13,6 @@ package fixtures.custombaseuri.implementation;
 import retrofit2.Retrofit;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -31,7 +30,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public final class PathsInner {
+public class PathsInner {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
@@ -53,7 +52,7 @@ public final class PathsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         Observable<Response<ResponseBody>> getEmpty(@Header("accept-language") String acceptLanguage, @Header("x-ms-parameterized-host") String parameterizedHost, @Header("User-Agent") String userAgent);
 
@@ -65,7 +64,7 @@ public final class PathsInner {
      * @param accountName Account Name
      */
     public void getEmpty(String accountName) {
-        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().body();
     }
 
     /**
@@ -76,7 +75,7 @@ public final class PathsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
@@ -89,7 +88,7 @@ public final class PathsInner {
         return getEmptyWithServiceResponseAsync(accountName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -123,7 +122,7 @@ public final class PathsInner {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

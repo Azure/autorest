@@ -104,11 +104,13 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "formdata/stream/uploadfile").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -123,15 +125,15 @@ namespace Fixtures.AcceptanceTestsBodyFormData
 
             // Serialize Request
             string _requestContent = null;
-            System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
+            MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
             if (fileContent != null)
             {
-                 System.Net.Http.StreamContent _fileContent = new System.Net.Http.StreamContent(fileContent);
-                _fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                 StreamContent _fileContent = new StreamContent(fileContent);
+                _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 FileStream _fileContentAsFileStream = fileContent as FileStream;
                 if (_fileContentAsFileStream != null)
                 {
-                    System.Net.Http.Headers.ContentDispositionHeaderValue _contentDispositionHeaderValue = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data");
+                    ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
                     _contentDispositionHeaderValue.Name = "fileContent";
                     _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
                     _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
@@ -140,7 +142,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             }
             if (fileName != null)
             {
-                System.Net.Http.StringContent _fileName = new System.Net.Http.StringContent(fileName, System.Text.Encoding.UTF8);
+                StringContent _fileName = new StringContent(fileName, System.Text.Encoding.UTF8);
                 _multiPartContent.Add(_fileName, "fileName");
             }
             _httpRequest.Content = _multiPartContent;
@@ -170,7 +172,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -251,11 +253,13 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             var _baseUrl = Client.BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "formdata/stream/uploadfile").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -276,8 +280,8 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             }
             if (fileContent != null && fileContent != Stream.Null)
             {
-              _httpRequest.Content = new System.Net.Http.StreamContent(fileContent);
-              _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/octet-stream");
+              _httpRequest.Content = new StreamContent(fileContent);
+              _httpRequest.Content.Headers.ContentType =MediaTypeHeaderValue.Parse("application/octet-stream");
             }
             // Send Request
             if (_shouldTrace)
@@ -305,7 +309,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

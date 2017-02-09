@@ -14,17 +14,19 @@ public class StorageAccountCreateParametersInner {
     /**
      * Resource location.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "location", required = true)
     private String location;
 
     /**
      * Resource tags.
      */
+    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
      * The properties property.
      */
+    @JsonProperty(value = "properties")
     private StorageAccountPropertiesCreateParameters properties;
 
     /**

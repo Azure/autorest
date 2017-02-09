@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.ApiVersionLocals;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionLocals.
  */
-public final class ApiVersionLocalsImpl implements ApiVersionLocals {
+public class ApiVersionLocalsImpl implements ApiVersionLocals {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionLocalsService service;
     /** The service client containing this operation class. */
@@ -54,19 +53,19 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionLocalsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         Observable<Response<ResponseBody>> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getMethodLocalNull" })
         @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         Observable<Response<ResponseBody>> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getPathLocalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         Observable<Response<ResponseBody>> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionLocals getSwaggerLocalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         Observable<Response<ResponseBody>> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -77,7 +76,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getMethodLocalValid() {
-        getMethodLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodLocalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -87,7 +86,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -99,7 +98,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getMethodLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -126,7 +125,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     }
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -137,7 +136,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getMethodLocalNull() {
-        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodLocalNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -147,7 +146,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -159,7 +158,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getMethodLocalNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -191,7 +190,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      */
     public void getMethodLocalNull(String apiVersion) {
-        getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().getBody();
+        getMethodLocalNullWithServiceResponseAsync(apiVersion).toBlocking().single().body();
     }
 
     /**
@@ -202,7 +201,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
+        return ServiceCall.fromResponse(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
     }
 
     /**
@@ -215,7 +214,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getMethodLocalNullWithServiceResponseAsync(apiVersion).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -242,7 +241,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     }
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -253,7 +252,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getPathLocalValid() {
-        getPathLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getPathLocalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -263,7 +262,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -275,7 +274,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getPathLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -302,7 +301,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     }
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -313,7 +312,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      *
      */
     public void getSwaggerLocalValid() {
-        getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerLocalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -323,7 +322,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -335,7 +334,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
         return getSwaggerLocalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -362,7 +361,7 @@ public final class ApiVersionLocalsImpl implements ApiVersionLocals {
     }
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

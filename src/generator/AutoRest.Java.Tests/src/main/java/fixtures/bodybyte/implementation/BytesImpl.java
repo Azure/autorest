@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Bytes.
  */
-public final class BytesImpl implements Bytes {
+public class BytesImpl implements Bytes {
     /** The Retrofit service to perform REST calls. */
     private BytesService service;
     /** The service client containing this operation class. */
@@ -54,23 +53,23 @@ public final class BytesImpl implements Bytes {
      * used by Retrofit to perform actually REST calls.
      */
     interface BytesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getNull" })
         @GET("byte/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getEmpty" })
         @GET("byte/empty")
         Observable<Response<ResponseBody>> getEmpty();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getNonAscii" })
         @GET("byte/nonAscii")
         Observable<Response<ResponseBody>> getNonAscii();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes putNonAscii" })
         @PUT("byte/nonAscii")
         Observable<Response<ResponseBody>> putNonAscii(@Body byte[] byteBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodybyte.Bytes getInvalid" })
         @GET("byte/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
@@ -82,7 +81,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -92,7 +91,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -104,7 +103,7 @@ public final class BytesImpl implements Bytes {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -130,7 +129,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<byte[], ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -142,7 +141,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getEmpty() {
-        return getEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -152,7 +151,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -164,7 +163,7 @@ public final class BytesImpl implements Bytes {
         return getEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -190,7 +189,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<byte[], ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -202,7 +201,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getNonAscii() {
-        return getNonAsciiWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNonAsciiWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -212,7 +211,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getNonAsciiWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNonAsciiWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -224,7 +223,7 @@ public final class BytesImpl implements Bytes {
         return getNonAsciiWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -250,7 +249,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<byte[], ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -262,7 +261,7 @@ public final class BytesImpl implements Bytes {
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      */
     public void putNonAscii(byte[] byteBody) {
-        putNonAsciiWithServiceResponseAsync(byteBody).toBlocking().single().getBody();
+        putNonAsciiWithServiceResponseAsync(byteBody).toBlocking().single().body();
     }
 
     /**
@@ -273,7 +272,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putNonAsciiWithServiceResponseAsync(byteBody), serviceCallback);
+        return ServiceCall.fromResponse(putNonAsciiWithServiceResponseAsync(byteBody), serviceCallback);
     }
 
     /**
@@ -286,7 +285,7 @@ public final class BytesImpl implements Bytes {
         return putNonAsciiWithServiceResponseAsync(byteBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -316,7 +315,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -328,7 +327,7 @@ public final class BytesImpl implements Bytes {
      * @return the byte[] object if successful.
      */
     public byte[] getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -338,7 +337,7 @@ public final class BytesImpl implements Bytes {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -350,7 +349,7 @@ public final class BytesImpl implements Bytes {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<byte[]>, byte[]>() {
             @Override
             public byte[] call(ServiceResponse<byte[]> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -376,7 +375,7 @@ public final class BytesImpl implements Bytes {
     }
 
     private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<byte[], ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

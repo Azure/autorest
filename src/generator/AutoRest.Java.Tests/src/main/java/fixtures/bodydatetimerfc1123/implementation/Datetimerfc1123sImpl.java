@@ -17,7 +17,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Datetimerfc1123s.
  */
-public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
+public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /** The Retrofit service to perform REST calls. */
     private Datetimerfc1123sService service;
     /** The service client containing this operation class. */
@@ -56,39 +55,39 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * used by Retrofit to perform actually REST calls.
      */
     interface Datetimerfc1123sService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getNull" })
         @GET("datetimerfc1123/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getInvalid" })
         @GET("datetimerfc1123/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getOverflow" })
         @GET("datetimerfc1123/overflow")
         Observable<Response<ResponseBody>> getOverflow();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUnderflow" })
         @GET("datetimerfc1123/underflow")
         Observable<Response<ResponseBody>> getUnderflow();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s putUtcMaxDateTime" })
         @PUT("datetimerfc1123/max")
         Observable<Response<ResponseBody>> putUtcMaxDateTime(@Body DateTimeRfc1123 datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcLowercaseMaxDateTime" })
         @GET("datetimerfc1123/max/lowercase")
         Observable<Response<ResponseBody>> getUtcLowercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcUppercaseMaxDateTime" })
         @GET("datetimerfc1123/max/uppercase")
         Observable<Response<ResponseBody>> getUtcUppercaseMaxDateTime();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s putUtcMinDateTime" })
         @PUT("datetimerfc1123/min")
         Observable<Response<ResponseBody>> putUtcMinDateTime(@Body DateTimeRfc1123 datetimeBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodydatetimerfc1123.Datetimerfc1123s getUtcMinDateTime" })
         @GET("datetimerfc1123/min")
         Observable<Response<ResponseBody>> getUtcMinDateTime();
 
@@ -100,7 +99,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -110,7 +109,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -122,7 +121,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -140,10 +139,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getNullDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -153,7 +152,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -165,7 +164,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -175,7 +174,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -187,7 +186,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -205,10 +204,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getInvalidDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -218,7 +217,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -230,7 +229,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getOverflow() {
-        return getOverflowWithServiceResponseAsync().toBlocking().single().getBody();
+        return getOverflowWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -240,7 +239,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getOverflowWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -252,7 +251,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getOverflowWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -270,10 +269,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getOverflowDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -283,7 +282,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -295,7 +294,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUnderflow() {
-        return getUnderflowWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUnderflowWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -305,7 +304,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUnderflowWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -317,7 +316,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getUnderflowWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -335,10 +334,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getUnderflowDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -348,7 +347,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -360,7 +359,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param datetimeBody the DateTimeRfc1123 value
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
-        putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -371,7 +370,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -384,7 +383,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -415,7 +414,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -427,7 +426,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcLowercaseMaxDateTime() {
-        return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -437,7 +436,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -449,7 +448,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getUtcLowercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -467,10 +466,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getUtcLowercaseMaxDateTimeDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -480,7 +479,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -492,7 +491,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcUppercaseMaxDateTime() {
-        return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -502,7 +501,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -514,7 +513,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getUtcUppercaseMaxDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -532,10 +531,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getUtcUppercaseMaxDateTimeDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -545,7 +544,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -557,7 +556,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @param datetimeBody the DateTimeRfc1123 value
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
-        putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().getBody();
+        putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
     }
 
     /**
@@ -568,7 +567,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+        return ServiceCall.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -581,7 +580,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -612,7 +611,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -624,7 +623,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the DateTime object if successful.
      */
     public DateTime getUtcMinDateTime() {
-        return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getUtcMinDateTimeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -634,7 +633,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.create(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -646,7 +645,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
         return getUtcMinDateTimeWithServiceResponseAsync().map(new Func1<ServiceResponse<DateTime>, DateTime>() {
             @Override
             public DateTime call(ServiceResponse<DateTime> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -664,10 +663,10 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
                     try {
                         ServiceResponse<DateTimeRfc1123> result = getUtcMinDateTimeDelegate(response);
                         DateTime body = null;
-                        if (result.getBody() != null) {
-                            body = result.getBody().getDateTime();
+                        if (result.body() != null) {
+                            body = result.body().dateTime();
                         }
-                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.getResponse());
+                        ServiceResponse<DateTime> clientResponse = new ServiceResponse<DateTime>(body, result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -677,7 +676,7 @@ public final class Datetimerfc1123sImpl implements Datetimerfc1123s {
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateTimeRfc1123, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<DateTimeRfc1123, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<DateTimeRfc1123>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

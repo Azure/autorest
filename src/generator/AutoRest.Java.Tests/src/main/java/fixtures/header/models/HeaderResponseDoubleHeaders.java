@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseDouble operation.
@@ -18,6 +19,7 @@ public class HeaderResponseDoubleHeaders {
     /**
      * response with header value "value": 7e120 or -3.0.
      */
+    @JsonProperty(value = "value")
     private Double value;
 
     /**

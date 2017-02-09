@@ -4,7 +4,7 @@
 package petstore;
 
 import com.microsoft.azure.AzureClient;
-import com.microsoft.azure.RestClient;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for StorageManagementClient class.

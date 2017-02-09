@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -22,11 +23,13 @@ public class Salmon extends Fish {
     /**
      * The location property.
      */
+    @JsonProperty(value = "location")
     private String location;
 
     /**
      * The iswild property.
      */
+    @JsonProperty(value = "iswild")
     private Boolean iswild;
 
     /**

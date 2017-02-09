@@ -12,7 +12,7 @@ public class StorageAccountRegenerateKeyParameters {
     /**
      * The keyName property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "keyName", required = true)
     private String keyName;
 
     /**

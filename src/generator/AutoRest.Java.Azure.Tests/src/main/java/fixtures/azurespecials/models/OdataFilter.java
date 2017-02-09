@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The OdataFilter model.
@@ -18,11 +19,13 @@ public class OdataFilter {
     /**
      * The id property.
      */
+    @JsonProperty(value = "id")
     private Integer id;
 
     /**
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**

@@ -12,13 +12,13 @@ package fixtures.azurespecials.implementation;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClientImpl class.
  */
-public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
+public class AutoRestAzureSpecialParametersTestClientImpl extends AzureServiceClient {
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
@@ -254,10 +254,8 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @param credentials the management credentials for Azure
      */
     public AutoRestAzureSpecialParametersTestClientImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**

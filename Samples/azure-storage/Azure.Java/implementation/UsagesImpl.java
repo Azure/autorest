@@ -6,7 +6,6 @@ package petstore.implementation;
 import retrofit2.Retrofit;
 import petstore.Usages;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -29,7 +28,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Usages.
  */
-public final class UsagesImpl implements Usages {
+public class UsagesImpl implements Usages {
     /** The Retrofit service to perform REST calls. */
     private UsagesService service;
     /** The service client containing this operation class. */
@@ -51,7 +50,7 @@ public final class UsagesImpl implements Usages {
      * used by Retrofit to perform actually REST calls.
      */
     interface UsagesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: petstore.Usages list" })
         @GET("subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages")
         Observable<Response<ResponseBody>> list(@Path("subscriptionId") String subscriptionId, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -63,7 +62,7 @@ public final class UsagesImpl implements Usages {
      * @return the List&lt;Usage&gt; object if successful.
      */
     public List<Usage> list() {
-        return listWithServiceResponseAsync().toBlocking().single().getBody();
+        return listWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -73,7 +72,7 @@ public final class UsagesImpl implements Usages {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback) {
-        return ServiceCall.create(listWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(listWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -85,7 +84,7 @@ public final class UsagesImpl implements Usages {
         return listWithServiceResponseAsync().map(new Func1<ServiceResponse<List<Usage>>, List<Usage>>() {
             @Override
             public List<Usage> call(ServiceResponse<List<Usage>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -108,7 +107,7 @@ public final class UsagesImpl implements Usages {
                 public Observable<ServiceResponse<List<Usage>>> call(Response<ResponseBody> response) {
                     try {
                         ServiceResponse<PageImpl<Usage>> result = listDelegate(response);
-                        ServiceResponse<List<Usage>> clientResponse = new ServiceResponse<List<Usage>>(result.getBody().getItems(), result.getResponse());
+                        ServiceResponse<List<Usage>> clientResponse = new ServiceResponse<List<Usage>>(result.body().items(), result.response());
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -118,7 +117,7 @@ public final class UsagesImpl implements Usages {
     }
 
     private ServiceResponse<PageImpl<Usage>> listDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Usage>, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<PageImpl<Usage>, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<PageImpl<Usage>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

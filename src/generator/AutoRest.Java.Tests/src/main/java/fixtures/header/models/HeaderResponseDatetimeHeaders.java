@@ -11,6 +11,7 @@
 package fixtures.header.models;
 
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseDatetime operation.
@@ -20,6 +21,7 @@ public class HeaderResponseDatetimeHeaders {
      * response with header values "2010-01-01T12:34:56Z" or
      * "0001-01-01T00:00:00Z".
      */
+    @JsonProperty(value = "value")
     private DateTime value;
 
     /**

@@ -13,13 +13,14 @@ package fixtures.bodyformdata.implementation;
 import fixtures.bodyformdata.AutoRestSwaggerBATFormDataService;
 import fixtures.bodyformdata.Formdatas;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService class.
  */
-public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
+public class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient implements AutoRestSwaggerBATFormDataService {
 
     /**
      * The Formdatas object to access its operations.
@@ -71,6 +72,16 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      */
     public AutoRestSwaggerBATFormDataServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder restBuilder) {
         super(baseUrl, clientBuilder, restBuilder);
+        initialize();
+    }
+
+    /**
+     * Initializes an instance of AutoRestSwaggerBATFormDataService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestSwaggerBATFormDataServiceImpl(RestClient restClient) {
+        super(restClient);
         initialize();
     }
 

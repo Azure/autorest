@@ -32,7 +32,7 @@ declare class AutoRestSwaggerBATHeaderService {
     constructor(baseUri: string, options: ServiceClientOptions);
 
     // Operation groups
-    header: operations.Header;
+    headerOperations: operations.HeaderOperations;
     }
 
 export = AutoRestSwaggerBATHeaderService;

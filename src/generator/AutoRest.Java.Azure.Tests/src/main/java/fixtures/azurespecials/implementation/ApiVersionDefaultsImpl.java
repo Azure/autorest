@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.ApiVersionDefaults;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionDefaults.
  */
-public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
+public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionDefaultsService service;
     /** The service client containing this operation class. */
@@ -54,19 +53,19 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionDefaultsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         Observable<Response<ResponseBody>> getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getMethodGlobalNotProvidedValid" })
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         Observable<Response<ResponseBody>> getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getPathGlobalValid" })
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         Observable<Response<ResponseBody>> getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.ApiVersionDefaults getSwaggerGlobalValid" })
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         Observable<Response<ResponseBody>> getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -77,7 +76,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      */
     public void getMethodGlobalValid() {
-        getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -87,7 +86,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -99,7 +98,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getMethodGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -128,7 +127,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -139,7 +138,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      */
     public void getMethodGlobalNotProvidedValid() {
-        getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -149,7 +148,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -161,7 +160,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getMethodGlobalNotProvidedValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -190,7 +189,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -201,7 +200,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      */
     public void getPathGlobalValid() {
-        getPathGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -211,7 +210,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -223,7 +222,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getPathGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -252,7 +251,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -263,7 +262,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      *
      */
     public void getSwaggerGlobalValid() {
-        getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().getBody();
+        getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -273,7 +272,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +284,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
         return getSwaggerGlobalValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -314,7 +313,7 @@ public final class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     }
 
     private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

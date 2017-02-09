@@ -10,11 +10,19 @@
 
 package fixtures.custombaseurimoreoptions;
 
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestParameterizedCustomHostTestClient class.
  */
 public interface AutoRestParameterizedCustomHostTestClient {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

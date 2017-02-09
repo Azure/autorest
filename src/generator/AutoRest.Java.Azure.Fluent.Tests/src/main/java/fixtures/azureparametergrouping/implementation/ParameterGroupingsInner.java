@@ -12,7 +12,6 @@ package fixtures.azureparametergrouping.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupings.
  */
-public final class ParameterGroupingsInner {
+public class ParameterGroupingsInner {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingsService service;
     /** The service client containing this operation class. */
@@ -56,19 +55,19 @@ public final class ParameterGroupingsInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface ParameterGroupingsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postRequired" })
         @POST("parameterGrouping/postRequired/{path}")
         Observable<Response<ResponseBody>> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postOptional" })
         @POST("parameterGrouping/postOptional")
         Observable<Response<ResponseBody>> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postMultiParamGroups" })
         @POST("parameterGrouping/postMultipleParameterGroups")
         Observable<Response<ResponseBody>> postMultiParamGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureparametergrouping.ParameterGroupings postSharedParameterGroupObject" })
         @POST("parameterGrouping/sharedParameterGroupObject")
         Observable<Response<ResponseBody>> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("User-Agent") String userAgent);
 
@@ -80,7 +79,7 @@ public final class ParameterGroupingsInner {
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      */
     public void postRequired(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters) {
-        postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().getBody();
+        postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().body();
     }
 
     /**
@@ -91,7 +90,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
+        return ServiceCall.fromResponse(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
     /**
@@ -104,7 +103,7 @@ public final class ParameterGroupingsInner {
         return postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -139,7 +138,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -150,7 +149,7 @@ public final class ParameterGroupingsInner {
      *
      */
     public void postOptional() {
-        postOptionalWithServiceResponseAsync().toBlocking().single().getBody();
+        postOptionalWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -160,7 +159,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -172,7 +171,7 @@ public final class ParameterGroupingsInner {
         return postOptionalWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -206,7 +205,7 @@ public final class ParameterGroupingsInner {
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      */
     public void postOptional(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters) {
-        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().getBody();
+        postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().body();
     }
 
     /**
@@ -217,7 +216,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
+        return ServiceCall.fromResponse(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
     /**
@@ -230,7 +229,7 @@ public final class ParameterGroupingsInner {
         return postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -266,7 +265,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -277,7 +276,7 @@ public final class ParameterGroupingsInner {
      *
      */
     public void postMultiParamGroups() {
-        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().getBody();
+        postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -287,7 +286,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -299,7 +298,7 @@ public final class ParameterGroupingsInner {
         return postMultiParamGroupsWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -337,7 +336,7 @@ public final class ParameterGroupingsInner {
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      */
     public void postMultiParamGroups(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().getBody();
+        postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().body();
     }
 
     /**
@@ -349,7 +348,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
+        return ServiceCall.fromResponse(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
     /**
@@ -363,7 +362,7 @@ public final class ParameterGroupingsInner {
         return postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -409,7 +408,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -420,7 +419,7 @@ public final class ParameterGroupingsInner {
      *
      */
     public void postSharedParameterGroupObject() {
-        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().getBody();
+        postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -430,7 +429,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -442,7 +441,7 @@ public final class ParameterGroupingsInner {
         return postSharedParameterGroupObjectWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -476,7 +475,7 @@ public final class ParameterGroupingsInner {
      * @param firstParameterGroup Additional parameters for the operation
      */
     public void postSharedParameterGroupObject(FirstParameterGroupInner firstParameterGroup) {
-        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().getBody();
+        postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().body();
     }
 
     /**
@@ -487,7 +486,7 @@ public final class ParameterGroupingsInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
+        return ServiceCall.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
     }
 
     /**
@@ -500,7 +499,7 @@ public final class ParameterGroupingsInner {
         return postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -536,7 +535,7 @@ public final class ParameterGroupingsInner {
     }
 
     private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

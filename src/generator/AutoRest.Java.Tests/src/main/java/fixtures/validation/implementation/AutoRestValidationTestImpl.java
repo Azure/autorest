@@ -12,14 +12,14 @@ package fixtures.validation.implementation;
 
 import fixtures.validation.AutoRestValidationTest;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
@@ -39,7 +39,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestValidationTest class.
  */
-public final class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
+public class AutoRestValidationTestImpl extends ServiceClient implements AutoRestValidationTest {
     /**
      * The Retrofit service to perform REST calls.
      */
@@ -131,6 +131,16 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestValidationTest client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestValidationTestImpl(RestClient restClient) {
+        super(restClient);
+        initialize();
+    }
+
     private void initialize() {
         initializeService();
     }
@@ -144,19 +154,19 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestValidationTestService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.validation.AutoRestValidationTest validationOfMethodParameters" })
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Observable<Response<ResponseBody>> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.validation.AutoRestValidationTest validationOfBody" })
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Observable<Response<ResponseBody>> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.validation.AutoRestValidationTest getWithConstantInPath" })
         @GET("validation/constantsInPath/{constantParam}/value")
         Observable<Response<ResponseBody>> getWithConstantInPath(@Path("constantParam") String constantParam);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.validation.AutoRestValidationTest postWithConstantInBody" })
         @POST("validation/constantsInPath/{constantParam}/value")
         Observable<Response<ResponseBody>> postWithConstantInBody(@Path("constantParam") String constantParam, @Body Product body);
 
@@ -170,7 +180,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
-        return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().getBody();
+        return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().body();
     }
 
     /**
@@ -182,7 +192,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+        return ServiceCall.fromResponse(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -196,7 +206,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -233,7 +243,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Product, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -247,7 +257,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id) {
-        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().getBody();
+        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).toBlocking().single().body();
     }
 
     /**
@@ -259,7 +269,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -273,7 +283,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return validationOfBodyWithServiceResponseAsync(resourceGroupName, id).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -319,7 +329,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
-        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).toBlocking().single().getBody();
+        return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).toBlocking().single().body();
     }
 
     /**
@@ -332,7 +342,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
+        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
     }
 
     /**
@@ -347,7 +357,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -386,7 +396,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Product, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -396,7 +406,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      */
     public void getWithConstantInPath() {
-        getWithConstantInPathWithServiceResponseAsync().toBlocking().single().getBody();
+        getWithConstantInPathWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -405,7 +415,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -416,7 +426,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return getWithConstantInPathWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -441,8 +451,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             });
     }
 
-    private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.mapperAdapter())
+    private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -452,7 +462,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody() {
-        return postWithConstantInBodyWithServiceResponseAsync().toBlocking().single().getBody();
+        return postWithConstantInBodyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -461,7 +471,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -472,7 +482,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return postWithConstantInBodyWithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -504,7 +514,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody(Product body) {
-        return postWithConstantInBodyWithServiceResponseAsync(body).toBlocking().single().getBody();
+        return postWithConstantInBodyWithServiceResponseAsync(body).toBlocking().single().body();
     }
 
     /**
@@ -514,7 +524,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
+        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -526,7 +536,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return postWithConstantInBodyWithServiceResponseAsync(body).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -553,8 +563,8 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             });
     }
 
-    private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Product, ServiceException>(this.mapperAdapter())
+    private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.restClient().responseBuilderFactory().<Product, RestException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .build(response);
     }

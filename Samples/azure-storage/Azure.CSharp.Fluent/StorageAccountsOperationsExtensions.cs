@@ -1,13 +1,9 @@
 
 namespace Petstore
 {
-    using Microsoft.Rest;
+    using System.Threading.Tasks;
    using Microsoft.Rest.Azure;
    using Models;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for StorageAccountsOperations.
@@ -493,4 +489,3 @@ namespace Petstore
 
     }
 }
-

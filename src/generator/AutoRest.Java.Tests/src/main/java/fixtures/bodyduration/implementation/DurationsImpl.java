@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -33,7 +32,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Durations.
  */
-public final class DurationsImpl implements Durations {
+public class DurationsImpl implements Durations {
     /** The Retrofit service to perform REST calls. */
     private DurationsService service;
     /** The service client containing this operation class. */
@@ -55,19 +54,19 @@ public final class DurationsImpl implements Durations {
      * used by Retrofit to perform actually REST calls.
      */
     interface DurationsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations getNull" })
         @GET("duration/null")
         Observable<Response<ResponseBody>> getNull();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations putPositiveDuration" })
         @PUT("duration/positiveduration")
         Observable<Response<ResponseBody>> putPositiveDuration(@Body Period durationBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations getPositiveDuration" })
         @GET("duration/positiveduration")
         Observable<Response<ResponseBody>> getPositiveDuration();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyduration.Durations getInvalid" })
         @GET("duration/invalid")
         Observable<Response<ResponseBody>> getInvalid();
 
@@ -79,7 +78,7 @@ public final class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getNull() {
-        return getNullWithServiceResponseAsync().toBlocking().single().getBody();
+        return getNullWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -89,7 +88,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getNullWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -101,7 +100,7 @@ public final class DurationsImpl implements Durations {
         return getNullWithServiceResponseAsync().map(new Func1<ServiceResponse<Period>, Period>() {
             @Override
             public Period call(ServiceResponse<Period> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -127,7 +126,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Period, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -139,7 +138,7 @@ public final class DurationsImpl implements Durations {
      * @param durationBody the Period value
      */
     public void putPositiveDuration(Period durationBody) {
-        putPositiveDurationWithServiceResponseAsync(durationBody).toBlocking().single().getBody();
+        putPositiveDurationWithServiceResponseAsync(durationBody).toBlocking().single().body();
     }
 
     /**
@@ -150,7 +149,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putPositiveDurationWithServiceResponseAsync(durationBody), serviceCallback);
+        return ServiceCall.fromResponse(putPositiveDurationWithServiceResponseAsync(durationBody), serviceCallback);
     }
 
     /**
@@ -163,7 +162,7 @@ public final class DurationsImpl implements Durations {
         return putPositiveDurationWithServiceResponseAsync(durationBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -193,7 +192,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -205,7 +204,7 @@ public final class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getPositiveDuration() {
-        return getPositiveDurationWithServiceResponseAsync().toBlocking().single().getBody();
+        return getPositiveDurationWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -215,7 +214,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getPositiveDurationWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getPositiveDurationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -227,7 +226,7 @@ public final class DurationsImpl implements Durations {
         return getPositiveDurationWithServiceResponseAsync().map(new Func1<ServiceResponse<Period>, Period>() {
             @Override
             public Period call(ServiceResponse<Period> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -253,7 +252,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Period, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -265,7 +264,7 @@ public final class DurationsImpl implements Durations {
      * @return the Period object if successful.
      */
     public Period getInvalid() {
-        return getInvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getInvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -275,7 +274,7 @@ public final class DurationsImpl implements Durations {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.create(getInvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -287,7 +286,7 @@ public final class DurationsImpl implements Durations {
         return getInvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Period>, Period>() {
             @Override
             public Period call(ServiceResponse<Period> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -313,7 +312,7 @@ public final class DurationsImpl implements Durations {
     }
 
     private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Period, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -12,11 +12,19 @@ import petstore.models.Order;
 import petstore.models.Pet;
 import petstore.models.User;
 import rx.Observable;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for SwaggerPetstore class.
  */
 public interface SwaggerPetstore {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

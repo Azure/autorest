@@ -10,6 +10,7 @@
 
 package fixtures.requiredoptional.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ClassOptionalWrapper model.
@@ -18,6 +19,7 @@ public class ClassOptionalWrapper {
     /**
      * The value property.
      */
+    @JsonProperty(value = "value")
     private Product value;
 
     /**

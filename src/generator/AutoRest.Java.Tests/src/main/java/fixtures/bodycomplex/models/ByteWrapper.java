@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ByteWrapper model.
@@ -18,6 +19,7 @@ public class ByteWrapper {
     /**
      * The field property.
      */
+    @JsonProperty(value = "field")
     private byte[] field;
 
     /**

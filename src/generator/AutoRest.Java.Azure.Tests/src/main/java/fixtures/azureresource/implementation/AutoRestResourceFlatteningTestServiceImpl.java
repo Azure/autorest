@@ -13,10 +13,9 @@ package fixtures.azureresource.implementation;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.Resource;
-import com.microsoft.azure.RestClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.RestClient;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -41,7 +40,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestServiceImpl class.
  */
-public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
+public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
     /** The Retrofit service to perform REST calls. */
     private AutoRestResourceFlatteningTestServiceService service;
     /** the {@link AzureClient} used for long running operations. */
@@ -140,10 +139,8 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param credentials the management credentials for Azure
      */
     public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
-        this(new RestClient.Builder()
-                .withBaseUrl(baseUrl)
-                .withCredentials(credentials)
-                .build());
+        super(baseUrl, credentials);
+        initialize();
     }
 
     /**
@@ -185,27 +182,27 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestResourceFlatteningTestServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putArray" })
         @PUT("azure/resource-flatten/array")
         Observable<Response<ResponseBody>> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getArray" })
         @GET("azure/resource-flatten/array")
         Observable<Response<ResponseBody>> getArray(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("azure/resource-flatten/dictionary")
         Observable<Response<ResponseBody>> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getDictionary" })
         @GET("azure/resource-flatten/dictionary")
         Observable<Response<ResponseBody>> getDictionary(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("azure/resource-flatten/resourcecollection")
         Observable<Response<ResponseBody>> putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("azure/resource-flatten/resourcecollection")
         Observable<Response<ResponseBody>> getResourceCollection(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -216,7 +213,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      */
     public void putArray() {
-        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -226,7 +223,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -238,7 +235,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -270,7 +267,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceArray External Resource as an Array to put
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
     }
 
     /**
@@ -281,7 +278,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
+        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
     /**
@@ -294,7 +291,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -322,7 +319,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -334,7 +331,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -344,7 +341,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
-        return ServiceCall.create(getArrayWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -356,7 +353,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
             @Override
             public List<FlattenedProduct> call(ServiceResponse<List<FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -382,7 +379,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<List<FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -393,7 +390,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      */
     public void putDictionary() {
-        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -403,7 +400,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -415,7 +412,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -447,7 +444,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceDictionary External Resource as a Dictionary to put
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().body();
     }
 
     /**
@@ -458,7 +455,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
     }
 
     /**
@@ -471,7 +468,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putDictionaryWithServiceResponseAsync(resourceDictionary).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -499,7 +496,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -511,7 +508,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -521,7 +518,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
-        return ServiceCall.create(getDictionaryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -533,7 +530,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return getDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() {
             @Override
             public Map<String, FlattenedProduct> call(ServiceResponse<Map<String, FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -559,7 +556,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Map<String, FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -570,7 +567,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      *
      */
     public void putResourceCollection() {
-        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -580,7 +577,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -592,7 +589,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -624,7 +621,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().body();
     }
 
     /**
@@ -635,7 +632,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
+        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
     /**
@@ -648,7 +645,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -676,7 +673,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -688,7 +685,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -698,7 +695,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
-        return ServiceCall.create(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -710,7 +707,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollection>, ResourceCollection>() {
             @Override
             public ResourceCollection call(ServiceResponse<ResourceCollection> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -736,7 +733,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<ResourceCollection, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

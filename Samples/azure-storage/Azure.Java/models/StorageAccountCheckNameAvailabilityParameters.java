@@ -12,12 +12,13 @@ public class StorageAccountCheckNameAvailabilityParameters {
     /**
      * The name property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "name", required = true)
     private String name;
 
     /**
      * The type property.
      */
+    @JsonProperty(value = "type")
     private String type;
 
     /**
