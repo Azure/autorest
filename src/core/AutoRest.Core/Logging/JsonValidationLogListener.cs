@@ -21,7 +21,7 @@ namespace AutoRest.Core.Logging
                 rawMessage["type"] = validationMessage.Severity.ToString();
                 rawMessage["code"] = validationMessage.Type.Name;
                 rawMessage["message"] = validationMessage.Message;
-                rawMessage["jsonpath"] = validationMessage.Path.JsonPath;
+                rawMessage["jsonref"] = validationMessage.Path.JsonReference;
                 rawMessageCollection.Add(rawMessage);
             }
         }

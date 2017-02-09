@@ -144,6 +144,11 @@ namespace AutoRest.Swagger.Model
         public ExternalDoc ExternalDocs { get; set; }
 
         /// <summary>
+        /// Path to this Swagger.
+        /// </summary>
+        internal Uri FilePath { get; set; }
+
+        /// <summary>
         /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
         /// </summary>
         /// <param name="context">The modified document context.</param>

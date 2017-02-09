@@ -33,9 +33,9 @@ namespace AutoRest.Core.Validation
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
-        public IEnumerable<LogMessage> GetValidationExceptions(object entity)
+        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, object entity)
         {
-            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity), Enumerable.Empty<Rule>());
+            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>());
         }
 
         /// <summary>

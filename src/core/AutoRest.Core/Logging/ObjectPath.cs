@@ -29,12 +29,12 @@ namespace AutoRest.Core.Logging
         public IEnumerable<ObjectPathPart> Path { get; }
 
         // https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-04
-        public string JsonPointer => "#" + string.Concat(Path.Select(p => p.JsonPointer));
+        public string JsonPointer => string.Concat(Path.Select(p => p.JsonPointer));
 
         // http://goessner.net/articles/JsonPath/, https://github.com/jayway/JsonPath
         public string JsonPath => "$" + string.Concat(Path.Select(p => p.JsonPath));
 
-        public string ReadablePath => "#" + string.Concat(Path.Select(p => p.ReadablePath));
+        public string ReadablePath => string.Concat(Path.Select(p => p.ReadablePath));
 
         public YamlNode SelectNode(YamlNode node)
         {
