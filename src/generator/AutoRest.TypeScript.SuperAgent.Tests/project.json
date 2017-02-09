@@ -14,11 +14,11 @@
     "publicSign": false,
     "keyFile": "../../../Tools/MSSharedLibKey.snk",
     "compile": {
-     "exclude": [ "CSharpAzureCodeNamingFrameworkTestsXX.*" ]
+      "exclude": [ "CSharpAzureCodeNamingFrameworkTestsXX.*" ]
     }
   },
 
-  "testRunner": "xunit",
+  "testRunner": "nunit",
   "frameworks": {
     "net451": {
 
@@ -26,10 +26,13 @@
   },
 
   "dependencies": {
+    "Microsoft.Extensions.DependencyModel": "1.0.0",
+    "dotnet-test-nunit": "3.4.0-beta-2",
+    "Microsoft.Extensions.Testing.Abstractions": "1.0.0-preview2-003121",
     "Microsoft.NETCore.Platforms": "1.0.1",
     "Microsoft.Rest.ClientRuntime.Azure": "3.3.2",
     "Microsoft.Rest.ClientRuntime": "2.3.2",
-    "xunit": "2.2.0-beta2-build3300",
+    "NUnit": "3.5.0",
     "AutoRest.TypeScript.SuperAgent": "1.0.0-*",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"
   }

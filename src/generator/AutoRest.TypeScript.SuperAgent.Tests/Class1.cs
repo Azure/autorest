@@ -1,13 +1,14 @@
 ﻿using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
-using Xunit;
+using NUnit.Framework;
 
 namespace AutoRest.TypeScript.SuperAgent.Tests
 {
+    [TestFixture]
     public class Class1
     {
-        [Fact]
+        [Test]
         public void PassingTest()
         {
 
