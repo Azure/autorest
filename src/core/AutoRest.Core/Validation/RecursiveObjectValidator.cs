@@ -20,12 +20,6 @@ namespace AutoRest.Core.Validation
         private Func<PropertyInfo, string> resolver;
 
         /// <summary>
-        /// Initializes the object validator. By default, it will use the property name when
-        /// returning the location of messages
-        /// </summary>
-        public RecursiveObjectValidator() : this(PropertyNameResolver.PropertyName) { }
-
-        /// <summary>
         /// Initializes the object validator with a custom <paramref name="resolver"/>
         /// that returns the name for a property when setting the location of messages
         /// </summary>

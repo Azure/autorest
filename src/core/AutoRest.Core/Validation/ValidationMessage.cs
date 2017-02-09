@@ -14,9 +14,6 @@ namespace AutoRest.Core.Validation
     /// </summary>
     public class ValidationMessage : LogMessage
     {
-        public ValidationMessage(ObjectPath path, Rule rule)
-            : this(path, rule, new string[0]) { }
-
         public ValidationMessage(ObjectPath path, Rule rule, params object[] formatArguments)
             : base(rule.Severity, $"{rule.GetType().Name} - {string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments)}", path)
         {
