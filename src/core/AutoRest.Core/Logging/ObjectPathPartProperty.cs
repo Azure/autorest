@@ -23,6 +23,8 @@ namespace AutoRest.Core.Logging
 
         public string Property { get; }
 
+        public override string JsonPointer => $"/{Property.Replace("~", "~0").Replace("/", "~1")}";
+
         public override string JsonPath => regexValidES3DotNotationPropertyName.IsMatch(Property) ? $".{Property}" : $"[{JsonConvert.SerializeObject(Property)}]";
 
         public override string ReadablePath => Property.StartsWith("/") ? Property : $"/{Property}";

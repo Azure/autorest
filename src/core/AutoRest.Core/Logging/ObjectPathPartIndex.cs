@@ -17,6 +17,8 @@ namespace AutoRest.Core.Logging
 
         public int Index { get; }
 
+        public override string JsonPointer => $"/{Index + 1}";
+
         public override string JsonPath => $"[{Index + 1}]";
 
         public override string ReadablePath => JsonPath;
