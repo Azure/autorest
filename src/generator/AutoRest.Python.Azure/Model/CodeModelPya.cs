@@ -42,6 +42,10 @@ namespace AutoRest.Python.Azure.Model
                 var optionalParams = new List<string>();
                 foreach (var property in Properties)
                 {
+                    if (property.IsConstant)
+                    {
+                        continue;
+                    }
                     if (property.IsRequired)
                     {
                         requireParams.Add(property.Name.ToPythonCase());
