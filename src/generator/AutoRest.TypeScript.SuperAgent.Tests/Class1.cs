@@ -1,5 +1,9 @@
-﻿using AutoRest.Core;
+﻿using System;
+using System.IO;
+using AutoRest.Core;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Swagger;
 using AutoRest.TypeScript.SuperAgent.Model;
 using NUnit.Framework;
 
@@ -11,22 +15,29 @@ namespace AutoRest.TypeScript.SuperAgent.Tests
         [Test]
         public void PassingTest()
         {
+            using (var context = new DependencyInjection.Context().Activate())
+            {
+                var settings = new Settings
+                               {
+                                   Input = "D:\\projects\\autorest\\src\\generator\\AutoRest.TypeScript.SuperAgent.Tests\\Resource\\test1.json",
+                                   OutputDirectory = "C:\\Users\\jlaszlo\\Desktop\\11111111111111",
+                                   CodeGenerator = "Test"
+                               };
 
-            var generator = new CodeGeneratorTs();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+                var plugin = new PluginTs();
 
-            var model = new CodeModelTs();
+                using (plugin.Activate())
+                {
+                    codeModel = plugin.Serializer.Load(codeModel);
+                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
 
-            var settings = Settings.Instance;
+                    //settings.CodeGenerator = "";
 
-            settings.Input = "";
-            settings.OutputDirectory = "";
-
-            settings.CodeGenerator = "";
-
-            Core.AutoRestController.Generate();
-
-
-            generator.Generate(model);
+                    Core.AutoRestController.Generate();
+                }
+            }
 
         }
 

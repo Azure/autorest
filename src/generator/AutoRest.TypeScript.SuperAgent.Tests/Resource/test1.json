@@ -1,0 +1,120 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Agoda.Website.MVC"
+  },
+  "host": "localhost:59036",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/{culture}/api/nha/user/current": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "getCurrentUser",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserInfo"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/user/current2": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "updateUser",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserInfo2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserInfo2"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "UserInfo": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "userLanguage": {
+          "type": "string"
+        }
+      }
+    },
+    "UserInfo2": {
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "userLanguage": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

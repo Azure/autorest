@@ -35,5 +35,9 @@
     "NUnit": "3.5.0",
     "AutoRest.TypeScript.SuperAgent": "1.0.0-*",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"
-  }
+  },
+
+  "content": [
+    "AutoRest.json"
+  ]
 }

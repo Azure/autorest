@@ -1,0 +1,15 @@
+﻿{
+  "plugins": {
+    "Test": {
+      "type": "PluginTs, AutoRest.TypeScript.SuperAgent"
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerModeler, AutoRest.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
+    }
+  }
+}
