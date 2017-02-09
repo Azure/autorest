@@ -26,46 +26,42 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid( Dictionary<string, Operation> path, RuleContext context, out object[] formatParameters)
         {
             List<string> notAllowedProperties = new List<string>();
-            foreach (var operation in path.Keys)
+            foreach (string operation in path.Keys)
             {
                 if ((operation.ToLower().Equals("get") ||
                     operation.ToLower().Equals("put") ||
-                    operation.ToLower().Equals("patch")) && path[operation].Parameters != null)
+                    operation.ToLower().Equals("patch")) && path[operation]?.Parameters != null)
                 {
-                    foreach (var param in path[operation].Parameters)
+                    foreach (SwaggerParameter param in path[operation].Parameters)
                     {
                         if (param.In == ParameterLocation.Body)
                         {
-                            if (param.Schema.Reference != null)
+                            if (param?.Schema?.Reference != null)
                             {
                                 string defName = Extensions.StripDefinitionPath(param.Schema.Reference);
                                 var definition = ((ServiceDefinition)context.Root).Definitions[defName];
-                                if (definition != null && definition.AllOf != null)
+                                if (definition?.AllOf != null && definition.Properties != null &&
+                                    definition.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null)
                                 {
-                                    if (definition.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) !=null && definition.Properties != null)
+                                    //Model is allOf Resource
+                                    foreach (KeyValuePair<string, Schema> prop in definition.Properties)
                                     {
-                                        //Model is allOf Resource
-                                        foreach (var prop in definition.Properties)
+                                        if (!allowedTopLevelProperties.Contains(prop.Key.ToLower()))
                                         {
-                                            if (!allowedTopLevelProperties.Contains(prop.Key.ToLower()))
-                                            {
-                                                notAllowedProperties.Add(defName + "/" + prop.Key);
-                                            }
+                                            notAllowedProperties.Add(defName + "/" + prop.Key);
                                         }
                                     }
                                 }    
                             }
-                            if (param.Schema.AllOf != null)
+                            if (param?.Schema?.AllOf != null && param.Schema.Properties != null &&
+                                param.Schema.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null)
                             {
-                                if (param.Schema.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null && param.Schema.Properties != null)
+                                //Model is allOf Resource
+                                foreach (KeyValuePair<string, Schema> prop in param.Schema.Properties)
                                 {
-                                    //Model is allOf Resource
-                                    foreach (var prop in param.Schema.Properties)
+                                    if (!allowedTopLevelProperties.Contains(prop.Key.ToLower()))
                                     {
-                                        if (!allowedTopLevelProperties.Contains(prop.Key.ToLower()))
-                                        {
-                                            notAllowedProperties.Add(path[operation].OperationId + ":" + prop.Key);
-                                        }
+                                        notAllowedProperties.Add(path[operation].OperationId + ":" + prop.Key);
                                     }
                                 }
                             }
