@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders1;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import rx.Observable;
@@ -86,5 +87,38 @@ public interface Headers {
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the boolean object if successful.
+     */
+    boolean customNamedRequestId1(String fooClientRequestId);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    ServiceCall<Boolean> customNamedRequestId1Async(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the observable to the boolean object
+     */
+    Observable<Boolean> customNamedRequestId1Async(String fooClientRequestId);
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the observable to the boolean object
+     */
+    Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>> customNamedRequestId1WithServiceResponseAsync(String fooClientRequestId);
 
 }

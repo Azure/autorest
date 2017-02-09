@@ -111,6 +111,40 @@
         </configuration>
       </plugin>
 
+      <plugin>
+        <artifactId>exec-maven-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.5.0</version>
+        <executions>
+          <execution>
+            <id>run-server</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>node</executable>
+              <workingDirectory>${session.executionRootDirectory}/src/dev/TestServer/server</workingDirectory>
+              <arguments>
+                <argument>startup/www</argument>
+              </arguments>
+              <async>true</async>
+            </configuration>
+          </execution>
+          <execution>
+            <id>report-coverage</id>
+            <phase>test</phase>
+            <goals>
+              <goal>java</goal>
+            </goals>
+            <configuration>
+              <mainClass>fixtures.report.CoverageReporter</mainClass>
+              <classpathScope>test</classpathScope>
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>

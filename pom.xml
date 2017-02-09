@@ -160,28 +160,6 @@
 <br />*/</code>]]></bottom>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>exec-maven-plugin</artifactId>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.5.0</version>
-        <executions>
-          <execution>
-            <id>run-server</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>node</executable>
-              <workingDirectory>${session.executionRootDirectory}/src/dev/TestServer/server</workingDirectory>
-              <arguments>
-                <argument>startup/www</argument>
-              </arguments>
-              <async>true</async>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>

@@ -18,10 +18,12 @@ import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders1;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
 import okhttp3.ResponseBody;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -62,6 +64,10 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdParamGrouping" })
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         Observable<Response<ResponseBody>> customNamedRequestIdParamGrouping(@Header("accept-language") String acceptLanguage, @Header("foo-client-request-id") String fooClientRequestId, @Header("User-Agent") String userAgent);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId1" })
+        @HEAD("azurespecials/customNamedRequestIdHead")
+        Observable<Response<Void>> customNamedRequestId1(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -197,6 +203,74 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdParamGroupingHeaders.class);
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the boolean object if successful.
+     */
+    public boolean customNamedRequestId1(String fooClientRequestId) {
+        return customNamedRequestId1WithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link ServiceCall} object
+     */
+    public ServiceCall<Boolean> customNamedRequestId1Async(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceCall.fromHeaderResponse(customNamedRequestId1WithServiceResponseAsync(fooClientRequestId), serviceCallback);
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the observable to the Boolean object
+     */
+    public Observable<Boolean> customNamedRequestId1Async(String fooClientRequestId) {
+        return customNamedRequestId1WithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>, Boolean>() {
+            @Override
+            public Boolean call(ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
+     *
+     * @param fooClientRequestId The fooRequestId
+     * @return the observable to the Boolean object
+     */
+    public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>> customNamedRequestId1WithServiceResponseAsync(String fooClientRequestId) {
+        if (fooClientRequestId == null) {
+            throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
+        }
+        return service.customNamedRequestId1(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>>>() {
+                @Override
+                public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>> call(Response<Void> response) {
+                    try {
+                        ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1> clientResponse = customNamedRequestId1Delegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1> customNamedRequestId1Delegate(Response<Void> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .buildEmptyWithHeaders(response, HeaderCustomNamedRequestIdHeaders1.class);
     }
 
 }
