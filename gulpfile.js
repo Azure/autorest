@@ -607,14 +607,24 @@ gulp.task('regenerate:expected:csazurefluentcomposite', function (cb) {
   }, cb);
 });
 
+var languages = [
+  "CSharp",
+  "Azure.CSharp",
+  "Ruby",
+  "Azure.Ruby",
+  "NodeJS",
+  "Azure.NodeJS",
+  "Python",
+  "Azure.Python",
+  "Go",
+  "Java",
+  "Azure.Java",
+  "Azure.Java.Fluent",
+  "AzureResourceSchema",
+  "Azure.CSharp.Fluent"];
+
 gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
-  var content = fs.readFileSync(autorestConfigPath).toString();
-  if (content.charCodeAt(0) === 0xFEFF) {
-    content = content.slice(1);
-  }
-  var autorestConfig = JSON.parse(content);
-  for (var lang in autorestConfig.plugins) {
+  for (var lang of languages) {
     if (!lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent' ) {
       var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/petstore/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/petstore/petstore.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {
@@ -626,13 +636,7 @@ gulp.task('regenerate:expected:samples', ['regenerate:expected:samples:azure'], 
 });
 
 gulp.task('regenerate:expected:samples:azure', function(){
-  var autorestConfigPath = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.json');
-  var content = fs.readFileSync(autorestConfigPath).toString();
-  if (content.charCodeAt(0) === 0xFEFF) {
-    content = content.slice(1);
-  }
-  var autorestConfig = JSON.parse(content);
-  for (var lang in autorestConfig.plugins) {
+  for (var lang of languages) {
     if (lang.match(/^Azure\..+/) && lang != 'Azure.CSharp.Fluent') {
       var generateCmd = path.join(basePathOrThrow(), GetAutoRestFolder() + 'AutoRest.exe') + ' -Modeler Swagger -CodeGenerator ' + lang + ' -OutputDirectory ' + path.join(basePathOrThrow(), 'Samples/azure-storage/' + lang) + ' -Namespace Petstore -Input ' + path.join(basePathOrThrow(), 'Samples/azure-storage/azure-storage.json') + ' -Header NONE';
       exec(clrCmd(generateCmd), function(err, stdout, stderr) {

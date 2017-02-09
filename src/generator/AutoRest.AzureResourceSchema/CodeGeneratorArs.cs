@@ -18,7 +18,7 @@ namespace AutoRest.AzureResourceSchema
 
         public override string ImplementationFileExtension => ".json";
 
-        public override string UsageInstructions => $"Your Azure Resource Schema(s) can be found in {Settings.Instance.OutputDirectory}";
+        public override string UsageInstructions => $"Your Azure Resource Schema(s) can be found in {Settings.Instance?.OutputDirectory}";
 
  
         public override async Task Generate(CodeModel serviceClient)

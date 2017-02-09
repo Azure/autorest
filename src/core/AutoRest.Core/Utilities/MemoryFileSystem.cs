@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
-    // TODO: MemoryFileSystem is for testing. Consider moving to test project.
     public class MemoryFileSystem : IFileSystem, IDisposable
     {
         private const string FolderKey = "Folder";
@@ -49,27 +48,13 @@ namespace AutoRest.Core.Utilities
                 return new Uri(Path.GetDirectoryName(path), UriKind.Relative);
             }
         }
-        
-        public void WriteFile(string path, string contents)
-        {
-            var directory = Path.GetDirectoryName(path);
-            if (!string.IsNullOrEmpty((directory)) && !VirtualStore.ContainsKey(directory))
-            {
-                throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
-            }
-            var result = new StringBuilder();
-            var lines = contents.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
-            var eol = path.LineEnding();
 
-            foreach (var l in lines)
-            {
-                result.Append(l);
-                result.Append(eol);
-            }
-            VirtualStore[path] = result;
+        public void WriteAllText(string path, string contents)
+        {
+            VirtualStore[path] = new StringBuilder(contents);
         }
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             if (VirtualStore.ContainsKey(path))
             {
@@ -98,56 +83,13 @@ namespace AutoRest.Core.Utilities
         }
 
         public bool FileExists(string path)
-        {
-            return VirtualStore.ContainsKey(path);
-        }
-
-        public void DeleteFile(string path)
-        {
-            if (VirtualStore.ContainsKey(path))
-            {
-                VirtualStore.Remove(path);
-            }
-        }
-
-        public void DeleteDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
-
-        public void EmptyDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
+            => VirtualStore.ContainsKey(path);
 
         public bool DirectoryExists(string path)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(path, StringComparison.Ordinal))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+            => VirtualStore.Keys.Any(key => key.StartsWith(path, StringComparison.Ordinal));
 
         public void CreateDirectory(string path)
-        {
-            VirtualStore[path] = new StringBuilder(FolderKey);
-        }
+            => VirtualStore[path] = new StringBuilder(FolderKey);
 
         public string[] GetDirectories(string startDirectory, string filePattern, SearchOption options)
         {
@@ -225,11 +167,24 @@ namespace AutoRest.Core.Utilities
                 _virtualStore?.Clear();
             }
         }
-        public string CurrentDirectory
+
+        public void CommitToDisk(string targetDirectory)
         {
-            get
+            var fs = new FileSystem();
+            foreach (var entry in VirtualStore)
             {
-                return "";
+                if (entry.Value.ToString() == FolderKey)
+                {
+                    var targetDirName = Path.Combine(targetDirectory, entry.Key);
+                    fs.CreateDirectory(targetDirName);
+                }
+                else
+                {
+                    var targetFileName = Path.Combine(targetDirectory, entry.Key);
+                    var targetFileDir = Path.GetDirectoryName(targetFileName);
+                    fs.CreateDirectory(targetFileDir);
+                    fs.WriteAllText(targetFileName, entry.Value.ToString());
+                }
             }
         }
     }

@@ -9,17 +9,19 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Parsing;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using AutoRest.Core.Validation;
+using YamlDotNet.RepresentationModel;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
-    public class SwaggerModeler : Modeler
+    public class SwaggerModeler
     {
         private const string BaseUriParameterName = "BaseUri";
 
@@ -29,17 +31,7 @@ namespace AutoRest.Swagger
 
         public SwaggerModeler() 
         {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-
             DefaultProtocol = TransferProtocolScheme.Http;
-        }
-
-        public override string Name
-        {
-            get { return "Swagger"; }
         }
 
         /// <summary>
@@ -61,51 +53,119 @@ namespace AutoRest.Swagger
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        public override CodeModel Build()
+        public ServiceDefinition Parse(IFileSystem fs, string[] inputFiles, bool inlineApiVersion = false)
         {
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
-            return Build(serviceDefinition);
-        }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public CodeModel Build(ServiceDefinition serviceDefinition)
-        {
-            ServiceDefinition = serviceDefinition;
-            if (!Settings.SkipValidation)
+            var strParameters = "parameters";
+
+            // construct merged swagger document
+            var mergedSwagger = new YamlMappingNode();
+            mergedSwagger.Set("info", (fs.ReadAllText(inputFiles[0]).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+
+            // merge child swaggers
+            foreach (var childSwaggerPath in inputFiles)
             {
-                // Look for semantic errors and warnings in the document.
-                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                var childSwaggerRaw = fs.ReadAllText(childSwaggerPath);
+                using (NewContext)
                 {
-                    Logger.Instance.Log(validationEx);
+                    new Settings
+                    {
+                        FileSystemInput = fs
+                    };
+                    childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
+                }
+                var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
+                if (childSwagger == null)
+                {
+                    throw ErrorManager.CreateError("Failed parsing referenced Swagger file {0}.", childSwaggerPath);
+                }
+
+                // remove info
+                var info = childSwagger.Get("info") as YamlMappingNode;
+                var version = info.Get("version");
+                info.Remove("title");
+                info.Remove("description");
+                info.Remove("version");
+
+                if (inlineApiVersion)
+                { 
+                    // fix up api version
+                    var apiVersionParam = (childSwagger.Get(strParameters) as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                    var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
+                    if (apiVersionParamName != null)
+                    {
+                        var paths =
+                            ((childSwagger.Get("paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>()).Concat
+                            ((childSwagger.Get("x-ms-paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>());
+                        var methods = paths.OfType<YamlMappingNode>().SelectMany(path => path.Children.Values.OfType<YamlMappingNode>());
+                        var parameters = methods.Select(method => method.Get(strParameters)).OfType<YamlSequenceNode>();
+                        var parametersCommon = paths.OfType<YamlMappingNode>().Select(path => path.Get(strParameters)).OfType<YamlSequenceNode>();
+                        var paramValues = parameters.Concat(parametersCommon).SelectMany(param => param.Children.OfType<YamlMappingNode>());
+                        var apiVersionParams = paramValues.Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/{strParameters}/{apiVersionParamName}");
+                        foreach (var param in apiVersionParams)
+                        {
+                            param.Remove("$ref");
+                            foreach (var child in (apiVersionParam?.Value as YamlMappingNode).Children)
+                            {
+                                param.Children.Add(child);
+                            }
+                            param.Set("enum", new YamlSequenceNode(version));
+                        }
+                    }
+                }
+
+                // merge
+                mergedSwagger = mergedSwagger.MergeWith(childSwagger);
+            }
+
+            if (inlineApiVersion)
+            { 
+                // remove api-version client property
+                var mergedSwaggerApiVersionParam = (mergedSwagger.Get(strParameters) as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode)?.Value;
+                if (mergedSwaggerApiVersionParamName != null)
+                {
+                    (mergedSwagger.Get(strParameters) as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);
                 }
             }
 
+            // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            return SwaggerParser.Parse(inputFiles[0], mergedSwagger.Serialize());
+        }
+
+        [Obsolete("these are multiple pipeline steps!")]
+        public CodeModel Build(IFileSystem fs, string[] inputFiles, bool inlineApiVersion = false)
+        {
+            return Build(Parse(fs, inputFiles, inlineApiVersion));
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability",
+             "CA1506:AvoidExcessiveClassCoupling")]
+        public CodeModel Build(ServiceDefinition serviceDefinition, string overrideModelsName = null, string overrideNamespace = null)
+        {
+            ServiceDefinition = serviceDefinition;
+
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
-            // Update settings
-            UpdateSettings();
 
             InitializeClientModel();
+            CodeModel.ModelsName = overrideModelsName;
+            CodeModel.Namespace = overrideNamespace;
             BuildCompositeTypes();
 
             // Build client parameters
             foreach (var swaggerParameter in ServiceDefinition.Parameters.Values)
             {
-                var parameter = ((ParameterBuilder)swaggerParameter.GetBuilder(this)).Build();
+                var parameter = ((ParameterBuilder) swaggerParameter.GetBuilder(this)).Build();
 
                 var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
-                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
+                clientProperty.RealPath = new string[] {parameter.SerializedName.Value};
 
                 CodeModel.Add(clientProperty);
             }
 
-            var  methods = new List<Method>();
+            var methods = new List<Method>();
             // Build methods
             foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
             {
@@ -132,11 +192,11 @@ namespace AutoRest.Swagger
                         }
                         var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
                         method.Group = methodGroup;
-                        
+
                         methods.Add(method);
                         if (method.DefaultResponse.Body is CompositeType)
                         {
-                            CodeModel.AddError((CompositeType)method.DefaultResponse.Body);
+                            CodeModel.AddError((CompositeType) method.DefaultResponse.Body);
                         }
                     }
                     else
@@ -158,7 +218,7 @@ namespace AutoRest.Swagger
                 CodeModel.Add(objectType);
             }
             CodeModel.AddRange(methods);
-            
+
 
             return CodeModel;
         }
@@ -168,16 +228,18 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override IEnumerable<ComparisonMessage> Compare()
+        public IEnumerable<ComparisonMessage> Compare()
         {
+            var settings = Settings.Instance;
+
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
+            if (string.IsNullOrWhiteSpace(settings.Input) || string.IsNullOrWhiteSpace(settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystemInput);
+            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystemInput);
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
@@ -196,20 +258,6 @@ namespace AutoRest.Swagger
                 .Concat(comparisonMessages);
         }
 
-        private void UpdateSettings()
-        {
-            if (ServiceDefinition.Info.CodeGenerationSettings != null)
-            {
-                foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
-                {
-                    //Don't overwrite settings that come in from the command line
-                    if (!this.Settings.CustomSettings.ContainsKey(key))
-                        this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
-                }
-                Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
-            }
-        }
-
         /// <summary>
         /// Initialize the base service and populate global service properties
         /// </summary>
@@ -226,17 +274,15 @@ namespace AutoRest.Swagger
                 throw ErrorManager.CreateError(Resources.InfoSectionMissing);
             }
 
-            CodeModel = New<CodeModel>();
-
-            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
+            if (ServiceDefinition.Info.Title == null)
             {
                 throw ErrorManager.CreateError(Resources.TitleMissing);
             }
 
+            CodeModel = New<CodeModel>();
+
             CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
 
-            CodeModel.Namespace = Settings.Namespace;
-            CodeModel.ModelsName = Settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
             CodeModel.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)
@@ -382,7 +428,7 @@ namespace AutoRest.Swagger
             if (swaggerParameter.Reference != null)
             {
                 string referenceKey = swaggerParameter.Reference.StripParameterPath();
-                if (!ServiceDefinition.Parameters.ContainsKey(referenceKey))
+                if (ServiceDefinition.Parameters.ContainsKey(referenceKey) != true)
                 {
                     throw new ArgumentException(
                         string.Format(CultureInfo.InvariantCulture,

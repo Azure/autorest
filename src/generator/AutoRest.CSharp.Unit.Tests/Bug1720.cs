@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\JobDefinitionsOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"JobDefinitionsOperations.cs"));
 
                 var result = await Compile(fileSystem);
                 // filter the warnings

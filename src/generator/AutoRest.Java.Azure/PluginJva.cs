@@ -12,7 +12,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
-    public sealed class PluginJva : Plugin<GeneratorSettingsJva, ModelSerializer<CodeModelJva>, TransformerJva, CodeGeneratorJva, CodeNamerJva, CodeModelJva>
+    public sealed class PluginJva : Plugin<GeneratorSettingsJva, TransformerJva, CodeGeneratorJva, CodeNamerJva, CodeModelJva>
     {
         public PluginJva()
         {

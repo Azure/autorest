@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using AutoRest.Core;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Extensibility;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
-using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
-namespace AutoRest
+namespace AutoRest.Preview
 {
     public static class AutoRestPipeline
     {
-        private static readonly string autoRestJson = File.ReadAllText("AutoRest.json");
-        
         public static MemoryFileSystem GenerateCodeForTest(string json, string codeGenerator, Action<IEnumerable<LogMessage>> processMessages)
         {
             using (NewContext)
@@ -22,58 +19,41 @@ namespace AutoRest
                 var fs = new MemoryFileSystem();
                 var settings = new Settings
                 {
-                    Modeler = "Swagger",
                     CodeGenerator = codeGenerator,
-                    FileSystem = fs,
-                    OutputDirectory = "GeneratedCode",
                     Namespace = "Test",
                     Input = "input.json"
                 };
 
-                fs.WriteFile(settings.Input, json);
-                fs.WriteFile("AutoRest.json", autoRestJson);
+                fs.WriteAllText(settings.Input, json);
 
-                GenerateCodeInto(processMessages);
+                GenerateCodeInto(fs, processMessages);
 
-                return fs;
+                return settings.FileSystemOutput;
             }
         }
 
-        private static void GenerateCodeInto(Action<IEnumerable<LogMessage>> processMessages)
+        private static void GenerateCodeInto(IFileSystem fs, Action<IEnumerable<LogMessage>> processMessages)
         {
             using (NewContext)
             {
-                var plugin = ExtensionsLoader.GetPlugin();
+                var config = AutoRestConfiguration.Create();
+                config.CodeGenerator = Settings.Instance.CodeGenerator;
+                var plugin = ExtensionsLoader.GetPlugin(config);
                 var modeler = ExtensionsLoader.GetModeler();
                 var messages = new List<LogMessage>();
                 Logger.Instance.AddListener(new SignalingLogListener(Category.Info, message => messages.Add(message)));
                 try
                 {
-                    var codeModel = modeler.Build();
-
-                    // After swagger Parser
-                    codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                    // After swagger Parser
-                    codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
+                    var codeModel = modeler.Build(fs, new [] { Settings.Instance.Input });
 
                     using (plugin.Activate())
                     {
                         // load model into language-specific code model
                         codeModel = plugin.Serializer.Load(codeModel);
 
-                        // we've loaded the model, run the extensions for after it's loaded
-                        codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-
                         // apply language-specific tranformation (more than just language-specific types)
                         // used to be called "NormalizeClientModel" . 
                         codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                        // next set of extensions
-                        codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-                        // next set of extensions
-                        codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                         // Generate code from CodeModel.
                         plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();

@@ -7,13 +7,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.Core;
+using AutoRest.Core.Logging;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
 
-namespace AutoRest.Simplify
+namespace AutoRest.Core.Simplify
 {
     public class CSharpSimplifier
     {
@@ -40,25 +41,33 @@ namespace AutoRest.Simplify
             var op = new AzureAsyncOperation();
             var restOp = new RestException();
 
-            var files = Settings.Instance.FileSystem.GetFiles(Settings.Instance.OutputDirectory, "*.cs",
-                    SearchOption.AllDirectories).
-                ToDictionary(each => each, each => Settings.Instance.FileSystem.ReadFileAsText(each));
+            var files = Settings.Instance.FileSystemOutput.GetFiles("", "*.cs", SearchOption.AllDirectories).
+                ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadAllText(each));
 
             var projectId = ProjectId.CreateNewId();
-            var solution = new AdhocWorkspace().CurrentSolution
-                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
-                .AddMetadataReference(projectId, Mscorlib)
-                .AddMetadataReference(projectId, Xml)
-                .AddMetadataReference(projectId, Newtonsoft)
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single());
+            Solution solution;
+            try
+            { 
+                solution = new AdhocWorkspace().CurrentSolution
+                    .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
+                    .AddMetadataReference(projectId, Mscorlib)
+                    .AddMetadataReference(projectId, Xml)
+                    .AddMetadataReference(projectId, Newtonsoft)
+                    .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",StringComparison.OrdinalIgnoreCase) == 0)
+                        .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
+                    .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",StringComparison.OrdinalIgnoreCase) == 0)
+                        .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
+                    .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
+                        .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)
+                        .Select(a => MetadataReference.CreateFromFile(a.Location)).Single());
+            }
+            catch(Exception e)
+            {
+                Logger.Instance.Log(Category.Warning, $"Failed to load assemblies for simplifier: {e}");
+                return;
+            }
 
             // Add existing files
             foreach (var file in files.Keys)
@@ -103,8 +112,7 @@ namespace AutoRest.Simplify
                         Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
 
                     // Write out the files back to their original location
-                    var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
-                    Settings.Instance.FileSystem.WriteFile(output, text);
+                    Settings.Instance.FileSystemOutput.WriteAllText(document.Name, text);
                 }
             }
         }

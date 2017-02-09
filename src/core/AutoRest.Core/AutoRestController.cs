@@ -10,6 +10,10 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using AutoRest.Core.Configuration;
+using AutoRest.Core.Simplify;
+using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
@@ -34,96 +38,116 @@ namespace AutoRest.Core
         /// <summary>
         /// Generates client using provided settings.
         /// </summary>
-        public static void Generate()
+        public static async Task<MemoryFileSystem> Generate(IFileSystem fsInput, AutoRestConfiguration configuration)
         {
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            
-            CodeModel codeModel = null;
-            
-            var modeler = ExtensionsLoader.GetModeler();
 
-            try
+            CodeModel codeModel;
+
+            using (NewContext)
             {
-                using (NewContext)
+                var modeler = ExtensionsLoader.GetModeler();
+                try
                 {
                     bool validationErrorFound = false;
-                    Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
+                    // TODO
+                    //Logger.Instance.AddListener(new SignalingLogListener(Settings.Instance.ValidationLevel, _ => validationErrorFound = true));
+
+                    var serviceDefinition = modeler.Parse(fsInput, configuration.InputFiles, configuration.InlineApiVersion);
+
+                    // EXCEPTIONAL REVERSE DATAFLOW: put custom generator settings into configuration
+                    if (serviceDefinition.Info.CodeGenerationSettings != null)
+                    {
+                        if (configuration.CustomSettings == null)
+                        {
+                            configuration.CustomSettings = new Dictionary<string, object>();
+                        }
+                        foreach (var key in serviceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
+                        {
+                            //Don't overwrite settings that come in from the command line
+                            if (!configuration.CustomSettings.ContainsKey(key))
+                            {
+                                configuration.CustomSettings[key] = serviceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                            }
+                        }
+                        if (configuration.CustomSettings.ContainsKey("ft"))
+                            configuration.PayloadFlatteningThreshold = Convert.ToInt32(configuration.CustomSettings["ft"]);
+                        if (configuration.CustomSettings.ContainsKey("name"))
+                        {
+                            configuration.ClientName = Convert.ToString(configuration.CustomSettings["name"]);
+                            configuration.CustomSettings.Remove("name");
+                        }
+                        Settings.PopulateSettings(configuration, configuration.CustomSettings);
+                    }
+
+                    if (configuration.ValidationLinter)
+                    {
+                        // Look for semantic errors and warnings in the document.
+                        var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                        foreach (var validationEx in validator.GetValidationExceptions(serviceDefinition))
+                        {
+                            Logger.Instance.Log(validationEx);
+                        }
+                    }
+
+                    // TODO: meh
+                    if (!string.IsNullOrEmpty(configuration.ClientName))
+                    {
+                        serviceDefinition.Info.Title = configuration.ClientName;
+                    }
 
                     // generate model from swagger 
-                    codeModel = modeler.Build();
-
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
-                    if (validationErrorFound)
-                    {
-                        Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
-                    }
+                    codeModel = modeler.Build(serviceDefinition, configuration.ModelsName, configuration.Namespace);
                 }
-
-            }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
-            }
-
-            var plugin = ExtensionsLoader.GetPlugin();
-
-            Console.ResetColor();
-            Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
-
-            Settings.Instance.Validate();
-            try
-            {
-                var genericSerializer = new ModelSerializer<CodeModel>();
-                var modelAsJson = genericSerializer.ToJson(codeModel);
-
-                // ensure once we're doing language-specific work, that we're working
-                // in context provided by the language-specific transformer. 
-                using (plugin.Activate())
+                catch (Exception exception)
                 {
-                    // load model into language-specific code model
-                    codeModel = plugin.Serializer.Load(modelAsJson);
+                    throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
+                }
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-     
-                    // apply language-specific tranformation (more than just language-specific types)
-                    // used to be called "NormalizeClientModel" . 
-                    codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+                using (NewContext)
+                {
+                    Settings.ActivateConfiguration(configuration);
+                    var plugin = ExtensionsLoader.GetPlugin(configuration);
 
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
+                    Console.ResetColor();
+                    Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 
+                    try
+                    {
+                        var genericSerializer = new ModelSerializer<CodeModel>();
+                        var modelAsJson = genericSerializer.ToJson(codeModel);
 
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
+                        // ensure once we're doing language-specific work, that we're working
+                        // in context provided by the language-specific transformer. 
+                        using (plugin.Activate())
+                        {
+                            // load model into language-specific code model
+                            codeModel = plugin.Serializer.Load(modelAsJson);
 
-                    // Generate code from CodeModel.
-                    plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+                            // apply language-specific tranformation (more than just language-specific types)
+                            // used to be called "NormalizeClientModel" . 
+                            codeModel = plugin.Transformer.TransformCodeModel(codeModel);
+
+                            // Generate code from CodeModel.
+                            await plugin.CodeGenerator.Generate(codeModel);
+                        }
+
+                        // TODO: make me a proper pipeline step, make async
+                        // pull setting from language specific config!
+                        if (!configuration.DisableSimplifier &&
+                            Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                        {
+                            await new CSharpSimplifier().Run().ConfigureAwait(false);
+                        }
+                    }
+                    catch (Exception exception)
+                    {
+                        throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
+                    }
+
+                    return Settings.Instance.FileSystemOutput;
                 }
             }
-            catch (Exception exception)
-            {
-                throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
-            }
-        }
-
-        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
-        {
-            /*
-             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
-                 codeModel = extension.Transform(codeModel);
-            */
-
-            return codeModel;
         }
 
         /// <summary>
@@ -136,7 +160,7 @@ namespace AutoRest.Core
                 throw new ArgumentNullException("settings");
             }
             Logger.Instance.Log(Category.Info, Resources.AutoRestCore, Version);
-            Modeler modeler = ExtensionsLoader.GetModeler();
+            dynamic modeler = ExtensionsLoader.GetModeler(); // TODO *cough*
 
             try
             {

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
+using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -45,16 +46,10 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = input
-                };
                 var modeler = new SwaggerModeler();
-                var messages = new List<LogMessage>();
-                Logger.Instance.AddListener(new SignalingLogListener(Category.Info, messages.Add));
-                modeler.Build();
-                return messages.OfType<ValidationMessage>();
+                var serviceDefinition = modeler.Parse(new FileSystem(), new[] { input });
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                return validator.GetValidationExceptions(serviceDefinition).OfType<ValidationMessage>();
             }
         }
 

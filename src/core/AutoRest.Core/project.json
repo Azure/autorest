@@ -21,6 +21,17 @@
   },
 
   "dependencies": {
+    "Microsoft.CodeAnalysis.Analyzers" : { "version":"1.0.0" ,"type": "build"},
+    "Microsoft.CodeAnalysis.Common": { "version":"1.0.0","type": "build"},
+    "Microsoft.CodeAnalysis.CSharp" : {"version":"1.0.0","type": "build" },
+    "Microsoft.CodeAnalysis.CSharp.Workspaces": { "version":"1.0.0","type": "build"},
+    "Microsoft.CodeAnalysis.Workspaces.Common" : {"version":"1.0.0","type": "build" },
+    "Microsoft.Composition" : {"version":"1.0.27","type": "build"},
+    "Microsoft.Rest.ClientRuntime": { "version":"2.3.2","type": "build" },
+    "Microsoft.Rest.ClientRuntime.Azure": { "version":"3.3.2" ,"type": "build"},
+    "System.Collections.Immutable" : { "version":"1.1.36" ,"type": "build"},
+    "System.Reflection.Metadata" : { "version":"1.0.21","type": "build" },
+    "System.Threading.Tasks": "4.0.0",
     "Newtonsoft.Json": "[9.0.1,10.0)",
     "YamlDotNet.Signed": "3.8.0"
   }

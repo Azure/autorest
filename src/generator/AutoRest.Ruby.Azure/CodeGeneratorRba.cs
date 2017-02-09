@@ -23,10 +23,6 @@ namespace AutoRest.Ruby.Azure
     /// </summary>
     public class CodeGeneratorRba : CodeGeneratorRb
     {
-        public CodeGeneratorRba() 
-        {
-        }
-
         /// <summary>
         /// Gets the usage instructions for the code generator.
         /// </summary>
@@ -47,14 +43,14 @@ namespace AutoRest.Ruby.Azure
 
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate { Model = codeModel };
-            await Write(serviceClientTemplate, Path.Combine(GeneratorSettingsRba.Instance.sdkPath, CodeNamer.UnderscoreCase(codeModel.Name) + ImplementationFileExtension));
+            await Write(serviceClientTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRba.Instance.sdkPath, CodeNamer.UnderscoreCase(codeModel.Name) + ImplementationFileExtension));
 
             // Operations
             foreach (MethodGroupRba group in codeModel.Operations.Where(each => !each.IsCodeModelMethodGroup))
             {
                 // Operation
                 var operationsTemplate = new AzureMethodGroupTemplate { Model = group };
-                await Write(operationsTemplate, Path.Combine(GeneratorSettingsRba.Instance.sdkPath, CodeNamer.UnderscoreCase(operationsTemplate.Model.TypeName) + ImplementationFileExtension));
+                await Write(operationsTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRba.Instance.sdkPath, CodeNamer.UnderscoreCase(operationsTemplate.Model.TypeName) + ImplementationFileExtension));
             }
 
             // Models
@@ -75,39 +71,39 @@ namespace AutoRest.Ruby.Azure
                 var modelTemplate = new AzureModelTemplate { Model = model };
                 if (!CompositeTypeRba.resourceOrSubResourceRegEx.IsMatch(model.Name) || !CompositeTypeRba.IsResourceModelMatchingStandardDefinition(model))
                 {
-                    await Write(modelTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                    await Write(modelTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
                 }
             }
             // Paged Models
             foreach (var pageModel in codeModel.pageModels)
             {
                 var pageTemplate = new PageModelTemplate { Model = pageModel };
-                await Write(pageTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(pageModel.Name) + ImplementationFileExtension));
+                await Write(pageTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(pageModel.Name) + ImplementationFileExtension));
             }
 
             // Enums
             foreach (EnumTypeRb enumType in codeModel.EnumTypes)
             {
                 var enumTemplate = new EnumTemplate { Model = enumType };
-                await Write(enumTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(enumTemplate.Model.Name) + ImplementationFileExtension));
+                await Write(enumTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(enumTemplate.Model.Name) + ImplementationFileExtension));
             }
 
             // Requirements
             var requirementsTemplate = new RequirementsTemplate{Model = new RequirementsRba(codeModel, this)};
-            await Write(requirementsTemplate, CodeNamer.UnderscoreCase(GeneratorSettingsRb.Instance.packageName ?? GeneratorSettingsRb.Instance.sdkName) + ImplementationFileExtension);
+            await Write(requirementsTemplate, Path.Combine(GeneratedFolderName, CodeNamer.UnderscoreCase(GeneratorSettingsRb.Instance.packageName ?? GeneratorSettingsRb.Instance.sdkName) + ImplementationFileExtension));
 
             // Version File
             if (GeneratorSettingsRb.Instance.packageVersion != null)
             {
                 var versionTemplate = new VersionTemplate { Model = GeneratorSettingsRb.Instance.packageVersion };
-                await Write(versionTemplate, Path.Combine(GeneratorSettingsRb.Instance.sdkPath, "version" + ImplementationFileExtension));
+                await Write(versionTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.sdkPath, "version" + ImplementationFileExtension));
             }
 
             // Module Definition File
             if (Settings.Instance.Namespace != null)
             {
                 var modTemplate  = new ModuleDefinitionTemplate { Model = GeneratorSettingsRb.Instance.ModuleDeclarations };
-                await Write(modTemplate, Path.Combine(GeneratorSettingsRb.Instance.sdkPath, "module_definition" + ImplementationFileExtension));
+                await Write(modTemplate, Path.Combine(GeneratedFolderName, GeneratorSettingsRb.Instance.sdkPath, "module_definition" + ImplementationFileExtension));
             }
         }
     }

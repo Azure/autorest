@@ -15,7 +15,7 @@ namespace AutoRest.NodeJS.Azure
         public override string Description => "Azure specific NodeJS code generator.";
     }
 
-    public sealed class PluginJsa : Plugin<GeneratorSettingsJsa, ModelSerializer<CodeModelJsa>, TransformerJsa, CodeGeneratorJsa, CodeNamerJs, CodeModelJsa>
+    public sealed class PluginJsa : Plugin<GeneratorSettingsJsa, TransformerJsa, CodeGeneratorJsa, CodeNamerJs, CodeModelJsa>
     {
         public PluginJsa()
         {

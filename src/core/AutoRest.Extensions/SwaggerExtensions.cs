@@ -68,8 +68,6 @@ namespace AutoRest.Extensions
 
                 if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
                 {
-                    SwaggerModeler modeler = new SwaggerModeler();
-                    modeler.Build();
                     var hostExtension = codeModel.Extensions[ParameterizedHostExtension] as JObject;
 
                     if (hostExtension != null)
@@ -101,6 +99,7 @@ namespace AutoRest.Extensions
 
                         if (!string.IsNullOrEmpty(parametersJson))
                         {
+                            var serviceDefinition = Singleton<ServiceDefinition>.Instance;
                             var jsonSettings = new JsonSerializerSettings
                             {
                                 TypeNameHandling = TypeNameHandling.None,
@@ -113,6 +112,9 @@ namespace AutoRest.Extensions
                             foreach (var swaggerParameter in swaggerParams)
                             {
                                 // Build parameter
+                                var modeler = new SwaggerModeler();
+                                modeler.ServiceDefinition = serviceDefinition;
+                                modeler.CodeModel = codeModel;
                                 var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
                                 var parameter = parameterBuilder.Build();
 
@@ -139,16 +141,17 @@ namespace AutoRest.Extensions
                                 }
 
                             }
+
                             if (useSchemePrefix)
                             {
                                 codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                                    modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                                    hostTemplate, modeler.ServiceDefinition.BasePath);
+                                    serviceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                                    hostTemplate, serviceDefinition.BasePath);
                             }
                             else
                             {
                                 codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
-                                    hostTemplate, modeler.ServiceDefinition.BasePath);
+                                    hostTemplate, serviceDefinition.BasePath);
                             }
 
                         }

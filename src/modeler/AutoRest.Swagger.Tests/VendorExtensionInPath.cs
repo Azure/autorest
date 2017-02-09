@@ -3,6 +3,7 @@
 
 using System.IO;
 using AutoRest.Core;
+using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -16,13 +17,8 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
-                new Settings
-                {
-                    Namespace = "Test",
-                    Input = Path.Combine("Swagger", "vendor-extension-in-path.json")
-                };
                 SwaggerModeler modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(new FileSystem(), new [] { Path.Combine("Swagger", "vendor-extension-in-path.json") });
 
                 // should return a valid model.
                 Assert.NotNull(clientModel);

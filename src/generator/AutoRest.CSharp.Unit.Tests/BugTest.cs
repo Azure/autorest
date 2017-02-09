@@ -96,23 +96,17 @@ namespace AutoRest.CSharp.Unit.Tests
         {
         }
 
-        protected virtual MemoryFileSystem CreateMockFilesystem()
+        protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
+
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string[] inputFiles = null, string clientName = null)
         {
-            var fs = new MemoryFileSystem();
-            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
-            return fs;
+           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, inputFiles, clientName);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger")
-        {
-           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
-        }
-
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string modeler = "Swagger")
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string[] inputFiles = null, string clientName = null)
         {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
-            return fs;
+            return dirName.GenerateCodeInto(fs, codeGenerator, inputFiles, clientName);
         }
 
         protected virtual void WriteLine(object value)
@@ -179,8 +173,8 @@ namespace AutoRest.CSharp.Unit.Tests
             assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
                 
             var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
+                fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
+                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(),
                 ManagedAssets.FrameworkAssemblies.Concat(
                     AppDomain.CurrentDomain.GetAssemblies()
                         .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location) )

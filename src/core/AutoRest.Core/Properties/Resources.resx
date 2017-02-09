@@ -129,9 +129,6 @@
   <data name="CommentString" xml:space="preserve">
     <value>\\\\</value>
   </data>
-  <data name="ConfigurationFileNotFound" xml:space="preserve">
-    <value>AutoRest.json was not found in the current directory</value>
-  </data>
   <data name="DirectoryNotExist" xml:space="preserve">
     <value>Directory {0} does not exist.</value>
   </data>
@@ -144,14 +141,11 @@
   <data name="ErrorLoadingAssembly" xml:space="preserve">
     <value>Error loading {0} assembly: {1}</value>
   </data>
-  <data name="ErrorParsingConfig" xml:space="preserve">
-    <value>Error parsing AutoRest.json file: {0}</value>
-  </data>
   <data name="ErrorSavingGeneratedCode" xml:space="preserve">
     <value>Error saving generated code: {0}</value>
   </data>
   <data name="ExtensionNotFound" xml:space="preserve">
-    <value>Plugin {0} does not have an assembly name in AutoRest.json</value>
+    <value>Plugin {0} does not have an assembly name in configuration file</value>
   </data>
   <data name="GeneratorInitialized" xml:space="preserve">
     <value>Successfully initialized {0} Code Generator {1}</value>
@@ -322,5 +316,39 @@
   </data>
   <data name="InvalidMutabilityValueForReadOnly" xml:space="preserve">
     <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ConfigurationKnownPlugins" xml:space="preserve">
+    <value>
+plugins:
+  CSharp:
+    type: PluginCs, AutoRest.CSharp
+  Azure.CSharp:
+    type: PluginCsa, AutoRest.CSharp.Azure
+  Ruby:
+    type: PluginRb, AutoRest.Ruby
+  Azure.Ruby:
+    type: PluginRba, AutoRest.Ruby.Azure
+  NodeJS:
+    type: PluginJs, AutoRest.NodeJS
+  Azure.NodeJS:
+    type: PluginJsa, AutoRest.NodeJS.Azure
+  Python:
+    type: PluginPy, AutoRest.Python
+  Azure.Python:
+    type: PluginPya, AutoRest.Python.Azure
+  Go:
+    type: PluginGo, AutoRest.Go
+  Java:
+    type: PluginJv, AutoRest.Java
+  Azure.Java:
+    type: PluginJva, AutoRest.Java.Azure
+  Azure.Java.Fluent:
+    type: PluginJvaf, AutoRest.Java.Azure.Fluent
+  AzureResourceSchema:
+    type: PluginArs, AutoRest.AzureResourceSchema
+  Azure.CSharp.Fluent:
+    type: PluginCsaf, AutoRest.CSharp.Azure.Fluent
+    </value>
   </data>
 </root>

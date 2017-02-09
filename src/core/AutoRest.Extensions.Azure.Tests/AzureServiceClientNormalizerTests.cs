@@ -6,6 +6,7 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
+using Microsoft.DotNet.ProjectModel;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -14,6 +15,8 @@ namespace AutoRest.Extensions.Azure.Tests
     [Collection("AutoRest Tests")]
     public class AzureServiceClientNormalizerTests
     {
+        private CodeModel BuildCodeModelFromFile(string fileName) => new SwaggerModeler().Build(new FileSystem(), new[] { fileName });
+
         [Fact]
         public void ResourceIsFlattenedForSimpleResource()
         {
@@ -402,15 +405,8 @@ namespace AutoRest.Extensions.Azure.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Input = @"Swagger\swagger-odata-spec.json"
-                };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                new Settings();
+                var codeModel = BuildCodeModelFromFile(@"Swagger\swagger-odata-spec.json");
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -426,15 +422,8 @@ namespace AutoRest.Extensions.Azure.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Input = @"Swagger\resource-external-false.json"
-                };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                new Settings();
+                var codeModel = BuildCodeModelFromFile(@"Swagger\resource-external-false.json");
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
                 Assert.NotNull(codeModel);
@@ -453,15 +442,8 @@ namespace AutoRest.Extensions.Azure.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Input = @"Swagger\swagger-odata-spec.json"
-                };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                new Settings();
+                var codeModel = BuildCodeModelFromFile(@"Swagger\swagger-odata-spec.json");
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -486,15 +468,8 @@ namespace AutoRest.Extensions.Azure.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Input = @"Swagger\swagger-odata-spec.json"
-                };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                new Settings();
+                var codeModel = BuildCodeModelFromFile(@"Swagger\swagger-odata-spec.json");
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -516,15 +491,8 @@ namespace AutoRest.Extensions.Azure.Tests
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Namespace = "Test",
-                    Input = @"Swagger\swagger-resource-flattening.json"
-                };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                new Settings();
+                var codeModel = BuildCodeModelFromFile(@"Swagger\swagger-resource-flattening.json");
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
                 Assert.NotNull(codeModel);

@@ -8,6 +8,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using AutoRest.Core.Configuration;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -17,21 +18,15 @@ namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
     {
-        /// <summary>
-        /// The name of the AutoRest configuration file.
-        /// </summary>
-        internal const string ConfigurationFileName = "AutoRest.json";
-
-
-        public static IAnyPlugin GetPlugin()
+        public static IAnyPlugin GetPlugin(AutoRestConfiguration configuration)
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
-            if (Settings.Instance == null)
+            if (configuration == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException("configuration");
             }
 
-            if (string.IsNullOrEmpty(Settings.Instance.CodeGenerator))
+            if (string.IsNullOrEmpty(configuration.CodeGenerator))
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -40,115 +35,39 @@ namespace AutoRest.Core.Extensibility
 
             IAnyPlugin plugin = null;
 
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
+            if (configuration.CodeGenerator.EqualsIgnoreCase("None"))
             {
                 plugin = new NoOpPlugin();
             }
             else
             {
-                string configurationFile = GetConfigurationFileContent(Settings.Instance);
-
-                if (configurationFile != null)
-                {
-                    try
-                    {
-                        var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                        plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
-                        Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
-                    }
-                }
-                else
-                {
-                    throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
-                }
+                plugin = LoadTypeFromAssembly<IAnyPlugin>(configuration.Plugins, configuration.CodeGenerator);
+                //if (configuration.CodeGenerator.Contains())
+                Settings.PopulateSettings(plugin.Settings, configuration.CustomSettings);
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
-                Settings.Instance.CodeGenerator,
+                configuration.CodeGenerator,
                 plugin.GetType().Assembly.GetName().Version);
             return plugin;
-
         }
 
         /// <summary>
         /// Gets the modeler specified in the provided Settings.
         /// </summary>
-        /// <param name="settings">The code generation settings</param>
         /// <returns>Modeler specified in Settings.Modeler</returns>
-        public static Modeler GetModeler()
+        public static dynamic GetModeler()
         {
             Logger.Instance.Log(Category.Info, Resources.InitializingModeler);
-            if (Settings.Instance == null)
-            {
-                throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
-            }
 
-            if (string.IsNullOrEmpty(Settings.Instance.Modeler))
+            var modeler = LoadTypeFromAssembly<dynamic>(new Dictionary<string, AutoRestProviderConfiguration>
             {
-                throw new ArgumentException(
-                    string.Format(CultureInfo.InvariantCulture,
-                        Resources.ParameterValueIsMissing, "Modeler"));
-            }
-
-            Modeler modeler = null;
-
-            string configurationFile = GetConfigurationFileContent(Settings.Instance);
-
-            if (configurationFile != null)
-            {
-                try
-                {
-                    var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
-                    modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
-                    Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
-                }
-                catch (Exception ex)
-                {
-                    throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
-                }
-            }
-            else
-            {
-                throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
-            }
+                { "Swagger", new AutoRestProviderConfiguration {TypeName = "SwaggerModeler, AutoRest.Swagger"} },
+            }, "Swagger");
 
             Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,
-                Settings.Instance.Modeler,
+                "Swagger",
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
-        }
-
-        public static string GetConfigurationFileContent(Settings settings)
-        {
-            if (settings == null)
-            {
-                throw new ArgumentNullException("settings");
-            }
-            if (settings.FileSystem == null)
-            {
-                throw new InvalidOperationException("FileSystem is null in settings.");
-            }
-
-            string path = ConfigurationFileName;
-            if (!settings.FileSystem.FileExists(path))
-            {
-                path = Path.Combine(Directory.GetCurrentDirectory(), ConfigurationFileName);
-            }
-
-            if (!settings.FileSystem.FileExists(path))
-            {
-                path = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Settings)).Location),
-                    ConfigurationFileName);
-            }
-
-            if (!settings.FileSystem.FileExists(path))
-            {
-                return null;
-            }
-            return settings.FileSystem.ReadFileAsText(path);
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
@@ -157,7 +76,7 @@ namespace AutoRest.Core.Extensibility
         {
             T instance = default(T);
 
-            if (Settings.Instance != null && section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
+            if (section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
             {
                 string fullTypeName = section[key].TypeName;
                 if (string.IsNullOrEmpty(fullTypeName))
@@ -195,14 +114,6 @@ namespace AutoRest.Core.Extensibility
                                      t.FullName == typeName);
 
                     instance = (T)loadedType.GetConstructor(Type.EmptyTypes).Invoke(null);
-
-                    if (!section[key].Settings.IsNullOrEmpty())
-                    {
-                        foreach (var settingFromFile in section[key].Settings)
-                        {
-                            Settings.Instance.CustomSettings[settingFromFile.Key] = settingFromFile.Value;
-                        }
-                    }
                 }
                 catch (Exception ex)
                 {

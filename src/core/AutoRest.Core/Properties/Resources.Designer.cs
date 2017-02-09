@@ -141,11 +141,32 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to AutoRest.json was not found in the current directory.
+        ///    Looks up a localized string similar to  
+        ///plugins:
+        ///  CSharp:
+        ///    type: PluginCs, AutoRest.CSharp
+        ///  Azure.CSharp:
+        ///    type: PluginCsa, AutoRest.CSharp.Azure
+        ///  Ruby:
+        ///    type: PluginRb, AutoRest.Ruby
+        ///  Azure.Ruby:
+        ///    type: PluginRba, AutoRest.Ruby.Azure
+        ///  NodeJS:
+        ///    type: PluginJs, AutoRest.NodeJS
+        ///  Azure.NodeJS:
+        ///    type: PluginJsa, AutoRest.NodeJS.Azure
+        ///  Python:
+        ///    type: PluginPy, AutoRest.Python
+        ///  Azure.Python:
+        ///    type: PluginPya, AutoRest.Python.Azure
+        ///  Go:
+        ///    type: PluginGo, AutoRest.Go
+        ///  Java:
+        ///    type: PluginJv, Aut [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string ConfigurationFileNotFound {
+        public static string ConfigurationKnownPlugins {
             get {
-                return ResourceManager.GetString("ConfigurationFileNotFound", resourceCulture);
+                return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
             }
         }
         
@@ -222,15 +243,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Error parsing AutoRest.json file: {0}.
-        /// </summary>
-        public static string ErrorParsingConfig {
-            get {
-                return ResourceManager.GetString("ErrorParsingConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to Error saving generated code: {0}.
         /// </summary>
         public static string ErrorSavingGeneratedCode {
@@ -240,7 +252,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to Plugin {0} does not have an assembly name in AutoRest.json.
+        ///    Looks up a localized string similar to Plugin {0} does not have an assembly name in configuration file.
         /// </summary>
         public static string ExtensionNotFound {
             get {
