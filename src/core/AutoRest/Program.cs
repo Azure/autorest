@@ -38,7 +38,7 @@ namespace AutoRest
                         var jsonValidationLogListener = new JsonValidationLogListener();
 
                         // set up logging
-                        if (settings.Json)
+                        if (settings.JsonValidationMessages)
                         {
                             Logger.Instance.AddListener(jsonValidationLogListener);
                         }
@@ -95,12 +95,12 @@ namespace AutoRest
                         else
                         {
                             Core.AutoRestController.Generate();
-                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                            if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                             }
                         }
-                        if (settings.Json)
+                        if (settings.JsonValidationMessages)
                         {
                             Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
                         }
