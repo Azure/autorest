@@ -15,14 +15,12 @@ paths:
           x-nullable: false
           schema:
             type: integer
-        default:
-          description: default description
+        '201':
+          description: another response type
           x-nullable: false
           schema:
-            "$ref": "#/definitions/ErrorObj"
-definitions:
-  ErrorObj:
-    properties:
-      prop0:
-        type: string
-    description: default error obj
+            type: integer
+        'default':
+          description: default resp
+          scheam:
+            type: bool

@@ -249,17 +249,11 @@ namespace AutoRest.Swagger
                             methodName,
                             response.Key));
                     }
+                    method.Responses[response.Key.ToHttpStatusCode()].Extensions = response.Value.Extensions;
                 }
-                BuildResponseExtensions(response.Key, response.Value);
             }
 
             return typesList;
-        }
-
-        // set response extensions map
-        private void BuildResponseExtensions(string responseStatusCode, OperationResponse response)
-        {
-            response.Extensions = _operation.Responses[responseStatusCode].Extensions;
         }
 
         private Response BuildMethodReturnType(List<Stack<IModelType>> types, IModelType headerType)
@@ -409,6 +403,7 @@ namespace AutoRest.Swagger
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
                     method.DefaultResponse = new Response(errorModel, headerType);
+                    method.DefaultResponse.Extensions = response.Extensions;
                 }
             }
         }
