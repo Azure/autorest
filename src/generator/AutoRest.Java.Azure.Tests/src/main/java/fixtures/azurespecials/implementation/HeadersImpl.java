@@ -18,7 +18,7 @@ import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
-import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders1;
+import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeadHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingHeaders;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import java.io.IOException;
@@ -65,9 +65,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
         @POST("azurespecials/customNamedRequestIdParamGrouping")
         Observable<Response<ResponseBody>> customNamedRequestIdParamGrouping(@Header("accept-language") String acceptLanguage, @Header("foo-client-request-id") String fooClientRequestId, @Header("User-Agent") String userAgent);
 
-        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestId1" })
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.Headers customNamedRequestIdHead" })
         @HEAD("azurespecials/customNamedRequestIdHead")
-        Observable<Response<Void>> customNamedRequestId1(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<Void>> customNamedRequestIdHead(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
     }
 
@@ -211,8 +211,8 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param fooClientRequestId The fooRequestId
      * @return the boolean object if successful.
      */
-    public boolean customNamedRequestId1(String fooClientRequestId) {
-        return customNamedRequestId1WithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
+    public boolean customNamedRequestIdHead(String fooClientRequestId) {
+        return customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
     }
 
     /**
@@ -222,8 +222,8 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall<Boolean> customNamedRequestId1Async(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(customNamedRequestId1WithServiceResponseAsync(fooClientRequestId), serviceCallback);
+    public ServiceCall<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceCall.fromHeaderResponse(customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -232,10 +232,10 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param fooClientRequestId The fooRequestId
      * @return the observable to the Boolean object
      */
-    public Observable<Boolean> customNamedRequestId1Async(String fooClientRequestId) {
-        return customNamedRequestId1WithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>, Boolean>() {
+    public Observable<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
+        return customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId).map(new Func1<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>, Boolean>() {
             @Override
-            public Boolean call(ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1> response) {
+            public Boolean call(ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> response) {
                 return response.body();
             }
         });
@@ -247,16 +247,16 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * @param fooClientRequestId The fooRequestId
      * @return the observable to the Boolean object
      */
-    public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>> customNamedRequestId1WithServiceResponseAsync(String fooClientRequestId) {
+    public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> customNamedRequestIdHeadWithServiceResponseAsync(String fooClientRequestId) {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
-        return service.customNamedRequestId1(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<Void>, Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>>>() {
+        return service.customNamedRequestIdHead(fooClientRequestId, this.client.acceptLanguage(), this.client.userAgent())
+            .flatMap(new Func1<Response<Void>, Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>>>() {
                 @Override
-                public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1>> call(Response<Void> response) {
+                public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> call(Response<Void> response) {
                     try {
-                        ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1> clientResponse = customNamedRequestId1Delegate(response);
+                        ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> clientResponse = customNamedRequestIdHeadDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -265,12 +265,12 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
             });
     }
 
-    private ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeaders1> customNamedRequestId1Delegate(Response<Void> response) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders> customNamedRequestIdHeadDelegate(Response<Void> response) throws ErrorException, IOException, IllegalArgumentException {
         return this.client.restClient().responseBuilderFactory().<Boolean, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildEmptyWithHeaders(response, HeaderCustomNamedRequestIdHeaders1.class);
+                .buildEmptyWithHeaders(response, HeaderCustomNamedRequestIdHeadHeaders.class);
     }
 
 }

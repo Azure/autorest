@@ -13,9 +13,9 @@ package fixtures.azurespecials.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Defines headers for customNamedRequestId operation.
+ * Defines headers for customNamedRequestIdHead operation.
  */
-public class HeaderCustomNamedRequestIdHeaders1 {
+public class HeaderCustomNamedRequestIdHeadHeaders {
     /**
      * Gets the foo-request-id.
      */
@@ -35,9 +35,9 @@ public class HeaderCustomNamedRequestIdHeaders1 {
      * Set the fooRequestId value.
      *
      * @param fooRequestId the fooRequestId value to set
-     * @return the HeaderCustomNamedRequestIdHeaders1 object itself.
+     * @return the HeaderCustomNamedRequestIdHeadHeaders object itself.
      */
-    public HeaderCustomNamedRequestIdHeaders1 withFooRequestId(String fooRequestId) {
+    public HeaderCustomNamedRequestIdHeadHeaders withFooRequestId(String fooRequestId) {
         this.fooRequestId = fooRequestId;
         return this;
     }
