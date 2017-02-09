@@ -15,7 +15,7 @@ namespace AutoRest.Core.Validation
     public class ValidationMessage : LogMessage
     {
         public ValidationMessage(FileObjectPath path, Rule rule, params object[] formatArguments)
-            : base(rule.Severity, $"{rule.GetType().Name} - {string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments)}", path)
+            : base(rule.Severity, $"{string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments)}", path)
         {
             Type = rule.GetType();
         }
