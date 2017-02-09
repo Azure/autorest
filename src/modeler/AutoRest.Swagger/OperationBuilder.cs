@@ -148,8 +148,14 @@ namespace AutoRest.Swagger
                 headerType = null;
             }
 
+            
             // Response format
             List<Stack<IModelType>> typesList = BuildResponses(method, headerType);
+
+            method.IsXNullableReturnType = (_operation.Responses.Keys.All(key =>
+            {
+                return _operation.Responses[key].Extensions?.Get<bool>("x-nullable") ?? true;
+            }));
 
             method.ReturnType = BuildMethodReturnType(typesList, headerType);
             if (method.Responses.Count == 0)
