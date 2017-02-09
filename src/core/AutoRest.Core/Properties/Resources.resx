@@ -323,7 +323,10 @@
   <data name="InvalidMutabilityValueForReadOnly" xml:space="preserve">
     <value>When property is modeled as "readOnly": true then x-ms-mutability extension can only have "read" value. When property is modeled as "readOnly": false then applying x-ms-mutability extension with only "read" value is not allowed. Extension contains invalid values: '{0}'.</value>
   </data>
-  <data name="AllowedTopLevelProperties" xml:space="preserve">
+  <data name="BooleanPropertyNotRecommended" xml:space="preserve">
+    <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: '{0}'.</value>
+  </data>
+    <data name="AllowedTopLevelProperties" xml:space="preserve">
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
   </data>
 </root>

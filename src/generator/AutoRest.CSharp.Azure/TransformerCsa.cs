@@ -41,11 +41,11 @@ namespace AutoRest.CSharp.Azure
             // add the Credentials
             // PopulateAdditionalProperties(codeModel);
 
-            // Do parameter transformations
-            TransformParameters(codeModel);
-
             // todo: these should be turned into individual transformers
             AzureExtensions.NormalizeAzureClientModel(codeModel);
+
+            // Do parameter transformations
+            TransformParameters(codeModel);
 
             NormalizePaginatedMethods(codeModel);
             NormalizeODataMethods(codeModel);

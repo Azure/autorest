@@ -73,6 +73,11 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
 @EmptyLine
 // @(Model.PreparerMethodName) prepares the @(Model.Name) request.
 func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
+@if (Model.IsCustomBaseUri && Model.URLParameters.Count() > 0)
+{
+    @:@(Model.URLMap)
+    @:@EmptyLine
+}
 @if (Model.PathParameters.Count() > 0)
 {
     @:@(Model.PathMap)
