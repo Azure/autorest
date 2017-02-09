@@ -162,7 +162,8 @@ namespace AutoRest.AzureResourceSchema
                 var table = new Table(new[] { "Name", "Type", "Required", "Value" });
 
                 // add a table row for each property in the schema
-                foreach (var prop in schema.Item2.Properties)
+                var props = FlattenProperties(schema.Item2);
+                foreach (var prop in props)
                 {
                     // type name
                     var typeName = GetValueTypeName(prop.Value);
@@ -213,7 +214,7 @@ namespace AutoRest.AzureResourceSchema
 
                             // there are a handful of objects with null properties because the properties
                             // are all read-only.  for now just skip them to avoid a crash during table creation.
-                            if (refSchema.Properties != null && !visited.Contains(values[i]))
+                            if (HasAdditionalProps(refSchema) && !visited.Contains(values[i]))
                             {
                                 // add type to the queue so a table for the type is generated
                                 schemas.Enqueue(new TableQueueEntry(values[i], refSchema));
@@ -232,6 +233,19 @@ namespace AutoRest.AzureResourceSchema
             }
 
             return tables;
+        }
+
+        /// <summary>
+        /// Returns true if a schema contains properties.
+        /// </summary>
+        /// <param name="jsonSchema">The JSON schema.</param>
+        /// <returns>True if the schema contains properties.</returns>
+        private bool HasAdditionalProps(JsonSchema jsonSchema)
+        {
+            return
+                jsonSchema.AllOf != null ||
+                jsonSchema.AnyOf != null ||
+                jsonSchema.Properties != null;
         }
 
         /// <summary>
@@ -403,10 +417,10 @@ namespace AutoRest.AzureResourceSchema
             else if (jsonSchema.JsonType == "object")
             {
                 var jobj = new JObject();
-                if (jsonSchema.Properties != null)
+                var props = FlattenProperties(jsonSchema);
+                foreach (var prop in props)
                 {
-                    foreach (var prop in jsonSchema.Properties)
-                        jobj.Add(JsonSchemaToJTokenImpl(prop.Key, prop.Value, stack));
+                    jobj.Add(JsonSchemaToJTokenImpl(prop.Key, prop.Value, stack));
                 }
 
                 if (propName != null)
@@ -434,6 +448,47 @@ namespace AutoRest.AzureResourceSchema
                     return new JProperty(propName, val);
                 else
                     return new JValue(val);
+            }
+        }
+
+        /// <summary>
+        /// Flattens properties in the AllOf and Properties sections into one list.
+        /// </summary>
+        /// <param name="jsonSchema">The JSON schema.</param>
+        /// <returns>A dictionary of all possible properties.</returns>
+        private IDictionary<string, JsonSchema> FlattenProperties(JsonSchema jsonSchema)
+        {
+            var merged = new Dictionary<string, JsonSchema>();
+            FlattenPropertiesImpl(merged, new[] { jsonSchema });
+
+            return merged;
+        }
+
+        /// <summary>
+        /// Recursively flattens properties in the AllOf and Properties sections into one list (don't call this one call FlattenProperties).
+        /// </summary>
+        /// <param name="merged">The dictionary to contain the merged content.</param>
+        /// <param name="items">The items to merge into the dictionary.</param>
+        private void FlattenPropertiesImpl(Dictionary<string, JsonSchema> merged, IEnumerable<JsonSchema> items)
+        {
+            foreach (var item in items)
+            {
+                if (item.AllOf != null)
+                {
+                    FlattenPropertiesImpl(merged, item.AllOf);
+                }
+                else if (item.Properties != null)
+                {
+                    foreach (var prop in item.Properties)
+                    {
+                        merged.Add(prop.Key, prop.Value);
+                    }
+                }
+                else if (item.Ref != null)
+                {
+                    var schema = ResolveDefinitionRef(item.Ref);
+                    FlattenPropertiesImpl(merged, new[] { schema });
+                }
             }
         }
     }

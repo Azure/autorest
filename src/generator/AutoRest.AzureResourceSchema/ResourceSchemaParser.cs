@@ -81,8 +81,28 @@ namespace AutoRest.AzureResourceSchema
                 {
                     JsonSchema resourceDefinition = new JsonSchema();
                     resourceDefinition.JsonType = "object";
-
                     resourceDefinition.ResourceType = resourceType;
+
+                    // get the resource name parameter, e.g. {fooName}
+                    var resNameParam = methodUrlPathAfterProvider.Substring(methodUrlPathAfterProvider.LastIndexOf('/') + 1);
+                    if (IsPathVariable(resNameParam))
+                    {
+                        // strip the enclosing braces
+                        resNameParam = resNameParam.Trim(new[] { '{', '}' });
+
+                        // look up the type
+                        var param = method.Parameters.Where(p => p.Name == resNameParam).FirstOrDefault();
+                        if (param != null)
+                        {
+                            // create a schema for it
+                            var nameParamSchema = ParseType(param.ClientProperty, param.ModelType, resourceSchema.Definitions, serviceClient.ModelTypes);
+                            nameParamSchema.ResourceType = resNameParam;
+
+                            // add it as the name property
+                            resourceDefinition.AddProperty("name", nameParamSchema, true);
+                        }
+                    }
+
                     resourceDefinition.AddProperty("type", JsonSchema.CreateStringEnum(resourceType), true);
                     resourceDefinition.AddProperty("apiVersion", JsonSchema.CreateStringEnum(apiVersion), true);
 

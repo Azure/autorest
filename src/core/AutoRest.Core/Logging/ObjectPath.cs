@@ -30,6 +30,8 @@ namespace AutoRest.Core.Logging
         
         public string XPath => "#" + string.Concat(Path.Select(p => p.XPath));
 
+        public string ReadablePath => "#" + string.Concat(Path.Select(p => p.ReadablePath));
+
         public YamlNode SelectNode(YamlNode node)
         {
             YamlNode result = node;

@@ -69,6 +69,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to API Version must be in the format: yyyy-MM-dd, optionally followed by -preview, -alpha, -beta, -rc, -privatepreview..
+        /// </summary>
+        public static string APIVersionFormatIsNotValid {
+            get {
+                return ResourceManager.GetString("APIVersionFormatIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
         public static string AutoRestCore {
@@ -146,6 +155,15 @@ namespace AutoRest.Core.Properties {
         public static string ConflictingRef {
             get {
                 return ResourceManager.GetString("ConflictingRef", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in the request body..
+        /// </summary>
+        public static string DeleteMustHaveEmptyRequestBody {
+            get {
+                return ResourceManager.GetString("DeleteMustHaveEmptyRequestBody", resourceCulture);
             }
         }
         
@@ -240,11 +258,29 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board..
+        /// </summary>
+        public static string GuidUsageNotRecommended {
+            get {
+                return ResourceManager.GetString("GuidUsageNotRecommended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Each header parameter should have an explicit client name defined for improved code generation output quality..
         /// </summary>
         public static string HeaderShouldHaveClientName {
             get {
                 return ResourceManager.GetString("HeaderShouldHaveClientName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Permissible values for HTTP Verb are delete,get,put,patch,head,options,post. .
+        /// </summary>
+        public static string HttpVerbIsNotValid {
+            get {
+                return ResourceManager.GetString("HttpVerbIsNotValid", resourceCulture);
             }
         }
         
@@ -465,6 +501,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to Operations API must be implemented for the service..
+        /// </summary>
+        public static string OperationsAPINotImplemented {
+            get {
+                return ResourceManager.GetString("OperationsAPINotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameter &apos;{0}&apos; is not expected..
         /// </summary>
         public static string ParameterIsNotValid {
@@ -501,11 +546,47 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///    Looks up a localized string similar to {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response..
+        /// </summary>
+        public static string PutGetPatchResponseInvalid {
+            get {
+                return ResourceManager.GetString("PutGetPatchResponseInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to A &apos;Resource&apos; definition must have x-ms-azure-resource extension enabled and set to true..
+        /// </summary>
+        public static string ResourceIsMsResourceNotValid {
+            get {
+                return ResourceManager.GetString("ResourceIsMsResourceNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to The id, name, type, location and tags properties of the Resource must be present with id, name and type as read-only.
+        /// </summary>
+        public static string ResourceModelIsNotValid {
+            get {
+                return ResourceManager.GetString("ResourceModelIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///    Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
             get {
                 return ResourceManager.GetString("ServiceDefinitionParametersMissingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties..
+        /// </summary>
+        public static string SkuModelIsNotValid {
+            get {
+                return ResourceManager.GetString("SkuModelIsNotValid", resourceCulture);
             }
         }
         
@@ -524,6 +605,20 @@ namespace AutoRest.Core.Properties {
         public static string TooManyBodyParameters {
             get {
                 return ResourceManager.GetString("TooManyBodyParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+        ///    A Tracked Resource must have: 
+        ///    1. A Get Operation 
+        ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 
+        ///    3. A ListBySubscriptionId operation with x-ms-pageable extension.
+        ///    4. Type, Location, Tags should not be used in the properties..
+        /// </summary>
+        public static string TrackedResourceIsNotValid {
+            get {
+                return ResourceManager.GetString("TrackedResourceIsNotValid", resourceCulture);
             }
         }
         
@@ -551,6 +646,15 @@ namespace AutoRest.Core.Properties {
         public static string UnknownFormat {
             get {
                 return ResourceManager.GetString("UnknownFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
+        /// </summary>
+        public static string XmsClientNameInValid {
+            get {
+                return ResourceManager.GetString("XmsClientNameInValid", resourceCulture);
             }
         }
         
