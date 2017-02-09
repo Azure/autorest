@@ -38,11 +38,11 @@ namespace AutoRest.Swagger.Validation
                         {
                             if (param.Schema.Reference != null)
                             {
-                                string defName = param.Schema.Reference.Split('/').Last();
+                                string defName = Extensions.StripDefinitionPath(param.Schema.Reference);
                                 var definition = ((ServiceDefinition)context.Root).Definitions[defName];
                                 if (definition != null && definition.AllOf != null)
                                 {
-                                    if (definition.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) !=null)
+                                    if (definition.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) !=null && definition.Properties != null)
                                     {
                                         //Model is allOf Resource
                                         foreach (var prop in definition.Properties)
@@ -57,7 +57,7 @@ namespace AutoRest.Swagger.Validation
                             }
                             if (param.Schema.AllOf != null)
                             {
-                                if (param.Schema.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null)
+                                if (param.Schema.AllOf.Select(s => s.Reference).Where(reference => resourceRefRegEx.IsMatch(reference)) != null && param.Schema.Properties != null)
                                 {
                                     //Model is allOf Resource
                                     foreach (var prop in param.Schema.Properties)
