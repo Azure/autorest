@@ -15,7 +15,6 @@ import fixtures.http.HttpServerFailures;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpServerFailures.
  */
-public final class HttpServerFailuresImpl implements HttpServerFailures {
+public class HttpServerFailuresImpl implements HttpServerFailures {
     /** The Retrofit service to perform REST calls. */
     private HttpServerFailuresService service;
     /** The service client containing this operation class. */
@@ -56,19 +55,19 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpServerFailuresService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures head501" })
         @HEAD("http/failure/server/501")
         Observable<Response<Void>> head501();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures get501" })
         @GET("http/failure/server/501")
         Observable<Response<ResponseBody>> get501();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures post505" })
         @POST("http/failure/server/505")
         Observable<Response<ResponseBody>> post505(@Body Boolean booleanValue);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.HttpServerFailures delete505" })
         @HTTP(path = "http/failure/server/505", method = "DELETE", hasBody = true)
         Observable<Response<ResponseBody>> delete505(@Body Boolean booleanValue);
 
@@ -80,7 +79,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error head501() {
-        return head501WithServiceResponseAsync().toBlocking().single().getBody();
+        return head501WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -90,7 +89,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> head501Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(head501WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head501WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -102,7 +101,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return head501WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -128,7 +127,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -139,7 +138,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error get501() {
-        return get501WithServiceResponseAsync().toBlocking().single().getBody();
+        return get501WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -149,7 +148,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> get501Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(get501WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get501WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -161,7 +160,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return get501WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -187,7 +186,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -198,7 +197,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505() {
-        return post505WithServiceResponseAsync().toBlocking().single().getBody();
+        return post505WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -208,7 +207,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post505WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(post505WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -220,7 +219,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return post505WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -253,7 +252,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error post505(Boolean booleanValue) {
-        return post505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        return post505WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -264,7 +263,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(post505WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(post505WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -277,7 +276,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return post505WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -304,7 +303,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -315,7 +314,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505() {
-        return delete505WithServiceResponseAsync().toBlocking().single().getBody();
+        return delete505WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -325,7 +324,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete505WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(delete505WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -337,7 +336,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return delete505WithServiceResponseAsync().map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -370,7 +369,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the Error object if successful.
      */
     public Error delete505(Boolean booleanValue) {
-        return delete505WithServiceResponseAsync(booleanValue).toBlocking().single().getBody();
+        return delete505WithServiceResponseAsync(booleanValue).toBlocking().single().body();
     }
 
     /**
@@ -381,7 +380,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Error> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.create(delete505WithServiceResponseAsync(booleanValue), serviceCallback);
+        return ServiceCall.fromResponse(delete505WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -394,7 +393,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
         return delete505WithServiceResponseAsync(booleanValue).map(new Func1<ServiceResponse<Error>, Error>() {
             @Override
             public Error call(ServiceResponse<Error> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -421,7 +420,7 @@ public final class HttpServerFailuresImpl implements HttpServerFailures {
     }
 
     private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Error, ErrorException>newInstance(this.client.serializerAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }

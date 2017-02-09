@@ -21,7 +21,7 @@ public class AvailabilitySetUpdateParameters {
      * A set of tags.
      * A description about the set of tags.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "tags", required = true)
     private Map<String, String> tags;
 
     /**

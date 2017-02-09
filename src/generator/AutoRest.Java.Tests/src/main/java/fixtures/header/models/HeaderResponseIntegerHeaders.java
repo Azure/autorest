@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseInteger operation.
@@ -18,6 +19,7 @@ public class HeaderResponseIntegerHeaders {
     /**
      * response with header value "value": 1 or -2.
      */
+    @JsonProperty(value = "value")
     private Integer value;
 
     /**

@@ -22,16 +22,15 @@ class AutoRestDateTimeTestServiceConfiguration(Configuration):
     attributes.
 
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, base_url=None):
 
         if not base_url:
             base_url = 'https://localhost'
 
-        super(AutoRestDateTimeTestServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestDateTimeTestServiceConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestdatetimetestservice/{}'.format(VERSION))
 
@@ -46,13 +45,12 @@ class AutoRestDateTimeTestService(object):
     :vartype datetime_model: .operations.DatetimeModelOperations
 
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, base_url=None):
 
-        self.config = AutoRestDateTimeTestServiceConfiguration(base_url, filepath)
+        self.config = AutoRestDateTimeTestServiceConfiguration(base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

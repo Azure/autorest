@@ -14,4 +14,4 @@
 
 'use strict';
 
-exports.Paging = require('./paging');
+exports.PagingOperations = require('./pagingOperations');

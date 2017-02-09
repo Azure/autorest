@@ -15,11 +15,19 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.validation.models.Product;
 import rx.Observable;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestValidationTest class.
  */
 public interface AutoRestValidationTest {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

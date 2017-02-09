@@ -1,13 +1,8 @@
 
 namespace Petstore
 {
-    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// StorageAccountsOperations operations.
@@ -307,4 +302,3 @@ namespace Petstore
         System.Threading.Tasks.Task<Microsoft.Rest.Azure.AzureOperationResponse<StorageAccountKeysInner>> RegenerateKeyWithHttpMessagesAsync(string resourceGroupName, string accountName, StorageAccountRegenerateKeyParametersInner regenerateKey, System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>> customHeaders = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
     }
 }
-

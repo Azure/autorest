@@ -10,6 +10,7 @@
 
 package fixtures.subscriptionidapiversion.implementation;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The SampleResourceGroupInner model.
@@ -18,11 +19,13 @@ public class SampleResourceGroupInner {
     /**
      * resource group name 'testgroup101'.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**
      * resource group location 'West US'.
      */
+    @JsonProperty(value = "location")
     private String location;
 
     /**

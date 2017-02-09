@@ -19,12 +19,13 @@ public class ChildProduct {
     /**
      * Constant string.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "constProperty", required = true)
     private String constProperty;
 
     /**
      * Count.
      */
+    @JsonProperty(value = "count")
     private Integer count;
 
     /**

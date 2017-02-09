@@ -12,6 +12,7 @@ package fixtures.azureresource.implementation;
 
 import java.util.List;
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ResourceCollectionInner model.
@@ -20,16 +21,19 @@ public class ResourceCollectionInner {
     /**
      * The productresource property.
      */
+    @JsonProperty(value = "productresource")
     private FlattenedProductInner productresource;
 
     /**
      * The arrayofresources property.
      */
+    @JsonProperty(value = "arrayofresources")
     private List<FlattenedProductInner> arrayofresources;
 
     /**
      * The dictionaryofresources property.
      */
+    @JsonProperty(value = "dictionaryofresources")
     private Map<String, FlattenedProductInner> dictionaryofresources;
 
     /**

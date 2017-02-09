@@ -3,6 +3,7 @@
 
 package petstore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The User model.
@@ -11,41 +12,49 @@ public class User {
     /**
      * The id property.
      */
+    @JsonProperty(value = "id")
     private Long id;
 
     /**
      * The username property.
      */
+    @JsonProperty(value = "username")
     private String username;
 
     /**
      * The firstName property.
      */
+    @JsonProperty(value = "firstName")
     private String firstName;
 
     /**
      * The lastName property.
      */
+    @JsonProperty(value = "lastName")
     private String lastName;
 
     /**
      * The email property.
      */
+    @JsonProperty(value = "email")
     private String email;
 
     /**
      * The password property.
      */
+    @JsonProperty(value = "password")
     private String password;
 
     /**
      * The phone property.
      */
+    @JsonProperty(value = "phone")
     private String phone;
 
     /**
      * User Status.
      */
+    @JsonProperty(value = "userStatus")
     private Integer userStatus;
 
     /**

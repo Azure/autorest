@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -22,6 +23,7 @@ public class Goblinshark extends Shark {
     /**
      * The jawsize property.
      */
+    @JsonProperty(value = "jawsize")
     private Integer jawsize;
 
     /**

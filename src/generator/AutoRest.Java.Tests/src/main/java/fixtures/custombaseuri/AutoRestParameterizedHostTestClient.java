@@ -10,11 +10,19 @@
 
 package fixtures.custombaseuri;
 
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestParameterizedHostTestClient class.
  */
 public interface AutoRestParameterizedHostTestClient {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

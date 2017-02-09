@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Polymorphisms.
  */
-public final class PolymorphismsImpl implements Polymorphisms {
+public class PolymorphismsImpl implements Polymorphisms {
     /** The Retrofit service to perform REST calls. */
     private PolymorphismsService service;
     /** The service client containing this operation class. */
@@ -56,15 +55,15 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphismsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms getValid" })
         @GET("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> getValid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValid" })
         @PUT("complex/polymorphism/valid")
         Observable<Response<ResponseBody>> putValid(@Body Fish complexBody);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodycomplex.Polymorphisms putValidMissingRequired" })
         @PUT("complex/polymorphism/missingrequired/invalid")
         Observable<Response<ResponseBody>> putValidMissingRequired(@Body Fish complexBody);
 
@@ -76,7 +75,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the Fish object if successful.
      */
     public Fish getValid() {
-        return getValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -86,7 +85,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        return ServiceCall.create(getValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -98,7 +97,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
         return getValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Fish>, Fish>() {
             @Override
             public Fish call(ServiceResponse<Fish> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -124,7 +123,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Fish, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Fish, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -168,7 +167,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
            };
      */
     public void putValid(Fish complexBody) {
-        putValidWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -211,7 +210,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -256,7 +255,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
         return putValidWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -319,7 +318,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -356,7 +355,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      }
      */
     public void putValidMissingRequired(Fish complexBody) {
-        putValidMissingRequiredWithServiceResponseAsync(complexBody).toBlocking().single().getBody();
+        putValidMissingRequiredWithServiceResponseAsync(complexBody).toBlocking().single().body();
     }
 
     /**
@@ -392,7 +391,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putValidMissingRequiredWithServiceResponseAsync(complexBody), serviceCallback);
+        return ServiceCall.fromResponse(putValidMissingRequiredWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -430,7 +429,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
         return putValidMissingRequiredWithServiceResponseAsync(complexBody).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -486,7 +485,7 @@ public final class PolymorphismsImpl implements Polymorphisms {
     }
 
     private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

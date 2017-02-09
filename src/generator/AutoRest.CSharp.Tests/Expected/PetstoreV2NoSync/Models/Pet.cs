@@ -14,6 +14,8 @@ namespace Fixtures.PetstoreV2NoSync.Models
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Xml;
+    using System.Xml.Linq;
 
     public partial class Pet
     {
@@ -103,6 +105,127 @@ namespace Fixtures.PetstoreV2NoSync.Models
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "PhotoUrls");
             }
+        }
+        /// <summary>
+        /// Serializes the object to an XML node
+        /// </summary>
+        internal XElement XmlSerialize(XElement result)
+        {
+            if( null != Id )
+            {
+                result.Add(new XElement("id", Id) );
+            }
+            if( null != Category )
+            {
+                result.Add(Category.XmlSerialize(new XElement( "category" )));
+            }
+            if( null != Name )
+            {
+                result.Add(new XElement("name", Name) );
+            }
+            if( null != PhotoUrls )
+            {
+                var seq = new XElement("photoUrl");
+                foreach( var value in PhotoUrls ){
+                    seq.Add(new XElement( "photoUrl", value ) );
+                }
+                result.Add(seq);
+            }
+            if( null != Tags )
+            {
+                var seq = new XElement("tag");
+                foreach( var value in Tags ){
+                    seq.Add(value.XmlSerialize( new XElement( "tag") ) );
+                }
+                result.Add(seq);
+            }
+            if( null != SByteProperty )
+            {
+                result.Add(new XElement("sByte", SByteProperty) );
+            }
+            if( null != Birthday )
+            {
+                result.Add(new XElement("birthday", Birthday) );
+            }
+            if( null != Dictionary )
+            {
+                var dict = new XElement("dictionary");
+                foreach( var key in Dictionary.Keys ) {
+                    dict.Add(Dictionary[key].XmlSerialize(new XElement(key) ) );
+                }
+                result.Add(dict);
+            }
+            if( null != Status )
+            {
+                result.Add(new XElement("status", Status) );
+            }
+            return result;
+        }
+        /// <summary>
+        /// Deserializes an XML node to an instance of Pet
+        /// </summary>
+        internal static Pet XmlDeserialize(string payload)
+        {
+            // deserialize to xml and use the overload to do the work
+            return XmlDeserialize( XElement.Parse( payload ) );
+        }
+        internal static Pet XmlDeserialize(XElement payload)
+        {
+            var result = new Pet();
+            var deserializeId = XmlSerialization.ToDeserializer(e => (long?)e);
+            long? resultId;
+            if (deserializeId(payload, "id", out resultId))
+            {
+                result.Id = resultId;
+            }
+            var deserializeCategory = XmlSerialization.ToDeserializer(e => Category.XmlDeserialize(e));
+            Category resultCategory;
+            if (deserializeCategory(payload, "category", out resultCategory))
+            {
+                result.Category = resultCategory;
+            }
+            var deserializeName = XmlSerialization.ToDeserializer(e => (string)e);
+            string resultName;
+            if (deserializeName(payload, "name", out resultName))
+            {
+                result.Name = resultName;
+            }
+            var deserializePhotoUrls = XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => (string)e), "photoUrl");
+            IList<string> resultPhotoUrls;
+            if (deserializePhotoUrls(payload, "photoUrl", out resultPhotoUrls))
+            {
+                result.PhotoUrls = resultPhotoUrls;
+            }
+            var deserializeTags = XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Tag.XmlDeserialize(e)), "tag");
+            IList<Tag> resultTags;
+            if (deserializeTags(payload, "tag", out resultTags))
+            {
+                result.Tags = resultTags;
+            }
+            var deserializeSByteProperty = XmlSerialization.ToDeserializer(e => System.Convert.FromBase64String(e.Value));
+            byte[] resultSByteProperty;
+            if (deserializeSByteProperty(payload, "sByte", out resultSByteProperty))
+            {
+                result.SByteProperty = resultSByteProperty;
+            }
+            var deserializeBirthday = XmlSerialization.ToDeserializer(e => (System.DateTime?)e);
+            System.DateTime? resultBirthday;
+            if (deserializeBirthday(payload, "birthday", out resultBirthday))
+            {
+                result.Birthday = resultBirthday;
+            }
+            var deserializeDictionary = XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => Category.XmlDeserialize(e)));
+            IDictionary<string, Category> resultDictionary;
+            if (deserializeDictionary(payload, "dictionary", out resultDictionary))
+            {
+                result.Dictionary = resultDictionary;
+            }
+            var deserializeStatus = XmlSerialization.ToDeserializer(e => (string)e);
+            string resultStatus;
+            if (deserializeStatus(payload, "status", out resultStatus))
+            {
+                result.Status = resultStatus;
+            }            return result;
         }
     }
 }

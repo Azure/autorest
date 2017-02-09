@@ -10,6 +10,7 @@
 
 package fixtures.paging.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Product model.
@@ -18,6 +19,7 @@ public class Product {
     /**
      * The properties property.
      */
+    @JsonProperty(value = "properties")
     private ProductProperties properties;
 
     /**

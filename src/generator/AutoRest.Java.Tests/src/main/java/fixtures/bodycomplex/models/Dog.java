@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Dog model.
@@ -18,6 +19,7 @@ public class Dog extends Pet {
     /**
      * The food property.
      */
+    @JsonProperty(value = "food")
     private String food;
 
     /**

@@ -1,11 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
-    using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -29,7 +24,7 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "properties")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "properties")]
         public StorageAccountProperties Properties { get; set; }
 
         /// <summary>
@@ -47,4 +42,3 @@ namespace Petstore.Models
         }
     }
 }
-

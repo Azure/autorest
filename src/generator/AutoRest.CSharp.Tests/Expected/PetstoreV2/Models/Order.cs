@@ -11,6 +11,8 @@ namespace Fixtures.PetstoreV2.Models
     using Fixtures.PetstoreV2;
     using Newtonsoft.Json;
     using System.Linq;
+    using System.Xml;
+    using System.Xml.Linq;
 
     public partial class Order
     {
@@ -66,6 +68,85 @@ namespace Fixtures.PetstoreV2.Models
         [JsonProperty(PropertyName = "complete")]
         public bool? Complete { get; set; }
 
+        /// <summary>
+        /// Serializes the object to an XML node
+        /// </summary>
+        internal XElement XmlSerialize(XElement result)
+        {
+            if( null != Id )
+            {
+                result.Add(new XElement("id", Id) );
+            }
+            if( null != PetId )
+            {
+                result.Add(new XElement("petId", PetId) );
+            }
+            if( null != Quantity )
+            {
+                result.Add(new XElement("quantity", Quantity) );
+            }
+            if( null != ShipDate )
+            {
+                result.Add(new XElement("shipDate", ShipDate) );
+            }
+            if( null != Status )
+            {
+                result.Add(new XElement("status", Status) );
+            }
+            if( null != Complete )
+            {
+                result.Add(new XElement("complete", Complete) );
+            }
+            return result;
+        }
+        /// <summary>
+        /// Deserializes an XML node to an instance of Order
+        /// </summary>
+        internal static Order XmlDeserialize(string payload)
+        {
+            // deserialize to xml and use the overload to do the work
+            return XmlDeserialize( XElement.Parse( payload ) );
+        }
+        internal static Order XmlDeserialize(XElement payload)
+        {
+            var result = new Order();
+            var deserializeId = XmlSerialization.ToDeserializer(e => (long?)e);
+            long? resultId;
+            if (deserializeId(payload, "id", out resultId))
+            {
+                result.Id = resultId;
+            }
+            var deserializePetId = XmlSerialization.ToDeserializer(e => (long?)e);
+            long? resultPetId;
+            if (deserializePetId(payload, "petId", out resultPetId))
+            {
+                result.PetId = resultPetId;
+            }
+            var deserializeQuantity = XmlSerialization.ToDeserializer(e => (int?)e);
+            int? resultQuantity;
+            if (deserializeQuantity(payload, "quantity", out resultQuantity))
+            {
+                result.Quantity = resultQuantity;
+            }
+            var deserializeShipDate = XmlSerialization.ToDeserializer(e => (System.DateTime?)e);
+            System.DateTime? resultShipDate;
+            if (deserializeShipDate(payload, "shipDate", out resultShipDate))
+            {
+                result.ShipDate = resultShipDate;
+            }
+            var deserializeStatus = XmlSerialization.ToDeserializer(e => (string)e);
+            string resultStatus;
+            if (deserializeStatus(payload, "status", out resultStatus))
+            {
+                result.Status = resultStatus;
+            }
+            var deserializeComplete = XmlSerialization.ToDeserializer(e => (bool?)e);
+            bool? resultComplete;
+            if (deserializeComplete(payload, "complete", out resultComplete))
+            {
+                result.Complete = resultComplete;
+            }            return result;
+        }
     }
 }
 

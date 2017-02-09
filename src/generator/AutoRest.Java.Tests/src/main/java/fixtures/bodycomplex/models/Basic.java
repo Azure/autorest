@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Basic model.
@@ -18,17 +19,20 @@ public class Basic {
     /**
      * Basic Id.
      */
+    @JsonProperty(value = "id")
     private Integer id;
 
     /**
      * Name property with a very long description that does not fit on a single
      * line and a line break.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**
      * Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
      */
+    @JsonProperty(value = "color")
     private CMYKColors color;
 
     /**

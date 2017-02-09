@@ -48,7 +48,7 @@ declare class AutoRestPagingTestService {
     generateClientRequestId: boolean;
 
     // Operation groups
-    paging: operations.Paging;
+    pagingOperations: operations.PagingOperations;
     }
 
 export = AutoRestPagingTestService;

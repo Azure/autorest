@@ -15,11 +15,11 @@ import * as models from '../models';
 
 /**
  * @class
- * Header
+ * HeaderOperations
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the AutoRestSwaggerBATHeaderService.
  */
-export interface Header {
+export interface HeaderOperations {
 
     /**
      * Send a post request with header value "User-Agent": "overwrite"

@@ -12,7 +12,6 @@ package fixtures.head.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -29,7 +28,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccess.
  */
-public final class HttpSuccessInner {
+public class HttpSuccessInner {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
@@ -51,15 +50,15 @@ public final class HttpSuccessInner {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head200" })
         @HEAD("http/success/200")
         Observable<Response<Void>> head200(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head204" })
         @HEAD("http/success/204")
         Observable<Response<Void>> head204(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.head.HttpSuccess head404" })
         @HEAD("http/success/404")
         Observable<Response<Void>> head404(@Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -71,7 +70,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head200() {
-        return head200WithServiceResponseAsync().toBlocking().single().getBody();
+        return head200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -81,7 +80,7 @@ public final class HttpSuccessInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(head200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -93,7 +92,7 @@ public final class HttpSuccessInner {
         return head200WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -119,7 +118,7 @@ public final class HttpSuccessInner {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -132,7 +131,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head204() {
-        return head204WithServiceResponseAsync().toBlocking().single().getBody();
+        return head204WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -142,7 +141,7 @@ public final class HttpSuccessInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(head204WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -154,7 +153,7 @@ public final class HttpSuccessInner {
         return head204WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -180,7 +179,7 @@ public final class HttpSuccessInner {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -193,7 +192,7 @@ public final class HttpSuccessInner {
      * @return the boolean object if successful.
      */
     public boolean head404() {
-        return head404WithServiceResponseAsync().toBlocking().single().getBody();
+        return head404WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -203,7 +202,7 @@ public final class HttpSuccessInner {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.create(head404WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -215,7 +214,7 @@ public final class HttpSuccessInner {
         return head404WithServiceResponseAsync().map(new Func1<ServiceResponse<Boolean>, Boolean>() {
             @Override
             public Boolean call(ServiceResponse<Boolean> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -241,7 +240,7 @@ public final class HttpSuccessInner {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Boolean, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)

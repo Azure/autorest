@@ -3,6 +3,7 @@
 
 package petstore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Usage Names.
@@ -11,11 +12,13 @@ public class UsageName {
     /**
      * Gets a string describing the resource name.
      */
+    @JsonProperty(value = "value")
     private String value;
 
     /**
      * Gets a localized string describing the resource name.
      */
+    @JsonProperty(value = "localizedValue")
     private String localizedValue;
 
     /**

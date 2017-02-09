@@ -29,11 +29,10 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
     :param optional_global_query: number of items to skip
     :type optional_global_query: int
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, required_global_path, required_global_query, optional_global_query=None, base_url=None, filepath=None):
+            self, required_global_path, required_global_query, optional_global_query=None, base_url=None):
 
         if required_global_path is None:
             raise ValueError("Parameter 'required_global_path' must not be None.")
@@ -46,7 +45,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestrequiredoptionaltestservice/{}'.format(VERSION))
 
@@ -73,13 +72,12 @@ class AutoRestRequiredOptionalTestService(object):
     :param optional_global_query: number of items to skip
     :type optional_global_query: int
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, required_global_path, required_global_query, optional_global_query=None, base_url=None, filepath=None):
+            self, required_global_path, required_global_query, optional_global_query=None, base_url=None):
 
-        self.config = AutoRestRequiredOptionalTestServiceConfiguration(required_global_path, required_global_query, optional_global_query, base_url, filepath)
+        self.config = AutoRestRequiredOptionalTestServiceConfiguration(required_global_path, required_global_query, optional_global_query, base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

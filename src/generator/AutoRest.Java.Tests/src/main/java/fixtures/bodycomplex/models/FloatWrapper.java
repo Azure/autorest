@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The FloatWrapper model.
@@ -18,11 +19,13 @@ public class FloatWrapper {
     /**
      * The field1 property.
      */
+    @JsonProperty(value = "field1")
     private Double field1;
 
     /**
      * The field2 property.
      */
+    @JsonProperty(value = "field2")
     private Double field2;
 
     /**

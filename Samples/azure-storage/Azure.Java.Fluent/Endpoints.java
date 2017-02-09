@@ -3,6 +3,7 @@
 
 package petstore;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The URIs that are used to perform a retrieval of a public blob, queue or
@@ -12,21 +13,25 @@ public class Endpoints {
     /**
      * Gets the blob endpoint.
      */
+    @JsonProperty(value = "blob")
     private String blob;
 
     /**
      * Gets the queue endpoint.
      */
+    @JsonProperty(value = "queue")
     private String queue;
 
     /**
      * Gets the table endpoint.
      */
+    @JsonProperty(value = "table")
     private String table;
 
     /**
      * Gets the file endpoint.
      */
+    @JsonProperty(value = "file")
     private String file;
 
     /**

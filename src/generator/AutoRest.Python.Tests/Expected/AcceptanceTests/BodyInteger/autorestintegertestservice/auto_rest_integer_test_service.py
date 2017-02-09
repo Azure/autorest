@@ -22,16 +22,15 @@ class AutoRestIntegerTestServiceConfiguration(Configuration):
     attributes.
 
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, base_url=None):
 
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestIntegerTestServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestIntegerTestServiceConfiguration, self).__init__(base_url)
 
         self.add_user_agent('autorestintegertestservice/{}'.format(VERSION))
 
@@ -46,13 +45,12 @@ class AutoRestIntegerTestService(object):
     :vartype int_model: .operations.IntModelOperations
 
     :param str base_url: Service URL
-    :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, base_url=None):
 
-        self.config = AutoRestIntegerTestServiceConfiguration(base_url, filepath)
+        self.config = AutoRestIntegerTestServiceConfiguration(base_url)
         self._client = ServiceClient(None, self.config)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

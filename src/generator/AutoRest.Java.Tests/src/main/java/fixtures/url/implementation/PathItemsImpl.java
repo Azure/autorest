@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.url.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in PathItems.
  */
-public final class PathItemsImpl implements PathItems {
+public class PathItemsImpl implements PathItems {
     /** The Retrofit service to perform REST calls. */
     private PathItemsService service;
     /** The service client containing this operation class. */
@@ -54,19 +53,19 @@ public final class PathItemsImpl implements PathItems {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathItemsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getAllWithValues" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         Observable<Response<ResponseBody>> getAllWithValues(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getGlobalQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery")
         Observable<Response<ResponseBody>> getGlobalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getGlobalAndLocalQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null")
         Observable<Response<ResponseBody>> getGlobalAndLocalQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.PathItems getLocalPathItemQueryNull" })
         @GET("pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null")
         Observable<Response<ResponseBody>> getLocalPathItemQueryNull(@Path("localStringPath") String localStringPath, @Path("pathItemStringPath") String pathItemStringPath, @Path("globalStringPath") String globalStringPath, @Query("localStringQuery") String localStringQuery, @Query("pathItemStringQuery") String pathItemStringQuery, @Query("globalStringQuery") String globalStringQuery);
 
@@ -79,7 +78,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      */
     public void getAllWithValues(String localStringPath, String pathItemStringPath) {
-        getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().getBody();
+        getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().body();
     }
 
     /**
@@ -91,7 +90,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -105,7 +104,7 @@ public final class PathItemsImpl implements PathItems {
         return getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -152,7 +151,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      */
     public void getAllWithValues(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().getBody();
+        getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().body();
     }
 
     /**
@@ -166,7 +165,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -182,7 +181,7 @@ public final class PathItemsImpl implements PathItems {
         return getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -221,7 +220,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getAllWithValuesDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -234,7 +233,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      */
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath) {
-        getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().getBody();
+        getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().body();
     }
 
     /**
@@ -246,7 +245,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -260,7 +259,7 @@ public final class PathItemsImpl implements PathItems {
         return getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -307,7 +306,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      */
     public void getGlobalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().getBody();
+        getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().body();
     }
 
     /**
@@ -321,7 +320,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -337,7 +336,7 @@ public final class PathItemsImpl implements PathItems {
         return getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -376,7 +375,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getGlobalQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -389,7 +388,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      */
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath) {
-        getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().getBody();
+        getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().body();
     }
 
     /**
@@ -401,7 +400,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -415,7 +414,7 @@ public final class PathItemsImpl implements PathItems {
         return getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -462,7 +461,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      */
     public void getGlobalAndLocalQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().getBody();
+        getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().body();
     }
 
     /**
@@ -476,7 +475,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -492,7 +491,7 @@ public final class PathItemsImpl implements PathItems {
         return getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -531,7 +530,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getGlobalAndLocalQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -544,7 +543,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      */
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath) {
-        getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().getBody();
+        getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).toBlocking().single().body();
     }
 
     /**
@@ -556,7 +555,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -570,7 +569,7 @@ public final class PathItemsImpl implements PathItems {
         return getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -617,7 +616,7 @@ public final class PathItemsImpl implements PathItems {
      * @param pathItemStringQuery should contain value null
      */
     public void getLocalPathItemQueryNull(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery) {
-        getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().getBody();
+        getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).toBlocking().single().body();
     }
 
     /**
@@ -631,7 +630,7 @@ public final class PathItemsImpl implements PathItems {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+        return ServiceCall.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -647,7 +646,7 @@ public final class PathItemsImpl implements PathItems {
         return getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -686,7 +685,7 @@ public final class PathItemsImpl implements PathItems {
     }
 
     private ServiceResponse<Void> getLocalPathItemQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

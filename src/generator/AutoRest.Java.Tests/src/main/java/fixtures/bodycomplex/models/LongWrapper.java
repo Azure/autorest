@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The LongWrapper model.
@@ -18,11 +19,13 @@ public class LongWrapper {
     /**
      * The field1 property.
      */
+    @JsonProperty(value = "field1")
     private Long field1;
 
     /**
      * The field2 property.
      */
+    @JsonProperty(value = "field2")
     private Long field2;
 
     /**

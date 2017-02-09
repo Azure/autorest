@@ -17,7 +17,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public final class PathsImpl implements Paths {
+public class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
@@ -54,7 +53,7 @@ public final class PathsImpl implements Paths {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseuri.Paths getEmpty" })
         @GET("customuri")
         Observable<Response<ResponseBody>> getEmpty(@Header("x-ms-parameterized-host") String parameterizedHost);
 
@@ -66,7 +65,7 @@ public final class PathsImpl implements Paths {
      * @param accountName Account Name
      */
     public void getEmpty(String accountName) {
-        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(accountName).toBlocking().single().body();
     }
 
     /**
@@ -77,7 +76,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
@@ -90,7 +89,7 @@ public final class PathsImpl implements Paths {
         return getEmptyWithServiceResponseAsync(accountName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -124,7 +123,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
