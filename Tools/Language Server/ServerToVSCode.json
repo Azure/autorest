@@ -1,0 +1,231 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Language Server Protocol",
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "paths": {
+        "/WindowServer/window/showMessage": {
+            "put": {
+                "description": "notification to display message on window",
+                "summary": "notification to display message on window",
+                "operationId": "window_showMessage",
+                "parameters": [
+                    {
+                        "name": "ShowMessageParams",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/ShowMessageParams"
+                        },
+                        "description": "message to display"
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message displayed"
+                    }
+                }
+            }
+        },
+        "/WindowServer/window/showMessageRequest": {
+            "post": {
+                "description": "request to display message on window",
+                "summary": "request to display message on window",
+                "operationId": "window_showMessage",
+                "parameters": [
+                    {
+                        "name": "ShowMessageParams",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/ShowMessageRequestParams"
+                        },
+                        "description": "message to display"
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message displayed",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/MessageActionItem"
+                        }
+                    }
+                }
+            }
+        },
+        "/WindowServer/window/logMessage": {
+            "put": {
+                "description": "notification to log message",
+                "summary": "notification to log message",
+                "operationId": "window_logMessage",
+                "parameters": [
+                    {
+                        "name": "LogMessageParams",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/LogMessageParams"
+                        },
+                        "description": "message to log"
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "message logged"
+                    }
+                }
+            }
+        },
+        "/WindowServer/telemetry/event": {
+            "put": {
+                "description": "notification for telemetry event info",
+                "summary": "notification for telemetry event info",
+                "operationId": "telemetry_event",
+                "parameters": [
+                    {
+                        "description": "can be of any type",
+                        "name": "eventInfo",
+                        "in": "path",
+                        "type": "string"
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "telemetry received"
+                    }
+                }
+            }
+        },
+        "/WindowServer/client/registerCapability": {
+            "post": {
+                "description": "request register for a new capability on the client side",
+                "summary": "request register for a new capability on the client side",
+                "operationId": "client_registerCapability",
+                "parameters": [
+                    {
+                        "description": "params to register",
+                        "name": "RegistrationParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/RegistrationParams"
+                        }
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "capability registered"
+                    }
+                }
+            }
+        },
+        "/WindowServer/client/unregisterCapability": {
+            "post": {
+                "description": "request unregister for an existing capability on the client side",
+                "summary": "request unregister for an existing capability on the client side",
+                "operationId": "client_unregisterCapability",
+                "parameters": [
+                    {
+                        "description": "params to unregister",
+                        "name": "UnregistrationParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/UnregistrationParams"
+                        }
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "capability unregistered"
+                    }
+                }
+            }
+        },
+        "/WindowServer/textDocument/publishDiagnostics": {
+            "put": {
+                "description": "notification are sent to signal results of validation runs.",
+                "summary": "notification are sent to signal results of validation runs.",
+                "operationId": "textDocument_publishDiagnostics",
+                "parameters": [
+                    {
+                        "description": "params to publish diagnostics",
+                        "name": "PublishDiagnosticsParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/PublishDiagnosticsParams"
+                        }
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "diagnostics received"
+                    }
+                }
+            }
+        },
+        "/WindowServer/workspace/applyEdit": {
+            "post": {
+                "description": "request to modify resource on the client side",
+                "summary": "request to modify resource on the client side",
+                "operationId": "workspace_applyEdit",
+                "parameters": [
+                    {
+                        "description": "params to apply edit",
+                        "name": "ApplyWorkspaceEditParams",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/ApplyWorkspaceEditParams"
+                        }
+                    }
+                ],
+                "consumes":[
+                    "application/json"
+                ],
+                "produces":[
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "edit applied",
+                        "schema": {
+                            "$ref": "CommonModels.json#/definitions/ApplyWorkspaceEditResponse"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

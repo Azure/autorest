@@ -187,7 +187,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// else generates (by default) the client code for spec
         /// </summary>
         [SettingsInfo("The code generation mode. " +
-                      "Possible values: rest, rest-client, rest-server. " +
+                      "Possible values: rest, rest-client, rest-server, jsonrpc-client, jsonrpc-server. " +
                       "Determines whether AutoRest generates " +
                       "the client or server side code for given spec.")]
         public string  CodeGenerationMode{ get; set; }

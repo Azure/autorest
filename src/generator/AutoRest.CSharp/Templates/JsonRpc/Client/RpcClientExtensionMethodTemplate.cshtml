@@ -1,0 +1,99 @@
+@using System.Text
+@using System
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.CSharp
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.MethodCs>
+@{
+    if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == SyncMethodsGenerationMode.Essential)
+    {
+        if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+        {
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+        if (!String.IsNullOrEmpty(Model.ExternalDocsUrl))
+            {
+@:/// <see href="@Model.ExternalDocsUrl" />
+        }
+@:/// </summary>
+    }
+        if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+        {
+@:/// <remarks>
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
+    }
+@:/// <param name='operations'>
+@:/// The operations group for this extension method.
+@:/// </param>
+    foreach (var parameter in Model.LocalParameters)
+        {
+@:/// <param name='@parameter.Name'>
+@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@:/// </param>
+    }
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@{ 
+    var retType1 = (Model.TaskExtensionReturnTypeString.StartsWith("Task")) ? Model.TaskExtensionReturnTypeString : Model.ReturnTypeString;
+}
+@:public static @retType1 @(Model.Name)(@Model.GetExtensionParameters(Model.GetSyncMethodParameterDeclaration(false)))
+@:{
+    if (retType1 != "void")
+    {
+    @:return ((I@(Model.MethodGroup.TypeName))operations).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    }
+    else
+    {
+    @:((I@(Model.MethodGroup.TypeName))operations).@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    }
+@:}
+@EmptyLine
+    }
+
+    if (!String.IsNullOrEmpty(Model.Description) || !String.IsNullOrEmpty(Model.Summary))
+    {
+@:/// <summary>
+@:@WrapComment("/// ", String.IsNullOrEmpty(Model.Summary) ? Model.Description.EscapeXmlComment() : Model.Summary.EscapeXmlComment())
+    if (!String.IsNullOrEmpty(Model.ExternalDocsUrl))
+        {
+@:/// <see href="@Model.ExternalDocsUrl" />
+    }
+@:/// </summary>
+}
+    if (!String.IsNullOrEmpty(Model.Description) && !String.IsNullOrEmpty(Model.Summary))
+    {
+@:/// <remarks>
+@:@WrapComment("/// ", Model.Description.EscapeXmlComment())
+@:/// </remarks>
+}
+@:/// <param name='operations'>
+@:/// The operations group for this extension method.
+@:/// </param>
+foreach (var parameter in Model.LocalParameters)
+    {
+@:/// <param name='@parameter.Name'>
+@:@WrapComment("/// ", parameter.Documentation.EscapeXmlComment())
+@:/// </param>
+}
+@:/// <param name='cancellationToken'>
+@:/// The cancellation token.
+@:/// </param>
+@if (Model.Deprecated)
+{
+@:[System.Obsolete()]
+}
+@:public static async @Model.TaskExtensionReturnTypeString @(Model.Name)Async(@Model.GetExtensionParameters(Model.GetAsyncMethodParameterDeclaration(false)))
+@:{
+    if (@Model.ReturnTypeString != "void" )
+    {
+    @:return await operations.@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgsWithoutCustomHeader())).ConfigureAwait(false);
+    }
+    else
+    {
+    @:await operations.@(Model.Name)Async(@(Model.GetAsyncMethodInvocationArgsWithoutCustomHeader())).ConfigureAwait(false);
+    }
+@:}
+}

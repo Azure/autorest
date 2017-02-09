@@ -35,6 +35,8 @@
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\Rest\Client&quot; $(RootNamespace).Templates.Rest.Client" />
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\Rest\Common&quot; $(RootNamespace).Templates.Rest.Common" />
     <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\Rest\Server&quot; $(RootNamespace).Templates.Rest.Server" />
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\JsonRpc\Client&quot; $(RootNamespace).Templates.JsonRpc.Client" />
+    <Exec Command="$(RazorCommand) &quot;$(MSBuildProjectDirectory)\Templates\JsonRpc\Server&quot; $(RootNamespace).Templates.JsonRpc.Server" />
   </Target>
 
   <Target Name="Build" Condition=" '$(OS)' != 'Windows_NT'">

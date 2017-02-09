@@ -1,0 +1,43 @@
+﻿@using System
+@using System.Linq
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@inherits AutoRest.Core.Template<AutoRest.CSharp.Model.CodeModelCs>
+
+/// <summary>
+/// The connection instance.
+/// </summary>
+public Connection ServerConnection { get; private set; }
+
+@EmptyLine
+        
+@foreach (var property in Model.Properties)
+{
+@:/// <summary>
+@:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+@:/// </summary>
+@:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly || property.IsConstant ? "private " : "")set; }
+@EmptyLine
+}
+        
+@foreach (var operation in Model.AllOperations) 
+{
+@:/// <summary>
+@:/// Gets the I@(operation.TypeName).
+@:/// </summary>
+@:public virtual I@(operation.TypeName) @(operation.NameForProperty) { get; private set; }
+@EmptyLine
+}
+       
+/// <summary>
+/// Initializes a new instance of the @Model.Name class.
+/// </summary>
+/// <param name='connection'>
+/// Required. The connection over which client will be talking to the rpc server
+/// </param>
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Connection connection) 
+{
+    ServerConnection = connection;
+    this.Initialize();
+}
+@EmptyLine

@@ -1,0 +1,1330 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Language Server Protocol",
+        "license": {
+            "name": "MIT"
+        }
+    },
+    "definitions": {
+        "ClientCapabilities": {
+            "description": "The capabilities provided by the client (editor or tool)",
+            "properties": {
+                "workspace": {
+                    "description": "Workspace specific client capabilities.",
+                    "$ref": "#/definitions/WorkspaceClientCapabilities"
+                },
+                "textDocument": {
+                    "description": "Text document specific client capabilities.",
+                    "$ref": "#/definitions/TextDocumentClientCapabilities"
+                },
+                "experimental": {
+                    "description": "Experimental client capabilities.",
+                    "type": "object"
+                }
+            }
+        },
+        "TextDocumentClientCapabilities": {
+            "description": "Text document specific client capabilities.",
+            "properties": {
+                "synchronization": {
+                    "description": "syncronization specific capabilities",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ],
+                    "properties": {
+                        "willSave": {
+                            "description": "The client supports sending will save notifications.",
+                            "$ref": "#/definitions/BooleanProperty"
+                        },
+                        "willSaveWaitUntil": {
+                            "description": "The client supports sending a will save request and waits for a response providing text edits which will be applied to the document before it is saved.",
+                            "$ref": "#/definitions/BooleanProperty"
+                        },
+                        "didSave": {
+                            "description": "The client supports did save notifications.",
+                            "$ref": "#/definitions/BooleanProperty"
+                        }
+                    }
+                },
+                "completion": {
+                    "description": "Capabilities specific to the textDocument/completion",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ],
+                    "properties": {
+                        "completionItem": {
+                            "description": "The client supports the following CompletionItem specific capabilities.",
+                            "properties": {
+                                "snippetSupport": {
+                                    "description": "Client supports snippets as insert text. A snippet can define tab stops and placeholders with `$1`, `$2` and `${3:foo}`. `$0` defines the final tab stop, it defaults to the end of the snippet. Placeholders with equal identifiers are linked, that is typing in one will update others too.",
+                                    "$ref": "#/definitions/BooleanProperty"
+                                }
+                            }
+                        }
+                    }
+                },
+                "hover": {
+                    "description": "Capabilities specific to the textDocument/hover",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "signatureHelp": {
+                    "description": "Capabilities specific to the textDocument/signatureHelp",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "references": {
+                    "description": "Capabilities specific to the textDocument/references",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "documentHighlight": {
+                    "description": "Capabilities specific to the textDocument/documentHighlight",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "documentSymbol": {
+                    "description": "Capabilities specific to the textDocument/documentSymbol",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "formatting": {
+                    "description": "Capabilities specific to the textDocument/formatting",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "rangeFormatting": {
+                    "description": "Capabilities specific to the textDocument/rangeFormatting",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "onTypeFormatting": {
+                    "description": "Capabilities specific to the textDocument/onTypeFormatting",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "definition": {
+                    "description": "Capabilities specific to the textDocument/definition",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "codeAction": {
+                    "description": "Capabilities specific to the textDocument/codeAction",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "codeLens": {
+                    "description": "Capabilities specific to the textDocument/codeLens",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "documentLink": {
+                    "description": "Capabilities specific to the textDocument/documentLink",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                },
+                "rename": {
+                    "description": "Capabilities specific to the textDocument/rename",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DynamicRegistrationProperty"
+                        }
+                    ]
+                }
+            }
+        },
+        "WorkspaceClientCapabilities": {
+            "description": "Workspace specific client capabilities.",
+            "properties": {
+                "applyEdit": {
+                    "description": "The client supports applying batch edits to the workspace.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "didChangeConfiguration": {
+                    "description": "Did change configuration notification supports dynamic registration.",
+                    "$ref": "#/definitions/DynamicRegistrationProperty"
+                },
+                "didChangeWatchedFiles": {
+                    "description": "Did change watched files notification supports dynamic registration.",
+                    "$ref": "#/definitions/DynamicRegistrationProperty"
+                },
+                "symbol": {
+                    "description": "Symbol request supports dynamic registration.",
+                    "$ref": "#/definitions/DynamicRegistrationProperty"
+                },
+                "executeCommand": {
+                    "description": "Execute command supports dynamic registration.",
+                    "$ref": "#/definitions/DynamicRegistrationProperty"
+                }
+            }
+        },
+        "BooleanProperty": {
+            "type": "boolean",
+            "description": "Whether document link supports given property"
+        },
+        "DynamicRegistrationProperty": {
+            "description": "dynamic registration property shared across objects ",
+            "properties": {
+                "dynamicRegistration": {
+                    "type": "boolean",
+                    "description": "whether client allows dynamic registration for capability"
+                }
+            }
+        },
+        "ServerCapabilities": {
+            "description": "The capabilities the language server provides.",
+            "properties": {
+                "textDocumentSync": {
+                    "$ref": "#/definitions/TextDocumentSyncOptions"
+                },
+                "hoverProvider": {
+                    "description": "The server provides hover support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "completionProvider": {
+                    "description": "The server provides completion support.",
+                    "$ref": "#/definitions/CompletionOptions"
+                },
+                "signatureHelpProvider": {
+                    "$ref": "#/definitions/SignatureHelpOptions"
+                },
+                "definitionProvider": {
+                    "description": "The server provides goto definition support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "referencesProvider": {
+                    "description": "The server provides find references support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "documentHighlightProvider": {
+                    "description": "The server provides document highlight support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "documentSymbolProvider": {
+                    "description": "The server provides document symbol support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "codeActionProvider": {
+                    "description": "The server provides code actions.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "codeLensProvider": {
+                    "$ref": "#/definitions/CodeLensOptions"
+                },
+                "workspaceSymbolProvider": {
+                    "description": "The server provides workspace symbol support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "documentFormattingProvider": {
+                    "description": "The server provides document formatting.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "documentRangeFormattingProvider": {
+                    "description": "The server provides document range formatting.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "documentOnTypeFormattingProvider": {
+                    "description": "The server provides document formatting on typing.",
+                    "$ref": "#/definitions/DocumentOnTypeFormattingOptions"
+                },
+                "renameProvider": {
+                    "description": "The server provides rename support.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "documentLinkProvider": {
+                    "$ref": "#/definitions/DocumentLinkOptions"
+                },
+                "executeCommandProvider": {
+                    "$ref": "#/definitions/ExecuteCommandOptions"
+                },
+                "experimental": {
+                    "type": "object",
+                    "description": "Experimental server capabilities."
+                }
+            }
+        },
+        "TextDocumentSyncOptions": {
+            "description": "Defines how text documents are synced. Is either a detailed structure defining each notification or for backwards compatibility the TextDocumentSyncKind number.",
+            "properties": {
+                "openClose": {
+                    "description": "Open and close notifications are sent to the server.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "change": {
+                    "description": "Change notificatins are sent to the server. See TextDocumentSyncKind.None, TextDocumentSyncKind.Full and TextDocumentSyncKindIncremental.",
+                    "$ref": "#/definitions/TextDocumentSyncKind"
+                },
+                "willSave": {
+                    "description": "Will save notifications are sent to the server.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "willSaveWaitUntil": {
+                    "description": "Will save wait until requests are sent to the server.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "save": {
+                    "description": "Save notifications are sent to the server.",
+                    "$ref": "#/definitions/SaveOptions"
+                }
+            }
+        },
+        "SaveOptions": {
+            "description": "Save notifications are sent to the server.",
+            "properties": {
+                "includeText": {
+                    "description": "The client is supposed to include the content on save.",
+                    "$ref": "#/definitions/BooleanProperty"
+                }
+            }
+        },
+        "CompletionOptions": {
+            "description": "The server provides completion support. ",
+            "properties": {
+                "resolveProvider": {
+                    "description": "The server provides support to resolve additional information for a completion item.",
+                    "$ref": "#/definitions/BooleanProperty"
+                },
+                "triggerCharacters": {
+                    "description": "The characters that trigger completion automatically.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "SignatureHelpOptions": {
+            "description": "The server provides signature help support.",
+            "properties": {
+                "triggerCharacters": {
+                    "description": "The characters that trigger completion automatically.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "CodeLensOptions": {
+            "description": "The server provides code lens.",
+            "properties": {
+                "resolveProvider": {
+                    "$ref": "#/definitions/BooleanProperty"
+                }
+            }
+        },
+        "DocumentOnTypeFormattingOptions": {
+            "description": "The server provides document formatting on typing.",
+            "properties": {
+                "firstTriggerCharacter": {
+                    "type": "string",
+                    "description": "A character on which formatting should be triggered, like }."
+                },
+                "moreTriggerCharacter": {
+                    "type": "string",
+                    "description": "More trigger characters."
+                }
+            },
+            "required": [ "firstTriggerCharacter" ]
+        },
+        "DocumentLinkOptions": {
+            "description": "The server provides document link support.",
+            "properties": {
+                "resolveProvider": {
+                    "$ref": "#/definitions/BooleanProperty"
+                }
+            }
+        },
+        "ExecuteCommandOptions": {
+            "description": "Execute command options.",
+            "properties": {
+                "commands": {
+                    "description": "The commands to be executed on the server",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ShowMessageParams": {
+            "description": "message to show on window",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MessageParams"
+                }
+            ]
+        },
+        "ShowMessageRequestParams": {
+            "description": "show message request",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MessageParams"
+                }
+            ],
+            "properties": {
+                "actions": {
+                    "type": "array",
+                    "description": "The message action items to present.",
+                    "items": {
+                        "$ref": "#/definitions/MessageActionItem"
+                    }
+                }
+            }
+        },
+        "MessageActionItem": {
+            "description": "The message action items to present.",
+            "properties": {
+                "title": {
+                    "description": "A short title like 'Retry', 'Open Log' etc.",
+                    "type": "string"
+                }
+            },
+            "required":[ "title" ]
+        },
+        "LogMessageParams": {
+            "description": "message to log",
+            "$ref": "#/definitions/MessageParams"
+        },
+        "MessageParams": {
+            "description": "generic message params obj",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/MessageType"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The actual message."
+                }
+            },
+            "required":[ "type", "message" ]
+        },
+        "MessageType": {
+            "type": "integer",
+            "description": "The message type. Error = 1, Warning = 2, Info = 3. Log = 4;",
+            "minimum": 1,
+            "maximum": 4
+        },
+        "Registration": {
+            "description": "General paramters to to regsiter for a capability.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/RegistrationBase"
+                }
+            ],
+            "properties": {
+                "registerOptions": {
+                    "description": "Options necessary for the registration.",
+                    "type": "object"
+                }
+            }
+        },
+        "RegistrationParams": {
+            "description": "General parameters array to to regsiter for a capability.",
+            "properties": {
+                "registrations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Registration"
+                    }
+                }
+            }
+        },
+        "RegistrationBase": {
+            "description": "General paramters to un/register for a capability.",
+            "properties": {
+                "id": {
+                    "description": "The id used to un/register the request.",
+                    "type": "string"
+                },
+                "method": {
+                    "description": "The method / capability to unregister for.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id", "method"
+            ]
+        },
+        "Unregistration": {
+            "$ref": "#/definitions/RegistrationBase"
+        },
+        "UnregistrationParams": {
+            "description": "General paramaters array to to unregsiter for a capability.",
+            "properties": {
+                "unregistrations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RegistrationBase"
+                    }
+                }
+            }
+        },
+        "TextDocumentItem": {
+            "description": "An item to transfer a text document from the client to the server.",
+            "properties": {
+                "uri": {
+                    "description": "The text document's URI.",
+                    "type": "string"
+                },
+                "languageId": {
+                    "description": "The text document's language identifier.",
+                    "type": "string"
+                },
+                "version": {
+                    "description": " The version number of this document (it will strictly increase after each change, including undo/redo).",
+                    "type": "number"
+                },
+                "text": {
+                    "description": "The content of the opened text document.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "uri", "languageId", "version", "text"
+            ]
+        },
+        "DidChangeTextDocumentParams": {
+            "description": "changes to document",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/VersionedTextDocumentIdentifier"
+                },
+                "contentChanges": {
+                    "description": "The actual content changes.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TextDocumentContentChangeEvent"
+                    }
+                }
+            },
+            "required":[ "textDocument", "contentChanges" ]
+        },
+        "VersionedTextDocumentIdentifier": {
+            "description": "The document that did change. The version number points to the version after all provided content changes have been applied.",
+            "allOf":[
+                {
+                    "$ref":"#/definitions/TextDocumentIdentifier"
+                }
+            ],
+            "properties": {
+                "version": {
+                    "description": " The version number of this document.",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "version"
+            ]
+        },
+        "TextDocumentContentChangeEvent": {
+            "description": "An event describing a change to a text document. If range and rangeLength are omitted the new text is considered to be the full content of the document.",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range"
+                },
+                "rangeLength": {
+                    "description": "The length of the range that got replaced.",
+                    "type": "number"
+                },
+                "text": {
+                    "description": "The new text of the document.",
+                    "type": "string"
+                }
+            },
+            "required":[ "text" ]
+        },
+        "Range": {
+            "description": "range of a document",
+            "properties": {
+                "start": {
+                    "$ref": "#/definitions/Position"
+                },
+                "end": {
+                    "$ref": "#/definitions/Position"
+                }
+            },
+            "required": [
+                "start", "end"
+            ]
+        },
+        "Position": {
+            "description": "Position in a text document expressed as zero-based line and character offset",
+            "properties": {
+                "line": {
+                    "description": "Line position in a document (zero-based).",
+                    "type": "integer"
+                },
+                "character": {
+                    "description": "Character offset on a line in a document (zero-based).",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "line", "character"
+            ]
+        },
+        "WillSaveTextDocumentParams": {
+            "description": "The parameters send in a will save text document notification.",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "reason": {
+                    "description": "The TextDocumentSaveReason.",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                }
+            },
+            "required": [
+                "textDocument", "reason"
+            ]
+        },
+        "TextDocumentIdentifier": {
+            "description": "The document that will be saved.",
+            "properties": {
+                "uri": {
+                    "description": "The text document's URI.",
+                    "type": "string"
+                }
+            },
+            "required": [ "uri" ]
+        },
+        "TextEdit": {
+            "description": "editing to be performed",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range"
+                },
+                "newText": {
+                    "type": "string",
+                    "description": "The string to be inserted. For delete operations use an empty string."
+                }
+            },
+            "required":["range", "newText"]
+        },
+        "DidSaveTextDocumentParams": {
+            "description": "info about document saved",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "text": {
+                    "description": "Optional the content when saved. Depends on the includeText value when the save notifcation was requested.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "textDocument"
+            ]
+        },
+        "FileEvent": {
+            "description": "An event describing a file change.",
+            "properties": {
+                "uri": {
+                    "type": "string",
+                    "description": "file's uri"
+                },
+                "type": {
+                    "description": "the change type enum. Created = 1, Changed = 2, Deleted = 3",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 3
+                }
+            },
+            "required":[ "uri", "type" ]
+        },
+        "TextDocumentSyncKind": {
+            "description": " Defines how the host (editor) should sync document changes to the language server. None = 0, Full = 1, Incremental = 2;",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+        },
+        "PublishDiagnosticsParams": {
+            "description": "params to publish diagnostics",
+            "properties": {
+                "uri": {
+                    "type": "string",
+                    "description": "The URI for which diagnostic information is reported."
+                },
+                "diagnostics": {
+                    "type": "array",
+                    "description": "An array of diagnostic information items.",
+                    "items": {
+                        "$ref": "#/definitions/Diagnostic"
+                    }
+                }
+            },
+            "required":[ "uri", "diagnostics" ]
+        },
+        "Diagnostic": {
+            "description": "Represents a diagnostic, such as a compiler error or warning.",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range"
+                },
+                "severity": {
+                    "description": "The diagnostic's severity. Can be omitted. If omitted it is up to the client to interpret diagnostics as error=1, warning=2, info=3 or hint=4.",
+                    "type": "integer",
+                    "maximum": 4,
+                    "minimum": 1
+                },
+                "code": {
+                    "description": "The diagnostic's code. Can be omitted.",
+                    "type": "integer"
+                },
+                "source": {
+                    "description": "A human-readable string describing the source of this diagnostic, e.g. 'typescript' or 'super lint'.",
+                    "type": "string"
+                },
+                "message": {
+                    "description": "The diagnostic's message.",
+                    "type": "string"
+                }
+            },
+            "required":["range", "source", "message"]
+        },
+        "TextDocumentPositionParams": {
+            "description": "A parameter literal used in requests to pass a text document and a position inside that document.",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "position": {
+                    "$ref": "#/definitions/Position"
+                }
+            },
+            "required": [
+                "textDocument", "position"
+            ]
+        },
+        "CompletionList": {
+            "description": "completion items and metadata",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CompletionItem"
+                    }
+                },
+                "isIncomplete": {
+                    "type": "boolean",
+                    "description": "This list it not complete. Further typing should result in recomputing this list."
+                }
+            }
+        },
+        "CompletionItem": {
+            "description": "a completion item",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "The label of this completion item."
+                },
+                "kind": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 18,
+                    "description": "The kind of this completion item. Based of the kind an icon is chosen by the editor. Text = 1, Method = 2, Function = 3, Constructor = 4 Field = 5, Variable = 6, Class = 7, Interface = 8, Module = 9, Property = 10, Unit = 11, Value = 12, Enum = 13, Keyword = 14, Snippet = 15, Color = 16, File = 17 Reference = 18"
+                },
+                "detail": {
+                    "type": "string",
+                    "description": "A human-readable string with additional information about this item, like type or symbol information."
+                },
+                "documentation": {
+                    "type": "string",
+                    "description": " A human-readable string that represents a doc-comment."
+                },
+                "sortText": {
+                    "type": "string",
+                    "description": "A string that shoud be used when comparing this item with other items. When `falsy` the label is used."
+                },
+                "filterText": {
+                    "type": "string",
+                    "description": "A string that should be used when filtering a set of completion items. When `falsy` the label is used."
+                },
+                "insertText": {
+                    "type": "string",
+                    "description": "A string that should be inserted a document when selecting this completion. When `falsy` the label is used."
+                },
+                "insertTextFormat": {
+                    "description": "The format of the insert text. PlainText = 1, Snippet = 2;",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 2
+                },
+                "textEdit": {
+                    "$ref": "#/definitions/TextEdit"
+                },
+                "additionalTextEdits": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TextEdit"
+                    },
+                    "description": " An optional array of additional text edits that are applied when selecting this completion. Edits must not overlap with the main edit nor with themselves."
+                },
+                "command": {
+                    "$ref": "#/definitions/Command"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "An data entry field that is preserved on a completion item between a completion and a completion resolve request."
+                }
+            },
+            "required":[ "label"]
+        },
+        "Hover": {
+            "description": "The result of a hover request.",
+            "properties": {
+                "contents": {
+                    "type": "array",
+                    "description": "array of marked strings",
+                    "items": {
+                        "$ref": "#/definitions/MarkedString"
+                    }
+                },
+                "range": {
+                    "$ref": "#/definitions/Range"
+                }
+            },
+            "required":[ "contents" ]
+        },
+        "MarkedString": {
+            "description": "MarkedString can be used to render human readable text. It is either a markdown string or a code-block that provides a language and a code snippet.",
+            "properties": {
+                "language": {
+                    "description": "lang of string",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "value of the string",
+                    "type": "string"
+                }
+            }
+        },
+        "SignatureHelp": {
+            "description": "Signature help represents the signature of something  callable. There can be multiple signature but only one active and only one active parameter.",
+            "properties": {
+                "signatures": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/SignatureInformation"
+                    },
+                    "description": "One or more signatures."
+                },
+                "activeSignature": {
+                    "type": "integer",
+                    "description": "the active signature"
+                },
+                "activeParameter": {
+                    "type": "integer",
+                    "description": "the active param of active signature"
+                }
+            },
+            "required": [ "signatures" ]
+        },
+        "SignatureInformation": {
+            "description": "Represents the signature of something callable. A signature can have a label, like a function-name, a doc-comment, and a set of parameters.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/LabelAndDocumentation"
+                }
+            ],
+            "properties": {
+                "parameters": {
+                    "type": "array",
+                    "description": "The parameters of this signature.",
+                    "items": {
+                        "$ref": "#/definitions/ParameterInformation"
+                    }
+                }
+            },
+            "required": [ "label" ]
+        },
+        "ParameterInformation": {
+            "description": "Represents a parameter of a callable-signature. A parameter can have a label and a doc-comment.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/LabelAndDocumentation"
+                }
+            ]
+        },
+        "LabelAndDocumentation": {
+            "description": "label and doc info",
+            "properties": {
+                "label": {
+                    "type": "string",
+                    "description": "label for item"
+                },
+                "documentation": {
+                    "type": "string",
+                    "description": "doc for item"
+                }
+            },
+            "required":["label"]
+        },
+        "ReferenceParams": {
+            "description": "request object to fetch references",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextDocumentPositionParams"
+                }
+            ],
+            "properties": {
+                "context":{
+                    "$ref":"#/definitions/ReferenceContext"
+                }
+            }
+        },
+        "ReferenceContext":{
+            "description": "ref context param",
+            "properties": {
+                "includeDeclaration": {
+                    "description": "Include the declaration of the current symbol.",
+                    "type": "boolean"
+                }    
+            },
+            "required":["includeDeclaration"]
+        },
+        "DocumentHighlight": {
+            "description": "A document highlight is a range inside a text document which deserves special attention. Usually a document highlight is visualized by changing the background color of its range.",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range"
+                },
+                "kind": {
+                    "type": "integer",
+                    "description": "DocumentHighlightKind enum Text = 1, Read = 2, Write = 3;",
+                    "maximum": 3,
+                    "minimum": 1
+                }
+            },
+            "required": [
+                "range"
+            ]
+        },
+        "DocumentSymbolParams": {
+            "description": "document symbols",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                }
+            },
+            "required":["textDocument"]
+        },
+        "SymbolInformation": {
+            "description": "Represents information about programming constructs like variables, classes, interfaces etc.",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of this symbol."
+                },
+                "kind": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 18,
+                    "description": "SymbolKind enum export const File = 1, Module = 2, Namespace = 3, Package = 4, Class = 5, Method = 6, Property = 7, Field = 8, Constructor = 9, Enum = 10, Interface = 11, Function = 12, Variable = 13, Constant = 14, String = 15, Number = 16, Boolean = 17, Array = 18"
+                },
+                "location": {
+                    "$ref": "#/definitions/Location"
+                },
+                "containerName": {
+                    "type": "string",
+                    "description": "The name of the symbol containing this symbol."
+                }
+            },
+            "required":["name", "kind", "location"]
+        },
+        "CodeActionParams": {
+            "description": "Params for the CodeActionRequest",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "range": {
+                    "$ref": "#/definitions/Range"
+                },
+                "context": {
+                    "$ref": "#/definitions/CodeActionContext"
+                }
+            },
+            "required": [
+                "textDocument", "range", "context"
+            ]
+        },
+        "CodeActionContext": {
+            "description": "Contains additional diagnostic information about the context in which a code action is run.",
+            "properties": {
+                "diagnostics": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Diagnostic"
+                    },
+                    "description": "An array of diagnostics."
+                }
+            },
+            "required": [
+                "diagnostics"
+            ]
+        },
+        "CodeLensParams": {
+            "description": "params for code lens request",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                }
+            },
+            "required":["textDocument"]
+        },
+        "CodeLens": {
+            "description": "A code lens represents a command that should be shown along with source text, like the number of references, a way to run tests, etc.",
+            "properties": {
+                "range": {
+                    "description": "The range in which this code lens is valid. Should only span a single line.",
+                    "$ref": "#/definitions/Range"
+                },
+                "command": {
+                    "description": "The command this code lens represents.",
+                    "$ref": "#/definitions/Command"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "A data entry field that is preserved on a code lens item between a code lens and a code lens resolve request."
+                }
+            },
+            "required":["range"]
+        },
+        "DocumentLinkParams": {
+            "description": "req get location of links in a doc",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                }
+            },
+            "required":["textDocument"]
+        },
+        "DocumentLink": {
+            "description": "A document link is a range in a text document that links to an internal or external resource, like another text document or a web site.",
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range"
+                },
+                "target": {
+                    "type": "string",
+                    "description": "The uri this link points to."
+                }
+            },
+            "required":["range", "target"]
+        },
+        "DocumentFormattingParams": {
+            "description": "params to request fomratting of whole doc",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "options": {
+                    "$ref": "#/definitions/FormattingOptions"
+                }
+            },
+            "required":["textDocument", "options"]
+        },
+        "DocumentRangeFormattingParams": {
+            "description": "Range over which to perform formatting",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DocumentFormattingParams"
+                }
+            ],
+            "properties": {
+                "range": {
+                    "$ref": "#/definitions/Range"
+                }
+            },
+            "required": [
+                "range"
+            ]
+        },
+        "FormattingOptions": {
+            "description": "Value-object describing what options formatting should use.",
+            "properties": {
+                "tabSize": {
+                    "description": "Size of a tab in spaces.",
+                    "type": "integer"
+                },
+                "insertSpaces": {
+                    "description": "Prefer spaces over tabs.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "tabSize", "insertSpaces"
+            ]
+        },
+        "DocumentOnTypeFormattingParams": {
+            "description": "params to format on typing",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "position": {
+                    "$ref": "#/definitions/Position"
+                },
+                "ch": {
+                    "type": "string",
+                    "description": "The character that has been typed."
+                },
+                "options": {
+                    "$ref": "#/definitions/FormattingOptions"
+                }
+            },
+            "required":["textDocument", "position", "ch", "options"]
+        },
+        "RenameParams": {
+            "description": "params to rename a symbol",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                },
+                "position": {
+                    "$ref": "#/definitions/Position"
+                },
+                "newName": {
+                    "description": "new name for the symbol",
+                    "type": "string"
+                }
+            },
+            "required":["textDocument", "position", "newName"]
+        },
+        "WorkspaceEdit": {
+            "description": "A workspace edit represents changes to many resources managed in the workspace.",
+            "properties": {
+                "changes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TextEdit"
+                    },
+                    "description": "Holds changes to existing resources."
+                }
+            }
+        },
+        "ExecuteCommandParams": {
+            "description": "params to request command exec at server",
+            "properties": {
+                "command": {
+                    "type": "string",
+                    "description": "the cmd to exec"
+                },
+                "arguments": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    },
+                    "description": "args to the cmd"
+                }
+            },
+            "required":["command"]
+        },
+        "ApplyEditParams": {
+            "description": "params to apply edit at client side",
+            "properties": {
+                "edit": {
+                    "$ref": "#/definitions/WorkspaceEdit"
+                }
+            }
+        },
+        "InitializeParams": {
+            "description": "params to initialize server comm",
+            "properties": {
+                "processId": {
+                    "type": "integer",
+                    "description": "URI referencing the template."
+                },
+                "rootPath": {
+                    "type": "string",
+                    "description": "The rootPath of the workspace. Is null if no folder is open."
+                },
+                "rootUri": {
+                    "type": "string",
+                    "description": "The rootUri of the workspace. Is null if no folder is open."
+                },
+                "initializationOptions": {
+                    "type": "object",
+                    "description": "User provided initialization options"
+                },
+                "capabilities": {
+                    "description": "The capabilities provided by the client (editor or tool)",
+                    "$ref": "#/definitions/ClientCapabilities"
+                },
+                "trace": {
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "description": "The initial trace setting. If omitted trace is disabled ('off')."
+                }
+            },
+            "required": [
+                "capabilities"
+            ]
+        },
+        "InitializeResult": {
+            "description": "result from initialize operation.",
+            "properties": {
+                "capabilities": {
+                    "$ref": "#/definitions/ServerCapabilities"
+                }
+            }
+        },
+        "InitializeError": {
+            "description": "Error object for unsuccessful initialization",
+            "properties": {
+                "retry": {
+                    "description": "Indicates whether the client should retry to send the initilize request after showing the message provided in the ResponseError.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "ApplyWorkspaceEditParams": {
+            "description": "params to apply a workspace edit",
+            "properties": {
+                "edit": {
+                    "$ref": "#/definitions/WorkspaceEdit"
+                }
+            },
+            "required": [ "edit" ]
+        },
+        "DidCloseTextDocumentParams": {
+            "description": "params for DidCloseTextDocument Notification operation",
+            "properties": {
+                "textDocument": {
+                    "$ref": "#/definitions/TextDocumentIdentifier"
+                }
+            },
+            "required": [
+                "textDocument"
+            ]
+        },
+        "Command": {
+            "description": "Represents a reference to a command.",
+            "properties": {
+                "title": {
+                    "description": "Title of the command, like save.",
+                    "type": "string"
+                },
+                "command": {
+                    "description": "The identifier of the actual command handler.",
+                    "type": "string"
+                },
+                "arguments": {
+                    "description": "args for the command",
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            },
+            "required":["title", "command", "arguments"]
+        },
+        "Location": {
+            "description": "Represents a location inside a resource, such as a line inside a text file.",
+            "properties": {
+                "uri": {
+                    "type": "string",
+                    "description": "uri of the resource"
+                },
+                "range": {
+                    "$ref": "#/definitions/Range"
+                }
+            }
+        },
+        "DidOpenTextDocumentParams": {
+            "description": "params to notify text document opened",
+            "properties": {
+                "textDocument": {
+                    "description": "The document that was opened.",
+                    "$ref": "#/definitions/TextDocumentItem"
+                }
+            },
+            "required": [
+                "textDocument"
+            ]
+        },
+        "WorkspaceSymbolParams": {
+            "description": "The parameters of a Workspace Symbol Request.",
+            "properties": {
+                "query": {
+                    "description": "A non-empty query string",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "query"
+            ]
+        },
+        "ApplyWorkspaceEditResponse": {
+            "description": "response generated by applyEdit operation",
+            "properties": {
+                "applied": {
+                    "description": "Indicates whether the edit was applied or not.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "DidChangeConfigurationParams":{
+            "description": "params to notify change in configuration",
+            "properties": {
+                "settings":{
+                    "type":"object",
+                    "description": "The actual changed settings"
+                }
+            },
+            "required": [
+                "settings"
+            ]
+        }
+    }
+}
