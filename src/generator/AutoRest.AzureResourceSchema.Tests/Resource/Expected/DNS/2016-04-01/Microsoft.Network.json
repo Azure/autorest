@@ -7,6 +7,9 @@
     "dnszones": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -88,6 +91,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -98,6 +102,9 @@
     "dnszones_A": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -114,10 +121,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -139,6 +142,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -148,6 +152,9 @@
     "dnszones_AAAA": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -164,10 +171,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -189,6 +192,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -198,6 +202,9 @@
     "dnszones_CNAME": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -214,10 +221,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -239,6 +242,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -248,6 +252,9 @@
     "dnszones_MX": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -264,10 +271,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -289,6 +292,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -298,6 +302,9 @@
     "dnszones_NS": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -314,10 +321,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -339,6 +342,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -348,6 +352,9 @@
     "dnszones_PTR": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -364,10 +371,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -389,6 +392,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -398,6 +402,9 @@
     "dnszones_SOA": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -414,10 +421,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -439,6 +442,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -448,6 +452,9 @@
     "dnszones_SRV": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -464,10 +471,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -489,6 +492,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -498,6 +502,9 @@
     "dnszones_TXT": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -514,10 +521,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -539,6 +542,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -580,6 +584,9 @@
     "dnszones_A_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -596,10 +603,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -621,6 +624,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -630,6 +634,9 @@
     "dnszones_AAAA_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -646,10 +653,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -671,6 +674,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -680,6 +684,9 @@
     "dnszones_CNAME_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -696,10 +703,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -721,6 +724,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -730,6 +734,9 @@
     "dnszones_MX_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -746,10 +753,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -771,6 +774,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -780,6 +784,9 @@
     "dnszones_NS_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -796,10 +803,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -821,6 +824,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -830,6 +834,9 @@
     "dnszones_PTR_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -846,10 +853,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -871,6 +874,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -880,6 +884,9 @@
     "dnszones_SOA_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -896,10 +903,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -921,6 +924,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -930,6 +934,9 @@
     "dnszones_SRV_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -946,10 +953,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -971,6 +974,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -980,6 +984,9 @@
     "dnszones_TXT_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -996,10 +1003,6 @@
           "type": "string",
           "description": "Gets or sets the ID of the resource."
         },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the name of the resource."
-        },
         "etag": {
           "type": "string",
           "description": "Gets or sets the ETag of the RecordSet."
@@ -1021,6 +1024,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"

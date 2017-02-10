@@ -73,6 +73,14 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void BooleanPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "boolean-properties.json"));
+
+            messages.AssertOnlyValidationMessage(typeof(BooleanPropertyNotRecommended));
+        }
+
+        [Fact]
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "default-value-not-in-enum.json"));

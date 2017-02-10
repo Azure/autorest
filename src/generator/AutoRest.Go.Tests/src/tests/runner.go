@@ -66,7 +66,9 @@ func runTests(allPass *bool) {
 		"custombaseurlgroup",
 		"filegroup",
 		// "formdatagroup",
-		"paginggroup"}
+		"paginggroup",
+		"morecustombaseurigroup",
+	}
 
 	for _, suite := range testSuites {
 		fmt.Printf("Run test (go test ./acceptancetests/%vtest -v) ...\n", suite)

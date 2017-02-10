@@ -7,6 +7,9 @@
     "jobCollections": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -18,10 +21,6 @@
           "enum": [
             "2016-03-01"
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the job collection resource name."
         },
         "location": {
           "type": "string",
@@ -64,6 +63,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -73,6 +73,9 @@
     "jobCollections_jobs": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -98,6 +101,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -330,6 +334,9 @@
     "jobCollections_jobs_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -355,6 +362,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"

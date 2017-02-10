@@ -7,6 +7,18 @@
     "service": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The name of the Api Management service."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -61,6 +73,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",

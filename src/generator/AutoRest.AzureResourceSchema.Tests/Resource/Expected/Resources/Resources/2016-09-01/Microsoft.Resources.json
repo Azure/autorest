@@ -7,6 +7,9 @@
     "deployments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -32,6 +35,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -53,14 +57,6 @@
       "type": "object",
       "properties": {
         "template": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "The template content. It can be a JObject or a well formed JSON string. Use only one of Template or TemplateLink."
         },
         "templateLink": {
@@ -75,14 +71,6 @@
           "description": "The template URI. Use only one of Template or TemplateLink."
         },
         "parameters": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Deployment parameters. It can be a JObject or a well formed JSON string. Use only one of Parameters or ParametersLink."
         },
         "parametersLink": {

@@ -2,6 +2,7 @@ package fixtures.bodycomplex;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
+import com.microsoft.rest.LogLevel;
 import fixtures.bodycomplex.implementation.AutoRestComplexTestServiceImpl;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.CMYKColors;
@@ -18,10 +19,9 @@ public class BasicOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
-        client = new AutoRestComplexTestServiceImpl("http://localhost:3000", clientBuilder, new Retrofit.Builder());
+        client = new AutoRestComplexTestServiceImpl("http://localhost:3000");
         client.withApiVersion("2015-05-01");
+        client.restClient().withLogLevel(LogLevel.BODY);
     }
 
     @Test

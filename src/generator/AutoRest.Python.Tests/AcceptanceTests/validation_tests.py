@@ -111,14 +111,14 @@ class ValidationTests(unittest.TestCase):
             client.validation_of_body("123", 150, tempproduct)
         except ValidationError as err:
             self.assertEqual(err.rule, "minimum_ex")
-            self.assertEqual(err.target, "capacity")
+            self.assertIn("capacity", err.target)
 
         try:
             tempproduct=Product(child=ChildProduct(), capacity=100)
             client.validation_of_body("123", 150, tempproduct)
         except ValidationError as err:
             self.assertEqual(err.rule, "maximum_ex")
-            self.assertEqual(err.target, "capacity")
+            self.assertIn("capacity", err.target)
 
         try:
             tempproduct=Product(child=ChildProduct(),
@@ -126,7 +126,7 @@ class ValidationTests(unittest.TestCase):
             client.validation_of_body("123", 150, tempproduct)
         except ValidationError as err:
             self.assertEqual(err.rule, "max_items")
-            self.assertEqual(err.target, "display_names")
+            self.assertIn("display_names", err.target)
 
         client2 = AutoRestValidationTest(
             "abc123",

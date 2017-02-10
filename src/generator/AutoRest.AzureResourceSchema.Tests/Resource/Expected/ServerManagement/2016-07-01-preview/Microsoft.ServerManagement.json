@@ -7,6 +7,9 @@
     "gateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -24,14 +27,6 @@
           "description": "location of the resource"
         },
         "tags": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "resource tags"
         },
         "properties": {
@@ -47,6 +42,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -56,6 +52,9 @@
     "nodes": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -73,14 +72,6 @@
           "description": "location of the resource?"
         },
         "tags": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "resource tags"
         },
         "properties": {
@@ -106,6 +97,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -115,6 +107,9 @@
     "nodes_sessions": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -140,6 +135,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -149,6 +145,9 @@
     "nodes_sessions_features_pssessions": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -163,6 +162,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -217,6 +217,9 @@
     "nodes_sessions_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -242,6 +245,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
