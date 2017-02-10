@@ -28,6 +28,8 @@
   },
   "devDependencies": {
     "@types/node": "^7.0.5",
+    "@types/semver": "^5.3.30",
+    "@types/tmp": "0.0.32",
     "chalk": "^1.1.2",
     "coffee-script": "^1.11.1",
     "del": "^2.2.2",
@@ -46,5 +48,20 @@
     "typescript": "^2.1.5",
     "vinyl-paths": "^2.1.0",
     "yargs": "^6.6.0"
+  },
+  "dependencies": {
+    "@types/request": "0.0.39",
+    "@types/shelljs": "^0.6.0",
+    "http-proxy-agent": "^1.0.0",
+    "https-proxy-agent": "^1.0.0",
+    "linq-es2015": "^2.4.13",
+    "request": "^2.79.0",
+    "semver": "^5.3.0",
+    "shelljs": "^0.7.6",
+    "streamsink": "^1.2.0",
+    "tar.gz2": "^1.0.0",
+    "tmp": "0.0.31",
+    "unzipper": "^0.8.4",
+    "yauzl": "^2.7.0"
   }
 }
