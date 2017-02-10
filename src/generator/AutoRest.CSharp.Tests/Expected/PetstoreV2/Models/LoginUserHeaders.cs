@@ -84,12 +84,7 @@ namespace Fixtures.PetstoreV2.Models
             if (deserializeXExpiresAfter(payload, "X-Expires-After", out resultXExpiresAfter))
             {
                 result.XExpiresAfter = resultXExpiresAfter;
-<<<<<<< HEAD
             }            return result;
-=======
-            }
-            return result;
->>>>>>> azure/master
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("shark")]
+    [Newtonsoft.Json.JsonObject("shark")]
     public partial class Shark : FishInner
     {
         /// <summary>

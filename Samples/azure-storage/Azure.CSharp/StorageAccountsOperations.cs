@@ -220,12 +220,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CheckNameAvailabilityResult>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CheckNameAvailabilityResult>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -646,12 +641,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -885,12 +875,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1096,12 +1081,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccountKeys>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccountKeys>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1279,12 +1259,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<StorageAccount>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<StorageAccount>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1472,12 +1447,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<StorageAccount>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<StorageAccount>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1704,12 +1674,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccountKeys>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccountKeys>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1939,12 +1904,7 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<StorageAccount>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

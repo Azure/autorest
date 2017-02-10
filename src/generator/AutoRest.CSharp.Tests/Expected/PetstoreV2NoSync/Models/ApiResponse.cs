@@ -93,12 +93,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
             if (deserializeMessage(payload, "message", out resultMessage))
             {
                 result.Message = resultMessage;
-<<<<<<< HEAD
             }            return result;
-=======
-            }
-            return result;
->>>>>>> azure/master
         }
     }
 }

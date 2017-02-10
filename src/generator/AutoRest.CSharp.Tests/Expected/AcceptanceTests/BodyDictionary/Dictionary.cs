@@ -156,12 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -287,12 +282,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -543,12 +533,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -674,12 +659,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -805,12 +785,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -936,12 +911,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1068,12 +1038,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1324,12 +1289,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1455,12 +1415,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, bool?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1586,12 +1541,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1842,12 +1792,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1973,12 +1918,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2104,12 +2044,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2360,12 +2295,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2491,12 +2421,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, long?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2622,12 +2547,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2878,12 +2798,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -3009,12 +2924,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -3140,12 +3050,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -3396,12 +3301,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -3527,12 +3427,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, double?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -3658,12 +3553,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -3914,12 +3804,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -4045,12 +3930,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, string>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -4177,12 +4057,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -4434,12 +4309,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -4565,12 +4435,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -4697,12 +4562,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -4954,12 +4814,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -5085,12 +4940,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -5218,12 +5068,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.DateTime?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -5476,12 +5321,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.TimeSpan?>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, System.TimeSpan?>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -5733,12 +5573,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -5991,12 +5826,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -6123,12 +5953,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, new Base64UrlJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, byte[]>>(_responseContent, new Base64UrlJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -6254,12 +6079,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -6385,12 +6205,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -6517,12 +6332,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -6649,12 +6459,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -6781,12 +6586,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, Widget>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7039,12 +6839,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7170,12 +6965,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7302,12 +7092,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7434,12 +7219,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7566,12 +7346,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IList<string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7823,12 +7598,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -7955,12 +7725,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -8088,12 +7853,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -8221,12 +7981,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -8354,12 +8109,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, IDictionary<string, string>>>(_responseContent, Client.DeserializationSettings);
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

@@ -127,11 +127,11 @@ namespace Fixtures.PetstoreV2AllSync
             BaseUri = new System.Uri("http://petstore.swagger.io/v2");
             SerializationSettings = new JsonSerializerSettings
             {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new  List<JsonConverter>
                     {
@@ -140,10 +140,10 @@ namespace Fixtures.PetstoreV2AllSync
             };
             DeserializationSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new List<JsonConverter>
                     {
@@ -285,12 +285,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -566,12 +561,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -725,12 +715,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -865,12 +850,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1267,12 +1247,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1419,12 +1394,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1581,12 +1551,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2233,12 +2198,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2492,12 +2452,7 @@ namespace Fixtures.PetstoreV2AllSync
                     }else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, DeserializationSettings);
-<<<<<<< HEAD
                     }        }
-=======
-                    }
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

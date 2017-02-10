@@ -156,12 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -287,12 +282,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -418,12 +408,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -549,12 +534,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -792,12 +772,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1035,12 +1010,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());        }
-=======
-                    _result.Body = SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, new DateJsonConverter());
-                }
->>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

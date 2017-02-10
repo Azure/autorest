@@ -175,12 +175,7 @@ namespace Fixtures.PetstoreV2NoSync.Models
             if (deserializeUserStatus(payload, "userStatus", out resultUserStatus))
             {
                 result.UserStatus = resultUserStatus;
-<<<<<<< HEAD
             }            return result;
-=======
-            }
-            return result;
->>>>>>> azure/master
         }
     }
 }

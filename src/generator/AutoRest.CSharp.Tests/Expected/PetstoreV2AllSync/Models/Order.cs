@@ -145,12 +145,7 @@ namespace Fixtures.PetstoreV2AllSync.Models
             if (deserializeComplete(payload, "complete", out resultComplete))
             {
                 result.Complete = resultComplete;
-<<<<<<< HEAD
             }            return result;
-=======
-            }
-            return result;
->>>>>>> azure/master
         }
     }
 }
