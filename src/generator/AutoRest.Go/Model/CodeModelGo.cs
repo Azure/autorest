@@ -6,6 +6,7 @@ using System.Linq;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.Extensions;
 
 namespace AutoRest.Go.Model
 {
@@ -47,6 +48,8 @@ namespace AutoRest.Go.Model
         }
 
         public string BaseClient => "ManagementClient";
+
+        public bool IsCustomBaseUri => Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
         public IEnumerable<string> ClientImports
         {
@@ -103,7 +106,7 @@ namespace AutoRest.Go.Model
                 var declarations = new List<string>();
                 foreach (var p in Properties)
                 {                    
-                    if (!p.SerializedName.FixedValue.IsApiVersion())
+                    if (!p.SerializedName.FixedValue.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         declarations.Add(
                                 string.Format(
@@ -122,12 +125,98 @@ namespace AutoRest.Go.Model
                 var invocationParams = new List<string>();
                 foreach (var p in Properties)
                 {
-                    if (!p.SerializedName.Value.IsApiVersion())
+                    if (!p.SerializedName.Value.IsApiVersion() && p.DefaultValue.FixedValue.IsNullOrEmpty())
                     {
                         invocationParams.Add(p.Name.Value.ToSentence());
                     }
                 }
                 return string.Join(", ", invocationParams);
+            }
+        }
+        public string GlobalDefaultParameters
+        {
+            get
+            {
+                var declarations = new List<string>();
+                foreach (var p in Properties)
+                {                    
+                    if (!p.SerializedName.FixedValue.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    {
+                        declarations.Add(
+                                string.Format(
+                                        (p.IsRequired || p.ModelType.CanBeEmpty() ? "{0} {1}" : "{0} *{1}"), 
+                                         p.Name.Value.ToSentence(), p.ModelType.Name.Value.ToSentence()));
+                    }
+                }
+                return string.Join(", ", declarations);
+            }
+        }
+
+        public string HelperGlobalDefaultParameters
+        {
+            get
+            {
+                var invocationParams = new List<string>();
+                foreach (var p in Properties)
+                {
+                    if (!p.SerializedName.Value.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    {
+                        invocationParams.Add("Default" + p.Name.Value);
+                    }
+                }
+                return string.Join(", ", invocationParams);
+            }
+        }
+
+        public string ConstGlobalDefaultParameters
+        {
+            get
+            {
+                var constDeclaration = new List<string>();
+                foreach (var p in Properties)
+                {
+                    if (!p.SerializedName.Value.IsApiVersion() && !p.DefaultValue.FixedValue.IsNullOrEmpty())
+                    {
+                        constDeclaration.Add(string.Format("// Default{0} is the default value for {1}\nDefault{0} = {2}",
+                            p.Name.Value,
+                            p.Name.Value.ToPhrase(),
+                            p.DefaultValue.Value));
+                    }
+                }
+                return string.Join("\n", constDeclaration);
+            }
+        }
+
+
+        public string AllGlobalParameters
+        {
+            get
+            {
+                if (GlobalParameters.IsNullOrEmpty())
+                {
+                    return GlobalDefaultParameters;
+                }
+                if (GlobalDefaultParameters.IsNullOrEmpty())
+                {
+                    return GlobalParameters;
+                }
+                return string.Join(", ", new string[] {GlobalParameters, GlobalDefaultParameters});
+            }
+        }
+
+        public string HelperAllGlobalParameters
+        {
+            get
+            {
+                if (HelperGlobalParameters.IsNullOrEmpty())
+                {
+                    return HelperGlobalDefaultParameters;
+                }
+                if (HelperGlobalDefaultParameters.IsNullOrEmpty())
+                {
+                    return HelperGlobalParameters;
+                }
+                return string.Join(", ", new string[] {HelperGlobalParameters, HelperGlobalDefaultParameters});
             }
         }
 

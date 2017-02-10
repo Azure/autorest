@@ -7,6 +7,9 @@
     "accounts": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -22,10 +25,6 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the account regional location."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the account name."
         },
         "tags": {
           "oneOf": [
@@ -67,6 +66,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -76,6 +76,9 @@
     "accounts_DataLakeStoreAccounts": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -101,6 +104,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -110,6 +114,9 @@
     "accounts_StorageAccounts": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -135,6 +142,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -146,6 +154,9 @@
     "accounts_DataLakeStoreAccounts_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -171,6 +182,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -180,6 +192,9 @@
     "accounts_StorageAccounts_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -205,6 +220,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"

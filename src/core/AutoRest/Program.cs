@@ -16,7 +16,6 @@ using YamlDotNet.RepresentationModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-
 namespace AutoRest
 {
     internal class Program

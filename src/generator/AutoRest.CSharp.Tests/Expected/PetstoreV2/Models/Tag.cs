@@ -77,7 +77,12 @@ namespace Fixtures.PetstoreV2.Models
             if (deserializeName(payload, "name", out resultName))
             {
                 result.Name = resultName;
+<<<<<<< HEAD
             }            return result;
+=======
+            }
+            return result;
+>>>>>>> azure/master
         }
     }
 }

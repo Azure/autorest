@@ -225,7 +225,12 @@ namespace Fixtures.PetstoreV2.Models
             if (deserializeStatus(payload, "status", out resultStatus))
             {
                 result.Status = resultStatus;
+<<<<<<< HEAD
             }            return result;
+=======
+            }
+            return result;
+>>>>>>> azure/master
         }
     }
 }

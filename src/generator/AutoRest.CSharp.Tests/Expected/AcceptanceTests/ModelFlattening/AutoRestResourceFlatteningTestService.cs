@@ -121,11 +121,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                Formatting = Formatting.Indented,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new  List<JsonConverter>
                     {
@@ -135,10 +135,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             SerializationSettings.Converters.Add(new TransformationJsonConverter());
             DeserializationSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new List<JsonConverter>
                     {
@@ -374,7 +374,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IList<FlattenedProduct>>(_responseContent, DeserializationSettings);        }
+=======
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<FlattenedProduct>>(_responseContent, DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -618,7 +623,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(_responseContent, DeserializationSettings);        }
+=======
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(_responseContent, DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -862,7 +872,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(_responseContent, DeserializationSettings);        }
+=======
+                    _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(_responseContent, DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1003,7 +1018,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<SimpleProduct>(_responseContent, DeserializationSettings);        }
+=======
+                    _result.Body = SafeJsonConvert.DeserializeObject<SimpleProduct>(_responseContent, DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1178,7 +1198,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<SimpleProduct>(_responseContent, DeserializationSettings);        }
+=======
+                    _result.Body = SafeJsonConvert.DeserializeObject<SimpleProduct>(_responseContent, DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1376,7 +1401,12 @@ namespace Fixtures.AcceptanceTestsModelFlattening
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = SafeJsonConvert.DeserializeObject<SimpleProduct>(_responseContent, DeserializationSettings);        }
+=======
+                    _result.Body = SafeJsonConvert.DeserializeObject<SimpleProduct>(_responseContent, DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

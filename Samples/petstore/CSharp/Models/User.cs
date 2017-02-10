@@ -167,7 +167,12 @@ namespace Petstore.Models
             if (deserializeUserStatus(payload, "userStatus", out resultUserStatus))
             {
                 result.UserStatus = resultUserStatus;
+<<<<<<< HEAD
             }            return result;
+=======
+            }
+            return result;
+>>>>>>> azure/master
         }
     }
 }

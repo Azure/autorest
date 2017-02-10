@@ -1,16 +1,14 @@
 package fixtures.bodystring;
 
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
-
+import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImpl;
 
 public class StringOperationsTests {
     private static AutoRestSwaggerBATService client;
@@ -86,7 +84,7 @@ public class StringOperationsTests {
         try {
             client.strings().getNotProvided();
         } catch (Exception ex) {
-            Assert.assertEquals(ServiceException.class, ex.getClass());
+            Assert.assertEquals(RestException.class, ex.getClass());
             Assert.assertTrue(ex.getMessage().contains("JsonMappingException"));
         }
     }

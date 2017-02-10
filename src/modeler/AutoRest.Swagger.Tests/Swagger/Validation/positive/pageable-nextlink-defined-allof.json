@@ -1,0 +1,166 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "PageableNextLinkModeledAllOf",
+    "description": "The properties needed for pageable are modeled in a parent definition",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "x-ms-pageable": {
+          "nextLinkName": "bar"
+        },
+        "responses": {
+          "200": {
+            "description": "A pageable response",
+            "schema": {
+              "$ref": "#/definitions/PageableFoo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Pageable": {
+      "type": "object",
+      "description": "Pageable object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bar": {
+          "type": "string"
+        }
+      }
+    },
+    "PageableFoo": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Pageable"
+        }
+      ],
+      "type": "object",
+      "description": "Foo object that inherits from pageable and doesn't define the pageable properties"
+    },
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Operations"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Description of Operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name",
+          "type": "string"
+        },
+        "display": {
+          "description": "foo",
+          "properties": {
+            "provider": {
+              "description": "Service provider",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "Error": {
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The code of the error"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message of the error"
+        }
+      },
+      "description": "An error result"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  }
+}

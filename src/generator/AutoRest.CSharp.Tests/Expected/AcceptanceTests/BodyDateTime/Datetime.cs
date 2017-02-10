@@ -155,7 +155,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -281,7 +286,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -407,7 +417,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -533,7 +548,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -771,7 +791,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -897,7 +922,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1137,7 +1167,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1264,7 +1299,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1504,7 +1544,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1631,7 +1676,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1869,7 +1919,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2107,7 +2162,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2345,7 +2405,12 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
+<<<<<<< HEAD
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);        }
+=======
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<System.DateTime?>(_responseContent, Client.DeserializationSettings);
+                }
+>>>>>>> azure/master
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

@@ -1,0 +1,156 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-xyz"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/service/{serviceName}/apis/{apiId}/operations": {
+      "get": {
+        "tags": [
+          "ApiOperations"
+        ],
+        "operationId": "ApiOperations_ListByApi",
+        "description": "Lists a collection of the operations for the specified API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParamterer"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A collection of operation summary entities at the API level.",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}": {
+        "get": {
+          "operationId": "list",
+          "summary": "Product Types",
+          "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+          "parameters": [
+            {
+              "$ref": "#/parameters/SubscriptionIdParamterer"
+            },
+            {
+              "name": "resourceGroupName",
+              "in": "path",
+              "description": "Resource Group ID.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            }
+          ],
+          "tags": [
+            "Redis"
+          ],
+          "responses": {
+            "200": {
+              "description": "A list of caches",
+              "schema": {
+                "$ref": "#/definitions/Product"
+              }
+            },
+            "default": {
+              "description": "Unexpected error",
+              "schema": {
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+  "definitions": {
+    "Product": {
+      "title": "The product title.",
+      "description": "The product documentation.",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "title": "A product id.",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of product."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people.",
+          "default": "100"
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product."
+        }
+      },
+      "example": {
+        "name": "Puma",
+        "id": 1
+      }
+    },
+    "Error": {
+      "description": "The Error documentation.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Description dummy"
+        },
+        "message": {
+          "type": "string",
+          "description": "Description dummy"
+        },
+        "fields": {
+          "type": "string",
+          "description": "Description dummy"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "path",
+      "description": "API ID.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

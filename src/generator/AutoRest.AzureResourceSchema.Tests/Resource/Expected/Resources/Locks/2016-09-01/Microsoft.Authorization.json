@@ -7,6 +7,9 @@
     "locks": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -29,13 +32,10 @@
             }
           ],
           "description": "The properties of the lock."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the lock."
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"

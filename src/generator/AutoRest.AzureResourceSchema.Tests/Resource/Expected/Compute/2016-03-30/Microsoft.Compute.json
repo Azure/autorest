@@ -7,6 +7,9 @@
     "availabilitySets": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -49,6 +52,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -59,6 +63,9 @@
     "virtualMachines": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -122,6 +129,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -132,6 +140,9 @@
     "virtualMachines_extensions": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -174,6 +185,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -184,6 +196,9 @@
     "virtualMachineScaleSets": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -237,6 +252,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1261,25 +1277,9 @@
           "description": "whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Json formatted protected settings for the extension."
         },
         "instanceView": {
@@ -1375,6 +1375,9 @@
     "virtualMachines_extensions_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1417,6 +1420,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1495,25 +1499,9 @@
           "description": "whether the extension handler should be automatically upgraded across minor versions."
         },
         "settings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Json formatted public settings for the extension."
         },
         "protectedSettings": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Json formatted protected settings for the extension."
         }
       },
