@@ -31,22 +31,20 @@ namespace AutoRest.Swagger.Validation
         /// Validates whether properties of type boolean exist.
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
-        /// <returns>true if there are propeties of type boolean, false otherwise.</returns>
+        /// <returns>true if there are no propeties of type boolean, false otherwise.</returns>
         public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
             formatParameters = null;
             List<string> booleanProperties = new List<string>();
-            foreach (string key in definitions.Keys)
+            foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                Schema definitionSchema = definitions.GetValueOrNull(key);
-                if (definitionSchema.Properties != null)
+                if (definition.Value?.Properties != null)
                 {
-                    foreach (var property in definitionSchema.Properties)
+                    foreach (KeyValuePair<string, Schema> property in definition.Value.Properties)
                     {
                         if (property.Value.Type.ToString().ToLower().Equals("boolean"))
                         {
-                            booleanProperties.Add(key + "/" + property.Key);
-
+                            booleanProperties.Add(definition.Key + "/" + property.Key);
                         }
                     }
                 }
