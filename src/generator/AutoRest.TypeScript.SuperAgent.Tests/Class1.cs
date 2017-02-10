@@ -1,10 +1,6 @@
-﻿using System;
-using System.IO;
-using AutoRest.Core;
-using AutoRest.Core.Model;
+﻿using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
-using AutoRest.TypeScript.SuperAgent.Model;
 using NUnit.Framework;
 
 namespace AutoRest.TypeScript.SuperAgent.Tests

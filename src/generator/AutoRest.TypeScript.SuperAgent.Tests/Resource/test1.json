@@ -4,19 +4,438 @@
     "version": "v1",
     "title": "Agoda.Website.MVC"
   },
-  "host": "localhost:59036",
+  "host": "localhost:61452",
   "schemes": [
     "http"
   ],
   "paths": {
+    "/{culture}/api/nha/ManageApi/GetBasicsInfo": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_GetBasicsInfo",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BasicsViewModel"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/SaveBasics": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_SaveBasics",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "jsonData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Property"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Property"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/SaveAvailability": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_SaveAvailability",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaveAvailibilityModel"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PropertyInventoryWithChannels"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/GetFraudValidationInfo": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_GetFraudValidationInfo",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FraudValidationViewModel"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/Approve": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_Approve",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "fraudValidation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FraudValidationParam"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApproveResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/RejectHotel": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_RejectHotel",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "fraudValidation",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FraudValidationParam"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FraudValidationResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/GetCompletionStatus": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_GetCompletionStatus",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NHAManageViewModel"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/Activate": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_Activate",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ActivateResponseMessage"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/GetPricing": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_GetPricing",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingViewModel"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/{culture}/api/nha/ManageApi/SavePricing": {
+      "post": {
+        "tags": [
+          "ManageApi"
+        ],
+        "operationId": "ManageApi_SavePricing",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "text/html",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "jsonData",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SavePricingModel"
+            }
+          },
+          {
+            "name": "culture",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "date-time",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/{culture}/api/nha/user/current": {
       "get": {
         "tags": [
           "User"
         ],
-        "operationId": "getCurrentUser",
+        "operationId": "User_getCurrentUser",
         "consumes": [
-
+          
         ],
         "produces": [
           "application/json",
@@ -49,7 +468,7 @@
         "tags": [
           "User"
         ],
-        "operationId": "updateUser",
+        "operationId": "User_updateUser",
         "consumes": [
           "application/json",
           "text/json",
@@ -94,6 +513,1415 @@
     }
   },
   "definitions": {
+    "JsonResult": {
+      "type": "object",
+      "properties": {
+        "contentEncoding": {
+          "$ref": "#/definitions/Encoding"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        },
+        "jsonRequestBehavior": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "maxJsonLength": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "recursionLimit": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Encoding": {
+      "type": "object",
+      "properties": {
+        "bodyName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "encodingName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "headerName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "webName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "windowsCodePage": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "isBrowserDisplay": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isBrowserSave": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isMailNewsDisplay": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isMailNewsSave": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "isSingleByte": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "encoderFallback": {
+          "$ref": "#/definitions/EncoderFallback"
+        },
+        "decoderFallback": {
+          "$ref": "#/definitions/DecoderFallback"
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "codePage": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "EncoderFallback": {
+      "type": "object",
+      "properties": {
+        "maxCharCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "DecoderFallback": {
+      "type": "object",
+      "properties": {
+        "maxCharCount": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "BasicsViewModel": {
+      "type": "object",
+      "properties": {
+        "selectedDetail": {
+          "$ref": "#/definitions/Property"
+        },
+        "propertyTypeList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyType"
+          }
+        },
+        "viewList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HotelView"
+          }
+        },
+        "bedTypeList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BedType"
+          }
+        },
+        "accommodateList": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "bathroomsList": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "bedroomsList": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelName": {
+          "type": "string"
+        },
+        "pageDescription": {
+          "type": "string"
+        },
+        "pageKeywords": {
+          "type": "string"
+        },
+        "pageTitle": {
+          "type": "string"
+        },
+        "pageName": {
+          "type": "string"
+        },
+        "robots": {
+          "type": "string"
+        },
+        "isRegistering": {
+          "type": "boolean"
+        },
+        "isInternalUser": {
+          "type": "boolean"
+        },
+        "backToMainYCSUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "Property": {
+      "type": "object",
+      "properties": {
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "propertyBasicInfo": {
+          "$ref": "#/definitions/PropertyBasicInfo"
+        },
+        "propertyRoomType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyRoomType"
+          }
+        },
+        "requestor": {
+          "$ref": "#/definitions/Requestor"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "PropertyType": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "productListId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "unitName": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "HotelView": {
+      "type": "object",
+      "properties": {
+        "cmsId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "viewId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "BedType": {
+      "type": "object",
+      "properties": {
+        "bedTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "defaultName": {
+          "type": "string"
+        },
+        "displaySetting": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "localName": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "PropertyBasicInfo": {
+      "type": "object",
+      "properties": {
+        "chainId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "geoLocation": {
+          "$ref": "#/definitions/GeoLocation"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelLanguageId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelLanguageName": {
+          "type": "string"
+        },
+        "hotelYcsFlag": {
+          "type": "boolean"
+        },
+        "isNonHotelAccomodationMode": {
+          "type": "boolean"
+        },
+        "productListId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "productListName": {
+          "type": "string"
+        },
+        "ycsLocalCurrencyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "PropertyRoomType": {
+      "type": "object",
+      "properties": {
+        "allotmentAlertLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "bedConfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BedConfiguration"
+          }
+        },
+        "captionId": {
+          "type": "string"
+        },
+        "captionText": {
+          "type": "string"
+        },
+        "defaultHotelRateCategoryName": {
+          "type": "string"
+        },
+        "externalRoomTypeCode": {
+          "type": "string"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRoomTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRoomTypeName": {
+          "type": "string"
+        },
+        "hotelRoomTypeYcsFlag": {
+          "type": "boolean"
+        },
+        "isBreakfastIncluded": {
+          "type": "boolean"
+        },
+        "masterRoomTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxChildrenInRoom": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxExtraBed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximumRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "maxInfantCots": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxOccupancy": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxOptionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minimumRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "noOfBathrooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noOfBedrooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noOfPhoto": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noOfRoomFacilities": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noOfRooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "productOfferTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "rackRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "recStatus": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            -1
+          ],
+          "type": "integer"
+        },
+        "requestor": {
+          "$ref": "#/definitions/Requestor"
+        },
+        "roomDescription": {
+          "type": "string"
+        },
+        "sizeOfRoom": {
+          "format": "double",
+          "type": "number"
+        },
+        "standardRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "viewId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "Requestor": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "ValidationError": {
+      "type": "object",
+      "properties": {
+        "constraint": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "GeoLocation": {
+      "type": "object",
+      "properties": {
+        "areaId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "areaName": {
+          "type": "string"
+        },
+        "cityId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cityName": {
+          "type": "string"
+        },
+        "countryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "englishStreetAddress": {
+          "type": "string"
+        },
+        "geoCoordinate": {
+          "$ref": "#/definitions/GeoCoordinate"
+        },
+        "localStreetAddress": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "stateId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "stateName": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "BedConfiguration": {
+      "type": "object",
+      "properties": {
+        "bedConfigurationId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "bedroomGroupNo": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "bedTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noOfBeds": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "optionId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "GeoCoordinate": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "SaveAvailibilityModel": {
+      "type": "object",
+      "properties": {
+        "roomRateDate": {
+          "$ref": "#/definitions/InventoryRoomRateDate"
+        },
+        "roomRateCat": {
+          "$ref": "#/definitions/InventoryRoomRateCategory"
+        },
+        "blockedDate": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "InventoryRoomRateDate": {
+      "type": "object",
+      "properties": {
+        "doubleRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "extraBedRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "fullRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "hasCloseoutFlag": {
+          "type": "boolean"
+        },
+        "hotelRatecategoryDescription": {
+          "type": "string"
+        },
+        "hotelRatecategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "inventoryRoomCommon": {
+          "$ref": "#/definitions/InventoryRoomCommon"
+        },
+        "limitRoom": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxNightStay": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minNightStay": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "singleRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "InventoryRoomRateCategory": {
+      "type": "object",
+      "properties": {
+        "arrivalEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "arrivalStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "benefits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Benefit"
+          }
+        },
+        "cancellationPolicyCode": {
+          "type": "string"
+        },
+        "cancellationPolicyDescription": {
+          "type": "string"
+        },
+        "cancellationPolicyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "chargeTypeCode": {
+          "type": "string"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRatecategoryCode": {
+          "type": "string"
+        },
+        "hotelRatecategoryDescription": {
+          "type": "string"
+        },
+        "hotelRatecategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRatecategoryType": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRatecategoryValueAmount": {
+          "format": "double",
+          "type": "number"
+        },
+        "isAutoExtendRateAllotment": {
+          "type": "boolean"
+        },
+        "limitRoom": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "masterHotelRatecategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxAdvPurchase": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxNightsStay": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minAdvPurchase": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minNightsStay": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "parentRatecategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "productOfferTypeGroupId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "rateTypeLoaded": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "recStatus": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            -1
+          ],
+          "type": "integer"
+        },
+        "sellEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sellEndTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sellStartDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sellStartTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "InventoryRoomCommon": {
+      "type": "object",
+      "properties": {
+        "allotmentDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRoomTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRoomTypeName": {
+          "type": "string"
+        },
+        "standardRoomCaptionText": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "Benefit": {
+      "type": "object",
+      "properties": {
+        "benefitDefaultName": {
+          "type": "string"
+        },
+        "benefitDescription": {
+          "type": "string"
+        },
+        "benefitGroupId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "benefitId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "benefitLocalName": {
+          "type": "string"
+        },
+        "hotelRatecategoryId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "isSpecificValue": {
+          "type": "boolean"
+        },
+        "specificType": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "PropertyInventoryWithChannels": {
+      "type": "object",
+      "properties": {
+        "by": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyChannel"
+          }
+        },
+        "endDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "inventoryRoomTypeAll": {
+          "$ref": "#/definitions/InventoryRoomTypeAll"
+        },
+        "propertyBasicInfo": {
+          "$ref": "#/definitions/PropertyBasicInfo"
+        },
+        "propertyRoomType": {
+          "$ref": "#/definitions/PropertyRoomType"
+        },
+        "startDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "PropertyChannel": {
+      "type": "object",
+      "properties": {
+        "cancellationPolicyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "channelDiscount": {
+          "format": "double",
+          "type": "number"
+        },
+        "channelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "isMobileEnableFlag": {
+          "type": "boolean"
+        },
+        "processingFee": {
+          "format": "double",
+          "type": "number"
+        },
+        "rateTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "InventoryRoomTypeAll": {
+      "type": "object",
+      "properties": {
+        "inventoryPromoSurcharge": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InventoryPromoSurchageDate"
+          }
+        },
+        "inventoryRoomAllotment": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InventoryRoomAllotment"
+          }
+        },
+        "inventoryRoomRateCategory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InventoryRoomRateCategory"
+          }
+        },
+        "inventoryRoomRateDate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InventoryRoomRateDate"
+          }
+        },
+        "inventoryRoomType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InventoryRoomType"
+          }
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "InventoryPromoSurchageDate": {
+      "type": "object",
+      "properties": {
+        "hasPromotion": {
+          "type": "boolean"
+        },
+        "hasSurcharge": {
+          "type": "boolean"
+        },
+        "inventoryRoomCommon": {
+          "$ref": "#/definitions/InventoryRoomCommon"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "InventoryRoomAllotment": {
+      "type": "object",
+      "properties": {
+        "allotmentGuaranteed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "allotmentRegular": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "excludeDateList": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "hasCloseoutFlag": {
+          "type": "boolean"
+        },
+        "hasNoArrivalFlag": {
+          "type": "boolean"
+        },
+        "hasNoCheckoutFlag": {
+          "type": "boolean"
+        },
+        "inventoryRoomCommon": {
+          "$ref": "#/definitions/InventoryRoomCommon"
+        },
+        "specificDay": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "InventoryRoomType": {
+      "type": "object",
+      "properties": {
+        "externalRoomTypeCode": {
+          "type": "string"
+        },
+        "hotelRoomTypeId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelRoomTypeName": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "maxChildrenInRoom": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxExtraBed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxOccupancy": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noOfRooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "standardRoomCaptionText": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "FraudValidationViewModel": {
+      "type": "object",
+      "properties": {
+        "rejectList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FraudReject"
+          }
+        },
+        "isHotelUnapproved": {
+          "type": "boolean"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelName": {
+          "type": "string"
+        },
+        "pageDescription": {
+          "type": "string"
+        },
+        "pageKeywords": {
+          "type": "string"
+        },
+        "pageTitle": {
+          "type": "string"
+        },
+        "pageName": {
+          "type": "string"
+        },
+        "robots": {
+          "type": "string"
+        },
+        "isRegistering": {
+          "type": "boolean"
+        },
+        "isInternalUser": {
+          "type": "boolean"
+        },
+        "backToMainYCSUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "FraudReject": {
+      "type": "object",
+      "properties": {
+        "reasonID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "reasonName": {
+          "type": "string"
+        }
+      }
+    },
+    "FraudValidationParam": {
+      "type": "object",
+      "properties": {
+        "propertyId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "rejectId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ApproveResponseMessage": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "FraudValidationResponseMessage": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "NHAManageViewModel": {
+      "type": "object",
+      "properties": {
+        "basicStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "amenitiesStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "photoStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "pricingStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "availibilityStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cancellationStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fraudValidationStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "contractStatus": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelName": {
+          "type": "string"
+        },
+        "pageDescription": {
+          "type": "string"
+        },
+        "pageKeywords": {
+          "type": "string"
+        },
+        "pageTitle": {
+          "type": "string"
+        },
+        "pageName": {
+          "type": "string"
+        },
+        "robots": {
+          "type": "string"
+        },
+        "isRegistering": {
+          "type": "boolean"
+        },
+        "isInternalUser": {
+          "type": "boolean"
+        },
+        "backToMainYCSUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "ActivateResponseMessage": {
+      "type": "object",
+      "properties": {
+        "isSuccess": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      }
+    },
+    "PricingViewModel": {
+      "type": "object",
+      "properties": {
+        "selectedDetail": {
+          "$ref": "#/definitions/InventoryRoomRateDate"
+        },
+        "currencyCode": {
+          "type": "string"
+        },
+        "currencyNoDecimal": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "benefitList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Benefit"
+          }
+        },
+        "channelList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Channel"
+          }
+        },
+        "selectedChannel": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyChannel"
+          }
+        },
+        "minRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "maxRate": {
+          "format": "double",
+          "type": "number"
+        },
+        "inventoryRoomRateCategory": {
+          "$ref": "#/definitions/InventoryRoomRateCategory"
+        },
+        "blockedDates": {
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "filteredAvailability": {
+          "type": "boolean"
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotelName": {
+          "type": "string"
+        },
+        "pageDescription": {
+          "type": "string"
+        },
+        "pageKeywords": {
+          "type": "string"
+        },
+        "pageTitle": {
+          "type": "string"
+        },
+        "pageName": {
+          "type": "string"
+        },
+        "robots": {
+          "type": "string"
+        },
+        "isRegistering": {
+          "type": "boolean"
+        },
+        "isInternalUser": {
+          "type": "boolean"
+        },
+        "backToMainYCSUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "Channel": {
+      "type": "object",
+      "properties": {
+        "channelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "defaultName": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "localName": {
+          "type": "string"
+        },
+        "validationErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationError"
+          }
+        }
+      }
+    },
+    "SavePricingModel": {
+      "type": "object",
+      "properties": {
+        "inventoryRoomRateDate": {
+          "$ref": "#/definitions/InventoryRoomRateDate"
+        },
+        "benefitSelected": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Benefit"
+          }
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyChannel"
+          }
+        },
+        "hotelId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
     "UserInfo": {
       "type": "object",
       "properties": {

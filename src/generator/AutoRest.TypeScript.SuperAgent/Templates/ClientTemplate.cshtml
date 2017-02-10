@@ -1,6 +1,5 @@
 ﻿@using System.Linq
-@using System.Net
-@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
 @using AutoRest.TypeScript.SuperAgent.Model
 @inherits AutoRest.Core.Template<CodeModelTs>
 
@@ -11,51 +10,95 @@
 import { Promise } from 'es6-promise';
 import * as request from 'superagent';
 
-export interface IApi{
-@foreach (var method in Model.Methods.Where(method => method.Responses.ContainsKey(HttpStatusCode.OK)))
-{
-@:    async @(method.SerializedName)(requestDto: @(method.Responses[HttpStatusCode.OK].Body.ClassName)Request) : Promise<@(method.Responses[HttpStatusCode.OK].Body.ClassName)Response>;
-}
-}
-
-export class Api implements IApi {
-    
-    private baseUrl: string;
+class Url{
+    protected url: string;
 
     public constructor(baseUrl: string){
+        this.url = baseUrl;
+    }
+
+    public Url addToPath(name: string, value: string){
+        this.url.replace('{'  + name +  '}', value);
+        return this;
+    }
+
+    public Url addToQuery(name: string, value: string){
+        this.url.replace('{'  + name +  '}', value);
+        return this;
+    }
+
+    public Url add(url: string){
+        this.url += url;
+        return this;
+    }
+
+    public toString() : string {
+        return this.url;
+    }
+}
+
+abstract class BaseApi {
+    readonly baseUrl: string
+
+    protected constructor(baseUrl: string){
+        if(baseUrl === undefined || baseUrl === null){
+            baseUrl = "";
+        }
         this.baseUrl = baseUrl;
     }
 
-@foreach (var method in Model.Methods.Where(method => method.Responses.ContainsKey(HttpStatusCode.OK)))
+    protected newUrl(url : string){
+        return new Url(this.baseUrl).add(url);
+    }
+}
+
+@foreach (var group in Model.MethodGroups)
 {
-@:    public async @(method.SerializedName)(requestDto: @(method.Responses[HttpStatusCode.OK].Body.ClassName)Request) : Promise<@(method.Responses[HttpStatusCode.OK].Body.ClassName)Response> {
-@:        return new Promise<@(method.Responses[HttpStatusCode.OK].Body.ClassName)Response>((resolve, reject) => {
+    var apiName = $"{group.Key.ToPascalCase().Replace("Api", "")}Api";
+    var apiInterfaceName = $"I{apiName}";
+@:export interface @(apiInterfaceName) {
+    foreach (var tsMethod in group.Select(m => new MethodModelTs(group.Key, m)))
+    {
+@:    @(tsMethod.MethodName)(requestDto: @(tsMethod.RequestTypeName)) : @(tsMethod.ResponsePromiseTypeName);
+    }
+@:}
+
+@:export class @(apiName) extends BaseApi implements @(apiInterfaceName) {
+@:
+@:    public constructor(baseUrl: string) {
+@:        super(baseUrl);
+@:    }
+    foreach (var method in group)
+    {
+        var tsMethod = new MethodModelTs(group.Key, method);
+        var tsParams = new ParametersModelTs(method.Parameters);
+
+@:    public async @(tsMethod.MethodName)(requestDto: @(tsMethod.RequestTypeName)) : @(tsMethod.ResponsePromiseTypeName) {
+@:        return new @(tsMethod.ResponsePromiseTypeName)((resolve, reject) => {
 @:            try{
-    foreach (var parameter in method.Parameters)
-    {
-        if (parameter.IsRequired)
-        {
-@:                if (requestDto.@(parameter.Name.Value) == null)
-@:                {
-@:                    throw new Error("Missing required parameter requestDto.@(parameter.Name.Value) when calling @(method.SerializedName)");
-@:                }
+@:                requestDto.validate();
+@:                var url = this.newUrl('@(method.Url)');
+
+        foreach (var name in tsParams.ParamNamesInBody) {
+@:                url.addToPath('@(name)', requestDto.@(name));
         }
-    }
-@:                const url = this.baseUrl + '@(method.Url.Value)'@foreach (var parameter in method.Parameters.Where(p => p.Location == ParameterLocation.Path)) { @:.replace('{@(parameter.Name.Value)}', @(parameter.Name.Value))
-};
-@:                request.@(method.HttpMethod.ToString().ToLower())(url)
-    foreach (var parameter in method.Parameters)
-    {
-        if (parameter.Location == ParameterLocation.Body)
+
+        foreach (var name in tsParams.ParamNamesInQuery)
         {
-@:                    .send(requestDto.@(parameter.Name.Value))
+@:                url.addToQuery('@(name)', requestDto.@(name));
         }
-    }
+
+@:                request.@(method.HttpMethod.ToString().ToLower())(url.toString())
+        foreach (var name in tsParams.ParamNamesInBody)
+        {
+@:                    .send(requestDto.@(name))
+        }
 @:                    .set('Accept', 'application/json')
-@:                    .end((err, res) =>
-@:                    {
-@:                        err === undefined ? resolve(res as @(method.Responses[HttpStatusCode.OK].Body.ClassName)Response) : reject(err);
-@:                    });
+        foreach (var name in tsParams.ParamNamesInHeader)
+        {
+@:                    .set('@(name)', requestDto.@(name))
+        }
+@:                    .end((err, res) => err === undefined ? resolve(res.body as @(tsMethod.ResponseTypeName) : reject(err));
 @:            }
 @:            catch (e)
 @:            {
@@ -63,6 +106,7 @@ export class Api implements IApi {
 @:            }
 @:        });
 @:    }
+    }
 }
 }
 
