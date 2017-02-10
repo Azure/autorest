@@ -48,7 +48,7 @@ function AutoRestSwaggerBATHeaderService(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.headerOperations = new operations.HeaderOperations(this);
+  this.header = new operations.Header(this);
   this.models = models;
   msRest.addSerializationMixin(this);
 }

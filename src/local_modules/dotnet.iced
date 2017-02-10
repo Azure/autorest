@@ -14,8 +14,7 @@ dotnet = (cmd) ->
     echo info "dotnet #{cmd} #{ file.path } /nologo"
     await exec "dotnet #{cmd} #{ file.path } /nologo", defer code,stdout,stderr
 
-    if code != 0 
-      throw "dotnet #{cmd} failed"
+    throw "dotnet #{cmd} failed" if code isnt 0
 
     # or just done, no more processing
     return callback null
@@ -35,8 +34,7 @@ task 'clean','calls dotnet-clean on the solution', ['clean-packages'], ->
 ###############################################
 task 'build','build:dotnet',['restore'], (done) ->
   exec "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
-    if code 
-      throw error "Build Failed #{ stderr }"
+    throw "Build Failed #{ stderr }" if code isnt 0
     echo "done build"
     done();
 
@@ -129,7 +127,7 @@ task 'package','From scratch build, sign, and package ', (done) ->
     -> done()
 
 ############################################### 
-task 'test-cs', 'runs dotnet tests',['restore'] , (done) ->
+task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
   tests()
     .pipe dotnet "test"
 
