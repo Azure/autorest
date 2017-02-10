@@ -44,15 +44,17 @@ task 'clean','Cleans the the solution', ['clean-packages'], ->
 task 'autorest', 'Runs AutoRest', -> 
   autorest process.argv.slice(3)
 
-task 'autorest-ng', "Runs AutoRest (via node)", ->
+task 'autorest-ng', "Runs AutoRest (via node)", ['build/build:typescript'] ,->
   cd process.env.INIT_CWD
-  exec "node #{basefolder}/src/AutoRest/autorest.js #{process.argv.slice(3).join(' ')}"
+  exec "node #{basefolder}/src/next-gen/autorest/index.js #{process.argv.slice(3).join(' ')}"
 
-autorest = (args) ->
+autorest = (args,done) ->
   # Run AutoRest from the original current directory.
   cd process.env.INIT_CWD
   echo info "AutoRest #{args.join(' ')}"
-  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}"
+  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {}, (code,stdout,stderr) ->
+    return done() if code is 0 
+    throw error "AutoRest Failed\n\n#{args.join(' ')}\n\n\{stderr}"
 
 ############################################### 
 task 'test', "runs all tests", ->
@@ -87,9 +89,16 @@ task 'test-go', 'runs Go tests', ['regenerate-go'], -> # FAILS, but also on mast
 # LEGACY 
 # Instead: have bunch of configuration files sitting in a well-known spot, discover them, feed them to AutoRest, done.
 
-regenExpected = (opts) ->
+
+
+
+regenExpected = (opts,done) ->
   outputDir = if !!opts.outputBaseDir then "#{opts.outputBaseDir}/#{opts.outputDir}" else opts.outputDir
+  instances = 0    
+
   for key of opts.mappings
+    instances++
+
     optsMappingsValue = opts.mappings[key]
     swaggerFile = if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue
     args = [
@@ -121,7 +130,10 @@ regenExpected = (opts) ->
         args.push(optsMappingsValue[1])
       else
         args.push([opts.nsPrefix, key.replace(/\/|\./, '')].join('.'))
-    autorest args
+
+    autorest args,() =>
+      instances = instances- 1
+      return done() if instances is 0 
 
 defaultMappings = {
   'AcceptanceTests/ParameterFlattening': 'parameter-flattening.json',
@@ -254,7 +266,7 @@ mergeOptions = (obj1, obj2) ->
     obj3[attrname] = obj2[attrname]
   return obj3
 
-task 'regenerate-nodecomposite', "regenerate expected composite swaggers for NodeJS", ->
+task 'regenerate-nodecomposite', "regenerate expected composite swaggers for NodeJS", (done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -264,9 +276,10 @@ task 'regenerate-nodecomposite', "regenerate expected composite swaggers for Nod
     'codeGenerator': 'NodeJS',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-nodeazurecomposite', "regenerate expected composite swaggers for NodeJS Azure", ->
+task 'regenerate-nodeazurecomposite', "regenerate expected composite swaggers for NodeJS Azure", (done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.NodeJS.Azure.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -276,9 +289,10 @@ task 'regenerate-nodeazurecomposite', "regenerate expected composite swaggers fo
     'codeGenerator': 'Azure.NodeJS',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-nodeazure', "regenerate expected swaggers for NodeJS Azure", ['regenerate-nodeazurecomposite'], ->
+task 'regenerate-nodeazure', "regenerate expected swaggers for NodeJS Azure", ['regenerate-nodeazurecomposite'],(done) ->
   for p of defaultAzureMappings
     nodeAzureMappings[p] = defaultAzureMappings[p]
   regenExpected {
@@ -288,9 +302,10 @@ task 'regenerate-nodeazure', "regenerate expected swaggers for NodeJS Azure", ['
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.NodeJS',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-node', "regenerate expected swaggers for NodeJS", ['regenerate-nodecomposite'], ->
+task 'regenerate-node', "regenerate expected swaggers for NodeJS", ['regenerate-nodecomposite'],(done) ->
   for p of defaultMappings
     nodeMappings[p] = defaultMappings[p]
   regenExpected {
@@ -300,9 +315,10 @@ task 'regenerate-node', "regenerate expected swaggers for NodeJS", ['regenerate-
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-python', "regenerate expected swaggers for Python", ->
+task 'regenerate-python', "regenerate expected swaggers for Python",(done) ->
   mappings = mergeOptions({ 
     'AcceptanceTests/UrlMultiCollectionFormat' : 'url-multi-collectionFormat.json'
   }, defaultMappings)
@@ -314,9 +330,10 @@ task 'regenerate-python', "regenerate expected swaggers for Python", ->
     'outputDir': 'Expected',
     'codeGenerator': 'Python',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-pythonazure', "regenerate expected swaggers for Python Azure", ->
+task 'regenerate-pythonazure', "regenerate expected swaggers for Python Azure", (done) ->
   mappings = mergeOptions({ 
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json',
     'AcceptanceTests/StorageManagementClient': 'storage.json'
@@ -329,9 +346,10 @@ task 'regenerate-pythonazure', "regenerate expected swaggers for Python Azure", 
     'outputDir': 'Expected',
     'codeGenerator': 'Azure.Python',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-rubyazure', "regenerate expected swaggers for Ruby Azure", ->
+task 'regenerate-rubyazure', "regenerate expected swaggers for Ruby Azure",(done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Ruby.Azure.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -339,9 +357,10 @@ task 'regenerate-rubyazure', "regenerate expected swaggers for Ruby Azure", ->
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Azure.Ruby',
     'nsPrefix': 'MyNamespace'
-  }
+  },done
+  return null
 
-task 'regenerate-ruby', "regenerate expected swaggers for Ruby", ->
+task 'regenerate-ruby', "regenerate expected swaggers for Ruby",(done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Ruby.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -349,9 +368,10 @@ task 'regenerate-ruby', "regenerate expected swaggers for Ruby", ->
     'outputDir': 'RspecTests/Generated',
     'codeGenerator': 'Ruby',
     'nsPrefix': 'MyNamespace'
-  }
+  },done
+  return null
 
-task 'regenerate-javaazure', "regenerate expected swaggers for Java Azure", ->
+task 'regenerate-javaazure', "regenerate expected swaggers for Java Azure",(done) ->
   mappings = {}
   for key of defaultAzureMappings
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
@@ -362,9 +382,10 @@ task 'regenerate-javaazure', "regenerate expected swaggers for Java Azure", ->
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Azure.Java',
     'nsPrefix': 'Fixtures'
-  }
+  },done
+  return null
 
-task 'regenerate-javaazurefluent', "regenerate expected swaggers for Java Azure Fluent", ->
+task 'regenerate-javaazurefluent', "regenerate expected swaggers for Java Azure Fluent",(done) ->
   mappings = {}
   for key of defaultAzureMappings
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key]
@@ -375,9 +396,10 @@ task 'regenerate-javaazurefluent', "regenerate expected swaggers for Java Azure 
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Azure.Java.Fluent',
     'nsPrefix': 'Fixtures'
-  }
+  },done
+  return null
 
-task 'regenerate-java', "regenerate expected swaggers for Java", ->
+task 'regenerate-java', "regenerate expected swaggers for Java", (done) ->
   mappings = {}
   for key of defaultMappings
     mappings[key.substring(16).toLowerCase()] = defaultMappings[key]
@@ -388,9 +410,10 @@ task 'regenerate-java', "regenerate expected swaggers for Java", ->
     'outputDir': 'src/main/java/fixtures',
     'codeGenerator': 'Java',
     'nsPrefix': 'Fixtures'
-  }
+  },done
+  return null
 
-task 'regenerate-csazure', "regenerate expected swaggers for C# Azure", ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'], ->
+task 'regenerate-csazure', "regenerate expected swaggers for C# Azure", ['regenerate-csazurecomposite','regenerate-csazureallsync', 'regenerate-csazurenosync'],(done) ->
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
@@ -402,9 +425,10 @@ task 'regenerate-csazure', "regenerate expected swaggers for C# Azure", ['regene
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-csazurefluent', "regenerate expected swaggers for C# Azure Fluent", ['regenerate-csazurefluentcomposite','regenerate-csazurefluentallsync', 'regenerate-csazurefluentnosync'], ->
+task 'regenerate-csazurefluent', "regenerate expected swaggers for C# Azure Fluent", ['regenerate-csazurefluentcomposite','regenerate-csazurefluentallsync', 'regenerate-csazurefluentnosync'],(done) ->
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': 'body-duration.json'
   }, defaultAzureMappings)
@@ -416,9 +440,10 @@ task 'regenerate-csazurefluent', "regenerate expected swaggers for C# Azure Flue
     'codeGenerator': 'Azure.CSharp.Fluent',
     'nsPrefix': 'Fixtures.Azure',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-cs', "regenerate expected swaggers for C#", ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], ->
+task 'regenerate-cs', "regenerate expected swaggers for C#", ['regenerate-cswithcreds', 'regenerate-cscomposite', 'regenerate-csallsync', 'regenerate-csnosync'], (done) ->
   mappings = mergeOptions({
     'Mirror.RecursiveTypes': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger-mirror-primitives.json',
@@ -437,9 +462,10 @@ task 'regenerate-cs', "regenerate expected swaggers for C#", ['regenerate-cswith
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-cswithcreds', "regenerate expected swaggers for C# with credentials", ->
+task 'regenerate-cswithcreds', "regenerate expected swaggers for C# with credentials", (done) ->
   mappings = {
     'PetstoreV2': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
   }
@@ -452,9 +478,10 @@ task 'regenerate-cswithcreds', "regenerate expected swaggers for C# with credent
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
-  }
+  },done
+  return null
 
-task 'regenerate-csallsync', "regenerate expected swaggers for C# with all synchronous methods", ->
+task 'regenerate-csallsync', "regenerate expected swaggers for C# with all synchronous methods",(done) ->
   mappings = {
     'PetstoreV2AllSync': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
   }
@@ -467,9 +494,10 @@ task 'regenerate-csallsync', "regenerate expected swaggers for C# with all synch
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
-  }
+  },done
+  return null
 
-task 'regenerate-csnosync', "regenerate expected swaggers for C# with no synchronous methods", ->
+task 'regenerate-csnosync', "regenerate expected swaggers for C# with no synchronous methods", (done) ->
   mappings = {
     'PetstoreV2NoSync': '../../../generator/AutoRest.CSharp.Tests/Swagger/swagger.2.0.example.v2.json',
   }
@@ -482,9 +510,10 @@ task 'regenerate-csnosync', "regenerate expected swaggers for C# with no synchro
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
-  }
+  },done
+  return null
 
-task 'regenerate-csazureallsync', "regenerate expected swaggers for C# Azure with all synchronous methods", ->
+task 'regenerate-csazureallsync', "regenerate expected swaggers for C# Azure with all synchronous methods", (done) ->
   mappings = {
     'AcceptanceTests/AzureBodyDurationAllSync': 'body-duration.json'
   }
@@ -497,9 +526,10 @@ task 'regenerate-csazureallsync', "regenerate expected swaggers for C# Azure wit
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
-  }
+  },done
+  return null
 
-task 'regenerate-csazurefluentallsync', "regenerate expected swaggers for C# Azure Fluent with all synchronous methods", ->
+task 'regenerate-csazurefluentallsync', "regenerate expected swaggers for C# Azure Fluent with all synchronous methods", (done) ->
   mappings = {
     'AcceptanceTests/AzureBodyDurationAllSync': 'body-duration.json'
   }
@@ -512,9 +542,10 @@ task 'regenerate-csazurefluentallsync', "regenerate expected swaggers for C# Azu
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'all'
-  }
+  },done
+  return null
 
-task 'regenerate-csazurenosync', "regenerate expected swaggers for C# Azure with no synchronous methods", ->
+task 'regenerate-csazurenosync', "regenerate expected swaggers for C# Azure with no synchronous methods",(done) ->
   mappings = {
     'AcceptanceTests/AzureBodyDurationNoSync': 'body-duration.json'
   }
@@ -527,9 +558,10 @@ task 'regenerate-csazurenosync', "regenerate expected swaggers for C# Azure with
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
-  }
+  },done
+  return null
 
-task 'regenerate-csazurefluentnosync', "regenerate expected swaggers for C# Azure Fluent with no synchronous methods", ->
+task 'regenerate-csazurefluentnosync', "regenerate expected swaggers for C# Azure Fluent with no synchronous methods",(done) ->
   mappings = {
     'AcceptanceTests/AzureBodyDurationNoSync': 'body-duration.json'
   }
@@ -542,9 +574,10 @@ task 'regenerate-csazurefluentnosync', "regenerate expected swaggers for C# Azur
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'syncMethods': 'none'
-  }
+  },done
+  return null
 
-task 'regenerate-cscomposite', "regenerate expected composite swaggers for C#", ->
+task 'regenerate-cscomposite', "regenerate expected composite swaggers for C#", (done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -554,9 +587,10 @@ task 'regenerate-cscomposite', "regenerate expected composite swaggers for C#", 
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-csazurecomposite', "regenerate expected composite swaggers for C# Azure", ->
+task 'regenerate-csazurecomposite', "regenerate expected composite swaggers for C# Azure",(done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -566,9 +600,10 @@ task 'regenerate-csazurecomposite', "regenerate expected composite swaggers for 
     'codeGenerator': 'Azure.CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-csazurefluentcomposite', "regenerate expected composite swaggers for C# Azure Fluent", ->
+task 'regenerate-csazurefluentcomposite', "regenerate expected composite swaggers for C# Azure Fluent", (done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.CSharp.Azure.Fluent.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
@@ -578,25 +613,29 @@ task 'regenerate-csazurefluentcomposite', "regenerate expected composite swagger
     'codeGenerator': 'Azure.CSharp.Fluent',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
-  }
+  },done
+  return null
 
-task 'regenerate-go', "regenerate expected swaggers for Go", ->
+task 'regenerate-go', "regenerate expected swaggers for Go",(done) ->
   regenExpected {
     'outputBaseDir': 'src/generator/AutoRest.Go.Tests',
     'inputBaseDir': 'src/dev/TestServer/swagger',
     'mappings': goMappings,
     'outputDir': 'src/tests/generated',
     'codeGenerator': 'Go'
-  }
+  },done
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests'
+  return null
 
-task 'regenerate-samples', "regenerate samples", ['regenerate-samplesazure'], ->
+task 'regenerate-samples', "regenerate samples", ['regenerate-samplesazure'],(done) ->
+  count = 0
   content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)
   autorestConfig = JSON.parse(content)
   for lang of autorestConfig.plugins
     if (!lang.match(/^Azure\..+/))
+      count++
       regenExpected {
         'modeler': 'Swagger',
         'header': 'NONE',
@@ -606,15 +645,22 @@ task 'regenerate-samples', "regenerate samples", ['regenerate-samplesazure'], ->
         'nsPrefix': "Petstore",
         'outputDir': "",
         'codeGenerator': lang
-      }
+      }, () => 
+        count = count - 1
+        return done() if count is 0
 
-task 'regenerate-samplesazure', "regenerate Azure samples", ->
+  return null
+
+task 'regenerate-samplesazure', "regenerate Azure samples", (done) ->
+  count = 0
   content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)
   autorestConfig = JSON.parse(content)
   for lang of autorestConfig.plugins
+   
     if (lang.match(/^Azure\.[^.]+$/))
+      count++
       regenExpected {
         'modeler': 'Swagger',
         'header': 'NONE',
@@ -624,9 +670,13 @@ task 'regenerate-samplesazure', "regenerate Azure samples", ->
         'nsPrefix': "Petstore",
         'outputDir': "",
         'codeGenerator': lang
-      }
+      },() => 
+        count = count - 1
+        return done() if count is 0 
+  return null
 
-task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], ->
+
+task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
   run 'regenerate-cs',
       'regenerate-csazure'
       'regenerate-csazurefluent'
@@ -640,7 +690,9 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
       'regenerate-java'
       'regenerate-javaazure'
       'regenerate-javaazurefluent'
-      'regenerate-go'
+      'regenerate-go', done
+  return null
+  
 
 task 'regenerate-delete', "regenerate expected code for tests", ->
   rm "-rf",

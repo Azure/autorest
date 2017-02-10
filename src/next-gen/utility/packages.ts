@@ -2,10 +2,10 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-
+/*
 import * as fs from 'fs';
 import * as https from 'https';
-import * as mkdirp from 'mkdirp';
+//import * as mkdirp from 'mkdirp';
 import * as path from 'path';
 import * as tmp from 'tmp';
 import { parse as parseUrl } from 'url';
@@ -58,6 +58,7 @@ export class PackageManager {
                 return util.buildPromiseChain(packages, pkg => downloadPackage(pkg, logger, status, proxy, strictSSL));
             });
     }
+
 
     public InstallPackages(logger: Logger, status: Status): Promise<void> {
         return this.GetPackages()
@@ -241,7 +242,7 @@ function downloadFile(urlString: string, pkg: Package, logger: Logger, status: S
         request.end();
     });
 }
-
+/*
 function installPackage(pkg: Package, logger: Logger, status?: Status): Promise<void> {
     status = status || getNoopStatus();
 
@@ -312,3 +313,4 @@ function installPackage(pkg: Package, logger: Logger, status?: Status): Promise<
         pkg.tmpFile.removeCallback();
     });
 }
+*/

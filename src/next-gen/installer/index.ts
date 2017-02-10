@@ -23,17 +23,24 @@ import * as unzip from 'unzipper'
 import * as StreamSink from 'streamsink';
 
 export class Installer {
+  private static ensureExists(dir:string)  {
+    if( !existsSync(dir) ) {
+      shell.mkdir(dir);
+    }
+    return dir;
+  }
+
   public static get rootFolder(): string {
-    return join (homedir(),'.autorest' );
+    return this.ensureExists( join (homedir(),'.autorest' ));
   }
   public static get framework(): string { 
-    return join( this.rootFolder, 'frameworks' )
+    return this.ensureExists( join( this.rootFolder, 'frameworks' ));
   }
   public static get app(): string { 
     return join( this.rootFolder, 'app' )
   }
   public static get autorest(): string { 
-    return join( this.app, 'autorest' )
+    return this.ensureExists(join( this.app, 'autorest' ));
   }
 
   public static get latestAutorest(): string { 
@@ -60,9 +67,6 @@ export class Installer {
   }
 
   public static async InstallFramework() {
-    if( !existsSync(this.framework) ) {
-      shell.mkdir(this.framework);
-    }
     const pi = await Utility.PlatformInformation();
     const fwks = await Releases.GetAssets('dotnet-runtime-1.0.3');
     const runtime = fwks.FirstOrDefault( each => each.name.startsWith( `dotnet-${pi.runtimeId}.1.0.3` ) );
@@ -73,7 +77,7 @@ export class Installer {
     
     return new Promise<string>((resolve, reject)=>{
       console.log(`Downloading ${runtime.browser_download_url} to ${this.framework}`);
-      let download = request.get(runtime.browser_download_url,{strictSSL:true,headers:{'user-agent':'autorest-installer',"Authorization": "token 4a16a53b6f60d86e0626bf525c84767e8271c5f1"}});
+      let download = request.get(runtime.browser_download_url,{strictSSL:true,headers:{'user-agent':'autorest-installer',"Authorization": "token f8966b1c8e8de1c7f07c844602e581af27ad6f61"}});
       let unpack:any = null;
 
       if( runtime.name.endsWith('.zip' )) {
@@ -88,9 +92,6 @@ export class Installer {
   }
 
   public static async InstallAutoRest() {
-    if( !existsSync(this.autorest) ) {
-      shell.mkdir(this.autorest);
-    }
   }
 
   private static GetFolders(path:string):IEnumerable<string> {

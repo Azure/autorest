@@ -11,6 +11,6 @@
         "args": [],
         "isBuildCommand": true,
         "isBackground": false,
-        "problemMatcher": [ "$msCompile" ]
+        "problemMatcher": [ "$msCompile", "$tsc" ]
     }]
 }

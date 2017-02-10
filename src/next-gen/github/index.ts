@@ -26,7 +26,7 @@ async function Rest(url:string): Promise<any> {
             method:"GET",
             protocol:u.protocol,
             headers: {"user-agent": "autorest",
-                "Authorization": "token 4a16a53b6f60d86e0626bf525c84767e8271c5f1"
+                "Authorization": "token f8966b1c8e8de1c7f07c844602e581af27ad6f61"
          },
             path:u.path,        
             }, (res)=> {
