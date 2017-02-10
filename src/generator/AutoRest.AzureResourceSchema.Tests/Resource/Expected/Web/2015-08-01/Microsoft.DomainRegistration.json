@@ -7,6 +7,9 @@
     "domains": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -22,10 +25,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -61,6 +60,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",

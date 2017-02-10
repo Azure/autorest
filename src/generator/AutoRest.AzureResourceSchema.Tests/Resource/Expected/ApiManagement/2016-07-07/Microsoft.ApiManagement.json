@@ -7,6 +7,18 @@
     "service": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "The name of the Api Management service."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -98,6 +110,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -109,6 +122,18 @@
     "service_apis": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "API identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -144,6 +169,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "ApiContract"
@@ -153,6 +179,9 @@
     "service_apis_operations": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -178,6 +207,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "OperationContract"
@@ -187,6 +217,9 @@
     "service_authorizationServers": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -212,6 +245,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "OAuth2AuthorizationServerContract"
@@ -221,6 +255,9 @@
     "service_certificates": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -243,6 +280,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -251,6 +289,18 @@
     "service_groups": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Group identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -262,12 +312,6 @@
           "enum": [
             "2016-07-07"
           ]
-        },
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 300,
-          "description": "Group name."
         },
         "description": {
           "type": "string",
@@ -289,15 +333,27 @@
         }
       },
       "required": [
+        "name",
         "type",
-        "apiVersion",
-        "name"
+        "apiVersion"
       ],
       "description": "Microsoft.ApiManagement/service/groups"
     },
     "service_groups_users": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "User identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -312,6 +368,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -320,6 +377,9 @@
     "service_loggers": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -363,6 +423,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "credentials"
@@ -372,6 +433,9 @@
     "service_openidConnectProviders": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -383,11 +447,6 @@
           "enum": [
             "2016-07-07"
           ]
-        },
-        "name": {
-          "type": "string",
-          "maxLength": 50,
-          "description": "User-friendly OpenID Connect Provider name."
         },
         "description": {
           "type": "string",
@@ -407,9 +466,9 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
-        "name",
         "metadataEndpoint",
         "clientId"
       ],
@@ -418,6 +477,18 @@
     "service_products": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Product identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -455,6 +526,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "ProductContract"
@@ -464,6 +536,18 @@
     "service_products_apis": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "API identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -478,6 +562,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -486,6 +571,18 @@
     "service_products_groups": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Group identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -500,6 +597,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -508,6 +606,9 @@
     "service_properties": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -519,12 +620,6 @@
           "enum": [
             "2016-07-07"
           ]
-        },
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 256,
-          "description": "Unique name of Property."
         },
         "value": {
           "type": "string",
@@ -559,9 +654,9 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
-        "name",
         "value"
       ],
       "description": "Microsoft.ApiManagement/service/properties"
@@ -569,6 +664,9 @@
     "service_subscriptions": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -588,10 +686,6 @@
         "productId": {
           "type": "string",
           "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
-        },
-        "name": {
-          "type": "string",
-          "description": "Subscription name."
         },
         "primaryKey": {
           "type": "string",
@@ -626,17 +720,29 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "userId",
-        "productId",
-        "name"
+        "productId"
       ],
       "description": "Microsoft.ApiManagement/service/subscriptions"
     },
     "service_users": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "User identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -690,6 +796,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "email",
@@ -1559,6 +1666,18 @@
     "service_apis_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "API identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1594,6 +1713,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "ApiContract"
@@ -1603,6 +1723,9 @@
     "service_apis_operations_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1628,6 +1751,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "OperationContract"
@@ -1637,6 +1761,9 @@
     "service_authorizationServers_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1662,6 +1789,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "OAuth2AuthorizationServerContract"
@@ -1671,6 +1799,9 @@
     "service_certificates_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1693,6 +1824,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -1701,6 +1833,18 @@
     "service_groups_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Group identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1712,10 +1856,6 @@
           "enum": [
             "2016-07-07"
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Group name."
         },
         "description": {
           "type": "string",
@@ -1737,15 +1877,27 @@
         }
       },
       "required": [
+        "name",
         "type",
-        "apiVersion",
-        "name"
+        "apiVersion"
       ],
       "description": "Microsoft.ApiManagement/service/groups"
     },
     "service_groups_users_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "User identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1760,6 +1912,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -1768,6 +1921,9 @@
     "service_loggers_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1811,6 +1967,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "credentials"
@@ -1820,6 +1977,9 @@
     "service_openidConnectProviders_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1831,10 +1991,6 @@
           "enum": [
             "2016-07-07"
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "User-friendly OpenID Connect Provider name."
         },
         "description": {
           "type": "string",
@@ -1854,9 +2010,9 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
-        "name",
         "metadataEndpoint",
         "clientId"
       ],
@@ -1865,6 +2021,18 @@
     "service_products_apis_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "API identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1879,6 +2047,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -1887,6 +2056,18 @@
     "service_products_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Product identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1924,6 +2105,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "ProductContract"
@@ -1933,6 +2115,18 @@
     "service_products_groups_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "Group identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1947,6 +2141,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -1955,6 +2150,9 @@
     "service_properties_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1966,10 +2164,6 @@
           "enum": [
             "2016-07-07"
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Unique name of Property."
         },
         "value": {
           "type": "string",
@@ -2002,9 +2196,9 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
-        "name",
         "value"
       ],
       "description": "Microsoft.ApiManagement/service/properties"
@@ -2012,6 +2206,9 @@
     "service_subscriptions_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -2031,10 +2228,6 @@
         "productId": {
           "type": "string",
           "description": "Product (product id path) for which subscription is being created in form /products/{productid}"
-        },
-        "name": {
-          "type": "string",
-          "description": "Subscription name."
         },
         "primaryKey": {
           "type": "string",
@@ -2065,17 +2258,29 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "userId",
-        "productId",
-        "name"
+        "productId"
       ],
       "description": "Microsoft.ApiManagement/service/subscriptions"
     },
     "service_users_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[^*#&+:<>?]+$"
+            },
+            {
+              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
+            }
+          ],
+          "description": "User identifier. Must be unique in the current API Management service instance."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -2125,6 +2330,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "email",

@@ -16,7 +16,6 @@ using Microsoft.Rest.Azure;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 using System.Net;
-using System.Reflection;
 
 namespace AutoRest.Simplify
 {

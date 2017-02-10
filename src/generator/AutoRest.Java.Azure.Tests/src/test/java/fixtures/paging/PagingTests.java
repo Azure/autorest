@@ -1,8 +1,19 @@
 package fixtures.paging;
 
+import com.microsoft.azure.AzureResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
-
+import com.microsoft.azure.serializer.AzureJacksonAdapter;
+import com.microsoft.rest.LogLevel;
+import com.microsoft.rest.RestClient;
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import com.microsoft.rest.interceptors.LoggingInterceptor;
+import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
+import fixtures.paging.models.CustomParameterGroup;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
+import fixtures.paging.models.Product;
+import fixtures.paging.models.ProductProperties;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,11 +22,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import fixtures.paging.implementation.AutoRestPagingTestServiceImpl;
-import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
-import fixtures.paging.models.Product;
-import fixtures.paging.models.ProductProperties;
-
 import static org.junit.Assert.fail;
 
 public class PagingTests {
@@ -23,7 +29,13 @@ public class PagingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestPagingTestServiceImpl("http://localhost:3000", null);
+        RestClient restClient = new RestClient.Builder()
+                .withBaseUrl("http://localhost:3000")
+                .withInterceptor(new LoggingInterceptor(LogLevel.BODY_AND_HEADERS))
+                .withSerializerAdapter(new AzureJacksonAdapter())
+                .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
+                .build();
+        client = new AutoRestPagingTestServiceImpl(restClient);;
     }
 
     @Test
@@ -112,7 +124,7 @@ public class PagingTests {
             List<Product> response = client.pagings().getSinglePagesFailure();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+            Assert.assertNotNull(ex.response());
         }
     }
 
@@ -123,18 +135,25 @@ public class PagingTests {
             response.size();
             fail();
         } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
+            Assert.assertNotNull(ex.response());
         }
     }
 
     @Test
     public void getMultiplePagesFailureUri() throws Exception {
-        try {
-            List<Product> response = client.pagings().getMultiplePagesFailureUri();
-            response.size();
-            fail();
-        } catch (CloudException ex) {
-            Assert.assertNotNull(ex.getResponse());
-        }
+        List<Product> response = client.pagings().getMultiplePagesFailureUri();
+        Assert.assertEquals(1, response.size());
+    }
+
+    @Test
+    public void getMultiplePagesFragmentNextLink() throws Exception {
+        List<Product> response = client.pagings().getMultiplePagesFragmentNextLink("test_user", "1.6");
+        Assert.assertEquals(10, response.size());
+    }
+
+    @Test
+    public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
+        List<Product> response = client.pagings().getMultiplePagesFragmentWithGroupingNextLink(new CustomParameterGroup().withTenant("test_user").withApiVersion("1.6"));
+        Assert.assertEquals(10, response.size());
     }
 }

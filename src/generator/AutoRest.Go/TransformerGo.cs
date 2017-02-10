@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using AutoRest.Extensions.Azure;
 
 namespace AutoRest.Go
 {
@@ -37,6 +38,7 @@ namespace AutoRest.Go
             TransformEnumTypes(cmg);
             TransformMethods(cmg);
             TransformModelTypes(cmg);
+            AzureExtensions.ProcessParameterizedHost(cmg);
 
             return cmg;
         }

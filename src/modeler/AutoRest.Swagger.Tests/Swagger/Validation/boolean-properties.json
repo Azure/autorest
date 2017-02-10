@@ -1,0 +1,61 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Boolean properties not recommended in models",
+    "description": "Some documentation.",
+    "version": "2017-02-08"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "PostFoo",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Test1": {
+      "description": "Property for foo path 1",
+      "properties": {
+        "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+        }
+      }
+    },
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "test subscription id"
+      },
+      "ApiVersion": {
+        "name": "api-version",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "test api version"
+      }
+    }
+  }
+}

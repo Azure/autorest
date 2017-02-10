@@ -7,6 +7,9 @@
     "profiles": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -60,6 +63,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -70,6 +74,9 @@
     "profiles_endpoints": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -125,6 +132,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -135,6 +143,9 @@
     "profiles_endpoints_customDomains": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -159,6 +170,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -168,6 +180,9 @@
     "profiles_endpoints_origins": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -192,6 +207,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -401,6 +417,9 @@
     "profiles_endpoints_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -456,6 +475,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -466,6 +486,9 @@
     "profiles_endpoints_customDomains_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -490,6 +513,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -499,6 +523,9 @@
     "profiles_endpoints_origins_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -523,6 +550,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"

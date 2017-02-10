@@ -57,33 +57,39 @@ autorest = (args) ->
 ############################################### 
 task 'test', "runs all tests", ->
   run 'test-cs',
-      'test-node'
-      'test-ruby'
-      'test-python'
       'test-go'
+      'test-java'
+      'test-node'
+      'test-python'
+      'test-ruby'
 
-############################################### 
-task 'test-node', 'runs NodeJS tests', ->
-  exec "npm test", { cwd: './src/generator/AutoRest.NodeJS.Tests/' }
-  exec "npm test", { cwd: './src/generator/AutoRest.NodeJS.Azure.Tests/' }
-
-############################################### 
-task 'test-python', 'runs Python tests', ->
-  exec "tox", { cwd: './src/generator/AutoRest.Python.Tests/' }
-  exec "tox", { cwd: './src/generator/AutoRest.Python.Azure.Tests/' }
-
-############################################### 
-task 'test-ruby', 'runs Ruby tests', ->
-  exec "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Tests/' }
-  exec "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Azure.Tests/' }
-
-############################################### 
-task 'test-go', 'runs Go tests', ['regenerate-go'], -> # FAILS, but also on master branch...
+###############################################
+task 'test-go', 'runs Go tests', -> # FAILS, but also on master branch...
   exec "glide up",               { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }
   exec "go fmt ./generated/...", { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }
   exec "go run ./runner.go",     { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }
 
-############################################### 
+###############################################
+task 'test-java', 'runs Java tests', ->
+  exec "mvn test", { cwd: './src/generator/AutoRest.Java.Tests/' }
+  exec "mvn test", { cwd: './src/generator/AutoRest.Java.Azure.Tests/' }
+
+###############################################
+task 'test-node', 'runs NodeJS tests', ->
+  #exec "npm test", { cwd: './src/generator/AutoRest.NodeJS.Tests/' }
+  exec "npm test", { cwd: './src/generator/AutoRest.NodeJS.Azure.Tests/' }
+
+###############################################
+task 'test-python', 'runs Python tests', ->
+  exec "tox", { cwd: './src/generator/AutoRest.Python.Tests/' }
+  exec "tox", { cwd: './src/generator/AutoRest.Python.Azure.Tests/' }
+
+###############################################
+task 'test-ruby', 'runs Ruby tests', ->
+  exec "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Tests/' }
+  exec "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Azure.Tests/' }
+
+###############################################
 # LEGACY 
 # Instead: have bunch of configuration files sitting in a well-known spot, discover them, feed them to AutoRest, done.
 

@@ -11,6 +11,8 @@ using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Model;
 using AutoRest.Go.Model;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Go
 {
@@ -29,7 +31,7 @@ namespace AutoRest.Go
         public virtual IEnumerable<string> StandardImports => new string[] { "github.com/Azure/go-autorest/autorest/azure", "net/http" };
 
         public virtual IEnumerable<string> PageableImports => new string[] { "net/http", "github.com/Azure/go-autorest/autorest/to" };
-        
+
         public virtual IEnumerable<string> ValidationImport => new string[] { "github.com/Azure/go-autorest/autorest/validation" };
 
         // CommonInitialisms are those "words" within a name that Golint expects to be uppercase.
@@ -82,9 +84,13 @@ namespace AutoRest.Go
                                                             "ManagementClient",
                                                             "NewWithBaseURI",
                                                             "New",
+                                                            "NewWithoutDefaults",
                                                         };
 
         public IReadOnlyDictionary<HttpStatusCode, string> StatusCodeToGoString;
+
+
+        private static readonly Regex semVerPattern = new Regex(@"^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<tag>\S+))?$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of CodeNamerGo.
@@ -412,20 +418,12 @@ namespace AutoRest.Go
         // camelCase or PascalCase.
         private string EnsureNameCase(string name)
         {
-            List<string> words = new List<string>();
-            new List<string>(name.ToWords())
-                .ForEach(s =>
-                {
-                    if (CommonInitialisms.Contains(s))
-                    {
-                        words.Add(s.ToUpper());
-                    }
-                    else
-                    {
-                        words.Add(s);
-                    }
-                });
-            return String.Join(String.Empty, words.ToArray());
+            var builder = new StringBuilder();
+            foreach (var s in name.ToWords())
+            {
+                builder.Append(CommonInitialisms.Contains(s) ? s.ToUpper() : s);
+            }
+            return builder.ToString();
         }
 
         public static string[] SDKVersionFromPackageVersion(string v)
@@ -434,12 +432,19 @@ namespace AutoRest.Go
             {
                 throw new ArgumentNullException("package version");
             }
-            string[] version = v.Split('.');
-            if (version.Length != 3)
+
+            var ver = semVerPattern.Match(v);
+
+            if (ver.Success)
             {
-                throw new InvalidOperationException("version string should have major, minor and patch versions.");
+                var tagVal = ver.Groups["tag"].Success ? ver.Groups["tag"].Value : "";
+                return new[] { ver.Groups["major"].Value, ver.Groups["minor"].Value, ver.Groups["patch"].Value, tagVal };
+                 
             }
-            return version;
+            throw new ArgumentException(
+                paramName: nameof(v),
+                message: "Version strings should be either of the format \"<major>.<minor>.<patch>\" or \"<major>.<minor>.<patch>-<tag>\". Where major, minor, and patch are decimal numbers and tag does not include whitespace.");
+
         }
 
         public override string EscapeDefaultValue(string defaultValue, IModelType type)
