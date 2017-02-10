@@ -4,6 +4,8 @@
     "files.exclude": {
         "attic/*": true,
         "**/.git": true,
+        "**/*.js.map": true,
+        "src/next-gen/**/*.js": true,
         "**/.svn": true,
         "**/.hg": true,
         "**/.DS_Store": true

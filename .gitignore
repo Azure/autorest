@@ -199,7 +199,7 @@ src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
-src/next-gen/*.js
+src/next-gen/**/*.js
 
 *.js.map
 

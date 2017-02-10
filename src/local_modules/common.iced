@@ -117,6 +117,10 @@ module.exports =
     x = -> Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
     "#{x()}#{x()}-#{x()}-#{x()}-#{x()}-#{x()}#{x()}#{x()}"
 
-# build task for tsc 
+# build task for global build
 module.exports.task 'build', 'builds project', -> 
   echo "Building project in #{basefolder}"
+
+# task for vscode
+module.exports.task 'code', 'launches vscode', -> 
+  exec "code #{basefolder}"
