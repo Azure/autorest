@@ -326,4 +326,7 @@
   <data name="BooleanPropertyNotRecommended" xml:space="preserve">
     <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: '{0}'.</value>
   </data>
+    <data name="AllowedTopLevelProperties" xml:space="preserve">
+    <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
+  </data>
 </root>
