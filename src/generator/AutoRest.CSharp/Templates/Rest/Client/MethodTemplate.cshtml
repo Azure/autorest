@@ -278,7 +278,6 @@ else
     else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormData))
     {
     @:System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
-
         foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
         {
     @:if (@(parameter.Name) != null)

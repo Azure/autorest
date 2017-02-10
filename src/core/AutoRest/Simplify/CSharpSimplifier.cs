@@ -16,32 +16,11 @@ using Microsoft.Rest.Azure;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 using System.Net;
-using System.Reflection;
 
 namespace AutoRest.Simplify
 {
     public class CSharpSimplifier
     {
-<<<<<<< HEAD
-=======
-        private static MetadataReference mscorlib;
-        private static MetadataReference newtonsoft;
-        private static MetadataReference xml;
-
-        private static MetadataReference Mscorlib
-        {
-            get {return mscorlib ?? (mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location));}
-        }
-
-        private static MetadataReference Xml {
-            get {return xml ?? (xml = MetadataReference.CreateFromFile($"{Path.GetDirectoryName(typeof(object).Assembly.Location)}\\System.Xml.Linq.dll"));}
-        }
-
-        private static MetadataReference Newtonsoft
-        {
-            get {return newtonsoft ?? (newtonsoft = MetadataReference.CreateFromFile(typeof(Newtonsoft.Json.JsonObjectAttribute).Assembly.Location));}
-        }
-
         public async Task Run()
         {
             var op = new AzureAsyncOperation();
