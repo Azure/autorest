@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Unit.Tests {
     
 
     public class BugTest {
-        internal static string[] SuppressWarnings = {"CS1701", "CS1591"};
+        internal static string[] SuppressWarnings = {"CS1701","CS1702", "CS1591"};
         //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
 
         internal static string[] VsCode = new string[] {
@@ -160,15 +160,29 @@ namespace AutoRest.CSharp.Unit.Tests {
                 }
             }
         }
-        private static readonly string[] _assemblies = new[] {
+        
+        protected static string DOTNET = System.IO.Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        protected static string FRAMEWORK= Path.Combine( DOTNET, "shared", "Microsoft.NETCore.App", "1.0.3" );
+
+        protected static readonly string[] _assemblies = new[] {
+            
+            Path.Combine(FRAMEWORK, "System.Runtime.dll"),
+            Path.Combine(FRAMEWORK, "System.Net.Http.dll"),
+            Path.Combine(FRAMEWORK, "mscorlib.dll"),
+            Path.Combine(FRAMEWORK, "System.Threading.Tasks.dll"),
+            Path.Combine(FRAMEWORK, "System.Net.Primitives.dll"),
+            Path.Combine(FRAMEWORK, "System.Collections.dll"),
+            Path.Combine(FRAMEWORK, "System.Text.Encoding.dll"),
+            Path.Combine(FRAMEWORK, "System.Text.RegularExpressions.dll"),
+            Path.Combine(FRAMEWORK, "System.IO.dll"),
+            
+
             typeof(Object).GetAssembly().Location,
             typeof(Attribute).GetAssembly().Location,
             typeof(IAzureClient).GetAssembly().Location,
             typeof(RestException).GetAssembly().Location,
             typeof(Uri).GetAssembly().Location,
             typeof(File).GetAssembly().Location,
-            typeof(HttpStatusCode).GetAssembly().Location,
-            typeof(HttpClient).GetAssembly().Location,
             typeof(ActionContext).GetAssembly().Location,
             typeof(Controller).GetAssembly().Location,
             typeof(Enumerable).GetAssembly().Location,
@@ -177,7 +191,10 @@ namespace AutoRest.CSharp.Unit.Tests {
             typeof(InlineRouteParameterParser).GetAssembly().Location,
             typeof(ControllerBase).GetAssembly().Location,
             
+            
         };
+
+
         protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
                 .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(), _assemblies);

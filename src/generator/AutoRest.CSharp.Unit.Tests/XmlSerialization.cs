@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Unit.Tests {
                 Assert.Empty(errors);
                 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 using (var service =new ServiceController()) {

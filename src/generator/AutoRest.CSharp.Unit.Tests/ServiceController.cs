@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Unit.Tests
         {
             try
             {
-                currentDirectory = currentDirectory ?? Environment.CurrentDirectory;
+                currentDirectory = currentDirectory ?? System.IO.Directory.GetCurrentDirectory();
                 if (!string.IsNullOrEmpty(currentDirectory))
                 {
                     try
@@ -285,11 +285,7 @@ namespace AutoRest.CSharp.Unit.Tests
             startInfo.UseShellExecute = false;
             startInfo.FileName = path;
             startInfo.Arguments = arguments;
-#if PORTABLE
             startInfo.Environment["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
-#else
-            startInfo.EnvironmentVariables["PORT"] = Port.ToString(CultureInfo.InvariantCulture);
-#endif
             process.OutputDataReceived += _listener.ProcessOutput;
             process.ErrorDataReceived += _listener.ProcessError;
             process.Start();
