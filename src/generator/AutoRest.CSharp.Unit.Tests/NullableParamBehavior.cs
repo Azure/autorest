@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
+using System.IO;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                string generatedCodeFileName = @"GeneratedCode\TestOperations.cs";
+                string generatedCodeFileName = Path.Combine("GeneratedCode", "TestOperations.cs");
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 
@@ -123,7 +124,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                string generatedCodeFileName = @"GeneratedCode\TestOperations.cs";
+                string generatedCodeFileName = Path.Combine("GeneratedCode", "TestOperations.cs");
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 

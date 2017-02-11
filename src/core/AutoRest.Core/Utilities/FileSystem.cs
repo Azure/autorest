@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
@@ -50,12 +51,7 @@ namespace AutoRest.Core.Utilities
         /// <param name="relativePath"></param>
         /// <returns></returns>
         public string MakePathRooted(Uri rootPath, string relativePath)
-        {
-            var combined = new Uri(Path.Combine(rootPath.ToString(), relativePath));
-            return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
-        }
-
-
+            => Path.Combine(rootPath.ToString(), relativePath);
 
         public string ReadFileAsText(string path)
         {
@@ -148,7 +144,7 @@ namespace AutoRest.Core.Utilities
             }
             if (IsCompletePath(path))
             {
-                return new Uri(new Uri(path), ".");
+                return new Uri(Regex.Match(path, @"^(?<dir>.*)[\\\/].*$").Groups["dir"].Value, UriKind.RelativeOrAbsolute);
             }
             else
             {

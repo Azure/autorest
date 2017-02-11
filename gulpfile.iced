@@ -66,7 +66,7 @@ task 'test', "runs all tests", ->
       'test-ruby'
 
 ###############################################
-task 'test-go', 'runs Go tests', (done) ->
+task 'test-go', 'runs Go tests', ['regenerate-go'], (done) ->  # Go does not use generated files as "expected" files and ".gitignore"s them! => need to (and may) just regenerate
   process.env.GOPATH = __dirname + '/src/generator/AutoRest.Go.Tests'
   await exec "glide up",               { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }, defer code, stderr, stdout
   throw error stderr if code isnt 0
