@@ -70,12 +70,12 @@
       <dependency>
         <groupId>com.microsoft.rest</groupId>
         <artifactId>client-runtime</artifactId>
-        <version>1.0.0-beta5-SNAPSHOT</version>
+        <version>1.0.0-beta6-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-client-runtime</artifactId>
-        <version>1.0.0-beta5-SNAPSHOT</version>
+        <version>1.0.0-beta6-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
@@ -159,28 +159,6 @@
 <br />* license information.
 <br />*/</code>]]></bottom>
         </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>exec-maven-plugin</artifactId>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.5.0</version>
-        <executions>
-          <execution>
-            <id>run-server</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>exec</goal>
-            </goals>
-            <configuration>
-              <executable>node</executable>
-              <workingDirectory>${session.executionRootDirectory}/src/dev/TestServer/server</workingDirectory>
-              <arguments>
-                <argument>startup/www</argument>
-              </arguments>
-              <async>true</async>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
     <pluginManagement>

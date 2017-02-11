@@ -73,6 +73,14 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void BooleanPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "boolean-properties.json"));
+
+            messages.AssertOnlyValidationMessage(typeof(BooleanPropertyNotRecommended));
+        }
+
+        [Fact]
         public void DefaultValueInEnumValidation()
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "default-value-not-in-enum.json"));
@@ -212,6 +220,13 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "required-property-not-in-properties.json"));
             messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMustExist));
+        }
+
+        [Fact]
+        public void BodyTopLevelPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "body-top-level-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
         }
 
         [Fact]

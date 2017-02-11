@@ -851,7 +851,47 @@
           }
         }
       }
-    }
+    },
+    "/azurespecials/customNamedRequestIdHead": {
+      "head": {
+        "operationId": "header_customNamedRequestIdHead",
+        "description": "Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request",
+        "parameters": [
+          {
+            "name": "foo-client-request-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The fooRequestId",
+            "x-ms-client-request-id": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "x-ms-request-id": "foo-request-id",
+        "responses": {
+          "200": {
+            "headers": {
+              "foo-request-id": {
+                "description": "Gets the foo-request-id.",
+                "type": "string"
+              }
+            },
+            "description": "Gets the foo-request-id"
+          },
+          "404": {
+            "description": "Gets the foo-request-id"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
   },
   "parameters": {
     "globalSubscriptionId": {

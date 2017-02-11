@@ -74,6 +74,10 @@ namespace AutoRest.Python.Model
                 var requireParams = new List<string>();
                 foreach (var property in parameters)
                 {
+                    if (property.IsConstant)
+                    {
+                        continue;
+                    }
                     if (property.IsRequired)
                     {
                         requireParams.Add(property.Name);

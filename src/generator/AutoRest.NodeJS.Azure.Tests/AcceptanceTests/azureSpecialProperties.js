@@ -204,6 +204,17 @@ describe('nodejs', function () {
       });
     });
     
+    it('should allow custom-named request-id headers to be used in head operations', function (done) {
+      testClient.header.customNamedRequestIdHead("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", function (error, result, request, response) {
+        should.not.exist(error);
+        response.statusCode.should.equal(200);
+        should.not.exist(request.headers["x-ms-client-request-id"]);
+        should.equal(response.headers["foo-request-id"], "123");
+        result.should.equal(true);
+        done();
+      });
+    });
+    
     it('should support OData filter', function (done) {
       var options = {
         filter: "id gt 5 and name eq 'foo'",
