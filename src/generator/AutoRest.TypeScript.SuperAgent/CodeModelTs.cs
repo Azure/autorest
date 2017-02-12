@@ -5,7 +5,7 @@ using System.Net;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 
-namespace AutoRest.TypeScript.SuperAgent.Model
+namespace AutoRest.TypeScript.SuperAgent
 {
     public class CodeModelTs : CodeModel
     {

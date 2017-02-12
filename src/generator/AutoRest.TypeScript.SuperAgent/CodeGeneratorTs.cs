@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.TypeScript.SuperAgent.Model;
+using AutoRest.TypeScript.SuperAgent.ModelBinder;
 using AutoRest.TypeScript.SuperAgent.Properties;
 using AutoRest.TypeScript.SuperAgent.Templates;
 
@@ -31,8 +32,11 @@ namespace AutoRest.TypeScript.SuperAgent
             {
                 throw new InvalidCastException("CodeModel is not a TypeScript code model.");
             }
+
+            var modelsBinder = new ModelsModelBinder();
+            var models = modelsBinder.Bind(codeModel);
            
-            var modelTemplate = new ModelTemplate {Model = codeModel};
+            var modelTemplate = new ModelTemplate {Model = models};
             await Write(modelTemplate, "model.ts");
 
             var clientTemplate = new ClientTemplate { Model = codeModel };

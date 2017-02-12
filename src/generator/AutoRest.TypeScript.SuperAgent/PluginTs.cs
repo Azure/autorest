@@ -17,15 +17,15 @@ namespace AutoRest.TypeScript.SuperAgent
 
                 // set code model implementations our own implementations 
                 new Factory<CodeModel, CodeModelTs>(),
-                //new Factory<CompositeType, CompositeTypeCsa>(),
+                new Factory<CompositeType, CompositeTypeTs>(),
                 //new Factory<DictionaryType, DictionaryTypeCs>(),
                 //new Factory<EnumType, EnumTypeCs>(),
                 //new Factory<Method, MethodCsa>(),
                 //new Factory<MethodGroup, MethodGroupCsa>(),
-                //new Factory<Parameter, ParameterCsa>(),
-                //new Factory<PrimaryType, PrimaryTypeCsa>(),
-                //new Factory<Property, PropertyCs>(),
-                //new Factory<SequenceType, SequenceTypeCs>(),
+                new Factory<Parameter, ParameterTs>(),
+                new Factory<PrimaryType, PrimaryTypeTs>(),
+                new Factory<Property, PropertyTs>(),
+                new Factory<SequenceType, SequenceTypeTs>(),
 
                 // we have a specific constructor for when a literal type is necessary.
                 //new Factory<ILiteralType> {(string name) => new CompositeTypeCsa {Name = {FixedValue = name}}},

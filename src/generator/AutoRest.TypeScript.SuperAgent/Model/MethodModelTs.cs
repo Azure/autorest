@@ -15,10 +15,10 @@ namespace AutoRest.TypeScript.SuperAgent.Model
             _groupName = groupName;
         }
 
-        public string MethodName => _method.SerializedName.Value.Replace($"{_groupName}_", "").ToCamelCase();
+        public string MethodName => _method.Name.Value.Replace($"{_groupName}_", "").ToCamelCase();
 
-        public string OkResponseTypeName => _method.Responses[HttpStatusCode.OK].Body.ClassName;
-        public string RequestTypeName => $"{OkResponseTypeName}Request";
+        public string OkResponseTypeName => _method.Responses[HttpStatusCode.OK].Body.GetImplementationName();
+        public string RequestTypeName =>  $"{OkResponseTypeName}Request";
 
         public string ResponseTypeName => $"{OkResponseTypeName}Response";
 
