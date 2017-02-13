@@ -101,7 +101,7 @@ task 'test-python', 'runs Python tests', (done) ->
   done()
 
 ###############################################
-task 'test-ruby', 'runs Ruby tests', ['regenerate-ruby'], (done) ->  # Ruby does not use generated files as "expected" files and ".gitignore"s them! => need to (and may) just regenerate
+task 'test-ruby', 'runs Ruby tests', ['regenerate-ruby', 'regenerate-rubyazure'], (done) ->  # Ruby does not use generated files as "expected" files and ".gitignore"s them! => need to (and may) just regenerate
   await exec "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Tests/' }, defer code, stderr, stdout
   throw error stderr if code isnt 0
   await exec "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Azure.Tests/' }, defer code, stderr, stdout
