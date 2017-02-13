@@ -31,7 +31,6 @@ public class PagingTests {
     public static void setup() {
         RestClient restClient = new RestClient.Builder()
                 .withBaseUrl("http://localhost:3000")
-                .withInterceptor(new LoggingInterceptor(LogLevel.BODY_AND_HEADERS))
                 .withSerializerAdapter(new AzureJacksonAdapter())
                 .withResponseBuilderFactory(new AzureResponseBuilder.Factory())
                 .build();
