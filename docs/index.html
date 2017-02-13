@@ -26,8 +26,8 @@
 
 <p>The <strong>AutoRest</strong> tool generates client libraries for accessing RESTful web services. Input to <em>AutoRest</em> is a spec that describes the REST API using the <a href="https://github.com/OAI/OpenAPI-Specification">Open API Initiative</a> format.</p>
 
-<h2>
-<a id="getting-autorest" class="anchor" href="#getting-autorest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting AutoRest</h2>
+<h2><a id="getting-autorest" class="anchor" href="#getting-autorest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting AutoRest</h2>
+<h3><a id="getting-autorest-windows" class="anchor" href="#getting-autorest-windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Windows</h3>
 
 <p>The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
 <a href="https://www.nuget.org/packages/autorest/"><img src="https://img.shields.io/nuget/v/autorest.svg?style=flat-square" alt="AutoRest NuGet"></a></p>
@@ -35,13 +35,17 @@
 <p>Alternatively it can be installed from <a href="https://chocolatey.org/">Chocolatey</a> by running:
 <a href="https://chocolatey.org/packages/AutoRest"><img src="https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square" alt="AutoRest Chocolatey"></a></p>
 
-<pre><code>choco install autorest
-</code></pre>
+<pre><code>choco install autorest</code></pre>
 
 <p>Nightlies are available via MyGet:
 <a href="https://www.myget.org/gallery/autorest"><img src="https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square" alt="AutoRest MyGet"></a></p>
 
-<p>AutoRest can be run on macOS and *nix using <a href="http://www.mono-project.com/download">Mono</a>:</p>
+<h3><a id="getting-autorest-macos-linux" class="anchor" href="#getting-autorest-macos-linux" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>macOS &amp; Linux</h3>
+
+<p>The easiest way for macOS users to get AutoRest is via <a href="https://brew.sh">Homebrew:</a></p>
+<pre><code>brew update &amp;&amp; brew install autorest</code></pre>
+
+<p>It can also run on macOS and Linux using <a href="http://www.mono-project.com/download">Mono</a>:</p>
 
 <pre>
 <code># Download & Unpack Autorest

@@ -4,48 +4,57 @@
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
-##Getting AutoRest
+## Getting AutoRest
+### Windows
+##### Nuget
 The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
 [![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg?style=flat-square)](https://www.nuget.org/packages/autorest/)
-
+##### Chocolatey
 Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
 [![AutoRest Chocolatey](https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square)](https://chocolatey.org/packages/AutoRest)
 
     choco install autorest
-    
+
+##### MyGet
 Nightlies are available via MyGet:
 [![AutoRest MyGet](https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square)](https://www.myget.org/gallery/autorest)
 
-AutoRest can be run on macOS and *nix using [Mono](http://www.mono-project.com/download):
+### macOS & Linux
+##### Homebrew
+The easiest way for macOS users to get AutoRest is via [Homebrew](https://brew.sh/):
+    
+    brew update && brew install autorest
 
-  # Download & Unpack Autorest
-  curl -LO https://github.com/Azure/autorest/releases/download/AutoRest-0.16.0/autorest.0.16.0.zip && \
-  unzip autorest.0.16.0.zip -d autorest/ && \
-  cd autorest && \
+##### Mono
+It can also run on macOS and Linux using [Mono](http://www.mono-project.com/download):
+```
+# Download & Unpack Autorest
+curl -LO https://github.com/Azure/autorest/releases/download/AutoRest-0.16.0/autorest.0.16.0.zip && unzip autorest.0.16.0.zip -d autorest/ && cd autorest
 
-  # Download Swagger.json example
-  curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json && \
+# Download Swagger.json example
+curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json
 
-  # Run AutoRest using mono
-  mono AutoRest.exe \
-    -CodeGenerator CSharp \
-    -Input petstore.json \
-    -OutputDirectory CSharp_PetStore -Namespace PetStore
+# Run AutoRest using mono
+mono AutoRest.exe \
+  -CodeGenerator CSharp \
+  -Input petstore.json \
+  -OutputDirectory CSharp_PetStore -Namespace PetStore
+```
+##### Docker
+Or using [Docker](https://docs.docker.com/engine/installation):
+```
+# Download Swagger.json example
+curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json
 
-Or [Docker](https://docs.docker.com/engine/installation):
+# Download latest AutoRest Docker image
+docker pull azuresdk/autorest:latest
 
-  # Download Swagger.json example
-  `curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`
-
-  # Download latest AutoRest Docker image
-  `docker pull azuresdk/autorest:latest`
-
-  # Run AutoRest using Docker, mounting the current folder (pwd) into /home inside the container
-  `docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
-    -CodeGenerator CSharp \
-    -Input /home/petstore.json \
-    -OutputDirectory /home/CSharp_PetStore -Namespace PetStore`
-
+# Run AutoRest using Docker, mounting the current folder (pwd) into /home inside the container
+docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
+  -CodeGenerator CSharp \
+  -Input /home/petstore.json \
+  -OutputDirectory /home/CSharp_PetStore -Namespace PetStore
+```
 ## Building AutoRest
 AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](docs/developer/guide/building-code.md) to build and test AutoRest.
 
