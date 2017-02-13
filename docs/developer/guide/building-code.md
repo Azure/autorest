@@ -13,7 +13,7 @@ Expected time around 100 minutes to install.
 - Windows 10 Anniversary - (has PackageManagement, developer mode and supports WSL.)
 - JDK 8
 - Android SDK
-- NodeJS
+- NodeJS (LTS Version: v6.9.4 or higher)
 - Gulp
 - Ruby 2.3
 - Ruby Devkit

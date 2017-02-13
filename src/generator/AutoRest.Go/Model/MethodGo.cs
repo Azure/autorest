@@ -4,6 +4,7 @@
 using AutoRest.Go.Properties;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
+using AutoRest.Extensions;
 using AutoRest.Extensions.Azure;
 using AutoRest.Extensions.Azure.Model;
 using Newtonsoft.Json;
@@ -25,6 +26,9 @@ namespace AutoRest.Go.Model
                                                  "The channel will be used to cancel polling and any outstanding HTTP requests.";
 
         public bool NextAlreadyDefined { get; private set; }
+
+        public bool IsCustomBaseUri
+            => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
 
         public MethodGo()        
         {
@@ -140,6 +144,10 @@ namespace AutoRest.Go.Model
 
         public IEnumerable<ParameterGo> OptionalHeaderParameters => ParametersGo.HeaderParameters(false);
 
+        public IEnumerable<ParameterGo> URLParameters => ParametersGo.URLParameters();
+
+        public string URLMap => URLParameters.BuildParameterMap("urlParameters");
+
         public IEnumerable<ParameterGo> PathParameters => ParametersGo.PathParameters();
 
         public string PathMap => PathParameters.BuildParameterMap("pathParameters");
@@ -184,7 +192,14 @@ namespace AutoRest.Go.Model
                 }
 
                 decorators.Add(HTTPMethodDecorator);
-                decorators.Add("autorest.WithBaseURL(client.BaseURI)");
+                if (!this.IsCustomBaseUri)
+                {
+                    decorators.Add(string.Format("autorest.WithBaseURL(client.BaseURI)"));
+                }
+                else
+                {
+                    decorators.Add(string.Format("autorest.WithCustomBaseURL(\"{0}\", urlParameters)", CodeModel.BaseUrl));
+                }          
 
                 decorators.Add(string.Format(PathParameters.Any()
                             ? "autorest.WithPathParameters(\"{0}\",pathParameters)"
