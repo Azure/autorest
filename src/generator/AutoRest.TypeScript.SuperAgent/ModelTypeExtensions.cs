@@ -21,5 +21,20 @@ namespace AutoRest.TypeScript.SuperAgent
 
             return typeName;
         }
+
+        public static bool IsPrimaryType(this IModelType modelType)
+        {
+            return modelType is PrimaryType;
+        }
+
+        public static bool IsSequenceType(this IModelType modelType)
+        {
+            return modelType is SequenceType;
+        }
+
+        public static bool IsComplexType(this IModelType modelType)
+        {
+            return modelType is CompositeType;
+        }
     }
 }

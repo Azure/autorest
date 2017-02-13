@@ -34,7 +34,7 @@ abstract class RequestBase {
 @:
 }
 
-@foreach (var model in Model.ResponseModels)
+@foreach (var model in Model.RequestModels)
 {
 @:export class @(model.Name) extends RequestBase {
     foreach (var property in model.Properties)

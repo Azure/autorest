@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
 
 namespace AutoRest.TypeScript.SuperAgent.ModelBinder
@@ -30,7 +31,24 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
             foreach (var method in codeModel.Methods)
             {
                 var okResponse = method.Responses[HttpStatusCode.OK];
-                var name = okResponse.Body.Name;
+                var useOptionForTypeName = okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType();
+                string name = null;
+                
+                if(!useOptionForTypeName)
+                {
+                    var serializedName = method.SerializedName.Value;
+                    var parts = serializedName.Split('_');
+                    if (parts.Length > 1)
+                    {
+                        name = parts[0];
+                    }
+                }
+
+                if (name == null)
+                {
+                    name = okResponse.Body.Name;
+                }
+
                 var modelType = new Model.Model
                 {
                     Name = $"{name}Request",
@@ -50,11 +68,11 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                 }
             }
 
-            foreach (var modelType in nonPropertyTypes)
+            foreach (var modelType in nonPropertyTypes.Where(m => !m.IsPrimaryType() || !m.IsSequenceType()))
             {
                 var model = new Model.Model
                             {
-                                Name = $"{modelType.Name}Response",
+                                Name =  $"{modelType.Name}Response",
                                 Properties = new List<ModelProperty>()
                             };
 
