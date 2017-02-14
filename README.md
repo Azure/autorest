@@ -35,16 +35,16 @@ AutoRest can be run on macOS and *nix using [Mono](http://www.mono-project.com/d
 Or [Docker](https://docs.docker.com/engine/installation):
 
   # Download Swagger.json example
-  curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json
+  `curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`
 
   # Download latest AutoRest Docker image
-  docker pull azuresdk/autorest:latest
+  `docker pull azuresdk/autorest:latest`
 
   # Run AutoRest using Docker, mounting the current folder (pwd) into /home inside the container
-  docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
+  `docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
     -CodeGenerator CSharp \
     -Input /home/petstore.json \
-    -OutputDirectory /home/CSharp_PetStore -Namespace PetStore
+    -OutputDirectory /home/CSharp_PetStore -Namespace PetStore`
 
 ## Building AutoRest
 AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](docs/developer/guide/building-code.md) to build and test AutoRest.

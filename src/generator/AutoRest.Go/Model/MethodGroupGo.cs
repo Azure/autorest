@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Go;
+using AutoRest.Extensions;
 
 namespace AutoRest.Go.Model
 {
@@ -17,8 +18,14 @@ namespace AutoRest.Go.Model
         public string PackageName { get; private set; }
         public string BaseClient { get; private set; }
 
+        public bool IsCustomBaseUri
+            => CodeModel.Extensions.ContainsKey(SwaggerExtensions.ParameterizedHostExtension);
+
         public string GlobalParameters;
         public string HelperGlobalParameters;
+        public string GlobalDefaultParameters;
+        public string HelperGlobalDefaultParameters;
+        public string ConstGlobalDefaultParameters;
         public IEnumerable<string> Imports { get; private set; }
 
         public MethodGroupGo(string name): base(name)
@@ -58,6 +65,9 @@ namespace AutoRest.Go.Model
             BaseClient = cmg.BaseClient;
             GlobalParameters = cmg.GlobalParameters;
             HelperGlobalParameters = cmg.HelperGlobalParameters;
+            GlobalDefaultParameters = cmg.GlobalDefaultParameters;
+            HelperGlobalDefaultParameters = cmg.HelperGlobalDefaultParameters;
+            ConstGlobalDefaultParameters = cmg.ConstGlobalDefaultParameters;
 
 
 

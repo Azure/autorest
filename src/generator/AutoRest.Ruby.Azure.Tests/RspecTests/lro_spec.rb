@@ -115,13 +115,13 @@ describe 'Long Running Operation' do
 
   it 'should succeed for post async retry' do
     result = @lros_client.post_async_retry_succeeded_async(@product).value!
-    expect(result.body).to be_nil
+    expect(result.body).to be_instance_of(Product)
     expect(result.response.status).to eq(200)
   end
 
   it 'should succeed for post async no retry' do
     result = @lros_client.post_async_no_retry_succeeded_async(@product).value!
-    expect(result.body).to be_nil
+    expect(result.body).to be_instance_of(Product)
     expect(result.response.status).to eq(200)
   end
 

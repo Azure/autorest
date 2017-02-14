@@ -81,6 +81,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
+        [CollectionRule(typeof(BodyTopLevelProperties))]
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustHaveEmptyRequestBody))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
@@ -94,7 +95,8 @@ namespace AutoRest.Swagger.Model
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
-        /// </summary>
+        /// <summary>
+        [Rule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(TrackedResourceValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]

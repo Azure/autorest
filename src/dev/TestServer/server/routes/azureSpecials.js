@@ -242,6 +242,18 @@ var specials = function (coverage) {
           res.set(headers).status(200).end();
         }
   });
+  
+  router.head('/customNamedRequestIdHead', function (req, res, next) {
+        var headers = {
+          'foo-request-id': '123'
+        };
+        if (req.get("foo-client-request-id") !== '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0') {
+          utils.send400(res, next, "Header foo-client-request-id must be set to 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.");
+        } else {
+          coverage['AzureXmsCustomNamedRequestId']++;
+          res.set(headers).status(200).end();
+        }
+  });
 }
 
 specials.prototype.router = router;

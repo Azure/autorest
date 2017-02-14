@@ -18,7 +18,7 @@ namespace AutoRest.Java
 {
     public class CodeGeneratorJv : CodeGenerator
     {
-        private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:1.0.0-beta5-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
+        private const string ClientRuntimePackage = "com.microsoft.rest:client-runtime:1.0.0-beta6-SNAPSHOT from snapshot repo https://oss.sonatype.org/content/repositories/snapshots/";
         private const string _packageInfoFileName = "package-info.java";
 
         public CodeNamerJv Namer { get; private set; }
