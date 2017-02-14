@@ -423,21 +423,15 @@ else
         @:{
             @if (Model.CodeModel.ShouldGenerateXmlSerialization)
             {<text>
-            @if (Model.IsXNullableReturnType)
-            {
-            @:@responsePair.Value.Body.AsNullableType() _tmp_ = null;
-            }
+            @responsePair.Value.Body.AsNullableType() _tmp_ = null;
             if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
                 @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
             {
-            @if (Model.IsXNullableReturnType)
-            {
-                @:_result.Body = _tmp_;
-            }
+                _result.Body = _tmp_;
             }
             else
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
             }</text>
             }
             else
@@ -479,12 +473,12 @@ else
         @:   _result.Body = _tmp_;
         @:} else 
         @:{
-        @:    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType))>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType())>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
         @:}
         }
         else
         {
-        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType))>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+        @:_result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType(Model. IsXNullableReturnType))>(_defaultResponseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
         }
     @:}
     @:catch (Newtonsoft.Json.JsonException ex)
