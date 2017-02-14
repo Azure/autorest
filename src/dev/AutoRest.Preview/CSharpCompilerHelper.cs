@@ -54,7 +54,7 @@ namespace AutoRest.Preview
             }
 
             // try to load the assembly
-            var asm = Assembly.Load(result.Output.GetBuffer());
+            var asm = LoadAssembly(result.Output);
             if (asm == null)
             {
                 throw new Exception("could not load assembly");

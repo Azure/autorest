@@ -16,6 +16,7 @@ using YamlDotNet.RepresentationModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+
 namespace AutoRest
 {
     internal class Program
@@ -47,6 +48,8 @@ namespace AutoRest
                             Console.Write(InternalPreprocessor(settings.FileSystem.ReadFileAsText(settings.Input)));
                             return 0;
                         }
+
+                        Settings.AutoRestFolder = Path.GetDirectoryName( typeof(Program).GetAssembly().Location);
 
                         // determine some reasonable default namespace
                         if (settings.Namespace == null)
@@ -103,7 +106,7 @@ namespace AutoRest
                                 {
                                     Logger.Instance.Log(Category.Error, Resources.GenerationFailed);
                                     Logger.Instance.Log(Category.Error, "{0} {1}",
-                                        typeof(Program).Assembly.ManifestModule.Name, string.Join(" ", args));
+                                        typeof(Program).GetAssembly().ManifestModule.Name, string.Join(" ", args));
                                 }
                             }
                             else

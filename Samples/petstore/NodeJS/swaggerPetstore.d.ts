@@ -5,7 +5,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as models from "./models";
 
 declare class SwaggerPetstore {
-    /**
+        /**
      * @class
      * Initializes a new instance of the SwaggerPetstore class.
      * @constructor

@@ -12,7 +12,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Describes a single response from an API Operation.
     /// </summary>
-    [Serializable]
     public class OperationResponse : SwaggerBase
     {
         private string _description;

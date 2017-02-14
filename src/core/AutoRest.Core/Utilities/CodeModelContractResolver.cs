@@ -157,7 +157,7 @@ namespace AutoRest.Core.Utilities
 
             // if the property is marked as a JsonObject, it should never be treated as a collection
             // and hence, doesn't need our ShouldSerialize overload.
-            if (property.PropertyType.CustomAttributes.Any(each => each.AttributeType == typeof(JsonObjectAttribute)))
+            if (property.PropertyType.CustomAttributes().Any(each => each.AttributeType == typeof(JsonObjectAttribute)))
             {
                 return property;
             }
@@ -230,20 +230,18 @@ namespace AutoRest.Core.Utilities
                     IEnumerable enumerable = null;
 
                     // this value could be in a public field or public property
-                    switch (member.MemberType)
+                    if (member is PropertyInfo )
                     {
-                        case MemberTypes.Property:
-                            enumerable = instance
-                                .GetType()
-                                .GetProperty(member.Name)
-                                .GetValue(instance, null) as IEnumerable;
-                            break;
-                        case MemberTypes.Field:
+                        enumerable = instance
+                            .GetType()
+                            .GetProperty(member.Name)
+                            .GetValue(instance, null) as IEnumerable;
+                    }
+                    if( member is FieldInfo ) { 
                             enumerable = instance
                                 .GetType()
                                 .GetField(member.Name)
                                 .GetValue(instance) as IEnumerable;
-                            break;
                     }
 
                     return (enumerable == null) || enumerable.GetEnumerator().MoveNext();

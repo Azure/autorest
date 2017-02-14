@@ -175,7 +175,7 @@ Readonlyproperty.prototype.putValid = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody = new client.models['ReadonlyObj']();
+    var complexBody = new client.models['ReadonlyObj']();
   try {
     if (size !== null && size !== undefined)
     {

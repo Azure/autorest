@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using MirrorPolymorphic;
+    using Fixtures.MirrorPolymorphic;
     using Newtonsoft.Json;
     using System.Linq;
 

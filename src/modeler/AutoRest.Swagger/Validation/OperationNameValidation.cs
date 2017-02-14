@@ -4,6 +4,7 @@
 using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using System.Text.RegularExpressions;
 
@@ -54,19 +55,19 @@ namespace AutoRest.Swagger.Validation
             bool isOperationNameValid = true;
             string httpVerb = context?.Parent?.Key;
 
-            if (httpVerb.Equals("GET", StringComparison.InvariantCultureIgnoreCase))
+            if (httpVerb.EqualsIgnoreCase("GET"))
             {
                 isOperationNameValid = GET_NOUN_VERB_PATTERN.IsMatch(entity) || GET_VERB_PATTERN.IsMatch(entity);
             }
-            else if (httpVerb.Equals("PUT", StringComparison.InvariantCultureIgnoreCase))
+            else if (httpVerb.EqualsIgnoreCase("PUT"))
             {
                 isOperationNameValid = PUT_NOUN_VERB_PATTERN.IsMatch(entity) || PUT_VERB_PATTERN.IsMatch(entity);
             }
-            else if (httpVerb.Equals("PATCH", StringComparison.InvariantCultureIgnoreCase))
+            else if (httpVerb.EqualsIgnoreCase("PATCH"))
             {
                 isOperationNameValid = PATCH_NOUN_VERB_PATTERN.IsMatch(entity) || PATCH_VERB_PATTERN.IsMatch(entity);
             }
-            else if (httpVerb.Equals("DELETE", StringComparison.InvariantCultureIgnoreCase))
+            else if (httpVerb.EqualsIgnoreCase("DELETE"))
             {
                 isOperationNameValid = DELETE_NOUN_VERB_PATTERN.IsMatch(entity) || DELETE_VERB_PATTERN.IsMatch(entity);
             }

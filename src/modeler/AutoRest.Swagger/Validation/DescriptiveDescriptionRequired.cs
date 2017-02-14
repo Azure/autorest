@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -22,7 +23,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         internal static bool IsImpermissibleValue(this string description)
         {
-            return ImpermissibleDescriptions.Any(s => s.Equals(description, System.StringComparison.InvariantCultureIgnoreCase));
+            return ImpermissibleDescriptions.Any(s => s.EqualsIgnoreCase(description));
         }
     }
 

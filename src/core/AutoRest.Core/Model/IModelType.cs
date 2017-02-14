@@ -166,7 +166,7 @@ namespace AutoRest.Core.Model
 
             var ta = JsonConvert.SerializeObject(this, CodeModelSettings.SerializerSettings);
             var tb = JsonConvert.SerializeObject(other, CodeModelSettings.SerializerSettings);
-            return ta == tb;
+            return JToken.DeepEquals(JsonConvert.DeserializeObject(ta) as JToken, JsonConvert.DeserializeObject(tb) as JToken);
         }
 
         /// <summary>

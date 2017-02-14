@@ -15,7 +15,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 if (Name != "String")
                 {
                     yield return string.Join(".",
-                        (CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture)) + (Name.ToString().EndsWith("Inner") ? ".implementation" : ""),
+                        (CodeModel?.Namespace.ToLowerInvariant()) + (Name.ToString().EndsWith("Inner") ? ".implementation" : ""),
                         Name);
                 }
             }
