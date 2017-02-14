@@ -4,18 +4,32 @@
 using AutoRest.Core.Validation;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Logging
 {
     public class JsonValidationLogListener : ILogListener
     {
-        private List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
+        private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
+
+        private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
 
         public void Log(LogMessage message)
         {
             var validationMessage = message as ValidationMessage;
             if (validationMessage != null && message.Severity > Category.Debug)
             {
+                string path = validationMessage.Path.ObjectPath.Path
+                    .OfType<ObjectPathPartProperty>()
+                    .Select(p => p.Property)
+                    .SkipWhile(p => p != "paths")
+                    .Skip(1)
+                    .FirstOrDefault();
+                var pathComponents = resPathPattern.Match(path ?? "");
+                var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
+                var pathComponentResourceType = pathComponents.Groups["resourceType"];
+
                 var rawMessage = new Dictionary<string, string>();
                 rawMessage["type"] = validationMessage.Severity.ToString();
                 rawMessage["code"] = validationMessage.Rule.GetType().Name;
@@ -24,8 +38,8 @@ namespace AutoRest.Core.Logging
                 rawMessage["json-path"] = validationMessage.Path.ReadablePath;
                 rawMessage["id"] = validationMessage.Rule.Id;
                 rawMessage["validationCategory"] = validationMessage.Rule.ValidationCategory.ToString();
-                rawMessage["providerNamespace"] = "providerNamespace_WAT";
-                rawMessage["resourceType"] = "resourceType_WAT";
+                rawMessage["providerNamespace"] = pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null;
+                rawMessage["resourceType"] = pathComponentResourceType.Success ? pathComponentResourceType.Value : null;
                 rawMessageCollection.Add(rawMessage);
             }
         }
