@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
 
 namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 {
-    public class ModelsModelBinder
+    public class ModelsModelBinder : ITsModelBinder<ModelsModel>
     {
         public ModelsModel Bind(CodeModelTs codeModel)
         {
@@ -24,55 +21,88 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
             };
 
             var parameters = codeModel.Methods.SelectMany(m => m.Parameters).ToArray();
-            var propertyTypes = parameters.Select(p => p.ModelType).ToArray();
-            var modelTypes = codeModel.ModelTypes.ToArray();
-            var nonPropertyTypes = modelTypes.Where(m => !propertyTypes.Contains(m)).ToArray();
+            var modelTypes = codeModel.ModelTypes.ToList();
 
             foreach (var method in codeModel.Methods)
             {
                 var okResponse = method.Responses[HttpStatusCode.OK];
-                var useOptionForTypeName = okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType();
-                string name = null;
-                
-                if(!useOptionForTypeName)
+
+                var doNotWrap = okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType();
+
+                string requestName = null;
+                string responseName = null;
+
+                if (doNotWrap)
                 {
                     var serializedName = method.SerializedName.Value;
                     var parts = serializedName.Split('_');
                     if (parts.Length > 1)
                     {
-                        name = parts[0];
+                        requestName = parts[0];
                     }
+
+                    responseName = okResponse.Body.GetImplementationName();
+                }
+                else
+                {
+                    responseName = okResponse.Body.Name;
                 }
 
-                if (name == null)
+                if (requestName == null)
                 {
-                    name = okResponse.Body.Name;
+                    requestName = okResponse.Body.GetImplementationName();
                 }
 
-                var modelType = new Model.Model
+                var requestModelType = new Model.Model
                 {
-                    Name = $"{name}Request",
+                    Name = $"{requestName}Request",
                     Properties = new List<ModelProperty>()
                 };
 
-                models.RequestModels.Add(modelType);
-
                 foreach (var parameter in method.Parameters)
                 {
-                    modelType.Properties.Add(new ModelProperty
+                    requestModelType.Properties.Add(new ModelProperty
+                    {
+                        Name = parameter.Name.ToCamelCase(),
+                        IsRequired = parameter.IsRequired,
+                        TypeName = parameter.ModelType.GetImplementationName()
+                    });
+                }
+
+                models.RequestModels.Add(requestModelType);
+
+                if (okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType())
+                {
+                    continue;
+                }
+
+                var responseModelType = new Model.Model
+                {
+                    Name = responseName,
+                    Properties = new List<ModelProperty>()
+                };
+
+                var type = modelTypes.First(m => m.ClassName == okResponse.Body.ClassName);
+                modelTypes.Remove(type);
+
+                foreach (var property in type.Properties)
+                {
+                    responseModelType.Properties.Add(new ModelProperty
                                              {
-                                                 Name = parameter.Name,
-                                                 IsRequired = parameter.IsRequired,
-                                                 TypeName = parameter.ModelType.GetImplementationName()
+                                                 Name = property.Name.ToCamelCase(),
+                                                 IsRequired = property.IsRequired,
+                                                 TypeName = property.ModelType.GetImplementationName()
                                              });
                 }
+
+                models.ResponseModels.Add(responseModelType);
             }
 
-            foreach (var modelType in nonPropertyTypes.Where(m => !m.IsPrimaryType() || !m.IsSequenceType()))
+            foreach (var modelType in modelTypes.Where(m => !m.IsPrimaryType() || !m.IsSequenceType()))
             {
                 var model = new Model.Model
                             {
-                                Name =  $"{modelType.Name}Response",
+                                Name =  $"{modelType.Name}",
                                 Properties = new List<ModelProperty>()
                             };
 
@@ -82,7 +112,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                 {
                     model.Properties.Add(new ModelProperty
                                          {
-                                             Name = propertyType.Name,
+                                             Name = propertyType.Name.ToCamelCase(),
                                              IsRequired = propertyType.IsRequired,
                                              TypeName = propertyType.GetImplementationName()
                                          });

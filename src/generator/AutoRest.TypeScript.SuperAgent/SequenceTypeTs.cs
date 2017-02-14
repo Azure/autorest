@@ -1,18 +1,24 @@
-﻿using System;
-using AutoRest.Core.Model;
+﻿using AutoRest.Core.Model;
 
 namespace AutoRest.TypeScript.SuperAgent
 {
     public class SequenceTypeTs : SequenceType, IImplementationNameAware
     {
-        public SequenceTypeTs()
-        {
-            //Name.OnGet += v => ImplementationName;
-        }
-
         public virtual string ImplementationName
         {
-            get { return $"{XmlName}[]"; }
+            get
+            {
+                var name = XmlName;
+
+                var elementType = ElementType as IImplementationNameAware;
+
+                if (elementType != null)
+                {
+                    name = elementType.ImplementationName;
+                }
+
+                return $"{name}[]";
+            }
         }
     }
 }

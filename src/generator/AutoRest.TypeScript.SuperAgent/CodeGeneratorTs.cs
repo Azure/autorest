@@ -34,12 +34,15 @@ namespace AutoRest.TypeScript.SuperAgent
             }
 
             var modelsBinder = new ModelsModelBinder();
+            var clientModelsBinder = new ClientGroupsModelBinder();
+
             var models = modelsBinder.Bind(codeModel);
+            var clientModels = clientModelsBinder.Bind(codeModel);
            
             var modelTemplate = new ModelTemplate {Model = models};
             await Write(modelTemplate, "model.ts");
 
-            var clientTemplate = new ClientTemplate { Model = codeModel };
+            var clientTemplate = new ClientTemplate { Model = clientModels };
             await Write(clientTemplate, "api.ts");
            
         }

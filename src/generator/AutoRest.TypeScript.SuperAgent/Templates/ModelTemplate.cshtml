@@ -7,7 +7,7 @@
 // Tool version: @Model.Header.GeneratorVersion
 
 abstract class RequestBase {
-    validateProperty(value: Any, name: string){
+    validateProperty(value: any, name: string){
         if(value === null){
             throw new Error("Missing required property value: " +name);
         }
@@ -52,7 +52,7 @@ abstract class RequestBase {
 @:    public validate(){
     foreach (var p in model.Properties.Where(p => p.IsRequired))
     {
-@:        validateProperty(this.@(p.Name), "@(p.Name)");
+@:        this.validateProperty(this.@(p.Name), "@(p.Name)");
     }
 @:    }
 @:}

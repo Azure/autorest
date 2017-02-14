@@ -15,11 +15,11 @@ namespace AutoRest.TypeScript.SuperAgent
 
         }
 
-        public string ImplementationName => ((IModelType)this).Name.Value
+        public string ImplementationName => ((IModelType)this).Name.Value; /*
             .Replace("Response", "")
             .Replace("Request", "")
             .Replace("Message", "")
             .Replace("ViewModel", "")
-            .Replace("Model", "");
+            .Replace("Model", "");*/
     }
 }
