@@ -20,12 +20,6 @@ namespace AutoRest.Core.Validation
         private Func<PropertyInfo, string> resolver;
 
         /// <summary>
-        /// Initializes the object validator. By default, it will use the property name when
-        /// returning the location of messages
-        /// </summary>
-        public RecursiveObjectValidator() : this(PropertyNameResolver.PropertyName) { }
-
-        /// <summary>
         /// Initializes the object validator with a custom <paramref name="resolver"/>
         /// that returns the name for a property when setting the location of messages
         /// </summary>
@@ -39,9 +33,9 @@ namespace AutoRest.Core.Validation
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
-        public IEnumerable<LogMessage> GetValidationExceptions(object entity)
+        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, object entity)
         {
-            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity), Enumerable.Empty<Rule>());
+            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>());
         }
 
         /// <summary>

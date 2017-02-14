@@ -80,7 +80,7 @@ namespace AutoRest.Swagger
             {
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition))
                 {
                     Logger.Instance.Log(validationEx);
                 }
@@ -183,7 +183,7 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion.FilePath, newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 

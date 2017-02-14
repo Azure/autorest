@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Logging;
+using System;
 
 namespace AutoRest.Core.Validation
 {
@@ -14,6 +15,10 @@ namespace AutoRest.Core.Validation
         protected Rule()
         {
         }
+
+        public virtual string Id => "!!! implement me and make me abstract !!!";
+
+        public ValidationCategory ValidationCategory => ((ValidationCategory)0); // !!! implement me and make me abstract !!!
 
         /// <summary>
         /// The template message for this Rule. 

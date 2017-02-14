@@ -74,8 +74,13 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
+            if (Settings.Instance.JsonValidationMessages)
+            {
+                return; // no code gen in Json validation mode
+            }
 
+            var plugin = ExtensionsLoader.GetPlugin();
+            
             Console.ResetColor();
             Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 

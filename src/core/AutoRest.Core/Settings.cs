@@ -280,6 +280,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool Verbose { get; set; }
 
         /// <summary>
+        /// If set to true, collect and print out validation messages as single JSON blob.
+        /// </summary>
+        [SettingsAlias("JsonValidationMessages")]
+        public bool JsonValidationMessages { get; set; }
+
+        /// <summary>
         /// If set to true, print out debug messages.
         /// </summary>
         [SettingsAlias("debug")]

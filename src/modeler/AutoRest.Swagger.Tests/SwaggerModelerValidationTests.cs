@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Tests
         internal static void AssertOnlyValidationMessage(this IEnumerable<ValidationMessage> messages, Type validationType, int count)
         {
             // checks that the collection has the right number of items and each is the correct type.
-            Assert.Equal(count, messages.Count(message => message.Type == validationType));
+            Assert.Equal(count, messages.Count(message => message.Rule.GetType() == validationType));
         }
     }
 
@@ -247,7 +247,7 @@ namespace AutoRest.Swagger.Tests
         public void Pageable200ResponseNotModeledValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "pageable-no-200-response.json"));
-            messages.Any(m => m.Type == typeof(PageableRequires200Response));
+            messages.Any(m => m.Rule.GetType() == typeof(PageableRequires200Response));
         }
 
         [Fact]

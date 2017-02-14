@@ -35,11 +35,20 @@ namespace AutoRest
                     {
                         settings = Settings.Create(args);
 
+                        var jsonValidationLogListener = new JsonValidationLogListener();
+
                         // set up logging
-                        Logger.Instance.AddListener(new ConsoleLogListener(
-                            settings.Debug ? Category.Debug : Category.Warning,
-                            settings.ValidationLevel,
-                            settings.Verbose));
+                        if (settings.JsonValidationMessages)
+                        {
+                            Logger.Instance.AddListener(jsonValidationLogListener);
+                        }
+                        else
+                        {
+                            Logger.Instance.AddListener(new ConsoleLogListener(
+                                settings.Debug ? Category.Debug : Category.Warning,
+                                settings.ValidationLevel,
+                                settings.Verbose));
+                        }
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
 
                         // internal preprocesor
@@ -86,10 +95,14 @@ namespace AutoRest
                         else
                         {
                             Core.AutoRestController.Generate();
-                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+                            if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                             }
+                        }
+                        if (settings.JsonValidationMessages)
+                        {
+                            Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
                         }
                     }
                     catch (Exception exception)
