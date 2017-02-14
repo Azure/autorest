@@ -27,6 +27,10 @@ task 'clean-packages', 'cleans out the contents of the packages folder', ->
   rm '-rf', packages
   mkdir packages 
 
+############################################### 
+task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clean', ->  
+  rm '-rf', "#{os.homedir()}/.nuget"
+
 ###############################################
 task 'clean','calls dotnet-clean on the solution', ['clean-packages'], -> 
   exec "dotnet clean #{solution} /nologo"
@@ -101,6 +105,8 @@ task 'sign-assemblies','', (done) ->
 
 ############################################### 
 task 'restore','restores the dotnet packages for the projects', -> 
+  if ! test '-d', "#{os.homedir()}/.nuget"
+    force = true
   projects()
     .pipe where (each) ->  # check for project.assets.json files are up to date  
       return true if force

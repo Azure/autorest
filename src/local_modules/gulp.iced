@@ -23,6 +23,7 @@ Import
 # force-global a bunch of stuff.
 require 'shelljs/global'
 Install 'marked'
+Install 'os'
 Install 'gulp'
 Install 'util'
 Install 'chalk'
