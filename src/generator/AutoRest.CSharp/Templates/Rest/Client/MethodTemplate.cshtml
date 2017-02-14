@@ -376,7 +376,20 @@ else
     {
         //If not defined by default model, read content as string
         @:if (_httpResponse.Content != null) {
-            @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            @:try
+            @:{
+                @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                @:Microsoft.Rest.Azure.CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Microsoft.Rest.Azure.CloudError>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
+                @:if (_errorBody != null)
+                @:{
+                    @:@(Model.InitializeExceptionWithMessage)
+                    @:ex.Body = _errorBody;
+                @:}
+            @:}
+            @:catch (Newtonsoft.Json.JsonException)
+            @:{
+            @:    // Ignore the exception
+            @:}
         @:}
         @:else {
             @:_responseContent = string.Empty;
