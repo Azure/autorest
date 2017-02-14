@@ -285,7 +285,8 @@ namespace Fixtures.MirrorSequences
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -431,7 +432,8 @@ namespace Fixtures.MirrorSequences
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<int?>>(_responseContent, DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<int?>>(_responseContent, DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -577,7 +579,8 @@ namespace Fixtures.MirrorSequences
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<int?>>(_responseContent, DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<int?>>(_responseContent, DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

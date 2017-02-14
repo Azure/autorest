@@ -201,7 +201,8 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Usage>>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Page<Usage>>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

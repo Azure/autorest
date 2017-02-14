@@ -607,10 +607,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -751,10 +753,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -887,10 +891,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1023,10 +1029,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1535,10 +1543,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int?)e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1672,10 +1682,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1818,10 +1830,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2414,10 +2428,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -2655,10 +2671,12 @@ namespace Petstore
                         XmlSerialization.Root(XmlSerialization.ToDeserializer(e => User.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
                     {
                         _result.Body = _tmp_;
-                    }else
+                    }
+                    else
                     {
                         _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, DeserializationSettings);
-                    }        }
+                    }
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

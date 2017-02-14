@@ -676,9 +676,8 @@ task 'regenerate-samples', '', ['regenerate-samplesazure'],(done) ->
         return done() if count is 0
   return null
 
-task 'regenerate-samplesazure', "regenerate Azure samples", (done) ->
-  count = 0
 task 'regenerate-samplesazure', '', (done) ->
+  count = 0
   content = cat "#{basefolder}/AutoRest.json"
   if (content.charCodeAt(0) == 0xFEFF)
     content = content.slice(1)

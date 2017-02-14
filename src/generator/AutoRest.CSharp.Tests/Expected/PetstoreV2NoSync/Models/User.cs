@@ -175,7 +175,8 @@ namespace Fixtures.PetstoreV2NoSync.Models
             if (deserializeUserStatus(payload, "userStatus", out resultUserStatus))
             {
                 result.UserStatus = resultUserStatus;
-            }            return result;
+            }
+            return result;
         }
     }
 }
