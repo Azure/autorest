@@ -27,15 +27,9 @@ namespace AutoRest.Core.Model
         /// </summary>
         public string OutputParameterProperty { get; set; }
 
-        /// <summary>
-        /// Returns a string representation of the ParameterMapping object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the ParameterMapping object.
-        /// </returns>
-        public override string ToString()
+        public string CreateCode(Parameter outputParameter)
         {
-            string outputPath = "";
+            string outputPath = outputParameter.Name;
             if (OutputParameterProperty != null)
             {
                 outputPath += "." + OutputParameterProperty;
@@ -45,7 +39,7 @@ namespace AutoRest.Core.Model
             {
                 inputPath += "." + InputParameterProperty;
             }
-            return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", outputPath, inputPath);
+            return $"{outputPath} = {inputPath}";
         }
 
         /// <summary>
@@ -54,7 +48,7 @@ namespace AutoRest.Core.Model
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            return  new ParameterMapping
+            return new ParameterMapping
             {
                 InputParameter = Duplicate(InputParameter),
                 InputParameterProperty = InputParameterProperty,

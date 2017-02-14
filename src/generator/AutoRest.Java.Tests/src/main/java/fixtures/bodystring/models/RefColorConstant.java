@@ -25,6 +25,7 @@ public class RefColorConstant {
     /**
      * Sample string.
      */
+    @JsonProperty(value = "field1")
     private String field1;
 
     /**

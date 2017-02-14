@@ -10,6 +10,7 @@
 
 package fixtures.http.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The A model.
@@ -18,6 +19,7 @@ public class A {
     /**
      * The statusCode property.
      */
+    @JsonProperty(value = "statusCode")
     private String statusCode;
 
     /**

@@ -22,7 +22,7 @@ namespace AutoRest.Core.Model
         private string _documentation;
         private string _namespace;
         private string _modelsName;
-        private string _name;
+        private readonly Fixable<string> _name = new Fixable<string>();
 
         [JsonIgnore]
         public virtual bool IsAzure => false;
@@ -34,6 +34,8 @@ namespace AutoRest.Core.Model
         protected CodeModel()
         {
             InitializeCollections();
+
+            Name.OnGet += value => (Settings.Instance?.ClientName).Else(CodeNamer.Instance.GetClientName(value));
         }
 
         [JsonIgnore]
@@ -69,19 +71,13 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the non-canonical name of the client model.
         /// </summary>
-        public virtual string Name
+        public Fixable<string> Name
         {
             get { return _name; }
             set
             {
-                if (string.IsNullOrWhiteSpace(_name))
-                {
-                    if (value != _name)
-                    {
-                        _name = CodeNamer.Instance.GetClientName(value);
-                        Children.Disambiguate();
-                    }
-                }
+                _name.CopyFrom(value);
+                Children.Disambiguate();
             }
         }
 
@@ -153,26 +149,6 @@ namespace AutoRest.Core.Model
         public Dictionary<string, object> Extensions { get; private set; } = new Dictionary<string, object>();
 
         /// <summary>
-        /// Returns a string representation of the CodeModel
-        /// </summary>
-        /// <returns>
-        /// A string representation of the CodeModel object.
-        /// </returns>
-        public override string ToString()
-        {
-            var jsonSettings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
-                ContractResolver = new CamelCaseContractResolver(),
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            };
-            jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-
-            return JsonConvert.SerializeObject(this, jsonSettings);
-        }
-
-        /// <summary>
         /// Reference to the container of this type.
         /// </summary>
         CodeModel IParent.CodeModel => this;
@@ -206,5 +182,10 @@ namespace AutoRest.Core.Model
         }
 
         public virtual HashSet<string> LocallyUsedNames => null;
+
+        public bool ShouldGenerateXmlSerialization =>
+            Methods.Any(method => 
+                method.RequestContentType == "application/xml" || 
+                (method.ResponseContentTypes?.Any(rct => rct.StartsWith("application/xml")) ?? false));
     }
 }

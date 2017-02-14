@@ -1,25 +1,21 @@
 ﻿@using AutoRest.Go
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Go.Templates
-@using AutoRest.Go.TemplateModels
+@using AutoRest.Go.Model
 @using AutoRest.Core.Utilities
 @using System.Linq
+@using System.Collections.Generic;
 
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.VersionTemplateModel>
-@{
-    var imports = Model.Imports;
-    var modelName = GoCodeNamer.CamelCase(Model.Name);
-}
-package @Model.PackageName
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.CodeModelGo>
+package @Model.Namespace
 @EmptyLine
 @Header("// ")
 
 @EmptyLine
 import (
-@foreach (var import in imports)
-{
-    @:"@(import)"
-}
+    "bytes"
+    "fmt"
+    "strings"
 )
 @EmptyLine
 
@@ -27,21 +23,36 @@ const (
     major = "@(Model.Version[0])"
     minor = "@(Model.Version[1])"
     patch = "@(Model.Version[2])"
-    // Always begin a "tag" with a dash (as per http://semver.org)
-    tag   = "-beta"
+    tag   = "@(Model.Version[3])"
 
-    semVerFormat = "%s.%s.%s%s"
-    userAgentFormat = "Azure-SDK-for-Go/%s arm-%s/%s"
+    userAgentFormat = "Azure-SDK-For-Go/%s arm-%s/%s"
+)
+
+// cached results of UserAgent and Version to prevent repeated operations.
+var (
+    userAgent string
+    version string
 )
 
 @EmptyLine
 // UserAgent returns the UserAgent string to use when sending http.Requests.
 func UserAgent() string {
-    return fmt.Sprintf(userAgentFormat, Version(), "@(Model.PackageName)", "@(Model.ApiVersion)")
+    if userAgent == "" {
+        userAgent = fmt.Sprintf(userAgentFormat, Version(), "@(Model.Namespace)", "@(Model.ApiVersion)")
+    }
+    return userAgent
 }
 
 @EmptyLine
 // Version returns the semantic version (see http://semver.org) of the client.
 func Version() string {
-    return fmt.Sprintf(semVerFormat, major, minor, patch, tag)
+    if version == "" {
+        versionBuilder := bytes.NewBufferString(fmt.Sprintf("%s.%s.%s", major, minor, patch))
+        if tag != "" {
+            versionBuilder.WriteRune('-')
+            versionBuilder.WriteString(strings.TrimPrefix(tag, "-"))
+        }
+        version = string(versionBuilder.Bytes())
+    }
+    return version
 }

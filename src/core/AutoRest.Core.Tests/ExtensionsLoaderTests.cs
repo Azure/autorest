@@ -21,7 +21,6 @@ namespace AutoRest.Core.Tests
 
         public ExtensionsLoaderTests()
         {
-            Logger.Entries.Clear();
             SetupMock();
         }
 

@@ -74,6 +74,10 @@ namespace AutoRest.Python.Model
                 var requireParams = new List<string>();
                 foreach (var property in parameters)
                 {
+                    if (property.IsConstant)
+                    {
+                        continue;
+                    }
                     if (property.IsRequired)
                     {
                         requireParams.Add(property.Name);
@@ -87,7 +91,7 @@ namespace AutoRest.Python.Model
                 var param = string.Join(", ", requireParams);
                 if (!string.IsNullOrEmpty(param))
                 {
-                    param += ", ";
+                    param = ", " + param;
                 }
                 return param;
             }
@@ -104,9 +108,9 @@ namespace AutoRest.Python.Model
                     configParams.Add(property.Name);
                 }
                 var param = string.Join(", ", configParams);
-                if (!param.IsNullOrEmpty())
+                if (!IsCustomBaseUri)
                 {
-                    param += ", ";
+                    param += (param.IsNullOrEmpty() ? "" : ", ") + "base_url";
                 }
                 return param;
             }

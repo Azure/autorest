@@ -13,25 +13,6 @@ write-host -fore Yellow "YES"
 write-host -fore cyan "Info: making temp directory."
 $null = mkdir -ea 0 c:\tmp
 
-Function Get-AndroidHomeFromRegistry
-{
-    if ([environment]::GetEnvironmentVariable("ProgramFiles(x86)")) {
-        $androidRegistryKey = "HKLM:\SOFTWARE\Wow6432Node\Android SDK Tools"
-    }
-    else {
-        $androidRegistryKey = "HKLM:\SOFTWARE\Android SDK Tools"
-    }
-
-    if (Test-Path $androidRegistryKey) {
-        $path = (Get-ItemProperty $androidRegistryKey Path).Path
-
-        if (-not (Test-Path -ea 0 $path)) {
-            $path = $null
-        }
-    }
-    return $path
-}
-
 function DiffPathFromRegistry {
     $u = ([System.Environment]::GetEnvironmentVariable( "path", 'User'))
     $m = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
@@ -71,16 +52,6 @@ if( !(get-command -ea 0 java.exe) ) {
 }
 write-host -fore darkcyan "      Setting JAVA_HOME environment key."
 ([System.Environment]::SetEnvironmentVariable('JAVA_HOME',  (resolve-path "$((get-command -ea 0 javac).Source)..\..\..").Path , "Machine" ))
-
-# install Android SDK
-if( ! (Get-AndroidHomeFromRegistry) ) {
-    write-host -fore cyan "Info: Installing Android SDK."
-    $null = install-package -provider chocolatey android-sdk -force
-    if( ! (Get-AndroidHomeFromRegistry) ) { return write-error "No Android SDK Installed" }
-    # set the environment variable for the user.
-}
-write-host -fore darkcyan "      setting ANDROID_HOME environment key."
-([System.Environment]::SetEnvironmentVariable('ANDROID_HOME', (Get-AndroidHomeFromRegistry) ,'Machine'))
 
 # Install node.js
 if( !(get-command -ea 0 node.exe) ) { 
@@ -307,19 +278,19 @@ if( !(get-command -ea 0 tox.exe) ) {
     if( !(get-command -ea 0 tox.exe) ) { return write-error "No TOX  in PATH." }
 }
 
-# install gradle
-if( !(get-command -ea 0 gradle.bat) ) { 
-    write-host -fore cyan "Info: Downloading Gradle"
-    (New-Object System.Net.WebClient).DownloadFile("https://services.gradle.org/distributions/gradle-3.1-all.zip", "c:\tmp\gradle-3.1-all.zip" )
-    if( !(test-path -ea 0  "c:\tmp\gradle-3.1-all.zip") ) { return write-error "Unable to download Gradle" }
-    write-host -fore darkcyan "      Unpacking Gradle."
-    Expand-Archive C:\tmp\gradle-3.1-all.zip -DestinationPath c:\
-    write-host -fore darkcyan "      Adding gradle to system PATH."
+# install maven
+if( !(get-command -ea 0 mvn.cmd) ) { 
+    write-host -fore cyan "Info: Downloading Maven"
+    (New-Object System.Net.WebClient).DownloadFile("http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip", "c:\tmp\apache-maven-3.3.9-bin.zip" )
+    if( !(test-path -ea 0  "c:\tmp\apache-maven-3.3.9-bin.zip") ) { return write-error "Unable to download Maven" }
+    write-host -fore darkcyan "      Unpacking Maven."
+    Expand-Archive C:\tmp\apache-maven-3.3.9-bin.zip -DestinationPath c:\
+    write-host -fore darkcyan "      Adding mvn to system PATH."
     $p = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
-    $p = "$p;c:\gradle-3.1\bin"
+    $p = "$p;c:\apache-maven-3.3.9\bin"
     ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))
     ReloadPathFromRegistry
-    if( !(get-command -ea 0 gradle.bat) ) { return write-error "No Gradle in PATH." }
+    if( !(get-command -ea 0 mvn.cmd) ) { return write-error "No Maven in PATH." }
 }
 
 #install go 

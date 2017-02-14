@@ -80,6 +80,10 @@ namespace AutoRest.CSharp
                 {
                     return "new " + type.Name + "()";
                 }
+                if (type is EnumType && (type as EnumType).ModelAsString)
+                {
+                    return Instance.QuoteValue(defaultValue);
+                }
                 if (primaryType != null)
                 {
                     if (primaryType.KnownPrimaryType == KnownPrimaryType.String)

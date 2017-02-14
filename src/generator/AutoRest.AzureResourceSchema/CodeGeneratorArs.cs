@@ -32,8 +32,13 @@ namespace AutoRest.AzureResourceSchema
                 await Write(stringWriter.ToString(), resourceProvider + ".json", true);
 
                 stringWriter = new StringWriter();
-                ResourceMarkdownWriter.Write(stringWriter, resourceSchemas[resourceProvider]);
-                await Write(stringWriter.ToString(), resourceProvider + ".md", false);
+                var md = ResourceMarkdownGenerator.Generate(resourceSchemas[resourceProvider]);
+
+                foreach (var m in md)
+                {
+                    var content = m.Content.Replace("\"boolean\"", "boolean");
+                    await Write(content, m.Type + ".md", false);
+                }
             }
         }
     }

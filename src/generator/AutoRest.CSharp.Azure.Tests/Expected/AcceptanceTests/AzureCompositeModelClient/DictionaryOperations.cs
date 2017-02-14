@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// <summary>
     /// DictionaryOperations operations.
     /// </summary>
-    internal partial class DictionaryOperations : IServiceOperations<AzureCompositeModel>, IDictionaryOperations
+    internal partial class DictionaryOperations : IServiceOperations<AzureCompositeModelClient>, IDictionaryOperations
     {
         /// <summary>
         /// Initializes a new instance of the DictionaryOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal DictionaryOperations(AzureCompositeModel client)
+        internal DictionaryOperations(AzureCompositeModelClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         }
 
         /// <summary>
-        /// Gets a reference to the AzureCompositeModel
+        /// Gets a reference to the AzureCompositeModelClient
         /// </summary>
-        public AzureCompositeModel Client { get; private set; }
+        public AzureCompositeModelClient Client { get; private set; }
 
         /// <summary>
         /// Get complex types with dictionary property
@@ -104,6 +104,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -150,7 +152,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -183,7 +185,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -261,6 +263,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -313,7 +317,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -401,6 +405,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -447,7 +453,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -480,7 +486,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -558,6 +564,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -610,7 +618,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -698,6 +706,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -744,7 +754,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -777,7 +787,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -851,6 +861,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -897,7 +909,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -930,7 +942,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

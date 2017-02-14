@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     /// <summary>
     /// LROSADsOperations operations.
     /// </summary>
-    internal partial class LROSADsOperations : IServiceOperations<AutoRestLongRunningOperationTestService>, ILROSADsOperations
+    internal partial class LROSADsOperations : IServiceOperations<AutoRestLongRunningOperationTestServiceClient>, ILROSADsOperations
     {
         /// <summary>
         /// Initializes a new instance of the LROSADsOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal LROSADsOperations(AutoRestLongRunningOperationTestService client)
+        internal LROSADsOperations(AutoRestLongRunningOperationTestServiceClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestLongRunningOperationTestService
+        /// Gets a reference to the AutoRestLongRunningOperationTestServiceClient
         /// </summary>
-        public AutoRestLongRunningOperationTestService Client { get; private set; }
+        public AutoRestLongRunningOperationTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Long running put request, service returns a 400 to the initial request
@@ -612,6 +612,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -665,7 +667,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -702,7 +704,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -720,7 +722,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -798,6 +800,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -851,7 +855,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -888,7 +892,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -906,7 +910,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -984,6 +988,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1037,7 +1043,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1074,7 +1080,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1092,7 +1098,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1171,6 +1177,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1224,7 +1232,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1261,7 +1269,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1273,9 +1281,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1344,6 +1352,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1391,7 +1401,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1422,9 +1432,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteNonRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteNonRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1493,6 +1503,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1540,7 +1552,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1571,9 +1583,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDelete202NonRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDelete202NonRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1644,6 +1656,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1691,7 +1705,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1722,9 +1736,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1797,6 +1811,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1850,7 +1866,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -1881,9 +1897,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostNonRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostNonRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -1956,6 +1972,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2009,7 +2027,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2040,9 +2058,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202NonRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202NonRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2117,6 +2135,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2170,7 +2190,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2201,9 +2221,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetry400Headers>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetry400Headers>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2280,6 +2300,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2333,7 +2355,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2370,7 +2392,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2388,7 +2410,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2467,6 +2489,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2520,7 +2544,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2557,7 +2581,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2569,9 +2593,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2649,6 +2673,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2702,7 +2728,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2739,7 +2765,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2751,9 +2777,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -2823,6 +2849,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2870,7 +2898,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -2961,6 +2989,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3008,7 +3038,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3039,9 +3069,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryNoStatusHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3115,6 +3145,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3168,7 +3200,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3199,9 +3231,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202NoLocationHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202NoLocationHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3276,6 +3308,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3329,7 +3363,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3360,9 +3394,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryNoPayloadHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryNoPayloadHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3439,6 +3473,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3492,7 +3528,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3529,7 +3565,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3608,6 +3644,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3661,7 +3699,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3698,7 +3736,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3710,9 +3748,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3790,6 +3828,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3843,7 +3883,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -3880,7 +3920,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Product>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -3892,9 +3932,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -3964,6 +4004,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4011,7 +4053,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4042,9 +4084,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDelete202RetryInvalidHeaderHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDelete202RetryInvalidHeaderHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -4114,6 +4156,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4161,7 +4205,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4192,9 +4236,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -4265,6 +4309,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4312,7 +4358,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4343,9 +4389,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -4419,6 +4465,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4472,7 +4520,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4503,9 +4551,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202RetryInvalidHeaderHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPost202RetryInvalidHeaderHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -4580,6 +4628,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4633,7 +4683,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4664,9 +4714,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
@@ -4741,6 +4791,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -4794,7 +4846,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -4825,9 +4877,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>(Newtonsoft.Json.JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
-            catch (Newtonsoft.Json.JsonException ex)
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)

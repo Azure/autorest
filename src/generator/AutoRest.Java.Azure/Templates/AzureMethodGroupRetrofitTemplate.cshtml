@@ -1,14 +1,14 @@
 ﻿@using System.Linq;
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
-@using AutoRest.Java.Azure.TemplateModels
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodGroupTemplateModel>
+@using AutoRest.Java.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodGroupJva>
 /**
- * The interface defining all the services for @Model.MethodGroupType to be
+ * The interface defining all the services for @Model.TypeName to be
  * used by Retrofit to perform actually REST calls.
  */
 interface @Model.MethodGroupServiceType {
-@foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
+@foreach (MethodJva method in Model.Methods)
 {
 if (method.RequestContentType == "multipart/form-data" || method.RequestContentType == "application/x-www-form-urlencoded")
 {
@@ -16,11 +16,15 @@ if (method.RequestContentType == "multipart/form-data" || method.RequestContentT
 }
 else
 {
-@:    @@Headers("Content-Type: @method.RequestContentType")
+@:    @@Headers({ "Content-Type: @method.RequestContentType", "x-ms-logging-context: @Model.MethodGroupFullType @method.Name" })
 }
 if (method.HttpMethod == HttpMethod.Delete)
 {
 @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
+}
+else if (method.IsPagingNextOperation)
+{
+@:    @@GET
 }
 else
 {

@@ -14,11 +14,10 @@ import retrofit2.Retrofit;
 import fixtures.url.Paths;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.Base64Url;
-import com.microsoft.rest.serializer.CollectionFormat;
+import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
@@ -40,7 +39,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public final class PathsImpl implements Paths {
+public class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
@@ -62,107 +61,107 @@ public final class PathsImpl implements Paths {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths getBooleanTrue" })
         @GET("paths/bool/true/{boolPath}")
         Observable<Response<ResponseBody>> getBooleanTrue(@Path("boolPath") boolean boolPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths getBooleanFalse" })
         @GET("paths/bool/false/{boolPath}")
         Observable<Response<ResponseBody>> getBooleanFalse(@Path("boolPath") boolean boolPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths getIntOneMillion" })
         @GET("paths/int/1000000/{intPath}")
         Observable<Response<ResponseBody>> getIntOneMillion(@Path("intPath") int intPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths getIntNegativeOneMillion" })
         @GET("paths/int/-1000000/{intPath}")
         Observable<Response<ResponseBody>> getIntNegativeOneMillion(@Path("intPath") int intPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths getTenBillion" })
         @GET("paths/long/10000000000/{longPath}")
         Observable<Response<ResponseBody>> getTenBillion(@Path("longPath") long longPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths getNegativeTenBillion" })
         @GET("paths/long/-10000000000/{longPath}")
         Observable<Response<ResponseBody>> getNegativeTenBillion(@Path("longPath") long longPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths floatScientificPositive" })
         @GET("paths/float/1.034E+20/{floatPath}")
         Observable<Response<ResponseBody>> floatScientificPositive(@Path("floatPath") double floatPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths floatScientificNegative" })
         @GET("paths/float/-1.034E-20/{floatPath}")
         Observable<Response<ResponseBody>> floatScientificNegative(@Path("floatPath") double floatPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths doubleDecimalPositive" })
         @GET("paths/double/9999999.999/{doublePath}")
         Observable<Response<ResponseBody>> doubleDecimalPositive(@Path("doublePath") double doublePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths doubleDecimalNegative" })
         @GET("paths/double/-9999999.999/{doublePath}")
         Observable<Response<ResponseBody>> doubleDecimalNegative(@Path("doublePath") double doublePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths stringUnicode" })
         @GET("paths/string/unicode/{stringPath}")
         Observable<Response<ResponseBody>> stringUnicode(@Path("stringPath") String stringPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths stringUrlEncoded" })
         @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         Observable<Response<ResponseBody>> stringUrlEncoded(@Path("stringPath") String stringPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths stringEmpty" })
         @GET("paths/string/empty/{stringPath}")
         Observable<Response<ResponseBody>> stringEmpty(@Path("stringPath") String stringPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths stringNull" })
         @GET("paths/string/null/{stringPath}")
         Observable<Response<ResponseBody>> stringNull(@Path("stringPath") String stringPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths enumValid" })
         @GET("paths/enum/green%20color/{enumPath}")
         Observable<Response<ResponseBody>> enumValid(@Path("enumPath") UriColor enumPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths enumNull" })
         @GET("paths/string/null/{enumPath}")
         Observable<Response<ResponseBody>> enumNull(@Path("enumPath") UriColor enumPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths byteMultiByte" })
         @GET("paths/byte/multibyte/{bytePath}")
         Observable<Response<ResponseBody>> byteMultiByte(@Path("bytePath") String bytePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths byteEmpty" })
         @GET("paths/byte/empty/{bytePath}")
         Observable<Response<ResponseBody>> byteEmpty(@Path("bytePath") String bytePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths byteNull" })
         @GET("paths/byte/null/{bytePath}")
         Observable<Response<ResponseBody>> byteNull(@Path("bytePath") String bytePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths dateValid" })
         @GET("paths/date/2012-01-01/{datePath}")
         Observable<Response<ResponseBody>> dateValid(@Path("datePath") LocalDate datePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths dateNull" })
         @GET("paths/date/null/{datePath}")
         Observable<Response<ResponseBody>> dateNull(@Path("datePath") LocalDate datePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths dateTimeValid" })
         @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         Observable<Response<ResponseBody>> dateTimeValid(@Path("dateTimePath") DateTime dateTimePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths dateTimeNull" })
         @GET("paths/datetime/null/{dateTimePath}")
         Observable<Response<ResponseBody>> dateTimeNull(@Path("dateTimePath") DateTime dateTimePath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths base64Url" })
         @GET("paths/string/bG9yZW0/{base64UrlPath}")
         Observable<Response<ResponseBody>> base64Url(@Path("base64UrlPath") Base64Url base64UrlPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath:commaSeparated}")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths arrayCsvInPath" })
+        @GET("paths/array/ArrayPath1%2cbegin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend%2c%2c/{arrayPath}")
         Observable<Response<ResponseBody>> arrayCsvInPath(@Path("arrayPath") String arrayPath);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.url.Paths unixTimeUrl" })
         @GET("paths/int/1460505600/{unixTimeUrlPath}")
         Observable<Response<ResponseBody>> unixTimeUrl(@Path("unixTimeUrlPath") long unixTimeUrlPath);
 
@@ -173,7 +172,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getBooleanTrue() {
-        getBooleanTrueWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanTrueWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -183,7 +182,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -195,7 +194,7 @@ public final class PathsImpl implements Paths {
         return getBooleanTrueWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -222,7 +221,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -233,7 +232,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getBooleanFalse() {
-        getBooleanFalseWithServiceResponseAsync().toBlocking().single().getBody();
+        getBooleanFalseWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -243,7 +242,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -255,7 +254,7 @@ public final class PathsImpl implements Paths {
         return getBooleanFalseWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -282,7 +281,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -293,7 +292,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getIntOneMillion() {
-        getIntOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntOneMillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -303,7 +302,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -315,7 +314,7 @@ public final class PathsImpl implements Paths {
         return getIntOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -342,7 +341,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -353,7 +352,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getIntNegativeOneMillion() {
-        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -363,7 +362,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -375,7 +374,7 @@ public final class PathsImpl implements Paths {
         return getIntNegativeOneMillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -402,7 +401,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -413,7 +412,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getTenBillion() {
-        getTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getTenBillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -423,7 +422,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -435,7 +434,7 @@ public final class PathsImpl implements Paths {
         return getTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -462,7 +461,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -473,7 +472,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void getNegativeTenBillion() {
-        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().getBody();
+        getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -483,7 +482,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -495,7 +494,7 @@ public final class PathsImpl implements Paths {
         return getNegativeTenBillionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -522,7 +521,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -533,7 +532,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void floatScientificPositive() {
-        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().getBody();
+        floatScientificPositiveWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -543,7 +542,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -555,7 +554,7 @@ public final class PathsImpl implements Paths {
         return floatScientificPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -582,7 +581,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -593,7 +592,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void floatScientificNegative() {
-        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().getBody();
+        floatScientificNegativeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -603,7 +602,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -615,7 +614,7 @@ public final class PathsImpl implements Paths {
         return floatScientificNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -642,7 +641,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -653,7 +652,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void doubleDecimalPositive() {
-        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -663,7 +662,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -675,7 +674,7 @@ public final class PathsImpl implements Paths {
         return doubleDecimalPositiveWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -702,7 +701,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -713,7 +712,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void doubleDecimalNegative() {
-        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().getBody();
+        doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -723,7 +722,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -735,7 +734,7 @@ public final class PathsImpl implements Paths {
         return doubleDecimalNegativeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -762,7 +761,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -773,7 +772,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void stringUnicode() {
-        stringUnicodeWithServiceResponseAsync().toBlocking().single().getBody();
+        stringUnicodeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -783,7 +782,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUnicodeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -795,7 +794,7 @@ public final class PathsImpl implements Paths {
         return stringUnicodeWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -822,7 +821,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -833,7 +832,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void stringUrlEncoded() {
-        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().getBody();
+        stringUrlEncodedWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -843,7 +842,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -855,7 +854,7 @@ public final class PathsImpl implements Paths {
         return stringUrlEncodedWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -882,7 +881,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -893,7 +892,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void stringEmpty() {
-        stringEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        stringEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -903,7 +902,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -915,7 +914,7 @@ public final class PathsImpl implements Paths {
         return stringEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -942,7 +941,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -954,7 +953,7 @@ public final class PathsImpl implements Paths {
      * @param stringPath null string value
      */
     public void stringNull(String stringPath) {
-        stringNullWithServiceResponseAsync(stringPath).toBlocking().single().getBody();
+        stringNullWithServiceResponseAsync(stringPath).toBlocking().single().body();
     }
 
     /**
@@ -965,7 +964,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
+        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
     }
 
     /**
@@ -978,7 +977,7 @@ public final class PathsImpl implements Paths {
         return stringNullWithServiceResponseAsync(stringPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1008,7 +1007,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1020,7 +1019,7 @@ public final class PathsImpl implements Paths {
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      */
     public void enumValid(UriColor enumPath) {
-        enumValidWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
+        enumValidWithServiceResponseAsync(enumPath).toBlocking().single().body();
     }
 
     /**
@@ -1031,7 +1030,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
+        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
@@ -1044,7 +1043,7 @@ public final class PathsImpl implements Paths {
         return enumValidWithServiceResponseAsync(enumPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1074,7 +1073,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1086,7 +1085,7 @@ public final class PathsImpl implements Paths {
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      */
     public void enumNull(UriColor enumPath) {
-        enumNullWithServiceResponseAsync(enumPath).toBlocking().single().getBody();
+        enumNullWithServiceResponseAsync(enumPath).toBlocking().single().body();
     }
 
     /**
@@ -1097,7 +1096,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
+        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
@@ -1110,7 +1109,7 @@ public final class PathsImpl implements Paths {
         return enumNullWithServiceResponseAsync(enumPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1140,7 +1139,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1152,7 +1151,7 @@ public final class PathsImpl implements Paths {
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      */
     public void byteMultiByte(byte[] bytePath) {
-        byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
+        byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().body();
     }
 
     /**
@@ -1163,7 +1162,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
+        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
@@ -1176,7 +1175,7 @@ public final class PathsImpl implements Paths {
         return byteMultiByteWithServiceResponseAsync(bytePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1207,7 +1206,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1218,7 +1217,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void byteEmpty() {
-        byteEmptyWithServiceResponseAsync().toBlocking().single().getBody();
+        byteEmptyWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1228,7 +1227,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteEmptyWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1240,7 +1239,7 @@ public final class PathsImpl implements Paths {
         return byteEmptyWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1268,7 +1267,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1280,7 +1279,7 @@ public final class PathsImpl implements Paths {
      * @param bytePath null as byte array (should throw)
      */
     public void byteNull(byte[] bytePath) {
-        byteNullWithServiceResponseAsync(bytePath).toBlocking().single().getBody();
+        byteNullWithServiceResponseAsync(bytePath).toBlocking().single().body();
     }
 
     /**
@@ -1291,7 +1290,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
+        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
@@ -1304,7 +1303,7 @@ public final class PathsImpl implements Paths {
         return byteNullWithServiceResponseAsync(bytePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1335,7 +1334,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1346,7 +1345,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void dateValid() {
-        dateValidWithServiceResponseAsync().toBlocking().single().getBody();
+        dateValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1356,7 +1355,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1368,7 +1367,7 @@ public final class PathsImpl implements Paths {
         return dateValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1395,7 +1394,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1407,7 +1406,7 @@ public final class PathsImpl implements Paths {
      * @param datePath null as date (should throw)
      */
     public void dateNull(LocalDate datePath) {
-        dateNullWithServiceResponseAsync(datePath).toBlocking().single().getBody();
+        dateNullWithServiceResponseAsync(datePath).toBlocking().single().body();
     }
 
     /**
@@ -1418,7 +1417,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateNullWithServiceResponseAsync(datePath), serviceCallback);
+        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(datePath), serviceCallback);
     }
 
     /**
@@ -1431,7 +1430,7 @@ public final class PathsImpl implements Paths {
         return dateNullWithServiceResponseAsync(datePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1461,7 +1460,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1472,7 +1471,7 @@ public final class PathsImpl implements Paths {
      *
      */
     public void dateTimeValid() {
-        dateTimeValidWithServiceResponseAsync().toBlocking().single().getBody();
+        dateTimeValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1482,7 +1481,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1494,7 +1493,7 @@ public final class PathsImpl implements Paths {
         return dateTimeValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1521,7 +1520,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1533,7 +1532,7 @@ public final class PathsImpl implements Paths {
      * @param dateTimePath null as date-time
      */
     public void dateTimeNull(DateTime dateTimePath) {
-        dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().getBody();
+        dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().body();
     }
 
     /**
@@ -1544,7 +1543,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
+        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
     }
 
     /**
@@ -1557,7 +1556,7 @@ public final class PathsImpl implements Paths {
         return dateTimeNullWithServiceResponseAsync(dateTimePath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1587,7 +1586,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1599,7 +1598,7 @@ public final class PathsImpl implements Paths {
      * @param base64UrlPath base64url encoded value
      */
     public void base64Url(byte[] base64UrlPath) {
-        base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().getBody();
+        base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().body();
     }
 
     /**
@@ -1610,7 +1609,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
+        return ServiceCall.fromResponse(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
     }
 
     /**
@@ -1623,7 +1622,7 @@ public final class PathsImpl implements Paths {
         return base64UrlWithServiceResponseAsync(base64UrlPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1654,7 +1653,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> base64UrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1666,7 +1665,7 @@ public final class PathsImpl implements Paths {
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      */
     public void arrayCsvInPath(List<String> arrayPath) {
-        arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().getBody();
+        arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().body();
     }
 
     /**
@@ -1677,7 +1676,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
+        return ServiceCall.fromResponse(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
     }
 
     /**
@@ -1690,7 +1689,7 @@ public final class PathsImpl implements Paths {
         return arrayCsvInPathWithServiceResponseAsync(arrayPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1706,7 +1705,7 @@ public final class PathsImpl implements Paths {
             throw new IllegalArgumentException("Parameter arrayPath is required and cannot be null.");
         }
         Validator.validate(arrayPath);
-        String arrayPathConverted = this.client.mapperAdapter().serializeList(arrayPath, CollectionFormat.CSV);
+        String arrayPathConverted = this.client.serializerAdapter().serializeList(arrayPath, CollectionFormat.CSV);
         return service.arrayCsvInPath(arrayPathConverted)
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -1722,7 +1721,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> arrayCsvInPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1734,7 +1733,7 @@ public final class PathsImpl implements Paths {
      * @param unixTimeUrlPath Unix time encoded value
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
-        unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().getBody();
+        unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().body();
     }
 
     /**
@@ -1745,7 +1744,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
+        return ServiceCall.fromResponse(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
     }
 
     /**
@@ -1758,7 +1757,7 @@ public final class PathsImpl implements Paths {
         return unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1786,7 +1785,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> unixTimeUrlDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

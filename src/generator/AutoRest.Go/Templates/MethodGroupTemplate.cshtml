@@ -1,15 +1,16 @@
 ﻿@using System;
 @using System.Collections.Generic;
 @using System.Linq;
-
+@using AutoRest.Core.Utilities;
 @using AutoRest.Go
-@using AutoRest.Go.TemplateModels
+@using AutoRest.Go.Model
 @using AutoRest.Go.Templates
 
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.MethodGroupTemplateModel>
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.MethodGroupGo>
 @{
-    var imports = Model.Imports;
-    var modelName = GoCodeNamer.CamelCase(Model.Name);
+    var modelName = CodeNamerGo.Instance.CamelCase(Model.Name);
+    var methods = new List<MethodGo>();
+    Model.Methods.Cast<MethodGo>().OrderBy(m => m.Name.Value).ForEach(m => methods.Add(m));
 }
 
 package @Model.PackageName
@@ -19,7 +20,7 @@ package @Model.PackageName
 @EmptyLine
 
 import (
-@foreach (var import in imports)
+@foreach (var import in Model.Imports)
 {
     @:"@(import)"
 }
@@ -33,18 +34,34 @@ type @(Model.ClientName) struct {
 
 @WrapComment("// ", string.Format("New{0} creates an instance of the {0} client.", Model.ClientName))
 func New@(Model.ClientName)(@(Model.GlobalParameters)) @(Model.ClientName) {
-    return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+    @if (!Model.IsCustomBaseUri)
+    {
+        <text>
+        return New@(Model.ClientName)WithBaseURI(DefaultBaseURI, @(Model.HelperGlobalParameters))
+        </text>
+    }
+    else
+    {
+        <text>
+        return @(Model.ClientName){ New(@(Model.HelperGlobalParameters))}
+        </text>
+    }
 }
 @EmptyLine
 
-@WrapComment("// ", string.Format("New{0}WithBaseURI creates an instance of the {0} client.", Model.ClientName))
-func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
-    return @(Model.ClientName){NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
-}
-@EmptyLine
-
-@foreach (var method in Model.MethodTemplateModels)
+@if (!Model.IsCustomBaseUri)
 {
-@:@(Include<MethodTemplate, MethodTemplateModel>(new MethodTemplate(), method))
+    @WrapComment("// ", string.Format("New{0}WithBaseURI creates an instance of the {0} client.", Model.ClientName))
+    <text>
+    func New@(Model.ClientName)WithBaseURI(baseURI string, @(Model.GlobalParameters)) @(Model.ClientName) {
+        return @(Model.ClientName){ NewWithBaseURI(baseURI, @(Model.HelperGlobalParameters))}
+    }
+    </text>
+    @EmptyLine
+}
+
+@foreach (var method in methods)
+{
+@:@(Include(new MethodTemplate(), method))
 @:@EmptyLine
 }

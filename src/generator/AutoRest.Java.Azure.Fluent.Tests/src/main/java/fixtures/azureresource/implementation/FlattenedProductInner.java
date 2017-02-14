@@ -12,12 +12,13 @@ package fixtures.azureresource.implementation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.rest.serializer.JsonFlatten;
+import com.microsoft.azure.Resource;
 
 /**
  * The FlattenedProductInner model.
  */
 @JsonFlatten
-public class FlattenedProductInner extends ResourceInner {
+public class FlattenedProductInner extends Resource {
     /**
      * The pname property.
      */

@@ -7,6 +7,9 @@
     "batchAccounts": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -60,6 +63,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -69,6 +73,9 @@
     "batchAccounts_applications": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -108,6 +115,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -116,6 +124,9 @@
     "batchAccounts_applications_versions": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -130,6 +141,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -170,6 +182,9 @@
     "batchAccounts_applications_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -209,6 +224,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],
@@ -217,6 +233,9 @@
     "batchAccounts_applications_versions_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -231,6 +250,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion"
       ],

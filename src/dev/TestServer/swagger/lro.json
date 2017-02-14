@@ -2982,7 +2982,7 @@
     "Product": {
       "allOf": [
         {
-          "$ref": "Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -3017,7 +3017,7 @@
     "SubProduct": {
       "allOf": [
         {
-          "$ref": "SubResource"
+          "$ref": "#/definitions/SubResource"
         }
       ],
       "properties": {

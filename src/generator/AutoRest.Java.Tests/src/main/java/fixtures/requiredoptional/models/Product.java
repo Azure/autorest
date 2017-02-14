@@ -19,12 +19,13 @@ public class Product {
     /**
      * The id property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "id", required = true)
     private int id;
 
     /**
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**

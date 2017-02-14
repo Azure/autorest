@@ -178,46 +178,16 @@ namespace AutoRest.Core.Model
         [JsonIgnore]
         public override string DefaultValue => IsConstant ? "{}" : null;
 
+
+        /// <summary>
+        /// Determines if the CompositeType is Constant (ie, the value is known at compile time)
+        /// 
+        /// Note: Added a check to ensure that it's not polymorphic. 
+        /// If it's polymorphic, it can't possibly be known at compile time.
+        /// </summary>
         [JsonIgnore]
-        public override bool IsConstant => ComposedProperties.Any() && ComposedProperties.All(p => p.IsConstant);
-
-        /// <summary>
-        /// Returns a string representation of the CompositeType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the CompositeType object.
-        /// </returns>
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        /// <summary>
-        /// Determines whether the specified model type is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool StructurallyEquals(IModelType other)
-        {
-            if (ReferenceEquals(other as CompositeType, null))
-            {
-                return false;
-            }
-            if (ReferenceEquals(other as CompositeType, this))
-            {
-                return true;
-            }
-
-            return base.StructurallyEquals(other) &&
-                ComposedProperties.SequenceEqual((other as CompositeType).ComposedProperties, 
-                new Utilities.EqualityComparer<Property>((a, b) => 
-                    a.Name == b.Name && 
-                    a.ModelType.StructurallyEquals(b.ModelType) && 
-                    a.IsReadOnly == b.IsReadOnly && 
-                    a.IsConstant == b.IsConstant && 
-                    a.IsRequired == b.IsRequired));
-        }
-
+        public override bool IsConstant => !BaseIsPolymorphic && ComposedProperties.Any() && ComposedProperties.All(p => p.IsConstant);
+        
         [JsonIgnore]
         public override IEnumerable<IChild> Children => Properties;
 

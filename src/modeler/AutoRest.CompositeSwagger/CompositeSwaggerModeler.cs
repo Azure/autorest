@@ -17,6 +17,8 @@ using Newtonsoft.Json.Converters;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using YamlDotNet.RepresentationModel;
+using AutoRest.Core.Parsing;
 
 namespace AutoRest.CompositeSwagger
 {
@@ -61,44 +63,69 @@ namespace AutoRest.CompositeSwagger
                 }
             }
 
-            CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
+            // construct merged swagger document
+            var mergedSwagger = new YamlMappingNode();
+            mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+
+            // merge child swaggers
+            foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
+            {
+                var childSwaggerRaw = Settings.FileSystem.ReadFileAsText(childSwaggerPath);
+                childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
+                var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
+                if (childSwagger == null)
+                {
+                    throw ErrorManager.CreateError("Failed parsing referenced Swagger file {0}.", childSwaggerPath);
+                }
+
+                // remove info
+                var info = childSwagger.Get("info") as YamlMappingNode;
+                var version = info.Get("version");
+                info.Remove("title");
+                info.Remove("description");
+                info.Remove("version");
+
+                // fix up api version
+                var apiVersionParam = (childSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+                var apiVersionParamName = (apiVersionParam?.Key as YamlScalarNode)?.Value;
+                if (apiVersionParamName != null)
+                {
+                    var paths =
+                        ((childSwagger.Get("paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>()).Concat
+                        ((childSwagger.Get("x-ms-paths") as YamlMappingNode)?.Children?.Values ?? Enumerable.Empty<YamlNode>());
+                    var methods = paths.OfType<YamlMappingNode>().SelectMany(path => path.Children.Values.OfType<YamlMappingNode>());
+                    var parameters = methods.SelectMany(method => (method.Get("parameters") as YamlSequenceNode)?.Children?.OfType<YamlMappingNode>() ?? Enumerable.Empty<YamlMappingNode>());
+                    var apiVersionParams = parameters.Where(param => (param.Get("$ref") as YamlScalarNode)?.Value == $"#/parameters/{apiVersionParamName}");
+                    foreach (var param in apiVersionParams)
+                    {
+                        param.Remove("$ref");
+                        foreach (var child in (apiVersionParam?.Value as YamlMappingNode).Children)
+                        {
+                            param.Children.Add(child);
+                        }
+                        param.Set("enum", new YamlSequenceNode(version));
+                    }
+                }
+
+                // merge
+                mergedSwagger = mergedSwagger.MergeWith(childSwagger);
+            }
+            // remove apiVersion client property
+            var mergedSwaggerApiVersionParam = (mergedSwagger.Get("parameters") as YamlMappingNode)?.Children?.FirstOrDefault(param => ((param.Value as YamlMappingNode)?.Get("name") as YamlScalarNode)?.Value == "api-version");
+            var mergedSwaggerApiVersionParamName = (mergedSwaggerApiVersionParam?.Key as YamlScalarNode)?.Value;
+            if (mergedSwaggerApiVersionParamName != null)
+            {
+                (mergedSwagger.Get("parameters") as YamlMappingNode).Remove(mergedSwaggerApiVersionParamName);
+            }
+
+            // CodeModel compositeClient = InitializeServiceClient(compositeSwaggerModel);
             using (NewContext)
             {
-                foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
-                {
-                    Settings.Input = childSwaggerPath;
-                    var swaggerModeler = new SwaggerModeler();
-                    var serviceClient = swaggerModeler.Build();
-                    compositeClient = Merge(compositeClient, serviceClient);
-                }
+                var swaggerModeler = new SwaggerModeler();
+                return swaggerModeler.Build(SwaggerParser.Parse(Settings.Input, mergedSwagger.Serialize()));
             }
-            return compositeClient;
         }
-
-        private CodeModel InitializeServiceClient(CompositeServiceDefinition compositeSwaggerModel)
-        {
-            CodeModel compositeClient = New<CodeModel>();
-
-            if (string.IsNullOrWhiteSpace(Settings.ClientName))
-            {
-                if (compositeSwaggerModel.Info.Title == null)
-                {
-                    throw ErrorManager.CreateError(Resources.TitleMissing);
-                }
-
-                compositeClient.Name = compositeSwaggerModel.Info.Title.Replace(" ", "");
-            }
-            else
-            {
-                compositeClient.Name = Settings.ClientName;
-            }
-            compositeClient.Namespace = Settings.Namespace;
-            compositeClient.ModelsName = Settings.ModelsName;
-            compositeClient.Documentation = compositeSwaggerModel.Info.Description;
-
-            return compositeClient;
-        }
-
+        
         private CompositeServiceDefinition Parse(string input)
         {
             var inputBody = Settings.FileSystem.ReadFileAsText(input);
@@ -117,325 +144,7 @@ namespace AutoRest.CompositeSwagger
                     Resources.ErrorParsingSpec, ex.Message), ex);
             }
         }
-
-        private static CodeModel Merge(CodeModel compositeClient, CodeModel subClient)
-        {
-            if (compositeClient == null)
-            {
-                throw new ArgumentNullException("compositeClient");
-            }
-
-            if (subClient == null)
-            {
-                throw new ArgumentNullException("subClient");
-            }
-
-            // Merge
-            if (compositeClient.BaseUrl == null)
-            {
-                compositeClient.BaseUrl = subClient.BaseUrl;
-            }
-            else
-            {
-                AssertEquals(compositeClient.BaseUrl, subClient.BaseUrl, "BaseUrl");
-            }
-
-            // Copy client properties
-            foreach (var subClientProperty in subClient.Properties)
-            {
-                if (subClientProperty.SerializedName == "api-version")
-                {
-                    continue;
-                }
-
-                var compositeClientProperty = compositeClient.Properties.FirstOrDefault(p => p.Name == subClientProperty.Name);
-                if (compositeClientProperty == null)
-                {
-                    compositeClient.Add( subClientProperty);
-                }
-                else
-                {
-                    AssertJsonEquals(compositeClientProperty, subClientProperty);
-                }
-            }
-
-            // Copy models
-            foreach (var subClientModel in subClient.ModelTypes)
-            {
-                var compositeClientModel = compositeClient.ModelTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
-                if (compositeClientModel == null)
-                {
-                    compositeClient.Add(subClientModel);
-                }
-                else
-                {
-                    AssertJsonEquals(compositeClientModel, subClientModel);
-                }
-            }
-
-            // Copy enum types
-            foreach (var subClientModel in subClient.EnumTypes)
-            {
-                var compositeClientModel = compositeClient.EnumTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
-                if (compositeClientModel == null)
-                {
-                    compositeClient.Add(subClientModel);
-                }
-                else
-                {
-                    AssertJsonEquals(compositeClientModel, subClientModel);
-                }
-            }
-
-            // Copy error types
-            foreach (var subClientModel in subClient.ErrorTypes)
-            {
-                var compositeClientModel = compositeClient.ErrorTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
-                if (compositeClientModel == null)
-                {
-                    compositeClient.AddError(subClientModel);
-                }
-                else
-                {
-                    AssertJsonEquals(compositeClientModel, subClientModel);
-                }
-            }
-
-            // Copy header types
-            foreach (var subClientModel in subClient.HeaderTypes)
-            {
-                var compositeClientModel = compositeClient.HeaderTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
-                if (compositeClientModel == null)
-                {
-                    compositeClient.AddHeader(subClientModel);
-                }
-                else
-                {
-                    AssertJsonEquals(compositeClientModel, subClientModel);
-                }
-            }
-
-            // Copy methods
-            foreach (var subClientMethod in subClient.Methods)
-            {
-                var apiVersionParameter = subClientMethod.Parameters.FirstOrDefault(p => p.SerializedName == "api-version");
-                if (apiVersionParameter != null)
-                {
-                    apiVersionParameter.ClientProperty = null;
-                    apiVersionParameter.IsConstant = true;
-                    apiVersionParameter.DefaultValue = subClient.ApiVersion;
-                    apiVersionParameter.IsRequired = true;
-                }
-
-                var compositeClientMethod = compositeClient.Methods.FirstOrDefault(m => m.ToString() == subClientMethod.ToString()
-                    && m.Group == subClientMethod.Group);
-                if (compositeClientMethod == null)
-                {
-                    // Re-link client parameters
-                    foreach (var parameter in subClientMethod.Parameters.Where(p => p.IsClientProperty))
-                    {
-                        var clientProperty = compositeClient.Properties
-                            .FirstOrDefault(p => p.SerializedName == parameter.ClientProperty.SerializedName);
-                        if (clientProperty != null)
-                        {
-                            parameter.ClientProperty = clientProperty;
-                        }
-                    }
-                    compositeClient.Add(subClientMethod);
-                    
-                }
-            }
-
-
-            // make sure that properties and parameters are using the types from the new model
-            // and not the types from the original.
-            foreach (var property in compositeClient.Properties)
-            {
-                EnsureUsesTypeFromModel(property, compositeClient);
-            }
-            foreach (var method in compositeClient.Methods)
-            {
-                foreach (var parameter in method.Parameters)
-                {
-                    EnsureUsesTypeFromModel(parameter, compositeClient);
-                }
-
-                foreach (var response in method.Responses.Values)
-                {
-                    response.Body = EnsureUsesTypeFromModel(response.Body, compositeClient);
-                    response.Headers = EnsureUsesTypeFromModel(response.Headers, compositeClient);
-                }
-
-                method.ReturnType.Body = EnsureUsesTypeFromModel(method.ReturnType.Body, compositeClient);
-                method.ReturnType.Headers = EnsureUsesTypeFromModel(method.ReturnType.Headers, compositeClient);
-            }
-            foreach (var modelType in compositeClient.ModelTypes)
-            {
-                foreach (var property in modelType.Properties)
-                {
-                    EnsureUsesTypeFromModel(property, compositeClient);
-                }
-            }
-
-            return compositeClient;
-        }
-
-        private static void EnsureUsesTypeFromModel(IVariable variable, CodeModel compositeClient)
-        {
-            if (variable.ModelType == null)
-            {
-                return;
-            }
-            if (variable.ModelType is EnumType)
-            {
-                variable.ModelType = FindEnumType((EnumType) variable.ModelType,compositeClient);
-            }
-            if (variable.ModelType is CompositeType)
-            {
-                variable.ModelType = FindCompositeType((CompositeType)variable.ModelType, compositeClient);
-            }
-            if (variable.ModelType is SequenceType)
-            {
-                var st = (SequenceType)variable.ModelType;
-                if (st.ElementType is EnumType)
-                {
-                    st.ElementType = FindEnumType((EnumType)st.ElementType, compositeClient);
-                }
-                if (st.ElementType is CompositeType)
-                {
-                    st.ElementType = FindCompositeType((CompositeType)st.ElementType, compositeClient);
-                }
-            }
-            if (variable.ModelType is DictionaryType)
-            {
-                var dt = (DictionaryType)variable.ModelType;
-                if (dt.ValueType is EnumType)
-                {
-                    dt.ValueType  = FindEnumType((EnumType)dt.ValueType, compositeClient);
-                }
-                if (dt.ValueType is CompositeType)
-                {
-                    dt.ValueType = FindCompositeType((CompositeType)dt.ValueType, compositeClient);
-                }
-            }
-        }
-
-        private static IModelType EnsureUsesTypeFromModel(IModelType modelType, CodeModel compositeClient)
-        {
-            if (modelType == null)
-            {
-                return modelType;
-            }
-            if (modelType is EnumType)
-            {
-                return FindEnumType((EnumType)modelType, compositeClient);
-            }
-            if (modelType is CompositeType)
-            {
-                return FindCompositeType((CompositeType)modelType, compositeClient);
-            }
-            if (modelType is SequenceType)
-            {
-                var st = (SequenceType)modelType;
-                if (st.ElementType is EnumType)
-                {
-                    st.ElementType = FindEnumType((EnumType)st.ElementType, compositeClient);
-                }
-                if (st.ElementType is CompositeType)
-                {
-                    st.ElementType = FindCompositeType((CompositeType)st.ElementType, compositeClient);
-                }
-                return st;
-            }
-            if (modelType is DictionaryType)
-            {
-                var dt = (DictionaryType)modelType;
-                if (dt.ValueType is EnumType)
-                {
-                    dt.ValueType = FindEnumType((EnumType)dt.ValueType, compositeClient);
-                }
-                if (dt.ValueType is CompositeType)
-                {
-                    dt.ValueType = FindCompositeType((CompositeType)dt.ValueType, compositeClient);
-                }
-                return dt;
-            }
-            return modelType;
-        }
-
-        private static CompositeType FindCompositeType(CompositeType ct, CodeModel compositeClient)
-        {
-            if (ct != null && !ct.Name.IsNullOrEmpty())
-            {
-                // if this has a name, then make sure it's in the model
-                if (!compositeClient.ModelTypes.Any(each => ReferenceEquals(each, ct)))
-                {
-                    // otherwise find the correct one in the model.
-                    return compositeClient.ModelTypes.Single(each => each.Name == ct.Name);
-                }
-            }
-            return ct;
-        }
-
-        private static EnumType FindEnumType(EnumType et, CodeModel compositeClient)
-        {
-            if (et != null && !et.Name.IsNullOrEmpty())
-            {
-                // if this has a name, then make sure it's in the model
-                if (!compositeClient.EnumTypes.Any(each => ReferenceEquals(each, et)))
-                {
-                    // otherwise find the correct one in the model.
-                    return compositeClient.EnumTypes.Single(each => each.Name == et.Name);
-                }
-            }
-            return et;
-        }
-
-        private static void AssertJsonEquals<T>(T compositeParam, T subParam)
-        {
-            if (compositeParam != null)
-            {
-                var jsonSettings = new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    NullValueHandling = NullValueHandling.Ignore,
-                    ContractResolver = new CamelCaseContractResolver(),
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-
-                var compositeParamJson = JsonConvert.SerializeObject(compositeParam, jsonSettings);
-                var subParamJson = JsonConvert.SerializeObject(subParam, jsonSettings);
-
-                if (!compositeParamJson.Equals(subParamJson))
-                {
-                    throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture,
-                        "{0}s are not the same.\nObject 1: {1}\nObject 2:{2}",
-                        typeof(T).Name, compositeParamJson, subParamJson));
-                }
-            }
-        }
-
-        private static void AssertEquals<T>(T compositeProperty, T subProperty, string propertyName)
-        {
-            if (compositeProperty != null)
-            {
-                if (!compositeProperty.Equals(subProperty))
-                {
-                    throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture,
-                        "{0} has different values in sub swagger documents.",
-                        propertyName));
-                }
-            }
-        }
-
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
-        {
-            // No composite modeler validation messages yet
-            messages = new List<ValidationMessage>();
-            return Build();
-        }
-
+        
         /// <summary>
         /// Copares two versions of the same service specification.
         /// </summary>

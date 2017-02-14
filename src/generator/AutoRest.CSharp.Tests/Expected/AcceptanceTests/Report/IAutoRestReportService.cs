@@ -29,12 +29,12 @@ namespace Fixtures.AcceptanceTestsReport
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
+        JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
+        JsonSerializerSettings DeserializationSettings { get; }
 
 
         /// <summary>

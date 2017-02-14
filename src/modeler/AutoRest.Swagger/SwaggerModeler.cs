@@ -57,31 +57,36 @@ namespace AutoRest.Swagger
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
 
-        public override CodeModel Build()
-        {
-            IEnumerable<ValidationMessage> messages = new List<ValidationMessage>();
-            return Build(out messages);
-        }
-
         /// <summary>
         /// Builds service model from swagger file.
         /// </summary>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override CodeModel Build(out IEnumerable<ValidationMessage> messages)
+        public override CodeModel Build()
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
-            ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            return Build(serviceDefinition);
+        }
 
-            // Look for semantic errors and warnings in the document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            messages = validator.GetValidationExceptions(ServiceDefinition).ToList();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+        public CodeModel Build(ServiceDefinition serviceDefinition)
+        {
+            ServiceDefinition = serviceDefinition;
+            if (!Settings.SkipValidation)
+            {
+                // Look for semantic errors and warnings in the document.
+                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                {
+                    Logger.Instance.Log(validationEx);
+                }
+            }
 
-            Logger.LogInfo(Resources.GeneratingClient);
+            Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
 
@@ -95,6 +100,7 @@ namespace AutoRest.Swagger
 
                 var clientProperty = New<Property>();
                 clientProperty.LoadFrom(parameter);
+                clientProperty.RealPath = new string[] { parameter.SerializedName.Value };
 
                 CodeModel.Add(clientProperty);
             }
@@ -135,7 +141,7 @@ namespace AutoRest.Swagger
                     }
                     else
                     {
-                        Logger.LogWarning(Resources.OptionsNotSupported);
+                        Logger.Instance.Log(Category.Warning, Resources.OptionsNotSupported);
                     }
                 }
             }
@@ -164,7 +170,7 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override IEnumerable<ComparisonMessage> Compare()
         {
-            Logger.LogInfo(Resources.ParsingSwagger);
+            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
@@ -177,17 +183,16 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var validationMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
-                !validationMessages.Any(m => m.Severity > LogEntrySeverity.Error) ? 
+                !LogMessages.Any(m => m.Severity > Category.Error) ? 
                 newDefintion.Compare(context, oldDefintion) : 
                 Enumerable.Empty<ComparisonMessage>();
 
-            return validationMessages
-                .Select(msg => 
-                    new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, string.Join("/", msg.Path), msg.Severity))
+            return LogMessages
+                .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
                 .Concat(comparisonMessages);
         }
 
@@ -223,19 +228,13 @@ namespace AutoRest.Swagger
 
             CodeModel = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName))
+            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
             {
-                if (ServiceDefinition.Info.Title == null)
-                {
-                    throw ErrorManager.CreateError(Resources.TitleMissing);
-                }
+                throw ErrorManager.CreateError(Resources.TitleMissing);
+            }
 
-                CodeModel.Name = ServiceDefinition.Info.Title.Replace(" ", "");
-            }
-            else
-            {
-                CodeModel.Name = Settings.ClientName;
-            }
+            CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
+
             CodeModel.Namespace = Settings.Namespace;
             CodeModel.ModelsName = Settings.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
@@ -261,23 +260,6 @@ namespace AutoRest.Swagger
         /// </summary>
         public virtual void BuildCompositeTypes()
         {
-            // Load any external references
-            foreach (var reference in ServiceDefinition.ExternalReferences)
-            {
-                string[] splitReference = reference.Split(new[] { '#' }, StringSplitOptions.RemoveEmptyEntries);
-                Debug.Assert(splitReference.Length == 2);
-                string filePath = splitReference[0];
-                // Make sure the filePath is either an absolute uri, or a rooted path
-                if (!Settings.FileSystem.IsCompletePath(filePath))
-                {
-                    // Otherwise, root it from the current path
-                    filePath = Settings.FileSystem.MakePathRooted(Settings.InputFolder, filePath);
-                }
-                string externalDefinition = Settings.FileSystem.ReadFileAsText(filePath);
-                ServiceDefinition external = SwaggerParser.Parse(externalDefinition);
-                external.Definitions.ForEach(d => ServiceDefinition.Definitions[d.Key] = d.Value);
-            }
-
             // Build service types and validate allOf
             if (ServiceDefinition.Definitions != null)
             {
@@ -292,7 +274,7 @@ namespace AutoRest.Swagger
                         : ServiceDefinition.Definitions[schema.Extends.StripDefinitionPath()];
 
                     if (parent != null &&
-                        !AncestorsHaveProperties(parent.Properties, parent.Extends.StripDefinitionPath()))
+                        !AncestorsHaveProperties(parent.Properties, parent.Extends))
                     {
                         throw ErrorManager.CreateError(Resources.InvalidAncestors, schemaName);
                     }
@@ -319,6 +301,7 @@ namespace AutoRest.Swagger
                 return true;
             }
 
+            extends = extends.StripDefinitionPath();
             Debug.Assert(!string.IsNullOrEmpty(extends) && ServiceDefinition.Definitions.ContainsKey(extends));
             return AncestorsHaveProperties(ServiceDefinition.Definitions[extends].Properties,
                 ServiceDefinition.Definitions[extends].Extends);

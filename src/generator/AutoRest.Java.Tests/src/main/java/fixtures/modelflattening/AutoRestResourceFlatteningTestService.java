@@ -21,11 +21,19 @@ import fixtures.modelflattening.models.SimpleProduct;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
+import com.microsoft.rest.RestClient;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
  */
 public interface AutoRestResourceFlatteningTestService {
+    /**
+     * Gets the REST client.
+     *
+     * @return the {@link RestClient} object.
+    */
+    RestClient restClient();
+
     /**
      * The default base URL.
      */

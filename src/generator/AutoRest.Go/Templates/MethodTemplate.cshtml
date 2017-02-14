@@ -1,10 +1,13 @@
 ﻿@using System.Collections.Generic;
 @using System.Linq;
 @using System.Text;
-
-@using AutoRest.Core.ClientModel
+@using System;
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
 @using AutoRest.Go
-@inherits AutoRest.Go.Template<AutoRest.Go.TemplateModels.MethodTemplateModel>
+@using AutoRest.Go.Model
+
+@inherits AutoRest.Core.Template<AutoRest.Go.Model.MethodGo>
 
 @{
     StringBuilder sb = new StringBuilder();
@@ -14,10 +17,10 @@
         {
             sb.Append(parameter.Name);
             sb.Append(" is ");
-            sb.Append(parameter.Documentation.ToSentence());
+            sb.Append(parameter.Documentation.FixedValue.ToSentence());
             sb.Append(" ");
         }
-        if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
+        if (parameter.ModelType.PrimaryType(KnownPrimaryType.Stream))
         {
             sb.Append(parameter.Name);
             sb.Append(" will be closed upon successful return. Callers should ensure closure when receiving an error.");
@@ -29,7 +32,7 @@
     rd.Insert(0, "resp");
 }
 
-@WrapComment("// ", Model.ScopedName + " " + Model.Description.ToSentence())
+@WrapComment("// ", Model.Name + " " + Model.Description.ToSentence())
 @if (Model.LocalParameters.Count() > 0)
 {
 @://
@@ -41,7 +44,7 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
     {
     @:if err := validation.Validate([]validation.Validation{
          @:@(Model.ParameterValidations)}); err != nil {
-             @:return result, @(Model.ValidationError())
+             @:return result, @(Model.ValidationError)
     @:}
     @:@EmptyLine
     }
@@ -68,8 +71,13 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
 }
 
 @EmptyLine
-// @(Model.PreparerMethodName) prepares the @(Model.ScopedName) request.
+// @(Model.PreparerMethodName) prepares the @(Model.Name) request.
 func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
+@if (Model.IsCustomBaseUri && Model.URLParameters.Count() > 0)
+{
+    @:@(Model.URLMap)
+    @:@EmptyLine
+}
 @if (Model.PathParameters.Count() > 0)
 {
     @:@(Model.PathMap)
@@ -78,9 +86,9 @@ func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParameter
 @if (Model.QueryParameters.Count() > 0)
 {
     @:@(Model.QueryMap)
-    foreach (Parameter p in Model.OptionalQueryParameters)
+    foreach (var p in Model.OptionalQueryParameters)
     {
-    @:if @(p.Type.GetEmptyCheck(p.GetParameterName(),false)) {
+    @:if @(p.ModelType.GetEmptyCheck(p.GetParameterName(),false)) {
         @:@(p.AddToMap("queryParameters"))
     @:}
     }
@@ -99,18 +107,18 @@ func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParameter
 
 @if (Model.BodyParameter != null && !Model.BodyParameter.IsRequired)
 {
-    @:if @(Model.BodyParameter.Type.GetEmptyCheck(Model.BodyParameter.Name, false)) {
+    @:if @(Model.BodyParameter.ModelType.GetEmptyCheck(Model.BodyParameter.Name, false)) {
         @:preparer = autorest.DecoratePreparer(preparer,
                             @:@(string.Format("autorest.WithJSON({0})", Model.BodyParameter.Name)))
     @:}
 }
 
-@foreach (Parameter p in Model.OptionalHeaderParameters)
+@foreach (var p in Model.OptionalHeaderParameters)
     {
-    @:if @(p.Type.GetEmptyCheck(p.GetParameterName(),false)) {
+    @:if @(p.ModelType.GetEmptyCheck(p.GetParameterName(), false)) {
         @:preparer = autorest.DecoratePreparer(preparer,
                             @:@(string.Format("autorest.WithHeader(\"{0}\",autorest.String({1}))",
-                            p.SerializedName, p.Name)))
+                            p.SerializedName, p.GetParameterName())))
     @:}
 }
 
@@ -121,7 +129,7 @@ func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParameter
 
 
 @EmptyLine
-// @(Model.SenderMethodName) sends the @(Model.ScopedName) request. The method will close the
+// @(Model.SenderMethodName) sends the @(Model.Name) request. The method will close the
 // http.Response Body if it receives an error.
 func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http.Response, error) {
     @if (Model.IsLongRunningOperation())
@@ -137,7 +145,7 @@ func (client @(Model.Owner)) @(Model.SenderMethodName)(req *http.Request) (*http
 }
 
 @EmptyLine
-// @(Model.ResponderMethodName) handles the response to the @(Model.ScopedName) request. The method always
+// @(Model.ResponderMethodName) handles the response to the @(Model.Name) request. The method always
 // closes the http.Response Body.
 func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (@(Model.MethodReturnSignature)) { 
     @if (Model.ReturnValue().Body.IsStreamType())
@@ -151,12 +159,12 @@ func (client @(Model.Owner)) @(Model.ResponderMethodName)(resp *http.Response) (
     return
 }
 
-@if (Model.IsPageable() && !Model.NextAlreadyDefined)
+@if (Model.IsPageable && !Model.NextAlreadyDefined)
 {
 @:@EmptyLine
 @:// @(Model.NextMethodName) retrieves the next set of results, if any.
 @:func (client @(Model.Owner)) @(Model.NextMethodName)(lastResults @(Model.ReturnValue().Body.Name)) (@Model.MethodReturnSignature) {
-    @:req, err := lastResults.@((Model.ReturnValue().Body as CompositeType).PreparerMethodName())()
+    @:req, err := lastResults.@((Model.ReturnValue().Body as CompositeTypeGo).PreparerMethodName)()
     @:if err != nil {
         @:return result, @(Model.AutorestError("Failure preparing next results request"))
     @:}

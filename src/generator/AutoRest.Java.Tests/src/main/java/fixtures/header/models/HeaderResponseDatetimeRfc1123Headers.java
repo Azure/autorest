@@ -12,6 +12,7 @@ package fixtures.header.models;
 
 import com.microsoft.rest.DateTimeRfc1123;
 import org.joda.time.DateTime;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseDatetimeRfc1123 operation.
@@ -21,6 +22,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
      * response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01
      * Jan 0001 00:00:00 GMT".
      */
+    @JsonProperty(value = "value")
     private DateTimeRfc1123 value;
 
     /**
@@ -32,7 +34,7 @@ public class HeaderResponseDatetimeRfc1123Headers {
         if (this.value == null) {
             return null;
         }
-        return this.value.getDateTime();
+        return this.value.dateTime();
     }
 
     /**

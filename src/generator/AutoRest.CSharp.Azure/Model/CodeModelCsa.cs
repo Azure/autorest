@@ -14,6 +14,8 @@ namespace AutoRest.CSharp.Azure.Model
         public IDictionary<KeyValuePair<string, string>, string> pageClasses =
             new Dictionary<KeyValuePair<string, string>, string>();
 
+        public override bool HaveModelNamespace => base.HaveModelNamespace || pageClasses.Any();
+
         /// <summary>
         ///     Returns the using statements 
         /// </summary>
@@ -24,8 +26,7 @@ namespace AutoRest.CSharp.Azure.Model
                 yield return "Microsoft.Rest";
                 yield return "Microsoft.Rest.Azure";
 
-                if (ModelTypes.Any(m => !m.Extensions.ContainsKey(AzureExtensions.ExternalExtension)) ||
-                    pageClasses.Any())
+                if (HaveModelNamespace)
                 {
                     yield return ModelsName;
                 }

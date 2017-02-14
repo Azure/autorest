@@ -3,6 +3,7 @@
 
 package petstore.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The CheckNameAvailability operation response.
@@ -13,6 +14,7 @@ public class CheckNameAvailabilityResult {
      * you to use. If true, the name is available. If false, the name has
      * already been taken or invalid and cannot be used.
      */
+    @JsonProperty(value = "nameAvailable")
     private Boolean nameAvailable;
 
     /**
@@ -20,11 +22,13 @@ public class CheckNameAvailabilityResult {
      * Reason element is only returned if NameAvailable is false. Possible
      * values include: 'AccountNameInvalid', 'AlreadyExists'.
      */
+    @JsonProperty(value = "reason")
     private Reason reason;
 
     /**
      * Gets an error message explaining the Reason value in more detail.
      */
+    @JsonProperty(value = "message")
     private String message;
 
     /**

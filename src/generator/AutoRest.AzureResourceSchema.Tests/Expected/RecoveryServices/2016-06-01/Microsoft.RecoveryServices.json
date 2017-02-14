@@ -7,6 +7,10 @@
     "vaults": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the recovery services vault."
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -59,6 +63,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -92,7 +97,6 @@
       "description": "Identifies the unique system identifier for each Azure resource."
     },
     "VaultProperties": {
-      "type": "object",
       "description": "Properties of the vault."
     }
   }

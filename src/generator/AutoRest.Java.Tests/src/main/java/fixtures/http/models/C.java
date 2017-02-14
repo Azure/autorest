@@ -10,6 +10,7 @@
 
 package fixtures.http.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The C model.
@@ -18,6 +19,7 @@ public class C {
     /**
      * The httpCode property.
      */
+    @JsonProperty(value = "httpCode")
     private String httpCode;
 
     /**

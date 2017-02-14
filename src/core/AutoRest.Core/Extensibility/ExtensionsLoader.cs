@@ -25,7 +25,7 @@ namespace AutoRest.Core.Extensibility
 
         public static IAnyPlugin GetPlugin()
         {
-            Logger.LogInfo(Resources.InitializingCodeGenerator);
+            Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
             if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings");
@@ -58,7 +58,7 @@ namespace AutoRest.Core.Extensibility
                     }
                     catch (Exception ex)
                     {
-                        throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
+                        throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
                     }
                 }
                 else
@@ -66,7 +66,7 @@ namespace AutoRest.Core.Extensibility
                     throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
                 }
             }
-            Logger.LogInfo(Resources.GeneratorInitialized,
+            Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
                 Settings.Instance.CodeGenerator,
                 plugin.GetType().Assembly.GetName().Version);
             return plugin;
@@ -80,7 +80,7 @@ namespace AutoRest.Core.Extensibility
         /// <returns>Modeler specified in Settings.Modeler</returns>
         public static Modeler GetModeler()
         {
-            Logger.LogInfo(Resources.InitializingModeler);
+            Logger.Instance.Log(Category.Info, Resources.InitializingModeler);
             if (Settings.Instance == null)
             {
                 throw new ArgumentNullException("settings", "settings or settings.Modeler cannot be null.");
@@ -107,7 +107,7 @@ namespace AutoRest.Core.Extensibility
                 }
                 catch (Exception ex)
                 {
-                    throw ErrorManager.CreateError(ex, Resources.ErrorParsingConfig);
+                    throw ErrorManager.CreateError(Resources.ErrorParsingConfig, ex);
                 }
             }
             else
@@ -115,7 +115,7 @@ namespace AutoRest.Core.Extensibility
                 throw ErrorManager.CreateError(Resources.ConfigurationFileNotFound);
             }
 
-            Logger.LogInfo(Resources.ModelerInitialized,
+            Logger.Instance.Log(Category.Info, Resources.ModelerInitialized,
                 Settings.Instance.Modeler,
                 modeler.GetType().Assembly.GetName().Version);
             return modeler;
@@ -206,7 +206,7 @@ namespace AutoRest.Core.Extensibility
                 }
                 catch (Exception ex)
                 {
-                    throw ErrorManager.CreateError(ex, Resources.ErrorLoadingAssembly, key, ex.Message);
+                    throw ErrorManager.CreateError(Resources.ErrorLoadingAssembly, key, ex);
                 }
 
                 return instance;

@@ -13,11 +13,10 @@ package fixtures.parameterflattening.implementation;
 import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
@@ -35,7 +34,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in AvailabilitySets.
  */
-public final class AvailabilitySetsImpl implements AvailabilitySets {
+public class AvailabilitySetsImpl implements AvailabilitySets {
     /** The Retrofit service to perform REST calls. */
     private AvailabilitySetsService service;
     /** The service client containing this operation class. */
@@ -57,9 +56,9 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * used by Retrofit to perform actually REST calls.
      */
     interface AvailabilitySetsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.parameterflattening.AvailabilitySets update" })
         @PATCH("parameterFlattening/{resourceGroupName}/{availabilitySetName}")
-        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags1);
+        Observable<Response<ResponseBody>> update(@Path("resourceGroupName") String resourceGroupName, @Path("availabilitySetName") String avset, @Body AvailabilitySetUpdateParameters tags);
 
     }
 
@@ -71,7 +70,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @param tags A set of tags. A description about the set of tags.
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
-        updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().getBody();
+        updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().body();
     }
 
     /**
@@ -84,7 +83,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
+        return ServiceCall.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
     /**
@@ -99,7 +98,7 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
         return updateWithServiceResponseAsync(resourceGroupName, avset, tags).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -139,8 +138,8 @@ public final class AvailabilitySetsImpl implements AvailabilitySets {
             });
     }
 
-    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> updateDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }

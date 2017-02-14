@@ -17,7 +17,7 @@ namespace AutoRest.Python.Azure
 {
     public class CodeGeneratorPya : CodeGeneratorPy
     {
-        private const string ClientRuntimePackage = "msrestazure version 0.4.0";
+        private const string ClientRuntimePackage = "msrestazure version 0.4.7";
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             Resources.UsageInformation, ClientRuntimePackage);

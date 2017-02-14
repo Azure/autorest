@@ -7,6 +7,9 @@
     "applicationGateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -57,6 +60,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -66,6 +70,9 @@
     "connections": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -116,6 +123,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -125,6 +133,9 @@
     "expressRouteCircuits_authorizations": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -151,16 +162,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -170,6 +178,9 @@
     "expressRouteCircuits_peerings": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -196,16 +207,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -215,6 +223,9 @@
     "loadBalancers": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -265,6 +276,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -274,6 +286,9 @@
     "localNetworkGateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -324,6 +339,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -333,6 +349,9 @@
     "networkInterfaces": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -383,6 +402,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -392,6 +412,9 @@
     "networkSecurityGroups": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -452,6 +475,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -461,6 +485,9 @@
     "networkSecurityGroups_securityRules": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -487,16 +514,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -506,6 +530,9 @@
     "publicIPAddresses": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -556,6 +583,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -565,6 +593,9 @@
     "routeTables": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -625,6 +656,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -634,6 +666,9 @@
     "routeTables_routes": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -660,16 +695,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -679,6 +711,9 @@
     "virtualnetworkgateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -729,6 +764,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -738,6 +774,9 @@
     "virtualnetworks": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -798,6 +837,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -807,6 +847,9 @@
     "virtualnetworks_subnets": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -833,16 +876,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -3451,6 +3491,9 @@
     "networkSecurityGroups_securityRules_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3477,16 +3520,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -3951,6 +3991,9 @@
     "routeTables_routes_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3977,16 +4020,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -4676,6 +4716,9 @@
     "virtualnetworks_subnets_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4702,16 +4745,13 @@
             }
           ]
         },
-        "name": {
-          "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource"
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated"
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"

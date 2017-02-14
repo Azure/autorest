@@ -8,6 +8,7 @@ using AutoRest.Core;
 using AutoRest.Swagger;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Model;
 
 #if gws_uh_no_just_no
 // If we want to keep these tests, they really 
@@ -24,6 +25,11 @@ namespace AutoRest.Extensions.Tests
 {
     public class ExtensionsTests
     {
+        private string CreateCSharpDeclarationString(Parameter parameter)
+        {
+            return $"{parameter.ModelType.Name} {parameter.Name}";
+        }
+
         [Fact]
         public void TestClientModelWithPayloadFlattening()
         {
@@ -41,19 +47,19 @@ namespace AutoRest.Extensions.Tests
 
                 Assert.NotNull(clientModel);
                 Assert.Equal(4, clientModel.Methods[0].Parameters.Count);
-                Assert.Equal("String subscriptionId", clientModel.Methods[0].Parameters[0].ToString());
-                Assert.Equal("String resourceGroupName", clientModel.Methods[0].Parameters[1].ToString());
-                Assert.Equal("String apiVersion", clientModel.Methods[0].Parameters[2].ToString());
-                Assert.Equal("MaxProduct maxProduct", clientModel.Methods[0].Parameters[3].ToString());
+                Assert.Equal("String subscriptionId", CreateCSharpDeclarationString(clientModel.Methods[0].Parameters[0]));
+                Assert.Equal("String resourceGroupName", CreateCSharpDeclarationString(clientModel.Methods[0].Parameters[1]));
+                Assert.Equal("String apiVersion", CreateCSharpDeclarationString(clientModel.Methods[0].Parameters[2]));
+                Assert.Equal("MaxProduct maxProduct", CreateCSharpDeclarationString(clientModel.Methods[0].Parameters[3]));
                 Assert.Equal(6, clientModel.Methods[1].Parameters.Count);
-                Assert.Equal("String subscriptionId", clientModel.Methods[1].Parameters[0].ToString());
-                Assert.Equal("String resourceGroupName", clientModel.Methods[1].Parameters[1].ToString());
-                Assert.Equal("String apiVersion", clientModel.Methods[1].Parameters[2].ToString());
-                Assert.Equal("String baseProductId", clientModel.Methods[1].Parameters[3].ToString());
+                Assert.Equal("String subscriptionId", CreateCSharpDeclarationString(clientModel.Methods[1].Parameters[0]));
+                Assert.Equal("String resourceGroupName", CreateCSharpDeclarationString(clientModel.Methods[1].Parameters[1]));
+                Assert.Equal("String apiVersion", CreateCSharpDeclarationString(clientModel.Methods[1].Parameters[2]));
+                Assert.Equal("String baseProductId", CreateCSharpDeclarationString(clientModel.Methods[1].Parameters[3]));
                 Assert.Equal(true, clientModel.Methods[1].Parameters[3].IsRequired);
-                Assert.Equal("String baseProductDescription", clientModel.Methods[1].Parameters[4].ToString());
+                Assert.Equal("String baseProductDescription", CreateCSharpDeclarationString(clientModel.Methods[1].Parameters[4]));
                 Assert.Equal(false, clientModel.Methods[1].Parameters[4].IsRequired);
-                Assert.Equal("MaxProduct maxProductReference", clientModel.Methods[1].Parameters[5].ToString());
+                Assert.Equal("MaxProduct maxProductReference", CreateCSharpDeclarationString(clientModel.Methods[1].Parameters[5]));
                 Assert.Equal(false, clientModel.Methods[1].Parameters[5].IsRequired);
                 Assert.Equal(1, clientModel.Methods[1].InputParameterTransformation.Count);
                 Assert.Equal(3, clientModel.Methods[1].InputParameterTransformation[0].ParameterMappings.Count);

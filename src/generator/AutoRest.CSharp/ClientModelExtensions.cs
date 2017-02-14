@@ -11,6 +11,9 @@ using AutoRest.Core.Utilities;
 using AutoRest.CSharp.Model;
 using AutoRest.Extensions;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.IO;
+using System.CodeDom.Compiler;
+using System.CodeDom;
 
 namespace AutoRest.CSharp
 {
@@ -340,7 +343,7 @@ namespace AutoRest.CSharp
 
             if (constraints != null && constraints.Any())
             {
-                AppendConstraintValidations(valueReference, constraints, sb, (type as PrimaryType)?.KnownFormat ?? KnownFormat.none);
+                AppendConstraintValidations(valueReference, constraints, sb, type);
             }
 
             if (sequence != null && sequence.ShouldValidateChain())
@@ -383,13 +386,27 @@ namespace AutoRest.CSharp
             return null;
         }
 
+        /// <summary>
+        /// Generates a C# string literal for given string, fully escaped and such.
+        /// </summary>
+        private static string ToLiteral(string input)
+        {
+            using (var writer = new StringWriter())
+            {
+                using (var provider = CodeDomProvider.CreateProvider("CSharp"))
+                {
+                    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(input), writer, null);
+                    return writer.ToString();
+                }
+            }
+        }
 
-        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, KnownFormat format)
+        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)
         {
             foreach (var constraint in constraints.Keys)
             {
                 string constraintCheck;
-                string constraintValue = (format == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
+                string constraintValue = ((type as PrimaryType)?.KnownFormat == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:
@@ -420,8 +437,15 @@ namespace AutoRest.CSharp
                         constraintCheck = $"{valueReference} % {constraintValue} != 0";
                         break;
                     case Constraint.Pattern:
-                        constraintValue = $"\"{constraintValue.Replace("\\", "\\\\")}\"";
-                        constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
+                        constraintValue = ToLiteral(constraintValue);
+                        if (type is DictionaryType)
+                        {
+                            constraintCheck = $"!System.Linq.Enumerable.All({valueReference}.Values, value => System.Text.RegularExpressions.Regex.IsMatch(value, {constraintValue}))";
+                        }
+                        else
+                        {
+                            constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
+                        }
                         break;
                     case Constraint.UniqueItems:
                         if ("true".EqualsIgnoreCase(constraints[constraint]))

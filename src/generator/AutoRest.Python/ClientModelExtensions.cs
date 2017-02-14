@@ -295,7 +295,7 @@ namespace AutoRest.Python
                 }
                 else
                 {
-                    innerTypeName = innerType.Name.Else("str");
+                    innerTypeName = GetPythonSerializationType(innerType);
                 }
                 return "[" + innerTypeName + "]";
             }
@@ -312,7 +312,7 @@ namespace AutoRest.Python
                 }
                 else
                 {
-                    innerTypeName = innerType.Name;
+                    innerTypeName = GetPythonSerializationType(innerType);
                 }
                 return "{" + innerTypeName + "}";
             }

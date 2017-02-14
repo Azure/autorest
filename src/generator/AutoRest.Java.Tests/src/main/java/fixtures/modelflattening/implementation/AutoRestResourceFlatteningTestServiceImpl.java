@@ -12,13 +12,13 @@ package fixtures.modelflattening.implementation;
 
 import fixtures.modelflattening.AutoRestResourceFlatteningTestService;
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.Validator;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
@@ -43,7 +43,7 @@ import rx.Observable;
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
  */
-public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
+public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient implements AutoRestResourceFlatteningTestService {
     /**
      * The Retrofit service to perform REST calls.
      */
@@ -89,6 +89,16 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         initialize();
     }
 
+    /**
+     * Initializes an instance of AutoRestResourceFlatteningTestService client.
+     *
+     * @param restClient the REST client containing pre-configured settings
+     */
+    public AutoRestResourceFlatteningTestServiceImpl(RestClient restClient) {
+        super(restClient);
+        initialize();
+    }
+
     private void initialize() {
         initializeService();
     }
@@ -102,39 +112,39 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestResourceFlatteningTestServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putArray" })
         @PUT("model-flatten/array")
         Observable<Response<ResponseBody>> putArray(@Body List<Resource> resourceArray);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getArray" })
         @GET("model-flatten/array")
         Observable<Response<ResponseBody>> getArray();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("model-flatten/dictionary")
         Observable<Response<ResponseBody>> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getDictionary" })
         @GET("model-flatten/dictionary")
         Observable<Response<ResponseBody>> getDictionary();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("model-flatten/resourcecollection")
         Observable<Response<ResponseBody>> putResourceCollection(@Body ResourceCollection resourceComplexObject);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("model-flatten/resourcecollection")
         Observable<Response<ResponseBody>> getResourceCollection();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putSimpleProduct" })
         @PUT("model-flatten/customFlattening")
         Observable<Response<ResponseBody>> putSimpleProduct(@Body SimpleProduct simpleBodyProduct);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService postFlattenedSimpleProduct" })
         @POST("model-flatten/customFlattening")
         Observable<Response<ResponseBody>> postFlattenedSimpleProduct(@Body SimpleProduct simpleBodyProduct);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putSimpleProductWithGrouping" })
         @PUT("model-flatten/customFlattening/parametergrouping/{name}/")
         Observable<Response<ResponseBody>> putSimpleProductWithGrouping(@Path("name") String name, @Body SimpleProduct simpleBodyProduct);
 
@@ -145,7 +155,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      */
     public void putArray() {
-        putArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -155,7 +165,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -167,7 +177,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -199,7 +209,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceArray External Resource as an Array to put
      */
     public void putArray(List<Resource> resourceArray) {
-        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().getBody();
+        putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
     }
 
     /**
@@ -210,7 +220,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
+        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
     /**
@@ -223,7 +233,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -251,7 +261,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -263,7 +273,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     public List<FlattenedProduct> getArray() {
-        return getArrayWithServiceResponseAsync().toBlocking().single().getBody();
+        return getArrayWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -273,7 +283,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
-        return ServiceCall.create(getArrayWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +295,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return getArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<FlattenedProduct>>, List<FlattenedProduct>>() {
             @Override
             public List<FlattenedProduct> call(ServiceResponse<List<FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -311,7 +321,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<List<FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -322,7 +332,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      */
     public void putDictionary() {
-        putDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -332,7 +342,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -344,7 +354,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -376,7 +386,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceDictionary External Resource as a Dictionary to put
      */
     public void putDictionary(Map<String, FlattenedProduct> resourceDictionary) {
-        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().getBody();
+        putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().body();
     }
 
     /**
@@ -387,7 +397,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
+        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
     }
 
     /**
@@ -400,7 +410,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putDictionaryWithServiceResponseAsync(resourceDictionary).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -428,7 +438,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -440,7 +450,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     public Map<String, FlattenedProduct> getDictionary() {
-        return getDictionaryWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDictionaryWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -450,7 +460,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
-        return ServiceCall.create(getDictionaryWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -462,7 +472,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return getDictionaryWithServiceResponseAsync().map(new Func1<ServiceResponse<Map<String, FlattenedProduct>>, Map<String, FlattenedProduct>>() {
             @Override
             public Map<String, FlattenedProduct> call(ServiceResponse<Map<String, FlattenedProduct>> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -488,7 +498,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Map<String, FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -499,7 +509,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      */
     public void putResourceCollection() {
-        putResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -509,7 +519,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -521,7 +531,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -553,7 +563,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      */
     public void putResourceCollection(ResourceCollection resourceComplexObject) {
-        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().getBody();
+        putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().body();
     }
 
     /**
@@ -564,7 +574,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
+        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
     /**
@@ -577,7 +587,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -605,7 +615,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -617,7 +627,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the ResourceCollection object if successful.
      */
     public ResourceCollection getResourceCollection() {
-        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().getBody();
+        return getResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -627,7 +637,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
-        return ServiceCall.create(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -639,7 +649,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollection>, ResourceCollection>() {
             @Override
             public ResourceCollection call(ServiceResponse<ResourceCollection> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -665,7 +675,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ResourceCollection, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<ResourceCollection, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -677,7 +687,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct() {
-        return putSimpleProductWithServiceResponseAsync().toBlocking().single().getBody();
+        return putSimpleProductWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -687,7 +697,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(putSimpleProductWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(putSimpleProductWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -699,7 +709,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putSimpleProductWithServiceResponseAsync().map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -732,7 +742,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProduct(SimpleProduct simpleBodyProduct) {
-        return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).toBlocking().single().getBody();
+        return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).toBlocking().single().body();
     }
 
     /**
@@ -743,7 +753,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(putSimpleProductWithServiceResponseAsync(simpleBodyProduct), serviceCallback);
+        return ServiceCall.fromResponse(putSimpleProductWithServiceResponseAsync(simpleBodyProduct), serviceCallback);
     }
 
     /**
@@ -756,7 +766,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putSimpleProductWithServiceResponseAsync(simpleBodyProduct).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -784,7 +794,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<SimpleProduct, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -798,7 +808,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName) {
-        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).toBlocking().single().getBody();
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).toBlocking().single().body();
     }
 
     /**
@@ -810,7 +820,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName), serviceCallback);
+        return ServiceCall.fromResponse(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName), serviceCallback);
     }
 
     /**
@@ -824,7 +834,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -877,7 +887,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct postFlattenedSimpleProduct(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue) {
-        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().single().getBody();
+        return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).toBlocking().single().body();
     }
 
     /**
@@ -892,7 +902,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
+        return ServiceCall.fromResponse(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
     }
 
     /**
@@ -909,7 +919,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -955,7 +965,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> postFlattenedSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<SimpleProduct, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -968,7 +978,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object if successful.
      */
     public SimpleProduct putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) {
-        return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).toBlocking().single().getBody();
+        return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).toBlocking().single().body();
     }
 
     /**
@@ -979,7 +989,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.create(putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup), serviceCallback);
+        return ServiceCall.fromResponse(putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup), serviceCallback);
     }
 
     /**
@@ -992,7 +1002,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
         return putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup).map(new Func1<ServiceResponse<SimpleProduct>, SimpleProduct>() {
             @Override
             public SimpleProduct call(ServiceResponse<SimpleProduct> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1038,7 +1048,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductWithGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<SimpleProduct, ErrorException>(this.mapperAdapter())
+        return this.restClient().responseBuilderFactory().<SimpleProduct, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// <summary>
     /// ArrayOperations operations.
     /// </summary>
-    internal partial class ArrayOperations : IServiceOperations<AzureCompositeModel>, IArrayOperations
+    internal partial class ArrayOperations : IServiceOperations<AzureCompositeModelClient>, IArrayOperations
     {
         /// <summary>
         /// Initializes a new instance of the ArrayOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal ArrayOperations(AzureCompositeModel client)
+        internal ArrayOperations(AzureCompositeModelClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         }
 
         /// <summary>
-        /// Gets a reference to the AzureCompositeModel
+        /// Gets a reference to the AzureCompositeModelClient
         /// </summary>
-        public AzureCompositeModel Client { get; private set; }
+        public AzureCompositeModelClient Client { get; private set; }
 
         /// <summary>
         /// Get complex types with array property
@@ -104,6 +104,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -150,7 +152,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -183,7 +185,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ArrayWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -261,6 +263,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -313,7 +317,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -401,6 +405,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -447,7 +453,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -480,7 +486,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ArrayWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -558,6 +564,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -610,7 +618,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -699,6 +707,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -745,7 +755,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -778,7 +788,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ArrayWrapper>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

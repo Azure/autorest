@@ -23,7 +23,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     /// <summary>
     /// PolymorphismOperations operations.
     /// </summary>
-    internal partial class PolymorphismOperations : IServiceOperations<AzureCompositeModel>, IPolymorphismOperations
+    internal partial class PolymorphismOperations : IServiceOperations<AzureCompositeModelClient>, IPolymorphismOperations
     {
         /// <summary>
         /// Initializes a new instance of the PolymorphismOperations class.
@@ -34,7 +34,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal PolymorphismOperations(AzureCompositeModel client)
+        internal PolymorphismOperations(AzureCompositeModelClient client)
         {
             if (client == null)
             {
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         }
 
         /// <summary>
-        /// Gets a reference to the AzureCompositeModel
+        /// Gets a reference to the AzureCompositeModelClient
         /// </summary>
-        public AzureCompositeModel Client { get; private set; }
+        public AzureCompositeModelClient Client { get; private set; }
 
         /// <summary>
         /// Get complex types that are polymorphic
@@ -104,6 +104,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -150,7 +152,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -183,7 +185,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Fish>(_responseContent, Client.DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -303,6 +305,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -355,7 +359,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -485,6 +489,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", Client.AcceptLanguage);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -537,7 +543,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

@@ -67,7 +67,7 @@
         ],
         "parameters": [
           {
-            "$ref": "globalSubscriptionId"
+            "$ref": "#/parameters/globalSubscriptionId"
           }
         ],
         "responses": {
@@ -92,7 +92,7 @@
         ],
         "parameters": [
           {
-            "$ref": "globalSubscriptionId"
+            "$ref": "#/parameters/globalSubscriptionId"
           }
         ],
         "responses": {
@@ -117,10 +117,10 @@
         ],
         "parameters": [
           {
-            "$ref": "globalSubscriptionId"
+            "$ref": "#/parameters/globalSubscriptionId"
           },
           {
-            "$ref": "globalApiVersion"
+            "$ref": "#/parameters/globalApiVersion"
           }
         ],
         "responses": {
@@ -197,7 +197,7 @@
     "/azurespecials/subscriptionId/path/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
       "parameters": [
         {
-            "$ref": "globalSubscriptionId"
+          "$ref": "#/parameters/globalSubscriptionId"
         }
       ],
       "post": {
@@ -311,7 +311,7 @@
         ],
         "parameters": [
           {
-            "$ref" : "globalApiVersion"
+            "$ref": "#/parameters/globalApiVersion"
           }
         ],
         "responses": {
@@ -336,7 +336,7 @@
         ],
         "parameters": [
           {
-            "$ref" : "globalApiVersion"
+            "$ref": "#/parameters/globalApiVersion"
           }
         ],
         "responses": {
@@ -366,8 +366,7 @@
             "description": "This should appear as a method parameter, use value '2.0'",
             "type": "string",
             "required": true,
-            "enum": [ "2.0" ],
-            "required": true
+            "enum": [ "2.0" ]
           }
         ],
         "responses": {
@@ -414,7 +413,7 @@
     "/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview": {
       "parameters": [
         {
-          "$ref": "globalApiVersion"
+          "$ref": "#/parameters/globalApiVersion"
         }
       ],
       "get": {
@@ -444,8 +443,7 @@
           "description": "This should appear as a method parameter, use value '2.0'",
           "type": "string",
           "required": true,
-          "enum": [ "2.0" ],
-          "required": true
+          "enum": [ "2.0" ]
         }
       ],
       "get": {
@@ -506,8 +504,7 @@
             "description": "The api version, which appears in the query, the value is always '2.0'",
             "type": "string",
             "required": true,
-            "enum": [ "2.0" ],
-            "required": true
+            "enum": [ "2.0" ]
           }
         ],
         "responses": {
@@ -854,7 +851,47 @@
           }
         }
       }
-    }
+    },
+    "/azurespecials/customNamedRequestIdHead": {
+      "head": {
+        "operationId": "header_customNamedRequestIdHead",
+        "description": "Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request",
+        "parameters": [
+          {
+            "name": "foo-client-request-id",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "The fooRequestId",
+            "x-ms-client-request-id": true
+          }
+        ],
+        "tags": [
+          "Header Operations"
+        ],
+        "x-ms-request-id": "foo-request-id",
+        "responses": {
+          "200": {
+            "headers": {
+              "foo-request-id": {
+                "description": "Gets the foo-request-id.",
+                "type": "string"
+              }
+            },
+            "description": "Gets the foo-request-id"
+          },
+          "404": {
+            "description": "Gets the foo-request-id"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
   },
   "parameters": {
     "globalSubscriptionId": {

@@ -30,7 +30,7 @@ namespace AutoRest.Ruby.Azure
         /// <summary>
         /// Gets the usage instructions for the code generator.
         /// </summary>
-        public override string UsageInstructions => @"The ""gem 'ms_rest_azure' ~> 0.6"" is required for working with generated code.";
+        public override string UsageInstructions => @"The ""gem 'ms_rest_azure' ~> 0.7"" is required for working with generated code.";
 
         /// <summary>
         /// Generates Ruby code for Azure service client.
@@ -61,20 +61,22 @@ namespace AutoRest.Ruby.Azure
             foreach (CompositeTypeRba model in codeModel.ModelTypes)
             {
                 if ((model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool)model.Extensions[AzureExtensions.ExternalExtension])
-                    || model.Name == "Resource" || model.Name == "SubResource")
+                    (bool)model.Extensions[AzureExtensions.ExternalExtension]))
                 {
                     continue;
                 }
 
-                if( codeModel.pageModels.Any( each => each.Name.EqualsIgnoreCase(model.Name ) ) )
+                if (codeModel.pageModels.Any(each => each.Name.EqualsIgnoreCase(model.Name)))
                 {
                     // Skip, handled in the .pageModels section below.
                     continue;
                 }
 
-                var modelTemplate = new ModelTemplate { Model = model };
-                await Write(modelTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                var modelTemplate = new AzureModelTemplate { Model = model };
+                if (!CompositeTypeRba.resourceOrSubResourceRegEx.IsMatch(model.Name) || !CompositeTypeRba.IsResourceModelMatchingStandardDefinition(model))
+                {
+                    await Write(modelTemplate, Path.Combine(GeneratorSettingsRb.Instance.modelsPath, CodeNamer.UnderscoreCase(model.Name) + ImplementationFileExtension));
+                }
             }
             // Paged Models
             foreach (var pageModel in codeModel.pageModels)

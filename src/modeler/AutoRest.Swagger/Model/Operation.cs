@@ -36,6 +36,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(OneUnderscoreInOperationId))]
         [Rule(typeof(OperationIdNounInVerb))]
+        [Rule(typeof(OperationNameValidation))]
         public string OperationId { get; set; }
 
         public string Summary
@@ -133,7 +134,7 @@ namespace AutoRest.Swagger.Model
                 {
                     var oldResponse = priorOperation.FindResponse(response.Key, priorOperation.Responses);
 
-                    context.Push(response.Key);
+                    context.PushProperty(response.Key);
 
                     if (oldResponse == null)
                     {
@@ -153,7 +154,7 @@ namespace AutoRest.Swagger.Model
 
                     if (newResponse == null)
                     {
-                        context.Push(response.Key);
+                        context.PushProperty(response.Key);
                         context.LogBreakingChange(ComparisonMessages.RemovedResponseCode, response.Key);
                         context.Pop();
                     }
@@ -175,7 +176,7 @@ namespace AutoRest.Swagger.Model
             {
                 SwaggerParameter newParam = FindParameter(oldParam.Name, Parameters, currentRoot.Parameters);
 
-                context.Push(oldParam.Name);
+                context.PushProperty(oldParam.Name);
 
                 if (newParam != null)
                 {
@@ -201,7 +202,7 @@ namespace AutoRest.Swagger.Model
 
                 if (oldParam == null)
                 {
-                    context.Push(newParam.Name);
+                    context.PushProperty(newParam.Name);
                     context.LogBreakingChange(ComparisonMessages.AddingRequiredParameter, newParam.Name);
                     context.Pop();
                 }

@@ -5,15 +5,18 @@ using System.Collections.Generic;
 
 namespace AutoRest.Go
 {
-    public class VariableScopeProvider : IScopeProvider
+    public class VariableScopeProvider
     {
         /// <summary>
         /// Placeholder for variable scope - this ensures that variables names are unique within the method
+        /// Refactor -> We could get rid of this file
+        /// Refactor -> Namer
         /// </summary>
         private readonly HashSet<string> _variables = new HashSet<string>();
 
         /// <summary>
         /// Get a variable name that is unique in this method's scope
+        /// Refactor -> Namer
         /// </summary>
         /// <param name="prefix">The variable prefix</param>
         /// <param name="suffix">The suffix added to the variable - a simple counter is used to generate new variable names</param>

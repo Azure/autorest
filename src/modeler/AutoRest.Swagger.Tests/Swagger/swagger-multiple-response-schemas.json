@@ -435,7 +435,7 @@
     "newPet": {
       "allOf": [
         {
-          "$ref": "pet"
+          "$ref": "#/definitions/pet"
         },
         {
           "required": [

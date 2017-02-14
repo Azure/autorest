@@ -1,10 +1,10 @@
 ﻿@using System.Linq;
-@using AutoRest.Core.ClientModel
+@using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
-@using AutoRest.Java.TypeModels
-@using AutoRest.Java.Azure.TypeModels
-@inherits AutoRest.Core.Template<AutoRest.Java.Azure.TemplateModels.AzureMethodTemplateModel>
+@using AutoRest.Java.Model
+@using AutoRest.Java.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodJva>
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
@@ -20,20 +20,20 @@
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
-    @Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
-    return new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
+public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
+    @Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped response = @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single();
+    return new @(Model.ReturnTypeJva.GenericBodyClientTypeString)(response.body()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
+        public @Model.ReturnTypeJva.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation(true)
-            return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true)).toBlocking().single().getBody();
+            return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true)).toBlocking().single().body();
         }
     };
 }
@@ -50,17 +50,17 @@ public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
+public ServiceCall<@Model.ReturnTypeJva.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
     return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
         @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation),
-        new Func1<String, Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped>>() {
+        new Func1<String, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
-            public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> call(String @Model.PagingNextPageLinkParameterName) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(String @Model.PagingNextPageLinkParameterName) {
                 @Model.PagingGroupedParameterTransformation(true)
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true));
             }
@@ -80,23 +80,23 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation)
-        .map(new Func1<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped, @Model.ReturnTypeModel.ServiceResponseGenericParameterString>() {
+        .map(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, @Model.ReturnTypeJva.ServiceResponseGenericParameterString>() {
             @@Override
-            public @Model.ReturnTypeModel.ServiceResponseGenericParameterString call(@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped response) {
-                return response.getBody();
+            public @Model.ReturnTypeJva.ServiceResponseGenericParameterString call(@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped response) {
+                return response.body();
             }
         });
 }
@@ -113,23 +113,23 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> 
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation)
-        .concatMap(new Func1<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped, Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped>>() {
+        .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
-            public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> call(@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped page) {
-                String @Model.PagingNextPageLinkParameterName = page.getBody().getNextPageLink();
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped page) {
+                String @Model.PagingNextPageLinkParameterName = page.body().nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
                 }
@@ -151,18 +151,18 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeJva.ClientResponseType} if successful.
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterDeclaration) {
     @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -173,15 +173,15 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterModel parameter in Model.LocalParameters)
+@foreach (ParameterJv parameter in Model.LocalParameters)
 {
     if (!parameter.IsRequired)
     {
-@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.DefaultValue(Model));
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.GetDefaultValue(Model) ?? "null");
     }
     if (parameter.IsConstant)
     {
-@:    final @(parameter.ClientType.ParameterVariant) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ClientType.ParameterVariant.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
 
     }
 }
@@ -192,13 +192,17 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
+@if (Model.IsPagingNextOperation)
+{
+@:    String nextUrl = @(Model.NextUrlConstruction);
+}
     return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation)
-        .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped>>() {
+        .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
-            public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> call(Response<@Model.CallType> response) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(Response<@Model.CallType> response) {
                 try {
-                    @Model.ReturnTypeModel.GenericBodyWireTypeStringWrapped result = @(Model.Name)Delegate(response);
-                    return Observable.just(@(Model.ReturnTypeModel.ServiceResponseCreation(Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped, "result.getBody()", "result")));
+                    @Model.ReturnTypeJva.GenericBodyWireTypeStringWrapped result = @(Model.Name)Delegate(response);
+                    return Observable.just(@(Model.ReturnTypeJva.ServiceResponseCreation(Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, "result.body()", "result")));
                 } catch (Throwable t) {
                     return Observable.error(t);
                 }
@@ -220,20 +224,20 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
 }
  */
-public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(@Model.MethodParameterDeclaration) {
-    @Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
-    return new @(Model.ReturnTypeModel.GenericBodyClientTypeString)(response.getBody()) {
+public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclaration) {
+    @Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped response = @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation).toBlocking().single();
+    return new @(Model.ReturnTypeJva.GenericBodyClientTypeString)(response.body()) {
         @@Override
-        public @Model.ReturnTypeModel.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
+        public @Model.ReturnTypeJva.ServiceResponseGenericParameterString nextPage(String @Model.PagingNextPageLinkParameterName) {
             @Model.PagingGroupedParameterTransformation()
-            return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation()).toBlocking().single().getBody();
+            return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation()).toBlocking().single().body();
         }
     };
 }
@@ -250,17 +254,17 @@ public @Model.ReturnTypeModel.BodyClientType.ResponseVariant.Name @(Model.Name)(
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
  * @@return the {@@link ServiceCall} object
  */
-public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public ServiceCall<@Model.ReturnTypeJva.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
     return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
         @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation),
-        new Func1<String, Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped>>() {
+        new Func1<String, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
-            public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> call(String @Model.PagingNextPageLinkParameterName) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(String @Model.PagingNextPageLinkParameterName) {
                 @Model.PagingGroupedParameterTransformation()
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation());
             }
@@ -280,23 +284,23 @@ public ServiceCall<@Model.ReturnTypeModel.ServiceCallGenericParameterString> @(M
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation)
-        .map(new Func1<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped, @Model.ReturnTypeModel.ServiceResponseGenericParameterString>() {
+        .map(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, @Model.ReturnTypeJva.ServiceResponseGenericParameterString>() {
             @@Override
-            public @Model.ReturnTypeModel.ServiceResponseGenericParameterString call(@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped response) {
-                return response.getBody();
+            public @Model.ReturnTypeJva.ServiceResponseGenericParameterString call(@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped response) {
+                return response.body();
             }
         });
 }
@@ -313,23 +317,23 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterString> 
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the observable to the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object
+@: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration) {
     return @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation)
-        .concatMap(new Func1<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped, Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped>>() {
+        .concatMap(new Func1<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
-            public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> call(@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped page) {
-                String @Model.PagingNextPageLinkParameterName = page.getBody().getNextPageLink();
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped page) {
+                String @Model.PagingNextPageLinkParameterName = page.body().nextPageLink();
                 if (@Model.PagingNextPageLinkParameterName == null) {
                     return Observable.just(page);
                 }
@@ -351,19 +355,19 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
  *
 @foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
 {
-    @Model.ReturnTypeModel.GenericBodyWireTypeStringWrapped
-@: * @@param @param.Name @((param.Documentation.IsNullOrEmpty() ? "the " + param.Type.ToString() + " value" : param.Documentation).EscapeXmlComment().Trim())
+    @Model.ReturnTypeJva.GenericBodyWireTypeStringWrapped
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeModel.BodyClientType.Name.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeModel.ClientResponseType} if successful.
+@: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeJva.ClientResponseType} if successful.
 }
 else
 {
-@: * @@return the {@@link @Model.ReturnTypeModel.ClientResponseType} object if successful.
+@: * @@return the {@@link @Model.ReturnTypeJva.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
+public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> @(Model.Name)SinglePageAsync(@Model.MethodParameterDeclaration) {
     @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -374,11 +378,11 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (ParameterModel parameter in Model.LocalParameters)
+@foreach (ParameterJv parameter in Model.LocalParameters)
 {
     if (parameter.IsConstant)
     {
-@:    final @(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
     }
 }
     @Model.BuildInputMappings()
@@ -388,13 +392,17 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
 @:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
 }
     @Model.ParameterConversion
+@if (Model.IsPagingNextOperation)
+{
+@:    String nextUrl = @(Model.NextUrlConstruction);
+}
     return service.@(Model.Name)(@Model.MethodParameterApiInvocation)
-        .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped>>() {
+        .flatMap(new Func1<Response<@Model.CallType>, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
-            public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped> call(Response<@Model.CallType> response) {
+            public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped> call(Response<@Model.CallType> response) {
                 try {
-                    @Model.ReturnTypeModel.GenericBodyWireTypeStringWrapped result = @(Model.Name)Delegate(response);
-                    return Observable.just(@(Model.ReturnTypeModel.ServiceResponseCreation(Model.ReturnTypeModel.ServiceResponseGenericParameterStringWrapped, "result.getBody()", "result")));
+                    @Model.ReturnTypeJva.GenericBodyWireTypeStringWrapped result = @(Model.Name)Delegate(response);
+                    return Observable.just(@(Model.ReturnTypeJva.ServiceResponseCreation(Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped, "result.body()", "result")));
                 } catch (Throwable t) {
                     return Observable.error(t);
                 }
@@ -402,12 +410,12 @@ public Observable<@Model.ReturnTypeModel.ServiceResponseGenericParameterStringWr
         });
 }
 @EmptyLine
-private @Model.ReturnTypeModel.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.ReturnTypeModel.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).mapperAdapter())
-@foreach (var response in Model.ResponseModels)
+private @Model.ReturnTypeJva.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
+    return @(Model.ClientReference).restClient().responseBuilderFactory().<@Model.ReturnTypeJva.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>newInstance(@(Model.ClientReference).serializerAdapter())
+@foreach (var response in Model.Responses)
 {
 
-            @:.register(@((int)response.Key), new TypeToken<@response.Value.GenericBodyWireTypeString>() { }.getType())
+            @:.register(@((int)response.Key), new TypeToken<@((response.Value as ResponseJva).GenericBodyWireTypeString)>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {

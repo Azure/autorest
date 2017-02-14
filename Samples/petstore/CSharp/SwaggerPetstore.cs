@@ -31,12 +31,12 @@ namespace Petstore
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        public Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; private set; }
+        public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; private set; }
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SwaggerPetstore class.
@@ -118,27 +118,27 @@ namespace Petstore
         private void Initialize()
         {
             BaseUri = new System.Uri("http://petstore.swagger.io/v2");
-            SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
+            SerializationSettings = new JsonSerializerSettings
             {
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                Formatting = Formatting.Indented,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new  List<JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
+            DeserializationSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
-                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
-                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -186,6 +186,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -301,6 +303,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -412,6 +416,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -534,6 +540,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -594,9 +602,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                    IList<Pet> _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -669,6 +685,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -729,9 +747,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                    IList<Pet> _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.CreateListXmlDeserializer(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)), null))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -796,6 +822,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -856,9 +884,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                    string _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -923,6 +959,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -983,9 +1021,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
+                    Pet _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Pet.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1061,6 +1107,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1186,6 +1234,8 @@ namespace Petstore
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("api_key", apiKey);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1296,6 +1346,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1420,6 +1472,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1480,9 +1534,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
+                    IDictionary<string, int?> _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.CreateDictionaryXmlDeserializer(XmlSerialization.ToDeserializer(e => (int?)e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1542,6 +1604,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1608,9 +1672,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
+                    Order _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1685,6 +1757,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1745,9 +1819,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
+                    Order _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => Order.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -1819,6 +1901,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("DELETE");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1923,6 +2007,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2030,6 +2116,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2137,6 +2225,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2264,6 +2354,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2324,9 +2416,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                    string _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => (string)e))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2379,6 +2479,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2494,6 +2596,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2554,9 +2658,17 @@ namespace Petstore
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, DeserializationSettings);
+                    User _tmp_ = null;
+                    if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
+                        XmlSerialization.Root(XmlSerialization.ToDeserializer(e => User.XmlDeserialize(e)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
+                    {
+                        _result.Body = _tmp_;
+                    }else
+                    {
+                        _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, DeserializationSettings);
+                    }
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -2631,6 +2743,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2752,6 +2866,8 @@ namespace Petstore
             _httpRequest.Method = new System.Net.Http.HttpMethod("DELETE");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)

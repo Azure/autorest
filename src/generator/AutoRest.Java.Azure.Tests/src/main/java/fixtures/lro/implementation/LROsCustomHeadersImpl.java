@@ -13,7 +13,6 @@ package fixtures.lro.implementation;
 import retrofit2.Retrofit;
 import fixtures.lro.LROsCustomHeaders;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
@@ -39,7 +38,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in LROsCustomHeaders.
  */
-public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
+public class LROsCustomHeadersImpl implements LROsCustomHeaders {
     /** The Retrofit service to perform REST calls. */
     private LROsCustomHeadersService service;
     /** The service client containing this operation class. */
@@ -61,35 +60,35 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * used by Retrofit to perform actually REST calls.
      */
     interface LROsCustomHeadersService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders putAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
         Observable<Response<ResponseBody>> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPutAsyncRetrySucceeded" })
         @PUT("lro/customheader/putasync/retry/succeeded")
         Observable<Response<ResponseBody>> beginPutAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders put201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         Observable<Response<ResponseBody>> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPut201CreatingSucceeded200" })
         @PUT("lro/customheader/put/201/creating/succeeded/200")
         Observable<Response<ResponseBody>> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders post202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
         Observable<Response<ResponseBody>> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPost202Retry200" })
         @POST("lro/customheader/post/202/retry/200")
         Observable<Response<ResponseBody>> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders postAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.lro.LROsCustomHeaders beginPostAsyncRetrySucceeded" })
         @POST("lro/customheader/postasync/retry/succeeded")
         Observable<Response<ResponseBody>> beginPostAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -98,10 +97,10 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded() {
-        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -111,7 +110,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -123,7 +122,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return putAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -145,7 +144,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product putAsyncRetrySucceeded(Product product) {
-        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        return putAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -156,7 +155,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -169,7 +168,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return putAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -192,7 +191,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded() {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -202,7 +201,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -214,7 +213,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -247,7 +246,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPutAsyncRetrySucceeded(Product product) {
-        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -258,7 +257,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -271,7 +270,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPutAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders>, Product>() {
             @Override
             public Product call(ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -299,7 +298,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     }
 
     private ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsCustomHeaderPutAsyncRetrySucceededHeaders.class);
@@ -308,10 +307,10 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
-     * @return the Product object  if successful.
+     * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200() {
-        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -321,7 +320,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -333,7 +332,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return put201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -355,7 +354,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product put201CreatingSucceeded200(Product product) {
-        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        return put201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -366,7 +365,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -379,7 +378,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return put201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -402,7 +401,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200() {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -412,7 +411,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -424,7 +423,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync().map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -457,7 +456,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the Product object if successful.
      */
     public Product beginPut201CreatingSucceeded200(Product product) {
-        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -468,7 +467,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.create(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -481,7 +480,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPut201CreatingSucceeded200WithServiceResponseAsync(product).map(new Func1<ServiceResponse<Product>, Product>() {
             @Override
             public Product call(ServiceResponse<Product> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -509,7 +508,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     }
 
     private ServiceResponse<Product> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(201, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -521,7 +520,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      */
     public void post202Retry200() {
-        post202Retry200WithServiceResponseAsync().toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -531,7 +530,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -543,7 +542,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return post202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -564,7 +563,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @param product Product to put
      */
     public void post202Retry200(Product product) {
-        post202Retry200WithServiceResponseAsync(product).toBlocking().last().getBody();
+        post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -575,7 +574,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -588,7 +587,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return post202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -610,7 +609,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      */
     public void beginPost202Retry200() {
-        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -620,7 +619,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -632,7 +631,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPost202Retry200WithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -664,7 +663,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @param product Product to put
      */
     public void beginPost202Retry200(Product product) {
-        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -675,7 +674,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -688,7 +687,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPost202Retry200WithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -716,7 +715,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     }
 
     private ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsCustomHeaderPost202Retry200Headers.class);
@@ -727,7 +726,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      */
     public void postAsyncRetrySucceeded() {
-        postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().getBody();
+        postAsyncRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
     }
 
     /**
@@ -737,7 +736,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -749,7 +748,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return postAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -770,7 +769,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @param product Product to put
      */
     public void postAsyncRetrySucceeded(Product product) {
-        postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().getBody();
+        postAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
     }
 
     /**
@@ -781,7 +780,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -794,7 +793,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return postAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -816,7 +815,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      */
     public void beginPostAsyncRetrySucceeded() {
-        beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().getBody();
+        beginPostAsyncRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -826,7 +825,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -838,7 +837,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync().map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -870,7 +869,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @param product Product to put
      */
     public void beginPostAsyncRetrySucceeded(Product product) {
-        beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().getBody();
+        beginPostAsyncRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
     }
 
     /**
@@ -881,7 +880,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.createWithHeaders(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -894,7 +893,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
         return beginPostAsyncRetrySucceededWithServiceResponseAsync(product).map(new Func1<ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders>, Void>() {
             @Override
             public Void call(ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -922,7 +921,7 @@ public final class LROsCustomHeadersImpl implements LROsCustomHeaders {
     }
 
     private ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);

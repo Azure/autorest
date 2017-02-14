@@ -24,7 +24,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
     /// <summary>
     /// ParameterGroupingOperations operations.
     /// </summary>
-    internal partial class ParameterGroupingOperations : IServiceOperations<AutoRestParameterGroupingTestService>, IParameterGroupingOperations
+    internal partial class ParameterGroupingOperations : IServiceOperations<AutoRestParameterGroupingTestServiceClient>, IParameterGroupingOperations
     {
         /// <summary>
         /// Initializes a new instance of the ParameterGroupingOperations class.
@@ -35,7 +35,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        internal ParameterGroupingOperations(AutoRestParameterGroupingTestService client)
+        internal ParameterGroupingOperations(AutoRestParameterGroupingTestServiceClient client)
         {
             if (client == null)
             {
@@ -45,9 +45,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         }
 
         /// <summary>
-        /// Gets a reference to the AutoRestParameterGroupingTestService
+        /// Gets a reference to the AutoRestParameterGroupingTestServiceClient
         /// </summary>
-        public AutoRestParameterGroupingTestService Client { get; private set; }
+        public AutoRestParameterGroupingTestServiceClient Client { get; private set; }
 
         /// <summary>
         /// Post a bunch of required parameters grouped
@@ -156,6 +156,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("customHeader", customHeader);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -205,7 +207,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -317,6 +319,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("customHeader", customHeader);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -363,7 +367,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -502,6 +506,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("header-two", headerTwo);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -548,7 +554,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -660,6 +666,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("header-one", headerOne);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -706,7 +714,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }

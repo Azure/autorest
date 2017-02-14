@@ -1,4 +1,4 @@
-    // Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
@@ -12,8 +12,10 @@ using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Azure.Templates;
 using AutoRest.CSharp.Model;
 
-using AutoRest.CSharp.Templates;
+using AutoRest.CSharp.Templates.Rest.Client;
+using AutoRest.CSharp.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.CSharp.Azure.Fluent
 {
@@ -64,8 +66,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             // Models
             foreach (CompositeTypeCs model in codeModel.ModelTypes.Concat(codeModel.HeaderTypes))
             {
-                if (model.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
-                    (bool)model.Extensions[AzureExtensions.ExternalExtension])
+                if (true == model.Extensions.Get<bool>(AzureExtensions.ExternalExtension))
                 {
                     continue;
                 }

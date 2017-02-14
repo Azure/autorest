@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
 using ScintillaNET;
 using YamlDotNet.RepresentationModel;
+using AutoRest.Core.Parsing;
 
 namespace AutoRest.Preview
 {
@@ -50,7 +50,7 @@ namespace AutoRest.Preview
         {
             highlights.Clear();
 
-            var severityNames = Enum.GetNames(typeof(LogEntrySeverity));
+            var severityNames = Enum.GetNames(typeof(Category));
 
             for (int i = 0; i < severityNames.Length; ++i)
             {
@@ -70,7 +70,7 @@ namespace AutoRest.Preview
             }
         }
 
-        public void ProcessMessages(string swagger, IEnumerable<ValidationMessage> messages)
+        public void ProcessMessages(string swagger, IEnumerable<LogMessage> messages)
         {
             if (scintilla.Text != swagger)
                 return; // text was changed in the meantime
@@ -89,22 +89,21 @@ namespace AutoRest.Preview
             // process messages
             if (doc != null)
             {
-                foreach (var message in messages)
+                foreach (var message in messages.Where(m => m.Path != null))
                 {
-                    if (message.Severity > LogEntrySeverity.Debug)
-                    {
+                    try {
                         scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                        var node = doc.ResolvePath(message.Path.Reverse().Skip(1));
+                        var node = message.Path.SelectNode(doc);
                         var start = node.Start.Index;
                         var len = Math.Max(1, node.End.Index - start);
                         scintilla.IndicatorFillRange(start, len);
-                        highlights.Add(new Highlight
-                        {
+                        highlights.Add(new Highlight {
                             Start = start,
                             End = start + len,
-                            Message =
-                                $"{message.Severity}: [{string.Join("->", message.Path.Reverse())}] {message.Message}"
+                            Message = $"{message.Severity}: [{message.Path.XPath}] {message.Message}"
                         });
+                    } catch  {
+                        
                     }
                 }
             }

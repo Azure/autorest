@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
-
+using AutoRest.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Unit.Tests
     public class BugTest
     {
         private ITestOutputHelper _output;
-        internal static string[] SuppressWarnings = {"CS1701", "CS1591" };
+        internal static string[] SuppressWarnings = {"CS1701", "CS1591" , "CS1573"};
         //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
 
 
@@ -47,7 +47,8 @@ namespace AutoRest.CSharp.Unit.Tests
                     startInfo =
                         new ProcessStartInfo(exe,
                             args.Aggregate(
-                                $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
+                                // $@"""{Path.Combine(exe, @"..\resources\app\out\cli.js")}""",
+                                "",
                                 (s, o) => $"{s} {Q}{o}{Q}"));
                     startInfo.EnvironmentVariables.Add("ATOM_SHELL_INTERNAL_RUN_AS_NODE", "1");
                     startInfo.UseShellExecute = false;
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.Unit.Tests
         protected virtual MemoryFileSystem CreateMockFilesystem()
         {
             var fs = new MemoryFileSystem();
-            fs.Copy(Path.Combine("Resource", "AutoRest.json"));
+            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
             return fs;
         }
 
@@ -169,6 +170,14 @@ namespace AutoRest.CSharp.Unit.Tests
 
         protected async Task<CompilationResult> Compile(IFileSystem fileSystem)
         {
+            string dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var assemblies = new[]
+                        {
+                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.dll"),
+                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.Azure.dll")
+                        };
+            assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
+                
             var compiler = new CSharpCompiler(
                 fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
                     .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
@@ -176,14 +185,9 @@ namespace AutoRest.CSharp.Unit.Tests
                     AppDomain.CurrentDomain.GetAssemblies()
                         .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location) )
                         .Select(each => each.Location)
-                        .Concat(new[]
-                        {
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.Azure.dll")
-                        })
+                        .Concat(assemblies)
                     ));
+            
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
             
             // if it failed compiling and we're in an interactive session

@@ -14,7 +14,7 @@ namespace AutoRest.Core.Model
     {
         protected DictionaryType()
         {
-            Name.OnGet += value => $"Dictionary<string,{ValueType}>";
+            Name.OnGet += value => $"Dictionary<string,{ValueType.Name}>";
         }
 
         /// <summary>
@@ -32,34 +32,6 @@ namespace AutoRest.Core.Model
         public override void Disambiguate()
         {
             // not needed, right?
-        }
-
-        /// <summary>
-        /// Returns a string representation of the DictionaryType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the DictionaryType object.
-        /// </returns>
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        /// <summary>
-        /// Determines whether the specified model type is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool StructurallyEquals(IModelType other)
-        {
-            if (ReferenceEquals(other as DictionaryType, null))
-            {
-                return false;
-            }
-
-            return base.StructurallyEquals(other) && 
-                   ValueType.StructurallyEquals((other as DictionaryType).ValueType) &&
-                   SupportsAdditionalProperties == (other as DictionaryType).SupportsAdditionalProperties;
         }
     }
 }

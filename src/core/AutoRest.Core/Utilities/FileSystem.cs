@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Properties;
 using System;
 using System.IO;
 using System.Linq;
@@ -123,9 +124,20 @@ namespace AutoRest.Core.Utilities
 
         public string CurrentDirectory => Directory.GetCurrentDirectory();
 
-        public string GetParentDir(string path)
+        public Uri GetParentDir(string path)
         {
-            return Directory.GetParent(Path.Combine(Directory.GetCurrentDirectory(), path)).FullName;
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new Exception(Resources.PathCannotBeNullOrEmpty);
+            }
+            if (IsCompletePath(path))
+            {
+                return new Uri(new Uri(path), ".");
+            }
+            else
+            {
+                return new Uri(Directory.GetParent(Path.Combine(Directory.GetCurrentDirectory(), path)).FullName, UriKind.Relative);
+            }
         }
     }
 }

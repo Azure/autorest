@@ -12,7 +12,8 @@ using AutoRest.Core.Model;
 using AutoRest.CSharp.Azure.Model;
 using AutoRest.CSharp.Azure.Templates;
 using AutoRest.CSharp.Model;
-using AutoRest.CSharp.Templates;
+using AutoRest.CSharp.Templates.Rest.Client;
+using AutoRest.CSharp.Templates.Rest.Common;
 using AutoRest.Extensions.Azure;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -109,6 +110,13 @@ namespace AutoRest.CSharp.Azure
                 var exceptionTemplate = new ExceptionTemplate {Model = exceptionType};
                 await Write(exceptionTemplate, Path.Combine(Settings.Instance.ModelsName,
                      $"{exceptionTemplate.Model.ExceptionTypeDefinitionName}{ImplementationFileExtension}"));
+            }
+
+            // Xml Serialization
+            if (codeModel.ShouldGenerateXmlSerialization)
+            {
+                var xmlSerializationTemplate = new XmlSerializationTemplate { Model = null };
+                await Write(xmlSerializationTemplate, Path.Combine(Settings.Instance.ModelsName, $"{XmlSerialization.XmlDeserializationClass}{ImplementationFileExtension}"));
             }
         }
     }

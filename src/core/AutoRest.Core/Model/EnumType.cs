@@ -28,6 +28,7 @@ namespace AutoRest.Core.Model
         protected EnumType()
         {
             Values = new List<EnumValue>();
+            Name.OnGet += s => string.IsNullOrEmpty(s) ? "enum" : CodeNamer.Instance.GetTypeName(s);
         }
 
         /// <summary>
@@ -68,22 +69,6 @@ namespace AutoRest.Core.Model
         public override string DeclarationName => ModelAsString ? ModelAsStringType : base.DeclarationName;
 
         /// <summary>
-        /// Returns a string representation of the PrimaryType object.
-        /// </summary>
-        /// <returns>
-        /// A string representation of the PrimaryType object.
-        /// </returns>
-        public override string ToString()
-        {
-            if (string.IsNullOrEmpty(Name))
-            {
-                return "enum";
-            }
-
-            return Name;
-        }
-
-        /// <summary>
         /// Determines whether the specified model type is structurally equal to this object.
         /// </summary>
         /// <param name="other">The object to compare with this object.</param>
@@ -95,8 +80,8 @@ namespace AutoRest.Core.Model
                 return false;
             }
 
-            return base.StructurallyEquals(other) && 
-                Values.OrderBy(t => t).SequenceEqual(Values.OrderBy(t => t)) &&
+            return Name == other.Name &&
+                Values.OrderBy(t => t).SequenceEqual((other as EnumType).Values.OrderBy(t => t), new Utilities.EqualityComparer<EnumValue>((a, b) => a.Name == b.Name)) &&
                 ModelAsString == (other as EnumType).ModelAsString;
         }
 

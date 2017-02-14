@@ -7,6 +7,9 @@
     "certificates": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -22,10 +25,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -61,6 +60,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -71,6 +71,9 @@
     "csrs": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -86,10 +89,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -125,6 +124,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -135,6 +135,9 @@
     "hostingEnvironments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -150,10 +153,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -199,6 +198,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -209,6 +209,9 @@
     "hostingEnvironments_workerPools": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -224,10 +227,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -273,6 +272,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -283,6 +283,9 @@
     "managedHostingEnvironments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -298,10 +301,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -337,6 +336,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -347,6 +347,9 @@
     "serverfarms": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -362,10 +365,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -411,6 +410,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -421,6 +421,9 @@
     "serverfarms_virtualNetworkConnections_gateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -436,10 +439,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -475,6 +474,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -485,6 +485,9 @@
     "serverfarms_virtualNetworkConnections_routes": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -500,10 +503,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -539,6 +538,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -549,6 +549,9 @@
     "sites": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -564,10 +567,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -628,6 +627,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -638,6 +638,9 @@
     "sites_deployments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -653,10 +656,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -692,6 +691,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -702,6 +702,9 @@
     "sites_hostNameBindings": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -717,10 +720,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -756,6 +755,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -766,6 +766,9 @@
     "sites_hybridconnection": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -781,10 +784,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -820,6 +819,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -830,6 +830,9 @@
     "sites_instances_deployments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -845,10 +848,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -884,6 +883,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -894,6 +894,9 @@
     "sites_premieraddons": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -936,14 +939,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -959,6 +954,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -968,6 +964,9 @@
     "sites_slots": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -983,10 +982,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1044,6 +1039,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1054,6 +1050,9 @@
     "sites_slots_deployments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1069,10 +1068,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1108,6 +1103,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1118,6 +1114,9 @@
     "sites_slots_hostNameBindings": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1133,10 +1132,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1172,6 +1167,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1182,6 +1178,9 @@
     "sites_slots_hybridconnection": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1197,10 +1196,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1236,6 +1231,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1246,6 +1242,9 @@
     "sites_slots_instances_deployments": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1261,10 +1260,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1300,6 +1295,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1310,6 +1306,9 @@
     "sites_slots_premieraddons": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1352,14 +1351,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -1375,6 +1366,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -1384,6 +1376,9 @@
     "sites_slots_virtualNetworkConnections": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1399,10 +1394,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1448,6 +1439,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1458,6 +1450,9 @@
     "sites_slots_virtualNetworkConnections_gateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1473,10 +1468,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1512,6 +1503,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1522,6 +1514,9 @@
     "sites_virtualNetworkConnections": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1537,10 +1532,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1586,6 +1577,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -1596,6 +1588,9 @@
     "sites_virtualNetworkConnections_gateways": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1611,10 +1606,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -1650,6 +1641,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -2476,6 +2468,9 @@
     "hostingEnvironments_workerPools_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -2491,10 +2486,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -2540,6 +2531,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3512,6 +3504,9 @@
     "sites_deployments_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3527,10 +3522,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -3566,6 +3557,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3576,6 +3568,9 @@
     "sites_hostNameBindings_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3591,10 +3586,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -3630,6 +3621,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3640,6 +3632,9 @@
     "sites_hybridconnection_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3655,10 +3650,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -3694,6 +3685,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3704,6 +3696,9 @@
     "sites_premieraddons_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3746,14 +3741,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -3769,6 +3756,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -3778,6 +3766,9 @@
     "sites_slots_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3793,10 +3784,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -3851,6 +3838,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3861,6 +3849,9 @@
     "sites_slots_deployments_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3876,10 +3867,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -3915,6 +3902,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3925,6 +3913,9 @@
     "sites_slots_hostNameBindings_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -3940,10 +3931,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -3979,6 +3966,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -3989,6 +3977,9 @@
     "sites_slots_hybridconnection_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4004,10 +3995,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -4043,6 +4030,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -4053,6 +4041,9 @@
     "sites_slots_premieraddons_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4095,14 +4086,6 @@
           "description": "Azure resource manager plan"
         },
         "properties": {
-          "oneOf": [
-            {
-              "type": "object"
-            },
-            {
-              "$ref": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#/definitions/expression"
-            }
-          ],
           "description": "Resource specific properties"
         },
         "sku": {
@@ -4118,6 +4101,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "properties"
@@ -4127,6 +4111,9 @@
     "sites_slots_virtualNetworkConnections_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4142,10 +4129,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -4191,6 +4174,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -4201,6 +4185,9 @@
     "sites_slots_virtualNetworkConnections_gateways_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4216,10 +4203,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -4255,6 +4238,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -4265,6 +4249,9 @@
     "sites_virtualNetworkConnections_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4280,10 +4267,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -4329,6 +4312,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",
@@ -4339,6 +4323,9 @@
     "sites_virtualNetworkConnections_gateways_childResource": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4354,10 +4341,6 @@
         "id": {
           "type": "string",
           "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource Name"
         },
         "kind": {
           "type": "string",
@@ -4393,6 +4376,7 @@
         }
       },
       "required": [
+        "name",
         "type",
         "apiVersion",
         "location",

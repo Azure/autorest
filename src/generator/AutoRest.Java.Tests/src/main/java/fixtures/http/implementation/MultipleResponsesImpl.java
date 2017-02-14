@@ -13,11 +13,10 @@ package fixtures.http.implementation;
 import retrofit2.Retrofit;
 import fixtures.http.MultipleResponses;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.http.models.A;
 import fixtures.http.models.B;
 import fixtures.http.models.C;
@@ -36,7 +35,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in MultipleResponses.
  */
-public final class MultipleResponsesImpl implements MultipleResponses {
+public class MultipleResponsesImpl implements MultipleResponses {
     /** The Retrofit service to perform REST calls. */
     private MultipleResponsesService service;
     /** The service client containing this operation class. */
@@ -58,139 +57,139 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * used by Retrofit to perform actually REST calls.
      */
     interface MultipleResponsesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError200Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError204Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError204Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError201Invalid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError201Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError202None" })
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError202None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model204NoModelDefaultError400Valid" })
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get200Model204NoModelDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError200Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         Observable<Response<ResponseBody>> get200Model201ModelDefaultError200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError201Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         Observable<Response<ResponseBody>> get200Model201ModelDefaultError201Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200Model201ModelDefaultError400Valid" })
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get200Model201ModelDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError200Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError201Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError404Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA201ModelC404ModelDDefaultError400Valid" })
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError202None" })
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultError202None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError204None" })
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultError204None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultError400Valid" })
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         Observable<Response<ResponseBody>> get202None204NoneDefaultError400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone202Invalid" })
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone202Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone204None" })
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone204None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone400None" })
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get202None204NoneDefaultNone400Invalid" })
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         Observable<Response<ResponseBody>> get202None204NoneDefaultNone400Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200Valid" })
         @GET("http/payloads/default/A/response/200/valid")
         Observable<Response<ResponseBody>> getDefaultModelA200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA200None" })
         @GET("http/payloads/default/A/response/200/none")
         Observable<Response<ResponseBody>> getDefaultModelA200None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400Valid" })
         @GET("http/payloads/default/A/response/400/valid")
         Observable<Response<ResponseBody>> getDefaultModelA400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultModelA400None" })
         @GET("http/payloads/default/A/response/400/none")
         Observable<Response<ResponseBody>> getDefaultModelA400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200Invalid" })
         @GET("http/payloads/default/none/response/200/invalid")
         Observable<Response<ResponseBody>> getDefaultNone200Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone200None" })
         @GET("http/payloads/default/none/response/200/none")
         Observable<Response<ResponseBody>> getDefaultNone200None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400Invalid" })
         @GET("http/payloads/default/none/response/400/invalid")
         Observable<Response<ResponseBody>> getDefaultNone400Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses getDefaultNone400None" })
         @GET("http/payloads/default/none/response/400/none")
         Observable<Response<ResponseBody>> getDefaultNone400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200None" })
         @GET("http/payloads/200/A/response/200/none")
         Observable<Response<ResponseBody>> get200ModelA200None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200Valid" })
         @GET("http/payloads/200/A/response/200/valid")
         Observable<Response<ResponseBody>> get200ModelA200Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA200Invalid" })
         @GET("http/payloads/200/A/response/200/invalid")
         Observable<Response<ResponseBody>> get200ModelA200Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400None" })
         @GET("http/payloads/200/A/response/400/none")
         Observable<Response<ResponseBody>> get200ModelA400None();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400Valid" })
         @GET("http/payloads/200/A/response/400/valid")
         Observable<Response<ResponseBody>> get200ModelA400Valid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA400Invalid" })
         @GET("http/payloads/200/A/response/400/invalid")
         Observable<Response<ResponseBody>> get200ModelA400Invalid();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.http.MultipleResponses get200ModelA202Valid" })
         @GET("http/payloads/200/A/response/202/valid")
         Observable<Response<ResponseBody>> get200ModelA202Valid();
 
@@ -202,7 +201,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError200Valid() {
-        return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -212,7 +211,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -224,7 +223,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -250,7 +249,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -263,7 +262,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError204Valid() {
-        return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -273,7 +272,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError204ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError204ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -285,7 +284,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError204ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -311,7 +310,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -324,7 +323,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError201Invalid() {
-        return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -334,7 +333,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -346,7 +345,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError201InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -372,7 +371,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -385,7 +384,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError202None() {
-        return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -395,7 +394,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -407,7 +406,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError202NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -433,7 +432,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -446,7 +445,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model204NoModelDefaultError400Valid() {
-        return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -456,7 +455,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model204NoModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model204NoModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -468,7 +467,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model204NoModelDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -494,7 +493,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -507,7 +506,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError200Valid() {
-        return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -517,7 +516,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model201ModelDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -529,7 +528,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model201ModelDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -555,7 +554,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
@@ -568,7 +567,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError201Valid() {
-        return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -578,7 +577,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model201ModelDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -590,7 +589,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model201ModelDefaultError201ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -616,7 +615,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
@@ -629,7 +628,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200Model201ModelDefaultError400Valid() {
-        return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -639,7 +638,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200Model201ModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200Model201ModelDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -651,7 +650,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200Model201ModelDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -677,7 +676,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<A, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
@@ -690,7 +689,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -700,7 +699,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -712,7 +711,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -738,7 +737,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Object, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -752,7 +751,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -762,7 +761,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -774,7 +773,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -800,7 +799,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Object, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -814,7 +813,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -824,7 +823,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -836,7 +835,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -862,7 +861,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Object, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -876,7 +875,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the Object object if successful.
      */
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
-        return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -886,7 +885,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
-        return ServiceCall.create(get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -898,7 +897,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Object>, Object>() {
             @Override
             public Object call(ServiceResponse<Object> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -924,7 +923,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Object, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Object, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
@@ -937,7 +936,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultError202None() {
-        get202None204NoneDefaultError202NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultError202NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -947,7 +946,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultError202NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -959,7 +958,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError202NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -985,7 +984,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -997,7 +996,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultError204None() {
-        get202None204NoneDefaultError204NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultError204NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1007,7 +1006,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError204NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultError204NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1019,7 +1018,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError204NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1045,7 +1044,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1057,7 +1056,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultError400Valid() {
-        get202None204NoneDefaultError400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultError400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1067,7 +1066,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultError400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1079,7 +1078,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultError400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1105,7 +1104,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
@@ -1117,7 +1116,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone202Invalid() {
-        get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1127,7 +1126,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone202InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone202InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1139,7 +1138,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone202InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1164,8 +1163,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1176,7 +1175,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone204None() {
-        get202None204NoneDefaultNone204NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone204NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1186,7 +1185,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone204NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone204NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1198,7 +1197,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone204NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1223,8 +1222,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1235,7 +1234,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone400None() {
-        get202None204NoneDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1245,7 +1244,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1257,7 +1256,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1282,8 +1281,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1294,7 +1293,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void get202None204NoneDefaultNone400Invalid() {
-        get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1304,7 +1303,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(get202None204NoneDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get202None204NoneDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1316,7 +1315,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get202None204NoneDefaultNone400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1341,8 +1340,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1354,7 +1353,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200Valid() {
-        return getDefaultModelA200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1364,7 +1363,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1376,7 +1375,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1402,7 +1401,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1413,7 +1412,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA200None() {
-        return getDefaultModelA200NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA200NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1423,7 +1422,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA200NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1435,7 +1434,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1461,7 +1460,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1472,7 +1471,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400Valid() {
-        return getDefaultModelA400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1482,7 +1481,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1494,7 +1493,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1520,7 +1519,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1531,7 +1530,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A getDefaultModelA400None() {
-        return getDefaultModelA400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return getDefaultModelA400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1541,7 +1540,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(getDefaultModelA400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultModelA400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1553,7 +1552,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultModelA400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1579,7 +1578,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
     }
 
     private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
-        return new ServiceResponseBuilder<A, MyException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<A, MyException>newInstance(this.client.serializerAdapter())
                 .registerError(MyException.class)
                 .build(response);
     }
@@ -1589,7 +1588,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone200Invalid() {
-        getDefaultNone200InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone200InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1599,7 +1598,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone200InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone200InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1611,7 +1610,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone200InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1636,8 +1635,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1646,7 +1645,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone200None() {
-        getDefaultNone200NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone200NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1656,7 +1655,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone200NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1668,7 +1667,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1693,8 +1692,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1703,7 +1702,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone400Invalid() {
-        getDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone400InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1713,7 +1712,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1725,7 +1724,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1750,8 +1749,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1760,7 +1759,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      *
      */
     public void getDefaultNone400None() {
-        getDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        getDefaultNone400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1770,7 +1769,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getDefaultNone400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1782,7 +1781,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return getDefaultNone400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1807,8 +1806,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.client.serializerAdapter())
                 .build(response);
     }
 
@@ -1818,7 +1817,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200None() {
-        return get200ModelA200NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA200NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1828,7 +1827,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA200NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1840,7 +1839,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA200NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1865,8 +1864,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1877,7 +1876,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Valid() {
-        return get200ModelA200ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA200ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1887,7 +1886,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA200ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1899,7 +1898,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA200ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1924,8 +1923,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1936,7 +1935,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA200Invalid() {
-        return get200ModelA200InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA200InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -1946,7 +1945,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA200InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA200InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1958,7 +1957,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA200InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -1983,8 +1982,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -1995,7 +1994,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400None() {
-        return get200ModelA400NoneWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA400NoneWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2005,7 +2004,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400NoneWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA400NoneWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2017,7 +2016,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA400NoneWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2042,8 +2041,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2054,7 +2053,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Valid() {
-        return get200ModelA400ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA400ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2064,7 +2063,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA400ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2076,7 +2075,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA400ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2101,8 +2100,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2113,7 +2112,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA400Invalid() {
-        return get200ModelA400InvalidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA400InvalidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2123,7 +2122,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA400InvalidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA400InvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2135,7 +2134,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA400InvalidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2160,8 +2159,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }
@@ -2172,7 +2171,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the A object if successful.
      */
     public A get200ModelA202Valid() {
-        return get200ModelA202ValidWithServiceResponseAsync().toBlocking().single().getBody();
+        return get200ModelA202ValidWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -2182,7 +2181,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<A> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
-        return ServiceCall.create(get200ModelA202ValidWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(get200ModelA202ValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2194,7 +2193,7 @@ public final class MultipleResponsesImpl implements MultipleResponses {
         return get200ModelA202ValidWithServiceResponseAsync().map(new Func1<ServiceResponse<A>, A>() {
             @Override
             public A call(ServiceResponse<A> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -2219,8 +2218,8 @@ public final class MultipleResponsesImpl implements MultipleResponses {
             });
     }
 
-    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<A, ServiceException>(this.client.mapperAdapter())
+    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws RestException, IOException {
+        return this.client.restClient().responseBuilderFactory().<A, RestException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<A>() { }.getType())
                 .build(response);
     }

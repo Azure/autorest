@@ -51,6 +51,7 @@ namespace AutoRest.Swagger
             {
                 type = New<PrimaryType>(KnownPrimaryType.Stream);
             }
+            type.XmlProperties = (SwaggerObject as Schema)?.Xml;
             type.Format = SwaggerObject.Format;
             if (SwaggerObject.Enum != null && type.KnownPrimaryType == KnownPrimaryType.String && !(IsSwaggerObjectConstant(SwaggerObject)))
             {
@@ -102,6 +103,7 @@ namespace AutoRest.Swagger
                     enumType.SetName( string.Empty);
                     enumType.SerializedName = string.Empty;
                 }
+                enumType.XmlProperties = (SwaggerObject as Schema)?.Xml;
                 return enumType;
             }
             if (SwaggerObject.Type == DataType.Array)
@@ -121,7 +123,9 @@ namespace AutoRest.Swagger
                 return New<SequenceType>(new 
                 {
                     ElementType = elementType,
-                    Extensions = SwaggerObject.Items.Extensions
+                    Extensions = SwaggerObject.Items.Extensions,
+                    XmlProperties = (SwaggerObject as Schema)?.Xml,
+                    ElementXmlProperties = SwaggerObject.Items?.Xml
                 });
             }
             if (SwaggerObject.AdditionalProperties != null)
@@ -140,7 +144,8 @@ namespace AutoRest.Swagger
                     ValueType =
                         SwaggerObject.AdditionalProperties.GetBuilder(Modeler)
                             .BuildServiceType((dictionaryValueServiceTypeName)),
-                    Extensions = SwaggerObject.AdditionalProperties.Extensions
+                    Extensions = SwaggerObject.AdditionalProperties.Extensions,
+                    XmlProperties = (SwaggerObject as Schema)?.Xml
                 });
             }
 

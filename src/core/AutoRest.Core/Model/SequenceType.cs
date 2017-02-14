@@ -3,6 +3,7 @@
 
 using System.Globalization;
 using Newtonsoft.Json;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Model
 {
@@ -14,7 +15,7 @@ namespace AutoRest.Core.Model
     {
         protected SequenceType()
         {
-            Name.OnGet+= v=> $"IList<{ElementType}>";
+            Name.OnGet+= v=> $"IList<{ElementType.Name}>";
         }
 
         public override string Qualifier => "Dictionary";
@@ -29,33 +30,21 @@ namespace AutoRest.Core.Model
         /// </summary>
         public virtual IModelType ElementType { get; set; }
 
-       
-
         /// <summary>
-        /// Returns a string representation of the SequenceType object.
+        ///  Xml Properties...
         /// </summary>
-        /// <returns>
-        /// A string representation of the SequenceType object.
-        /// </returns>
-        public override string ToString()
-        {
-            return Name;
-        }
+        public XmlProperties ElementXmlProperties { get; set; }
 
-        /// <summary>
-        /// Determines whether the specified model type is structurally equal to this object.
-        /// </summary>
-        /// <param name="other">The object to compare with this object.</param>
-        /// <returns>true if the specified object is functionally equal to this object; otherwise, false.</returns>
-        public override bool StructurallyEquals(IModelType other)
-        {
-            if (ReferenceEquals(other as SequenceType, null))
-            {
-                return false;
-            }
+        [JsonIgnore]
+        public override string XmlName => base.XmlName.Else(ElementType.XmlName);
 
-            return base.StructurallyEquals(other) && 
-                ElementType.StructurallyEquals((other as SequenceType).ElementType);
-        }
+        [JsonIgnore]
+        public string ElementXmlName => ElementXmlProperties?.Name ?? XmlName;
+        [JsonIgnore]
+        public string ElementXmlNamespace => ElementXmlProperties?.Namespace ?? ElementType.XmlNamespace;
+        [JsonIgnore]
+        public string ElementXmlPrefix => ElementXmlProperties?.Prefix ?? ElementType.XmlPrefix;
+        [JsonIgnore]
+        public bool ElementXmlIsWrapped => ElementXmlProperties?.Wrapped ?? ElementType.XmlIsWrapped;
     }
 }

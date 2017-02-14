@@ -17,7 +17,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
@@ -34,7 +33,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public final class PathsImpl implements Paths {
+public class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
@@ -56,7 +55,7 @@ public final class PathsImpl implements Paths {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.custombaseurimoreoptions.Paths getEmpty" })
         @GET("customuri/{subscriptionId}/{keyName}")
         Observable<Response<ResponseBody>> getEmpty(@Path("keyName") String keyName, @Path("subscriptionId") String subscriptionId, @Query("keyVersion") String keyVersion, @Header("x-ms-parameterized-host") String parameterizedHost);
 
@@ -70,7 +69,7 @@ public final class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      */
     public void getEmpty(String vault, String secret, String keyName) {
-        getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().body();
     }
 
     /**
@@ -83,7 +82,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
     }
 
     /**
@@ -98,7 +97,7 @@ public final class PathsImpl implements Paths {
         return getEmptyWithServiceResponseAsync(vault, secret, keyName).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -152,7 +151,7 @@ public final class PathsImpl implements Paths {
      * @param keyVersion The key version. Default value 'v1'.
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
-        getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().getBody();
+        getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().body();
     }
 
     /**
@@ -166,7 +165,7 @@ public final class PathsImpl implements Paths {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
     /**
@@ -182,7 +181,7 @@ public final class PathsImpl implements Paths {
         return getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -228,7 +227,7 @@ public final class PathsImpl implements Paths {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

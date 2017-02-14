@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Siamese model.
@@ -18,6 +19,7 @@ public class Siamese extends Cat {
     /**
      * The breed property.
      */
+    @JsonProperty(value = "breed")
     private String breed;
 
     /**

@@ -13,7 +13,7 @@ Expected time around 100 minutes to install.
 - Windows 10 Anniversary - (has PackageManagement, developer mode and supports WSL.)
 - JDK 8
 - Android SDK
-- NodeJS
+- NodeJS (LTS Version: v6.9.4 or higher)
 - Gulp
 - Ruby 2.3
 - Ruby Devkit
@@ -21,7 +21,7 @@ Expected time around 100 minutes to install.
 - Python 2.7
 - Python 3.5
 - Tox
-- Gradle
+- Maven
 - Go 
 - Glide
 - Git (copies git to x86 program files too. )
@@ -92,13 +92,15 @@ Install the latest Android environment from http://developer.android.com/sdk/ind
 
 In SDK Manager, make sure that build tools 23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows. If it is not there, it may be in your hidden `AppData\Local` directory.
 
-#### Gradle
-Install the `Gradle build system` from [Gradle downloads](http://gradle.org/gradle-download/).
-Ensure Gradle is in your `PATH`.
->set PATH=PATH;C:\gradle-2.6\bin
+#### Maven
+Install the `Maven build system` from [Maven downloads](https://maven.apache.org/download.cgi).
+Ensure Maven is in your `PATH`.
+>set PATH=PATH;C:\apache-maven-3.3.9\bin
 
-Ensure that your environment includes the `GRADLE_HOME`.
->set GRADLE_HOME=C:\gradle-2.6
+Ensure that your environment includes the `MAVEN_HOME`.
+>set MAVEN_HOME=C:\apache-maven-3.3.9
+
+When you read this, the available version is probably higher than 3.3.9.
 
 #### Java IDE
 You may want a Java IDE.

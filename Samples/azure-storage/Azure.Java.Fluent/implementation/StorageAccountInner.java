@@ -4,6 +4,7 @@
 package petstore.implementation;
 
 import petstore.StorageAccountProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.Resource;
 
 /**
@@ -13,6 +14,7 @@ public class StorageAccountInner extends Resource {
     /**
      * The properties property.
      */
+    @JsonProperty(value = "properties")
     private StorageAccountProperties properties;
 
     /**

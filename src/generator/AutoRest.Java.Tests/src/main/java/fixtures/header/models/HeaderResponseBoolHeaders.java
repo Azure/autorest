@@ -10,6 +10,7 @@
 
 package fixtures.header.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Defines headers for responseBool operation.
@@ -18,6 +19,7 @@ public class HeaderResponseBoolHeaders {
     /**
      * response with header value "value": true or false.
      */
+    @JsonProperty(value = "value")
     private Boolean value;
 
     /**

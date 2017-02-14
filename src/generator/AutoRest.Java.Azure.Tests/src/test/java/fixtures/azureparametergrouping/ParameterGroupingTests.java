@@ -1,5 +1,6 @@
 package fixtures.azureparametergrouping;
 
+import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class ParameterGroupingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestParameterGroupingTestServiceImpl("http://localhost:3000", null);
+        client = new AutoRestParameterGroupingTestServiceImpl("http://localhost:3000", new BasicAuthenticationCredentials(null, null));
     }
 
     @Test

@@ -5,6 +5,7 @@ using System.Linq;
 using AutoRest.Core.Model;
 using Newtonsoft.Json.Linq;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Extensions
 {
@@ -110,12 +111,12 @@ namespace AutoRest.Extensions
             {
                 Method method = methodList.Single();
                 return string.Format(CultureInfo.InvariantCulture, "Additional parameters for the {0} operation.",
-                    createOperationDisplayString(method.MethodGroup.Name, method.Name));
+                    createOperationDisplayString(method.MethodGroup.Name.ToPascalCase(), method.Name));
             }
             else if (methodList.Count <= 4)
             {
                 string operationsString = string.Join(", ", methodList.Select(
-                    m => string.Format(CultureInfo.InvariantCulture, createOperationDisplayString(m.MethodGroup.Name, m.Name))));
+                    m => string.Format(CultureInfo.InvariantCulture, createOperationDisplayString(m.MethodGroup.Name.ToPascalCase(), m.Name))));
 
                 return string.Format(CultureInfo.InvariantCulture, "Additional parameters for a set of operations, such as: {0}.", operationsString);
             }

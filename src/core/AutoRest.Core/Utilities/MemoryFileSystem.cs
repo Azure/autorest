@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+
+using AutoRest.Core.Properties;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -32,9 +34,20 @@ namespace AutoRest.Core.Utilities
             return (new Uri(Path.Combine(rootPath.ToString(), relativePath).ToString(), UriKind.Relative)).ToString();
         }
 
-        public string GetParentDir(string path)
+        public Uri GetParentDir(string path)
         {
-           return (path == "") ? "" : Path.GetDirectoryName(path);
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new Exception(Resources.PathCannotBeNullOrEmpty);
+            }
+            if (IsCompletePath(path))
+            {
+                return new Uri(new Uri(path), ".");
+            }
+            else
+            {
+                return new Uri(Path.GetDirectoryName(path), UriKind.Relative);
+            }
         }
         
         public void WriteFile(string path, string contents)

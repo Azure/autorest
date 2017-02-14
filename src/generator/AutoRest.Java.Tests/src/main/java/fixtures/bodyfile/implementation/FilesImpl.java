@@ -16,7 +16,6 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseBuilder;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in Files.
  */
-public final class FilesImpl implements Files {
+public class FilesImpl implements Files {
     /** The Retrofit service to perform REST calls. */
     private FilesService service;
     /** The service client containing this operation class. */
@@ -54,17 +53,17 @@ public final class FilesImpl implements Files {
      * used by Retrofit to perform actually REST calls.
      */
     interface FilesService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getFile" })
         @GET("files/stream/nonempty")
         @Streaming
         Observable<Response<ResponseBody>> getFile();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getFileLarge" })
         @GET("files/stream/verylarge")
         @Streaming
         Observable<Response<ResponseBody>> getFileLarge();
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.bodyfile.Files getEmptyFile" })
         @GET("files/stream/empty")
         @Streaming
         Observable<Response<ResponseBody>> getEmptyFile();
@@ -77,7 +76,7 @@ public final class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFile() {
-        return getFileWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFileWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -87,7 +86,7 @@ public final class FilesImpl implements Files {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(getFileWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFileWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -99,7 +98,7 @@ public final class FilesImpl implements Files {
         return getFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -125,7 +124,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -137,7 +136,7 @@ public final class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getFileLarge() {
-        return getFileLargeWithServiceResponseAsync().toBlocking().single().getBody();
+        return getFileLargeWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -147,7 +146,7 @@ public final class FilesImpl implements Files {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(getFileLargeWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getFileLargeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -159,7 +158,7 @@ public final class FilesImpl implements Files {
         return getFileLargeWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -185,7 +184,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getFileLargeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -197,7 +196,7 @@ public final class FilesImpl implements Files {
      * @return the InputStream object if successful.
      */
     public InputStream getEmptyFile() {
-        return getEmptyFileWithServiceResponseAsync().toBlocking().single().getBody();
+        return getEmptyFileWithServiceResponseAsync().toBlocking().single().body();
     }
 
     /**
@@ -207,7 +206,7 @@ public final class FilesImpl implements Files {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.create(getEmptyFileWithServiceResponseAsync(), serviceCallback);
+        return ServiceCall.fromResponse(getEmptyFileWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -219,7 +218,7 @@ public final class FilesImpl implements Files {
         return getEmptyFileWithServiceResponseAsync().map(new Func1<ServiceResponse<InputStream>, InputStream>() {
             @Override
             public InputStream call(ServiceResponse<InputStream> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -245,7 +244,7 @@ public final class FilesImpl implements Files {
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<InputStream, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

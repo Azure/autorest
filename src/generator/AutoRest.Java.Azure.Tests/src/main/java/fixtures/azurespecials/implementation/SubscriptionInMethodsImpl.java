@@ -13,7 +13,6 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.SubscriptionInMethods;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -32,7 +31,7 @@ import rx.Observable;
  * An instance of this class provides access to all the operations defined
  * in SubscriptionInMethods.
  */
-public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
+public class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     /** The Retrofit service to perform REST calls. */
     private SubscriptionInMethodsService service;
     /** The service client containing this operation class. */
@@ -54,19 +53,19 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * used by Retrofit to perform actually REST calls.
      */
     interface SubscriptionInMethodsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalValid" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postMethodLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postMethodLocalNull" })
         @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
         Observable<Response<ResponseBody>> postMethodLocalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postPathLocalValid" })
         @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postPathLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azurespecials.SubscriptionInMethods postSwaggerLocalValid" })
         @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         Observable<Response<ResponseBody>> postSwaggerLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
@@ -78,7 +77,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      */
     public void postMethodLocalValid(String subscriptionId) {
-        postMethodLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postMethodLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -89,7 +88,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -102,7 +101,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         return postMethodLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -132,7 +131,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     }
 
     private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -144,7 +143,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      */
     public void postMethodLocalNull(String subscriptionId) {
-        postMethodLocalNullWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postMethodLocalNullWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -155,7 +154,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -168,7 +167,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         return postMethodLocalNullWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -198,7 +197,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     }
 
     private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -210,7 +209,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      */
     public void postPathLocalValid(String subscriptionId) {
-        postPathLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postPathLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -221,7 +220,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -234,7 +233,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         return postPathLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -264,7 +263,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     }
 
     private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -276,7 +275,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      */
     public void postSwaggerLocalValid(String subscriptionId) {
-        postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().getBody();
+        postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).toBlocking().single().body();
     }
 
     /**
@@ -287,7 +286,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
      * @return the {@link ServiceCall} object
      */
     public ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.create(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+        return ServiceCall.fromResponse(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -300,7 +299,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
         return postSwaggerLocalValidWithServiceResponseAsync(subscriptionId).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
-                return response.getBody();
+                return response.body();
             }
         });
     }
@@ -330,7 +329,7 @@ public final class SubscriptionInMethodsImpl implements SubscriptionInMethods {
     }
 
     private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.mapperAdapter())
+        return this.client.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

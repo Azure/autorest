@@ -39,7 +39,7 @@ public class PageImpl<T> implements Page<T> {
      * @return the link to the next page.
      */
     @Override
-    public String getNextPageLink() {
+    public String nextPageLink() {
         return this.nextPageLink;
     }
 
@@ -49,7 +49,7 @@ public class PageImpl<T> implements Page<T> {
      * @return the list of items in {@link List}.
      */
     @Override
-    public List<T> getItems() {
+    public List<T> items() {
         return items;
     }
 

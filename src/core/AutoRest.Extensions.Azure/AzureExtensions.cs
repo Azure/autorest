@@ -32,7 +32,6 @@ namespace AutoRest.Extensions.Azure
         public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
-        public const string ExternalExtension = "x-ms-external";
 
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
@@ -108,11 +107,11 @@ namespace AutoRest.Extensions.Azure
                     successStatusCode != default(HttpStatusCode) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    method.ReturnType = new Response(New<PrimaryType>(KnownPrimaryType.Boolean), method.ReturnType.Headers);
+                    method.ReturnType = New<Response>(New<PrimaryType>(KnownPrimaryType.Boolean), method.ReturnType.Headers);
                 }
                 else
                 {
-                    Logger.LogInfo(string.Format(CultureInfo.InvariantCulture, Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
+                    Logger.Instance.Log(Category.Info, Resources.HeadMethodPossibleIncorrectSpecification, method.Name);
                 }
             }
         }
@@ -146,7 +145,7 @@ namespace AutoRest.Extensions.Azure
             {
                 if (method.DefaultResponse.Body == null && method.ReturnType.Body != null)
                 {
-                    method.DefaultResponse = new Response(cloudError, method.ReturnType.Headers);
+                    method.DefaultResponse = New<Response>(cloudError, method.ReturnType.Headers);
                 }                
             }
         }

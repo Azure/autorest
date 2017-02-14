@@ -19,7 +19,7 @@ public class IntWrapper {
     /**
      * The value property.
      */
-    @JsonProperty(required = true)
+    @JsonProperty(value = "value", required = true)
     private int value;
 
     /**
