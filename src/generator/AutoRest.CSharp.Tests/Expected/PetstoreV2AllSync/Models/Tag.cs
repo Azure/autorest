@@ -77,7 +77,8 @@ namespace Fixtures.PetstoreV2AllSync.Models
             if (deserializeName(payload, "name", out resultName))
             {
                 result.Name = resultName;
-            }            return result;
+            }
+            return result;
         }
     }
 }

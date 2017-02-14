@@ -75,7 +75,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void BooleanPropertiesValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "boolean-properties.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "boolean-properties.json"));
 
             messages.AssertOnlyValidationMessage(typeof(BooleanPropertyNotRecommended));
         }

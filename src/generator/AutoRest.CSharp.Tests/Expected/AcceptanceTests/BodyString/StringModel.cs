@@ -156,7 +156,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -398,7 +399,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -651,7 +653,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -907,7 +910,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1162,7 +1166,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1288,7 +1293,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<byte[]>(_responseContent, new Base64UrlJsonConverter());        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<byte[]>(_responseContent, new Base64UrlJsonConverter());
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1414,7 +1420,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<byte[]>(_responseContent, new Base64UrlJsonConverter());        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<byte[]>(_responseContent, new Base64UrlJsonConverter());
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1665,7 +1672,8 @@ namespace Fixtures.AcceptanceTestsBodyString
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<byte[]>(_responseContent, new Base64UrlJsonConverter());        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<byte[]>(_responseContent, new Base64UrlJsonConverter());
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

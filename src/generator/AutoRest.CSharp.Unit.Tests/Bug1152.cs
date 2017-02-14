@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text.RegularExpressions;
 using Xunit;
 
@@ -16,8 +17,9 @@ namespace AutoRest.CSharp.Unit.Tests
             // simplified test pattern for unit testing aspects of code generation
             using (var fileSystem = "Bug1152".GenerateCodeInto(fileSystem : CreateMockFilesystem(), modeler : "Swagger"))
             {
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\TestObject.cs"));
-                var testObject = fileSystem.ReadFileAsText(@"GeneratedCode\Models\TestObject.cs");
+                var expectedPath = Path.Combine("GeneratedCode", "Models", "TestObject.cs");
+                Assert.True(fileSystem.FileExists(expectedPath));
+                var testObject = fileSystem.ReadFileAsText(expectedPath);
 
                 Assert.DoesNotContain(@"\\\\", Regex.Match(testObject, "Default is.*").Value);
             }

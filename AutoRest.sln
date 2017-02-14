@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26127.0
+VisualStudioVersion = 15.0.26205.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest", "src\core\AutoRest\AutoRest.csproj", "{BE85FEB6-C008-4202-8799-CFA9D292D0B6}"
 EndProject
@@ -70,7 +70,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Ruby", "src\genera
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Ruby.Azure", "src\generator\AutoRest.Ruby.Azure\AutoRest.Ruby.Azure.csproj", "{BAF2EC7F-4E5F-4D63-93AF-8C4BB645169F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Ruby.Azure", "src\generator\AutoRest.CSharp.Unit.Tests\AutoRest.CSharp.Unit.Tests.csproj", "{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.CSharp.Unit.Tests", "src\generator\AutoRest.CSharp.Unit.Tests\AutoRest.CSharp.Unit.Tests.csproj", "{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -451,9 +451,7 @@ Global
 		{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}.Release|x64.ActiveCfg = Release|x64
-		{BAF2EC7F-9999-4E5F-4D63-93AF-8C4BB645169F}.Release|x64.Build.0 = Release|x64
 		{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}.Release|x86.ActiveCfg = Release|x86
-		{BAF2EC7F-9999-4D63-93AF-8C4BB645169F}.Release|x86.Build.0 = Release|x86		
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

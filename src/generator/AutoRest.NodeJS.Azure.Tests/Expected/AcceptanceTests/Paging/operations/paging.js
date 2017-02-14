@@ -17,15 +17,15 @@ var WebResource = msRest.WebResource;
 
 /**
  * @class
- * PagingOperations
+ * Paging
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the AutoRestPagingTestService.
- * Initializes a new instance of the PagingOperations class.
+ * Initializes a new instance of the Paging class.
  * @constructor
  *
  * @param {AutoRestPagingTestService} client Reference to the service client.
  */
-function PagingOperations(client) {
+function Paging(client) {
   this.client = client;
 }
 
@@ -50,7 +50,7 @@ function PagingOperations(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getSinglePages = function (options, callback) {
+Paging.prototype.getSinglePages = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -186,7 +186,7 @@ PagingOperations.prototype.getSinglePages = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePages = function (options, callback) {
+Paging.prototype.getMultiplePages = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -357,7 +357,7 @@ PagingOperations.prototype.getMultiplePages = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getOdataMultiplePages = function (options, callback) {
+Paging.prototype.getOdataMultiplePages = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -530,7 +530,7 @@ PagingOperations.prototype.getOdataMultiplePages = function (options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWithOffsetOptions, options, callback) {
+Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWithOffsetOptions, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -700,7 +700,7 @@ PagingOperations.prototype.getMultiplePagesWithOffset = function (pagingGetMulti
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesRetryFirst = function (options, callback) {
+Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -826,7 +826,7 @@ PagingOperations.prototype.getMultiplePagesRetryFirst = function (options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesRetrySecond = function (options, callback) {
+Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -950,7 +950,7 @@ PagingOperations.prototype.getMultiplePagesRetrySecond = function (options, call
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getSinglePagesFailure = function (options, callback) {
+Paging.prototype.getSinglePagesFailure = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1074,7 +1074,7 @@ PagingOperations.prototype.getSinglePagesFailure = function (options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesFailure = function (options, callback) {
+Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1198,7 +1198,7 @@ PagingOperations.prototype.getMultiplePagesFailure = function (options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesFailureUri = function (options, callback) {
+Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1326,7 +1326,7 @@ PagingOperations.prototype.getMultiplePagesFailureUri = function (options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant, options, callback) {
+Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1465,7 +1465,7 @@ PagingOperations.prototype.getMultiplePagesFragmentNextLink = function (apiVersi
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (customParameterGroup, options, callback) {
+Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (customParameterGroup, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1620,7 +1620,7 @@ PagingOperations.prototype.getMultiplePagesFragmentWithGroupingNextLink = functi
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.nextFragment = function (apiVersion, tenant, nextLink, options, callback) {
+Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1764,7 +1764,7 @@ PagingOperations.prototype.nextFragment = function (apiVersion, tenant, nextLink
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.nextFragmentWithGrouping = function (nextLink, customParameterGroup, options, callback) {
+Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterGroup, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1920,7 +1920,7 @@ PagingOperations.prototype.nextFragmentWithGrouping = function (nextLink, custom
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getSinglePagesNext = function (nextPageLink, options, callback) {
+Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2058,7 +2058,7 @@ PagingOperations.prototype.getSinglePagesNext = function (nextPageLink, options,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
+Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2231,7 +2231,7 @@ PagingOperations.prototype.getMultiplePagesNext = function (nextPageLink, option
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, callback) {
+Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2405,7 +2405,7 @@ PagingOperations.prototype.getOdataMultiplePagesNext = function (nextPageLink, o
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, options, callback) {
+Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2566,7 +2566,7 @@ PagingOperations.prototype.getMultiplePagesWithOffsetNext = function (nextPageLi
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, options, callback) {
+Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2694,7 +2694,7 @@ PagingOperations.prototype.getMultiplePagesRetryFirstNext = function (nextPageLi
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, options, callback) {
+Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2820,7 +2820,7 @@ PagingOperations.prototype.getMultiplePagesRetrySecondNext = function (nextPageL
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getSinglePagesFailureNext = function (nextPageLink, options, callback) {
+Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2946,7 +2946,7 @@ PagingOperations.prototype.getSinglePagesFailureNext = function (nextPageLink, o
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, callback) {
+Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3072,7 +3072,7 @@ PagingOperations.prototype.getMultiplePagesFailureNext = function (nextPageLink,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-PagingOperations.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, options, callback) {
+Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3175,4 +3175,4 @@ PagingOperations.prototype.getMultiplePagesFailureUriNext = function (nextPageLi
 };
 
 
-module.exports = PagingOperations;
+module.exports = Paging;

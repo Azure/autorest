@@ -84,7 +84,8 @@ namespace Fixtures.PetstoreV2.Models
             if (deserializeXExpiresAfter(payload, "X-Expires-After", out resultXExpiresAfter))
             {
                 result.XExpiresAfter = resultXExpiresAfter;
-            }            return result;
+            }
+            return result;
         }
     }
 }

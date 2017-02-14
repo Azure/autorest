@@ -73,7 +73,7 @@ function AutoRestPagingTestService(credentials, baseUri, options) {
   if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
     this.generateClientRequestId = options.generateClientRequestId;
   }
-  this.pagingOperations = new operations.PagingOperations(this);
+  this.paging = new operations.Paging(this);
   this.models = models;
   msRest.addSerializationMixin(this);
 }

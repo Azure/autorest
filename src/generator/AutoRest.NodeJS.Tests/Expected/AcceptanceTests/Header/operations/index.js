@@ -14,4 +14,4 @@
 
 'use strict';
 
-exports.HeaderOperations = require('./headerOperations');
+exports.Header = require('./header');

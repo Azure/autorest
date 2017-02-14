@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Tests.Utilities
                 if (!serverPath.DirectoryExists())
                 {
                     // otherwise walk up the path till we find a folder 
-                    serverPath = @"dev\TestServer\server".FindFolderByWalkingUpPath();
+                    serverPath = Path.Combine("dev", "TestServer", "server").FindFolderByWalkingUpPath();
                     if (serverPath == null)
                     {
                         throw new Exception("Unable to find TestServerPath.\r\n");

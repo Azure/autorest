@@ -183,7 +183,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -483,7 +484,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -783,7 +785,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -937,7 +940,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);        }
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<DictionaryWrapperInner>(_responseContent, Client.DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

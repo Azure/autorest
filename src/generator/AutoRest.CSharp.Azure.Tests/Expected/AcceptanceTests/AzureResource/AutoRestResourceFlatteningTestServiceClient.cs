@@ -579,7 +579,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<FlattenedProduct>>(_responseContent, DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<FlattenedProduct>>(_responseContent, DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -877,7 +878,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(_responseContent, DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(_responseContent, DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
@@ -1175,7 +1177,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(_responseContent, DeserializationSettings);        }
+                    _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(_responseContent, DeserializationSettings);
+                }
                 catch (JsonException ex)
                 {
                     _httpRequest.Dispose();

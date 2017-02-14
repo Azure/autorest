@@ -145,7 +145,8 @@ namespace Fixtures.PetstoreV2NoSync.Models
             if (deserializeComplete(payload, "complete", out resultComplete))
             {
                 result.Complete = resultComplete;
-            }            return result;
+            }
+            return result;
         }
     }
 }

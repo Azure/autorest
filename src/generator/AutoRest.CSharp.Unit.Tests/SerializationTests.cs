@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public void ParseSecurityDefinitionType()
         {
-            var filePath = @"Resource\SerializationTests\SerializationTests.json";
+            var filePath = Path.Combine("Resource", "SerializationTests", "SerializationTests.json");
             var swaggerContent = File.ReadAllText(filePath);
             var definition = SwaggerParser.Parse(filePath, swaggerContent);
             Assert.Equal(SecuritySchemeType.OAuth2, definition.SecurityDefinitions["petstore_auth"].SecuritySchemeType);

@@ -14,11 +14,11 @@ import * as models from '../models';
 
 /**
  * @class
- * PagingOperations
+ * Paging
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the AutoRestPagingTestService.
  */
-export interface PagingOperations {
+export interface Paging {
 
     /**
      * A paging operation that finishes on the first call without a nextlink

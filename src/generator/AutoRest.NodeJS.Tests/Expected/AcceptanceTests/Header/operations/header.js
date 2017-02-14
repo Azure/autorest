@@ -17,15 +17,15 @@ var moment = require('moment');
 
 /**
  * @class
- * HeaderOperations
+ * Header
  * __NOTE__: An instance of this class is automatically created for an
  * instance of the AutoRestSwaggerBATHeaderService.
- * Initializes a new instance of the HeaderOperations class.
+ * Initializes a new instance of the Header class.
  * @constructor
  *
  * @param {AutoRestSwaggerBATHeaderService} client Reference to the service client.
  */
-function HeaderOperations(client) {
+function Header(client) {
   this.client = client;
 }
 
@@ -52,7 +52,7 @@ function HeaderOperations(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramExistingKey = function (userAgent, options, callback) {
+Header.prototype.paramExistingKey = function (userAgent, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -152,7 +152,7 @@ HeaderOperations.prototype.paramExistingKey = function (userAgent, options, call
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseExistingKey = function (options, callback) {
+Header.prototype.responseExistingKey = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -244,7 +244,7 @@ HeaderOperations.prototype.responseExistingKey = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramProtectedKey = function (contentType, options, callback) {
+Header.prototype.paramProtectedKey = function (contentType, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -344,7 +344,7 @@ HeaderOperations.prototype.paramProtectedKey = function (contentType, options, c
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseProtectedKey = function (options, callback) {
+Header.prototype.responseProtectedKey = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -439,7 +439,7 @@ HeaderOperations.prototype.responseProtectedKey = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramInteger = function (scenario, value, options, callback) {
+Header.prototype.paramInteger = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -548,7 +548,7 @@ HeaderOperations.prototype.paramInteger = function (scenario, value, options, ca
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseInteger = function (scenario, options, callback) {
+Header.prototype.responseInteger = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -654,7 +654,7 @@ HeaderOperations.prototype.responseInteger = function (scenario, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramLong = function (scenario, value, options, callback) {
+Header.prototype.paramLong = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -763,7 +763,7 @@ HeaderOperations.prototype.paramLong = function (scenario, value, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseLong = function (scenario, options, callback) {
+Header.prototype.responseLong = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -869,7 +869,7 @@ HeaderOperations.prototype.responseLong = function (scenario, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramFloat = function (scenario, value, options, callback) {
+Header.prototype.paramFloat = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -978,7 +978,7 @@ HeaderOperations.prototype.paramFloat = function (scenario, value, options, call
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseFloat = function (scenario, options, callback) {
+Header.prototype.responseFloat = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1084,7 +1084,7 @@ HeaderOperations.prototype.responseFloat = function (scenario, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramDouble = function (scenario, value, options, callback) {
+Header.prototype.paramDouble = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1193,7 +1193,7 @@ HeaderOperations.prototype.paramDouble = function (scenario, value, options, cal
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseDouble = function (scenario, options, callback) {
+Header.prototype.responseDouble = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1299,7 +1299,7 @@ HeaderOperations.prototype.responseDouble = function (scenario, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramBool = function (scenario, value, options, callback) {
+Header.prototype.paramBool = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1408,7 +1408,7 @@ HeaderOperations.prototype.paramBool = function (scenario, value, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseBool = function (scenario, options, callback) {
+Header.prototype.responseBool = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1516,7 +1516,7 @@ HeaderOperations.prototype.responseBool = function (scenario, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramString = function (scenario, options, callback) {
+Header.prototype.paramString = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1627,7 +1627,7 @@ HeaderOperations.prototype.paramString = function (scenario, options, callback) 
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseString = function (scenario, options, callback) {
+Header.prototype.responseString = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1734,7 +1734,7 @@ HeaderOperations.prototype.responseString = function (scenario, options, callbac
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramDate = function (scenario, value, options, callback) {
+Header.prototype.paramDate = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1844,7 +1844,7 @@ HeaderOperations.prototype.paramDate = function (scenario, value, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseDate = function (scenario, options, callback) {
+Header.prototype.responseDate = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1951,7 +1951,7 @@ HeaderOperations.prototype.responseDate = function (scenario, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramDatetime = function (scenario, value, options, callback) {
+Header.prototype.paramDatetime = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2062,7 +2062,7 @@ HeaderOperations.prototype.paramDatetime = function (scenario, value, options, c
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseDatetime = function (scenario, options, callback) {
+Header.prototype.responseDatetime = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2170,7 +2170,7 @@ HeaderOperations.prototype.responseDatetime = function (scenario, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramDatetimeRfc1123 = function (scenario, options, callback) {
+Header.prototype.paramDatetimeRfc1123 = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2282,7 +2282,7 @@ HeaderOperations.prototype.paramDatetimeRfc1123 = function (scenario, options, c
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseDatetimeRfc1123 = function (scenario, options, callback) {
+Header.prototype.responseDatetimeRfc1123 = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2389,7 +2389,7 @@ HeaderOperations.prototype.responseDatetimeRfc1123 = function (scenario, options
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramDuration = function (scenario, value, options, callback) {
+Header.prototype.paramDuration = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2498,7 +2498,7 @@ HeaderOperations.prototype.paramDuration = function (scenario, value, options, c
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseDuration = function (scenario, options, callback) {
+Header.prototype.responseDuration = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2604,7 +2604,7 @@ HeaderOperations.prototype.responseDuration = function (scenario, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramByte = function (scenario, value, options, callback) {
+Header.prototype.paramByte = function (scenario, value, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2713,7 +2713,7 @@ HeaderOperations.prototype.paramByte = function (scenario, value, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseByte = function (scenario, options, callback) {
+Header.prototype.responseByte = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2820,7 +2820,7 @@ HeaderOperations.prototype.responseByte = function (scenario, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.paramEnum = function (scenario, options, callback) {
+Header.prototype.paramEnum = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2933,7 +2933,7 @@ HeaderOperations.prototype.paramEnum = function (scenario, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.responseEnum = function (scenario, options, callback) {
+Header.prototype.responseEnum = function (scenario, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3034,7 +3034,7 @@ HeaderOperations.prototype.responseEnum = function (scenario, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-HeaderOperations.prototype.customRequestId = function (options, callback) {
+Header.prototype.customRequestId = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -3104,4 +3104,4 @@ HeaderOperations.prototype.customRequestId = function (options, callback) {
 };
 
 
-module.exports = HeaderOperations;
+module.exports = Header;
