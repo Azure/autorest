@@ -17,13 +17,12 @@ namespace AutoRest.Core.Validation
         public ValidationMessage(FileObjectPath path, Rule rule, params object[] formatArguments)
             : base(rule.Severity, $"{string.Format(CultureInfo.CurrentCulture, rule.MessageTemplate, formatArguments)}", path)
         {
-            Type = rule.GetType();
+            Rule = rule;
         }
 
         /// <summary>
-        /// The class of the Validation message
+        /// The validation rule which triggered this message.
         /// </summary>
-        public Type Type { get; }
-
+        public Rule Rule { get; }
     }
 }

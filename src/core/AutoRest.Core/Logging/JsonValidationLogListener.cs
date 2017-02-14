@@ -1,10 +1,9 @@
-﻿using AutoRest.Core.Validation;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using AutoRest.Core.Validation;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AutoRest.Core.Logging
 {
@@ -19,9 +18,14 @@ namespace AutoRest.Core.Logging
             {
                 var rawMessage = new Dictionary<string, string>();
                 rawMessage["type"] = validationMessage.Severity.ToString();
-                rawMessage["code"] = validationMessage.Type.Name;
+                rawMessage["code"] = validationMessage.Rule.GetType().Name;
                 rawMessage["message"] = validationMessage.Message;
                 rawMessage["jsonref"] = validationMessage.Path.JsonReference;
+                rawMessage["json-path"] = validationMessage.Path.ReadablePath;
+                rawMessage["id"] = validationMessage.Rule.Id;
+                rawMessage["validationCategory"] = validationMessage.Rule.ValidationCategory.ToString();
+                rawMessage["providerNamespace"] = "providerNamespace_WAT";
+                rawMessage["resourceType"] = "resourceType_WAT";
                 rawMessageCollection.Add(rawMessage);
             }
         }
