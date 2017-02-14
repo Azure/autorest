@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj"  />
+  <Import Project="$(common)common-package-references.proj" />
+  <Import Project="$(common)project-library.proj" />
+  <Import Project="$(common)package-info.proj" />
+  <Import Project="$(common)package-fallback.proj" />
+   
+  <PropertyGroup>
+    <AssemblyName>AutoRest.Tooling.CSharp.Compiler</AssemblyName>
+    <PackageTags>Microsoft AutoRest Tooling</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+  
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="YamlDotNet.Signed" Version="3.8.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="2.0.0-rc2" />
+  </ItemGroup>
+</Project>

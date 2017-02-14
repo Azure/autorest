@@ -8,7 +8,7 @@
 
 namespace Fixtures.PetstoreV2NoSync.Models
 {
-    using PetstoreV2NoSync;
+    using Fixtures.PetstoreV2NoSync;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;

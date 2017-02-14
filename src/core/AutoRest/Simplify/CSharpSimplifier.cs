@@ -6,35 +6,21 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using AutoRest.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Simplification;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Rest;
 using Microsoft.Rest.Azure;
+using Newtonsoft.Json;
+using AutoRest.Core.Utilities;
+using System.Net;
 
 namespace AutoRest.Simplify
 {
     public class CSharpSimplifier
     {
-        private static MetadataReference mscorlib;
-        private static MetadataReference newtonsoft;
-        private static MetadataReference xml;
-
-        private static MetadataReference Mscorlib
-        {
-            get {return mscorlib ?? (mscorlib = MetadataReference.CreateFromFile(typeof(object).Assembly.Location));}
-        }
-
-        private static MetadataReference Xml {
-            get {return xml ?? (xml = MetadataReference.CreateFromFile($"{Path.GetDirectoryName(typeof(object).Assembly.Location)}\\System.Xml.Linq.dll"));}
-        }
-
-        private static MetadataReference Newtonsoft
-        {
-            get {return newtonsoft ?? (newtonsoft = MetadataReference.CreateFromFile(typeof(Newtonsoft.Json.JsonObjectAttribute).Assembly.Location));}
-        }
-
         public async Task Run()
         {
             var op = new AzureAsyncOperation();
@@ -44,21 +30,24 @@ namespace AutoRest.Simplify
                     SearchOption.AllDirectories).
                 ToDictionary(each => each, each => Settings.Instance.FileSystem.ReadFileAsText(each));
 
+            var assemblies = new[] {
+                typeof(IAzureClient).GetAssembly().Location,
+                typeof(RestException).GetAssembly().Location,
+                typeof(Uri).GetAssembly().Location,
+                typeof(File).GetAssembly().Location,
+                typeof(HttpStatusCode).GetAssembly().Location,
+                typeof(System.Net.Http.HttpClient).GetAssembly().Location,
+                typeof(object).GetAssembly().Location,
+                typeof(XElement).GetAssembly().Location,
+                typeof(JsonConvert).GetAssembly().Location
+            };
+
+
             var projectId = ProjectId.CreateNewId();
             var solution = new AdhocWorkspace().CurrentSolution
-                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
-                .AddMetadataReference(projectId, Mscorlib)
-                .AddMetadataReference(projectId, Xml)
-                .AddMetadataReference(projectId, Newtonsoft)
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime.Azure",StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a =>string.Compare(a.GetName().Name, "Microsoft.Rest.ClientRuntime",StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single())
-                .AddMetadataReference(projectId, AppDomain.CurrentDomain.GetAssemblies()
-                    .Where(a => string.Compare(a.GetName().Name, "System", StringComparison.OrdinalIgnoreCase) == 0)
-                    .Select(a => MetadataReference.CreateFromFile(a.Location)).Single());
+                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp);
+            // add assemblies
+            solution = assemblies.Aggregate(solution, (current, asm) => current.AddMetadataReference(projectId, MetadataReference.CreateFromFile(asm)));
 
             // Add existing files
             foreach (var file in files.Keys)

@@ -193,7 +193,7 @@ Header.prototype.customNamedRequestIdParamGrouping = function (headerCustomNamed
   } catch (error) {
     return callback(error);
   }
-  var fooClientRequestId;
+    var fooClientRequestId;
   try {
     if (headerCustomNamedRequestIdParamGroupingParameters !== null && headerCustomNamedRequestIdParamGroupingParameters !== undefined)
     {

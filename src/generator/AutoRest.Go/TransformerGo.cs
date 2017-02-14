@@ -226,8 +226,8 @@ namespace AutoRest.Go
 
             var stutteringTypes = exportedTypes
                                     .Where(exported =>
-                                        (exported is IModelType && (exported as IModelType).Name.FixedValue.StartsWith(cmg.Namespace, StringComparison.InvariantCultureIgnoreCase)) ||
-                                        (exported is Method && (exported as Method).Name.FixedValue.StartsWith(cmg.Namespace, StringComparison.InvariantCultureIgnoreCase)));
+                                        (exported is IModelType && (exported as IModelType).Name.FixedValue.StartsWith(cmg.Namespace, StringComparison.OrdinalIgnoreCase)) ||
+                                        (exported is Method && (exported as Method).Name.FixedValue.StartsWith(cmg.Namespace, StringComparison.OrdinalIgnoreCase)));
 
             if (stutteringTypes.Any())
             {

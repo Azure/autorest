@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback, ServiceClientCre
 import * as operations from "./operations";
 
 declare class AutoRestHeadTestService {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AutoRestHeadTestService class.
      * @constructor

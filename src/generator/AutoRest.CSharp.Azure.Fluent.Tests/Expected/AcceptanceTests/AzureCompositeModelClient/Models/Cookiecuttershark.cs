@@ -8,13 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("cookiecuttershark")]
+    [Newtonsoft.Json.JsonObject("cookiecuttershark")]
     public partial class Cookiecuttershark : Shark
     {
         /// <summary>

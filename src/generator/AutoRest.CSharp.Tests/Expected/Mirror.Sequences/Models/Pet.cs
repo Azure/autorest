@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using MirrorSequences;
+    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;

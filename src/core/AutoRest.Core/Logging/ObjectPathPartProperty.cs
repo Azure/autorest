@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Utilities;
 using YamlDotNet.RepresentationModel;
 
 namespace AutoRest.Core.Logging
@@ -26,7 +27,7 @@ namespace AutoRest.Core.Logging
         public override YamlNode SelectNode(ref YamlNode node)
         {
             var child = (node as YamlMappingNode)?.
-                Children?.FirstOrDefault(pair => pair.Key.ToString().Equals(Property, StringComparison.InvariantCultureIgnoreCase));
+                Children?.FirstOrDefault(pair => pair.Key.ToString().EqualsIgnoreCase(Property));
             node = child?.Value;
             return child?.Key;
         }

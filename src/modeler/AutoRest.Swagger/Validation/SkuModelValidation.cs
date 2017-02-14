@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
@@ -41,14 +42,14 @@ namespace AutoRest.Swagger.Validation
         {
             foreach(KeyValuePair<string, Schema> definition in definitions)
             {
-                if(definition.Key.Equals("sku", System.StringComparison.InvariantCultureIgnoreCase))
+                if(definition.Key.EqualsIgnoreCase("sku"))
                 {
                     Schema schema = definition.Value;
                     if (schema.Properties == null)
                         return false;
 
                     bool hasName = schema.Properties.Any(property =>
-                        property.Key.Equals("name", System.StringComparison.InvariantCultureIgnoreCase) &&
+                        property.Key.EqualsIgnoreCase("name") &&
                         property.Value.Type == Model.DataType.String);
 
                     if (!hasName)

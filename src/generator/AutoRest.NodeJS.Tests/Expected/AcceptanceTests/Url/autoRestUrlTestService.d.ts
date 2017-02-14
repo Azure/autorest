@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestUrlTestService {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AutoRestUrlTestService class.
      * @constructor

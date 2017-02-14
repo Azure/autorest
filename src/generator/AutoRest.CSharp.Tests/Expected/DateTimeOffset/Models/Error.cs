@@ -8,7 +8,7 @@
 
 namespace Fixtures.DateTimeOffset.Models
 {
-    using DateTimeOffset;
+    using Fixtures.DateTimeOffset;
     using Newtonsoft.Json;
     using System.Linq;
 
