@@ -653,6 +653,57 @@ task 'regenerate-go', '', (done) ->
   },done
   return null
 
+task 'regenerate-ars', '', (done) ->
+  regenExpected {
+    'outputBaseDir': 'src/generator/AutoRest.AzureResourceSchema.Tests',
+    'inputBaseDir': 'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Swagger',
+    'mappings': {
+      'ApiManagement/2016-07-07':'ApiManagement/2016-07-07/apimanagement.json',
+      'ApiManagement/2016-07-07b':'ApiManagement/2016-07-07b/apimanagement.json',
+      'Batch/2015-12-01':'Batch/2015-12-01/BatchManagement.json',
+      'CDN/2015-06-01':'CDN/2015-06-01/cdn.json',
+      'CDN/2016-04-02':'CDN/2016-04-02/cdn.json',
+      'CognitiveServices/2016-02-01-preview':'CognitiveServices/2016-02-01-preview/cognitiveservices.json',
+      'CommitmentPlans/2016-05-01-preview':'CommitmentPlans/2016-05-01-preview/commitmentPlans.json',
+      'Compute/2015-06-15':'Compute/2015-06-15/compute.json',
+      'Compute/2016-03-30':'Compute/2016-03-30/compute.json',
+      'Compute/2016-03-30b':'Compute/2016-03-30b/compute.json',
+      'ContainerService/2016-03-30':'ContainerService/2016-03-30/containerService.json',
+      'DataLakeAnalytics/2015-10-01-preview':'DataLakeAnalytics/2015-10-01-preview/account.json',
+      'DataLakeStore/2015-10-01-preview':'DataLakeStore/2015-10-01-preview/account.json',
+      'DevTestLabs/2015-05-21-preview':'DevTestLabs/2015-05-21-preview/DTL.json',
+      'DNS/2015-05-04-preview':'DNS/2015-05-04-preview/dns.json',
+      'DNS/2016-04-01':'DNS/2016-04-01/dns.json',
+      'Insights/2016-03-01':'Insights/2016-03-01/insightsManagementClient.json',
+      'Logic/2015-02-01-preview':'Logic/2015-02-01-preview/logic.json',
+      'Logic/2016-06-01':'Logic/2016-06-01/logic.json',
+      'MachineLearning/2016-05-01-preview':'MachineLearning/2016-05-01-preview/webservices.json',
+      'MobileEngagement/2014-12-01':'MobileEngagement/2014-12-01/mobile-engagement.json',
+      'Network/2015-05-01-preview':'Network/2015-05-01-preview/network.json',
+      'Network/2015-06-15':'Network/2015-06-15/network.json',
+      'Network/2016-03-30':'Network/2016-03-30/network.json',
+      'Network/2016-09-01':'Network/2016-09-01/network.json',
+      'NotificationHubs/2016-03-01':'NotificationHubs/2016-03-01/notificationhubs.json',
+      'PowerBIEmbedded/2016-01-29':'PowerBIEmbedded/2016-01-29/powerbiembedded.json',
+      'RecoveryServices/2016-06-01':'RecoveryServices/2016-06-01/recoveryservices.json',
+      'Redis/2016-04-01':'Redis/2016-04-01/redis.json',
+      'Resources/Locks/2016-09-01':'Resources/Locks/2016-09-01/locks.json',
+      'Resources/Resources/2016-09-01':'Resources/Resources/2016-09-01/resources.json',
+      'Scheduler/2016-03-01':'Scheduler/2016-03-01/scheduler.json',
+      'Search/2015-02-28':'Search/2015-02-28/search.json',
+      'ServerManagement/2016-07-01-preview':'ServerManagement/2016-07-01-preview/servermanagement.json',
+      'ServiceBus/2015-08-01':'ServiceBus/2015-08-01/servicebus.json',
+      'Storage/2015-05-01-preview':'Storage/2015-05-01-preview/storage.json',
+      'Storage/2015-06-15':'Storage/2015-06-15/storage.json',
+      'Storage/2016-01-01':'Storage/2016-01-01/storage.json',
+      'TrafficManager/2015-11-01':'TrafficManager/2015-11-01/trafficmanager.json',
+      'Web/2015-08-01':'Web/2015-08-01/web.json'
+    },
+    'outputDir': 'Resource/Expected',
+    'codeGenerator': 'AzureResourceSchema'
+  },done
+  return null
+
 task 'regenerate-samples', '', ['regenerate-samplesazure'],(done) ->
   count = 0
   content = cat "#{basefolder}/AutoRest.json"
@@ -700,24 +751,23 @@ task 'regenerate-samplesazure', '', (done) ->
         return done() if count is 0 
   return null
 
-
 task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
-  run 'regenerate-cs',
+  run 'regenerate-ars',
+      'regenerate-cs'
       'regenerate-csazure'
       'regenerate-csazurefluent'
-      'regenerate-node'
-      'regenerate-nodeazure'
-      'regenerate-ruby'
-      'regenerate-rubyazure'
-      'regenerate-python'
-      'regenerate-pythonazure'
-      'regenerate-samples'
+      'regenerate-go'
       'regenerate-java'
       'regenerate-javaazure'
       'regenerate-javaazurefluent'
-      'regenerate-go', done
+      'regenerate-node'
+      'regenerate-nodeazure'
+      'regenerate-python'
+      'regenerate-pythonazure'
+      'regenerate-ruby'
+      'regenerate-rubyazure'
+      'regenerate-samples', done
   return null
-  
 
 task 'regenerate-delete', '', ->
   rm "-rf",
@@ -732,3 +782,4 @@ task 'regenerate-delete', '', ->
     'src/generator/AutoRest.NodeJS.Azure.Tests/Expected'
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
+    'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
