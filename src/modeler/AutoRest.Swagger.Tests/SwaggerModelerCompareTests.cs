@@ -42,8 +42,8 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "Comparison", "Modified", input),
-                    Previous = Path.Combine("Swagger", "Comparison", "Original", input)
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Comparison", "Modified", input),
+                    Previous = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Comparison", "Original", input)
                 };
 
                 var modeler = new SwaggerModeler();

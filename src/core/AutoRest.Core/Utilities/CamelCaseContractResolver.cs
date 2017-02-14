@@ -27,7 +27,7 @@ namespace AutoRest.Core.Utilities
 
             foreach (var property in properties)
             {
-                property.PropertyName = char.ToLower(property.PropertyName[0], CultureInfo.InvariantCulture) +
+                property.PropertyName = char.ToLower(property.PropertyName[0]) +
                                         property.PropertyName.Substring(1);
             }
 

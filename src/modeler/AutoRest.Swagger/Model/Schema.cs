@@ -17,7 +17,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Swagger schema object.
     /// </summary>
-    [Serializable]
     [Rule(typeof(ModelTypeIncomplete))]
     public class Schema : SwaggerObject
     {
@@ -135,7 +134,7 @@ namespace AutoRest.Swagger.Model
 
             if (priorSchema.ReadOnly != ReadOnly)
             {
-                context.LogBreakingChange(ComparisonMessages.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture), ReadOnly.ToString().ToLower(CultureInfo.CurrentCulture));
+                context.LogBreakingChange(ComparisonMessages.ReadonlyPropertyChanged2, priorSchema.ReadOnly.ToString().ToLower(), ReadOnly.ToString().ToLower());
             }
 
             if ((priorSchema.Discriminator == null && Discriminator != null) ||

@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Azure;
-    using AcceptanceTestsLro;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsLro;
     using Newtonsoft.Json;
     using System.Linq;
 

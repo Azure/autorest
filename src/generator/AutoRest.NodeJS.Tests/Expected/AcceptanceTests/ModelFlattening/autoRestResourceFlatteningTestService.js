@@ -972,7 +972,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   } catch (error) {
     return callback(error);
   }
-  var simpleBodyProduct;
+    var simpleBodyProduct;
   try {
     if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (genericValue !== null && genericValue !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
@@ -1135,7 +1135,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   } catch (error) {
     return callback(error);
   }
-  var name;
+    var name;
   var productId;
   var description;
   var maxProductDisplayName;

@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestSwaggerBATFormDataService {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AutoRestSwaggerBATFormDataService class.
      * @constructor

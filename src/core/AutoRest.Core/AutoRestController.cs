@@ -10,6 +10,7 @@ using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
@@ -26,8 +27,7 @@ namespace AutoRest.Core
         {
             get
             {
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo((typeof(Settings)).Assembly.Location);
-                return fvi.FileVersion;
+                return typeof(Settings).GetAssembly().GetName().Version.ToString();
             }
         }
 

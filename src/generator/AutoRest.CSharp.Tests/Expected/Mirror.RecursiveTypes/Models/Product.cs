@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
-    using MirrorRecursiveTypes;
+    using Fixtures.MirrorRecursiveTypes;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;

@@ -9,9 +9,6 @@ namespace AutoRest.Core.Logging
     /// <summary>
     /// Code generation aggregate exception.
     /// </summary>
-#if !PORTABLE
-    [Serializable]
-#endif
     public class CodeGenerationException : AggregateException
     {
         /// <summary>
@@ -37,15 +34,6 @@ namespace AutoRest.Core.Logging
         public CodeGenerationException(string message, Exception innerException) : base(message, innerException)
         {
         }
-
-#if !PORTABLE 
-        /// <summary>
-        /// Instantiates a new instance of the CodeGenerationException class.
-        /// </summary>
-        protected CodeGenerationException(SerializationInfo serializationInfo, StreamingContext context) : base (serializationInfo, context)
-        {
-        }
-#endif
 
         /// <summary>
         /// Instantiates a new instance of the CodeGenerationException class.

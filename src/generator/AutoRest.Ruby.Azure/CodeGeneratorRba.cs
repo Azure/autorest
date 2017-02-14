@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;

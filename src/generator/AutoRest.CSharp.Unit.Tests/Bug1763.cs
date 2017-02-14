@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
+using System.IO;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -30,7 +31,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 var result = await Compile(fileSystem);
 
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\Pet.cs"));
+                Assert.True(fileSystem.FileExists(Path.Combine("GeneratedCode", "Models", "Pet.cs")));
 
                 // filter the warnings
                 var warnings = result.Messages.Where(
@@ -52,14 +53,15 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
+
                 var petModel = asm.ExportedTypes.First(type => type.FullName == "Test.Models.Pet" );
                 var idMember = petModel.GetMembers().First(member => member.Name == "_id" );
                 Assert.NotNull(idMember);
 
                 // now read from the file to ensure we use this. to access the members
-                var codeText = fileSystem.ReadFileAsText(@"GeneratedCode\Models\Pet.cs");
+                var codeText = fileSystem.ReadFileAsText(Path.Combine("GeneratedCode", "Models", "Pet.cs"));
                 // get hold of the ctor
                 var regex = new Regex(Regex.Escape("public Pet(int _id, string name = default(string))") + @"[^}]+");
                 var match = regex.Match(codeText);

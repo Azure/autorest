@@ -10,7 +10,7 @@ namespace AutoRest.Core.Model
     /// <summary>
     /// Defines a parameter mapping.
     /// </summary>
-    public class ParameterMapping : ICloneable
+    public class ParameterMapping 
     {
         /// <summary>
         /// Gets or sets the input parameter.

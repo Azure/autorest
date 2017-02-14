@@ -26,7 +26,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return (CodeModel.Namespace.ToLower(CultureInfo.InvariantCulture)) + "." + TypeName;
+                return (CodeModel.Namespace.ToLowerInvariant()) + "." + TypeName;
             }
         }
 

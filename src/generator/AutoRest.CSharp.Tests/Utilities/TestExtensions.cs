@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Tests.Utilities
         {
             try
             {
-                currentDirectory = currentDirectory ?? Environment.CurrentDirectory;
+                currentDirectory = currentDirectory ?? Core.Utilities.Extensions.CodeBaseDirectory;
                 if (!string.IsNullOrEmpty(currentDirectory))
                 {
                     try

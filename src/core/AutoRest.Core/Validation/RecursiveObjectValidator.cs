@@ -8,6 +8,7 @@ using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
 using System;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Validation
 {
@@ -86,7 +87,7 @@ namespace AutoRest.Core.Validation
             }
 
             // If this is a class, validate its value and its properties.
-            else if (traverseProperties && entity.GetType().IsClass && entity.GetType() != typeof(string))
+            else if (traverseProperties && entity.GetType().IsClass() && entity.GetType() != typeof(string))
             {
                 // Validate each property of the object
                 var propertyMessages = entity.GetValidatableProperties()
