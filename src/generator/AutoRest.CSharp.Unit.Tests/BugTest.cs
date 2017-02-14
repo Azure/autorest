@@ -162,8 +162,30 @@ namespace AutoRest.CSharp.Unit.Tests {
         }
         
         protected static string DOTNET = System.IO.Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-        protected static string FRAMEWORK= Path.Combine( DOTNET, "shared", "Microsoft.NETCore.App", "1.0.3" );
+        protected static string Shared = Path.Combine( DOTNET, "shared", "Microsoft.NETCore.App" );
 
+        private static int VerNum(string version) 	{
+            int n = 0;
+            foreach (var i in version.Split('.'))
+            {
+                int p;
+                if (!Int32.TryParse(i, out p))
+                {
+                    return n;
+                }
+                n = (n << 8) + p;
+            }
+            return n;
+        }
+        private static string _framework;
+        protected static string FRAMEWORK { 
+            get {
+                if (string.IsNullOrEmpty(_framework ) ) {
+                _framework = Path.Combine( Shared, System.IO.Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
+                }
+                return _framework;
+            }
+        }
         protected static readonly string[] _assemblies = new[] {
             
             Path.Combine(FRAMEWORK, "System.Runtime.dll"),
