@@ -9,11 +9,11 @@
 abstract class RequestBase {
     validateProperty(value: any, name: string){
         if(value === null){
-            throw new Error("Missing required property value: " +name);
+            throw new Error("Missing required property value: " + name);
         }
     }
 
-    abstract validate();
+    abstract validate() : void;
 }
 
 @foreach (var model in Model.ResponseModels)

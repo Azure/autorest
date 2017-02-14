@@ -13,7 +13,7 @@ namespace AutoRest.TypeScript.SuperAgent.Model
 
         public string HttpMethod { get; set; }
 
-        public string Url { get; set; }
+        public string UrlTemplate { get; set; }
 
         public string ResponsePromiseTypeName { get; set; }
 

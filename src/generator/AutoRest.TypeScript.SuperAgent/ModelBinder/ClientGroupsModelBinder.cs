@@ -13,6 +13,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
         {
             var model = new ClientGroupsModel
                         {
+                            ModelModuleName = "model",
                             Header = new HeaderModel(),
                             Clients = new List<ClientModel>()
                         };
@@ -47,26 +48,39 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                         {
                             requestName = parts[0];
                         }
-                        
-                        responseName = okResponse.Body.GetImplementationName();
+                        else
+                        {
+                            responseName = okResponse.Body.GetImplementationName();
+                        }
                     }
                     else
                     {
                         responseName = okResponse.Body.Name;
                     }
 
-                    if (requestName == null)
+                    if (string.IsNullOrWhiteSpace(requestName))
                     {
                         requestName = okResponse.Body.GetImplementationName();
                     }
 
+                    if (string.IsNullOrWhiteSpace(responseName))
+                    {
+                        responseName = okResponse.Body.GetImplementationName();
+                    }
+
+                    requestName = $"{model.ModelModuleName}.{requestName}Request";
+
+                    if (!doNotWrap)
+                    {
+                        responseName = $"{model.ModelModuleName}.{responseName}";
+                    }
 
                     var clientMethod = new ClientMethodModel
                                        {
-                                           Url = method.Url,
+                                           UrlTemplate = GetUrlTemplate(method),
                                            HttpMethod = method.HttpMethod.ToString().ToLower(),
                                            MethodName = method.Name.Value.Replace($"{groupName}_", "").ToCamelCase(),
-                                           RequestTypeName = $"{requestName}Request",
+                                           RequestTypeName = requestName,
                                            ResponseTypeName = responseName,
                                            ParamNamesInPath =
                                                method.Parameters.Where(p => p.Location == ParameterLocation.Path)
@@ -97,6 +111,27 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
             }
 
             return model;
+        }
+
+        public string GetUrlTemplate(Method method)
+        {
+            var url = method.Url.Value;
+
+            foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Path))
+            {
+                url = url.Replace($"{{{param.Name.Value}}}", $"${{requestDto.{param.Name.Value}}}");
+            }
+
+            for (var index = 0;
+                index < method.Parameters.Where(p => p.Location == ParameterLocation.Query).ToArray().Length;
+                index++)
+            {
+                var param = method.Parameters.Where(p => p.Location == ParameterLocation.Query).ToArray()[index];
+                char separator = index == 0 ? '?' : '&';
+                url += $"{separator}{param.Name.Value}=${{requestDto.{param.Name.Value}}}";
+            }
+
+            return $"${{this.baseUrl}}{url}";
         }
     }
 }

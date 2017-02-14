@@ -16,7 +16,7 @@ namespace AutoRest.TypeScript.SuperAgent.Tests
                 var settings = new Settings
                                {
                                    Input = "D:\\projects\\autorest\\src\\generator\\AutoRest.TypeScript.SuperAgent.Tests\\Resource\\test1.json",
-                                   OutputDirectory = "C:\\Users\\jlaszlo\\Desktop\\11111111111111",
+                                   OutputDirectory = "D:\\IT-Hotel\\YCS\\Ycs Web\\Agoda.WebSite.ClientSide\\scripts\\services",
                                    CodeGenerator = "Test"
                                };
 
