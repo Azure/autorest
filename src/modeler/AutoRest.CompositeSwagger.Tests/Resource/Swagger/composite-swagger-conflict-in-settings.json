@@ -1,0 +1,10 @@
+{
+  "info": {
+    "title": "Swagger 1",
+    "description": "Swagger 1 documentation."
+  },
+  "documents": [
+    "./swagger-1.json",
+    "./swagger-conflict-in-settings.json"
+  ]  
+}

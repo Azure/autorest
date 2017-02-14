@@ -1,0 +1,27 @@
+﻿{
+  "codeGenerators": {
+    "CSharp": {
+      "type": "CSharpCodeGenerator, foo",
+      "settings": {
+        "includeCredentials": "true"
+      }
+    },
+    "Java": {
+      "type": "invalid, Something.Java",
+      "settings": {
+        "includeCredentials": "false"
+      }
+    }
+  },
+  "modelers": {
+    "Swagger": {
+      "type": "SwaggerServiceModelBuilder, AutoRest.Swagger",
+      "settings": {
+        "requireOperationId": "false"
+      }
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.CompositeSwagger"
+    }
+  }
+}

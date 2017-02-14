@@ -1,0 +1,42 @@
+﻿@inherits Core.Template<Core.Tests.Resource.SampleViewModel>
+using System;
+using System.Collection;
+@Model.Imports
+namespace @Model.Namespace
+{
+    @using System;
+
+    public partial class @Model.Name
+    {
+        @foreach(var property in Model.Properties)
+        {
+        @:@property.Documentation
+        @:public @property.Type @property.Name { get; @(property.ReadOnly ? "private" : "") set; }
+        @:
+        }
+        /// <summary>
+        /// Serialize the object
+        /// </summary>
+        /// <exception cref="@(Model.OperationExceptionTypeString)">
+        /// Test exception comment
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// Test exception comment two
+        /// </exception>
+        /// <returns>
+        /// Returns the json model for the type @Model.Name
+        /// </returns>
+        public virtual JToken SerializeJson(JToken outputObject)
+        {
+            @Model.SerializationBlock
+        }
+
+        /// <summary>
+        @WrapComment("/// ", "Deserialize current type to Json object because today is Friday and there is a sun outside the window.")
+        /// </summary>
+        public virtual void DeserializeJson(JToken inputObject)
+        {
+            @Model.DeserializationBlock
+        }
+    }
+}

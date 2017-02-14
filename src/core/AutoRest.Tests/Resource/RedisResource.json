@@ -1,0 +1,598 @@
+{
+  "swagger": "2.0",
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "info": {
+    "version": "2014-04-01-preview",
+    "title": "RedisManagementClient"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis": {
+      "get": {
+        "description": "",
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "operationId": "List",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/xml",
+          "application/xml",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResourceListResponse"
+            }
+          },
+          "204": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResourceListResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{resourceName}": {
+      "delete": {
+        "description": "",
+        "operationId": "Delete",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/xml",
+          "application/xml",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "201": {
+            "description": ""
+          },
+          "202": {
+            "description": ""
+          },
+          "204": {
+            "description": ""
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      },
+      "get": {
+        "description": "",
+        "operationId": "Get",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/xml",
+          "application/xml",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResourceResponse"
+            }
+          },
+          "204": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisResourceResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "operationId": "CreateOrUpdate",
+        "consumes": [
+          "application/x-www-form-urlencoded",
+          "application/json",
+          "text/xml",
+          "application/xml",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/xml",
+          "application/xml",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateRedisRequest"
+            }
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisCreateOrUpdateResponse"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisCreateOrUpdateResponse"
+            }
+          },
+          "202": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RedisCreateOrUpdateResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{resourceName}/listKeys": {
+      "post": {
+        "description": "",
+        "operationId": "ListKeys",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKeysResponse"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKeysResponse"
+            }
+          },
+          "202": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKeysResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{resourceName}/regenerateKey": {
+      "post": {
+        "description": "",
+        "operationId": "RegenerateKey",
+        "consumes": [
+          "application/x-www-form-urlencoded",
+          "application/json",
+          "text/xml",
+          "application/xml",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyRequest"
+            }
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKeysResponse"
+            }
+          },
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKeysResponse"
+            }
+          },
+          "202": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ListKeysResponse"
+            }
+          },
+          "default": {
+            "description": "unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceSpec": {
+      "properties": {
+        "resourceType": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "type": "string"
+        }
+      }
+    },
+    "RegenerateKeyRequest": {
+      "properties": {
+        "KeyType": {
+          "enum": [
+            "Primary",
+            "Secondary"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "RedisResourceResponse": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RedisResponseProperties"
+        }
+      }
+    },
+    "CacheSku": {
+      "properties": {
+        "Capacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Name": {
+          "enum": [
+            "Basic",
+            "Standard"
+          ],
+          "type": "string"
+        },
+        "Family": {
+          "type": "string"
+        }
+      }
+    },
+    "KeyValuePair[String,String]": {
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      }
+    },
+    "RedisResponseProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/CacheSku"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "redisVersion": {
+          "type": "string"
+        },
+        "sslPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxMemoryPolicy": {
+          "enum": [
+            "VolatileLRU",
+            "AllKeysLRU",
+            "VolatileRandom",
+            "AllKeysRandom",
+            "VolatileTTL",
+            "NoEviction"
+          ],
+          "type": "string"
+        },
+        "provisioningState": {
+          "enum": [
+            "Creating",
+            "Provisioning",
+            "Unprovisioning",
+            "Succeeded",
+            "Failed",
+            "Stopped",
+            "Disabled",
+            "Updating"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "RedisAccessKeys": {
+      "properties": {
+        "primaryKey": {
+          "type": "string"
+        },
+        "secondaryKey": {
+          "type": "string"
+        }
+      }
+    },
+    "RedisResponsePropertiesWithAccessKey": {
+      "properties": {
+        "accessKeys": {
+          "$ref": "#/definitions/RedisAccessKeys"
+        },
+        "sku": {
+          "$ref": "#/definitions/CacheSku"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "redisVersion": {
+          "type": "string"
+        },
+        "sslPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxMemoryPolicy": {
+          "enum": [
+            "VolatileLRU",
+            "AllKeysLRU",
+            "VolatileRandom",
+            "AllKeysRandom",
+            "VolatileTTL",
+            "NoEviction"
+          ],
+          "type": "string"
+        },
+        "provisioningState": {
+          "enum": [
+            "Creating",
+            "Provisioning",
+            "Unprovisioning",
+            "Succeeded",
+            "Failed",
+            "Stopped",
+            "Disabled",
+            "Updating"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "ListKeysResponse": {
+      "properties": {
+        "primaryKey": {
+          "type": "string"
+        },
+        "secondaryKey": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateRedisRequest": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateRedisProperties"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "RedisCreateOrUpdateResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RedisResponsePropertiesWithAccessKey"
+        }
+      }
+    },
+    "CreateRedisProperties": {
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/CacheSku"
+        },
+        "redisVersion": {
+          "type": "string"
+        },
+        "maxMemoryPolicy": {
+          "enum": [
+            "VolatileLRU",
+            "AllKeysLRU",
+            "VolatileRandom",
+            "AllKeysRandom",
+            "VolatileTTL",
+            "NoEviction"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "RedisResourceListResponse": {
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/RedisResourceResponse"
+          },
+          "type": "array"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
