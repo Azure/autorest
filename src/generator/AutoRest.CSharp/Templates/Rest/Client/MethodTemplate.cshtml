@@ -361,14 +361,11 @@ else
             @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
             @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(Model.DefaultResponse.Body)));
             }
-            if (Model.IsXNullableReturnType)
-            {
             @:if (_errorBody != null)
             @:{
                 @:@(Model.InitializeExceptionWithMessage)
                 @:ex.Body = _errorBody;
             @:}
-            }
         @:}
         @:catch (Newtonsoft.Json.JsonException)
         @:{
