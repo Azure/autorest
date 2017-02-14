@@ -30,6 +30,9 @@
         "AzureResourceSchema": {
             "type": "PluginArs, AutoRest.AzureResourceSchema"
         },
+        "Azure.Java.Fluent": {
+            "type": "PluginJvaf, AutoRest.Java.Azure.Fluent"
+        },
         "Azure.CSharp.Fluent": {
           "type": "PluginCsaf, AutoRest.CSharp.Azure.Fluent"
         }
