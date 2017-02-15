@@ -84,7 +84,7 @@ namespace AutoRest.Swagger.Validation
                 {
                     var stringParams = new List<string>() { errOpId };
                     stringParams.AddRange(opNames);
-                    yield return new ValidationMessage(context.Path, this, errOpId, suggestedNames);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, errOpId, suggestedNames);
                 }
             }
         }
