@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsUrl.Models
 {
-    using AcceptanceTestsUrl;
+    using Fixtures.AcceptanceTestsUrl;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.Runtime;
@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsUrl.Models
     /// <summary>
     /// Defines values for UriColor.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum UriColor
     {
         [EnumMember(Value = "red color")]

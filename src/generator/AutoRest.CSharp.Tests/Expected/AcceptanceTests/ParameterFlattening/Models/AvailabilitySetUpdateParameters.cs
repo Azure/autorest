@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsParameterFlattening.Models
 {
-    using AcceptanceTestsParameterFlattening;
+    using Fixtures.AcceptanceTestsParameterFlattening;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;

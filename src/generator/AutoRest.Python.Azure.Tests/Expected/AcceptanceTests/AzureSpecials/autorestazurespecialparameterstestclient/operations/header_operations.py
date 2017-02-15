@@ -136,3 +136,54 @@ class HeaderOperations(object):
                 'foo-request-id': 'str',
             })
             return client_raw_response
+
+    def custom_named_request_id_head(
+            self, foo_client_request_id, custom_headers=None, raw=False, **operation_config):
+        """Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
+        the header of the request.
+
+        :param foo_client_request_id: The fooRequestId
+        :type foo_client_request_id: str
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: bool
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsazurespecials.models.ErrorException>`
+        """
+        # Construct URL
+        url = '/azurespecials/customNamedRequestIdHead'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if self.config.generate_client_request_id:
+            header_parameters['foo-client-request-id'] = str(uuid.uuid1())
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        header_parameters['foo-client-request-id'] = self._serialize.header("foo_client_request_id", foo_client_request_id, 'str')
+        if self.config.accept_language is not None:
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+        # Construct and send request
+        request = self._client.head(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200, 404]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = (response.status_code == 200)
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response.add_headers({
+                'foo-request-id': 'str',
+                })
+            return client_raw_response
+        return deserialized

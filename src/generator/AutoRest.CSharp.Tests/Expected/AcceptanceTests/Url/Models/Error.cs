@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsUrl.Models
 {
-    using AcceptanceTestsUrl;
+    using Fixtures.AcceptanceTestsUrl;
     using Newtonsoft.Json;
     using System.Linq;
 

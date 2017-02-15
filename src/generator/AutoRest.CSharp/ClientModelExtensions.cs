@@ -169,13 +169,13 @@ namespace AutoRest.CSharp
                 string firstWord = summary.TrimStart().Split(' ').First();
                 if (firstWord.Length <= 1)
                 {
-                    documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                    documentation += char.ToLower(summary[0]) + summary.Substring(1);
                 }
                 else
                 {
-                    documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
+                    documentation += firstWord.ToUpper() == firstWord
                         ? summary
-                        : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                        : char.ToLower(summary[0]) + summary.Substring(1);
                 }
             }
             return documentation.EscapeXmlComment();
@@ -343,7 +343,7 @@ namespace AutoRest.CSharp
 
             if (constraints != null && constraints.Any())
             {
-                AppendConstraintValidations(valueReference, constraints, sb, (type as PrimaryType)?.KnownFormat ?? KnownFormat.none);
+                AppendConstraintValidations(valueReference, constraints, sb, type);
             }
 
             if (sequence != null && sequence.ShouldValidateChain())
@@ -391,6 +391,7 @@ namespace AutoRest.CSharp
         /// </summary>
         private static string ToLiteral(string input)
         {
+#if LEGACY            
             using (var writer = new StringWriter())
             {
                 using (var provider = CodeDomProvider.CreateProvider("CSharp"))
@@ -399,14 +400,17 @@ namespace AutoRest.CSharp
                     return writer.ToString();
                 }
             }
+#else 
+            return "\"" + input.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+#endif             
         }
 
-        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, KnownFormat format)
+        private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)
         {
             foreach (var constraint in constraints.Keys)
             {
                 string constraintCheck;
-                string constraintValue = (format == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
+                string constraintValue = ((type as PrimaryType)?.KnownFormat == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:
@@ -438,7 +442,14 @@ namespace AutoRest.CSharp
                         break;
                     case Constraint.Pattern:
                         constraintValue = ToLiteral(constraintValue);
-                        constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
+                        if (type is DictionaryType)
+                        {
+                            constraintCheck = $"!System.Linq.Enumerable.All({valueReference}.Values, value => System.Text.RegularExpressions.Regex.IsMatch(value, {constraintValue}))";
+                        }
+                        else
+                        {
+                            constraintCheck = $"!System.Text.RegularExpressions.Regex.IsMatch({valueReference}, {constraintValue})";
+                        }
                         break;
                     case Constraint.UniqueItems:
                         if ("true".EqualsIgnoreCase(constraints[constraint]))

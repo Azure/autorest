@@ -32,12 +32,12 @@ namespace Fixtures.MirrorPrimitives
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        public Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; private set; }
+        public JsonSerializerSettings SerializationSettings { get; private set; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        public Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; private set; }
+        public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the SwaggerDataTypesClient class.
@@ -45,7 +45,7 @@ namespace Fixtures.MirrorPrimitives
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public SwaggerDataTypesClient(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
+        public SwaggerDataTypesClient(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
@@ -59,7 +59,7 @@ namespace Fixtures.MirrorPrimitives
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public SwaggerDataTypesClient(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public SwaggerDataTypesClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
@@ -76,7 +76,7 @@ namespace Fixtures.MirrorPrimitives
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public SwaggerDataTypesClient(System.Uri baseUri, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        public SwaggerDataTypesClient(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -100,7 +100,7 @@ namespace Fixtures.MirrorPrimitives
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public SwaggerDataTypesClient(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public SwaggerDataTypesClient(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -119,7 +119,7 @@ namespace Fixtures.MirrorPrimitives
         private void Initialize()
         {
             BaseUri = new System.Uri("http://localhost:3000/");
-            SerializationSettings = new Newtonsoft.Json.JsonSerializerSettings
+            SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
                 DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
@@ -127,19 +127,19 @@ namespace Fixtures.MirrorPrimitives
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new  System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new  List<JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
             };
-            DeserializationSettings = new Newtonsoft.Json.JsonSerializerSettings
+            DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
                 ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
-                Converters = new System.Collections.Generic.List<Newtonsoft.Json.JsonConverter>
+                Converters = new List<JsonConverter>
                     {
                         new Iso8601TimeSpanConverter()
                     }
@@ -188,9 +188,9 @@ namespace Fixtures.MirrorPrimitives
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (responseCode != null)
@@ -201,6 +201,8 @@ namespace Fixtures.MirrorPrimitives
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -218,7 +220,7 @@ namespace Fixtures.MirrorPrimitives
             if(product != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(product, SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Send Request
@@ -247,7 +249,7 @@ namespace Fixtures.MirrorPrimitives
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -276,7 +278,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -335,9 +337,9 @@ namespace Fixtures.MirrorPrimitives
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("PUT");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("PUT");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (responseCode != null)
@@ -348,6 +350,8 @@ namespace Fixtures.MirrorPrimitives
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -365,7 +369,7 @@ namespace Fixtures.MirrorPrimitives
             if(product != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(product, SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Send Request
@@ -394,7 +398,7 @@ namespace Fixtures.MirrorPrimitives
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -423,7 +427,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -482,9 +486,9 @@ namespace Fixtures.MirrorPrimitives
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("POST");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (responseCode != null)
@@ -495,6 +499,8 @@ namespace Fixtures.MirrorPrimitives
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -512,7 +518,7 @@ namespace Fixtures.MirrorPrimitives
             if(product != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(product, SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Send Request
@@ -541,7 +547,7 @@ namespace Fixtures.MirrorPrimitives
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -570,7 +576,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)
@@ -629,9 +635,9 @@ namespace Fixtures.MirrorPrimitives
             var _baseUrl = BaseUri.AbsoluteUri;
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datatypes").ToString();
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("PATCH");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("PATCH");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (responseCode != null)
@@ -642,6 +648,8 @@ namespace Fixtures.MirrorPrimitives
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("response-code", responseCode);
             }
+
+
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -659,7 +667,7 @@ namespace Fixtures.MirrorPrimitives
             if(product != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(product, SerializationSettings);
-                _httpRequest.Content = new System.Net.Http.StringContent(_requestContent, System.Text.Encoding.UTF8);
+                _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType =System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             }
             // Send Request
@@ -688,7 +696,7 @@ namespace Fixtures.MirrorPrimitives
                         ex.Body = _errorBody;
                     }
                 }
-                catch (Newtonsoft.Json.JsonException)
+                catch (JsonException)
                 {
                     // Ignore the exception
                 }
@@ -717,7 +725,7 @@ namespace Fixtures.MirrorPrimitives
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, DeserializationSettings);
                 }
-                catch (Newtonsoft.Json.JsonException ex)
+                catch (JsonException ex)
                 {
                     _httpRequest.Dispose();
                     if (_httpResponse != null)

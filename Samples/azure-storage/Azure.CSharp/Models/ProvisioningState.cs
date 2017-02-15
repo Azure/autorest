@@ -9,7 +9,7 @@ namespace Petstore.Models
     /// <summary>
     /// Defines values for ProvisioningState.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum ProvisioningState
     {
         [EnumMember(Value = "Creating")]

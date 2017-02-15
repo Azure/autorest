@@ -63,8 +63,9 @@ namespace AutoRest.CSharp.Unit.Tests
                 // Should also succeed.
                 Assert.True(result.Succeeded);
 
+
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that we have the class we expected

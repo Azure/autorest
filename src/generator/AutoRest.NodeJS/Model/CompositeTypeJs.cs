@@ -297,7 +297,7 @@ namespace AutoRest.NodeJS.Model
                 typeName = "string";
             }
 
-            return typeName.ToLower(CultureInfo.InvariantCulture);
+            return typeName.ToLowerInvariant();
         }
     }
 }

@@ -42,6 +42,10 @@ namespace AutoRest.Python.Azure.Model
                 var optionalParams = new List<string>();
                 foreach (var property in Properties)
                 {
+                    if (property.IsConstant)
+                    {
+                        continue;
+                    }
                     if (property.IsRequired)
                     {
                         requireParams.Add(property.Name.ToPythonCase());
@@ -63,13 +67,13 @@ namespace AutoRest.Python.Azure.Model
                 var param = string.Join(", ", requireParams);
                 if (!string.IsNullOrEmpty(param))
                 {
-                    param += ", ";
+                    param = ", " + param;
                 }
                 return param;
             }
         }
 
-        public override string SetupRequires => "\"msrest>=0.4.0\", \"msrestazure>=0.4.0\"";
+        public override string SetupRequires => "\"msrestazure>=0.4.7\"";
 
         public override bool NeedsExtraImport => true;
 

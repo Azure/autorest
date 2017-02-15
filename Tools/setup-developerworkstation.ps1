@@ -53,13 +53,32 @@ if( !(get-command -ea 0 java.exe) ) {
 write-host -fore darkcyan "      Setting JAVA_HOME environment key."
 ([System.Environment]::SetEnvironmentVariable('JAVA_HOME',  (resolve-path "$((get-command -ea 0 javac).Source)..\..\..").Path , "Machine" ))
 
-# Install node.js
+# Install node.js via nvm
 if( !(get-command -ea 0 node.exe) ) { 
     write-host -fore cyan "Info: Installing NodeJS."
-    $null = install-package -provider chocolatey nodejs -force
+    
+    invoke-webrequest "https://github.com/coreybutler/nvm-windows/releases/download/1.1.1/nvm-noinstall.zip" -outfile  "c:\tmp\nvm.zip" 
+    mkdir -force -ea 0 "$env:ALLUSERSPROFILE\nvm"
+    Expand-Archive c:\tmp\nvm.zip -DestinationPath "$env:ALLUSERSPROFILE\nvm"
+
+    $p = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
+    $p = "$p;$env:ALLUSERSPROFILE\nvm;$env:ProgramFiles\nodejs;"
+    ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))
     ReloadPathFromRegistry
+
+    $env:NVM_HOME="$env:ALLUSERSPROFILE\nvm"
+    $env:NVM_SYMLINK="$env:ProgramFiles\nodejs"
+
+    ([System.Environment]::SetEnvironmentVariable( "NVM_HOME", "$env:ALLUSERSPROFILE\nvm",  'Machine'))
+    ([System.Environment]::SetEnvironmentVariable( "NVM_SYMLINK", "$env:ProgramFiles\nodejs",  'Machine'))
+
+    set-content -Path "$env:ALLUSERSPROFILE\nvm\settings.txt" -Value "root: $env:ALLUSERSPROFILE\nvm`npath: $env:ProgramFiles\nodejs"
+    nvm install 6.9.5
+    nvm use 6.9.5 
+   
     if( !(get-command -ea 0 node.exe) ) { return write-error "No NodeJS in PATH." }
     
+<# for build machines, since I don't want this per-user    
     # use system-wide locations for npm
     npm config --global set cache "$env:ALLUSERSPROFILE\npm-cache"
     npm config --global set prefix "$env:ALLUSERSPROFILE\npm"
@@ -67,7 +86,7 @@ if( !(get-command -ea 0 node.exe) ) {
     $p = "$env:ALLUSERSPROFILE\npm;$p"
     ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))    
     ReloadPathFromRegistry
-   
+#>    
 }
 
 # install gulp
@@ -92,14 +111,14 @@ if( !(get-command -ea 0 ruby) ) {
 }
 
 # 7zip
-if( ! (test-path -ea 0  "C:\Program Files\7-Zip\7z.exe")) {
+if( ! (test-path -ea 0  "$env:ProgramFiles\7-Zip\7z.exe")) {
     write-host -fore cyan "Info: Downloading 7zip."
     ( New-Object System.Net.WebClient).DownloadFile("http://www.7-zip.org/a/7z1604-x64.msi", "c:\tmp\7z1604-x64.msi" );
     if( !(test-path -ea 0  "c:\tmp\7z1604-x64.msi") ) { return write-error "Unable to download 7zip installer" }
     write-host -fore darkcyan "      Installing 7Zip."
     Start-Process -wait -FilePath msiexec -ArgumentList  "/i", "c:\tmp\7z1604-x64.msi", "/passive"
 
-    if( ! (test-path -ea 0  "C:\Program Files\7-Zip\7z.exe"))  { return write-error "Unable to install 7zip" } 
+    if( ! (test-path -ea 0  "$env:ProgramFiles\7-Zip\7z.exe"))  { return write-error "Unable to install 7zip" } 
 }
 
 # ruby devkit
@@ -108,7 +127,7 @@ if( ! (test-path -ea 0  "C:\ruby2.3.1\devkit")) {
     ( New-Object System.Net.WebClient).DownloadFile("http://dl.bintray.com/oneclick/rubyinstaller/DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe", "c:\tmp\DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe" )
     if( !(test-path -ea 0  "c:\tmp\DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe") ) { return write-error "Unable to download ruby devkit" }
     write-host -fore darkcyan "      Unpacking ruby devkit."
-    &'C:\Program Files\7-Zip\7z' x C:\tmp\DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe -oC:\ruby2.3.1\devkit
+    & "$env:ProgramFiles\7-Zip\7z" x C:\tmp\DevKit-mingw64-32-4.7.2-20130224-1151-sfx.exe -oC:\ruby2.3.1\devkit
     pushd C:\ruby2.3.1\devkit\
     write-host -fore darkcyan "      Installing ruby devkit."
     ruby dk.rb init
@@ -252,6 +271,7 @@ X4XSQRjbgbMEHMUfpIBvFSDJ3gyICh3WZlXi/EjJKSZp4A==
     }
 
     gem install bundle
+    popd
 }
 
 # install python 2.7 and 3.5
@@ -296,7 +316,7 @@ if( !(get-command -ea 0 mvn.cmd) ) {
 #install go 
 if( !(get-command -ea 0 go.exe) ) { 
     write-host -fore cyan "Info: Downloading Go"
-    (New-Object System.Net.WebClient).DownloadFile("https://storage.googleapis.com/golang/go1.7.1.windows-amd64.msi", "c:\tmp\go1.7.1.windows-amd64.msi" )
+    invoke-webrequest "https://storage.googleapis.com/golang/go1.7.1.windows-amd64.msi" -outfile  "c:\tmp\go1.7.1.windows-amd64.msi" 
     if( !(test-path -ea 0  "c:\tmp\go1.7.1.windows-amd64.msi" ) ) { return write-error "Unable to download Go" }
     write-host -fore darkcyan "      Installing Go."
     Start-Process -wait -FilePath msiexec -ArgumentList  "/i", "C:\tmp\go1.7.1.windows-amd64.msi", "/passive"
@@ -307,7 +327,7 @@ if( !(get-command -ea 0 go.exe) ) {
 # install glide
 if( !(get-command -ea 0 glide.exe) ) {
     write-host -fore cyan "Info: Downloading Glide"
-    (New-Object System.Net.WebClient).DownloadFile("https://github.com/Masterminds/glide/releases/download/v0.11.1/glide-v0.11.1-windows-amd64.zip", "c:\tmp\glide-v0.11.1-windows-amd64.zip" )
+    invoke-webrequest "https://github.com/Masterminds/glide/releases/download/v0.11.1/glide-v0.11.1-windows-amd64.zip" -outfile  "c:\tmp\glide-v0.11.1-windows-amd64.zip"
     if( !(test-path -ea 0  "c:\tmp\glide-v0.11.1-windows-amd64.zip" ) ) { return write-error "Unable to download Glide" }
     write-host -fore darkcyan "      Unpacking Glide."
     Expand-Archive C:\tmp\glide-v0.11.1-windows-amd64.zip -DestinationPath c:\glide
@@ -321,36 +341,59 @@ if( !(get-command -ea 0 glide.exe) ) {
 
 # install git 
 if( !(get-command -ea 0 git) ) { 
+    write-host -fore cyan "Info: Downloading GIT"
+    invoke-webrequest "https://github.com/git-for-windows/git/releases/download/v2.11.1.windows.1/Git-2.11.1-64-bit.exe" -outfile  "c:\tmp\gitinstall.exe"
+    if( !(test-path -ea 0  "c:\tmp\gitinstall.exe" ) ) { return write-error "Unable to download Git" }
     write-host -fore cyan "Info: Installing GIT"
-    $null = install-package -provider chocolatey git -force
-    if( !(get-command -ea 0 git) ) { return write-error "No git in PATH." }
+    Start-Process -wait -FilePath c:\tmp\gitinstall.exe -ArgumentList  "/silent"
+    
     # it also needs to be in x86. 
     write-host -fore darkcyan "      Putting git in x86 program files too."
-    robocopy /mir "c:\program files\git" "c:\program files (x86)\git"
+    robocopy /mir "$env:ProgramFiles\git" "${env:ProgramFiles(x86)}\git"
+    
+    ReloadPathFromRegistry
+    if( !(get-command -ea 0 git) ) { 
+	    write-host -fore darkcyan "      adding git to system PATH."
+	    $p = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
+	    $p = "$p;$env:ProgramFiles\git\bin"
+	    ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))
+    }
+    ReloadPathFromRegistry
+    if( !(get-command -ea 0 git.exe) ) { return write-error "No git in PATH." }
 }
 
 write-host -fore cyan "Info: Fixing firewall rules for languages/tools"
+Get-NetFirewallRule -DisplayName "Remote Desktop*" | Set-NetFirewallRule -enabled true
 @("java", "javaw", "javaws", "node", "ruby", "go", "glide" ) |% { $app = ((get-command -ea 0 $_).source); $null= netsh firewall add allowedprogram  "$app" "$app" ENABLE }
 
-# visual studio community
-if( ! (test-path  -ea 0 'C:\Program Files (x86)\Microsoft Visual Studio 14.0\' ) ) {
+<#
+# visual studio community 14.0 
+if( ! (test-path  -ea 0 "${env:ProgramFiles(x86)}\Microsoft Visual Studio 14.0\" ) ) {
     write-host -fore cyan "Info: Downloading VS_Community"
-    (New-Object System.Net.WebClient).DownloadFile("https://download.microsoft.com/download/0/B/C/0BC321A4-013F-479C-84E6-4A2F90B11269/vs_community.exe" , "c:\tmp\vs_community.exe")
+    invoke-webrequest "https://download.microsoft.com/download/0/B/C/0BC321A4-013F-479C-84E6-4A2F90B11269/vs_community.exe"  -outfile "c:\tmp\vs_community.exe" 
     if( !(test-path -ea 0 "c:\tmp\vs_community.exe") ) { return write-error "Unable to download VS 2015 community" }
     write-host -fore darkcyan "      Installing VS Community (full install) -- this may take around 90 minutes"
     C:\tmp\vs_community.exe /full /norestart /q
     while( get-process vs_*  ) { write-host -NoNewline "." ; sleep 1 }
 }
+#> 
+
+<# vs 2017
+if( ! (test-path  -ea 0 "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2017\" ) ) {
+    write-host -fore cyan "Info: Downloading VS_Community 2017"
+    ...???
+} 
 
 # disable strong naming on the build server.
 write-host -fore cyan "Info: Turning off strong name verification (for testing)"
-$null = &"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -Vr *
-$null = &"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\sn.exe" -Vr *
+$null = &"${env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\sn.exe" -Vr *
+$null = &"${env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\sn.exe" -Vr *
+#>
 
 # visual studio code
 if( !(get-command -ea 0 code) ) {
     write-host -fore cyan "Info: Downloading Visual Studio Code"
-    (New-Object System.Net.WebClient).DownloadFile("https://go.microsoft.com/fwlink/?LinkID=623230", "c:\tmp\vs_code.exe" )
+    invoke-webrequest "https://go.microsoft.com/fwlink/?LinkID=623230" -outfile  "c:\tmp\vs_code.exe" 
     if( !(test-path -ea 0 "c:\tmp\vs_code.exe" ) ) { return write-error "Unable to download VS code" }
     write-host -fore darkcyan "      Installing VS Code"
     C:\tmp\vs_code.exe /silent /norestart
@@ -362,23 +405,30 @@ if( !(get-command -ea 0 code) ) {
 # install wix
 if (!(get-command -ea 0 heat.exe) ) {
     write-host -fore cyan "Info: Downloading Wix Toolset."
-    (New-Object System.Net.WebClient).DownloadFile("http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=wix&DownloadId=1587179&FileTime=131118854865270000&Build=21031", "c:\tmp\wix310.exe")
+    invoke-webrequest "http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=wix&DownloadId=1587179&FileTime=131118854865270000&Build=21031" -outfile  "c:\tmp\wix310.exe"
     if( !(test-path -ea 0 "c:\tmp\wix310.exe" ) ) { return write-error "Unable to download Wix Toolset" }
     write-host -fore darkcyan "      Installing Wix Toolset"
     C:\tmp\wix310.exe /passive /noreboot
     while( get-process wix*  ) { write-host -NoNewline "." ; sleep 1 }
     write-host -fore darkcyan "      adding Wix Toolset to system PATH."
     $p = ([System.Environment]::GetEnvironmentVariable( "path", 'Machine'))
-    $p = "$p;C:\Program Files (x86)\WiX Toolset v3.10\bin"
+    $p = "$p;${env:ProgramFiles(x86)}\WiX Toolset v3.10\bin"
     ([System.Environment]::SetEnvironmentVariable( "path", $p,  'Machine'))
     ReloadPathFromRegistry
     if (!(get-command -ea 0 heat.exe) ) { return "No Wix Toolset in path." }
 }
 
-# dotnet cli
-if( !(get-command -ea 0 dotnet) ) {
-    write-host -fore cyan "Info: Downloading Visual Studio Code"
-    (New-Object System.Net.WebClient).DownloadFile("https://go.microsoft.com/fwlink/?LinkId=817245", "c:\tmp\dotnet-cli.exe" );
+# check for a good version of dotnet-cli
+$good = $false
+
+if( (get-command -ea 0 dotnet) ) {
+    $v = (dotnet --version ) -replace '.*-00',''
+    $good = $v -gt 4811
+}
+    
+if( -not $good ) {
+    write-host -fore cyan "Info: Downloading dotnet-cli tools"
+    invoke-webrequest "https://dotnetcli.blob.core.windows.net/dotnet/Sdk/rel-1.0.0/dotnet-dev-win-x64.latest.exe" -outfile "c:\tmp\dotnet-cli.exe"
     if( !(test-path -ea 0 "c:\tmp\dotnet-cli.exe" ) ) { return write-error "Unable to download dotnet-cli" }
     write-host -fore darkcyan "      Installing Dotnet-cli"
     C:\tmp\dotnet-cli.exe /install /passive /noreboot SKIP_VSU_CHECK=1

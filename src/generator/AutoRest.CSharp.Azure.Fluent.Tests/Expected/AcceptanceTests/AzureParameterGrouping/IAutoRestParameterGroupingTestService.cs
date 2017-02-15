@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -27,12 +27,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <summary>
         /// Gets or sets json serialization settings.
         /// </summary>
-        Newtonsoft.Json.JsonSerializerSettings SerializationSettings { get; }
+        JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
         /// Gets or sets json deserialization settings.
         /// </summary>
-        Newtonsoft.Json.JsonSerializerSettings DeserializationSettings { get; }
+        JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
         /// Credentials needed for the client to connect to Azure.

@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyInteger.Models
 {
-    using AcceptanceTestsBodyInteger;
+    using Fixtures.AcceptanceTestsBodyInteger;
     using Newtonsoft.Json;
     using System.Linq;
 

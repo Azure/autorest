@@ -360,7 +360,7 @@ namespace AutoRest.NodeJS.Model
         public string PopulateErrorCodeAndMessage()
         {
             var builder = new IndentedStringBuilder("  ");
-            if (DefaultResponse.Body != null && DefaultResponse.Body.Name.RawValue.Equals("CloudError", StringComparison.InvariantCultureIgnoreCase))
+            if (DefaultResponse.Body != null && DefaultResponse.Body.Name.RawValue.EqualsIgnoreCase("CloudError"))
             {
                 builder.AppendLine("if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;")
                        .AppendLine("if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;")
@@ -419,7 +419,7 @@ namespace AutoRest.NodeJS.Model
                 typeName = "string";
             }
 
-            return typeName.ToLower(CultureInfo.InvariantCulture);
+            return typeName.ToLowerInvariant();
         }
 
         public string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsedResponse")
@@ -730,7 +730,7 @@ namespace AutoRest.NodeJS.Model
                     typeName = "string";
                 }
 
-                return typeName.ToLower(CultureInfo.InvariantCulture);
+                return typeName.ToLowerInvariant();
             }
         }
 

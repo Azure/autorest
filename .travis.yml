@@ -16,7 +16,7 @@ install:
   # select JDK
   - jdk_switcher use oraclejdk8
   # Install npm
-  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 4
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install 6.9.5
   - npm install -g npm@'>=1.4.3'
   - npm install
   # Install ruby dependencies
@@ -24,11 +24,11 @@ install:
   - gem install bundler
   - bundle install
   - pip install --user tox
-  # Install NetCore RC2
+  # Install NetCore RC4
   - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list' 
   - sudo apt-key adv --keyserver apt-mo.trafficmanager.net --recv-keys 417A0893
   - sudo apt-get update
-  - sudo apt-get install dotnet-dev-1.0.0-preview2-003121 -y
+  - sudo apt-get install dotnet-dev-1.0.0-rc4-004769 -y
   # Install go
   - sudo curl -O https://storage.googleapis.com/golang/go1.7.linux-amd64.tar.gz
   - sudo tar -xvf go1.7.linux-amd64.tar.gz
@@ -40,7 +40,8 @@ install:
   - sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
   - sudo apt-get install glide
 script:
-  - gulp
+  - gulp build
+  - gulp test
 after_script:
   - echo "========== Server log: ============"
   - pwd

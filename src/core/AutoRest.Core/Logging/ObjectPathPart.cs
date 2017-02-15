@@ -7,7 +7,11 @@ namespace AutoRest.Core.Logging
 {
     public abstract class ObjectPathPart
     {
-        public abstract string XPath { get; }
+        public abstract string JsonPointer { get; }
+
+        public abstract string JsonPath { get; }
+
+        public abstract string ReadablePath { get; }
 
         /// <summary>
         /// Selects the child node according to this path part.

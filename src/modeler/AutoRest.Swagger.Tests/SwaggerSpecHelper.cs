@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Tests
 
     public static class SwaggerSpecHelper
     {
-        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp")
+        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp", string nameSpace = null)
         {
             using (NewContext)
             {
@@ -27,7 +27,8 @@ namespace AutoRest.Swagger.Tests
                         Header = "MICROSOFT_MIT_NO_VERSION",
                         Modeler = modeler,
                         PayloadFlatteningThreshold = 1,
-                        CodeGenerator =  plugin
+                        CodeGenerator =  plugin,
+                        Namespace = nameSpace
                     };
 
                 RunTests(resultFolder);
@@ -43,7 +44,7 @@ namespace AutoRest.Swagger.Tests
             var settings = Settings.Instance;
 
             settings.FileSystem = new MemoryFileSystem();
-            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
+            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "AutoRest.json")));
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
 

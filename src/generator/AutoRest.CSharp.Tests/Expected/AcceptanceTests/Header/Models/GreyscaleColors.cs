@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using AcceptanceTestsHeader;
+    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.Runtime;
@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// <summary>
     /// Defines values for GreyscaleColors.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum GreyscaleColors
     {
         [EnumMember(Value = "White")]

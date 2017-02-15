@@ -30,39 +30,26 @@ namespace AutoRest.CSharp.Unit.Tests
             return name[0] == '<' && name[1] == '>' && name.IndexOf("AnonymousType", StringComparison.Ordinal) > 0;
         }
 
-        internal static void Copy(this IFileSystem fileSystem, string source)
-        {
-            Copy(fileSystem, source, (File.Exists(source)? Path.GetFileName(source): source));
+        internal static void CopyFile(this IFileSystem fileSystem, string source, string destination) {
+            destination = destination.Replace("._", ".");
+            fileSystem.WriteFile(destination, File.ReadAllText(source));
         }
 
-        internal static void Copy(this IFileSystem fileSystem, string source, string destination)
+        internal static void CopyFolder(this IFileSystem fileSystem, string basePath, string source, string destination)
         {
-            // if copying a file
-            if (File.Exists(source))
-            {
-                fileSystem.WriteFile(destination, File.ReadAllText(source));
-                return;
-            }
-            
-            // if copying a directory
-            if (fileSystem.DirectoryExists(destination))
-            {
-                fileSystem.DeleteDirectory(destination);
-            }
             fileSystem.CreateDirectory(destination);
         
             // Copy dirs recursively
-            foreach (var child in Directory.GetDirectories(Path.GetFullPath(source), "*", SearchOption.TopDirectoryOnly).Select(p => Path.GetDirectoryName(p)))
+            foreach (var child in Directory.EnumerateDirectories(Path.GetFullPath(Path.Combine(basePath, source))).Select(Path.GetFileName))
             {
-                fileSystem.Copy(Path.Combine(source, child), Path.Combine(destination, child));
+                fileSystem.CopyFolder(basePath, Path.Combine(source, child), Path.Combine(destination, child));
             }
+
             // Copy files
-            foreach (var childFile in Directory.GetFiles(Path.GetFullPath(source), "*", SearchOption.TopDirectoryOnly).Select(p=>Path.GetFileName(p)))
+            foreach (var childFile in Directory.EnumerateFiles(Path.GetFullPath(Path.Combine(basePath, source))).Select(Path.GetFileName))
             {
-                fileSystem.Copy(Path.Combine(source, childFile), 
-                                Path.Combine(destination, childFile));
+                fileSystem.CopyFile(Path.Combine(basePath,source,childFile), Path.Combine(destination, childFile));
             }
-           
         }
 
         internal static string[] GetFilesByExtension(this IFileSystem fileSystem, string path, SearchOption s, params string[] fileExts)
@@ -70,7 +57,7 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputDir,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             using (NewContext)
             {
@@ -84,16 +71,26 @@ namespace AutoRest.CSharp.Unit.Tests
                     CodeGenerationMode = "rest-client"
                 };
 
-                return inputDir.GenerateCodeInto(fileSystem, settings);
+                return testName.GenerateCodeInto(fileSystem, settings);
             }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string inputDir, MemoryFileSystem fileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem fileSystem, Settings settings)
         {
-            fileSystem.Copy(Path.Combine("Resource", inputDir));
-            var fileExt = (File.Exists(Path.Combine("Resource", Path.Combine(inputDir, inputDir + ".yaml"))) ? ".yaml" : ".json");
-            settings.Input = Path.Combine("Resource", Path.Combine(inputDir, inputDir + fileExt));
+            // copy the whole input directory into the memoryfilesystem.
+            fileSystem.CopyFolder("Resource", testName,"");
 
+            // find the appropriately named .yaml or .json file for the swagger. 
+            foreach (var ext in new[] {".yaml", ".json", ".md"}) {
+                var name = testName + ext;
+                if (fileSystem.FileExists(name)) {
+                    settings.Input = name;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(settings.Input)) {
+                throw new Exception($"Can't find swagger file ${testName} [.yaml] [.json] [.md]");
+            }
 
             var plugin = ExtensionsLoader.GetPlugin();
             var modeler = ExtensionsLoader.GetModeler();
@@ -158,6 +155,6 @@ namespace AutoRest.CSharp.Unit.Tests
             return outputFolder;
         }
 
-        internal static bool IsNullableValueType(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        internal static bool IsNullableValueType(this Type type) => type.IsGenericType() && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     }
 }

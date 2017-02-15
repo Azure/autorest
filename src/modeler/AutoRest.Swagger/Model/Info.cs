@@ -14,7 +14,6 @@ namespace AutoRest.Swagger.Model
     /// The metadata can be used by the clients if needed, and can be presented 
     /// in the Swagger-UI for convenience.
     /// </summary>
-    [Serializable]
     public class Info : SpecObject
     {
         private string _description;
@@ -39,6 +38,7 @@ namespace AutoRest.Swagger.Model
 
         public License License { get; set; }
 
+        [Rule(typeof(APIVersionPattern))]
         public string Version { get; set; }
 
         [JsonProperty("x-ms-code-generation-settings")]

@@ -115,7 +115,7 @@ namespace AutoRest.Go
         /// <returns></returns>
         public static string TrimStartsWith(this string value, string s)
         {
-            if (!string.IsNullOrEmpty(s) && s.Length < value.Length && value.StartsWith(s, StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrEmpty(s) && s.Length < value.Length && value.StartsWith(s, StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring(s.Length);
             }
@@ -434,11 +434,6 @@ namespace AutoRest.Go
                     }   
                 }
             }
-
-            x.AddRange(from prop in ((CompositeType)p.ModelType).Properties
-                       where prop.IsReadOnly
-                       select GetConstraint(string.Format("{0}.{1}", name, prop.WasFlattened() ? prop.ModelType.Name : prop.Name),
-                                            ReadOnlyConstraint, "true"));
 
             List<string> y = new List<string>();
             if (x.Count > 0)

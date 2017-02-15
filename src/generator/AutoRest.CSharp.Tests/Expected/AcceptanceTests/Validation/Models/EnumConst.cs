@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using AcceptanceTestsValidation;
+    using Fixtures.AcceptanceTestsValidation;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.Runtime;
@@ -17,7 +17,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     /// <summary>
     /// Defines values for EnumConst.
     /// </summary>
-    [JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum EnumConst
     {
         [EnumMember(Value = "constant_string_as_enum")]

@@ -3,8 +3,6 @@ PackageTest/NugetPackageTest/Generated
 src/generator/AutoRest.NodeJS.Tests/AcceptanceTests/*.js
 
 ## Ignore user-specific files, temporary files, build results, etc.
-AutoRest/**/Templates/*.cs
-src/**/Templates/**/*.cs
 compare-results/*
 
 # User-specific files
@@ -200,6 +198,13 @@ src/generator/AutoRest.Go.Tests/src/github.com/*
 src/generator/AutoRest.Go.Tests/src/tests/generated/*
 src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
+
+src/next-gen/**/*.js
+
+*.js.map
+
+# backup files
+*~
 
 #client runtime
 src/client/**/*

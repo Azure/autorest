@@ -201,7 +201,7 @@ ArrayModel.prototype.putValid = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+    var complexBody;
   if (arrayProperty !== null && arrayProperty !== undefined) {
       complexBody = new client.models['ArrayWrapper']();
       complexBody.arrayProperty = arrayProperty;
@@ -462,7 +462,7 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+    var complexBody;
   if (arrayProperty !== null && arrayProperty !== undefined) {
       complexBody = new client.models['ArrayWrapper']();
       complexBody.arrayProperty = arrayProperty;

@@ -41,11 +41,11 @@ namespace AutoRest.CSharp.Azure
             // add the Credentials
             // PopulateAdditionalProperties(codeModel);
 
-            // Do parameter transformations
-            TransformParameters(codeModel);
-
             // todo: these should be turned into individual transformers
             AzureExtensions.NormalizeAzureClientModel(codeModel);
+
+            // Do parameter transformations
+            TransformParameters(codeModel);
 
             NormalizePaginatedMethods(codeModel);
             NormalizeODataMethods(codeModel);
@@ -155,9 +155,9 @@ namespace AutoRest.CSharp.Azure
                     if (sequenceType != null)
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName,
-                            sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
+                            sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || sequenceType.IsNullable));
                         var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat,
-                            sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || (sequenceType.IsXNullable ?? true)));
+                            sequenceType.ElementType.AsNullableType(!sequenceType.ElementType.IsValueType() || sequenceType.IsNullable));
 
                         var pagedResult = New<ILiteralType>(pagableTypeName) as CompositeType;
 
