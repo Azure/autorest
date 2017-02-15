@@ -18,30 +18,30 @@ const (
     // APIVersion is the version of the Petstore
     APIVersion = "1.0.0"
 
-    // DefaultBaseURI is the default URI used for the service Petstore
-    DefaultBaseURI = "http://petstore.swagger.io/v2"
+        // DefaultBaseURI is the default URI used for the service Petstore
+        DefaultBaseURI = "http://petstore.swagger.io/v2"
 )
 
 // ManagementClient is the base client for Petstore.
 type ManagementClient struct {
     autorest.Client
-    BaseURI string
+        BaseURI string
     APIVersion string
 }
 
 // New creates an instance of the ManagementClient client.
 func New()ManagementClient {
-    return NewWithBaseURI(DefaultBaseURI, )
+        return NewWithBaseURI(DefaultBaseURI, )
 }
 
-// NewWithBaseURI creates an instance of the ManagementClient client.
-func NewWithBaseURI(baseURI string, ) ManagementClient {
-   return ManagementClient{
-        Client: autorest.NewClientWithUserAgent(UserAgent()),
-        BaseURI: baseURI,
-        APIVersion: APIVersion,
+    // NewWithBaseURI creates an instance of the ManagementClient client.
+    func NewWithBaseURI(baseURI string, ) ManagementClient {
+        return ManagementClient{
+            Client: autorest.NewClientWithUserAgent(UserAgent()),
+            BaseURI: baseURI,
+            APIVersion: APIVersion,
+        }
     }
-}
 
     // AddPet adds a new pet to the store. You may receive an HTTP invalid input if
     // your pet is invalid.

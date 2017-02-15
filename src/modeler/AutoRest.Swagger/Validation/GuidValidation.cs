@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace AutoRest.Swagger.Validation
         private bool HandleSchema(Schema definition, Dictionary<string, Schema> definitions, out object[] formatParameters, string name)
         {
             // This could be a reference to another definition. But, that definition could be handled seperately.
-            if(definition.Type == DataType.String && definition.Format != null && definition.Format.Equals("uuid", System.StringComparison.InvariantCultureIgnoreCase))
+            if(definition.Type == DataType.String && definition.Format != null && definition.Format.EqualsIgnoreCase("uuid"))
             {
                 formatParameters = new object[2];
                 formatParameters[0] = name ;

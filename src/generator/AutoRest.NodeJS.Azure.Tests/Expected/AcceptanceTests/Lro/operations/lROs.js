@@ -5004,7 +5004,7 @@ LROs.prototype.beginPutSubResource = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var product;
+    var product;
   try {
     if (provisioningState !== null && provisioningState !== undefined)
     {
@@ -5158,7 +5158,7 @@ LROs.prototype.beginPutAsyncSubResource = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var product;
+    var product;
   try {
     if (provisioningState !== null && provisioningState !== undefined)
     {

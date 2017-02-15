@@ -99,7 +99,9 @@ namespace AutoRest.Core.Utilities
 
         public bool FileExists(string path)
         {
-            return VirtualStore.ContainsKey(path);
+            return VirtualStore.ContainsKey(path) 
+                || VirtualStore.ContainsKey(path.Replace("/", "\\")) 
+                || VirtualStore.ContainsKey(path.Replace("\\", "/")); // TODO: uniform treatment
         }
 
         public void DeleteFile(string path)

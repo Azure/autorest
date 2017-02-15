@@ -98,7 +98,7 @@ namespace AutoRest.Java
             }
             else
             {
-                return package + httpMethod.ToString().ToUpper(CultureInfo.InvariantCulture);
+                return package + httpMethod.ToString().ToUpperInvariant();
             }
         }
     }

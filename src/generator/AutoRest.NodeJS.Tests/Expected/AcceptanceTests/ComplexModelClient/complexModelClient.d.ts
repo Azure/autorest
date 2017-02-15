@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as models from "./models";
 
 declare class ComplexModelClient {
-    /**
+        /**
      * @class
      * Initializes a new instance of the ComplexModelClient class.
      * @constructor

@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureParameterGrouping;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;

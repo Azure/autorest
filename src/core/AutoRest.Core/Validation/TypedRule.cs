@@ -30,7 +30,7 @@ namespace AutoRest.Core.Validation
             object[] formatParams;
             if (!IsValid(entity, context, out formatParams))
             {
-                yield return new ValidationMessage(context.Path, this, formatParams);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, formatParams);
             }
         }
 

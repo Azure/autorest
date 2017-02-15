@@ -3,6 +3,7 @@
 // 
 
 using System;
+using System.Reflection;
 using AutoRest.Core.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

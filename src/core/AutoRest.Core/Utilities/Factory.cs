@@ -20,7 +20,8 @@ namespace AutoRest.Core.Utilities
         private static MethodInfo LambdaMethodInfo = typeof(Expression)
             .GetMethods(BindingFlags.Static |BindingFlags.FlattenHierarchy | BindingFlags.Public)
             .First(each =>
-                each.Name == "Lambda" && each.IsGenericMethodDefinition &&
+                each.Name == "Lambda" &&
+                each.IsGenericMethodDefinition &&
                 each.ParameterTypes()
                     .SequenceEqual(new[] {typeof(Expression), typeof(IEnumerable<ParameterExpression>)}));
 
@@ -114,7 +115,7 @@ namespace AutoRest.Core.Utilities
             for (var i = 0; i < signature.Length; i++)
             {
                 // if the argument is null, but the signature can take a null, it's a match.
-                if (argTypes[i] == null && !signature[i].IsValueType)
+                if (argTypes[i] == null && !signature[i].IsValueType())
                 {
                     continue;
                 }

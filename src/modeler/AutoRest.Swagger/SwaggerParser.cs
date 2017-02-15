@@ -145,7 +145,9 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SchemaRequiredItemConverter());
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
-
+                Uri filePath = null;
+                Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
+                swaggerService.FilePath = filePath;
                 return swaggerService;
             }
             catch (JsonException ex)

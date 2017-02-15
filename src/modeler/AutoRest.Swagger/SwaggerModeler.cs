@@ -80,7 +80,7 @@ namespace AutoRest.Swagger
             {
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition))
                 {
                     Logger.Instance.Log(validationEx);
                 }
@@ -183,7 +183,7 @@ namespace AutoRest.Swagger
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion.FilePath, newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
@@ -248,7 +248,7 @@ namespace AutoRest.Swagger
                 ServiceDefinition.Host = "localhost";
             }
             CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
+                ServiceDefinition.Schemes[0].ToString().ToLower(),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
 
             // Copy extensions

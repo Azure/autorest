@@ -98,9 +98,9 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             _url = _url.Replace("{accountName}", accountName);
             _url = _url.Replace("{host}", Client.Host);
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
 

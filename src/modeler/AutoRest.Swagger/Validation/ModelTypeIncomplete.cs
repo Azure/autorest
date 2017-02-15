@@ -18,7 +18,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (schema.Description == null)
                 {
-                    yield return new ValidationMessage(context.Path, this, "description");
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, "description");
                 }
             }
         }

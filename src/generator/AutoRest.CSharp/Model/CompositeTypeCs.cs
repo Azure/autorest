@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Model
                     var documentation = string.Format(
                         CultureInfo.InvariantCulture,
                         "<param name=\"{0}\">{1}</param>",
-                        char.ToLower(property.Name.CharAt(0), CultureInfo.InvariantCulture) + property.Name.Substring(1),
+                        char.ToLower(property.Name.CharAt(0)) + property.Name.Substring(1),
                         documentationInnerText);
 
                     declarations.Add(documentation);

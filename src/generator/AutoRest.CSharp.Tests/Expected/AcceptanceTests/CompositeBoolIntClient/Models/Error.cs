@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsCompositeBoolIntClient.Models
 {
-    using AcceptanceTestsCompositeBoolIntClient;
+    using Fixtures.AcceptanceTestsCompositeBoolIntClient;
     using Newtonsoft.Json;
     using System.Linq;
 
