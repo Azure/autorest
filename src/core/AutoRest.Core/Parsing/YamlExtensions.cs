@@ -44,6 +44,23 @@ namespace AutoRest.Core.Parsing
             }
         }
 
+        public static T ParseYaml<T>(this string yaml)
+        {
+            try
+            {
+                using (var reader = new StringReader(yaml))
+                {
+                    return new Deserializer().Deserialize<T>(reader);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML/JSON.");
+                Logger.Instance.Log(Category.Warning, e.ToString());
+            }
+            return default(T);
+        }
+
         /// <summary>
         /// Gets the YAML syntax tree from given string. Returns null on failure.
         /// </summary>

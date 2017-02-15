@@ -36,9 +36,6 @@ namespace AutoRest.CSharp.Tests
 
             //var virtualStore = new MemoryFileSystem();
             //settings.FileSystem = virtualStore;
-            //settings.ApplicationConfigurationPath = Path.Combine((new FileSystem()).GetCurrentDirectory(), 
-            //    "../../../../binaries/net45/autorest.json");
-            //settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
             //settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
             //settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
             //settings.FileSystem = new FileSystem();

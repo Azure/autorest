@@ -704,13 +704,25 @@ task 'regenerate-ars', '', (done) ->
   },done
   return null
 
+languages = [
+  "CSharp",
+  "Azure.CSharp",
+  "Ruby",
+  "Azure.Ruby",
+  "NodeJS",
+  "Azure.NodeJS",
+  "Python",
+  "Azure.Python",
+  "Go",
+  "Java",
+  "Azure.Java",
+  "Azure.Java.Fluent",
+  "AzureResourceSchema",
+  "Azure.CSharp.Fluent"]
+
 task 'regenerate-samples', '', ['regenerate-samplesazure'],(done) ->
   count = 0
-  content = cat "#{basefolder}/src/core/AutoRest/AutoRest.json"
-  if (content.charCodeAt(0) == 0xFEFF)
-    content = content.slice(1)
-  autorestConfig = JSON.parse(content)
-  for lang of autorestConfig.plugins
+  for lang in languages
     if (!lang.match(/^Azure\..+/))
       count++
       regenExpected {
@@ -729,12 +741,7 @@ task 'regenerate-samples', '', ['regenerate-samplesazure'],(done) ->
 
 task 'regenerate-samplesazure', '', (done) ->
   count = 0
-  content = cat "#{basefolder}/src/core/AutoRest/AutoRest.json"
-  if (content.charCodeAt(0) == 0xFEFF)
-    content = content.slice(1)
-  autorestConfig = JSON.parse(content)
-  for lang of autorestConfig.plugins
-   
+  for lang in languages
     if (lang.match(/^Azure\.[^.]+$/))
       count++
       regenExpected {

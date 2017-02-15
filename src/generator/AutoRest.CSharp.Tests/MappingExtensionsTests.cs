@@ -26,7 +26,6 @@ namespace AutoRest.CSharp.Tests
                     OutputDirectory = Path.GetTempPath()
                 };
                 settings.FileSystem = new MemoryFileSystem();
-                settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "AutoRest.json")));
                 settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
                 settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
                 

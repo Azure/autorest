@@ -24,7 +24,6 @@ namespace AutoRest.Core.Tests
 
         private void SetupMock()
         {
-            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine("Resource", "AutoRest.json")));
             _fileSystem.WriteFile("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
@@ -113,7 +112,6 @@ namespace AutoRest.Core.Tests
                 Assert.DoesNotContain(existingContents, _fileSystem.VirtualStore[path].ToString());
                 Assert.Equal(4, _fileSystem.VirtualStore.Count);
                 Assert.True(_fileSystem.VirtualStore.ContainsKey(path));
-                Assert.True(_fileSystem.VirtualStore.ContainsKey("AutoRest.json"));
                 Assert.True(_fileSystem.VirtualStore.ContainsKey("RedisResource.json"));
             }
         }

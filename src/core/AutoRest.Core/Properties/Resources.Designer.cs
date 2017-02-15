@@ -159,15 +159,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///    Looks up a localized string similar to AutoRest.json was not found in the current directory.
-        /// </summary>
-        public static string ConfigurationFileNotFound {
-            get {
-                return ResourceManager.GetString("ConfigurationFileNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///    Looks up a localized string similar to Properties defined alongside $ref will be ignored according to JSON specification..
         /// </summary>
         public static string ConflictingRef {
@@ -236,15 +227,6 @@ namespace AutoRest.Core.Properties {
         public static string ErrorLoadingAssembly {
             get {
                 return ResourceManager.GetString("ErrorLoadingAssembly", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///    Looks up a localized string similar to Error parsing AutoRest.json file: {0}.
-        /// </summary>
-        public static string ErrorParsingConfig {
-            get {
-                return ResourceManager.GetString("ErrorParsingConfig", resourceCulture);
             }
         }
         
@@ -616,7 +598,14 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
             }
         }
-        
+        public static string ConfigurationKnownPlugins
+        {
+            get
+            {
+                return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///    Looks up a localized string similar to Operations can not have more than one &apos;body&apos; parameter. The following were found: &apos;{0}&apos;.
         /// </summary>

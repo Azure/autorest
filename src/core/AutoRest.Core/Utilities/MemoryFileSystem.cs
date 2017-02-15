@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
-    // TODO: MemoryFileSystem is for testing. Consider moving to test project.
     public class MemoryFileSystem : IFileSystem, IDisposable
     {
         private const string FolderKey = "Folder";

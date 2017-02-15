@@ -40,15 +40,15 @@ namespace AutoRest.CSharp.Unit.Tests
             fileSystem.CreateDirectory(destination);
         
             // Copy dirs recursively
-            foreach (var child in Directory.EnumerateDirectories(Path.GetFullPath(Path.Combine(basePath, source))).Select(Path.GetFileName))
+            foreach (var child in Directory.EnumerateDirectories(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, basePath, source)).Select(Path.GetFileName))
             {
                 fileSystem.CopyFolder(basePath, Path.Combine(source, child), Path.Combine(destination, child));
             }
 
             // Copy files
-            foreach (var childFile in Directory.EnumerateFiles(Path.GetFullPath(Path.Combine(basePath, source))).Select(Path.GetFileName))
+            foreach (var childFile in Directory.EnumerateFiles(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, basePath, source)).Select(Path.GetFileName))
             {
-                fileSystem.CopyFile(Path.Combine(basePath,source,childFile), Path.Combine(destination, childFile));
+                fileSystem.CopyFile(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, basePath, source,childFile), Path.Combine(destination, childFile));
             }
         }
 

@@ -120,6 +120,44 @@
   <data name="AutoRestCore" xml:space="preserve">
     <value>AutoRest Core {0}</value>
   </data>
+  <data name="ConfigurationKnownPlugins" xml:space="preserve">
+    <value>
+Plugins:
+  CSharp:
+    TypeName: PluginCs, AutoRest.CSharp
+  Azure.CSharp:
+    TypeName: PluginCsa, AutoRest.CSharp.Azure
+  Ruby:
+    TypeName: PluginRb, AutoRest.Ruby
+  Azure.Ruby:
+    TypeName: PluginRba, AutoRest.Ruby.Azure
+  NodeJS:
+    TypeName: PluginJs, AutoRest.NodeJS
+  Azure.NodeJS:
+    TypeName: PluginJsa, AutoRest.NodeJS.Azure
+  Python:
+    TypeName: PluginPy, AutoRest.Python
+  Azure.Python:
+    TypeName: PluginPya, AutoRest.Python.Azure
+  Go:
+    TypeName: PluginGo, AutoRest.Go
+  Java:
+    TypeName: PluginJv, AutoRest.Java
+  Azure.Java:
+    TypeName: PluginJva, AutoRest.Java.Azure
+  Azure.Java.Fluent:
+    TypeName: PluginJvaf, AutoRest.Java.Azure.Fluent
+  AzureResourceSchema:
+    TypeName: PluginArs, AutoRest.AzureResourceSchema
+  Azure.CSharp.Fluent:
+    TypeName: PluginCsaf, AutoRest.CSharp.Azure.Fluent
+Modelers:
+  Swagger:
+    TypeName: SwaggerModeler, AutoRest.Swagger
+  CompositeSwagger:
+    TypeName: CompositeSwaggerModeler, AutoRest.CompositeSwagger
+    </value>
+  </data>
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>Code generation failed with errors. See inner exceptions for details.</value>
   </data>
@@ -128,9 +166,6 @@
   </data>
   <data name="CommentString" xml:space="preserve">
     <value>\\\\</value>
-  </data>
-  <data name="ConfigurationFileNotFound" xml:space="preserve">
-    <value>AutoRest.json was not found in the current directory</value>
   </data>
   <data name="DirectoryNotExist" xml:space="preserve">
     <value>Directory {0} does not exist.</value>
@@ -144,14 +179,11 @@
   <data name="ErrorLoadingAssembly" xml:space="preserve">
     <value>Error loading {0} assembly: {1}</value>
   </data>
-  <data name="ErrorParsingConfig" xml:space="preserve">
-    <value>Error parsing AutoRest.json file: {0}</value>
-  </data>
   <data name="ErrorSavingGeneratedCode" xml:space="preserve">
     <value>Error saving generated code: {0}</value>
   </data>
   <data name="ExtensionNotFound" xml:space="preserve">
-    <value>Plugin {0} does not have an assembly name in AutoRest.json</value>
+    <value>Plugin {0} not found</value>
   </data>
   <data name="GeneratorInitialized" xml:space="preserve">
     <value>Successfully initialized {0} Code Generator {1}</value>
