@@ -10,7 +10,7 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -30,9 +30,9 @@ public interface XMsClientRequestIds {
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -60,9 +60,9 @@ public interface XMsClientRequestIds {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.

@@ -10,7 +10,7 @@
 
 package fixtures.azureparametergrouping;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
@@ -36,9 +36,9 @@ public interface ParameterGroupings {
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of required parameters grouped.
@@ -66,9 +66,9 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -95,9 +95,9 @@ public interface ParameterGroupings {
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post a bunch of optional parameters grouped.
@@ -125,9 +125,9 @@ public interface ParameterGroupings {
      * Post parameters from multiple different parameter groups.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -156,9 +156,9 @@ public interface ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters from multiple different parameter groups.
@@ -188,9 +188,9 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters with a shared parameter group object.
@@ -217,9 +217,9 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters with a shared parameter group object.

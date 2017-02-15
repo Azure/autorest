@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.headexceptions.HeadExceptions;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
@@ -77,10 +77,10 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -135,10 +135,10 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -193,10 +193,10 @@ public class HeadExceptionsImpl implements HeadExceptions {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**

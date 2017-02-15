@@ -13,7 +13,7 @@ package fixtures.lro.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -279,10 +279,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putNonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -324,10 +324,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putNonRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -370,10 +370,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutNonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutNonRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -426,10 +426,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutNonRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutNonRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -490,10 +490,10 @@ public class LROSADsInner {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -535,10 +535,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -581,10 +581,10 @@ public class LROSADsInner {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutNonRetry201Creating400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -637,10 +637,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutNonRetry201Creating400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -701,10 +701,10 @@ public class LROSADsInner {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -746,10 +746,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -792,10 +792,10 @@ public class LROSADsInner {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -848,10 +848,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutNonRetry201Creating400InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutNonRetry201Creating400InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -912,10 +912,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -957,10 +957,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1003,10 +1003,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetry400Async(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1059,10 +1059,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1121,10 +1121,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteNonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1163,10 +1163,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 400 with an error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteNonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1222,10 +1222,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(delete202NonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> delete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(delete202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1264,10 +1264,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDelete202NonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDelete202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1323,10 +1323,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1365,10 +1365,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1424,10 +1424,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postNonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1468,10 +1468,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postNonRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1513,10 +1513,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostNonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostNonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1568,10 +1568,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostNonRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostNonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostNonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1630,10 +1630,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202NonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1674,10 +1674,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202NonRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> post202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202NonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1719,10 +1719,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202NonRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPost202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202NonRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1774,10 +1774,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202NonRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPost202NonRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202NonRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1836,10 +1836,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1880,10 +1880,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1925,10 +1925,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetry400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1980,10 +1980,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetry400Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetry400WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2043,10 +2043,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2088,10 +2088,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(putError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(putError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2134,10 +2134,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2190,10 +2190,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutError201NoProvisioningStatePayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPutError201NoProvisioningStatePayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2254,10 +2254,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2299,10 +2299,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2345,10 +2345,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2401,10 +2401,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2464,10 +2464,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2509,10 +2509,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2555,10 +2555,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2611,10 +2611,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryNoStatusPayloadAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryNoStatusPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2673,10 +2673,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(delete204SucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> delete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(delete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2715,10 +2715,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(beginDelete204SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2774,10 +2774,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2816,10 +2816,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteAsyncRelativeRetryNoStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2875,10 +2875,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202NoLocationWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202NoLocationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2919,10 +2919,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202NoLocationWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> post202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202NoLocationWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -2964,10 +2964,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202NoLocationWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPost202NoLocationAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202NoLocationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3019,10 +3019,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202NoLocationWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPost202NoLocationAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202NoLocationWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3081,10 +3081,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3125,10 +3125,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3170,10 +3170,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3225,10 +3225,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryNoPayloadAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetryNoPayloadWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3288,10 +3288,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> put200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(put200InvalidJsonWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> put200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(put200InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3333,10 +3333,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> put200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(put200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> put200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(put200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3379,10 +3379,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPut200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPut200InvalidJsonWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPut200InvalidJsonAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPut200InvalidJsonWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3435,10 +3435,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPut200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromResponse(beginPut200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPut200InvalidJsonAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPut200InvalidJsonWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3499,10 +3499,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3544,10 +3544,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3590,10 +3590,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3646,10 +3646,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3709,10 +3709,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3754,10 +3754,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> putAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3800,10 +3800,10 @@ public class LROSADsInner {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3856,10 +3856,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<ProductInner> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -3918,10 +3918,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(delete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> delete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(delete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3960,10 +3960,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDelete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDelete202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4019,10 +4019,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4061,10 +4061,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4120,10 +4120,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4162,10 +4162,10 @@ public class LROSADsInner {
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4221,10 +4221,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4265,10 +4265,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> post202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4310,10 +4310,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202RetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4365,10 +4365,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPost202RetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202RetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4427,10 +4427,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4471,10 +4471,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4516,10 +4516,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4571,10 +4571,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidHeaderAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidHeaderWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4633,10 +4633,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4677,10 +4677,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -4722,10 +4722,10 @@ public class LROSADsInner {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -4777,10 +4777,10 @@ public class LROSADsInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetryInvalidJsonPollingWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

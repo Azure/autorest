@@ -13,7 +13,7 @@ package fixtures.bodyduration.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodyduration.Durations;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyduration.models.ErrorException;
@@ -85,10 +85,10 @@ public class DurationsImpl implements Durations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -146,10 +146,10 @@ public class DurationsImpl implements Durations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putPositiveDurationWithServiceResponseAsync(durationBody), serviceCallback);
+    public ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putPositiveDurationWithServiceResponseAsync(durationBody), serviceCallback);
     }
 
     /**
@@ -211,10 +211,10 @@ public class DurationsImpl implements Durations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.fromResponse(getPositiveDurationWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+        return ServiceFuture.fromResponse(getPositiveDurationWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -271,10 +271,10 @@ public class DurationsImpl implements Durations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

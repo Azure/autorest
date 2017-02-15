@@ -10,7 +10,7 @@
 
 package fixtures.bodystring;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -31,9 +31,9 @@ public interface Strings {
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<String> getNullAsync(final ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getNullAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Get null string value value.
@@ -59,9 +59,9 @@ public interface Strings {
      * Set string value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putNullAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNullAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value null.
@@ -88,9 +88,9 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value null.
@@ -119,9 +119,9 @@ public interface Strings {
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<String> getEmptyAsync(final ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getEmptyAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Get empty string value value ''.
@@ -149,9 +149,9 @@ public interface Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value empty ''.
@@ -180,9 +180,9 @@ public interface Strings {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<String> getMbcsAsync(final ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getMbcsAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -210,9 +210,9 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -241,9 +241,9 @@ public interface Strings {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -271,9 +271,9 @@ public interface Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -302,9 +302,9 @@ public interface Strings {
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
+    ServiceFuture<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -331,9 +331,9 @@ public interface Strings {
      * Get value that is base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get value that is base64 encoded.
@@ -360,9 +360,9 @@ public interface Strings {
      * Get value that is base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get value that is base64url encoded.
@@ -390,9 +390,9 @@ public interface Strings {
      *
      * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put value that is base64url encoded.
@@ -421,9 +421,9 @@ public interface Strings {
      * Get null value that is expected to be base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null value that is expected to be base64url encoded.

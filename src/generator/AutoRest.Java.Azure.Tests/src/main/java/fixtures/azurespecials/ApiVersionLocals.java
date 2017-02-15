@@ -10,7 +10,7 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -30,9 +30,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -58,9 +58,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -87,9 +87,9 @@ public interface ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -117,9 +117,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -145,9 +145,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.

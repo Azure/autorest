@@ -10,7 +10,7 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
@@ -34,9 +34,9 @@ public interface Implicits {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
@@ -64,9 +64,9 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -93,9 +93,9 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -123,9 +123,9 @@ public interface Implicits {
      * Test implicitly optional header parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter.
@@ -152,9 +152,9 @@ public interface Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter.
@@ -182,9 +182,9 @@ public interface Implicits {
      * Test implicitly optional body parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter.
@@ -211,9 +211,9 @@ public interface Implicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter.
@@ -242,9 +242,9 @@ public interface Implicits {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
@@ -271,9 +271,9 @@ public interface Implicits {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required query parameter.
@@ -300,9 +300,9 @@ public interface Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.

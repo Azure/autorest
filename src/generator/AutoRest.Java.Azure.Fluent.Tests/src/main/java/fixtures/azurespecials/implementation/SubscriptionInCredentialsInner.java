@@ -12,7 +12,7 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
@@ -87,10 +87,10 @@ public class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -149,10 +149,10 @@ public class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMethodGlobalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -211,10 +211,10 @@ public class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -276,10 +276,10 @@ public class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -338,10 +338,10 @@ public class SubscriptionInCredentialsInner {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

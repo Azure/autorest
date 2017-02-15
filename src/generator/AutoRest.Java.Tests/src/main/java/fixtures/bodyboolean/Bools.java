@@ -10,7 +10,7 @@
 
 package fixtures.bodyboolean;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -31,9 +31,9 @@ public interface Bools {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get true Boolean value.
@@ -61,9 +61,9 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value true.
@@ -92,9 +92,9 @@ public interface Bools {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get false Boolean value.
@@ -122,9 +122,9 @@ public interface Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Set Boolean value false.
@@ -153,9 +153,9 @@ public interface Bools {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get null Boolean value.
@@ -182,9 +182,9 @@ public interface Bools {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get invalid Boolean value.

@@ -53,10 +53,10 @@ public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParamete
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@return the {@@link ServiceCall} object
+ * @@return the {@@link ServiceFuture} object
  */
-public ServiceCall<@Model.ReturnTypeJva.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
-    return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
+public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
+    return AzureServiceFuture.@(Model.ServiceFutureFactoryMethod)(
         @(Model.Name)SinglePageAsync(@Model.MethodRequiredParameterInvocation),
         new Func1<String, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
@@ -65,7 +65,7 @@ public ServiceCall<@Model.ReturnTypeJva.ServiceCallGenericParameterString> @(Mod
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation(true));
             }
         },
-        serviceCallback);
+        serviceFutureback);
 }
 @EmptyLine
 /**
@@ -257,10 +257,10 @@ public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclara
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@return the {@@link ServiceCall} object
+ * @@return the {@@link ServiceFuture} object
  */
-public ServiceCall<@Model.ReturnTypeJva.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
-    return AzureServiceCall.@(Model.ServiceCallFactoryMethod)(
+public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+    return AzureServiceFuture.@(Model.ServiceFutureFactoryMethod)(
         @(Model.Name)SinglePageAsync(@Model.MethodParameterInvocation),
         new Func1<String, Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrapped>>() {
             @@Override
@@ -269,7 +269,7 @@ public ServiceCall<@Model.ReturnTypeJva.ServiceCallGenericParameterString> @(Mod
                 return @(Model.GetPagingNextMethodInvocation(true))(@Model.NextMethodParameterInvocation());
             }
         },
-        serviceCallback);
+        serviceFutureback);
 }
 @EmptyLine
 /**

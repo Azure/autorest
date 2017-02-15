@@ -13,7 +13,7 @@ package fixtures.bodyboolean.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodyboolean.Bools;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
@@ -92,10 +92,10 @@ public class BoolsImpl implements Bools {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getTrueWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -153,10 +153,10 @@ public class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
+    public ServiceFuture<Void> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putTrueWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -215,10 +215,10 @@ public class BoolsImpl implements Bools {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getFalseWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -276,10 +276,10 @@ public class BoolsImpl implements Bools {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
+    public ServiceFuture<Void> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putFalseWithServiceResponseAsync(boolBody), serviceCallback);
     }
 
     /**
@@ -338,10 +338,10 @@ public class BoolsImpl implements Bools {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -398,10 +398,10 @@ public class BoolsImpl implements Bools {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

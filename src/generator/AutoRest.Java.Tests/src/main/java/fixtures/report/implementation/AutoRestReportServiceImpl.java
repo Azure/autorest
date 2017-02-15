@@ -16,7 +16,7 @@ import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.report.models.ErrorException;
@@ -120,10 +120,10 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceFuture.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

@@ -10,7 +10,7 @@
 
 package fixtures.bodyfile;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.InputStream;
@@ -32,9 +32,9 @@ public interface Files {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get file.
@@ -61,9 +61,9 @@ public interface Files {
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get a large file.
@@ -90,9 +90,9 @@ public interface Files {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get empty file.

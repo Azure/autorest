@@ -13,7 +13,7 @@ package fixtures.bodyfile.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodyfile.Files;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyfile.models.ErrorException;
@@ -83,10 +83,10 @@ public class FilesImpl implements Files {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.fromResponse(getFileWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+        return ServiceFuture.fromResponse(getFileWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -143,10 +143,10 @@ public class FilesImpl implements Files {
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.fromResponse(getFileLargeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback) {
+        return ServiceFuture.fromResponse(getFileLargeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -203,10 +203,10 @@ public class FilesImpl implements Files {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyFileWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyFileWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.lro.LRORetrys;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -135,10 +135,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -180,10 +180,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -226,10 +226,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -282,10 +282,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -346,10 +346,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -391,10 +391,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -437,10 +437,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -493,10 +493,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -556,10 +556,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -599,10 +599,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -659,10 +659,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(delete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -701,10 +701,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDelete202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -760,10 +760,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(deleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(deleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -802,10 +802,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -861,10 +861,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -905,10 +905,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -950,10 +950,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1005,10 +1005,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1067,10 +1067,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1111,10 +1111,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -1156,10 +1156,10 @@ public class LRORetrysImpl implements LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1211,10 +1211,10 @@ public class LRORetrysImpl implements LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

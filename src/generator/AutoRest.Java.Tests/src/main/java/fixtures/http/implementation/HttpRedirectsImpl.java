@@ -13,7 +13,7 @@ package fixtures.http.implementation;
 import retrofit2.Retrofit;
 import fixtures.http.HttpRedirects;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.http.models.ErrorException;
@@ -147,10 +147,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head300Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(head300WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head300Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(head300WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -208,10 +208,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(get300WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<String>> get300Async(final ServiceCallback<List<String>> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(get300WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -268,10 +268,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(head301WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head301Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(head301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -328,10 +328,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> get301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(get301WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> get301Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(get301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -388,10 +388,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> put301Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(put301WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> put301Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(put301WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -443,10 +443,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(put301WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(put301WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -504,10 +504,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(head302WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head302Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(head302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -564,10 +564,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> get302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(get302WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> get302Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(get302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -624,10 +624,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> patch302Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(patch302WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> patch302Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(patch302WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -679,10 +679,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(patch302WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(patch302WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -740,10 +740,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post303Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post303WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post303Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post303WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -795,10 +795,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post303WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post303WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -857,10 +857,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Redirect with 307, resulting in a 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(head307WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head307Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(head307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -917,10 +917,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> get307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(get307WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> get307Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(get307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -977,10 +977,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Put redirected with 307, resulting in a 200 after redirect.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> put307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(put307WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> put307Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(put307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1032,10 +1032,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(put307WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(put307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1094,10 +1094,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Patch redirected with 307, resulting in a 200 after redirect.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> patch307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(patch307WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> patch307Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(patch307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1149,10 +1149,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(patch307WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(patch307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1211,10 +1211,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Post redirected with 307, resulting in a 200 after redirect.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post307WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post307Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1266,10 +1266,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post307WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1328,10 +1328,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      * Delete redirected with 307, resulting in a 200 after redirect.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> delete307Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(delete307WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> delete307Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(delete307WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1383,10 +1383,10 @@ public class HttpRedirectsImpl implements HttpRedirects {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(delete307WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Void> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(delete307WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**

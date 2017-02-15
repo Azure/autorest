@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -80,10 +80,10 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
+    public ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
     /**

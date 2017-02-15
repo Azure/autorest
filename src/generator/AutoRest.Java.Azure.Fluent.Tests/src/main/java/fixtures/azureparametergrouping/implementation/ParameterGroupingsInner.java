@@ -12,7 +12,7 @@ package fixtures.azureparametergrouping.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -87,10 +87,10 @@ public class ParameterGroupingsInner {
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
+    public ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParametersInner parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters), serviceCallback);
     }
 
     /**
@@ -156,10 +156,10 @@ public class ParameterGroupingsInner {
      * Post a bunch of optional parameters grouped.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postOptionalWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postOptionalWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -213,10 +213,10 @@ public class ParameterGroupingsInner {
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
+    public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParametersInner parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters), serviceCallback);
     }
 
     /**
@@ -283,10 +283,10 @@ public class ParameterGroupingsInner {
      * Post parameters from multiple different parameter groups.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMultiParamGroupsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -345,10 +345,10 @@ public class ParameterGroupingsInner {
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
+    public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroupInner firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroupInner parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), serviceCallback);
     }
 
     /**
@@ -426,10 +426,10 @@ public class ParameterGroupingsInner {
      * Post parameters with a shared parameter group object.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -483,10 +483,10 @@ public class ParameterGroupingsInner {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
+    public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroupInner firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup), serviceCallback);
     }
 
     /**

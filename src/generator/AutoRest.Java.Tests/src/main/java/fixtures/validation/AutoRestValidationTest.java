@@ -10,7 +10,7 @@
 
 package fixtures.validation;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.validation.models.Product;
@@ -78,9 +78,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -115,9 +115,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -153,9 +153,9 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -185,9 +185,9 @@ public interface AutoRestValidationTest {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      *
@@ -210,9 +210,9 @@ public interface AutoRestValidationTest {
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      *
@@ -236,9 +236,9 @@ public interface AutoRestValidationTest {
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback);
 
     /**
      *

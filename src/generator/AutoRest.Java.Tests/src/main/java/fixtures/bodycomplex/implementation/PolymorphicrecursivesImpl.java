@@ -13,7 +13,7 @@ package fixtures.bodycomplex.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -78,10 +78,10 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+        return ServiceFuture.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -243,10 +243,10 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+    public ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**

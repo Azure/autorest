@@ -13,7 +13,7 @@ package fixtures.bodycomplex.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodycomplex.Arrays;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -90,10 +90,10 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+        return ServiceFuture.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -151,10 +151,10 @@ public class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+    public ServiceFuture<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -217,10 +217,10 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -278,10 +278,10 @@ public class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
+    public ServiceFuture<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putEmptyWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -344,10 +344,10 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
-        return ServiceCall.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+        return ServiceFuture.fromResponse(getNotProvidedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

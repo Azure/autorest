@@ -10,7 +10,7 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ReadonlyObj;
@@ -32,9 +32,9 @@ public interface Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
+    ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
 
     /**
      * Get complex types that have readonly properties.
@@ -62,9 +62,9 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that have readonly properties.

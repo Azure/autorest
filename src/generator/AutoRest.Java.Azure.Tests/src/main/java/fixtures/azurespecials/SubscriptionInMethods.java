@@ -10,7 +10,7 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -32,9 +32,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -64,9 +64,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = null, client-side validation should prevent you from making this call.
@@ -96,9 +96,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.
@@ -128,9 +128,9 @@ public interface SubscriptionInMethods {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * POST method with subscriptionId modeled in the method.  pass in subscription id = '1234-5678-9012-3456' to succeed.

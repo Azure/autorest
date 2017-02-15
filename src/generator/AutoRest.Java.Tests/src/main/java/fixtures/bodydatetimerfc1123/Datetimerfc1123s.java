@@ -10,7 +10,7 @@
 
 package fixtures.bodydatetimerfc1123;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import org.joda.time.DateTime;
@@ -32,9 +32,9 @@ public interface Datetimerfc1123s {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null datetime value.
@@ -61,9 +61,9 @@ public interface Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid datetime value.
@@ -90,9 +90,9 @@ public interface Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get overflow datetime value.
@@ -119,9 +119,9 @@ public interface Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get underflow datetime value.
@@ -149,9 +149,9 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
@@ -180,9 +180,9 @@ public interface Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
@@ -209,9 +209,9 @@ public interface Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
@@ -239,9 +239,9 @@ public interface Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
@@ -270,9 +270,9 @@ public interface Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.

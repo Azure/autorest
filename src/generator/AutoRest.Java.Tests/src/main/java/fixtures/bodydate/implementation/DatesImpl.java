@@ -13,7 +13,7 @@ package fixtures.bodydate.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodydate.Dates;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydate.models.ErrorException;
@@ -101,10 +101,10 @@ public class DatesImpl implements Dates {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -161,10 +161,10 @@ public class DatesImpl implements Dates {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidDateWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -221,10 +221,10 @@ public class DatesImpl implements Dates {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.fromResponse(getOverflowDateWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+        return ServiceFuture.fromResponse(getOverflowDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -281,10 +281,10 @@ public class DatesImpl implements Dates {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.fromResponse(getUnderflowDateWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+        return ServiceFuture.fromResponse(getUnderflowDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -342,10 +342,10 @@ public class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putMaxDateWithServiceResponseAsync(dateBody), serviceCallback);
+    public ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMaxDateWithServiceResponseAsync(dateBody), serviceCallback);
     }
 
     /**
@@ -407,10 +407,10 @@ public class DatesImpl implements Dates {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.fromResponse(getMaxDateWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+        return ServiceFuture.fromResponse(getMaxDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -468,10 +468,10 @@ public class DatesImpl implements Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putMinDateWithServiceResponseAsync(dateBody), serviceCallback);
+    public ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMinDateWithServiceResponseAsync(dateBody), serviceCallback);
     }
 
     /**
@@ -533,10 +533,10 @@ public class DatesImpl implements Dates {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
-        return ServiceCall.fromResponse(getMinDateWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+        return ServiceFuture.fromResponse(getMinDateWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

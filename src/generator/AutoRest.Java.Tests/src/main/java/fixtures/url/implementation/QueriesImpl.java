@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.url.Queries;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CollectionFormat;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -209,10 +209,10 @@ public class QueriesImpl implements Queries {
      * Get true Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -269,10 +269,10 @@ public class QueriesImpl implements Queries {
      * Get false Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -329,10 +329,10 @@ public class QueriesImpl implements Queries {
      * Get null Boolean value on query (query string should be absent).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getBooleanNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getBooleanNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getBooleanNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -384,10 +384,10 @@ public class QueriesImpl implements Queries {
      *
      * @param boolQuery null boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getBooleanNullWithServiceResponseAsync(boolQuery), serviceCallback);
+    public ServiceFuture<Void> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getBooleanNullWithServiceResponseAsync(boolQuery), serviceCallback);
     }
 
     /**
@@ -445,10 +445,10 @@ public class QueriesImpl implements Queries {
      * Get '1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -505,10 +505,10 @@ public class QueriesImpl implements Queries {
      * Get '-1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -565,10 +565,10 @@ public class QueriesImpl implements Queries {
      * Get null integer value (no query parameter).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getIntNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getIntNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getIntNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -620,10 +620,10 @@ public class QueriesImpl implements Queries {
      *
      * @param intQuery null integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getIntNullWithServiceResponseAsync(intQuery), serviceCallback);
+    public ServiceFuture<Void> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getIntNullWithServiceResponseAsync(intQuery), serviceCallback);
     }
 
     /**
@@ -681,10 +681,10 @@ public class QueriesImpl implements Queries {
      * Get '10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -741,10 +741,10 @@ public class QueriesImpl implements Queries {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -801,10 +801,10 @@ public class QueriesImpl implements Queries {
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getLongNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getLongNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getLongNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -856,10 +856,10 @@ public class QueriesImpl implements Queries {
      *
      * @param longQuery null 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getLongNullWithServiceResponseAsync(longQuery), serviceCallback);
+    public ServiceFuture<Void> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getLongNullWithServiceResponseAsync(longQuery), serviceCallback);
     }
 
     /**
@@ -917,10 +917,10 @@ public class QueriesImpl implements Queries {
      * Get '1.034E+20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -977,10 +977,10 @@ public class QueriesImpl implements Queries {
      * Get '-1.034E-20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1037,10 +1037,10 @@ public class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(floatNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> floatNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(floatNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1092,10 +1092,10 @@ public class QueriesImpl implements Queries {
      *
      * @param floatQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(floatNullWithServiceResponseAsync(floatQuery), serviceCallback);
+    public ServiceFuture<Void> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(floatNullWithServiceResponseAsync(floatQuery), serviceCallback);
     }
 
     /**
@@ -1153,10 +1153,10 @@ public class QueriesImpl implements Queries {
      * Get '9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1213,10 +1213,10 @@ public class QueriesImpl implements Queries {
      * Get '-9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1273,10 +1273,10 @@ public class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(doubleNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> doubleNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(doubleNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1328,10 +1328,10 @@ public class QueriesImpl implements Queries {
      *
      * @param doubleQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(doubleNullWithServiceResponseAsync(doubleQuery), serviceCallback);
+    public ServiceFuture<Void> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(doubleNullWithServiceResponseAsync(doubleQuery), serviceCallback);
     }
 
     /**
@@ -1389,10 +1389,10 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1449,10 +1449,10 @@ public class QueriesImpl implements Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1509,10 +1509,10 @@ public class QueriesImpl implements Queries {
      * Get ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1569,10 +1569,10 @@ public class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1624,10 +1624,10 @@ public class QueriesImpl implements Queries {
      *
      * @param stringQuery null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(stringQuery), serviceCallback);
+    public ServiceFuture<Void> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringNullWithServiceResponseAsync(stringQuery), serviceCallback);
     }
 
     /**
@@ -1685,10 +1685,10 @@ public class QueriesImpl implements Queries {
      * Get using uri with query parameter 'green color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> enumValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(enumValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1740,10 +1740,10 @@ public class QueriesImpl implements Queries {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(enumQuery), serviceCallback);
+    public ServiceFuture<Void> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(enumValidWithServiceResponseAsync(enumQuery), serviceCallback);
     }
 
     /**
@@ -1801,10 +1801,10 @@ public class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> enumNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(enumNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1856,10 +1856,10 @@ public class QueriesImpl implements Queries {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(enumQuery), serviceCallback);
+    public ServiceFuture<Void> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(enumNullWithServiceResponseAsync(enumQuery), serviceCallback);
     }
 
     /**
@@ -1917,10 +1917,10 @@ public class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> byteMultiByteAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteMultiByteWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1973,10 +1973,10 @@ public class QueriesImpl implements Queries {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(byteQuery), serviceCallback);
+    public ServiceFuture<Void> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteMultiByteWithServiceResponseAsync(byteQuery), serviceCallback);
     }
 
     /**
@@ -2035,10 +2035,10 @@ public class QueriesImpl implements Queries {
      * Get '' as byte array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2096,10 +2096,10 @@ public class QueriesImpl implements Queries {
      * Get null as byte array (no query parameters in uri).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> byteNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2152,10 +2152,10 @@ public class QueriesImpl implements Queries {
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(byteQuery), serviceCallback);
+    public ServiceFuture<Void> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteNullWithServiceResponseAsync(byteQuery), serviceCallback);
     }
 
     /**
@@ -2214,10 +2214,10 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01' as date.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2274,10 +2274,10 @@ public class QueriesImpl implements Queries {
      * Get null as date - this should result in no query parameters in uri.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> dateNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2329,10 +2329,10 @@ public class QueriesImpl implements Queries {
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(dateQuery), serviceCallback);
+    public ServiceFuture<Void> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateNullWithServiceResponseAsync(dateQuery), serviceCallback);
     }
 
     /**
@@ -2390,10 +2390,10 @@ public class QueriesImpl implements Queries {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2450,10 +2450,10 @@ public class QueriesImpl implements Queries {
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> dateTimeNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateTimeNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2505,10 +2505,10 @@ public class QueriesImpl implements Queries {
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimeQuery), serviceCallback);
+    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimeQuery), serviceCallback);
     }
 
     /**
@@ -2566,10 +2566,10 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringCsvValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> arrayStringCsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringCsvValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2622,10 +2622,10 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringCsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+    public ServiceFuture<Void> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringCsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2685,10 +2685,10 @@ public class QueriesImpl implements Queries {
      * Get a null array of string using the csv-array format.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringCsvNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> arrayStringCsvNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringCsvNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2741,10 +2741,10 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringCsvNullWithServiceResponseAsync(arrayQuery), serviceCallback);
+    public ServiceFuture<Void> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringCsvNullWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2804,10 +2804,10 @@ public class QueriesImpl implements Queries {
      * Get an empty array [] of string using the csv-array format.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> arrayStringCsvEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2860,10 +2860,10 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery), serviceCallback);
+    public ServiceFuture<Void> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringCsvEmptyWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -2923,10 +2923,10 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringSsvValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> arrayStringSsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringSsvValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2979,10 +2979,10 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringSsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+    public ServiceFuture<Void> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringSsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3042,10 +3042,10 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringTsvValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> arrayStringTsvValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringTsvValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3098,10 +3098,10 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringTsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+    public ServiceFuture<Void> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringTsvValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**
@@ -3161,10 +3161,10 @@ public class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringPipesValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> arrayStringPipesValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringPipesValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -3217,10 +3217,10 @@ public class QueriesImpl implements Queries {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayStringPipesValidWithServiceResponseAsync(arrayQuery), serviceCallback);
+    public ServiceFuture<Void> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayStringPipesValidWithServiceResponseAsync(arrayQuery), serviceCallback);
     }
 
     /**

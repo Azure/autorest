@@ -13,7 +13,7 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.Odatas;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
@@ -71,10 +71,10 @@ public class OdatasImpl implements Odatas {
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getWithFilterWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithFilterWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -132,10 +132,10 @@ public class OdatasImpl implements Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
+    public ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithFilterWithServiceResponseAsync(filter, top, orderby), serviceCallback);
     }
 
     /**

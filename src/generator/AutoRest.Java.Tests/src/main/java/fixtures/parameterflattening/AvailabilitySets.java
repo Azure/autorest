@@ -10,7 +10,7 @@
 
 package fixtures.parameterflattening;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.util.Map;
@@ -37,9 +37,9 @@ public interface AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Updates the tags for an availability set.

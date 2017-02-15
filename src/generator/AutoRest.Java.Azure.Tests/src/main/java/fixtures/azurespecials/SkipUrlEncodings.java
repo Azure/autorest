@@ -10,7 +10,7 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -32,9 +32,9 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -64,9 +64,9 @@ public interface SkipUrlEncodings {
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -94,9 +94,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerPathValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
@@ -124,9 +124,9 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -154,9 +154,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryNullAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -183,9 +183,9 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value null.
@@ -215,9 +215,9 @@ public interface SkipUrlEncodings {
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
@@ -245,9 +245,9 @@ public interface SkipUrlEncodings {
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerQueryValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.

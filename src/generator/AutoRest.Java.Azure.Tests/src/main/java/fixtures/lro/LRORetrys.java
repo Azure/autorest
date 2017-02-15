@@ -10,7 +10,7 @@
 
 package fixtures.lro;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -39,9 +39,9 @@ public interface LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -69,9 +69,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -100,9 +100,9 @@ public interface LRORetrys {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -130,9 +130,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -161,9 +161,9 @@ public interface LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -191,9 +191,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -222,9 +222,9 @@ public interface LRORetrys {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -252,9 +252,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -283,9 +283,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -312,9 +312,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
+    ServiceFuture<Product> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback);
 
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -340,9 +340,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -368,9 +368,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
@@ -396,9 +396,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -424,9 +424,9 @@ public interface LRORetrys {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -452,9 +452,9 @@ public interface LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -481,9 +481,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -511,9 +511,9 @@ public interface LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -540,9 +540,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
@@ -570,9 +570,9 @@ public interface LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -599,9 +599,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -629,9 +629,9 @@ public interface LRORetrys {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -658,9 +658,9 @@ public interface LRORetrys {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.

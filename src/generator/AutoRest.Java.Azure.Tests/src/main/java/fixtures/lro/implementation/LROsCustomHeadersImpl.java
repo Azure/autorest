@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.lro.LROsCustomHeaders;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -107,10 +107,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> putAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -152,10 +152,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(putAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -198,10 +198,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> beginPutAsyncRetrySucceededAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -254,10 +254,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPutAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -317,10 +317,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> put201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -362,10 +362,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(put201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -408,10 +408,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -464,10 +464,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Product> beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(beginPut201CreatingSucceeded200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -527,10 +527,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -571,10 +571,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(post202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -616,10 +616,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -671,10 +671,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPost202Retry200WithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -733,10 +733,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -777,10 +777,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(postAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**
@@ -822,10 +822,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -877,10 +877,10 @@ public class LROsCustomHeadersImpl implements LROsCustomHeaders {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
+    public ServiceFuture<Void> beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(beginPostAsyncRetrySucceededWithServiceResponseAsync(product), serviceCallback);
     }
 
     /**

@@ -16,7 +16,7 @@ import com.microsoft.rest.RestClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -162,10 +162,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -217,10 +217,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
+    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
     /**
@@ -280,10 +280,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
-        return ServiceCall.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+        return ServiceFuture.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -339,10 +339,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -394,10 +394,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
+    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
     }
 
     /**
@@ -457,10 +457,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
-        return ServiceCall.fromResponse(getDictionaryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
+        return ServiceFuture.fromResponse(getDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -516,10 +516,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -571,10 +571,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
+    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
     /**
@@ -634,10 +634,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
-        return ServiceCall.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
+        return ServiceFuture.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -694,10 +694,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * Put Simple Product with client flattening true on the model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.fromResponse(putSimpleProductWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<SimpleProduct> putSimpleProductAsync(final ServiceCallback<SimpleProduct> serviceCallback) {
+        return ServiceFuture.fromResponse(putSimpleProductWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -750,10 +750,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param simpleBodyProduct Simple body product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.fromResponse(putSimpleProductWithServiceResponseAsync(simpleBodyProduct), serviceCallback);
+    public ServiceFuture<SimpleProduct> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+        return ServiceFuture.fromResponse(putSimpleProductWithServiceResponseAsync(simpleBodyProduct), serviceCallback);
     }
 
     /**
@@ -817,10 +817,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param maxProductDisplayName Display name of product.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.fromResponse(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName), serviceCallback);
+    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, final ServiceCallback<SimpleProduct> serviceCallback) {
+        return ServiceFuture.fromResponse(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName), serviceCallback);
     }
 
     /**
@@ -899,10 +899,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      * @param genericValue Generic URL value.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.fromResponse(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
+    public ServiceFuture<SimpleProduct> postFlattenedSimpleProductAsync(String productId, String maxProductDisplayName, String description, String genericValue, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
+        return ServiceFuture.fromResponse(postFlattenedSimpleProductWithServiceResponseAsync(productId, maxProductDisplayName, description, genericValue, odatavalue), serviceCallback);
     }
 
     /**
@@ -986,10 +986,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
      *
      * @param flattenParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
-        return ServiceCall.fromResponse(putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup), serviceCallback);
+    public ServiceFuture<SimpleProduct> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
+        return ServiceFuture.fromResponse(putSimpleProductWithGroupingWithServiceResponseAsync(flattenParameterGroup), serviceCallback);
     }
 
     /**

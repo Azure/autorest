@@ -16,7 +16,7 @@ import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.Resource;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -220,10 +220,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -275,10 +275,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
+    public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putArrayWithServiceResponseAsync(resourceArray), serviceCallback);
     }
 
     /**
@@ -338,10 +338,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
-        return ServiceCall.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+        return ServiceFuture.fromResponse(getArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -397,10 +397,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -452,10 +452,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
+    public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putDictionaryWithServiceResponseAsync(resourceDictionary), serviceCallback);
     }
 
     /**
@@ -515,10 +515,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
-        return ServiceCall.fromResponse(getDictionaryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
+        return ServiceFuture.fromResponse(getDictionaryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -574,10 +574,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -629,10 +629,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
+    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
     /**
@@ -692,10 +692,10 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
-        return ServiceCall.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
+        return ServiceFuture.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

@@ -10,7 +10,7 @@
 
 package fixtures.headexceptions;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -30,9 +30,9 @@ public interface HeadExceptions {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 200 status code if successful.
@@ -58,9 +58,9 @@ public interface HeadExceptions {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 204 status code if successful.
@@ -86,9 +86,9 @@ public interface HeadExceptions {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 404 status code if successful.

@@ -413,7 +413,7 @@ namespace AutoRest.Java.Model
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceFutureback<{0}> serviceFutureback",
                     ReturnTypeJv.GenericBodyClientTypeString);
                 return parameters;
             }
@@ -429,7 +429,7 @@ namespace AutoRest.Java.Model
                 {
                     parameters += ", ";
                 }
-                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceFutureback<{0}> serviceFutureback",
                     ReturnTypeJv.GenericBodyClientTypeString);
                 return parameters;
             }
@@ -445,7 +445,7 @@ namespace AutoRest.Java.Model
                 {
                     parameters += ", ";
                 }
-                parameters += "serviceCallback";
+                parameters += "serviceFutureback";
                 return parameters;
             }
         }
@@ -460,7 +460,7 @@ namespace AutoRest.Java.Model
                 {
                     parameters += ", ";
                 }
-                parameters += "serviceCallback";
+                parameters += "serviceFutureback";
                 return parameters;
             }
         }
@@ -638,18 +638,18 @@ namespace AutoRest.Java.Model
                     .Outdent().AppendLine("}");
                 builder.AppendLine("ServiceResponse<{0}> clientResponse = new ServiceResponse<{0}>(body, result.response());",
                     ReturnTypeJv.GenericBodyClientTypeString);
-                builder.AppendLine("if (serviceCallback != null) {")
-                    .Indent().AppendLine("serviceCallback.success(clientResponse);", ReturnTypeJv.GenericBodyClientTypeString)
+                builder.AppendLine("if (serviceFutureback != null) {")
+                    .Indent().AppendLine("serviceFutureback.success(clientResponse);", ReturnTypeJv.GenericBodyClientTypeString)
                     .Outdent().AppendLine("}");
-                builder.AppendLine("serviceCall.success(clientResponse);");
+                builder.AppendLine("serviceFuture.success(clientResponse);");
             }
             else
             {
                 builder.AppendLine("{0} clientResponse = {1}Delegate(response);", ReturnTypeJv.WireResponseTypeString, this.Name);
-                builder.AppendLine("if (serviceCallback != null) {")
-                    .Indent().AppendLine("serviceCallback.success(clientResponse);", this.Name)
+                builder.AppendLine("if (serviceFutureback != null) {")
+                    .Indent().AppendLine("serviceFutureback.success(clientResponse);", this.Name)
                     .Outdent().AppendLine("}");
-                builder.AppendLine("serviceCall.success(clientResponse);");
+                builder.AppendLine("serviceFuture.success(clientResponse);");
             }
             return builder.ToString();
         }
@@ -675,7 +675,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ServiceCallFactoryMethod
+        public virtual string ServiceFutureFactoryMethod
         {
             get
             {
@@ -693,7 +693,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return " * @param serviceCallback the async ServiceCallback to handle successful and failed responses.";
+                return " * @param serviceFutureback the async ServiceFutureback to handle successful and failed responses.";
             }
         }
 
@@ -705,9 +705,9 @@ namespace AutoRest.Java.Model
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("rx.Observable");
-                imports.Add("com.microsoft.rest.ServiceCall");
+                imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
-                imports.Add("com.microsoft.rest.ServiceCallback");
+                imports.Add("com.microsoft.rest.ServiceFutureback");
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
@@ -738,9 +738,9 @@ namespace AutoRest.Java.Model
                 {
                     imports.Add("okhttp3.ResponseBody");
                 }
-                imports.Add("com.microsoft.rest.ServiceCall");
+                imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
-                imports.Add("com.microsoft.rest.ServiceCallback");
+                imports.Add("com.microsoft.rest.ServiceFutureback");
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());

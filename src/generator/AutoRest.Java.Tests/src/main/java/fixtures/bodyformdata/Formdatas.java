@@ -10,7 +10,7 @@
 
 package fixtures.bodyformdata;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.InputStream;
@@ -36,9 +36,9 @@ public interface Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Upload file.
@@ -71,9 +71,9 @@ public interface Formdatas {
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Upload file.

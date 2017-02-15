@@ -13,7 +13,7 @@ package fixtures.requiredoptional.implementation;
 import retrofit2.Retrofit;
 import fixtures.requiredoptional.Implicits;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
@@ -102,10 +102,10 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getRequiredPathWithServiceResponseAsync(pathParameter), serviceCallback);
+    public ServiceFuture<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getRequiredPathWithServiceResponseAsync(pathParameter), serviceCallback);
     }
 
     /**
@@ -165,10 +165,10 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalQueryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -220,10 +220,10 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalQueryWithServiceResponseAsync(queryParameter), serviceCallback);
+    public ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalQueryWithServiceResponseAsync(queryParameter), serviceCallback);
     }
 
     /**
@@ -281,10 +281,10 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional header parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -336,10 +336,10 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalHeaderWithServiceResponseAsync(queryParameter), serviceCallback);
+    public ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalHeaderWithServiceResponseAsync(queryParameter), serviceCallback);
     }
 
     /**
@@ -397,10 +397,10 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional body parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalBodyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -452,10 +452,10 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalBodyWithServiceResponseAsync(bodyParameter), serviceCallback);
+    public ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalBodyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
@@ -514,10 +514,10 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getRequiredGlobalPathWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getRequiredGlobalPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -576,10 +576,10 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getRequiredGlobalQueryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getRequiredGlobalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -638,10 +638,10 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getOptionalGlobalQueryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getOptionalGlobalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

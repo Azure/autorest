@@ -13,7 +13,7 @@ package fixtures.url.implementation;
 import retrofit2.Retrofit;
 import fixtures.url.PathItems;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.url.models.ErrorException;
@@ -87,10 +87,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -162,10 +162,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    public ServiceFuture<Void> getAllWithValuesAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getAllWithValuesWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -242,10 +242,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -317,10 +317,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value 'localStringQuery'
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    public ServiceFuture<Void> getGlobalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getGlobalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -397,10 +397,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -472,10 +472,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain null value
      * @param pathItemStringQuery A string value 'pathItemStringQuery' that appears as a query parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    public ServiceFuture<Void> getGlobalAndLocalQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getGlobalAndLocalQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**
@@ -552,10 +552,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringPath should contain value 'localStringPath'
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
+    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath), serviceCallback);
     }
 
     /**
@@ -627,10 +627,10 @@ public class PathItemsImpl implements PathItems {
      * @param localStringQuery should contain value null
      * @param pathItemStringQuery should contain value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
+    public ServiceFuture<Void> getLocalPathItemQueryNullAsync(String localStringPath, String pathItemStringPath, String localStringQuery, String pathItemStringQuery, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getLocalPathItemQueryNullWithServiceResponseAsync(localStringPath, pathItemStringPath, localStringQuery, pathItemStringQuery), serviceCallback);
     }
 
     /**

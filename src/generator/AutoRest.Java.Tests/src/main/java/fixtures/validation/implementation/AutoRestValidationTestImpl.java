@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
@@ -189,10 +189,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+    public ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -266,10 +266,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -339,10 +339,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
+    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
     }
 
     /**
@@ -412,10 +412,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -468,10 +468,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -521,10 +521,10 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**

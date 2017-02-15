@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
@@ -106,10 +106,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -171,10 +171,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -236,10 +236,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -301,10 +301,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -367,10 +367,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+    public ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -433,10 +433,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -498,10 +498,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -564,10 +564,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+    public ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
@@ -630,10 +630,10 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

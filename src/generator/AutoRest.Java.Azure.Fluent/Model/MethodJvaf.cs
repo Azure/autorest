@@ -76,7 +76,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var imports = base.InterfaceImports;
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
+                    imports.Remove("com.microsoft.rest.ServiceFutureback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.PagedList");
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
@@ -114,7 +114,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
+                    imports.Remove("com.microsoft.rest.ServiceFutureback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.Add("com.microsoft.azure.Page");
                     imports.Add("com.microsoft.azure.PagedList");

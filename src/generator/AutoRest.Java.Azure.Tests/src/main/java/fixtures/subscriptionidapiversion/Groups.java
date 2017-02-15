@@ -10,7 +10,7 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
@@ -34,9 +34,9 @@ public interface Groups {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback);
+    ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback);
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

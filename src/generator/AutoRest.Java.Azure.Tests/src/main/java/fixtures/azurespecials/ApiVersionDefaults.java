@@ -10,7 +10,7 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
@@ -30,9 +30,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -58,9 +58,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -86,9 +86,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -114,9 +114,9 @@ public interface ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
