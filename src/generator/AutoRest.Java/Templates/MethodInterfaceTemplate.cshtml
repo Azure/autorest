@@ -42,9 +42,9 @@
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
- * @@return the {@@link ServiceCall} object
+ * @@return the {@@link ServiceFuture} object
  */
-ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
+ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))
@@ -133,9 +133,9 @@ Observable<@Model.ReturnTypeJv.ServiceResponseGenericParameterStringWrapped> @(M
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
- * @@return the {@@link ServiceCall} object
+ * @@return the {@@link ServiceFuture} object
  */
-ServiceCall<@Model.ReturnTypeJv.ServiceCallGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback);
+ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback);
 @EmptyLine
 /**
 @if (!string.IsNullOrEmpty(Model.Summary))

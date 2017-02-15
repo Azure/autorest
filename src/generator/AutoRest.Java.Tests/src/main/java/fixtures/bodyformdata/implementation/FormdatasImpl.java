@@ -13,8 +13,8 @@ package fixtures.bodyformdata.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodyformdata.Formdatas;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
@@ -88,10 +88,10 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
+    public ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+        return ServiceFuture.fromResponse(uploadFileWithServiceResponseAsync(fileContent, fileName), serviceCallback);
     }
 
     /**
@@ -161,10 +161,10 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
-        return ServiceCall.fromResponse(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
+    public ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
+        return ServiceFuture.fromResponse(uploadFileViaBodyWithServiceResponseAsync(fileContent), serviceCallback);
     }
 
     /**

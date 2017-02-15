@@ -12,8 +12,8 @@ package fixtures.azurereport;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.util.Map;
 import rx.Observable;
@@ -98,9 +98,9 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get test coverage report.

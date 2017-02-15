@@ -13,8 +13,8 @@ package fixtures.header.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.header.models.ErrorException;
@@ -204,10 +204,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
+    public ServiceFuture<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramExistingKeyWithServiceResponseAsync(userAgent), serviceCallback);
     }
 
     /**
@@ -268,10 +268,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseExistingKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -329,10 +329,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
+    public ServiceFuture<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramProtectedKeyWithServiceResponseAsync(contentType), serviceCallback);
     }
 
     /**
@@ -393,10 +393,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseProtectedKeyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -456,10 +456,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramIntegerWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -524,10 +524,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseIntegerWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -592,10 +592,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramLongWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -660,10 +660,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseLongWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseLongWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -728,10 +728,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramFloatWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -796,10 +796,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseFloatWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -864,10 +864,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramDoubleWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -932,10 +932,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseDoubleWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1000,10 +1000,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramBoolWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1068,10 +1068,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseBoolWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1134,10 +1134,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramStringWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1196,10 +1196,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramStringWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1264,10 +1264,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseStringWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseStringWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1332,10 +1332,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramDateWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1403,10 +1403,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseDateWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseDateWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1471,10 +1471,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramDatetimeWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1542,10 +1542,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseDatetimeWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1608,10 +1608,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1674,10 +1674,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramDatetimeRfc1123WithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1746,10 +1746,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseDatetimeRfc1123WithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1814,10 +1814,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramDurationWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -1885,10 +1885,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseDurationWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -1953,10 +1953,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramByteWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -2025,10 +2025,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseByteWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseByteWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2091,10 +2091,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2153,10 +2153,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
+    public ServiceFuture<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramEnumWithServiceResponseAsync(scenario, value), serviceCallback);
     }
 
     /**
@@ -2221,10 +2221,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
+    public ServiceFuture<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(responseEnumWithServiceResponseAsync(scenario), serviceCallback);
     }
 
     /**
@@ -2285,10 +2285,10 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(customRequestIdWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(customRequestIdWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
