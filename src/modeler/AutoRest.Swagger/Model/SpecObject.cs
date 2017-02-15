@@ -5,7 +5,6 @@ using System;
 
 namespace AutoRest.Swagger.Model
 {
-    [Serializable]
     public abstract class SpecObject : SwaggerBase
     {
     }

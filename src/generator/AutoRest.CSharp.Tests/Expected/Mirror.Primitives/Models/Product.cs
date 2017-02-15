@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorPrimitives.Models
 {
-    using MirrorPrimitives;
+    using Fixtures.MirrorPrimitives;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;

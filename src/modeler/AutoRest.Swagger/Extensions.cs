@@ -25,7 +25,7 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("verb");
             }
 
-            switch (verb.ToLower(CultureInfo.InvariantCulture))
+            switch (verb.ToLower())
             {
                 case "get":
                     return HttpMethod.Get;

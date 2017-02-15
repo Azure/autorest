@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using AcceptanceTestsValidation;
+    using Fixtures.AcceptanceTestsValidation;
     using Newtonsoft.Json;
     using System.Linq;
 

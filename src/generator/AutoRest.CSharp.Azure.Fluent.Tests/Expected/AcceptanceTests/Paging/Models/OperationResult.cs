@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using Azure;
-    using AcceptanceTestsPaging;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsPaging;
     using Newtonsoft.Json;
     using System.Linq;
 

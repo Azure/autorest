@@ -88,7 +88,7 @@ AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, op
   } catch (error) {
     return callback(error);
   }
-  var tags1;
+    var tags1;
   if (tags !== null && tags !== undefined) {
       tags1 = new client.models['AvailabilitySetUpdateParameters']();
       tags1.tags = tags;

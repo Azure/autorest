@@ -278,7 +278,6 @@ else
     else if (Model.LogicalParameters.Any(p => p.Location == ParameterLocation.FormData))
     {
     @:System.Net.Http.MultipartFormDataContent _multiPartContent = new System.Net.Http.MultipartFormDataContent();
-        
         foreach (ParameterCs parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
         {
     @:if (@(parameter.Name) != null)
@@ -297,7 +296,7 @@ else
             _contentDispositionHeaderValue.FileName = @(localParam)AsFileStream.Name;
             @(localParam).Headers.ContentDisposition = _contentDispositionHeaderValue;        
         }    
-        </text>
+</text>
             }
             else
             {
@@ -416,11 +415,10 @@ else
         @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
         else
+        {<text>
+        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        try
         {
-
-        @:_responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-        @:try
-        @:{
             @if (Model.CodeModel.ShouldGenerateXmlSerialization)
             {<text>
             @responsePair.Value.Body.AsNullableType() _tmp_ = null;
@@ -432,22 +430,25 @@ else
             else
             {
                 _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
-            }</text>
+            }
+</text>
             }
             else
             {<text>
-            _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));</text>
+            _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+</text>
             }
-        @:}
-        @:catch (Newtonsoft.Json.JsonException ex)
-        @:{
-        @:    _httpRequest.Dispose();
-        @:    if (_httpResponse != null)
-        @:    {
-        @:        _httpResponse.Dispose();
-        @:    }
-        @:    throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
-        @:}
+        }
+        catch (Newtonsoft.Json.JsonException ex)
+        {
+            _httpRequest.Dispose();
+            if (_httpResponse != null)
+            {
+                _httpResponse.Dispose();
+            }
+            throw new Microsoft.Rest.SerializationException("Unable to deserialize the response.", _responseContent, ex);
+        }
+</text>
         }
     }
     </text>

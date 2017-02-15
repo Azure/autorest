@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as models from "./models";
 
 declare class AutoRestReportService {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AutoRestReportService class.
      * @constructor

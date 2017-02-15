@@ -37,6 +37,7 @@ namespace AutoRest.Core.Validation
 
         public DataDirection Direction { get; set; } = DataDirection.None;
 
+        public Uri File { get; set; }
         public ObjectPath Path { get { return _path.Peek(); } }
 
         public void PushIndex(int index) { _path.Push(Path.AppendIndex(index)); }
@@ -47,17 +48,17 @@ namespace AutoRest.Core.Validation
 
         public void LogInfo(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, Path, Category.Info, formatArguments));
+            _messages.Add(new ComparisonMessage(template, new FileObjectPath(File, Path), Category.Info, formatArguments));
         }
 
         public void LogError(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, Path, Category.Error, formatArguments));
+            _messages.Add(new ComparisonMessage(template, new FileObjectPath(File, Path), Category.Error, formatArguments));
         }
 
         public void LogBreakingChange(MessageTemplate template, params object[] formatArguments)
         {
-            _messages.Add(new ComparisonMessage(template, Path, Strict ? Category.Error : Category.Warning, formatArguments));
+            _messages.Add(new ComparisonMessage(template, new FileObjectPath(File, Path), Strict ? Category.Error : Category.Warning, formatArguments));
         }
 
         public IEnumerable<ComparisonMessage> Messages {  get { return _messages; } }

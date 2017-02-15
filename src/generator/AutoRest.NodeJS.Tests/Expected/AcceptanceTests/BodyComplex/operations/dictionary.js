@@ -179,7 +179,7 @@ Dictionary.prototype.putValid = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+    var complexBody;
   if (defaultProgram !== null && defaultProgram !== undefined) {
       complexBody = new client.models['DictionaryWrapper']();
       complexBody.defaultProgram = defaultProgram;
@@ -409,7 +409,7 @@ Dictionary.prototype.putEmpty = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+    var complexBody;
   if (defaultProgram !== null && defaultProgram !== undefined) {
       complexBody = new client.models['DictionaryWrapper']();
       complexBody.defaultProgram = defaultProgram;
