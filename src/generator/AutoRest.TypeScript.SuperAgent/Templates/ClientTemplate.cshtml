@@ -64,7 +64,7 @@ class HttpCall<TReq, TRes> {
     }
 
     httpDelete(body?: any): Promise<TRes> {
-        return this.execute(() => request.put, body);
+        return this.execute(() => request.delete, body);
     }
 }
     
@@ -90,7 +90,7 @@ function req<TReq, TRes>(requestDto: TReq) : UrlConfig<TReq, TRes> {
 abstract class BaseApi {
     protected baseUrl: string;
 
-    constructor(baseUrl: string){
+    constructor(baseUrl?: string){
         if(baseUrl === undefined || baseUrl === null){
             baseUrl = "";
         }
