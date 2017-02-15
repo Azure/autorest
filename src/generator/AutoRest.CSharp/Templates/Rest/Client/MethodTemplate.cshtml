@@ -353,7 +353,7 @@ else
         @:{
             if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
-            @:@(Model.DefaultResponse.Body.AsNullableType(Model.IsXNullableReturnType)) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            @:@(Model.DefaultResponse.Body.AsNullableType()) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
             else
             {
