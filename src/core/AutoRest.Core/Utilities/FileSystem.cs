@@ -51,7 +51,7 @@ namespace AutoRest.Core.Utilities
         /// <param name="relativePath"></param>
         /// <returns></returns>
         public string MakePathRooted(Uri rootPath, string relativePath)
-            => Path.Combine(rootPath.ToString(), relativePath);
+            => (new Uri(Path.Combine(rootPath.ToString(), relativePath).ToString(), UriKind.Absolute)).ToString();
 
         public string ReadFileAsText(string path)
         {

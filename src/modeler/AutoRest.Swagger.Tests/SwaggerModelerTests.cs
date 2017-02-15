@@ -190,7 +190,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-external-ref-no-definitions.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref-no-definitions.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -208,7 +208,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "arm-network", "2016-12-01", "swagger", "applicationGateway.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "arm-network", "2016-12-01", "swagger", "applicationGateway.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
