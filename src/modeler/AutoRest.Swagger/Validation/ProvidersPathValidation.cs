@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
@@ -32,7 +31,7 @@ namespace AutoRest.Swagger.Validation
 
                 if (!FullRegex.IsMatch(pathObj.Key.TrimEnd('/')))
                 {
-                    yield return new ValidationMessage(context.Path, this, pathObj.Key);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, pathObj.Key);
                 }
             }
         }
