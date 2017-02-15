@@ -1,6 +1,7 @@
 import * as https from 'https';
 import {Enumerable as IEnumerable, From} from 'linq-es2015';
 import { parse as parseUrl } from 'url';
+import {Utility} from '../utility'
 
 export class Asset { 
     url:string;
@@ -16,8 +17,6 @@ export class Asset {
     browser_download_url:string;
 }
 
-
-
 async function Rest(url:string): Promise<any> {
     return new Promise<string>( (resolve, reject) => {
         var u = parseUrl(url);
@@ -25,8 +24,7 @@ async function Rest(url:string): Promise<any> {
             host:u.host,
             method:"GET",
             protocol:u.protocol,
-            headers: {"user-agent": "autorest",
-                "Authorization": "token f8966b1c8e8de1c7f07c844602e581af27ad6f61"
+            headers: {"user-agent": "autorest", "Authorization": `token ${Utility.Id}`
          },
             path:u.path,        
             }, (res)=> {
