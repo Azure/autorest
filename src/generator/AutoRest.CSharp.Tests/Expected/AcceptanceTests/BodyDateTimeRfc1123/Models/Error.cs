@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 {
-    using AcceptanceTestsBodyDateTimeRfc1123;
+    using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
     using Newtonsoft.Json;
     using System.Linq;
 

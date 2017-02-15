@@ -22,6 +22,7 @@ func main() {
 	server.Kill()
 	if !allPass {
 		fmt.Println("Not all tests passed")
+		os.Exit(1)
 	}
 }
 
@@ -63,11 +64,11 @@ func runTests(allPass *bool) {
 		"stringgroup",
 		"urlgroup",
 		"validationgroup",
-		"custombaseurlgroup",
+		//"custombaseurlgroup",
 		"filegroup",
 		// "formdatagroup",
 		"paginggroup",
-		"morecustombaseurigroup",
+		//"morecustombaseurigroup",
 	}
 
 	for _, suite := range testSuites {
@@ -115,7 +116,7 @@ func printReport(res *map[string]*int32, report string) {
 		}
 	}
 	total := len(*res)
-	fmt.Printf("\nReport:	Passed(%v)  Failed(%v)\n", total-count, count)
+	fmt.Printf("\nReport:	Passed(%v)  Not Run(%v)\n", total-count, count)
 	fmt.Printf("Go %s Done.......\n\n", report)
 
 }

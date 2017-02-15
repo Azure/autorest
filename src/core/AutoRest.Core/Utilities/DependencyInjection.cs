@@ -6,8 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting.Messaging;
+
 using System.Threading;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Core.Logging;
@@ -20,6 +19,9 @@ namespace AutoRest.Core.Utilities
         {
             private const string Slot = "LODIS-CurrentContext";
 
+#if !LEGACY
+            private static AsyncLocal<Guid?> LodisContext = new AsyncLocal<Guid?>();
+#endif
             internal static Dictionary<Guid, Activation> Activations = new Dictionary<Guid, Activation>();
 
             internal readonly Guid Id = Guid.NewGuid();
@@ -75,7 +77,7 @@ namespace AutoRest.Core.Utilities
                     Activations.Add(Id, this);
                 }
                 Current = this;
-                Context.OnActivate();
+                Context.PerformOnActivate();
 #if DEBUG
                 // Let's verify that the Context's factories have 
                 // correctly implemented constructors of the base 
@@ -98,7 +100,11 @@ namespace AutoRest.Core.Utilities
             {
                 get
                 {
+#if LEGACY
                     var id = CallContext.LogicalGetData(Slot);
+#else
+                    var id = LodisContext.Value;
+#endif
                     lock (typeof(Activation))
                     {
                         return id != null ? Activations[(Guid) id] : null;
@@ -106,7 +112,11 @@ namespace AutoRest.Core.Utilities
                 }
                 set
                 {
+#if LEGACY
                     CallContext.LogicalSetData( Slot,value?.Id);
+#else
+                    LodisContext.Value = value?.Id;
+#endif
                 }
             }
 
@@ -237,7 +247,7 @@ namespace AutoRest.Core.Utilities
         public class Context : IEnumerable<Factory>
         {
             private readonly Dictionary<Type, Factory> _factories = new Dictionary<Type, Factory>();
-            private event Action _onActivate;
+            private event Action OnActivate;
 
             public IEnumerator<Factory> GetEnumerator() => _factories.Values.GetEnumerator();
 
@@ -259,9 +269,9 @@ namespace AutoRest.Core.Utilities
             }
             public Context Add(Context parent)
             {
-                if (parent._onActivate != null)
+                if (parent.OnActivate != null)
                 {
-                    _onActivate += parent._onActivate;
+                    OnActivate += parent.OnActivate;
                 }
                 return Add((IEnumerable<Factory>) (parent));
             }
@@ -318,12 +328,12 @@ namespace AutoRest.Core.Utilities
 
             public void Add(Action onActivate)
             {
-                _onActivate += onActivate;
+                OnActivate += onActivate;
             }
 
-            protected internal void OnActivate()
+            protected internal void PerformOnActivate()
             {
-                _onActivate?.Invoke();
+                OnActivate?.Invoke();
             }
         }
 
@@ -397,7 +407,6 @@ namespace AutoRest.Core.Utilities
                 Logger.Instance.Log(Category.Fatal, $"New<{typeof(T)}({arguments.Select(each => each?.ToString()).Aggregate((cur, each) => $"{cur}, {each}")}) threw exception {e.GetType().Name} - {e.Message}");
                 throw;
             }
-
         }
 
         public static bool IsAnonymous(this object instance)

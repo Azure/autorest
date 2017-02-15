@@ -27,17 +27,17 @@ namespace AutoRest.Swagger.Validation
             return (context.Parent?.Value as SwaggerObject).IsConstraintSupported(context.Key);
         }
 
-    /// <summary>
-    ///     The template message for this Rule.
-    /// </summary>
-    /// <remarks>
-    ///     This may contain placeholders '{0}' for parameterized messages.
-    /// </remarks>
+        /// <summary>
+        ///     The template message for this Rule.
+        /// </summary>
+        /// <remarks>
+        ///     This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
         public override string MessageTemplate => Resources.InvalidConstraint;
 
-            /// <summary>
-            ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
-            /// </summary>
-            public override Category Severity => Category.Warning;
-        }
+        /// <summary>
+        ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Warning;
     }
+}

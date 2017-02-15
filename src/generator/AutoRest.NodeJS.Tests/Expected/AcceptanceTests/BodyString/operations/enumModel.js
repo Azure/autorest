@@ -661,7 +661,7 @@ EnumModel.prototype.putReferencedConstant = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var enumStringBody = new client.models['RefColorConstant']();
+    var enumStringBody = new client.models['RefColorConstant']();
   try {
     if (field1 !== null && field1 !== undefined)
     {

@@ -21,7 +21,6 @@ namespace AutoRest.Swagger.Model
     /// Describes a single operation determining with this object is mandatory.
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
     /// </summary>
-    [Serializable]
     [Rule(typeof(DefaultMustBeInEnum))]
     [Rule(typeof(RefsMustNotHaveSiblings))]
     public abstract class SwaggerObject : SwaggerBase

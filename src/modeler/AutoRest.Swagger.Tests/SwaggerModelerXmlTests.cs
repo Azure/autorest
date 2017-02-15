@@ -10,7 +10,6 @@ using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
-using AutoRest.CSharp;
 using Newtonsoft.Json.Linq;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
@@ -28,7 +27,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
+                    Input = Path.Combine("Resource","Swagger", "swagger-xml.yaml")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -51,7 +50,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml.yaml")
+                    Input = Path.Combine("Resource","Swagger", "swagger-xml.yaml")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
@@ -71,7 +70,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-xml-paths.yaml")
+                    Input = Path.Combine("Resource","Swagger", "swagger-xml-paths.yaml")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();

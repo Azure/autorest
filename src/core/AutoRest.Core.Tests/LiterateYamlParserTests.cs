@@ -5,8 +5,7 @@
 using Xunit;
 using System.IO;
 using AutoRest.Core.Parsing;
-using AutoRest.Swagger;
-using Newtonsoft.Json;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Tests
 {
@@ -19,8 +18,8 @@ namespace AutoRest.Core.Tests
         public void Compare()
         {
             var parser = new LiterateYamlParser();
-            var input1 = File.ReadAllText(Path.Combine("Resource", "literateSwagger.json"));
-            var input2 = parser.Parse(File.ReadAllText(Path.Combine("Resource", "literateSwagger.json.md")));
+            var input1 = File.ReadAllText(Path.Combine(Utilities.Extensions.CodeBaseDirectory, "Resource", "literateSwagger.json"));
+            var input2 = parser.Parse(File.ReadAllText(Path.Combine(Utilities.Extensions.CodeBaseDirectory, "Resource", "literateSwagger.json.md")));
 
             var normalized1 = input1.EnsureYamlIsJson();
             var normalized2 = input2.EnsureYamlIsJson();

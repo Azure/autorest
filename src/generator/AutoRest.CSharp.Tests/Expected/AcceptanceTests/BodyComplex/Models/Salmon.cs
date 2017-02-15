@@ -8,13 +8,13 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("salmon")]
+    [Newtonsoft.Json.JsonObject("salmon")]
     public partial class Salmon : Fish
     {
         /// <summary>

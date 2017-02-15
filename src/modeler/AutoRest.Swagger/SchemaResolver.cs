@@ -13,7 +13,7 @@ namespace AutoRest.Swagger
     /// <summary>
     /// Methods for normalizing and evaluating swagger schemas in their context in a swagger spec
     /// </summary>
-    public class SchemaResolver : ICloneable
+    public class SchemaResolver
     {
         private const int MaximumReferenceDepth = 40;
         private readonly ServiceDefinition _serviceDefinition;

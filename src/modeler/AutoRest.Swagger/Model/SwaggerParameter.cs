@@ -14,7 +14,6 @@ namespace AutoRest.Swagger.Model
     /// Describes a single operation parameter.
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject 
     /// </summary>
-    [Serializable]
     [Rule(typeof(ParameterDescriptionRequired))]
     [Rule(typeof(XmsClientNameParameterValidation))]
     public class SwaggerParameter : SwaggerObject
@@ -64,10 +63,10 @@ namespace AutoRest.Swagger.Model
             context.Direction = DataDirection.Request;
 
             base.Compare(context, previous);
-
+            
             if (In != priorParameter.In)
             {
-                context.LogBreakingChange(ComparisonMessages.ParameterInHasChanged, priorParameter.In.ToString().ToLower(CultureInfo.CurrentCulture), In.ToString().ToLower(CultureInfo.CurrentCulture));
+                context.LogBreakingChange(ComparisonMessages.ParameterInHasChanged, priorParameter.In.ToString().ToLower(), In.ToString().ToLower());
             }
 
             if (this.IsConstant != priorParameter.IsConstant)
