@@ -50,7 +50,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 var imports = new List<string>();
-                var ns = Namespace.ToLower(CultureInfo.InvariantCulture);
+                var ns = Namespace.ToLowerInvariant();
                 foreach (var i in base.ImplImports.ToList())
                 {
                     if (i.StartsWith(ns + "." + ImplPackage, StringComparison.OrdinalIgnoreCase))

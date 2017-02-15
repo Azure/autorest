@@ -1,0 +1,6 @@
+<Project ToolsVersion="15.0">
+  <PropertyGroup>
+    <PackageTargetFallback>$(PackageTargetFallback);dotnet;portable-net45+win8;netstandard1.3</PackageTargetFallback>
+    <!-- <PackageTargetFallback>$(PackageTargetFallback);dnxcore50; portable-net45+win8+wp8+wpa81</PackageTargetFallback> -->
+  </PropertyGroup>
+</Project>

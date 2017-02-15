@@ -34,6 +34,13 @@ namespace AutoRest.Core
             get { return TemplateConstants.EmptyLine + "\r\n"; }
         }
 
+        public virtual void BeginWriteAttribute(string name, string prefix, int prefixOffset, string suffix, int suffixOffset, int attributeValuesCount) {
+        }
+        public virtual void EndWriteAttribute() {
+        }
+        public void WriteAttributeValue(string prefix, int prefixOffset, object value, int valueOffset, int valueLength, bool isLiteral) {
+        }
+        
         /// <summary>
         /// Gets or sets settings.
         /// </summary>

@@ -5,7 +5,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback, ServiceClientCre
 import * as operations from "./operations";
 
 declare class StorageManagementClient {
-    /**
+        /**
      * @class
      * Initializes a new instance of the StorageManagementClient class.
      * @constructor

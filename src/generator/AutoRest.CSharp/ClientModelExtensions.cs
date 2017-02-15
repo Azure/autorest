@@ -169,13 +169,13 @@ namespace AutoRest.CSharp
                 string firstWord = summary.TrimStart().Split(' ').First();
                 if (firstWord.Length <= 1)
                 {
-                    documentation += char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                    documentation += char.ToLower(summary[0]) + summary.Substring(1);
                 }
                 else
                 {
-                    documentation += firstWord.ToUpper(CultureInfo.InvariantCulture) == firstWord
+                    documentation += firstWord.ToUpper() == firstWord
                         ? summary
-                        : char.ToLower(summary[0], CultureInfo.InvariantCulture) + summary.Substring(1);
+                        : char.ToLower(summary[0]) + summary.Substring(1);
                 }
             }
             return documentation.EscapeXmlComment();
@@ -391,6 +391,7 @@ namespace AutoRest.CSharp
         /// </summary>
         private static string ToLiteral(string input)
         {
+#if LEGACY            
             using (var writer = new StringWriter())
             {
                 using (var provider = CodeDomProvider.CreateProvider("CSharp"))
@@ -399,6 +400,9 @@ namespace AutoRest.CSharp
                     return writer.ToString();
                 }
             }
+#else 
+            return "\"" + input.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+#endif             
         }
 
         private static void AppendConstraintValidations(string valueReference, Dictionary<Constraint, string> constraints, IndentedStringBuilder sb, IModelType type)

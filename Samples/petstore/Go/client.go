@@ -18,30 +18,30 @@ const (
     // APIVersion is the version of the Petstore
     APIVersion = "1.0.0"
 
-    // DefaultBaseURI is the default URI used for the service Petstore
-    DefaultBaseURI = "http://petstore.swagger.io/v2"
+        // DefaultBaseURI is the default URI used for the service Petstore
+        DefaultBaseURI = "http://petstore.swagger.io/v2"
 )
 
 // ManagementClient is the base client for Petstore.
 type ManagementClient struct {
     autorest.Client
-    BaseURI string
+        BaseURI string
     APIVersion string
 }
 
 // New creates an instance of the ManagementClient client.
 func New()ManagementClient {
-    return NewWithBaseURI(DefaultBaseURI, )
+        return NewWithBaseURI(DefaultBaseURI, )
 }
 
-// NewWithBaseURI creates an instance of the ManagementClient client.
-func NewWithBaseURI(baseURI string, ) ManagementClient {
-   return ManagementClient{
-        Client: autorest.NewClientWithUserAgent(UserAgent()),
-        BaseURI: baseURI,
-        APIVersion: APIVersion,
+    // NewWithBaseURI creates an instance of the ManagementClient client.
+    func NewWithBaseURI(baseURI string, ) ManagementClient {
+        return ManagementClient{
+            Client: autorest.NewClientWithUserAgent(UserAgent()),
+            BaseURI: baseURI,
+            APIVersion: APIVersion,
+        }
     }
-}
 
     // AddPet adds a new pet to the store. You may receive an HTTP invalid input if
     // your pet is invalid.
@@ -999,14 +999,6 @@ func NewWithBaseURI(baseURI string, ) ManagementClient {
     //
     // body is order placed for purchasing the pet
     func (client ManagementClient) PlaceOrder(body *Order) (result Order, err error) {
-        if err := validation.Validate([]validation.Validation{
-             { TargetValue: body,
-              Constraints: []validation.Constraint{	{Target: "body", Name: validation.Null, Rule: false ,
-             Chain: []validation.Constraint{	{Target: "body.ID", Name: validation.ReadOnly, Rule: true, Chain: nil },
-             }}}}}); err != nil {
-                 return result, validation.NewErrorWithValidationError(err, "petstore.ManagementClient","PlaceOrder")
-        }
-
         req, err := client.PlaceOrderPreparer(body)
         if err != nil {
             return result, autorest.NewErrorWithError(err, "petstore.ManagementClient", "PlaceOrder", nil , "Failure preparing request")

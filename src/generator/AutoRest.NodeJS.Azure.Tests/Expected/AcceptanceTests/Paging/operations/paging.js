@@ -208,7 +208,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var maxresults;
+    var maxresults;
   var timeout;
   try {
     if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
@@ -379,7 +379,7 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var maxresults;
+    var maxresults;
   var timeout;
   try {
     if (pagingGetOdataMultiplePagesOptions !== null && pagingGetOdataMultiplePagesOptions !== undefined)
@@ -554,7 +554,7 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
   } catch (error) {
     return callback(error);
   }
-  var maxresults;
+    var maxresults;
   var offset;
   var timeout;
   try {
@@ -1485,7 +1485,7 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
   } catch (error) {
     return callback(error);
   }
-  var apiVersion;
+    var apiVersion;
   var tenant;
   try {
     if (customParameterGroup !== null && customParameterGroup !== undefined)
@@ -1787,7 +1787,7 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
   } catch (error) {
     return callback(error);
   }
-  var apiVersion;
+    var apiVersion;
   var tenant;
   try {
     if (customParameterGroup !== null && customParameterGroup !== undefined)
@@ -2083,7 +2083,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   } catch (error) {
     return callback(error);
   }
-  var maxresults;
+    var maxresults;
   var timeout;
   try {
     if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
@@ -2256,7 +2256,7 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
   } catch (error) {
     return callback(error);
   }
-  var maxresults;
+    var maxresults;
   var timeout;
   try {
     if (pagingGetOdataMultiplePagesOptions !== null && pagingGetOdataMultiplePagesOptions !== undefined)
@@ -2430,7 +2430,7 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
   } catch (error) {
     return callback(error);
   }
-  var maxresults;
+    var maxresults;
   var timeout;
   try {
     if (pagingGetMultiplePagesWithOffsetNextOptions !== null && pagingGetMultiplePagesWithOffsetNextOptions !== undefined)

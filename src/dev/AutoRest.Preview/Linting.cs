@@ -93,14 +93,14 @@ namespace AutoRest.Preview
                 {
                     try {
                         scintilla.IndicatorCurrent = INDICATOR_BASE + (int)message.Severity;
-                        var node = message.Path.SelectNode(doc);
+                        var node = message.Path.ObjectPath.SelectNode(doc);
                         var start = node.Start.Index;
                         var len = Math.Max(1, node.End.Index - start);
                         scintilla.IndicatorFillRange(start, len);
                         highlights.Add(new Highlight {
                             Start = start,
                             End = start + len,
-                            Message = $"{message.Severity}: [{message.Path.XPath}] {message.Message}"
+                            Message = $"{message.Severity}: [{message.Path.ObjectPath.JsonPath}] {message.Message}"
                         });
                     } catch  {
                         

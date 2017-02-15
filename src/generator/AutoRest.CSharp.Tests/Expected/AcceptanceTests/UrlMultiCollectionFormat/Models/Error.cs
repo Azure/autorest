@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat.Models
 {
-    using AcceptanceTestsUrlMultiCollectionFormat;
+    using Fixtures.AcceptanceTestsUrlMultiCollectionFormat;
     using Newtonsoft.Json;
     using System.Linq;
 

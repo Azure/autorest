@@ -8,7 +8,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Contact information for the defined API.
     /// </summary>
-    [Serializable]
     public class Contact
     {
         /// <summary>

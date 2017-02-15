@@ -558,4 +558,21 @@ export interface Header {
      */
     customNamedRequestIdParamGrouping(headerCustomNamedRequestIdParamGroupingParameters: models.HeaderCustomNamedRequestIdParamGroupingParameters, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     customNamedRequestIdParamGrouping(headerCustomNamedRequestIdParamGroupingParameters: models.HeaderCustomNamedRequestIdParamGroupingParameters, callback: ServiceCallback<void>): void;
+
+    /**
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
+     * header of the request
+     *
+     * @param {string} fooClientRequestId The fooRequestId
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    customNamedRequestIdHead(fooClientRequestId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    customNamedRequestIdHead(fooClientRequestId: string, callback: ServiceCallback<boolean>): void;
 }

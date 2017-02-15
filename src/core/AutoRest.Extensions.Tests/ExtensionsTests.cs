@@ -10,17 +10,6 @@ using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Model;
 
-#if gws_uh_no_just_no
-// If we want to keep these tests, they really 
-// should be migrated to the language 
-// specific tests projects. 
-
-using AutoRest.Java;
-using AutoRest.NodeJS;
-using AutoRest.Python;
-using AutoRest.Ruby;
-#endif
-
 namespace AutoRest.Extensions.Tests
 {
     public class ExtensionsTests
@@ -38,7 +27,7 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-payload-flatten.json"),
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json"),
                     PayloadFlatteningThreshold = 3
                 };
                 var modeler = new SwaggerModeler();
@@ -74,7 +63,7 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-parameter-location.json"),
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-parameter-location.json"),
                     PayloadFlatteningThreshold = 3
                 };
                 var modeler = new SwaggerModeler();
@@ -83,8 +72,8 @@ namespace AutoRest.Extensions.Tests
 
                 Assert.NotNull(clientModel);
                 Assert.Equal(2, clientModel.Properties.Count);
-                Assert.Equal(clientModel.Properties[0].Name, "SubscriptionId");
-                Assert.Equal(clientModel.Properties[1].Name, "ApiVersion");
+                Assert.Equal<string>(clientModel.Properties[0].Name, "SubscriptionId");
+                Assert.Equal<string>(clientModel.Properties[1].Name, "ApiVersion");
                 Assert.False(
                     clientModel.Methods[0].Parameters.First(p => p.Name == "resourceGroupName").IsClientProperty);
                 Assert.True(clientModel.Methods[0].Parameters.First(p => p.Name == "subscriptionId").IsClientProperty);
@@ -104,7 +93,7 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-x-ms-client-flatten.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-flatten.json")
                 };
                 var modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();
@@ -169,7 +158,7 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
                 };
 
                 var modeler = new SwaggerModeler();
@@ -214,7 +203,7 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
                 };
 
                 var modeler = new SwaggerModeler();
@@ -254,7 +243,7 @@ namespace AutoRest.Extensions.Tests
             var setting = new Settings
             {
                 Namespace = "Test",
-                Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+                Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
             };
 
             var modeler = new SwaggerModeler(setting);
@@ -294,7 +283,7 @@ namespace AutoRest.Extensions.Tests
             var setting = new Settings
             {
                 Namespace = "Test",
-                Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+                Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
             };
 
             var modeler = new SwaggerModeler(setting);
@@ -334,7 +323,7 @@ namespace AutoRest.Extensions.Tests
             var setting = new Settings
             {
                 Namespace = "Test",
-                Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+                Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
             };
 
             var modeler = new SwaggerModeler(setting);
@@ -374,7 +363,7 @@ namespace AutoRest.Extensions.Tests
             var setting = new Settings
             {
                 Namespace = "Test",
-                Input = Path.Combine("Swagger", "swagger-x-ms-client-name.json")
+                Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
             };
 
             var modeler = new SwaggerModeler(setting);

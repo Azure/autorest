@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 {
-    using AcceptanceTestsCustomBaseUri;
+    using Fixtures.AcceptanceTestsCustomBaseUri;
     using Newtonsoft.Json;
     using System.Linq;
 

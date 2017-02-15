@@ -44,7 +44,7 @@ namespace AutoRest.Swagger.Tests
             var settings = Settings.Instance;
 
             settings.FileSystem = new MemoryFileSystem();
-            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
+            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "AutoRest.json")));
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
             settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
 

@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureReport
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Serialization;
@@ -70,7 +70,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected AutoRestReportServiceForAzure(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
+        protected AutoRestReportServiceForAzure(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
@@ -84,7 +84,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected AutoRestReportServiceForAzure(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected AutoRestReportServiceForAzure(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
@@ -101,7 +101,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected AutoRestReportServiceForAzure(System.Uri baseUri, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        protected AutoRestReportServiceForAzure(System.Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -125,7 +125,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        protected AutoRestReportServiceForAzure(System.Uri baseUri, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        protected AutoRestReportServiceForAzure(System.Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -146,7 +146,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestReportServiceForAzure(ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestReportServiceForAzure(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -174,7 +174,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestReportServiceForAzure(ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public AutoRestReportServiceForAzure(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
@@ -202,7 +202,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestReportServiceForAzure(System.Uri baseUri, ServiceClientCredentials credentials, params System.Net.Http.DelegatingHandler[] handlers) : this(handlers)
+        public AutoRestReportServiceForAzure(System.Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -238,7 +238,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public AutoRestReportServiceForAzure(System.Uri baseUri, ServiceClientCredentials credentials, System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public AutoRestReportServiceForAzure(System.Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -271,11 +271,11 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new List<JsonConverter>
                     {
@@ -284,10 +284,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             };
             DeserializationSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new List<JsonConverter>
                     {
@@ -336,9 +336,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
                 _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("GET");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("GET");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (GenerateClientRequestId != null && GenerateClientRequestId.Value)

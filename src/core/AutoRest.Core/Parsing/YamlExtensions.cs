@@ -145,7 +145,7 @@ namespace AutoRest.Core.Parsing
             }
 
             // nothing worked
-            throw new Exception($"{path.XPath} has incomaptible values ({a}, {b}).");
+            throw new Exception($"{path.JsonPath} has incomaptible values ({a}, {b}).");
         }
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)

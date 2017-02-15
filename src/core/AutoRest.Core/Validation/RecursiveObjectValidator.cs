@@ -8,6 +8,7 @@ using System.Reflection;
 using AutoRest.Core.Utilities.Collections;
 using System;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Validation
 {
@@ -17,12 +18,6 @@ namespace AutoRest.Core.Validation
     public class RecursiveObjectValidator
     {
         private Func<PropertyInfo, string> resolver;
-
-        /// <summary>
-        /// Initializes the object validator. By default, it will use the property name when
-        /// returning the location of messages
-        /// </summary>
-        public RecursiveObjectValidator() : this(PropertyNameResolver.PropertyName) { }
 
         /// <summary>
         /// Initializes the object validator with a custom <paramref name="resolver"/>
@@ -38,9 +33,9 @@ namespace AutoRest.Core.Validation
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
-        public IEnumerable<LogMessage> GetValidationExceptions(object entity)
+        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, object entity)
         {
-            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity), Enumerable.Empty<Rule>());
+            return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>());
         }
 
         /// <summary>
@@ -86,7 +81,7 @@ namespace AutoRest.Core.Validation
             }
 
             // If this is a class, validate its value and its properties.
-            else if (traverseProperties && entity.GetType().IsClass && entity.GetType() != typeof(string))
+            else if (traverseProperties && entity.GetType().IsClass() && entity.GetType() != typeof(string))
             {
                 // Validate each property of the object
                 var propertyMessages = entity.GetValidatableProperties()
