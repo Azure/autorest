@@ -72,7 +72,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
                     if (!doNotWrap)
                     {
-                        responseName = $"{model.ModelModuleName}.{responseName}";
+                        responseName = $"{model.ModelModuleName}.I{responseName}";
                     }
 
                     var clientMethod = new ClientMethodModel

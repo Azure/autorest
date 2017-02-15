@@ -18,16 +18,16 @@ abstract class RequestBase {
 
 @foreach (var model in Model.ResponseModels)
 {
-@:export class @(model.Name) {
+@:export interface @(model.Name) {
     foreach (var property in model.Properties)
     {
         if (property.IsRequired)
         {
-@:    public @(property.Name) : @(property.TypeName);
+@:    @(property.Name) : @(property.TypeName);
         }
         else
         {
-@:    public @(property.Name)? : @(property.TypeName);
+@:    @(property.Name)? : @(property.TypeName);
         }
     }
 @:}
@@ -41,15 +41,15 @@ abstract class RequestBase {
     {
         if (property.IsRequired)
         {
-@:    public @(property.Name) : @(property.TypeName); 
+@:    @(property.Name) : @(property.TypeName); 
         }
         else
         {
-@:    public @(property.Name)? : @(property.TypeName);
+@:    @(property.Name)? : @(property.TypeName);
         }
     }
 
-@:    public validate(){
+@:    validate(){
     foreach (var p in model.Properties.Where(p => p.IsRequired))
     {
 @:        this.validateProperty(this.@(p.Name), "@(p.Name)");

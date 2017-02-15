@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
 
@@ -20,8 +21,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                             ResponseModels = new List<Model.Model>()
             };
 
-            var parameters = codeModel.Methods.SelectMany(m => m.Parameters).ToArray();
-            var modelTypes = codeModel.ModelTypes.ToList();
+            var modelTypesFromDefinition = codeModel.ModelTypes.ToList();
 
             foreach (var method in codeModel.Methods)
             {
@@ -45,7 +45,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                 }
                 else
                 {
-                    responseName = okResponse.Body.Name;
+                    responseName = $"I{okResponse.Body.Name}";
                 }
 
                 if (requestName == null)
@@ -65,7 +65,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     {
                         Name = parameter.Name.ToCamelCase(),
                         IsRequired = parameter.IsRequired,
-                        TypeName = parameter.ModelType.GetImplementationName()
+                        TypeName = GetTypeText(parameter.ModelType)
                     });
                 }
 
@@ -82,8 +82,8 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     Properties = new List<ModelProperty>()
                 };
 
-                var type = modelTypes.First(m => m.ClassName == okResponse.Body.ClassName);
-                modelTypes.Remove(type);
+                var type = modelTypesFromDefinition.First(m => m.ClassName == okResponse.Body.ClassName);
+                modelTypesFromDefinition.Remove(type);
 
                 foreach (var property in type.Properties)
                 {
@@ -91,35 +91,55 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                                              {
                                                  Name = property.Name.ToCamelCase(),
                                                  IsRequired = property.IsRequired,
-                                                 TypeName = property.ModelType.GetImplementationName()
+                                                 TypeName = GetTypeText(property.ModelType)
                                              });
                 }
 
                 models.ResponseModels.Add(responseModelType);
             }
 
-            foreach (var modelType in modelTypes.Where(m => !m.IsPrimaryType() || !m.IsSequenceType()))
+            foreach (var modelType in modelTypesFromDefinition.Where(m => !m.IsPrimaryType() || !m.IsSequenceType()))
             {
                 var model = new Model.Model
                             {
-                                Name =  $"{modelType.Name}",
+                                Name = GetTypeText(modelType),
                                 Properties = new List<ModelProperty>()
                             };
 
                 models.ResponseModels.Add(model);
 
-                foreach (var propertyType in modelType.Properties)
+                foreach (var property in modelType.Properties)
                 {
+                    var propertyType = property.ModelType;
+
                     model.Properties.Add(new ModelProperty
                                          {
-                                             Name = propertyType.Name.ToCamelCase(),
-                                             IsRequired = propertyType.IsRequired,
-                                             TypeName = propertyType.GetImplementationName()
-                                         });
+                                             Name = property.Name.ToCamelCase(),
+                                             IsRequired = property.IsRequired,
+                                             TypeName = GetTypeText(propertyType)
+                    });
                 }
             }
 
             return models;
+        }
+
+        protected string GetTypeText(IModelType modelType)
+        {
+            var seqType = modelType as SequenceTypeTs;
+
+            string name = "";
+
+            if (seqType == null)
+            {
+                name = modelType.GetImplementationName();
+                return modelType.IsPrimaryType() ? name : $"I{name}";
+            }
+
+            var elementType = seqType.ElementType;
+            name = elementType.GetImplementationName();
+
+            return SequenceTypeTs.CreateSeqTypeText(elementType.IsPrimaryType() ? name : $"I{name}");
         }
     }
 }

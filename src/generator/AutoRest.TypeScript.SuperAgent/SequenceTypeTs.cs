@@ -4,7 +4,14 @@ namespace AutoRest.TypeScript.SuperAgent
 {
     public class SequenceTypeTs : SequenceType, IImplementationNameAware
     {
-        public virtual string ImplementationName
+        public virtual string ImplementationName => CreateSeqTypeText(ElementTypeImplementationName);
+
+        internal static string CreateSeqTypeText(string implementationName)
+        {
+            return $"{implementationName}[]";
+        }
+
+        public string ElementTypeImplementationName
         {
             get
             {
@@ -17,7 +24,7 @@ namespace AutoRest.TypeScript.SuperAgent
                     name = elementType.ImplementationName;
                 }
 
-                return $"{name}[]";
+                return name;
             }
         }
     }
