@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
 
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that parameter is of correct type
