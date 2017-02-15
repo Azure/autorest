@@ -442,7 +442,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ProvidersPathValidJson()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource", "Swagger", "Validation", "positive", "providers-path-valid.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "providers-path-valid.json"));
             messages.AssertOnlyValidationWarning(typeof(ProvidersPathValidation), 0);
         }
 
