@@ -13,7 +13,7 @@ import * as models from "./models";
 import * as operations from "./operations";
 
 declare class AzureCompositeModel {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AzureCompositeModel class.
      * @constructor

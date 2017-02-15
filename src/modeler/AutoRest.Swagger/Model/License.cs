@@ -8,7 +8,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// License information for the defined API.
     /// </summary>
-    [Serializable]
     public class License
     {
         /// <summary>

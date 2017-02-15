@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Validation
 {

@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using System.Threading;

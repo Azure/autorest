@@ -1,5 +1,6 @@
 ﻿
 using AutoRest.Core.Logging;
+using System;
 
 namespace AutoRest.Core.Validation
 {
@@ -13,10 +14,11 @@ namespace AutoRest.Core.Validation
         /// Initializes a top level context for rules
         /// </summary>
         /// <param name="root"></param>
-        public RuleContext(object root) : this(null)
+        public RuleContext(object root, Uri file) : this(null)
         {
             this.Root = root;
             this.Value = root;
+            this.File = file;
         }
 
         /// <summary>
@@ -27,6 +29,7 @@ namespace AutoRest.Core.Validation
         {
             this.Parent = parent;
             this.Root = parent?.Root;
+            this.File = parent?.File;
         }
 
         /// <summary>
@@ -84,5 +87,7 @@ namespace AutoRest.Core.Validation
                 : Key == null
                     ? Parent.Path.AppendIndex(Index.Value)
                     : Parent.Path.AppendProperty(Key);
+
+        public Uri File { get; private set;  }
     }
 }

@@ -115,7 +115,7 @@ namespace AutoRest.Go
         /// <returns></returns>
         public static string TrimStartsWith(this string value, string s)
         {
-            if (!string.IsNullOrEmpty(s) && s.Length < value.Length && value.StartsWith(s, StringComparison.InvariantCultureIgnoreCase))
+            if (!string.IsNullOrEmpty(s) && s.Length < value.Length && value.StartsWith(s, StringComparison.OrdinalIgnoreCase))
             {
                 value = value.Substring(s.Length);
             }

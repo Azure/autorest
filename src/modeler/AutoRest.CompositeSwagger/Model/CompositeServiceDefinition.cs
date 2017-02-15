@@ -10,7 +10,6 @@ namespace AutoRest.CompositeSwagger.Model
     /// <summary>
     /// Class that represents a Composite Swagger schema
     /// </summary>
-    [Serializable]
     public class CompositeServiceDefinition : SpecObject
     {
         public CompositeServiceDefinition()

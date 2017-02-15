@@ -54,7 +54,7 @@ namespace AutoRest.Java.Model
         public IEnumerable<MethodJv> RootMethods => Methods.Where(m => m.Group.IsNullOrEmpty()).OfType<MethodJv>();
 
         [JsonIgnore]
-        public string FullyQualifiedDomainName => Namespace.ToLower(CultureInfo.InvariantCulture) + "." + this.Name;
+        public string FullyQualifiedDomainName => Namespace.ToLowerInvariant() + "." + this.Name;
 
         [JsonIgnore]
         public virtual IEnumerable<string> ImplImports

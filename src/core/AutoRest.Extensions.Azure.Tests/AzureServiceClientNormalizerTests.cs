@@ -8,6 +8,7 @@ using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using System.IO;
 
 namespace AutoRest.Extensions.Azure.Tests
 {
@@ -405,7 +406,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Swagger\swagger-odata-spec.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json")
                 };
 
 
@@ -429,7 +430,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Swagger\resource-external-false.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "resource-external-false.json")
                 };
 
 
@@ -456,7 +457,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Swagger\swagger-odata-spec.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json")
                 };
 
 
@@ -489,7 +490,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Swagger\swagger-odata-spec.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json")
                 };
 
 
@@ -519,7 +520,7 @@ namespace AutoRest.Extensions.Azure.Tests
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = @"Swagger\swagger-resource-flattening.json"
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-resource-flattening.json")
                 };
 
 

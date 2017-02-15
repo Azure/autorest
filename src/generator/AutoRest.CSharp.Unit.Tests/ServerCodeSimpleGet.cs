@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     Assert.Empty(errors);
 
                     // Load and reflect on the assembly
-                    var asm = Assembly.Load(result.Output.GetBuffer());
+                    var asm = LoadAssembly(result.Output);
                     Assert.NotNull(asm);
 
                     // Verify the server controller

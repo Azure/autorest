@@ -12,7 +12,7 @@ namespace AutoRest.Core.Model
     /// <summary>
     /// Defines a parameter transformation.
     /// </summary>
-    public class ParameterTransformation : ICloneable
+    public class ParameterTransformation 
     {
         public ParameterTransformation()
         {

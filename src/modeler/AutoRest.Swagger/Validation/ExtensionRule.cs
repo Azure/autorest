@@ -25,7 +25,7 @@ namespace AutoRest.Swagger.Validation
             // Only try to validate an object with this extension rule if the extension name matches the key
             if (context.Key == ExtensionName && !IsValid(entity, context, out formatParams))
             {
-                yield return new ValidationMessage(context.Path, this, formatParams);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, formatParams);
             }
         }
 

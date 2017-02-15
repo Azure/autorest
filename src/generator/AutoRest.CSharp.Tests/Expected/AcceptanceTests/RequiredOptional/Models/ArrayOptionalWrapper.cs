@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using AcceptanceTestsRequiredOptional;
+    using Fixtures.AcceptanceTestsRequiredOptional;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;

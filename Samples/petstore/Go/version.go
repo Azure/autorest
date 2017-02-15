@@ -31,7 +31,7 @@ func UserAgent() string {
 // Version returns the semantic version (see http://semver.org) of the client.
 func Version() string {
     if version == "" {
-        versionBuilder := bytes.NewBufferString(fmt.Sprintf("%d.%d.%d", major, minor, patch))
+        versionBuilder := bytes.NewBufferString(fmt.Sprintf("%s.%s.%s", major, minor, patch))
         if tag != "" {
             versionBuilder.WriteRune('-')
             versionBuilder.WriteString(strings.TrimPrefix(tag, "-"))

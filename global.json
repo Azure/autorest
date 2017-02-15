@@ -1,11 +1,5 @@
 {
-  "projects": [
-    "src/generator",
-    "src/modeler",
-    "src/core",
-    "src/dev"
-  ],
-   "sdk": {
-    "version": "1.0.0-preview2-003121"
+  "sdk": {
+    "version": "1.0.0-rc4-004769"
   }
 }

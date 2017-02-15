@@ -14,7 +14,7 @@ namespace AutoRest.Core.Logging
     /// </summary>
     public class LogMessage
     {
-        public LogMessage(Category severity, string message, ObjectPath path = null)
+        public LogMessage(Category severity, string message, FileObjectPath path = null)
         {
             Severity = severity;
             Message = message;
@@ -41,7 +41,7 @@ namespace AutoRest.Core.Logging
         /// <summary>
         /// The JSON document path to the element being validated.
         /// </summary>
-        public ObjectPath Path { get; }
+        public FileObjectPath Path { get; }
 
         /// <summary>
         /// Additional data, set only if `Settings.Instance.Verbose` is set.

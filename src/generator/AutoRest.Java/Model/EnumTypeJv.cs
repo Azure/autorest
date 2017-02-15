@@ -24,7 +24,7 @@ namespace AutoRest.Java.Model
                 if (Name != "String")
                 {
                     yield return string.Join(".",
-                        CodeModel?.Namespace.ToLower(CultureInfo.InvariantCulture),
+                        CodeModel?.Namespace.ToLowerInvariant(),
                         "models", Name);
                 }
             }

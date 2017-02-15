@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using System;
 using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Model
@@ -10,7 +9,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Security Scheme Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#security-scheme-object-
     /// </summary>
-    [Serializable]
     public class SecurityDefinition
     {
         private string _description;

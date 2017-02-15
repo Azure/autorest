@@ -19,7 +19,6 @@ namespace AutoRest.Swagger.Model
     /// http://json.schemastore.org/swagger-2.0
     /// Swagger Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#swagger-object- 
     /// </summary>
-    [Serializable]
     public class ServiceDefinition : SpecObject
     {
         public ServiceDefinition()
@@ -97,7 +96,7 @@ namespace AutoRest.Swagger.Model
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
-        /// <summary>
+        /// </summary>
         [Rule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(TrackedResourceValidation))]
@@ -145,6 +144,11 @@ namespace AutoRest.Swagger.Model
         /// Additional external documentation
         /// </summary>
         public ExternalDoc ExternalDocs { get; set; }
+
+        /// <summary>
+        /// Path to this Swagger.
+        /// </summary>
+        internal Uri FilePath { get; set; }
 
         /// <summary>
         /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
@@ -446,7 +450,7 @@ namespace AutoRest.Swagger.Model
 
                 if (!versionChanged && !integers)
                 {
-                    versionChanged = !oldVer.ToLower(CultureInfo.CurrentCulture).Equals(newVer.ToLower(CultureInfo.CurrentCulture));
+                    versionChanged = !oldVer.ToLower().Equals(newVer.ToLower());
                 }
 
                 context.Strict = !versionChanged;
