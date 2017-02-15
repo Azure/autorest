@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutValidAsync(this IReadonlyproperty operations, int? size = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(size, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(size, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

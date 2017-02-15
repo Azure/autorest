@@ -129,7 +129,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// </param>
             public static async Task PutNonAsciiAsync(this IByteModel operations, byte[] byteBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutNonAsciiWithHttpMessagesAsync(byteBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutNonAsciiWithHttpMessagesAsync(byteBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

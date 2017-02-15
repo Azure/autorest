@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutValidAsync(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -130,7 +130,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutEmptyAsync(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutEmptyWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

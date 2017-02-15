@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static async Task PutUtcMaxDateTimeAsync(this IDatetimerfc1123 operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUtcMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutUtcMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -240,7 +240,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
             /// </param>
             public static async Task PutUtcMinDateTimeAsync(this IDatetimerfc1123 operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUtcMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutUtcMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

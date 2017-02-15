@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigFloatAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -212,7 +212,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigDoubleAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -269,7 +269,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigDoublePositiveDecimalAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDoublePositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigDoublePositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -326,7 +326,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigDoubleNegativeDecimalAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDoubleNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigDoubleNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -383,7 +383,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -440,7 +440,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigDecimalPositiveDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDecimalPositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigDecimalPositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -497,7 +497,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutBigDecimalNegativeDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBigDecimalNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBigDecimalNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -554,7 +554,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutSmallFloatAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutSmallFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutSmallFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -611,7 +611,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutSmallDoubleAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutSmallDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutSmallDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -668,7 +668,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task PutSmallDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutSmallDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutSmallDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

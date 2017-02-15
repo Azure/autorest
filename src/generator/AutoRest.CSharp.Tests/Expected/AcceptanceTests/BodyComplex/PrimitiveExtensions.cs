@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutIntAsync(this IPrimitive operations, IntWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -132,7 +132,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutLongAsync(this IPrimitive operations, LongWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -191,7 +191,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutFloatAsync(this IPrimitive operations, FloatWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -252,7 +252,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutDoubleAsync(this IPrimitive operations, DoubleWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -311,7 +311,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutBoolAsync(this IPrimitive operations, BooleanWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -370,7 +370,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutStringAsync(this IPrimitive operations, StringWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -429,7 +429,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutDateAsync(this IPrimitive operations, DateWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -488,7 +488,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutDateTimeAsync(this IPrimitive operations, DatetimeWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -549,7 +549,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutDateTimeRfc1123Async(this IPrimitive operations, Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -606,7 +606,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutDurationAsync(this IPrimitive operations, System.TimeSpan? field = default(System.TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -663,7 +663,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutByteAsync(this IPrimitive operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

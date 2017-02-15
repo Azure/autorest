@@ -79,7 +79,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutValidAsync(this IInheritanceOperations operations, Siamese complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

@@ -63,7 +63,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             /// </param>
             public static async Task GetEmptyAsync(this IPaths operations, string vault, string secret, string keyName, string keyVersion = "v1", CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetEmptyWithHttpMessagesAsync(vault, secret, keyName, keyVersion, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetEmptyWithHttpMessagesAsync(vault, secret, keyName, keyVersion, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

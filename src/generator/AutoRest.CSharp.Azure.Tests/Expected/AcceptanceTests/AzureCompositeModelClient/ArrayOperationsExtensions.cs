@@ -75,7 +75,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutValidAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -132,7 +132,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutEmptyAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutEmptyWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

@@ -79,7 +79,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalIntegerParameterAsync(this IExplicitModel operations, int? bodyParameter = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalIntegerParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalIntegerParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -146,7 +146,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalIntegerPropertyAsync(this IExplicitModel operations, int? value = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalIntegerPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalIntegerPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -211,7 +211,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalIntegerHeaderAsync(this IExplicitModel operations, int? headerParameter = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalIntegerHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalIntegerHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -274,7 +274,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalStringParameterAsync(this IExplicitModel operations, string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalStringParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalStringParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -341,7 +341,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalStringPropertyAsync(this IExplicitModel operations, string value = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalStringPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalStringPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -406,7 +406,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalStringHeaderAsync(this IExplicitModel operations, string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalStringHeaderWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalStringHeaderWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -469,7 +469,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalClassParameterAsync(this IExplicitModel operations, Product bodyParameter = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalClassParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalClassParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -536,7 +536,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalClassPropertyAsync(this IExplicitModel operations, Product value = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalClassPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalClassPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -599,7 +599,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalArrayParameterAsync(this IExplicitModel operations, IList<string> bodyParameter = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalArrayParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalArrayParameterWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -666,7 +666,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalArrayPropertyAsync(this IExplicitModel operations, IList<string> value = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalArrayPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalArrayPropertyWithHttpMessagesAsync(value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -731,7 +731,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PostOptionalArrayHeaderAsync(this IExplicitModel operations, IList<string> headerParameter = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostOptionalArrayHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PostOptionalArrayHeaderWithHttpMessagesAsync(headerParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
