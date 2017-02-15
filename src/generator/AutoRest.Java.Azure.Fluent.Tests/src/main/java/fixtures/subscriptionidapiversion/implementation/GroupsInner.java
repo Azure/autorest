@@ -12,8 +12,8 @@ package fixtures.subscriptionidapiversion.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;

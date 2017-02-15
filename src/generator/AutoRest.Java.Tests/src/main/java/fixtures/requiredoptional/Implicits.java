@@ -10,8 +10,8 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
 import rx.Observable;

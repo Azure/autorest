@@ -10,8 +10,8 @@
 
 package fixtures.bodyfile;
 
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.InputStream;
 import rx.Observable;

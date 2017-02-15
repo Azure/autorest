@@ -10,8 +10,8 @@
 
 package fixtures.bodyduration;
 
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import org.joda.time.Period;
 import rx.Observable;

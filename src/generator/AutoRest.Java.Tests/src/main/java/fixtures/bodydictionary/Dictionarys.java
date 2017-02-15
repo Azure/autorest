@@ -10,8 +10,8 @@
 
 package fixtures.bodydictionary;
 
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydictionary.models.Widget;
 import java.util.List;

@@ -10,8 +10,8 @@
 
 package fixtures.parameterflattening;
 
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.util.Map;
 import rx.Observable;

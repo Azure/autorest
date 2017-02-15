@@ -10,8 +10,8 @@
 
 package fixtures.bodyarray;
 
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyarray.models.Product;
 import java.util.List;

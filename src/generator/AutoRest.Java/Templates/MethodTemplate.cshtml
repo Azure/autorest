@@ -55,7 +55,7 @@ else
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
-    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation), serviceFutureback);
+    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation), serviceCallback);
 }
 @EmptyLine
 /**
@@ -207,7 +207,7 @@ else
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
-    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation), serviceFutureback);
+    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation), serviceCallback);
 }
 @EmptyLine
 /**

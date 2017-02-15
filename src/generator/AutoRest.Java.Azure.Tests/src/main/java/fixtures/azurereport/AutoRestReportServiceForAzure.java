@@ -12,8 +12,8 @@ package fixtures.azurereport;
 
 import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.util.Map;
 import rx.Observable;
