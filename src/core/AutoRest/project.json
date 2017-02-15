@@ -60,7 +60,6 @@
     "AutoRest.Java.Azure.Fluent": { "target": "project", "type": "build" },
     "AutoRest.AzureResourceSchema": { "target": "project", "type": "build" },
     "AutoRest.CSharp.Azure.Fluent": { "target": "project", "type": "build" },
-  
   "Microsoft.CodeAnalysis.Analyzers" : { "version":"1.0.0" ,"type": "build"},
   "Microsoft.CodeAnalysis.Common": { "version":"1.0.0","type": "build"},
   "Microsoft.CodeAnalysis.CSharp" : {"version":"1.0.0","type": "build" },
@@ -70,7 +69,11 @@
   "Microsoft.Rest.ClientRuntime": { "version":"2.3.2","type": "build" },
   "Microsoft.Rest.ClientRuntime.Azure": { "version":"3.3.2" ,"type": "build"},
   "System.Collections.Immutable" : { "version":"1.1.36" ,"type": "build"},
-  "System.Reflection.Metadata" : { "version":"1.0.21","type": "build" }
+    "System.Reflection.Metadata": {
+      "version": "1.0.21",
+      "type": "build"
+    },
+    "AutoRest.TypeScript.SuperAgent": "1.0.0-*"
   },
 
   "disabled_dependencies": {

@@ -37,6 +37,7 @@
     <file src="binaries/net45/AutoRest.Swagger.dll" target="tools" />
     <file src="binaries/net45/Newtonsoft.Json.dll" target="tools" />
     <file src="binaries/net45/YamlDotNet.dll" target="tools" />
+	<file src="binaries/net45/AutoRest.TypeScript.SuperAgent.dll" target="tools" />
     <file src="binaries/net45/AutoRest.Release.json" target="tools/AutoRest.json" />
   </files>
 </package>  
