@@ -1,1948 +1,1046 @@
-﻿{
+﻿// 20170215154839
+// http://petstore.swagger.io/v2/swagger.json
+
+{
   "swagger": "2.0",
   "info": {
-    "version": "v1",
-    "title": "Agoda.Website.MVC"
+    "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
   },
-  "host": "localhost:61452",
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "pet",
+      "description": "Everything about your Pets",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "store",
+      "description": "Access to Petstore orders"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/{culture}/api/nha/ManageApi/GetBasicsInfo": {
+    "/pet": {
       "post": {
         "tags": [
-          "ManageApi"
+          "pet"
         ],
-        "operationId": "ManageApi_GetBasicsInfo",
+        "summary": "Add a new pet to the store",
+        "description": "",
+        "operationId": "addPet",
         "consumes": [
-          
+          "application/json",
+          "application/xml"
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
           "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/BasicsViewModel"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/SaveBasics": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_SaveBasics",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "jsonData",
             "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Property"
+              "$ref": "#/definitions/Pet"
             }
-          },
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Property"
-            }
+          "405": {
+            "description": "Invalid input"
           }
         },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/SaveAvailability": {
-      "post": {
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      },
+      "put": {
         "tags": [
-          "ManageApi"
+          "pet"
         ],
-        "operationId": "ManageApi_SaveAvailability",
+        "summary": "Update an existing pet",
+        "description": "",
+        "operationId": "updatePet",
         "consumes": [
           "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "application/xml"
         ],
         "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
           "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "data",
             "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SaveAvailibilityModel"
+              "$ref": "#/definitions/Pet"
             }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
           },
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PropertyInventoryWithChannels"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/GetFraudValidationInfo": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_GetFraudValidationInfo",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FraudValidationViewModel"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/Approve": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_Approve",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "fraudValidation",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FraudValidationParam"
-            }
+          "404": {
+            "description": "Pet not found"
           },
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ApproveResponseMessage"
-            }
+          "405": {
+            "description": "Validation exception"
           }
         },
-        "deprecated": false
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
       }
     },
-    "/{culture}/api/nha/ManageApi/RejectHotel": {
-      "post": {
+    "/pet/findByStatus": {
+      "get": {
         "tags": [
-          "ManageApi"
+          "pet"
         ],
-        "operationId": "ManageApi_RejectHotel",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
+        "summary": "Finds Pets by status",
+        "description": "Multiple status values can be provided with comma separated strings",
+        "operationId": "findPetsByStatus",
         "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
           "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "fraudValidation",
-            "in": "body",
+            "name": "status",
+            "in": "query",
+            "description": "Status values that need to be considered for filter",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/FraudValidationParam"
-            }
-          },
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "available",
+                "pending",
+                "sold"
+              ],
+              "default": "available"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FraudValidationResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/GetCompletionStatus": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_GetCompletionStatus",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NHAManageViewModel"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/Activate": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_Activate",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ActivateResponseMessage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/GetPricing": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_GetPricing",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PricingViewModel"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/{culture}/api/nha/ManageApi/SavePricing": {
-      "post": {
-        "tags": [
-          "ManageApi"
-        ],
-        "operationId": "ManageApi_SavePricing",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "jsonData",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SavePricingModel"
-            }
-          },
-          {
-            "name": "culture",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
+            "description": "successful operation",
             "schema": {
               "type": "array",
               "items": {
-                "format": "date-time",
-                "type": "string"
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "/pet/findByTags": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Finds Pets by tags",
+        "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
+        "operationId": "findPetsByTags",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "Tags to filter by",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ],
+        "deprecated": true
+      }
+    },
+    "/pet/{petId}": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Find pet by ID",
+        "description": "Returns a single pet",
+        "operationId": "getPetById",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Updates a pet in the store with form data",
+        "description": "",
+        "operationId": "updatePetWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Updated name of the pet",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "formData",
+            "description": "Updated status of the pet",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Deletes a pet",
+        "description": "",
+        "operationId": "deletePet",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "Pet id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "/pet/{petId}/uploadImage": {
+      "post": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "uploads an image",
+        "description": "",
+        "operationId": "uploadFile",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet to update",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "additionalMetadata",
+            "in": "formData",
+            "description": "Additional data to pass to server",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "file to upload",
+            "required": false,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "petstore_auth": [
+              "write:pets",
+              "read:pets"
+            ]
+          }
+        ]
+      }
+    },
+    "/store/inventory": {
+      "get": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Returns pet inventories by status",
+        "description": "Returns a map of status codes to quantities",
+        "operationId": "getInventory",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }
         },
-        "deprecated": false
+        "security": [
+          {
+            "api_key": [
+
+            ]
+          }
+        ]
       }
     },
-    "/{culture}/api/nha/user/current": {
-      "get": {
+    "/store/order": {
+      "post": {
         "tags": [
-          "User"
+          "store"
         ],
-        "operationId": "User_getCurrentUser",
-        "consumes": [
-          
-        ],
+        "summary": "Place an order for a pet",
+        "description": "",
+        "operationId": "placeOrder",
         "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
           "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "culture",
-            "in": "path",
+            "in": "body",
+            "name": "body",
+            "description": "order placed for purchasing the pet",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/UserInfo"
+              "$ref": "#/definitions/Order"
             }
+          },
+          "400": {
+            "description": "Invalid Order"
           }
-        },
-        "deprecated": false
+        }
       }
     },
-    "/{culture}/api/nha/user/current2": {
-      "post": {
+    "/store/order/{orderId}": {
+      "get": {
         "tags": [
-          "User"
+          "store"
         ],
-        "operationId": "User_updateUser",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "text/html",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
+        "summary": "Find purchase order by ID",
+        "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
+        "operationId": "getOrderById",
         "produces": [
-          "application/json",
-          "text/json",
-          "text/html",
           "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "name": "culture",
+            "name": "orderId",
             "in": "path",
+            "description": "ID of pet that needs to be fetched",
+            "required": true,
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "store"
+        ],
+        "summary": "Delete purchase order by ID",
+        "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
+        "operationId": "deleteOrder",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "description": "ID of the order that needs to be deleted",
+            "required": true,
+            "type": "integer",
+            "minimum": 1.0,
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Created user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/createWithArray": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates list of users with given input array",
+        "description": "",
+        "operationId": "createUsersWithArrayInput",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of user object",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/createWithList": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Creates list of users with given input array",
+        "description": "",
+        "operationId": "createUsersWithListInput",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "List of user object",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "The user name for login",
             "required": true,
             "type": "string"
           },
           {
-            "name": "user",
-            "in": "body",
+            "name": "password",
+            "in": "query",
+            "description": "The password for login in clear text",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserInfo2"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/UserInfo2"
+              "type": "string"
+            },
+            "headers": {
+              "X-Rate-Limit": {
+                "type": "integer",
+                "format": "int32",
+                "description": "calls per hour allowed by the user"
+              },
+              "X-Expires-After": {
+                "type": "string",
+                "format": "date-time",
+                "description": "date in UTC when token expires"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "logoutUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{username}": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get user by user name",
+        "description": "",
+        "operationId": "getUserByName",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Updated user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "name that need to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
-        },
-        "deprecated": false
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid user supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
       }
     }
   },
+  "securityDefinitions": {
+    "petstore_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+      "flow": "implicit",
+      "scopes": {
+        "write:pets": "modify pets in your account",
+        "read:pets": "read your pets"
+      }
+    },
+    "api_key": {
+      "type": "apiKey",
+      "name": "api_key",
+      "in": "header"
+    }
+  },
   "definitions": {
-    "JsonResult": {
+    "Order": {
       "type": "object",
       "properties": {
-        "contentEncoding": {
-          "$ref": "#/definitions/Encoding"
+        "id": {
+          "type": "integer",
+          "format": "int64"
         },
-        "contentType": {
-          "type": "string"
+        "petId": {
+          "type": "integer",
+          "format": "int64"
         },
-        "data": {
-          "type": "object"
+        "quantity": {
+          "type": "integer",
+          "format": "int32"
         },
-        "jsonRequestBehavior": {
-          "format": "int32",
+        "shipDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "Order Status",
           "enum": [
-            0,
-            1
-          ],
-          "type": "integer"
+            "placed",
+            "approved",
+            "delivered"
+          ]
         },
-        "maxJsonLength": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "recursionLimit": {
-          "format": "int32",
-          "type": "integer"
+        "complete": {
+          "type": "boolean",
+          "default": false
         }
+      },
+      "xml": {
+        "name": "Order"
       }
     },
-    "Encoding": {
+    "Category": {
       "type": "object",
       "properties": {
-        "bodyName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "encodingName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "headerName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "webName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "windowsCodePage": {
-          "format": "int32",
+        "id": {
           "type": "integer",
-          "readOnly": true
-        },
-        "isBrowserDisplay": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isBrowserSave": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isMailNewsDisplay": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isMailNewsSave": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isSingleByte": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "encoderFallback": {
-          "$ref": "#/definitions/EncoderFallback"
-        },
-        "decoderFallback": {
-          "$ref": "#/definitions/DecoderFallback"
-        },
-        "isReadOnly": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "codePage": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "EncoderFallback": {
-      "type": "object",
-      "properties": {
-        "maxCharCount": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "DecoderFallback": {
-      "type": "object",
-      "properties": {
-        "maxCharCount": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "BasicsViewModel": {
-      "type": "object",
-      "properties": {
-        "selectedDetail": {
-          "$ref": "#/definitions/Property"
-        },
-        "propertyTypeList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyType"
-          }
-        },
-        "viewList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HotelView"
-          }
-        },
-        "bedTypeList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BedType"
-          }
-        },
-        "accommodateList": {
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "bathroomsList": {
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "bedroomsList": {
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelName": {
-          "type": "string"
-        },
-        "pageDescription": {
-          "type": "string"
-        },
-        "pageKeywords": {
-          "type": "string"
-        },
-        "pageTitle": {
-          "type": "string"
-        },
-        "pageName": {
-          "type": "string"
-        },
-        "robots": {
-          "type": "string"
-        },
-        "isRegistering": {
-          "type": "boolean"
-        },
-        "isInternalUser": {
-          "type": "boolean"
-        },
-        "backToMainYCSUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "Property": {
-      "type": "object",
-      "properties": {
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "propertyBasicInfo": {
-          "$ref": "#/definitions/PropertyBasicInfo"
-        },
-        "propertyRoomType": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyRoomType"
-          }
-        },
-        "requestor": {
-          "$ref": "#/definitions/Requestor"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "PropertyType": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
+          "format": "int64"
         },
         "name": {
           "type": "string"
-        },
-        "productListId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "unitName": {
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
         }
+      },
+      "xml": {
+        "name": "Category"
       }
     },
-    "HotelView": {
+    "User": {
       "type": "object",
       "properties": {
-        "cmsId": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "username": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "userStatus": {
+          "type": "integer",
           "format": "int32",
-          "type": "integer"
+          "description": "User Status"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
         },
         "name": {
           "type": "string"
-        },
-        "viewId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
         }
+      },
+      "xml": {
+        "name": "Tag"
       }
     },
-    "BedType": {
+    "Pet": {
       "type": "object",
+      "required": [
+        "name",
+        "photoUrls"
+      ],
       "properties": {
-        "bedTypeId": {
-          "format": "int32",
-          "type": "integer"
+        "id": {
+          "type": "integer",
+          "format": "int64"
         },
-        "defaultName": {
-          "type": "string"
+        "category": {
+          "$ref": "#/definitions/Category"
         },
-        "displaySetting": {
-          "format": "int32",
-          "type": "integer"
+        "name": {
+          "type": "string",
+          "example": "doggie"
         },
-        "localName": {
-          "type": "string"
-        },
-        "validationErrors": {
+        "photoUrls": {
           "type": "array",
+          "xml": {
+            "name": "photoUrl",
+            "wrapped": true
+          },
           "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "PropertyBasicInfo": {
-      "type": "object",
-      "properties": {
-        "chainId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "geoLocation": {
-          "$ref": "#/definitions/GeoLocation"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelLanguageId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelLanguageName": {
-          "type": "string"
-        },
-        "hotelYcsFlag": {
-          "type": "boolean"
-        },
-        "isNonHotelAccomodationMode": {
-          "type": "boolean"
-        },
-        "productListId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "productListName": {
-          "type": "string"
-        },
-        "ycsLocalCurrencyId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "PropertyRoomType": {
-      "type": "object",
-      "properties": {
-        "allotmentAlertLevel": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "bedConfiguration": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BedConfiguration"
+            "type": "string"
           }
         },
-        "captionId": {
-          "type": "string"
+        "tags": {
+          "type": "array",
+          "xml": {
+            "name": "tag",
+            "wrapped": true
+          },
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
         },
-        "captionText": {
-          "type": "string"
-        },
-        "defaultHotelRateCategoryName": {
-          "type": "string"
-        },
-        "externalRoomTypeCode": {
-          "type": "string"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRoomTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRoomTypeName": {
-          "type": "string"
-        },
-        "hotelRoomTypeYcsFlag": {
-          "type": "boolean"
-        },
-        "isBreakfastIncluded": {
-          "type": "boolean"
-        },
-        "masterRoomTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxChildrenInRoom": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxExtraBed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maximumRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "maxInfantCots": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxOccupancy": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxOptionId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "minimumRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "noOfBathrooms": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "noOfBedrooms": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "noOfPhoto": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "noOfRoomFacilities": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "noOfRooms": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "productOfferTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "rackRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "recStatus": {
-          "format": "int32",
+        "status": {
+          "type": "string",
+          "description": "pet status in the store",
           "enum": [
-            0,
-            1,
-            -1
-          ],
-          "type": "integer"
-        },
-        "requestor": {
-          "$ref": "#/definitions/Requestor"
-        },
-        "roomDescription": {
-          "type": "string"
-        },
-        "sizeOfRoom": {
-          "format": "double",
-          "type": "number"
-        },
-        "standardRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "viewId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
+            "available",
+            "pending",
+            "sold"
+          ]
         }
+      },
+      "xml": {
+        "name": "Pet"
       }
     },
-    "Requestor": {
+    "ApiResponse": {
       "type": "object",
       "properties": {
-        "userId": {
-          "format": "uuid",
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
           "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "ValidationError": {
-      "type": "object",
-      "properties": {
-        "constraint": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "GeoLocation": {
-      "type": "object",
-      "properties": {
-        "areaId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "areaName": {
-          "type": "string"
-        },
-        "cityId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "cityName": {
-          "type": "string"
-        },
-        "countryId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "countryName": {
-          "type": "string"
-        },
-        "englishStreetAddress": {
-          "type": "string"
-        },
-        "geoCoordinate": {
-          "$ref": "#/definitions/GeoCoordinate"
-        },
-        "localStreetAddress": {
-          "type": "string"
-        },
-        "postalCode": {
-          "type": "string"
-        },
-        "stateId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "stateName": {
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "BedConfiguration": {
-      "type": "object",
-      "properties": {
-        "bedConfigurationId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "bedroomGroupNo": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "bedTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "noOfBeds": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "optionId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "GeoCoordinate": {
-      "type": "object",
-      "properties": {
-        "latitude": {
-          "format": "double",
-          "type": "number"
-        },
-        "longitude": {
-          "format": "double",
-          "type": "number"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "SaveAvailibilityModel": {
-      "type": "object",
-      "properties": {
-        "roomRateDate": {
-          "$ref": "#/definitions/InventoryRoomRateDate"
-        },
-        "roomRateCat": {
-          "$ref": "#/definitions/InventoryRoomRateCategory"
-        },
-        "blockedDate": {
-          "type": "array",
-          "items": {
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "InventoryRoomRateDate": {
-      "type": "object",
-      "properties": {
-        "doubleRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "extraBedRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "fullRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "hasCloseoutFlag": {
-          "type": "boolean"
-        },
-        "hotelRatecategoryDescription": {
-          "type": "string"
-        },
-        "hotelRatecategoryId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "inventoryRoomCommon": {
-          "$ref": "#/definitions/InventoryRoomCommon"
-        },
-        "limitRoom": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxNightStay": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "minNightStay": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "singleRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "InventoryRoomRateCategory": {
-      "type": "object",
-      "properties": {
-        "arrivalEndDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "arrivalStartDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "benefits": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Benefit"
-          }
-        },
-        "cancellationPolicyCode": {
-          "type": "string"
-        },
-        "cancellationPolicyDescription": {
-          "type": "string"
-        },
-        "cancellationPolicyId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "chargeTypeCode": {
-          "type": "string"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRatecategoryCode": {
-          "type": "string"
-        },
-        "hotelRatecategoryDescription": {
-          "type": "string"
-        },
-        "hotelRatecategoryId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRatecategoryType": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRatecategoryValueAmount": {
-          "format": "double",
-          "type": "number"
-        },
-        "isAutoExtendRateAllotment": {
-          "type": "boolean"
-        },
-        "limitRoom": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "masterHotelRatecategoryId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxAdvPurchase": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxNightsStay": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "minAdvPurchase": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "minNightsStay": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "parentRatecategoryId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "productOfferTypeGroupId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "rateTypeLoaded": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "recStatus": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            -1
-          ],
-          "type": "integer"
-        },
-        "sellEndDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "sellEndTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "sellStartDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "sellStartTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "InventoryRoomCommon": {
-      "type": "object",
-      "properties": {
-        "allotmentDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRoomTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRoomTypeName": {
-          "type": "string"
-        },
-        "standardRoomCaptionText": {
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "Benefit": {
-      "type": "object",
-      "properties": {
-        "benefitDefaultName": {
-          "type": "string"
-        },
-        "benefitDescription": {
-          "type": "string"
-        },
-        "benefitGroupId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "benefitId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "benefitLocalName": {
-          "type": "string"
-        },
-        "hotelRatecategoryId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "isActive": {
-          "type": "boolean"
-        },
-        "isSpecificValue": {
-          "type": "boolean"
-        },
-        "specificType": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "PropertyInventoryWithChannels": {
-      "type": "object",
-      "properties": {
-        "by": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "channels": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyChannel"
-          }
-        },
-        "endDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "inventoryRoomTypeAll": {
-          "$ref": "#/definitions/InventoryRoomTypeAll"
-        },
-        "propertyBasicInfo": {
-          "$ref": "#/definitions/PropertyBasicInfo"
-        },
-        "propertyRoomType": {
-          "$ref": "#/definitions/PropertyRoomType"
-        },
-        "startDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "PropertyChannel": {
-      "type": "object",
-      "properties": {
-        "cancellationPolicyId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "channelDiscount": {
-          "format": "double",
-          "type": "number"
-        },
-        "channelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "channelName": {
-          "type": "string"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "isActive": {
-          "type": "boolean"
-        },
-        "isMobileEnableFlag": {
-          "type": "boolean"
-        },
-        "processingFee": {
-          "format": "double",
-          "type": "number"
-        },
-        "rateTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "InventoryRoomTypeAll": {
-      "type": "object",
-      "properties": {
-        "inventoryPromoSurcharge": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InventoryPromoSurchageDate"
-          }
-        },
-        "inventoryRoomAllotment": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InventoryRoomAllotment"
-          }
-        },
-        "inventoryRoomRateCategory": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InventoryRoomRateCategory"
-          }
-        },
-        "inventoryRoomRateDate": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InventoryRoomRateDate"
-          }
-        },
-        "inventoryRoomType": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InventoryRoomType"
-          }
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "InventoryPromoSurchageDate": {
-      "type": "object",
-      "properties": {
-        "hasPromotion": {
-          "type": "boolean"
-        },
-        "hasSurcharge": {
-          "type": "boolean"
-        },
-        "inventoryRoomCommon": {
-          "$ref": "#/definitions/InventoryRoomCommon"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "InventoryRoomAllotment": {
-      "type": "object",
-      "properties": {
-        "allotmentGuaranteed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "allotmentRegular": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "excludeDateList": {
-          "type": "array",
-          "items": {
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "hasCloseoutFlag": {
-          "type": "boolean"
-        },
-        "hasNoArrivalFlag": {
-          "type": "boolean"
-        },
-        "hasNoCheckoutFlag": {
-          "type": "boolean"
-        },
-        "inventoryRoomCommon": {
-          "$ref": "#/definitions/InventoryRoomCommon"
-        },
-        "specificDay": {
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "InventoryRoomType": {
-      "type": "object",
-      "properties": {
-        "externalRoomTypeCode": {
-          "type": "string"
-        },
-        "hotelRoomTypeId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelRoomTypeName": {
-          "type": "string"
-        },
-        "isActive": {
-          "type": "boolean"
-        },
-        "maxChildrenInRoom": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxExtraBed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maxOccupancy": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "noOfRooms": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "standardRoomCaptionText": {
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "FraudValidationViewModel": {
-      "type": "object",
-      "properties": {
-        "rejectList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FraudReject"
-          }
-        },
-        "isHotelUnapproved": {
-          "type": "boolean"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelName": {
-          "type": "string"
-        },
-        "pageDescription": {
-          "type": "string"
-        },
-        "pageKeywords": {
-          "type": "string"
-        },
-        "pageTitle": {
-          "type": "string"
-        },
-        "pageName": {
-          "type": "string"
-        },
-        "robots": {
-          "type": "string"
-        },
-        "isRegistering": {
-          "type": "boolean"
-        },
-        "isInternalUser": {
-          "type": "boolean"
-        },
-        "backToMainYCSUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "FraudReject": {
-      "type": "object",
-      "properties": {
-        "reasonID": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "reasonName": {
-          "type": "string"
-        }
-      }
-    },
-    "FraudValidationParam": {
-      "type": "object",
-      "properties": {
-        "propertyId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "rejectId": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "ApproveResponseMessage": {
-      "type": "object",
-      "properties": {
-        "isSuccess": {
-          "type": "boolean"
         },
         "message": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object"
-        }
-      }
-    },
-    "FraudValidationResponseMessage": {
-      "type": "object",
-      "properties": {
-        "isSuccess": {
-          "type": "boolean"
-        },
-        "message": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object"
-        }
-      }
-    },
-    "NHAManageViewModel": {
-      "type": "object",
-      "properties": {
-        "basicStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "amenitiesStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "photoStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "pricingStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "availibilityStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "cancellationStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "fraudValidationStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "contractStatus": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelName": {
-          "type": "string"
-        },
-        "pageDescription": {
-          "type": "string"
-        },
-        "pageKeywords": {
-          "type": "string"
-        },
-        "pageTitle": {
-          "type": "string"
-        },
-        "pageName": {
-          "type": "string"
-        },
-        "robots": {
-          "type": "string"
-        },
-        "isRegistering": {
-          "type": "boolean"
-        },
-        "isInternalUser": {
-          "type": "boolean"
-        },
-        "backToMainYCSUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "ActivateResponseMessage": {
-      "type": "object",
-      "properties": {
-        "isSuccess": {
-          "type": "boolean"
-        },
-        "message": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object"
-        }
-      }
-    },
-    "PricingViewModel": {
-      "type": "object",
-      "properties": {
-        "selectedDetail": {
-          "$ref": "#/definitions/InventoryRoomRateDate"
-        },
-        "currencyCode": {
-          "type": "string"
-        },
-        "currencyNoDecimal": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "benefitList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Benefit"
-          }
-        },
-        "channelList": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Channel"
-          }
-        },
-        "selectedChannel": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyChannel"
-          }
-        },
-        "minRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "maxRate": {
-          "format": "double",
-          "type": "number"
-        },
-        "inventoryRoomRateCategory": {
-          "$ref": "#/definitions/InventoryRoomRateCategory"
-        },
-        "blockedDates": {
-          "type": "array",
-          "items": {
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "filteredAvailability": {
-          "type": "boolean"
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotelName": {
-          "type": "string"
-        },
-        "pageDescription": {
-          "type": "string"
-        },
-        "pageKeywords": {
-          "type": "string"
-        },
-        "pageTitle": {
-          "type": "string"
-        },
-        "pageName": {
-          "type": "string"
-        },
-        "robots": {
-          "type": "string"
-        },
-        "isRegistering": {
-          "type": "boolean"
-        },
-        "isInternalUser": {
-          "type": "boolean"
-        },
-        "backToMainYCSUrl": {
-          "type": "string"
-        }
-      }
-    },
-    "Channel": {
-      "type": "object",
-      "properties": {
-        "channelId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "defaultName": {
-          "type": "string"
-        },
-        "isActive": {
-          "type": "boolean"
-        },
-        "localName": {
-          "type": "string"
-        },
-        "validationErrors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ValidationError"
-          }
-        }
-      }
-    },
-    "SavePricingModel": {
-      "type": "object",
-      "properties": {
-        "inventoryRoomRateDate": {
-          "$ref": "#/definitions/InventoryRoomRateDate"
-        },
-        "benefitSelected": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Benefit"
-          }
-        },
-        "channels": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyChannel"
-          }
-        },
-        "hotelId": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "UserInfo": {
-      "type": "object",
-      "properties": {
-        "userName": {
-          "type": "string"
-        },
-        "userLanguage": {
-          "type": "string"
-        }
-      }
-    },
-    "UserInfo2": {
-      "type": "object",
-      "properties": {
-        "userName": {
-          "type": "string"
-        },
-        "userLanguage": {
           "type": "string"
         }
       }
     }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
   }
 }
