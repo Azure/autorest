@@ -18,10 +18,7 @@ namespace AutoRest.Core
         /// </summary>
         /// <param name="codeModel"></param>
         /// <returns></returns>
-        public virtual TCodeModel TransformCodeModel(CodeModel codeModel)
-        {
-            return codeModel as TCodeModel;
-        }
+        public virtual TCodeModel TransformCodeModel(CodeModel codeModel) => codeModel as TCodeModel;
     }
 
     public class CodeModelTransformer<TCodeModel, TBaseTransformer> : CodeModelTransformer<TCodeModel> where TCodeModel : CodeModel where TBaseTransformer : class, ITransformer<CodeModel>
