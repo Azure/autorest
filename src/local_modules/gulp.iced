@@ -26,8 +26,10 @@ Install 'marked'
 Install 'os'
 Install 'gulp'
 Install 'util'
+Install 'moment'
 Install 'chalk'
 Install 'yargs'
+Install 'ghrelease', 'gulp-github-release'
 Install 'through', 'through2'
 Install 'run', 'run-sequence'
 Install 'except', './except.iced'
@@ -41,12 +43,6 @@ Plugin 'filter',
 # force this into global namespace
 global['argv'] = yargs.argv
 
-# global['dotnet'] = require './dotnet.iced'
-# global['signBinaries'] = require './sign-binaries.iced'
-# global['signPackages'] = require './sign-nupkgs.iced'
-# global['policheck'] = require './policheck.iced'
-# global['publishPackages'] = require './publish-nupkgs.iced'
-
 Include './common'
 
 ###############################################
@@ -54,8 +50,16 @@ Include './common'
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
   version: argv.version or cat "#{basefolder}/VERSION"
-  configuration: argv.configuration or "debug"
+  configuration: argv.configuration or (if argv.release then 'release' else 'debug')
+  github_apikey: argv.github_apikey or process.env.GITHUB_APIKEY or null
+  nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
+  myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
+  npm_apikey:  argv.npm_apikey or process.env.NPM_APIKEY or null
+  today: moment().format('YYYYMMDD')
   force: argv.force or false
+  workdir: "#{process.env.tmp}/gulp/#{guid()}"
+
+mkdir workdir
 
 ###############################################
 # UI stuff
@@ -76,6 +80,7 @@ set '+e'
 
 Import 
   error: chalk.bold.red
+  error_message: chalk.bold.cyan
   warning: chalk.bold.yellow
   info: chalk.bold.green
 
@@ -97,5 +102,7 @@ task 'default','', ->
 ## available switches  
   *--force*          specify when you want to force an action (restore, etc)
   *--configuration*  'debug' or 'release'
+  *--release*        same as --configuration=release
+  *--nightly*        generate label for package as 'nightly-YYYYMMDD'
 #{switches}
 """
