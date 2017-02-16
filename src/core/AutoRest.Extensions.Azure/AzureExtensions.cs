@@ -143,7 +143,7 @@ namespace AutoRest.Extensions.Azure
             // Set default response if not defined explicitly
             foreach (var method in codeModel.Methods)
             {
-                if (method.DefaultResponse.Body == null && method.ReturnType.Body != null)
+                if (method.DefaultResponse.Body == null)
                 {
                     method.DefaultResponse = New<Response>(cloudError, method.ReturnType.Headers);
                 }                
