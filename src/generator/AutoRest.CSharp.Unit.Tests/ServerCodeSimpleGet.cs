@@ -34,8 +34,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
-                    FileSystem = fileSystem,
-                    OutputDirectory = "GeneratedCode",
+                    FileSystemInput = fileSystem,
+                    OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-server"
                 };

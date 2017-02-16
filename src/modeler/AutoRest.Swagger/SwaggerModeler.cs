@@ -68,7 +68,7 @@ namespace AutoRest.Swagger
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
             return Build(serviceDefinition);
         }
 
@@ -170,14 +170,16 @@ namespace AutoRest.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override IEnumerable<ComparisonMessage> Compare()
         {
+            var settings = Settings.Instance;
+
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystemInput);
+            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystemInput);
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 

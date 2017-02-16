@@ -107,11 +107,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             }
         }
 
-        protected virtual MemoryFileSystem CreateMockFilesystem() {
-            var fs = new MemoryFileSystem();
-            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
-            return fs;
-        }
+        protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger") {
             return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
@@ -119,8 +115,7 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp", string modeler = "Swagger") {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
-            return fs;
+            return dirName.GenerateCodeInto(fs, codeGenerator, modeler);
         }
 
         protected virtual void WriteLine(object value) {
@@ -218,8 +213,8 @@ namespace AutoRest.CSharp.Unit.Tests {
 
 
         protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
-            var compiler = new CSharpCompiler(fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(), _assemblies);
+            var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
+                .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
 
 #if false

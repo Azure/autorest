@@ -10,7 +10,6 @@
   </PropertyGroup>
  
   <ItemGroup>
-    <Content Include="Resource\AutoRest.json" />
     <Content Include="Resource\swagger-payload-flatten.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

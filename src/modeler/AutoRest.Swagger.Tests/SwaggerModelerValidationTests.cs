@@ -467,6 +467,7 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 0);
         }
 
+        /// <summary>
         /// Verifies that list by operations (operations that are named as *_listby*) are correctly named
         /// </summary>
         [Fact]
