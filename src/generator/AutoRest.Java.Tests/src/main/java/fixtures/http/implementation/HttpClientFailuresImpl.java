@@ -12,8 +12,8 @@ package fixtures.http.implementation;
 
 import retrofit2.Retrofit;
 import fixtures.http.HttpClientFailures;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
@@ -164,10 +164,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> head400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(head400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> head400Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(head400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -223,10 +223,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> get400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(get400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> get400Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(get400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -282,10 +282,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> put400Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -338,10 +338,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put400WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -399,10 +399,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> patch400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(patch400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> patch400Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(patch400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -455,10 +455,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(patch400WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(patch400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -516,10 +516,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> post400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(post400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> post400Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(post400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -572,10 +572,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(post400WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(post400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -633,10 +633,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> delete400Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(delete400WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> delete400Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(delete400WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -689,10 +689,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(delete400WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(delete400WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -750,10 +750,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> head401Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(head401WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> head401Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(head401WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -809,10 +809,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> get402Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(get402WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> get402Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(get402WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -868,10 +868,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> get403Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(get403WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> get403Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(get403WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -927,10 +927,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 404 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put404Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put404WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> put404Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -983,10 +983,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put404WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put404WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1044,10 +1044,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 405 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> patch405Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(patch405WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> patch405Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(patch405WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1100,10 +1100,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(patch405WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(patch405WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1161,10 +1161,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 406 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> post406Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(post406WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> post406Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(post406WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1217,10 +1217,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(post406WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(post406WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1278,10 +1278,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 407 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> delete407Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(delete407WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> delete407Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(delete407WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1334,10 +1334,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(delete407WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(delete407WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1395,10 +1395,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 409 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put409Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put409WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> put409Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put409WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1451,10 +1451,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put409WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put409WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1512,10 +1512,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> head410Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(head410WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> head410Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(head410WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1571,10 +1571,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> get411Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(get411WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> get411Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(get411WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1630,10 +1630,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> get412Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(get412WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> get412Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(get412WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1689,10 +1689,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 413 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put413Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put413WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> put413Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put413WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1745,10 +1745,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(put413WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(put413WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1806,10 +1806,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 414 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> patch414Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(patch414WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> patch414Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(patch414WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1862,10 +1862,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(patch414WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(patch414WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -1923,10 +1923,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 415 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> post415Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(post415WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> post415Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(post415WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1979,10 +1979,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(post415WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(post415WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -2040,10 +2040,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> get416Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(get416WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> get416Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(get416WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2099,10 +2099,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 417 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> delete417Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(delete417WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> delete417Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(delete417WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2155,10 +2155,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(delete417WithServiceResponseAsync(booleanValue), serviceCallback);
+    public ServiceFuture<Error> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(delete417WithServiceResponseAsync(booleanValue), serviceCallback);
     }
 
     /**
@@ -2216,10 +2216,10 @@ public class HttpClientFailuresImpl implements HttpClientFailures {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> head429Async(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(head429WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> head429Async(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(head429WithServiceResponseAsync(), serviceCallback);
     }
 
     /**

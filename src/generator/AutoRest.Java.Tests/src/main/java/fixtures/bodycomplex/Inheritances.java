@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.Siamese;
 import rx.Observable;
@@ -32,9 +32,9 @@ public interface Inheritances {
      * Get complex types that extend others.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
+    ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback);
 
     /**
      * Get complex types that extend others.
@@ -62,9 +62,9 @@ public interface Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that extend others.

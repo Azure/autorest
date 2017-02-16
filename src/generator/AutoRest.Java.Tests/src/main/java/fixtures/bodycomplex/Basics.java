@@ -10,8 +10,8 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.Basic;
 import rx.Observable;
@@ -32,9 +32,9 @@ public interface Basics {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -62,9 +62,9 @@ public interface Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -93,9 +93,9 @@ public interface Basics {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -122,9 +122,9 @@ public interface Basics {
      * Get a basic complex type that is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is empty.
@@ -151,9 +151,9 @@ public interface Basics {
      * Get a basic complex type whose properties are null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type whose properties are null.
@@ -180,9 +180,9 @@ public interface Basics {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceFuture<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.

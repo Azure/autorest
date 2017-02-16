@@ -10,8 +10,8 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
 
@@ -30,9 +30,9 @@ public interface HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head408Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head408Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 408 status code, then 200 after retry.
@@ -58,9 +58,9 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put500Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put500Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -87,9 +87,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -117,9 +117,9 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch500Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch500Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -146,9 +146,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 500 status code, then 200 after retry.
@@ -176,9 +176,9 @@ public interface HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> get502Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> get502Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 502 status code, then 200 after retry.
@@ -204,9 +204,9 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post503Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post503Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -233,9 +233,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -263,9 +263,9 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete503Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete503Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -292,9 +292,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 503 status code, then 200 after retry.
@@ -322,9 +322,9 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put504Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put504Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -351,9 +351,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -381,9 +381,9 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch504Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch504Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.
@@ -410,9 +410,9 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 504 status code, then 200 after retry.

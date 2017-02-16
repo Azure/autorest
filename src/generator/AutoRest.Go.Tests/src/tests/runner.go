@@ -64,11 +64,11 @@ func runTests(allPass *bool) {
 		"stringgroup",
 		"urlgroup",
 		"validationgroup",
-		//"custombaseurlgroup",
+		"custombaseurlgroup",
 		"filegroup",
 		// "formdatagroup",
 		"paginggroup",
-		//"morecustombaseurigroup",
+		"morecustombaseurigroup",
 	}
 
 	for _, suite := range testSuites {

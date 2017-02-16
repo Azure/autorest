@@ -77,7 +77,7 @@ export class Installer {
     
     return new Promise<string>((resolve, reject)=>{
       console.log(`Downloading ${runtime.browser_download_url} to ${this.framework}`);
-      let download = request.get(runtime.browser_download_url,{strictSSL:true,headers:{'user-agent':'autorest-installer',"Authorization": "token f8966b1c8e8de1c7f07c844602e581af27ad6f61"}});
+      let download = request.get(runtime.browser_download_url,{strictSSL:true,headers:{'user-agent':'autorest-installer',"Authorization": `token ${Utility.Id}`}});
       let unpack:any = null;
 
       if( runtime.name.endsWith('.zip' )) {

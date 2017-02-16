@@ -14,8 +14,8 @@ import retrofit2.Retrofit;
 import fixtures.http.HttpFailures;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
@@ -79,10 +79,10 @@ public class HttpFailuresImpl implements HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -139,10 +139,10 @@ public class HttpFailuresImpl implements HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getNoModelErrorWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -198,10 +198,10 @@ public class HttpFailuresImpl implements HttpFailures {
      * Get empty response from server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(getNoModelEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

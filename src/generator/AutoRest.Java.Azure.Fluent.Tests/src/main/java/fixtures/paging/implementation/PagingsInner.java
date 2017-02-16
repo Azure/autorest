@@ -12,12 +12,12 @@ package fixtures.paging.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.AzureServiceCall;
+import com.microsoft.azure.AzureServiceFuture;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.azure.Page;
 import com.microsoft.azure.PagedList;
-import com.microsoft.rest.ServiceCall;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
@@ -168,10 +168,10 @@ public class PagingsInner {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getSinglePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getSinglePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getSinglePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -262,10 +262,10 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -357,10 +357,10 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesSinglePageAsync(clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -466,10 +466,10 @@ public class PagingsInner {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getOdataMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getOdataMultiplePagesAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getOdataMultiplePagesSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -561,10 +561,10 @@ public class PagingsInner {
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getOdataMultiplePagesAsync(final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getOdataMultiplePagesSinglePageAsync(clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -675,10 +675,10 @@ public class PagingsInner {
      *
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -786,10 +786,10 @@ public class PagingsInner {
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptionsInner pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesWithOffsetSinglePageAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -899,10 +899,10 @@ public class PagingsInner {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesRetryFirstAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesRetryFirstSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -993,10 +993,10 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesRetrySecondAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesRetrySecondSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1087,10 +1087,10 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the first call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getSinglePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getSinglePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getSinglePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1181,10 +1181,10 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the second call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesFailureAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesFailureSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1275,10 +1275,10 @@ public class PagingsInner {
      * A paging operation that receives an invalid nextLink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesFailureUriAsync(final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesFailureUriAsync(final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesFailureUriSinglePageAsync(),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1373,10 +1373,10 @@ public class PagingsInner {
      * @param tenant Sets the tenant to use.
      * @param apiVersion Sets the api version to use.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesFragmentNextLinkAsync(final String tenant, final String apiVersion, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesFragmentNextLinkSinglePageAsync(tenant, apiVersion),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1481,10 +1481,10 @@ public class PagingsInner {
      *
      * @param customParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkAsync(final CustomParameterGroupInner customParameterGroup, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesFragmentWithGroupingNextLinkAsync(final CustomParameterGroupInner customParameterGroup, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(customParameterGroup),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1589,12 +1589,12 @@ public class PagingsInner {
      * @param tenant Sets the tenant to use.
      * @param nextLink Next link for list operation.
      * @param apiVersion Sets the api version to use.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> nextFragmentAsync(final String tenant, final String nextLink, final String apiVersion, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             nextFragmentSinglePageAsync(tenant, nextLink, apiVersion),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1707,12 +1707,12 @@ public class PagingsInner {
      *
      * @param nextLink Next link for list operation.
      * @param customParameterGroup Additional parameters for the operation
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> nextFragmentWithGroupingAsync(final String nextLink, final CustomParameterGroupInner customParameterGroup, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             nextFragmentWithGroupingSinglePageAsync(nextLink, customParameterGroup),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1820,12 +1820,12 @@ public class PagingsInner {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getSinglePagesNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getSinglePagesNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getSinglePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -1924,12 +1924,12 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2029,12 +2029,12 @@ public class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptionsInner pagingGetMultiplePagesOptions, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2148,12 +2148,12 @@ public class PagingsInner {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2253,12 +2253,12 @@ public class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetOdataMultiplePagesOptions Additional parameters for the operation
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getOdataMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetOdataMultiplePagesOptionsInner pagingGetOdataMultiplePagesOptions, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getOdataMultiplePagesNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetOdataMultiplePagesOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2372,12 +2372,12 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2477,12 +2477,12 @@ public class PagingsInner {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptionsInner pagingGetMultiplePagesWithOffsetNextOptions, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesWithOffsetNextSinglePageAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2596,12 +2596,12 @@ public class PagingsInner {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesRetryFirstNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2700,12 +2700,12 @@ public class PagingsInner {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesRetrySecondNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2804,12 +2804,12 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getSinglePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -2908,12 +2908,12 @@ public class PagingsInner {
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesFailureNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override
@@ -3012,12 +3012,12 @@ public class PagingsInner {
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @param serviceCall the ServiceCall object tracking the Retrofit calls
+     * @param serviceFuture the ServiceFuture object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<ProductInner>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall<List<ProductInner>> serviceCall, final ListOperationCallback<ProductInner> serviceCallback) {
-        return AzureServiceCall.fromPageResponse(
+    public ServiceFuture<List<ProductInner>> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceFuture<List<ProductInner>> serviceFuture, final ListOperationCallback<ProductInner> serviceCallback) {
+        return AzureServiceFuture.fromPageResponse(
             getMultiplePagesFailureUriNextSinglePageAsync(nextPageLink),
             new Func1<String, Observable<ServiceResponse<Page<ProductInner>>>>() {
                 @Override

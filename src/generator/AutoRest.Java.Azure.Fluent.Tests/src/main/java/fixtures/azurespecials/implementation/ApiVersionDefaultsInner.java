@@ -12,8 +12,8 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
@@ -82,10 +82,10 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -144,10 +144,10 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -206,10 +206,10 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -268,10 +268,10 @@ public class ApiVersionDefaultsInner {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

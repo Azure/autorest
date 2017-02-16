@@ -10,8 +10,8 @@
 
 package fixtures.bodybyte;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
 
@@ -31,9 +31,9 @@ public interface Bytes {
      * Get null byte value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get null byte value.
@@ -60,9 +60,9 @@ public interface Bytes {
      * Get empty byte value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get empty byte value ''.
@@ -89,9 +89,9 @@ public interface Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -119,9 +119,9 @@ public interface Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
@@ -150,9 +150,9 @@ public interface Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
+    ServiceFuture<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback);
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.

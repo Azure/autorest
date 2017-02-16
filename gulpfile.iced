@@ -12,16 +12,13 @@ Tasks "dotnet",
 Import
   solution: "#{basefolder}/AutoRest.sln"
   packages: "#{basefolder}/packages"
+  release_name: if argv.nightly then "#{version}-nightly-#{today}" else "#{version}" 
+  package_name: if argv.nightly then "autorest-#{version}-nightly-#{today}.zip" else "autorest-#{version}.zip"
 
   # which projects to care about
   projects:() ->
     source 'src/**/*.csproj'
       .pipe except /preview/ig
-
-  # which projects to package
-  pkgs:() ->
-    source 'src/**/*.csproj'
-      .pipe except /tests/ig
 
   # test projects 
   tests:() ->
@@ -32,17 +29,78 @@ Import
     
   # assemblies that we sign
   assemblies: () -> 
-    source "src/**/bin/#{configuration}/**/*.dll"   # the dlls in the ouptut folders
-      .pipe except /tests/ig        # except of course, test dlls
-      .pipe where (each) ->                         # take only files that are the same name as a folder they are in. (so, no deps.)
-        return true for folder in split each.path when folder is basename each.path 
+    source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**/AutoRest*"
+      .pipe except /pdb$/i
+      .pipe except /json$/i
+      .pipe except /so$/i
+      .pipe onlyFiles()
+      # .pipe showFiles()
+      # .pipe where (each) ->                         # take only files that are the same name as a folder they are in. (so, no deps.)
+      #  return true for folder in split each.path when folder is basename each.path 
 
+  packagefiles: () -> 
+    source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**"
+      .pipe except /pdb$/i
+      .pipe onlyFiles()
+
+task "show", 'show', -> 
+  assemblies() 
+    .pipe showFiles()
 
 task 'clean','Cleans the the solution', ['clean-packages'], -> 
   exec "git checkout #{basefolder}/packages"  
 
 task 'autorest', 'Runs AutoRest', (done) -> 
   autorest process.argv.slice(3), done
+
+task 'dotnet:publish','',['release-only', 'clean'], (done) -> 
+  exec "dotnet publish -c #{configuration} #{basefolder}/src/core/AutoRest /nologo /clp:NoSummary", (code, stdout, stderr) ->
+    Fail "Build Failed #{ warning stdout } \n#{ error stderr }" if code 
+    done();
+
+task 'zip-autorest', '', (done) ->
+  packagefiles()
+    .pipe zip package_name
+    .pipe destination packages
+
+task 'package','From scratch build, sign, and package autorest', (done) -> 
+  run 'clean',
+    'restore'
+    'dotnet:publish'
+    'sign-assemblies'
+    'zip-autorest' 
+    -> done()
+
+task 'publish', 'Builds, signs, publishes autorest binaries to GitHub Release',(done) ->
+  run 'package',
+    'upload:github'
+    -> done()
+
+
+task 'upload:github','', ->
+  Fail "needs --github_apikey=... or GITHUB_APIKEY set" if !github_apikey
+  Fail "Missing package file #{packages}/#{package_name}" if !exists("#{packages}/#{package_name}")
+
+  source "#{packages}/#{package_name}"
+    .pipe ghrelease {
+      token: github_apikey,   
+      owner: 'azure',
+      repo: 'autorest',
+      tag: "v#{release_name}",       
+      name: "#{release_name}", 
+      notes: """
+This release just contains the binary runtimes for the #{release_name} release of AutoRest.
+
+To Install AutoRest, install nodej.js 6.9.5 or later, and run
+
+> `npm install -g autorest`
+
+(You don't want to download these files directly, there's no point.)
+""",                
+      draft: false,
+      prerelease: if argv.nightly then true else false, 
+    }
+    
 
 task 'autorest-ng', "Runs AutoRest (via node)", ['build/build:typescript'] ,->
   cd process.env.INIT_CWD
