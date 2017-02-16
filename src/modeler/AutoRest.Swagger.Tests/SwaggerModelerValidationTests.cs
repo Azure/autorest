@@ -261,133 +261,133 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void OperationNameValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "operation-name-not-valid.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "operation-name-not-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(OperationNameValidation), 3);
         }
 
         [Fact]
         public void LongRunningResponseForPutValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "long-running-invalid-response-put.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "long-running-invalid-response-put.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
         }
 
         [Fact]
         public void LongRunningResponseForPostValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "long-running-invalid-response-post.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "long-running-invalid-response-post.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
         }
 
         [Fact]
         public void LongRunningResponseForDeleteValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "long-running-invalid-response-delete.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "long-running-invalid-response-delete.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
         }
 
         [Fact]
         public void MutabilityNotModeledValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "mutability-invalid-values.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values.json"));
             messages.AssertOnlyValidationMessage(typeof(MutabilityValidValuesRule), 2);
         }
 
         [Fact]
         public void MutabilityNotModeledWithReadOnlyValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
             messages.AssertOnlyValidationMessage(typeof(MutabilityWithReadOnlyRule), 2);
         }
 
         [Fact]
         public void VersionFormatValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-version-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-version-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(APIVersionPattern), 1);
         }
 
         [Fact]
         public void GuidUsageValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-guid-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-guid-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(GuidValidation), 1);
         }
 
         [Fact]
         public void DeleteRequestBodyValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-delete-request-body-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-delete-request-body-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(DeleteMustHaveEmptyRequestBody), 1);
         }
 
         [Fact]
         public void ResourceExtensionValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-ext-msresource-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-ext-msresource-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(ResourceIsMsResourceValidation), 1);
         }
 
         [Fact]
         public void MsClientNameExtensionValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-ext-msclientname-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-ext-msclientname-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(XmsClientNameValidation), 1);
         }
 
         [Fact]
         public void OperationsApiValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-operations-api-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-operations-api-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(OperationsAPIImplementationValidation), 1);
         }
 
         [Fact]
         public void ResourceModelValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-ext-resource-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-ext-resource-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(ResourceModelValidation), 1);
         }
 
         [Fact]
         public void SkuModelValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-skumodel-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-skumodel-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 1);
         }
 
         [Fact]
         public void TrackedResource1Validation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-tracked-resource-1-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-1-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
         }
 
         [Fact]
         public void TrackedResource2Validation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-tracked-resource-2-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-2-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
         }
 
         [Fact]
         public void TrackedResource3Validation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-tracked-resource-3-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-3-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
         }
 
         [Fact]
         public void TrackedResource4Validation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-tracked-resource-4-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-4-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
         }
 
         [Fact]
         public void PutGetPatchResponseValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "swagger-putgetpatch-response-validation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-putgetpatch-response-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(PutGetPatchResponseValidation), 1);
         }
     }
@@ -412,7 +412,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void RequiredPropertyDefinedAllOf()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "positive", "required-property-defined-allof.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "positive", "required-property-defined-allof.json"));
             Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
 
@@ -422,7 +422,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void PageableNextLinkDefinedAllOf()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "positive", "pageable-nextlink-defined-allof.json"));
             Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
 
@@ -432,7 +432,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void LongRunningResponseDefined()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource","Swagger", "Validation", "positive", "long-running-valid-response.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "positive", "long-running-valid-response.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
         }
 
