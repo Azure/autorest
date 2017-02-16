@@ -72,4 +72,3 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
         Task<HttpOperationResponse> ArrayStringMultiValidWithHttpMessagesAsync(IList<string> arrayQuery = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

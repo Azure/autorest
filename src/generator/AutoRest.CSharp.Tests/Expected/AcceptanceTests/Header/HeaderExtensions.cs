@@ -1068,4 +1068,3 @@ namespace Fixtures.AcceptanceTestsHeader
 
     }
 }
-

@@ -64,7 +64,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public string ProvisioningStateValues { get; protected set; }
+        public string ProvisioningStateValues { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -73,4 +73,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
     }
 }
-

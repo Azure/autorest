@@ -413,4 +413,3 @@ namespace Fixtures.PetstoreV2NoSync
 
     }
 }
-

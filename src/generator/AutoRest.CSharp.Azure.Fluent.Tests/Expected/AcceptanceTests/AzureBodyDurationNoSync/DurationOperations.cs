@@ -651,4 +651,3 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
 
     }
 }
-

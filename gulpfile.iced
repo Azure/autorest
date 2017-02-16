@@ -52,8 +52,13 @@ task "show", 'show', ->
   assemblies() 
     .pipe showFiles()
 
-task 'autorest', 'Runs AutoRest', (done) -> 
-  autorest process.argv.slice(3), done
+task 'clean','Cleans the the solution', ['clean-packages'], -> 
+  exec "git checkout #{basefolder}/packages"  
+
+task 'autorest', 'Runs AutoRest', (done) ->
+  args = process.argv.slice(3)
+  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+    return done()
 
 task 'dotnet:publish','',['release-only', 'clean'], (done) -> 
   exec "dotnet publish -c #{configuration} #{basefolder}/src/core/AutoRest /nologo /clp:NoSummary", (code, stdout, stderr) ->
@@ -121,9 +126,8 @@ task 'autorest-ng', "Runs AutoRest (via node)" ,(done)->
 autorest = (args,done) ->
   # Run AutoRest from the original current directory.
   echo info "AutoRest #{args.join(' ')}"
-  execute "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true, cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done() if code is 0 
-    throw error "AutoRest Failed\n\n#{args.join(' ')}\n\n\{stderr}"
+  execute "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true, cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+    return done()
 
 ############################################### 
 task 'test', "runs all tests", (done) ->
@@ -863,3 +867,9 @@ task 'regenerate-delete', '', ->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
+
+task 'autorest-preview-build', '', ->
+  exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"
+
+task 'autorest-preview', '', ->
+  exec "#{basefolder}/src/dev/AutoRest.Preview/bin/Debug/net461/AutoRest.Preview.exe", {cwd: "./src/dev/AutoRest.Preview"}

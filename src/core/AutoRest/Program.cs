@@ -73,28 +73,27 @@ namespace AutoRest
                             }
                         }
 
+                        // help requested?
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
-                        if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
+                        if (settings.ShowHelp)
                         {
                             settings.CodeGenerator = defCodeGen;
-                            Console.WriteLine(HelpGenerator.Generate(Resources.HelpMarkdownTemplate, settings));
+                            Console.WriteLine(HelpGenerator.Generate(IsShowMarkdownHelpIncluded(args) ? Resources.HelpMarkdownTemplate : Resources.HelpTextTemplate, settings));
+                            return 0;
                         }
-                        else if (settings.ShowHelp)
-                        {
-                            settings.CodeGenerator = defCodeGen;
-                            Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, settings));
-                        }
-                        else if (!string.IsNullOrEmpty(settings.Previous))
+
+                        // comparison?
+                        if (!string.IsNullOrEmpty(settings.Previous))
                         {
                             AutoRestController.Compare();
+                            return 0;
                         }
-                        else
+
+                        // main pipeline
+                        AutoRestController.Generate();
+                        if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                         {
-                            AutoRestController.Generate();
-                            if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
-                            {
-                                new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
-                            }
+                            new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                         }
                         if (settings.JsonValidationMessages)
                         {

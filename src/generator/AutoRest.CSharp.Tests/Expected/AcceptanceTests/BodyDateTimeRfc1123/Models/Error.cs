@@ -40,4 +40,3 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
 
     }
 }
-
