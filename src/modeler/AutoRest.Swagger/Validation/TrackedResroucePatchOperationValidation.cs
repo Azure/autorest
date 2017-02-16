@@ -45,7 +45,7 @@ namespace AutoRest.Swagger.Validation
                         // if no patch operation returns current tracked resource as a response, 
                         // the tracked resource does not have a corresponding patch operation, grounds to call
                         // the swagger invalid!
-                        yield return new ValidationMessage(context.Path, this, definition.Key.StripDefinitionPath());
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
                     }
                 }
             }

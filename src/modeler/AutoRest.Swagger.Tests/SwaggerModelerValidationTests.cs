@@ -387,7 +387,7 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void TrackedResourcePatchOperationValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "tracking-resource-patch-operation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracking-resource-patch-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 1);
         }
 
