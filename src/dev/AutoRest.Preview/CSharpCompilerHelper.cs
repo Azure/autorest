@@ -17,7 +17,7 @@ namespace AutoRest.Preview
         private static async Task<CompilationResult> Compile(IFileSystem fileSystem)
         {
             var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
+                fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
                     .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
                 ManagedAssets.FrameworkAssemblies.Concat(
                     AppDomain.CurrentDomain.GetAssemblies()

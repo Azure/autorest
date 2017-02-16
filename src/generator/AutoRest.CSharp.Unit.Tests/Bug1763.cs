@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 var result = await Compile(fileSystem);
 
                 // Expected Files
-                Assert.True(fileSystem.FileExists(Path.Combine("GeneratedCode", "Models", "Pet.cs")));
+                Assert.True(fileSystem.FileExists(Path.Combine("Models", "Pet.cs")));
 
                 // filter the warnings
                 var warnings = result.Messages.Where(
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(idMember);
 
                 // now read from the file to ensure we use this. to access the members
-                var codeText = fileSystem.ReadAllText(Path.Combine("GeneratedCode", "Models", "Pet.cs"));
+                var codeText = fileSystem.ReadAllText(Path.Combine("Models", "Pet.cs"));
                 // get hold of the ctor
                 var regex = new Regex(Regex.Escape("public Pet(int _id, string name = default(string))") + @"[^}]+");
                 var match = regex.Match(codeText);

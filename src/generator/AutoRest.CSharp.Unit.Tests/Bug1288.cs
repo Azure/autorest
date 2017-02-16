@@ -3,13 +3,13 @@
 // 
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
-using System.IO;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -31,8 +31,8 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(modeler: "CompositeSwagger"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(Path.Combine("GeneratedCode", "CompositeModel.cs")));
-                Assert.True(fileSystem.FileExists(Path.Combine("GeneratedCode", "Models", "Param1.cs")));
+                Assert.True(fileSystem.FileExists(Path.Combine("CompositeModel.cs")));
+                Assert.True(fileSystem.FileExists(Path.Combine("Models", "Param1.cs")));
 
                 var result = await Compile(fileSystem);
 

@@ -111,28 +111,6 @@ namespace AutoRest.Core.Utilities
             }
         }
 
-        public void DeleteDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
-
-        public void EmptyDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
-
         public bool DirectoryExists(string path)
         {
             foreach (var key in VirtualStore.Keys.ToArray())

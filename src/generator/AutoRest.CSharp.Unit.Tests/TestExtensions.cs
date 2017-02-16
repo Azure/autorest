@@ -30,7 +30,8 @@ namespace AutoRest.CSharp.Unit.Tests
             return name[0] == '<' && name[1] == '>' && name.IndexOf("AnonymousType", StringComparison.Ordinal) > 0;
         }
 
-        internal static void CopyFile(this IFileSystem fileSystem, string source, string destination) {
+        internal static void CopyFile(this IFileSystem fileSystem, string source, string destination)
+        {
             destination = destination.Replace("._", ".");
             fileSystem.WriteAllText(destination, File.ReadAllText(source));
         }
@@ -66,7 +67,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     Modeler = modeler,
                     CodeGenerator = codeGenerator,
                     FileSystem = fileSystem,
-                    OutputDirectory = "GeneratedCode",
+                    OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };
@@ -96,29 +97,14 @@ namespace AutoRest.CSharp.Unit.Tests
             var modeler = ExtensionsLoader.GetModeler();
             var codeModel = modeler.Build();
 
-            // After swagger Parser
-            codeModel = AutoRestController.RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-            // After swagger Parser
-            codeModel = AutoRestController.RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
             using (plugin.Activate())
             {
                 // load model into language-specific code model
                 codeModel = plugin.Serializer.Load(codeModel);
 
-                // we've loaded the model, run the extensions for after it's loaded
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-
                 // apply language-specific tranformation (more than just language-specific types)
                 // used to be called "NormalizeClientModel" . 
                 codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                // next set of extensions
-                codeModel = AutoRestController.RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-                // next set of extensions
-                codeModel = AutoRestController.RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                 // Generate code from CodeModel.
                 plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
@@ -135,8 +121,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 try
                 {
-                    fileSystem.EmptyDirectory(outputFolder);
-                    fileSystem.DeleteDirectory(outputFolder);
+                    Directory.Delete(outputFolder, true);
                 }
                 catch
                 {

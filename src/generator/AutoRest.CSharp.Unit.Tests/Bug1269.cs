@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(Path.Combine("GeneratedCode", "PetOperations.cs")));
+                Assert.True(fileSystem.FileExists("PetOperations.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 // Should also succeed.
                 Assert.True(result.Succeeded);
 
-                string genCode = fileSystem.ReadAllText(Path.Combine("GeneratedCode", "PetOperations.cs"));
+                string genCode = fileSystem.ReadAllText("PetOperations.cs");
                 const string nullStreamPattern = @"(?:.+)+(if \(streamContents == null\))(?:.+)+";
                 var regexResult = Regex.Match(genCode, nullStreamPattern, RegexOptions.Singleline);
                 Assert.False(regexResult.Success);

@@ -101,19 +101,6 @@ namespace AutoRest.Core.Utilities
             }
         }
 
-        public void DeleteDirectory(string directory)
-        {
-            Directory.Delete(directory, true);
-        }
-
-        public void EmptyDirectory(string directory)
-        {
-            foreach (var filePath in Directory.GetFiles(directory))
-            {
-                File.Delete(filePath);
-            }
-        }
-
         public string[] GetFiles(string startDirectory, string filePattern, SearchOption options)
         {
             return Directory.GetFiles(startDirectory, filePattern, options);

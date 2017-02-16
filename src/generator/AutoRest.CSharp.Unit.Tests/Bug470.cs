@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
                     FileSystem = fileSystem,
-                    OutputDirectory = "GeneratedCode",
+                    OutputDirectory = "",
                     Namespace = "Test",
                     ModelsName = modelsName
                 };
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 using (fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem, settings))
                 {
                     // Expected Files
-                    Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
+                    Assert.True(fileSystem.FileExists($@"{modelsName}\ResultObject.cs"));
 
                     var result = await Compile(fileSystem);
 
