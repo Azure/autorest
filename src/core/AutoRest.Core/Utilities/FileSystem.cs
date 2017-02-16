@@ -13,6 +13,11 @@ namespace AutoRest.Core.Utilities
 {
     public class FileSystem : IFileSystem
     {
+        public FileSystem()
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+        }
+
         public void WriteFile(string path, string contents)
         {
             var eol = path.LineEnding();
