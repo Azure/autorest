@@ -27,10 +27,10 @@ namespace AutoRest.CSharp.Unit.Tests
         public async Task EmptyDefaultResponseExceptionHandling()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = GenerateCodeForTestFromSpec())
+            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\ContainerServices.cs"));
+                Assert.True(fileSystem.FileExists(@"ContainerServicesOperations.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -55,11 +55,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // now read from the file to ensure we have the try catch block as expected
-                var codeText = fileSystem.ReadFileAsText(@"GeneratedCode\ContainerServices.cs");
-
+                var codeText = fileSystem.ReadAllText(@"ContainerServicesOperations.cs");
+                
                 Assert.NotEmpty(codeText);
+                // is a CloudException object created?
+                Assert.True(codeText.Contains("new Microsoft.Rest.Azure.CloudException"));
+                // are we deserializing response into CloudError object?
                 Assert.True(codeText.Contains("Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>"));
-                Assert.True(codeText.Contains("ex = new CloudException(_errorBody.Message);"));
+                // are we setting the errorbody in exception?
                 Assert.True(codeText.Contains("ex.Body = _errorBody;"));
 
             }
