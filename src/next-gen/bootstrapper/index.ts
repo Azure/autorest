@@ -13,6 +13,8 @@ import * as yargs from 'yargs'
 
 async function main() {
     
+    // autorest --version=1.0.1-nightly712312 
+    // autorest --version=latest 
     
     // steps:
     // determine the autorest version requested

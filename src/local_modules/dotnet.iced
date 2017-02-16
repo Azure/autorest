@@ -19,10 +19,6 @@ dotnet = (cmd) ->
 ###############################################
 # Common Tasks
 
-###############################################
-#task 'clean-packages', 'cleans out the contents of the packages folder', ->  
-  #rm '-rf', packages
-  #mkdir packages 
 
 ############################################### 
 task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clean', ->  
@@ -111,14 +107,6 @@ task 'restore','restores the dotnet packages for the projects', (done) ->
       next null  
   return null
   
-
-
-############################################### 
-# task 'dotnet-pack', '', ['clean-packages'] , ->
-#  # package the projects
-#  pkgs()
-#    .pipe dotnet "pack -c #{configuration} --no-build --output #{packages} #{versionsuffix}"
-
 ############################################### 
 #task 'package','From scratch build, sign, and package ', (done) -> 
 #  run 'clean',

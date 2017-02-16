@@ -17,7 +17,7 @@
   "homepage": "https://github.com/Azure/autorest/readme.md",
   
   "bin": {
-    "autorest": "./bin/autorest"
+    "autorest": "./index.js"
   },
  
   "devDependencies": {

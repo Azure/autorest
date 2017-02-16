@@ -47,9 +47,6 @@ Import
     source "src/next-gen/**/tsconfig.json"
 
 
-task 'clean','Cleans the the solution', ['clean-packages'], -> 
-  exec "git checkout #{basefolder}/packages"  
-
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
