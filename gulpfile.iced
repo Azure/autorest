@@ -102,17 +102,14 @@ To Install AutoRest, install nodej.js 6.9.5 or later, and run
       draft: false,
       prerelease: if argv.nightly then true else false, 
     }
-    
 
 task 'autorest-ng', "Runs AutoRest (via node)", ['build/build:typescript'] ,->
-  cd process.env.INIT_CWD
-  exec "node #{basefolder}/src/next-gen/autorest/index.js #{process.argv.slice(3).join(' ')}"
+  execute "node #{basefolder}/src/next-gen/autorest/index.js #{process.argv.slice(3).join(' ')}", {cwd: process.env.INIT_CWD }
 
 autorest = (args,done) ->
   # Run AutoRest from the original current directory.
-  cd process.env.INIT_CWD
   echo info "AutoRest #{args.join(' ')}"
-  execute "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true}, (code,stdout,stderr) ->
+  execute "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true, cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done() if code is 0 
     throw error "AutoRest Failed\n\n#{args.join(' ')}\n\n\{stderr}"
 

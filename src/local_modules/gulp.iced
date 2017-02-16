@@ -76,6 +76,9 @@ Import
   today: moment().format('YYYYMMDD')
   force: argv.force or false
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
+  threshold: argv.threshold or 10
+  verbose: argv.verbose or null
+  
 
 mkdir "#{process.env.tmp}/gulp" if !test "-d", "#{process.env.tmp}/gulp"
 mkdir workdir if !test "-d", workdir
@@ -102,6 +105,7 @@ Import
   error_message: chalk.bold.cyan
   warning: chalk.bold.yellow
   info: chalk.bold.green
+  quiet_info: chalk.green
 
 ###############################################
 task 'default','', ->
@@ -123,6 +127,8 @@ task 'default','', ->
   *--configuration*  'debug' or 'release'
   *--release*        same as --configuration=release
   *--nightly*        generate label for package as 'nightly-YYYYMMDD'
+  *--verbose*        enable verbose output
+  *--threshold=nn*   set parallelism threshold (default = 10)
 
 #{switches}
 """

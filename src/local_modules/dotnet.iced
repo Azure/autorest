@@ -85,17 +85,32 @@ task 'sign-assemblies','', (done) ->
     return;
 
 ############################################### 
-task 'restore','restores the dotnet packages for the projects', -> 
+task 'restore','restores the dotnet packages for the projects', (done) -> 
   if ! test '-d', "#{os.homedir()}/.nuget"
     global.force = true
-  
+  instances = 0 
+  _done = () ->
+    if instances is 0
+      instances--
+      done();
+
   projects()
+    .on 'end', -> 
+      _done() 
     .pipe where (each) ->  # check for project.assets.json files are up to date  
       return true if force
       assets = "#{folder each.path}/obj/project.assets.json"
       return false if (exists assets) and (newer assets, each.path)
       return true
-    .pipe dotnet 'restore'
+    .pipe foreach (each,next)->
+      any = true
+      instances++
+      execute "dotnet restore #{ each.path } /nologo",{retry:1} ,(code,stderr,stdout) ->
+        instances--
+        _done()
+      next null  
+  return null
+  
 
 
 ############################################### 
@@ -124,6 +139,7 @@ task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
       instances++
       execute "dotnet test #{ each.path } /nologo", (code,stderr,stdout) ->
         instances--
+        done() if instances is 0
       next null  
   return null
 

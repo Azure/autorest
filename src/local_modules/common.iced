@@ -1,7 +1,6 @@
 
 fs = require('fs')
 
-threshold= 10 
 concurrency = 0 
 queue = []
 
@@ -154,11 +153,18 @@ module.exports =
   
     concurrency++
 
-    echo info "            #{cmdline}" if !options.silent 
-    options.silent = true
+    options.cwd = options.cwd or basefolder 
+    echo  "           #{quiet_info options.cwd} :: #{info cmdline}" if !options.silent 
+    
+    options.silent = !verbose 
 
     exec cmdline, options, (code,stdout,stderr)-> 
       concurrency--
+
+      if code and (options.retry or 0) > 0
+        echo warning "reytrying #{options.retry} #{cmdline}"
+        options.retry--
+        return execute cmdline,options,callback
 
       # run the next one in the queue
       if queue.length
