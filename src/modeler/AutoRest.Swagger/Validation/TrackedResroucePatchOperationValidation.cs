@@ -28,11 +28,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
-        /// <summary>
-        /// Overridable method that lets a child rule return multiple validation messages for the <paramref name="entity"/>
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
+        // Verifies if a tracked resource has a corresponding patch operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             List<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", (ServiceDefinition)context.Root);
