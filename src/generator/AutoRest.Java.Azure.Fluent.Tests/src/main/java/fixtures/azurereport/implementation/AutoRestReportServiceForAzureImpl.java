@@ -15,8 +15,8 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurereport.ErrorException;
 import java.io.IOException;
@@ -193,10 +193,10 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceCall.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

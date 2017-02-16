@@ -3,8 +3,8 @@
 
 package petstore;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +40,9 @@ public interface SwaggerPetstore {
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
@@ -69,9 +69,9 @@ public interface SwaggerPetstore {
      *
      * @param body Pet object in the form of byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
@@ -101,9 +101,9 @@ public interface SwaggerPetstore {
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> addPetAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> addPetAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Add a new pet to the store.
@@ -134,9 +134,9 @@ public interface SwaggerPetstore {
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Add a new pet to the store.
@@ -166,9 +166,9 @@ public interface SwaggerPetstore {
      * Update an existing pet.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Update an existing pet.
@@ -195,9 +195,9 @@ public interface SwaggerPetstore {
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Update an existing pet.
@@ -228,9 +228,9 @@ public interface SwaggerPetstore {
      * Multiple status values can be provided with comma seperated strings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback);
+    ServiceCall<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback);
 
     /**
      * Finds Pets by status.
@@ -262,9 +262,9 @@ public interface SwaggerPetstore {
      *
      * @param status Status values that need to be considered for filter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback);
+    ServiceCall<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback);
 
     /**
      * Finds Pets by status.
@@ -297,9 +297,9 @@ public interface SwaggerPetstore {
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback);
+    ServiceCall<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback);
 
     /**
      * Finds Pets by tags.
@@ -331,9 +331,9 @@ public interface SwaggerPetstore {
      *
      * @param tags Tags to filter by
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback);
+    ServiceCall<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback);
 
     /**
      * Finds Pets by tags.
@@ -368,9 +368,9 @@ public interface SwaggerPetstore {
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback);
+    ServiceCall<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback);
 
     /**
      * Fake endpoint to test byte array return by 'Find pet by ID'.
@@ -405,9 +405,9 @@ public interface SwaggerPetstore {
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback);
+    ServiceCall<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback);
 
     /**
      * Find pet by ID.
@@ -439,9 +439,9 @@ public interface SwaggerPetstore {
      *
      * @param petId ID of pet that needs to be updated
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Updates a pet in the store with form data.
@@ -474,9 +474,9 @@ public interface SwaggerPetstore {
      * @param name Updated name of the pet
      * @param status Updated status of the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Updates a pet in the store with form data.
@@ -510,9 +510,9 @@ public interface SwaggerPetstore {
      *
      * @param petId Pet id to delete
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Deletes a pet.
@@ -543,9 +543,9 @@ public interface SwaggerPetstore {
      * @param petId Pet id to delete
      * @param apiKey the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Deletes a pet.
@@ -577,9 +577,9 @@ public interface SwaggerPetstore {
      *
      * @param petId ID of pet to update
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * uploads an image.
@@ -612,9 +612,9 @@ public interface SwaggerPetstore {
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback);
 
     /**
      * uploads an image.
@@ -649,9 +649,9 @@ public interface SwaggerPetstore {
      * Returns a map of status codes to quantities.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Returns pet inventories by status.
@@ -680,9 +680,9 @@ public interface SwaggerPetstore {
      * Place an order for a pet.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback);
+    ServiceCall<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback);
 
     /**
      * Place an order for a pet.
@@ -710,9 +710,9 @@ public interface SwaggerPetstore {
      *
      * @param body order placed for purchasing the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback);
+    ServiceCall<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback);
 
     /**
      * Place an order for a pet.
@@ -745,9 +745,9 @@ public interface SwaggerPetstore {
      *
      * @param orderId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback);
+    ServiceCall<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback);
 
     /**
      * Find purchase order by ID.
@@ -781,9 +781,9 @@ public interface SwaggerPetstore {
      *
      * @param orderId ID of the order that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete purchase order by ID.
@@ -815,9 +815,9 @@ public interface SwaggerPetstore {
      * This can only be done by the logged in user.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> createUserAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> createUserAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Create user.
@@ -848,9 +848,9 @@ public interface SwaggerPetstore {
      *
      * @param body Created user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Create user.
@@ -880,9 +880,9 @@ public interface SwaggerPetstore {
      * Creates list of users with given input array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Creates list of users with given input array.
@@ -909,9 +909,9 @@ public interface SwaggerPetstore {
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Creates list of users with given input array.
@@ -939,9 +939,9 @@ public interface SwaggerPetstore {
      * Creates list of users with given input array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Creates list of users with given input array.
@@ -968,9 +968,9 @@ public interface SwaggerPetstore {
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Creates list of users with given input array.
@@ -999,9 +999,9 @@ public interface SwaggerPetstore {
      * Logs user into the system.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<String> loginUserAsync(final ServiceCallback<String> serviceCallback);
+    ServiceCall<String> loginUserAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Logs user into the system.
@@ -1031,9 +1031,9 @@ public interface SwaggerPetstore {
      * @param username The user name for login
      * @param password The password for login in clear text
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback);
+    ServiceCall<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback);
 
     /**
      * Logs user into the system.
@@ -1063,9 +1063,9 @@ public interface SwaggerPetstore {
      * Logs out current logged in user session.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Logs out current logged in user session.
@@ -1094,9 +1094,9 @@ public interface SwaggerPetstore {
      *
      * @param username The name that needs to be fetched. Use user1 for testing.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback);
+    ServiceCall<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback);
 
     /**
      * Get user by user name.
@@ -1128,9 +1128,9 @@ public interface SwaggerPetstore {
      *
      * @param username name that need to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Updated user.
@@ -1165,9 +1165,9 @@ public interface SwaggerPetstore {
      * @param username name that need to be deleted
      * @param body Updated user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Updated user.
@@ -1203,9 +1203,9 @@ public interface SwaggerPetstore {
      *
      * @param username The name that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback);
+    ServiceCall<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete user.

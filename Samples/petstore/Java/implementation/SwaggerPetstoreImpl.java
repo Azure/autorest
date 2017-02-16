@@ -11,8 +11,8 @@ import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.RestException;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.InputStream;
@@ -212,10 +212,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -267,10 +267,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Pet object in the form of byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -329,10 +329,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> addPetAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(addPetWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> addPetAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(addPetWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -388,10 +388,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(addPetWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(addPetWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -451,10 +451,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Update an existing pet.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updatePetWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(updatePetWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -506,10 +506,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updatePetWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(updatePetWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -572,10 +572,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Multiple status values can be provided with comma seperated strings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceFuture.fromResponse(findPetsByStatusWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceCall.fromResponse(findPetsByStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -633,10 +633,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param status Status values that need to be considered for filter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceFuture.fromResponse(findPetsByStatusWithServiceResponseAsync(status), serviceCallback);
+    public ServiceCall<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceCall.fromResponse(findPetsByStatusWithServiceResponseAsync(status), serviceCallback);
     }
 
     /**
@@ -701,10 +701,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceFuture.fromResponse(findPetsByTagsWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceCall.fromResponse(findPetsByTagsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -762,10 +762,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param tags Tags to filter by
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceFuture.fromResponse(findPetsByTagsWithServiceResponseAsync(tags), serviceCallback);
+    public ServiceCall<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceCall.fromResponse(findPetsByTagsWithServiceResponseAsync(tags), serviceCallback);
     }
 
     /**
@@ -832,10 +832,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(findPetsWithByteArrayWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceCall<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
+        return ServiceCall.fromResponse(findPetsWithByteArrayWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -901,10 +901,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
-        return ServiceFuture.fromResponse(getPetByIdWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceCall<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
+        return ServiceCall.fromResponse(getPetByIdWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -967,10 +967,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet that needs to be updated
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updatePetWithFormWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceCall<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(updatePetWithFormWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -1032,10 +1032,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param name Updated name of the pet
      * @param status Updated status of the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updatePetWithFormWithServiceResponseAsync(petId, name, status), serviceCallback);
+    public ServiceCall<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(updatePetWithFormWithServiceResponseAsync(petId, name, status), serviceCallback);
     }
 
     /**
@@ -1101,10 +1101,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId Pet id to delete
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deletePetWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceCall<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(deletePetWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -1160,10 +1160,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId Pet id to delete
      * @param apiKey the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deletePetWithServiceResponseAsync(petId, apiKey), serviceCallback);
+    public ServiceCall<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(deletePetWithServiceResponseAsync(petId, apiKey), serviceCallback);
     }
 
     /**
@@ -1224,10 +1224,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet to update
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(uploadFileWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceCall<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -1290,10 +1290,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(uploadFileWithServiceResponseAsync(petId, additionalMetadata, file), serviceCallback);
+    public ServiceCall<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(petId, additionalMetadata, file), serviceCallback);
     }
 
     /**
@@ -1360,10 +1360,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a map of status codes to quantities.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceFuture.fromResponse(getInventoryWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceCall.fromResponse(getInventoryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1421,10 +1421,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Place an order for a pet.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback) {
-        return ServiceFuture.fromResponse(placeOrderWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback) {
+        return ServiceCall.fromResponse(placeOrderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1477,10 +1477,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body order placed for purchasing the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
-        return ServiceFuture.fromResponse(placeOrderWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
+        return ServiceCall.fromResponse(placeOrderWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -1544,10 +1544,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param orderId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
-        return ServiceFuture.fromResponse(getOrderByIdWithServiceResponseAsync(orderId), serviceCallback);
+    public ServiceCall<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
+        return ServiceCall.fromResponse(getOrderByIdWithServiceResponseAsync(orderId), serviceCallback);
     }
 
     /**
@@ -1615,10 +1615,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param orderId ID of the order that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deleteOrderWithServiceResponseAsync(orderId), serviceCallback);
+    public ServiceCall<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(deleteOrderWithServiceResponseAsync(orderId), serviceCallback);
     }
 
     /**
@@ -1683,10 +1683,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> createUserAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(createUserWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> createUserAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(createUserWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1742,10 +1742,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Created user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(createUserWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(createUserWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -1804,10 +1804,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1859,10 +1859,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -1919,10 +1919,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(createUsersWithListInputWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(createUsersWithListInputWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -1974,10 +1974,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(createUsersWithListInputWithServiceResponseAsync(body), serviceCallback);
+    public ServiceCall<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(createUsersWithListInputWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -2035,10 +2035,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Logs user into the system.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<String> loginUserAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(loginUserWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<String> loginUserAsync(final ServiceCallback<String> serviceCallback) {
+        return ServiceCall.fromResponse(loginUserWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2094,10 +2094,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param username The user name for login
      * @param password The password for login in clear text
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
-        return ServiceFuture.fromResponse(loginUserWithServiceResponseAsync(username, password), serviceCallback);
+    public ServiceCall<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
+        return ServiceCall.fromResponse(loginUserWithServiceResponseAsync(username, password), serviceCallback);
     }
 
     /**
@@ -2157,10 +2157,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Logs out current logged in user session.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(logoutUserWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(logoutUserWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -2217,10 +2217,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The name that needs to be fetched. Use user1 for testing.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
-        return ServiceFuture.fromResponse(getUserByNameWithServiceResponseAsync(username), serviceCallback);
+    public ServiceCall<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
+        return ServiceCall.fromResponse(getUserByNameWithServiceResponseAsync(username), serviceCallback);
     }
 
     /**
@@ -2286,10 +2286,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username name that need to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updateUserWithServiceResponseAsync(username), serviceCallback);
+    public ServiceCall<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(updateUserWithServiceResponseAsync(username), serviceCallback);
     }
 
     /**
@@ -2352,10 +2352,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param username name that need to be deleted
      * @param body Updated user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(updateUserWithServiceResponseAsync(username, body), serviceCallback);
+    public ServiceCall<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(updateUserWithServiceResponseAsync(username, body), serviceCallback);
     }
 
     /**
@@ -2425,10 +2425,10 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The name that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(deleteUserWithServiceResponseAsync(username), serviceCallback);
+    public ServiceCall<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(deleteUserWithServiceResponseAsync(username), serviceCallback);
     }
 
     /**

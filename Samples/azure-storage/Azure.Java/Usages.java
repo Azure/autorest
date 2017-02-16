@@ -3,8 +3,8 @@
 
 package petstore;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.util.List;
 import petstore.models.Usage;
@@ -26,9 +26,9 @@ public interface Usages {
      * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    ServiceFuture<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback);
+    ServiceCall<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback);
 
     /**
      * Gets the current usage count and the limit for the resources under the subscription.

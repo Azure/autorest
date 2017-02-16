@@ -12,8 +12,8 @@ package fixtures.subscriptionidapiversion.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;
@@ -74,10 +74,10 @@ public class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
-        return ServiceFuture.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+    public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+        return ServiceCall.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**

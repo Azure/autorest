@@ -12,8 +12,8 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
@@ -82,10 +82,10 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(getMethodLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -142,10 +142,10 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(getMethodLocalNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -197,10 +197,10 @@ public class ApiVersionLocalsInner {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
+    public ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(getMethodLocalNullWithServiceResponseAsync(apiVersion), serviceCallback);
     }
 
     /**
@@ -258,10 +258,10 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(getPathLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -318,10 +318,10 @@ public class ApiVersionLocalsInner {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(getSwaggerLocalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

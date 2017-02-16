@@ -13,8 +13,8 @@ package fixtures.custombaseuri.implementation;
 import retrofit2.Retrofit;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.ErrorException;
 import java.io.IOException;
@@ -72,10 +72,10 @@ public class PathsInner {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceFuture} object
+     * @return the {@link ServiceCall} object
      */
-    public ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
+    public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
