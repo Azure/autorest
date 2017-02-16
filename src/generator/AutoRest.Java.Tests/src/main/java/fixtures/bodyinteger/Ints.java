@@ -10,8 +10,8 @@
 
 package fixtures.bodyinteger;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import org.joda.time.DateTime;
 import rx.Observable;
@@ -32,9 +32,9 @@ public interface Ints {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get null Int value.
@@ -61,9 +61,9 @@ public interface Ints {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get invalid Int value.
@@ -90,9 +90,9 @@ public interface Ints {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get overflow Int32 value.
@@ -119,9 +119,9 @@ public interface Ints {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
+    ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback);
 
     /**
      * Get underflow Int32 value.
@@ -148,9 +148,9 @@ public interface Ints {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
      * Get overflow Int64 value.
@@ -177,9 +177,9 @@ public interface Ints {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
+    ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback);
 
     /**
      * Get underflow Int64 value.
@@ -207,9 +207,9 @@ public interface Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int32 value.
@@ -239,9 +239,9 @@ public interface Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put max int64 value.
@@ -271,9 +271,9 @@ public interface Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int32 value.
@@ -303,9 +303,9 @@ public interface Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put min int64 value.
@@ -334,9 +334,9 @@ public interface Ints {
      * Get datetime encoded as Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get datetime encoded as Unix time value.
@@ -364,9 +364,9 @@ public interface Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put datetime encoded as Unix time.
@@ -395,9 +395,9 @@ public interface Ints {
      * Get invalid Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get invalid Unix time value.
@@ -424,9 +424,9 @@ public interface Ints {
      * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
+    ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback);
 
     /**
      * Get null Unix time value.

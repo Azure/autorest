@@ -57,7 +57,7 @@ namespace AutoRest.Java.Azure.Model
         }
 
         [JsonIgnore]
-        public override string ServiceCallGenericParameterString
+        public override string ServiceFutureGenericParameterString
         {
             get
             {

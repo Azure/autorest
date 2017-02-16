@@ -47,7 +47,7 @@
     },
     "/foo": {
       "post": {
-        "operationId": "PostFoo",
+        "operationId": "Foo_List",
         "summary": "Foo path",
         "description": "Foo operation",
         "x-ms-pageable": {
