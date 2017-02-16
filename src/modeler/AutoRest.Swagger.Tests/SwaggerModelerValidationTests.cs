@@ -212,14 +212,14 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ListOperationsNamingValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "list-operation-naming.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "list-operations-naming.json"));
             messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 2);
         }
 
         [Fact]
         public void ListByOperationsValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "listby-operations.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "listby-operations.json"));
             messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 3);
         }
 
@@ -484,7 +484,7 @@ namespace AutoRest.Swagger.Tests
         public void ListOperationsCorrectlyNamed()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "list-operations-valid-naming.json"));
-            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
+            messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 0);
         }
 
         /// Verifies that a providers path is of proper format

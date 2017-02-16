@@ -41,12 +41,25 @@ namespace AutoRest.Swagger.Model.Utilities
             if (op.Extensions.GetValue<object>(XmsPageable) != null) return true;
 
             // if a success response is not defined, we have nothing to check, return false
-            if ((op.Responses?.ContainsKey("200") ?? false) !=true) return false;
+            if (op.Responses?.ContainsKey("200") !=true) return false;
 
             // if we have a non-null response schema, and the schema is of type array, return true
-            if (((op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty)) ?? true)!=true)
+            if (op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) == false)
             {
                 var modelLink = op.Responses["200"].Schema.Reference;
+                // if the object has more than 2 properties, we can assume its a composite object
+                // that does not represent a collection of some type
+                if ((entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Count ?? 2) >= 2)
+                {
+                    return false;
+                }
+
+                // if the object is an allof on some other object, let's consider it to be a composite object
+                if (entity.Definitions[modelLink.StripDefinitionPath()].AllOf != null)
+                {
+                    return false;
+                }
+
                 if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array)??false)
                 {
                     return true;

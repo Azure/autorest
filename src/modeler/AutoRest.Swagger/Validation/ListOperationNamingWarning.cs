@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
 
                 if(ValidationUtilities.IsXmsPageableOrArrayResponseOperation(opPair.Value, serviceDefinition))
                 {
-                    yield return new ValidationMessage(context.Path, this, opPair.Value.OperationId);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, opPair.Value.OperationId);
                 }
             }
         }
