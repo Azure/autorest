@@ -1,5 +1,6 @@
 {
   "info": {
+    "version": "1.0.0",
     "title": "Azure Composite Model",
     "description": "Composite Swagger Client that represents merging body complex and complex model swagger clients"
   },

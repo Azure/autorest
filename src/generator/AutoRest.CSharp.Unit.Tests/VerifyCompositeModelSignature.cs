@@ -24,11 +24,11 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task VerifySignature()
         {
-            using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem: CreateMockFilesystem(), modeler: "Swagger"))
+            using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(CreateMockFilesystem()))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\TestAllOfObject.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\TestAllOfObject.cs"));
 
                 var result = await Compile(fileSystem);
 
