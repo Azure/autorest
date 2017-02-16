@@ -57,4 +57,3 @@ namespace Fixtures.DateTimeOffset.Models
 
     }
 }
-

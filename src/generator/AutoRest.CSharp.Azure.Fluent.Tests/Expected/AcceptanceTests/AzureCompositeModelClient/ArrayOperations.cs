@@ -807,4 +807,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 
     }
 }
-

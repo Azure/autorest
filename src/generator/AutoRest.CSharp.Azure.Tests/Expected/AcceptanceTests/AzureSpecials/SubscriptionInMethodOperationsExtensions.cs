@@ -160,4 +160,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 
     }
 }
-

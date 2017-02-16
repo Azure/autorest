@@ -21,4 +21,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public const string BlacK = "blacK";
     }
 }
-

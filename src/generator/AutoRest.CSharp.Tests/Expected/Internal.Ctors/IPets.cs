@@ -34,4 +34,3 @@ namespace Fixtures.InternalCtors
         Task<HttpOperationResponse> GetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

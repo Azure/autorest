@@ -245,4 +245,3 @@ namespace Fixtures.AcceptanceTestsBodyDate
 
     }
 }
-

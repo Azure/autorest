@@ -105,4 +105,3 @@ namespace Fixtures.Azure.AcceptanceTestsHead
 
     }
 }
-
