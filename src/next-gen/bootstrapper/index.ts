@@ -37,7 +37,8 @@ async function main() {
 
     if( version.startsWith('latest')) {
         // find out the latest version
-        Installer.getReleases()
+        let releases= await Installer.getReleases(version != 'latest-release');
+
         // check if it's installed
         // install it if needed
         
@@ -67,9 +68,9 @@ async function main() {
 
     // if( !Installer.IsAutoRestInstalled) {
       //  if(!Installer.IsFrameworkInstalled ) {
-            await Installer.InstallFramework();
+        //     await Installer.InstallFramework();
 //        }
-        await Installer.InstallAutoRest();
+//         await Installer.InstallAutoRest();
     //}
 }
 

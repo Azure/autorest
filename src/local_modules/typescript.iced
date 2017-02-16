@@ -8,14 +8,18 @@ task 'build', 'build:typescript', (done)->
         echo stdout.replace("src/next-gen","#{basefolder}/src/next-gen") 
         count--
         if count is 0
-          return install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
-          # done() 
+          global.ts_ready--
+          done() 
 
       next null
     return null
 
 Import
   install_package: (from,to,done)->
+    return setTimeout (->
+      install_package from, to, done
+    ), 500 if global.ts_ready > 0
+   
     Fail "Directory '#{from}' doesn't exist'" if !test "-d", from
     Fail "Directory '#{to}' doesn't exist'" if !test "-d", to
 
@@ -39,7 +43,4 @@ task 'install', 'install:typescript', (done)->
 
     return null
     
-    
-    
-    
-    
+
