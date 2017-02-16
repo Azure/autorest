@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
         // Verifies if a tracked resource has a corresponding patch operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            List<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", (ServiceDefinition)context.Root);
+            IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", (ServiceDefinition)context.Root);
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
                 if (resNames.IsMatch(definition.Key) || ValidationUtilities.IsTrackedResource(definition.Value, definitions))

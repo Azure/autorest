@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
-            List<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
             
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
@@ -62,7 +62,7 @@ namespace AutoRest.Swagger.Validation
                         return false;
                     }
 
-                    bool listByResourceGroupCheck = this.listByXCheck(getOperations, listByRgRegEx, definition.Key, definitions);
+                    bool listByResourceGroupCheck = this.ListByXCheck(getOperations, listByRgRegEx, definition.Key, definitions);
                     if (!listByResourceGroupCheck)
                     {
                         formatParameters = new object[2];
@@ -71,7 +71,7 @@ namespace AutoRest.Swagger.Validation
                         return false;
                     }
 
-                    bool listBySubscriptionIdCheck = this.listByXCheck(getOperations, listBySidRegEx, definition.Key, definitions);
+                    bool listBySubscriptionIdCheck = this.ListByXCheck(getOperations, listBySidRegEx, definition.Key, definitions);
                     if (!listBySubscriptionIdCheck)
                     {
                         formatParameters = new object[2];
@@ -138,7 +138,7 @@ namespace AutoRest.Swagger.Validation
             return true;
         }
 
-        private bool listByXCheck(List<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
+        private bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
         {
             return getOperations.Any(operation =>
                        regEx.IsMatch(operation.OperationId) &&

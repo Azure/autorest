@@ -69,20 +69,9 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        public static List<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
+        public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
         {
-            List<Operation> result = new List<Operation>();
-            foreach (KeyValuePair<string, Dictionary<string, Operation>> path in serviceDefinition.Paths)
-            {
-                foreach (KeyValuePair<string, Operation> operation in path.Value)
-                {
-                    if (operation.Key.ToLower().Equals(id.ToLower()))
-                    {
-                        result.Add(operation.Value);
-                    }
-                }
-            }
-            return result;
+            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
         }
     }
 }
