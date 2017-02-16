@@ -9,11 +9,47 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using AutoRest.Core;
 using Newtonsoft.Json;
+using System;
+using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class MethodJvaf : MethodJva
     {
+        public override void Disambiguate()
+        {
+            if (this.HttpMethod == HttpMethod.Get)
+            {
+                var url = this.Url.Value;
+                var urlSplits = url.Split('/');
+                if (urlSplits.Count() == 6 || urlSplits.Count() == 8)
+                {
+                    var originalName = Name;
+                    string newName = null;
+                    if (urlSplits.Count() == 6 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions"))
+                    {
+                        newName = "List";
+                    }
+                    else if (urlSplits.Count() == 8 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions")
+                        && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "resourceGroups"))
+                    {
+                        newName = "ListByResourceGroup";
+                    }
+                    if (!string.IsNullOrWhiteSpace(newName))
+                    {
+                        this.SimulateAsPagingOperation = true;
+                        var name = CodeNamer.Instance.GetUnique(newName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+                        if (name != originalName)
+                        {
+                            Name = name;
+                        }
+                        return;
+                    }
+                }
+            }
+            base.Disambiguate();
+        }
+
         [JsonIgnore]
         public override IEnumerable<ParameterJv> RetrofitParameters
         {
@@ -74,11 +110,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 var imports = base.InterfaceImports;
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation || this.IsPagingNextOperation || this.SimulateAsPagingOperation)
                 {
+                    if (this.IsPagingOperation || this.IsPagingNextOperation)
+                    {
+                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.PagedList");
+                    }
+
                     imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.Add("com.microsoft.azure.PagedList");
+
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
                     if (pageType != null)
                     {
@@ -112,17 +153,22 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // return type may have been removed as a side effect
                     imports.AddRange(this.ReturnTypeJva.ImplImports);
                 }
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.azure.ListOperationCallback");
+                    if (this.IsPagingOperation || this.IsPagingNextOperation)
+                    {
+                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.PagedList");
+                    }
+
                     imports.Add("com.microsoft.azure.Page");
-                    imports.Add("com.microsoft.azure.PagedList");
                     if (pageType != null)
                     {
                         imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                     }
                 }
+
                 if (this.IsPagingNonPollingOperation && pageType != null)
                 {
                     imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));

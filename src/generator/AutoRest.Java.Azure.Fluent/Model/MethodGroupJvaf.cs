@@ -28,7 +28,18 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public override string ImplClassSuffix => "Inner";
 
         [JsonIgnore]
-        public override string ParentDeclaration => "";
+        public override string ParentDeclaration
+        {
+            get
+            {
+                if (this.Methods.Any(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "List"))
+                    && this.Methods.Any(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "ListByResourceGroup")))
+                {
+                    return " implements InnerSupportsListing";
+                }
+                return "";
+            }
+        }
 
         [JsonIgnore]
         public override string ServiceClientType => CodeModel.Name + "Impl";
@@ -43,6 +54,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 var imports = new List<string>();
                 var ns = CodeModel.Namespace.ToLowerInvariant();
+                if (this.Methods.Any(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "List"))
+                    && this.Methods.Any(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "ListByResourceGroup")))
+                {
+                    imports.Add("com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsListing");
+                }
                 foreach (var i in base.ImplImports.ToList())
                 {
                     if (i.StartsWith(ns + "." + ImplPackage, StringComparison.OrdinalIgnoreCase))
