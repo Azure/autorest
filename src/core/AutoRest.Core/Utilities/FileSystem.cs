@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
@@ -50,19 +51,30 @@ namespace AutoRest.Core.Utilities
         /// <param name="relativePath"></param>
         /// <returns></returns>
         public string MakePathRooted(Uri rootPath, string relativePath)
-        {
-            var combined = new Uri(Path.Combine(rootPath.ToString(), relativePath));
-            return combined.IsAbsoluteUri ? combined.AbsoluteUri : combined.LocalPath;
-        }
+            => Path.Combine(rootPath.ToString(), relativePath);
 
         public string ReadFileAsText(string path)
         {
             path = path.AdjustGithubUrl();
-            using (var client = new WebClient())
+
+            Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out Uri uri);
+
+            if (!uri.IsAbsoluteUri)
             {
-                client.Headers.Add("User-Agent: AutoRest");
-                client.Encoding = Encoding.UTF8;
-                return client.DownloadString(path);
+                return File.ReadAllText(Path.Combine(CurrentDirectory, path));
+            }
+
+            if (uri.IsFile)
+            {
+                return File.ReadAllText(uri.LocalPath, Encoding.UTF8);
+            }
+            
+            using (var client = new System.Net.Http.HttpClient( ))
+            {
+                client.DefaultRequestHeaders.Add("User-Agent","AutoRest");
+                // client.Encoding = Encoding.UTF8;
+                return client.GetAsync(path).Result.Content.ReadAsStringAsync().Result;
+                //return client.DownloadString(path);
             }
         }
 
@@ -73,7 +85,7 @@ namespace AutoRest.Core.Utilities
                 return File.AppendText(path);
             }
             // ensure that we're being very very explicit: NO BYTE ORDER MARK. 
-            return new StreamWriter(path, false, new UTF8Encoding(false, true));
+            return new StreamWriter(new FileStream( path,FileMode.Create), new UTF8Encoding(false, true));
         }
 
         public bool FileExists(string path)
@@ -132,7 +144,7 @@ namespace AutoRest.Core.Utilities
             }
             if (IsCompletePath(path))
             {
-                return new Uri(new Uri(path), ".");
+                return new Uri(Regex.Match(path, @"^(?<dir>.*)[\\\/].*$").Groups["dir"].Value, UriKind.RelativeOrAbsolute);
             }
             else
             {

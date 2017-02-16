@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
@@ -30,7 +29,7 @@ namespace AutoRest.Ruby.Azure
         /// <summary>
         /// Gets the usage instructions for the code generator.
         /// </summary>
-        public override string UsageInstructions => @"The ""gem 'ms_rest_azure' ~> 0.6"" is required for working with generated code.";
+        public override string UsageInstructions => @"The ""gem 'ms_rest_azure' ~> 0.7"" is required for working with generated code.";
 
         /// <summary>
         /// Generates Ruby code for Azure service client.

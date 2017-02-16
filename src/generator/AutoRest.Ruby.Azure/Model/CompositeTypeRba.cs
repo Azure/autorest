@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using AutoRest.Extensions.Azure;
 using AutoRest.Ruby.Model;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 using System.Text.RegularExpressions;
 
 namespace AutoRest.Ruby.Azure.Model
@@ -75,13 +76,13 @@ namespace AutoRest.Ruby.Azure.Model
         public static bool IsResourceModelMatchingStandardDefinition(CompositeType model)
         {
             string modelName = model.Name.ToString();
-            if (modelName.Equals("SubResource", StringComparison.InvariantCultureIgnoreCase) &&
+            if (modelName.EqualsIgnoreCase("SubResource") &&
                 model.Properties.All(property => subResourceRegEx.IsMatch(property.Name.ToString())))
             {
                 return true;
             }
 
-            if(modelName.Equals("Resource", StringComparison.InvariantCultureIgnoreCase) &&
+            if(modelName.EqualsIgnoreCase("Resource") &&
                model.Properties.All(property => resourceRegEx.IsMatch(property.Name.ToString())))
             {
                 return true;
@@ -100,8 +101,8 @@ namespace AutoRest.Ruby.Azure.Model
         public static bool NeedsAccessor(CompositeType model, string propertyName)
         {
             string modelName = model.Name.ToString();
-            if((modelName.Equals("SubResource", StringComparison.InvariantCultureIgnoreCase) && subResourceRegEx.IsMatch(propertyName)) ||
-               (modelName.Equals("Resource", StringComparison.InvariantCultureIgnoreCase) && resourceRegEx.IsMatch(propertyName)))
+            if((modelName.EqualsIgnoreCase("SubResource") && subResourceRegEx.IsMatch(propertyName)) ||
+               (modelName.EqualsIgnoreCase("Resource") && resourceRegEx.IsMatch(propertyName)))
             {
                 return false;
             }

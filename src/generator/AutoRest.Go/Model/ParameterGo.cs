@@ -83,7 +83,7 @@ namespace AutoRest.Go.Model
                 return "client." + ApiVersionName;
             }
             var value = IsClientProperty
-                ? "client." + CodeNamerGo.Instance.PascalCase(Name.Value)
+                ? "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
                 : Name.Value;
 
             var format = IsRequired || ModelType.CanBeEmpty()
@@ -186,9 +186,30 @@ namespace AutoRest.Go.Model
             return parameters.ByLocationAsRequired(ParameterLocation.Header, isRequired);
         }
 
+         public static IEnumerable<ParameterGo> URLParameters(this IEnumerable<ParameterGo> parameters)
+        {
+            var urlParams = new List<ParameterGo>();
+            foreach (ParameterGo p in parameters.ByLocation(ParameterLocation.Path))
+            {
+                if (p.Method.CodeModel.BaseUrl.Contains(p.SerializedName))
+                {
+                    urlParams.Add(p);
+                }
+            }
+            return urlParams;
+        }
+
         public static IEnumerable<ParameterGo> PathParameters(this IEnumerable<ParameterGo> parameters)
         {
-            return parameters.ByLocation(ParameterLocation.Path);
+            var pathParams = new List<ParameterGo>();
+            foreach (ParameterGo p in parameters.ByLocation(ParameterLocation.Path))
+            {
+                if (!p.Method.CodeModel.BaseUrl.Contains(p.SerializedName))
+                {
+                    pathParams.Add(p);
+                }
+            }
+            return pathParams;
         }
 
         public static IEnumerable<ParameterGo> QueryParameters(this IEnumerable<ParameterGo> parameters)

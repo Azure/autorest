@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -89,6 +89,42 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 using (var _result = await operations.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(headerCustomNamedRequestIdParamGroupingParameters, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Headers;
+                }
+            }
+
+            /// <summary>
+            /// Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
+            /// header of the request
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fooClientRequestId'>
+            /// The fooRequestId
+            /// </param>
+            public static bool CustomNamedRequestIdHead(this IHeaderOperations operations, string fooClientRequestId)
+            {
+                return operations.CustomNamedRequestIdHeadAsync(fooClientRequestId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the
+            /// header of the request
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='fooClientRequestId'>
+            /// The fooRequestId
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<bool> CustomNamedRequestIdHeadAsync(this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CustomNamedRequestIdHeadWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
                 }
             }
 

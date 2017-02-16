@@ -10,7 +10,6 @@ namespace AutoRest.Swagger.Model
     /// The metadata can be used by the clients if needed, and can be presented 
     /// in the Swagger-UI for convenience.
     /// </summary>
-    [Serializable]
     public class CodeGenerationSettings : SpecObject
     {
     }

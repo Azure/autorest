@@ -108,7 +108,7 @@ namespace AutoRest.Java.Model
                         WireName,
                         clientReference,
                         source,
-                        CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture));
+                        CollectionFormat.ToString().ToUpperInvariant());
                 }
             }
             

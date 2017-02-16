@@ -19,7 +19,7 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Swagger", "vendor-extension-in-path.json")
+                    Input = Path.Combine("Resource","Swagger", "vendor-extension-in-path.json")
                 };
                 SwaggerModeler modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();

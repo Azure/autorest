@@ -2,7 +2,6 @@ package complexgrouptest
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 	"time"
 
@@ -67,18 +66,6 @@ func getReadOnlyClient() ReadonlypropertyClient {
 	c := NewReadonlypropertyClient()
 	c.BaseURI = utils.GetBaseURI()
 	return c
-}
-
-// Read only property tests
-func (s *ComplexGroupSuite) TestReadOnlyComplex(c *chk.C) {
-	res, err := complexReadOnlyClient.GetValid()
-	c.Assert(err, chk.IsNil)
-	_, err = complexReadOnlyClient.PutValid(res)
-	c.Assert(err, chk.NotNil)
-	expected := fmt.Errorf("autorest/validation: validation failed: parameter=%s constraint=%s value=%#v details: %s",
-		"complexBody.ID", "ReadOnly", "1234", "readonly parameter; must send as nil or empty in request")
-	c.Assert(err, chk.ErrorMatches,
-		fmt.Sprintf("complexgroup.ReadonlypropertyClient#PutValid: Invalid input: %v", expected))
 }
 
 // Primitive tests

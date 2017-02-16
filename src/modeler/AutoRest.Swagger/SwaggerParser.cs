@@ -96,7 +96,7 @@ namespace AutoRest.Swagger
                     {
                         currentDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, currentFilePath, entityType, modelName, externalFiles[filePath]);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, filePath, entityType, modelName, externalFiles[filePath]);
                     }
                     else
                     {
@@ -139,7 +139,9 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SchemaRequiredItemConverter());
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
-
+                Uri filePath = null;
+                Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
+                swaggerService.FilePath = filePath;
                 return swaggerService;
             }
             catch (JsonException ex)

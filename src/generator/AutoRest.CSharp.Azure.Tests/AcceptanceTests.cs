@@ -248,7 +248,7 @@ namespace AutoRest.CSharp.Azure.Tests
                                     new Product { Location = "West US" }, customHeaders).Result);
             }
         }
-#if PORTABLE
+#if !LEGACY
         [Fact(Skip = "Failing in CoreCLR - TODO: debug and fix")]
 #else 
         [Fact]
@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Azure.Tests
                 Assert.Throws<CloudException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidJsonPolling(new Product { Location = "West US" }));
 
-#if !PORTABLE
+#if LEGACY
                 Assert.Throws<SerializationException>(
                     () => client.LROSADs.PutAsyncRelativeRetryInvalidHeader(new Product { Location = "West US" }));
 
@@ -492,8 +492,8 @@ namespace AutoRest.CSharp.Azure.Tests
                     new TokenCredentials(Guid.NewGuid().ToString())))
             {
                 var report = client.GetReport();
-#if PORTABLE
-                float totalTests = report.Count - 6;
+#if !LEGACY
+                float totalTests = report.Count - 11;
 #else
                 // TODO: This is fudging some numbers. Fixing the actual problem is a priority.
                 float totalTests = report.Count;
@@ -667,6 +667,24 @@ namespace AutoRest.CSharp.Azure.Tests
                 };
                 IAzureOperationResponse response = client.Header.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(group).Result;
 
+                Assert.Equal("123", response.RequestId);
+            }
+        }
+
+        [Fact]
+        public void CustomNamedRequestIdHeadTest()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("azure-special-properties.json"), ExpectedPath("AzureSpecials"), generator: "Azure.CSharp");
+
+            const string validSubscription = "1234-5678-9012-3456";
+            const string expectedRequestId = "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0";
+
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                new TokenCredentials(validSubscription, Guid.NewGuid().ToString())))
+            {
+                AzureOperationResponse<bool, HeaderCustomNamedRequestIdHeadHeaders> response = client.Header.CustomNamedRequestIdHeadWithHttpMessagesAsync(expectedRequestId).Result;
+                Assert.True(response.Body);
                 Assert.Equal("123", response.RequestId);
             }
         }

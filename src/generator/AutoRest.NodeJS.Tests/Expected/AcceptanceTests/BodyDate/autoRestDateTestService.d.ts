@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestDateTestService {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AutoRestDateTestService class.
      * @constructor

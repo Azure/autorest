@@ -64,19 +64,19 @@ namespace AutoRest.Swagger
             switch (swaggerObject.Type)
             {
                 case DataType.Array:
-                    return (constraintName == Constraint.MinItems.ToString() ||
-                            constraintName == Constraint.MaxItems.ToString() ||
-                            constraintName == Constraint.UniqueItems.ToString());
+                    return (constraintName.EqualsIgnoreCase(Constraint.MinItems.ToString()) ||
+                            constraintName.EqualsIgnoreCase(Constraint.MaxItems.ToString()) ||
+                            constraintName.EqualsIgnoreCase(Constraint.UniqueItems.ToString()));
                 case DataType.Integer:
                 case DataType.Number:
-                    return constraintName == Constraint.ExclusiveMaximum.ToString() ||
-                           constraintName == Constraint.ExclusiveMinimum.ToString() ||
-                           constraintName == Constraint.MultipleOf.ToString() ||
-                           constraintName == "Minimum" || constraintName == "Maximum";
+                    return constraintName.EqualsIgnoreCase(Constraint.ExclusiveMaximum.ToString()) ||
+                           constraintName.EqualsIgnoreCase(Constraint.ExclusiveMinimum.ToString()) ||
+                           constraintName.EqualsIgnoreCase(Constraint.MultipleOf.ToString()) ||
+                           constraintName.EqualsIgnoreCase("minimum") || constraintName.EqualsIgnoreCase("maximum");
                 case DataType.String:
-                    return (constraintName == Constraint.MinLength.ToString() ||
-                            constraintName == Constraint.MaxLength.ToString() ||
-                            constraintName == Constraint.Pattern.ToString());
+                    return (constraintName.EqualsIgnoreCase(Constraint.MinLength.ToString()) ||
+                            constraintName.EqualsIgnoreCase(Constraint.MaxLength.ToString()) ||
+                            constraintName.EqualsIgnoreCase(Constraint.Pattern.ToString()));
                  default:
                     return false;
             }

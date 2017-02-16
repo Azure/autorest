@@ -13,8 +13,8 @@ package fixtures.bodyinteger.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodyinteger.Ints;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
@@ -126,10 +126,10 @@ public class IntsImpl implements Ints {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -186,10 +186,10 @@ public class IntsImpl implements Ints {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -246,10 +246,10 @@ public class IntsImpl implements Ints {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.fromResponse(getOverflowInt32WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
+        return ServiceFuture.fromResponse(getOverflowInt32WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -306,10 +306,10 @@ public class IntsImpl implements Ints {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
-        return ServiceCall.fromResponse(getUnderflowInt32WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
+        return ServiceFuture.fromResponse(getUnderflowInt32WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -366,10 +366,10 @@ public class IntsImpl implements Ints {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceCall.fromResponse(getOverflowInt64WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
+        return ServiceFuture.fromResponse(getOverflowInt64WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -426,10 +426,10 @@ public class IntsImpl implements Ints {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
-        return ServiceCall.fromResponse(getUnderflowInt64WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
+        return ServiceFuture.fromResponse(getUnderflowInt64WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -487,10 +487,10 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putMax32WithServiceResponseAsync(intBody), serviceCallback);
+    public ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMax32WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -550,10 +550,10 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putMax64WithServiceResponseAsync(intBody), serviceCallback);
+    public ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMax64WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -613,10 +613,10 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putMin32WithServiceResponseAsync(intBody), serviceCallback);
+    public ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMin32WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -676,10 +676,10 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putMin64WithServiceResponseAsync(intBody), serviceCallback);
+    public ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putMin64WithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -738,10 +738,10 @@ public class IntsImpl implements Ints {
      * Get datetime encoded as Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUnixTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUnixTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -804,10 +804,10 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putUnixTimeDateWithServiceResponseAsync(intBody), serviceCallback);
+    public ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putUnixTimeDateWithServiceResponseAsync(intBody), serviceCallback);
     }
 
     /**
@@ -867,10 +867,10 @@ public class IntsImpl implements Ints {
      * Get invalid Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidUnixTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidUnixTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -932,10 +932,10 @@ public class IntsImpl implements Ints {
      * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getNullUnixTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullUnixTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

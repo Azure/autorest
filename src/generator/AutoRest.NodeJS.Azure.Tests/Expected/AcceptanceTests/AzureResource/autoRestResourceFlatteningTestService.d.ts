@@ -12,7 +12,7 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback, ServiceClientCre
 import * as models from "./models";
 
 declare class AutoRestResourceFlatteningTestService {
-    /**
+        /**
      * @class
      * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
      * @constructor
