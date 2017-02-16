@@ -22,7 +22,7 @@ namespace AutoRest.Preview
                 {
                     Modeler = "Swagger",
                     CodeGenerator = codeGenerator,
-                    FileSystem = fs,
+                    FileSystemInput = fs,
                     OutputDirectory = "",
                     Namespace = "Test",
                     Input = "input.json"
@@ -32,7 +32,7 @@ namespace AutoRest.Preview
 
                 GenerateCodeInto(processMessages);
 
-                return fs;
+                return settings.FileSystemOutput;
             }
         }
 

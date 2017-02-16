@@ -852,3 +852,9 @@ task 'regenerate-delete', '', ->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
+
+task 'autorest-preview-build', '', ->
+  exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"
+
+task 'autorest-preview', '', ->
+  exec "#{basefolder}/src/dev/AutoRest.Preview/bin/Debug/net461/AutoRest.Preview.exe", {cwd: "./src/dev/AutoRest.Preview"}
