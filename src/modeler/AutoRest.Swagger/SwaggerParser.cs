@@ -28,7 +28,7 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            var swaggerDocument = fileSystem.ReadFileAsText(path);
+            var swaggerDocument = fileSystem.ReadAllText(path);
             return Parse(path, swaggerDocument);
         }
 
@@ -77,7 +77,7 @@ namespace AutoRest.Swagger
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
-                        var externalDefinitionString = Settings.FileSystem.ReadFileAsText(filePath);
+                        var externalDefinitionString = Settings.FileSystem.ReadAllText(filePath);
                         externalFiles[filePath] = JObject.Parse(externalDefinitionString);
                     }
                 }
@@ -107,7 +107,6 @@ namespace AutoRest.Swagger
                     
                 }
             }
-            return;
         }
 
         public static string Normalize(string path, string swaggerDocument)
@@ -115,7 +114,7 @@ namespace AutoRest.Swagger
             if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
             {
                 Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
-                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
+                swaggerDocument = LiterateYamlParser.Parse(swaggerDocument);
             }
             // normalize YAML to JSON since that's what we process
             swaggerDocument = swaggerDocument.EnsureYamlIsJson();

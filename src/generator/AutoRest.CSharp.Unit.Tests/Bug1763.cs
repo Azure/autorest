@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.NotNull(idMember);
 
                 // now read from the file to ensure we use this. to access the members
-                var codeText = fileSystem.ReadFileAsText(Path.Combine("GeneratedCode", "Models", "Pet.cs"));
+                var codeText = fileSystem.ReadAllText(Path.Combine("GeneratedCode", "Models", "Pet.cs"));
                 // get hold of the ctor
                 var regex = new Regex(Regex.Escape("public Pet(int _id, string name = default(string))") + @"[^}]+");
                 var match = regex.Match(codeText);

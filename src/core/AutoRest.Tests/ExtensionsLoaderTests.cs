@@ -137,43 +137,6 @@ namespace AutoRest.Core.Tests
             }
         }
 
-        [Fact]
-        public void NoJsonFileThrowsException()
-        {
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "JavaScript", FileSystem = _fileSystem};
-                _fileSystem.DeleteFile("AutoRest.json");
-
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "AutoRest.json was not found in the current directory");
-            }
-        }
-
-        [Fact]
-        public void InvalidTypeThrowsException()
-        {
-            using (NewContext)
-            {
-                _fileSystem.WriteFile("AutoRest.json",
-                    File.ReadAllText(Path.Combine("Resource", "AutoRestWithInvalidType.json")));
-
-                new Settings {CodeGenerator = "CSharp", FileSystem = _fileSystem};
-
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "Plugin CSharp does not have an assembly name in AutoRest.json");
-            }
-
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "Java", FileSystem = _fileSystem};
-                AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetPlugin(),
-                    "Plugin Java does not have an assembly name in AutoRest.json");
-            }
-        }
-
         private void AssertThrows<T>(Action action, string message) where T : Exception
         {
             try

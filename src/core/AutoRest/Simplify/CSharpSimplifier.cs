@@ -28,7 +28,7 @@ namespace AutoRest.Simplify
 
             var files = Settings.Instance.FileSystem.GetFiles(Settings.Instance.OutputDirectory, "*.cs",
                     SearchOption.AllDirectories).
-                ToDictionary(each => each, each => Settings.Instance.FileSystem.ReadFileAsText(each));
+                ToDictionary(each => each, each => Settings.Instance.FileSystem.ReadAllText(each));
 
             var assemblies = new[] {
                 typeof(IAzureClient).GetAssembly().Location,
@@ -93,7 +93,7 @@ namespace AutoRest.Simplify
 
                     // Write out the files back to their original location
                     var output = Path.Combine(Settings.Instance.FileSystem.CurrentDirectory, document.Name);
-                    Settings.Instance.FileSystem.WriteFile(output, text);
+                    Settings.Instance.FileSystem.WriteAllText(output, text);
                 }
             }
         }

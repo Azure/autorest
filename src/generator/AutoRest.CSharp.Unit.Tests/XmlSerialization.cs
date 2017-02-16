@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Unit.Tests {
         /// </summary>
         /// [Fact]
         public async Task CheckXmlSerialization() {
-            using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "CSharp"))
+            using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\StorageServiceProperties.cs"));
                 Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));

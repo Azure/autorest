@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
         internal static void CopyFile(this IFileSystem fileSystem, string source, string destination) {
             destination = destination.Replace("._", ".");
-            fileSystem.WriteFile(destination, File.ReadAllText(source));
+            fileSystem.WriteAllText(destination, File.ReadAllText(source));
         }
 
         internal static void CopyFolder(this IFileSystem fileSystem, string basePath, string source, string destination)
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 var target = Path.Combine(outputFolder, file.Substring(file.IndexOf(":", StringComparison.Ordinal) + 1));
                 Directory.CreateDirectory(Path.GetDirectoryName(target));
-                File.WriteAllText(target, fileSystem.ReadFileAsText(file));
+                File.WriteAllText(target, fileSystem.ReadAllText(file));
             }
 
             return outputFolder;

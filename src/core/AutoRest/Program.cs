@@ -54,7 +54,7 @@ namespace AutoRest
                         // internal preprocesor
                         if (settings.Preprocessor)
                         {
-                            Console.Write(InternalPreprocessor(settings.FileSystem.ReadFileAsText(settings.Input)));
+                            Console.Write(InternalPreprocessor(settings.FileSystem.ReadAllText(settings.Input)));
                             return 0;
                         }
 

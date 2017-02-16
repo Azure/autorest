@@ -65,12 +65,12 @@ namespace AutoRest.CompositeSwagger
 
             // construct merged swagger document
             var mergedSwagger = new YamlMappingNode();
-            mergedSwagger.Set("info", (Settings.FileSystem.ReadFileAsText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
+            mergedSwagger.Set("info", (Settings.FileSystem.ReadAllText(Settings.Input).ParseYaml() as YamlMappingNode)?.Get("info") as YamlMappingNode);
 
             // merge child swaggers
             foreach (var childSwaggerPath in compositeSwaggerModel.Documents)
             {
-                var childSwaggerRaw = Settings.FileSystem.ReadFileAsText(childSwaggerPath);
+                var childSwaggerRaw = Settings.FileSystem.ReadAllText(childSwaggerPath);
                 childSwaggerRaw = SwaggerParser.Normalize(childSwaggerPath, childSwaggerRaw);
                 var childSwagger = childSwaggerRaw.ParseYaml() as YamlMappingNode;
                 if (childSwagger == null)
@@ -128,7 +128,7 @@ namespace AutoRest.CompositeSwagger
         
         private CompositeServiceDefinition Parse(string input)
         {
-            var inputBody = Settings.FileSystem.ReadFileAsText(input);
+            var inputBody = Settings.FileSystem.ReadAllText(input);
             try
             {
                 var settings = new JsonSerializerSettings

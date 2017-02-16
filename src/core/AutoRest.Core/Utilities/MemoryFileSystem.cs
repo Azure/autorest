@@ -49,7 +49,7 @@ namespace AutoRest.Core.Utilities
             }
         }
         
-        public void WriteFile(string path, string contents)
+        public void WriteAllText(string path, string contents)
         {
             var directory = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty((directory)) && !VirtualStore.ContainsKey(directory))
@@ -68,7 +68,7 @@ namespace AutoRest.Core.Utilities
             VirtualStore[path] = result;
         }
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             if (VirtualStore.ContainsKey(path))
             {

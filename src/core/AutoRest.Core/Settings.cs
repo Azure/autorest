@@ -391,7 +391,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             autoRestSettings.CustomSettings = settings;
             if (!string.IsNullOrEmpty(autoRestSettings.CodeGenSettings))
             {
-                var settingsContent = autoRestSettings.FileSystem.ReadFileAsText(autoRestSettings.CodeGenSettings);
+                var settingsContent = autoRestSettings.FileSystem.ReadAllText(autoRestSettings.CodeGenSettings);
                 var codeGenSettingsDictionary =
                     JsonConvert.DeserializeObject<Dictionary<string, object>>(settingsContent);
                 foreach (var pair in codeGenSettingsDictionary)

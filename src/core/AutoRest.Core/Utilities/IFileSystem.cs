@@ -10,9 +10,9 @@ namespace AutoRest.Core.Utilities
     {
         bool IsCompletePath(string path);
 
-        void WriteFile(string path, string contents);
+        void WriteAllText(string path, string contents);
 
-        string ReadFileAsText(string path);
+        string ReadAllText(string path);
 
         TextWriter GetTextWriter(string path);
 

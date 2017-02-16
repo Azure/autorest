@@ -13,7 +13,7 @@ namespace AutoRest.Core.Utilities
 {
     public class FileSystem : IFileSystem
     {
-        public void WriteFile(string path, string contents)
+        public void WriteAllText(string path, string contents)
         {
             var eol = path.LineEnding();
             var lines = contents.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
@@ -53,7 +53,7 @@ namespace AutoRest.Core.Utilities
         public string MakePathRooted(Uri rootPath, string relativePath)
             => Path.Combine(rootPath.ToString(), relativePath);
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             path = path.AdjustGithubUrl();
 

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Tests
                 };
                 settings.FileSystem = new MemoryFileSystem();
                 settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
-                settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+                settings.FileSystem.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
                 
                 var modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Tests
                     CodeGeneratorCs generator = new CodeGeneratorCs();
 
                     generator.Generate(clientModel).GetAwaiter().GetResult();
-                    string body = settings.FileSystem.ReadFileAsText(Path.Combine(settings.OutputDirectory, "Payload.cs"));
+                    string body = settings.FileSystem.ReadAllText(Path.Combine(settings.OutputDirectory, "Payload.cs"));
                     Assert.True(body.ContainsMultiline(@"
                     MinProduct minProduct = new MinProduct();
                     if (baseProductId != null || baseProductDescription != null || maxProductReference != null)

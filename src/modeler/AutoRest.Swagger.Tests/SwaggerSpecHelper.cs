@@ -45,7 +45,7 @@ namespace AutoRest.Swagger.Tests
 
             settings.FileSystem = new MemoryFileSystem();
             settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
-            settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+            settings.FileSystem.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
 
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
@@ -71,7 +71,7 @@ namespace AutoRest.Swagger.Tests
             {
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
-                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystem.ReadFileAsText(actualFile));
+                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystem.ReadAllText(actualFile));
             }
         }
 

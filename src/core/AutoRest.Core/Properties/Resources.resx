@@ -127,6 +127,8 @@ Plugins:
     TypeName: PluginCs, AutoRest.CSharp
   Azure.CSharp:
     TypeName: PluginCsa, AutoRest.CSharp.Azure
+  Azure.CSharp.Fluent:
+    TypeName: PluginCsaf, AutoRest.CSharp.Azure.Fluent
   Ruby:
     TypeName: PluginRb, AutoRest.Ruby
   Azure.Ruby:
@@ -149,8 +151,6 @@ Plugins:
     TypeName: PluginJvaf, AutoRest.Java.Azure.Fluent
   AzureResourceSchema:
     TypeName: PluginArs, AutoRest.AzureResourceSchema
-  Azure.CSharp.Fluent:
-    TypeName: PluginCsaf, AutoRest.CSharp.Azure.Fluent
 Modelers:
   Swagger:
     TypeName: SwaggerModeler, AutoRest.Swagger
