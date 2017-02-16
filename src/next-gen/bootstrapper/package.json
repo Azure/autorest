@@ -1,11 +1,7 @@
 {
-  "name": "autorest-build",
-  "version": "1.0.0",
-  "description": "Tools for AutoRest build processes",
-  "scripts": {
-    "test": "gulp test",
-    "install": "gulp install"
-  },
+  "name": "autorest-bootstrapper",
+  "version": "1.0.1",
+  "description": "AutoRest bootstrapper",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azure/autorest.git"
@@ -21,39 +17,25 @@
   "homepage": "https://github.com/Azure/autorest/readme.md",
   "main": "./src/AutoRest/AutoRest.js",
   "bin": {
-    "autorest": "./bin/autorest"
+    "autorest": "./bin/index.js"
   },
   "engines": {
     "node": ">=6.9.5"
   },
   "devDependencies": {
+    "@types/request": "0.0.39",
+    "@types/shelljs": "^0.6.0",
     "@types/node": "^7.0.5",
     "@types/semver": "^5.3.30",
     "@types/tmp": "0.0.32",
     "chalk": "^1.1.2",
-    "coffee-script": "^1.11.1",
     "del": "^2.2.2",
-    "gulp": "^3.9.1",
-    "gulp-dependencies-changed": "^1.0.2",
-    "gulp-filter": "^5.0.0",
-    "gulp-github-release": "^1.2.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-unzip": "^0.2.0",
-    "gulp-zip": "^4.0.0",
-    "iced-coffee-script": "*",
     "marked": "^0.3.6",
     "marked-terminal": "^2.0.0",
-    "moment": "^2.17.1",
-    "run-sequence": "*",
-    "shelljs": "^0.7.6",
-    "through2": "^2.0.3",
-    "typescript": "^2.1.5",
-    "vinyl-paths": "^2.1.0",
-    "yargs": "^6.6.0"
+    "typescript": "^2.1.5"
   },
+  
   "dependencies": {
-    "@types/request": "0.0.39",
-    "@types/shelljs": "^0.6.0",
     "http-proxy-agent": "^1.0.0",
     "https-proxy-agent": "^1.0.0",
     "linq-es2015": "^2.4.13",
@@ -64,6 +46,7 @@
     "tar.gz2": "^1.0.0",
     "tmp": "0.0.31",
     "unzipper": "^0.8.4",
-    "yauzl": "^2.7.0"
+    "yauzl": "^2.7.0",
+    "yargs": "^6.6.0"
   }
 }
