@@ -9,7 +9,6 @@
 namespace Fixtures.AcceptanceTestsHttp
 {
     using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
     using Models;
     using Newtonsoft.Json;
     using System.Collections;
@@ -248,19 +247,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                        if (_errorBody != null)
-                        {
-                            ex.Body = _errorBody;
-                        }
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;
@@ -380,19 +367,7 @@ namespace Fixtures.AcceptanceTestsHttp
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        CloudError _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, Client.DeserializationSettings);
-                        if (_errorBody != null)
-                        {
-                            ex.Body = _errorBody;
-                        }
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
                 else {
                     _responseContent = string.Empty;

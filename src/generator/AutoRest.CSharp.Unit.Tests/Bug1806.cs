@@ -58,12 +58,12 @@ namespace AutoRest.CSharp.Unit.Tests
                 var codeText = fileSystem.ReadFileAsText(@"GeneratedCode\ContainerServices.cs");
 
                 Assert.NotEmpty(codeText);
-                int sIndex = codeText.IndexOf("Microsoft.Rest.HttpOperationException");
-                int eIndex = codeText.IndexOf("HttpRequestMessageWrapper");
+                int sIndex = codeText.IndexOf("HttpStatusCode _statusCode");
+                int eIndex = codeText.IndexOf("new HttpRequestMessageWrapper");
                 var codeBlock = codeText.Substring(sIndex, eIndex-sIndex);
-                Assert.True(codeBlock.Contains("catch (Newtonsoft.Json.JsonException)"));
+                Assert.True(codeBlock.Contains("Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<CloudError>"));
+                Assert.True(codeBlock.Contains("ex = new CloudException(_errorBody.Message);"));
                 Assert.True(codeBlock.Contains("ex.Body = _errorBody;"));
-                Assert.True(codeBlock.Contains("Microsoft.Rest.Azure.CloudError _errorBody"));
 
             }
         }

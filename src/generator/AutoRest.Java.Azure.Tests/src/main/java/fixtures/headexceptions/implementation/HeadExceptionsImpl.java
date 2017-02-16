@@ -120,6 +120,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response);
     }
 
@@ -178,6 +179,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response);
     }
 
@@ -236,6 +238,7 @@ public class HeadExceptionsImpl implements HeadExceptions {
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response);
     }
 
