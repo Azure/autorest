@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Parsing;
+using AutoRest.Core.Properties;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -11,6 +13,9 @@ namespace AutoRest.Core.Extensibility
     /// </summary>
     public class AutoRestConfiguration
     {
+        public static AutoRestConfiguration Get()
+            => Resources.ConfigurationKnownPlugins.ParseYaml<AutoRestConfiguration>();
+
         public AutoRestConfiguration()
         {
             Plugins = new Dictionary<string, AutoRestProviderConfiguration>();
