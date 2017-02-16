@@ -7,8 +7,8 @@ import retrofit2.Retrofit;
 import petstore.StorageAccounts;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.IOException;
@@ -119,10 +119,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<CheckNameAvailabilityResult> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, final ServiceCallback<CheckNameAvailabilityResult> serviceCallback) {
-        return ServiceCall.fromResponse(checkNameAvailabilityWithServiceResponseAsync(accountName), serviceCallback);
+    public ServiceFuture<CheckNameAvailabilityResult> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, final ServiceCallback<CheckNameAvailabilityResult> serviceCallback) {
+        return ServiceFuture.fromResponse(checkNameAvailabilityWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
@@ -197,10 +197,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
-        return ServiceCall.fromResponse(createWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
+    public ServiceFuture<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceFuture.fromResponse(createWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
     }
 
     /**
@@ -268,10 +268,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<StorageAccount> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
-        return ServiceCall.fromResponse(beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
+    public ServiceFuture<StorageAccount> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceFuture.fromResponse(beginCreateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
     }
 
     /**
@@ -354,10 +354,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteAsync(String resourceGroupName, String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+    public ServiceFuture<Void> deleteAsync(String resourceGroupName, String accountName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
     }
 
     /**
@@ -414,7 +414,6 @@ public class StorageAccountsImpl implements StorageAccounts {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(CloudException.class)
                 .build(response);
     }
 
@@ -435,10 +434,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<StorageAccount> getPropertiesAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccount> serviceCallback) {
-        return ServiceCall.fromResponse(getPropertiesWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+    public ServiceFuture<StorageAccount> getPropertiesAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceFuture.fromResponse(getPropertiesWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
     }
 
     /**
@@ -517,10 +516,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<StorageAccount> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
-        return ServiceCall.fromResponse(updateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
+    public ServiceFuture<StorageAccount> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, accountName, parameters), serviceCallback);
     }
 
     /**
@@ -603,10 +602,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the storage account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeys> serviceCallback) {
-        return ServiceCall.fromResponse(listKeysWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
+    public ServiceFuture<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeys> serviceCallback) {
+        return ServiceFuture.fromResponse(listKeysWithServiceResponseAsync(resourceGroupName, accountName), serviceCallback);
     }
 
     /**
@@ -679,10 +678,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<StorageAccount>> listAsync(final ServiceCallback<List<StorageAccount>> serviceCallback) {
-        return ServiceCall.fromResponse(listWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<StorageAccount>> listAsync(final ServiceCallback<List<StorageAccount>> serviceCallback) {
+        return ServiceFuture.fromResponse(listWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -748,10 +747,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<StorageAccount>> listByResourceGroupAsync(String resourceGroupName, final ServiceCallback<List<StorageAccount>> serviceCallback) {
-        return ServiceCall.fromResponse(listByResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+    public ServiceFuture<List<StorageAccount>> listByResourceGroupAsync(String resourceGroupName, final ServiceCallback<List<StorageAccount>> serviceCallback) {
+        return ServiceFuture.fromResponse(listByResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**
@@ -826,10 +825,10 @@ public class StorageAccountsImpl implements StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<StorageAccountKeys> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey, final ServiceCallback<StorageAccountKeys> serviceCallback) {
-        return ServiceCall.fromResponse(regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey), serviceCallback);
+    public ServiceFuture<StorageAccountKeys> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey, final ServiceCallback<StorageAccountKeys> serviceCallback) {
+        return ServiceFuture.fromResponse(regenerateKeyWithServiceResponseAsync(resourceGroupName, accountName, regenerateKey), serviceCallback);
     }
 
     /**
