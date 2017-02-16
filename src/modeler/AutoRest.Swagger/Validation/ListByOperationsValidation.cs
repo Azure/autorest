@@ -32,28 +32,15 @@ namespace AutoRest.Swagger.Validation
             
             foreach (var pathObj in entity)
             {
-                var listOpIds = pathObj.Value.Select(pair => {
-                    // if the operation is not a get or a post, skip
-                    if (!(pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")))
-                    {
-                        return null;
-                    }
-
-                    // if the operation id is not of the form *_list(by), skip
-                    if (!(ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list")))
-                    {
-                        return null;
-                    }
-
-                    // if the operation does not return an array type or is not an xms pageable type, skip
-                    if (!(ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition)))
-                    {
-                        return null;
-                    }
-
-                    // if all conditions pass, return the operation id
-                    return pair.Value.OperationId;
-                }).Where(opId=> opId!=null);
+                var listOpIds = pathObj.Value
+                                        // operation should be a get or post
+                                        .Where(pair => (!(pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post"))))
+                                        // operation id should be of the form *_list(by)
+                                        .Where(pair => (!(ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list"))))
+                                        // operation is xmspageable or returns an array
+                                        .Where(pair => (!(ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition))))
+                                        // select the operation id
+                                        .Select(pair => pair.Value.OperationId);
 
                 // if there are no operations matching our conditions, skip
                 if (IsNullOrEmpty(listOpIds))
@@ -79,7 +66,7 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
                 // aggregate suggested op names in a single readable string for the formatter
-                var suggestedNames = opNames.Aggregate((curr, next)=> curr+", "+ next);
+                var suggestedNames = string.Join(", ", opNames);
                 foreach (var errOpId in errOpIds)
                 {
                     var stringParams = new List<string>() { errOpId };
