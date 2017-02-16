@@ -90,7 +90,7 @@ namespace AutoRest.Go
         public IReadOnlyDictionary<HttpStatusCode, string> StatusCodeToGoString;
 
 
-        private static readonly Regex semVerPattern = new Regex(@"^(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<tag>\S+))?$", RegexOptions.Compiled);
+        private static readonly Regex semVerPattern = new Regex(@"^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<tag>\S+))?$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of CodeNamerGo.
