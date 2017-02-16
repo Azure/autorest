@@ -24,7 +24,7 @@ namespace AutoRest.Core.Tests
 
         private void SetupMock()
         {
-            _fileSystem.WriteFile("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
+            _fileSystem.WriteAllText("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
         [Fact]
@@ -81,11 +81,11 @@ namespace AutoRest.Core.Tests
                     OutputDirectory = Path.GetTempPath()
                 };
                 string existingContents = "this is dummy";
-                string path = Path.Combine(settings.OutputDirectory, settings.ModelsName, "Pet.cs");
-                _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
+                string path = Path.Combine(settings.ModelsName, "Pet.cs");
+                settings.FileSystemOutput.VirtualStore[path] = new StringBuilder(existingContents);
                 var codeGenerator = new SampleCodeGenerator();
                 codeGenerator.Generate(New<CodeModel>()).GetAwaiter().GetResult();
-                Assert.NotEqual(existingContents, _fileSystem.VirtualStore[path].ToString());
+                Assert.NotEqual(existingContents, settings.FileSystemOutput.VirtualStore[path].ToString());
             }
         }
 
@@ -104,7 +104,7 @@ namespace AutoRest.Core.Tests
                     OutputFileName = "test.file.cs"
                 };
 
-                string path = Path.Combine(settings.OutputDirectory, "test.file.cs");
+                string path = Path.Combine("test.file.cs");
                 string existingContents = "this is dummy";
                 _fileSystem.VirtualStore[path] = new StringBuilder(existingContents);
                 var codeGenerator = new SampleCodeGenerator();

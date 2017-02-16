@@ -9,7 +9,7 @@ using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Logging;
 
-namespace AutoRest
+namespace AutoRest.Preview
 {
     public static class AutoRestPipeline
     {
@@ -23,12 +23,12 @@ namespace AutoRest
                     Modeler = "Swagger",
                     CodeGenerator = codeGenerator,
                     FileSystem = fs,
-                    OutputDirectory = "GeneratedCode",
+                    OutputDirectory = "",
                     Namespace = "Test",
                     Input = "input.json"
                 };
 
-                fs.WriteFile(settings.Input, json);
+                fs.WriteAllText(settings.Input, json);
 
                 GenerateCodeInto(processMessages);
 

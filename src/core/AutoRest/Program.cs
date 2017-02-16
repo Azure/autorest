@@ -54,7 +54,7 @@ namespace AutoRest
                         // internal preprocesor
                         if (settings.Preprocessor)
                         {
-                            Console.Write(InternalPreprocessor(settings.FileSystem.ReadAllText(settings.Input)));
+                            Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadAllText(settings.Input)));
                             return 0;
                         }
 
@@ -66,10 +66,6 @@ namespace AutoRest
                             if (settings.Input != null)
                             {
                                 settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
-                            }
-                            else if (settings.InputFolder != null)
-                            {
-                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
                             }
                             else
                             {
@@ -90,11 +86,11 @@ namespace AutoRest
                         }
                         else if (!string.IsNullOrEmpty(settings.Previous))
                         {
-                            Core.AutoRestController.Compare();
+                            AutoRestController.Compare();
                         }
                         else
                         {
-                            Core.AutoRestController.Generate();
+                            AutoRestController.Generate();
                             if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                             {
                                 new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
@@ -103,6 +99,12 @@ namespace AutoRest
                         if (settings.JsonValidationMessages)
                         {
                             Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
+                        }
+                        else
+                        {
+                            Settings.Instance.FileSystemOutput.CommitToDisk(Settings.Instance.OutputFileName == null
+                                ? Settings.Instance.OutputDirectory
+                                : Path.GetDirectoryName(Settings.Instance.OutputFileName));
                         }
                     }
                     catch (Exception exception)

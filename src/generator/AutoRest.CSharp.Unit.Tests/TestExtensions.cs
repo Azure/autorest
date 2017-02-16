@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Unit.Tests
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem fileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
         {
             using (NewContext)
             {
@@ -66,25 +66,26 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     Modeler = modeler,
                     CodeGenerator = codeGenerator,
-                    FileSystem = fileSystem,
+                    FileSystemInput = inputFileSystem,
                     OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };
 
-                return testName.GenerateCodeInto(fileSystem, settings);
+                return testName.GenerateCodeInto(inputFileSystem, settings);
             }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem fileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem inputFileSystem, Settings settings)
         {
+            Settings.Instance.FileSystemInput = inputFileSystem;
             // copy the whole input directory into the memoryfilesystem.
-            fileSystem.CopyFolder("Resource", testName,"");
+            inputFileSystem.CopyFolder("Resource", testName,"");
 
             // find the appropriately named .yaml or .json file for the swagger. 
             foreach (var ext in new[] {".yaml", ".json", ".md"}) {
                 var name = testName + ext;
-                if (fileSystem.FileExists(name)) {
+                if (inputFileSystem.FileExists(name)) {
                     settings.Input = name;
                 }
             }
@@ -108,9 +109,9 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 // Generate code from CodeModel.
                 plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
-            }
 
-            return fileSystem;
+                return settings.FileSystemOutput;
+            }
         }
 
         internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)

@@ -161,6 +161,15 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///    Looks up a localized string similar to Properties defined alongside $ref will be ignored according to JSON specification..
         /// </summary>
+        public static string ConfigurationKnownPlugins {
+            get {
+                return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Properties defined alongside $ref will be ignored according to JSON specification..
+        /// </summary>
         public static string ConflictingRef {
             get {
                 return ResourceManager.GetString("ConflictingRef", resourceCulture);
@@ -596,13 +605,6 @@ namespace AutoRest.Core.Properties {
         public static string SupportedSchemesWarningMessage {
             get {
                 return ResourceManager.GetString("SupportedSchemesWarningMessage", resourceCulture);
-            }
-        }
-        public static string ConfigurationKnownPlugins
-        {
-            get
-            {
-                return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
             }
         }
 
