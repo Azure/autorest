@@ -50,9 +50,6 @@ task "show", 'show', ->
   assemblies() 
     .pipe showFiles()
 
-task 'clean','Cleans the the solution', ['clean-packages'], -> 
-  exec "git checkout #{basefolder}/packages"  
-
 task 'autorest', 'Runs AutoRest', (done) -> 
   autorest process.argv.slice(3), done
 
