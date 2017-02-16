@@ -212,14 +212,14 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void ListOperationsNamingValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource", "Swagger", "Validation", "list-operations-naming.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "list-operations-naming.json"));
             messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 2);
         }
 
         [Fact]
         public void ListByOperationsValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Resource", "Swagger", "Validation", "listby-operations.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "listby-operations.json"));
             messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 3);
         }
 

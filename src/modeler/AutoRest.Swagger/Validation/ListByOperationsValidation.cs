@@ -34,11 +34,11 @@ namespace AutoRest.Swagger.Validation
             {
                 var listOpIds = pathObj.Value
                                         // operation should be a get or post
-                                        .Where(pair => (!(pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post"))))
+                                        .Where(pair => (pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")))
                                         // operation id should be of the form *_list(by)
-                                        .Where(pair => (!(ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list"))))
+                                        .Where(pair => (ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list")))
                                         // operation is xmspageable or returns an array
-                                        .Where(pair => (!(ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition))))
+                                        .Where(pair => (ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition)))
                                         // select the operation id
                                         .Select(pair => pair.Value.OperationId);
 
@@ -69,8 +69,6 @@ namespace AutoRest.Swagger.Validation
                 var suggestedNames = string.Join(", ", opNames);
                 foreach (var errOpId in errOpIds)
                 {
-                    var stringParams = new List<string>() { errOpId };
-                    stringParams.AddRange(opNames);
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, errOpId, suggestedNames);
                 }
             }
@@ -80,7 +78,7 @@ namespace AutoRest.Swagger.Validation
         {
             var opList = new List<string>();
             var methodGrp = GetMethodGroup(path);
-            if (methodGrp == string.Empty || !SubscriptionRegex.IsMatch(path))
+            if (methodGrp == null || !SubscriptionRegex.IsMatch(path))
             {
                 return opList;
             }
@@ -121,8 +119,7 @@ namespace AutoRest.Swagger.Validation
             var match = UrlRegex.Match(path);
             var caps = match.Groups["urltoken"].Captures.OfType<Capture>().Reverse();
             var capture = caps.FirstOrDefault(cap => !PathParameterRegex.IsMatch(cap.Value));
-            
-            return (capture!=null) ? capture.Value.Substring(1) : string.Empty;
+            return capture?.Value?.Substring(1);
         }
 
         private bool IsNullOrEmpty(IEnumerable<object> enumerable)
@@ -144,7 +141,3 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
     }
 }
-
-
-
-
