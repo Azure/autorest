@@ -36,19 +36,19 @@ namespace Petstore.Models
         /// Gets resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; protected set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets resource name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Gets resource type
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; protected set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// Gets or sets resource location
@@ -64,4 +64,3 @@ namespace Petstore.Models
 
     }
 }
-

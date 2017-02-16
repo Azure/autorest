@@ -233,4 +233,3 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 
     }
 }
-

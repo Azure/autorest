@@ -46,13 +46,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// Gets resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; protected set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets resource Type
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; protected set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -69,8 +69,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// Gets resource Name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
     }
 }
-

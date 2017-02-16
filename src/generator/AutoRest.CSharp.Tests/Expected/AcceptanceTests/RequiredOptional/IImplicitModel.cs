@@ -130,4 +130,3 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         Task<HttpOperationResponse<Error>> GetOptionalGlobalQueryWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

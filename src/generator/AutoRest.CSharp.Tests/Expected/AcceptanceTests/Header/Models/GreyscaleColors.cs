@@ -28,4 +28,3 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         GREY
     }
 }
-

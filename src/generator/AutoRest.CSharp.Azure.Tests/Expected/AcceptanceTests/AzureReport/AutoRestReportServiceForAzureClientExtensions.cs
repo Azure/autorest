@@ -52,4 +52,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
 
     }
 }
-

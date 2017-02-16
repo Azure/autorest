@@ -24,4 +24,3 @@ namespace Petstore.Models
         PremiumLRS
     }
 }
-

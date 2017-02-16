@@ -106,4 +106,3 @@ namespace Fixtures.AcceptanceTestsBodyByte
         Task<HttpOperationResponse<byte[]>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

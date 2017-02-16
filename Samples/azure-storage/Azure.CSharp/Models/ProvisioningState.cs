@@ -20,4 +20,3 @@ namespace Petstore.Models
         Succeeded
     }
 }
-
