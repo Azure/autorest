@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task PutUtcMaxDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUtcMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutUtcMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -242,7 +242,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task PutLocalPositiveOffsetMaxDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalPositiveOffsetMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLocalPositiveOffsetMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -333,7 +333,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task PutLocalNegativeOffsetMaxDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalNegativeOffsetMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLocalNegativeOffsetMaxDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -422,7 +422,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task PutUtcMinDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUtcMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutUtcMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -479,7 +479,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task PutLocalPositiveOffsetMinDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -536,7 +536,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task PutLocalNegativeOffsetMinDateTimeAsync(this IDatetime operations, System.DateTime datetimeBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(datetimeBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

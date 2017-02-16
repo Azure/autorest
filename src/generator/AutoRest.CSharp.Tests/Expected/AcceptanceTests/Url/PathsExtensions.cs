@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task GetBooleanTrueAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetBooleanTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task GetBooleanFalseAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetBooleanFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -91,7 +91,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task GetIntOneMillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetIntOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -116,7 +116,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task GetIntNegativeOneMillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task GetTenBillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -166,7 +166,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task GetNegativeTenBillionAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetNegativeTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetNegativeTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -191,7 +191,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task FloatScientificPositiveAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.FloatScientificPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -216,7 +216,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task FloatScientificNegativeAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.FloatScientificNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -241,7 +241,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task DoubleDecimalPositiveAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.DoubleDecimalPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -266,7 +266,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task DoubleDecimalNegativeAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.DoubleDecimalNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -291,7 +291,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task StringUnicodeAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUnicodeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.StringUnicodeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -316,7 +316,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task StringUrlEncodedAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.StringUrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -341,7 +341,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task StringEmptyAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.StringEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -372,7 +372,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task StringNullAsync(this IPaths operations, string stringPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringNullWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.StringNullWithHttpMessagesAsync(stringPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -405,7 +405,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task EnumValidAsync(this IPaths operations, UriColor enumPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.EnumValidWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.EnumValidWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -438,7 +438,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task EnumNullAsync(this IPaths operations, UriColor enumPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.EnumNullWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.EnumNullWithHttpMessagesAsync(enumPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -469,7 +469,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task ByteMultiByteAsync(this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteMultiByteWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ByteMultiByteWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -494,7 +494,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task ByteEmptyAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.ByteEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -525,7 +525,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task ByteNullAsync(this IPaths operations, byte[] bytePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteNullWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ByteNullWithHttpMessagesAsync(bytePath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -550,7 +550,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task DateValidAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.DateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -583,7 +583,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task DateNullAsync(this IPaths operations, System.DateTime datePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateNullWithHttpMessagesAsync(datePath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.DateNullWithHttpMessagesAsync(datePath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -608,7 +608,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task DateTimeValidAsync(this IPaths operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.DateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -641,7 +641,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task DateTimeNullAsync(this IPaths operations, System.DateTime dateTimePath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeNullWithHttpMessagesAsync(dateTimePath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.DateTimeNullWithHttpMessagesAsync(dateTimePath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -672,7 +672,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task Base64UrlAsync(this IPaths operations, byte[] base64UrlPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Base64UrlWithHttpMessagesAsync(base64UrlPath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.Base64UrlWithHttpMessagesAsync(base64UrlPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -707,7 +707,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task ArrayCsvInPathAsync(this IPaths operations, IList<string> arrayPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayCsvInPathWithHttpMessagesAsync(arrayPath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ArrayCsvInPathWithHttpMessagesAsync(arrayPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -738,7 +738,7 @@ namespace Fixtures.AcceptanceTestsUrl
             /// </param>
             public static async Task UnixTimeUrlAsync(this IPaths operations, System.DateTime unixTimeUrlPath, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.UnixTimeUrlWithHttpMessagesAsync(unixTimeUrlPath, null, cancellationToken).ConfigureAwait(false);
+                (await operations.UnixTimeUrlWithHttpMessagesAsync(unixTimeUrlPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

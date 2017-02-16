@@ -177,7 +177,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutValidAsync(this IPolymorphicrecursive operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

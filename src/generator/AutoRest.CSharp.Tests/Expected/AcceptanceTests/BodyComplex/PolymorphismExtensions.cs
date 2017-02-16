@@ -137,7 +137,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutValidAsync(this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -222,7 +222,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task PutValidMissingRequiredAsync(this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidMissingRequiredWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidMissingRequiredWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

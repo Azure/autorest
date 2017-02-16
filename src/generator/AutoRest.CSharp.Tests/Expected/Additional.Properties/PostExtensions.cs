@@ -39,7 +39,7 @@ namespace Fixtures.AdditionalProperties
             /// </param>
             public static async Task PetsAsync(this IPost operations, Pet pet, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PetsWithHttpMessagesAsync(pet, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PetsWithHttpMessagesAsync(pet, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationNoSync
             /// </param>
             public static async Task PutPositiveDurationAsync(this IDurationOperations operations, System.TimeSpan durationBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>

@@ -48,7 +48,7 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
             /// </param>
             public static async Task GetEmptyAsync(this IPathsOperations operations, string accountName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetEmptyWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetEmptyWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

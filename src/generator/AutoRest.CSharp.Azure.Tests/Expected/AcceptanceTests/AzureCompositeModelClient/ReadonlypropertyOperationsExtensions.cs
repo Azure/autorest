@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutValidAsync(this IReadonlypropertyOperations operations, int? size = default(int?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutValidWithHttpMessagesAsync(size, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutValidWithHttpMessagesAsync(size, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

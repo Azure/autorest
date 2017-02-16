@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutTrueAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -128,7 +128,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutFalseAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
