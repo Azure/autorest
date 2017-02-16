@@ -14,8 +14,8 @@ import retrofit2.Retrofit;
 import fixtures.custombaseurimoreoptions.Paths;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseurimoreoptions.models.ErrorException;
 import java.io.IOException;
@@ -79,10 +79,10 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
+    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName), serviceCallback);
     }
 
     /**
@@ -162,10 +162,10 @@ public class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
+    public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion), serviceCallback);
     }
 
     /**

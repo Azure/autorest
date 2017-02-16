@@ -7,6 +7,6 @@ namespace AutoRest.AzureResourceSchema {
     using Core.Extensibility;
     using Core.Model;
 
-    public sealed class PluginArs : Plugin<GeneratorSettingsArs, ModelSerializer<CodeModel>, CodeModelTransformer<CodeModel>, CodeGeneratorArs, CodeNamer, CodeModel> {
+    public sealed class PluginArs : Plugin<GeneratorSettingsArs, CodeModelTransformer<CodeModel>, CodeGeneratorArs, CodeNamer, CodeModel> {
     }
 }

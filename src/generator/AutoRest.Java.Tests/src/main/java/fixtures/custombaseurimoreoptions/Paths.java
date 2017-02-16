@@ -10,8 +10,8 @@
 
 package fixtures.custombaseurimoreoptions;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
 
@@ -36,9 +36,9 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -77,9 +77,9 @@ public interface Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.

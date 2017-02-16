@@ -13,8 +13,8 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
@@ -74,10 +74,10 @@ public class XMsClientRequestIdsInner {
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -135,10 +135,10 @@ public class XMsClientRequestIdsInner {
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
+    public ServiceFuture<Void> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(paramGetWithServiceResponseAsync(xMsClientRequestId), serviceCallback);
     }
 
     /**

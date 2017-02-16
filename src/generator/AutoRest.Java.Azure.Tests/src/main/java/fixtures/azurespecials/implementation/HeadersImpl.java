@@ -12,8 +12,8 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.Validator;
 import fixtures.azurespecials.models.ErrorException;
@@ -85,10 +85,10 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+    public ServiceFuture<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(customNamedRequestIdWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**
@@ -151,10 +151,10 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
+    public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters), serviceCallback);
     }
 
     /**
@@ -220,10 +220,10 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromHeaderResponse(customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId), serviceCallback);
+    public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromHeaderResponse(customNamedRequestIdHeadWithServiceResponseAsync(fooClientRequestId), serviceCallback);
     }
 
     /**

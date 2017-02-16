@@ -13,11 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="AutoRest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Drawing" />
     <Reference Include="System" />

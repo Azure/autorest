@@ -10,9 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Resource\AutoRest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resource\Swagger\**\*;Resource\Expected\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -15,11 +15,11 @@ namespace AutoRest.CSharp.Unit.Tests
         public void SummaryCommentsContainImproperlyEscapedBackslashes()
         {
             // simplified test pattern for unit testing aspects of code generation
-            using (var fileSystem = "Bug1152".GenerateCodeInto(fileSystem : CreateMockFilesystem(), modeler : "Swagger"))
+            using (var fileSystem = "Bug1152".GenerateCodeInto(inputFileSystem : CreateMockFilesystem()))
             {
-                var expectedPath = Path.Combine("GeneratedCode", "Models", "TestObject.cs");
+                var expectedPath = Path.Combine("Models", "TestObject.cs");
                 Assert.True(fileSystem.FileExists(expectedPath));
-                var testObject = fileSystem.ReadFileAsText(expectedPath);
+                var testObject = fileSystem.ReadAllText(expectedPath);
 
                 Assert.DoesNotContain(@"\\\\", Regex.Match(testObject, "Default is.*").Value);
             }

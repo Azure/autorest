@@ -10,8 +10,8 @@
 
 package fixtures.custombaseuri;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
 
@@ -32,9 +32,9 @@ public interface Paths {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.

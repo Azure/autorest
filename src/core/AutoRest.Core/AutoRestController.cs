@@ -56,12 +56,6 @@ namespace AutoRest.Core
                     // generate model from swagger 
                     codeModel = modeler.Build();
 
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
                     if (validationErrorFound)
                     {
                         Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
@@ -97,19 +91,9 @@ namespace AutoRest.Core
                     // load model into language-specific code model
                     codeModel = plugin.Serializer.Load(modelAsJson);
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-     
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                     // Generate code from CodeModel.
                     plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
@@ -119,16 +103,6 @@ namespace AutoRest.Core
             {
                 throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
             }
-        }
-
-        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
-        {
-            /*
-             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
-                 codeModel = extension.Transform(codeModel);
-            */
-
-            return codeModel;
         }
 
         /// <summary>

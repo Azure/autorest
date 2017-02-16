@@ -14,6 +14,7 @@ using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -28,7 +29,7 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            var swaggerDocument = fileSystem.ReadFileAsText(path);
+            var swaggerDocument = fileSystem.ReadAllText(path);
             return Parse(path, swaggerDocument);
         }
 
@@ -70,14 +71,14 @@ namespace AutoRest.Swagger
                     entityPath = "#" + splitReference[1];
                     value.Value = entityPath;
                     // Make sure the filePath is either an absolute uri, or a rooted path
-                    if (!Settings.FileSystem.IsCompletePath(filePath))
+                    if (!Settings.FileSystemInput.IsCompletePath(filePath))
                     {
                         // Otherwise, root it from the directory (one level up) of the current swagger file path
-                        filePath = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(currentFilePath), filePath);
+                        filePath = Settings.FileSystemInput.MakePathRooted(Settings.FileSystemInput.GetParentDir(currentFilePath), filePath);
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
-                        var externalDefinitionString = Settings.FileSystem.ReadFileAsText(filePath);
+                        var externalDefinitionString = Settings.FileSystemInput.ReadAllText(filePath);
                         externalFiles[filePath] = JObject.Parse(externalDefinitionString);
                     }
                 }
@@ -107,7 +108,6 @@ namespace AutoRest.Swagger
                     
                 }
             }
-            return;
         }
 
         public static string Normalize(string path, string swaggerDocument)
@@ -115,7 +115,7 @@ namespace AutoRest.Swagger
             if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
             {
                 Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
-                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
+                swaggerDocument = LiterateYamlParser.Parse(swaggerDocument);
             }
             // normalize YAML to JSON since that's what we process
             swaggerDocument = swaggerDocument.EnsureYamlIsJson();
@@ -139,6 +139,9 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SchemaRequiredItemConverter());
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
+
+                // for parameterized host, will be made available via JsonRpc accessible state in the future
+                ServiceDefinition.Instance = swaggerService;
                 Uri filePath = null;
                 Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
                 swaggerService.FilePath = filePath;

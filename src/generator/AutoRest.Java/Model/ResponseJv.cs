@@ -203,7 +203,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ServiceCallGenericParameterString
+        public virtual string ServiceFutureGenericParameterString
         {
             get
             {
@@ -216,7 +216,7 @@ namespace AutoRest.Java.Model
         {
             get
             {
-                return ServiceCallGenericParameterString;
+                return ServiceFutureGenericParameterString;
             }
         }
 

@@ -13,8 +13,8 @@ package fixtures.bodybyte.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodybyte.Bytes;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
@@ -88,10 +88,10 @@ public class BytesImpl implements Bytes {
      * Get null byte value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<byte[]> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -148,10 +148,10 @@ public class BytesImpl implements Bytes {
      * Get empty byte value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<byte[]> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -208,10 +208,10 @@ public class BytesImpl implements Bytes {
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.fromResponse(getNonAsciiWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<byte[]> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+        return ServiceFuture.fromResponse(getNonAsciiWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -269,10 +269,10 @@ public class BytesImpl implements Bytes {
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putNonAsciiWithServiceResponseAsync(byteBody), serviceCallback);
+    public ServiceFuture<Void> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putNonAsciiWithServiceResponseAsync(byteBody), serviceCallback);
     }
 
     /**
@@ -334,10 +334,10 @@ public class BytesImpl implements Bytes {
      * Get invalid byte value ':::SWAGGER::::'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<byte[]> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**

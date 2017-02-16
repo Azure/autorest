@@ -1,6 +1,10 @@
 
 fs = require('fs')
 
+concurrency = 0 
+queue = []
+
+
 module.exports =
   # lets us just handle each item in a stream easily.
   foreach: (delegate) -> 
@@ -17,6 +21,7 @@ module.exports =
 
   showFiles: () ->
     foreach (each,done) ->
+      echo info each.path
       done null, each
 
   onlyFiles: () -> 
@@ -132,6 +137,48 @@ module.exports =
     echo ""
     rm '-rf', "#{process.env.tmp}/gulp"
     process.exit(1)
+  
+
+  execute: (cmdline,options,callback)->
+    if typeof options == 'function' 
+      callback = options
+      options = { }
+
+    # if we're busy, schedule again...
+    if concurrency >= threshold
+      queue.push(->
+          execute cmdline, options, callback
+      )
+      return
+  
+    concurrency++
+
+    options.cwd = options.cwd or basefolder 
+    echo  "           #{quiet_info options.cwd} :: #{info cmdline}" if !options.silent 
+    
+    options.silent = !verbose 
+
+    exec cmdline, options, (code,stdout,stderr)-> 
+      concurrency--
+
+      if code and (options.retry or 0) > 0
+        echo warning "reytrying #{options.retry} #{cmdline}"
+        options.retry--
+        return execute cmdline,options,callback
+
+      # run the next one in the queue
+      if queue.length
+        fn = (queue.shift())
+        fn() 
+
+      if code 
+        echo error "#{options.cwd}"
+        echo error "#{cmdline}"
+        echo warning stderr
+        echo error stdout
+
+        Fail "Task failed, fast exit"
+      callback(code,stdout,stderr)
 
 # build task for global build
 module.exports.task 'build', 'builds project', -> 
