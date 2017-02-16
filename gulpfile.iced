@@ -46,12 +46,6 @@ Import
   typescriptProjects: () -> 
     source "src/next-gen/**/tsconfig.json"
 
-task "show", 'show', -> 
-  assemblies() 
-    .pipe showFiles()
-
-task 'clean','Cleans the the solution', ['clean-packages'], -> 
-  exec "git checkout #{basefolder}/packages"  
 
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
@@ -67,12 +61,17 @@ task 'zip-autorest', '', (done) ->
   packagefiles()
     .pipe zip package_name
     .pipe destination packages
+  
+task 'install-node-files' ,'', (done)->
+  install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/Release/netcoreapp1.0/publish",done
+  return null;
 
 task 'package','From scratch build, sign, and package autorest', (done) -> 
   run 'clean',
     'restore'
     'dotnet:publish'
     'sign-assemblies'
+    'install-node-files'
     'zip-autorest' 
     -> done()
 
@@ -105,8 +104,12 @@ To Install AutoRest, install nodej.js 6.9.5 or later, and run
       prerelease: if argv.nightly then true else false, 
     }
 
-task 'autorest-ng', "Runs AutoRest (via node)", ['build/build:typescript'] ,->
-  execute "node #{basefolder}/src/next-gen/autorest/index.js #{process.argv.slice(3).join(' ')}", {cwd: process.env.INIT_CWD }
+task 'autorest-ng', "Runs AutoRest (via node)" ,(done)->
+  args = process.argv.slice(3)
+  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-ng/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+    return done() if code is 0 
+    Fail "AutoRest(ng) Failed\n\n#{args.join(' ')}\n\n\{stderr}"
+
 
 autorest = (args,done) ->
   # Run AutoRest from the original current directory.

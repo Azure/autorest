@@ -12,7 +12,23 @@ task 'build', 'build:typescript', (done)->
 
       next null
     return null
-    
+
+Import
+  install_package: (from,to,done)->
+    return setTimeout (->
+      install_package from, to, done
+    ), 500 if global.ts_ready > 0
+   
+    Fail "Directory '#{from}' doesn't exist'" if !test "-d", from
+    mkdir -p, to if !test "-d", to
+
+    # create an empty package.json
+    "{ }" .to "#{to}/package.json"
+
+    # install the autorest typescript code into the target folder
+    execute "npm install #{from}", {cwd : to }, (c,o,e)->
+      done();
+
 task 'install', 'install:typescript', (done)-> 
   count = 0
   typescriptProjects()
@@ -26,7 +42,4 @@ task 'install', 'install:typescript', (done)->
 
     return null
     
-    
-    
-    
-    
+
