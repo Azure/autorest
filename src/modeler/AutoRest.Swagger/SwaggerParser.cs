@@ -14,6 +14,7 @@ using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -138,6 +139,9 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SchemaRequiredItemConverter());
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
+
+                // for parameterized host, will be made available via JsonRpc accessible state in the future
+                ServiceDefinition.Instance = swaggerService;
                 Uri filePath = null;
                 Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
                 swaggerService.FilePath = filePath;
