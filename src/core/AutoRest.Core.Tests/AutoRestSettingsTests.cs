@@ -125,7 +125,7 @@ namespace AutoRest.Core.Tests
                     "-ModelsName", "MyModels"
                 });
                 Assert.True(settings.ShowHelp);
-                Assert.Equal("c:\\input", settings.Input);
+                Assert.Equal("file://c:\\input", settings.Input);
                 Assert.Equal("c:\\output", settings.OutputDirectory);
                 Assert.Equal("MyClient", settings.ClientName);
                 Assert.Equal("MyModels", settings.ModelsName);
@@ -144,7 +144,7 @@ namespace AutoRest.Core.Tests
                     "-mname", "MyModels"
                 });
                 Assert.True(settings.ShowHelp);
-                Assert.Equal("/c/input", settings.Input);
+                Assert.Equal("file:///c/input", settings.Input);
                 Assert.Equal("c:\\output", settings.OutputDirectory);
                 Assert.Equal("MyClient", settings.ClientName);
                 Assert.Equal("MyModels", settings.ModelsName);

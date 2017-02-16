@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -45,7 +46,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private string _header;
 
-        public static string AutoRestFolder{ get;set;}
+        public static string AutoRestFolder { get; set; }
 
         public Settings()
         {
@@ -99,6 +100,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         public IDictionary<string, object> CustomSettings { get; private set; }
 
+        private string _input;
+
         // The CommandLineInfo attribute is reflected to display help.
         // Prefer to show required properties before optional.
         // Although not guaranteed by the Framework, the iteration order matches the
@@ -112,7 +115,33 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsInfo("The location of the input specification.", true)]
         [SettingsAlias("i")]
         [SettingsAlias("input")]
-        public string Input { get; set; }
+        public string Input
+        {
+            get
+            {
+                var fileSchemaPrefix = "file://";
+                if (_input != null && !Regex.IsMatch(_input, @"^(file|https?)://.*$", RegexOptions.IgnoreCase))
+                {
+                    //On a linux system, Path.IsPathRooted("C:/Foo") -> false. Ideally, it is not expected from 
+                    //someone to provide that kind of a file path while running AutoRest on a linux based system.
+                    //However, adding the extra condition to do the right behavior for "C:\\Foo". The focus is to 
+                    //do the right thing based on the initial characters. If the provided path is incorrect, it will
+                    //eventually fail.
+                    if (Path.IsPathRooted(_input) || (Path.PathSeparator != ';' && Regex.IsMatch(_input, @"^[a-zA-Z]:(\\{1,2}|/)\w+.*$", RegexOptions.IgnoreCase)))
+                    {
+                        return string.Concat(fileSchemaPrefix, _input);
+                    }
+
+                    return string.Concat(fileSchemaPrefix, Path.GetFullPath(_input));
+                }
+
+                return _input;
+            }
+            set
+            {
+                _input = value;
+            }
+        }
 
         /// <summary>
         /// Gets of sets the path to a previous version of the input specification file. This will cause
@@ -192,7 +221,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                       "Possible values: rest, rest-client, rest-server. " +
                       "Determines whether AutoRest generates " +
                       "the client or server side code for given spec.")]
-        public string  CodeGenerationMode{ get; set; }
+        public string CodeGenerationMode { get; set; }
 
         /// <summary>
         /// Gets or sets a comment header to include in each generated file.
