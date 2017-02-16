@@ -40,11 +40,10 @@ namespace AutoRest.Swagger.Validation
             {
                 if (resNames.IsMatch(definition.Key) || ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    if(!patchOperations.Any(op => (op.Responses["200"].Schema?.Reference?.StripDefinitionPath()??string.Empty) == definition.Key))
+                    if(!patchOperations.Any(op => (op.Responses["200"].Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {
                         // if no patch operation returns current tracked resource as a response, 
-                        // the tracked resource does not have a corresponding patch operation, grounds to call
-                        // the swagger invalid!
+                        // the tracked resource does not have a corresponding patch operation
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
                     }
                 }
