@@ -34,6 +34,24 @@ Install 'through', 'through2'
 Install 'run', 'run-sequence'
 Install 'except', './except.iced'
 
+# do a bit of monkeypatching
+_gulpStart = gulp.Gulp::start
+_runTask = gulp.Gulp::_runTask
+
+gulp.Gulp::start = (taskName) ->
+  @currentStartTaskName = taskName
+  _gulpStart.apply this, arguments
+  return
+
+gulp.Gulp::_runTask = (task) ->
+  @currentRunTaskName = task.name
+  _runTask.apply this, arguments
+  return
+
+#  echo 'this.currentStartTaskName: ' + this.currentStartTaskName
+#  echo 'this.currentRunTaskName: ' + this.currentRunTaskName
+
+
 # bring some gulp-Plugins along
 Plugin 'filter',
   'zip'
@@ -59,7 +77,8 @@ Import
   force: argv.force or false
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
 
-mkdir workdir
+mkdir "#{process.env.tmp}/gulp" if !test "-d", "#{process.env.tmp}/gulp"
+mkdir workdir if !test "-d", workdir
 
 ###############################################
 # UI stuff
@@ -104,5 +123,6 @@ task 'default','', ->
   *--configuration*  'debug' or 'release'
   *--release*        same as --configuration=release
   *--nightly*        generate label for package as 'nightly-YYYYMMDD'
+
 #{switches}
 """
