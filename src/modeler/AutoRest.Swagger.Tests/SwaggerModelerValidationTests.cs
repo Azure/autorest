@@ -210,6 +210,20 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void ListOperationsNamingValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "list-operations-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 2);
+        }
+
+        [Fact]
+        public void ListByOperationsValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "listby-operations.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 3);
+        }
+
+        [Fact]
         public void InvalidConstraintValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json"));
@@ -437,6 +451,26 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
+        /// Verifies that list by operations (operations that are named as *_listby*) are correctly named
+        /// </summary>
+        [Fact]
+        public void ListByOperationsCorrectlyNamed()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "listby-operations-valid-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListByOperationsValidation), 0);
+        }
+
+        /// <summary>
+        /// Verifies that listing operations (any operation that returns an array or is of xmspageable type) 
+        /// are correctly named
+        /// </summary>
+        [Fact]
+        public void ListOperationsCorrectlyNamed()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "list-operations-valid-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(ListOperationNamingWarning), 0);
+        }
+
         /// Verifies that a providers path is of proper format
         /// </summary>
         [Fact]
