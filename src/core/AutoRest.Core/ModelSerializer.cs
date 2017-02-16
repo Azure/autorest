@@ -22,7 +22,7 @@ namespace AutoRest.Core {
         }
 
         public virtual TCodeModel Load(IFileSystem fileSystem, string path) {
-            return Load(fileSystem.ReadFileAsText(path));
+            return Load(fileSystem.ReadAllText(path));
         }
 
         public virtual TCodeModel Load(CodeModel codeModel) {

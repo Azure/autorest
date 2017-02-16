@@ -158,7 +158,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
             }
-        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
         }
 

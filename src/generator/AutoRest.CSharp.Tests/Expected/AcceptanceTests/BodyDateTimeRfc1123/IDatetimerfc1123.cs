@@ -164,4 +164,3 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         Task<HttpOperationResponse<System.DateTime?>> GetUtcMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

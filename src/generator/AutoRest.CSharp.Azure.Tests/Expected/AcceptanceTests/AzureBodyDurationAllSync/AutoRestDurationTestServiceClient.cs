@@ -302,4 +302,3 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
         }
     }
 }
-

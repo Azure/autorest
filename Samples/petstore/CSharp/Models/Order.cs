@@ -31,7 +31,7 @@ namespace Petstore.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public long? Id { get; protected set; }
+        public long? Id { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -142,4 +142,3 @@ namespace Petstore.Models
         }
     }
 }
-

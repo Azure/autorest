@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists($@"GeneratedCode\Models\{modelName}.cs"));
+                Assert.True(fileSystem.FileExists($@"Models\{modelName}.cs"));
 
                 var result = await Compile(fileSystem);
 

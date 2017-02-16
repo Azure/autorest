@@ -671,4 +671,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex
 
     }
 }
-

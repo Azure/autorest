@@ -227,4 +227,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex
 
     }
 }
-

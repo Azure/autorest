@@ -1,0 +1,32 @@
+{
+  "name": "autorest-ng",
+  "version": "1.0.1",
+  "description": "AutoRest",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "keywords": [
+    "autorest"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest/readme.md",
+  "main": "./src/AutoRest/AutoRest.js",
+  "bin": {
+    "autorest": "./bin/index.js"
+  },
+  "engines": {
+    "node": ">=6.9.5"
+  },
+  "devDependencies": {
+    "typescript": "^2.1.5"
+  },
+  
+  "dependencies": {
+    "yargs": "^6.6.0"
+  }
+}

@@ -1,6 +1,10 @@
 
 fs = require('fs')
 
+concurrency = 0 
+queue = []
+
+
 module.exports =
   # lets us just handle each item in a stream easily.
   foreach: (delegate) -> 
@@ -17,8 +21,13 @@ module.exports =
 
   showFiles: () ->
     foreach (each,done) ->
+      echo info each.path
       done null, each
 
+  onlyFiles: () -> 
+    foreach (each,done) ->
+      return done null, each if fs.statSync(each.path).isFile()
+      done null
 
   source: (globs, options ) -> 
     gulp.src( globs, options) 
@@ -113,9 +122,63 @@ module.exports =
     path.basename = "#{f[1].replace(/[_]/g, '/') }/#{f[2]}"
     path.dirname = ""
 
+  except: (match) -> 
+    foreach (each,done) ->
+      return done null if each.path.match( match ) 
+      done null, each
+
   guid: ->
     x = -> Math.floor((1 + Math.random()) * 0x10000).toString(16).substring 1
     "#{x()}#{x()}-#{x()}-#{x()}-#{x()}-#{x()}#{x()}#{x()}"
+
+  Fail: (text) ->
+    echo ""
+    echo "#{ error 'Task Failed:' }  #{error_message text}"
+    echo ""
+    rm '-rf', "#{process.env.tmp}/gulp"
+    process.exit(1)
+  
+
+  execute: (cmdline,options,callback)->
+    if typeof options == 'function' 
+      callback = options
+      options = { }
+
+    # if we're busy, schedule again...
+    if concurrency >= threshold
+      queue.push(->
+          execute cmdline, options, callback
+      )
+      return
+  
+    concurrency++
+
+    options.cwd = options.cwd or basefolder 
+    echo  "           #{quiet_info options.cwd} :: #{info cmdline}" if !options.silent 
+    
+    options.silent = !verbose 
+
+    exec cmdline, options, (code,stdout,stderr)-> 
+      concurrency--
+
+      if code and (options.retry or 0) > 0
+        echo warning "reytrying #{options.retry} #{cmdline}"
+        options.retry--
+        return execute cmdline,options,callback
+
+      # run the next one in the queue
+      if queue.length
+        fn = (queue.shift())
+        fn() 
+
+      if code 
+        echo error "#{options.cwd}"
+        echo error "#{cmdline}"
+        echo warning stderr
+        echo error stdout
+
+        Fail "Task failed, fast exit"
+      callback(code,stdout,stderr)
 
 # build task for global build
 module.exports.task 'build', 'builds project', -> 
@@ -124,3 +187,8 @@ module.exports.task 'build', 'builds project', ->
 # task for vscode
 module.exports.task 'code', 'launches vscode', -> 
   exec "code #{basefolder}"
+
+module.exports.task 'release-only', '', (done)-> 
+  Fail( "This command requires --configuration release" ) if configuration isnt "release"
+  done()
+ 

@@ -12,7 +12,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby.Azure
 {
-    public sealed class PluginRba : Plugin<GeneratorSettingsRba, ModelSerializer<CodeModelRba>, TransformerRba, CodeGeneratorRba, CodeNamerRb, CodeModelRba>
+    public sealed class PluginRba : Plugin<GeneratorSettingsRba, TransformerRba, CodeGeneratorRba, CodeNamerRb, CodeModelRba>
     {
         public PluginRba()
         {

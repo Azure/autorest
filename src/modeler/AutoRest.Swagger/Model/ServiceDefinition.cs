@@ -21,6 +21,9 @@ namespace AutoRest.Swagger.Model
     /// </summary>
     public class ServiceDefinition : SpecObject
     {
+        // as long as AAAS does not provide that
+        public static ServiceDefinition Instance { get; set; }
+
         public ServiceDefinition()
         {
             Definitions = new Dictionary<string, Schema>();
@@ -78,8 +81,11 @@ namespace AutoRest.Swagger.Model
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
+        [Rule(typeof(ListOperationNamingWarning))]
+        [Rule(typeof(ListByOperationsValidation))]
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
+        [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(BodyTopLevelProperties))]
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustHaveEmptyRequestBody))]
@@ -89,6 +95,8 @@ namespace AutoRest.Swagger.Model
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [JsonProperty("x-ms-paths")]
+        [Rule(typeof(ListOperationNamingWarning))]
+        [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 

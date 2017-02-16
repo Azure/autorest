@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace AutoRest.Core.Extensibility
 {
     /// <summary>
-    /// In-memory representation of AutoRest.json configuration.
+    /// In-memory representation of AutoRest configuration.
     /// </summary>
     public class AutoRestConfiguration
     {

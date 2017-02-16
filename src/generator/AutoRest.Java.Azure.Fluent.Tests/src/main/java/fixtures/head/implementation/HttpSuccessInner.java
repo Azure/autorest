@@ -13,8 +13,8 @@ package fixtures.head.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import retrofit2.http.HEAD;
@@ -77,10 +77,10 @@ public class HttpSuccessInner {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -138,10 +138,10 @@ public class HttpSuccessInner {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
@@ -199,10 +199,10 @@ public class HttpSuccessInner {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
-        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
+        return ServiceFuture.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
