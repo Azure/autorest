@@ -12,7 +12,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
-using AutoRest.Core.Parsing;
 
 namespace AutoRest.Core.Extensibility
 {
@@ -41,8 +40,7 @@ namespace AutoRest.Core.Extensibility
             }
             else
             {
-                string configurationFile = Resources.ConfigurationKnownPlugins;
-                var config = configurationFile.ParseYaml<AutoRestConfiguration>();
+                var config = AutoRestConfiguration.Get();
                 plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
                 Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             }
@@ -75,8 +73,7 @@ namespace AutoRest.Core.Extensibility
 
             Modeler modeler = null;
 
-            string configurationFile = Resources.ConfigurationKnownPlugins;
-            var config = configurationFile.ParseYaml<AutoRestConfiguration>();
+            var config = AutoRestConfiguration.Get();
             modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, Settings.Instance.Modeler);
             Settings.PopulateSettings(modeler, Settings.Instance.CustomSettings);
 
