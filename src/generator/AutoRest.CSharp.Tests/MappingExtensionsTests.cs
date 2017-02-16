@@ -22,13 +22,11 @@ namespace AutoRest.CSharp.Tests
                 {
                     Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json"),
-                    PayloadFlatteningThreshold = 3,
-                    OutputDirectory = Path.GetTempPath()
+                    PayloadFlatteningThreshold = 3
                 };
-                settings.FileSystem = new MemoryFileSystem();
-                settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "AutoRest.json")));
-                settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
-                settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+                settings.FileSystemInput = new MemoryFileSystem();
+                settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
+                settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
                 
                 var modeler = new SwaggerModeler();
                 var clientModel = modeler.Build();
@@ -40,7 +38,7 @@ namespace AutoRest.CSharp.Tests
                     CodeGeneratorCs generator = new CodeGeneratorCs();
 
                     generator.Generate(clientModel).GetAwaiter().GetResult();
-                    string body = settings.FileSystem.ReadFileAsText(Path.Combine(settings.OutputDirectory, "Payload.cs"));
+                    string body = settings.FileSystemOutput.ReadAllText(Path.Combine("Payload.cs"));
                     Assert.True(body.ContainsMultiline(@"
                     MinProduct minProduct = new MinProduct();
                     if (baseProductId != null || baseProductDescription != null || maxProductReference != null)

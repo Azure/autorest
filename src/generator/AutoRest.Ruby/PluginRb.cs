@@ -11,7 +11,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Ruby
 {
-    public sealed class PluginRb :Plugin <GeneratorSettingsRb, ModelSerializer<CodeModelRb>, TransformerRb, CodeGeneratorRb, CodeNamerRb, CodeModelRb>
+    public sealed class PluginRb :Plugin <GeneratorSettingsRb, TransformerRb, CodeGeneratorRb, CodeNamerRb, CodeModelRb>
     {
         public PluginRb()
         {

@@ -14,7 +14,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java.Azure
 {
-    public sealed class PluginJvaf : Plugin<GeneratorSettingsJvaf, ModelSerializer<CodeModelJvaf>, TransformerJvaf, CodeGeneratorJvaf, CodeNamerJva, CodeModelJvaf>
+    public sealed class PluginJvaf : Plugin<GeneratorSettingsJvaf, TransformerJvaf, CodeGeneratorJvaf, CodeNamerJva, CodeModelJvaf>
     {
         public PluginJvaf()
         {

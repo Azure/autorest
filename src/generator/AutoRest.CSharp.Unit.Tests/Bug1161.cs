@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\RecurrenceSchedule.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\RecurrenceSchedule.cs"));
 
                 var result = await Compile(fileSystem);
 

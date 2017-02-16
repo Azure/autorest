@@ -44,6 +44,23 @@ namespace AutoRest.Core.Parsing
             }
         }
 
+        public static T ParseYaml<T>(this string yaml)
+        {
+            try
+            {
+                using (var reader = new StringReader(yaml))
+                {
+                    return new Deserializer().Deserialize<T>(reader);
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML/JSON.");
+                Logger.Instance.Log(Category.Warning, e.ToString());
+            }
+            return default(T);
+        }
+
         /// <summary>
         /// Gets the YAML syntax tree from given string. Returns null on failure.
         /// </summary>
@@ -61,8 +78,8 @@ namespace AutoRest.Core.Parsing
             }
             catch (Exception e)
             {
-                Logger.Instance.Log(Category.Warning, "Parsed document is not valid YAML/JSON.");
-                Logger.Instance.Log(Category.Warning, e.ToString());
+                Logger.Instance.Log(Category.Debug, "Parsed document is not valid YAML/JSON.");
+                Logger.Instance.Log(Category.Debug, e.ToString());
             }
             return doc;
         }
@@ -87,7 +104,7 @@ namespace AutoRest.Core.Parsing
         ///     - be merged if they are mapping or sequence nodes
         ///     - THROW an exception otherwise
         /// </summary>
-        public static T MergeYamlObjects<T>(T a, T b, ObjectPath path) where T : YamlNode
+        public static T MergeYamlObjects<T>(T a, T b, ObjectPath path = null) where T : YamlNode
         {
             if (a == null)
             {
@@ -96,6 +113,10 @@ namespace AutoRest.Core.Parsing
             if (b == null)
             {
                 throw new ArgumentNullException(nameof(b));
+            }
+            if (path == null)
+            {
+                path = ObjectPath.Empty;
             }
 
             // trivial case
@@ -149,7 +170,7 @@ namespace AutoRest.Core.Parsing
         }
 
         public static YamlMappingNode MergeWith(this YamlMappingNode self, YamlMappingNode other)
-            => MergeYamlObjects(self, other, ObjectPath.Empty);
+            => MergeYamlObjects(self, other);
 
         public static void Set(this YamlMappingNode self, string key, YamlNode value)
             => self.Children[new YamlScalarNode(key)] = value;

@@ -18,7 +18,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-good1.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -45,7 +44,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-good2.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -65,7 +63,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-good3.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -84,7 +81,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-conflict-in-global-param.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -99,7 +95,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-conflict-in-model.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -114,7 +109,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-conflict-in-settings.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -129,7 +123,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-empty.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
@@ -144,7 +137,6 @@ namespace AutoRest.CompositeSwagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
                     Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "composite-swagger-empty2.json")
                 };
                 Modeler modeler = new CompositeSwaggerModeler();
