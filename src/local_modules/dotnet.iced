@@ -20,16 +20,16 @@ dotnet = (cmd) ->
 # Common Tasks
 
 ###############################################
-task 'clean-packages', 'cleans out the contents of the packages folder', ->  
-  rm '-rf', packages
-  mkdir packages 
+#task 'clean-packages', 'cleans out the contents of the packages folder', ->  
+  #rm '-rf', packages
+  #mkdir packages 
 
 ############################################### 
 task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clean', ->  
   rm '-rf', "#{os.homedir()}/.nuget"
 
 ###############################################
-task 'clean','calls dotnet-clean on the solution', ['clean-packages'], (done)-> 
+task 'clean','calls dotnet-clean on the solution', (done)-> 
   execute "dotnet clean #{solution} /nologo",(c,s,e) =>
     done()
 
