@@ -37,10 +37,7 @@ task 'clean','calls dotnet-clean on the solution', (done)->
 task 'build','build:dotnet',['restore'], (done) ->
   global.ts_ready++
   execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
-    # Fail "Build Failed #{ stderr }" if code
-    # echo "done build"
-    global.ts_ready--
-    done();
+    install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
     
 
 ###############################################

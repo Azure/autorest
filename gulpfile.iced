@@ -8,8 +8,6 @@ require './src/local_modules/gulp.iced'
 Tasks "dotnet", 
   "typescript"
 
-global['ts_ready'] = 1
-
 # Settings
 Import
   solution: "#{basefolder}/AutoRest.sln"
@@ -48,9 +46,6 @@ Import
   typescriptProjects: () -> 
     source "src/next-gen/**/tsconfig.json"
 
-task "show", 'show', -> 
-  assemblies() 
-    .pipe showFiles()
 
 task 'clean','Cleans the the solution', ['clean-packages'], -> 
   exec "git checkout #{basefolder}/packages"  
@@ -87,10 +82,6 @@ task 'publish', 'Builds, signs, publishes autorest binaries to GitHub Release',(
   run 'package',
     'upload:github'
     -> done()
-
-task "build", "copy ts outputs into build folder", (done)->
-  install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done 
-
 
 task 'upload:github','', ->
   Fail "needs --github_apikey=... or GITHUB_APIKEY set" if !github_apikey

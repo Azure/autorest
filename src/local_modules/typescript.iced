@@ -8,7 +8,6 @@ task 'build', 'build:typescript', (done)->
         echo stdout.replace("src/next-gen","#{basefolder}/src/next-gen") 
         count--
         if count is 0
-          global.ts_ready--
           done() 
 
       next null
