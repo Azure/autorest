@@ -54,7 +54,8 @@ export class Installer {
   public static get dotnet() : string {
     return "";
   }
-  public static getReleases():IEnumerable<string> {
+  public static getReleases(allowPrereleases:Boolean):IEnumerable<string> {
+    
     return null;
   }
 

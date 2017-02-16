@@ -63,11 +63,16 @@ task 'zip-autorest', '', (done) ->
     .pipe zip package_name
     .pipe destination packages
 
+task 'install-node-files' ,'', (done)->
+  install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/Release/netcoreapp1.0/publish",done
+  return null;
+
 task 'package','From scratch build, sign, and package autorest', (done) -> 
   run 'clean',
     'restore'
     'dotnet:publish'
     'sign-assemblies'
+    'install-node-files'
     'zip-autorest' 
     -> done()
 
