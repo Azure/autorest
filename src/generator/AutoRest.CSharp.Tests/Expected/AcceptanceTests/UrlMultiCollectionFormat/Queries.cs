@@ -438,4 +438,3 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
 
     }
 }
-

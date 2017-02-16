@@ -187,4 +187,3 @@ namespace Fixtures.AdditionalProperties
 
     }
 }
-

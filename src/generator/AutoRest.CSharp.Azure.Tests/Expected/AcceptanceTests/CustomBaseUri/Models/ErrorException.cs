@@ -96,4 +96,3 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
 #endif
     }
 }
-
