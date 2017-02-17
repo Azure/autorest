@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "noImplicitAny": false,
+    "alwaysStrict": true,
     "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
     "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "es2016",
     "types" : ["node"]
   },
-    "exclude": [
-      "node_modules"
-    ]
-
+  "exclude": [
+    "node_modules"
+  ]
 }

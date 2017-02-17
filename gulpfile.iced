@@ -46,12 +46,6 @@ Import
   typescriptProjects: () -> 
     source "src/next-gen/**/tsconfig.json"
 
-
-task 'autorest', 'Runs AutoRest', (done) ->
-  args = process.argv.slice(3)
-  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done()
-
 task 'dotnet:publish','',['release-only', 'clean'], (done) -> 
   exec "dotnet publish -c #{configuration} #{basefolder}/src/core/AutoRest /nologo /clp:NoSummary", (code, stdout, stderr) ->
     Fail "Build Failed #{ warning stdout } \n#{ error stderr }" if code 
@@ -104,12 +98,16 @@ To Install AutoRest, install nodej.js 6.9.5 or later, and run
       prerelease: if argv.nightly then true else false, 
     }
 
+
+task 'autorest', 'Runs AutoRest', (done) ->
+  args = process.argv.slice(3)
+  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+    return done()
+
 task 'autorest-ng', "Runs AutoRest (via node)" ,(done)->
   args = process.argv.slice(3)
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-ng/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done() if code is 0 
-    Fail "AutoRest(ng) Failed\n\n#{args.join(' ')}\n\n\{stderr}"
-
+    return done()
 
 autorest = (args,done) ->
   # Run AutoRest from the original current directory.
