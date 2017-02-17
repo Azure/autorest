@@ -49,5 +49,6 @@ namespace AutoRest.Core.Model
             return (Body == null ? other.Body == null : Body.StructurallyEquals(other.Body))
                 && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
         }
+        public Dictionary<string, object> Extensions { get; set; } = new Dictionary<string, object>();
     }
 }
