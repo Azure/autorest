@@ -76,7 +76,7 @@ Import
   today: moment().format('YYYYMMDD')
   force: argv.force or false
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
-  threshold: argv.threshold or 10
+  threshold: argv.threshold or ((os.cpus().length)-1 )
   verbose: argv.verbose or null
   
 

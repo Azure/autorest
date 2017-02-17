@@ -30,11 +30,10 @@ task 'clean','calls dotnet-clean on the solution', (done)->
     done()
 
 ###############################################
-task 'build','build:dotnet',['restore'], (done) ->
+task 'build','dotnet',['restore'], (done) ->
   global.ts_ready++
   execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
-    install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
-    
+    done()
 
 ###############################################
 task 'policheck-assemblies','', -> 
@@ -125,7 +124,7 @@ task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
   tests()
     .pipe foreach (each,next)->
       instances++
-      execute "dotnet test #{ each.path } /nologo", (code,stderr,stdout) ->
+      execute "dotnet test #{ each.path } /nologo",{retry:1}, (code,stderr,stdout) ->
         instances--
         done() if instances is 0
       next null  
