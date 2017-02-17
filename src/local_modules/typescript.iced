@@ -20,7 +20,7 @@ Import
     ), 500 if global.ts_ready > 0
    
     Fail "Directory '#{from}' doesn't exist'" if !test "-d", from
-    mkdir -p, to if !test "-d", to
+    mkdir "-p", to if !test "-d", to
 
     # create an empty package.json
     "{ }" .to "#{to}/package.json"
