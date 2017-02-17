@@ -40,8 +40,7 @@ install:
   - sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
   - sudo apt-get install glide
 script:
-  - gulp build
-  - gulp test
+  - gulp build && gulp test
 after_script:
   - echo "========== Server log: ============"
   - pwd

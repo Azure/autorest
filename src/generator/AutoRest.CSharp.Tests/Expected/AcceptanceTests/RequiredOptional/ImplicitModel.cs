@@ -932,4 +932,3 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
 
     }
 }
-

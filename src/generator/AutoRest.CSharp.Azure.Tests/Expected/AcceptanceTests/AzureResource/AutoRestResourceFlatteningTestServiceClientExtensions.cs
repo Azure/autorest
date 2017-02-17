@@ -52,7 +52,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static async Task PutArrayAsync(this IAutoRestResourceFlatteningTestServiceClient operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -115,7 +115,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static async Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestServiceClient operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -178,7 +178,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
             /// </param>
             public static async Task PutResourceCollectionAsync(this IAutoRestResourceFlatteningTestServiceClient operations, ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutResourceCollectionWithHttpMessagesAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutResourceCollectionWithHttpMessagesAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -213,4 +213,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
 
     }
 }
-

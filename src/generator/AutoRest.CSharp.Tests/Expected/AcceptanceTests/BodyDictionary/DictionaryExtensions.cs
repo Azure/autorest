@@ -101,7 +101,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutEmptyAsync(this IDictionary operations, IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutEmptyWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -272,7 +272,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutBooleanTfftAsync(this IDictionary operations, IDictionary<string, bool?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBooleanTfftWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBooleanTfftWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -385,7 +385,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutIntegerValidAsync(this IDictionary operations, IDictionary<string, int?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutIntegerValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutIntegerValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -498,7 +498,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutLongValidAsync(this IDictionary operations, IDictionary<string, long?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLongValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLongValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -611,7 +611,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutFloatValidAsync(this IDictionary operations, IDictionary<string, double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFloatValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutFloatValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -724,7 +724,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutDoubleValidAsync(this IDictionary operations, IDictionary<string, double?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDoubleValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDoubleValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -837,7 +837,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutStringValidAsync(this IDictionary operations, IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutStringValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutStringValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -954,7 +954,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutDateValidAsync(this IDictionary operations, IDictionary<string, System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1071,7 +1071,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutDateTimeValidAsync(this IDictionary operations, IDictionary<string, System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateTimeValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1190,7 +1190,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutDateTimeRfc1123ValidAsync(this IDictionary operations, IDictionary<string, System.DateTime?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeRfc1123ValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateTimeRfc1123ValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1249,7 +1249,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutDurationValidAsync(this IDictionary operations, IDictionary<string, System.TimeSpan?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDurationValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDurationValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1310,7 +1310,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutByteValidAsync(this IDictionary operations, IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutByteValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1549,7 +1549,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutComplexValidAsync(this IDictionary operations, IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutComplexValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutComplexValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1726,7 +1726,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutArrayValidAsync(this IDictionary operations, IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutArrayValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutArrayValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1913,9 +1913,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task PutDictionaryValidAsync(this IDictionary operations, IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDictionaryValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDictionaryValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

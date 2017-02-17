@@ -18,4 +18,3 @@ namespace Petstore.Models
         AlreadyExists
     }
 }
-

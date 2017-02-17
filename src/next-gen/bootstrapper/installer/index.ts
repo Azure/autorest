@@ -54,8 +54,8 @@ export class Installer {
   public static get dotnet() : string {
     return "";
   }
-  public static getReleases():IEnumerable<string> {
-    return null;
+  public static async getReleases(allowPrereleases:Boolean):Promise<IEnumerable<string>> {
+    return  Releases.List()
   }
 
   public static IsAutoRestInstalled() :Boolean {

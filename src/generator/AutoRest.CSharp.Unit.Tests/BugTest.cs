@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             }
         }
         
-        protected static string DOTNET = System.IO.Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        protected static string DOTNET = Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
         protected static string Shared = Path.Combine( DOTNET, "shared", "Microsoft.NETCore.App" );
 
         private static int VerNum(string version) 	{
@@ -176,11 +176,12 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected static string FRAMEWORK { 
             get {
                 if (string.IsNullOrEmpty(_framework ) ) {
-                _framework = Path.Combine( Shared, System.IO.Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
+                    _framework = Path.Combine( Shared, Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
                 }
                 return _framework;
             }
         }
+
         protected static readonly string[] _assemblies = new[] {
             
             Path.Combine(FRAMEWORK, "System.Runtime.dll"),
@@ -207,10 +208,8 @@ namespace AutoRest.CSharp.Unit.Tests {
             typeof(EnumMemberAttribute).GetAssembly().Location,
             typeof(InlineRouteParameterParser).GetAssembly().Location,
             typeof(ControllerBase).GetAssembly().Location,
-            
-            
-        };
 
+        };
 
         protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)

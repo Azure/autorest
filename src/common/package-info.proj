@@ -7,8 +7,8 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     
-    <_DelaySign_>true</_DelaySign_>
-    <_AssemblyOriginatorKeyFile_>../../../tools/MSSharedLibKey.snk</_AssemblyOriginatorKeyFile_>
-    <_SignAssembly_>true</_SignAssembly_>
+    <DelaySign Condition="$(Configuration) == 'Release'">true</DelaySign>
+    <AssemblyOriginatorKeyFile Condition="$(Configuration) == 'Release'">$(SolutionDir)/tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly Condition="$(Configuration) == 'Release'">true</SignAssembly>
   </PropertyGroup>
 </Project>

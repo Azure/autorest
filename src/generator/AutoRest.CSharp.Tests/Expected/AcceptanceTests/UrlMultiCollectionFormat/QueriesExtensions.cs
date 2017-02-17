@@ -47,7 +47,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// </param>
             public static async Task ArrayStringMultiNullAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringMultiNullWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ArrayStringMultiNullWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -78,7 +78,7 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// </param>
             public static async Task ArrayStringMultiEmptyAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringMultiEmptyWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ArrayStringMultiEmptyWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -113,9 +113,8 @@ namespace Fixtures.AcceptanceTestsUrlMultiCollectionFormat
             /// </param>
             public static async Task ArrayStringMultiValidAsync(this IQueries operations, IList<string> arrayQuery = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ArrayStringMultiValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ArrayStringMultiValidWithHttpMessagesAsync(arrayQuery, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

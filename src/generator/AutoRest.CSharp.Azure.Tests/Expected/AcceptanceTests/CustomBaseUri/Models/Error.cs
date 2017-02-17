@@ -41,4 +41,3 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri.Models
 
     }
 }
-

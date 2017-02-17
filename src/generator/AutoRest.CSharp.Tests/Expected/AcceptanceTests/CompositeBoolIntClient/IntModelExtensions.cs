@@ -211,7 +211,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutMax32Async(this IIntModel operations, int intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMax32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMax32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -240,7 +240,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutMax64Async(this IIntModel operations, long intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMax64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMax64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -269,7 +269,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutMin32Async(this IIntModel operations, int intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMin32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMin32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -298,7 +298,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutMin64Async(this IIntModel operations, long intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMin64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMin64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -355,7 +355,7 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// </param>
             public static async Task PutUnixTimeDateAsync(this IIntModel operations, System.DateTime intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutUnixTimeDateWithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutUnixTimeDateWithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -416,4 +416,3 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
 
     }
 }
-

@@ -19,26 +19,22 @@ dotnet = (cmd) ->
 ###############################################
 # Common Tasks
 
-###############################################
-task 'clean-packages', 'cleans out the contents of the packages folder', ->  
-  rm '-rf', packages
-  mkdir packages 
 
 ############################################### 
 task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clean', ->  
   rm '-rf', "#{os.homedir()}/.nuget"
 
 ###############################################
-task 'clean','calls dotnet-clean on the solution', ['clean-packages'], (done)-> 
+task 'clean','calls dotnet-clean on the solution', (done)-> 
   execute "dotnet clean #{solution} /nologo",(c,s,e) =>
     done()
 
 ###############################################
 task 'build','build:dotnet',['restore'], (done) ->
+  global.ts_ready++
   execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
-    # Fail "Build Failed #{ stderr }" if code
-    # echo "done build"
-    done();
+    install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
+    
 
 ###############################################
 task 'policheck-assemblies','', -> 
@@ -111,14 +107,6 @@ task 'restore','restores the dotnet packages for the projects', (done) ->
       next null  
   return null
   
-
-
-############################################### 
-# task 'dotnet-pack', '', ['clean-packages'] , ->
-#  # package the projects
-#  pkgs()
-#    .pipe dotnet "pack -c #{configuration} --no-build --output #{packages} #{versionsuffix}"
-
 ############################################### 
 #task 'package','From scratch build, sign, and package ', (done) -> 
 #  run 'clean',

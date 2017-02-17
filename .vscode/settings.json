@@ -1,0 +1,14 @@
+{
+    "files.exclude": {
+        "src/next-gen/**/*.js" : true,
+        "src/next-gen/**/*.js.map": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true
+    },
+    
+    "files.associations": {
+        "*.iced": "coffeescript"
+    }
+}

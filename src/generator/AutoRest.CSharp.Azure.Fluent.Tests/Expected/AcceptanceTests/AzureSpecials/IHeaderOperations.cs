@@ -84,4 +84,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         Task<AzureOperationResponse<bool,HeaderCustomNamedRequestIdHeadHeadersInner>> CustomNamedRequestIdHeadWithHttpMessagesAsync(string fooClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

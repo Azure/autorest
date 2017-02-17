@@ -45,7 +45,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamExistingKeyAsync(this IHeader operations, string userAgent, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamExistingKeyWithHttpMessagesAsync(userAgent, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamExistingKeyWithHttpMessagesAsync(userAgent, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -104,7 +104,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamProtectedKeyAsync(this IHeader operations, string contentType, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamProtectedKeyWithHttpMessagesAsync(contentType, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamProtectedKeyWithHttpMessagesAsync(contentType, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamIntegerAsync(this IHeader operations, string scenario, int value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamIntegerWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamIntegerWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -244,7 +244,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamLongAsync(this IHeader operations, string scenario, long value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamLongWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamLongWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -317,7 +317,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamFloatAsync(this IHeader operations, string scenario, double value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamFloatWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamFloatWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -390,7 +390,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamDoubleAsync(this IHeader operations, string scenario, double value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDoubleWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamDoubleWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -463,7 +463,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamBoolAsync(this IHeader operations, string scenario, bool value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamBoolWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamBoolWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -542,7 +542,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamStringAsync(this IHeader operations, string scenario, string value = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamStringWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamStringWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -619,7 +619,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamDateAsync(this IHeader operations, string scenario, System.DateTime value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDateWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamDateWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -696,7 +696,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamDatetimeAsync(this IHeader operations, string scenario, System.DateTime value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDatetimeWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamDatetimeWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -775,7 +775,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamDatetimeRfc1123Async(this IHeader operations, string scenario, System.DateTime? value = default(System.DateTime?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDatetimeRfc1123WithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamDatetimeRfc1123WithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -850,7 +850,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamDurationAsync(this IHeader operations, string scenario, System.TimeSpan value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamDurationWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamDurationWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -923,7 +923,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamByteAsync(this IHeader operations, string scenario, byte[] value, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamByteWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamByteWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1000,7 +1000,7 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task ParamEnumAsync(this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamEnumWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamEnumWithHttpMessagesAsync(scenario, value, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1063,9 +1063,8 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task CustomRequestIdAsync(this IHeader operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.CustomRequestIdWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.CustomRequestIdWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-
