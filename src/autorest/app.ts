@@ -1,12 +1,16 @@
 #!/usr/bin/env node
-// start of autorest-app
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+// start of autorest-ng
 // the console app starts for real here.
 
 // this file should get 'required' by the boostrapper
 
 import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
-import * as yargs from "yargs";
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise(function (resolve, reject) {
@@ -16,8 +20,7 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function main() {
-  let autorestExeArgs = process.argv.slice(2).filter(arg => arg.indexOf("--") !== 0);
-  let autorestExe = spawn("dotnet", [path.join(__dirname, "../../AutoRest.dll"), ...autorestExeArgs]);
+  let autorestExe = spawn("dotnet", [path.join(__dirname, "../../AutoRest.dll"), ...process.argv.slice(2)]);
   autorestExe.stdout.pipe(process.stdout);
   autorestExe.stderr.pipe(process.stderr);
   let exitCode = await awaitable(autorestExe);
