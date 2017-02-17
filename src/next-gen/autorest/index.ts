@@ -4,7 +4,7 @@
 
 // this file should get 'required' by the boostrapper
 
-import { spawn, execFile, ChildProcess } from "child_process";
+import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 import * as yargs from "yargs";
 
