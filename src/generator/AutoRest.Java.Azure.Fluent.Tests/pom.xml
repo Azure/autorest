@@ -48,6 +48,10 @@
   <dependencies>
     <dependency>
       <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-mgmt-resources</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
       <artifactId>azure-client-runtime</artifactId>
     </dependency>
     <dependency>
