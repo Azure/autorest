@@ -132,51 +132,37 @@ task 'test', "runs all tests", (done) ->
 task 'test-go', 'runs Go tests', ['regenerate-go'], (done) ->  # Go does not use generated files as "expected" files and ".gitignore"s them! => need to (and may) just regenerate
   process.env.GOPATH = "#{basefolder}/src/generator/AutoRest.Go.Tests"
   await execute "glide up",               { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }, defer code, stderr, stdout
-  # throw error stderr if code isnt 0
   await execute "go fmt ./generated/...", { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }, defer code, stderr, stdout
-  # throw error stderr if code isnt 0
   await execute "go run ./runner.go",     { cwd: './src/generator/AutoRest.Go.Tests/src/tests' }, defer code, stderr, stdout
-  # throw error stderr if code isnt 0
   done()
 
 ###############################################
 task 'test-java', 'runs Java tests', (done) ->
   await execute "mvn test -pl src/generator/AutoRest.Java.Tests",       defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   await execute "mvn test -pl src/generator/AutoRest.Java.Azure.Tests", defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   done()
 
 ###############################################
 task 'test-node', 'runs NodeJS tests', (done) ->
   await execute "npm test", { cwd: './src/generator/AutoRest.NodeJS.Tests/' }, defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   await execute "npm test", { cwd: './src/generator/AutoRest.NodeJS.Azure.Tests/' }, defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   done()
 
 ###############################################
 task 'test-python', 'runs Python tests', (done) ->
   await execute "tox", { cwd: './src/generator/AutoRest.Python.Tests/' }, defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   await execute "tox", { cwd: './src/generator/AutoRest.Python.Azure.Tests/' }, defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   done()
 
 ###############################################
 task 'test-ruby', 'runs Ruby tests', ['regenerate-ruby', 'regenerate-rubyazure'], (done) ->  # Ruby does not use generated files as "expected" files and ".gitignore"s them! => need to (and may) just regenerate
   await execute "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Tests/' }, defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   await execute "ruby RspecTests/tests_runner.rb", { cwd: './src/generator/AutoRest.Ruby.Azure.Tests/' }, defer code, stderr, stdout
-  #throw error stderr if code isnt 0
   done()
 
 ###############################################
 # LEGACY 
 # Instead: have bunch of configuration files sitting in a well-known spot, discover them, feed them to AutoRest, done.
-
-
-
 
 regenExpected = (opts,done) ->
   outputDir = if !!opts.outputBaseDir then "#{opts.outputBaseDir}/#{opts.outputDir}" else opts.outputDir
@@ -823,7 +809,7 @@ task 'regenerate-samplesazure', '', (done) ->
 
 
 task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], (done) ->
-  run 'regenerate-ars',
+  run ['regenerate-ars',
       'regenerate-cs'
       'regenerate-csazure'
       'regenerate-csazurefluent'
@@ -837,7 +823,7 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
       'regenerate-pythonazure'
       'regenerate-ruby'
       'regenerate-rubyazure'
-      'regenerate-samples', done
+      'regenerate-samples'], done
   return null
   
 

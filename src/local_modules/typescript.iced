@@ -1,5 +1,5 @@
 # build task for tsc 
-task 'build', 'build:typescript', (done)-> 
+task 'build', 'typescript', (done)-> 
   count = 0
   typescriptProjects()
     .pipe foreach (each,next) -> 
@@ -8,7 +8,7 @@ task 'build', 'build:typescript', (done)->
         echo stdout.replace("src/next-gen","#{basefolder}/src/next-gen") 
         count--
         if count is 0
-          done() 
+          install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
 
       next null
     return null
