@@ -190,13 +190,33 @@ namespace AutoRest.Swagger.Tests
                 new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "swagger-external-ref-no-definitions.json")
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-external-ref-no-definitions.json")
                 };
                 Modeler modeler = new SwaggerModeler();
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
                 Assert.True(codeModel.ModelTypes.First().Extensions.ContainsKey("x-ms-external"));
+            }
+        }
+
+        [Fact]
+        public void TestRelativeCircularReferencesToExternalFiles()
+        {
+            using (NewContext)
+            {
+                new Settings
+                {
+                    Namespace = "Test",
+                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "arm-network", "2016-12-01", "swagger", "applicationGateway.json")
+                };
+                Modeler modeler = new SwaggerModeler();
+                var codeModel = modeler.Build();
+                Assert.NotNull(codeModel);
+                var modelTypes = codeModel.ModelTypes;
+                Assert.Equal("NetworkInterfaceIPConfigurationPropertiesFormat", modelTypes.First(m => m.Name == "NetworkInterfaceIPConfigurationPropertiesFormat").Name);
+                Assert.Equal("FooBarPool", modelTypes.First(m => m.Name == "FooBarPool").Name);
+                Assert.Equal("FooResource", modelTypes.First(m => m.Name == "FooResource").Name);
             }
         }
 

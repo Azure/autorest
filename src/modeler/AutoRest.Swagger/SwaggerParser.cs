@@ -45,9 +45,15 @@ namespace AutoRest.Swagger
             return result;
         }
 
-        public static void EnsureCompleteDefinitionIsPresent(HashSet<string> visitedEntities, Dictionary<string, JObject> externalFiles, string currentFilePath, string entityType = null, string modelName = null, JToken externalDoc = null)
+        public static void EnsureCompleteDefinitionIsPresent(HashSet<string> visitedEntities, Dictionary<string, JObject> externalFiles, string sourceFilePath, string currentFilePath = null, string entityType = null, string modelName = null)
         {
             IEnumerable<JToken> references;
+            var sourceDoc = externalFiles[sourceFilePath];
+            if (currentFilePath == null)
+            {
+                currentFilePath = sourceFilePath;
+            }
+
             var currentDoc = externalFiles[currentFilePath];
             if (entityType == null && modelName == null)
             {
@@ -59,7 +65,7 @@ namespace AutoRest.Swagger
                 //It is possible that the external doc had a fully defined model. Hence we need to process all the refs of that model.
                 references = currentDoc[entityType][modelName].SelectTokens("$..$ref");
             }
-            
+
             foreach (JValue value in references)
             {
                 var path = (string)value;
@@ -86,26 +92,26 @@ namespace AutoRest.Swagger
                 entityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
                 modelName = entityPath.StripDefinitionPath();
 
-                if (currentDoc[entityType] == null)
+                if (sourceDoc[entityType] == null)
                 {
-                    currentDoc[entityType] = new JObject();
+                    sourceDoc[entityType] = new JObject();
                 }
-                if (currentDoc[entityType][modelName] == null && !visitedEntities.Contains(modelName))
+                if (sourceDoc[entityType][modelName] == null && !visitedEntities.Contains(modelName))
                 {
                     visitedEntities.Add(modelName);
                     if (filePath != null)
                     {
-                        currentDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, filePath, entityType, modelName, externalFiles[filePath]);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, filePath, entityType, modelName);
+                        sourceDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
                     }
                     else
                     {
-                        currentDoc[entityType][modelName] = externalDoc[entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, currentFilePath, entityType, modelName, externalDoc);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, currentFilePath, entityType, modelName);
+                        sourceDoc[entityType][modelName] = currentDoc[entityType][modelName];
                     }
-                    
+
                 }
             }
         }

@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -45,7 +46,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private string _header;
 
-        public static string AutoRestFolder{ get;set;}
+        public static string AutoRestFolder { get; set; }
 
         public Settings()
         {
@@ -88,6 +89,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// Custom provider specific settings.
         /// </summary>
         public IDictionary<string, object> CustomSettings { get; private set; }
+
+        private string _input;
 
         // The CommandLineInfo attribute is reflected to display help.
         // Prefer to show required properties before optional.
@@ -182,7 +185,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                       "Possible values: rest, rest-client, rest-server. " +
                       "Determines whether AutoRest generates " +
                       "the client or server side code for given spec.")]
-        public string  CodeGenerationMode{ get; set; }
+        public string CodeGenerationMode { get; set; }
 
         /// <summary>
         /// Gets or sets a comment header to include in each generated file.
