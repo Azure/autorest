@@ -44,8 +44,29 @@ Import
       .pipe onlyFiles()
   
   typescriptProjects: () -> 
-    source "src/next-gen/**/tsconfig.json"
+    source "src/**/tsconfig.json"
+      .pipe except /node_modules/i
+      .pipe except /src.generator/i
+      .pipe except /src.core/i
+      .pipe except /src.dev/i
+      .pipe except /src.modeler/i
+      .pipe except /src.local_modules/i
+      .pipe except /src.common/i
 
+  generatedFiles: () -> 
+    source [ "src/**/*.js" , "src/**/*.js.map" ]
+      .pipe except /node_modules/i
+      .pipe except /src.generator/i
+      .pipe except /src.core/i
+      .pipe except /src.dev/i
+      .pipe except /src.modeler/i
+      .pipe except /src.local_modules/i
+      .pipe except /src.common/i
+        
+
+task 'show', " ", ->
+  generatedFiles() 
+    .pipe showFiles()
 
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
@@ -63,7 +84,7 @@ task 'zip-autorest', '', (done) ->
     .pipe destination packages
   
 task 'install-node-files' ,'', (done)->
-  install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/Release/netcoreapp1.0/publish",done
+  install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/Release/netcoreapp1.0/publish",done
   return null;
 
 task 'package','From scratch build, sign, and package autorest', (done) -> 

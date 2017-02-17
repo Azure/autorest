@@ -1,7 +1,11 @@
 {
     "files.exclude": {
-        "src/next-gen/**/*.js" : true,
-        "src/next-gen/**/*.js.map": true,
+        "src/bootstrapper/**/*.js" : true,
+        "src/bootstrapper/**/*.js.map": true,
+        "src/autorest/**/*.js" : true,
+        "src/autorest/**/*.js.map": true,
+        "src/extension/**/*.js" : true,
+        "src/extension/**/*.js.map": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,

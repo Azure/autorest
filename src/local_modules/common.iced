@@ -184,6 +184,8 @@ module.exports =
 module.exports.task 'build', 'builds project', -> 
   echo "Building project in #{basefolder}"
 
+module.exports.task 'clean', 'cleans the project files', -> 
+
 # task for vscode
 module.exports.task 'code', 'launches vscode', -> 
   exec "code #{basefolder}"

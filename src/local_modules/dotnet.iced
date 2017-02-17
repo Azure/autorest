@@ -25,7 +25,7 @@ task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clea
   rm '-rf', "#{os.homedir()}/.nuget"
 
 ###############################################
-task 'clean','calls dotnet-clean on the solution', (done)-> 
+task 'clean','dotnet', (done)-> 
   execute "dotnet clean #{solution} /nologo",(c,s,e) =>
     done()
 
