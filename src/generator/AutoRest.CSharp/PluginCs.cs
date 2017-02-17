@@ -11,7 +11,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.CSharp
 {
-    public sealed class PluginCs :Plugin<GeneratorSettingsCs, ModelSerializer<CodeModelCs>, TransformerCs, CodeGeneratorCs, CodeNamerCs, CodeModelCs>
+    public sealed class PluginCs :Plugin<GeneratorSettingsCs, TransformerCs, CodeGeneratorCs, CodeNamerCs, CodeModelCs>
     {
         public PluginCs()
         {

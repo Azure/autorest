@@ -95,4 +95,3 @@ namespace Fixtures.MirrorRecursiveTypes.Models
 #endif
     }
 }
-

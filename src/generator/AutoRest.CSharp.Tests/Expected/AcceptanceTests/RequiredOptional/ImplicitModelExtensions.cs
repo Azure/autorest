@@ -75,7 +75,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PutOptionalQueryAsync(this IImplicitModel operations, string queryParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutOptionalQueryWithHttpMessagesAsync(queryParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutOptionalQueryWithHttpMessagesAsync(queryParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -104,7 +104,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PutOptionalHeaderAsync(this IImplicitModel operations, string queryParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutOptionalHeaderWithHttpMessagesAsync(queryParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutOptionalHeaderWithHttpMessagesAsync(queryParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -133,7 +133,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task PutOptionalBodyAsync(this IImplicitModel operations, string bodyParameter = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutOptionalBodyWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutOptionalBodyWithHttpMessagesAsync(bodyParameter, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -222,4 +222,3 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
 
     }
 }
-

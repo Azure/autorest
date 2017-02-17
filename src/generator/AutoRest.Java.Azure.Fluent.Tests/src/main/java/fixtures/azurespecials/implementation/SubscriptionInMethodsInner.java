@@ -12,8 +12,8 @@ package fixtures.azurespecials.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.ErrorException;
 import java.io.IOException;
@@ -84,10 +84,10 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId This should appear as a method parameter, use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+    public ServiceFuture<Void> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMethodLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -150,10 +150,10 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId This should appear as a method parameter, use value null, client-side validation should prvenet the call
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
+    public ServiceFuture<Void> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postMethodLocalNullWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -216,10 +216,10 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId Should appear as a method parameter -use value '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+    public ServiceFuture<Void> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postPathLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**
@@ -282,10 +282,10 @@ public class SubscriptionInMethodsInner {
      *
      * @param subscriptionId The subscriptionId, which appears in the path, the value is always '1234-5678-9012-3456'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
+    public ServiceFuture<Void> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(postSwaggerLocalValidWithServiceResponseAsync(subscriptionId), serviceCallback);
     }
 
     /**

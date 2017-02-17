@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static async Task PutArrayAsync(this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -112,7 +112,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static async Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -175,7 +175,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             /// </param>
             public static async Task PutResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutResourceCollectionWithHttpMessagesAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutResourceCollectionWithHttpMessagesAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -346,4 +346,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening
 
     }
 }
-

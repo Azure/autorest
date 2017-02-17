@@ -600,4 +600,3 @@ namespace Fixtures.MirrorSequences
 
     }
 }
-

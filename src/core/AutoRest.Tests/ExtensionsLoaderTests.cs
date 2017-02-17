@@ -26,7 +26,6 @@ namespace AutoRest.Core.Tests
 
         private void SetupMock()
         {
-            _fileSystem.WriteFile("AutoRest.json", File.ReadAllText(Path.Combine("Resource", "AutoRest.json")));
             _fileSystem.WriteFile("RedisResource.json", File.ReadAllText(Path.Combine("Resource", "RedisResource.json")));
         }
 
@@ -100,7 +99,7 @@ namespace AutoRest.Core.Tests
                 var settings = new Settings {Modeler = modeler, FileSystem = _fileSystem};
                 AssertThrows<CodeGenerationException>(
                     () => ExtensionsLoader.GetModeler(),
-                    string.Format("Plugin {0} does not have an assembly name in AutoRest.json", modeler));
+                    string.Format("Plugin {0} not found", modeler));
             }
         }
 
@@ -134,68 +133,7 @@ namespace AutoRest.Core.Tests
 
             AssertThrows<CodeGenerationException>(
                 () => ExtensionsLoader.GetPlugin(),
-                $"Plugin {codeGenerator} does not have an assembly name in AutoRest.json");
-            }
-        }
-
-        [Fact]
-        public void InvalidJsonFileThrowsException()
-        {
-            using (NewContext)
-            {
-                var settings = new Settings {CodeGenerator = "JavaScript", FileSystem = _fileSystem};
-
-                _fileSystem.WriteFile("AutoRest.json", "{'foo': 'bar'}");
-                AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetPlugin(),
-                    $"Plugin {"JavaScript"} does not have an assembly name in AutoRest.json");
-
-            }
-
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "JavaScript", FileSystem = _fileSystem};
-                _fileSystem.WriteFile("AutoRest.json", "{'foo': ");
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "Error parsing AutoRest.json file");
-            }
-            
-        }
-
-        [Fact]
-        public void NoJsonFileThrowsException()
-        {
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "JavaScript", FileSystem = _fileSystem};
-                _fileSystem.DeleteFile("AutoRest.json");
-
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "AutoRest.json was not found in the current directory");
-            }
-        }
-
-        [Fact]
-        public void InvalidTypeThrowsException()
-        {
-            using (NewContext)
-            {
-                _fileSystem.WriteFile("AutoRest.json",
-                    File.ReadAllText(Path.Combine("Resource", "AutoRestWithInvalidType.json")));
-
-                new Settings {CodeGenerator = "CSharp", FileSystem = _fileSystem};
-
-                AssertThrows<CodeGenerationException>(
-                    () => ExtensionsLoader.GetPlugin(),
-                    "Plugin CSharp does not have an assembly name in AutoRest.json");
-            }
-
-            using (NewContext)
-            {
-                new Settings {CodeGenerator = "Java", FileSystem = _fileSystem};
-                AssertThrows<CodeGenerationException>(() => ExtensionsLoader.GetPlugin(),
-                    "Plugin Java does not have an assembly name in AutoRest.json");
+                $"Plugin {codeGenerator} not found");
             }
         }
 

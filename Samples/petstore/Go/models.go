@@ -18,7 +18,6 @@ const (
     Sold Status = "sold"
 )
 
-
 // Status1 enumerates the values for status 1.
 type Status1 string
 
@@ -30,7 +29,6 @@ const (
     // Placed specifies the placed state for status 1.
     Placed Status1 = "placed"
 )
-
 
 // Category is
 type Category struct {

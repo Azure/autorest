@@ -95,4 +95,3 @@ namespace Fixtures.AcceptanceTestsBodyFile.Models
 #endif
     }
 }
-

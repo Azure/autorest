@@ -77,7 +77,7 @@ namespace AutoRest.AzureResourceSchema.Tests
                 MemoryFileSystem fileSystem = new MemoryFileSystem();
 
                 Settings settings = new Settings();
-                settings.FileSystem = fileSystem;
+                settings.FileSystemOutput = fileSystem;
 
                 CodeModel serviceClient = New<CodeModel>();
                 serviceClient.ApiVersion = apiVersion;

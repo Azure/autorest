@@ -44,7 +44,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetAsync(this IXMsClientRequestIdOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -79,9 +79,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task ParamGetAsync(this IXMsClientRequestIdOperations operations, string xMsClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ParamGetWithHttpMessagesAsync(xMsClientRequestId, null, cancellationToken).ConfigureAwait(false);
+                (await operations.ParamGetWithHttpMessagesAsync(xMsClientRequestId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

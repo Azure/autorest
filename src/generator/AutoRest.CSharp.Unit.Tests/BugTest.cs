@@ -107,11 +107,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             }
         }
 
-        protected virtual MemoryFileSystem CreateMockFilesystem() {
-            var fs = new MemoryFileSystem();
-            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
-            return fs;
-        }
+        protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger") {
             return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
@@ -119,8 +115,7 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp", string modeler = "Swagger") {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
-            return fs;
+            return dirName.GenerateCodeInto(fs, codeGenerator, modeler);
         }
 
         protected virtual void WriteLine(object value) {
@@ -161,7 +156,7 @@ namespace AutoRest.CSharp.Unit.Tests {
             }
         }
         
-        protected static string DOTNET = System.IO.Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        protected static string DOTNET = Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
         protected static string Shared = Path.Combine( DOTNET, "shared", "Microsoft.NETCore.App" );
 
         private static int VerNum(string version) 	{
@@ -181,11 +176,12 @@ namespace AutoRest.CSharp.Unit.Tests {
         protected static string FRAMEWORK { 
             get {
                 if (string.IsNullOrEmpty(_framework ) ) {
-                _framework = Path.Combine( Shared, System.IO.Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
+                    _framework = Path.Combine( Shared, Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
                 }
                 return _framework;
             }
         }
+
         protected static readonly string[] _assemblies = new[] {
             
             Path.Combine(FRAMEWORK, "System.Runtime.dll"),
@@ -212,14 +208,12 @@ namespace AutoRest.CSharp.Unit.Tests {
             typeof(EnumMemberAttribute).GetAssembly().Location,
             typeof(InlineRouteParameterParser).GetAssembly().Location,
             typeof(ControllerBase).GetAssembly().Location,
-            
-            
+
         };
 
-
         protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
-            var compiler = new CSharpCompiler(fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(), _assemblies);
+            var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
+                .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
 
 #if false

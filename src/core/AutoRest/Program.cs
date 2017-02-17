@@ -54,7 +54,7 @@ namespace AutoRest
                         // internal preprocesor
                         if (settings.Preprocessor)
                         {
-                            Console.Write(InternalPreprocessor(settings.FileSystem.ReadFileAsText(settings.Input)));
+                            Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadAllText(settings.Input)));
                             return 0;
                         }
 
@@ -67,42 +67,43 @@ namespace AutoRest
                             {
                                 settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
                             }
-                            else if (settings.InputFolder != null)
-                            {
-                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
-                            }
                             else
                             {
                                 settings.Namespace = "default";
                             }
                         }
 
+                        // help requested?
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
-                        if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
+                        if (settings.ShowHelp)
                         {
                             settings.CodeGenerator = defCodeGen;
-                            Console.WriteLine(HelpGenerator.Generate(Resources.HelpMarkdownTemplate, settings));
+                            Console.WriteLine(HelpGenerator.Generate(IsShowMarkdownHelpIncluded(args) ? Resources.HelpMarkdownTemplate : Resources.HelpTextTemplate, settings));
+                            return 0;
                         }
-                        else if (settings.ShowHelp)
+
+                        // comparison?
+                        if (!string.IsNullOrEmpty(settings.Previous))
                         {
-                            settings.CodeGenerator = defCodeGen;
-                            Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, settings));
+                            AutoRestController.Compare();
+                            return 0;
                         }
-                        else if (!string.IsNullOrEmpty(settings.Previous))
+
+                        // main pipeline
+                        AutoRestController.Generate();
+                        if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                         {
-                            Core.AutoRestController.Compare();
-                        }
-                        else
-                        {
-                            Core.AutoRestController.Generate();
-                            if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
-                            {
-                                new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
-                            }
+                            new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                         }
                         if (settings.JsonValidationMessages)
                         {
                             Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
+                        }
+                        else
+                        {
+                            Settings.Instance.FileSystemOutput.CommitToDisk(Settings.Instance.OutputFileName == null
+                                ? Settings.Instance.OutputDirectory
+                                : Path.GetDirectoryName(Settings.Instance.OutputFileName));
                         }
                     }
                     catch (Exception exception)

@@ -11,7 +11,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Java
 {
-    public sealed class PluginJv : Plugin<GeneratorSettingsJv, ModelSerializer<CodeModelJv>, TransformerJv, CodeGeneratorJv, CodeNamerJv, CodeModelJv>
+    public sealed class PluginJv : Plugin<GeneratorSettingsJv, TransformerJv, CodeGeneratorJv, CodeNamerJv, CodeModelJv>
     {
         public PluginJv()
         {

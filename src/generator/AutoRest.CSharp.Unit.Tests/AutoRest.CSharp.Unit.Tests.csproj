@@ -27,9 +27,8 @@
     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp/AutoRest.CSharp.csproj" />
     <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Azure/AutoRest.CSharp.Azure.csproj" />
-    <!-- <ProjectReference Include="$(SolutionDir)src/generator/AutoRest.CSharp.Tests/AutoRest.CSharp.Tests.csproj" />-->
     <ProjectReference Include="$(SolutionDir)src/dev/AutoRest.Tooling.CSharp.Compiler/AutoRest.Tooling.CSharp.Compiler.csproj" />
-     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
-     <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.CompositeSwagger/AutoRest.CompositeSwagger.csproj" />
   </ItemGroup>
 </Project>

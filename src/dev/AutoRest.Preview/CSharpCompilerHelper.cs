@@ -1,44 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.Core.Utilities;
 using Microsoft.CodeAnalysis;
 using Microsoft.Rest.CSharp.Compiler.Compilation;
+using AutoRest.CSharp.Unit.Tests;
+using System.Reflection;
+using System.IO;
 
 namespace AutoRest.Preview
 {
     public static class CSharpCompilerHelper
     {
-        private static readonly string[] SuppressWarnings = { "CS1701", "CS1591" };
-
-        private static async Task<CompilationResult> Compile(IFileSystem fileSystem)
+        private class HelpMethodExposer : BugTest
         {
-            var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
-                ManagedAssets.FrameworkAssemblies.Concat(
-                    AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location))
-                        .Select(each => each.Location)
-                        .Concat(new[]
-                        {
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                                "Microsoft.Rest.ClientRuntime.Azure.dll")
-                        })
-                ));
+            public new Task<CompilationResult> Compile(IFileSystem fileSystem) => base.Compile(fileSystem);
 
-            return await compiler.Compile(Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind.DynamicallyLinkedLibrary);
+            public new Assembly LoadAssembly(MemoryStream stream) => base.LoadAssembly(stream);
         }
+
+        internal static string[] SuppressWarnings = { "CS1701", "CS1702", "CS1591" };
 
         public static async Task<IEnumerable<Type>> CompileTypes(MemoryFileSystem fileSystem)
         {
+            var helper = new HelpMethodExposer();
+
             // compile
-            var result = await Compile(fileSystem);
+            var result = await helper.Compile(fileSystem);
 
             // filter the warnings
             var warnings = result.Messages.Where(
@@ -54,7 +43,7 @@ namespace AutoRest.Preview
             }
 
             // try to load the assembly
-            var asm = LoadAssembly(result.Output);
+            var asm = helper.LoadAssembly(result.Output);
             if (asm == null)
             {
                 throw new Exception("could not load assembly");

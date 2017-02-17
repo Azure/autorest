@@ -22,10 +22,6 @@ namespace AutoRest.Ruby.Azure
     /// </summary>
     public class CodeGeneratorRba : CodeGeneratorRb
     {
-        public CodeGeneratorRba() 
-        {
-        }
-
         /// <summary>
         /// Gets the usage instructions for the code generator.
         /// </summary>

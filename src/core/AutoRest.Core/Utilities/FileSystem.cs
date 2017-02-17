@@ -13,7 +13,7 @@ namespace AutoRest.Core.Utilities
 {
     public class FileSystem : IFileSystem
     {
-        public void WriteFile(string path, string contents)
+        public void WriteAllText(string path, string contents)
         {
             var eol = path.LineEnding();
             var lines = contents.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
@@ -26,10 +26,13 @@ namespace AutoRest.Core.Utilities
             // write out the file, with correct line endings for file.
             using (var writer = GetTextWriter(path))
             {
-                foreach (var line in lines)
+                for (var i = 0; i < lines.Length; ++i)
                 {
-                    writer.Write(line);
+                    if (i != 0)
+                {
                     writer.Write(eol);
+                }
+                    writer.Write(lines[i]);
                 }
             }
         }
@@ -53,7 +56,7 @@ namespace AutoRest.Core.Utilities
         public string MakePathRooted(Uri rootPath, string relativePath)
             => Path.Combine(rootPath.ToString(), relativePath);
 
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             path = path.AdjustGithubUrl();
 
@@ -98,19 +101,6 @@ namespace AutoRest.Core.Utilities
             if (File.Exists(path))
             {
                 File.Delete(path);
-            }
-        }
-
-        public void DeleteDirectory(string directory)
-        {
-            Directory.Delete(directory, true);
-        }
-
-        public void EmptyDirectory(string directory)
-        {
-            foreach (var filePath in Directory.GetFiles(directory))
-            {
-                File.Delete(filePath);
             }
         }
 

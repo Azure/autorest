@@ -21,4 +21,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public const string BlacK = "blacK";
     }
 }
-

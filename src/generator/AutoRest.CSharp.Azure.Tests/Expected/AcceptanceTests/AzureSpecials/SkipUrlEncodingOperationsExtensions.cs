@@ -48,7 +48,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodPathValidAsync(this ISkipUrlEncodingOperations operations, string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -79,7 +79,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetPathPathValidAsync(this ISkipUrlEncodingOperations operations, string unencodedPathParam, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetPathPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetPathPathValidWithHttpMessagesAsync(unencodedPathParam, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -104,7 +104,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetSwaggerPathValidAsync(this ISkipUrlEncodingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerPathValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetSwaggerPathValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -137,7 +137,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodQueryValidAsync(this ISkipUrlEncodingOperations operations, string q1, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -168,7 +168,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodQueryNullAsync(this ISkipUrlEncodingOperations operations, string q1 = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodQueryNullWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodQueryNullWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -201,7 +201,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetPathQueryValidAsync(this ISkipUrlEncodingOperations operations, string q1, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetPathQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetPathQueryValidWithHttpMessagesAsync(q1, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -228,9 +228,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetSwaggerQueryValidAsync(this ISkipUrlEncodingOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerQueryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetSwaggerQueryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

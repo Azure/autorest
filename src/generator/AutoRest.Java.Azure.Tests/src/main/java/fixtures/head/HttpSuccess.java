@@ -10,8 +10,8 @@
 
 package fixtures.head;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
 
@@ -31,9 +31,9 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Return 200 status code if successful.
@@ -60,9 +60,9 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Return 204 status code if successful.
@@ -89,9 +89,9 @@ public interface HttpSuccess {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Return 404 status code if successful.

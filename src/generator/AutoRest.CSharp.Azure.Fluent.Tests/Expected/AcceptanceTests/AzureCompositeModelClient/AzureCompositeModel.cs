@@ -941,4 +941,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 
     }
 }
-

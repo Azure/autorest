@@ -58,4 +58,3 @@ namespace Petstore.Models
         }
     }
 }
-

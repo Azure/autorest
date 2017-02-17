@@ -77,7 +77,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutNotExpandableAsync(this IEnumModel operations, Colors stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutNotExpandableWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutNotExpandableWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -140,7 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutReferencedAsync(this IEnumModel operations, Colors enumStringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutReferencedWithHttpMessagesAsync(enumStringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutReferencedWithHttpMessagesAsync(enumStringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -199,9 +199,8 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutReferencedConstantAsync(this IEnumModel operations, string field1 = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutReferencedConstantWithHttpMessagesAsync(field1, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutReferencedConstantWithHttpMessagesAsync(field1, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

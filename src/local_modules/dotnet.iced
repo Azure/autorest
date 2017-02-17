@@ -11,36 +11,30 @@ dotnet = (cmd) ->
       return callback null, file
     
     # do something with the file
-    echo info "dotnet #{cmd} #{ file.path } /nologo"
-    await exec "dotnet #{cmd} #{ file.path } /nologo", defer code,stdout,stderr
-
-    throw "dotnet #{cmd} failed" if code isnt 0
-
+    await execute "dotnet #{cmd} #{ file.path } /nologo", defer code,stdout,stderr
+    # Fail "dotnet #{cmd} failed" if code
     # or just done, no more processing
     return callback null
 
 ###############################################
 # Common Tasks
 
-###############################################
-task 'clean-packages', 'cleans out the contents of the packages folder', ->  
-  rm '-rf', packages
-  mkdir packages 
 
 ############################################### 
 task 'reset-dotnet-cache', 'removes installed dotnet-packages so restore is clean', ->  
   rm '-rf', "#{os.homedir()}/.nuget"
 
 ###############################################
-task 'clean','calls dotnet-clean on the solution', ['clean-packages'], -> 
-  exec "dotnet clean #{solution} /nologo"
+task 'clean','calls dotnet-clean on the solution', (done)-> 
+  execute "dotnet clean #{solution} /nologo",(c,s,e) =>
+    done()
 
 ###############################################
 task 'build','build:dotnet',['restore'], (done) ->
-  exec "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
-    throw "Build Failed #{ stderr }" if code isnt 0
-    echo "done build"
-    done();
+  global.ts_ready++
+  execute "dotnet build -c #{configuration} #{solution} /nologo /clp:NoSummary", (code, stdout, stderr) ->
+    install_package "#{basefolder}/src/next-gen/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
+    
 
 ###############################################
 task 'policheck-assemblies','', -> 
@@ -49,31 +43,15 @@ task 'policheck-assemblies','', ->
     .pipe policheck()
 
 ###############################################
-task 'sign-packages','' ,(done) ->
-  return done() # if configuration isnt "release"
-
-###############################################  
-task 'publish-packages','Publishes the packages to the NuGet Repository', (done) ->
-  return done() if configuration isnt "release"
-  source "#{packages}/*.nupkg"
-    .pipe publishPackages()
-
-############################################### 
 task 'sign-assemblies','', (done) -> 
   # skip signing if we're not doing a release build
-  return done() if configuration isnt "release"
-  
-  workdir = "#{process.env.tmp}/gulp/#{guid()}"
-  echo warning workdir
-  mkdir workdir 
+  Fail "signing requires --configuration release" if configuration isnt "release"
 
   unsigned  = "#{workdir}/unsigned"
   mkdir unsigned 
-  echo warning unsigned
 
   signed  = "#{workdir}/signed"
   mkdir signed
-  echo warning signed
 
   assemblies() 
     # rename the files to flatten folder names out of the way.
@@ -97,45 +75,61 @@ task 'sign-assemblies','', (done) ->
             .pipe destination "#{__dirname}/src"            
             .on 'end', () => 
               # cleanup!
-              echo warning workdir
               rm '-rf', workdir
               done()
     
     return;
 
 ############################################### 
-task 'restore','restores the dotnet packages for the projects', -> 
+task 'restore','restores the dotnet packages for the projects', (done) -> 
   if ! test '-d', "#{os.homedir()}/.nuget"
-    force = true
+    global.force = true
+  instances = 0 
+  _done = () ->
+    if instances is 0
+      instances--
+      done();
+
   projects()
+    .on 'end', -> 
+      _done() 
     .pipe where (each) ->  # check for project.assets.json files are up to date  
       return true if force
       assets = "#{folder each.path}/obj/project.assets.json"
       return false if (exists assets) and (newer assets, each.path)
       return true
-    .pipe dotnet 'restore'
-
-
+    .pipe foreach (each,next)->
+      any = true
+      instances++
+      execute "dotnet restore #{ each.path } /nologo",{retry:1} ,(code,stderr,stdout) ->
+        instances--
+        _done()
+      next null  
+  return null
+  
 ############################################### 
-task 'pack', '', ['clean-packages'] , ->
-  # package the projects
-  pkgs()
-    .pipe dotnet "pack -c #{configuration} --no-build --output #{packages} #{versionsuffix}"
-
-############################################### 
-task 'package','From scratch build, sign, and package ', (done) -> 
-  run 'clean',
-    'restore'
-    'build'
-    'sign-assemblies'
-    'pack' 
-    'sign-packages'
-    -> done()
+#task 'package','From scratch build, sign, and package ', (done) -> 
+#  run 'clean',
+#    'restore'
+#    'publish'
+#    'sign-assemblies'
+#    'pack' 
+#    'sign-packages'
+#    -> done()
 
 ############################################### 
 task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
+  instances = 0    
+
+  # run xunit test in parallel with each other.
   tests()
-    .pipe dotnet "test"
+    .pipe foreach (each,next)->
+      instances++
+      execute "dotnet test #{ each.path } /nologo", (code,stderr,stdout) ->
+        instances--
+        done() if instances is 0
+      next null  
+  return null
 
 
 global['codesign'] = (description, keywords, input, output, certificate1, certificate2, done)-> 
@@ -143,22 +137,12 @@ global['codesign'] = (description, keywords, input, output, certificate1, certif
   certificate1 = if typeof certificate1 is 'number' then certificate1 else 72
   certificate2 = if typeof certificate2 is 'number' then certificate2 else 401
 
-  throw "Description Required" if not description?
-  throw "Keywords Required" if not keywords?
-  throw "Input Required (folder)" if not input?
-  throw "Output Required (folder)" if  not output?
+  Fail "Description Required" if not description?
+  Fail "Keywords Required" if not keywords?
+  Fail "Input Required (folder)" if not input?
+  Fail "Output Required (folder)" if  not output?
 
-  echo "#{csu} 
-    /c1=#{certificate1}
-    /c2=#{certificate2}
-    \"/d=#{description}\"
-    \"/kw=#{keywords}\"
-    \"/i=#{input}\"
-    \"/o=#{output}\"
-    \"/clean=False\"
-  "
-
-  exec "#{csu} 
+  execute "#{csu} 
     /c1=#{certificate1}
     /c2=#{certificate2}
     \"/d=#{description}\"
@@ -167,12 +151,9 @@ global['codesign'] = (description, keywords, input, output, certificate1, certif
     \"/o=#{output}\"
     \"/clean=False\"
   " , (code, stdout, stderr) ->
-    if code 
-      throw error "Code Signing Failed."
+    Fail error "Code Signing Failed." if code
     echo "done codesigning"
     done();
 
 # the dotnet gulp-plugin.
-
-
 module.exports = dotnet

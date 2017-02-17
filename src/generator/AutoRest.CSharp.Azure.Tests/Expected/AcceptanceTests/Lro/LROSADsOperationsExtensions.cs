@@ -494,7 +494,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task Delete204SucceededAsync(this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Delete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.Delete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1393,7 +1393,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             /// </param>
             public static async Task BeginDelete204SucceededAsync(this ILROSADsOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.BeginDelete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.BeginDelete204SucceededWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -1820,4 +1820,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro
 
     }
 }
-

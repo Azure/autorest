@@ -41,7 +41,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static async Task Head200Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -66,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static async Task Head204Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -91,9 +91,8 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// </param>
             public static async Task Head404Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

@@ -42,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodGlobalValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -67,7 +67,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodGlobalNotProvidedValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodGlobalNotProvidedValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodGlobalNotProvidedValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -92,7 +92,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetPathGlobalValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetPathGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetPathGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -117,9 +117,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetSwaggerGlobalValidAsync(this IApiVersionDefaultOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetSwaggerGlobalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

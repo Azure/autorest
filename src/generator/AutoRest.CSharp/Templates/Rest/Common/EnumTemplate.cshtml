@@ -23,12 +23,12 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 @:        @(Model.Values.Last().MemberName)
     @:}
     if (Model.CodeModel.ShouldGenerateXmlSerialization) {<text>
-    internal static class @(Model.ClassName)EnumExtension 
+    internal static class @(Model.ClassName)EnumExtension
     {
-        internal static string ToSerializedValue(this @(Model.ClassName)? value )  => 
+        internal static string ToSerializedValue(this @(Model.ClassName)? value )  =>
             value == null ? null : (( @(Model.ClassName) )value).ToSerializedValue();
 @EmptyLine
-        internal static string ToSerializedValue(this @(Model.ClassName) value ) 
+        internal static string ToSerializedValue(this @(Model.ClassName) value )
         {
             switch( value )
             {
@@ -43,21 +43,19 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         }
 @EmptyLine
         internal static @(Model.ClassName)? Parse@(Model.ClassName)( this string value )
-        { 
+        {
             switch( value )
             {
-            @for (int i = 0; i < Model.Values.Count; i++)   
+            @for (int i = 0; i < Model.Values.Count; i++)
             {<text>
-                case "@Model.Values[i].SerializedName": 
+                case "@Model.Values[i].SerializedName":
                     return @(Model.ClassName).@(Model.Values[i].MemberName);</text>
             }
             }
             return null;
         }
-        
     }
 </text>}
-    
     }
     else
     {

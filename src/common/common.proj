@@ -8,9 +8,8 @@
     <SolutionDir>$(Common)../../</SolutionDir>
   </PropertyGroup>
 
-  <Target Name="Nuke" >
-    <RemoveDir Directories="$(BaseOutputPath)" />
-    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
-    <Delete Files="@(GeneratedFiles)" />
+  <Target Name="Nuke" AfterTargets="clean" >
+    <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
+    <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
   </Target>
 </Project>

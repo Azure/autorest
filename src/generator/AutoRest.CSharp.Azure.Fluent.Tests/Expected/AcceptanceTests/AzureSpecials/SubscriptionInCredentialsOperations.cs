@@ -785,4 +785,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 
     }
 }
-

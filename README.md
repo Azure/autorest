@@ -95,7 +95,7 @@ By convention, Swagger documents are exposed by web services with the name `swag
 ```
 Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](docs/user/cli.md) for details).
 
-**AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
+**AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with a configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
 
 The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires `-Namespace` be specified.  By default, the CodeGenerator will place output in a directory named *Generated*. This can be overridden by providing the `-OutputDirectory` parameter.
 

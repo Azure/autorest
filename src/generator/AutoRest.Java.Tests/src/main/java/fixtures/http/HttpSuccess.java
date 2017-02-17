@@ -10,8 +10,8 @@
 
 package fixtures.http;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import rx.Observable;
 
@@ -30,9 +30,9 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 200 status code if successful.
@@ -59,9 +59,9 @@ public interface HttpSuccess {
      * Get 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback);
+    ServiceFuture<Boolean> get200Async(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get 200 success.
@@ -87,9 +87,9 @@ public interface HttpSuccess {
      * Put boolean value true returning 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put boolean value true returning 200 success.
@@ -116,9 +116,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put boolean value true returning 200 success.
@@ -146,9 +146,9 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returning 200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -175,9 +175,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -205,9 +205,9 @@ public interface HttpSuccess {
      * Post bollean value true in request that returns a 200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -234,9 +234,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -264,9 +264,9 @@ public interface HttpSuccess {
      * Delete simple boolean value true returns 200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -293,9 +293,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete simple boolean value true returns 200.
@@ -323,9 +323,9 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 201.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put201Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put201Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -352,9 +352,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 201.
@@ -382,9 +382,9 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post201Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post201Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -411,9 +411,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -441,9 +441,9 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put202Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put202Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -470,9 +470,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -500,9 +500,9 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 202.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch202Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch202Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -529,9 +529,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -559,9 +559,9 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post202Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post202Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -588,9 +588,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -618,9 +618,9 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete202Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete202Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -647,9 +647,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -677,9 +677,9 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 204 status code if successful.
@@ -705,9 +705,9 @@ public interface HttpSuccess {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -734,9 +734,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -764,9 +764,9 @@ public interface HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -793,9 +793,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -823,9 +823,9 @@ public interface HttpSuccess {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -852,9 +852,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -882,9 +882,9 @@ public interface HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -911,9 +911,9 @@ public interface HttpSuccess {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -941,9 +941,9 @@ public interface HttpSuccess {
      * Return 404 status code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 404 status code.
