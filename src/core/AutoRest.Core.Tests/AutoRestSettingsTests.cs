@@ -22,12 +22,12 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create((string[]) null);
+                var settings = Settings.Create((string[])null);
                 Assert.NotNull(settings);
             }
             using (NewContext)
             {
-                var settings = Settings.Create((IDictionary<string, object>) null);
+                var settings = Settings.Create((IDictionary<string, object>)null);
                 Assert.NotNull(settings);
             }
             using (NewContext)
@@ -47,7 +47,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create(new[] {"-Help", " -Bar ", " -Foo"});
+                var settings = Settings.Create(new[] { "-Help", " -Bar ", " -Foo" });
                 Assert.True(settings.ShowHelp);
                 Assert.Equal("", settings.CustomSettings["Foo"]);
                 Assert.Equal("", settings.CustomSettings["Bar"]);
@@ -62,12 +62,12 @@ namespace AutoRest.Core.Tests
                 var codeBaseUrl = new Uri(Utilities.Extensions.CodeBaseDirectory); // travis error here... I guess the constructor isn't happy 'bout linux paths?
                 var codeBasePath = Uri.UnescapeDataString(codeBaseUrl.AbsolutePath);
                 var settingsFile = Path.Combine(codeBasePath, Path.Combine("Resource", "SampleSettings.json"));
-                var settings = Settings.Create(new[] {"-cgs", settingsFile});
-                Assert.False((bool) settings.CustomSettings["sampleSwitchFalse"]);
-                Assert.True((bool) settings.CustomSettings["sampleSwitchTrue"]);
+                var settings = Settings.Create(new[] { "-cgs", settingsFile });
+                Assert.False((bool)settings.CustomSettings["sampleSwitchFalse"]);
+                Assert.True((bool)settings.CustomSettings["sampleSwitchTrue"]);
                 Assert.Equal("Foo", settings.CustomSettings["sampleString"]);
                 Assert.Equal(typeof(JArray), settings.CustomSettings["filePathArray"].GetType());
-                Assert.Equal(2, ((JArray) settings.CustomSettings["filePathArray"]).Count);
+                Assert.Equal(2, ((JArray)settings.CustomSettings["filePathArray"]).Count);
                 Assert.Equal(typeof(JArray), settings.CustomSettings["intArray"].GetType());
                 Assert.Equal(typeof(long), settings.CustomSettings["intFoo"].GetType());
             }
@@ -78,7 +78,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create(new[] {"-AddCredentials"});
+                var settings = Settings.Create(new[] { "-AddCredentials" });
                 Assert.True(settings.AddCredentials);
             }
         }
@@ -88,7 +88,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create(new[] {"-AddCredentials false"});
+                var settings = Settings.Create(new[] { "-AddCredentials false" });
                 Assert.False(settings.AddCredentials);
             }
         }
@@ -98,7 +98,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create(new[] {"-pv", "1.2.1"});
+                var settings = Settings.Create(new[] { "-pv", "1.2.1" });
                 Assert.Equal("1.2.1", settings.PackageVersion);
             }
         }
@@ -108,7 +108,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create(new[] {"-pn", "HelloWorld"});
+                var settings = Settings.Create(new[] { "-pn", "HelloWorld" });
                 Assert.Equal("HelloWorld", settings.PackageName);
             }
         }
@@ -125,7 +125,7 @@ namespace AutoRest.Core.Tests
                     "-ModelsName", "MyModels"
                 });
                 Assert.True(settings.ShowHelp);
-                Assert.Equal("file://c:\\input", settings.Input);
+                Assert.Equal("c:\\input", settings.Input);
                 Assert.Equal("c:\\output", settings.OutputDirectory);
                 Assert.Equal("MyClient", settings.ClientName);
                 Assert.Equal("MyModels", settings.ModelsName);
@@ -144,7 +144,7 @@ namespace AutoRest.Core.Tests
                     "-mname", "MyModels"
                 });
                 Assert.True(settings.ShowHelp);
-                Assert.Equal("file:///c/input", settings.Input);
+                Assert.Equal("/c/input", settings.Input);
                 Assert.Equal("c:\\output", settings.OutputDirectory);
                 Assert.Equal("MyClient", settings.ClientName);
                 Assert.Equal("MyModels", settings.ModelsName);
@@ -169,7 +169,7 @@ namespace AutoRest.Core.Tests
         {
             using (NewContext)
             {
-                var settings = Settings.Create(new[] {"-Modeler", "foo"});
+                var settings = Settings.Create(new[] { "-Modeler", "foo" });
                 try
                 {
                     settings.Validate();

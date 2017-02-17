@@ -115,33 +115,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsInfo("The location of the input specification.", true)]
         [SettingsAlias("i")]
         [SettingsAlias("input")]
-        public string Input
-        {
-            get
-            {
-                var fileSchemaPrefix = "file://";
-                if (_input != null && !Regex.IsMatch(_input, @"^(file|https?)://.*$", RegexOptions.IgnoreCase))
-                {
-                    //On a linux system, Path.IsPathRooted("C:/Foo") -> false. Ideally, it is not expected from 
-                    //someone to provide that kind of a file path while running AutoRest on a linux based system.
-                    //However, adding the extra condition to do the right behavior for "C:\\Foo". The focus is to 
-                    //do the right thing based on the initial characters. If the provided path is incorrect, it will
-                    //eventually fail.
-                    if (Path.IsPathRooted(_input) || (Path.PathSeparator != ';' && Regex.IsMatch(_input, @"^[a-zA-Z]:(\\{1,2}|/)\w+.*$", RegexOptions.IgnoreCase)))
-                    {
-                        return string.Concat(fileSchemaPrefix, _input);
-                    }
-
-                    return string.Concat(fileSchemaPrefix, Path.GetFullPath(_input));
-                }
-
-                return _input;
-            }
-            set
-            {
-                _input = value;
-            }
-        }
+        public string Input { get; set; }
 
         /// <summary>
         /// Gets of sets the path to a previous version of the input specification file. This will cause
