@@ -4,6 +4,7 @@
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
+using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
 using System.Text.RegularExpressions;
@@ -13,7 +14,6 @@ namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourceValidation : TypedRule<Dictionary<string, Schema>>
     {
-        private readonly Regex regEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private readonly Regex exemptedNames = new Regex(@"^(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
         private readonly Regex listByRgRegEx = new Regex(@".+_ListByResourceGroup$", RegexOptions.IgnoreCase);
         private readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
@@ -40,11 +40,11 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
-            List<Operation> getOperations = this.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
             
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                if (!exemptedNames.IsMatch(definition.Key) && this.IsTrackedResource(definition.Value, definitions))
+                if (!exemptedNames.IsMatch(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
                     bool getCheck = getOperations.Any(operation =>
                         operation.Responses.Any(response => 
@@ -62,7 +62,7 @@ namespace AutoRest.Swagger.Validation
                         return false;
                     }
 
-                    bool listByResourceGroupCheck = this.listByXCheck(getOperations, listByRgRegEx, definition.Key, definitions);
+                    bool listByResourceGroupCheck = this.ListByXCheck(getOperations, listByRgRegEx, definition.Key, definitions);
                     if (!listByResourceGroupCheck)
                     {
                         formatParameters = new object[2];
@@ -71,7 +71,7 @@ namespace AutoRest.Swagger.Validation
                         return false;
                     }
 
-                    bool listBySubscriptionIdCheck = this.listByXCheck(getOperations, listBySidRegEx, definition.Key, definitions);
+                    bool listBySubscriptionIdCheck = this.ListByXCheck(getOperations, listBySidRegEx, definition.Key, definitions);
                     if (!listBySubscriptionIdCheck)
                     {
                         formatParameters = new object[2];
@@ -138,7 +138,7 @@ namespace AutoRest.Swagger.Validation
             return true;
         }
 
-        private bool listByXCheck(List<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
+        private bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
         {
             return getOperations.Any(operation =>
                        regEx.IsMatch(operation.OperationId) &&
@@ -154,41 +154,6 @@ namespace AutoRest.Swagger.Validation
         {
             Schema schema = Schema.FindReferencedSchema(reference, definitions);
             return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items != null && property.Value.Items.Reference.EndsWith("/" + referenceToMatch));
-        }
-
-        private List<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
-        {
-            List<Operation> result = new List<Operation>();
-            foreach(KeyValuePair<string, Dictionary<string, Operation>> path in serviceDefinition.Paths)
-            {
-                foreach(KeyValuePair<string, Operation> operation in path.Value)
-                {
-                    if (operation.Key.ToLower().Equals(id.ToLower()))
-                    {
-                        result.Add(operation.Value);
-                    }
-                }
-            }
-            return result;
-        }
-
-        private bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
-        {
-            if(schema.AllOf != null)
-            {
-                foreach(Schema item in schema.AllOf)
-                {
-                    if(regEx.IsMatch(item.Reference))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return this.IsTrackedResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
-                    }
-                }
-            }
-            return false;
         }
     }
 }

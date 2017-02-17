@@ -5,6 +5,7 @@ using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace AutoRest.Swagger.Model.Utilities
@@ -12,8 +13,28 @@ namespace AutoRest.Swagger.Model.Utilities
     public static class ValidationUtilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
+        private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
 
-        // determine if the operation returns an array type or is of xmspageable type
+        public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
+        {
+            if (schema.AllOf != null)
+            {
+                foreach (Schema item in schema.AllOf)
+                {
+                    if (TrackedResRegEx.IsMatch(item.Reference))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return IsTrackedResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
+                    }
+                }
+            }
+            return false;
+        }
+
+        // determine if the operation is xms pageable or returns an object of array type
         public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
         {
             // if xmspageable type, return true
@@ -48,5 +69,9 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
+        public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
+        {
+            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
+        }
     }
 }
