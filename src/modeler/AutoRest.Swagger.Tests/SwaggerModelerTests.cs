@@ -155,8 +155,12 @@ namespace AutoRest.Swagger.Tests
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
-                Assert.Equal(3, codeModel.ModelTypes.Count);
+                Assert.Equal(7, codeModel.ModelTypes.Count);
                 Assert.Equal("ChildProduct", codeModel.ModelTypes.First(m => m.Name == "ChildProduct").Name);
+                Assert.Equal("Pet", codeModel.ModelTypes.First(m => m.Name == "Pet").Name);
+                Assert.Equal("Cat", codeModel.ModelTypes.First(m => m.Name == "Cat").Name);
+                Assert.Equal("SiameseCat", codeModel.ModelTypes.First(m => m.Name == "SiameseCat").Name);
+                Assert.Equal("Dog", codeModel.ModelTypes.First(m => m.Name == "Dog").Name);
                 Assert.Equal("Product", codeModel.ModelTypes.First(m => m.Name == "ChildProduct").BaseModelType.Name);
             }
         }
@@ -175,7 +179,7 @@ namespace AutoRest.Swagger.Tests
                 var codeModel = modeler.Build();
 
                 Assert.NotNull(codeModel);
-                Assert.Equal(3, codeModel.ModelTypes.Count);
+                Assert.Equal(7, codeModel.ModelTypes.Count);
                 Assert.Equal("ChildProduct", codeModel.ModelTypes.First(m => m.Name == "ChildProduct").Name);
                 Assert.Equal("Product",
                     codeModel.ModelTypes.First(m => m.Name == "ChildProduct").Properties[1].ModelType.Name);
