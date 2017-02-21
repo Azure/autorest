@@ -225,7 +225,7 @@ namespace AutoRest.Java.Azure
             }
         }
 
-        public static string GetPagingSetting(Dictionary<string, object> extensions,
+        private static string GetPagingSetting(Dictionary<string, object> extensions,
             IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
             // default value
