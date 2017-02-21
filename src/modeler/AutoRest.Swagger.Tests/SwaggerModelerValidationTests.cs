@@ -230,6 +230,12 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationWarning(typeof(InvalidConstraint), 18);
         }
 
+        public void BodyTopLevelPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "body-top-level-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+        }
+
         [Fact]
         public void NestedPropertiesValidation()
         {
