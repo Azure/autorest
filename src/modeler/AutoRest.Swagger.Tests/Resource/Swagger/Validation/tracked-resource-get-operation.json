@@ -18,19 +18,13 @@
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_update",
+        "operationId": "Redis_Update",
         "description": "gets a Redis cache.",
         "parameters": [
-          {
-            "name": "tag",
-            "type": "string",
-            "required": true,
-            "description": "tag to update"
-          }
         ],
         "responses": {
           "200": {
-            "description": "the resource patched",
+            "description": "the resource",
             "schema": {
               "$ref": "#/definitions/Resource"
             }

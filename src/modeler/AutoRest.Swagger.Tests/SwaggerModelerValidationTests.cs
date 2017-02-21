@@ -387,8 +387,15 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void TrackedResourcePatchOperationValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracking-resource-patch-operation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracked-resource-patch-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 1);
+        }
+
+        [Fact]
+        public void TrackedResourceGetOperationValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracked-resource-get-operation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 1);
         }
 
         [Fact]
@@ -458,13 +465,23 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that tracking resource has a patch operation
+        /// Verifies that tracked resource has a patch operation
         /// </summary>
         [Fact]
-        public void TrackingResourcePatchOperationValidation()
+        public void ValidTrackedResourcePatchOperation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracking-resource-patch-valid-operation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-patch-valid-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 0);
+        }
+
+        /// <summary>
+        /// Verifies that tracked resource has a get operation
+        /// </summary>
+        [Fact]
+        public void ValidTrackedResourceGetOperation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-get-valid-operation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 0);
         }
 
         /// <summary>
