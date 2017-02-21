@@ -89,29 +89,46 @@ namespace AutoRest.Swagger
                     }
                 }
 
-                entityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                modelName = entityPath.StripDefinitionPath();
+                var referencedEntityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                var referencedModelName = entityPath.StripDefinitionPath();
 
-                if (sourceDoc[entityType] == null)
+                if (sourceDoc[referencedEntityType] == null)
                 {
-                    sourceDoc[entityType] = new JObject();
+                    sourceDoc[referencedEntityType] = new JObject();
                 }
-                if (sourceDoc[entityType][modelName] == null && !visitedEntities.Contains(modelName))
+                if (sourceDoc[referencedEntityType][referencedModelName] == null && !visitedEntities.Contains(referencedModelName))
                 {
-                    visitedEntities.Add(modelName);
+                    visitedEntities.Add(referencedModelName);
                     if (filePath != null)
                     {
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, filePath, entityType, modelName);
-                        sourceDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, filePath, referencedEntityType, referencedModelName);
+                        sourceDoc[referencedEntityType][referencedModelName] = externalFiles[filePath][referencedEntityType][referencedModelName];
                     }
                     else
                     {
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, currentFilePath, entityType, modelName);
-                        sourceDoc[entityType][modelName] = currentDoc[entityType][modelName];
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, currentFilePath, referencedEntityType, referencedModelName);
+                        sourceDoc[referencedEntityType][referencedModelName] = currentDoc[referencedEntityType][referencedModelName];
                     }
 
+                }
+            }
+
+            //ensure that all the models that are an allOf on the current model in the external doc are also included
+            if (entityType != null && modelName != null) {
+                var reference = "#/" + entityType + "/" + modelName;
+                IEnumerable<JToken> dependentRefs = currentDoc.SelectTokens("$..allOf[*].$ref").Where(r => ((string)r).Contains(reference));
+                foreach (JToken dependentRef in dependentRefs)
+                {
+                    //the JSON Path "definitions.ModelName.allOf[0].$ref" provides the name of the model that is an allOf on the current model
+                    string[] refs = dependentRef.Path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (refs[1] != null && !visitedEntities.Contains(refs[1]))
+                    {
+                        //recursively check if the model is completely defined.
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, currentFilePath, refs[0], refs[1]);
+                        sourceDoc[refs[0]][refs[1]] = currentDoc[refs[0]][refs[1]];
+                    }
                 }
             }
         }

@@ -91,7 +91,7 @@
         ],
         "responses": {
           "204": {
-            "description": "A list of caches",
+            "description": "A list of caches"
           },
           "default": {
             "description": "Unexpected error",
