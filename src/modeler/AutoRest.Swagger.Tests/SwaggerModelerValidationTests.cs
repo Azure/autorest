@@ -92,7 +92,7 @@ namespace AutoRest.Swagger.Tests
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonEmptyClientName));
+            messages.AssertOnlyValidationMessage(typeof(NonEmptyClientName));
         }
 
         [Fact]
