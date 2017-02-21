@@ -435,6 +435,16 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void ValidCollectionObjectsPropertiesName()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "collection-objects-naming-valid.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
+        }
+
+        /// <summary>
         /// Verifies that a clean Swagger file does not result in any validation errors
         /// </summary>
         [Fact]
