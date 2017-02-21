@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -22,6 +21,16 @@ namespace AutoRest.Swagger.Validation
         private static readonly Regex DELETE_VERB_PATTERN = new Regex(@"^(Delete)", RegexOptions.IgnoreCase);
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M1005";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -35,7 +44,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This rule corresponds to M1005, M1006, M1007 & M1009.
         /// </remarks>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// This rule passes if the operation id of HTTP Method confirms to M1005, M1006, M1007 & M1009.

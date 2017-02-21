@@ -19,6 +19,16 @@ namespace AutoRest.Swagger.Validation
         private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST)$", RegexOptions.IgnoreCase);
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2044";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -29,7 +39,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// An <paramref name="operationDefinition"/> fails this rule if it does not have the correct HTTP Verb.

@@ -20,6 +20,16 @@ namespace AutoRest.Swagger.Validation
         private readonly Regex propertiesRegEx = new Regex(@"^(TYPE|LOCATION|TAGS)$", RegexOptions.IgnoreCase);
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3010";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -30,7 +40,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// Validation fails iof tracked resource fails to meet one of the four required criteria.
