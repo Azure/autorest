@@ -224,6 +224,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void CollectionObjectsPropertiesNamingValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNamingValidation), 2);
+        }
+
+        [Fact]
         public void InvalidConstraintValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json"));

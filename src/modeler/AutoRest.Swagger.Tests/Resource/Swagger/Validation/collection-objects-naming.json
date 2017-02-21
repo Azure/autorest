@@ -1,4 +1,4 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
     "title": "Operations schemes has non-http/https type",
@@ -13,7 +13,7 @@
   "paths": {
     "/foo": {
       "post": {
-        "operationId": "Noun_Verb",
+        "operationId": "Models_list",
         "summary": "Foo path",
         "description": "Foo operation",
         "responses": {
@@ -64,7 +64,7 @@
   "x-ms-paths": {
     "/foo?{id}": {
       "get": {
-        "operationId": "foo_getByID",
+        "operationId": "foo_listByID",
         "summary": "Foo get path",
         "description": "Foo get operation",
         "responses": {
@@ -117,7 +117,7 @@
     "Models": {
       "description": "the models to return",
       "properties": {
-        "value": {
+        "mymodels": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Model"
