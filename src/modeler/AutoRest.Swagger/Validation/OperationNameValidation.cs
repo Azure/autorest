@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
-using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
 using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationNameValidation : TypedRule<string>
+    public abstract class OperationNameValidation : TypedRule<string>
     {
         private static readonly Regex GET_NOUN_VERB_PATTERN = new Regex(@"^(\w+)_(Get|List)", RegexOptions.IgnoreCase);
         private static readonly Regex GET_VERB_PATTERN = new Regex(@"^(Get|List)", RegexOptions.IgnoreCase);
@@ -21,22 +19,9 @@ namespace AutoRest.Swagger.Validation
         private static readonly Regex DELETE_VERB_PATTERN = new Regex(@"^(Delete)", RegexOptions.IgnoreCase);
 
         /// <summary>
-        /// Id of the Rule.
-        /// </summary>
-        public override string Id => "M1005";
-
-        /// <summary>
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
-
-        /// <summary>
-        /// The template message for this Rule. 
-        /// </summary>
-        /// <remarks>
-        /// This may contain placeholders '{0}' for parameterized messages.
-        /// </remarks>
-        public override string MessageTemplate => Resources.OperationNameNotValid;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -47,41 +32,59 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
-        /// This rule passes if the operation id of HTTP Method confirms to M1005, M1006, M1007 & M1009.
-        ///   e.g. For Get method User_Get or User_List
-        ///     or For Put method User_Create
-        ///     or For Patch method User_Update
-        ///     or For Delete method User_Delete
-        ///     are valid names.
+        /// This rule passes if the operation id of HTTP Method confirms to M1005.
+        ///   e.g. For Get method User_Get or User_List are valid names.
         /// </summary>
-        /// <param name="operationDefinition">Dictionary of the path and respective operations.</param>
-        /// <returns><c>true</c> if operation name confimes to above rules, otherwise <c>false</c>.</returns>
+        /// <param name="entity">Operation name to be verified.</param>
+        /// <returns><c>true</c> if operation name confimes to GET rule, otherwise <c>false</c>.</returns>
         /// <remarks>
         /// Message will be shown at the path level.
         /// </remarks>
-        public override bool IsValid(string entity, RuleContext context)
+        protected bool IsGetValid(string entity)
         {
-            bool isOperationNameValid = true;
-            string httpVerb = context?.Parent?.Key;
+            return GET_NOUN_VERB_PATTERN.IsMatch(entity) || GET_VERB_PATTERN.IsMatch(entity);
+        }
 
-            if (httpVerb.EqualsIgnoreCase("GET"))
-            {
-                isOperationNameValid = GET_NOUN_VERB_PATTERN.IsMatch(entity) || GET_VERB_PATTERN.IsMatch(entity);
-            }
-            else if (httpVerb.EqualsIgnoreCase("PUT"))
-            {
-                isOperationNameValid = PUT_NOUN_VERB_PATTERN.IsMatch(entity) || PUT_VERB_PATTERN.IsMatch(entity);
-            }
-            else if (httpVerb.EqualsIgnoreCase("PATCH"))
-            {
-                isOperationNameValid = PATCH_NOUN_VERB_PATTERN.IsMatch(entity) || PATCH_VERB_PATTERN.IsMatch(entity);
-            }
-            else if (httpVerb.EqualsIgnoreCase("DELETE"))
-            {
-                isOperationNameValid = DELETE_NOUN_VERB_PATTERN.IsMatch(entity) || DELETE_VERB_PATTERN.IsMatch(entity);
-            }
+        /// <summary>
+        /// This rule passes if the operation id of HTTP Method confirms to M1006.
+        ///   e.g. For PUT method User_Create is valid name.
+        /// </summary>
+        /// <param name="entity">Operation name to be verified.</param>
+        /// <returns><c>true</c> if operation name confimes to PUT rule, otherwise <c>false</c>.</returns>
+        /// <remarks>
+        /// Message will be shown at the path level.
+        /// </remarks>
+        protected bool IsPutValid(string entity)
+        {
+            return PUT_NOUN_VERB_PATTERN.IsMatch(entity) || PUT_VERB_PATTERN.IsMatch(entity);
+        }
 
-            return isOperationNameValid;
+        /// <summary>
+        /// This rule passes if the operation id of HTTP Method confirms to M1007.
+        ///   e.g. For PUT method User_Update is valid name.
+        /// </summary>
+        /// <param name="entity">Operation name to be verified.</param>
+        /// <returns><c>true</c> if operation name confimes to PATCH rule, otherwise <c>false</c>.</returns>
+        /// <remarks>
+        /// Message will be shown at the path level.
+        /// </remarks>
+        protected bool IsPatchValid(string entity)
+        {
+            return PATCH_NOUN_VERB_PATTERN.IsMatch(entity) || PATCH_VERB_PATTERN.IsMatch(entity);
+        }
+
+        /// <summary>
+        /// This rule passes if the operation id of HTTP Method confirms to M1009.
+        ///   e.g. For PUT method User_Delete is valid name.
+        /// </summary>
+        /// <param name="entity">Operation name to be verified.</param>
+        /// <returns><c>true</c> if operation name confimes to DELETE rule, otherwise <c>false</c>.</returns>
+        /// <remarks>
+        /// Message will be shown at the path level.
+        /// </remarks>
+        protected bool IsDeleteValid(string entity)
+        {
+            return DELETE_NOUN_VERB_PATTERN.IsMatch(entity) || DELETE_VERB_PATTERN.IsMatch(entity);
         }
     }
 }
