@@ -17,6 +17,16 @@ namespace AutoRest.Swagger.Validation
         private readonly Regex resNames = new Regex(@"(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3008";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
