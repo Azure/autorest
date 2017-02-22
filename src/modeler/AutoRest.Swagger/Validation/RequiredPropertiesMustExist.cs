@@ -10,6 +10,16 @@ namespace AutoRest.Swagger.Validation
     public class RequiredPropertiesMustExist : TypedRule<string>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3003";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// A <paramref name="propertyName" /> passes this rule if the <paramref name="propertyName"/> appears in the list of properties
         /// or the properties of its ancestors
         /// </summary>
@@ -41,6 +51,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
     }
 }

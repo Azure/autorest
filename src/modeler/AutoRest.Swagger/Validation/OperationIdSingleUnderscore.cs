@@ -11,6 +11,16 @@ namespace AutoRest.Swagger.Validation
     public class OneUnderscoreInOperationId : TypedRule<string>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2055";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// This rule passes if the entity contains no more than 1 underscore
         /// </summary>
         /// <param name="entity"></param>
