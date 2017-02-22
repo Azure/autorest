@@ -6,6 +6,7 @@ using System.Linq;
 using AutoRest.Swagger.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Swagger.JsonConverters
 {
@@ -71,12 +72,17 @@ namespace AutoRest.Swagger.JsonConverters
             {
                 try
                 {
+                    if (operation.Name == null || operation.Name.StartsWith("x-"))
+                    {
+                        continue;
+                    }
+
                     result[operation.Name] = JsonConvert.DeserializeObject<Operation>(operation.Value.ToString(),
                         GetSettings(serializer));
                 }
-                catch (JsonException)
+                catch (JsonException exception)
                 {
-                    // Skip
+                    Logger.Instance.Log(Category.Error, exception.Message);
                 }
             }
 
