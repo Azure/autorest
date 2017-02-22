@@ -10,7 +10,7 @@ import * as semver from 'semver'
 import { argv as cli } from 'yargs'
 import { join } from 'path';
 import * as dns from 'dns';
-import { Npm } from './npm';
+import { Npm } from './npmjs';
 import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
@@ -27,7 +27,7 @@ class App {
   private static done: boolean = false;
 
   private static networkEnabled: boolean = true;
-  private static pkgVersion: string = "0.9.1";
+  private static pkgVersion: string = "0.9.4";
 
   private static currentVersion: string = null;
   private static frameworkVersion: string = null;

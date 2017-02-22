@@ -15,8 +15,8 @@ Tasks "dotnet",  # compiling dotnet
 Import
   solution: "#{basefolder}/AutoRest.sln"
   packages: "#{basefolder}/packages"
-  release_name: if argv.nightly then "#{version}-#{today}-nightly"              else if argv.daily then "#{version}-#{now}-daily"              else "#{version}"
-  package_name: if argv.nightly then "autorest-#{version}-#{today}-nightly.zip" else if argv.daily then "autorest-#{version}-#{now}-daily.zip" else "autorest-#{version}.zip"
+  release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
+  package_name: if argv.nightly then "autorest-#{version}-#{today}-2300-nightly.zip" else if argv.preview then "autorest-#{version}-#{now}-preview.zip" else "autorest-#{version}.zip"
 
   # which projects to care about
   projects:() ->
