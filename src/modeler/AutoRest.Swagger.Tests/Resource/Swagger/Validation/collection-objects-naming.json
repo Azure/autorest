@@ -9,6 +9,12 @@
   "schemes": [
     "https"
   ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "basePath": "/",
   "paths": {
     "/foo": {
@@ -26,16 +32,7 @@
               "$ref": "#/definitions/Models"
             }
           }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "schemes": [
-          "https"
-        ]
+        }
       }
     },
     "/operations": {

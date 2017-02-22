@@ -15,10 +15,21 @@ namespace AutoRest.Swagger.Validation
     public class CollectionObjectPropertiesNamingValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         private readonly Regex ListRegex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3027";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
-            var serviceDefinition = (ServiceDefinition)context.Root;
+            ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
             var listOperations = entity.Values.SelectMany(opDict => opDict.Where(pair => pair.Key.ToLower().Equals("get") || pair.Key.ToLower().Equals("post")));
             foreach (var opPair in listOperations)
             {
@@ -28,7 +39,7 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
                 
-                var collType = opPair.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath();
+                string collType = opPair.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath();
                 // if no response type defined skip
                 if (collType == null)
                 {
@@ -36,7 +47,7 @@ namespace AutoRest.Swagger.Validation
                 }
 
                 var collTypeDef = serviceDefinition.Definitions[collType];
-                // if collection object has 2 properties or less (xmspageable objects can have the nextlink prop)
+                // if collection object has 2 properties or less (x-ms-pageable objects can have the nextlink prop)
                 // and the object does not have a property named "value", show the warning
                 if ((collTypeDef.Properties?.Count <= 2) && collTypeDef.Properties.All(prop => !prop.Key.ToLower().Equals("value")))
                 {
@@ -59,7 +70,3 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Warning;
     }
 }
-
-
-
-
