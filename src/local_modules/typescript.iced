@@ -53,5 +53,3 @@ task 'install', 'typescript', (done)->
       next null
 
     return null
-    
-

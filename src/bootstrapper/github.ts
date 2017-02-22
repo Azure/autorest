@@ -3,6 +3,8 @@ import { Enumerable as IEnumerable, From } from 'linq-es2015';
 import { parse as parseUrl } from 'url';
 import { Utility } from './utility'
 import * as request from 'request'
+import { Console } from "./console";
+import { inspect } from 'util'
 
 export class Asset {
   url: string;
@@ -61,6 +63,7 @@ async function Rest(url: string): Promise<any> {
   return new Promise<string>((resolve, reject) => {
     let stream = request.get(url, {
       strictSSL: true,
+      timeout: 10000,
       headers: {
         'user-agent': 'autorest-installer',
         "Authorization": `token ${Utility.Id}`
@@ -78,7 +81,7 @@ async function Rest(url: string): Promise<any> {
     });
 
     stream.on('error', (err) => {
-      console.log(err);
+      Console.Error(`${err}`);
       reject(err);
     });
   });
@@ -87,13 +90,13 @@ async function Rest(url: string): Promise<any> {
 export class Github {
   static async GetAssets(tag: string): Promise<IEnumerable<Asset>> {
     var response = await Rest(`https://api.github.com/repos/azure/autorest/releases/tags/${tag}`);
-    // console.log(response);
+    Console.Debug(inspect(response));
     return From(<Array<Asset>>response.assets);
   }
 
   static async List(): Promise<IEnumerable<Release>> {
     const response = await Rest(`https://api.github.com/repos/azure/autorest/releases`);
-    // console.log(response);
+    Console.Debug(inspect(response));
     return From<Release>(response);
   }
 }

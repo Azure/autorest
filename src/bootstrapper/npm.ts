@@ -4,11 +4,13 @@ import { parse as parseUrl } from 'url';
 import { Utility } from './utility'
 import * as request from 'request'
 import * as semver from "semver";
+import { Console } from './console';
 
 async function Rest(url: string): Promise<any> {
   return new Promise<string>((resolve, reject) => {
     let stream = request.get(url, {
       strictSSL: true,
+      timeout: 5000,
       headers: {
         'user-agent': 'autorest-installer',
       }
@@ -25,7 +27,7 @@ async function Rest(url: string): Promise<any> {
     });
 
     stream.on('error', (err) => {
-      console.log(err);
+      Console.Error(`${err}`);
       reject(err);
     });
   });

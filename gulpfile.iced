@@ -93,3 +93,6 @@ autorest = (args,done) ->
   echo info "AutoRest #{args.join(' ')}"
   execute "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true, cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
+
+if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+  echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"

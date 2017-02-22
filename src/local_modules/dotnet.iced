@@ -44,7 +44,11 @@ task 'policheck-assemblies','', ->
 ###############################################
 task 'sign-assemblies','', (done) -> 
   # skip signing if we're not doing a release build
-  return done()
+  if !(exists csu) 
+    echo warning "CODESIGNING is not available."
+    echo warning "Binaries will not be code-signed."
+    return done()
+
   Fail "signing requires --configuration release" if configuration isnt "release"
 
   unsigned  = "#{workdir}/unsigned"

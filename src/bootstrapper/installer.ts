@@ -19,7 +19,7 @@ import { Asset, Github } from './github'
 import * as tgz from 'tar.gz2'
 import * as https from 'https';
 import * as unzip from 'unzipper'
-
+import { Console } from './console';
 import * as StreamSink from 'streamsink';
 
 export class Installer {
@@ -70,7 +70,7 @@ export class Installer {
     }
 
     return new Promise<string>((resolve, reject) => {
-      console.log(`Downloading ${runtime.browser_download_url} to ${this.FrameworkFolder}`);
+      Console.Log(`Downloading __${runtime.browser_download_url}__ \n        to  __${this.FrameworkFolder}__`);
       let download = request.get(runtime.browser_download_url, {
         strictSSL: true,
         headers: {
@@ -102,7 +102,7 @@ export class Installer {
     const targetFolder = join(this.AutorestFolder, version);
 
     return new Promise<string>((resolve, reject) => {
-      console.log(`Downloading ${asset.browser_download_url} to ${targetFolder}`);
+      Console.Log(`Downloading __${asset.browser_download_url}__ \n        to  __${targetFolder}__`);
       let download = request.get(asset.browser_download_url, {
         strictSSL: true,
         headers: {
