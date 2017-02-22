@@ -92,7 +92,7 @@ namespace AutoRest.Swagger.Tests
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonEmptyClientName));
+            messages.AssertOnlyValidationMessage(typeof(NonEmptyClientName));
         }
 
         [Fact]
@@ -230,6 +230,12 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationWarning(typeof(InvalidConstraint), 18);
         }
 
+        public void BodyTopLevelPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "body-top-level-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+        }
+
         [Fact]
         public void NestedPropertiesValidation()
         {
@@ -276,7 +282,9 @@ namespace AutoRest.Swagger.Tests
         public void OperationNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "operation-name-not-valid.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationNameValidation), 3);
+            messages.AssertOnlyValidationMessage(typeof(GetOperationNameValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PutOperationNameValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(DeleteOperationNameValidation), 1);
         }
 
         [Fact]

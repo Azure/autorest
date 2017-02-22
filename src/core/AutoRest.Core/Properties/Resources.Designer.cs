@@ -206,6 +206,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        /// </summary>
+        public static string DeleteOperationNameNotValid {
+            get {
+                return ResourceManager.GetString("DeleteOperationNameNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The value provided for description is not descriptive enough..
         /// </summary>
         public static string DescriptionNotDescriptive {
@@ -283,6 +292,15 @@ namespace AutoRest.Core.Properties {
         public static string GeneratorInitialized {
             get {
                 return ResourceManager.GetString("GeneratorInitialized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
+        /// </summary>
+        public static string GetOperationNameNotValid {
+            get {
+                return ResourceManager.GetString("GetOperationNameNotValid", resourceCulture);
             }
         }
         
@@ -512,15 +530,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;, &apos;PUT&apos; operation must use method name &apos;Create&apos;, &apos;PATCH&apos; operation must use method name &apos;Update&apos; and &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
-        /// </summary>
-        public static string OperationNameNotValid {
-            get {
-                return ResourceManager.GetString("OperationNameNotValid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
@@ -566,6 +575,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;PATCH&apos; operation must use method name &apos;Update&apos;..
+        /// </summary>
+        public static string PatchOperationNameNotValid {
+            get {
+                return ResourceManager.GetString("PatchOperationNameNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to path cannot be null or an empty string or a string with white spaces while getting the parent directory.
         /// </summary>
         public static string PathCannotBeNullOrEmpty {
@@ -580,6 +598,15 @@ namespace AutoRest.Core.Properties {
         public static string PutGetPatchResponseInvalid {
             get {
                 return ResourceManager.GetString("PutGetPatchResponseInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;PUT&apos; operation must use method name &apos;Create&apos;..
+        /// </summary>
+        public static string PutOperationNameNotValid {
+            get {
+                return ResourceManager.GetString("PutOperationNameNotValid", resourceCulture);
             }
         }
         

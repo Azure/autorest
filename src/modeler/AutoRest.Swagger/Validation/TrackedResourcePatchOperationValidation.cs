@@ -14,7 +14,17 @@ namespace AutoRest.Swagger.Validation
     public class TrackedResourcePatchOperationValidation : TypedRule<Dictionary<string, Schema>>
     {
         private readonly Regex resNames = new Regex(@"(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
-        
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3026";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
@@ -26,7 +36,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Fatal;
+        public override Category Severity => Category.Error;
 
         // Verifies if a tracked resource has a corresponding patch operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)

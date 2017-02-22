@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
@@ -24,6 +23,16 @@ namespace AutoRest.Swagger.Validation
         private readonly string ListTemplate = "{0}_List";
         private readonly string ResourceGroup = "ResourceGroup";
         private readonly string SubscriptionId = "SubscriptionId";
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M1003";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string,Dictionary<string, Operation>> entity, RuleContext context)
         {
@@ -138,6 +147,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
     }
 }
