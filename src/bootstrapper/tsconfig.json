@@ -4,7 +4,8 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "sourceMap": true,
-    "types" : ["node"]
+    "types" : ["node"],
+    "newLine": "LF"
   },
   "exclude": [
     "node_modules"

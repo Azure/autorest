@@ -18,7 +18,7 @@ class App {
   private static verbose: boolean = cli.verbose;
   private static version: string = cli.version;
   private static networkEnabled: boolean = true;
-  private static pkgVersion: string = "0.9.1";
+  private static pkgVersion: string = "0.9.3";
 
   private static Log(text: string) {
     console.log(text);

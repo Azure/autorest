@@ -30,6 +30,7 @@ Install 'moment'
 Install 'chalk'
 Install 'yargs'
 Install 'ghrelease', 'gulp-github-release'
+Install 'eol', 'gulp-line-ending-corrector'
 Install 'through', 'through2'
 Install 'run', 'run-sequence'
 Install 'except', './except.iced'
@@ -132,3 +133,5 @@ task 'default','', ->
 
 #{switches}
 """
+
+task 'fix-line-endings', '', ->

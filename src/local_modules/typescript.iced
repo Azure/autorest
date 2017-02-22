@@ -13,6 +13,12 @@ task 'build', 'typescript', (done)->
       next null
     return null
 
+task 'fix-line-endings', 'typescript', ->
+  typescriptFiles()
+    .pipe eol {eolc: 'LF', encoding:'utf8'}
+    .pipe showFiles()
+    #.pipe destination()
+
 Import
   install_package: (from,to,done)->
     return setTimeout (->

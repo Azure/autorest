@@ -63,6 +63,16 @@ Import
       .pipe except /src.local_modules/i
       .pipe except /src.common/i
         
+  typescriptFiles: () -> 
+    source [ "src/**/*.ts" , "src/**/*.json" ]
+      .pipe except /node_modules/i
+      .pipe except /src.generator/i
+      .pipe except /src.core/i
+      .pipe except /src.dev/i
+      .pipe except /src.modeler/i
+      .pipe except /src.local_modules/i
+      .pipe except /src.common/i
+
 task 'show', " ", ->
   generatedFiles() 
     .pipe showFiles()
