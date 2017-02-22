@@ -17,6 +17,16 @@ namespace AutoRest.Swagger.Validation
     public class PutGetPatchResponseValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3007";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -27,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// Validates if the response of Put/Get/Patch are same.

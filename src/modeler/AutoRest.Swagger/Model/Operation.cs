@@ -36,7 +36,10 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(OneUnderscoreInOperationId))]
         [Rule(typeof(OperationIdNounInVerb))]
-        [Rule(typeof(OperationNameValidation))]
+        [Rule(typeof(GetOperationNameValidation))]
+        [Rule(typeof(PutOperationNameValidation))]
+        [Rule(typeof(PatchOperationNameValidation))]
+        [Rule(typeof(DeleteOperationNameValidation))]
         public string OperationId { get; set; }
 
         public string Summary

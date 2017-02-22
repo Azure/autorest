@@ -16,9 +16,15 @@ namespace AutoRest.Core.Validation
         {
         }
 
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
         public virtual string Id => "!!! implement me and make me abstract !!!";
 
-        public ValidationCategory ValidationCategory => ((ValidationCategory)0); // !!! implement me and make me abstract !!!
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public virtual ValidationCategory ValidationCategory => ((ValidationCategory)0); // !!! implement me and make me abstract !!!
 
         /// <summary>
         /// The template message for this Rule. 
@@ -27,7 +33,7 @@ namespace AutoRest.Core.Validation
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public abstract string MessageTemplate { get; }
-        
+
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
