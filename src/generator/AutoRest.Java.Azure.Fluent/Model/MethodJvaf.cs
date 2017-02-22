@@ -28,7 +28,14 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     string newName = null;
                     if (urlSplits.Count() == 6 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions"))
                     {
-                        newName = "List";
+                        if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "providers"))
+                        {
+                            newName = "List";
+                        }
+                        else
+                        {
+                            newName = "ListByResourceGroup";
+                        }
                     }
                     else if (urlSplits.Count() == 8 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions")
                         && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "resourceGroups"))
@@ -118,7 +125,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Add("com.microsoft.azure.PagedList");
                     }
 
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
+                    if (!this.SimulateAsPagingOperation)
+                    {
+                        imports.Remove("com.microsoft.rest.ServiceCallback");
+                    }
 
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
                     if (pageType != null)
@@ -155,11 +165,15 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Add("com.microsoft.azure.ListOperationCallback");
                         imports.Add("com.microsoft.azure.PagedList");
+                    }
+
+                    if (!this.SimulateAsPagingOperation)
+                    {
+                        imports.Remove("com.microsoft.rest.ServiceCallback");
                     }
 
                     imports.Add("com.microsoft.azure.Page");
