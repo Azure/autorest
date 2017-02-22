@@ -15,8 +15,8 @@ Tasks "dotnet",  # compiling dotnet
 Import
   solution: "#{basefolder}/AutoRest.sln"
   packages: "#{basefolder}/packages"
-  release_name: if argv.nightly then "#{version}-nightly-#{today}"              else if argv.daily then "#{version}-daily-#{now}"              else "#{version}"
-  package_name: if argv.nightly then "autorest-#{version}-nightly-#{today}.zip" else if argv.daily then "autorest-#{version}-daily-#{now}.zip" else "autorest-#{version}.zip"
+  release_name: if argv.nightly then "#{version}-#{today}-nightly"              else if argv.daily then "#{version}-#{now}-daily"              else "#{version}"
+  package_name: if argv.nightly then "autorest-#{version}-#{today}-nightly.zip" else if argv.daily then "autorest-#{version}-#{now}-daily.zip" else "autorest-#{version}.zip"
 
   # which projects to care about
   projects:() ->
@@ -77,10 +77,20 @@ Import
             more.push e
             n null
 
+task 'install-binaries', '', (done)->
+  mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
+  source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**"
+    .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
+
+task 'install', 'build and install the dev version of autorest',(done)->
+  run [ 'build/typescript', 'build/dotnet/binaries' ],
+    'install-node-files',
+    'install-binaries',
+    -> done()
 
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
-  exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+  exec "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
 task 'autorest-app', "Runs AutoRest (via node)" ,(done)->

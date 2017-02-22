@@ -4,7 +4,7 @@
   "description": "Tools for AutoRest build processes",
   "scripts": {
     "test": "gulp test",
-    "install": "gulp install"
+    "install": "gulp npm-install"
   },
   "repository": {
     "type": "git",

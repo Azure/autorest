@@ -241,7 +241,7 @@ ${this.BuildInfo}
 
       // call autorest-app in the target folder
       if (process.argv.length > 2) {
-        console.log(process.argv);
+        Console.Debug(process.argv);
         require(join(Installer.AutorestFolder, this.version, "node_modules", "autorest-app", "app.js"));
       } else {
         Console.Log("Use ---help to get help information.")

@@ -128,8 +128,8 @@ task 'default','', ->
   *--force*          specify when you want to force an action (restore, etc)
   *--configuration*  'debug' or 'release'
   *--release*        same as --configuration=release
-  *--nightly*        generate label for package as 'nightly-YYYYMMDD'
-  *--daily*          generate label for package as 'daily-YYYYMMDD-HHmm'
+  *--nightly*        generate label for package as 'YYYYMMDD-nightly'
+  *--daily*          generate label for package as 'YYYYMMDD-HHmm-daily'
   *--verbose*        enable verbose output
   *--threshold=nn*   set parallelism threshold (default = 10)
 

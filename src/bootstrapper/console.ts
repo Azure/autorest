@@ -21,7 +21,7 @@ export class Console {
   private static debug: boolean = cli['-debug'];
   private static verbose: boolean = cli['-verbose'];
 
-  public static Log(text: string) {
+  public static Log(text: any) {
     if (!this.quiet) {
       console.log(marked(`${text}`.trim()).trim());
     }
@@ -29,26 +29,30 @@ export class Console {
 
   private static get Timestamp(): string {
     const m = new Date();
-    return chalk.red(`${chalk.gray(m.getHours())}:${chalk.gray(m.getMinutes())}:${chalk.gray(m.getSeconds())}`);
+    const hh = `${m.getHours()}`;
+    const mm = `${m.getMinutes()}`;
+    const ss = `${m.getSeconds()}`;
+
+    return chalk.red(`${chalk.gray(hh)}:${chalk.gray(mm)}:${chalk.gray(ss)}`);
   }
 
-  public static Debug(text: string) {
+  public static Debug(text: any) {
     if (this.debug) {
       console.log(chalk.bold.yellow(`[${this.Timestamp}] `) + marked(`${text}`.trim()).trim());
     }
   }
 
-  public static Verbose(text: string) {
+  public static Verbose(text: any) {
     if (this.verbose) {
       console.log(chalk.bold.magenta(`[${this.Timestamp}] `) + marked(`${text}`.trim()).trim());
     }
   }
 
-  public static Error(text: string) {
+  public static Error(text: any) {
     console.error(chalk.bold.red(`${text}`.trim()).trim());
   }
 
-  public static Exit(reason: string) {
+  public static Exit(reason: any) {
     this.Error(reason || "Unknown Error");
     process.exit(1);
   }
