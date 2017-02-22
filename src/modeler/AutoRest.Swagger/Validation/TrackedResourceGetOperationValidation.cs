@@ -3,6 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
+using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
@@ -21,7 +22,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Tracked resource {0} must have a get operation.";
+        public override string MessageTemplate => Resources.TrackedResourceIsNotValid;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
