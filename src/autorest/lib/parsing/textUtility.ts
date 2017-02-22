@@ -4,23 +4,23 @@
  *--------------------------------------------------------------------------------------------*/
 
 function textLineStartIndices(text: string): number[] {
-    let indices = [0];
+  let indices = [0];
 
-    let regex = /\r?\n/g;
-    let match: RegExpExecArray | null;
-    while ((match = regex.exec(text)) !== null) {
-        indices.push(match.index + match[0].length);
-    }
+  const regex = /\r?\n/g;
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(text)) !== null) {
+    indices.push(match.index + match[0].length);
+  }
 
-    return indices;
+  return indices;
 }
 
 export function textIndexToPosition(text: string, index: number): sourceMap.Position {
-    let startIndices = textLineStartIndices(text);
-    let lineIndex = startIndices.map(i => i <= index).lastIndexOf(true); // TODO: binary search?
+  const startIndices = textLineStartIndices(text);
+  const lineIndex = startIndices.map(i => i <= index).lastIndexOf(true); // TODO: binary search?
 
-    return {
-        column: index - startIndices[lineIndex],
-        line: 1 + lineIndex,
-    };
+  return {
+    column: index - startIndices[lineIndex],
+    line: 1 + lineIndex,
+  };
 }

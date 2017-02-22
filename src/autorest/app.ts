@@ -13,7 +13,7 @@ import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 
 function awaitable(child: ChildProcess): Promise<number> {
-  return new Promise(function (resolve, reject) {
+  return new Promise((resolve, reject) => {
     child.addListener("error", reject);
     child.addListener("exit", resolve);
   });
