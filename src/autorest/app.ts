@@ -16,7 +16,8 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function main() {
-    let autorestExe = spawn("dotnet", [path.join(__dirname, "../../AutoRest.dll"), ...process.argv.slice(2)]);
+    let autorestExeArgs = process.argv.slice(2).filter(arg => arg.indexOf("--") !== 0);
+    let autorestExe = spawn("dotnet", [path.join(__dirname, "../../AutoRest.dll"), ...autorestExeArgs]);
     autorestExe.stdout.pipe(process.stdout);
     autorestExe.stderr.pipe(process.stderr);
     let exitCode = await awaitable(autorestExe);
