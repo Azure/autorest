@@ -4,6 +4,7 @@
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
+using System;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -27,12 +28,12 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
-        /// <returns><c>true</c> if GET operation name confimes to GET rule, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if GET operation name confirms to GET rule, otherwise <c>false</c>.</returns>
         public override bool IsValid(string entity, RuleContext context)
         {
             string httpVerb = context?.Parent?.Key;
 
-            if (httpVerb.EqualsIgnoreCase("GET"))
+            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("GET"))
             {
                 return IsGetValid(entity);
             }

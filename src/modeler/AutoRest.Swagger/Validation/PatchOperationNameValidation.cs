@@ -4,6 +4,7 @@
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
+using System;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -27,12 +28,12 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
-        /// <returns><c>true</c> if PATCH operation name confimes to PATCH rule, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if PATCH operation name confirms to PATCH rule, otherwise <c>false</c>.</returns>
         public override bool IsValid(string entity, RuleContext context)
         {
             string httpVerb = context?.Parent?.Key;
 
-            if (httpVerb.EqualsIgnoreCase("PATCH"))
+            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("PATCH"))
             {
                 return IsPatchValid(entity);
             }

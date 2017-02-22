@@ -36,7 +36,7 @@ namespace AutoRest.Swagger.Validation
         ///   e.g. For Get method User_Get or User_List are valid names.
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
-        /// <returns><c>true</c> if operation name confimes to GET rule, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if operation name confirms to GET rule, otherwise <c>false</c>.</returns>
         /// <remarks>
         /// Message will be shown at the path level.
         /// </remarks>
