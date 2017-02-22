@@ -9,7 +9,7 @@ task 'zip-autorest', '', (done) ->
     .pipe destination packages
 
 task 'install-node-files' ,'', (done)->
-  install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/Release/netcoreapp1.0/publish",done
+  install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish",done
   return null;
 
 task 'package','From scratch build, sign, and package autorest', (done) -> 
