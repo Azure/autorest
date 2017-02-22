@@ -135,3 +135,6 @@ task 'default','', ->
 """
 
 task 'fix-line-endings', '', ->
+  source "**/*.iced"
+    .pipe eol {eolc: 'LF', encoding:'utf8'}
+    .pipe destination '.'
