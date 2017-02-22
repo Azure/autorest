@@ -9,7 +9,7 @@ module.exports =
   # lets us just handle each item in a stream easily.
   foreach: (delegate) -> 
     through.obj ( each, enc, done ) -> 
-      delegate each, done
+      delegate each, done, this
 
   toArray: (result,passthru) => 
     foreach (each,done) => 
@@ -107,6 +107,7 @@ module.exports =
 
   exists: (path) ->
     return test '-f', path 
+
 
   newer: (first,second) ->
     f = fs.statSync(first).mtime

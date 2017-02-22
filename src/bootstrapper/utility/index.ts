@@ -28,6 +28,4 @@ export class Utility {
   static async PlatformInformation(): Promise<PlatformInformation> {
     return PlatformInformation.GetCurrent();
   }
-
-
 }

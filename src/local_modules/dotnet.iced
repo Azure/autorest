@@ -44,6 +44,7 @@ task 'policheck-assemblies','', ->
 ###############################################
 task 'sign-assemblies','', (done) -> 
   # skip signing if we're not doing a release build
+  return done()
   Fail "signing requires --configuration release" if configuration isnt "release"
 
   unsigned  = "#{workdir}/unsigned"
@@ -106,16 +107,6 @@ task 'restore','restores the dotnet packages for the projects', (done) ->
       next null  
   return null
   
-############################################### 
-#task 'package','From scratch build, sign, and package ', (done) -> 
-#  run 'clean',
-#    'restore'
-#    'publish'
-#    'sign-assemblies'
-#    'pack' 
-#    'sign-packages'
-#    -> done()
-
 ############################################### 
 task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
   instances = 0    

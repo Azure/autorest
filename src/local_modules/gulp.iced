@@ -23,6 +23,7 @@ Import
 # force-global a bunch of stuff.
 require 'shelljs/global'
 Install 'marked'
+Install 'vinyl'
 Install 'os'
 Install 'gulp'
 Install 'util'
@@ -75,11 +76,11 @@ Import
   myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
   npm_apikey:  argv.npm_apikey or process.env.NPM_APIKEY or null
   today: moment().format('YYYYMMDD')
+  now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
   threshold: argv.threshold or ((os.cpus().length)-1 )
   verbose: argv.verbose or null
-  
 
 mkdir "#{process.env.tmp}/gulp" if !test "-d", "#{process.env.tmp}/gulp"
 mkdir workdir if !test "-d", workdir
@@ -128,6 +129,7 @@ task 'default','', ->
   *--configuration*  'debug' or 'release'
   *--release*        same as --configuration=release
   *--nightly*        generate label for package as 'nightly-YYYYMMDD'
+  *--daily*          generate label for package as 'daily-YYYYMMDD-HHmm'
   *--verbose*        enable verbose output
   *--threshold=nn*   set parallelism threshold (default = 10)
 

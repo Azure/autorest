@@ -17,6 +17,7 @@ task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
     .pipe eol {eolc: 'LF', encoding:'utf8'}
     .pipe destination 'src'
+    #.pipe showFiles()
 
 Import
   install_package: (from,to,done)->
