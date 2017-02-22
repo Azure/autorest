@@ -134,7 +134,7 @@ task 'default','', ->
 #{switches}
 """
 
-task 'fix-line-endings', '', ->
+task 'fix-line-endings', 'Fixes line endings to file-type appropriate values.', ->
   source "**/*.iced"
     .pipe eol {eolc: 'LF', encoding:'utf8'}
     .pipe destination '.'
