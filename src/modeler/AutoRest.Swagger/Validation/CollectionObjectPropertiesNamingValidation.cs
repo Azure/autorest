@@ -62,8 +62,8 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Collection object {0} returned by list operation {1} has has no property named 'value'";
-
+        public override string MessageTemplate => Resources.CollectionObjectPropertiesNamingMessage;
+        
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
