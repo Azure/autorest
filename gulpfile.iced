@@ -128,7 +128,7 @@ task 'autorest', 'Runs AutoRest', (done) ->
 
 task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
   args = process.argv.slice(3)
-  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-ng/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
 autorest = (args,done) ->
