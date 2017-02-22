@@ -64,8 +64,23 @@ namespace AutoRest.Swagger.JsonConverters
                 // Removing the common parameters to avoid serialization errors
                 jo.Remove("parameters");
             }
-            return JsonConvert.DeserializeObject<Dictionary<string, Operation>>(jo.ToString(),
-                GetSettings(serializer));
+
+            var result = new Dictionary<string, Operation>();
+
+            foreach (JProperty operation in jo.Children())
+            {
+                try
+                {
+                    result[operation.Name] = JsonConvert.DeserializeObject<Operation>(operation.Value.ToString(),
+                        GetSettings(serializer));
+                }
+                catch (JsonException)
+                {
+                    // Skip
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

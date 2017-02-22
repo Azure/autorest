@@ -67,6 +67,7 @@
             }
         },
         "/array/empty": {
+			"x-extension-under-path": true,
             "get": {
                 "operationId": "array_getEmpty",
                 "description": "Get empty array value []",
