@@ -32,7 +32,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.TrackedResourceIsNotValid;
+        public override string MessageTemplate => Resources.TrackedResourceGetOperationMissing;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
