@@ -67,7 +67,7 @@ task 'show', " ", ->
   generatedFiles() 
     .pipe showFiles()
 
-task 'dotnet:publish','',['release-only', 'clean'], (done) -> 
+task 'dotnet:publish','', (done) -> 
   exec "dotnet publish -c #{configuration} #{basefolder}/src/core/AutoRest /nologo /clp:NoSummary", (code, stdout, stderr) ->
     Fail "Build Failed #{ warning stdout } \n#{ error stderr }" if code 
     done();
@@ -84,6 +84,7 @@ task 'install-node-files' ,'', (done)->
 task 'package','From scratch build, sign, and package autorest', (done) -> 
   run 'clean',
     'restore'
+    'build/typescript'
     'dotnet:publish'
     'sign-assemblies'
     'install-node-files'
@@ -125,7 +126,7 @@ task 'autorest', 'Runs AutoRest', (done) ->
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-task 'autorest-ng', "Runs AutoRest (via node)" ,(done)->
+task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
   args = process.argv.slice(3)
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-ng/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()

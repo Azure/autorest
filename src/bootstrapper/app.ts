@@ -156,8 +156,8 @@ class App {
         }
       }
 
-      // call autorest-ng in the target folder
-      require(join(Installer.AutorestFolder, this.version, "node_modules", "autorest-ng", "index.js"));
+      // call autorest-app in the target folder
+      require(join(Installer.AutorestFolder, this.version, "node_modules", "autorest-app", "app.js"));
       // console.log(`Installed Framework: ${Installer.LatestFrameworkVersion} `);
       // console.log(`Installed AutoRest: ${Installer.LatestAutorestVersion} `);
     } catch (exception) {
