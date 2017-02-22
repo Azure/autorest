@@ -87,12 +87,14 @@ async function Rest(url: string): Promise<any> {
 export class Github {
   static async GetAssets(tag: string): Promise<IEnumerable<Asset>> {
     var response = await Rest(`https://api.github.com/repos/azure/autorest/releases/tags/${tag}`);
+    // console.log(response);
     return From(<Array<Asset>>response.assets);
   }
 
   static async List(): Promise<IEnumerable<Release>> {
-    return From<Release>(await Rest(`https://api.github.com/repos/azure/autorest/releases`));
+    const response = await Rest(`https://api.github.com/repos/azure/autorest/releases`);
+    // console.log(response);
+    return From<Release>(response);
   }
-
 }
 

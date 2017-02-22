@@ -93,7 +93,6 @@ export class Installer {
   }
 
   public static async InstallAutoRest(version: string) {
-    console.log(`installing version ${version}`);
     const asset = (await Github.GetAssets(`v${version}`)).FirstOrDefault();
 
     if (asset == null) {
@@ -131,6 +130,4 @@ export class Installer {
       .Where(each => each != null)
       .OrderBy(each => each, semver.rcompare) : From([]);
   }
-
-
 }

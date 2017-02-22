@@ -1,13 +1,15 @@
 {
-  "name": "autorest-bootstrapper",
-  "version": "1.0.1",
-  "description": "AutoRest bootstrapper",
+  "name": "autorest",
+  "version": "0.9.1",
+  "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Azure/autorest.git"
   },
+  "readme": "https://github.com/Azure/AutoRest/readme.md",
+  
   "keywords": [
-    "autorest"
+    "autorest", "rest", "swagger"
   ],
   "author": "Microsoft Corporation",
   "license": "MIT",
@@ -15,9 +17,9 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/readme.md",
-  "main": "./src/AutoRest/AutoRest.js",
+  "main": "./app.js",
   "bin": {
-    "autorest": "./bin/index.js"
+    "autorest": "./app.js"
   },
   "engines": {
     "node": ">=6.9.5"
