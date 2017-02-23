@@ -361,7 +361,7 @@ Modelers:
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
   </data>
   <data name="TrackedResourceGetOperationMissing" xml:space="preserve">
-    <value>Tracked resource {0} must have a get operation.</value>
+    <value>Tracked resource '{0}' must have a get operation.</value>
   </data>
   <data name="DeleteOperationNameNotValid" xml:space="preserve">
     <value>'DELETE' operation must use method name 'Delete'.</value>
@@ -374,5 +374,8 @@ Modelers:
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
     <value>Collection object {0} returned by list operation {1} has no property named 'value'.</value>
+  </data>
+  <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
+    <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
   </data>
 </root>

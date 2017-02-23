@@ -14,8 +14,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourceGetOperationValidation : TypedRule<Dictionary<string, Schema>>
     {
-        private readonly Regex resNames = new Regex(@"(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
-
+        
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -42,10 +41,13 @@ namespace AutoRest.Swagger.Validation
         // Verifies if a tracked resource has a corresponding get operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", (ServiceDefinition)context.Root);
+            var servDef = (ServiceDefinition)context.Root;
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", servDef);
+            // filter out the model definitions that are not being returned as a response
+            var respDefinitions = servDef.Paths.Concat(servDef.CustomPaths).SelectMany(pathPair => pathPair.Value.Select(pathObj => pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())).Distinct();
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                if (resNames.IsMatch(definition.Key) || ValidationUtilities.IsTrackedResource(definition.Value, definitions))
+                if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
                     if (!getOperations.Any(op => (op.Responses["200"].Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {

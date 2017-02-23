@@ -674,7 +674,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tracked resource {0} must have a get operation..
+        ///   Looks up a localized string similar to Tracked resource &apos;{0}&apos; must have a get operation..
         /// </summary>
         public static string TrackedResourceGetOperationMissing {
             get {
@@ -693,6 +693,15 @@ namespace AutoRest.Core.Properties {
         public static string TrackedResourceIsNotValid {
             get {
                 return ResourceManager.GetString("TrackedResourceIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracked resource &apos;{0}&apos; must have patch operation that at least supports the update of tags..
+        /// </summary>
+        public static string TrackedResourcePatchOperationMissing {
+            get {
+                return ResourceManager.GetString("TrackedResourcePatchOperationMissing", resourceCulture);
             }
         }
         

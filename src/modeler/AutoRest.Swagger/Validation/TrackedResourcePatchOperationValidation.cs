@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Properties;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model.Utilities;
@@ -13,8 +14,6 @@ namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourcePatchOperationValidation : TypedRule<Dictionary<string, Schema>>
     {
-        private readonly Regex resNames = new Regex(@"(RESOURCE|TRACKEDRESOURCE)$", RegexOptions.IgnoreCase);
-
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -31,7 +30,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Tracked resource {0} must have patch operation that at least supports the update of tags.";
+        public override string MessageTemplate => Resources.TrackedResourcePatchOperationMissing;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -41,10 +40,12 @@ namespace AutoRest.Swagger.Validation
         // Verifies if a tracked resource has a corresponding patch operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", (ServiceDefinition)context.Root);
+            var servDef = (ServiceDefinition)context.Root;
+            IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", servDef);
+            var respDefinitions = servDef.Paths.Concat(servDef.CustomPaths).SelectMany(pathPair => pathPair.Value.Select(pathObj => pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())).Distinct();
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                if (resNames.IsMatch(definition.Key) || ValidationUtilities.IsTrackedResource(definition.Value, definitions))
+                if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
                     if(!patchOperations.Any(op => (op.Responses["200"].Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {
