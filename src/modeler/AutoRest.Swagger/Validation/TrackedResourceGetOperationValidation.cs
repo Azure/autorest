@@ -49,7 +49,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    if (!getOperations.Any(op => (op.Responses["200"].Schema?.Reference?.StripDefinitionPath()) == definition.Key))
+                    if (!getOperations.Any(op => (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {
                         // if no GET operation returns current tracked resource as a response, 
                         // the tracked resource does not have a corresponding get operation
