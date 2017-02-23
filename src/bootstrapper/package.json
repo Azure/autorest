@@ -1,22 +1,23 @@
 {
   "name": "autorest",
-  "version": "0.9.5",
+  "version": "0.9.7",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/autorest.git"
+    "url": "https://github.com/Azure/autorest"
   },
   "readme": "https://github.com/Azure/AutoRest/readme.md",
-  
   "keywords": [
-    "autorest", "rest", "swagger"
+    "autorest",
+    "rest",
+    "swagger"
   ],
   "author": "Microsoft Corporation",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Azure/autorest/issues"
   },
-  "homepage": "https://github.com/Azure/autorest/readme.md",
+  "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
   "main": "./app.js",
   "bin": {
     "autorest": "./app.js"
@@ -35,7 +36,6 @@
     "del": "^2.2.2",
     "typescript": "^2.1.5"
   },
-  
   "dependencies": {
     "linq-es2015": "^2.4.13",
     "request": "^2.79.0",

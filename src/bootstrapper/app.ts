@@ -27,7 +27,7 @@ class App {
   private static done: boolean = false;
 
   private static networkEnabled: boolean = true;
-  private static pkgVersion: string = "0.9.5";
+  private static pkgVersion: string = "0.9.7";
 
   private static currentVersion: string = null;
   private static frameworkVersion: string = null;
