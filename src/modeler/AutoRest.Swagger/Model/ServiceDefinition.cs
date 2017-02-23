@@ -107,6 +107,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(TrackedResourceValidation))]
         [Rule(typeof(TrackedResourcePatchOperationValidation))]
+        [Rule(typeof(TrackedResourceGetOperationValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]

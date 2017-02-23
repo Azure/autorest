@@ -360,6 +360,9 @@ Modelers:
   <data name="AllowedTopLevelProperties" xml:space="preserve">
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
   </data>
+  <data name="TrackedResourceGetOperationMissing" xml:space="preserve">
+    <value>Tracked resource {0} must have a get operation.</value>
+  </data>
   <data name="DeleteOperationNameNotValid" xml:space="preserve">
     <value>'DELETE' operation must use method name 'Delete'.</value>
   </data>
