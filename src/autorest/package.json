@@ -27,6 +27,7 @@
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
     "commonmark": "^0.27.0",
+    "get-uri": "^2.0.0",
     "jsonpath": "^0.2.11",
     "linq-es2015": "^2.4.13",
     "pify": "^2.3.0",

@@ -11,6 +11,7 @@
 
 import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
+import { homedir } from "os";
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -20,11 +21,18 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function main() {
-  let autorestExe = spawn("dotnet", [path.join(__dirname, "../../AutoRest.dll"), ...process.argv.slice(2)]);
-  autorestExe.stdout.pipe(process.stdout);
-  autorestExe.stderr.pipe(process.stderr);
-  let exitCode = await awaitable(autorestExe);
-  process.exit(exitCode);
+  try {
+    const autorestExe = spawn(
+      path.join(homedir(), ".autorest", "frameworks", "dotnet"),
+      [path.join(__dirname, "../../AutoRest.dll"), ...process.argv.slice(2)]);
+    autorestExe.stdout.pipe(process.stdout);
+    autorestExe.stderr.pipe(process.stderr);
+    const exitCode = await awaitable(autorestExe);
+    process.exit(exitCode);
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
 }
 
 main();

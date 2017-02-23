@@ -4,44 +4,24 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as commonmark from "commonmark";
-import * as fs from "fs";
 // import { From } from "linq-es2015";
-import * as path from "path";
-import * as promisify from "pify";
-import { SourceMapGenerator } from "source-map";
 import { Mappings, compile } from "../source-map/sourceMap";
 import { numberOfLines } from "./textUtility";
+import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
 
-interface fsAsync {
-  /*
-   * Asynchronous readFile - Asynchronously reads the entire contents of a file.
-   *
-   * @param fileName
-   * @param encoding
-   */
-  readFile(filename: string, encoding: string): Promise<string>;
-  /*
-   * Asynchronous readFile - Asynchronously reads the entire contents of a file.
-   *
-   * @param fileName
-   * @param options An object with optional {encoding} and {flag} properties.  If {encoding} is specified, readFile returns a string; otherwise it returns a Buffer.
-   */
-  readFile(filename: string, options: { encoding: string; flag?: string; }): Promise<string>;
-  /*
-   * Asynchronous readFile - Asynchronously reads the entire contents of a file.
-   *
-   * @param fileName
-   * @param options An object with optional {encoding} and {flag} properties.  If {encoding} is specified, readFile returns a string; otherwise it returns a Buffer.
-   */
-  readFile(filename: string, options: { flag?: string; }): Promise<Buffer>;
-  /*
-   * Asynchronous readFile - Asynchronously reads the entire contents of a file.
-   *
-   * @param fileName
-   */
-  readFile(filename: string): Promise<Buffer>;
+export async function parse(hConfigFile: DataHandleRead, intermediateHandles: (key: string) => Promise<DataHandleWrite>): Promise<DataHandleRead[]> {
+  const hsCodeBlock: DataHandleRead[] = [];
+  const rawMarkdown = await hConfigFile.readData();
+  for (const codeBlock of parseCodeblocks(rawMarkdown)) {
+    const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
+
+    const codeBlockKey = `${hConfigFile.key}_codeBlock_${codeBlock.sourcepos[0][0]}`;
+    const hwCodeBlock = await intermediateHandles(codeBlockKey);
+    const hCodeBlock = await hwCodeBlock.writeData(codeBlock.literal, mappings);
+    hsCodeBlock.push(hCodeBlock);
+  }
+  return hsCodeBlock;
 }
-var fsAsync: fsAsync = promisify(fs);
 
 function ast(node: commonmark.Node): any {
   if (node.type === "text") {
@@ -71,24 +51,6 @@ function ast(node: commonmark.Node): any {
   }
 
   return result;
-}
-
-export async function test() {
-  let parser = new commonmark.Parser();
-  let inputFile = "C:\\Users\\jobader\\Desktop\\asd\\md\\input.js";
-  let inputFileContent = await fsAsync.readFile(inputFile, "utf8");
-
-  for (let cb of parseCodeblocks(inputFileContent)) {
-    let content = cb.literal;
-    let mapping = getSourceMapForCodeBlock("input.js", cb);
-    let gen = new SourceMapGenerator({ file: `output${cb.sourcepos[0][0]}.js` });
-    compile(mapping, gen);
-
-    console.log();
-    console.log(`output${cb.sourcepos[0][0]}.js`);
-    console.log(content);
-    console.log(JSON.stringify(gen.toJSON(), null, 2));
-  }
 }
 
 export function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {

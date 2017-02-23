@@ -7,6 +7,7 @@ import * as jsonpath from "jsonpath";
 import * as yaml from "../parsing/yaml";
 import * as yamlast from "../parsing/yamlAst";
 import { Mappings } from "./sourceMap";
+import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)
 function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
@@ -78,16 +79,23 @@ export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlFil
   }
 }
 
-export function* sourceMappings(files: { [fileName: string]: string }): Mappings {
+export function* identitySourceMappings(files: { [fileName: string]: string }): Mappings {
   for (const fileName in files) {
     yield* identitySourceMapping(fileName, files[fileName]);
   }
 }
 
-export function mergeWithSourceMappings<T>(files: { [fileName: string]: string }): [T, Mappings] {
+export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
-  for (const fileName in files) {
-    resultObject = merge(resultObject, yaml.parse(files[fileName]));
+  const rawYamls: { [key: string]: string } = {};
+  for (const yamlInputHandle of yamlInputHandles) {
+    const rawYaml = await yamlInputHandle.readData();
+    resultObject = merge(resultObject, yaml.parse(rawYaml));
+    rawYamls[yamlInputHandle.key] = rawYaml;
   }
-  return [resultObject, sourceMappings(files)];
+
+  const resultObjectRaw = yaml.stringify(resultObject);
+  const mappings = identitySourceMappings(rawYamls);
+
+  return await yamlOutputHandle.writeData(resultObjectRaw, mappings, yamlInputHandles);
 }
