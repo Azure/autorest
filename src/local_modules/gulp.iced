@@ -74,7 +74,7 @@ configString = (s)->
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
   version: argv.version or cat "#{basefolder}/VERSION"
-  configuration: configString( argv.configuration) if argv.configuration else (if argv.release then 'Release' else 'Debug')
+  configuration: if argv.configuration then configString( argv.configuration)  else (if argv.release then 'Release' else 'Debug')
   github_apikey: argv.github_apikey or process.env.GITHUB_APIKEY or null
   nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
   myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
@@ -87,7 +87,7 @@ Import
   tmpfolder: process.env.tmp || "#{basefolder}/tmp"
   workdir: "#{global.tmpfolder}/gulp/#{guid()}"
 
-mkdir "#{tmpfolder}/gulp" if !test "-d", "#{tmpfolder}/gulp"
+mkdir "-p", "#{tmpfolder}/gulp" if !test "-d", "#{tmpfolder}/gulp"
 mkdir "-p", workdir if !test "-d", workdir
 
 ###############################################

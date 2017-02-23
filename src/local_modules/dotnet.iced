@@ -52,10 +52,10 @@ task 'sign-assemblies','', (done) ->
   Fail "signing requires --configuration release" if configuration isnt "release"
 
   unsigned  = "#{workdir}/unsigned"
-  mkdir unsigned 
+  mkdir "-p", unsigned 
 
   signed  = "#{workdir}/signed"
-  mkdir signed
+  mkdir "-p", signed
 
   assemblies() 
     # rename the files to flatten folder names out of the way.
