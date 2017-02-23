@@ -17,6 +17,11 @@ Import
   packages: "#{basefolder}/packages"
   release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
   package_name: if argv.nightly then "autorest-#{version}-#{today}-2300-nightly.zip" else if argv.preview then "autorest-#{version}-#{now}-preview.zip" else "autorest-#{version}.zip"
+  autorest: (args,done) ->
+    # Run AutoRest from the original current directory.
+    echo info "AutoRest #{args.join(' ')}"
+    execute "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true}, (code,stdout,stderr) ->
+      return done()
 
   # which projects to care about
   projects:() ->
@@ -79,7 +84,7 @@ Import
 
 task 'install-binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
-  source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**"
+  source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
     .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
 
 task 'install', 'build and install the dev version of autorest',(done)->
@@ -98,11 +103,7 @@ task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-autorest = (args,done) ->
-  # Run AutoRest from the original current directory.
-  echo info "AutoRest #{args.join(' ')}"
-  execute "dotnet #{basefolder}/src/core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true, cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done()
+
 
 if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
   echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"

@@ -76,7 +76,7 @@ task 'sign-assemblies','', (done) ->
           source "#{signed}/*"
             .pipe rename (path) -> 
               flattenDecode path 
-            .pipe destination "#{__dirname}/src"            
+            .pipe destination "#{basefolder}/src"            
             .on 'end', () => 
               # cleanup!
               rm '-rf', workdir

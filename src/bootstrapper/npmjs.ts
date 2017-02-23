@@ -10,7 +10,7 @@ async function Rest(url: string): Promise<any> {
   return new Promise<string>((resolve, reject) => {
     let stream = request.get(url, {
       strictSSL: true,
-      timeout: 5000,
+      timeout: 15000,
       headers: {
         'user-agent': 'autorest-installer',
       }
