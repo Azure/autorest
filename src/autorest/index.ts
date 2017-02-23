@@ -4,7 +4,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { test } from "./lib/parsing/literateYaml";
+//import { test } from "./lib/parsing/literateYaml";
+import { test } from "./lib/parsing/literate";
 
 // TODO
 test();

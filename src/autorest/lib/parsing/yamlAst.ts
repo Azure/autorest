@@ -6,10 +6,22 @@
 import * as jsonpath from "jsonpath";
 import * as sourceMap from "source-map";
 import * as yamlAst from "yaml-ast-parser";
-import { textIndexToPosition } from "./textUtility";
+import { indexToPosition } from "./textUtility";
 
 export function parse(rawYaml: string): yamlAst.YAMLNode {
   return yamlAst.safeLoad(rawYaml, null) as yamlAst.YAMLNode;
+}
+
+export function renameAnchors(yamlNode: yamlAst.YAMLNode, anchorNameMap: (anchorName: string) => string) {
+  for (const node of descendants(yamlNode)) {
+    if (node.anchorId !== undefined) {
+      node.anchorId = anchorNameMap(node.anchorId);
+    }
+    if (node.kind === yamlAst.Kind.ANCHOR_REF) {
+      const nodeAnchorRef = node as yamlAst.YAMLAnchorReference;
+      nodeAnchorRef.referencesAnchor = anchorNameMap(nodeAnchorRef.referencesAnchor);
+    }
+  }
 }
 
 export function* descendantPaths(yamlAstNode: yamlAst.YAMLNode, currentPath: jsonpath.PathComponent[] = ["$"]): Iterable<jsonpath.PathComponent[]> {
@@ -136,5 +148,5 @@ export function resolvePath(yaml: string, yamlAstRoot: yamlAst.YAMLNode, jsonPat
     jsonPath = jsonpath.parse(jsonPath).map(part => part.value);
   }
   let textIndex = resolvePathParts(yamlAstRoot, jsonPath);
-  return textIndexToPosition(yaml, textIndex);
+  return indexToPosition(yaml, textIndex);
 }

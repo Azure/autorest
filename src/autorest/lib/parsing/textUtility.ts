@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-function textLineStartIndices(text: string): number[] {
+export function lineIndices(text: string): number[] {
   let indices = [0];
 
   const regex = /\r?\n/g;
@@ -15,8 +15,12 @@ function textLineStartIndices(text: string): number[] {
   return indices;
 }
 
-export function textIndexToPosition(text: string, index: number): sourceMap.Position {
-  const startIndices = textLineStartIndices(text);
+export function numberOfLines(text: string): number {
+  return lineIndices(text).length;
+}
+
+export function indexToPosition(text: string, index: number): sourceMap.Position {
+  const startIndices = lineIndices(text);
   const lineIndex = startIndices.map(i => i <= index).lastIndexOf(true); // TODO: binary search?
 
   return {

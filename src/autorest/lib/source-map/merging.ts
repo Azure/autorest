@@ -8,7 +8,7 @@ import * as yaml from "../parsing/yaml";
 import * as yamlast from "../parsing/yamlAst";
 import { Mappings } from "./sourceMap";
 
-// TODO: may want ASTy merge! (keeping circular structure and such)
+// TODO: may want ASTy merge! (keeping circular structure and such?)
 function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
   if (a === null || b === null) {
     throw new Error("Argument cannot be null");
@@ -22,14 +22,15 @@ function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
   // mapping nodes
   if (typeof a === "object" && typeof b === "object") {
     if (a instanceof Array && b instanceof Array) {
-      // sequence nodes
-      const result = a.slice();
-      for (const belem of b) {
-        if (a.indexOf(belem) === -1) {
-          result.push(belem);
-        }
-      }
-      return result;
+      // // sequence nodes
+      // const result = a.slice();
+      // for (const belem of b) {
+      //     if (a.indexOf(belem) === -1) {
+      //         result.push(belem);
+      //     }
+      // }
+      // return result;
+      throw new Error("No support for mergin arrays"); // requires remapping source, so no more identitySourceMapping!
     }
     else {
       // object nodes - iterate all members
@@ -61,8 +62,8 @@ function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
   throw new Error(`'${jsonpath.stringify(path)}' has incomaptible values (${a}, ${b}).`);
 }
 
-export function merge<T, U>(a: T, b: U, path: jsonpath.PathComponent[] = ["$"]): T & U {
-  return mergeInternal(a, b, path);
+export function merge<T, U>(a: T, b: U): T & U {
+  return mergeInternal(a, b, ["$"]);
 }
 
 export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlFile: string): Mappings {
