@@ -224,6 +224,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void CollectionObjectsPropertiesNamingValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNamingValidation), 2);
+        }
+
+        [Fact]
         public void InvalidConstraintValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json"));
@@ -439,6 +446,16 @@ namespace AutoRest.Swagger.Tests
         public void CleanFileValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "clean-complex-spec.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void ValidCollectionObjectsPropertiesName()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "collection-objects-naming-valid.json"));
             Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
         }
 

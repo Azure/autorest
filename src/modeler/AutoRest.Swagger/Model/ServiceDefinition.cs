@@ -83,6 +83,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(UniqueResourcePaths))]
         [Rule(typeof(ListOperationNamingWarning))]
         [Rule(typeof(ListByOperationsValidation))]
+        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
         [Rule(typeof(ProvidersPathValidation))]
@@ -96,6 +97,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [JsonProperty("x-ms-paths")]
         [Rule(typeof(ListOperationNamingWarning))]
+        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
         [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
