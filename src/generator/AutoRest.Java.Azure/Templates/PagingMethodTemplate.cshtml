@@ -22,6 +22,9 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
+ * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
+ * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
@@ -53,6 +56,7 @@ public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodRequiredParamete
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
@@ -82,6 +86,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
@@ -115,6 +120,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
@@ -153,6 +159,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeJva.ClientResponseType} if successful.
@@ -226,6 +233,9 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
+ * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
+ * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
@@ -257,6 +267,7 @@ public @Model.ReturnTypeResponseName @(Model.Name)(@Model.MethodParameterDeclara
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
@@ -286,6 +297,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
@@ -319,6 +331,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterString> @(
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeResponseName.EscapeXmlComment() object
@@ -358,6 +371,7 @@ public Observable<@Model.ReturnTypeJva.ServiceResponseGenericParameterStringWrap
     @Model.ReturnTypeJva.GenericBodyWireTypeStringWrapped
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object wrapped in {@@link @Model.ReturnTypeJva.ClientResponseType} if successful.
