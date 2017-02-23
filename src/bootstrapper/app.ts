@@ -47,7 +47,7 @@ class App {
     if (this.networkEnabled) {
       return Npm.LatestRelease().then(npmversion => {
         if (semver.gt(npmversion, this.pkgVersion)) {
-          Console.Log(chalk.yellow.bold(`\nThere is a new version of AutoRest available (${npmversion}).\nInstall with 'npm -g install autorest'.\n`));
+          Console.Log(chalk.yellow.bold(`\nThere is a new version of AutoRest available (${npmversion}).\nInstall with 'npm install autorest -g '.\n`));
         }
       });
     }
