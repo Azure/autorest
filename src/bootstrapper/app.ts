@@ -14,7 +14,7 @@ import { Npm } from './npmjs';
 import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
-
+import * as fs from 'fs'
 
 class App {
   private static listAvailable: number = cli['-list-available'] ? (Number.isInteger(cli['-list-available']) ? cli['-list-available'] : 10) : 0;
@@ -27,7 +27,7 @@ class App {
   private static done: boolean = false;
 
   private static networkEnabled: boolean = true;
-  private static pkgVersion: string = "0.9.7";
+  private static pkgVersion: string = require(`${__dirname}/package.json`).version;
 
   private static currentVersion: string = null;
   private static frameworkVersion: string = null;
@@ -109,6 +109,8 @@ ${this.BuildInfo}
 
   static async main(networkEnabled: boolean) {
     try {
+
+
 
       // Remove triple-dash args from cmdline
       process.argv = From<string>(process.argv).Where(each => !each.startsWith('---')).ToArray();

@@ -65,12 +65,16 @@ global['argv'] = yargs.argv
 
 Include './common'
 
+configString = (s)->
+  "#{s.charAt 0 .toUpperCase()}#{s.slice 1 .toLowerCase() }"
+
+
 ###############################################
 # Global values
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
   version: argv.version or cat "#{basefolder}/VERSION"
-  configuration: argv.configuration or (if argv.release then 'release' else 'debug')
+  configuration: configString( argv.configuration) if argv.configuration else (if argv.release then 'Release' else 'Debug')
   github_apikey: argv.github_apikey or process.env.GITHUB_APIKEY or null
   nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
   myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
