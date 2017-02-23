@@ -152,7 +152,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} has has no property named &apos;value&apos;.
+        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} has no property named &apos;value&apos;.
         /// </summary>
         public static string CollectionObjectPropertiesNamingMessage {
             get {

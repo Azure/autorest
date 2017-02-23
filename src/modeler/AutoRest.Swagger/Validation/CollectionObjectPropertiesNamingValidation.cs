@@ -19,7 +19,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M3027";
+        public override string Id => "M3008";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -49,7 +49,7 @@ namespace AutoRest.Swagger.Validation
                 var collTypeDef = serviceDefinition.Definitions[collType];
                 // if collection object has 2 properties or less (x-ms-pageable objects can have the nextlink prop)
                 // and the object does not have a property named "value", show the warning
-                if ((collTypeDef.Properties?.Count <= 2) && collTypeDef.Properties.All(prop => !prop.Key.ToLower().Equals("value")))
+                if ((collTypeDef.Properties?.Count <= 2) && collTypeDef.Properties.All(prop => !(prop.Key.ToLower().Equals("value") && prop.Value.Type == DataType.Array)))
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, collType, opPair.Value.OperationId);
                 }
@@ -67,6 +67,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Fatal;
     }
 }

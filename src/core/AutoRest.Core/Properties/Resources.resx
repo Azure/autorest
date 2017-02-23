@@ -370,6 +370,6 @@ Modelers:
     <value>'PUT' operation must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
-    <value>Collection object {0} returned by list operation {1} has has no property named 'value'</value>
+    <value>Collection object {0} returned by list operation {1} has no property named 'value'</value>
   </data>
 </root>
