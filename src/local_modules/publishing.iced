@@ -26,7 +26,7 @@ task 'publish', 'Builds, signs, publishes autorest binaries to GitHub Release',(
     -> done()
 
 task 'publish/bootstrap', '', ['build/typescript'], (done) ->
-  execute "npm publish ", {cwd: "#{basefolder}/src/bootstrapper" }
+  execute "npm publish ", {cwd: "#{basefolder}/src/bootstrapper" }, done
 
 task 'upload:github','', ->
   Fail "needs --github_apikey=... or GITHUB_APIKEY set" if !github_apikey

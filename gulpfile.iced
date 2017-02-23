@@ -37,14 +37,14 @@ Import
     
   # assemblies that we sign
   assemblies: () -> 
-    source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**/AutoRest*"
+    source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**/AutoRest*"
       .pipe except /pdb$/i
       .pipe except /json$/i
       .pipe except /so$/i
       .pipe onlyFiles()
 
   packagefiles: () -> 
-    source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**"
+    source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
       .pipe except /pdb$/i
       .pipe onlyFiles()
   

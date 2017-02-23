@@ -190,6 +190,6 @@ module.exports.task 'code', 'launches vscode', ->
   exec "code #{basefolder}"
 
 module.exports.task 'release-only', '', (done)-> 
-  Fail( "This command requires --configuration release" ) if configuration isnt "release"
+  Fail( "This command requires --configuration release" ) if configuration isnt "Release"
   done()
  
