@@ -5,13 +5,19 @@ task 'build', 'typescript', (done)->
     .pipe foreach (each,next) -> 
       count++
       execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}", (code,stdout,stderr) ->
-        echo stdout.replace("src/","#{basefolder}/src/") 
+        echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0
           install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
 
       next null
     return null
+
+task 'fix-line-endings', 'typescript', ->
+  typescriptFiles()
+    .pipe eol {eolc: 'LF', encoding:'utf8'}
+    .pipe destination 'src'
+    #.pipe showFiles()
 
 Import
   install_package: (from,to,done)->
@@ -35,7 +41,7 @@ task 'clean' , 'typescript', (done)->
       rm each.path
       done null
 
-task 'install', 'typescript', (done)-> 
+task 'npm-install', 'typescript', (done)-> 
   count = 0
   typescriptProjects()
     .pipe foreach (each,next) -> 
@@ -47,5 +53,3 @@ task 'install', 'typescript', (done)->
       next null
 
     return null
-    
-

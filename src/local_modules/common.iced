@@ -1,15 +1,13 @@
-
 fs = require('fs')
 
 concurrency = 0 
 queue = []
 
-
 module.exports =
   # lets us just handle each item in a stream easily.
   foreach: (delegate) -> 
     through.obj ( each, enc, done ) -> 
-      delegate each, done
+      delegate each, done, this
 
   toArray: (result,passthru) => 
     foreach (each,done) => 
@@ -108,6 +106,7 @@ module.exports =
   exists: (path) ->
     return test '-f', path 
 
+
   newer: (first,second) ->
     f = fs.statSync(first).mtime
     s = fs.statSync(second).mtime
@@ -135,7 +134,7 @@ module.exports =
     echo ""
     echo "#{ error 'Task Failed:' }  #{error_message text}"
     echo ""
-    rm '-rf', "#{process.env.tmp}/gulp"
+    rm '-rf', "#{tmpfolder}/gulp"
     process.exit(1)
   
 
@@ -191,6 +190,6 @@ module.exports.task 'code', 'launches vscode', ->
   exec "code #{basefolder}"
 
 module.exports.task 'release-only', '', (done)-> 
-  Fail( "This command requires --configuration release" ) if configuration isnt "release"
+  Fail( "This command requires --configuration release" ) if configuration isnt "Release"
   done()
  

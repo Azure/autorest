@@ -23,6 +23,7 @@ Import
 # force-global a bunch of stuff.
 require 'shelljs/global'
 Install 'marked'
+Install 'vinyl'
 Install 'os'
 Install 'gulp'
 Install 'util'
@@ -30,6 +31,7 @@ Install 'moment'
 Install 'chalk'
 Install 'yargs'
 Install 'ghrelease', 'gulp-github-release'
+Install 'eol', 'gulp-line-ending-corrector'
 Install 'through', 'through2'
 Install 'run', 'run-sequence'
 Install 'except', './except.iced'
@@ -63,25 +65,30 @@ global['argv'] = yargs.argv
 
 Include './common'
 
+configString = (s)->
+  "#{s.charAt 0 .toUpperCase()}#{s.slice 1 .toLowerCase() }"
+
+
 ###############################################
 # Global values
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
   version: argv.version or cat "#{basefolder}/VERSION"
-  configuration: argv.configuration or (if argv.release then 'release' else 'debug')
+  configuration: if argv.configuration then configString( argv.configuration)  else (if argv.release then 'Release' else 'Debug')
   github_apikey: argv.github_apikey or process.env.GITHUB_APIKEY or null
   nuget_apikey: argv.nuget_apikey or process.env.NUGET_APIKEY or null
   myget_apikey: argv.myget_apikey or process.env.MYGET_APIKEY or null
   npm_apikey:  argv.npm_apikey or process.env.NPM_APIKEY or null
   today: moment().format('YYYYMMDD')
+  now: moment().format('YYYYMMDD-HHmm')
   force: argv.force or false
-  workdir: "#{process.env.tmp}/gulp/#{guid()}"
   threshold: argv.threshold or ((os.cpus().length)-1 )
   verbose: argv.verbose or null
-  
+  tmpfolder: process.env.tmp || "#{basefolder}/tmp"
+  workdir: "#{global.tmpfolder}/gulp/#{guid()}"
 
-mkdir "#{process.env.tmp}/gulp" if !test "-d", "#{process.env.tmp}/gulp"
-mkdir workdir if !test "-d", workdir
+mkdir "-p", "#{tmpfolder}/gulp" if !test "-d", "#{tmpfolder}/gulp"
+mkdir "-p", workdir if !test "-d", workdir
 
 ###############################################
 # UI stuff
@@ -126,9 +133,15 @@ task 'default','', ->
   *--force*          specify when you want to force an action (restore, etc)
   *--configuration*  'debug' or 'release'
   *--release*        same as --configuration=release
-  *--nightly*        generate label for package as 'nightly-YYYYMMDD'
+  *--nightly*        generate label for package as 'YYYYMMDD-0000-nightly'
+  *--preview*        generate label for package as 'YYYYMMDD-HHmm-preview'
   *--verbose*        enable verbose output
   *--threshold=nn*   set parallelism threshold (default = 10)
 
 #{switches}
 """
+
+task 'fix-line-endings', 'Fixes line endings to file-type appropriate values.', ->
+  source "**/*.iced"
+    .pipe eol {eolc: 'LF', encoding:'utf8'}
+    .pipe destination '.'
