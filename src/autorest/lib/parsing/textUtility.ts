@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export function lineIndices(text: string): number[] {
+function lineIndices(text: string): number[] {
   let indices = [0];
 
   const regex = /\r?\n/g;
@@ -13,10 +13,6 @@ export function lineIndices(text: string): number[] {
   }
 
   return indices;
-}
-
-export function numberOfLines(text: string): number {
-  return lineIndices(text).length;
 }
 
 export function indexToPosition(text: string, index: number): sourceMap.Position {

@@ -4,9 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as commonmark from "commonmark";
-// import { From } from "linq-es2015";
-import { Mappings, compile } from "../source-map/sourceMap";
-import { numberOfLines } from "./textUtility";
+import { Mappings } from "../source-map/sourceMap";
 import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
 
 export async function parse(hConfigFile: DataHandleRead, intermediateHandles: (key: string) => Promise<DataHandleWrite>): Promise<DataHandleRead[]> {
@@ -23,37 +21,7 @@ export async function parse(hConfigFile: DataHandleRead, intermediateHandles: (k
   return hsCodeBlock;
 }
 
-function ast(node: commonmark.Node): any {
-  if (node.type === "text") {
-    return node.literal;
-  }
-
-  let result: any = {};
-  // result.info = node.info;
-  // result.isContainer = node.isContainer;
-  if (node.level) {
-    result.level = node.level;
-  }
-  if (node.literal) {
-    result.literal = node.literal;
-  }
-  // result.sourcepos = node.sourcepos;
-  result.type = node.type;
-  result.children = [];
-
-  var child = node.firstChild;
-  while (child != null) {
-    result.children.push(ast(child));
-    child = child.next;
-  }
-  if (result.children.length === 0) {
-    delete result.children;
-  }
-
-  return result;
-}
-
-export function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
+function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
   const numLines = codeBlock.sourcepos[1][0] - codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 1 : -1);
   for (var i = 0; i < numLines; ++i) {
     yield {
@@ -71,7 +39,7 @@ export function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: com
   }
 }
 
-export function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
+function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
   const parser = new commonmark.Parser();
   const parsed = parser.parse(markdown);
   const walker = parsed.walker();

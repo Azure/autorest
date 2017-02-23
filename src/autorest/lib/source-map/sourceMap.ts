@@ -4,9 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as jsonpath from "jsonpath";
-import { resolvePath } from "../parsing/yamlAst";
+import * as yamlAst from "../parsing/yamlAst";
 import * as sourceMap from "source-map";
-import * as yamlAst from "yaml-ast-parser";
 
 /**
  * Also allow for object paths that will gladly be resolved by us.
@@ -33,7 +32,7 @@ export function compile(mappings: Mappings, target: sourceMap.SourceMapGenerator
         if (yaml === undefined) {
           throw new Error(`File '${fileName}' was not provided.`);
         }
-        yamlASTs[fileName] = yamlAst.safeLoad(yaml, null) as yamlAst.YAMLNode;
+        yamlASTs[fileName] = yamlAst.parse(yaml) as yamlAst.YAMLNode;
       }
       return yamlASTs[fileName];
     }
@@ -41,7 +40,7 @@ export function compile(mappings: Mappings, target: sourceMap.SourceMapGenerator
 
   const compilePosition = (position: Position, fileName: string) => {
     if ((position as any).path) {
-      return resolvePath(yamlFiles[fileName], getAST(fileName), (position as any).path);
+      return yamlAst.resolvePath(yamlFiles[fileName], getAST(fileName), (position as any).path);
     }
     return position as sourceMap.Position;
   };
