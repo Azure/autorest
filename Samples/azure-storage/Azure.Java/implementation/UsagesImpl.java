@@ -59,6 +59,9 @@ public class UsagesImpl implements Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Usage&gt; object if successful.
      */
     public List<Usage> list() {
@@ -69,6 +72,7 @@ public class UsagesImpl implements Usages {
      * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback) {
@@ -78,6 +82,7 @@ public class UsagesImpl implements Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Usage&gt; object
      */
     public Observable<List<Usage>> listAsync() {
@@ -92,6 +97,7 @@ public class UsagesImpl implements Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Usage&gt; object
      */
     public Observable<ServiceResponse<List<Usage>>> listWithServiceResponseAsync() {

@@ -10,9 +10,12 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.RestException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.http.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -23,6 +26,9 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     boolean getEmptyError();
@@ -31,6 +37,7 @@ public interface HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Boolean> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
@@ -38,6 +45,7 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<Boolean> getEmptyErrorAsync();
@@ -45,6 +53,7 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getEmptyErrorWithServiceResponseAsync();
@@ -52,6 +61,9 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     boolean getNoModelError();
@@ -60,6 +72,7 @@ public interface HttpFailures {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Boolean> getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback);
@@ -67,6 +80,7 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<Boolean> getNoModelErrorAsync();
@@ -74,6 +88,7 @@ public interface HttpFailures {
     /**
      * Get empty error form server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getNoModelErrorWithServiceResponseAsync();
@@ -81,6 +96,9 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     boolean getNoModelEmpty();
@@ -89,6 +107,7 @@ public interface HttpFailures {
      * Get empty response from server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Boolean> getNoModelEmptyAsync(final ServiceCallback<Boolean> serviceCallback);
@@ -96,6 +115,7 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<Boolean> getNoModelEmptyAsync();
@@ -103,6 +123,7 @@ public interface HttpFailures {
     /**
      * Get empty response from server.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> getNoModelEmptyWithServiceResponseAsync();

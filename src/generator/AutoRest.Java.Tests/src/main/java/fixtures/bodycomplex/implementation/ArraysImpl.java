@@ -80,6 +80,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getValid() {
@@ -90,6 +93,7 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ArrayWrapper> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
@@ -99,6 +103,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
     public Observable<ArrayWrapper> getValidAsync() {
@@ -113,6 +118,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
     public Observable<ServiceResponse<ArrayWrapper>> getValidWithServiceResponseAsync() {
@@ -141,6 +147,9 @@ public class ArraysImpl implements Arrays {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValid(ArrayWrapper complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -151,6 +160,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
@@ -161,6 +171,7 @@ public class ArraysImpl implements Arrays {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidAsync(ArrayWrapper complexBody) {
@@ -176,6 +187,7 @@ public class ArraysImpl implements Arrays {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ArrayWrapper complexBody) {
@@ -207,6 +219,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getEmpty() {
@@ -217,6 +232,7 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ArrayWrapper> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
@@ -226,6 +242,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
     public Observable<ArrayWrapper> getEmptyAsync() {
@@ -240,6 +257,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property which is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
     public Observable<ServiceResponse<ArrayWrapper>> getEmptyWithServiceResponseAsync() {
@@ -268,6 +286,9 @@ public class ArraysImpl implements Arrays {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putEmpty(ArrayWrapper complexBody) {
         putEmptyWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -278,6 +299,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
@@ -288,6 +310,7 @@ public class ArraysImpl implements Arrays {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putEmptyAsync(ArrayWrapper complexBody) {
@@ -303,6 +326,7 @@ public class ArraysImpl implements Arrays {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(ArrayWrapper complexBody) {
@@ -334,6 +358,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ArrayWrapper object if successful.
      */
     public ArrayWrapper getNotProvided() {
@@ -344,6 +371,7 @@ public class ArraysImpl implements Arrays {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ArrayWrapper> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
@@ -353,6 +381,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
     public Observable<ArrayWrapper> getNotProvidedAsync() {
@@ -367,6 +396,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ArrayWrapper object
      */
     public Observable<ServiceResponse<ArrayWrapper>> getNotProvidedWithServiceResponseAsync() {

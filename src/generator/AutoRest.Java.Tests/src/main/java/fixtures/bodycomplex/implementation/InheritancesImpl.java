@@ -68,6 +68,9 @@ public class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Siamese object if successful.
      */
     public Siamese getValid() {
@@ -78,6 +81,7 @@ public class InheritancesImpl implements Inheritances {
      * Get complex types that extend others.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Siamese> getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
@@ -87,6 +91,7 @@ public class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Siamese object
      */
     public Observable<Siamese> getValidAsync() {
@@ -101,6 +106,7 @@ public class InheritancesImpl implements Inheritances {
     /**
      * Get complex types that extend others.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Siamese object
      */
     public Observable<ServiceResponse<Siamese>> getValidWithServiceResponseAsync() {
@@ -129,6 +135,9 @@ public class InheritancesImpl implements Inheritances {
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValid(Siamese complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -139,6 +148,7 @@ public class InheritancesImpl implements Inheritances {
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putValidAsync(Siamese complexBody, final ServiceCallback<Void> serviceCallback) {
@@ -149,6 +159,7 @@ public class InheritancesImpl implements Inheritances {
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidAsync(Siamese complexBody) {
@@ -164,6 +175,7 @@ public class InheritancesImpl implements Inheritances {
      * Put complex types that extend others.
      *
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Siamese complexBody) {

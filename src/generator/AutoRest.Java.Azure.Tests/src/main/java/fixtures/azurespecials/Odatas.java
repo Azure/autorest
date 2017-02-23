@@ -13,6 +13,8 @@ package fixtures.azurespecials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.azurespecials.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -23,6 +25,9 @@ public interface Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getWithFilter();
 
@@ -30,6 +35,7 @@ public interface Odatas {
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getWithFilterAsync(final ServiceCallback<Void> serviceCallback);
@@ -37,6 +43,7 @@ public interface Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getWithFilterAsync();
@@ -44,6 +51,7 @@ public interface Odatas {
     /**
      * Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync();
@@ -53,6 +61,9 @@ public interface Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getWithFilter(String filter, Integer top, String orderby);
 
@@ -63,6 +74,7 @@ public interface Odatas {
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getWithFilterAsync(String filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback);
@@ -73,6 +85,7 @@ public interface Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getWithFilterAsync(String filter, Integer top, String orderby);
@@ -83,6 +96,7 @@ public interface Odatas {
      * @param filter The filter parameter with value '$filter=id gt 5 and name eq 'foo''.
      * @param top The top parameter with value 10.
      * @param orderby The orderby parameter with value id.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getWithFilterWithServiceResponseAsync(String filter, Integer top, String orderby);

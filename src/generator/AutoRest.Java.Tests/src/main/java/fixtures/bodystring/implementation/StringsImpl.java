@@ -111,6 +111,9 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String getNull() {
@@ -121,6 +124,7 @@ public class StringsImpl implements Strings {
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getNullAsync(final ServiceCallback<String> serviceCallback) {
@@ -130,6 +134,7 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> getNullAsync() {
@@ -144,6 +149,7 @@ public class StringsImpl implements Strings {
     /**
      * Get null string value value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getNullWithServiceResponseAsync() {
@@ -171,6 +177,9 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putNull() {
         putNullWithServiceResponseAsync().toBlocking().single().body();
@@ -180,6 +189,7 @@ public class StringsImpl implements Strings {
      * Set string value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putNullAsync(final ServiceCallback<Void> serviceCallback) {
@@ -189,6 +199,7 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putNullAsync() {
@@ -203,6 +214,7 @@ public class StringsImpl implements Strings {
     /**
      * Set string value null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync() {
@@ -225,6 +237,9 @@ public class StringsImpl implements Strings {
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putNull(String stringBody) {
         putNullWithServiceResponseAsync(stringBody).toBlocking().single().body();
@@ -235,6 +250,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
@@ -245,6 +261,7 @@ public class StringsImpl implements Strings {
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putNullAsync(String stringBody) {
@@ -260,6 +277,7 @@ public class StringsImpl implements Strings {
      * Set string value null.
      *
      * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putNullWithServiceResponseAsync(String stringBody) {
@@ -287,6 +305,9 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String getEmpty() {
@@ -297,6 +318,7 @@ public class StringsImpl implements Strings {
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
@@ -306,6 +328,7 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> getEmptyAsync() {
@@ -320,6 +343,7 @@ public class StringsImpl implements Strings {
     /**
      * Get empty string value value ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getEmptyWithServiceResponseAsync() {
@@ -348,6 +372,9 @@ public class StringsImpl implements Strings {
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putEmpty(String stringBody) {
         putEmptyWithServiceResponseAsync(stringBody).toBlocking().single().body();
@@ -358,6 +385,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: ''
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
@@ -368,6 +396,7 @@ public class StringsImpl implements Strings {
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putEmptyAsync(String stringBody) {
@@ -383,6 +412,7 @@ public class StringsImpl implements Strings {
      * Set string value empty ''.
      *
      * @param stringBody Possible values include: ''
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(String stringBody) {
@@ -413,6 +443,9 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String getMbcs() {
@@ -423,6 +456,7 @@ public class StringsImpl implements Strings {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
@@ -432,6 +466,7 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> getMbcsAsync() {
@@ -446,6 +481,7 @@ public class StringsImpl implements Strings {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getMbcsWithServiceResponseAsync() {
@@ -474,6 +510,9 @@ public class StringsImpl implements Strings {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMbcs(String stringBody) {
         putMbcsWithServiceResponseAsync(stringBody).toBlocking().single().body();
@@ -484,6 +523,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
@@ -494,6 +534,7 @@ public class StringsImpl implements Strings {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMbcsAsync(String stringBody) {
@@ -509,6 +550,7 @@ public class StringsImpl implements Strings {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putMbcsWithServiceResponseAsync(String stringBody) {
@@ -539,6 +581,9 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String getWhitespace() {
@@ -549,6 +594,7 @@ public class StringsImpl implements Strings {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
@@ -558,6 +604,7 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> getWhitespaceAsync() {
@@ -572,6 +619,7 @@ public class StringsImpl implements Strings {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getWhitespaceWithServiceResponseAsync() {
@@ -600,6 +648,9 @@ public class StringsImpl implements Strings {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putWhitespace(String stringBody) {
         putWhitespaceWithServiceResponseAsync(stringBody).toBlocking().single().body();
@@ -610,6 +661,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
@@ -620,6 +672,7 @@ public class StringsImpl implements Strings {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putWhitespaceAsync(String stringBody) {
@@ -635,6 +688,7 @@ public class StringsImpl implements Strings {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values include: '    Now is the time for all good men to come to the aid of their country    '
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putWhitespaceWithServiceResponseAsync(String stringBody) {
@@ -665,6 +719,9 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String getNotProvided() {
@@ -675,6 +732,7 @@ public class StringsImpl implements Strings {
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<String> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
@@ -684,6 +742,7 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> getNotProvidedAsync() {
@@ -698,6 +757,7 @@ public class StringsImpl implements Strings {
     /**
      * Get String value when no string value is sent in response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> getNotProvidedWithServiceResponseAsync() {
@@ -725,6 +785,9 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the byte[] object if successful.
      */
     public byte[] getBase64Encoded() {
@@ -735,6 +798,7 @@ public class StringsImpl implements Strings {
      * Get value that is base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<byte[]> getBase64EncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
@@ -744,6 +808,7 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
     public Observable<byte[]> getBase64EncodedAsync() {
@@ -758,6 +823,7 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64 encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getBase64EncodedWithServiceResponseAsync() {
@@ -790,6 +856,9 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the byte[] object if successful.
      */
     public byte[] getBase64UrlEncoded() {
@@ -800,6 +869,7 @@ public class StringsImpl implements Strings {
      * Get value that is base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<byte[]> getBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
@@ -809,6 +879,7 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
     public Observable<byte[]> getBase64UrlEncodedAsync() {
@@ -823,6 +894,7 @@ public class StringsImpl implements Strings {
     /**
      * Get value that is base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getBase64UrlEncodedWithServiceResponseAsync() {
@@ -856,6 +928,9 @@ public class StringsImpl implements Strings {
      * Put value that is base64url encoded.
      *
      * @param stringBody the Base64Url value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBase64UrlEncoded(byte[] stringBody) {
         putBase64UrlEncodedWithServiceResponseAsync(stringBody).toBlocking().single().body();
@@ -866,6 +941,7 @@ public class StringsImpl implements Strings {
      *
      * @param stringBody the Base64Url value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBase64UrlEncodedAsync(byte[] stringBody, final ServiceCallback<Void> serviceCallback) {
@@ -876,6 +952,7 @@ public class StringsImpl implements Strings {
      * Put value that is base64url encoded.
      *
      * @param stringBody the Base64Url value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putBase64UrlEncodedAsync(byte[] stringBody) {
@@ -891,6 +968,7 @@ public class StringsImpl implements Strings {
      * Put value that is base64url encoded.
      *
      * @param stringBody the Base64Url value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putBase64UrlEncodedWithServiceResponseAsync(byte[] stringBody) {
@@ -922,6 +1000,9 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the byte[] object if successful.
      */
     public byte[] getNullBase64UrlEncoded() {
@@ -932,6 +1013,7 @@ public class StringsImpl implements Strings {
      * Get null value that is expected to be base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<byte[]> getNullBase64UrlEncodedAsync(final ServiceCallback<byte[]> serviceCallback) {
@@ -941,6 +1023,7 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
     public Observable<byte[]> getNullBase64UrlEncodedAsync() {
@@ -955,6 +1038,7 @@ public class StringsImpl implements Strings {
     /**
      * Get null value that is expected to be base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the byte[] object
      */
     public Observable<ServiceResponse<byte[]>> getNullBase64UrlEncodedWithServiceResponseAsync() {
