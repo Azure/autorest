@@ -93,6 +93,9 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install-binaries',
     -> done()
 
+task 'bootstrap', '', ['build/typescript'],(done)->
+  require "#{basefolder}/src/bootstrapper/app.js"
+
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->

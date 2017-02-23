@@ -17,9 +17,9 @@ marked.setOptions({
 })
 
 export class Console {
-  private static quiet: boolean = cli['-quiet'];
-  private static debug: boolean = cli['-debug'];
-  private static verbose: boolean = cli['-verbose'];
+  private static quiet: boolean = cli.quiet;
+  private static debug: boolean = cli.debug;
+  private static verbose: boolean = cli.verbose;
 
   public static Log(text: any) {
     if (!this.quiet) {
