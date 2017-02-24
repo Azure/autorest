@@ -9,6 +9,7 @@
 
 // this file should get 'required' by the boostrapper
 
+import fileUrl = require("file-url");
 import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 import { homedir } from "os";

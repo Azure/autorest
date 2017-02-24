@@ -11,6 +11,9 @@ import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { Mappings, compile } from "../source-map/sourceMap";
 import { parse } from "../parsing/yaml";
 
+export module KnownScopes {
+  export const Input = "input";
+}
 
 /********************************************
  * Data model section (not exposed)
@@ -32,29 +35,33 @@ type Store = { [key: string]: Data };
  * - ensures WRITE ONCE model
  ********************************************/
 
-abstract class DataViewReadonly {
+export abstract class DataStoreViewReadonly {
   abstract read(key: string): Promise<DataHandleRead | null>;
   abstract enum(): Promise<Iterable<string>>;
 }
 
-abstract class DataView extends DataViewReadonly {
+export abstract class DataStoreView extends DataStoreViewReadonly {
   abstract write(key: string): Promise<DataHandleWrite>;
 
-  public createScope(name: string): DataView {
-    return new DataViewScope(name, this);
+  public createScope(name: string): DataStoreView {
+    return new DataStoreViewScope(name, this);
   }
 
-  public createReadThroughScope(name: string, customUriFilter?: (uri: string) => boolean): DataViewReadonly {
-    return new DataViewReadThrough(this.createScope(name), customUriFilter);
+  public createFileScope(name: string): DataStoreFileView {
+    return new DataStoreFileView(new DataStoreViewScope(name, this));
   }
 
-  public asReadonly(): DataViewReadonly {
+  public createReadThroughScope(name: string, customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
+    return new DataStoreViewReadThrough(this.createFileScope(name), customUriFilter);
+  }
+
+  public asReadonly(): DataStoreViewReadonly {
     return this;
   }
 }
 
-class DataViewScope extends DataView {
-  constructor(private name: string, private slave: DataView) {
+class DataStoreViewScope extends DataStoreView {
+  constructor(private name: string, private slave: DataStoreView) {
     super();
   }
 
@@ -78,7 +85,36 @@ class DataViewScope extends DataView {
   }
 }
 
-class DataViewReadThrough extends DataViewReadonly {
+class DataStoreViewReadThrough extends DataStoreViewReadonly {
+  constructor(private slave: DataStoreFileView, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+    super();
+  }
+
+  public async read(uri: string): Promise<DataHandleRead> {
+    // prope cache
+    const existingData = await this.slave.read(uri);
+    if (existingData !== null) {
+      return existingData;
+    }
+
+    // validation before hitting the file system or web
+    if (!this.customUriFilter(uri)) {
+      throw `Provided URI '${uri}' violated the filter`;
+    }
+
+    // populate cache
+    const data = await readUri(uri);
+    const writeHandle = await this.slave.write(uri);
+    const readHandle = await writeHandle.writeData(data);
+    return readHandle;
+  }
+
+  public async enum(): Promise<Iterable<string>> {
+    return this.slave.enum();
+  }
+}
+
+class DataStoreFileView extends DataStoreView {
   private static isUri(uri: string): boolean {
     return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
   }
@@ -91,41 +127,35 @@ class DataViewReadThrough extends DataViewReadonly {
     return decodeURIComponent(encodedUri);
   }
 
-  constructor(private slave: DataView, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+  constructor(private slave: DataStoreView) {
     super();
   }
 
-  public async read(uri: string): Promise<DataHandleRead> {
-    // validation
-    if (!DataViewReadThrough.isUri(uri)) {
+  public async read(uri: string): Promise<DataHandleRead | null> {
+    if (!DataStoreFileView.isUri(uri)) {
       throw `Provided URI '${uri}' is invalid`;
     }
-    if (!this.customUriFilter(uri)) {
-      throw `Provided URI '${uri}' violated the filter`;
+
+    const key = DataStoreFileView.encodeUri(uri);
+    return await this.slave.read(key);
+  }
+
+  public async write(uri: string): Promise<DataHandleWrite> {
+    if (!DataStoreFileView.isUri(uri)) {
+      throw `Provided URI '${uri}' is invalid`;
     }
 
-    const key = DataViewReadThrough.encodeUri(uri);
-
-    // prope cache
-    const existingData = await this.slave.read(key);
-    if (existingData !== null) {
-      return existingData;
-    }
-
-    // populate cache
-    const data = await readUri(uri);
-    const writeHandle = await this.slave.write(key);
-    const readHandle = await writeHandle.writeData(data);
-    return readHandle;
+    const key = DataStoreFileView.encodeUri(uri);
+    return await this.slave.write(key);
   }
 
   public async enum(): Promise<Iterable<string>> {
     const slaveResult = await this.slave.enum();
-    return From(slaveResult).Select(DataViewReadThrough.decodeUri);
+    return From(slaveResult).Select(DataStoreFileView.decodeUri);
   }
 }
 
-export class DataStore extends DataView {
+export class DataStore extends DataStoreView {
   private store: Store = {};
 
   private validate(key: string): void {
