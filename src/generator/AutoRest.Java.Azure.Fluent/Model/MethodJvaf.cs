@@ -18,42 +18,45 @@ namespace AutoRest.Java.Azure.Fluent.Model
     {
         public override void Disambiguate()
         {
-            if (this.HttpMethod == HttpMethod.Get)
+            if (string.IsNullOrWhiteSpace(this.MethodGroup.Name))
             {
-                var url = this.Url.Value;
-                var urlSplits = url.Split('/');
-                if (urlSplits.Count() == 6 || urlSplits.Count() == 8)
+                base.Disambiguate();
+
+                return;
+            }
+
+            var methodType = GetMethodType(this);
+            var originalName = Name;
+            string newName = null;
+
+            if (methodType == MethodType.ListBySubscription)
+            {
+                var otherListBySubMethods = this.MethodGroup.Methods.Where(x => GetMethodType(x as MethodJvaf) == MethodType.ListBySubscription);
+                if (otherListBySubMethods.Count() == 1)
                 {
-                    var originalName = Name;
-                    string newName = null;
-                    if (urlSplits.Count() == 6 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions"))
-                    {
-                        if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "providers"))
-                        {
-                            newName = "List";
-                        }
-                        else
-                        {
-                            newName = "ListByResourceGroup";
-                        }
-                    }
-                    else if (urlSplits.Count() == 8 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions")
-                        && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "resourceGroups"))
-                    {
-                        newName = "ListByResourceGroup";
-                    }
-                    if (!string.IsNullOrWhiteSpace(newName))
-                    {
-                        this.SimulateAsPagingOperation = true;
-                        var name = CodeNamer.Instance.GetUnique(newName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
-                        if (name != originalName)
-                        {
-                            Name = name;
-                        }
-                        return;
-                    }
+                    newName = "List";
                 }
             }
+            if (methodType == MethodType.ListByResourceGroup)
+            {
+                var otherListByResourceGroupMethods = this.MethodGroup.Methods.Where(x => GetMethodType(x as MethodJvaf) == MethodType.ListByResourceGroup);
+                if (otherListByResourceGroupMethods.Count() == 1)
+                {
+                    newName = "ListByResourceGroup";
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(newName))
+            {
+                this.SimulateAsPagingOperation = true;
+                var name = CodeNamer.Instance.GetUnique(newName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+                if (name != originalName)
+                {
+                    Name = name;
+                }
+                return;
+            }
+
             base.Disambiguate();
         }
 
@@ -189,6 +192,42 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 return imports;
             }
+        }
+
+        private enum MethodType
+        {
+            Other,
+            ListBySubscription,
+            ListByResourceGroup
+        }
+
+        private static MethodType GetMethodType(MethodJvaf method)
+        {
+            if (method.HttpMethod == HttpMethod.Get)
+            {
+                var url = method.Url.Value;
+                var urlSplits = url.Split('/');
+                if ((urlSplits.Count() == 6 || urlSplits.Count() == 8) && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions"))
+                {
+                    if (urlSplits.Count() == 6)
+                    {
+                        if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "providers"))
+                        {
+                            return MethodType.ListBySubscription;
+                        }
+                        else
+                        {
+                            return MethodType.ListByResourceGroup;
+                        }
+                    }
+                    else if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "resourceGroups"))
+                    {
+                        return MethodType.ListByResourceGroup;
+                    }
+                }
+            }
+
+            return MethodType.Other;
         }
     }
 }
