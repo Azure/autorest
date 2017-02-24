@@ -89,6 +89,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Properties bag [{0}] should not be repeated for ARM top level properties.
+        /// </summary>
+        public static string ArmPropertiesBagValidationMessage {
+            get {
+                return ResourceManager.GetString("ArmPropertiesBagValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
         public static string AutoRestCore {
