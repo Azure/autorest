@@ -12,6 +12,16 @@ namespace AutoRest.Swagger.Validation
     public class ValidFormats : TypedRule<string>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2003";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// An <paramref name="entity" /> fails this rule if it has a format that we can't handle
         /// </summary>
         /// <param name="entity"></param>
@@ -42,6 +52,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         ///     The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
     }
 }

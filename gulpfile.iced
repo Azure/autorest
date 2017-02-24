@@ -37,14 +37,14 @@ Import
     
   # assemblies that we sign
   assemblies: () -> 
-    source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**/AutoRest*"
+    source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**/AutoRest*"
       .pipe except /pdb$/i
       .pipe except /json$/i
       .pipe except /so$/i
       .pipe onlyFiles()
 
   packagefiles: () -> 
-    source "src/core/AutoRest/bin/Release/netcoreapp1.0/publish/**"
+    source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
       .pipe except /pdb$/i
       .pipe onlyFiles()
   
@@ -93,6 +93,9 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install-binaries',
     -> done()
 
+task 'bootstrap', '', ['build/typescript'],(done)->
+  require "#{basefolder}/src/bootstrapper/app.js"
+
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
@@ -102,8 +105,6 @@ task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
   args = process.argv.slice(3)
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
-
-
 
 if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
   echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"

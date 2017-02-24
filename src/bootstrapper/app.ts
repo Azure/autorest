@@ -14,20 +14,20 @@ import { Npm } from './npmjs';
 import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
-
+import * as fs from 'fs'
 
 class App {
-  private static listAvailable: number = cli['-list-available'] ? (Number.isInteger(cli['-list-available']) ? cli['-list-available'] : 10) : 0;
-  private static listInstalled: number = cli['-list-installed'] ? (Number.isInteger(cli['-list-installed']) ? cli['-list-installed'] : 10) : 0;
+  private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;
+  private static listInstalled: number = cli['list-installed'] ? (Number.isInteger(cli['list-installed']) ? cli['list-installed'] : 10) : 0;
 
-  private static version: string = cli['-version'];
-  private static reset: boolean = cli["-reset"] || false;
+  private static version: string = cli.version || cli.latest ? 'latest' : cli['latest-release'] ? 'latest-release' : null;
+  private static reset: boolean = cli.reset || false;
 
-  private static help: string = cli['-help'] || cli.help || cli.h || false;
+  private static help: string = cli.help || cli.h || false;
   private static done: boolean = false;
 
   private static networkEnabled: boolean = true;
-  private static pkgVersion: string = "0.9.7";
+  private static pkgVersion: string = require(`${__dirname}/package.json`).version;
 
   private static currentVersion: string = null;
   private static frameworkVersion: string = null;
@@ -35,8 +35,8 @@ class App {
   private static get BuildInfo(): string {
     return `> __Build Information__
 > Bootstrapper :        __${this.pkgVersion}__
-> NetCore framework :   __${this.frameworkVersion || "<none>"}__
-> AutoRest core :       __${this.currentVersion || "<none>"}__`;
+> NetCore framework :   __${this.frameworkVersion || '<none>'}__
+> AutoRest core :       __${this.currentVersion || '<none>'}__`;
   }
 
   private static async GetReleases(): Promise<IEnumerable<Release>> {
@@ -54,27 +54,26 @@ class App {
   }
 
   private static ShowHelp() {
-    Console.Log(`# AutoRest 
-${this.BuildInfo}
+    Console.Log(`${this.BuildInfo}
 
 ## __Output Verbosity__
-  *---verbose*            show verbose output information
-  *---debug*              show internal debug information
-  *---quiet*              suppress output
+  *--verbose*            show verbose output information
+  *--debug*              show internal debug information
+  *--quiet*              suppress output
 
 ## __Versions__
-  *---list-installed*     show all installed versions of AutoRest tools
-  *---list-available=__nn__*  lists the last nn releases available from github
+  *--list-installed*     show all installed versions of AutoRest tools
+  *--list-available=__nn__*  lists the last nn releases available from github
                         (defaults to 10)
 
 ## __Installation__
-  *---version=__version__*    uses __version__ of AutoRest, installing if necessary.
+  *--version=*__version__    uses __version__ of AutoRest, installing if necessary.
                         for __version__ you can  
-                        use a version label (see *---list-available*) or
+                        use a version label (see *--list-available*) or
                           __latest__         - get latest nightly build
                           __latest-release__ - get latest release version
-  *---reset*              remove all installed versions of AutoRest tools
-                        and install the latest (override with *---version*)
+  *--reset*              remove all installed versions of AutoRest tools
+                        and install the latest (override with *--version*)
                         
 
 ## __Using AutoRest__`);
@@ -90,7 +89,7 @@ ${this.BuildInfo}
       Console.Log(text);
       this.done = true;
     } else {
-      Console.Exit("**Unable to check online, network is not available**")
+      Console.Exit('**Unable to check online, network is not available**');
     }
   }
 
@@ -102,22 +101,18 @@ ${this.BuildInfo}
       }
       Console.Log(text);
     } else {
-      Console.Log("**No AutoRest versions are installed**");
+      Console.Log('**No AutoRest versions are installed**');
     }
     this.done = true;
   }
 
   static async main(networkEnabled: boolean) {
     try {
-
-      // Remove triple-dash args from cmdline
-      process.argv = From<string>(process.argv).Where(each => !each.startsWith('---')).ToArray();
-
-
       this.networkEnabled = networkEnabled;
       Console.Debug(`Network Enabled: ${this.networkEnabled}`);
 
-
+      // Remove bootstrapper args from cmdline
+      process.argv = From<string>(process.argv).Where(each => From<string>(["version", "list-installed", "list-available", "reset", "help"]).Any(i => each == `--${i}`)).ToArray();
 
       if (this.reset) {
         rm('-rf', Installer.RootFolder);
@@ -136,7 +131,7 @@ ${this.BuildInfo}
         this.ShowHelp();
         // remove other arguments and send -help o 
         process.argv.length = 2;
-        process.argv.push("--help");
+        process.argv.push('--help');
       }
 
       if (this.listAvailable || this.listInstalled) {
@@ -176,10 +171,10 @@ ${this.BuildInfo}
           let releases = await this.GetReleases();
 
           if (this.version == 'latest-release') {
-            Console.Verbose("Requested 'latest-release' version");
+            Console.Verbose('Requested "latest-release" version');
             releases = releases.Where(each => each.prerelease == false);
           } else {
-            Console.Verbose("Requested 'latest' available version");
+            Console.Verbose('Requested "latest" available version');
           }
 
           // the desired version is the latest one in the set.
@@ -192,7 +187,7 @@ ${this.BuildInfo}
       } else {
         // no network, fall back to the latest installed version
         if (this.currentVersion == null) {
-          Console.Exit("No network access, and no currently installed versions of AutoRest.")
+          Console.Exit('No network access, and no currently installed versions of AutoRest.');
         }
         this.version = this.currentVersion;
 
@@ -242,9 +237,9 @@ ${this.BuildInfo}
       // call autorest-app in the target folder
       if (process.argv.length > 2) {
         Console.Debug(process.argv);
-        require(join(Installer.AutorestFolder, this.version, "node_modules", "autorest-app", "app.js"));
+        require(join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-app', 'app.js'));
       } else {
-        Console.Log("Use ---help to get help information.")
+        Console.Log('Use --help to get help information.');
       }
     } catch (exception) {
       Console.Log(exception);
@@ -253,5 +248,5 @@ ${this.BuildInfo}
 }
 // quickly check for network connectivity, and then jump to main.
 dns.lookup('8.8.8.8', 4, (err, address, family) => {
-  App.main(err == null)
+  App.main(err == null);
 });

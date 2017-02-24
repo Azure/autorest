@@ -17,6 +17,16 @@ namespace AutoRest.Swagger.Validation
         private static readonly string extensionToCheck = "x-ms-client-name";
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2013";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -27,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// Validates if the name of property and x-ms-client-name(if exists) does not match.

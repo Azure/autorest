@@ -15,6 +15,16 @@ namespace AutoRest.Swagger.Validation
     public class BooleanPropertyNotRecommended : TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3018";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>

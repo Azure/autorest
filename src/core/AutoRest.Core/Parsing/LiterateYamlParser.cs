@@ -22,7 +22,7 @@ namespace AutoRest.Core.Parsing
             public string Fence { get; set; }
             public string InfoString { get; set; }
         }
-            // search code blocks
+        // search code blocks
         private static CodeFence TryParseCodeFence(string line)
         {
             line = line.Trim();
@@ -53,11 +53,11 @@ namespace AutoRest.Core.Parsing
             }
 
             return Regex.Replace(s, @"\$\{(?<varname>[^}]*)\}", match => variableEvaluator(match.Groups["varname"].Value));
-            }
+        }
 
         public static string Parse(string markdown, Func<string, string> variableEvaluator = null, bool requireCodeBlocks = true)
         {
-            var lines = markdown.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
+            var lines = markdown.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
             // parse and merge code blocks into single syntax tree
             var mergedYaml = new YamlMappingNode();
@@ -71,18 +71,18 @@ namespace AutoRest.Core.Parsing
                 if (fenceOpen != null)
                 {
                     foundCodeBlock = true;
-                var codeBlock = new StringBuilder();
+                    var codeBlock = new StringBuilder();
 
                     // parse code block
                     i++;
-                    while (i < lines.Length && 
+                    while (i < lines.Length &&
                         ((fenceClose = TryParseCodeFence(lines[i])) == null || !IsCodeFencePair(fenceOpen, fenceClose)))
-                {
+                    {
                         codeBlock.AppendLine(lines[i]);
                         i++;
-                }
+                    }
 
-                // deserialize and merge
+                    // deserialize and merge
                     var guard = Regex.Match(fenceOpen.InfoString.ResolveVariables(variableEvaluator), @"enabled=(?<guard>\S+)").Groups["guard"]; // TODO: logical ops?
                     var active = !guard.Success || guard.Value == "true"; // TODO: that all? TRUE? 1? wat?
 
@@ -90,12 +90,12 @@ namespace AutoRest.Core.Parsing
                     {
                         // deserialize and merge
                         var codeBlockYaml = codeBlock.ToString().ResolveVariables(variableEvaluator).ParseYaml() as YamlMappingNode;
-                if (codeBlockYaml == null)
-                {
-                    throw new FormatException("A given code block was not a valid YAML object.");
-                }
-                mergedYaml = mergedYaml.MergeWith(codeBlockYaml);
-            }
+                        if (codeBlockYaml == null)
+                        {
+                            throw new FormatException("A given code block was not a valid YAML object.");
+                        }
+                        mergedYaml = mergedYaml.MergeWith(codeBlockYaml);
+                    }
                 }
             }
 

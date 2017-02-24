@@ -342,8 +342,8 @@ Modelers:
   <data name="GuidUsageNotRecommended" xml:space="preserve">
     <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
-  <data name="OperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation must use method name 'Get' or Method name start with 'List', 'PUT' operation must use method name 'Create', 'PATCH' operation must use method name 'Update' and 'DELETE' operation must use method name 'Delete'.</value>
+  <data name="GetOperationNameNotValid" xml:space="preserve">
+    <value>'GET' operation must use method name 'Get' or Method name start with 'List'</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
@@ -359,5 +359,23 @@ Modelers:
   </data>
   <data name="AllowedTopLevelProperties" xml:space="preserve">
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
+  </data>
+  <data name="TrackedResourceGetOperationMissing" xml:space="preserve">
+    <value>Tracked resource '{0}' must have a get operation.</value>
+  </data>
+  <data name="DeleteOperationNameNotValid" xml:space="preserve">
+    <value>'DELETE' operation must use method name 'Delete'.</value>
+  </data>
+  <data name="PatchOperationNameNotValid" xml:space="preserve">
+    <value>'PATCH' operation must use method name 'Update'.</value>
+  </data>
+  <data name="PutOperationNameNotValid" xml:space="preserve">
+    <value>'PUT' operation must use method name 'Create'.</value>
+  </data>
+  <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
+    <value>Collection object {0} returned by list operation {1} has no property named 'value'.</value>
+  </data>
+  <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
+    <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
   </data>
 </root>

@@ -64,7 +64,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = CompareSwagger("version_check_01.json").ToArray();
             Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
-            Assert.Empty(messages.Where(m => m.Severity >= Category.Error));
         }
 
         [Fact]
@@ -72,7 +71,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = CompareSwagger("version_check_03.json").ToArray();
             Assert.NotEmpty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
-            Assert.Empty(messages.Where(m => m.Severity >= Category.Error));
         }
 
         /// <summary>
@@ -83,7 +81,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = CompareSwagger("version_check_02.json").ToArray();
             Assert.Empty(messages.Where(m => m.Id > 0 && m.Severity == Category.Warning));
-            Assert.NotEmpty(messages.Where(m => m.Severity >= Category.Error));
         }
 
         /// <summary>

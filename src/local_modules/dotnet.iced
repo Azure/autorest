@@ -49,13 +49,13 @@ task 'sign-assemblies','', (done) ->
     echo warning "Binaries will not be code-signed."
     return done()
 
-  Fail "signing requires --configuration release" if configuration isnt "release"
+  Fail "signing requires --configuration release" if configuration isnt "Release"
 
   unsigned  = "#{workdir}/unsigned"
-  mkdir unsigned 
+  mkdir "-p", unsigned 
 
   signed  = "#{workdir}/signed"
-  mkdir signed
+  mkdir "-p", signed
 
   assemblies() 
     # rename the files to flatten folder names out of the way.

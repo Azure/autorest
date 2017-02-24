@@ -1,9 +1,7 @@
-
 fs = require('fs')
 
 concurrency = 0 
 queue = []
-
 
 module.exports =
   # lets us just handle each item in a stream easily.
@@ -136,7 +134,7 @@ module.exports =
     echo ""
     echo "#{ error 'Task Failed:' }  #{error_message text}"
     echo ""
-    rm '-rf', "#{process.env.tmp}/gulp"
+    rm '-rf', "#{tmpfolder}/gulp"
     process.exit(1)
   
 
@@ -192,6 +190,6 @@ module.exports.task 'code', 'launches vscode', ->
   exec "code #{basefolder}"
 
 module.exports.task 'release-only', '', (done)-> 
-  Fail( "This command requires --configuration release" ) if configuration isnt "release"
+  Fail( "This command requires --configuration release" ) if configuration isnt "Release"
   done()
  

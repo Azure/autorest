@@ -15,6 +15,16 @@ namespace AutoRest.Swagger.Validation
         private const string NOUN_VERB_PATTERN = "^(\\w+)?_(\\w+)$";
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M1001";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// This rule passes if the operation id doesn't contain a repeated value before and after the underscore
         ///   e.g. User_GetUser
         ///     or Users_DeleteUser
@@ -60,7 +70,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
     }
 }
