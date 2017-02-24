@@ -9,7 +9,7 @@ import { Readable } from "stream";
 
 const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
 
-export async function read(uri: string): Promise<string> {
+export async function readUri(uri: string): Promise<string> {
   const readable = await getUriAsync(uri);
 
   const readAll = new Promise<string>(function (resolve, reject) {

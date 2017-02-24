@@ -5,25 +5,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { parse } from "./lib/parsing/literateYaml";
-import { DataStore } from "./lib/data-store/dataStore";
+import { DataStore, DataHandleRead } from "./lib/data-store/dataStore";
 
-async function test() {
-  const dataStore = new DataStore();
+// async function run(dataStore: DataStore, configuration: DataHandleRead) {
 
-  // config-file
-  //const hConfigFile = await dataStore.readThrough("config-file.md", "file:///C:/Users/jobader/Desktop/asd/md/input.js");
-  const hConfigFile = await dataStore.readThrough("config-file.md", "file:///C:/Users/jobader/Desktop/asd/md/inputx.js");
+// }
 
-  // literate
-  const hwConfig = await dataStore.create("config.yaml");
-  const hConfig = await parse(hConfigFile, hwConfig, key => dataStore.create(key));
+// async function run(dataStore: DataStore, configuration: DataHandleRead) {
 
-  // config
-  const config = await hConfig.readObject<AutoRestConfiguration>();
-  console.log(JSON.stringify(config));
-
-
-  await dataStore.dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
-}
-
-test();
+// }

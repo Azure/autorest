@@ -4,8 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { read } from "./input";
+import { readUri } from "./input";
 import { dumpString } from "./dump";
+import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { Mappings, compile } from "../source-map/sourceMap";
 import { parse } from "../parsing/yaml";
@@ -31,7 +32,100 @@ type Store = { [key: string]: Data };
  * - ensures WRITE ONCE model
  ********************************************/
 
-export class DataStore {
+abstract class DataViewReadonly {
+  abstract read(key: string): Promise<DataHandleRead | null>;
+  abstract enum(): Promise<Iterable<string>>;
+}
+
+abstract class DataView extends DataViewReadonly {
+  abstract write(key: string): Promise<DataHandleWrite>;
+
+  public createScope(name: string): DataView {
+    return new DataViewScope(name, this);
+  }
+
+  public createReadThroughScope(name: string, customUriFilter?: (uri: string) => boolean): DataViewReadonly {
+    return new DataViewReadThrough(this.createScope(name), customUriFilter);
+  }
+
+  public asReadonly(): DataViewReadonly {
+    return this;
+  }
+}
+
+class DataViewScope extends DataView {
+  constructor(private name: string, private slave: DataView) {
+    super();
+  }
+
+  private get prefix(): string {
+    return `${this.name}/`;
+  }
+
+  public write(key: string): Promise<DataHandleWrite> {
+    return this.slave.write(this.prefix + key);
+  }
+
+  public read(key: string): Promise<DataHandleRead> {
+    return this.slave.read(this.prefix + key);
+  }
+
+  public async enum(): Promise<Iterable<string>> {
+    const parentResult = await this.slave.enum();
+    return From(parentResult)
+      .Where(key => key.startsWith(this.prefix))
+      .Select(key => key.substr(this.prefix.length));
+  }
+}
+
+class DataViewReadThrough extends DataViewReadonly {
+  private static isUri(uri: string): boolean {
+    return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
+  }
+
+  private static encodeUri(uri: string): string {
+    return encodeURIComponent(uri);
+  }
+
+  private static decodeUri(encodedUri: string): string {
+    return decodeURIComponent(encodedUri);
+  }
+
+  constructor(private slave: DataView, private customUriFilter: (uri: string) => boolean = uri => /^http/.test(uri)) {
+    super();
+  }
+
+  public async read(uri: string): Promise<DataHandleRead> {
+    // validation
+    if (!DataViewReadThrough.isUri(uri)) {
+      throw `Provided URI '${uri}' is invalid`;
+    }
+    if (!this.customUriFilter(uri)) {
+      throw `Provided URI '${uri}' violated the filter`;
+    }
+
+    const key = DataViewReadThrough.encodeUri(uri);
+
+    // prope cache
+    const existingData = await this.slave.read(key);
+    if (existingData !== null) {
+      return existingData;
+    }
+
+    // populate cache
+    const data = await readUri(uri);
+    const writeHandle = await this.slave.write(key);
+    const readHandle = await writeHandle.writeData(data);
+    return readHandle;
+  }
+
+  public async enum(): Promise<Iterable<string>> {
+    const slaveResult = await this.slave.enum();
+    return From(slaveResult).Select(DataViewReadThrough.decodeUri);
+  }
+}
+
+export class DataStore extends DataView {
   private store: Store = {};
 
   private validate(key: string): void {
@@ -46,22 +140,23 @@ export class DataStore {
     }
   }
 
-  public async create(key: string): Promise<DataHandleWrite> {
+  public async write(key: string): Promise<DataHandleWrite> {
     return new DataHandleWrite(key, async data => {
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }
       this.store[key] = data;
       this.validate(key);
-      return new DataHandleRead(key, Promise.resolve(data));
+      return this.read(key);
     });
   }
 
-  public async readThrough(key: string, uri: string): Promise<DataHandleRead> {
-    const data = await read(uri);
-    const writeHandle = await this.create(key);
-    const readHandle = await writeHandle.writeData(data);
-    return readHandle;
+  public async read(key: string): Promise<DataHandleRead | null> {
+    const data = this.store[key];
+    if (!data) {
+      return null;
+    }
+    return new DataHandleRead(key, Promise.resolve(data));
   }
 
   public async dump(targetDir: string): Promise<void> {
@@ -72,6 +167,10 @@ export class DataStore {
       await dumpString(targetFile, data.data);
       await dumpString(targetFile + ".map", JSON.stringify(data.metadata.sourceMap, null, 2));
     }
+  }
+
+  public async enum(): Promise<Iterable<string>> {
+    return Object.getOwnPropertyNames(this.store);
   }
 }
 
