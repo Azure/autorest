@@ -73,5 +73,23 @@ namespace AutoRest.Swagger.Model.Utilities
         {
             return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
         }
+
+        public static IEnumerable<string> GetResponseModelDefinitions(ServiceDefinition serviceDefinition)
+        {
+            // for every path, check its response object and get its model definition
+            var respDefinitions = serviceDefinition.Paths.SelectMany(
+                                    pathPair => pathPair.Value.Select(
+                                        pathObj => pathObj.Value.Responses?.ContainsKey("200") == true ? pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() : string.Empty));
+
+            respDefinitions = respDefinitions.Concat(
+                                    serviceDefinition.CustomPaths.SelectMany(
+                                        pathPair => pathPair.Value.Select(
+                                            pathObj => pathObj.Value.Responses?.ContainsKey("200") == true ? pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() : string.Empty)));
+
+            respDefinitions = respDefinitions.Where(def => !string.IsNullOrWhiteSpace(def)).Distinct();
+
+            return respDefinitions;
+        }
+
     }
 }

@@ -33,7 +33,7 @@
           "200": {
             "description": "the resource",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/TempResource"
             }
           }
         }
@@ -58,7 +58,7 @@
           "200": {
             "description": "the resource patched",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/TempResource"
             }
           }
         }
@@ -122,6 +122,19 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "TempResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "temporary resource",
+      "properties": {
+        "prop0": {
+          "type": "string"
+        }
+      }
     },
     "OperationsListResult": {
       "description": "List of operations",
