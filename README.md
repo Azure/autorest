@@ -10,6 +10,7 @@ AutoRest has been thru a lot of changes recently, most notably:
 - we've switched to building the core components with the latest [dotnet-cli](https://github.com/dotnet/cli) tools, and the binaries are build for .NET Core 1.0 (aka 'CoreCLR')
 - we're starting to build some of the components in NodeJS - this allows us to leverage all sorts of other great functionality with less coding effort
 - we have a great cross-platform installation model for Windows, Mac OSX and Linux, which is built on top of NodeJS's `npm` package manager
+
 > #### Why did you change that?
 > Previously, in order to get AutoRest, you had to either get an older version from Chocolatey, or install a 'nightly' build from the MyGet feed using the NuGet tool.
 > This didn't make it easier to keep up-to-date with AutoRest (as development happens pretty fast these days!), and often bugs were getting fixed and it was a pain for users to get the updated binaries.
