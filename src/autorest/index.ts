@@ -11,7 +11,8 @@ async function test() {
   const dataStore = new DataStore();
 
   // config-file
-  const hConfigFile = await dataStore.readThrough("config-file.md", "file:///C:/Users/jobader/Desktop/asd/md/input.js")
+  //const hConfigFile = await dataStore.readThrough("config-file.md", "file:///C:/Users/jobader/Desktop/asd/md/input.js");
+  const hConfigFile = await dataStore.readThrough("config-file.md", "file:///C:/Users/jobader/Desktop/asd/md/inputx.js");
 
   // literate
   const hwConfig = await dataStore.create("config.yaml");
