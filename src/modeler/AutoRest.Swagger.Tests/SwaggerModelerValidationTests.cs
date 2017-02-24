@@ -410,7 +410,7 @@ namespace AutoRest.Swagger.Tests
         public void ArmResourcePropertiesBagValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "arm-resource-properties-bag-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 1);
+            messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 2);
         }
 
         [Fact]

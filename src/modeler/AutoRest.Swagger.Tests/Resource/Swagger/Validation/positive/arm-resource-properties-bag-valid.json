@@ -26,7 +26,7 @@
           "200": {
             "description": "the resource",
             "schema": {
-              "$ref": "#/definitions/TempResource"
+              "$ref": "#/definitions/TempResource2"
             }
           }
         }
@@ -56,11 +56,24 @@
     }
   },
   "definitions": {
-    "TempResource": {
+    "TempResource1": {
       "x-ms-azure-resource": true,
-      "description": "temporary resource",
+      "description": "temporary resource 1",
       "properties": {
         "prop0": {
+          "type": "string"
+        }
+      }
+    },
+    "TempResource2": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TempResource1"
+        }
+      ],
+      "description": "temporary resource 2",
+      "properties": {
+        "prop1": {
           "type": "string"
         }
       }
