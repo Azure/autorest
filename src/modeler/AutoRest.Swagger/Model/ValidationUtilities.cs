@@ -86,7 +86,7 @@ namespace AutoRest.Swagger.Model.Utilities
                                         pathPair => pathPair.Value.Select(
                                             pathObj => pathObj.Value.Responses?.ContainsKey("200") == true ? pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() : string.Empty)));
 
-            respDefinitions = respDefinitions.Where(def => !string.IsNullOrEmpty(def)).Distinct();
+            respDefinitions = respDefinitions.Where(def => !string.IsNullOrWhiteSpace(def)).Distinct();
 
             return respDefinitions;
         }
