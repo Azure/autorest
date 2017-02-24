@@ -84,7 +84,7 @@ gulp clean
 ### Restore npm packages for Typescript projects
 `gulp npm-install` - restores packages for the typescript projects
 
-### Build autorest and install it in the user's home folder ('~/.autorest/plugins/autorest/<VERSION>-<DATE>-<TIME>-private') as a private build so you can run it with the `autorest` command anywhere.
+### Build autorest and install it in the user's home folder (`~/.autorest/plugins/autorest/<VERSION>-<DATE>-<TIME>-private`) as a private build so you can run it with the `autorest` command anywhere.
 `gulp install` - build and install the dev version of autorest
 
 ### Run AutoRest without installing it
