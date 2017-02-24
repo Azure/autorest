@@ -94,18 +94,18 @@ gulp clean
 ### Testing 
 `gulp regenerate` - regenerate all expected code for tests (There are many fine-grained `rengenerate-*` tasks, find them with `gulp -T` if you need them. )
 
-`gulp test` - runs all tests
-`gulp test-dotnet` - runs dotnet tests
-`gulp test-go` - runs Go tests
-`gulp test-java` - runs Java tests
-`gulp test-node` - runs NodeJS tests
-`gulp test-python` - runs Python tests
-`gulp test-ruby` - runs Ruby tests
+`gulp test` - runs all tests<br>
+`gulp test-dotnet` - runs dotnet tests<br>
+`gulp test-go` - runs Go tests<br>
+`gulp test-java` - runs Java tests<br>
+`gulp test-node` - runs NodeJS tests<br>
+`gulp test-python` - runs Python tests<br>
+`gulp test-ruby` - runs Ruby tests<br>
 
 ## available switches
 
-  `--force`          specify when you want to force an action (restore, etc)
-  `--configuration`  'debug' or 'release'
-  `--release`        same as --configuration=release
-  `--verbose`        enable verbose output
-  `--threshold=nn`   set parallelism threshold - default = (# of cpus in system-1)
+`--force`          specify when you want to force an action (restore, etc)<br>
+`--configuration`  'debug' or 'release'<br>
+`--release`        same as --configuration=release<br>
+`--verbose`        enable verbose output<br>
+`--threshold=nn`   set parallelism threshold - default = (# of cpus in system-1)<br>
