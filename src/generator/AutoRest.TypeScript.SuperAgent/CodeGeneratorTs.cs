@@ -33,18 +33,27 @@ namespace AutoRest.TypeScript.SuperAgent
                 throw new InvalidCastException("CodeModel is not a TypeScript code model.");
             }
 
-            var modelsBinder = new ModelsModelBinder();
-            var clientModelsBinder = new ClientGroupsModelBinder();
+            try
+            {
 
-            var models = modelsBinder.Bind(codeModel);
-            var clientModels = clientModelsBinder.Bind(codeModel);
-           
-            var modelTemplate = new ModelTemplate {Model = models};
-            await Write(modelTemplate, "model.ts");
+                var modelsBinder = new ModelsModelBinder();
+                var clientModelsBinder = new ClientGroupsModelBinder();
 
-            var clientTemplate = new ClientTemplate { Model = clientModels };
-            await Write(clientTemplate, "api.ts");
-           
+                var models = modelsBinder.Bind(codeModel);
+                var clientModels = clientModelsBinder.Bind(codeModel);
+
+                var modelTemplate = new ModelTemplate {Model = models};
+                await Write(modelTemplate, "model.ts");
+
+                var clientTemplate = new ClientTemplate {Model = clientModels};
+                await Write(clientTemplate, "api.ts");
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }

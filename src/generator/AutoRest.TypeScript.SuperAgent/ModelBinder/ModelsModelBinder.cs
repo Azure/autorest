@@ -82,7 +82,13 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     Properties = new List<ModelProperty>()
                 };
 
-                var type = modelTypesFromDefinition.First(m => m.ClassName == okResponse.Body.ClassName);
+                var type = modelTypesFromDefinition.FirstOrDefault(m => m.ClassName == okResponse.Body.ClassName);
+
+                if (type == null)
+                {
+                    continue;
+                }
+
                 modelTypesFromDefinition.Remove(type);
 
                 foreach (var property in type.Properties)
