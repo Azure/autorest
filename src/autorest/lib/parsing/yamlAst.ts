@@ -128,9 +128,15 @@ function resolvePathPart(yamlAstRoot: yamlAst.YAMLNode, yamlAstCurrent: yamlAst.
 }
 
 export function resolvePathParts(yamlAstRoot: yamlAst.YAMLNode, jsonPathParts: jsonpath.PathComponent[]): number {
-  if (jsonPathParts[0] !== "$") {
-    throw new Error("Argument: Expected JSON path starting with $");
+  if (jsonPathParts.length === 0 || jsonPathParts[0] !== "$") {
+    throw new Error("Argument: Invalid JSON path (not starting with $)");
   }
+  // special treatment of root "$", so it gets mapped to the VERY beginning of the document (possibly "---")
+  // instead of the first YAML mapping node. This allows disambiguation of "$" and "$.<first prop>" in YAML.
+  if (jsonPathParts.length === 1) {
+    return 0;
+  }
+
   let yamlAstCurrent = yamlAstRoot;
   for (let i = 1; i < jsonPathParts.length; ++i) {
     yamlAstCurrent = resolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathParts[i], true);

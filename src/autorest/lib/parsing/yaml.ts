@@ -53,5 +53,5 @@ export function parse<T>(rawYaml: string): T {
 }
 
 export function stringify(object: any): string {
-  return safeDump(object, null);
+  return "---\n" + safeDump(object, null);
 }

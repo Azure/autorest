@@ -17,7 +17,11 @@ async function test() {
   const hwConfig = await dataStore.create("config.yaml");
   const hConfig = await parse(hConfigFile, hwConfig, key => dataStore.create(key));
 
-  console.log(await hConfig.readData());
+  // config
+  const config = await hConfig.readObject<AutoRestConfiguration>();
+  console.log(JSON.stringify(config));
+
+
   await dataStore.dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
 }
 

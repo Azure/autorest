@@ -8,6 +8,7 @@ import { read } from "./input";
 import { dumpString } from "./dump";
 import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { Mappings, compile } from "../source-map/sourceMap";
+import { parse } from "../parsing/yaml";
 
 
 /********************************************
@@ -115,5 +116,10 @@ export class DataHandleRead {
   public async readData(): Promise<string> {
     const data = await this.read;
     return data.data;
+  }
+
+  public async readObject<T>(): Promise<T> {
+    const data = await this.readData();
+    return parse<T>(data);
   }
 }
