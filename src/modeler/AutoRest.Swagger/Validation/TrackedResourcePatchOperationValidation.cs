@@ -6,6 +6,7 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
+using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
 using System.Text.RegularExpressions;
 using System.Linq;
@@ -40,9 +41,9 @@ namespace AutoRest.Swagger.Validation
         // Verifies if a tracked resource has a corresponding patch operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            var servDef = (ServiceDefinition)context.Root;
-            IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", servDef);
-            var respDefinitions = servDef.Paths.Concat(servDef.CustomPaths).SelectMany(pathPair => pathPair.Value.Select(pathObj => pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())).Distinct();
+            var serviceDefinition = (ServiceDefinition)context.Root;
+            IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", serviceDefinition);
+            var respDefinitions = ValidationUtilities.GetResponseModelDefinitions(serviceDefinition);
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
                 if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
