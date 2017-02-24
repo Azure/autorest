@@ -20,10 +20,11 @@ At a bare minimum, to compile autorest and run it you will need at least:
 
 #### Required: [Node.js](https://nodejs.org/en/) 6.9.5 or greater
 
-| |Most Users ![image](/docs/images/normal.png) |Technical Users ![image](/docs/images/glasses.png)|
-|-|:--|:------------------------------------------------------------------|
+
+|asd |Most Users  |Technical Users |
+|----|------------|--------------------------|
 |Windows|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/ ) using the <br>Windows installer.|You can install the [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows) <br><br>Install the latest release of the [Node Version Manager](https://github.com/coreybutler/nvm-windows/releases/download/1.1.2/nvm-setup.zip) and then run the following commands:  <br>  `nvm install 6.10.0` <br>  `nvm use 6.10.0` |
-|Linux|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/package-manager/) via the<br> package manager instructions for <br>your version of Linux|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script):<br><br>Run the following commands:<br>`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash` <br>  `nvm install 6.10.0` <br> `nvm use 6.10.0` |
+|Linux|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/package-manager/) via the<br> package manager instructions for <br>your version of Linux|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script):<br><br>Run the following commands:<br>`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash` <br>  `nvm install 6.10.0` <br> `nvm use 6.10.0`|
 |OS X|Install [Latest NodeJS LTS build](https://nodejs.org/en/download/ ) using<br> the Macintosh installer<br><br>or<br><br>Use the [Instructions using a package manager](https://nodejs.org/en/download/package-manager/#osx)|You can install the [Node Version Manager](https://github.com/creationix/nvm#install-script). <br><br>Run the following commands: <br>`touch ~/.bash_profile` <br> `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash` <br> `nvm install 6.10.0` <br> `nvm use 6.10.0` |
 
 ###  [Gulp](https://github.com/gulpjs/gulp) 
