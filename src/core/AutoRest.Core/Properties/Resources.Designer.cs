@@ -602,6 +602,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Property names should follow camelCase style: {0}..
+        /// </summary>
+        public static string PropertyNameShouldBeCamelCase {
+            get {
+                return ResourceManager.GetString("PropertyNameShouldBeCamelCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response..
         /// </summary>
         public static string PutGetPatchResponseInvalid {

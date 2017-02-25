@@ -378,4 +378,7 @@ Modelers:
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
   </data>
+  <data name="PropertyNameShouldBeCamelCase" xml:space="preserve">
+    <value>Property names should follow camelCase style: {0}.</value>
+  </data>
 </root>
