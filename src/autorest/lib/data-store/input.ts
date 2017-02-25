@@ -3,7 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-const getUri = require("get-uri"); // untyped
+// untyped imports
+const getUri = require("get-uri");
+const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
+
 import * as promisify from "pify";
 import { Readable } from "stream";
 
@@ -20,4 +23,8 @@ export async function readUri(uri: string): Promise<string> {
   });
 
   return await readAll;
+}
+
+export function createFileUri(path: string, resolve: boolean = false): string {
+  return fileUri(path, { resolve: resolve });
 }

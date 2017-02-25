@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@types/commonmark": "^0.22.29",
-    "@types/file-url": "^1.0.28",
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",

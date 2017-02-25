@@ -9,7 +9,6 @@
 
 // this file should get 'required' by the boostrapper
 
-import fileUrl = require("file-url");
 import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 import { homedir } from "os";
@@ -22,10 +21,11 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function main() {
+  const autorestArgs = process.argv.slice(2);
   try {
     const autorestExe = spawn(
       path.join(homedir(), ".autorest", "frameworks", "dotnet"),
-      [path.join(__dirname, "../../AutoRest.dll"), ...process.argv.slice(2)]);
+      [path.join(__dirname, "../../AutoRest.dll"), ...autorestArgs]);
     autorestExe.stdout.pipe(process.stdout);
     autorestExe.stderr.pipe(process.stderr);
     const exitCode = await awaitable(autorestExe);

@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AutoRestConfiguration } from "../configuration/configuration";
-import { DataStore, DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/dataStore";
+import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/dataStore";
 
 export type PipelineProducts = { [productKey: string]: DataStoreViewReadonly };
 

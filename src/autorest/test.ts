@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { runWithConfiguration } from "./index";
+import { run } from "./index";
 import { DataStore } from "./lib/data-store/dataStore";
 
 async function test() {
@@ -12,7 +12,7 @@ async function test() {
 
   // const customUriFilter = (uri: string) => /^file/.test(uri);
   const configFileUri = "file:///C:/Users/jobader/Desktop/asd/md/input.js";
-  const results = await runWithConfiguration(configFileUri);
+  const results = await run(configFileUri);
   await results["root"].dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
 }
 
