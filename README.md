@@ -36,6 +36,17 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   npm install -g autorest
   ```
 
+### Status on various platforms:
+ 
+|OS | Status | 
+|---|--------|
+|Windows x64| Verified - Working|
+|OSX 10.11 x64| Verified - Working (may have to install openssl manually?)|
+|Ubuntu 16.04 x64| Verified - Working|
+|Ubuntu 16.10 x64| Not Working (.NET CoreCLR Failure) |
+
+Other Linux platforms *might* work -- if the platform is listed https://github.com/Azure/autorest/releases/tag/dotnet-runtime-1.0.3 -- there is a fairly good chance that it'll work. As more testing is completed, we'll ensure that we update the status here.
+
 ### _Coming Soon_ 
 A downloadable Installer EXE for Windows that automates both steps should be available shortly.
 
