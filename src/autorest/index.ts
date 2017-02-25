@@ -5,16 +5,23 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { stringify } from "./lib/parsing/yaml";
+import { parse } from "./lib/parsing/literateYaml";
 import { DataStore, DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "./lib/data-store/dataStore";
 import { AutoRestConfiguration } from "./lib/configuration/configuration";
-import { Pipeline } from "./lib/pipeline/pipeline";
+import { Pipeline, PipelineProducts } from "./lib/pipeline/pipeline";
 
-export async function run(configuration: DataHandleRead, pipelineView: DataStoreView): Promise<{ [productKey: string]: DataStoreViewReadonly }> {
+export async function run(configuration: DataHandleRead, dataStore: DataStoreView): Promise<PipelineProducts> {
+  // deliteralize
+  const configScope = dataStore.createScope(KnownScopes.Configuration);
+  const hwConfig = await configScope.write("config.yaml");
+
+  // invoke pipeline
+  configuration = await parse(configuration, hwConfig, key => configScope.write(key));
   const pipeline = new Pipeline(configuration);
-  return await pipeline.run(pipelineView);
+  return await pipeline.run(dataStore);
 }
 
-export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): Promise<{ [productKey: string]: DataStoreViewReadonly }> {
+export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): Promise<PipelineProducts> {
   const dataStore = new DataStore();
 
   // input
@@ -31,7 +38,7 @@ export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguratio
   return await run(hConfig, dataStore);
 }
 
-export async function runWithConfiguration(configurationUri: string, dataStore: DataStoreView = new DataStore()): Promise<{ [productKey: string]: DataStoreViewReadonly }> {
+export async function runWithConfiguration(configurationUri: string, dataStore: DataStoreView = new DataStore()): Promise<PipelineProducts> {
   // load configuration file
   const inputView = dataStore.createReadThroughScope(KnownScopes.Input, uri => uri === configurationUri);
   const hConfig = await inputView.read(configurationUri);

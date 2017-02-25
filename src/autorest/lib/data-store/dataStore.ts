@@ -13,17 +13,20 @@ import { parse } from "../parsing/yaml";
 
 export module KnownScopes {
   export const Input = "input";
+  export const Configuration = "config";
 }
 
 /********************************************
  * Data model section (not exposed)
  ********************************************/
 
+interface Metadata {
+  sourceMap: RawSourceMap;
+}
+
 interface Data {
   data: string;
-  metadata: {
-    sourceMap: RawSourceMap;
-  };
+  metadata: Metadata;
 }
 
 type Store = { [key: string]: Data };
@@ -38,6 +41,21 @@ type Store = { [key: string]: Data };
 export abstract class DataStoreViewReadonly {
   abstract read(key: string): Promise<DataHandleRead | null>;
   abstract enum(): Promise<Iterable<string>>;
+
+  public async dump(targetDir: string): Promise<void> {
+    const keys = await this.enum();
+    for (const key of keys) {
+      const dataHandle = await this.read(key);
+      if (dataHandle !== null) {
+        const data = await dataHandle.readData();
+        const metadata = await dataHandle.readMetadata();
+        const targetFile = path.join(targetDir, key);
+        console.log(key);
+        await dumpString(targetFile, data);
+        await dumpString(targetFile + ".map", JSON.stringify(metadata.sourceMap, null, 2));
+      }
+    }
+  }
 }
 
 export abstract class DataStoreView extends DataStoreViewReadonly {
@@ -189,16 +207,6 @@ export class DataStore extends DataStoreView {
     return new DataHandleRead(key, Promise.resolve(data));
   }
 
-  public async dump(targetDir: string): Promise<void> {
-    // tslint:disable-next-line:forin
-    for (const key in this.store) {
-      const data = this.store[key];
-      const targetFile = path.join(targetDir, key);
-      await dumpString(targetFile, data.data);
-      await dumpString(targetFile + ".map", JSON.stringify(data.metadata.sourceMap, null, 2));
-    }
-  }
-
   public async enum(): Promise<Iterable<string>> {
     return Object.getOwnPropertyNames(this.store);
   }
@@ -245,6 +253,11 @@ export class DataHandleRead {
   public async readData(): Promise<string> {
     const data = await this.read;
     return data.data;
+  }
+
+  public async readMetadata(): Promise<Metadata> {
+    const data = await this.read;
+    return data.metadata;
   }
 
   public async readObject<T>(): Promise<T> {

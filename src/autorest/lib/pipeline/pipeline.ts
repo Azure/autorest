@@ -6,12 +6,26 @@
 import { AutoRestConfiguration } from "../configuration/configuration";
 import { DataStore, DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/dataStore";
 
+export type PipelineProducts = { [productKey: string]: DataStoreViewReadonly };
+
 export class Pipeline {
   constructor(private configuration: DataHandleRead) {
+    this.build(configuration.readObject<AutoRestConfiguration>());
   }
 
-  public async run(pipelineView: DataStoreView): Promise<{ [productKey: string]: DataStoreViewReadonly }> {
-    // beep
-    return {};
+  private build(configuration: AutoRestConfiguration) {
+    // bleep
+  }
+
+  public async run(pipelineView: DataStoreView): Promise<PipelineProducts> {
+    const result: PipelineProducts = {};
+
+    // forward global view for debugging
+    result["root"] = pipelineView.asReadonly();
+
+    // bloop
+
+
+    return result;
   }
 }

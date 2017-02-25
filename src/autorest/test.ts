@@ -5,7 +5,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { runWithConfiguration } from "./index";
-import { parse } from "./lib/parsing/literateYaml";
 import { DataStore } from "./lib/data-store/dataStore";
 
 async function test() {
@@ -13,7 +12,8 @@ async function test() {
 
   // const customUriFilter = (uri: string) => /^file/.test(uri);
   const configFileUri = "file:///C:/Users/jobader/Desktop/asd/md/input.js";
-  await runWithConfiguration(configFileUri);
+  const results = await runWithConfiguration(configFileUri);
+  await results["root"].dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
 }
 
 test();
