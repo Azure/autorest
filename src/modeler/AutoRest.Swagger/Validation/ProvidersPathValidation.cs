@@ -1,16 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
 
-namespace AutoRest.Swagger.Validation 
+namespace AutoRest.Swagger.Validation
 {
     public class ProvidersPathValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {

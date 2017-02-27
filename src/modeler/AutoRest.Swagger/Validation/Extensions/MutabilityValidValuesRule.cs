@@ -12,6 +12,16 @@ namespace AutoRest.Swagger.Validation
     public class MutabilityValidValuesRule : MutabilityExtensionRule
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2008";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
         /// Array of valid values for x-ms-mutability extension.
         /// </summary>
         protected readonly string[] ValidValues = { "create", "read", "update" };
@@ -23,7 +33,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="context">Rule context.</param>
         /// <param name="formatParameters">array of invalid parameters to be returned.</param>
         /// <returns><c>true</c> if all values for x-ms-mutability are valid, otherwise <c>false</c>.</returns>
-        /// <remarks>This rule corresponds to M2006.</remarks>
+        /// <remarks>This rule corresponds to M2008.</remarks>
         public override bool IsValid(object mutable, RuleContext context, out object[] formatParameters) => ValidateMutabilityValues(mutable, context, out formatParameters);
 
         /// <summary>
@@ -37,7 +47,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// Verify that mutability values are valid.

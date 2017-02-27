@@ -1,5 +1,5 @@
 {
-  "name": "autorest-ng",
+  "name": "autorest-app",
   "version": "1.0.1",
   "description": "AutoRest",
   "repository": {
@@ -17,7 +17,7 @@
   "homepage": "https://github.com/Azure/autorest/readme.md",
   
   "bin": {
-    "autorest": "./index.js"
+    "autorest": "./app.js"
   },
  
   "devDependencies": {

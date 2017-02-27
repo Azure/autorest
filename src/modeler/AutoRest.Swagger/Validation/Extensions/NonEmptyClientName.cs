@@ -3,12 +3,23 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Core.Validation;
 
 namespace AutoRest.Swagger.Validation
 {
     public class NonEmptyClientName : ExtensionRule
     {
         protected override string ExtensionName => "x-ms-client-name";
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2028";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         public override bool IsValid(object clientName)
         {
@@ -36,6 +47,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
     }
 }

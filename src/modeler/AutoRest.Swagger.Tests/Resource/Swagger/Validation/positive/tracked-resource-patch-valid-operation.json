@@ -13,20 +13,52 @@
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/Res": {
       "get": {
         "tags": [
           "Redis"
         ],
-        "operationId": "Redis_Get",
+        "operationId": "Redis_get",
         "description": "gets a Redis cache.",
         "parameters": [
+          {
+            "name": "name",
+            "type": "string",
+            "required": true,
+            "description": "redis cache to get",
+            "in": "path"
+          }
         ],
         "responses": {
           "200": {
             "description": "the resource",
             "schema": {
-              "$ref": "#/definitions/Resource"
+              "$ref": "#/definitions/TempResource"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}": {
+      "patch": {
+        "tags": [
+          "Redis"
+        ],
+        "operationId": "Redis_update",
+        "description": "gets a Redis cache.",
+        "parameters": [
+          {
+            "name": "tag",
+            "type": "string",
+            "required": true,
+            "description": "tag to update"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the resource patched",
+            "schema": {
+              "$ref": "#/definitions/TempResource"
             }
           }
         }
@@ -90,6 +122,19 @@
         "location"
       ],
       "x-ms-azure-resource": true
+    },
+    "TempResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "temporary resource",
+      "properties": {
+        "prop0": {
+          "type": "string"
+        }
+      }
     },
     "OperationsListResult": {
       "description": "List of operations",

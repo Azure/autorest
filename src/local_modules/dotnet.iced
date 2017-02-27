@@ -44,13 +44,18 @@ task 'policheck-assemblies','', ->
 ###############################################
 task 'sign-assemblies','', (done) -> 
   # skip signing if we're not doing a release build
-  Fail "signing requires --configuration release" if configuration isnt "release"
+  if !(exists csu) 
+    echo warning "CODESIGNING is not available."
+    echo warning "Binaries will not be code-signed."
+    return done()
+
+  Fail "signing requires --configuration release" if configuration isnt "Release"
 
   unsigned  = "#{workdir}/unsigned"
-  mkdir unsigned 
+  mkdir "-p", unsigned 
 
   signed  = "#{workdir}/signed"
-  mkdir signed
+  mkdir "-p", signed
 
   assemblies() 
     # rename the files to flatten folder names out of the way.
@@ -71,7 +76,7 @@ task 'sign-assemblies','', (done) ->
           source "#{signed}/*"
             .pipe rename (path) -> 
               flattenDecode path 
-            .pipe destination "#{__dirname}/src"            
+            .pipe destination "#{basefolder}/src"            
             .on 'end', () => 
               # cleanup!
               rm '-rf', workdir
@@ -106,16 +111,6 @@ task 'restore','restores the dotnet packages for the projects', (done) ->
       next null  
   return null
   
-############################################### 
-#task 'package','From scratch build, sign, and package ', (done) -> 
-#  run 'clean',
-#    'restore'
-#    'publish'
-#    'sign-assemblies'
-#    'pack' 
-#    'sign-packages'
-#    -> done()
-
 ############################################### 
 task 'test-dotnet', 'runs dotnet tests',['restore'] , (done) ->
   instances = 0    

@@ -4,7 +4,15 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "sourceMap": true,
-    "types" : ["node"]
+    "types" : ["node"],
+    "newLine": "LF",
+    "lib": [
+      "es5",
+      "es6",
+      "es2015.collection",
+      "es2015.promise",
+      "es2015.core" 
+    ]
   },
   "exclude": [
     "node_modules"

@@ -92,7 +92,7 @@ namespace AutoRest.Swagger.Tests
         public void EmptyClientNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "empty-client-name-extension.json"));
-            messages.AssertOnlyValidationWarning(typeof(NonEmptyClientName));
+            messages.AssertOnlyValidationMessage(typeof(NonEmptyClientName));
         }
 
         [Fact]
@@ -224,10 +224,23 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void CollectionObjectsPropertiesNamingValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
+            messages.AssertOnlyValidationMessage(typeof(CollectionObjectPropertiesNamingValidation), 2);
+        }
+
+        [Fact]
         public void InvalidConstraintValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json"));
             messages.AssertOnlyValidationWarning(typeof(InvalidConstraint), 18);
+        }
+
+        public void BodyTopLevelPropertiesValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "body-top-level-properties.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
         }
 
         [Fact]
@@ -276,7 +289,9 @@ namespace AutoRest.Swagger.Tests
         public void OperationNameValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "operation-name-not-valid.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationNameValidation), 3);
+            messages.AssertOnlyValidationMessage(typeof(GetOperationNameValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(PutOperationNameValidation), 1);
+            messages.AssertOnlyValidationMessage(typeof(DeleteOperationNameValidation), 1);
         }
 
         [Fact]
@@ -387,8 +402,15 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void TrackedResourcePatchOperationValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracking-resource-patch-operation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracked-resource-patch-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 1);
+        }
+
+        [Fact]
+        public void TrackedResourceGetOperationValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "tracked-resource-get-operation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 1);
         }
 
         [Fact]
@@ -428,6 +450,16 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void ValidCollectionObjectsPropertiesName()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "collection-objects-naming-valid.json"));
+            Assert.Empty(messages.Where(m => m.Severity >= Category.Warning));
+        }
+
+        /// <summary>
         /// Verifies that a clean Swagger file does not result in any validation errors
         /// </summary>
         [Fact]
@@ -458,13 +490,23 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
-        /// Verifies that tracking resource has a patch operation
+        /// Verifies that tracked resource has a patch operation
         /// </summary>
         [Fact]
-        public void TrackingResourcePatchOperationValidation()
+        public void ValidTrackedResourcePatchOperation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracking-resource-patch-valid-operation.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-patch-valid-operation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourcePatchOperationValidation), 0);
+        }
+
+        /// <summary>
+        /// Verifies that tracked resource has a get operation
+        /// </summary>
+        [Fact]
+        public void ValidTrackedResourceGetOperation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "tracked-resource-get-valid-operation.json"));
+            messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 0);
         }
 
         /// <summary>

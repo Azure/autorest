@@ -4,7 +4,7 @@
   "description": "Tools for AutoRest build processes",
   "scripts": {
     "test": "gulp test",
-    "install": "gulp install"
+    "install": "gulp npm-install"
   },
   "repository": {
     "type": "git",
@@ -35,8 +35,10 @@
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-dependencies-changed": "^1.0.2",
+    "gulp-eol": "^0.1.2",
     "gulp-filter": "^5.0.0",
     "gulp-github-release": "^1.2.1",
+    "gulp-line-ending-corrector": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-unzip": "^0.2.0",
     "gulp-zip": "^4.0.0",

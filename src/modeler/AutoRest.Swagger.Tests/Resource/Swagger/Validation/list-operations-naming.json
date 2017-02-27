@@ -117,7 +117,7 @@
     "Models": {
       "description": "the models to return",
       "properties": {
-        "mymodels": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Model"

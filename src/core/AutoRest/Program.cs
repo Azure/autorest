@@ -31,11 +31,10 @@ namespace AutoRest
                 {
                     bool generationFailed = false;
                     Settings settings = null;
+                    var jsonValidationLogListener = new JsonValidationLogListener();
                     try
                     {
                         settings = Settings.Create(args);
-
-                        var jsonValidationLogListener = new JsonValidationLogListener();
 
                         // set up logging
                         if (settings.JsonValidationMessages)
@@ -95,11 +94,7 @@ namespace AutoRest
                         {
                             new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                         }
-                        if (settings.JsonValidationMessages)
-                        {
-                            Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
-                        }
-                        else
+                        if (!settings.JsonValidationMessages)
                         {
                             Settings.Instance.FileSystemOutput.CommitToDisk(Settings.Instance.OutputFileName == null
                                 ? Settings.Instance.OutputDirectory
@@ -112,6 +107,10 @@ namespace AutoRest
                     }
                     finally
                     {
+                        if (settings != null && settings.JsonValidationMessages)
+                        {
+                            Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
+                        }
                         if (settings != null && !settings.ShowHelp)
                         {
                             if (generationFailed)

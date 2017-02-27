@@ -43,6 +43,7 @@
   ],
   "paths": {
     "/pet": {
+      "x-ms-internal": true,
       "get": {
         "description": "Returns all pets from the system that the user has access to",
         "operationId": "findPets",
@@ -124,7 +125,7 @@
         }
       },
       "put": {
-        "tags": [ ],
+        "tags": [],
         "summary": "",
         "description": "",
         "operationId": "CreateOrUpdatePet",
@@ -156,8 +157,11 @@
         },
         "schemes": [ "http", "https" ],
         "deprecated": true,
-        "security": [ ],
-        "x-test-header-info": { "name": "x-static-header", "value": "headerValue" }
+        "security": [],
+        "x-test-header-info": {
+          "name": "x-static-header",
+          "value": "headerValue"
+        }
       }
     },
     "/pet/{id}": {
