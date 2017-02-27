@@ -89,7 +89,7 @@ class App {
       Console.Log(text);
       this.done = true;
     } else {
-      Console.Exit('**Unable to check online, network is not available**')
+      Console.Exit('**Unable to check online, network is not available**');
     }
   }
 
@@ -187,7 +187,7 @@ class App {
       } else {
         // no network, fall back to the latest installed version
         if (this.currentVersion == null) {
-          Console.Exit('No network access, and no currently installed versions of AutoRest.')
+          Console.Exit('No network access, and no currently installed versions of AutoRest.');
         }
         this.version = this.currentVersion;
 
@@ -239,7 +239,7 @@ class App {
         Console.Debug(process.argv);
         require(join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-app', 'app.js'));
       } else {
-        Console.Log('Use --help to get help information.')
+        Console.Log('Use --help to get help information.');
       }
     } catch (exception) {
       Console.Log(exception);
@@ -248,5 +248,5 @@ class App {
 }
 // quickly check for network connectivity, and then jump to main.
 dns.lookup('8.8.8.8', 4, (err, address, family) => {
-  App.main(err == null)
+  App.main(err == null);
 });
