@@ -2,6 +2,7 @@ fs = require('fs')
 
 concurrency = 0 
 queue = []
+global.completed = []
 
 module.exports =
   # lets us just handle each item in a stream easily.
@@ -53,7 +54,14 @@ module.exports =
       prev.dep.unshift name
     
     # add the new task.
-    gulp.task name, deps, fn
+    # gulp.task name, deps, fn
+    gulp.task name, deps, (done)->
+      if not global.completed[name] 
+        global.completed[name] = true
+        return fn(done)
+      # echo warning "Skipping completed task #{name}"
+      return done()
+
     
     # set the description
     gulp.tasks[name].description = description
