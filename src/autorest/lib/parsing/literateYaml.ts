@@ -11,19 +11,19 @@ function tryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
 }
 
-export async function parse(hConfigFile: DataHandleRead, hConfig: DataHandleWrite, intermediateHandles: (key: string) => Promise<DataHandleWrite>): Promise<DataHandleRead> {
+export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateHandles: (key: string) => Promise<DataHandleWrite>): Promise<DataHandleRead> {
   let hsConfigFileBlocks: DataHandleRead[] = [];
 
   // try parsing as literate YAML
-  if (tryMarkdown(await hConfigFile.readData())) {
-    hsConfigFileBlocks = await parseLiterate(hConfigFile, intermediateHandles);
+  if (tryMarkdown(await hLiterate.readData())) {
+    hsConfigFileBlocks = await parseLiterate(hLiterate, intermediateHandles);
   }
 
   // fall back to raw YAML
   if (hsConfigFileBlocks.length == 0) {
-    hsConfigFileBlocks = [hConfigFile];
+    hsConfigFileBlocks = [hLiterate];
   }
 
   // merge
-  return await mergeYamls(hsConfigFileBlocks, hConfig);
+  return await mergeYamls(hsConfigFileBlocks, hResult);
 }

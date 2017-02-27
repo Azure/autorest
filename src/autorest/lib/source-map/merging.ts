@@ -96,6 +96,5 @@ export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputH
 
   const resultObjectRaw = yaml.stringify(resultObject);
   const mappings = identitySourceMappings(rawYamls);
-
   return await yamlOutputHandle.writeData(resultObjectRaw, mappings, yamlInputHandles);
 }

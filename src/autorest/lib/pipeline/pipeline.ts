@@ -24,9 +24,6 @@ export class Pipeline {
     // RUN pipeline
     const result: PipelineProducts = {};
 
-    // forward global view for debugging
-    result["root"] = pipelineView.asReadonly();
-
     // load Swaggers
     const swaggerScope = pipelineView.createScope("swagger");
     const tmpScope = pipelineView.createScope("tmp");
