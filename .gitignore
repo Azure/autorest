@@ -210,3 +210,5 @@ src/extension/**/*.js
 
 #client runtime
 src/client/**/*
+
+src/extension/old/**/*
