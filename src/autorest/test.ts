@@ -8,12 +8,16 @@ import { run } from "./index";
 import { DataStore } from "./lib/data-store/dataStore";
 
 async function test() {
-  const dataStore = new DataStore();
+  try {
+    const dataStore = new DataStore();
 
-  // const customUriFilter = (uri: string) => /^file/.test(uri);
-  const configFileUri = "file:///C:/Users/jobader/Desktop/asd/md/input.js";
-  const results = await run(configFileUri);
-  await results["root"].dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
+    // const customUriFilter = (uri: string) => /^file/.test(uri);
+    const configFileUri = "file:///C:/Users/jobader/Desktop/asd/readme.md";
+    const results = await run(configFileUri);
+    await results["root"].dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 test();

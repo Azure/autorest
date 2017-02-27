@@ -13,6 +13,6 @@ export function isLegacy(args: string[]): boolean {
 
 export function configurationFromLegacyArgs(args: string[]): AutoRestConfiguration {
   return {
-    // TODO
+    "input-file": []
   }
 }

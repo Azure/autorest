@@ -7,13 +7,23 @@ import { mergeYamls } from "../source-map/merging";
 import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
 import { parse as parseLiterate } from "./literate";
 
+function tryMarkdown(rawMarkdownOrYaml: string): boolean {
+  return /^#/gm.test(rawMarkdownOrYaml);
+}
+
 export async function parse(hConfigFile: DataHandleRead, hConfig: DataHandleWrite, intermediateHandles: (key: string) => Promise<DataHandleWrite>): Promise<DataHandleRead> {
+  let hsConfigFileBlocks: DataHandleRead[] = [];
+
   // try parsing as literate YAML
-  let hsConfigFileBlocks = await parseLiterate(hConfigFile, intermediateHandles);
+  if (tryMarkdown(await hConfigFile.readData())) {
+    hsConfigFileBlocks = await parseLiterate(hConfigFile, intermediateHandles);
+  }
+
   // fall back to raw YAML
   if (hsConfigFileBlocks.length == 0) {
     hsConfigFileBlocks = [hConfigFile];
   }
+
   // merge
   return await mergeYamls(hsConfigFileBlocks, hConfig);
 }

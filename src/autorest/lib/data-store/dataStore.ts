@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { readUri } from "./input";
-import { dumpString } from "./dump";
+import { readUri } from "../io/input";
+import { dumpString } from "../io/dump";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator } from "source-map";
 import { Mappings, compile } from "../source-map/sourceMap";
