@@ -5,7 +5,7 @@
 @using AutoRest.CSharp
 @using AutoRest.CSharp.Model
 @using AutoRest.Extensions
-@inherits Template<global::AutoRest.CSharp.Model.CompositeTypeCs>
+@inherits Template<global::AutoRest.CSharp.Model.,CompositeTypeCs>
 @Header("// ")
 @EmptyLine
 namespace @(Settings.Namespace).@(Settings.ModelsName)
@@ -50,13 +50,20 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
 <text>
         public @(Model.Name)()
         {
-            @foreach(var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
-                && !p.IsConstant
-                && p.IsRequired
-                && ((CompositeType)p.ModelType).ContainsConstantProperties))
+            @foreach (var property in Model.ComposedProperties.Where(p => p.ModelType is CompositeType
+                     && !p.IsConstant
+                     && p.IsRequired
+                     && ((CompositeType)p.ModelType).ContainsConstantProperties))
             {
             @:this.@(property.Name) = new @(property.ModelTypeName)();
             }
+
+            @foreach (var property in Model.Properties.Where(p => p.ModelType is PrimaryType
+                     && !p.IsConstant && p.DefaultValue!=null))
+            {
+            @:this.@(property.Name) = new @(property.DefaultValue);
+            }
+            
         }
 </text>
         }

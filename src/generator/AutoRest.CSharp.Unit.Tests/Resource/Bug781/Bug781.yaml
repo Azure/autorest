@@ -1,0 +1,26 @@
+﻿---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/operation":
+    put:
+      operationId: approved_operation
+      parameters:
+      - name: requestProperty
+        required: true
+        in: body
+        schema:
+          "$ref": "#/definitions/RequestObject"
+      responses:
+        '200':
+          description: OK
+definitions:
+  RequestObject:
+    properties:
+      reqProp:
+        type: string
+        description: This is a response.
+    default:
+      reqProp: Someprop
