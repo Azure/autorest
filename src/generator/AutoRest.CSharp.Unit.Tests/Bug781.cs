@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Unit.Tests
         ///     Support format:'char' for single character strings.
         /// </summary>
         [Fact]
-        public async Task EnsureClientNameEndsWithClient()
+        public async Task EnsureModelCtorSetsDefaultValues()
         {
             // simplified test pattern for unit testing aspects of code generation
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
@@ -53,10 +53,14 @@ namespace AutoRest.CSharp.Unit.Tests
                 // try to load the assembly
                 var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
+                Assert.True(asm.DefinedTypes.Any(defType => defType.Name == "RequestObject"));
 
-                // verify that class with the expected name is present
-                var ops = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.SimpleAPIClient");
-                Assert.NotNull(ops);
+                // Check if the default ctor is setting the default value
+                var codeText = fileSystem.ReadAllText(@"Models\RequestObject.cs");
+                int sIndex = codeText.IndexOf("public RequestObject()");
+                int eIndex = codeText.Substring(sIndex, codeText.Length - 1 - sIndex).IndexOf("}");
+                var ctorText = codeText.Substring(sIndex, eIndex);
+                Assert.True(ctorText.Contains("ReqProp = \"defpropvalue\";"));
             }
         }
     }

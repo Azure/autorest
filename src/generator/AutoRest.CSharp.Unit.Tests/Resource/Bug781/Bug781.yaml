@@ -22,5 +22,4 @@ definitions:
       reqProp:
         type: string
         description: This is a response.
-    default:
-      reqProp: Someprop
+        default: defpropvalue
