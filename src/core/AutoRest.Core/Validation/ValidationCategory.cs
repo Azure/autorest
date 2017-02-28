@@ -8,8 +8,9 @@ namespace AutoRest.Core.Validation
     [Flags]
     public enum ValidationCategory
     {
-        RPCViolation    = 1 << 0,
-        OneAPIViolation = 1 << 1,
-        SDKViolation    = 1 << 2,
+        None            = 1 << 0,
+        RPCViolation    = 1 << 1,
+        OneAPIViolation = 1 << 2,
+        SDKViolation    = 1 << 3
     }
 }

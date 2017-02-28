@@ -3,6 +3,7 @@
     "alwaysStrict": true,
     "module": "commonjs",
     "noEmitOnError": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "sourceMap": true,
