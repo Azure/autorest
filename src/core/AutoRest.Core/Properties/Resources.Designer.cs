@@ -602,11 +602,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property names should follow camelCase style: {0}..
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style: &quot;{1}&quot;..
         /// </summary>
-        public static string PropertyNameShouldBeCamelCase {
+        public static string PropertyNameCamelCase {
             get {
-                return ResourceManager.GetString("PropertyNameShouldBeCamelCase", resourceCulture);
+                return ResourceManager.GetString("PropertyNameCamelCase", resourceCulture);
             }
         }
         
