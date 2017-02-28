@@ -7,7 +7,7 @@
   "version": "0.0.1",
   "publisher": "Microsoft",
   "engines": {
-    "vscode": "^1.9.0"
+    "vscode": "^1.8.0"
   },
   "categories": [
     "Other"
@@ -19,15 +19,15 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Example configuration",
+      "title": "Default configuration",
       "properties": {
-        "languageServerExample.maxNumberOfProblems": {
+        "autorest.maxNumberOfProblems": {
           "type": "number",
           "default": 100,
           "description": "Controls the maximum number of problems produced by the server."
         },
 
-        "languageServerExample.trace.server": {
+        "autorest.trace.server": {
           "type": "string",
           "enum": [
             "off",
@@ -35,7 +35,7 @@
             "verbose"
           ],
           "default": "off",
-          "description": "Traces the communication between VSCode and the languageServerExample service."
+          "description": "Traces the communication between VSCode and the AutoRest Langugage Service"
         }        
       }
     }
@@ -50,7 +50,7 @@
     "@types/mocha": "^2.2.33",
     "@types/node": "^6.0.52",
     "typescript": "^2.1.5",
-    "vscode": "^1.0.3"
+    "vscode": "^1.0.4"
   },
   "dependencies": {
     "vscode-languageclient": "^3.0.3"

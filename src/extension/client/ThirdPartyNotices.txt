@@ -1,5 +1,5 @@
 THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
-For Microsoft vscode-languageserver-node-example
+For Microsoft AutoRest Lanaguage Extension
  
 This project incorporates material from the project(s) listed below (collectively, “Third Party Code”).
 Microsoft is not the original author of the Third Party Code.  The original copyright notice and license 

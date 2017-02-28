@@ -9,6 +9,7 @@ task 'zip-autorest', '', (done) ->
     .pipe destination packages
 
 task 'install-node-files' ,'', (done)->
+  # install autorest files into dotnet-output-folder
   install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish",done
   return null;
 
