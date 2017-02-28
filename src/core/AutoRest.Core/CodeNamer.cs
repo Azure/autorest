@@ -582,5 +582,28 @@ namespace AutoRest.Core
 
             return desiredName;
         }
+
+        public string GetDefaultValueSignatureForPrimaryType(Property property)
+        {
+            var primaryType = property.ModelType as PrimaryType;
+
+            if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
+            {
+                return property.DefaultValue.ToLowerInvariant();
+            }
+            if ((primaryType.KnownPrimaryType == KnownPrimaryType.Date) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.DateTime) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.DateTimeRfc1123) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.TimeSpan) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.ByteArray) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.Base64Url) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.UnixTime) ||
+                (primaryType.KnownPrimaryType == KnownPrimaryType.Uuid))
+            {
+                return string.Format("new {0}(\"{1}\")", property.ModelType.Name, property.DefaultValue);
+            }
+            return property.DefaultValue;
+        }
+
     }
 }

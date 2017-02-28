@@ -106,6 +106,10 @@ namespace AutoRest.CSharp
                             $"Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<{primaryType.Name}>"+
                             $"({Instance.QuoteValue($"\"{defaultValue}\"")}, this.Client.SerializationSettings)";
                     }
+                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Uuid)
+                    {
+                        return string.Format("new {0}(\"{1}\")", type.Name, defaultValue);
+                    }
                 }
             }
             return defaultValue;
