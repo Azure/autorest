@@ -28,6 +28,7 @@ namespace AutoRest.TypeScript.SuperAgent
         public override async Task Generate(CodeModel cm)
         {
             var codeModel = cm as CodeModelTs;
+
             if (codeModel == null)
             {
                 throw new InvalidCastException("CodeModel is not a TypeScript code model.");
@@ -35,6 +36,8 @@ namespace AutoRest.TypeScript.SuperAgent
 
             try
             {
+                var utilsTemplate = new UtilsTemplate() {Model = null};
+                await Write(utilsTemplate, "httpUtil.ts");
 
                 var modelsBinder = new ModelsModelBinder();
                 var clientModelsBinder = new ClientGroupsModelBinder();

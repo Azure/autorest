@@ -30,6 +30,7 @@ namespace AutoRest.TypeScript.SuperAgent
                         return "number";
 
                     case KnownPrimaryType.String:
+                    case KnownPrimaryType.Uuid:
                         return "string";
 
                     case KnownPrimaryType.Date:
@@ -37,6 +38,9 @@ namespace AutoRest.TypeScript.SuperAgent
                     case KnownPrimaryType.DateTimeRfc1123:
                     case KnownPrimaryType.UnixTime:
                         return "Date";
+
+                    case KnownPrimaryType.Stream:
+                        return "file";
 
                     default:
                         return "any";

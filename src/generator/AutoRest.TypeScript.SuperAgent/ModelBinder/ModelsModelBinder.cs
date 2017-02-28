@@ -25,7 +25,12 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             foreach (var method in codeModel.Methods)
             {
-                var okResponse = method.Responses[HttpStatusCode.OK];
+                Response okResponse = method.Responses.ContainsKey(HttpStatusCode.OK) ? method.Responses[HttpStatusCode.OK] : method.Responses.Values.FirstOrDefault(r => r.Body != null);
+
+                if (okResponse == null)
+                {
+                    continue;
+                }
 
                 var doNotWrap = okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType();
 
