@@ -267,9 +267,6 @@ Modelers:
   <data name="BodyWithType" xml:space="preserve">
     <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
   </data>
-  <data name="ConflictingRef" xml:space="preserve">
-    <value>Properties defined alongside $ref will be ignored according to JSON specification.</value>
-  </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>
   </data>

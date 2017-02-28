@@ -204,16 +204,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Properties defined alongside $ref will be ignored according to JSON specification..
-        /// </summary>
-        public static string ConflictingRef {
-            get {
-                return ResourceManager.GetString("ConflictingRef", resourceCulture);
-            }
-        }
-        
+               
         /// <summary>
         ///   Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in the request body..
         /// </summary>
