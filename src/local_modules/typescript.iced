@@ -37,9 +37,15 @@ Import
 
 task 'clean' , 'typescript', (done)->
   generatedFiles()
-    .pipe foreach (each,done)->
+    .pipe foreach (each,next)->
       rm each.path
-      done null
+      next null
+
+task 'test', 'typescript',['build/typescript'], (done)->
+  typescriptProjectFolders()
+    .pipe foreach (each,next)->
+      execute "#{each.path}/node_modules/.bin/mocha test", {cwd: each.path}, (c,o,e) ->
+        next null
 
 task 'npm-install', 'typescript', (done)-> 
   count = 0

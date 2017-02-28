@@ -15,6 +15,7 @@
       "dom",
       "es2016"
     ],
+    "experimentalDecorators": true,
     "newLine": "LF"
   },
   "exclude": [

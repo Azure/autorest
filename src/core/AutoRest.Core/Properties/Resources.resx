@@ -378,4 +378,7 @@ Modelers:
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
   </data>
+  <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
+    <value>Top level property names should not be repeated inside the properties bag. Properties [{0}] conflict with ARM top level properties. Please rename these.</value>
+  </data>
 </root>
