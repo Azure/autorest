@@ -55,13 +55,24 @@ module.exports =
     
     # add the new task.
     # gulp.task name, deps, fn
-    gulp.task name, deps, (done)->
-      if not global.completed[name] 
-        global.completed[name] = true
-        return fn(done)
-      # echo warning "Skipping completed task #{name}"
-      return done()
 
+    if fn.length # see if the task function has arguments (betcha never saw that before!)
+      gulp.task name, deps, (done)->
+        if not global.completed[name] 
+          #echo warning "Running task #{name} #{typeof done}"
+          global.completed[name] = true
+          return fn(done)
+        #echo warning "Skipping completed task #{name}"
+        return done()
+    else 
+      gulp.task name, deps, ()->
+        if not global.completed[name] 
+          #echo warning "Running task #{name}"
+          global.completed[name] = true
+          return fn()
+        #echo warning "Skipping completed task #{name}"
+        return null
+    
     
     # set the description
     gulp.tasks[name].description = description
