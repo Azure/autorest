@@ -68,7 +68,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
               @foreach (var property in Model.Properties.Where(p => p.ModelType is PrimaryType && !p.IsRequired && p.DefaultValue!=null))
               {
-            @:this.@(property.Name) = @(property.DefaultValue);
+            @:this.@(property.Name) = @(property.DefaultValue.Replace("\\", "\\\\"));
               }
         @:}
             }

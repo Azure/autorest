@@ -88,6 +88,10 @@ namespace AutoRest.CSharp
                 {
                     if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
                     {
+                        if (primaryType.DeclarationName.EqualsIgnoreCase("char"))
+                        {
+                            return "'" + defaultValue + "'";
+                        }
                         return Instance.QuoteValue(defaultValue);
                     }
                     if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)

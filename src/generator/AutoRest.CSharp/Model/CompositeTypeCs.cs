@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Model
                 return Name + "Exception";
             }
         }
-        
+
         public virtual IEnumerable<string> Usings => Enumerable.Empty<string>();
 
         /// <summary>
@@ -175,7 +175,6 @@ namespace AutoRest.CSharp.Model
 
                 return string.Empty;
             }
-            
         }
 
         public bool IsValueType => false;
