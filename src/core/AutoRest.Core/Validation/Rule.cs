@@ -24,7 +24,7 @@ namespace AutoRest.Core.Validation
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
-        public virtual ValidationCategory ValidationCategory => ((ValidationCategory)0); // !!! implement me and make me abstract !!!
+        public virtual ValidationCategory ValidationCategory => ValidationCategory.None; // !!! implement me and make me abstract !!!
 
         /// <summary>
         /// The template message for this Rule. 

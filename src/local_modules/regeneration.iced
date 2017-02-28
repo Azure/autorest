@@ -666,7 +666,7 @@ task 'regenerate', "regenerate expected code for tests", ['regenerate-delete'], 
   return null
   
 
-task 'regenerate-delete', '', ->
+task 'regenerate-delete', '', (done)->
   rm "-rf",
     'src/generator/AutoRest.CSharp.Tests/Expected'
     'src/generator/AutoRest.CSharp.Azure.Tests/Expected'
@@ -680,6 +680,8 @@ task 'regenerate-delete', '', ->
     'src/generator/AutoRest.Python.Tests/Expected'
     'src/generator/AutoRest.Python.Azure.Tests/Expected'
     'src/generator/AutoRest.AzureResourceSchema.Tests/Resource/Expected'
+  echo typeof done
+  done()
 
 task 'autorest-preview-build', '', ->
   exec "dotnet build #{basefolder}/src/dev/AutoRest.Preview/"

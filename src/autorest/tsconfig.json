@@ -10,6 +10,7 @@
     "strictNullChecks": true,
     "target": "es2016",
     "types" : ["node"],
+    "experimentalDecorators": true,
     "newLine": "LF"
   },
   "exclude": [
