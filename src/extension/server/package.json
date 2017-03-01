@@ -1,0 +1,22 @@
+{
+  "name": "autorest-language-server",
+  "description": "Implementation of the AutoRest language server",
+  "version": "0.0.1",
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    // "autorest": "../../bootstrapper",
+    "vscode-languageserver": "^3.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.52",
+    "typescript": "^2.1.5"
+  },
+  "scripts": {
+    "compile": "installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -p .",
+    "watch": "installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc --watch -p ."
+  }
+}

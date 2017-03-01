@@ -7,6 +7,7 @@ class ExecResult {
   stderr: string;
 }
 
+/* @internal */
 export class Utility {
 
   public static get Id(): string {

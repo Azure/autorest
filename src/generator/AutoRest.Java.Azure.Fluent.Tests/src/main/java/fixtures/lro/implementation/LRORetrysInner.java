@@ -117,6 +117,9 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200() {
@@ -127,6 +130,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
@@ -136,6 +140,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ProductInner> put201CreatingSucceeded200Async() {
@@ -150,6 +155,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200WithServiceResponseAsync() {
@@ -161,6 +167,9 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner put201CreatingSucceeded200(ProductInner product) {
@@ -172,6 +181,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> put201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
@@ -182,6 +192,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ProductInner> put201CreatingSucceeded200Async(ProductInner product) {
@@ -197,6 +208,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponse<ProductInner>> put201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
@@ -208,6 +220,9 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200() {
@@ -218,6 +233,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(final ServiceCallback<ProductInner> serviceCallback) {
@@ -227,6 +243,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut201CreatingSucceeded200Async() {
@@ -241,6 +258,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200WithServiceResponseAsync() {
@@ -263,6 +281,9 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPut201CreatingSucceeded200(ProductInner product) {
@@ -274,6 +295,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
@@ -284,6 +306,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPut201CreatingSucceeded200Async(ProductInner product) {
@@ -299,6 +322,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponse<ProductInner>> beginPut201CreatingSucceeded200WithServiceResponseAsync(ProductInner product) {
@@ -328,6 +352,9 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded() {
@@ -338,6 +365,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> putAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
@@ -347,6 +375,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRelativeRetrySucceededAsync() {
@@ -361,6 +390,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededWithServiceResponseAsync() {
@@ -372,6 +402,9 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner putAsyncRelativeRetrySucceeded(ProductInner product) {
@@ -383,6 +416,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
@@ -393,6 +427,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ProductInner> putAsyncRelativeRetrySucceededAsync(ProductInner product) {
@@ -408,6 +443,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> putAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
@@ -419,6 +455,9 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded() {
@@ -429,6 +468,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
@@ -438,6 +478,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRelativeRetrySucceededAsync() {
@@ -452,6 +493,7 @@ public class LRORetrysInner {
     /**
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync() {
@@ -474,6 +516,9 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner beginPutAsyncRelativeRetrySucceeded(ProductInner product) {
@@ -485,6 +530,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<ProductInner> serviceCallback) {
@@ -495,6 +541,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginPutAsyncRelativeRetrySucceededAsync(ProductInner product) {
@@ -510,6 +557,7 @@ public class LRORetrysInner {
      * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysPutAsyncRelativeRetrySucceededHeadersInner>> beginPutAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
@@ -538,6 +586,9 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner deleteProvisioning202Accepted200Succeeded() {
@@ -548,6 +599,7 @@ public class LRORetrysInner {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> deleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
@@ -557,6 +609,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ProductInner> deleteProvisioning202Accepted200SucceededAsync() {
@@ -571,6 +624,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> deleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
@@ -581,6 +635,9 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ProductInner object if successful.
      */
     public ProductInner beginDeleteProvisioning202Accepted200Succeeded() {
@@ -591,6 +648,7 @@ public class LRORetrysInner {
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<ProductInner> serviceCallback) {
@@ -600,6 +658,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ProductInner> beginDeleteProvisioning202Accepted200SucceededAsync() {
@@ -614,6 +673,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ProductInner object
      */
     public Observable<ServiceResponseWithHeaders<ProductInner, LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner>> beginDeleteProvisioning202Accepted200SucceededWithServiceResponseAsync() {
@@ -642,6 +702,9 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void delete202Retry200() {
         delete202Retry200WithServiceResponseAsync().toBlocking().last().body();
@@ -651,6 +714,7 @@ public class LRORetrysInner {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> delete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
@@ -660,6 +724,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<Void> delete202Retry200Async() {
@@ -674,6 +739,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> delete202Retry200WithServiceResponseAsync() {
@@ -684,6 +750,9 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDelete202Retry200() {
         beginDelete202Retry200WithServiceResponseAsync().toBlocking().single().body();
@@ -693,6 +762,7 @@ public class LRORetrysInner {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
@@ -702,6 +772,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDelete202Retry200Async() {
@@ -716,6 +787,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200HeadersInner>> beginDelete202Retry200WithServiceResponseAsync() {
@@ -743,6 +815,9 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void deleteAsyncRelativeRetrySucceeded() {
         deleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
@@ -752,6 +827,7 @@ public class LRORetrysInner {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> deleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
@@ -761,6 +837,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<Void> deleteAsyncRelativeRetrySucceededAsync() {
@@ -775,6 +852,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> deleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
@@ -785,6 +863,9 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginDeleteAsyncRelativeRetrySucceeded() {
         beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
@@ -794,6 +875,7 @@ public class LRORetrysInner {
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
@@ -803,6 +885,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginDeleteAsyncRelativeRetrySucceededAsync() {
@@ -817,6 +900,7 @@ public class LRORetrysInner {
     /**
      * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeadersInner>> beginDeleteAsyncRelativeRetrySucceededWithServiceResponseAsync() {
@@ -844,6 +928,9 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post202Retry200() {
         post202Retry200WithServiceResponseAsync().toBlocking().last().body();
@@ -853,6 +940,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Retry200Async(final ServiceCallback<Void> serviceCallback) {
@@ -862,6 +950,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<Void> post202Retry200Async() {
@@ -876,6 +965,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync() {
@@ -887,6 +977,9 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void post202Retry200(ProductInner product) {
         post202Retry200WithServiceResponseAsync(product).toBlocking().last().body();
@@ -897,6 +990,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> post202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
@@ -907,6 +1001,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<Void> post202Retry200Async(ProductInner product) {
@@ -922,6 +1017,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> post202Retry200WithServiceResponseAsync(ProductInner product) {
@@ -933,6 +1029,9 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200() {
         beginPost202Retry200WithServiceResponseAsync().toBlocking().single().body();
@@ -942,6 +1041,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPost202Retry200Async(final ServiceCallback<Void> serviceCallback) {
@@ -951,6 +1051,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202Retry200Async() {
@@ -965,6 +1066,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync() {
@@ -987,6 +1089,9 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPost202Retry200(ProductInner product) {
         beginPost202Retry200WithServiceResponseAsync(product).toBlocking().single().body();
@@ -997,6 +1102,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPost202Retry200Async(ProductInner product, final ServiceCallback<Void> serviceCallback) {
@@ -1007,6 +1113,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPost202Retry200Async(ProductInner product) {
@@ -1022,6 +1129,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200HeadersInner>> beginPost202Retry200WithServiceResponseAsync(ProductInner product) {
@@ -1050,6 +1158,9 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postAsyncRelativeRetrySucceeded() {
         postAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().last().body();
@@ -1059,6 +1170,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
@@ -1068,6 +1180,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRelativeRetrySucceededAsync() {
@@ -1082,6 +1195,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededWithServiceResponseAsync() {
@@ -1093,6 +1207,9 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postAsyncRelativeRetrySucceeded(ProductInner product) {
         postAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().last().body();
@@ -1103,6 +1220,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
@@ -1113,6 +1231,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<Void> postAsyncRelativeRetrySucceededAsync(ProductInner product) {
@@ -1128,6 +1247,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable for the request
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> postAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {
@@ -1139,6 +1259,9 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded() {
         beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync().toBlocking().single().body();
@@ -1148,6 +1271,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
@@ -1157,6 +1281,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRelativeRetrySucceededAsync() {
@@ -1171,6 +1296,7 @@ public class LRORetrysInner {
     /**
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync() {
@@ -1193,6 +1319,9 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void beginPostAsyncRelativeRetrySucceeded(ProductInner product) {
         beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(product).toBlocking().single().body();
@@ -1203,6 +1332,7 @@ public class LRORetrysInner {
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product, final ServiceCallback<Void> serviceCallback) {
@@ -1213,6 +1343,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> beginPostAsyncRelativeRetrySucceededAsync(ProductInner product) {
@@ -1228,6 +1359,7 @@ public class LRORetrysInner {
      * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeadersInner>> beginPostAsyncRelativeRetrySucceededWithServiceResponseAsync(ProductInner product) {

@@ -11,6 +11,7 @@ import { createFileUri } from "./lib/io/input";
 import { AutoRestConfiguration, AutoRestConfigurationManager } from "./lib/configuration/configuration";
 import { Pipeline, PipelineProducts } from "./lib/pipeline/pipeline";
 
+/* @internal */
 export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): Promise<PipelineProducts> {
   // load configuration file
   const inputView = dataStore.createReadThroughScope(KnownScopes.Input, uri => uri === configurationUri);
@@ -30,6 +31,7 @@ export async function run(configurationUri: string, dataStore: DataStoreView = n
   return await pipeline.run(dataStore);
 }
 
+/* @internal */
 export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): Promise<PipelineProducts> {
   const dataStore = new DataStore();
 
@@ -47,4 +49,13 @@ export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguratio
   }
 
   return await run(configFileUri, dataStore);
+}
+
+export interface IFileSystem {
+
+}
+
+export class AutoRest {
+  public constructor(configurationUrl: string, fileSystem: IFileSystem) {
+  }
 }

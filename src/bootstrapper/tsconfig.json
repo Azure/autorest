@@ -7,6 +7,8 @@
     "types" : ["node"],
     "newLine": "LF",
     "experimentalDecorators": true,
+    "declaration": true,
+    "stripInternal": true,
     "lib": [
       "es5",
       "es6",

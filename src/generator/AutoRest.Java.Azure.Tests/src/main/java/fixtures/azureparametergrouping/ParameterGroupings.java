@@ -13,10 +13,12 @@ package fixtures.azureparametergrouping;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -28,6 +30,9 @@ public interface ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
 
@@ -36,6 +41,7 @@ public interface ParameterGroupings {
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback);
@@ -44,6 +50,7 @@ public interface ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
@@ -52,6 +59,7 @@ public interface ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postRequiredWithServiceResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters);
@@ -59,6 +67,9 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptional();
 
@@ -66,6 +77,7 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback);
@@ -73,6 +85,7 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalAsync();
@@ -80,6 +93,7 @@ public interface ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync();
@@ -87,6 +101,9 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
 
@@ -95,6 +112,7 @@ public interface ParameterGroupings {
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback);
@@ -103,6 +121,7 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
@@ -111,6 +130,7 @@ public interface ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters);
@@ -118,6 +138,9 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postMultiParamGroups();
 
@@ -125,6 +148,7 @@ public interface ParameterGroupings {
      * Post parameters from multiple different parameter groups.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback);
@@ -132,6 +156,7 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postMultiParamGroupsAsync();
@@ -139,6 +164,7 @@ public interface ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync();
@@ -147,6 +173,9 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
 
@@ -156,6 +185,7 @@ public interface ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback);
@@ -165,6 +195,7 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
@@ -174,6 +205,7 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup);
@@ -181,6 +213,9 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postSharedParameterGroupObject();
 
@@ -188,6 +223,7 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback);
@@ -195,6 +231,7 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postSharedParameterGroupObjectAsync();
@@ -202,6 +239,7 @@ public interface ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync();
@@ -209,6 +247,9 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup);
 
@@ -217,6 +258,7 @@ public interface ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback);
@@ -225,6 +267,7 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup);
@@ -233,6 +276,7 @@ public interface ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync(FirstParameterGroup firstParameterGroup);

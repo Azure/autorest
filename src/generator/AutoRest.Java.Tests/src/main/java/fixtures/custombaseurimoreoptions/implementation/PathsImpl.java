@@ -67,6 +67,9 @@ public class PathsImpl implements Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getEmpty(String vault, String secret, String keyName) {
         getEmptyWithServiceResponseAsync(vault, secret, keyName).toBlocking().single().body();
@@ -79,6 +82,7 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback) {
@@ -91,6 +95,7 @@ public class PathsImpl implements Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getEmptyAsync(String vault, String secret, String keyName) {
@@ -108,6 +113,7 @@ public class PathsImpl implements Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName) {
@@ -149,6 +155,9 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getEmpty(String vault, String secret, String keyName, String keyVersion) {
         getEmptyWithServiceResponseAsync(vault, secret, keyName, keyVersion).toBlocking().single().body();
@@ -162,6 +171,7 @@ public class PathsImpl implements Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback) {
@@ -175,6 +185,7 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion) {
@@ -193,6 +204,7 @@ public class PathsImpl implements Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName, String keyVersion) {

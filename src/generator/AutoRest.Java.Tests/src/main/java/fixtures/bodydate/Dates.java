@@ -13,6 +13,8 @@ package fixtures.bodydate;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodydate.models.ErrorException;
+import java.io.IOException;
 import org.joda.time.LocalDate;
 import rx.Observable;
 
@@ -24,6 +26,9 @@ public interface Dates {
     /**
      * Get null date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LocalDate object if successful.
      */
     LocalDate getNull();
@@ -32,6 +37,7 @@ public interface Dates {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<LocalDate> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
@@ -39,6 +45,7 @@ public interface Dates {
     /**
      * Get null date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<LocalDate> getNullAsync();
@@ -46,6 +53,7 @@ public interface Dates {
     /**
      * Get null date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<ServiceResponse<LocalDate>> getNullWithServiceResponseAsync();
@@ -53,6 +61,9 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LocalDate object if successful.
      */
     LocalDate getInvalidDate();
@@ -61,6 +72,7 @@ public interface Dates {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<LocalDate> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
@@ -68,6 +80,7 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<LocalDate> getInvalidDateAsync();
@@ -75,6 +88,7 @@ public interface Dates {
     /**
      * Get invalid date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<ServiceResponse<LocalDate>> getInvalidDateWithServiceResponseAsync();
@@ -82,6 +96,9 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LocalDate object if successful.
      */
     LocalDate getOverflowDate();
@@ -90,6 +107,7 @@ public interface Dates {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<LocalDate> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
@@ -97,6 +115,7 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<LocalDate> getOverflowDateAsync();
@@ -104,6 +123,7 @@ public interface Dates {
     /**
      * Get overflow date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<ServiceResponse<LocalDate>> getOverflowDateWithServiceResponseAsync();
@@ -111,6 +131,9 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LocalDate object if successful.
      */
     LocalDate getUnderflowDate();
@@ -119,6 +142,7 @@ public interface Dates {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<LocalDate> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
@@ -126,6 +150,7 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<LocalDate> getUnderflowDateAsync();
@@ -133,6 +158,7 @@ public interface Dates {
     /**
      * Get underflow date value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<ServiceResponse<LocalDate>> getUnderflowDateWithServiceResponseAsync();
@@ -141,6 +167,9 @@ public interface Dates {
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putMaxDate(LocalDate dateBody);
 
@@ -149,6 +178,7 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
@@ -157,6 +187,7 @@ public interface Dates {
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putMaxDateAsync(LocalDate dateBody);
@@ -165,6 +196,7 @@ public interface Dates {
      * Put max date value 9999-12-31.
      *
      * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putMaxDateWithServiceResponseAsync(LocalDate dateBody);
@@ -172,6 +204,9 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LocalDate object if successful.
      */
     LocalDate getMaxDate();
@@ -180,6 +215,7 @@ public interface Dates {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<LocalDate> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
@@ -187,6 +223,7 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<LocalDate> getMaxDateAsync();
@@ -194,6 +231,7 @@ public interface Dates {
     /**
      * Get max date value 9999-12-31.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<ServiceResponse<LocalDate>> getMaxDateWithServiceResponseAsync();
@@ -202,6 +240,9 @@ public interface Dates {
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putMinDate(LocalDate dateBody);
 
@@ -210,6 +251,7 @@ public interface Dates {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
@@ -218,6 +260,7 @@ public interface Dates {
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putMinDateAsync(LocalDate dateBody);
@@ -226,6 +269,7 @@ public interface Dates {
      * Put min date value 0000-01-01.
      *
      * @param dateBody the LocalDate value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putMinDateWithServiceResponseAsync(LocalDate dateBody);
@@ -233,6 +277,9 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the LocalDate object if successful.
      */
     LocalDate getMinDate();
@@ -241,6 +288,7 @@ public interface Dates {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<LocalDate> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
@@ -248,6 +296,7 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<LocalDate> getMinDateAsync();
@@ -255,6 +304,7 @@ public interface Dates {
     /**
      * Get min date value 0000-01-01.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the LocalDate object
      */
     Observable<ServiceResponse<LocalDate>> getMinDateWithServiceResponseAsync();

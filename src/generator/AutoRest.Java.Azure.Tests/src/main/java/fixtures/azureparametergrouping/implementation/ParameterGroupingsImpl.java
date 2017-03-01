@@ -82,6 +82,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postRequired(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
         postRequiredWithServiceResponseAsync(parameterGroupingPostRequiredParameters).toBlocking().single().body();
@@ -92,6 +95,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters, final ServiceCallback<Void> serviceCallback) {
@@ -102,6 +106,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postRequiredAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
@@ -117,6 +122,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of required parameters grouped.
      *
      * @param parameterGroupingPostRequiredParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postRequiredWithServiceResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
@@ -152,6 +158,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptional() {
         postOptionalWithServiceResponseAsync().toBlocking().single().body();
@@ -161,6 +170,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalAsync(final ServiceCallback<Void> serviceCallback) {
@@ -170,6 +180,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postOptionalAsync() {
@@ -184,6 +195,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post a bunch of optional parameters grouped.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync() {
@@ -208,6 +220,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
         postOptionalWithServiceResponseAsync(parameterGroupingPostOptionalParameters).toBlocking().single().body();
@@ -218,6 +233,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
@@ -228,6 +244,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
@@ -243,6 +260,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post a bunch of optional parameters grouped.
      *
      * @param parameterGroupingPostOptionalParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postOptionalWithServiceResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
@@ -279,6 +297,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postMultiParamGroups() {
         postMultiParamGroupsWithServiceResponseAsync().toBlocking().single().body();
@@ -288,6 +309,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post parameters from multiple different parameter groups.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postMultiParamGroupsAsync(final ServiceCallback<Void> serviceCallback) {
@@ -297,6 +319,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postMultiParamGroupsAsync() {
@@ -311,6 +334,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters from multiple different parameter groups.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync() {
@@ -339,6 +363,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
         postMultiParamGroupsWithServiceResponseAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup).toBlocking().single().body();
@@ -350,6 +377,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
@@ -361,6 +389,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
@@ -377,6 +406,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postMultiParamGroupsWithServiceResponseAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
@@ -422,6 +452,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postSharedParameterGroupObject() {
         postSharedParameterGroupObjectWithServiceResponseAsync().toBlocking().single().body();
@@ -431,6 +464,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postSharedParameterGroupObjectAsync(final ServiceCallback<Void> serviceCallback) {
@@ -440,6 +474,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postSharedParameterGroupObjectAsync() {
@@ -454,6 +489,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
     /**
      * Post parameters with a shared parameter group object.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync() {
@@ -478,6 +514,9 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) {
         postSharedParameterGroupObjectWithServiceResponseAsync(firstParameterGroup).toBlocking().single().body();
@@ -488,6 +527,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      *
      * @param firstParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
@@ -498,6 +538,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup) {
@@ -513,6 +554,7 @@ public class ParameterGroupingsImpl implements ParameterGroupings {
      * Post parameters with a shared parameter group object.
      *
      * @param firstParameterGroup Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> postSharedParameterGroupObjectWithServiceResponseAsync(FirstParameterGroup firstParameterGroup) {

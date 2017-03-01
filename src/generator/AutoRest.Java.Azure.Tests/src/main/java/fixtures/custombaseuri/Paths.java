@@ -13,6 +13,8 @@ package fixtures.custombaseuri;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.custombaseuri.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -24,6 +26,9 @@ public interface Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getEmpty(String accountName);
 
@@ -32,6 +37,7 @@ public interface Paths {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
@@ -40,6 +46,7 @@ public interface Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getEmptyAsync(String accountName);
@@ -48,6 +55,7 @@ public interface Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName);

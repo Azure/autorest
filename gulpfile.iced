@@ -49,7 +49,7 @@ Import
       .pipe onlyFiles()
   
   typescriptProjectFolders: ()->
-    source ["src/autorest", "src/extension", "src/bootstrapper" ]
+    source ["src/bootstrapper", "src/autorest","src/extension/client","src/extension/server" ]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
@@ -87,6 +87,16 @@ task 'install-binaries', '', (done)->
   source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
     .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
 
+task 'install-extension-server' ,'', (done)->
+  # install vscode language service into the client folder
+  execute "node #{basefolder}/src/extension/server/node_modules/vscode-languageserver/bin/installServerIntoExtension #{basefolder}/src/extension/client #{basefolder}/src/extension/server/package.json #{basefolder}/src/extension/server/tsconfig.json",{ cwd:"#{basefolder}/src/extension/server" }, (c,o,e) -> done null
+  return null;
+
+task 'install-extension' ,'', ['install-extension-server', "build/typescript"], (done)->
+  # configures something locally for vscode?
+  execute "npm run update-vscode",{ cwd:"#{basefolder}/src/extension/client" }, (c,o,e) -> done null
+  return null;
+
 task 'install', 'build and install the dev version of autorest',(done)->
   run [ 'build/typescript', 'build/dotnet/binaries' ],
     'install-node-files',
@@ -106,5 +116,7 @@ task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (newer "#{basefolder}/src/autorest/package.json",  "#{basefolder}/src/autorest/node_modules") or (newer "#{basefolder}/src/bootstrapper/package.json",  "#{basefolder}/src/bootstrapper/node_modules")
   echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"
+
+  

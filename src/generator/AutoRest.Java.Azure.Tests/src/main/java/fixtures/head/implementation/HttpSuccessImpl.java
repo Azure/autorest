@@ -68,6 +68,9 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     public boolean head200() {
@@ -78,6 +81,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback) {
@@ -87,6 +91,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<Boolean> head200Async() {
@@ -101,6 +106,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync() {
@@ -129,6 +135,9 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     public boolean head204() {
@@ -139,6 +148,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback) {
@@ -148,6 +158,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<Boolean> head204Async() {
@@ -162,6 +173,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync() {
@@ -190,6 +202,9 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     public boolean head404() {
@@ -200,6 +215,7 @@ public class HttpSuccessImpl implements HttpSuccess {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback) {
@@ -209,6 +225,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<Boolean> head404Async() {
@@ -223,6 +240,7 @@ public class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync() {

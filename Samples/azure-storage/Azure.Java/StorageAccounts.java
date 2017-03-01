@@ -3,9 +3,11 @@
 
 package petstore;
 
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import java.io.IOException;
 import java.util.List;
 import petstore.models.CheckNameAvailabilityResult;
 import petstore.models.StorageAccount;
@@ -25,6 +27,9 @@ public interface StorageAccounts {
      * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the CheckNameAvailabilityResult object if successful.
      */
     CheckNameAvailabilityResult checkNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName);
@@ -34,6 +39,7 @@ public interface StorageAccounts {
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<CheckNameAvailabilityResult> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, final ServiceCallback<CheckNameAvailabilityResult> serviceCallback);
@@ -42,6 +48,7 @@ public interface StorageAccounts {
      * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the CheckNameAvailabilityResult object
      */
     Observable<CheckNameAvailabilityResult> checkNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName);
@@ -50,6 +57,7 @@ public interface StorageAccounts {
      * Checks that account name is valid and is not in use.
      *
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the CheckNameAvailabilityResult object
      */
     Observable<ServiceResponse<CheckNameAvailabilityResult>> checkNameAvailabilityWithServiceResponseAsync(StorageAccountCheckNameAvailabilityParameters accountName);
@@ -60,6 +68,9 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccount object if successful.
      */
     StorageAccount create(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters);
@@ -71,6 +82,7 @@ public interface StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback);
@@ -81,6 +93,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<StorageAccount> createAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters);
@@ -91,6 +104,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<ServiceResponse<StorageAccount>> createWithServiceResponseAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters);
@@ -101,6 +115,9 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccount object if successful.
      */
     StorageAccount beginCreate(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters);
@@ -112,6 +129,7 @@ public interface StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<StorageAccount> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback);
@@ -122,6 +140,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<StorageAccount> beginCreateAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters);
@@ -132,6 +151,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to provide for the created account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<ServiceResponse<StorageAccount>> beginCreateWithServiceResponseAsync(String resourceGroupName, String accountName, StorageAccountCreateParameters parameters);
@@ -141,6 +161,9 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void delete(String resourceGroupName, String accountName);
 
@@ -150,6 +173,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> deleteAsync(String resourceGroupName, String accountName, final ServiceCallback<Void> serviceCallback);
@@ -159,6 +183,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> deleteAsync(String resourceGroupName, String accountName);
@@ -168,6 +193,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> deleteWithServiceResponseAsync(String resourceGroupName, String accountName);
@@ -177,6 +203,9 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccount object if successful.
      */
     StorageAccount getProperties(String resourceGroupName, String accountName);
@@ -187,6 +216,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<StorageAccount> getPropertiesAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccount> serviceCallback);
@@ -196,6 +226,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<StorageAccount> getPropertiesAsync(String resourceGroupName, String accountName);
@@ -205,6 +236,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<ServiceResponse<StorageAccount>> getPropertiesWithServiceResponseAsync(String resourceGroupName, String accountName);
@@ -215,6 +247,9 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccount object if successful.
      */
     StorageAccount update(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters);
@@ -226,6 +261,7 @@ public interface StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<StorageAccount> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters, final ServiceCallback<StorageAccount> serviceCallback);
@@ -236,6 +272,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<StorageAccount> updateAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters);
@@ -246,6 +283,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param parameters The parameters to update on the account. Note that only one property can be changed at a time using this API.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccount object
      */
     Observable<ServiceResponse<StorageAccount>> updateWithServiceResponseAsync(String resourceGroupName, String accountName, StorageAccountUpdateParameters parameters);
@@ -255,6 +293,9 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the storage account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccountKeys object if successful.
      */
     StorageAccountKeys listKeys(String resourceGroupName, String accountName);
@@ -265,6 +306,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the storage account.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName, final ServiceCallback<StorageAccountKeys> serviceCallback);
@@ -274,6 +316,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the storage account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccountKeys object
      */
     Observable<StorageAccountKeys> listKeysAsync(String resourceGroupName, String accountName);
@@ -283,6 +326,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group.
      * @param accountName The name of the storage account.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccountKeys object
      */
     Observable<ServiceResponse<StorageAccountKeys>> listKeysWithServiceResponseAsync(String resourceGroupName, String accountName);
@@ -290,6 +334,9 @@ public interface StorageAccounts {
     /**
      * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;StorageAccount&gt; object if successful.
      */
     List<StorageAccount> list();
@@ -298,6 +345,7 @@ public interface StorageAccounts {
      * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<List<StorageAccount>> listAsync(final ServiceCallback<List<StorageAccount>> serviceCallback);
@@ -305,6 +353,7 @@ public interface StorageAccounts {
     /**
      * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;StorageAccount&gt; object
      */
     Observable<List<StorageAccount>> listAsync();
@@ -312,6 +361,7 @@ public interface StorageAccounts {
     /**
      * Lists all the storage accounts available under the subscription. Note that storage keys are not returned; use the ListKeys operation for this.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;StorageAccount&gt; object
      */
     Observable<ServiceResponse<List<StorageAccount>>> listWithServiceResponseAsync();
@@ -320,6 +370,9 @@ public interface StorageAccounts {
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;StorageAccount&gt; object if successful.
      */
     List<StorageAccount> listByResourceGroup(String resourceGroupName);
@@ -329,6 +382,7 @@ public interface StorageAccounts {
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<List<StorageAccount>> listByResourceGroupAsync(String resourceGroupName, final ServiceCallback<List<StorageAccount>> serviceCallback);
@@ -337,6 +391,7 @@ public interface StorageAccounts {
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;StorageAccount&gt; object
      */
     Observable<List<StorageAccount>> listByResourceGroupAsync(String resourceGroupName);
@@ -345,6 +400,7 @@ public interface StorageAccounts {
      * Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
      *
      * @param resourceGroupName The name of the resource group within the user's subscription.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;StorageAccount&gt; object
      */
     Observable<ServiceResponse<List<StorageAccount>>> listByResourceGroupWithServiceResponseAsync(String resourceGroupName);
@@ -355,6 +411,9 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the StorageAccountKeys object if successful.
      */
     StorageAccountKeys regenerateKey(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey);
@@ -366,6 +425,7 @@ public interface StorageAccounts {
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<StorageAccountKeys> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey, final ServiceCallback<StorageAccountKeys> serviceCallback);
@@ -376,6 +436,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccountKeys object
      */
     Observable<StorageAccountKeys> regenerateKeyAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey);
@@ -386,6 +447,7 @@ public interface StorageAccounts {
      * @param resourceGroupName The name of the resource group within the user's subscription.
      * @param accountName The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param regenerateKey Specifies name of the key which should be regenerated. key1 or key2 for the default keys
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the StorageAccountKeys object
      */
     Observable<ServiceResponse<StorageAccountKeys>> regenerateKeyWithServiceResponseAsync(String resourceGroupName, String accountName, StorageAccountRegenerateKeyParameters regenerateKey);
