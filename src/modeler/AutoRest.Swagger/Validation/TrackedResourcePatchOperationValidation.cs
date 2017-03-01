@@ -48,12 +48,11 @@ namespace AutoRest.Swagger.Validation
             {
                 if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    foreach (var patchOp in patchOperations)
+                    if(!patchOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {
-                        if (patchOp.Responses.ContainsKey("200") && patchOp.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() == definition.Key)
-                        {
-                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
-                        }
+                        // if no patch operation returns current tracked resource as a response, 
+                        // the tracked resource does not have a corresponding patch operation
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
                     }
                 }
             }

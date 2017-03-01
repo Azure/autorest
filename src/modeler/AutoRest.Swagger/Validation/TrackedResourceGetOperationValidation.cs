@@ -49,14 +49,12 @@ namespace AutoRest.Swagger.Validation
             {
                 if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    foreach (var getOp in getOperations)
+                    // check for 200 status response models since they correspond to a successful get operation
+                    if (!getOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {
-                        if (getOp.Responses.ContainsKey("200") && getOp.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() == definition.Key)
-                        {
-                            // if no GET operation returns current tracked resource as a response, 
-                            // the tracked resource does not have a corresponding get operation
-                            yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
-                        }
+                        // if no GET operation returns current tracked resource as a response, 
+                        // the tracked resource does not have a corresponding get operation
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
                     }
                 }
             }
