@@ -1,9 +1,9 @@
-﻿@using System.Linq;
+@using System.Linq;
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
 @using AutoRest.Java
 @using AutoRest.Java.Model
-@inherits AutoRest.Core.Template<AutoRest.Java.Model.MethodJv>
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodJva>
 @if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 <text>
@@ -21,9 +21,6 @@
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
- * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
@@ -55,7 +52,6 @@ else
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
@@ -76,7 +72,6 @@ public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
@@ -86,11 +81,13 @@ else
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
-    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, @Model.ReturnTypeJv.GenericBodyClientTypeString>() {
+public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
         @@Override
-        public @Model.ReturnTypeJv.GenericBodyClientTypeString call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
-            return response.body();
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
+            @Model.ReturnTypeJv.GenericBodyWireTypeString page = new PageImpl<>();
+            page.setItems(response.body());
+            return page;
         }
     });
 }
@@ -109,7 +106,6 @@ public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
@@ -179,9 +175,6 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
- * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
- * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
@@ -213,7 +206,6 @@ else
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
- * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
@@ -234,7 +226,6 @@ public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
@@ -244,11 +235,13 @@ else
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
  */
-public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
-    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, @Model.ReturnTypeJv.GenericBodyClientTypeString>() {
+public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
         @@Override
-        public @Model.ReturnTypeJv.GenericBodyClientTypeString call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
-            return response.body();
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
+            @Model.ReturnTypeJv.GenericBodyWireTypeString page = new PageImpl<>();
+            page.setItems(response.body());
+            return page;
         }
     });
 }
@@ -267,7 +260,6 @@ public Observable<@Model.ReturnTypeJv.GenericBodyClientTypeString> @(Model.Name)
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
- * @@throws IllegalArgumentException thrown if parameters fail the validation
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object

@@ -49,6 +49,10 @@ public class @(Model.MethodGroupImplType)@(Model.ParentDeclaration) {
     {
     @:@(Include(new PagingMethodTemplate(), method))
     }
+    else if (method.SimulateAsPagingOperation)
+    {
+    @:@(Include(new SimulatedPageMethodTemplate(), method))
+    }
     else
     {
     @:@(Include(new AzureMethodTemplate(), method))

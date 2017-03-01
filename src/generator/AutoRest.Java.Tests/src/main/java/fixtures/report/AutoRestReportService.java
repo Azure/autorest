@@ -13,6 +13,8 @@ package fixtures.report;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.report.models.ErrorException;
+import java.io.IOException;
 import java.util.Map;
 import rx.Observable;
 import com.microsoft.rest.RestClient;
@@ -36,6 +38,9 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     Map<String, Integer> getReport();
@@ -44,6 +49,7 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
@@ -51,6 +57,7 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Observable<Map<String, Integer>> getReportAsync();
@@ -58,6 +65,7 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync();

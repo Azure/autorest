@@ -10,9 +10,11 @@
 
 package fixtures.headexceptions;
 
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -23,6 +25,9 @@ public interface HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void head200();
 
@@ -30,6 +35,7 @@ public interface HeadExceptions {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback);
@@ -37,6 +43,7 @@ public interface HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> head200Async();
@@ -44,6 +51,7 @@ public interface HeadExceptions {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> head200WithServiceResponseAsync();
@@ -51,6 +59,9 @@ public interface HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void head204();
 
@@ -58,6 +69,7 @@ public interface HeadExceptions {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback);
@@ -65,6 +77,7 @@ public interface HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> head204Async();
@@ -72,6 +85,7 @@ public interface HeadExceptions {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> head204WithServiceResponseAsync();
@@ -79,6 +93,9 @@ public interface HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void head404();
 
@@ -86,6 +103,7 @@ public interface HeadExceptions {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback);
@@ -93,6 +111,7 @@ public interface HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> head404Async();
@@ -100,6 +119,7 @@ public interface HeadExceptions {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> head404WithServiceResponseAsync();

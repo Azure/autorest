@@ -14,6 +14,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
 import fixtures.header.models.HeaderResponseByteHeaders;
@@ -29,6 +30,7 @@ import fixtures.header.models.HeaderResponseIntegerHeaders;
 import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
+import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
@@ -43,6 +45,9 @@ public interface Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramExistingKey(String userAgent);
 
@@ -51,6 +56,7 @@ public interface Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback);
@@ -59,6 +65,7 @@ public interface Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramExistingKeyAsync(String userAgent);
@@ -67,6 +74,7 @@ public interface Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramExistingKeyWithServiceResponseAsync(String userAgent);
@@ -74,6 +82,9 @@ public interface Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseExistingKey();
 
@@ -81,6 +92,7 @@ public interface Headers {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback);
@@ -88,6 +100,7 @@ public interface Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseExistingKeyAsync();
@@ -95,6 +108,7 @@ public interface Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> responseExistingKeyWithServiceResponseAsync();
@@ -103,6 +117,9 @@ public interface Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramProtectedKey(String contentType);
 
@@ -111,6 +128,7 @@ public interface Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback);
@@ -119,6 +137,7 @@ public interface Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramProtectedKeyAsync(String contentType);
@@ -127,6 +146,7 @@ public interface Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramProtectedKeyWithServiceResponseAsync(String contentType);
@@ -134,6 +154,9 @@ public interface Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseProtectedKey();
 
@@ -141,6 +164,7 @@ public interface Headers {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback);
@@ -148,6 +172,7 @@ public interface Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseProtectedKeyAsync();
@@ -155,6 +180,7 @@ public interface Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> responseProtectedKeyWithServiceResponseAsync();
@@ -164,6 +190,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramInteger(String scenario, int value);
 
@@ -173,6 +202,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback);
@@ -182,6 +212,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramIntegerAsync(String scenario, int value);
@@ -191,6 +222,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramIntegerWithServiceResponseAsync(String scenario, int value);
@@ -199,6 +231,9 @@ public interface Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseInteger(String scenario);
 
@@ -207,6 +242,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -215,6 +251,7 @@ public interface Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseIntegerAsync(String scenario);
@@ -223,6 +260,7 @@ public interface Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> responseIntegerWithServiceResponseAsync(String scenario);
@@ -232,6 +270,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramLong(String scenario, long value);
 
@@ -241,6 +282,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback);
@@ -250,6 +292,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramLongAsync(String scenario, long value);
@@ -259,6 +302,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramLongWithServiceResponseAsync(String scenario, long value);
@@ -267,6 +311,9 @@ public interface Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseLong(String scenario);
 
@@ -275,6 +322,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -283,6 +331,7 @@ public interface Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseLongAsync(String scenario);
@@ -291,6 +340,7 @@ public interface Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> responseLongWithServiceResponseAsync(String scenario);
@@ -300,6 +350,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramFloat(String scenario, double value);
 
@@ -309,6 +362,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
@@ -318,6 +372,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramFloatAsync(String scenario, double value);
@@ -327,6 +382,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramFloatWithServiceResponseAsync(String scenario, double value);
@@ -335,6 +391,9 @@ public interface Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseFloat(String scenario);
 
@@ -343,6 +402,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -351,6 +411,7 @@ public interface Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseFloatAsync(String scenario);
@@ -359,6 +420,7 @@ public interface Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> responseFloatWithServiceResponseAsync(String scenario);
@@ -368,6 +430,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramDouble(String scenario, double value);
 
@@ -377,6 +442,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
@@ -386,6 +452,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramDoubleAsync(String scenario, double value);
@@ -395,6 +462,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramDoubleWithServiceResponseAsync(String scenario, double value);
@@ -403,6 +471,9 @@ public interface Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseDouble(String scenario);
 
@@ -411,6 +482,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -419,6 +491,7 @@ public interface Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseDoubleAsync(String scenario);
@@ -427,6 +500,7 @@ public interface Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> responseDoubleWithServiceResponseAsync(String scenario);
@@ -436,6 +510,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramBool(String scenario, boolean value);
 
@@ -445,6 +522,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback);
@@ -454,6 +532,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramBoolAsync(String scenario, boolean value);
@@ -463,6 +542,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramBoolWithServiceResponseAsync(String scenario, boolean value);
@@ -471,6 +551,9 @@ public interface Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseBool(String scenario);
 
@@ -479,6 +562,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -487,6 +571,7 @@ public interface Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseBoolAsync(String scenario);
@@ -495,6 +580,7 @@ public interface Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> responseBoolWithServiceResponseAsync(String scenario);
@@ -503,6 +589,9 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramString(String scenario);
 
@@ -511,6 +600,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -519,6 +609,7 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramStringAsync(String scenario);
@@ -527,6 +618,7 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramStringWithServiceResponseAsync(String scenario);
@@ -535,6 +627,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramString(String scenario, String value);
 
@@ -544,6 +639,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback);
@@ -553,6 +649,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramStringAsync(String scenario, String value);
@@ -562,6 +659,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramStringWithServiceResponseAsync(String scenario, String value);
@@ -570,6 +668,9 @@ public interface Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseString(String scenario);
 
@@ -578,6 +679,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -586,6 +688,7 @@ public interface Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseStringAsync(String scenario);
@@ -594,6 +697,7 @@ public interface Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> responseStringWithServiceResponseAsync(String scenario);
@@ -603,6 +707,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramDate(String scenario, LocalDate value);
 
@@ -612,6 +719,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback);
@@ -621,6 +729,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramDateAsync(String scenario, LocalDate value);
@@ -630,6 +739,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramDateWithServiceResponseAsync(String scenario, LocalDate value);
@@ -638,6 +748,9 @@ public interface Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseDate(String scenario);
 
@@ -646,6 +759,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -654,6 +768,7 @@ public interface Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseDateAsync(String scenario);
@@ -662,6 +777,7 @@ public interface Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> responseDateWithServiceResponseAsync(String scenario);
@@ -671,6 +787,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramDatetime(String scenario, DateTime value);
 
@@ -680,6 +799,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback);
@@ -689,6 +809,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramDatetimeAsync(String scenario, DateTime value);
@@ -698,6 +819,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramDatetimeWithServiceResponseAsync(String scenario, DateTime value);
@@ -706,6 +828,9 @@ public interface Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseDatetime(String scenario);
 
@@ -714,6 +839,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -722,6 +848,7 @@ public interface Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseDatetimeAsync(String scenario);
@@ -730,6 +857,7 @@ public interface Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> responseDatetimeWithServiceResponseAsync(String scenario);
@@ -738,6 +866,9 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramDatetimeRfc1123(String scenario);
 
@@ -746,6 +877,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -754,6 +886,7 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramDatetimeRfc1123Async(String scenario);
@@ -762,6 +895,7 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramDatetimeRfc1123WithServiceResponseAsync(String scenario);
@@ -770,6 +904,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramDatetimeRfc1123(String scenario, DateTime value);
 
@@ -779,6 +916,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback);
@@ -788,6 +926,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramDatetimeRfc1123Async(String scenario, DateTime value);
@@ -797,6 +936,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramDatetimeRfc1123WithServiceResponseAsync(String scenario, DateTime value);
@@ -805,6 +945,9 @@ public interface Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseDatetimeRfc1123(String scenario);
 
@@ -813,6 +956,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -821,6 +965,7 @@ public interface Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseDatetimeRfc1123Async(String scenario);
@@ -829,6 +974,7 @@ public interface Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> responseDatetimeRfc1123WithServiceResponseAsync(String scenario);
@@ -838,6 +984,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramDuration(String scenario, Period value);
 
@@ -847,6 +996,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback);
@@ -856,6 +1006,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramDurationAsync(String scenario, Period value);
@@ -865,6 +1016,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramDurationWithServiceResponseAsync(String scenario, Period value);
@@ -873,6 +1025,9 @@ public interface Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseDuration(String scenario);
 
@@ -881,6 +1036,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -889,6 +1045,7 @@ public interface Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseDurationAsync(String scenario);
@@ -897,6 +1054,7 @@ public interface Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> responseDurationWithServiceResponseAsync(String scenario);
@@ -906,6 +1064,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramByte(String scenario, byte[] value);
 
@@ -915,6 +1076,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback);
@@ -924,6 +1086,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramByteAsync(String scenario, byte[] value);
@@ -933,6 +1096,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramByteWithServiceResponseAsync(String scenario, byte[] value);
@@ -941,6 +1105,9 @@ public interface Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseByte(String scenario);
 
@@ -949,6 +1116,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -957,6 +1125,7 @@ public interface Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseByteAsync(String scenario);
@@ -965,6 +1134,7 @@ public interface Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> responseByteWithServiceResponseAsync(String scenario);
@@ -973,6 +1143,9 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramEnum(String scenario);
 
@@ -981,6 +1154,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -989,6 +1163,7 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramEnumAsync(String scenario);
@@ -997,6 +1172,7 @@ public interface Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario);
@@ -1005,6 +1181,9 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void paramEnum(String scenario, GreyscaleColors value);
 
@@ -1014,6 +1193,7 @@ public interface Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback);
@@ -1023,6 +1203,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> paramEnumAsync(String scenario, GreyscaleColors value);
@@ -1032,6 +1213,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario, GreyscaleColors value);
@@ -1040,6 +1222,9 @@ public interface Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void responseEnum(String scenario);
 
@@ -1048,6 +1233,7 @@ public interface Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback);
@@ -1056,6 +1242,7 @@ public interface Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<Void> responseEnumAsync(String scenario);
@@ -1064,6 +1251,7 @@ public interface Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     Observable<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> responseEnumWithServiceResponseAsync(String scenario);
@@ -1071,6 +1259,9 @@ public interface Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void customRequestId();
 
@@ -1078,6 +1269,7 @@ public interface Headers {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback);
@@ -1085,6 +1277,7 @@ public interface Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> customRequestIdAsync();
@@ -1092,6 +1285,7 @@ public interface Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> customRequestIdWithServiceResponseAsync();

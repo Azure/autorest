@@ -14,6 +14,8 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.Basic;
+import fixtures.bodycomplex.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -24,6 +26,9 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Basic object if successful.
      */
     Basic getValid();
@@ -32,6 +37,7 @@ public interface Basics {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Basic> getValidAsync(final ServiceCallback<Basic> serviceCallback);
@@ -39,6 +45,7 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<Basic> getValidAsync();
@@ -46,6 +53,7 @@ public interface Basics {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<ServiceResponse<Basic>> getValidWithServiceResponseAsync();
@@ -54,6 +62,9 @@ public interface Basics {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putValid(Basic complexBody);
 
@@ -62,6 +73,7 @@ public interface Basics {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
@@ -70,6 +82,7 @@ public interface Basics {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putValidAsync(Basic complexBody);
@@ -78,6 +91,7 @@ public interface Basics {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Basic complexBody);
@@ -85,6 +99,9 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Basic object if successful.
      */
     Basic getInvalid();
@@ -93,6 +110,7 @@ public interface Basics {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Basic> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
@@ -100,6 +118,7 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<Basic> getInvalidAsync();
@@ -107,6 +126,7 @@ public interface Basics {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<ServiceResponse<Basic>> getInvalidWithServiceResponseAsync();
@@ -114,6 +134,9 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Basic object if successful.
      */
     Basic getEmpty();
@@ -122,6 +145,7 @@ public interface Basics {
      * Get a basic complex type that is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Basic> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
@@ -129,6 +153,7 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<Basic> getEmptyAsync();
@@ -136,6 +161,7 @@ public interface Basics {
     /**
      * Get a basic complex type that is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<ServiceResponse<Basic>> getEmptyWithServiceResponseAsync();
@@ -143,6 +169,9 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Basic object if successful.
      */
     Basic getNull();
@@ -151,6 +180,7 @@ public interface Basics {
      * Get a basic complex type whose properties are null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Basic> getNullAsync(final ServiceCallback<Basic> serviceCallback);
@@ -158,6 +188,7 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<Basic> getNullAsync();
@@ -165,6 +196,7 @@ public interface Basics {
     /**
      * Get a basic complex type whose properties are null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<ServiceResponse<Basic>> getNullWithServiceResponseAsync();
@@ -172,6 +204,9 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Basic object if successful.
      */
     Basic getNotProvided();
@@ -180,6 +215,7 @@ public interface Basics {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Basic> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
@@ -187,6 +223,7 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<Basic> getNotProvidedAsync();
@@ -194,6 +231,7 @@ public interface Basics {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Basic object
      */
     Observable<ServiceResponse<Basic>> getNotProvidedWithServiceResponseAsync();

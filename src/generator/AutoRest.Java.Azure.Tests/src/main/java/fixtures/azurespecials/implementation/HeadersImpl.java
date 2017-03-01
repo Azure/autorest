@@ -75,6 +75,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void customNamedRequestId(String fooClientRequestId) {
         customNamedRequestIdWithServiceResponseAsync(fooClientRequestId).toBlocking().single().body();
@@ -85,6 +88,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
@@ -95,6 +99,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> customNamedRequestIdAsync(String fooClientRequestId) {
@@ -110,6 +115,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders>> customNamedRequestIdWithServiceResponseAsync(String fooClientRequestId) {
@@ -141,6 +147,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void customNamedRequestIdParamGrouping(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
         customNamedRequestIdParamGroupingWithServiceResponseAsync(headerCustomNamedRequestIdParamGroupingParameters).toBlocking().single().body();
@@ -151,6 +160,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, final ServiceCallback<Void> serviceCallback) {
@@ -161,6 +171,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> customNamedRequestIdParamGroupingAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
@@ -176,6 +187,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
      *
      * @param headerCustomNamedRequestIdParamGroupingParameters Additional parameters for the operation
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdParamGroupingHeaders>> customNamedRequestIdParamGroupingWithServiceResponseAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
@@ -209,6 +221,9 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     public boolean customNamedRequestIdHead(String fooClientRequestId) {
@@ -220,6 +235,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId, final ServiceCallback<Boolean> serviceCallback) {
@@ -230,6 +246,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<Boolean> customNamedRequestIdHeadAsync(String fooClientRequestId) {
@@ -245,6 +262,7 @@ public class HeadersImpl implements fixtures.azurespecials.Headers {
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Boolean object
      */
     public Observable<ServiceResponseWithHeaders<Boolean, HeaderCustomNamedRequestIdHeadHeaders>> customNamedRequestIdHeadWithServiceResponseAsync(String fooClientRequestId) {

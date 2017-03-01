@@ -194,6 +194,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramExistingKey(String userAgent) {
         paramExistingKeyWithServiceResponseAsync(userAgent).toBlocking().single().body();
@@ -204,6 +207,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
@@ -214,6 +218,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramExistingKeyAsync(String userAgent) {
@@ -229,6 +234,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "User-Agent": "overwrite".
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramExistingKeyWithServiceResponseAsync(String userAgent) {
@@ -259,6 +265,9 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseExistingKey() {
         responseExistingKeyWithServiceResponseAsync().toBlocking().single().body();
@@ -268,6 +277,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
@@ -277,6 +287,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseExistingKeyAsync() {
@@ -291,6 +302,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "User-Agent": "overwrite".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders>> responseExistingKeyWithServiceResponseAsync() {
@@ -319,6 +331,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramProtectedKey(String contentType) {
         paramProtectedKeyWithServiceResponseAsync(contentType).toBlocking().single().body();
@@ -329,6 +344,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
@@ -339,6 +355,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramProtectedKeyAsync(String contentType) {
@@ -354,6 +371,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header value "Content-Type": "text/html".
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramProtectedKeyWithServiceResponseAsync(String contentType) {
@@ -384,6 +402,9 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseProtectedKey() {
         responseProtectedKeyWithServiceResponseAsync().toBlocking().single().body();
@@ -393,6 +414,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
@@ -402,6 +424,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseProtectedKeyAsync() {
@@ -416,6 +439,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Get a response with header value "Content-Type": "text/html".
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders>> responseProtectedKeyWithServiceResponseAsync() {
@@ -445,6 +469,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramInteger(String scenario, int value) {
         paramIntegerWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -456,6 +483,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
@@ -467,6 +495,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramIntegerAsync(String scenario, int value) {
@@ -483,6 +512,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramIntegerWithServiceResponseAsync(String scenario, int value) {
@@ -514,6 +544,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseInteger(String scenario) {
         responseIntegerWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -524,6 +557,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -534,6 +568,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseIntegerAsync(String scenario) {
@@ -549,6 +584,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 1 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders>> responseIntegerWithServiceResponseAsync(String scenario) {
@@ -581,6 +617,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramLong(String scenario, long value) {
         paramLongWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -592,6 +631,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
@@ -603,6 +643,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramLongAsync(String scenario, long value) {
@@ -619,6 +660,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramLongWithServiceResponseAsync(String scenario, long value) {
@@ -650,6 +692,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseLong(String scenario) {
         responseLongWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -660,6 +705,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -670,6 +716,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseLongAsync(String scenario) {
@@ -685,6 +732,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 105 or -2.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders>> responseLongWithServiceResponseAsync(String scenario) {
@@ -717,6 +765,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramFloat(String scenario, double value) {
         paramFloatWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -728,6 +779,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
@@ -739,6 +791,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramFloatAsync(String scenario, double value) {
@@ -755,6 +808,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramFloatWithServiceResponseAsync(String scenario, double value) {
@@ -786,6 +840,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseFloat(String scenario) {
         responseFloatWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -796,6 +853,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -806,6 +864,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseFloatAsync(String scenario) {
@@ -821,6 +880,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 0.07 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders>> responseFloatWithServiceResponseAsync(String scenario) {
@@ -853,6 +913,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramDouble(String scenario, double value) {
         paramDoubleWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -864,6 +927,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
@@ -875,6 +939,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDoubleAsync(String scenario, double value) {
@@ -891,6 +956,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDoubleWithServiceResponseAsync(String scenario, double value) {
@@ -922,6 +988,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseDouble(String scenario) {
         responseDoubleWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -932,6 +1001,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -942,6 +1012,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDoubleAsync(String scenario) {
@@ -957,6 +1028,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": 7e120 or -3.0.
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders>> responseDoubleWithServiceResponseAsync(String scenario) {
@@ -989,6 +1061,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramBool(String scenario, boolean value) {
         paramBoolWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1000,6 +1075,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
@@ -1011,6 +1087,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramBoolAsync(String scenario, boolean value) {
@@ -1027,6 +1104,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramBoolWithServiceResponseAsync(String scenario, boolean value) {
@@ -1058,6 +1136,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseBool(String scenario) {
         responseBoolWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1068,6 +1149,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1078,6 +1160,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseBoolAsync(String scenario) {
@@ -1093,6 +1176,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header value "value": true or false.
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders>> responseBoolWithServiceResponseAsync(String scenario) {
@@ -1124,6 +1208,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramString(String scenario) {
         paramStringWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1134,6 +1221,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1144,6 +1232,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramStringAsync(String scenario) {
@@ -1159,6 +1248,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramStringWithServiceResponseAsync(String scenario) {
@@ -1185,6 +1275,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramString(String scenario, String value) {
         paramStringWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1196,6 +1289,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
@@ -1207,6 +1301,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramStringAsync(String scenario, String value) {
@@ -1223,6 +1318,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramStringWithServiceResponseAsync(String scenario, String value) {
@@ -1254,6 +1350,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseString(String scenario) {
         responseStringWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1264,6 +1363,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1274,6 +1374,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseStringAsync(String scenario) {
@@ -1289,6 +1390,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders>> responseStringWithServiceResponseAsync(String scenario) {
@@ -1321,6 +1423,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramDate(String scenario, LocalDate value) {
         paramDateWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1332,6 +1437,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
@@ -1343,6 +1449,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDateAsync(String scenario, LocalDate value) {
@@ -1359,6 +1466,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDateWithServiceResponseAsync(String scenario, LocalDate value) {
@@ -1393,6 +1501,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseDate(String scenario) {
         responseDateWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1403,6 +1514,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1413,6 +1525,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDateAsync(String scenario) {
@@ -1428,6 +1541,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01" or "0001-01-01".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders>> responseDateWithServiceResponseAsync(String scenario) {
@@ -1460,6 +1574,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramDatetime(String scenario, DateTime value) {
         paramDatetimeWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1471,6 +1588,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
@@ -1482,6 +1600,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDatetimeAsync(String scenario, DateTime value) {
@@ -1498,6 +1617,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDatetimeWithServiceResponseAsync(String scenario, DateTime value) {
@@ -1532,6 +1652,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseDatetime(String scenario) {
         responseDatetimeWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1542,6 +1665,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1552,6 +1676,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDatetimeAsync(String scenario) {
@@ -1567,6 +1692,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders>> responseDatetimeWithServiceResponseAsync(String scenario) {
@@ -1598,6 +1724,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramDatetimeRfc1123(String scenario) {
         paramDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1608,6 +1737,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1618,6 +1748,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDatetimeRfc1123Async(String scenario) {
@@ -1633,6 +1764,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDatetimeRfc1123WithServiceResponseAsync(String scenario) {
@@ -1663,6 +1795,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramDatetimeRfc1123(String scenario, DateTime value) {
         paramDatetimeRfc1123WithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1674,6 +1809,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramDatetimeRfc1123Async(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
@@ -1685,6 +1821,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDatetimeRfc1123Async(String scenario, DateTime value) {
@@ -1701,6 +1838,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDatetimeRfc1123WithServiceResponseAsync(String scenario, DateTime value) {
@@ -1736,6 +1874,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseDatetimeRfc1123(String scenario) {
         responseDatetimeRfc1123WithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1746,6 +1887,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1756,6 +1898,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDatetimeRfc1123Async(String scenario) {
@@ -1771,6 +1914,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers>> responseDatetimeRfc1123WithServiceResponseAsync(String scenario) {
@@ -1803,6 +1947,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramDuration(String scenario, Period value) {
         paramDurationWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1814,6 +1961,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
@@ -1825,6 +1973,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramDurationAsync(String scenario, Period value) {
@@ -1841,6 +1990,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramDurationWithServiceResponseAsync(String scenario, Period value) {
@@ -1875,6 +2025,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseDuration(String scenario) {
         responseDurationWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -1885,6 +2038,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -1895,6 +2049,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseDurationAsync(String scenario) {
@@ -1910,6 +2065,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "P123DT22H14M12.011S".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders>> responseDurationWithServiceResponseAsync(String scenario) {
@@ -1942,6 +2098,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramByte(String scenario, byte[] value) {
         paramByteWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -1953,6 +2112,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
@@ -1964,6 +2124,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramByteAsync(String scenario, byte[] value) {
@@ -1980,6 +2141,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramByteWithServiceResponseAsync(String scenario, byte[] value) {
@@ -2015,6 +2177,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseByte(String scenario) {
         responseByteWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -2025,6 +2190,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -2035,6 +2201,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseByteAsync(String scenario) {
@@ -2050,6 +2217,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
      *
      * @param scenario Send a post request with header values "scenario": "valid"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders>> responseByteWithServiceResponseAsync(String scenario) {
@@ -2081,6 +2249,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramEnum(String scenario) {
         paramEnumWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -2091,6 +2262,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -2101,6 +2273,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramEnumAsync(String scenario) {
@@ -2116,6 +2289,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario) {
@@ -2142,6 +2316,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void paramEnum(String scenario, GreyscaleColors value) {
         paramEnumWithServiceResponseAsync(scenario, value).toBlocking().single().body();
@@ -2153,6 +2330,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
@@ -2164,6 +2342,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> paramEnumAsync(String scenario, GreyscaleColors value) {
@@ -2180,6 +2359,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY'. Possible values include: 'White', 'black', 'GREY'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> paramEnumWithServiceResponseAsync(String scenario, GreyscaleColors value) {
@@ -2211,6 +2391,9 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void responseEnum(String scenario) {
         responseEnumWithServiceResponseAsync(scenario).toBlocking().single().body();
@@ -2221,6 +2404,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
@@ -2231,6 +2415,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<Void> responseEnumAsync(String scenario) {
@@ -2246,6 +2431,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Get a response with header values "GREY" or null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     public Observable<ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders>> responseEnumWithServiceResponseAsync(String scenario) {
@@ -2276,6 +2462,9 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void customRequestId() {
         customRequestIdWithServiceResponseAsync().toBlocking().single().body();
@@ -2285,6 +2474,7 @@ public class HeadersImpl implements fixtures.header.Headers {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
@@ -2294,6 +2484,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> customRequestIdAsync() {
@@ -2308,6 +2499,7 @@ public class HeadersImpl implements fixtures.header.Headers {
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> customRequestIdWithServiceResponseAsync() {
