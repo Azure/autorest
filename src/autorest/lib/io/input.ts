@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 // untyped imports
+const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
 
@@ -25,7 +26,7 @@ export async function readUri(uri: string): Promise<string> {
       readable.on("error", err => reject(err));
     });
 
-    return await readAll;
+    return stripBom(await readAll);
   } catch (e) {
     throw new Error(`Failed to load '${uri}' (${e})`);
   }
