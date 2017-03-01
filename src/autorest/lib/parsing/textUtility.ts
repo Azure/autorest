@@ -3,16 +3,21 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+const regexNewLine = /\r?\n/g;
+
 function lineIndices(text: string): number[] {
   let indices = [0];
 
-  const regex = /\r?\n/g;
   let match: RegExpExecArray | null;
-  while ((match = regex.exec(text)) !== null) {
+  while ((match = regexNewLine.exec(text)) !== null) {
     indices.push(match.index + match[0].length);
   }
 
   return indices;
+}
+
+export function lines(text: string): string[] {
+  return text.split(regexNewLine);
 }
 
 export function indexToPosition(text: string, index: number): sourceMap.Position {

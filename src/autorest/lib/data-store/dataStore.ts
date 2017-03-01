@@ -10,8 +10,7 @@ import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Mappings, compile, Position, compilePosition } from "../source-map/sourceMap";
 import { BlameTree } from "../source-map/blaming";
-import { parse } from "../parsing/yaml";
-import { YAMLNode, parse as parseAst } from "../parsing/yamlAst";
+import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../parsing/yaml";
 
 export const helloworld = "hi";
 
@@ -57,7 +56,7 @@ export abstract class DataStoreViewReadonly {
         const metadata = await dataHandle.readMetadata();
         const targetFile = path.join(targetDir, key);
         await dumpString(targetFile, data);
-        await dumpString(targetFile + ".map", JSON.stringify(metadata.sourceMap, null, 2));
+        await dumpString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
       }
     }
   }
@@ -278,6 +277,10 @@ export class DataHandleWrite {
       return sourceMapGenerator.toJSON();
     });
   }
+
+  public writeObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
+    return this.writeData(stringify(obj), mappings, mappingSources);
+  }
 }
 
 /* @internal */
@@ -303,8 +306,26 @@ export class DataHandleRead {
   public async blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
     const metadata = await this.readMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
-    const result = sourceMapConsumer.originalPositionFor(position); // TODO: multiple sources!?
-    // `result` has null-properties if there is no original 
-    return result.source === null ? [] : [result];
+
+    // const singleResult = sourceMapConsumer.originalPositionFor(position);
+    // does NOT support multiple sources :(
+    // `singleResult` has null-properties if there is no original
+
+    // get coinciding sources
+    const sameLineResults: sourceMap.MappingItem[] = [];
+    sourceMapConsumer.eachMapping(mapping => {
+      if (mapping.generatedLine === position.line && mapping.generatedColumn <= position.column) {
+        sameLineResults.push(mapping);
+      }
+    });
+    const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
+    return sameLineResults.filter(m => m.generatedColumn === maxColumn).map(m => {
+      return {
+        column: m.originalColumn,
+        line: m.originalLine,
+        name: m.name,
+        source: m.source
+      };
+    });
   }
 }

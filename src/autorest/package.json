@@ -39,6 +39,7 @@
     "linq-es2015": "^2.4.13",
     "pify": "^2.3.0",
     "source-map": "^0.5.6",
+    "strip-bom": "^3.0.0",
     "urijs": "^1.18.7",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.32/yaml-ast-parser-0.0.32.tgz",
     "yargs": "^6.6.0"
