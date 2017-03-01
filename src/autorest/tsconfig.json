@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
     "noEmitOnError": true,
     "noImplicitAny": true,
@@ -10,6 +11,10 @@
     "strictNullChecks": true,
     "target": "es2016",
     "types" : ["node"],
+    "lib": [
+      "dom",
+      "es2016"
+    ],
     "experimentalDecorators": true,
     "newLine": "LF"
   },
