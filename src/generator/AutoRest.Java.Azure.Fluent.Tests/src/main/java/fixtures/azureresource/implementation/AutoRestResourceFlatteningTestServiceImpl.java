@@ -208,6 +208,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putArray() {
         putArrayWithServiceResponseAsync().toBlocking().single().body();
@@ -217,6 +220,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback) {
@@ -226,6 +230,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putArrayAsync() {
@@ -240,6 +245,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync() {
@@ -262,6 +268,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putArray(List<Resource> resourceArray) {
         putArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
@@ -272,6 +281,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
@@ -282,6 +292,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putArrayAsync(List<Resource> resourceArray) {
@@ -297,6 +308,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray) {
@@ -325,6 +337,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;FlattenedProductInner&gt; object if successful.
      */
     public List<FlattenedProductInner> getArray() {
@@ -335,6 +350,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<FlattenedProductInner>> getArrayAsync(final ServiceCallback<List<FlattenedProductInner>> serviceCallback) {
@@ -344,6 +360,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProductInner&gt; object
      */
     public Observable<List<FlattenedProductInner>> getArrayAsync() {
@@ -358,6 +375,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProductInner&gt; object
      */
     public Observable<ServiceResponse<List<FlattenedProductInner>>> getArrayWithServiceResponseAsync() {
@@ -385,6 +403,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDictionary() {
         putDictionaryWithServiceResponseAsync().toBlocking().single().body();
@@ -394,6 +415,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback) {
@@ -403,6 +425,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDictionaryAsync() {
@@ -417,6 +440,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync() {
@@ -439,6 +463,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDictionary(Map<String, FlattenedProductInner> resourceDictionary) {
         putDictionaryWithServiceResponseAsync(resourceDictionary).toBlocking().single().body();
@@ -449,6 +476,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
@@ -459,6 +487,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDictionaryAsync(Map<String, FlattenedProductInner> resourceDictionary) {
@@ -474,6 +503,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProductInner> resourceDictionary) {
@@ -502,6 +532,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Map&lt;String, FlattenedProductInner&gt; object if successful.
      */
     public Map<String, FlattenedProductInner> getDictionary() {
@@ -512,6 +545,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, FlattenedProductInner>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProductInner>> serviceCallback) {
@@ -521,6 +555,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProductInner&gt; object
      */
     public Observable<Map<String, FlattenedProductInner>> getDictionaryAsync() {
@@ -535,6 +570,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProductInner&gt; object
      */
     public Observable<ServiceResponse<Map<String, FlattenedProductInner>>> getDictionaryWithServiceResponseAsync() {
@@ -562,6 +598,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putResourceCollection() {
         putResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
@@ -571,6 +610,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback) {
@@ -580,6 +620,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putResourceCollectionAsync() {
@@ -594,6 +635,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync() {
@@ -616,6 +658,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putResourceCollection(ResourceCollectionInner resourceComplexObject) {
         putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().body();
@@ -626,6 +671,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
@@ -636,6 +682,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
@@ -651,6 +698,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollectionInner resourceComplexObject) {
@@ -679,6 +727,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ResourceCollectionInner object if successful.
      */
     public ResourceCollectionInner getResourceCollection() {
@@ -689,6 +740,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ResourceCollectionInner> getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) {
@@ -698,6 +750,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollectionInner object
      */
     public Observable<ResourceCollectionInner> getResourceCollectionAsync() {
@@ -712,6 +765,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollectionInner object
      */
     public Observable<ServiceResponse<ResourceCollectionInner>> getResourceCollectionWithServiceResponseAsync() {

@@ -76,6 +76,9 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the InputStream object if successful.
      */
     public InputStream uploadFile(byte[] fileContent, String fileName) {
@@ -88,6 +91,7 @@ public class FormdatasImpl implements Formdatas {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> uploadFileAsync(byte[] fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
@@ -99,6 +103,7 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     public Observable<InputStream> uploadFileAsync(byte[] fileContent, String fileName) {
@@ -115,6 +120,7 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> uploadFileWithServiceResponseAsync(byte[] fileContent, String fileName) {
@@ -150,6 +156,9 @@ public class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the InputStream object if successful.
      */
     public InputStream uploadFileViaBody(byte[] fileContent) {
@@ -161,6 +170,7 @@ public class FormdatasImpl implements Formdatas {
      *
      * @param fileContent File to upload.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<InputStream> uploadFileViaBodyAsync(byte[] fileContent, final ServiceCallback<InputStream> serviceCallback) {
@@ -171,6 +181,7 @@ public class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     public Observable<InputStream> uploadFileViaBodyAsync(byte[] fileContent) {
@@ -186,6 +197,7 @@ public class FormdatasImpl implements Formdatas {
      * Upload file.
      *
      * @param fileContent File to upload.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     public Observable<ServiceResponse<InputStream>> uploadFileViaBodyWithServiceResponseAsync(byte[] fileContent) {

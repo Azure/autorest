@@ -13,7 +13,9 @@ package fixtures.url;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
+import java.io.IOException;
 import java.util.List;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -27,6 +29,9 @@ public interface Paths {
     /**
      * Get true Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getBooleanTrue();
 
@@ -34,6 +39,7 @@ public interface Paths {
      * Get true Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback);
@@ -41,6 +47,7 @@ public interface Paths {
     /**
      * Get true Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getBooleanTrueAsync();
@@ -48,6 +55,7 @@ public interface Paths {
     /**
      * Get true Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync();
@@ -55,6 +63,9 @@ public interface Paths {
     /**
      * Get false Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getBooleanFalse();
 
@@ -62,6 +73,7 @@ public interface Paths {
      * Get false Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback);
@@ -69,6 +81,7 @@ public interface Paths {
     /**
      * Get false Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getBooleanFalseAsync();
@@ -76,6 +89,7 @@ public interface Paths {
     /**
      * Get false Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync();
@@ -83,6 +97,9 @@ public interface Paths {
     /**
      * Get '1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getIntOneMillion();
 
@@ -90,6 +107,7 @@ public interface Paths {
      * Get '1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback);
@@ -97,6 +115,7 @@ public interface Paths {
     /**
      * Get '1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getIntOneMillionAsync();
@@ -104,6 +123,7 @@ public interface Paths {
     /**
      * Get '1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync();
@@ -111,6 +131,9 @@ public interface Paths {
     /**
      * Get '-1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getIntNegativeOneMillion();
 
@@ -118,6 +141,7 @@ public interface Paths {
      * Get '-1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback);
@@ -125,6 +149,7 @@ public interface Paths {
     /**
      * Get '-1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getIntNegativeOneMillionAsync();
@@ -132,6 +157,7 @@ public interface Paths {
     /**
      * Get '-1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync();
@@ -139,6 +165,9 @@ public interface Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getTenBillion();
 
@@ -146,6 +175,7 @@ public interface Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback);
@@ -153,6 +183,7 @@ public interface Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getTenBillionAsync();
@@ -160,6 +191,7 @@ public interface Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync();
@@ -167,6 +199,9 @@ public interface Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getNegativeTenBillion();
 
@@ -174,6 +209,7 @@ public interface Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback);
@@ -181,6 +217,7 @@ public interface Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getNegativeTenBillionAsync();
@@ -188,6 +225,7 @@ public interface Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync();
@@ -195,6 +233,9 @@ public interface Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void floatScientificPositive();
 
@@ -202,6 +243,7 @@ public interface Paths {
      * Get '1.034E+20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback);
@@ -209,6 +251,7 @@ public interface Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> floatScientificPositiveAsync();
@@ -216,6 +259,7 @@ public interface Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync();
@@ -223,6 +267,9 @@ public interface Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void floatScientificNegative();
 
@@ -230,6 +277,7 @@ public interface Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback);
@@ -237,6 +285,7 @@ public interface Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> floatScientificNegativeAsync();
@@ -244,6 +293,7 @@ public interface Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync();
@@ -251,6 +301,9 @@ public interface Paths {
     /**
      * Get '9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void doubleDecimalPositive();
 
@@ -258,6 +311,7 @@ public interface Paths {
      * Get '9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback);
@@ -265,6 +319,7 @@ public interface Paths {
     /**
      * Get '9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> doubleDecimalPositiveAsync();
@@ -272,6 +327,7 @@ public interface Paths {
     /**
      * Get '9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync();
@@ -279,6 +335,9 @@ public interface Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void doubleDecimalNegative();
 
@@ -286,6 +345,7 @@ public interface Paths {
      * Get '-9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback);
@@ -293,6 +353,7 @@ public interface Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> doubleDecimalNegativeAsync();
@@ -300,6 +361,7 @@ public interface Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync();
@@ -307,6 +369,9 @@ public interface Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void stringUnicode();
 
@@ -314,6 +379,7 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback);
@@ -321,6 +387,7 @@ public interface Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> stringUnicodeAsync();
@@ -328,6 +395,7 @@ public interface Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync();
@@ -335,6 +403,9 @@ public interface Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void stringUrlEncoded();
 
@@ -342,6 +413,7 @@ public interface Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback);
@@ -349,6 +421,7 @@ public interface Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> stringUrlEncodedAsync();
@@ -356,6 +429,7 @@ public interface Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync();
@@ -363,6 +437,9 @@ public interface Paths {
     /**
      * Get ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void stringEmpty();
 
@@ -370,6 +447,7 @@ public interface Paths {
      * Get ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback);
@@ -377,6 +455,7 @@ public interface Paths {
     /**
      * Get ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> stringEmptyAsync();
@@ -384,6 +463,7 @@ public interface Paths {
     /**
      * Get ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync();
@@ -392,6 +472,9 @@ public interface Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void stringNull(String stringPath);
 
@@ -400,6 +483,7 @@ public interface Paths {
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
@@ -408,6 +492,7 @@ public interface Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> stringNullAsync(String stringPath);
@@ -416,6 +501,7 @@ public interface Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringPath);
@@ -424,6 +510,9 @@ public interface Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void enumValid(UriColor enumPath);
 
@@ -432,6 +521,7 @@ public interface Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
@@ -440,6 +530,7 @@ public interface Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> enumValidAsync(UriColor enumPath);
@@ -448,6 +539,7 @@ public interface Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumPath);
@@ -456,6 +548,9 @@ public interface Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void enumNull(UriColor enumPath);
 
@@ -464,6 +559,7 @@ public interface Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
@@ -472,6 +568,7 @@ public interface Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> enumNullAsync(UriColor enumPath);
@@ -480,6 +577,7 @@ public interface Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumPath);
@@ -488,6 +586,9 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void byteMultiByte(byte[] bytePath);
 
@@ -496,6 +597,7 @@ public interface Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
@@ -504,6 +606,7 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> byteMultiByteAsync(byte[] bytePath);
@@ -512,6 +615,7 @@ public interface Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] bytePath);
@@ -519,6 +623,9 @@ public interface Paths {
     /**
      * Get '' as byte array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void byteEmpty();
 
@@ -526,6 +633,7 @@ public interface Paths {
      * Get '' as byte array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback);
@@ -533,6 +641,7 @@ public interface Paths {
     /**
      * Get '' as byte array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> byteEmptyAsync();
@@ -540,6 +649,7 @@ public interface Paths {
     /**
      * Get '' as byte array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync();
@@ -548,6 +658,9 @@ public interface Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void byteNull(byte[] bytePath);
 
@@ -556,6 +669,7 @@ public interface Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
@@ -564,6 +678,7 @@ public interface Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> byteNullAsync(byte[] bytePath);
@@ -572,6 +687,7 @@ public interface Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] bytePath);
@@ -579,6 +695,9 @@ public interface Paths {
     /**
      * Get '2012-01-01' as date.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void dateValid();
 
@@ -586,6 +705,7 @@ public interface Paths {
      * Get '2012-01-01' as date.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback);
@@ -593,6 +713,7 @@ public interface Paths {
     /**
      * Get '2012-01-01' as date.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> dateValidAsync();
@@ -600,6 +721,7 @@ public interface Paths {
     /**
      * Get '2012-01-01' as date.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync();
@@ -608,6 +730,9 @@ public interface Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void dateNull(LocalDate datePath);
 
@@ -616,6 +741,7 @@ public interface Paths {
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
@@ -624,6 +750,7 @@ public interface Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> dateNullAsync(LocalDate datePath);
@@ -632,6 +759,7 @@ public interface Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate datePath);
@@ -639,6 +767,9 @@ public interface Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void dateTimeValid();
 
@@ -646,6 +777,7 @@ public interface Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback);
@@ -653,6 +785,7 @@ public interface Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> dateTimeValidAsync();
@@ -660,6 +793,7 @@ public interface Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync();
@@ -668,6 +802,9 @@ public interface Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void dateTimeNull(DateTime dateTimePath);
 
@@ -676,6 +813,7 @@ public interface Paths {
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
@@ -684,6 +822,7 @@ public interface Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> dateTimeNullAsync(DateTime dateTimePath);
@@ -692,6 +831,7 @@ public interface Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimePath);
@@ -700,6 +840,9 @@ public interface Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void base64Url(byte[] base64UrlPath);
 
@@ -708,6 +851,7 @@ public interface Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback);
@@ -716,6 +860,7 @@ public interface Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> base64UrlAsync(byte[] base64UrlPath);
@@ -724,6 +869,7 @@ public interface Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> base64UrlWithServiceResponseAsync(byte[] base64UrlPath);
@@ -732,6 +878,9 @@ public interface Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void arrayCsvInPath(List<String> arrayPath);
 
@@ -740,6 +889,7 @@ public interface Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback);
@@ -748,6 +898,7 @@ public interface Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> arrayCsvInPathAsync(List<String> arrayPath);
@@ -756,6 +907,7 @@ public interface Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> arrayCsvInPathWithServiceResponseAsync(List<String> arrayPath);
@@ -764,6 +916,9 @@ public interface Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void unixTimeUrl(DateTime unixTimeUrlPath);
 
@@ -772,6 +927,7 @@ public interface Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback);
@@ -780,6 +936,7 @@ public interface Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath);
@@ -788,6 +945,7 @@ public interface Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> unixTimeUrlWithServiceResponseAsync(DateTime unixTimeUrlPath);
