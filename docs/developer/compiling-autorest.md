@@ -89,7 +89,7 @@ gulp clean
 
 ### Run AutoRest without installing it
 `gulp autorest` - runs the autorest binary directly. You can pass regular command line parameters to it.
-`gulp autorest-app` - Runs AutoRest (via the `node` front-end. This will soon be the default.)
+`gulp autorest-cli` - Runs AutoRest (via the `node` front-end. This will soon be the default.)
 
 ### Testing 
 `gulp regenerate` - regenerate all expected code for tests (There are many fine-grained `rengenerate-*` tasks, find them with `gulp -T` if you need them. )

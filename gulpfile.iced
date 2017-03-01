@@ -49,7 +49,7 @@ Import
       .pipe onlyFiles()
   
   typescriptProjectFolders: ()->
-    source ["src/bootstrapper", "src/autorest","src/extension/client","src/extension/server" ]
+    source ["src/autorest", "src/autorest-core","src/extension/client","src/extension/server" ]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
@@ -103,20 +103,20 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install-binaries',
     -> done()
 
-task 'bootstrap', '', ['build/typescript'],(done)->
-  require "#{basefolder}/src/bootstrapper/app.js"
+task 'autorestcli', '', ['build/typescript'],(done)->
+  require "#{basefolder}/src/autorest/app.js"
 
 task 'autorest', 'Runs AutoRest', (done) ->
   args = process.argv.slice(3)
   exec "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
+task 'autorest-cli', "Runs AutoRest (via node)" ,(done)->
   args = process.argv.slice(3)
-  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
+  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (newer "#{basefolder}/src/autorest/package.json",  "#{basefolder}/src/autorest/node_modules") or (newer "#{basefolder}/src/bootstrapper/package.json",  "#{basefolder}/src/bootstrapper/node_modules")
+if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (newer "#{basefolder}/src/autorest/package.json",  "#{basefolder}/src/autorest/node_modules") or (newer "#{basefolder}/src/autorest-core/package.json",  "#{basefolder}/src/autorest-core/node_modules")
   echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"
 
   
