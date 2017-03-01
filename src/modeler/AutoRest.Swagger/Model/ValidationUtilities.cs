@@ -93,7 +93,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
         public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
         {
-            return serviceDefinition.Definitions.Where(defPair=>defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions?["x-ms-azure-resource"] == true);
+            return serviceDefinition.Definitions.Where(defPair=> !defPair.Key.EqualsIgnoreCase("Resource") && defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions["x-ms-azure-resource"] == true);
         }
     }
 }

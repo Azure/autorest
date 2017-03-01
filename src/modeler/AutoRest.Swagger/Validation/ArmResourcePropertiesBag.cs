@@ -46,18 +46,17 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var armDefsPairs = ValidationUtilities.GetArmResources((ServiceDefinition)context.Root);
-            var armDefs = armDefsPairs.Select(defPair => defPair.Value);
             var armDefsKeys = armDefsPairs.Select(defPair => defPair.Key);
             // Also get all models that directly reference an allOf on these arm models
-            var derivedArmDefs = definitions.Values.Where(def => def.AllOf?.Any(defAllOfRef => armDefsKeys.Contains(defAllOfRef.Reference?.StripDefinitionPath()))==true);
-            var modelsToCheck = armDefs.Concat(derivedArmDefs);
+            var derivedArms = definitions.Where(def => def.Value?.AllOf?.Any(defAllOfRef => armDefsKeys.Contains(defAllOfRef.Reference?.StripDefinitionPath()))==true);
+            var modelsToCheck = armDefsPairs.Concat(derivedArms);
             
-            foreach (var modelDef in modelsToCheck)
+            foreach (var modelDefPair in modelsToCheck)
             {
-                var repeatedProps = modelDef.Properties.Keys.Intersect(ArmPropertiesBag);
+                var repeatedProps = modelDefPair.Value.Properties.Keys.Intersect(ArmPropertiesBag);
                 if (repeatedProps.Any())
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Join(", ", repeatedProps));
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, modelDefPair.Key.StripDefinitionPath(), string.Join(", ", repeatedProps));
                 }
             }
         }
