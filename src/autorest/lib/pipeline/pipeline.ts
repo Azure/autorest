@@ -38,7 +38,7 @@ export class Pipeline {
 
       // deliterlatize
       const hwRawSwagger = await deliteralizeScope.write(inputFileUri);
-      const hRawSwagger = await parse(hLiterateSwaggerFile, hwRawSwagger, pipelineView.createScope("tmp"));
+      const hRawSwagger = await parse(hLiterateSwaggerFile, hwRawSwagger, swaggerScope.createScope("tmp"));
       rawSwaggers.push(hRawSwagger);
     }
     // merge swaggers

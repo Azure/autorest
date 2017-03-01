@@ -5,7 +5,17 @@
 
 import * as sourceMap from "source-map";
 
-export interface BlameTree {
-  node: sourceMap.MappedPosition;
-  blaming: BlameTree[];
+export class BlameTree {
+  public constructor(
+    public readonly node: sourceMap.MappedPosition,
+    public readonly blaming: BlameTree[]) { }
+
+  public * blameInputs(): Iterable<sourceMap.MappedPosition> {
+    // report self?
+    if (this.node.source.startsWith("input/")) {
+      yield {
+        decodeURIComponent(this.node.source.slice(6));
+      };
+    }
+  }
 }
