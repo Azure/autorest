@@ -43,7 +43,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
     public partial class @Model.Name@(Model.BaseModelType != null ? " : " + Model.BaseModelType.Name : "")
     {
         /// <summary>
-        @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
+        @WrapComment("/// ", ("I;nitializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         /// </summary>
         @if (Model.Properties.Any(p => p.ModelType is CompositeType && ((CompositeType)p.ModelType).ContainsConstantProperties))
         {
@@ -68,7 +68,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
         @:{
               @foreach (var property in Model.Properties.Where(p => p.ModelType is PrimaryType && !p.IsRequired && p.DefaultValue!=null))
               {
-            @:this.@(property.Name) = @(property.DefaultValue.Replace("\\", "\\\\"));
+            @:this.@(property.Name) = @(property.DefaultValue.ToString().Replace("\\", "\\\\"));
               }
         @:}
             }
