@@ -5,7 +5,7 @@
 
 import * as jsonpath from "jsonpath";
 import * as sourceMap from "source-map";
-import * as yamlAst from "../parsing/yamlAst";
+import * as yaml from "../parsing/yaml";
 import { DataHandleRead } from "../data-store/dataStore";
 
 /**
@@ -29,7 +29,7 @@ export type Mappings = Iterable<Mapping>;
 export async function compilePosition(position: Position, yamlFile: DataHandleRead): Promise<sourceMap.Position> {
   const path = (position as any).path;
   if (path) {
-    return yamlAst.resolvePath(yamlFile, path);
+    return yaml.resolvePath(yamlFile, path);
   }
   return position as sourceMap.Position;
 }

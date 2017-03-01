@@ -5,7 +5,6 @@
 
 import * as jsonpath from "jsonpath";
 import * as yaml from "../parsing/yaml";
-import * as yamlast from "../parsing/yamlAst";
 import { Mappings } from "./sourceMap";
 import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
 
@@ -68,7 +67,7 @@ export function merge<T, U>(a: T, b: U): T & U {
 }
 
 export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlFile: string): Mappings {
-  const descendantPaths = yamlast.descendantPaths(yamlast.parse(sourceYamlFile));
+  const descendantPaths = yaml.descendantsPath(yaml.parseToAst(sourceYamlFile));
   for (const descendantPath of descendantPaths) {
     yield {
       generated: { path: descendantPath },

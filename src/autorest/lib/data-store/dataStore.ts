@@ -10,8 +10,7 @@ import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Mappings, compile, Position, compilePosition } from "../source-map/sourceMap";
 import { BlameTree } from "../source-map/blaming";
-import { parse } from "../parsing/yaml";
-import { YAMLNode, parse as parseAst } from "../parsing/yamlAst";
+import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../parsing/yaml";
 
 export module KnownScopes {
   export const Input = "input";
@@ -274,6 +273,10 @@ export class DataHandleWrite {
       await compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
+  }
+
+  public writeObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
+    return this.writeData(stringify(obj), mappings, mappingSources);
   }
 }
 

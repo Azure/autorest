@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { AutoRestConfiguration, AutoRestConfigurationManager } from "../configuration/configuration";
+import { AutoRestConfigurationManager } from "../configuration/configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/dataStore";
 import { parse } from "../parsing/literateYaml";
 import { mergeYamls } from "../source-map/merging";
@@ -26,7 +26,6 @@ export class Pipeline {
 
     // load Swaggers
     const swaggerScope = pipelineView.createScope("swagger");
-    const tmpScope = pipelineView.createScope("tmp");
     const deliteralizeScope = swaggerScope.createFileScope("deliteralize");
     const rawSwaggers: DataHandleRead[] = []
     for (const inputFileUri of this.configuration.inputFileUris) {
@@ -39,7 +38,7 @@ export class Pipeline {
 
       // deliterlatize
       const hwRawSwagger = await deliteralizeScope.write(inputFileUri);
-      const hRawSwagger = await parse(hLiterateSwaggerFile, hwRawSwagger, key => tmpScope.write(key));
+      const hRawSwagger = await parse(hLiterateSwaggerFile, hwRawSwagger, pipelineView.createScope("tmp"));
       rawSwaggers.push(hRawSwagger);
     }
     // merge swaggers

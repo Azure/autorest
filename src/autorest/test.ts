@@ -18,7 +18,7 @@ async function test() {
     const results = await run(configFileUri, dataStore);
 
     // BLAME
-    console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.RetentionPolicy.xml"))));
+    console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))));
 
     await dataStore.dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
   } catch (e) {

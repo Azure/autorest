@@ -22,7 +22,7 @@ export async function run(configurationUri: string, dataStore: DataStoreView = n
   // deliteralize
   const configScope = dataStore.createScope(KnownScopes.Configuration);
   const hwConfig = await configScope.write("config.yaml");
-  const hConfig = await parse(hLiterateConfig, hwConfig, key => configScope.write(key));
+  const hConfig = await parse(hLiterateConfig, hwConfig, configScope.createScope("tmp"));
 
   // configuration manager
   const config = new AutoRestConfigurationManager(await hConfig.readObject<AutoRestConfiguration>(), configurationUri);

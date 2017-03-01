@@ -5,20 +5,25 @@
 
 import * as commonmark from "commonmark";
 import { Mappings } from "../source-map/sourceMap";
-import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
+import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/dataStore";
 
-export async function parse(hConfigFile: DataHandleRead, intermediateHandles: (key: string) => Promise<DataHandleWrite>): Promise<DataHandleRead[]> {
-  const hsCodeBlock: DataHandleRead[] = [];
+export async function parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
+  const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
   const rawMarkdown = await hConfigFile.readData();
   for (const codeBlock of parseCodeblocks(rawMarkdown)) {
+    const codeBlockKey = `${hConfigFile.key}_codeBlock_${codeBlock.sourcepos[0][0]}`;
+
+    const data = codeBlock.literal;
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const codeBlockKey = `${hConfigFile.key}_codeBlock_${codeBlock.sourcepos[0][0]}`;
-    const hwCodeBlock = await intermediateHandles(codeBlockKey);
-    const hCodeBlock = await hwCodeBlock.writeData(codeBlock.literal, mappings);
-    hsCodeBlock.push(hCodeBlock);
+    const hwCodeBlock = await intermediateScope.write(codeBlockKey);
+    const hCodeBlock = await hwCodeBlock.writeData(data, mappings);
+    result.push({
+      data: hCodeBlock,
+      codeBlock: codeBlock
+    });
   }
-  return hsCodeBlock;
+  return result;
 }
 
 function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
