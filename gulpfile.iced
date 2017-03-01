@@ -116,5 +116,7 @@ task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (newer "#{basefolder}/src/autorest/package.json",  "#{basefolder}/src/autorest/node_modules") or (newer "#{basefolder}/src/bootstrapper/package.json",  "#{basefolder}/src/bootstrapper/node_modules")
   echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"
+
+  

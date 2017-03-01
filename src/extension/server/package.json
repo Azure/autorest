@@ -8,7 +8,7 @@
     "node": "*"
   },
   "dependencies": {
-    "autorest": "file:///C:\\work\\github\\autorest\\src\\bootstrapper",
+    // "autorest": "../../bootstrapper",
     "vscode-languageserver": "^3.0.4"
   },
   "devDependencies": {

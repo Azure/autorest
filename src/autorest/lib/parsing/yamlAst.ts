@@ -10,6 +10,7 @@ import { indexToPosition } from "./textUtility";
 import { DataHandleRead } from "../data-store/dataStore";
 
 // reexport required elements
+/* @internal */
 export const Kind = yamlAst.Kind;
 export type YAMLNode = yamlAst.YAMLNode;
 export type YAMLScalar = yamlAst.YAMLScalar;

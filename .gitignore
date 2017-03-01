@@ -212,3 +212,4 @@ src/extension/**/*.js
 src/client/**/*
 
 src/extension/old/**/*
+*.d.ts

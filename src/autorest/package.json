@@ -18,17 +18,20 @@
   "bin": {
     "autorest": "./app.js"
   },
+  "typings": "./index.d.ts",
+
   "devDependencies": {
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
-    "typescript": "^2.1.5"
-  },
-  "dependencies": {
+    "typescript": "^2.1.5",
     "@types/commonmark": "^0.22.29",
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",
     "@types/source-map": "^0.5.0",
-    "@types/urijs": "^1.15.31",
+    "@types/urijs": "^1.15.31"
+  },
+  
+  "dependencies": {
     "commonmark": "^0.27.0",
     "file-url": "^2.0.2",
     "get-uri": "^2.0.0",

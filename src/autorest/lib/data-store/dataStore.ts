@@ -13,6 +13,9 @@ import { BlameTree } from "../source-map/blaming";
 import { parse } from "../parsing/yaml";
 import { YAMLNode, parse as parseAst } from "../parsing/yamlAst";
 
+export const helloworld = "hi";
+
+/* @internal */
 export module KnownScopes {
   export const Input = "input";
   export const Configuration = "config";
@@ -22,7 +25,7 @@ export module KnownScopes {
  * Data model section (not exposed)
  ********************************************/
 
-interface Metadata {
+export interface Metadata {
   sourceMap: Promise<RawSourceMap>;
   yamlAst: Promise<YAMLNode>;
 }
@@ -134,7 +137,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
   }
 }
 
-class DataStoreFileView extends DataStoreView {
+export class DataStoreFileView extends DataStoreView {
   private static isUri(uri: string): boolean {
     return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
   }
@@ -277,6 +280,7 @@ export class DataHandleWrite {
   }
 }
 
+/* @internal */
 export class DataHandleRead {
   constructor(public readonly key: string, private read: Promise<Data>) {
   }

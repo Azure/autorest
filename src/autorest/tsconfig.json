@@ -9,6 +9,8 @@
     "noImplicitThis": true,
     "sourceMap": true,
     "strictNullChecks": true,
+    "declaration": true,
+    "stripInternal": true,
     "target": "es2016",
     "types" : ["node"],
     "lib": [
