@@ -27,6 +27,8 @@ async function test() {
 
     // BLAME
     console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))));
+    // console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", <sourceMap.Position>{ column: 4, line: 54 })));
+    // console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", <sourceMap.Position>{ column: 6, line: 54 })));
 
     await dataStore.dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
   } catch (e) {

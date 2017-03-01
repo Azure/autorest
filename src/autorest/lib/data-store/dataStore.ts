@@ -302,8 +302,26 @@ export class DataHandleRead {
   public async blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
     const metadata = await this.readMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
-    const result = sourceMapConsumer.originalPositionFor(position); // TODO: multiple sources!?
-    // `result` has null-properties if there is no original 
-    return result.source === null ? [] : [result];
+
+    // const singleResult = sourceMapConsumer.originalPositionFor(position);
+    // does NOT support multiple sources :(
+    // `singleResult` has null-properties if there is no original
+
+    // get coinciding sources
+    const sameLineResults: sourceMap.MappingItem[] = [];
+    sourceMapConsumer.eachMapping(mapping => {
+      if (mapping.generatedLine === position.line && mapping.generatedColumn <= position.column) {
+        sameLineResults.push(mapping);
+      }
+    });
+    const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
+    return sameLineResults.filter(m => m.generatedColumn === maxColumn).map(m => {
+      return {
+        column: m.originalColumn,
+        line: m.originalLine,
+        name: m.name,
+        source: m.source
+      };
+    });
   }
 }
