@@ -47,3 +47,12 @@ export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguratio
 
   return await run(configFileUri, dataStore);
 }
+
+export interface IFileSystem {
+
+}
+
+export class AutoRest {
+  public constructor(configurationUrl: string, fileSystem: IFileSystem) {
+  }
+}

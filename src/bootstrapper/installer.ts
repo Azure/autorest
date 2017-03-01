@@ -87,7 +87,9 @@ export class Installer {
       else {
         unpack = download.pipe(tgz().createWriteStream(this.FrameworkFolder))
       }
-      unpack.on('close', resolve);
+      unpack.on('end', () => {
+        setTimeout(resolve, 100);
+      });
       unpack.on('error', reject);
     });
   }
@@ -119,7 +121,9 @@ export class Installer {
       else {
         unpack = download.pipe(tgz().createWriteStream(targetFolder))
       }
-      unpack.on('close', resolve);
+      unpack.on('end', () => {
+        setTimeout(resolve, 100);
+      });
       unpack.on('error', reject);
     });
   }
