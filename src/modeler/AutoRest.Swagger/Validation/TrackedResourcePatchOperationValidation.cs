@@ -48,7 +48,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
                 {
-                    if(!patchOperations.Any(op => (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
+                    if(!patchOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
                     {
                         // if no patch operation returns current tracked resource as a response, 
                         // the tracked resource does not have a corresponding patch operation
