@@ -15,16 +15,20 @@ import * as URI from "urijs";
 const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
 
 export async function readUri(uri: string): Promise<string> {
-  const readable = await getUriAsync(uri);
+  try {
+    const readable = await getUriAsync(uri);
 
-  const readAll = new Promise<string>(function (resolve, reject) {
-    let result = "";
-    readable.on("data", data => result += data.toString());
-    readable.on("end", () => resolve(result));
-    readable.on("error", err => reject(err));
-  });
+    const readAll = new Promise<string>(function (resolve, reject) {
+      let result = "";
+      readable.on("data", data => result += data.toString());
+      readable.on("end", () => resolve(result));
+      readable.on("error", err => reject(err));
+    });
 
-  return await readAll;
+    return await readAll;
+  } catch (e) {
+    throw new Error(`Failed to load '${uri}' (${e})`);
+  }
 }
 
 export function createFileUri(path: string): string {
