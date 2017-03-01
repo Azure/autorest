@@ -9,6 +9,7 @@ import * as sourceMap from "source-map";
 import * as yamlAst from "yaml-ast-parser";
 import { indexToPosition } from "./textUtility";
 import { DataHandleRead } from "../data-store/dataStore";
+export { newScalar } from "yaml-ast-parser";
 
 // reexport required elements
 export const Kind = yamlAst.Kind;
@@ -20,7 +21,10 @@ export type YAMLSequence = yamlAst.YAMLSequence;
 export type YAMLAnchorReference = yamlAst.YAMLAnchorReference;
 
 export function cloneAst(ast: YAMLNode): YAMLNode {
-  return parseToAst(stringify(parseNode<any>(ast)));
+  return parseToAst(stringifyAst(ast));
+}
+export function stringifyAst(ast: YAMLNode): string {
+  return stringify(parseNode<any>(ast));
 }
 export function clone<T>(object: T): T {
   return parse<T>(stringify(object));
@@ -103,7 +107,7 @@ export function* descendantsWithPath(yamlAstNode: YAMLNode, currentPath: jsonpat
   }
 }
 
-export function* descendantsPath(yamlAstNode: YAMLNode, currentPath: jsonpath.PathComponent[] = ["$"]): Iterable<jsonpath.PathComponent[]> {
+export function descendantsPath(yamlAstNode: YAMLNode, currentPath: jsonpath.PathComponent[] = ["$"]): Iterable<jsonpath.PathComponent[]> {
   return From(descendantsWithPath(yamlAstNode, currentPath)).Select(x => x.path);
 }
 

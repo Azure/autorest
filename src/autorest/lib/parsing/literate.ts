@@ -17,7 +17,7 @@ export async function parse(hConfigFile: DataHandleRead, intermediateScope: Data
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
     const hwCodeBlock = await intermediateScope.write(codeBlockKey);
-    const hCodeBlock = await hwCodeBlock.writeData(data, mappings);
+    const hCodeBlock = await hwCodeBlock.writeData(data, mappings, [hConfigFile]);
     result.push({
       data: hCodeBlock,
       codeBlock: codeBlock

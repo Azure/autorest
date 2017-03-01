@@ -11,7 +11,7 @@ import { DataHandleRead } from "../data-store/dataStore";
 /**
  * Also allow for object paths that will gladly be resolved by us.
  */
-export type Position = sourceMap.Position | { path: jsonpath.PathComponent[] };
+export type Position = sourceMap.Position /* line: 1-based, column: 0-based */ | { path: jsonpath.PathComponent[] };
 
 export function parseJsonPath(jsonPath: string): Position {
   return { path: jsonpath.parse(jsonPath).map(part => part.expression.value) };
@@ -42,7 +42,12 @@ export async function compile(mappings: Mappings, target: sourceMap.SourceMapGen
   }
 
   const generatedFile = target.toJSON().file;
-  const compilePos = (position: Position, key: string) => compilePosition(position, yamlFileLookup[key]);
+  const compilePos = (position: Position, key: string) => {
+    if (!yamlFileLookup[key]) {
+      throw new Error(`File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map(x => x.key))}')`);
+    }
+    return compilePosition(position, yamlFileLookup[key]);
+  }
 
   for (const mapping of mappings) {
     const compiledMapping: sourceMap.Mapping = {

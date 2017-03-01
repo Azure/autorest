@@ -53,7 +53,7 @@ export abstract class DataStoreViewReadonly {
         const metadata = await dataHandle.readMetadata();
         const targetFile = path.join(targetDir, key);
         await dumpString(targetFile, data);
-        await dumpString(targetFile + ".map", JSON.stringify(metadata.sourceMap, null, 2));
+        await dumpString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
       }
     }
   }
