@@ -11,6 +11,7 @@ using AutoRest.Core;
 using Newtonsoft.Json;
 using System;
 using AutoRest.Core.Utilities.Collections;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
@@ -27,34 +28,49 @@ namespace AutoRest.Java.Azure.Fluent.Model
 
             var methodType = GetMethodType(this);
             var originalName = Name;
-            string newName = null;
 
-            if (methodType == MethodType.ListBySubscription)
+            if (methodType != MethodType.Other)
             {
-                var otherListBySubMethods = this.MethodGroup.Methods.Where(x => GetMethodType(x as MethodJvaf) == MethodType.ListBySubscription);
-                if (otherListBySubMethods.Count() == 1)
-                {
-                    newName = "List";
-                }
-            }
-            if (methodType == MethodType.ListByResourceGroup)
-            {
-                var otherListByResourceGroupMethods = this.MethodGroup.Methods.Where(x => GetMethodType(x as MethodJvaf) == MethodType.ListByResourceGroup);
-                if (otherListByResourceGroupMethods.Count() == 1)
-                {
-                    newName = "ListByResourceGroup";
-                }
-            }
+                string newName = null;
 
-            if (!string.IsNullOrWhiteSpace(newName))
-            {
-                this.SimulateAsPagingOperation = true;
-                var name = CodeNamer.Instance.GetUnique(newName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
-                if (name != originalName)
+                if (this.MethodGroup.Methods.Count(x => GetMethodType(x as MethodJvaf) == methodType) == 1)
                 {
-                    Name = name;
+                    switch (methodType)
+                    {
+                        case MethodType.ListBySubscription:
+                            newName = WellKnowMethodNames.List;
+                            break;
+
+                        case MethodType.ListByResourceGroup:
+                            newName = WellKnowMethodNames.ListByResourceGroup;
+                            break;
+
+                        case MethodType.Delete:
+                            newName = WellKnowMethodNames.Delete;
+                            break;
+
+                        case MethodType.Get:
+                            newName = WellKnowMethodNames.GetByResourceGroup;
+                            break;
+
+                        default:
+                            throw new Exception("Flow should not hit this statement.");
+                    }
                 }
-                return;
+                if (!string.IsNullOrWhiteSpace(newName))
+                {
+                    if (methodType == MethodType.ListByResourceGroup || methodType == MethodType.ListBySubscription)
+                    {
+                        this.SimulateAsPagingOperation = true;
+                    }
+
+                    var name = CodeNamer.Instance.GetUnique(newName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+                    if (name != originalName)
+                    {
+                        Name = name;
+                    }
+                    return;
+                }
             }
 
             base.Disambiguate();
@@ -122,10 +138,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 var imports = base.InterfaceImports;
                 if (this.IsPagingOperation || this.IsPagingNextOperation || this.SimulateAsPagingOperation)
                 {
+                    imports.Add("com.microsoft.azure.PagedList");
+
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Add("com.microsoft.azure.ListOperationCallback");
-                        imports.Add("com.microsoft.azure.PagedList");
                     }
 
                     if (!this.SimulateAsPagingOperation)
@@ -168,10 +185,11 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                 {
+                    imports.Add("com.microsoft.azure.PagedList");
+
                     if (this.IsPagingOperation || this.IsPagingNextOperation)
                     {
                         imports.Add("com.microsoft.azure.ListOperationCallback");
-                        imports.Add("com.microsoft.azure.PagedList");
                     }
 
                     if (!this.SimulateAsPagingOperation)
@@ -198,20 +216,24 @@ namespace AutoRest.Java.Azure.Fluent.Model
         {
             Other,
             ListBySubscription,
-            ListByResourceGroup
+            ListByResourceGroup,
+            Get,
+            Delete
         }
 
         private static MethodType GetMethodType(MethodJvaf method)
         {
+            Regex leading = new Regex("^/+");
+            Regex trailing = new Regex("/+$");
+            var methodUrl = trailing.Replace(leading.Replace(method.Url.Value, ""), "");
             if (method.HttpMethod == HttpMethod.Get)
             {
-                var url = method.Url.Value;
-                var urlSplits = url.Split('/');
-                if ((urlSplits.Count() == 6 || urlSplits.Count() == 8) && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions"))
+                var urlSplits = methodUrl.Split('/');
+                if ((urlSplits.Count() == 5 || urlSplits.Count() == 7) && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[0], "subscriptions"))
                 {
-                    if (urlSplits.Count() == 6)
+                    if (urlSplits.Count() == 5)
                     {
-                        if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "providers"))
+                        if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[2], "providers"))
                         {
                             return MethodType.ListBySubscription;
                         }
@@ -220,14 +242,40 @@ namespace AutoRest.Java.Azure.Fluent.Model
                             return MethodType.ListByResourceGroup;
                         }
                     }
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "resourceGroups"))
+                    else if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[2], "resourceGroups"))
                     {
                         return MethodType.ListByResourceGroup;
                     }
                 }
+                if (IsTopLevelResourceUrl(methodUrl))
+                {
+                    return MethodType.Get;
+                }
+            }
+            else if (method.HttpMethod == HttpMethod.Delete)
+            {
+                if (method.Name.Value.ToLowerInvariant().StartsWith("begin")
+                    || method.MethodGroup.Methods.Count(x => x.HttpMethod == HttpMethod.Delete) > 1)
+                {
+                    return MethodType.Other;
+                }
+
+                if (IsTopLevelResourceUrl(methodUrl))
+                {
+                    return MethodType.Delete;
+                }
             }
 
             return MethodType.Other;
+        }
+
+        private static bool IsTopLevelResourceUrl(string url)
+        {
+            var urlSplits = url.Split('/');
+
+            return urlSplits.Count() == 8 && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[0], "subscriptions")
+                                && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[2], "resourceGroups")
+                                && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[4], "providers");
         }
     }
 }
