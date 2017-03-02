@@ -57,12 +57,16 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
             @:this.@(property.Name) = new @(property.ModelTypeName)();
             }
+            CustomInit();
         }
 </text>
         }
         else
         {
-        @:public @(Model.Name)() { }
+        @:public @(Model.Name)() 
+        @:{
+        @:  CustomInit();
+        @:}
         }
 
         @EmptyLine
@@ -102,8 +106,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 {
             @:this.@(property.Name) = @propName;
                 }
-            }            
-
+            }
+        @:    CustomInit();
         @:}
         }
 
@@ -118,9 +122,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
             @:@(property.Name) = @(property.DefaultValue);
             }
+
         @:}
         }
-
+        @EmptyLine
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
+        
         @EmptyLine
         @foreach (var property in Model.Properties.Where(p => !p.IsConstant))
         {
