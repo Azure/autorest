@@ -21,7 +21,7 @@ The AutoRest build system has standardized on `gulp` for the following reasons:
   - excellent support for parallelism
   - using `IcedCoffeeScript` + `ShellJS` keeps the scripts very readable.
 
-The main `gulpfile` is the file in the root of the folder called `gulpfile.iced`. You'll also find support modules for that in the `./src/local_modules` folder (see the `.iced` files there)
+The main `gulpfile` is the file in the root of the folder called `gulpfile.iced`. You'll also find support modules for that in the `./src/gulp_modules` folder (see the `.iced` files there)
 
 You can get a quick list of the available gulp commands by running `gulp` without arguments:
 

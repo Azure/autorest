@@ -10,7 +10,13 @@ task 'zip-autorest', '', (done) ->
 
 task 'install-node-files' ,'', (done)->
   # install autorest files into dotnet-output-folder
-  install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish",done
+  # install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish",done
+  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
+    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules"
+  
+  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules/autorest-core"
+    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules/autorest-core",'junction' 
+    
   return null;
 
 task 'package','From scratch build, sign, and package autorest', (done) -> 

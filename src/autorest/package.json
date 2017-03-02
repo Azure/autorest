@@ -40,7 +40,6 @@
     "typescript": "^2.1.5"
   },
   "dependencies": {
-    "autorest-core": "../autorest",
     "chalk": "^1.1.2",
     "linq-es2015": "^2.4.13",
     "marked": "^0.3.6",
