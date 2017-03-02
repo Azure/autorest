@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { descendants, Kind, cloneAst, stringifyAst, YAMLMapping, newScalar, parseNode } from "../approved-imports/yaml";
+import { descendants, Kind, cloneAst, YAMLMapping, newScalar, parseNode } from "../approved-imports/yaml";
 import { mergeYamls, identitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../approved-imports/sourceMap";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/dataStore";

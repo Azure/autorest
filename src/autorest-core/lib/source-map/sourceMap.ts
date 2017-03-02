@@ -10,7 +10,7 @@ import { DataHandleRead } from "../data-store/dataStore";
 export async function compilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
   const path = (position as any).path;
   if (path) {
-    return yaml.resolvePath(yamlFile, path);
+    return yaml.resolvePath(await yamlFile, path);
   }
   return position as Position;
 }
@@ -24,7 +24,7 @@ export async function compile(mappings: Mappings, target: sourceMap.SourceMapGen
 
   const generatedFile = target.toJSON().file;
   const compilePos = (position: SmartPosition, key: string) => {
-    if (!yamlFileLookup[key]) {
+    if ((position as any).path && !yamlFileLookup[key]) {
       throw new Error(`File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map(x => x.key))}')`);
     }
     return compilePosition(position, yamlFileLookup[key]);

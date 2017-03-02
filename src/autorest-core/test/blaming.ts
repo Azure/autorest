@@ -10,21 +10,22 @@ import { run } from "../index";
   @test async "end to end blaming with literate swagger"() {
     const dataStore = new DataStore();
     const configFileUri = resolveUri(createFileUri(__dirname) + "/", "resources/literate-example/readme.md");
-    const inputScope = await dataStore.createReadThroughScope("input", uri => uri === configFileUri);
     const results = await run(configFileUri, dataStore);
 
     // regular description
     {
-      const blameTree = await dataStore.calculateBlame("swagger/swagger.yaml", { path: parse("$.securityDefinitions.azure_auth.description") });
+      const blameTree = await dataStore.blame("swagger/swagger.yaml", { path: parse("$.securityDefinitions.azure_auth.description") });
       const blameInputs = Array.from(blameTree.blameInputs());
       assert.equal(1, blameInputs.length);
     }
 
     // markdown description (blames both the swagger's json path and the markdown source of the description)
     {
-      const blameTree = await dataStore.calculateBlame("swagger/swagger.yaml", { path: parse("$.definitions.SearchServiceListResult.description") });
+      const blameTree = await dataStore.blame("swagger/swagger.yaml", { path: parse("$.definitions.SearchServiceListResult.description") });
       const blameInputs = Array.from(blameTree.blameInputs());
       assert.equal(2, blameInputs.length);
     }
+
+    await dataStore.dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
   }
 }

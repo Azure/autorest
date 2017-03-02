@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { Mappings, SmartPosition } from "../approved-imports/sourceMap";
+import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/sourceMap";
 import { readUri } from "../approved-imports/uri";
 import { writeString } from "../approved-imports/writefs";
 import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../approved-imports/yaml";
@@ -26,6 +26,7 @@ export module KnownScopes {
  ********************************************/
 
 export interface Metadata {
+  inputSourceMap: Promise<RawSourceMap>;
   sourceMap: Promise<RawSourceMap>;
   yamlAst: Promise<YAMLNode>;
 }
@@ -58,6 +59,7 @@ export abstract class DataStoreViewReadonly {
         const targetFile = path.join(targetDir, key);
         await writeString(targetFile, data);
         await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
+        await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
       }
     }
   }
@@ -205,6 +207,7 @@ export class DataStore extends DataStoreView {
       };
       this.store[key] = storeEntry;
       storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
+      storeEntry.metadata.inputSourceMap = this.createInputSourceMapFor(key);
       await this.validate(key);
       return await this.read(key);
     });
@@ -222,13 +225,13 @@ export class DataStore extends DataStoreView {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public async calculateBlame(key: string, position: SmartPosition): Promise<BlameTree> {
+  public async blame(key: string, position: SmartPosition): Promise<BlameTree> {
     const data = await this.read(key);
     if (data === null) {
       throw new Error(`Data with key '${key}' not found`);
     }
     const resolvedPosition = await compilePosition(position, data);
-    return this.blame({
+    return BlameTree.create(this, {
       source: key,
       column: resolvedPosition.column,
       line: resolvedPosition.line,
@@ -236,13 +239,35 @@ export class DataStore extends DataStoreView {
     });
   }
 
-  private async blame(position: sourceMap.MappedPosition): Promise<BlameTree> {
-    const data = await this.read(position.source);
+  private async createInputSourceMapFor(key: string): Promise<RawSourceMap> {
+    const data = await this.read(key);
     if (data === null) {
-      throw new Error(`Data with key '${position.source}' not found`);
+      throw new Error(`Data with key '${key}' not found`);
     }
-    const blames = await data.blame(position);
-    return new BlameTree(position, await Promise.all(blames.map(pos => this.blame(pos))));
+
+    // retrieve all target positions
+    const targetPositions: SmartPosition[] = [];
+    const metadata = await data.readMetadata();
+    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
+    sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
+
+    // collect blame
+    const mappings: Mapping[] = [];
+    for (const targetPosition of targetPositions) {
+      const blameTree = await this.blame(key, targetPosition);
+      const inputPositions = blameTree.blameInputs();
+      for (const inputPosition of inputPositions) {
+        mappings.push({
+          name: inputPosition.name,
+          source: inputPosition.source,
+          generated: blameTree.node,
+          original: inputPosition
+        })
+      }
+    }
+    const sourceMapGenerator = new SourceMapGenerator({ file: key });
+    await compile(mappings, sourceMapGenerator);
+    return sourceMapGenerator.toJSON();
   }
 }
 
