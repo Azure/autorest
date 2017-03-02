@@ -3,8 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { From } from "linq-es2015";
-import * as sourceMap from "source-map";
+import { From } from "../approved-imports/linq";
 
 export class BlameTree {
   public constructor(

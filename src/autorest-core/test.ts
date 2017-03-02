@@ -5,8 +5,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as commonmark from "commonmark";
-import { stringify } from "./lib/parsing/yaml";
-import { parseJsonPath } from "./lib/source-map/sourceMap";
+import { parse } from "./lib/approved-imports/jsonPath";
+import { stringify } from "./lib/approved-imports/yaml";
 import { run } from "./index";
 import { DataStore } from "./lib/data-store/dataStore";
 
@@ -27,7 +27,7 @@ async function test() {
 
     // BLAME
     //console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))));
-    console.log(stringify(Array.from((await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))).blameInputs())));
+    console.log(stringify(Array.from((await dataStore.calculateBlame("swagger/swagger.yaml", { path: parse("$.definitions.SearchServiceListResult.description") })).blameInputs())));
     // console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", <sourceMap.Position>{ column: 4, line: 54 })));
     // console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", <sourceMap.Position>{ column: 6, line: 54 })));
 

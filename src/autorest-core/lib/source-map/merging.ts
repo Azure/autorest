@@ -3,13 +3,14 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as jsonpath from "jsonpath";
-import * as yaml from "../parsing/yaml";
-import { Mappings } from "./sourceMap";
+import { From } from "../approved-imports/linq";
+import { JsonPath, stringify } from "../approved-imports/jsonPath";
+import * as yaml from "../approved-imports/yaml";
+import { Mappings } from "../approved-imports/sourceMap";
 import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)
-function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
+function mergeInternal(a: any, b: any, path: JsonPath): any {
   if (a === null || b === null) {
     throw new Error("Argument cannot be null");
   }
@@ -59,41 +60,35 @@ function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
     }
   }
 
-  throw new Error(`'${jsonpath.stringify(path)}' has incomaptible values (${yaml.stringify(a)}, ${yaml.stringify(b)}).`);
+  throw new Error(`'${stringify(path)}' has incomaptible values (${yaml.stringify(a)}, ${yaml.stringify(b)}).`);
 }
 
 export function merge<T, U>(a: T, b: U): T & U {
   return mergeInternal(a, b, ["$"]);
 }
 
-export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlFile: string): Mappings {
-  const descendantPaths = yaml.descendantsPath(yaml.parseToAst(sourceYamlFile));
-  for (const descendantPath of descendantPaths) {
+export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
+  const descendantsWithPath = yaml.descendants(sourceYamlAst);
+  for (const descendantWithPath of descendantsWithPath) {
+    const descendantPath = descendantWithPath.path;
     yield {
       generated: { path: descendantPath },
       original: { path: descendantPath },
-      name: jsonpath.stringify(descendantPath),
+      name: stringify(descendantPath),
       source: sourceYamlFileName
     };
   }
 }
 
-export function* identitySourceMappings(files: { [fileName: string]: string }): Mappings {
-  for (const fileName in files) {
-    yield* identitySourceMapping(fileName, files[fileName]);
-  }
-}
-
 export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
-  const rawYamls: { [key: string]: string } = {};
+  const mappings: Mappings[] = [];
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.readData();
     resultObject = merge(resultObject, yaml.parse(rawYaml));
-    rawYamls[yamlInputHandle.key] = rawYaml;
+    mappings.push(identitySourceMapping(yamlInputHandle.key, await (await yamlInputHandle.readMetadata()).yamlAst));
   }
 
   const resultObjectRaw = yaml.stringify(resultObject);
-  const mappings = identitySourceMappings(rawYamls);
-  return await yamlOutputHandle.writeData(resultObjectRaw, mappings, yamlInputHandles);
+  return await yamlOutputHandle.writeData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
 }

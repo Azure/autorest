@@ -3,18 +3,18 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-// untyped imports
-const stripBom: (text: string) => string = require("strip-bom");
-const getUri = require("get-uri");
-const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
-
-import { isAbsolute } from "path";
+/***********************
+ * Data aquisition
+ ***********************/
 import * as promisify from "pify";
 import { Readable } from "stream";
-import * as URI from "urijs";
-
+const stripBom: (text: string) => string = require("strip-bom");
+const getUri = require("get-uri");
 const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
 
+/**
+ * Loads a UTF8 string from given URI.
+ */
 export async function readUri(uri: string): Promise<string> {
   try {
     const readable = await getUriAsync(uri);
@@ -32,6 +32,20 @@ export async function readUri(uri: string): Promise<string> {
   }
 }
 
+
+/***********************
+ * URI manipulation
+ ***********************/
+import { isAbsolute } from "path";
+import * as URI from "urijs";
+const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
+
+/**
+ * Create a 'file:///' URI from given path, performing no checking of path validity whatsoever.
+ * Possible usage includes:
+ * - making existing local paths consumable by `readUri` (e.g. "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml")
+ * - creating "fake" URIs for virtual FS files (e.g. "input/swagger.yaml" -> "file:///input/swagger.yaml")
+ */
 export function createFileUri(path: string): string {
   return fileUri(path, { resolve: false });
 }

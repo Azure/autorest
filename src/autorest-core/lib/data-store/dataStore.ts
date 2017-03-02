@@ -4,15 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { readUri } from "../io/input";
-import { dumpString } from "../io/dump";
+import { Mappings, SmartPosition } from "../approved-imports/sourceMap";
+import { readUri } from "../approved-imports/uri";
+import { writeString } from "../approved-imports/writefs";
+import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../approved-imports/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
-import { Mappings, compile, Position, compilePosition } from "../source-map/sourceMap";
+import { compile, compilePosition } from "../source-map/sourceMap";
 import { BlameTree } from "../source-map/blaming";
-import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../parsing/yaml";
 
-export const helloworld = "hi";
+export const helloworld = "hi"; // TODO: wat?
 
 /* @internal */
 export module KnownScopes {
@@ -55,8 +56,8 @@ export abstract class DataStoreViewReadonly {
         const data = await dataHandle.readData();
         const metadata = await dataHandle.readMetadata();
         const targetFile = path.join(targetDir, key);
-        await dumpString(targetFile, data);
-        await dumpString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
+        await writeString(targetFile, data);
+        await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
       }
     }
   }
@@ -221,7 +222,7 @@ export class DataStore extends DataStoreView {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public async calculateBlame(key: string, position: Position): Promise<BlameTree> {
+  public async calculateBlame(key: string, position: SmartPosition): Promise<BlameTree> {
     const data = await this.read(key);
     if (data === null) {
       throw new Error(`Data with key '${key}' not found`);

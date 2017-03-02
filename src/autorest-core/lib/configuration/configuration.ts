@@ -3,8 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as URI from "urijs";
-import { resolveUri } from "../io/input";
+import { resolveUri } from "../approved-imports/uri";
 
 export interface AutoRestConfiguration {
   "input-file": string[] | string;
@@ -18,7 +17,7 @@ export class AutoRestConfigurationManager {
   }
 
   private get baseFolderUri(): string {
-    const configFileFolderUri = new URI(".").absoluteTo(this.configurationFileUri).toString();
+    const configFileFolderUri = resolveUri(this.configurationFileUri, ".").toString();
     const baseFolder = this.config["base-folder"] || "";
     const baseFolderUri = resolveUri(configFileFolderUri, baseFolder);
     return baseFolderUri.replace(/\/$/g, "") + "/";

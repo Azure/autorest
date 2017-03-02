@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as commonmark from "commonmark";
-import { Mappings } from "../source-map/sourceMap";
-import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/dataStore";
+import * as commonmark from "../approved-imports/commonmark";
+import { Mappings } from "../approved-imports/sourceMap";
+import { DataHandleRead, DataStoreView } from "../data-store/dataStore";
 
 export async function parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
   const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
@@ -48,7 +48,7 @@ function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
   const parser = new commonmark.Parser();
   const parsed = parser.parse(markdown);
   const walker = parsed.walker();
-  let event: commonmark.NodeWalkingStep;
+  let event;
   while ((event = walker.next())) {
     var node = event.node;
     if (event.entering && node.type === "code_block") {

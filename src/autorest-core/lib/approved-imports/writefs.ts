@@ -9,15 +9,20 @@ import * as pify from "pify";
 
 const fsAsync = pify(fs);
 
-async function ensureDirectoryExistence(filePath: string): Promise<void> {
+async function createDirectoryFor(filePath: string): Promise<void> {
   var dirname = path.dirname(filePath);
   if (!fs.existsSync(dirname)) {
-    await ensureDirectoryExistence(dirname);
+    await createDirectoryFor(dirname);
     await fsAsync.mkdir(dirname);
   }
 }
 
-export async function dumpString(fileName: string, data: string) {
-  await ensureDirectoryExistence(fileName);
+/**
+ * Writes string to local file system.
+ * @param fileName  Target file name.
+ * @param data      String to write (encoding: UTF8).
+ */
+export async function writeString(fileName: string, data: string): Promise<void> {
+  await createDirectoryFor(fileName);
   await fsAsync.writeFile(fileName, data);
 }

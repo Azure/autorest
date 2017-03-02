@@ -3,35 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as jsonpath from "jsonpath";
-import * as sourceMap from "source-map";
+import { Mappings, Position, SmartPosition } from "../approved-imports/sourceMap";
 import * as yaml from "../parsing/yaml";
 import { DataHandleRead } from "../data-store/dataStore";
 
-/**
- * Also allow for object paths that will gladly be resolved by us.
- */
-export type Position = sourceMap.Position /* line: 1-based, column: 0-based */ | { path: jsonpath.PathComponent[] };
-
-export function parseJsonPath(jsonPath: string): Position {
-  return { path: jsonpath.parse(jsonPath).map(part => part.expression.value) };
-}
-
-export interface Mapping {
-  generated: Position;
-  original: Position;
-  source: string;
-  name?: string;
-}
-
-export type Mappings = Iterable<Mapping>;
-
-export async function compilePosition(position: Position, yamlFile: DataHandleRead): Promise<sourceMap.Position> {
+export async function compilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
   const path = (position as any).path;
   if (path) {
     return yaml.resolvePath(yamlFile, path);
   }
-  return position as sourceMap.Position;
+  return position as Position;
 }
 
 export async function compile(mappings: Mappings, target: sourceMap.SourceMapGenerator, yamlFiles: DataHandleRead[] = []): Promise<void> {
@@ -42,7 +23,7 @@ export async function compile(mappings: Mappings, target: sourceMap.SourceMapGen
   }
 
   const generatedFile = target.toJSON().file;
-  const compilePos = (position: Position, key: string) => {
+  const compilePos = (position: SmartPosition, key: string) => {
     if (!yamlFileLookup[key]) {
       throw new Error(`File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map(x => x.key))}')`);
     }
@@ -50,12 +31,11 @@ export async function compile(mappings: Mappings, target: sourceMap.SourceMapGen
   }
 
   for (const mapping of mappings) {
-    const compiledMapping: sourceMap.Mapping = {
+    target.addMapping({
       generated: await compilePos(mapping.generated, generatedFile),
       original: await compilePos(mapping.original, mapping.source),
       name: mapping.name,
       source: mapping.source
-    };
-    target.addMapping(compiledMapping);
+    });
   }
 }

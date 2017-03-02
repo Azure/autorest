@@ -4,10 +4,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { stringify } from "./lib/parsing/yaml";
+import { createFileUri } from "./lib/approved-imports/uri";
+import { stringify } from "./lib/approved-imports/yaml";
 import { parse } from "./lib/parsing/literateYaml";
 import { DataStore, DataStoreView, KnownScopes } from "./lib/data-store/dataStore";
-import { createFileUri } from "./lib/io/input";
 import { AutoRestConfiguration, AutoRestConfigurationManager } from "./lib/configuration/configuration";
 import { Pipeline, PipelineProducts } from "./lib/pipeline/pipeline";
 
