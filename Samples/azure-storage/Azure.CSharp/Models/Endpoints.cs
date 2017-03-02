@@ -13,7 +13,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Endpoints class.
         /// </summary>
-        public Endpoints() { }
+        public Endpoints()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Endpoints class.
@@ -28,7 +31,13 @@ namespace Petstore.Models
             Queue = queue;
             Table = table;
             File = file;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the blob endpoint.

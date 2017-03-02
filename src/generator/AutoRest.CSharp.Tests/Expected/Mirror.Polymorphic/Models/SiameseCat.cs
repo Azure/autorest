@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the SiameseCat class.
         /// </summary>
-        public SiameseCat() { }
+        public SiameseCat()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SiameseCat class.
@@ -30,7 +33,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description, color)
         {
             Length = length;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets cat length

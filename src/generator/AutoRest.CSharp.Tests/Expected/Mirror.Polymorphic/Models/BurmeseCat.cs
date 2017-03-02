@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the BurmeseCat class.
         /// </summary>
-        public BurmeseCat() { }
+        public BurmeseCat()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BurmeseCat class.
@@ -31,7 +34,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description, color, length)
         {
             NickName = nickName;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets cat nick name

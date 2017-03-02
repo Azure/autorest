@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the StringWrapper class.
         /// </summary>
-        public StringWrapper() { }
+        public StringWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the StringWrapper class.
@@ -27,7 +30,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             Field = field;
             Empty = empty;
             NullProperty = nullProperty;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

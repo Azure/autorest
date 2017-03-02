@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// Initializes a new instance of the
         /// HeaderCustomNamedRequestIdHeadHeaders class.
         /// </summary>
-        public HeaderCustomNamedRequestIdHeadHeaders() { }
+        public HeaderCustomNamedRequestIdHeadHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -32,7 +35,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         public HeaderCustomNamedRequestIdHeadHeaders(string fooRequestId = default(string))
         {
             FooRequestId = fooRequestId;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the foo-request-id.

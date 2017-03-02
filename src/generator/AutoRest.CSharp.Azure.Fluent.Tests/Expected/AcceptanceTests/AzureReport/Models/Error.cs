@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error() { }
+        public Error()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Error class.
@@ -27,7 +30,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport.Models
         {
             Status = status;
             Message = message;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

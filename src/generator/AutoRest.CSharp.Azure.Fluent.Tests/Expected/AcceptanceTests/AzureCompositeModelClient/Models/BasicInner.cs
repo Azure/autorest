@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the BasicInner class.
         /// </summary>
-        public BasicInner() { }
+        public BasicInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BasicInner class.
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             Id = id;
             Name = name;
             Color = color;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets basic Id

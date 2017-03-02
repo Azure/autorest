@@ -12,7 +12,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the StorageAccountKeys class.
         /// </summary>
-        public StorageAccountKeys() { }
+        public StorageAccountKeys()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccountKeys class.
@@ -23,7 +26,13 @@ namespace Petstore.Models
         {
             Key1 = key1;
             Key2 = key2;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the value of key 1.

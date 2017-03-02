@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
         /// </summary>
-        public OperationResult() { }
+        public OperationResult()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
@@ -30,7 +33,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         public OperationResult(string status = default(string))
         {
             Status = status;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the status of the request. Possible values include:

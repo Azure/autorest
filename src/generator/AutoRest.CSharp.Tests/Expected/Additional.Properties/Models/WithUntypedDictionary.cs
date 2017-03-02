@@ -19,7 +19,10 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the WithUntypedDictionary class.
         /// </summary>
-        public WithUntypedDictionary() { }
+        public WithUntypedDictionary()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the WithUntypedDictionary class.
@@ -30,7 +33,13 @@ namespace Fixtures.AdditionalProperties.Models
         {
             AdditionalProperties = additionalProperties;
             Abc = abc;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unmatched properties from the message are deserialized

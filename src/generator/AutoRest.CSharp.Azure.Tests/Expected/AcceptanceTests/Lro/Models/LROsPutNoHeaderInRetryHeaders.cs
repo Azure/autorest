@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the LROsPutNoHeaderInRetryHeaders
         /// class.
         /// </summary>
-        public LROsPutNoHeaderInRetryHeaders() { }
+        public LROsPutNoHeaderInRetryHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the LROsPutNoHeaderInRetryHeaders
@@ -33,7 +36,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         public LROsPutNoHeaderInRetryHeaders(string location = default(string))
         {
             Location = location;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to

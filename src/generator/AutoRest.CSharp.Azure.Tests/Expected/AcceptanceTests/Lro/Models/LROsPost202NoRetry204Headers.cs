@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the LROsPost202NoRetry204Headers
         /// class.
         /// </summary>
-        public LROsPost202NoRetry204Headers() { }
+        public LROsPost202NoRetry204Headers()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the LROsPost202NoRetry204Headers
@@ -36,7 +39,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             Location = location;
             RetryAfter = retryAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to

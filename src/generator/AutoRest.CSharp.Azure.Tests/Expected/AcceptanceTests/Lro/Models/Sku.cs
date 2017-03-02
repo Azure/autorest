@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Sku class.
         /// </summary>
-        public Sku() { }
+        public Sku()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Sku class.
@@ -27,7 +30,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             Name = name;
             Id = id;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

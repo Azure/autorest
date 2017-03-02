@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product() { }
+        public Product()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
@@ -26,7 +29,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         public Product(ProductProperties properties = default(ProductProperties))
         {
             Properties = properties;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

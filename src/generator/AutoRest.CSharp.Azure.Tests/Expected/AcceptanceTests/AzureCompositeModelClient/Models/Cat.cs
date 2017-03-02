@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Cat class.
         /// </summary>
-        public Cat() { }
+        public Cat()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Cat class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Color = color;
             Hates = hates;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

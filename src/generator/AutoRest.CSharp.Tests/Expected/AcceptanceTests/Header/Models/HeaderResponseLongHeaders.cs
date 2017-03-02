@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseLongHeaders class.
         /// </summary>
-        public HeaderResponseLongHeaders() { }
+        public HeaderResponseLongHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseLongHeaders class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseLongHeaders(long? value = default(long?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header value "value": 105 or -2

@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseEnumHeaders class.
         /// </summary>
-        public HeaderResponseEnumHeaders() { }
+        public HeaderResponseEnumHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseEnumHeaders class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseEnumHeaders(GreyscaleColors? value = default(GreyscaleColors?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header values "GREY" or null. Possible

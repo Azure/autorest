@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// <summary>
         /// Initializes a new instance of the SampleResourceGroupInner class.
         /// </summary>
-        public SampleResourceGroupInner() { }
+        public SampleResourceGroupInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SampleResourceGroupInner class.
@@ -29,7 +32,13 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         {
             Name = name;
             Location = location;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets resource group name 'testgroup101'

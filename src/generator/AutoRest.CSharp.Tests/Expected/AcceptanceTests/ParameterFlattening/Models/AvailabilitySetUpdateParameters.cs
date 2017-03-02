@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// Initializes a new instance of the AvailabilitySetUpdateParameters
         /// class.
         /// </summary>
-        public AvailabilitySetUpdateParameters() { }
+        public AvailabilitySetUpdateParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the AvailabilitySetUpdateParameters
@@ -31,7 +34,13 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         public AvailabilitySetUpdateParameters(IDictionary<string, string> tags)
         {
             Tags = tags;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets a set of tags.

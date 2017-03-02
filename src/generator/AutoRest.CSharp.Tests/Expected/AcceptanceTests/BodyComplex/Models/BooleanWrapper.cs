@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the BooleanWrapper class.
         /// </summary>
-        public BooleanWrapper() { }
+        public BooleanWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BooleanWrapper class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

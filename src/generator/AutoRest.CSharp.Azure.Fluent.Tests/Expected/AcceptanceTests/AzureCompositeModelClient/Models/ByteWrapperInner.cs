@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ByteWrapperInner class.
         /// </summary>
-        public ByteWrapperInner() { }
+        public ByteWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ByteWrapperInner class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public ByteWrapperInner(byte[] field = default(byte[]))
         {
             Field = field;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

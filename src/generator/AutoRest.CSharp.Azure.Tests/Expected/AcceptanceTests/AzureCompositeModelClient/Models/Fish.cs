@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish() { }
+        public Fish()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Fish class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             Species = species;
             Length = length;
             Siblings = siblings;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

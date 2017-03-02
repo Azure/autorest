@@ -18,7 +18,10 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
         /// </summary>
-        public ErrorModel() { }
+        public ErrorModel()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
@@ -27,7 +30,13 @@ namespace Fixtures.MirrorSequences.Models
         {
             Code = code;
             Message = message;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

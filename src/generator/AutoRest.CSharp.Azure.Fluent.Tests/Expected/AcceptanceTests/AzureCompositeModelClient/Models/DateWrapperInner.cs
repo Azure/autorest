@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the DateWrapperInner class.
         /// </summary>
-        public DateWrapperInner() { }
+        public DateWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DateWrapperInner class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Field = field;
             Leap = leap;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

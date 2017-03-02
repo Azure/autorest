@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the ChildProduct class.
         /// </summary>
-        public ChildProduct() { }
+        public ChildProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ChildProduct class.
@@ -29,6 +32,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public ChildProduct(int? count = default(int?))
         {
             Count = count;
+            CustomInit();
         }
         /// <summary>
         /// Static constructor for ChildProduct class.
@@ -37,6 +41,11 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         {
             ConstProperty = "constant";
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets count

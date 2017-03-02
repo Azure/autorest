@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the BaseCat class.
         /// </summary>
-        public BaseCat() { }
+        public BaseCat()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BaseCat class.
@@ -29,7 +32,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description)
         {
             Color = color;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets cat color

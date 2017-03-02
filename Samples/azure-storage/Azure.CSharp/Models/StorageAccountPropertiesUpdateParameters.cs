@@ -10,7 +10,10 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountPropertiesUpdateParameters class.
         /// </summary>
-        public StorageAccountPropertiesUpdateParameters() { }
+        public StorageAccountPropertiesUpdateParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -31,7 +34,13 @@ namespace Petstore.Models
         {
             AccountType = accountType;
             CustomDomain = customDomain;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the account type. Note that StandardZRS and PremiumLRS

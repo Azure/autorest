@@ -24,7 +24,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the CustomParameterGroup class.
         /// </summary>
-        public CustomParameterGroup() { }
+        public CustomParameterGroup()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CustomParameterGroup class.
@@ -35,7 +38,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         {
             ApiVersion = apiVersion;
             Tenant = tenant;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets sets the api version to use.

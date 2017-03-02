@@ -19,7 +19,10 @@ namespace Fixtures.PetstoreV2.Models
         /// <summary>
         /// Initializes a new instance of the User class.
         /// </summary>
-        public User() { }
+        public User()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the User class.
@@ -35,7 +38,13 @@ namespace Fixtures.PetstoreV2.Models
             Password = password;
             Phone = phone;
             UserStatus = userStatus;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

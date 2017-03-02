@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DateWrapper class.
         /// </summary>
-        public DateWrapper() { }
+        public DateWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DateWrapper class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Field = field;
             Leap = leap;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

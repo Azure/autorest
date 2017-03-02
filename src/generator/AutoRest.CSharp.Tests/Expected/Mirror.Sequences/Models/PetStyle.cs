@@ -18,7 +18,10 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the PetStyle class.
         /// </summary>
-        public PetStyle() { }
+        public PetStyle()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the PetStyle class.
@@ -26,7 +29,13 @@ namespace Fixtures.MirrorSequences.Models
         public PetStyle(string name)
         {
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

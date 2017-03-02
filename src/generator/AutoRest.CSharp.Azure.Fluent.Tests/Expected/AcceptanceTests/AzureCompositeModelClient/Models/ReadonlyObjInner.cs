@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ReadonlyObjInner class.
         /// </summary>
-        public ReadonlyObjInner() { }
+        public ReadonlyObjInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ReadonlyObjInner class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Id = id;
             Size = size;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

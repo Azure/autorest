@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the BooleanWrapperInner class.
         /// </summary>
-        public BooleanWrapperInner() { }
+        public BooleanWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BooleanWrapperInner class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             FieldTrue = fieldTrue;
             FieldFalse = fieldFalse;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

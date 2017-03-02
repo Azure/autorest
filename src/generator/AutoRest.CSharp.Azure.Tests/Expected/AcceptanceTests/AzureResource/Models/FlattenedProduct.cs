@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
         /// </summary>
-        public FlattenedProduct() { }
+        public FlattenedProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
@@ -38,7 +41,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
             Pname = pname;
             Lsize = lsize;
             ProvisioningState = provisioningState;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

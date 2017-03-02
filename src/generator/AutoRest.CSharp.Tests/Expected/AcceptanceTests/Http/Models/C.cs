@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the C class.
         /// </summary>
-        public C() { }
+        public C()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the C class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         public C(string httpCode = default(string))
         {
             HttpCode = httpCode;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

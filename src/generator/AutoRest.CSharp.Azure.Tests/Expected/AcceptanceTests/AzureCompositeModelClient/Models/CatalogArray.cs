@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the CatalogArray class.
         /// </summary>
-        public CatalogArray() { }
+        public CatalogArray()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CatalogArray class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public CatalogArray(IList<Product> productArray = default(IList<Product>))
         {
             ProductArray = productArray;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets array of products

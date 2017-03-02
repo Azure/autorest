@@ -12,7 +12,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the UsageName class.
         /// </summary>
-        public UsageName() { }
+        public UsageName()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the UsageName class.
@@ -25,7 +28,13 @@ namespace Petstore.Models
         {
             Value = value;
             LocalizedValue = localizedValue;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets a string describing the resource name.

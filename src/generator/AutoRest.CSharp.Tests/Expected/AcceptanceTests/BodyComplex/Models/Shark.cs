@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark() { }
+        public Shark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Shark class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Age = age;
             Birthday = birthday;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Siamese class.
         /// </summary>
-        public Siamese() { }
+        public Siamese()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Siamese class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
             : base(id, name, color, hates)
         {
             Breed = breed;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

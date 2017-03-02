@@ -19,7 +19,10 @@ namespace Fixtures.PetstoreV2.Models
         /// <summary>
         /// Initializes a new instance of the Order class.
         /// </summary>
-        public Order() { }
+        public Order()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Order class.
@@ -34,7 +37,13 @@ namespace Fixtures.PetstoreV2.Models
             ShipDate = shipDate;
             Status = status;
             Complete = complete;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

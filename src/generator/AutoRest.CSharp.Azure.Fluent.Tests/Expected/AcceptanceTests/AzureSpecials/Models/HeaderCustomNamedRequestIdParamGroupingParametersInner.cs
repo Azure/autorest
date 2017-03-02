@@ -24,7 +24,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// Initializes a new instance of the
         /// HeaderCustomNamedRequestIdParamGroupingParametersInner class.
         /// </summary>
-        public HeaderCustomNamedRequestIdParamGroupingParametersInner() { }
+        public HeaderCustomNamedRequestIdParamGroupingParametersInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -34,7 +37,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         public HeaderCustomNamedRequestIdParamGroupingParametersInner(string fooClientRequestId)
         {
             FooClientRequestId = fooClientRequestId;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the fooRequestId

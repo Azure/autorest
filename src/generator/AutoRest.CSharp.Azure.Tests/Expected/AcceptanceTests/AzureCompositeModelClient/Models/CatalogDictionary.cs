@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the CatalogDictionary class.
         /// </summary>
-        public CatalogDictionary() { }
+        public CatalogDictionary()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CatalogDictionary class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public CatalogDictionary(IDictionary<string, Product> productDictionary = default(IDictionary<string, Product>))
         {
             ProductDictionary = productDictionary;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets dictionary of products

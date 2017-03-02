@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Horsey class.
         /// </summary>
-        public Horsey() { }
+        public Horsey()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Horsey class.
@@ -29,7 +32,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description)
         {
             Breed = breed;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets horse breed

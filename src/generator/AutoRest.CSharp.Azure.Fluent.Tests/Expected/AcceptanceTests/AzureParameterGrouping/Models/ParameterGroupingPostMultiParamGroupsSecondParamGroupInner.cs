@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the
         /// ParameterGroupingPostMultiParamGroupsSecondParamGroupInner class.
         /// </summary>
-        public ParameterGroupingPostMultiParamGroupsSecondParamGroupInner() { }
+        public ParameterGroupingPostMultiParamGroupsSecondParamGroupInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -34,7 +37,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         {
             HeaderTwo = headerTwo;
             QueryTwo = queryTwo;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

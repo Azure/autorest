@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Doggy class.
         /// </summary>
-        public Doggy() { }
+        public Doggy()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Doggy class.
@@ -29,7 +32,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description)
         {
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets dog name

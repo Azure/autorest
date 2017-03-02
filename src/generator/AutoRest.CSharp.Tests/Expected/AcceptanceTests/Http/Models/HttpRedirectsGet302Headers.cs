@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the HttpRedirectsGet302Headers class.
         /// </summary>
-        public HttpRedirectsGet302Headers() { }
+        public HttpRedirectsGet302Headers()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HttpRedirectsGet302Headers class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         public HttpRedirectsGet302Headers(string location = default(string))
         {
             Location = location;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the redirect location for this request. Possible

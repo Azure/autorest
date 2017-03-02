@@ -62,8 +62,7 @@ namespace AutoRest.CSharp.Unit.Tests.Resource
                 // verify that parameter is of correct type
                 var prod = asm.ExportedTypes.FirstOrDefault(each => each.FullName == "Test.Models.Product");
                 Assert.NotNull(prod);
-
-
+                
                 // find all ctors in the model and ensure they call CustomInit()
                 var codeText = fileSystem.ReadAllText(@"Models\Product.cs");
                 Assert.True(reg.IsMatch(codeText));

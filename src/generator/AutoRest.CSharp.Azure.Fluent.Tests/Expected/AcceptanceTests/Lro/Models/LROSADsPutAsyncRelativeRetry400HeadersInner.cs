@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROSADsPutAsyncRelativeRetry400HeadersInner class.
         /// </summary>
-        public LROSADsPutAsyncRelativeRetry400HeadersInner() { }
+        public LROSADsPutAsyncRelativeRetry400HeadersInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -41,7 +44,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
             RetryAfter = retryAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to

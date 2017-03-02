@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseDatetimeHeaders
         /// class.
         /// </summary>
-        public HeaderResponseDatetimeHeaders() { }
+        public HeaderResponseDatetimeHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseDatetimeHeaders
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseDatetimeHeaders(System.DateTime? value = default(System.DateTime?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header values "2010-01-01T12:34:56Z" or

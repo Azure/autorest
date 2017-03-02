@@ -20,7 +20,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the SubResource class.
         /// </summary>
-        public SubResource() { }
+        public SubResource()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SubResource class.
@@ -29,7 +32,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         public SubResource(string id = default(string))
         {
             Id = id;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets sub Resource Id

@@ -9,7 +9,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the StorageAccountProperties class.
         /// </summary>
-        public StorageAccountProperties() { }
+        public StorageAccountProperties()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccountProperties class.
@@ -64,7 +67,13 @@ namespace Petstore.Models
             CreationTime = creationTime;
             CustomDomain = customDomain;
             SecondaryEndpoints = secondaryEndpoints;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the status of the storage account at the time the operation

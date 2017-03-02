@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         /// <summary>
         /// Initializes a new instance of the Widget class.
         /// </summary>
-        public Widget() { }
+        public Widget()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Widget class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyDictionary.Models
         {
             Integer = integer;
             StringProperty = stringProperty;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

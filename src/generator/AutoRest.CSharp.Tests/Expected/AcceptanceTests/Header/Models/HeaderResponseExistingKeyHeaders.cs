@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseExistingKeyHeaders
         /// class.
         /// </summary>
-        public HeaderResponseExistingKeyHeaders() { }
+        public HeaderResponseExistingKeyHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseExistingKeyHeaders
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseExistingKeyHeaders(string userAgent = default(string))
         {
             UserAgent = userAgent;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header value "User-Agent": "overwrite"

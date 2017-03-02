@@ -23,7 +23,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the
         /// HeaderResponseDatetimeRfc1123Headers class.
         /// </summary>
-        public HeaderResponseDatetimeRfc1123Headers() { }
+        public HeaderResponseDatetimeRfc1123Headers()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -34,7 +37,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseDatetimeRfc1123Headers(System.DateTime? value = default(System.DateTime?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header values "Wed, 01 Jan 2010 12:34:56

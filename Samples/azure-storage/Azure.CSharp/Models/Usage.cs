@@ -13,7 +13,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Usage class.
         /// </summary>
-        public Usage() { }
+        public Usage()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Usage class.
@@ -32,7 +35,13 @@ namespace Petstore.Models
             CurrentValue = currentValue;
             Limit = limit;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets the unit of measurement. Possible values include: 'Count',

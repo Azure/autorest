@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DatetimeWrapper class.
         /// </summary>
-        public DatetimeWrapper() { }
+        public DatetimeWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DatetimeWrapper class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Field = field;
             Now = now;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

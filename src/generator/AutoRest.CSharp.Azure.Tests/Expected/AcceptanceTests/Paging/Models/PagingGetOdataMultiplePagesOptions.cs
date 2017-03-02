@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// Initializes a new instance of the
         /// PagingGetOdataMultiplePagesOptions class.
         /// </summary>
-        public PagingGetOdataMultiplePagesOptions() { }
+        public PagingGetOdataMultiplePagesOptions()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -37,7 +40,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         {
             Maxresults = maxresults;
             Timeout = timeout;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets sets the maximum number of items to return in the

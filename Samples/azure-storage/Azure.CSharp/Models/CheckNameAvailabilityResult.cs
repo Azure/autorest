@@ -13,7 +13,10 @@ namespace Petstore.Models
         /// Initializes a new instance of the CheckNameAvailabilityResult
         /// class.
         /// </summary>
-        public CheckNameAvailabilityResult() { }
+        public CheckNameAvailabilityResult()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CheckNameAvailabilityResult
@@ -34,7 +37,13 @@ namespace Petstore.Models
             NameAvailable = nameAvailable;
             Reason = reason;
             Message = message;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets a boolean value that indicates whether the name is available

@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the ConstantProduct class.
         /// </summary>
-        public ConstantProduct() { }
+        public ConstantProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Static constructor for ConstantProduct class.
@@ -30,6 +33,11 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             ConstProperty = "constant";
             ConstProperty2 = "constant2";
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Constant string

@@ -11,7 +11,10 @@ namespace Petstore.Models
         /// Initializes a new instance of the
         /// StorageAccountCheckNameAvailabilityParameters class.
         /// </summary>
-        public StorageAccountCheckNameAvailabilityParameters() { }
+        public StorageAccountCheckNameAvailabilityParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -21,7 +24,13 @@ namespace Petstore.Models
         {
             Name = name;
             Type = type;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

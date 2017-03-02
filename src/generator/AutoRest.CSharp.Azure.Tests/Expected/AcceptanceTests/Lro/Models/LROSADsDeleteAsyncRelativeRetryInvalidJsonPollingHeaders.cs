@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders class.
         /// </summary>
-        public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders() { }
+        public LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -42,7 +45,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
             RetryAfter = retryAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// an Init method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to
