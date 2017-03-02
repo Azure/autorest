@@ -116,6 +116,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
+        /// </summary>
+        public static string BodyPropertyNameCamelCase {
+            get {
+                return ResourceManager.GetString("BodyPropertyNameCamelCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A body parameter cannot have a type, format, or any other properties describing its type..
         /// </summary>
         public static string BodyWithType {
@@ -202,6 +211,15 @@ namespace AutoRest.Core.Properties {
         public static string ConfigurationKnownPlugins {
             get {
                 return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, for definition: &quot;{1}&quot; must follow camelCase style. Example: &quot;{2}&quot;..
+        /// </summary>
+        public static string DefinitionsPropertiesNameCamelCase {
+            get {
+                return ResourceManager.GetString("DefinitionsPropertiesNameCamelCase", resourceCulture);
             }
         }
         

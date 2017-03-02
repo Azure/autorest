@@ -375,6 +375,12 @@ Modelers:
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
   </data>
+  <data name="BodyPropertyNameCamelCase" xml:space="preserve">
+    <value>Property named: "{0}", must follow camelCase style. Example: "{1}".</value>
+  </data>
+  <data name="DefinitionsPropertiesNameCamelCase" xml:space="preserve">
+    <value>Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".</value>
+  </data>
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
     <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
