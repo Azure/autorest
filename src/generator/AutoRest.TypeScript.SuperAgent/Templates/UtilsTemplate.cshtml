@@ -25,7 +25,7 @@ export class HttpCall<TReq, TRes> {
                 }
                 var httpRequest = req(this.url);
                 if (body) {httpRequest.send(body);}
-                httpRequest.end((err: any, res: any) => err === undefined ? resolve(res.body as TRes) : reject(err));
+                httpRequest.end((err: any, res: any) => !err ? resolve(res.body as TRes) : reject(err));
             }
             catch (e) {
                 reject(e);

@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.TypeScript.SuperAgent.Model;
 
 namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 {
-    public class ModelsModelBinder : ITsModelBinder<ModelsModel>
+    public class ModelsModelBinder : ModelBinderBaseTs, ITsModelBinder<ModelsModel>
     {
         public ModelsModel Bind(CodeModelTs codeModel)
         {
@@ -18,65 +18,60 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                                         ApiVersion = codeModel.ApiVersion 
                                      },
                             RequestModels = new List<Model.Model>(),
-                            ResponseModels = new List<Model.Model>()
+                            ResponseModels = new List<Model.Model>(),
+                            EnumModels = new List<EnumModel>()
             };
 
             var modelTypesFromDefinition = codeModel.ModelTypes.ToList();
 
+            var enumsInModels = new List<Tuple<string, IModelType>>();
+
+            Func<IVariable, ModelProperty> getPropertyModel =
+                variable =>
+                {
+                    var propertyType = variable.ModelType;
+                    string typeName = null;
+
+                    if (propertyType.IsEnumType())
+                    {
+                        var enumType = (EnumTypeTs) propertyType;
+                        typeName = enumType.GetImplementationName(variable);
+                        enumsInModels.Add(new Tuple<string, IModelType>(typeName, propertyType));
+                    }
+
+                    return new ModelProperty
+                           {
+                               Name = variable.Name.ToCamelCase(),
+                               IsRequired = variable.IsRequired,
+                               TypeName = typeName ?? GetTypeText(propertyType)
+                           };
+                };
+
             foreach (var method in codeModel.Methods)
             {
-                Response okResponse = method.Responses.ContainsKey(HttpStatusCode.OK) ? method.Responses[HttpStatusCode.OK] : method.Responses.Values.FirstOrDefault(r => r.Body != null);
+                string requestName = null;
+                string responseName = null;
+                IModelType modelType = null;
 
-                if (okResponse == null)
+                if (!TryGetResponseName(method, out modelType, out responseName, out requestName))
                 {
                     continue;
                 }
 
-                var doNotWrap = okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType();
-
-                string requestName = null;
-                string responseName = null;
-
-                if (doNotWrap)
-                {
-                    var serializedName = method.SerializedName.Value;
-                    var parts = serializedName.Split('_');
-                    if (parts.Length > 1)
-                    {
-                        requestName = parts[0];
-                    }
-
-                    responseName = okResponse.Body.GetImplementationName();
-                }
-                else
-                {
-                    responseName = $"I{okResponse.Body.Name}";
-                }
-
-                if (requestName == null)
-                {
-                    requestName = okResponse.Body.GetImplementationName();
-                }
-
                 var requestModelType = new Model.Model
                 {
-                    Name = $"{requestName}Request",
+                    Name = requestName,
                     Properties = new List<ModelProperty>()
                 };
 
-                foreach (var parameter in method.Parameters)
+                foreach (Parameter parameter in method.Parameters)
                 {
-                    requestModelType.Properties.Add(new ModelProperty
-                    {
-                        Name = parameter.Name.ToCamelCase(),
-                        IsRequired = parameter.IsRequired,
-                        TypeName = GetTypeText(parameter.ModelType)
-                    });
+                    requestModelType.Properties.Add(getPropertyModel(parameter));
                 }
 
                 models.RequestModels.Add(requestModelType);
 
-                if (okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType())
+                if (modelType.IsPrimaryType() || modelType.IsSequenceType() || modelType.IsEnumType())
                 {
                     continue;
                 }
@@ -87,7 +82,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     Properties = new List<ModelProperty>()
                 };
 
-                var type = modelTypesFromDefinition.FirstOrDefault(m => m.ClassName == okResponse.Body.ClassName);
+                var type = modelTypesFromDefinition.FirstOrDefault(m => m.ClassName == modelType.ClassName);
 
                 if (type == null)
                 {
@@ -98,19 +93,19 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
                 foreach (var property in type.Properties)
                 {
-                    responseModelType.Properties.Add(new ModelProperty
-                                             {
-                                                 Name = property.Name.ToCamelCase(),
-                                                 IsRequired = property.IsRequired,
-                                                 TypeName = GetTypeText(property.ModelType)
-                                             });
+                    responseModelType.Properties.Add(getPropertyModel(property));
                 }
 
                 models.ResponseModels.Add(responseModelType);
             }
 
-            foreach (var modelType in modelTypesFromDefinition.Where(m => !m.IsPrimaryType() || !m.IsSequenceType()))
+            foreach (var modelType in modelTypesFromDefinition)
             {
+                if (modelType.IsPrimaryType() || modelType.IsSequenceType() && modelType.IsEnumType())
+                {
+                    continue;
+                }
+
                 var model = new Model.Model
                             {
                                 Name = GetTypeText(modelType),
@@ -121,36 +116,39 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
                 foreach (var property in modelType.Properties)
                 {
-                    var propertyType = property.ModelType;
-
-                    model.Properties.Add(new ModelProperty
-                                         {
-                                             Name = property.Name.ToCamelCase(),
-                                             IsRequired = property.IsRequired,
-                                             TypeName = GetTypeText(propertyType)
-                    });
+                    model.Properties.Add(getPropertyModel(property));
                 }
             }
 
-            return models;
-        }
-
-        protected string GetTypeText(IModelType modelType)
-        {
-            var seqType = modelType as SequenceTypeTs;
-
-            string name = "";
-
-            if (seqType == null)
+            foreach (var pair in enumsInModels)
             {
-                name = modelType.GetImplementationName();
-                return modelType.IsPrimaryType() ? name : $"I{name}";
+                var enumType = (EnumTypeTs) pair.Item2;
+                var enumModel = new EnumModel {Name = pair.Item1};
+
+                if (enumType.ModelAsString)
+                {
+                    for (var index = 0; index < enumType.EnumValues.Length; index++)
+                    {
+                        var value = enumType.Children.Cast<EnumValue>().ToArray()[index];
+                        enumModel.Values.Add(value.Name, index);
+                    }
+                }
+
+                models.EnumModels.Add(enumModel);
             }
 
-            var elementType = seqType.ElementType;
-            name = elementType.GetImplementationName();
+            models.EnumModels = models.EnumModels.Distinct().ToList();
 
-            return SequenceTypeTs.CreateSeqTypeText(elementType.IsPrimaryType() ? name : $"I{name}");
+            foreach (EnumType enumType in codeModel.EnumTypes.ToArray())
+            {
+                models.EnumModels.Add(new EnumModel
+                {
+                    Name = enumType.DeclarationName,
+                    Values = new Dictionary<string, object>()
+                });
+            }
+
+            return models;
         }
     }
 }

@@ -7,7 +7,7 @@ using AutoRest.TypeScript.SuperAgent.Model;
 
 namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 {
-    public class ClientGroupsModelBinder : ITsModelBinder<ClientGroupsModel>
+    public class ClientGroupsModelBinder : ModelBinderBaseTs, ITsModelBinder<ClientGroupsModel>
     {
         public ClientGroupsModel Bind(CodeModelTs codeModel)
         {
@@ -33,47 +33,15 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
                 foreach (var method in methods)
                 {
-                    var okResponse = method.Responses[HttpStatusCode.OK];
-
-                    var doNotWrap = okResponse.Body.IsPrimaryType() || okResponse.Body.IsSequenceType();
-
-                    string requestName = null;
+                    IModelType modelType = null;
                     string responseName = null;
-
-                    if (doNotWrap)
+                    string requestName = null;
+                    if (!TryGetResponseName(method, out modelType, out responseName, out requestName))
                     {
-                        var serializedName = method.SerializedName.Value;
-                        var parts = serializedName.Split('_');
-                        if (parts.Length > 1)
-                        {
-                            requestName = parts[0];
-                        }
-                        else
-                        {
-                            responseName = okResponse.Body.GetImplementationName();
-                        }
-                    }
-                    else
-                    {
-                        responseName = okResponse.Body.Name;
+                        continue;
                     }
 
-                    if (string.IsNullOrWhiteSpace(requestName))
-                    {
-                        requestName = okResponse.Body.GetImplementationName();
-                    }
-
-                    if (string.IsNullOrWhiteSpace(responseName))
-                    {
-                        responseName = okResponse.Body.GetImplementationName();
-                    }
-
-                    requestName = $"{model.ModelModuleName}.{requestName}Request";
-
-                    if (!doNotWrap)
-                    {
-                        responseName = $"{model.ModelModuleName}.I{responseName}";
-                    }
+                    requestName = $"{model.ModelModuleName}.{requestName}";
 
                     var clientMethod = new ClientMethodModel
                                        {

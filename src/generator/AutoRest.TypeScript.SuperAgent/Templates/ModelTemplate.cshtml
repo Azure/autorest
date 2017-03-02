@@ -16,7 +16,18 @@ abstract class RequestBase {
     abstract validate() : void;
 }
 
-@foreach (var model in Model.ResponseModels)
+@foreach (var model in Model.EnumModels)
+{
+@:export enum @(model.Name) {
+    foreach (var pair in model.Values)
+    {
+@:    @(pair.Key) : @(pair.Value),
+    }
+@:}
+}
+
+
+@foreach(var model in Model.ResponseModels)
 {
 @:export interface @(model.Name) {
     foreach (var property in model.Properties)

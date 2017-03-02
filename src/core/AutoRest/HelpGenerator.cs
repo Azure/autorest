@@ -41,7 +41,7 @@ namespace AutoRest
             },
             new HelpExample
             {
-                Description = "Generate C# client in MyNamespace with custom Models name from swagger.json input:",
+                Description = "Generate C# client in MyNamespace with custom EnumModels name from swagger.json input:",
                 Example =
                     "AutoRest.exe -Namespace MyNamespace -ModelsName MyModels -CodeGenerator CSharp -Modeler Swagger -Input swagger.json"
             }

@@ -32,6 +32,11 @@ namespace AutoRest.TypeScript.SuperAgent
             return modelType is SequenceType;
         }
 
+        public static bool IsEnumType(this IModelType modelType)
+        {
+            return modelType is EnumType;
+        }
+
         public static bool IsComplexType(this IModelType modelType)
         {
             return modelType is CompositeType;

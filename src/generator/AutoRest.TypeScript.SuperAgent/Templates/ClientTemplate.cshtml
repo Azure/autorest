@@ -19,7 +19,7 @@ import * as httpUtil from "./httpUtil"
     }
 @:}
 
-@:export class @(client.Name) extends BaseApi implements @(client.InterfaceName) {
+@:export class @(client.Name) extends httpUtil.BaseApi implements @(client.InterfaceName) {
 @:
 @:    public constructor(baseUrl: string) {
 @:        super(baseUrl);
