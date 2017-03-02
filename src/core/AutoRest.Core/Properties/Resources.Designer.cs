@@ -706,7 +706,7 @@ namespace AutoRest.Core.Properties {
         ///    1. A Get Operation 
         ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 
         ///    3. A ListBySubscriptionId operation with x-ms-pageable extension.
-        ///    4. Type, Location, Tags should not be used in the properties..
+        ///    4. &quot;type&quot;,&quot;location&quot;,&quot;tags&quot; should not be used in the RP property bag named &quot;properties&quot;..
         /// </summary>
         public static string TrackedResourceIsNotValid {
             get {
