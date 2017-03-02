@@ -701,7 +701,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+        ///   Looks up a localized string similar to Tracked Resource failing validation is: &quot;{0}&quot;. Validation Failed: {1}.
         ///    A Tracked Resource must have: 
         ///    1. A Get Operation 
         ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 

@@ -254,7 +254,7 @@ Modelers:
     <value>Operations API must be implemented for the service.</value>
   </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
-    <value>Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+    <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
     A Tracked Resource must have: 
     1. A Get Operation 
     2. A ListByResourceGroup operation with x-ms-pageable extension and 
