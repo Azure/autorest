@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     /// </summary>
     public partial class ChildProduct
     {
-        /// <summary>
-        /// Initializes a new instance of the ChildProduct class.
-        /// </summary>
-        public ChildProduct() { }
 
         /// <summary>
         /// Initializes a new instance of the ChildProduct class.

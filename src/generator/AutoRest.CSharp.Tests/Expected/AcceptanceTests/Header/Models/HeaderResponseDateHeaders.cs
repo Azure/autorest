@@ -19,10 +19,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseDateHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseDateHeaders class.
-        /// </summary>
-        public HeaderResponseDateHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseDateHeaders class.

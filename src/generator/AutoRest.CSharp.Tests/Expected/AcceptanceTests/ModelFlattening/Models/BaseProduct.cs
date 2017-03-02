@@ -18,10 +18,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     /// </summary>
     public partial class BaseProduct
     {
-        /// <summary>
-        /// Initializes a new instance of the BaseProduct class.
-        /// </summary>
-        public BaseProduct() { }
 
         /// <summary>
         /// Initializes a new instance of the BaseProduct class.

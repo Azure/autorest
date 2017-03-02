@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 
     public partial class OdataFilterInner
     {
-        /// <summary>
-        /// Initializes a new instance of the OdataFilterInner class.
-        /// </summary>
-        public OdataFilterInner() { }
 
         /// <summary>
         /// Initializes a new instance of the OdataFilterInner class.

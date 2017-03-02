@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class ReadonlyObjInner
     {
-        /// <summary>
-        /// Initializes a new instance of the ReadonlyObjInner class.
-        /// </summary>
-        public ReadonlyObjInner() { }
 
         /// <summary>
         /// Initializes a new instance of the ReadonlyObjInner class.

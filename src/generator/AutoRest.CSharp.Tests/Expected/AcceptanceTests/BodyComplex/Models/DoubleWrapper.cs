@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class DoubleWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the DoubleWrapper class.
-        /// </summary>
-        public DoubleWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the DoubleWrapper class.

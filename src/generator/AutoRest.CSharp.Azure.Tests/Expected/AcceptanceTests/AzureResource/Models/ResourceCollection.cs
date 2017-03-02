@@ -17,10 +17,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 
     public partial class ResourceCollection
     {
-        /// <summary>
-        /// Initializes a new instance of the ResourceCollection class.
-        /// </summary>
-        public ResourceCollection() { }
 
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.

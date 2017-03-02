@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 
     public partial class OdataFilter
     {
-        /// <summary>
-        /// Initializes a new instance of the OdataFilter class.
-        /// </summary>
-        public OdataFilter() { }
 
         /// <summary>
         /// Initializes a new instance of the OdataFilter class.

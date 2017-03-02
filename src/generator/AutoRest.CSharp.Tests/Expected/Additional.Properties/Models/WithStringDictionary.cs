@@ -16,10 +16,6 @@ namespace Fixtures.AdditionalProperties.Models
 
     public partial class WithStringDictionary
     {
-        /// <summary>
-        /// Initializes a new instance of the WithStringDictionary class.
-        /// </summary>
-        public WithStringDictionary() { }
 
         /// <summary>
         /// Initializes a new instance of the WithStringDictionary class.

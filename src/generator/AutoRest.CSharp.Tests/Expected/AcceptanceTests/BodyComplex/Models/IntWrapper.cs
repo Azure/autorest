@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class IntWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the IntWrapper class.
-        /// </summary>
-        public IntWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the IntWrapper class.

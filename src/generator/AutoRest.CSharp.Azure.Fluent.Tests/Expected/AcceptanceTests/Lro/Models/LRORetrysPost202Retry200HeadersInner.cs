@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LRORetrysPost202Retry200HeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LRORetrysPost202Retry200HeadersInner class.
-        /// </summary>
-        public LRORetrysPost202Retry200HeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

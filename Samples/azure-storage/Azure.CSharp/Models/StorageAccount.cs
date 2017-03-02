@@ -11,10 +11,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class StorageAccount : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of the StorageAccount class.
-        /// </summary>
-        public StorageAccount() { }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccount class.

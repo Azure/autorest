@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class Fish
     {
-        /// <summary>
-        /// Initializes a new instance of the Fish class.
-        /// </summary>
-        public Fish() { }
 
         /// <summary>
         /// Initializes a new instance of the Fish class.

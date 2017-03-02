@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class Cat : Pet
     {
-        /// <summary>
-        /// Initializes a new instance of the Cat class.
-        /// </summary>
-        public Cat() { }
 
         /// <summary>
         /// Initializes a new instance of the Cat class.

@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class BooleanWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the BooleanWrapperInner class.
-        /// </summary>
-        public BooleanWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the BooleanWrapperInner class.

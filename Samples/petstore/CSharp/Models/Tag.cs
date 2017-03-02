@@ -8,10 +8,6 @@ namespace Petstore.Models
 
     public partial class Tag
     {
-        /// <summary>
-        /// Initializes a new instance of the Tag class.
-        /// </summary>
-        public Tag() { }
 
         /// <summary>
         /// Initializes a new instance of the Tag class.

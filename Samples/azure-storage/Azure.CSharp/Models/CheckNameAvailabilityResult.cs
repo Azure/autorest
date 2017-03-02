@@ -9,11 +9,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class CheckNameAvailabilityResult
     {
-        /// <summary>
-        /// Initializes a new instance of the CheckNameAvailabilityResult
-        /// class.
-        /// </summary>
-        public CheckNameAvailabilityResult() { }
 
         /// <summary>
         /// Initializes a new instance of the CheckNameAvailabilityResult

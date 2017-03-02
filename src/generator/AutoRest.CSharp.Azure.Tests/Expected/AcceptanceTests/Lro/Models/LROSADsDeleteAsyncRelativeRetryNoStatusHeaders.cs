@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROSADsDeleteAsyncRelativeRetryNoStatusHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROSADsDeleteAsyncRelativeRetryNoStatusHeaders class.
-        /// </summary>
-        public LROSADsDeleteAsyncRelativeRetryNoStatusHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the

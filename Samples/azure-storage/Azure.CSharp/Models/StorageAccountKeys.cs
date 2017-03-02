@@ -9,10 +9,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class StorageAccountKeys
     {
-        /// <summary>
-        /// Initializes a new instance of the StorageAccountKeys class.
-        /// </summary>
-        public StorageAccountKeys() { }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccountKeys class.

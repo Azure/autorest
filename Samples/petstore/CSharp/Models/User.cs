@@ -8,10 +8,6 @@ namespace Petstore.Models
 
     public partial class User
     {
-        /// <summary>
-        /// Initializes a new instance of the User class.
-        /// </summary>
-        public User() { }
 
         /// <summary>
         /// Initializes a new instance of the User class.

@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class BasicInner
     {
-        /// <summary>
-        /// Initializes a new instance of the BasicInner class.
-        /// </summary>
-        public BasicInner() { }
 
         /// <summary>
         /// Initializes a new instance of the BasicInner class.

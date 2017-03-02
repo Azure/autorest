@@ -10,10 +10,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class Endpoints
     {
-        /// <summary>
-        /// Initializes a new instance of the Endpoints class.
-        /// </summary>
-        public Endpoints() { }
 
         /// <summary>
         /// Initializes a new instance of the Endpoints class.

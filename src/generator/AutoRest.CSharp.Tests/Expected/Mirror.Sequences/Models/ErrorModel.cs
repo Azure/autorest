@@ -15,10 +15,6 @@ namespace Fixtures.MirrorSequences.Models
 
     public partial class ErrorModel
     {
-        /// <summary>
-        /// Initializes a new instance of the ErrorModel class.
-        /// </summary>
-        public ErrorModel() { }
 
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.

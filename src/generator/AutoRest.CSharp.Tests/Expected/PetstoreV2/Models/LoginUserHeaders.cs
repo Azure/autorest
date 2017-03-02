@@ -19,10 +19,6 @@ namespace Fixtures.PetstoreV2.Models
     /// </summary>
     public partial class LoginUserHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the LoginUserHeaders class.
-        /// </summary>
-        public LoginUserHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the LoginUserHeaders class.

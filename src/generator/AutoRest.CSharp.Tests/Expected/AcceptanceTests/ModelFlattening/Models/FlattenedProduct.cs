@@ -23,10 +23,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     [JsonTransformation]
     public partial class FlattenedProduct : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of the FlattenedProduct class.
-        /// </summary>
-        public FlattenedProduct() { }
 
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.

@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseBoolHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseBoolHeaders class.
-        /// </summary>
-        public HeaderResponseBoolHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseBoolHeaders class.

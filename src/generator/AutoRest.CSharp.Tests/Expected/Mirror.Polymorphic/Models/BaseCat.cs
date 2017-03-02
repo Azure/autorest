@@ -14,10 +14,6 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     public partial class BaseCat : Animal
     {
-        /// <summary>
-        /// Initializes a new instance of the BaseCat class.
-        /// </summary>
-        public BaseCat() { }
 
         /// <summary>
         /// Initializes a new instance of the BaseCat class.

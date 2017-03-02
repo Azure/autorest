@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     public partial class Sku
     {
-        /// <summary>
-        /// Initializes a new instance of the Sku class.
-        /// </summary>
-        public Sku() { }
 
         /// <summary>
         /// Initializes a new instance of the Sku class.

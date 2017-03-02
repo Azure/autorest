@@ -14,10 +14,6 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     public partial class SiameseCat : BaseCat
     {
-        /// <summary>
-        /// Initializes a new instance of the SiameseCat class.
-        /// </summary>
-        public SiameseCat() { }
 
         /// <summary>
         /// Initializes a new instance of the SiameseCat class.

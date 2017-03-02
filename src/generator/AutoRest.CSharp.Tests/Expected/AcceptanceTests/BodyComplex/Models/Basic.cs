@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class Basic
     {
-        /// <summary>
-        /// Initializes a new instance of the Basic class.
-        /// </summary>
-        public Basic() { }
 
         /// <summary>
         /// Initializes a new instance of the Basic class.

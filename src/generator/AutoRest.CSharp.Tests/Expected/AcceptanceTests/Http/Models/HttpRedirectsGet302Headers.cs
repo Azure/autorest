@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     /// </summary>
     public partial class HttpRedirectsGet302Headers
     {
-        /// <summary>
-        /// Initializes a new instance of the HttpRedirectsGet302Headers class.
-        /// </summary>
-        public HttpRedirectsGet302Headers() { }
 
         /// <summary>
         /// Initializes a new instance of the HttpRedirectsGet302Headers class.

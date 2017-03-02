@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class Datetimerfc1123Wrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the Datetimerfc1123Wrapper class.
-        /// </summary>
-        public Datetimerfc1123Wrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the Datetimerfc1123Wrapper class.

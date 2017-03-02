@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class DictionaryWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the DictionaryWrapper class.
-        /// </summary>
-        public DictionaryWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the DictionaryWrapper class.

@@ -17,10 +17,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     public partial class SubResource : IResource
     {
-        /// <summary>
-        /// Initializes a new instance of the SubResource class.
-        /// </summary>
-        public SubResource() { }
 
         /// <summary>
         /// Initializes a new instance of the SubResource class.

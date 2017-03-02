@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROSADsPost202NoLocationHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the LROSADsPost202NoLocationHeaders
-        /// class.
-        /// </summary>
-        public LROSADsPost202NoLocationHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the LROSADsPost202NoLocationHeaders

@@ -14,10 +14,6 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     public partial class Horsey : Animal
     {
-        /// <summary>
-        /// Initializes a new instance of the Horsey class.
-        /// </summary>
-        public Horsey() { }
 
         /// <summary>
         /// Initializes a new instance of the Horsey class.

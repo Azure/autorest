@@ -14,10 +14,6 @@ namespace Fixtures.AdditionalProperties.Models
 
     public partial class Feature
     {
-        /// <summary>
-        /// Initializes a new instance of the Feature class.
-        /// </summary>
-        public Feature() { }
 
         /// <summary>
         /// Initializes a new instance of the Feature class.

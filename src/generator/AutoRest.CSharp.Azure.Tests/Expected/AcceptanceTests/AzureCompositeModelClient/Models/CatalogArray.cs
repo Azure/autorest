@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class CatalogArray
     {
-        /// <summary>
-        /// Initializes a new instance of the CatalogArray class.
-        /// </summary>
-        public CatalogArray() { }
 
         /// <summary>
         /// Initializes a new instance of the CatalogArray class.

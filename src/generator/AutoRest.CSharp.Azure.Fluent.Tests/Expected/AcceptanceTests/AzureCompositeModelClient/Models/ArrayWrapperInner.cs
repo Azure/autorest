@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class ArrayWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the ArrayWrapperInner class.
-        /// </summary>
-        public ArrayWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the ArrayWrapperInner class.

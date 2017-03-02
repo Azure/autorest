@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     [Newtonsoft.Json.JsonObject("goblin")]
     public partial class Goblinshark : Shark
     {
-        /// <summary>
-        /// Initializes a new instance of the Goblinshark class.
-        /// </summary>
-        public Goblinshark() { }
 
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.

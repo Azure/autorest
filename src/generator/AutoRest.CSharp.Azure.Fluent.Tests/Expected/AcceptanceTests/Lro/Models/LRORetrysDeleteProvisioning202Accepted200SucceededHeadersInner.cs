@@ -19,12 +19,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner
-        /// class.
-        /// </summary>
-        public LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class LongWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the LongWrapper class.
-        /// </summary>
-        public LongWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the LongWrapper class.

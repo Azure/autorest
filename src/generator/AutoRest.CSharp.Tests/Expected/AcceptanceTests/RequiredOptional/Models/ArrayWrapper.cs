@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 
     public partial class ArrayWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the ArrayWrapper class.
-        /// </summary>
-        public ArrayWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.

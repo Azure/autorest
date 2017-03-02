@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class DoubleWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the DoubleWrapperInner class.
-        /// </summary>
-        public DoubleWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the DoubleWrapperInner class.

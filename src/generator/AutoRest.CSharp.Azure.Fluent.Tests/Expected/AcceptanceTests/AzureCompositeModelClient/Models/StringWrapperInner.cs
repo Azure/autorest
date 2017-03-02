@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class StringWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the StringWrapperInner class.
-        /// </summary>
-        public StringWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the StringWrapperInner class.

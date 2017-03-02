@@ -17,11 +17,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseExistingKeyHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseExistingKeyHeaders
-        /// class.
-        /// </summary>
-        public HeaderResponseExistingKeyHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseExistingKeyHeaders

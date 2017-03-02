@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     public partial class OperationResult
     {
-        /// <summary>
-        /// Initializes a new instance of the OperationResult class.
-        /// </summary>
-        public OperationResult() { }
 
         /// <summary>
         /// Initializes a new instance of the OperationResult class.

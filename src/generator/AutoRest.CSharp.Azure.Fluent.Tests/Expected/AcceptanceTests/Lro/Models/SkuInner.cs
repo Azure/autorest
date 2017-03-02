@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     public partial class SkuInner
     {
-        /// <summary>
-        /// Initializes a new instance of the SkuInner class.
-        /// </summary>
-        public SkuInner() { }
 
         /// <summary>
         /// Initializes a new instance of the SkuInner class.

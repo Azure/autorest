@@ -20,11 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
     /// </summary>
     public partial class HeaderCustomNamedRequestIdParamGroupingParametersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// HeaderCustomNamedRequestIdParamGroupingParametersInner class.
-        /// </summary>
-        public HeaderCustomNamedRequestIdParamGroupingParametersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

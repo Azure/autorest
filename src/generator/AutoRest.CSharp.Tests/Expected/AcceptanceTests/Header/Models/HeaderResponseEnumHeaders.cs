@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseEnumHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseEnumHeaders class.
-        /// </summary>
-        public HeaderResponseEnumHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseEnumHeaders class.

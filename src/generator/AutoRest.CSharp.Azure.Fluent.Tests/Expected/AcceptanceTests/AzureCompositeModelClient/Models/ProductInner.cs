@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     /// </summary>
     public partial class ProductInner
     {
-        /// <summary>
-        /// Initializes a new instance of the ProductInner class.
-        /// </summary>
-        public ProductInner() { }
 
         /// <summary>
         /// Initializes a new instance of the ProductInner class.

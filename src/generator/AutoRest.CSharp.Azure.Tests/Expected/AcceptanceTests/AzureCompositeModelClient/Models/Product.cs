@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     /// </summary>
     public partial class Product
     {
-        /// <summary>
-        /// Initializes a new instance of the Product class.
-        /// </summary>
-        public Product() { }
 
         /// <summary>
         /// Initializes a new instance of the Product class.

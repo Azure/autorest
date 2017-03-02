@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROSADsDelete202RetryInvalidHeaderHeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROSADsDelete202RetryInvalidHeaderHeadersInner class.
-        /// </summary>
-        public LROSADsDelete202RetryInvalidHeaderHeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

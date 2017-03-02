@@ -21,10 +21,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     /// </summary>
     public partial class CustomParameterGroupInner
     {
-        /// <summary>
-        /// Initializes a new instance of the CustomParameterGroupInner class.
-        /// </summary>
-        public CustomParameterGroupInner() { }
 
         /// <summary>
         /// Initializes a new instance of the CustomParameterGroupInner class.

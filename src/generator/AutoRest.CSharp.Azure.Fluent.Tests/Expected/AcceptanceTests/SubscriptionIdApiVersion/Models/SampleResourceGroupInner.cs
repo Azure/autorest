@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 
     public partial class SampleResourceGroupInner
     {
-        /// <summary>
-        /// Initializes a new instance of the SampleResourceGroupInner class.
-        /// </summary>
-        public SampleResourceGroupInner() { }
 
         /// <summary>
         /// Initializes a new instance of the SampleResourceGroupInner class.

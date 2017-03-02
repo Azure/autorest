@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
 
     public partial class RefColorConstant
     {
-        /// <summary>
-        /// Initializes a new instance of the RefColorConstant class.
-        /// </summary>
-        public RefColorConstant() { }
 
         /// <summary>
         /// Initializes a new instance of the RefColorConstant class.

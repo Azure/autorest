@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     /// </summary>
     public partial class PagingGetMultiplePagesOptions
     {
-        /// <summary>
-        /// Initializes a new instance of the PagingGetMultiplePagesOptions
-        /// class.
-        /// </summary>
-        public PagingGetMultiplePagesOptions() { }
 
         /// <summary>
         /// Initializes a new instance of the PagingGetMultiplePagesOptions

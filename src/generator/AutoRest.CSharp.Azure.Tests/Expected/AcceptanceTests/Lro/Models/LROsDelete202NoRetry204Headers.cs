@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROsDelete202NoRetry204Headers
     {
-        /// <summary>
-        /// Initializes a new instance of the LROsDelete202NoRetry204Headers
-        /// class.
-        /// </summary>
-        public LROsDelete202NoRetry204Headers() { }
 
         /// <summary>
         /// Initializes a new instance of the LROsDelete202NoRetry204Headers

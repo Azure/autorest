@@ -16,10 +16,6 @@ namespace Fixtures.PetstoreV2AllSync.Models
 
     public partial class Category
     {
-        /// <summary>
-        /// Initializes a new instance of the Category class.
-        /// </summary>
-        public Category() { }
 
         /// <summary>
         /// Initializes a new instance of the Category class.

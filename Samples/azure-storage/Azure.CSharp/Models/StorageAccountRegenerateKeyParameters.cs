@@ -7,11 +7,6 @@ namespace Petstore.Models
 
     public partial class StorageAccountRegenerateKeyParameters
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// StorageAccountRegenerateKeyParameters class.
-        /// </summary>
-        public StorageAccountRegenerateKeyParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the

@@ -20,10 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     [JsonTransformation]
     public partial class Product : Resource
     {
-        /// <summary>
-        /// Initializes a new instance of the Product class.
-        /// </summary>
-        public Product() { }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
