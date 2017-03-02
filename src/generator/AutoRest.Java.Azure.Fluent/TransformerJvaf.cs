@@ -89,15 +89,6 @@ namespace AutoRest.Java.Azure
 
         public void NormalizeTopLevelTypes(CodeModel serviceClient)
         {
-            foreach (var param in serviceClient.Methods.SelectMany(m => m.Parameters))
-            {
-                AppendInnerToTopLevelType(param.ModelType, serviceClient);
-            }
-            foreach (var response in serviceClient.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
-            {
-                AppendInnerToTopLevelType(response.Body, serviceClient);
-                AppendInnerToTopLevelType(response.Headers, serviceClient);
-            }
             foreach (var model in serviceClient.ModelTypes)
             {
                 if (model.BaseModelType != null && (model.BaseModelType.Name == "Resource" || model.BaseModelType.Name == "SubResource"))
@@ -114,7 +105,7 @@ namespace AutoRest.Java.Azure
             CompositeTypeJvaf compositeType = type as CompositeTypeJvaf;
             SequenceType sequenceType = type as SequenceType;
             DictionaryType dictionaryType = type as DictionaryType;
-            if (compositeType != null && !compositeType.IsResource)
+            if (compositeType != null)
             {
                 compositeType.IsInnerModel = true;
             }

@@ -73,15 +73,6 @@ namespace AutoRest.CSharp.Azure.Fluent
 
         public void NormalizeTopLevelTypes(CodeModelCsaf codeModel)
         {
-            foreach (var param in codeModel.Methods.SelectMany(m => m.Parameters))
-            {
-                AppendInnerToTopLevelType(param.ModelType, codeModel);
-            }
-            foreach (var response in codeModel.Methods.SelectMany(m => m.Responses).Select(r => r.Value))
-            {
-                AppendInnerToTopLevelType(response.Body, codeModel);
-                AppendInnerToTopLevelType(response.Headers, codeModel);
-            }
             foreach (var model in codeModel.ModelTypes)
             {
                 if ((model.BaseModelType != null) && model.BaseModelType.IsResource())
@@ -100,7 +91,7 @@ namespace AutoRest.CSharp.Azure.Fluent
             var compositeType = type as CompositeType;
             var sequenceType = type as SequenceType;
             var dictionaryType = type as DictionaryType;
-            if ((compositeType != null) && !codeModel._innerTypes.Contains(compositeType))
+            if (compositeType != null)
             {
                 compositeType.Name.FixedValue = compositeType.Name + "Inner";
                 codeModel._innerTypes.Add(compositeType);
