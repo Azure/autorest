@@ -1,11 +1,14 @@
 {
     "files.exclude": {
         "src/autorest-core/**/*.js" : true,
+        "src/autorest-core/**/*.d.ts" : true,
         "src/autorest-core/**/*.js.map": true,
         "src/autorest/**/*.js" : true,
         "src/autorest/**/*.js.map": true,
-        "src/extension/**/*.js" : true,
-        "src/extension/**/*.js.map": true,
+        "src/autorest/**/*.d.ts": true,
+        "src/vscode-autorest/**/*.js" : true,
+        "src/vscode-autorest/**/*.js.map": true,
+        "src/vscode-autorest/**/*.d.ts": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
