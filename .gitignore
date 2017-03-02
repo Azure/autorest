@@ -201,7 +201,7 @@ src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
 src/autorest/**/*.js
 src/autorest-core/**/*.js
-src/extension/**/*.js
+src/vscode-autorest/**/*.js
 
 *.js.map
 

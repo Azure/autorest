@@ -2,7 +2,7 @@
 global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
-require './src/local_modules/gulp.iced'
+require './src/gulp_modules/gulp.iced'
 
 # tasks required for this build 
 Tasks "dotnet",  # compiling dotnet
@@ -49,7 +49,7 @@ Import
       .pipe onlyFiles()
   
   typescriptProjectFolders: ()->
-    source ["src/autorest", "src/autorest-core","src/extension/client","src/extension/server" ]
+    source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
@@ -64,7 +64,7 @@ Import
   generatedFiles: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
-        source(["#{each.path}/**/*.js", "#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**"])
+        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**"])
           .on 'end', -> 
             next null
           .pipe foreach (e,n)->
@@ -87,16 +87,6 @@ task 'install-binaries', '', (done)->
   source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
     .pipe destination "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private" 
 
-task 'install-extension-server' ,'', (done)->
-  # install vscode language service into the client folder
-  execute "node #{basefolder}/src/extension/server/node_modules/vscode-languageserver/bin/installServerIntoExtension #{basefolder}/src/extension/client #{basefolder}/src/extension/server/package.json #{basefolder}/src/extension/server/tsconfig.json",{ cwd:"#{basefolder}/src/extension/server" }, (c,o,e) -> done null
-  return null;
-
-task 'install-extension' ,'', ['install-extension-server', "build/typescript"], (done)->
-  # configures something locally for vscode?
-  execute "npm run update-vscode",{ cwd:"#{basefolder}/src/extension/client" }, (c,o,e) -> done null
-  return null;
-
 task 'install', 'build and install the dev version of autorest',(done)->
   run [ 'build/typescript', 'build/dotnet/binaries' ],
     'install-node-files',
@@ -116,7 +106,30 @@ task 'autorest-cli', "Runs AutoRest (via node)" ,(done)->
   exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
     return done()
 
-if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (newer "#{basefolder}/src/autorest/package.json",  "#{basefolder}/src/autorest/node_modules") or (newer "#{basefolder}/src/autorest-core/package.json",  "#{basefolder}/src/autorest-core/node_modules")
-  echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"
 
-  
+task 'init', "" ,(done)->
+  # is the main node_modules out of date?
+  doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core") or (! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest")
+
+  typescriptProjectFolders()
+    .on 'end', -> 
+      if doit
+        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+        exec "npm install",{silent:false},(c,o,e)->
+          # after npm, hookup symlinks/junctions for dependent packages in projects
+          if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
+            fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
+
+          if ! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest"        
+            fs.symlinkSync "#{basefolder}/src/autorest", "#{basefolder}/src/vscode-autorest/server/node_modules/autorest",'junction'         
+
+          done null
+      else 
+        done null
+
+    .pipe foreach (each,next) -> 
+      # is any of the TS projects node_modules out of date?
+      doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
+      next null
+
+  return null

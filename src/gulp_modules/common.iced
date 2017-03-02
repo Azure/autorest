@@ -55,6 +55,8 @@ module.exports =
     
     # add the new task.
     # gulp.task name, deps, fn
+    if name isnt "init" and name isnt "npm-install"
+      deps.unshift "init" 
 
     if fn.length # see if the task function has arguments (betcha never saw that before!)
       gulp.task name, deps, (done)->
