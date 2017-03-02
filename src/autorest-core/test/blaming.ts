@@ -25,7 +25,5 @@ import { run } from "../index";
       const blameInputs = Array.from(blameTree.blameInputs());
       assert.equal(2, blameInputs.length);
     }
-
-    await dataStore.dump("C:\\Users\\jobader\\Desktop\\asd\\auto");
   }
 }
