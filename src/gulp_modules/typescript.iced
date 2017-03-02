@@ -1,10 +1,9 @@
 # build task for tsc 
 task 'build', 'typescript', (done)-> 
-  count = 0
+  count = 4
   typescriptProjects()
     .pipe foreach (each,next) -> 
-      count++
-      execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}", (code,stdout,stderr) ->
+      execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}",{retry:1} ,(code,stdout,stderr) ->
         echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0
@@ -13,11 +12,9 @@ task 'build', 'typescript', (done)->
   
           if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
             fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
-
-          # install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
-
+          done()
       next null
-    return null
+  return null
 
 task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
@@ -54,14 +51,14 @@ task 'test', 'typescript',['build/typescript'], (done)->
         next null
 
 task 'npm-install', 'typescript', (done)-> 
-  count = 0
+  count = 4
   typescriptProjectFolders()
-    .pipe foreach (each,next) -> 
-      count++
-      execute "npm install", {cwd: each.path}, (code,stdout,stderr) ->
+    .pipe foreach (each,next)-> 
+      #count++
+      execute "npm install", {cwd: each.path }, (code,stdout,stderr) ->
+        echo stdout
         count--
         if count is 0
           done() 
       next null
-
-    return null
+  return null

@@ -182,7 +182,7 @@ module.exports =
       concurrency--
 
       if code and (options.retry or 0) > 0
-        echo warning "reytrying #{options.retry} #{cmdline}"
+        echo warning "retrying #{options.retry} #{cmdline}"
         options.retry--
         return execute cmdline,options,callback
 
