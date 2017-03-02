@@ -73,6 +73,7 @@ Import
         
   typescriptFiles: () -> 
     typescriptProjectFolders()
+      .pipe except /src.vscode-autorest.server/ # covered in vscode-autorest
       .pipe foreach (each,next,more)=>
         source(["#{each.path}/**/*.ts", "#{each.path}/**/*.json", "!#{each.path}/node_modules/**"])
           .on 'end', -> 
