@@ -47,7 +47,10 @@ task 'clean' , 'typescript', (done)->
 task 'test', 'typescript',['build/typescript'], (done)->
   typescriptProjectFolders()
     .pipe foreach (each,next)->
-      execute "#{each.path}/node_modules/.bin/mocha test", {cwd: each.path}, (c,o,e) ->
+      if test "-f", "#{each.path}/node_modules/.bin/mocha"
+        execute "#{each.path}/node_modules/.bin/mocha test", {cwd: each.path}, (c,o,e) ->
+          next null
+      else
         next null
 
 task 'npm-install', 'typescript', (done)-> 

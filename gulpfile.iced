@@ -64,7 +64,7 @@ Import
   generatedFiles: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
-        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**"])
+        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**","!#{each.path}/server/node_modules/**"])
           .on 'end', -> 
             next null
           .pipe foreach (e,n)->
