@@ -4,7 +4,7 @@ First,Download the Swagger.json example:
 
 | Platform | Command |
 |----|---|
-|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json -o swagger.json`|
+|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json -o petstore.json`|
 |Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`|
 
 Next, generate the client:
