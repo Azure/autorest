@@ -16,6 +16,7 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.subscriptionidapiversion.ErrorException;
+import fixtures.subscriptionidapiversion.SampleResourceGroup;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
@@ -66,9 +67,9 @@ public class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the SampleResourceGroupInner object if successful.
+     * @return the SampleResourceGroup object if successful.
      */
-    public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
+    public SampleResourceGroup getSampleResourceGroup(String resourceGroupName) {
         return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).toBlocking().single().body();
     }
 
@@ -80,7 +81,7 @@ public class GroupsInner {
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+    public ServiceFuture<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) {
         return ServiceFuture.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
@@ -89,12 +90,12 @@ public class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroupInner object
+     * @return the observable to the SampleResourceGroup object
      */
-    public Observable<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
-        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroupInner>, SampleResourceGroupInner>() {
+    public Observable<SampleResourceGroup> getSampleResourceGroupAsync(String resourceGroupName) {
+        return getSampleResourceGroupWithServiceResponseAsync(resourceGroupName).map(new Func1<ServiceResponse<SampleResourceGroup>, SampleResourceGroup>() {
             @Override
-            public SampleResourceGroupInner call(ServiceResponse<SampleResourceGroupInner> response) {
+            public SampleResourceGroup call(ServiceResponse<SampleResourceGroup> response) {
                 return response.body();
             }
         });
@@ -105,9 +106,9 @@ public class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the SampleResourceGroupInner object
+     * @return the observable to the SampleResourceGroup object
      */
-    public Observable<ServiceResponse<SampleResourceGroupInner>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName) {
+    public Observable<ServiceResponse<SampleResourceGroup>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName) {
         if (this.client.subscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.client.subscriptionId() is required and cannot be null.");
         }
@@ -118,11 +119,11 @@ public class GroupsInner {
             throw new IllegalArgumentException("Parameter this.client.apiVersion() is required and cannot be null.");
         }
         return service.getSampleResourceGroup(this.client.subscriptionId(), resourceGroupName, this.client.apiVersion(), this.client.acceptLanguage(), this.client.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SampleResourceGroupInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<SampleResourceGroup>>>() {
                 @Override
-                public Observable<ServiceResponse<SampleResourceGroupInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<SampleResourceGroup>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<SampleResourceGroupInner> clientResponse = getSampleResourceGroupDelegate(response);
+                        ServiceResponse<SampleResourceGroup> clientResponse = getSampleResourceGroupDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -131,9 +132,9 @@ public class GroupsInner {
             });
     }
 
-    private ServiceResponse<SampleResourceGroupInner> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return this.client.restClient().responseBuilderFactory().<SampleResourceGroupInner, ErrorException>newInstance(this.client.serializerAdapter())
-                .register(200, new TypeToken<SampleResourceGroupInner>() { }.getType())
+    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return this.client.restClient().responseBuilderFactory().<SampleResourceGroup, ErrorException>newInstance(this.client.serializerAdapter())
+                .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

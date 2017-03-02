@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static SiameseInner GetValid(this IInheritanceOperations operations)
+            public static Siamese GetValid(this IInheritanceOperations operations)
             {
                 return operations.GetValidAsync().GetAwaiter().GetResult();
             }
@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SiameseInner> GetValidAsync(this IInheritanceOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Siamese> GetValidAsync(this IInheritanceOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato",
             /// and the 2nd one named "Tomato" with id=-1 and food="french fries".
             /// </param>
-            public static void PutValid(this IInheritanceOperations operations, SiameseInner complexBody)
+            public static void PutValid(this IInheritanceOperations operations, Siamese complexBody)
             {
                 operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
@@ -77,7 +77,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IInheritanceOperations operations, SiameseInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IInheritanceOperations operations, Siamese complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

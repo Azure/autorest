@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static ReadonlyObjInner GetValid(this IReadonlypropertyOperations operations)
+            public static ReadonlyObj GetValid(this IReadonlypropertyOperations operations)
             {
                 return operations.GetValidAsync().GetAwaiter().GetResult();
             }
@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ReadonlyObjInner> GetValidAsync(this IReadonlypropertyOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ReadonlyObj> GetValidAsync(this IReadonlypropertyOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='odataQuery'>
             /// OData parameters to apply to the operation.
             /// </param>
-            public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilterInner> odataQuery = default(ODataQuery<OdataFilterInner>))
+            public static void GetWithFilter(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>))
             {
                 operations.GetWithFilterAsync(odataQuery).GetAwaiter().GetResult();
             }
@@ -49,7 +49,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetWithFilterAsync(this IOdataOperations operations, ODataQuery<OdataFilterInner> odataQuery = default(ODataQuery<OdataFilterInner>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetWithFilterAsync(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.GetWithFilterWithHttpMessagesAsync(odataQuery, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

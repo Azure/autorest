@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<ReadonlyObjInner>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<ReadonlyObj>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -170,7 +170,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<ReadonlyObjInner>();
+            var _result = new AzureOperationResponse<ReadonlyObj>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -183,7 +183,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ReadonlyObjInner>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<ReadonlyObj>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -221,7 +221,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </return>
         public async Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(int? size = default(int?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            ReadonlyObjInner complexBody = new ReadonlyObjInner();
+            ReadonlyObj complexBody = new ReadonlyObj();
             if (size != null)
             {
                 complexBody.Size = size;

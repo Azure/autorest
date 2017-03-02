@@ -25,7 +25,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static FishInner GetValid(this IPolymorphismOperations operations)
+            public static Fish GetValid(this IPolymorphismOperations operations)
             {
                 return operations.GetValidAsync().GetAwaiter().GetResult();
             }
@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<FishInner> GetValidAsync(this IPolymorphismOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Fish> GetValidAsync(this IPolymorphismOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -88,7 +88,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// ]
             /// };
             /// </param>
-            public static void PutValid(this IPolymorphismOperations operations, FishInner complexBody)
+            public static void PutValid(this IPolymorphismOperations operations, Fish complexBody)
             {
                 operations.PutValidAsync(complexBody).GetAwaiter().GetResult();
             }
@@ -137,7 +137,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync(this IPolymorphismOperations operations, FishInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IPolymorphismOperations operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// ]
             /// }
             /// </param>
-            public static void PutValidMissingRequired(this IPolymorphismOperations operations, FishInner complexBody)
+            public static void PutValidMissingRequired(this IPolymorphismOperations operations, Fish complexBody)
             {
                 operations.PutValidMissingRequiredAsync(complexBody).GetAwaiter().GetResult();
             }
@@ -222,7 +222,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidMissingRequiredAsync(this IPolymorphismOperations operations, FishInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidMissingRequiredAsync(this IPolymorphismOperations operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutValidMissingRequiredWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }

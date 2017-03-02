@@ -318,7 +318,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse> PutArrayWithHttpMessagesAsync(IList<ResourceInner> resourceArray = default(IList<ResourceInner>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PutArrayWithHttpMessagesAsync(IList<Resource> resourceArray = default(IList<Resource>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -916,7 +916,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollectionInner resourceComplexObject = default(ResourceCollectionInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PutResourceCollectionWithHttpMessagesAsync(ResourceCollection resourceComplexObject = default(ResourceCollection), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1060,7 +1060,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<ResourceCollectionInner>> GetResourceCollectionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<ResourceCollection>> GetResourceCollectionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1164,7 +1164,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<ResourceCollectionInner>();
+            var _result = new AzureOperationResponse<ResourceCollection>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
@@ -1177,7 +1177,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollectionInner>(_responseContent, DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(_responseContent, DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {

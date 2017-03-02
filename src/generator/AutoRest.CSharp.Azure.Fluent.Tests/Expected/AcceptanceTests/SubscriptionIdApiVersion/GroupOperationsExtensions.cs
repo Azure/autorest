@@ -29,7 +29,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// <param name='resourceGroupName'>
             /// Resource Group name 'testgroup101'.
             /// </param>
-            public static SampleResourceGroupInner GetSampleResourceGroup(this IGroupOperations operations, string resourceGroupName)
+            public static SampleResourceGroup GetSampleResourceGroup(this IGroupOperations operations, string resourceGroupName)
             {
                 return operations.GetSampleResourceGroupAsync(resourceGroupName).GetAwaiter().GetResult();
             }
@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SampleResourceGroupInner> GetSampleResourceGroupAsync(this IGroupOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SampleResourceGroup> GetSampleResourceGroupAsync(this IGroupOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSampleResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {
