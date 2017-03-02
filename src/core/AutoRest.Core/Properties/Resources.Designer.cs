@@ -89,7 +89,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top level property names should not be repeated inside the properties bag. Properties [{0}] conflict with ARM top level properties. Please rename these..
+        ///   Looks up a localized string similar to Top level property names should not be repeated inside the properties bag for ARM resource &quot;{0}&quot;. Properties [{1}] conflict with ARM top level properties. Please rename these..
         /// </summary>
         public static string ArmPropertiesBagValidationMessage {
             get {
@@ -211,15 +211,6 @@ namespace AutoRest.Core.Properties {
         public static string ConfigurationKnownPlugins {
             get {
                 return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Properties defined alongside $ref will be ignored according to JSON specification..
-        /// </summary>
-        public static string ConflictingRef {
-            get {
-                return ResourceManager.GetString("ConflictingRef", resourceCulture);
             }
         }
         

@@ -13,6 +13,8 @@ package fixtures.bodynumber;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodynumber.models.ErrorException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import rx.Observable;
 
@@ -24,6 +26,9 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getNull();
@@ -32,6 +37,7 @@ public interface Numbers {
      * Get null Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getNullAsync(final ServiceCallback<Double> serviceCallback);
@@ -39,6 +45,7 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getNullAsync();
@@ -46,6 +53,7 @@ public interface Numbers {
     /**
      * Get null Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getNullWithServiceResponseAsync();
@@ -53,6 +61,9 @@ public interface Numbers {
     /**
      * Get invalid float Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getInvalidFloat();
@@ -61,6 +72,7 @@ public interface Numbers {
      * Get invalid float Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback);
@@ -68,6 +80,7 @@ public interface Numbers {
     /**
      * Get invalid float Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getInvalidFloatAsync();
@@ -75,6 +88,7 @@ public interface Numbers {
     /**
      * Get invalid float Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getInvalidFloatWithServiceResponseAsync();
@@ -82,6 +96,9 @@ public interface Numbers {
     /**
      * Get invalid double Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getInvalidDouble();
@@ -90,6 +107,7 @@ public interface Numbers {
      * Get invalid double Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback);
@@ -97,6 +115,7 @@ public interface Numbers {
     /**
      * Get invalid double Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getInvalidDoubleAsync();
@@ -104,6 +123,7 @@ public interface Numbers {
     /**
      * Get invalid double Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getInvalidDoubleWithServiceResponseAsync();
@@ -111,6 +131,9 @@ public interface Numbers {
     /**
      * Get invalid decimal Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the BigDecimal object if successful.
      */
     BigDecimal getInvalidDecimal();
@@ -119,6 +142,7 @@ public interface Numbers {
      * Get invalid decimal Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<BigDecimal> getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
@@ -126,6 +150,7 @@ public interface Numbers {
     /**
      * Get invalid decimal Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<BigDecimal> getInvalidDecimalAsync();
@@ -133,6 +158,7 @@ public interface Numbers {
     /**
      * Get invalid decimal Number value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<ServiceResponse<BigDecimal>> getInvalidDecimalWithServiceResponseAsync();
@@ -141,6 +167,9 @@ public interface Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigFloat(double numberBody);
 
@@ -149,6 +178,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
@@ -157,6 +187,7 @@ public interface Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigFloatAsync(double numberBody);
@@ -165,6 +196,7 @@ public interface Numbers {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigFloatWithServiceResponseAsync(double numberBody);
@@ -172,6 +204,9 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getBigFloat();
@@ -180,6 +215,7 @@ public interface Numbers {
      * Get big float value 3.402823e+20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getBigFloatAsync(final ServiceCallback<Double> serviceCallback);
@@ -187,6 +223,7 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getBigFloatAsync();
@@ -194,6 +231,7 @@ public interface Numbers {
     /**
      * Get big float value 3.402823e+20.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigFloatWithServiceResponseAsync();
@@ -202,6 +240,9 @@ public interface Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigDouble(double numberBody);
 
@@ -210,6 +251,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
@@ -218,6 +260,7 @@ public interface Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigDoubleAsync(double numberBody);
@@ -226,6 +269,7 @@ public interface Numbers {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigDoubleWithServiceResponseAsync(double numberBody);
@@ -233,6 +277,9 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getBigDouble();
@@ -241,6 +288,7 @@ public interface Numbers {
      * Get big double value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getBigDoubleAsync(final ServiceCallback<Double> serviceCallback);
@@ -248,6 +296,7 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getBigDoubleAsync();
@@ -255,6 +304,7 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e+101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigDoubleWithServiceResponseAsync();
@@ -263,6 +313,9 @@ public interface Numbers {
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigDoublePositiveDecimal(double numberBody);
 
@@ -271,6 +324,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
@@ -279,6 +333,7 @@ public interface Numbers {
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigDoublePositiveDecimalAsync(double numberBody);
@@ -287,6 +342,7 @@ public interface Numbers {
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigDoublePositiveDecimalWithServiceResponseAsync(double numberBody);
@@ -294,6 +350,9 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getBigDoublePositiveDecimal();
@@ -302,6 +361,7 @@ public interface Numbers {
      * Get big double value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback);
@@ -309,6 +369,7 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getBigDoublePositiveDecimalAsync();
@@ -316,6 +377,7 @@ public interface Numbers {
     /**
      * Get big double value 99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigDoublePositiveDecimalWithServiceResponseAsync();
@@ -324,6 +386,9 @@ public interface Numbers {
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigDoubleNegativeDecimal(double numberBody);
 
@@ -332,6 +397,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
@@ -340,6 +406,7 @@ public interface Numbers {
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigDoubleNegativeDecimalAsync(double numberBody);
@@ -348,6 +415,7 @@ public interface Numbers {
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigDoubleNegativeDecimalWithServiceResponseAsync(double numberBody);
@@ -355,6 +423,9 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getBigDoubleNegativeDecimal();
@@ -363,6 +434,7 @@ public interface Numbers {
      * Get big double value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback);
@@ -370,6 +442,7 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getBigDoubleNegativeDecimalAsync();
@@ -377,6 +450,7 @@ public interface Numbers {
     /**
      * Get big double value -99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getBigDoubleNegativeDecimalWithServiceResponseAsync();
@@ -385,6 +459,9 @@ public interface Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigDecimal(BigDecimal numberBody);
 
@@ -393,6 +470,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
@@ -401,6 +479,7 @@ public interface Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigDecimalAsync(BigDecimal numberBody);
@@ -409,6 +488,7 @@ public interface Numbers {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigDecimalWithServiceResponseAsync(BigDecimal numberBody);
@@ -416,6 +496,9 @@ public interface Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the BigDecimal object if successful.
      */
     BigDecimal getBigDecimal();
@@ -424,6 +507,7 @@ public interface Numbers {
      * Get big decimal value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<BigDecimal> getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
@@ -431,6 +515,7 @@ public interface Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<BigDecimal> getBigDecimalAsync();
@@ -438,6 +523,7 @@ public interface Numbers {
     /**
      * Get big decimal value 2.5976931e+101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<ServiceResponse<BigDecimal>> getBigDecimalWithServiceResponseAsync();
@@ -446,6 +532,9 @@ public interface Numbers {
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigDecimalPositiveDecimal(BigDecimal numberBody);
 
@@ -454,6 +543,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
@@ -462,6 +552,7 @@ public interface Numbers {
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigDecimalPositiveDecimalAsync(BigDecimal numberBody);
@@ -470,6 +561,7 @@ public interface Numbers {
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigDecimalPositiveDecimalWithServiceResponseAsync(BigDecimal numberBody);
@@ -477,6 +569,9 @@ public interface Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the BigDecimal object if successful.
      */
     BigDecimal getBigDecimalPositiveDecimal();
@@ -485,6 +580,7 @@ public interface Numbers {
      * Get big decimal value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<BigDecimal> getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
@@ -492,6 +588,7 @@ public interface Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<BigDecimal> getBigDecimalPositiveDecimalAsync();
@@ -499,6 +596,7 @@ public interface Numbers {
     /**
      * Get big decimal value 99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<ServiceResponse<BigDecimal>> getBigDecimalPositiveDecimalWithServiceResponseAsync();
@@ -507,6 +605,9 @@ public interface Numbers {
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putBigDecimalNegativeDecimal(BigDecimal numberBody);
 
@@ -515,6 +616,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
@@ -523,6 +625,7 @@ public interface Numbers {
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putBigDecimalNegativeDecimalAsync(BigDecimal numberBody);
@@ -531,6 +634,7 @@ public interface Numbers {
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putBigDecimalNegativeDecimalWithServiceResponseAsync(BigDecimal numberBody);
@@ -538,6 +642,9 @@ public interface Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the BigDecimal object if successful.
      */
     BigDecimal getBigDecimalNegativeDecimal();
@@ -546,6 +653,7 @@ public interface Numbers {
      * Get big decimal value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<BigDecimal> getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
@@ -553,6 +661,7 @@ public interface Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<BigDecimal> getBigDecimalNegativeDecimalAsync();
@@ -560,6 +669,7 @@ public interface Numbers {
     /**
      * Get big decimal value -99999999.99.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<ServiceResponse<BigDecimal>> getBigDecimalNegativeDecimalWithServiceResponseAsync();
@@ -568,6 +678,9 @@ public interface Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putSmallFloat(double numberBody);
 
@@ -576,6 +689,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
@@ -584,6 +698,7 @@ public interface Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putSmallFloatAsync(double numberBody);
@@ -592,6 +707,7 @@ public interface Numbers {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putSmallFloatWithServiceResponseAsync(double numberBody);
@@ -599,6 +715,9 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getSmallFloat();
@@ -607,6 +726,7 @@ public interface Numbers {
      * Get big double value 3.402823e-20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getSmallFloatAsync(final ServiceCallback<Double> serviceCallback);
@@ -614,6 +734,7 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getSmallFloatAsync();
@@ -621,6 +742,7 @@ public interface Numbers {
     /**
      * Get big double value 3.402823e-20.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getSmallFloatWithServiceResponseAsync();
@@ -629,6 +751,9 @@ public interface Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putSmallDouble(double numberBody);
 
@@ -637,6 +762,7 @@ public interface Numbers {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
@@ -645,6 +771,7 @@ public interface Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putSmallDoubleAsync(double numberBody);
@@ -653,6 +780,7 @@ public interface Numbers {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putSmallDoubleWithServiceResponseAsync(double numberBody);
@@ -660,6 +788,9 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the double object if successful.
      */
     double getSmallDouble();
@@ -668,6 +799,7 @@ public interface Numbers {
      * Get big double value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Double> getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback);
@@ -675,6 +807,7 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<Double> getSmallDoubleAsync();
@@ -682,6 +815,7 @@ public interface Numbers {
     /**
      * Get big double value 2.5976931e-101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the double object
      */
     Observable<ServiceResponse<Double>> getSmallDoubleWithServiceResponseAsync();
@@ -690,6 +824,9 @@ public interface Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putSmallDecimal(BigDecimal numberBody);
 
@@ -698,6 +835,7 @@ public interface Numbers {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
@@ -706,6 +844,7 @@ public interface Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putSmallDecimalAsync(BigDecimal numberBody);
@@ -714,6 +853,7 @@ public interface Numbers {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putSmallDecimalWithServiceResponseAsync(BigDecimal numberBody);
@@ -721,6 +861,9 @@ public interface Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the BigDecimal object if successful.
      */
     BigDecimal getSmallDecimal();
@@ -729,6 +872,7 @@ public interface Numbers {
      * Get small decimal value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<BigDecimal> getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
@@ -736,6 +880,7 @@ public interface Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<BigDecimal> getSmallDecimalAsync();
@@ -743,6 +888,7 @@ public interface Numbers {
     /**
      * Get small decimal value 2.5976931e-101.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the BigDecimal object
      */
     Observable<ServiceResponse<BigDecimal>> getSmallDecimalWithServiceResponseAsync();

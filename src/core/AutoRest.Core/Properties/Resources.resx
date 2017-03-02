@@ -267,9 +267,6 @@ Modelers:
   <data name="BodyWithType" xml:space="preserve">
     <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
   </data>
-  <data name="ConflictingRef" xml:space="preserve">
-    <value>Properties defined alongside $ref will be ignored according to JSON specification.</value>
-  </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>
   </data>
@@ -385,6 +382,6 @@ Modelers:
     <value>Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".</value>
   </data>
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
-    <value>Top level property names should not be repeated inside the properties bag. Properties [{0}] conflict with ARM top level properties. Please rename these.</value>
+    <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
 </root>

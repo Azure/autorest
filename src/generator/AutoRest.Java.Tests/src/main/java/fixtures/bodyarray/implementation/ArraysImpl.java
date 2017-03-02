@@ -329,6 +329,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getNull() {
@@ -339,6 +342,7 @@ public class ArraysImpl implements Arrays {
      * Get null array value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Integer>> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
@@ -348,6 +352,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<List<Integer>> getNullAsync() {
@@ -362,6 +367,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get null array value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getNullWithServiceResponseAsync() {
@@ -389,6 +395,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getInvalid() {
@@ -399,6 +408,7 @@ public class ArraysImpl implements Arrays {
      * Get invalid array [1, 2, 3.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Integer>> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
@@ -408,6 +418,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<List<Integer>> getInvalidAsync() {
@@ -422,6 +433,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get invalid array [1, 2, 3.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getInvalidWithServiceResponseAsync() {
@@ -449,6 +461,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getEmpty() {
@@ -459,6 +474,7 @@ public class ArraysImpl implements Arrays {
      * Get empty array value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Integer>> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
@@ -468,6 +484,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<List<Integer>> getEmptyAsync() {
@@ -482,6 +499,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array value [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getEmptyWithServiceResponseAsync() {
@@ -510,6 +528,9 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putEmpty(List<String> arrayBody) {
         putEmptyWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -520,6 +541,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -530,6 +552,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putEmptyAsync(List<String> arrayBody) {
@@ -545,6 +568,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [].
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(List<String> arrayBody) {
@@ -576,6 +600,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanTfft() {
@@ -586,6 +613,7 @@ public class ArraysImpl implements Arrays {
      * Get boolean array value [true, false, false, true].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Boolean>> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
@@ -595,6 +623,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<List<Boolean>> getBooleanTfftAsync() {
@@ -609,6 +638,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, false, false, true].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<ServiceResponse<List<Boolean>>> getBooleanTfftWithServiceResponseAsync() {
@@ -637,6 +667,9 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putBooleanTfft(List<Boolean> arrayBody) {
         putBooleanTfftWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -647,6 +680,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -657,6 +691,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putBooleanTfftAsync(List<Boolean> arrayBody) {
@@ -672,6 +707,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [true, false, false, true].
      *
      * @param arrayBody the List&lt;Boolean&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putBooleanTfftWithServiceResponseAsync(List<Boolean> arrayBody) {
@@ -703,6 +739,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidNull() {
@@ -713,6 +752,7 @@ public class ArraysImpl implements Arrays {
      * Get boolean array value [true, null, false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Boolean>> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
@@ -722,6 +762,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<List<Boolean>> getBooleanInvalidNullAsync() {
@@ -736,6 +777,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, null, false].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidNullWithServiceResponseAsync() {
@@ -763,6 +805,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Boolean&gt; object if successful.
      */
     public List<Boolean> getBooleanInvalidString() {
@@ -773,6 +818,7 @@ public class ArraysImpl implements Arrays {
      * Get boolean array value [true, 'boolean', false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Boolean>> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
@@ -782,6 +828,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<List<Boolean>> getBooleanInvalidStringAsync() {
@@ -796,6 +843,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [true, 'boolean', false].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Boolean&gt; object
      */
     public Observable<ServiceResponse<List<Boolean>>> getBooleanInvalidStringWithServiceResponseAsync() {
@@ -823,6 +871,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntegerValid() {
@@ -833,6 +884,7 @@ public class ArraysImpl implements Arrays {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Integer>> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
@@ -842,6 +894,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<List<Integer>> getIntegerValidAsync() {
@@ -856,6 +909,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getIntegerValidWithServiceResponseAsync() {
@@ -884,6 +938,9 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putIntegerValid(List<Integer> arrayBody) {
         putIntegerValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -894,6 +951,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -904,6 +962,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putIntegerValidAsync(List<Integer> arrayBody) {
@@ -919,6 +978,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Integer&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putIntegerValidWithServiceResponseAsync(List<Integer> arrayBody) {
@@ -950,6 +1010,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidNull() {
@@ -960,6 +1023,7 @@ public class ArraysImpl implements Arrays {
      * Get integer array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Integer>> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
@@ -969,6 +1033,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<List<Integer>> getIntInvalidNullAsync() {
@@ -983,6 +1048,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, null, 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getIntInvalidNullWithServiceResponseAsync() {
@@ -1010,6 +1076,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Integer&gt; object if successful.
      */
     public List<Integer> getIntInvalidString() {
@@ -1020,6 +1089,7 @@ public class ArraysImpl implements Arrays {
      * Get integer array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Integer>> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
@@ -1029,6 +1099,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<List<Integer>> getIntInvalidStringAsync() {
@@ -1043,6 +1114,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, 'integer', 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Integer&gt; object
      */
     public Observable<ServiceResponse<List<Integer>>> getIntInvalidStringWithServiceResponseAsync() {
@@ -1070,6 +1142,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongValid() {
@@ -1080,6 +1155,7 @@ public class ArraysImpl implements Arrays {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Long>> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
@@ -1089,6 +1165,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<List<Long>> getLongValidAsync() {
@@ -1103,6 +1180,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value [1, -1, 3, 300].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<ServiceResponse<List<Long>>> getLongValidWithServiceResponseAsync() {
@@ -1131,6 +1209,9 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putLongValid(List<Long> arrayBody) {
         putLongValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -1141,6 +1222,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -1151,6 +1233,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putLongValidAsync(List<Long> arrayBody) {
@@ -1166,6 +1249,7 @@ public class ArraysImpl implements Arrays {
      * Set array value empty [1, -1, 3, 300].
      *
      * @param arrayBody the List&lt;Long&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putLongValidWithServiceResponseAsync(List<Long> arrayBody) {
@@ -1197,6 +1281,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidNull() {
@@ -1207,6 +1294,7 @@ public class ArraysImpl implements Arrays {
      * Get long array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Long>> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
@@ -1216,6 +1304,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<List<Long>> getLongInvalidNullAsync() {
@@ -1230,6 +1319,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, null, 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<ServiceResponse<List<Long>>> getLongInvalidNullWithServiceResponseAsync() {
@@ -1257,6 +1347,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Long&gt; object if successful.
      */
     public List<Long> getLongInvalidString() {
@@ -1267,6 +1360,7 @@ public class ArraysImpl implements Arrays {
      * Get long array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Long>> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
@@ -1276,6 +1370,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<List<Long>> getLongInvalidStringAsync() {
@@ -1290,6 +1385,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get long array value [1, 'integer', 0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Long&gt; object
      */
     public Observable<ServiceResponse<List<Long>>> getLongInvalidStringWithServiceResponseAsync() {
@@ -1317,6 +1413,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatValid() {
@@ -1327,6 +1426,7 @@ public class ArraysImpl implements Arrays {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Double>> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
@@ -1336,6 +1436,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<List<Double>> getFloatValidAsync() {
@@ -1350,6 +1451,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getFloatValidWithServiceResponseAsync() {
@@ -1378,6 +1480,9 @@ public class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putFloatValid(List<Double> arrayBody) {
         putFloatValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -1388,6 +1493,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -1398,6 +1504,7 @@ public class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putFloatValidAsync(List<Double> arrayBody) {
@@ -1413,6 +1520,7 @@ public class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putFloatValidWithServiceResponseAsync(List<Double> arrayBody) {
@@ -1444,6 +1552,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidNull() {
@@ -1454,6 +1565,7 @@ public class ArraysImpl implements Arrays {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Double>> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
@@ -1463,6 +1575,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<List<Double>> getFloatInvalidNullAsync() {
@@ -1477,6 +1590,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getFloatInvalidNullWithServiceResponseAsync() {
@@ -1504,6 +1618,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getFloatInvalidString() {
@@ -1514,6 +1631,7 @@ public class ArraysImpl implements Arrays {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Double>> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
@@ -1523,6 +1641,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<List<Double>> getFloatInvalidStringAsync() {
@@ -1537,6 +1656,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getFloatInvalidStringWithServiceResponseAsync() {
@@ -1564,6 +1684,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleValid() {
@@ -1574,6 +1697,7 @@ public class ArraysImpl implements Arrays {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Double>> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
@@ -1583,6 +1707,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<List<Double>> getDoubleValidAsync() {
@@ -1597,6 +1722,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0, -0.01, 1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getDoubleValidWithServiceResponseAsync() {
@@ -1625,6 +1751,9 @@ public class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDoubleValid(List<Double> arrayBody) {
         putDoubleValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -1635,6 +1764,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -1645,6 +1775,7 @@ public class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDoubleValidAsync(List<Double> arrayBody) {
@@ -1660,6 +1791,7 @@ public class ArraysImpl implements Arrays {
      * Set array value [0, -0.01, 1.2e20].
      *
      * @param arrayBody the List&lt;Double&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDoubleValidWithServiceResponseAsync(List<Double> arrayBody) {
@@ -1691,6 +1823,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidNull() {
@@ -1701,6 +1836,7 @@ public class ArraysImpl implements Arrays {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Double>> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
@@ -1710,6 +1846,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<List<Double>> getDoubleInvalidNullAsync() {
@@ -1724,6 +1861,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get float array value [0.0, null, -1.2e20].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getDoubleInvalidNullWithServiceResponseAsync() {
@@ -1751,6 +1889,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Double&gt; object if successful.
      */
     public List<Double> getDoubleInvalidString() {
@@ -1761,6 +1902,7 @@ public class ArraysImpl implements Arrays {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Double>> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
@@ -1770,6 +1912,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<List<Double>> getDoubleInvalidStringAsync() {
@@ -1784,6 +1927,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get boolean array value [1.0, 'number', 0.0].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Double&gt; object
      */
     public Observable<ServiceResponse<List<Double>>> getDoubleInvalidStringWithServiceResponseAsync() {
@@ -1811,6 +1955,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringValid() {
@@ -1821,6 +1968,7 @@ public class ArraysImpl implements Arrays {
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<String>> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
@@ -1830,6 +1978,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
     public Observable<List<String>> getStringValidAsync() {
@@ -1844,6 +1993,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
     public Observable<ServiceResponse<List<String>>> getStringValidWithServiceResponseAsync() {
@@ -1872,6 +2022,9 @@ public class ArraysImpl implements Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putStringValid(List<String> arrayBody) {
         putStringValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -1882,6 +2035,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -1892,6 +2046,7 @@ public class ArraysImpl implements Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putStringValidAsync(List<String> arrayBody) {
@@ -1907,6 +2062,7 @@ public class ArraysImpl implements Arrays {
      * Set array value ['foo1', 'foo2', 'foo3'].
      *
      * @param arrayBody the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putStringValidWithServiceResponseAsync(List<String> arrayBody) {
@@ -1938,6 +2094,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithNull() {
@@ -1948,6 +2107,7 @@ public class ArraysImpl implements Arrays {
      * Get string array value ['foo', null, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<String>> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
@@ -1957,6 +2117,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
     public Observable<List<String>> getStringWithNullAsync() {
@@ -1971,6 +2132,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', null, 'foo2'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
     public Observable<ServiceResponse<List<String>>> getStringWithNullWithServiceResponseAsync() {
@@ -1998,6 +2160,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;String&gt; object if successful.
      */
     public List<String> getStringWithInvalid() {
@@ -2008,6 +2173,7 @@ public class ArraysImpl implements Arrays {
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<String>> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
@@ -2017,6 +2183,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
     public Observable<List<String>> getStringWithInvalidAsync() {
@@ -2031,6 +2198,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get string array value ['foo', 123, 'foo2'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;String&gt; object
      */
     public Observable<ServiceResponse<List<String>>> getStringWithInvalidWithServiceResponseAsync() {
@@ -2058,6 +2226,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidValid() {
@@ -2068,6 +2239,7 @@ public class ArraysImpl implements Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<UUID>> getUuidValidAsync(final ServiceCallback<List<UUID>> serviceCallback) {
@@ -2077,6 +2249,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UUID&gt; object
      */
     public Observable<List<UUID>> getUuidValidAsync() {
@@ -2091,6 +2264,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UUID&gt; object
      */
     public Observable<ServiceResponse<List<UUID>>> getUuidValidWithServiceResponseAsync() {
@@ -2119,6 +2293,9 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putUuidValid(List<UUID> arrayBody) {
         putUuidValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -2129,6 +2306,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;UUID&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putUuidValidAsync(List<UUID> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -2139,6 +2317,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putUuidValidAsync(List<UUID> arrayBody) {
@@ -2154,6 +2333,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205'].
      *
      * @param arrayBody the List&lt;UUID&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putUuidValidWithServiceResponseAsync(List<UUID> arrayBody) {
@@ -2185,6 +2365,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;UUID&gt; object if successful.
      */
     public List<UUID> getUuidInvalidChars() {
@@ -2195,6 +2378,7 @@ public class ArraysImpl implements Arrays {
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<UUID>> getUuidInvalidCharsAsync(final ServiceCallback<List<UUID>> serviceCallback) {
@@ -2204,6 +2388,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UUID&gt; object
      */
     public Observable<List<UUID>> getUuidInvalidCharsAsync() {
@@ -2218,6 +2403,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;UUID&gt; object
      */
     public Observable<ServiceResponse<List<UUID>>> getUuidInvalidCharsWithServiceResponseAsync() {
@@ -2245,6 +2431,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateValid() {
@@ -2255,6 +2444,7 @@ public class ArraysImpl implements Arrays {
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<LocalDate>> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
@@ -2264,6 +2454,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<List<LocalDate>> getDateValidAsync() {
@@ -2278,6 +2469,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<ServiceResponse<List<LocalDate>>> getDateValidWithServiceResponseAsync() {
@@ -2306,6 +2498,9 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDateValid(List<LocalDate> arrayBody) {
         putDateValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -2316,6 +2511,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -2326,6 +2522,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateValidAsync(List<LocalDate> arrayBody) {
@@ -2341,6 +2538,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDateValidWithServiceResponseAsync(List<LocalDate> arrayBody) {
@@ -2372,6 +2570,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidNull() {
@@ -2382,6 +2583,7 @@ public class ArraysImpl implements Arrays {
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<LocalDate>> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
@@ -2391,6 +2593,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<List<LocalDate>> getDateInvalidNullAsync() {
@@ -2405,6 +2608,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidNullWithServiceResponseAsync() {
@@ -2432,6 +2636,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;LocalDate&gt; object if successful.
      */
     public List<LocalDate> getDateInvalidChars() {
@@ -2442,6 +2649,7 @@ public class ArraysImpl implements Arrays {
      * Get date array value ['2011-03-22', 'date'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<LocalDate>> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
@@ -2451,6 +2659,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<List<LocalDate>> getDateInvalidCharsAsync() {
@@ -2465,6 +2674,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2011-03-22', 'date'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;LocalDate&gt; object
      */
     public Observable<ServiceResponse<List<LocalDate>>> getDateInvalidCharsWithServiceResponseAsync() {
@@ -2492,6 +2702,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeValid() {
@@ -2502,6 +2715,7 @@ public class ArraysImpl implements Arrays {
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<DateTime>> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
@@ -2511,6 +2725,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<List<DateTime>> getDateTimeValidAsync() {
@@ -2525,6 +2740,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeValidWithServiceResponseAsync() {
@@ -2553,6 +2769,9 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDateTimeValid(List<DateTime> arrayBody) {
         putDateTimeValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -2563,6 +2782,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -2573,6 +2793,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateTimeValidAsync(List<DateTime> arrayBody) {
@@ -2588,6 +2809,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param arrayBody the List&lt;DateTime&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDateTimeValidWithServiceResponseAsync(List<DateTime> arrayBody) {
@@ -2619,6 +2841,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidNull() {
@@ -2629,6 +2854,7 @@ public class ArraysImpl implements Arrays {
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<DateTime>> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
@@ -2638,6 +2864,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<List<DateTime>> getDateTimeInvalidNullAsync() {
@@ -2652,6 +2879,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidNullWithServiceResponseAsync() {
@@ -2679,6 +2907,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeInvalidChars() {
@@ -2689,6 +2920,7 @@ public class ArraysImpl implements Arrays {
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<DateTime>> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
@@ -2698,6 +2930,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<List<DateTime>> getDateTimeInvalidCharsAsync() {
@@ -2712,6 +2945,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeInvalidCharsWithServiceResponseAsync() {
@@ -2739,6 +2973,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;DateTime&gt; object if successful.
      */
     public List<DateTime> getDateTimeRfc1123Valid() {
@@ -2749,6 +2986,7 @@ public class ArraysImpl implements Arrays {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<DateTime>> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
@@ -2758,6 +2996,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<List<DateTime>> getDateTimeRfc1123ValidAsync() {
@@ -2772,6 +3011,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;DateTime&gt; object
      */
     public Observable<ServiceResponse<List<DateTime>>> getDateTimeRfc1123ValidWithServiceResponseAsync() {
@@ -2810,6 +3050,9 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDateTimeRfc1123Valid(List<DateTime> arrayBody) {
         putDateTimeRfc1123ValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -2820,6 +3063,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -2830,6 +3074,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDateTimeRfc1123ValidAsync(List<DateTime> arrayBody) {
@@ -2845,6 +3090,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDateTimeRfc1123ValidWithServiceResponseAsync(List<DateTime> arrayBody) {
@@ -2881,6 +3127,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Period&gt; object if successful.
      */
     public List<Period> getDurationValid() {
@@ -2891,6 +3140,7 @@ public class ArraysImpl implements Arrays {
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Period>> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
@@ -2900,6 +3150,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Period&gt; object
      */
     public Observable<List<Period>> getDurationValidAsync() {
@@ -2914,6 +3165,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Period&gt; object
      */
     public Observable<ServiceResponse<List<Period>>> getDurationValidWithServiceResponseAsync() {
@@ -2942,6 +3194,9 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDurationValid(List<Period> arrayBody) {
         putDurationValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -2952,6 +3207,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -2962,6 +3218,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDurationValidAsync(List<Period> arrayBody) {
@@ -2977,6 +3234,7 @@ public class ArraysImpl implements Arrays {
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param arrayBody the List&lt;Period&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDurationValidWithServiceResponseAsync(List<Period> arrayBody) {
@@ -3008,6 +3266,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteValid() {
@@ -3018,6 +3279,7 @@ public class ArraysImpl implements Arrays {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<byte[]>> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
@@ -3027,6 +3289,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<List<byte[]>> getByteValidAsync() {
@@ -3041,6 +3304,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<ServiceResponse<List<byte[]>>> getByteValidWithServiceResponseAsync() {
@@ -3069,6 +3333,9 @@ public class ArraysImpl implements Arrays {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putByteValid(List<byte[]> arrayBody) {
         putByteValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -3079,6 +3346,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -3089,6 +3357,7 @@ public class ArraysImpl implements Arrays {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putByteValidAsync(List<byte[]> arrayBody) {
@@ -3104,6 +3373,7 @@ public class ArraysImpl implements Arrays {
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
      *
      * @param arrayBody the List&lt;byte[]&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putByteValidWithServiceResponseAsync(List<byte[]> arrayBody) {
@@ -3135,6 +3405,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getByteInvalidNull() {
@@ -3145,6 +3418,7 @@ public class ArraysImpl implements Arrays {
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<byte[]>> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
@@ -3154,6 +3428,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<List<byte[]>> getByteInvalidNullAsync() {
@@ -3168,6 +3443,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<ServiceResponse<List<byte[]>>> getByteInvalidNullWithServiceResponseAsync() {
@@ -3195,6 +3471,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;byte[]&gt; object if successful.
      */
     public List<byte[]> getBase64Url() {
@@ -3205,6 +3484,7 @@ public class ArraysImpl implements Arrays {
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<byte[]>> getBase64UrlAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
@@ -3214,6 +3494,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<List<byte[]>> getBase64UrlAsync() {
@@ -3228,6 +3509,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;byte[]&gt; object
      */
     public Observable<ServiceResponse<List<byte[]>>> getBase64UrlWithServiceResponseAsync() {
@@ -3265,6 +3547,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexNull() {
@@ -3275,6 +3560,7 @@ public class ArraysImpl implements Arrays {
      * Get array of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Product>> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
@@ -3284,6 +3570,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<List<Product>> getComplexNullAsync() {
@@ -3298,6 +3585,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type null value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexNullWithServiceResponseAsync() {
@@ -3325,6 +3613,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexEmpty() {
@@ -3335,6 +3626,7 @@ public class ArraysImpl implements Arrays {
      * Get empty array of complex type [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Product>> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
@@ -3344,6 +3636,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<List<Product>> getComplexEmptyAsync() {
@@ -3358,6 +3651,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get empty array of complex type [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexEmptyWithServiceResponseAsync() {
@@ -3385,6 +3679,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemNull() {
@@ -3395,6 +3692,7 @@ public class ArraysImpl implements Arrays {
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Product>> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
@@ -3404,6 +3702,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<List<Product>> getComplexItemNullAsync() {
@@ -3418,6 +3717,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexItemNullWithServiceResponseAsync() {
@@ -3445,6 +3745,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexItemEmpty() {
@@ -3455,6 +3758,7 @@ public class ArraysImpl implements Arrays {
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Product>> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
@@ -3464,6 +3768,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<List<Product>> getComplexItemEmptyAsync() {
@@ -3478,6 +3783,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexItemEmptyWithServiceResponseAsync() {
@@ -3505,6 +3811,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Product&gt; object if successful.
      */
     public List<Product> getComplexValid() {
@@ -3515,6 +3824,7 @@ public class ArraysImpl implements Arrays {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Product>> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
@@ -3524,6 +3834,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<List<Product>> getComplexValidAsync() {
@@ -3538,6 +3849,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Product&gt; object
      */
     public Observable<ServiceResponse<List<Product>>> getComplexValidWithServiceResponseAsync() {
@@ -3566,6 +3878,9 @@ public class ArraysImpl implements Arrays {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putComplexValid(List<Product> arrayBody) {
         putComplexValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -3576,6 +3891,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -3586,6 +3902,7 @@ public class ArraysImpl implements Arrays {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putComplexValidAsync(List<Product> arrayBody) {
@@ -3601,6 +3918,7 @@ public class ArraysImpl implements Arrays {
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param arrayBody the List&lt;Product&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putComplexValidWithServiceResponseAsync(List<Product> arrayBody) {
@@ -3632,6 +3950,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayNull() {
@@ -3642,6 +3963,7 @@ public class ArraysImpl implements Arrays {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<List<String>>> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
@@ -3651,6 +3973,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<List<List<String>>> getArrayNullAsync() {
@@ -3665,6 +3988,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get a null array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayNullWithServiceResponseAsync() {
@@ -3692,6 +4016,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayEmpty() {
@@ -3702,6 +4029,7 @@ public class ArraysImpl implements Arrays {
      * Get an empty array [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<List<String>>> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
@@ -3711,6 +4039,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<List<List<String>>> getArrayEmptyAsync() {
@@ -3725,6 +4054,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an empty array [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayEmptyWithServiceResponseAsync() {
@@ -3752,6 +4082,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemNull() {
@@ -3762,6 +4095,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<List<String>>> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
@@ -3771,6 +4105,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<List<List<String>>> getArrayItemNullAsync() {
@@ -3785,6 +4120,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayItemNullWithServiceResponseAsync() {
@@ -3812,6 +4148,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayItemEmpty() {
@@ -3822,6 +4161,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<List<String>>> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
@@ -3831,6 +4171,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<List<List<String>>> getArrayItemEmptyAsync() {
@@ -3845,6 +4186,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayItemEmptyWithServiceResponseAsync() {
@@ -3872,6 +4214,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;List&lt;String&gt;&gt; object if successful.
      */
     public List<List<String>> getArrayValid() {
@@ -3882,6 +4227,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<List<String>>> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
@@ -3891,6 +4237,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<List<List<String>>> getArrayValidAsync() {
@@ -3905,6 +4252,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;List&lt;String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<List<String>>>> getArrayValidWithServiceResponseAsync() {
@@ -3933,6 +4281,9 @@ public class ArraysImpl implements Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putArrayValid(List<List<String>> arrayBody) {
         putArrayValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -3943,6 +4294,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -3953,6 +4305,7 @@ public class ArraysImpl implements Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putArrayValidAsync(List<List<String>> arrayBody) {
@@ -3968,6 +4321,7 @@ public class ArraysImpl implements Arrays {
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putArrayValidWithServiceResponseAsync(List<List<String>> arrayBody) {
@@ -3999,6 +4353,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryNull() {
@@ -4009,6 +4366,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
@@ -4018,6 +4376,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<List<Map<String, String>>> getDictionaryNullAsync() {
@@ -4032,6 +4391,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries with value null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryNullWithServiceResponseAsync() {
@@ -4059,6 +4419,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryEmpty() {
@@ -4069,6 +4432,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
@@ -4078,6 +4442,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<List<Map<String, String>>> getDictionaryEmptyAsync() {
@@ -4092,6 +4457,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryEmptyWithServiceResponseAsync() {
@@ -4119,6 +4485,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemNull() {
@@ -4129,6 +4498,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
@@ -4138,6 +4508,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<List<Map<String, String>>> getDictionaryItemNullAsync() {
@@ -4152,6 +4523,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemNullWithServiceResponseAsync() {
@@ -4179,6 +4551,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryItemEmpty() {
@@ -4189,6 +4564,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
@@ -4198,6 +4574,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<List<Map<String, String>>> getDictionaryItemEmptyAsync() {
@@ -4212,6 +4589,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryItemEmptyWithServiceResponseAsync() {
@@ -4239,6 +4617,9 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Map&lt;String, String&gt;&gt; object if successful.
      */
     public List<Map<String, String>> getDictionaryValid() {
@@ -4249,6 +4630,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<List<Map<String, String>>> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
@@ -4258,6 +4640,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<List<Map<String, String>>> getDictionaryValidAsync() {
@@ -4272,6 +4655,7 @@ public class ArraysImpl implements Arrays {
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Map&lt;String, String&gt;&gt; object
      */
     public Observable<ServiceResponse<List<Map<String, String>>>> getDictionaryValidWithServiceResponseAsync() {
@@ -4300,6 +4684,9 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putDictionaryValid(List<Map<String, String>> arrayBody) {
         putDictionaryValidWithServiceResponseAsync(arrayBody).toBlocking().single().body();
@@ -4310,6 +4697,7 @@ public class ArraysImpl implements Arrays {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
@@ -4320,6 +4708,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putDictionaryValidAsync(List<Map<String, String>> arrayBody) {
@@ -4335,6 +4724,7 @@ public class ArraysImpl implements Arrays {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putDictionaryValidWithServiceResponseAsync(List<Map<String, String>> arrayBody) {

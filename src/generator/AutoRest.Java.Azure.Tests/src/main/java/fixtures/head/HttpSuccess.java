@@ -10,9 +10,11 @@
 
 package fixtures.head;
 
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -23,6 +25,9 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     boolean head200();
@@ -31,6 +36,7 @@ public interface HttpSuccess {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Boolean> head200Async(final ServiceCallback<Boolean> serviceCallback);
@@ -38,6 +44,7 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<Boolean> head200Async();
@@ -45,6 +52,7 @@ public interface HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> head200WithServiceResponseAsync();
@@ -52,6 +60,9 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     boolean head204();
@@ -60,6 +71,7 @@ public interface HttpSuccess {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Boolean> head204Async(final ServiceCallback<Boolean> serviceCallback);
@@ -67,6 +79,7 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<Boolean> head204Async();
@@ -74,6 +87,7 @@ public interface HttpSuccess {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> head204WithServiceResponseAsync();
@@ -81,6 +95,9 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the boolean object if successful.
      */
     boolean head404();
@@ -89,6 +106,7 @@ public interface HttpSuccess {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Boolean> head404Async(final ServiceCallback<Boolean> serviceCallback);
@@ -96,6 +114,7 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<Boolean> head404Async();
@@ -103,6 +122,7 @@ public interface HttpSuccess {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the boolean object
      */
     Observable<ServiceResponse<Boolean>> head404WithServiceResponseAsync();

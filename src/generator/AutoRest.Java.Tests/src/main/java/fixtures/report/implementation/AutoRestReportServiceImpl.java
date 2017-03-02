@@ -110,6 +110,9 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
@@ -120,6 +123,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
@@ -129,6 +133,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getReportAsync() {
@@ -143,6 +148,7 @@ public class AutoRestReportServiceImpl extends ServiceClient implements AutoRest
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync() {

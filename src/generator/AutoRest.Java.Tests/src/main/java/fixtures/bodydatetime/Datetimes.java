@@ -13,6 +13,8 @@ package fixtures.bodydatetime;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodydatetime.models.ErrorException;
+import java.io.IOException;
 import org.joda.time.DateTime;
 import rx.Observable;
 
@@ -24,6 +26,9 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getNull();
@@ -32,6 +37,7 @@ public interface Datetimes {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -39,6 +45,7 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getNullAsync();
@@ -46,6 +53,7 @@ public interface Datetimes {
     /**
      * Get null datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getNullWithServiceResponseAsync();
@@ -53,6 +61,9 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getInvalid();
@@ -61,6 +72,7 @@ public interface Datetimes {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -68,6 +80,7 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getInvalidAsync();
@@ -75,6 +88,7 @@ public interface Datetimes {
     /**
      * Get invalid datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getInvalidWithServiceResponseAsync();
@@ -82,6 +96,9 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getOverflow();
@@ -90,6 +107,7 @@ public interface Datetimes {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -97,6 +115,7 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getOverflowAsync();
@@ -104,6 +123,7 @@ public interface Datetimes {
     /**
      * Get overflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getOverflowWithServiceResponseAsync();
@@ -111,6 +131,9 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getUnderflow();
@@ -119,6 +142,7 @@ public interface Datetimes {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -126,6 +150,7 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getUnderflowAsync();
@@ -133,6 +158,7 @@ public interface Datetimes {
     /**
      * Get underflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getUnderflowWithServiceResponseAsync();
@@ -141,6 +167,9 @@ public interface Datetimes {
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putUtcMaxDateTime(DateTime datetimeBody);
 
@@ -149,6 +178,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
@@ -157,6 +187,7 @@ public interface Datetimes {
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody);
@@ -165,6 +196,7 @@ public interface Datetimes {
      * Put max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putUtcMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
@@ -172,6 +204,9 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getUtcLowercaseMaxDateTime();
@@ -180,6 +215,7 @@ public interface Datetimes {
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -187,6 +223,7 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getUtcLowercaseMaxDateTimeAsync();
@@ -194,6 +231,7 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31t23:59:59.9999999z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeWithServiceResponseAsync();
@@ -201,6 +239,9 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getUtcUppercaseMaxDateTime();
@@ -209,6 +250,7 @@ public interface Datetimes {
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -216,6 +258,7 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getUtcUppercaseMaxDateTimeAsync();
@@ -223,6 +266,7 @@ public interface Datetimes {
     /**
      * Get max datetime value 9999-12-31T23:59:59.9999999Z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeWithServiceResponseAsync();
@@ -231,6 +275,9 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putLocalPositiveOffsetMaxDateTime(DateTime datetimeBody);
 
@@ -239,6 +286,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
@@ -247,6 +295,7 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody);
@@ -255,6 +304,7 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putLocalPositiveOffsetMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
@@ -262,6 +312,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getLocalPositiveOffsetLowercaseMaxDateTime();
@@ -270,6 +323,7 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -277,6 +331,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync();
@@ -284,6 +339,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithServiceResponseAsync();
@@ -291,6 +347,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getLocalPositiveOffsetUppercaseMaxDateTime();
@@ -299,6 +358,7 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -306,6 +366,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync();
@@ -313,6 +374,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithServiceResponseAsync();
@@ -321,6 +383,9 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putLocalNegativeOffsetMaxDateTime(DateTime datetimeBody);
 
@@ -329,6 +394,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
@@ -337,6 +403,7 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody);
@@ -345,6 +412,7 @@ public interface Datetimes {
      * Put max datetime value with positive numoffset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putLocalNegativeOffsetMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody);
@@ -352,6 +420,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getLocalNegativeOffsetUppercaseMaxDateTime();
@@ -360,6 +431,7 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -367,6 +439,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync();
@@ -374,6 +447,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31T23:59:59.9999999-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithServiceResponseAsync();
@@ -381,6 +455,9 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getLocalNegativeOffsetLowercaseMaxDateTime();
@@ -389,6 +466,7 @@ public interface Datetimes {
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -396,6 +474,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync();
@@ -403,6 +482,7 @@ public interface Datetimes {
     /**
      * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithServiceResponseAsync();
@@ -411,6 +491,9 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putUtcMinDateTime(DateTime datetimeBody);
 
@@ -419,6 +502,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
@@ -427,6 +511,7 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putUtcMinDateTimeAsync(DateTime datetimeBody);
@@ -435,6 +520,7 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00Z.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putUtcMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
@@ -442,6 +528,9 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getUtcMinDateTime();
@@ -450,6 +539,7 @@ public interface Datetimes {
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -457,6 +547,7 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getUtcMinDateTimeAsync();
@@ -464,6 +555,7 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00Z.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getUtcMinDateTimeWithServiceResponseAsync();
@@ -472,6 +564,9 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putLocalPositiveOffsetMinDateTime(DateTime datetimeBody);
 
@@ -480,6 +575,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
@@ -488,6 +584,7 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody);
@@ -496,6 +593,7 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putLocalPositiveOffsetMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
@@ -503,6 +601,9 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getLocalPositiveOffsetMinDateTime();
@@ -511,6 +612,7 @@ public interface Datetimes {
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -518,6 +620,7 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getLocalPositiveOffsetMinDateTimeAsync();
@@ -525,6 +628,7 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00+14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getLocalPositiveOffsetMinDateTimeWithServiceResponseAsync();
@@ -533,6 +637,9 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putLocalNegativeOffsetMinDateTime(DateTime datetimeBody);
 
@@ -541,6 +648,7 @@ public interface Datetimes {
      *
      * @param datetimeBody the DateTime value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback);
@@ -549,6 +657,7 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody);
@@ -557,6 +666,7 @@ public interface Datetimes {
      * Put min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param datetimeBody the DateTime value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putLocalNegativeOffsetMinDateTimeWithServiceResponseAsync(DateTime datetimeBody);
@@ -564,6 +674,9 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     DateTime getLocalNegativeOffsetMinDateTime();
@@ -572,6 +685,7 @@ public interface Datetimes {
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<DateTime> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback);
@@ -579,6 +693,7 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<DateTime> getLocalNegativeOffsetMinDateTimeAsync();
@@ -586,6 +701,7 @@ public interface Datetimes {
     /**
      * Get min datetime value 0001-01-01T00:00:00-14:00.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     Observable<ServiceResponse<DateTime>> getLocalNegativeOffsetMinDateTimeWithServiceResponseAsync();

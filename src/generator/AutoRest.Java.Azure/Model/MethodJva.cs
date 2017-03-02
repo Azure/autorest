@@ -53,6 +53,9 @@ namespace AutoRest.Java.Azure.Model
                     !IsPagingNextOperation;
 
         [JsonIgnore]
+        public bool SimulateAsPagingOperation { set; get; } = false;
+
+        [JsonIgnore]
         public ResponseJva ReturnTypeJva => ReturnType as ResponseJva;
 
         /// <summary>

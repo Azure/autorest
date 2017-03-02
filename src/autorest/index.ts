@@ -6,9 +6,9 @@
 
 import { stringify } from "./lib/parsing/yaml";
 import { parse } from "./lib/parsing/literateYaml";
-import { DataStore, DataStoreView, DataHandleRead, KnownScopes } from "./lib/data-store/dataStore";
-import { createFileUri } from "./lib/data-store/input";
-import { AutoRestConfiguration } from "./lib/configuration/configuration";
+import { DataStore, DataStoreView, KnownScopes } from "./lib/data-store/dataStore";
+import { createFileUri } from "./lib/io/input";
+import { AutoRestConfiguration, AutoRestConfigurationManager } from "./lib/configuration/configuration";
 import { Pipeline, PipelineProducts } from "./lib/pipeline/pipeline";
 
 export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): Promise<PipelineProducts> {
@@ -24,8 +24,9 @@ export async function run(configurationUri: string, dataStore: DataStoreView = n
   const hwConfig = await configScope.write("config.yaml");
   const hConfig = await parse(hLiterateConfig, hwConfig, key => configScope.write(key));
 
-  // invoke pipeline
-  const pipeline = new Pipeline(hConfig);
+  // configuration manager
+  const config = new AutoRestConfigurationManager(await hConfig.readObject<AutoRestConfiguration>(), configurationUri);
+  const pipeline = new Pipeline(config);
   return await pipeline.run(dataStore);
 }
 

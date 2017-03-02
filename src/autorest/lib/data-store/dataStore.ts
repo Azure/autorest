@@ -4,12 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { readUri } from "./input";
-import { dumpString } from "./dump";
+import { readUri } from "../io/input";
+import { dumpString } from "../io/dump";
 import { From } from "linq-es2015";
-import { RawSourceMap, SourceMapGenerator } from "source-map";
-import { Mappings, compile } from "../source-map/sourceMap";
+import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
+import { Mappings, compile, Position, compilePosition } from "../source-map/sourceMap";
+import { BlameTree } from "../source-map/blaming";
 import { parse } from "../parsing/yaml";
+import { YAMLNode, parse as parseAst } from "../parsing/yamlAst";
 
 export module KnownScopes {
   export const Input = "input";
@@ -21,7 +23,8 @@ export module KnownScopes {
  ********************************************/
 
 interface Metadata {
-  sourceMap: RawSourceMap;
+  sourceMap: Promise<RawSourceMap>;
+  yamlAst: Promise<YAMLNode>;
 }
 
 interface Data {
@@ -50,7 +53,6 @@ export abstract class DataStoreViewReadonly {
         const data = await dataHandle.readData();
         const metadata = await dataHandle.readMetadata();
         const targetFile = path.join(targetDir, key);
-        console.log(key);
         await dumpString(targetFile, data);
         await dumpString(targetFile + ".map", JSON.stringify(metadata.sourceMap, null, 2));
       }
@@ -176,11 +178,12 @@ class DataStoreFileView extends DataStoreView {
 export class DataStore extends DataStoreView {
   private store: Store = {};
 
-  private validate(key: string): void {
+  private async validate(key: string): Promise<void> {
     const data = this.store[key];
 
     // sourceMap
-    const inputFiles = data.metadata.sourceMap.sources.concat(data.metadata.sourceMap.file);
+    const sourceMap = await data.metadata.sourceMap;
+    const inputFiles = sourceMap.sources.concat(sourceMap.file);
     for (const inputFile of inputFiles) {
       if (!this.store[inputFile]) {
         throw new Error(`Source map of '${key}' references '${inputFile}' which does not exist`);
@@ -189,13 +192,18 @@ export class DataStore extends DataStoreView {
   }
 
   public async write(key: string): Promise<DataHandleWrite> {
-    return new DataHandleWrite(key, async data => {
+    return new DataHandleWrite(key, async (data, metadataFactory) => {
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }
-      this.store[key] = data;
-      this.validate(key);
-      return this.read(key);
+      const storeEntry: Data = {
+        data: data,
+        metadata: <Metadata><Metadata | null>null
+      };
+      this.store[key] = storeEntry;
+      storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
+      await this.validate(key);
+      return await this.read(key);
     });
   }
 
@@ -210,6 +218,32 @@ export class DataStore extends DataStoreView {
   public async enum(): Promise<Iterable<string>> {
     return Object.getOwnPropertyNames(this.store);
   }
+
+  public async calculateBlame(key: string, position: Position): Promise<BlameTree> {
+    const data = await this.read(key);
+    if (data === null) {
+      throw new Error(`Data with key '${key}' not found`);
+    }
+    const resolvedPosition = await compilePosition(position, data);
+    return this.blame({
+      source: key,
+      column: resolvedPosition.column,
+      line: resolvedPosition.line,
+      name: `blameRoot (${JSON.stringify(position)})`
+    });
+  }
+
+  private async blame(position: sourceMap.MappedPosition): Promise<BlameTree> {
+    const data = await this.read(position.source);
+    if (data === null) {
+      throw new Error(`Data with key '${position.source}' not found`);
+    }
+    const blames = await data.blame(position);
+    return {
+      node: position,
+      blaming: await Promise.all(blames.map(pos => this.blame(pos)))
+    };
+  }
 }
 
 
@@ -220,29 +254,26 @@ export class DataStore extends DataStoreView {
  ********************************************/
 
 export class DataHandleWrite {
-  constructor(public readonly key: string, private write: (data: Data) => Promise<DataHandleRead>) {
+  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => Promise<Metadata>) => Promise<DataHandleRead>) {
   }
 
-  public async writeDataWithSourceMap(data: string, sourceMap: RawSourceMap): Promise<DataHandleRead> {
-    return await this.write({
-      data: data,
-      metadata: {
-        sourceMap: sourceMap
-      }
+  public async writeDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
+    return await this.write(data, async readHandle => {
+      return {
+        sourceMap: sourceMapFactory(readHandle), // defer initializing source map as it depends on read handle
+        yamlAst: new Promise<YAMLNode>((res, rej) => {
+          res(parseAst(data));
+        })
+      };
     });
   }
 
   public async writeData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    // compile source map
-    const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
-    const inputFiles: { [key: string]: string } = {};
-    for (const mappingSource of mappingSources) {
-      inputFiles[mappingSource.key] = await mappingSource.readData();
-    }
-    inputFiles[this.key] = data;
-    compile(mappings, sourceMapGenerator, inputFiles);
-
-    return await this.writeDataWithSourceMap(data, sourceMapGenerator.toJSON());
+    return await this.writeDataWithSourceMap(data, async readHandle => {
+      const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
+      await compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
+      return sourceMapGenerator.toJSON();
+    });
   }
 }
 
@@ -263,5 +294,13 @@ export class DataHandleRead {
   public async readObject<T>(): Promise<T> {
     const data = await this.readData();
     return parse<T>(data);
+  }
+
+  public async blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
+    const metadata = await this.readMetadata();
+    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
+    const result = sourceMapConsumer.originalPositionFor(position); // TODO: multiple sources!?
+    // `result` has null-properties if there is no original 
+    return result.source === null ? [] : [result];
   }
 }

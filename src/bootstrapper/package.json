@@ -26,14 +26,16 @@
     "node": ">=6.9.5"
   },
   "devDependencies": {
-    "@types/request": "0.0.39",
-    "@types/marked": "*",
-    "@types/shelljs": "^0.6.0",
-    "@types/node": "^7.0.5",
-    "@types/semver": "^5.3.30",
-    "@types/tmp": "0.0.32",
     "@types/chalk": "*",
+    "@types/marked": "*",
+    "@types/node": "^7.0.5",
+    "@types/request": "0.0.39",
+    "@types/semver": "^5.3.30",
+    "@types/shelljs": "^0.6.0",
+    "@types/tmp": "0.0.32",
     "del": "^2.2.2",
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.22",
     "typescript": "^2.1.5"
   },
   "dependencies": {

@@ -30,6 +30,9 @@ if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
+ * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
+ * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
@@ -61,6 +64,7 @@ else
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
@@ -81,6 +85,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
 public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
@@ -106,6 +111,7 @@ public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
 public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration) {
@@ -152,6 +158,9 @@ public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)Wi
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
+ * @@throws @Model.OperationExceptionTypeString thrown if the request is rejected by server
+ * @@throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
 @if (Model.ReturnType.Body != null)
 {
 @: * @@return the @Model.ReturnTypeResponseName.EscapeXmlComment() object if successful.
@@ -183,6 +192,7 @@ else
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
 @Model.CallbackDocumentation
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the {@@link ServiceFuture} object
  */
 public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
@@ -203,6 +213,7 @@ public ServiceFuture<@Model.ReturnTypeJva.ServiceFutureGenericParameterString> @
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
 public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
@@ -228,6 +239,7 @@ public Observable<@Model.ReturnTypeJva.GenericBodyClientTypeString> @(Model.Name
 {
 @: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
 }
+ * @@throws IllegalArgumentException thrown if parameters fail the validation
  * @@return the observable for the request
  */
 public Observable<@Model.ReturnTypeJva.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration) {

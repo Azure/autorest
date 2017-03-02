@@ -3,9 +3,11 @@
 
 package petstore;
 
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import java.io.IOException;
 import java.util.List;
 import petstore.models.Usage;
 import rx.Observable;
@@ -18,6 +20,9 @@ public interface Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Usage&gt; object if successful.
      */
     List<Usage> list();
@@ -26,6 +31,7 @@ public interface Usages {
      * Gets the current usage count and the limit for the resources under the subscription.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<List<Usage>> listAsync(final ServiceCallback<List<Usage>> serviceCallback);
@@ -33,6 +39,7 @@ public interface Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Usage&gt; object
      */
     Observable<List<Usage>> listAsync();
@@ -40,6 +47,7 @@ public interface Usages {
     /**
      * Gets the current usage count and the limit for the resources under the subscription.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Usage&gt; object
      */
     Observable<ServiceResponse<List<Usage>>> listWithServiceResponseAsync();

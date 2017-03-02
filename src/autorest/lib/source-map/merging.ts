@@ -60,7 +60,7 @@ function mergeInternal(a: any, b: any, path: jsonpath.PathComponent[]): any {
     }
   }
 
-  throw new Error(`'${jsonpath.stringify(path)}' has incomaptible values (${a}, ${b}).`);
+  throw new Error(`'${jsonpath.stringify(path)}' has incomaptible values (${yaml.stringify(a)}, ${yaml.stringify(b)}).`);
 }
 
 export function merge<T, U>(a: T, b: U): T & U {
@@ -96,6 +96,5 @@ export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputH
 
   const resultObjectRaw = yaml.stringify(resultObject);
   const mappings = identitySourceMappings(rawYamls);
-
   return await yamlOutputHandle.writeData(resultObjectRaw, mappings, yamlInputHandles);
 }

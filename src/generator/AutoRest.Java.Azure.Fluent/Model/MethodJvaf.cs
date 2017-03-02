@@ -9,11 +9,57 @@ using AutoRest.Java.Azure.Model;
 using AutoRest.Java.Model;
 using AutoRest.Core;
 using Newtonsoft.Json;
+using System;
+using AutoRest.Core.Utilities.Collections;
 
 namespace AutoRest.Java.Azure.Fluent.Model
 {
     public class MethodJvaf : MethodJva
     {
+        public override void Disambiguate()
+        {
+            if (string.IsNullOrWhiteSpace(this.MethodGroup.Name))
+            {
+                base.Disambiguate();
+
+                return;
+            }
+
+            var methodType = GetMethodType(this);
+            var originalName = Name;
+            string newName = null;
+
+            if (methodType == MethodType.ListBySubscription)
+            {
+                var otherListBySubMethods = this.MethodGroup.Methods.Where(x => GetMethodType(x as MethodJvaf) == MethodType.ListBySubscription);
+                if (otherListBySubMethods.Count() == 1)
+                {
+                    newName = "List";
+                }
+            }
+            if (methodType == MethodType.ListByResourceGroup)
+            {
+                var otherListByResourceGroupMethods = this.MethodGroup.Methods.Where(x => GetMethodType(x as MethodJvaf) == MethodType.ListByResourceGroup);
+                if (otherListByResourceGroupMethods.Count() == 1)
+                {
+                    newName = "ListByResourceGroup";
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(newName))
+            {
+                this.SimulateAsPagingOperation = true;
+                var name = CodeNamer.Instance.GetUnique(newName, this, Parent.IdentifiersInScope, Parent.Children.Except(this.SingleItemAsEnumerable()));
+                if (name != originalName)
+                {
+                    Name = name;
+                }
+                return;
+            }
+
+            base.Disambiguate();
+        }
+
         [JsonIgnore]
         public override IEnumerable<ParameterJv> RetrofitParameters
         {
@@ -74,11 +120,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
             get
             {
                 var imports = base.InterfaceImports;
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation || this.IsPagingNextOperation || this.SimulateAsPagingOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.azure.ListOperationCallback");
-                    imports.Add("com.microsoft.azure.PagedList");
+                    if (this.IsPagingOperation || this.IsPagingNextOperation)
+                    {
+                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.PagedList");
+                    }
+
+                    if (!this.SimulateAsPagingOperation)
+                    {
+                        imports.Remove("com.microsoft.rest.ServiceCallback");
+                    }
+
                     var pageType = ReturnTypeJva.BodyClientType as SequenceTypeJva;
                     if (pageType != null)
                     {
@@ -112,23 +166,68 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // return type may have been removed as a side effect
                     imports.AddRange(this.ReturnTypeJva.ImplImports);
                 }
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                 {
-                    imports.Remove("com.microsoft.rest.ServiceCallback");
-                    imports.Add("com.microsoft.azure.ListOperationCallback");
+                    if (this.IsPagingOperation || this.IsPagingNextOperation)
+                    {
+                        imports.Add("com.microsoft.azure.ListOperationCallback");
+                        imports.Add("com.microsoft.azure.PagedList");
+                    }
+
+                    if (!this.SimulateAsPagingOperation)
+                    {
+                        imports.Remove("com.microsoft.rest.ServiceCallback");
+                    }
+
                     imports.Add("com.microsoft.azure.Page");
-                    imports.Add("com.microsoft.azure.PagedList");
                     if (pageType != null)
                     {
                         imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                     }
                 }
+
                 if (this.IsPagingNonPollingOperation && pageType != null)
                 {
                     imports.RemoveAll(i => new CompositeTypeJva((ReturnTypeJva.BodyClientType as SequenceTypeJva).PageImplType) { CodeModel = CodeModel }.ImportSafe().Contains(i));
                 }
                 return imports;
             }
+        }
+
+        private enum MethodType
+        {
+            Other,
+            ListBySubscription,
+            ListByResourceGroup
+        }
+
+        private static MethodType GetMethodType(MethodJvaf method)
+        {
+            if (method.HttpMethod == HttpMethod.Get)
+            {
+                var url = method.Url.Value;
+                var urlSplits = url.Split('/');
+                if ((urlSplits.Count() == 6 || urlSplits.Count() == 8) && StringComparer.OrdinalIgnoreCase.Equals(urlSplits[1], "subscriptions"))
+                {
+                    if (urlSplits.Count() == 6)
+                    {
+                        if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "providers"))
+                        {
+                            return MethodType.ListBySubscription;
+                        }
+                        else
+                        {
+                            return MethodType.ListByResourceGroup;
+                        }
+                    }
+                    else if (StringComparer.OrdinalIgnoreCase.Equals(urlSplits[3], "resourceGroups"))
+                    {
+                        return MethodType.ListByResourceGroup;
+                    }
+                }
+            }
+
+            return MethodType.Other;
         }
     }
 }

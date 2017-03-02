@@ -22,7 +22,6 @@ namespace AutoRest.Swagger.Model
     /// https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#parameterObject
     /// </summary>
     [Rule(typeof(DefaultMustBeInEnum))]
-    [Rule(typeof(RefsMustNotHaveSiblings))]
     public abstract class SwaggerObject : SwaggerBase
     {
         private string _description;

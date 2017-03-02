@@ -13,6 +13,8 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.http.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -23,6 +25,9 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void head408();
 
@@ -30,6 +35,7 @@ public interface HttpRetrys {
      * Return 408 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> head408Async(final ServiceCallback<Void> serviceCallback);
@@ -37,6 +43,7 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> head408Async();
@@ -44,6 +51,7 @@ public interface HttpRetrys {
     /**
      * Return 408 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> head408WithServiceResponseAsync();
@@ -51,6 +59,9 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void put500();
 
@@ -58,6 +69,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> put500Async(final ServiceCallback<Void> serviceCallback);
@@ -65,6 +77,7 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> put500Async();
@@ -72,6 +85,7 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> put500WithServiceResponseAsync();
@@ -79,6 +93,9 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void put500(Boolean booleanValue);
 
@@ -87,6 +104,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
@@ -95,6 +113,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> put500Async(Boolean booleanValue);
@@ -103,6 +122,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> put500WithServiceResponseAsync(Boolean booleanValue);
@@ -110,6 +130,9 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void patch500();
 
@@ -117,6 +140,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> patch500Async(final ServiceCallback<Void> serviceCallback);
@@ -124,6 +148,7 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> patch500Async();
@@ -131,6 +156,7 @@ public interface HttpRetrys {
     /**
      * Return 500 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> patch500WithServiceResponseAsync();
@@ -138,6 +164,9 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void patch500(Boolean booleanValue);
 
@@ -146,6 +175,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
@@ -154,6 +184,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> patch500Async(Boolean booleanValue);
@@ -162,6 +193,7 @@ public interface HttpRetrys {
      * Return 500 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> patch500WithServiceResponseAsync(Boolean booleanValue);
@@ -169,6 +201,9 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void get502();
 
@@ -176,6 +211,7 @@ public interface HttpRetrys {
      * Return 502 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> get502Async(final ServiceCallback<Void> serviceCallback);
@@ -183,6 +219,7 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> get502Async();
@@ -190,6 +227,7 @@ public interface HttpRetrys {
     /**
      * Return 502 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> get502WithServiceResponseAsync();
@@ -197,6 +235,9 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void post503();
 
@@ -204,6 +245,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> post503Async(final ServiceCallback<Void> serviceCallback);
@@ -211,6 +253,7 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> post503Async();
@@ -218,6 +261,7 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> post503WithServiceResponseAsync();
@@ -225,6 +269,9 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void post503(Boolean booleanValue);
 
@@ -233,6 +280,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
@@ -241,6 +289,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> post503Async(Boolean booleanValue);
@@ -249,6 +298,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> post503WithServiceResponseAsync(Boolean booleanValue);
@@ -256,6 +306,9 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void delete503();
 
@@ -263,6 +316,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> delete503Async(final ServiceCallback<Void> serviceCallback);
@@ -270,6 +324,7 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> delete503Async();
@@ -277,6 +332,7 @@ public interface HttpRetrys {
     /**
      * Return 503 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> delete503WithServiceResponseAsync();
@@ -284,6 +340,9 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void delete503(Boolean booleanValue);
 
@@ -292,6 +351,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
@@ -300,6 +360,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> delete503Async(Boolean booleanValue);
@@ -308,6 +369,7 @@ public interface HttpRetrys {
      * Return 503 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> delete503WithServiceResponseAsync(Boolean booleanValue);
@@ -315,6 +377,9 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void put504();
 
@@ -322,6 +387,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> put504Async(final ServiceCallback<Void> serviceCallback);
@@ -329,6 +395,7 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> put504Async();
@@ -336,6 +403,7 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> put504WithServiceResponseAsync();
@@ -343,6 +411,9 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void put504(Boolean booleanValue);
 
@@ -351,6 +422,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
@@ -359,6 +431,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> put504Async(Boolean booleanValue);
@@ -367,6 +440,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> put504WithServiceResponseAsync(Boolean booleanValue);
@@ -374,6 +448,9 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void patch504();
 
@@ -381,6 +458,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> patch504Async(final ServiceCallback<Void> serviceCallback);
@@ -388,6 +466,7 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> patch504Async();
@@ -395,6 +474,7 @@ public interface HttpRetrys {
     /**
      * Return 504 status code, then 200 after retry.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> patch504WithServiceResponseAsync();
@@ -402,6 +482,9 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void patch504(Boolean booleanValue);
 
@@ -410,6 +493,7 @@ public interface HttpRetrys {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
@@ -418,6 +502,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> patch504Async(Boolean booleanValue);
@@ -426,6 +511,7 @@ public interface HttpRetrys {
      * Return 504 status code, then 200 after retry.
      *
      * @param booleanValue Simple boolean value true
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> patch504WithServiceResponseAsync(Boolean booleanValue);
