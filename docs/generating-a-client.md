@@ -1,6 +1,6 @@
 # <img align="center" src="./images/logo.png"> Sample : Generating a client using AutoRest
 
-First,Download the Swagger.json example:
+First, download the petstore.json example file:
 
 | Platform | Command |
 |----|---|
