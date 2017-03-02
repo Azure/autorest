@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /*---------------------------------------------------------------------------------------------
-*  Copyright (c) Microsoft Corporation. All rights reserved.
-*  Licensed under the MIT License. See License.txt in the project root for license information.
-*--------------------------------------------------------------------------------------------*/
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 // start of autorest-ng
 // the console app starts for real here.
@@ -21,10 +21,11 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function main() {
+  const autorestArgs = process.argv.slice(2);
   try {
     const autorestExe = spawn(
       path.join(homedir(), ".autorest", "frameworks", "dotnet"),
-      [path.join(__dirname, "../../AutoRest.dll"), ...process.argv.slice(2)]);
+      [path.join(__dirname, "../../AutoRest.dll"), ...autorestArgs]);
     autorestExe.stdout.pipe(process.stdout);
     autorestExe.stderr.pipe(process.stderr);
     const exitCode = await awaitable(autorestExe);

@@ -129,5 +129,10 @@ namespace AutoRest.Swagger.Model.Utilities
             }
             return sb.ToString();
         }
+
+        public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
+        {
+            return serviceDefinition.Definitions.Where(defPair=>defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions?["x-ms-azure-resource"] == true);
+        }
     }
 }
