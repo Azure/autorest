@@ -155,9 +155,8 @@ module.exports =
     echo ""
     echo "#{ error 'Task Failed:' }  #{error_message text}"
     echo ""
-    rm '-rf', "#{tmpfolder}/gulp"
+    rm '-rf', workfolder
     process.exit(1)
-  
 
   execute: (cmdline,options,callback)->
     if typeof options == 'function' 

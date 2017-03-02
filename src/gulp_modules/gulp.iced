@@ -72,6 +72,8 @@ configString = (s)->
 
 ###############################################
 # Global values
+process.env.tmp = process.env.tmp or "#{basefolder}/tmp"
+
 Import 
   versionsuffix: if argv["version-suffix"]? then "--version-suffix=#{argv["version-suffix"]}" else ""
   version: argv.version or cat "#{basefolder}/VERSION"
@@ -85,10 +87,8 @@ Import
   force: argv.force or false
   threshold: argv.threshold or ((os.cpus().length)-1 )
   verbose: argv.verbose or null
-  tmpfolder: process.env.tmp || "#{basefolder}/tmp"
-  workdir: "#{global.tmpfolder}/gulp/#{guid()}"
+  workdir: "#{process.env.tmp}/gulp/#{guid()}"
 
-mkdir "-p", "#{tmpfolder}/gulp" if !test "-d", "#{tmpfolder}/gulp"
 mkdir "-p", workdir if !test "-d", workdir
 
 ###############################################
