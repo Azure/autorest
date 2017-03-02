@@ -241,10 +241,7 @@ export class DataStore extends DataStoreView {
       throw new Error(`Data with key '${position.source}' not found`);
     }
     const blames = await data.blame(position);
-    return {
-      node: position,
-      blaming: await Promise.all(blames.map(pos => this.blame(pos)))
-    };
+    return new BlameTree(position, await Promise.all(blames.map(pos => this.blame(pos))));
   }
 }
 
@@ -319,9 +316,10 @@ export class DataHandleRead {
       }
     });
     const maxColumn = sameLineResults.reduce((c, m) => Math.max(c, m.generatedColumn), 0);
+    const columnDelta = position.column - maxColumn;
     return sameLineResults.filter(m => m.generatedColumn === maxColumn).map(m => {
       return {
-        column: m.originalColumn,
+        column: m.originalColumn + columnDelta,
         line: m.originalLine,
         name: m.name,
         source: m.source

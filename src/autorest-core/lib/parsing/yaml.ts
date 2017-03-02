@@ -12,7 +12,7 @@ import { DataHandleRead } from "../data-store/dataStore";
 export { newScalar } from "yaml-ast-parser";
 
 // reexport required elements
-export const Kind = yamlAst.Kind;
+export const Kind: { SCALAR: number, MAPPING: number, MAP: number, SEQ: number, ANCHOR_REF: number, INCLUDE_REF: number } = yamlAst.Kind;
 export type YAMLNode = yamlAst.YAMLNode;
 export type YAMLScalar = yamlAst.YAMLScalar;
 export type YAMLMapping = yamlAst.YAMLMapping;
@@ -191,6 +191,7 @@ function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
     case Kind.INCLUDE_REF:
       throw new Error(`INCLUDE_REF not implemented`);
   }
+  throw new Error(`unexpected YAML AST node kind '${yamlAstCurrent.kind}'`);
 }
 
 export function resolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: jsonpath.PathComponent[]): number {

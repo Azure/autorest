@@ -26,7 +26,8 @@ async function test() {
     // console.log(mdTree.firstChild.type, `"${mdTree.firstChild.firstChild.literal}"`, mdTree.firstChild.level);
 
     // BLAME
-    console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))));
+    //console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))));
+    console.log(stringify(Array.from((await dataStore.calculateBlame("swagger/swagger.yaml", parseJsonPath("$.definitions.SearchServiceListResult.description"))).blameInputs())));
     // console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", <sourceMap.Position>{ column: 4, line: 54 })));
     // console.log(stringify(await dataStore.calculateBlame("swagger/swagger.yaml", <sourceMap.Position>{ column: 6, line: 54 })));
 
