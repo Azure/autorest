@@ -8,7 +8,13 @@ task 'build', 'typescript', (done)->
         echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0
-          install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
+          if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+            mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+  
+          if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
+            fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
+
+          # install_package "#{basefolder}/src/autorest", "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0",done
 
       next null
     return null
@@ -49,10 +55,10 @@ task 'test', 'typescript',['build/typescript'], (done)->
 
 task 'npm-install', 'typescript', (done)-> 
   count = 0
-  typescriptProjects()
+  typescriptProjectFolders()
     .pipe foreach (each,next) -> 
       count++
-      execute "npm install", {cwd: folder each.path}, (code,stdout,stderr) ->
+      execute "npm install", {cwd: each.path}, (code,stdout,stderr) ->
         count--
         if count is 0
           done() 
