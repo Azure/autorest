@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as yamlAst from "yaml-ast-parser";
-import { JsonPath } from "./jsonPath";
+import { JsonPath } from "./jsonpath";
 
 /**
  * reexport required elements

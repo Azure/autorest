@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, resolveAnchorRef } from "../approved-imports/yaml";
-import { JsonPath, JsonPathComponent } from "../approved-imports/jsonPath";
+import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
 import { indexToPosition } from "./textUtility";
 import { DataHandleRead } from "../data-store/dataStore";
 

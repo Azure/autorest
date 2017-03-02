@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { From } from "../approved-imports/linq";
-import { JsonPath, stringify } from "../approved-imports/jsonPath";
+import { JsonPath, stringify } from "../approved-imports/jsonpath";
 import * as yaml from "../approved-imports/yaml";
 import { Mappings } from "../approved-imports/sourceMap";
 import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
@@ -38,6 +38,7 @@ function mergeInternal(a: any, b: any, path: JsonPath): any {
       const result: any = {};
       let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b)).sort();
       keys = keys.filter((v, i) => i === 0 || v !== keys[i - 1]); // distinct
+
       for (const key of keys) {
         const subpath = path.concat(key);
 

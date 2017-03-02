@@ -5,7 +5,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as commonmark from "commonmark";
-import { parse } from "./lib/approved-imports/jsonPath";
+import { parse } from "./lib/approved-imports/jsonpath";
 import { stringify } from "./lib/approved-imports/yaml";
 import { run } from "./index";
 import { DataStore } from "./lib/data-store/dataStore";
