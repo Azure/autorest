@@ -90,7 +90,7 @@ namespace AutoRest.Swagger.Model
         [CollectionRule(typeof(BodyTopLevelProperties))]
         [CollectionRule(typeof(HttpVerbValidation))]
         [CollectionRule(typeof(DeleteMustHaveEmptyRequestBody))]
-        [CollectionRule(typeof(PropertiesNamesCamelCase))]
+        [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
         [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
-        [CollectionRule(typeof(PropertiesNamesCamelCase))]
+        [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>
@@ -115,6 +115,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
+        [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>

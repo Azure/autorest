@@ -247,7 +247,8 @@ namespace AutoRest.Swagger.Tests
         public void PropertyNameCasingValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "property-names-casing.json"));
-            messages.AssertOnlyValidationMessage(typeof(PropertiesNamesCamelCase), 2);
+            messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 1);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 1);
         }
 
         [Fact]
@@ -553,7 +554,8 @@ namespace AutoRest.Swagger.Tests
         public void ValidPropertyNameCasing()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "property-names-casing-valid.json"));
-            messages.AssertOnlyValidationMessage(typeof(PropertiesNamesCamelCase), 0);
+            messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 0);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 0);
         }
 
     }
