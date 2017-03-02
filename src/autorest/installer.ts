@@ -30,6 +30,14 @@ export class Installer {
     return dir;
   }
 
+  private static GetFallbackUrl(url: string): string {
+    let newurl = url.replace("https://github.com/Azure/autorest/releases/download/", "https://autorest-releases.azureedge.net");
+    if (newurl == url) {
+      return null;
+    }
+    return newurl;
+  }
+
   public static get RootFolder(): string {
     return this.ensureExists(join(homedir(), '.autorest'));
   }
@@ -60,6 +68,38 @@ export class Installer {
     return "";
   }
 
+  private static HttpGet(url: string, filename: string, targetFolder: string, resolve, reject) {
+    let download = request.get(url, {
+      strictSSL: true,
+      headers: {
+        'user-agent': 'autorest-installer',
+        "Authorization": `token ${Utility.Id}`
+      }
+    });
+
+    let unpack: any = null;
+    if (filename.endsWith('.zip')) {
+      unpack = download.pipe(unzip.Extract({ path: targetFolder }))
+    }
+    else {
+      unpack = download.pipe(tgz().createWriteStream(targetFolder))
+    }
+
+    unpack.on('end', () => {
+      setTimeout(resolve, 100);
+    });
+
+    unpack.on('error', () => {
+      let newUrl = this.GetFallbackUrl(url);
+      if (newUrl == null) {
+        Console.Error(`Failed to download file: ${filename}`);
+        return reject();
+      }
+      Console.Error(`Failed to download file: ${filename}, trying fallback url.`);
+      this.HttpGet(newUrl, filename, targetFolder, resolve, reject);
+    });
+  }
+
   public static async InstallFramework() {
     const pi = await Utility.PlatformInformation();
     const fwks = await Github.GetAssets('dotnet-runtime-1.0.3');
@@ -71,26 +111,7 @@ export class Installer {
 
     return new Promise<string>((resolve, reject) => {
       Console.Log(`Downloading __${runtime.browser_download_url}__ \n        to  __${this.FrameworkFolder}__`);
-      let download = request.get(runtime.browser_download_url, {
-        strictSSL: true,
-        headers: {
-          'user-agent': 'autorest-installer',
-          "Authorization": `token ${Utility.Id}`
-        }
-      });
-
-      let unpack: any = null;
-
-      if (runtime.name.endsWith('.zip')) {
-        unpack = download.pipe(unzip.Extract({ path: this.FrameworkFolder }))
-      }
-      else {
-        unpack = download.pipe(tgz().createWriteStream(this.FrameworkFolder))
-      }
-      unpack.on('end', () => {
-        setTimeout(resolve, 100);
-      });
-      unpack.on('error', reject);
+      this.HttpGet(runtime.browser_download_url, runtime.name, this.FrameworkFolder, resolve, reject);
     });
   }
 
@@ -105,26 +126,7 @@ export class Installer {
 
     return new Promise<string>((resolve, reject) => {
       Console.Log(`Downloading __${asset.browser_download_url}__ \n        to  __${targetFolder}__`);
-      let download = request.get(asset.browser_download_url, {
-        strictSSL: true,
-        headers: {
-          'user-agent': 'autorest-installer',
-          "Authorization": `token ${Utility.Id}`
-        }
-      });
-
-      let unpack: any = null;
-
-      if (asset.name.endsWith('.zip')) {
-        unpack = download.pipe(unzip.Extract({ path: targetFolder }))
-      }
-      else {
-        unpack = download.pipe(tgz().createWriteStream(targetFolder))
-      }
-      unpack.on('end', () => {
-        setTimeout(resolve, 100);
-      });
-      unpack.on('error', reject);
+      this.HttpGet(asset.browser_download_url, asset.name, targetFolder, resolve, reject);
     });
   }
 

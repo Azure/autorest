@@ -59,43 +59,58 @@ export class Release {
   author: Author;
 }
 
-async function Rest(url: string): Promise<any> {
+let hosts = [
+  "https://api.github.com/repos/azure/autorest",
+  "https://autorest-feed.azureedge.net",
+]
+
+function RestCall(url: string, i: number, resolve, reject) {
+  let stream = request.get(`${hosts[i]}${url}`, {
+    strictSSL: true,
+    timeout: 15000,
+    headers: {
+      'user-agent': 'autorest-installer',
+      "Authorization": `token ${Utility.Id}`
+    }
+  });
+
+  let responseString = '';
+
+  stream.on('data', (data => {
+    responseString += data;
+  }));
+
+  stream.on('end', () => {
+    resolve(JSON.parse(responseString));
+  });
+
+  stream.on('error', (err) => {
+    Console.Error(`Failed to access data at ${url}.`);
+    if (i < hosts.length - 1) {
+      Console.Error(`Retrying alternate url.`);
+      return RestCall(url, i + 1, resolve, reject)
+    }
+
+    Console.Error(`${err}`);
+    reject(err);
+  });
+}
+
+async function Rest(url: string, i: number = 0): Promise<any> {
   return new Promise<string>((resolve, reject) => {
-    let stream = request.get(url, {
-      strictSSL: true,
-      timeout: 15000,
-      headers: {
-        'user-agent': 'autorest-installer',
-        "Authorization": `token ${Utility.Id}`
-      }
-    });
-
-    let responseString = '';
-
-    stream.on('data', (data => {
-      responseString += data;
-    }));
-
-    stream.on('end', () => {
-      resolve(JSON.parse(responseString));
-    });
-
-    stream.on('error', (err) => {
-      Console.Error(`${err}`);
-      reject(err);
-    });
+    RestCall(url, i, resolve, reject);
   });
 }
 
 export class Github {
   static async GetAssets(tag: string): Promise<IEnumerable<Asset>> {
-    var response = await Rest(`https://api.github.com/repos/azure/autorest/releases/tags/${tag}`);
+    var response = await Rest(`/releases/tags/${tag}`);
     Console.Debug(inspect(response));
     return From(<Array<Asset>>response.assets);
   }
 
   static async List(): Promise<IEnumerable<Release>> {
-    const response = await Rest(`https://api.github.com/repos/azure/autorest/releases`);
+    const response = await Rest(`/releases`);
     Console.Debug(inspect(response));
     return From<Release>(response);
   }
