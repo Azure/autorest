@@ -68,6 +68,9 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ReadonlyObj object if successful.
      */
     public ReadonlyObj getValid() {
@@ -78,6 +81,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) {
@@ -87,6 +91,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReadonlyObj object
      */
     public Observable<ReadonlyObj> getValidAsync() {
@@ -101,6 +106,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReadonlyObj object
      */
     public Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync() {
@@ -129,6 +135,9 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValid(ReadonlyObj complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -139,6 +148,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) {
@@ -149,6 +159,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidAsync(ReadonlyObj complexBody) {
@@ -164,6 +175,7 @@ public class ReadonlypropertysImpl implements Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody) {

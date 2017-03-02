@@ -6,6 +6,7 @@
     "sourceMap": true,
     "types" : ["node"],
     "newLine": "LF",
+    "experimentalDecorators": true,
     "lib": [
       "es5",
       "es6",

@@ -7,6 +7,7 @@ import * as jsonpath from "jsonpath";
 import * as sourceMap from "source-map";
 import * as yamlAst from "yaml-ast-parser";
 import { indexToPosition } from "./textUtility";
+import { DataHandleRead } from "../data-store/dataStore";
 
 // reexport required elements
 export const Kind = yamlAst.Kind;
@@ -129,7 +130,7 @@ function resolvePathPart(yamlAstRoot: yamlAst.YAMLNode, yamlAstCurrent: yamlAst.
 
 export function resolvePathParts(yamlAstRoot: yamlAst.YAMLNode, jsonPathParts: jsonpath.PathComponent[]): number {
   if (jsonPathParts.length === 0 || jsonPathParts[0] !== "$") {
-    throw new Error("Argument: Invalid JSON path (not starting with $)");
+    throw new Error(`Argument: Invalid JSON path '${JSON.stringify(jsonPathParts)}' (not starting with $)`);
   }
   // special treatment of root "$", so it gets mapped to the VERY beginning of the document (possibly "---")
   // instead of the first YAML mapping node. This allows disambiguation of "$" and "$.<first prop>" in YAML.
@@ -147,10 +148,9 @@ export function resolvePathParts(yamlAstRoot: yamlAst.YAMLNode, jsonPathParts: j
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export function resolvePath(yaml: string, yamlAstRoot: yamlAst.YAMLNode, jsonPath: string | jsonpath.PathComponent[]): sourceMap.Position {
-  if (typeof jsonPath === "string") {
-    jsonPath = jsonpath.parse(jsonPath).map(part => part.value);
-  }
-  let textIndex = resolvePathParts(yamlAstRoot, jsonPath);
+export async function resolvePath(yamlFile: DataHandleRead, jsonPath: jsonpath.PathComponent[]): Promise<sourceMap.Position> {
+  const yaml = await yamlFile.readData();
+  const yamlAst = await (await yamlFile.readMetadata()).yamlAst;
+  const textIndex = resolvePathParts(yamlAst, jsonPath);
   return indexToPosition(yaml, textIndex);
 }

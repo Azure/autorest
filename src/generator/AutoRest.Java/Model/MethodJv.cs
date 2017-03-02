@@ -712,7 +712,13 @@ namespace AutoRest.Java.Model
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
                 imports.AddRange(this.ReturnTypeJv.InterfaceImports);
-                return imports.ToList();
+                // exceptions
+                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .ForEach(ex =>
+                    {
+                        string exceptionImport = CodeNamerJv.GetJavaException(ex, CodeModel);
+                        if (exceptionImport != null) imports.Add(CodeNamerJv.GetJavaException(ex, CodeModel));
+                    });                return imports.ToList();
             }
         }
 

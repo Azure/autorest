@@ -148,8 +148,8 @@ namespace AutoRest.Java.Azure
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeJva).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeTypeJva)method.Responses[responseStatus].Body;
-                    var sequenceType = compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
+                    var compositeType = (CompositeTypeJva)method.Responses[responseStatus].Body;
+                    var sequenceType = compositeType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)

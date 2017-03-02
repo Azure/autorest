@@ -28,7 +28,19 @@ namespace AutoRest.Java.Azure.Fluent.Model
         public override string ImplClassSuffix => "Inner";
 
         [JsonIgnore]
-        public override string ParentDeclaration => "";
+        public override string ParentDeclaration
+        {
+            get
+            {
+                if (AnyMethodSupportsInnerListing())
+                {
+                    var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "List"));
+
+                    return $" implements InnerSupportsListing<{((ResponseJva)listMethod.ReturnType).SequenceElementTypeString}>";
+                }
+                return "";
+            }
+        }
 
         [JsonIgnore]
         public override string ServiceClientType => CodeModel.Name + "Impl";
@@ -43,6 +55,10 @@ namespace AutoRest.Java.Azure.Fluent.Model
             {
                 var imports = new List<string>();
                 var ns = CodeModel.Namespace.ToLowerInvariant();
+                if (AnyMethodSupportsInnerListing())
+                {
+                    imports.Add("com.microsoft.azure.management.resources.fluentcore.collection.InnerSupportsListing");
+                }
                 foreach (var i in base.ImplImports.ToList())
                 {
                     if (i.StartsWith(ns + "." + ImplPackage, StringComparison.OrdinalIgnoreCase))
@@ -60,6 +76,16 @@ namespace AutoRest.Java.Azure.Fluent.Model
                 }
                 return imports;
             }
+        }
+
+        private bool AnyMethodSupportsInnerListing()
+        {
+            var listMethod = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "List"));
+            var listByResourceGroup = this.Methods.FirstOrDefault(x => StringComparer.OrdinalIgnoreCase.Equals(x.Name, "ListByResourceGroup"));
+            return listMethod != null && listByResourceGroup != null
+                && StringComparer.OrdinalIgnoreCase.Equals(
+                    ((ResponseJva)listMethod.ReturnType).SequenceElementTypeString,
+                    ((ResponseJva)listByResourceGroup.ReturnType).SequenceElementTypeString);
         }
     }
 }

@@ -116,6 +116,9 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the int object if successful.
      */
     public int getNull() {
@@ -126,6 +129,7 @@ public class IntsImpl implements Ints {
      * Get null Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getNullAsync(final ServiceCallback<Integer> serviceCallback) {
@@ -135,6 +139,7 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<Integer> getNullAsync() {
@@ -149,6 +154,7 @@ public class IntsImpl implements Ints {
     /**
      * Get null Int value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getNullWithServiceResponseAsync() {
@@ -176,6 +182,9 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the int object if successful.
      */
     public int getInvalid() {
@@ -186,6 +195,7 @@ public class IntsImpl implements Ints {
      * Get invalid Int value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
@@ -195,6 +205,7 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<Integer> getInvalidAsync() {
@@ -209,6 +220,7 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Int value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getInvalidWithServiceResponseAsync() {
@@ -236,6 +248,9 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the int object if successful.
      */
     public int getOverflowInt32() {
@@ -246,6 +261,7 @@ public class IntsImpl implements Ints {
      * Get overflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
@@ -255,6 +271,7 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<Integer> getOverflowInt32Async() {
@@ -269,6 +286,7 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int32 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getOverflowInt32WithServiceResponseAsync() {
@@ -296,6 +314,9 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the int object if successful.
      */
     public int getUnderflowInt32() {
@@ -306,6 +327,7 @@ public class IntsImpl implements Ints {
      * Get underflow Int32 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Integer> getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
@@ -315,6 +337,7 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<Integer> getUnderflowInt32Async() {
@@ -329,6 +352,7 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int32 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Integer object
      */
     public Observable<ServiceResponse<Integer>> getUnderflowInt32WithServiceResponseAsync() {
@@ -356,6 +380,9 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the long object if successful.
      */
     public long getOverflowInt64() {
@@ -366,6 +393,7 @@ public class IntsImpl implements Ints {
      * Get overflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Long> getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
@@ -375,6 +403,7 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Long object
      */
     public Observable<Long> getOverflowInt64Async() {
@@ -389,6 +418,7 @@ public class IntsImpl implements Ints {
     /**
      * Get overflow Int64 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Long object
      */
     public Observable<ServiceResponse<Long>> getOverflowInt64WithServiceResponseAsync() {
@@ -416,6 +446,9 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the long object if successful.
      */
     public long getUnderflowInt64() {
@@ -426,6 +459,7 @@ public class IntsImpl implements Ints {
      * Get underflow Int64 value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Long> getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
@@ -435,6 +469,7 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Long object
      */
     public Observable<Long> getUnderflowInt64Async() {
@@ -449,6 +484,7 @@ public class IntsImpl implements Ints {
     /**
      * Get underflow Int64 value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Long object
      */
     public Observable<ServiceResponse<Long>> getUnderflowInt64WithServiceResponseAsync() {
@@ -477,6 +513,9 @@ public class IntsImpl implements Ints {
      * Put max int32 value.
      *
      * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMax32(int intBody) {
         putMax32WithServiceResponseAsync(intBody).toBlocking().single().body();
@@ -487,6 +526,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
@@ -497,6 +537,7 @@ public class IntsImpl implements Ints {
      * Put max int32 value.
      *
      * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMax32Async(int intBody) {
@@ -512,6 +553,7 @@ public class IntsImpl implements Ints {
      * Put max int32 value.
      *
      * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putMax32WithServiceResponseAsync(int intBody) {
@@ -540,6 +582,9 @@ public class IntsImpl implements Ints {
      * Put max int64 value.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMax64(long intBody) {
         putMax64WithServiceResponseAsync(intBody).toBlocking().single().body();
@@ -550,6 +595,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
@@ -560,6 +606,7 @@ public class IntsImpl implements Ints {
      * Put max int64 value.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMax64Async(long intBody) {
@@ -575,6 +622,7 @@ public class IntsImpl implements Ints {
      * Put max int64 value.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putMax64WithServiceResponseAsync(long intBody) {
@@ -603,6 +651,9 @@ public class IntsImpl implements Ints {
      * Put min int32 value.
      *
      * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMin32(int intBody) {
         putMin32WithServiceResponseAsync(intBody).toBlocking().single().body();
@@ -613,6 +664,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
@@ -623,6 +675,7 @@ public class IntsImpl implements Ints {
      * Put min int32 value.
      *
      * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMin32Async(int intBody) {
@@ -638,6 +691,7 @@ public class IntsImpl implements Ints {
      * Put min int32 value.
      *
      * @param intBody the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putMin32WithServiceResponseAsync(int intBody) {
@@ -666,6 +720,9 @@ public class IntsImpl implements Ints {
      * Put min int64 value.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putMin64(long intBody) {
         putMin64WithServiceResponseAsync(intBody).toBlocking().single().body();
@@ -676,6 +733,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
@@ -686,6 +744,7 @@ public class IntsImpl implements Ints {
      * Put min int64 value.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putMin64Async(long intBody) {
@@ -701,6 +760,7 @@ public class IntsImpl implements Ints {
      * Put min int64 value.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putMin64WithServiceResponseAsync(long intBody) {
@@ -728,6 +788,9 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getUnixTime() {
@@ -738,6 +801,7 @@ public class IntsImpl implements Ints {
      * Get datetime encoded as Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<DateTime> getUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
@@ -747,6 +811,7 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getUnixTimeAsync() {
@@ -761,6 +826,7 @@ public class IntsImpl implements Ints {
     /**
      * Get datetime encoded as Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUnixTimeWithServiceResponseAsync() {
@@ -794,6 +860,9 @@ public class IntsImpl implements Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putUnixTimeDate(DateTime intBody) {
         putUnixTimeDateWithServiceResponseAsync(intBody).toBlocking().single().body();
@@ -804,6 +873,7 @@ public class IntsImpl implements Ints {
      *
      * @param intBody the long value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putUnixTimeDateAsync(DateTime intBody, final ServiceCallback<Void> serviceCallback) {
@@ -814,6 +884,7 @@ public class IntsImpl implements Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putUnixTimeDateAsync(DateTime intBody) {
@@ -829,6 +900,7 @@ public class IntsImpl implements Ints {
      * Put datetime encoded as Unix time.
      *
      * @param intBody the long value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putUnixTimeDateWithServiceResponseAsync(DateTime intBody) {
@@ -857,6 +929,9 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getInvalidUnixTime() {
@@ -867,6 +942,7 @@ public class IntsImpl implements Ints {
      * Get invalid Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<DateTime> getInvalidUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
@@ -876,6 +952,7 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getInvalidUnixTimeAsync() {
@@ -890,6 +967,7 @@ public class IntsImpl implements Ints {
     /**
      * Get invalid Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getInvalidUnixTimeWithServiceResponseAsync() {
@@ -922,6 +1000,9 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getNullUnixTime() {
@@ -932,6 +1013,7 @@ public class IntsImpl implements Ints {
      * Get null Unix time value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<DateTime> getNullUnixTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
@@ -941,6 +1023,7 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getNullUnixTimeAsync() {
@@ -955,6 +1038,7 @@ public class IntsImpl implements Ints {
     /**
      * Get null Unix time value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getNullUnixTimeWithServiceResponseAsync() {
