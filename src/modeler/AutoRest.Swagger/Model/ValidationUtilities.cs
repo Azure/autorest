@@ -104,11 +104,11 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
-        /// Returns a camel case styled string based on the string passed as parameter.
+        /// Returns a suggestion of camel case styled string based on the string passed as parameter.
         /// </summary>
         /// <param name="name">String to convert to camel case style</param>
         /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
-        public static string toCamelCase(string name)
+        public static string ToCamelCase(string name)
         {
             StringBuilder sb = new StringBuilder(name);
             if (sb.Length > 0)
