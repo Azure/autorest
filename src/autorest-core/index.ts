@@ -18,16 +18,26 @@ function runInternal(configurationUri: string, dataStore: DataStoreView): DataPr
 }
 
 /* @internal */
-export async function run(configurationUri: string, callback: (data: DataHandleRead) => Promise<void>, cancellationToken: CancellationToken = CancellationToken.none): Promise<void> {
+export async function run(
+  configurationUri: string,
+  callback: (data: DataHandleRead) => Promise<void>,
+  cancellationToken: CancellationToken = CancellationToken.none)
+  : Promise<void> {
+
   const dataStore: DataStoreView = new DataStore(cancellationToken);
   const outputData: DataPromise = runInternal(configurationUri, dataStore);
   return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
 }
 
 /* @internal */
-export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }, cancellationToken: CancellationToken = CancellationToken.none): DataPromise {
-  const dataStore = new DataStore(cancellationToken);
+export async function runWithKnownSetOfFiles(
+  configuration: AutoRestConfiguration,
+  inputFiles: { [fileName: string]: string },
+  callback: (data: DataHandleRead) => Promise<void>,
+  cancellationToken: CancellationToken = CancellationToken.none)
+  : Promise<void> {
 
+  const dataStore = new DataStore(cancellationToken);
   const configFileUri = createFileUri("config.yaml");
 
   // input
@@ -41,7 +51,8 @@ export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguratio
     }
   }
 
-  return await runInternal(configFileUri, dataStore);
+  const outputData: DataPromise = runInternal(configFileUri, dataStore);
+  return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
 }
 
 
