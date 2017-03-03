@@ -57,7 +57,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
             return true;
         }
 
-        protected string GetTypeText(IModelType modelType, string moduleName = null)
+        public string GetTypeText(IModelType modelType, string moduleName = null)
         {
             var seqType = modelType as SequenceTypeTs;
 
