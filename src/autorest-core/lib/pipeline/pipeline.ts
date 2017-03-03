@@ -7,19 +7,8 @@ import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configur
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/dataStore";
 import { parse } from "../parsing/literateYaml";
 import { mergeYamls } from "../source-map/merging";
-import { MultiPromise, MultiPromiseUtility } from "./multi-promise";
-
-export type DataPromise = MultiPromise<DataHandleRead>;
-export type DataFactory = (workingScope: DataStoreView) => DataPromise;
-
-// async function pluginJsonRpc(): DataPromise {
-//   return (workingScope: DataStoreView) => MultiPromiseUtility.map(literate, async (literateDoc, index) => {
-//     const docScope = workingScope.createScope(`doc${index}_tmp`);
-//     const hwRawDoc = await workingScope.write(`doc${index}.yaml`);
-//     const hRawDoc = await parse(literateDoc, hwRawDoc, docScope);
-//     return hRawDoc;
-//   });
-// }
+import { MultiPromiseUtility } from "./multi-promise";
+import { DataPromise, DataFactory } from "./plugin";
 
 async function pluginLoad(inputScope: DataStoreViewReadonly, inputFileUri: string): DataPromise {
   const handle = await inputScope.read(inputFileUri);

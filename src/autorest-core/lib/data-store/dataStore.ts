@@ -196,8 +196,29 @@ export class DataStore extends DataStoreView {
     }
   }
 
+  /****************
+   * Cancellation
+   ***************/
+
+  private cancelled: boolean = false;
+  private throwIfCancelled(): void {
+    if (this.cancelled) {
+      throw new Error("This session was cancelled.");
+    }
+  }
+  public cancel(): void {
+    this.cancelled = true;
+  }
+
+
+  /****************
+   * Data access
+   ***************/
+
   public async write(key: string): Promise<DataHandleWrite> {
+    this.throwIfCancelled();
     return new DataHandleWrite(key, async (data, metadataFactory) => {
+      this.throwIfCancelled();
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }

@@ -8,7 +8,8 @@ import { createFileUri } from "./lib/approved-imports/uri";
 import { stringify } from "./lib/approved-imports/yaml";
 import { DataStore, DataStoreView, KnownScopes } from "./lib/data-store/dataStore";
 import { AutoRestConfiguration } from "./lib/configuration/configuration";
-import { pipeline, DataPromise } from "./lib/pipeline/pipeline";
+import { pipeline } from "./lib/pipeline/pipeline";
+import { DataPromise } from "./lib/pipeline/plugin";
 
 /* @internal */
 export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): DataPromise {
