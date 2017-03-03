@@ -18,10 +18,10 @@ abstract class RequestBase {
 
 @foreach (var model in Model.EnumModels)
 {
-@:export enum @(model.Name) {
+@:export class @(model.Name) {
     foreach (var pair in model.Values)
     {
-@:    @(pair.Key) : @(pair.Value),
+@:    static @(pair.Key) : "@(pair.Key);
     }
 @:}
 }

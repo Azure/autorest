@@ -24,17 +24,15 @@
             "name": "aaa",
             "in": "query",
             "required": true,
-            "type": "integer",
-            "format": "int32",
-            "enum": [ 11, 22, 33 ]
+            "type": "string",
+            "enum": [ "One", "Two", "Three" ]
           },
           {
             "name": "aaaaMyEnum2a",
             "in": "query",
             "required": true,
-            "type": "integer",
-            "format": "int32",
-            "enum": [ 11, 22, 33 ]
+            "type": "string",
+            "enum": [ "One", "Two", "Three" ]
           }
         ],
         "responses": {
@@ -56,14 +54,12 @@
           "type": "integer"
         },
         "Numbers": {
-          "format": "int32",
-          "enum": [ 11, 22, 33 ],
-          "type": "integer"
+          "enum": [ "One", "Two", "Three" ],
+          "type": "string"
         },
         "Stuff": {
-          "format": "int32",
-          "enum": [ 1, 2, 4, 8 ],
-          "type": "integer"
+          "enum": [ "Spades", "Clubs", "Diamonds", "Hearts" ],
+          "type": "string"
         }
       }
     }
