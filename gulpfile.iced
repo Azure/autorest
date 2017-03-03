@@ -94,19 +94,19 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install-binaries',
     -> done()
 
-task 'autorestcli', '', ['build/typescript'],(done)->
-  require "#{basefolder}/src/autorest/app.js"
-
-task 'autorest', 'Runs AutoRest', (done) ->
-  args = process.argv.slice(3)
-  exec "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done()
-
-task 'autorest-cli', "Runs AutoRest (via node)" ,(done)->
-  args = process.argv.slice(3)
-  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done()
-
+task 'autorest', 'Runs AutoRest', (done)->
+  if test "-f", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll" 
+    node = process.argv.shift()
+    main = process.argv.shift()
+    main = "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js"
+    while( process.argv.shift() == 'autorest') 
+      ""
+    process.argv.unshift main
+    process.argv.unshift node
+    echo process.argv
+    require main
+  else  
+    Fail "You must run #{ info 'gulp build'}' first"
 
 task 'init', "" ,(done)->
   # is the main node_modules out of date?

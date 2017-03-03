@@ -59,7 +59,6 @@ task 'npm-install', 'typescript', (done)->
     .pipe foreach (each,next)-> 
       #count++
       execute "npm install", {cwd: each.path }, (code,stdout,stderr) ->
-        echo stdout
         count--
         if count is 0
           done() 
