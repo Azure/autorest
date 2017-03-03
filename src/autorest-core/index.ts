@@ -11,21 +11,22 @@ import { AutoRestConfiguration } from "./lib/configuration/configuration";
 import { pipeline } from "./lib/pipeline/pipeline";
 import { DataPromise } from "./lib/pipeline/plugin";
 import { MultiPromiseUtility } from "./lib/pipeline/multi-promise";
+import { CancellationToken } from "./lib/approved-imports/cancallation";
 
-function runInternal(configurationUri: string, dataStore: DataStoreView = new DataStore()): DataPromise {
+function runInternal(configurationUri: string, dataStore: DataStoreView): DataPromise {
   return pipeline(configurationUri)(dataStore);
 }
 
 /* @internal */
-export async function run(configurationUri: string, callback: (data: DataHandleRead) => Promise<void>): Promise<void> {
-  const dataStore: DataStoreView = new DataStore();
+export async function run(configurationUri: string, callback: (data: DataHandleRead) => Promise<void>, cancellationToken: CancellationToken = CancellationToken.none): Promise<void> {
+  const dataStore: DataStoreView = new DataStore(cancellationToken);
   const outputData: DataPromise = runInternal(configurationUri, dataStore);
   return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
 }
 
 /* @internal */
-export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): DataPromise {
-  const dataStore = new DataStore();
+export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }, cancellationToken: CancellationToken = CancellationToken.none): DataPromise {
+  const dataStore = new DataStore(cancellationToken);
 
   const configFileUri = createFileUri("config.yaml");
 
@@ -40,7 +41,7 @@ export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguratio
     }
   }
 
-  return await run(configFileUri, dataStore);
+  return await runInternal(configFileUri, dataStore);
 }
 
 

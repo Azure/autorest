@@ -4,13 +4,13 @@ import * as assert from "assert";
 import { createFileUri, resolveUri } from "../lib/approved-imports/uri";
 import { parse } from "../lib/approved-imports/jsonpath";
 import { DataStore } from "../lib/data-store/dataStore";
-import { run } from "../index";
+import { pipeline } from "../lib/pipeline/pipeline";
 
 @suite class Blaming {
   @test async "end to end blaming with literate swagger"() {
     const dataStore = new DataStore();
     const configFileUri = resolveUri(createFileUri(__dirname) + "/", "resources/literate-example/readme.md");
-    const results = await run(configFileUri, dataStore);
+    const results = await pipeline(configFileUri)(dataStore);
 
     // regular description
     {

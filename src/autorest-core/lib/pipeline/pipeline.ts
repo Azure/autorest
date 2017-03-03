@@ -9,6 +9,7 @@ import { parse } from "../parsing/literateYaml";
 import { mergeYamls } from "../source-map/merging";
 import { MultiPromiseUtility } from "./multi-promise";
 import { DataPromise, DataFactory } from "./plugin";
+import { CancellationToken } from "../approved-imports/cancallation";
 
 async function pluginLoad(inputScope: DataStoreViewReadonly, inputFileUri: string): DataPromise {
   const handle = await inputScope.read(inputFileUri);

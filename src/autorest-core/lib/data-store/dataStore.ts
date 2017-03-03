@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
+import { CancellationToken } from "../approved-imports/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/sourceMap";
 import { readUri } from "../approved-imports/uri";
 import { writeString } from "../approved-imports/writefs";
@@ -196,29 +197,18 @@ export class DataStore extends DataStoreView {
     }
   }
 
-  /****************
-   * Cancellation
-   ***************/
-
-  private cancelled: boolean = false;
-  private throwIfCancelled(): void {
-    if (this.cancelled) {
-      throw new Error("This session was cancelled.");
-    }
+  public constructor(private cancellationToken: CancellationToken = CancellationToken.none) {
+    super();
   }
-  public cancel(): void {
-    this.cancelled = true;
-  }
-
 
   /****************
    * Data access
    ***************/
 
   public async write(key: string): Promise<DataHandleWrite> {
-    this.throwIfCancelled();
+    this.cancellationToken.throwIfCancelled();
     return new DataHandleWrite(key, async (data, metadataFactory) => {
-      this.throwIfCancelled();
+      this.cancellationToken.throwIfCancelled();
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }
