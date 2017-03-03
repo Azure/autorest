@@ -20,13 +20,21 @@ export module MultiPromiseUtility {
     });
   }
 
-  export async function gather<T>(promise: MultiPromise<T>): Promise<T[]> {
-    const result: T[] = [];
+  export async function toAsyncCallbacks<T>(promise: MultiPromise<T>, callback: (item: T) => Promise<void>): Promise<void> {
     let res: MultiPromiseItem<T> | null;
     while (res = await promise) {
-      result.push(res.current);
+      await callback(res.current);
       promise = res.next;
     }
+  }
+
+  export function toCallbacks<T>(promise: MultiPromise<T>, callback: (item: T) => void): Promise<void> {
+    return toAsyncCallbacks(promise, async item => callback(item));
+  }
+
+  export async function gather<T>(promise: MultiPromise<T>): Promise<T[]> {
+    const result: T[] = [];
+    await toCallbacks(promise, item => result.push(item));
     return result;
   }
 

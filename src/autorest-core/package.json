@@ -19,7 +19,6 @@
     "autorest": "./app.js"
   },
   "typings": "./index.d.ts",
-
   "devDependencies": {
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
@@ -30,8 +29,8 @@
     "@types/source-map": "^0.5.0",
     "@types/urijs": "^1.15.31"
   },
-  
   "dependencies": {
+    "cancellation": "^1.0.0",
     "commonmark": "^0.27.0",
     "file-url": "^2.0.2",
     "get-uri": "^2.0.0",

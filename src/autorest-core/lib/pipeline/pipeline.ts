@@ -85,9 +85,6 @@ export function pipeline(configurationUri: string): DataFactory {
       config.inputFileUris)
       (workingScope.createScope("loader"));
 
-    // pull
-    await MultiPromiseUtility.getSingle(swagger);
-
     return swagger;
   };
 }

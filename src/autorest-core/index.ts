@@ -6,14 +6,21 @@
 
 import { createFileUri } from "./lib/approved-imports/uri";
 import { stringify } from "./lib/approved-imports/yaml";
-import { DataStore, DataStoreView, KnownScopes } from "./lib/data-store/dataStore";
+import { DataStore, DataStoreView, KnownScopes, DataHandleRead } from "./lib/data-store/dataStore";
 import { AutoRestConfiguration } from "./lib/configuration/configuration";
 import { pipeline } from "./lib/pipeline/pipeline";
 import { DataPromise } from "./lib/pipeline/plugin";
+import { MultiPromiseUtility } from "./lib/pipeline/multi-promise";
+
+function runInternal(configurationUri: string, dataStore: DataStoreView = new DataStore()): DataPromise {
+  return pipeline(configurationUri)(dataStore);
+}
 
 /* @internal */
-export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): DataPromise {
-  return pipeline(configurationUri)(dataStore);
+export async function run(configurationUri: string, callback: (data: DataHandleRead) => Promise<void>): Promise<void> {
+  const dataStore: DataStoreView = new DataStore();
+  const outputData: DataPromise = runInternal(configurationUri, dataStore);
+  return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
 }
 
 /* @internal */
@@ -35,6 +42,7 @@ export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguratio
 
   return await run(configFileUri, dataStore);
 }
+
 
 export interface IFileSystem {
 
