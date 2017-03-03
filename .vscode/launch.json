@@ -5,7 +5,7 @@
     "type": "node2",
     "request": "launch",
     "name": "bootstrapper",
-    "program": "${workspaceRoot}/src/bootstrapper/app.js",
+    "program": "${workspaceRoot}/src/autorest/app.js",
     "cwd": "${workspaceRoot}",
     "preLaunchTask": "build/typescript"
   }],

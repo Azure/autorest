@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"sourceMap": true,
+    "lib": [
+      "es5",
+      "es6",
+      "es2015.collection",
+      "es2015.promise",
+      "es2015.core" 
+    ]
+	},
+  "include": [
+    "src/server.ts"
+  ],
+	"exclude": [
+		"node_modules/**"
+	]
+}
