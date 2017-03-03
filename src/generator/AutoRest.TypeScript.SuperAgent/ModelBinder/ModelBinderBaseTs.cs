@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using AutoRest.Core.Model;
 
@@ -8,7 +6,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 {
     public class ModelBinderBaseTs
     {
-        protected bool TryGetResponseName(Method method, out IModelType modelType, out string responseName, out string requestName)
+        protected bool TryGetResponseName(Method method, out IModelType modelType, out string responseName, out string requestName, string moduleName = null)
         {
             responseName = null;
             requestName = null;
@@ -37,7 +35,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                 }
             }
 
-            responseName = GetTypeText(modelType);
+            responseName = GetTypeText(modelType, moduleName);
 
             if (requestName == null)
             {
@@ -51,12 +49,19 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             requestName = $"{requestName}Request".TrimStart('I');
 
+            if (!string.IsNullOrWhiteSpace(moduleName) && !requestName.StartsWith(moduleName))
+            {
+                requestName = $"{moduleName}.{requestName}";
+            }
+
             return true;
         }
 
-        protected string GetTypeText(IModelType modelType)
+        protected string GetTypeText(IModelType modelType, string moduleName = null)
         {
             var seqType = modelType as SequenceTypeTs;
+
+            var prefix = string.IsNullOrWhiteSpace(moduleName) ? "" : $"{moduleName}.";
 
             string name = "";
 
@@ -69,13 +74,13 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     return name;
                 }
 
-                return modelType.IsPrimaryType() ? name : $"I{name}";
+                return modelType.IsPrimaryType() ? name : $"{prefix}I{name}";
             }
 
             var elementType = seqType.ElementType;
             name = elementType.GetImplementationName();
 
-            return SequenceTypeTs.CreateSeqTypeText(elementType.IsPrimaryType() ? name : $"I{name}");
+            return SequenceTypeTs.CreateSeqTypeText(elementType.IsPrimaryType() ? name : $"{prefix}I{name}");
         }
 
 

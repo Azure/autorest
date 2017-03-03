@@ -36,12 +36,10 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     IModelType modelType = null;
                     string responseName = null;
                     string requestName = null;
-                    if (!TryGetResponseName(method, out modelType, out responseName, out requestName))
+                    if (!TryGetResponseName(method, out modelType, out responseName, out requestName, model.ModelModuleName))
                     {
                         continue;
                     }
-
-                    requestName = $"{model.ModelModuleName}.{requestName}";
 
                     var clientMethod = new ClientMethodModel
                                        {
