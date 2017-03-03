@@ -24,7 +24,6 @@ class App {
   private static reset: boolean = cli.reset || false;
 
   private static help: string = cli.help || cli.h || false;
-  private static done: boolean = false;
 
   private static networkEnabled: boolean = true;
   private static pkgVersion: string = require(`${__dirname}/package.json`).version;
@@ -46,6 +45,10 @@ class App {
   private static async CheckBootstrapperVersion() {
     if (this.networkEnabled) {
       return Npm.LatestRelease().then(npmversion => {
+        if (npmversion == null) {
+          return;
+        }
+
         if (semver.gt(npmversion, this.pkgVersion)) {
           Console.Log(chalk.yellow.bold(`\nThere is a new version of AutoRest available (${npmversion}).\nInstall with 'npm install autorest -g '.\n`));
         }
@@ -87,7 +90,6 @@ class App {
         text += `\n> ${each.name}`;
       }
       Console.Log(text);
-      this.done = true;
     } else {
       Console.Exit('**Unable to check online, network is not available**');
     }
@@ -103,7 +105,6 @@ class App {
     } else {
       Console.Log('**No AutoRest versions are installed**');
     }
-    this.done = true;
   }
 
   static async main(networkEnabled: boolean) {
@@ -139,15 +140,15 @@ class App {
       }
 
       if (this.listAvailable) {
-        this.ListAvailable();
+        await this.ListAvailable();
       }
 
       if (this.listInstalled) {
-        this.ListInstalled();
+        await this.ListInstalled();
       }
 
       // if the command is not to take action, quit peacefully now.
-      if (this.done) {
+      if (this.listAvailable || this.listInstalled) {
         await waitable;
         process.exit(0);
       }
@@ -237,12 +238,23 @@ class App {
       // call autorest-core in the target folder
       if (process.argv.length > 2) {
         Console.Debug(process.argv);
-        require(join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-core', 'app.js'));
+        let startPath = join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-core', 'app.js');
+        if (fs.existsSync(startPath)) {
+          require(startPath);
+          return
+        } else {
+          startPath = join(Installer.AutorestFolder, this.version, 'node_modules', 'autorest-app', 'app.js');
+          if (fs.existsSync(startPath)) {
+            require(startPath);
+            return
+          }
+        }
+        Console.Error("Unable to find start path for AutoRest Core Module.");
       } else {
         Console.Log('Use --help to get help information.');
       }
     } catch (exception) {
-      Console.Log(exception);
+      Console.Error(exception);
     }
   }
 }

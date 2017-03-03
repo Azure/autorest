@@ -55,7 +55,6 @@ export async function runWithKnownSetOfFiles(
   return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
 }
 
-
 export interface IFileSystem {
 
 }

@@ -12,6 +12,7 @@
 import { spawn, ChildProcess } from "child_process";
 import * as path from "path";
 import { homedir } from "os";
+import * as fs from "fs";
 
 function awaitable(child: ChildProcess): Promise<number> {
   return new Promise((resolve, reject) => {
@@ -20,12 +21,43 @@ function awaitable(child: ChildProcess): Promise<number> {
   });
 }
 
+function AutoRestDllPath() {
+  let result = path.join(__dirname, "../../AutoRest.dll");
+
+  // try relative path to __dirname
+  if (fs.existsSync(result)) {
+    return result;
+  }
+
+  // try relative to process.argv[1]
+  result = path.join(path.dirname(process.argv[1]), "../../AutoRest.dll");
+  // try relative path to __dirname
+  if (fs.existsSync(result)) {
+    return result;
+  }
+
+  throw "Unable to find AutoRest.Dll."
+}
+
+function DotNetPath() {
+  let result = path.join(homedir(), ".autorest", "frameworks", "dotnet")
+
+  // try relative path to __dirname
+  if (fs.existsSync(result)) {
+    return result;
+  }
+
+  // hope there is one in the PATH
+  return "dotnet"
+}
+
 async function main() {
   const autorestArgs = process.argv.slice(2);
   try {
     const autorestExe = spawn(
       path.join(homedir(), ".autorest", "frameworks", "dotnet"),
-      [path.join(__dirname, "../../AutoRest.dll"), ...autorestArgs]);
+
+      [AutoRestDllPath(), ...autorestArgs]);
     autorestExe.stdout.pipe(process.stdout);
     autorestExe.stderr.pipe(process.stderr);
     const exitCode = await awaitable(autorestExe);

@@ -5,6 +5,7 @@ using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -89,6 +90,48 @@ namespace AutoRest.Swagger.Model.Utilities
             respDefinitions = respDefinitions.Where(def => !string.IsNullOrWhiteSpace(def)).Distinct();
 
             return respDefinitions;
+        }
+
+        /// <summary>
+        /// Returns whether a string follows camel case style.
+        /// </summary>
+        /// <param name="name">String to check for style</param>
+        /// <returns>true if "name" follows camel case style, false otherwise.</returns>
+        public static bool isNameCamelCase(string name)
+        {
+            Regex propNameRegEx = new Regex(@"^[a-z0-9]+([A-Z][a-z0-9]+)+|^[a-z0-9]+$|^[a-z0-9]+[A-Z]$");
+            return (propNameRegEx.IsMatch(name));
+        }
+
+        /// <summary>
+        /// Returns a suggestion of camel case styled string based on the string passed as parameter.
+        /// </summary>
+        /// <param name="name">String to convert to camel case style</param>
+        /// <returns>A string that conforms with camel case style based on the string passed as parameter.</returns>
+        public static string ToCamelCase(string name)
+        {
+            StringBuilder sb = new StringBuilder(name);
+            if (sb.Length > 0)
+            {
+                sb[0] = sb[0].ToString().ToLower()[0];
+            }
+            bool firstUpper = true;
+            for (int i = 1; i < name.Length; i++)
+            {
+                if (char.IsUpper(sb[i]) && firstUpper)
+                {
+                    firstUpper = false;
+                }
+                else
+                {
+                    firstUpper = true;
+                    if (char.IsUpper(sb[i]))
+                    {
+                        sb[i] = sb[i].ToString().ToLower()[0];
+                    }
+                }
+            }
+            return sb.ToString();
         }
 
         public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)

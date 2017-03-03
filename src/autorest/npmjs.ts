@@ -27,8 +27,8 @@ async function Rest(url: string): Promise<any> {
     });
 
     stream.on('error', (err) => {
-      Console.Error(`${err}`);
-      reject(err);
+      Console.Debug(`Unable to get npm package info...`);
+      resolve(null);
     });
   });
 }
@@ -50,7 +50,13 @@ export class Npm {
 
   static async LatestRelease(): Promise<string> {
     const response = await Rest(`https://registry.npmjs.org/autorest`);
-    return semver.valid((<NodePackage>response)["dist-tags"].latest);
+    if (response) {
+      const lp = (<NodePackage>response);
+      if (lp["dist-tags"] && lp["dist-tags"].latest) {
+        return semver.valid(lp["dist-tags"].latest);
+      }
+    }
+    return null;
   }
 
 }

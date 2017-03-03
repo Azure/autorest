@@ -116,6 +116,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
+        /// </summary>
+        public static string BodyPropertyNameCamelCase {
+            get {
+                return ResourceManager.GetString("BodyPropertyNameCamelCase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A body parameter cannot have a type, format, or any other properties describing its type..
         /// </summary>
         public static string BodyWithType {
@@ -202,6 +211,15 @@ namespace AutoRest.Core.Properties {
         public static string ConfigurationKnownPlugins {
             get {
                 return ResourceManager.GetString("ConfigurationKnownPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, for definition: &quot;{1}&quot; must follow camelCase style. Example: &quot;{2}&quot;..
+        /// </summary>
+        public static string DefinitionsPropertiesNameCamelCase {
+            get {
+                return ResourceManager.GetString("DefinitionsPropertiesNameCamelCase", resourceCulture);
             }
         }
         
@@ -683,12 +701,12 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+        ///   Looks up a localized string similar to Tracked Resource failing validation is: &quot;{0}&quot;. Validation Failed: {1}.
         ///    A Tracked Resource must have: 
         ///    1. A Get Operation 
         ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 
         ///    3. A ListBySubscriptionId operation with x-ms-pageable extension.
-        ///    4. Type, Location, Tags should not be used in the properties..
+        ///    4. &quot;type&quot;,&quot;location&quot;,&quot;tags&quot; should not be used in the RP property bag named &quot;properties&quot;..
         /// </summary>
         public static string TrackedResourceIsNotValid {
             get {

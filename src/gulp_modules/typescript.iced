@@ -48,7 +48,7 @@ task 'test', 'typescript',['build/typescript'], (done)->
   typescriptProjectFolders()
     .pipe foreach (each,next)->
       if test "-f", "#{each.path}/node_modules/.bin/mocha"
-        execute "#{each.path}/node_modules/.bin/mocha test  --timeout 5000", {cwd: each.path}, (c,o,e) ->
+        execute "#{each.path}/node_modules/.bin/mocha test  --timeout 15000", {cwd: each.path}, (c,o,e) ->
           next null
       else
         next null
@@ -59,7 +59,6 @@ task 'npm-install', 'typescript', (done)->
     .pipe foreach (each,next)-> 
       #count++
       execute "npm install", {cwd: each.path }, (code,stdout,stderr) ->
-        echo stdout
         count--
         if count is 0
           done() 
