@@ -6,39 +6,23 @@
 
 import { createFileUri } from "./lib/approved-imports/uri";
 import { stringify } from "./lib/approved-imports/yaml";
-import { parse } from "./lib/parsing/literateYaml";
 import { DataStore, DataStoreView, KnownScopes } from "./lib/data-store/dataStore";
-import { AutoRestConfiguration, AutoRestConfigurationManager } from "./lib/configuration/configuration";
-import { Pipeline, PipelineProducts } from "./lib/pipeline/pipeline";
+import { AutoRestConfiguration } from "./lib/configuration/configuration";
+import { pipeline, DataPromise } from "./lib/pipeline/pipeline";
 
 /* @internal */
-export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): Promise<PipelineProducts> {
-  // load configuration file
-  const inputView = dataStore.createReadThroughScope(KnownScopes.Input, uri => uri === configurationUri);
-  const hLiterateConfig = await inputView.read(configurationUri);
-  if (hLiterateConfig === null) {
-    throw new Error(`Configuration file '${configurationUri}' not found`);
-  }
-
-  // deliteralize
-  const configScope = dataStore.createScope(KnownScopes.Configuration);
-  const hwConfig = await configScope.write("config.yaml");
-  const hConfig = await parse(hLiterateConfig, hwConfig, configScope.createScope("tmp"));
-
-  // configuration manager
-  const config = new AutoRestConfigurationManager(await hConfig.readObject<AutoRestConfiguration>(), configurationUri);
-  const pipeline = new Pipeline(config);
-  return await pipeline.run(dataStore);
+export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): DataPromise {
+  return pipeline(configurationUri)(dataStore);
 }
 
 /* @internal */
-export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): Promise<PipelineProducts> {
+export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): DataPromise {
   const dataStore = new DataStore();
 
   const configFileUri = createFileUri("config.yaml");
 
   // input
-  const inputView = dataStore.createFileScope(KnownScopes.Input);
+  const inputView = dataStore.createScope(KnownScopes.Input).asFileScope();
   const hwConfig = await inputView.write(configFileUri);
   await hwConfig.writeData(stringify(configuration));
   for (const fileName in inputFiles) {

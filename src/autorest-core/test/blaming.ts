@@ -14,14 +14,18 @@ import { run } from "../index";
 
     // regular description
     {
-      const blameTree = await dataStore.blame("swagger/swagger.yaml", { path: parse("$.securityDefinitions.azure_auth.description") });
+      const blameTree = await dataStore.blame(
+        "loader/swagger/compose/swagger.yaml",
+        { path: parse("$.securityDefinitions.azure_auth.description") });
       const blameInputs = Array.from(blameTree.blameInputs());
       assert.equal(1, blameInputs.length);
     }
 
     // markdown description (blames both the swagger's json path and the markdown source of the description)
     {
-      const blameTree = await dataStore.blame("swagger/swagger.yaml", { path: parse("$.definitions.SearchServiceListResult.description") });
+      const blameTree = await dataStore.blame(
+        "loader/swagger/compose/swagger.yaml",
+        { path: parse("$.definitions.SearchServiceListResult.description") });
       const blameInputs = Array.from(blameTree.blameInputs());
       assert.equal(2, blameInputs.length);
     }

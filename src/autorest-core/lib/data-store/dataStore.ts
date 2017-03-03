@@ -72,12 +72,12 @@ export abstract class DataStoreView extends DataStoreViewReadonly {
     return new DataStoreViewScope(name, this);
   }
 
-  public createFileScope(name: string): DataStoreFileView {
-    return new DataStoreFileView(new DataStoreViewScope(name, this));
+  public asFileScope(): DataStoreFileView {
+    return new DataStoreFileView(this);
   }
 
-  public createReadThroughScope(name: string, customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
-    return new DataStoreViewReadThrough(this.createFileScope(name), customUriFilter);
+  public asFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
+    return new DataStoreViewReadThrough(this.asFileScope(), customUriFilter);
   }
 
   public asReadonly(): DataStoreViewReadonly {

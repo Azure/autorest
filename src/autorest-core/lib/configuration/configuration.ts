@@ -34,7 +34,7 @@ export class AutoRestConfigurationManager {
       : raw;
   }
 
-  public get inputFileUris(): Iterable<string> {
+  public get inputFileUris(): string[] {
     return this.inputFiles().map(inputFile => this.resolveUri(inputFile));
   }
 
