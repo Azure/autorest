@@ -124,7 +124,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // validation before hitting the file system or web
     if (!this.customUriFilter(uri)) {
-      throw `Provided URI '${uri}' violated the filter`;
+      throw new Error(`Provided URI '${uri}' violated the filter`);
     }
 
     // populate cache
@@ -158,7 +158,7 @@ export class DataStoreFileView extends DataStoreView {
 
   public async read(uri: string): Promise<DataHandleRead | null> {
     if (!DataStoreFileView.isUri(uri)) {
-      throw `Provided URI '${uri}' is invalid`;
+      throw new Error(`Provided URI '${uri}' is invalid`);
     }
 
     const key = DataStoreFileView.encodeUri(uri);
@@ -167,7 +167,7 @@ export class DataStoreFileView extends DataStoreView {
 
   public async write(uri: string): Promise<DataHandleWrite> {
     if (!DataStoreFileView.isUri(uri)) {
-      throw `Provided URI '${uri}' is invalid`;
+      throw new Error(`Provided URI '${uri}' is invalid`);
     }
 
     const key = DataStoreFileView.encodeUri(uri);
