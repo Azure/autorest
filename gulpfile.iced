@@ -97,7 +97,7 @@ task 'install', 'build and install the dev version of autorest',(done)->
 task 'autorest', 'Runs AutoRest', (done)->
   if test "-f", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll" 
     node = process.argv.shift()
-    main = process.argv.shift()
+    #main = process.argv.shift()
     main = "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js"
     while( process.argv.shift() == 'autorest') 
       ""
