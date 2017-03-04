@@ -3,65 +3,13 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { fork } from "child_process";
 import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../approved-imports/sourceMap";
 import { CancellationToken } from "../approved-imports/cancallation";
-import { createMessageConnection, MessageConnection } from "../approved-imports/jsonrpc";
-import { RequestType0, RequestType1, RequestType2 } from "../approved-imports/jsonrpc";
-import { NotificationType0, NotificationType1, NotificationType2, NotificationType3, NotificationType4 } from "../approved-imports/jsonrpc";
+import { createMessageConnection, MessageConnection, StreamMessageReader, StreamMessageWriter } from "../approved-imports/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/dataStore";
+import { Message, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 
-import { NotificationHandler4 } from "../approved-imports/jsonrpc";
-/**
- * API
- */
-
-export type MessageChannel =
-  // exception
-  "FATAL" |
-
-  // your input is invalid
-  "ERROR" |
-  // we think you could do better
-  "WARNING" |
-  // hey there!
-  "INFO" |
-  // so I was thinking about...
-  "VERBOSE" |
-
-  // information about internals
-  "DEBUG";
-
-export interface Message<T> {
-  channel: MessageChannel;
-  message: string;
-  payload: T;
-}
-
-
-const IAutoRestPluginTarget_GetPluginNames = new RequestType0<string[], Error, void>("GetPluginNames");
-const IAutoRestPluginTarget_Process = new RequestType2<string, string, boolean, Error, void>("Process");
-export interface IAutoRestPluginTarget {
-  GetPluginNames(): Promise<string[]>;
-  Process(pluginName: string, sessionId: string): Promise<boolean>;
-}
-
-const IAutoRestPluginInitiator_ReadFile = new RequestType2<string, string, string, Error, void>("ReadFile");
-const IAutoRestPluginInitiator_GetValue = new RequestType2<string, string, any, Error, void>("GetValue");
-const IAutoRestPluginInitiator_ListInputs = new RequestType1<string, string[], Error, void>("ListInputs");
-const IAutoRestPluginInitiator_WriteFile = new NotificationType4<string, string, string, Mappings | RawSourceMap | undefined, void>("WriteFile");
-const IAutoRestPluginInitiator_Message = new NotificationType4<string, Message<any>, SmartPosition | undefined, string | undefined, void>("Message");
-export interface IAutoRestPluginInitiator {
-  ReadFile(sessionId: string, filename: string): Promise<string>;
-  GetValue(sessionId: string, key: string): Promise<any>;
-  ListInputs(sessionId: string): Promise<string[]>;
-
-  WriteFile(sessionId: string, filename: string, content: string, sourceMap?: Mappings | RawSourceMap): void;
-  Message(sessionId: string, message: Message<any>, path?: SmartPosition, sourceFile?: string): void;
-}
-
-/**
- * Controller
- */
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -81,6 +29,25 @@ export class AutoRestPlugin {
   private static lastSessionId: number = 0;
   private static createSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
 
+  public static async fromModule(modulePath: string): Promise<AutoRestPlugin> {
+    const childProc = fork(modulePath);
+    childProc.on("error", err => { throw err; });
+    if (childProc.stdin === null) await new Promise(_ => { });
+    const channel = createMessageConnection(
+      childProc.stdout,
+      childProc.stdin,
+      {
+        error(message) { console.error(message); },
+        info(message) { console.info(message); },
+        log(message) { console.log(message); },
+        warn(message) { console.warn(message); }
+      }
+    );
+    const plugin = new AutoRestPlugin(channel);
+    channel.listen();
+    return plugin;
+  }
+
   public constructor(channel: MessageConnection) {
     // initiator
     const dispatcher = (fnName: string) => (sessionId: string, ...rest: any[]) => {
@@ -97,19 +64,19 @@ export class AutoRestPlugin {
       WriteFile: dispatcher("WriteFile"),
       Message: dispatcher("Message"),
     };
-    channel.onRequest(IAutoRestPluginInitiator_ReadFile, this.apiInitiator.ReadFile);
-    channel.onRequest(IAutoRestPluginInitiator_GetValue, this.apiInitiator.GetValue);
-    channel.onRequest(IAutoRestPluginInitiator_ListInputs, this.apiInitiator.ListInputs);
-    channel.onNotification(IAutoRestPluginInitiator_WriteFile, this.apiInitiator.WriteFile);
-    channel.onNotification(IAutoRestPluginInitiator_Message, this.apiInitiator.Message);
+    channel.onRequest(IAutoRestPluginInitiator_Types.ReadFile, this.apiInitiator.ReadFile);
+    channel.onRequest(IAutoRestPluginInitiator_Types.GetValue, this.apiInitiator.GetValue);
+    channel.onRequest(IAutoRestPluginInitiator_Types.ListInputs, this.apiInitiator.ListInputs);
+    channel.onNotification(IAutoRestPluginInitiator_Types.WriteFile, this.apiInitiator.WriteFile);
+    channel.onNotification(IAutoRestPluginInitiator_Types.Message, this.apiInitiator.Message);
 
     // target
     this.apiTarget = {
       async GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
-        return await channel.sendRequest(IAutoRestPluginTarget_GetPluginNames, cancellationToken);
+        return await channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return await channel.sendRequest(IAutoRestPluginTarget_Process, pluginName, sessionId, cancellationToken);
+        return await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
       }
     };
   }

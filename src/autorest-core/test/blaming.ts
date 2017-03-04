@@ -18,7 +18,7 @@ import { pipeline } from "../lib/pipeline/pipeline";
         "loader/swagger/compose/swagger.yaml",
         { path: parse("$.securityDefinitions.azure_auth.description") });
       const blameInputs = Array.from(blameTree.blameInputs());
-      assert.equal(1, blameInputs.length);
+      assert.equal(blameInputs.length, 1);
     }
 
     // markdown description (blames both the swagger's json path and the markdown source of the description)
@@ -27,7 +27,7 @@ import { pipeline } from "../lib/pipeline/pipeline";
         "loader/swagger/compose/swagger.yaml",
         { path: parse("$.definitions.SearchServiceListResult.description") });
       const blameInputs = Array.from(blameTree.blameInputs());
-      assert.equal(2, blameInputs.length);
+      assert.equal(blameInputs.length, 2);
     }
   }
 }

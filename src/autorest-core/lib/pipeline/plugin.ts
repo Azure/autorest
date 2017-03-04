@@ -5,9 +5,11 @@
 
 import { DataHandleRead, DataStoreView } from "../data-store/dataStore";
 import { MultiPromise, MultiPromiseUtility } from "./multi-promise";
+import { AutoRestPlugin } from "./plugin-server";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 export type DataFactory = (workingScope: DataStoreView) => DataPromise;
+
 
 
 
