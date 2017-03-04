@@ -16,6 +16,7 @@ using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Extensibility;
 
 namespace AutoRest.Swagger
 {
@@ -84,6 +85,18 @@ namespace AutoRest.Swagger
                 {
                     Logger.Instance.Log(validationEx);
                 }
+            }
+            try
+            {
+                if (ExtensionsLoader.GetPlugin() is NoOpPlugin)
+                {
+                    return New<CodeModel>();
+                }
+            }
+            catch
+            {
+                // no problem: the above is just a shortcut for validation-only runs 
+                // (the modeler takes time and may throw exceptions, so bypassing it improves validation experience)
             }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
