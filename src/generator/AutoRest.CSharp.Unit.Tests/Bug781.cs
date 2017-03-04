@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace AutoRest.CSharp.Unit.Tests.Resource
+namespace AutoRest.CSharp.Unit.Tests
 {
     public class Bug781 : BugTest
     {
