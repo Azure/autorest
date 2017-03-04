@@ -122,9 +122,13 @@ namespace AutoRest.Swagger.Model.Utilities
                 {
                     firstUpper = false;
                 }
-                else if (char.IsUpper(sb[i]))
+                else
                 {
-                    sb[i] = sb[i].ToString().ToLower()[0];
+                    firstUpper = true;
+                    if (char.IsUpper(sb[i]))
+                    {
+                        sb[i] = sb[i].ToString().ToLower()[0];
+                    }
                 }
             }
             return sb.ToString();

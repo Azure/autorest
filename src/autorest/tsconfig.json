@@ -1,22 +1,21 @@
 {
   "compilerOptions": {
-    "alwaysStrict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
-    "noEmitOnError": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "sourceMap": true,
-    "strictNullChecks": true,
     "target": "es2016",
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "sourceMap": true,
     "types" : ["node"],
-    "lib": [
-      "dom",
-      "es2016"
-    ],
+    "newLine": "LF",
     "experimentalDecorators": true,
-    "newLine": "LF"
+    "declaration": true,
+    "stripInternal": true,
+    "lib": [
+      "es5",
+      "es6",
+      "es2015.collection",
+      "es2015.promise",
+      "es2015.core" 
+    ]
   },
   "exclude": [
     "node_modules"

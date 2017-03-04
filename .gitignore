@@ -200,8 +200,8 @@ src/generator/AutoRest.Go.Tests/src/tests/vendor/*
 src/generator/AutoRest.Go.Tests/src/tests/glide.lock
 
 src/autorest/**/*.js
-src/bootstrapper/**/*.js
-src/extension/**/*.js
+src/autorest-core/**/*.js
+src/vscode-autorest/**/*.js
 
 *.js.map
 
@@ -210,3 +210,6 @@ src/extension/**/*.js
 
 #client runtime
 src/client/**/*
+
+src/extension/old/**/*
+*.d.ts

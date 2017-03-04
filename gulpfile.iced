@@ -2,7 +2,7 @@
 global.basefolder = "#{__dirname}"
 
 # use our tweaked version of gulp with iced coffee.
-require './src/local_modules/gulp.iced'
+require './src/gulp_modules/gulp.iced'
 
 # tasks required for this build 
 Tasks "dotnet",  # compiling dotnet
@@ -49,7 +49,7 @@ Import
       .pipe onlyFiles()
   
   typescriptProjectFolders: ()->
-    source ["src/autorest", "src/extension", "src/bootstrapper" ]
+    source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
@@ -64,7 +64,7 @@ Import
   generatedFiles: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
-        source(["#{each.path}/**/*.js", "#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**"])
+        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**","!#{each.path}/server/node_modules/**"])
           .on 'end', -> 
             next null
           .pipe foreach (e,n)->
@@ -73,6 +73,7 @@ Import
         
   typescriptFiles: () -> 
     typescriptProjectFolders()
+      .pipe except /src.vscode-autorest.server/ # covered in vscode-autorest
       .pipe foreach (each,next,more)=>
         source(["#{each.path}/**/*.ts", "#{each.path}/**/*.json", "!#{each.path}/node_modules/**"])
           .on 'end', -> 
@@ -93,18 +94,43 @@ task 'install', 'build and install the dev version of autorest',(done)->
     'install-binaries',
     -> done()
 
-task 'bootstrap', '', ['build/typescript'],(done)->
-  require "#{basefolder}/src/bootstrapper/app.js"
+task 'autorest', 'Runs AutoRest', (done)->
+  if test "-f", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll" 
+    node = process.argv.shift()
+    main = process.argv.shift()
+    main = "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js"
+    while( process.argv.shift() == 'autorest') 
+      ""
+    process.argv.unshift main
+    process.argv.unshift node
+    echo process.argv
+    require main
+  else  
+    Fail "You must run #{ info 'gulp build'}' first"
 
-task 'autorest', 'Runs AutoRest', (done) ->
-  args = process.argv.slice(3)
-  exec "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done()
+task 'init', "" ,(done)->
+  # is the main node_modules out of date?
+  doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core") or (! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest")
 
-task 'autorest-app', "Runs AutoRest (via node)" ,(done)->
-  args = process.argv.slice(3)
-  exec "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-app/index.js #{args.join(' ')}" , {cwd: process.env.INIT_CWD}, (code,stdout,stderr) ->
-    return done()
+  typescriptProjectFolders()
+    .on 'end', -> 
+      if doit
+        echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
+        exec "npm install",{silent:false},(c,o,e)->
+          # after npm, hookup symlinks/junctions for dependent packages in projects
+          if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
+            fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
 
-if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
-  echo error "\n#{ warning 'WARNING:' } package.json is newer than 'node_modules' - you might want to do an 'npm install'\n"
+          if ! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest"        
+            fs.symlinkSync "#{basefolder}/src/autorest", "#{basefolder}/src/vscode-autorest/server/node_modules/autorest",'junction'         
+
+          done null
+      else 
+        done null
+
+    .pipe foreach (each,next) -> 
+      # is any of the TS projects node_modules out of date?
+      doit = true if (! test "-d", "#{each.path}/node_modules") or (newer "#{each.path}/package.json",  "#{each.path}/node_modules")
+      next null
+
+  return null
