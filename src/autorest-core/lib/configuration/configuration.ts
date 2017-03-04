@@ -5,6 +5,10 @@
 
 import { resolveUri } from "../approved-imports/uri";
 
+export interface AutoRestConfigurationSwitches {
+  [key: string]: string | null;
+}
+
 export interface AutoRestConfiguration {
   "input-file": string[] | string;
   "base-folder"?: string;
