@@ -18,7 +18,7 @@ namespace AutoRest.Swagger.Validation
         /// <param name="paths"></param>
         /// <returns></returns>
         public override bool IsValid(SwaggerParameter Parameter) => 
-            (Parameter?.Schema == null || !(Parameter?.Name.ToLower().Equals(SubscriptionId) == true || Parameter?.Name.ToLower().Equals(ApiVersion) == true));
+            (Parameter?.Schema != null || !(Parameter?.Name.ToLower().Equals(SubscriptionId) == true || Parameter?.Name.ToLower().Equals(ApiVersion) == true));
 
         /// <summary>
         /// The template message for this Rule. 

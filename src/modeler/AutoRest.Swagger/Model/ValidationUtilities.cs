@@ -13,8 +13,11 @@ namespace AutoRest.Swagger.Model.Utilities
 {
     public static class ValidationUtilities
     {
-        private static readonly string XmsPageable = "x-ms-pageable";
+        private const string XmsPageable = "x-ms-pageable";
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private const string AzureHostSignature = "management.azure.com";
+
+        public static bool IsARMServiceDefinition(ServiceDefinition serviceDefinition) => serviceDefinition.Host?.EqualsIgnoreCase(AzureHostSignature) == true;
 
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {

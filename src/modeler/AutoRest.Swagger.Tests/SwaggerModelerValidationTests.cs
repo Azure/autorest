@@ -127,7 +127,7 @@ namespace AutoRest.Swagger.Tests
         public void ServiceDefinitionParametersValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "service-def-invalid-parameters.json"));
-            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters), 2);
         }
         
         [Fact]

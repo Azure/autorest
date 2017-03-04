@@ -26,20 +26,39 @@
           "default": {
             "description": "Unexpected error"
           }
-        }
-      },
-      "parameters": [
-        {
-          "name": "subscriptionId",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "invalid node for subscriptionId"
         },
-        {
-          "$ref": "#/parameters/SubscriptionIdParameter"
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "invalid node for subscriptionId"
+          }
+        ]
+      }
+    },
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          }
         }
-      ]
+      }
     }
   },
   "parameters": {
@@ -56,6 +75,21 @@
       "required": true,
       "type": "string",
       "description": "test api version"
+    }
+  },
+  "definitions": {
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "the operation"
+          },
+          "description": "List of Operations"
+        }
+      }
     }
   }
 }

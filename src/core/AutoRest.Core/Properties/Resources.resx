@@ -325,10 +325,10 @@ Modelers:
     <value>Non-HTTPS/HTTP schemes have limited support</value>
   </data>
   <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section</value>
+    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
   </data>
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
+    <value>Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition</value>
   </data>
   <data name="UniqueResourcePathsWarning" xml:space="preserve">
     <value>More than one resource path is not allowed in a single spec (found: {0}).</value>
