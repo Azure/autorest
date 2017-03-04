@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Mappings, Position, SmartPosition } from "../approved-imports/sourceMap";
+import { Mappings, Position, SmartPosition } from "../approved-imports/source-map";
 import * as yaml from "../parsing/yaml";
-import { DataHandleRead } from "../data-store/dataStore";
+import { DataHandleRead } from "../data-store/data-store";
 
 export async function compilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
   const path = (position as any).path;

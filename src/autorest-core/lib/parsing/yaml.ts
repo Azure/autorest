@@ -6,7 +6,7 @@
 import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, resolveAnchorRef } from "../approved-imports/yaml";
 import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
 import { indexToPosition } from "./textUtility";
-import { DataHandleRead } from "../data-store/dataStore";
+import { DataHandleRead } from "../data-store/data-store";
 
 
 /**
@@ -83,8 +83,8 @@ export function resolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath)
  * Resolves the text position of a JSON path in raw YAML.
  */
 export async function resolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<sourceMap.Position> {
-  const yaml = await yamlFile.readData();
-  const yamlAst = await (await yamlFile.readMetadata()).yamlAst;
+  const yaml = await yamlFile.ReadData();
+  const yamlAst = await (await yamlFile.ReadMetadata()).yamlAst;
   const textIndex = resolvePathParts(yamlAst, jsonPath);
   return indexToPosition(yaml, textIndex);
 }

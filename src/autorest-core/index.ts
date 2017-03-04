@@ -6,16 +6,11 @@
 
 import { createFileUri } from "./lib/approved-imports/uri";
 import { stringify } from "./lib/approved-imports/yaml";
-import { DataStore, DataStoreView, KnownScopes, DataHandleRead } from "./lib/data-store/dataStore";
+import { DataStore, DataStoreView, KnownScopes, DataHandleRead } from "./lib/data-store/data-store";
 import { AutoRestConfiguration } from "./lib/configuration/configuration";
-import { pipeline } from "./lib/pipeline/pipeline";
-import { DataPromise } from "./lib/pipeline/plugin";
-import { MultiPromiseUtility } from "./lib/pipeline/multi-promise";
+import { RunPipeline, DataPromise } from "./lib/pipeline/pipeline";
+import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
 import { CancellationToken } from "./lib/approved-imports/cancallation";
-
-function runInternal(configurationUri: string, dataStore: DataStoreView): DataPromise {
-  return pipeline(configurationUri)(dataStore);
-}
 
 /* @internal */
 export async function run(
@@ -25,8 +20,7 @@ export async function run(
   : Promise<void> {
 
   const dataStore: DataStoreView = new DataStore(cancellationToken);
-  const outputData: DataPromise = runInternal(configurationUri, dataStore);
-  return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
+  const outputData = await RunPipeline(configurationUri, dataStore);
 }
 
 /* @internal */
@@ -41,18 +35,17 @@ export async function runWithKnownSetOfFiles(
   const configFileUri = createFileUri("config.yaml");
 
   // input
-  const inputView = dataStore.createScope(KnownScopes.Input).asFileScope();
-  const hwConfig = await inputView.write(configFileUri);
-  await hwConfig.writeData(stringify(configuration));
+  const inputView = dataStore.CreateScope(KnownScopes.Input).AsFileScope();
+  const hwConfig = await inputView.Write(configFileUri);
+  await hwConfig.WriteData(stringify(configuration));
   for (const fileName in inputFiles) {
     if (typeof fileName === "string") {
-      const hwFile = await inputView.write(createFileUri(fileName));
-      await hwFile.writeData(inputFiles[fileName]);
+      const hwFile = await inputView.Write(createFileUri(fileName));
+      await hwFile.WriteData(inputFiles[fileName]);
     }
   }
 
-  const outputData: DataPromise = runInternal(configFileUri, dataStore);
-  return MultiPromiseUtility.toAsyncCallbacks(outputData, callback);
+  const outputData = await RunPipeline(configFileUri, dataStore);
 }
 
 export interface IFileSystem {

@@ -5,13 +5,13 @@
 
 import * as path from "path";
 import { CancellationToken } from "../approved-imports/cancallation";
-import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/sourceMap";
+import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/source-map";
 import { readUri } from "../approved-imports/uri";
 import { writeString } from "../approved-imports/writefs";
 import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../approved-imports/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
-import { compile, compilePosition } from "../source-map/sourceMap";
+import { compile, compilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
 
 export const helloworld = "hi"; // TODO: wat?
@@ -47,16 +47,16 @@ type Store = { [key: string]: Data };
  ********************************************/
 
 export abstract class DataStoreViewReadonly {
-  abstract read(key: string): Promise<DataHandleRead | null>;
-  abstract enum(): Promise<Iterable<string>>;
+  abstract Read(key: string): Promise<DataHandleRead | null>;
+  abstract Enum(): Promise<Iterable<string>>;
 
-  public async dump(targetDir: string): Promise<void> {
-    const keys = await this.enum();
+  public async Dump(targetDir: string): Promise<void> {
+    const keys = await this.Enum();
     for (const key of keys) {
-      const dataHandle = await this.read(key);
+      const dataHandle = await this.Read(key);
       if (dataHandle !== null) {
-        const data = await dataHandle.readData();
-        const metadata = await dataHandle.readMetadata();
+        const data = await dataHandle.ReadData();
+        const metadata = await dataHandle.ReadMetadata();
         const targetFile = path.join(targetDir, key);
         await writeString(targetFile, data);
         await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
@@ -67,21 +67,21 @@ export abstract class DataStoreViewReadonly {
 }
 
 export abstract class DataStoreView extends DataStoreViewReadonly {
-  abstract write(key: string): Promise<DataHandleWrite>;
+  abstract Write(key: string): Promise<DataHandleWrite>;
 
-  public createScope(name: string): DataStoreView {
+  public CreateScope(name: string): DataStoreView {
     return new DataStoreViewScope(name, this);
   }
 
-  public asFileScope(): DataStoreFileView {
+  public AsFileScope(): DataStoreFileView {
     return new DataStoreFileView(this);
   }
 
-  public asFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
-    return new DataStoreViewReadThrough(this.asFileScope(), customUriFilter);
+  public AsFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
+    return new DataStoreViewReadThrough(this.AsFileScope(), customUriFilter);
   }
 
-  public asReadonly(): DataStoreViewReadonly {
+  public AsReadonly(): DataStoreViewReadonly {
     return this;
   }
 }
@@ -91,23 +91,23 @@ class DataStoreViewScope extends DataStoreView {
     super();
   }
 
-  private get prefix(): string {
+  private get Prefix(): string {
     return `${this.name}/`;
   }
 
-  public write(key: string): Promise<DataHandleWrite> {
-    return this.slave.write(this.prefix + key);
+  public Write(key: string): Promise<DataHandleWrite> {
+    return this.slave.Write(this.Prefix + key);
   }
 
-  public read(key: string): Promise<DataHandleRead> {
-    return this.slave.read(this.prefix + key);
+  public Read(key: string): Promise<DataHandleRead> {
+    return this.slave.Read(this.Prefix + key);
   }
 
-  public async enum(): Promise<Iterable<string>> {
-    const parentResult = await this.slave.enum();
+  public async Enum(): Promise<Iterable<string>> {
+    const parentResult = await this.slave.Enum();
     return From(parentResult)
-      .Where(key => key.startsWith(this.prefix))
-      .Select(key => key.substr(this.prefix.length));
+      .Where(key => key.startsWith(this.Prefix))
+      .Select(key => key.substr(this.Prefix.length));
   }
 }
 
@@ -116,9 +116,9 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     super();
   }
 
-  public async read(uri: string): Promise<DataHandleRead> {
+  public async Read(uri: string): Promise<DataHandleRead> {
     // prope cache
-    const existingData = await this.slave.read(uri);
+    const existingData = await this.slave.Read(uri);
     if (existingData !== null) {
       return existingData;
     }
@@ -130,13 +130,13 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // populate cache
     const data = await readUri(uri);
-    const writeHandle = await this.slave.write(uri);
-    const readHandle = await writeHandle.writeData(data);
+    const writeHandle = await this.slave.Write(uri);
+    const readHandle = await writeHandle.WriteData(data);
     return readHandle;
   }
 
-  public async enum(): Promise<Iterable<string>> {
-    return this.slave.enum();
+  public async Enum(): Promise<Iterable<string>> {
+    return this.slave.Enum();
   }
 }
 
@@ -145,11 +145,11 @@ export class DataStoreFileView extends DataStoreView {
     return /^([a-z0-9+.-]+):(?:\/\/(?:((?:[a-z0-9-._~!$&'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(\/(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?|(\/?(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:/?@]|%[0-9A-F]{2})*))?$/i.test(uri);
   }
 
-  private static encodeUri(uri: string): string {
+  private static EncodeUri(uri: string): string {
     return encodeURIComponent(uri);
   }
 
-  private static decodeUri(encodedUri: string): string {
+  private static DecodeUri(encodedUri: string): string {
     return decodeURIComponent(encodedUri);
   }
 
@@ -157,34 +157,34 @@ export class DataStoreFileView extends DataStoreView {
     super();
   }
 
-  public async read(uri: string): Promise<DataHandleRead | null> {
+  public async Read(uri: string): Promise<DataHandleRead | null> {
     if (!DataStoreFileView.isUri(uri)) {
       throw new Error(`Provided URI '${uri}' is invalid`);
     }
 
-    const key = DataStoreFileView.encodeUri(uri);
-    return await this.slave.read(key);
+    const key = DataStoreFileView.EncodeUri(uri);
+    return await this.slave.Read(key);
   }
 
-  public async write(uri: string): Promise<DataHandleWrite> {
+  public async Write(uri: string): Promise<DataHandleWrite> {
     if (!DataStoreFileView.isUri(uri)) {
       throw new Error(`Provided URI '${uri}' is invalid`);
     }
 
-    const key = DataStoreFileView.encodeUri(uri);
-    return await this.slave.write(key);
+    const key = DataStoreFileView.EncodeUri(uri);
+    return await this.slave.Write(key);
   }
 
-  public async enum(): Promise<Iterable<string>> {
-    const slaveResult = await this.slave.enum();
-    return From(slaveResult).Select(DataStoreFileView.decodeUri);
+  public async Enum(): Promise<Iterable<string>> {
+    const slaveResult = await this.slave.Enum();
+    return From(slaveResult).Select(DataStoreFileView.DecodeUri);
   }
 }
 
 export class DataStore extends DataStoreView {
   private store: Store = {};
 
-  private async validate(key: string): Promise<void> {
+  private async Validate(key: string): Promise<void> {
     const data = this.store[key];
 
     // sourceMap
@@ -201,7 +201,7 @@ export class DataStore extends DataStoreView {
     super();
   }
 
-  private throwIfCancelled(): void {
+  private ThrowIfCancelled(): void {
     if (this.cancellationToken.isCancellationRequested) {
       throw new Error("cancelled");
     }
@@ -211,10 +211,10 @@ export class DataStore extends DataStoreView {
    * Data access
    ***************/
 
-  public async write(key: string): Promise<DataHandleWrite> {
-    this.throwIfCancelled();
+  public async Write(key: string): Promise<DataHandleWrite> {
+    this.ThrowIfCancelled();
     return new DataHandleWrite(key, async (data, metadataFactory) => {
-      this.throwIfCancelled();
+      this.ThrowIfCancelled();
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }
@@ -224,13 +224,13 @@ export class DataStore extends DataStoreView {
       };
       this.store[key] = storeEntry;
       storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
-      storeEntry.metadata.inputSourceMap = this.createInputSourceMapFor(key);
-      await this.validate(key);
-      return await this.read(key);
+      storeEntry.metadata.inputSourceMap = this.CreateInputSourceMapFor(key);
+      await this.Validate(key);
+      return await this.Read(key);
     });
   }
 
-  public async read(key: string): Promise<DataHandleRead | null> {
+  public async Read(key: string): Promise<DataHandleRead | null> {
     const data = this.store[key];
     if (!data) {
       return null;
@@ -238,17 +238,17 @@ export class DataStore extends DataStoreView {
     return new DataHandleRead(key, Promise.resolve(data));
   }
 
-  public async enum(): Promise<Iterable<string>> {
+  public async Enum(): Promise<Iterable<string>> {
     return Object.getOwnPropertyNames(this.store);
   }
 
-  public async blame(key: string, position: SmartPosition): Promise<BlameTree> {
-    const data = await this.read(key);
+  public async Blame(key: string, position: SmartPosition): Promise<BlameTree> {
+    const data = await this.Read(key);
     if (data === null) {
       throw new Error(`Data with key '${key}' not found`);
     }
     const resolvedPosition = await compilePosition(position, data);
-    return BlameTree.create(this, {
+    return BlameTree.Create(this, {
       source: key,
       column: resolvedPosition.column,
       line: resolvedPosition.line,
@@ -256,23 +256,23 @@ export class DataStore extends DataStoreView {
     });
   }
 
-  private async createInputSourceMapFor(key: string): Promise<RawSourceMap> {
-    const data = await this.read(key);
+  private async CreateInputSourceMapFor(key: string): Promise<RawSourceMap> {
+    const data = await this.Read(key);
     if (data === null) {
       throw new Error(`Data with key '${key}' not found`);
     }
 
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];
-    const metadata = await data.readMetadata();
+    const metadata = await data.ReadMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
     sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
     const mappings: Mapping[] = [];
     for (const targetPosition of targetPositions) {
-      const blameTree = await this.blame(key, targetPosition);
-      const inputPositions = blameTree.blameInputs();
+      const blameTree = await this.Blame(key, targetPosition);
+      const inputPositions = blameTree.BlameInputs();
       for (const inputPosition of inputPositions) {
         mappings.push({
           name: inputPosition.name,
@@ -299,7 +299,7 @@ export class DataHandleWrite {
   constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => Promise<Metadata>) => Promise<DataHandleRead>) {
   }
 
-  public async writeDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
+  public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
     return await this.write(data, async readHandle => {
       return {
         sourceMap: sourceMapFactory(readHandle), // defer initializing source map as it depends on read handle
@@ -310,16 +310,16 @@ export class DataHandleWrite {
     });
   }
 
-  public async writeData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return await this.writeDataWithSourceMap(data, async readHandle => {
+  public async WriteData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
+    return await this.WriteDataWithSourceMap(data, async readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
       await compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
 
-  public writeObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return this.writeData(stringify(obj), mappings, mappingSources);
+  public WriteObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
+    return this.WriteData(stringify(obj), mappings, mappingSources);
   }
 }
 
@@ -328,23 +328,23 @@ export class DataHandleRead {
   constructor(public readonly key: string, private read: Promise<Data>) {
   }
 
-  public async readData(): Promise<string> {
+  public async ReadData(): Promise<string> {
     const data = await this.read;
     return data.data;
   }
 
-  public async readMetadata(): Promise<Metadata> {
+  public async ReadMetadata(): Promise<Metadata> {
     const data = await this.read;
     return data.metadata;
   }
 
-  public async readObject<T>(): Promise<T> {
-    const data = await this.readData();
+  public async ReadObject<T>(): Promise<T> {
+    const data = await this.ReadData();
     return parse<T>(data);
   }
 
-  public async blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
-    const metadata = await this.readMetadata();
+  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
+    const metadata = await this.ReadMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
 
     // const singleResult = sourceMapConsumer.originalPositionFor(position);

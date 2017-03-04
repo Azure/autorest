@@ -5,7 +5,7 @@
 
 import { RequestType0, RequestType1, RequestType2 } from "../approved-imports/jsonrpc";
 import { NotificationType0, NotificationType1, NotificationType2, NotificationType3, NotificationType4 } from "../approved-imports/jsonrpc";
-import { Mapping, RawSourceMap, SmartPosition } from "../approved-imports/sourceMap";
+import { Mapping, RawSourceMap, SmartPosition } from "../approved-imports/source-map";
 
 
 export type MessageChannel =

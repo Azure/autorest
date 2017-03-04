@@ -4,89 +4,80 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configuration/configuration";
-import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/dataStore";
+import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
 import { parse } from "../parsing/literateYaml";
 import { mergeYamls } from "../source-map/merging";
-import { MultiPromiseUtility } from "./multi-promise";
-import { DataPromise, DataFactory } from "./plugin";
+import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { AutoRestPlugin } from "./plugin-server";
 
-async function pluginLoad(inputScope: DataStoreViewReadonly, inputFileUri: string): DataPromise {
-  const handle = await inputScope.read(inputFileUri);
+export type DataPromise = MultiPromise<DataHandleRead>;
+
+async function LoadUri(inputScope: DataStoreViewReadonly, inputFileUri: string): Promise<DataHandleRead> {
+  const handle = await inputScope.Read(inputFileUri);
   if (handle === null) {
     throw new Error(`Input file '${inputFileUri}' not found.`);
   }
-  return MultiPromiseUtility.single(handle);
+  return handle;
 }
 
-function pluginDeliteralizeYaml(literate: DataPromise): DataFactory {
-  return (workingScope: DataStoreView) => MultiPromiseUtility.map(literate, async (literateDoc, index) => {
-    const docScope = workingScope.createScope(`doc${index}_tmp`);
-    const hwRawDoc = await workingScope.write(`doc${index}.yaml`);
-    const hRawDoc = await parse(literateDoc, hwRawDoc, docScope);
-    return hRawDoc;
-  });
+async function DeliteralizeYaml(literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const docScope = workingScope.CreateScope(`doc_tmp`);
+  const hwRawDoc = await workingScope.Write(`doc.yaml`);
+  const hRawDoc = await parse(literate, hwRawDoc, docScope);
+  return hRawDoc;
 }
 
-function pluginLoadLiterateYaml(inputScope: DataStoreViewReadonly, inputFileUri: string): DataFactory {
-  return async (workingScope: DataStoreView) => {
-    const pluginSwaggerInput: DataPromise = pluginLoad(inputScope, inputFileUri);
-    const pluginDeliteralizeSwagger: DataPromise = pluginDeliteralizeYaml(pluginSwaggerInput)(workingScope);
-    return pluginDeliteralizeSwagger;
+async function LoadLiterateYaml(inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const pluginSwaggerInput = await LoadUri(inputScope, inputFileUri);
+  const pluginDeliteralizeSwagger = DeliteralizeYaml(pluginSwaggerInput, workingScope);
+  return pluginDeliteralizeSwagger;
+}
+
+async function LoadLiterateSwagger(inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const data = await LoadLiterateYaml(inputScope, inputFileUri, workingScope);
+  // TODO: resolve external references (Amar's magic)
+  return data;
+}
+
+async function LoadLiterateSwaggers(inputScope: DataStoreViewReadonly, inputFileUris: string[], workingScope: DataStoreView): Promise<DataHandleRead[]> {
+  const swaggerScope = workingScope.CreateScope("swagger");
+  const rawSwaggers: DataHandleRead[] = [];
+  let i = 0;
+  for (const inputFileUri of inputFileUris) {
+    // read literate Swagger
+    const pluginInput = await LoadLiterateSwagger(inputScope, inputFileUri, swaggerScope.CreateScope("deliteralize_" + i));
+    rawSwaggers.push(pluginInput);
+    i++;
   }
+  return rawSwaggers;
 }
 
-function pluginLoadLiterateSwagger(inputScope: DataStoreViewReadonly, inputFileUri: string): DataFactory {
-  return async (workingScope: DataStoreView) => {
-    const data: DataPromise = pluginLoadLiterateYaml(inputScope, inputFileUri)(workingScope);
-    // TODO: resolve external references (Amar's magic)
-    return data;
-  };
+async function MergeYaml(inputSwaggers: DataHandleRead[], workingScope: DataStoreView): Promise<DataHandleRead> {
+  const hwSwagger = await workingScope.Write("swagger.yaml");
+  const hSwagger = await mergeYamls(inputSwaggers, hwSwagger);
+  return hSwagger;
 }
 
-function pluginLoadLiterateSwaggers(inputScope: DataStoreViewReadonly, inputFileUris: string[]): DataFactory {
-  return async (workingScope: DataStoreView) => {
-    const swaggerScope = workingScope.createScope("swagger");
-    const rawSwaggers: DataPromise[] = [];
-    let i = 0;
-    for (const inputFileUri of inputFileUris) {
-      // read literate Swagger
-      const pluginInput: DataPromise = pluginLoadLiterateSwagger(inputScope, inputFileUri)
-        (swaggerScope.createScope("deliteralize_" + i));
-      rawSwaggers.push(pluginInput);
-      i++;
-    }
-    const swaggers = MultiPromiseUtility.join(...rawSwaggers);
-    const swagger = pluginMergeYaml(swaggers)(swaggerScope.createScope("compose"));
-    return swagger;
-  };
-}
+export async function RunPipeline(configurationUri: string, workingScope: DataStoreView): Promise<{ [name: string]: DataPromise }> {
+  // load config
+  const hConfig = await LoadLiterateYaml(
+    workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => uri === configurationUri),
+    configurationUri,
+    workingScope.CreateScope("config"));
+  const config = new AutoRestConfigurationManager(await hConfig.ReadObject<AutoRestConfiguration>(), configurationUri);
 
-function pluginMergeYaml(data: DataPromise): DataFactory {
-  return async (workingScope: DataStoreView) => {
-    const hwSwagger = await workingScope.write("swagger.yaml");
-    const inputSwaggers = await MultiPromiseUtility.gather(data);
-    const hSwagger = await mergeYamls(inputSwaggers, hwSwagger);
-    return MultiPromiseUtility.single(hSwagger);
-  };
-}
+  // load Swaggers
+  const swaggers = await LoadLiterateSwaggers(
+    // TODO: unlock further URIs here
+    workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => config.inputFileUris.indexOf(uri) !== -1),
+    config.inputFileUris, workingScope.CreateScope("loader"));
 
-export function pipeline(configurationUri: string): DataFactory {
-  return async (workingScope: DataStoreView) => {
-    // load config
-    const configPlugin: DataPromise = pluginLoadLiterateYaml(workingScope.createScope(KnownScopes.Input).asFileScopeReadThrough(uri => uri === configurationUri), configurationUri)
-      (workingScope.createScope("config"));
-    const hConfig = await MultiPromiseUtility.getSingle(configPlugin);
-    const config = new AutoRestConfigurationManager(await hConfig.readObject<AutoRestConfiguration>(), configurationUri);
+  //
+  const swagger = await MergeYaml(swaggers, workingScope.CreateScope("compose"));
 
-    // load Swaggers
-    const swagger = pluginLoadLiterateSwaggers(
-      // TODO: unlock further URIs here
-      workingScope.createScope(KnownScopes.Input).asFileScopeReadThrough(uri => config.inputFileUris.indexOf(uri) !== -1),
-      config.inputFileUris)
-      (workingScope.createScope("loader"));
-
-    return swagger;
+  return {
+    componentSwaggers: MultiPromiseUtility.list(swaggers),
+    swagger: MultiPromiseUtility.single(swagger)
   };
 }

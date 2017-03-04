@@ -4,10 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { fork } from "child_process";
-import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../approved-imports/sourceMap";
+import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../approved-imports/source-map";
 import { CancellationToken } from "../approved-imports/cancallation";
-import { createMessageConnection, MessageConnection, StreamMessageReader, StreamMessageWriter } from "../approved-imports/jsonrpc";
-import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/dataStore";
+import { createMessageConnection, MessageConnection } from "../approved-imports/jsonrpc";
+import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/data-store";
 import { Message, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 
 
@@ -17,6 +17,8 @@ interface IAutoRestPluginTargetEndpoint {
 }
 
 interface IAutoRestPluginInitiatorEndpoint {
+  FinishNotifications(): Promise<void>; // not exposed; necessary to ensure notifications are processed before 
+
   ReadFile(filename: string): Promise<string>;
   GetValue(key: string): Promise<any>;
   ListInputs(): Promise<string[]>;
@@ -27,12 +29,11 @@ interface IAutoRestPluginInitiatorEndpoint {
 
 export class AutoRestPlugin {
   private static lastSessionId: number = 0;
-  private static createSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
+  private static CreateSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
 
-  public static async fromModule(modulePath: string): Promise<AutoRestPlugin> {
-    const childProc = fork(modulePath);
-    childProc.on("error", err => { throw err; });
-    if (childProc.stdin === null) await new Promise(_ => { });
+  public static async FromModule(modulePath: string): Promise<AutoRestPlugin> {
+    const childProc = fork(modulePath, [], <any>{ silent: true });
+    // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,
       childProc.stdin,
@@ -49,9 +50,11 @@ export class AutoRestPlugin {
   }
 
   public constructor(channel: MessageConnection) {
+    const endpoints = this.apiInitiatorEndpoints;
+
     // initiator
     const dispatcher = (fnName: string) => (sessionId: string, ...rest: any[]) => {
-      const endpoint = this.apiInitiatorEndpoints[sessionId];
+      const endpoint = endpoints[sessionId];
       if (endpoint) {
         return (endpoint as any)[fnName](...rest);
       }
@@ -76,24 +79,26 @@ export class AutoRestPlugin {
         return await channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        return await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
+        const result = await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
+        await endpoints[sessionId].FinishNotifications();
+        return result;
       }
     };
   }
 
   private apiTarget: IAutoRestPluginTargetEndpoint;
   private apiInitiator: IAutoRestPluginInitiator;
-  private apiInitiatorEndpoints: { [sessionId: string]: IAutoRestPluginInitiatorEndpoint };
+  private apiInitiatorEndpoints: { [sessionId: string]: IAutoRestPluginInitiatorEndpoint } = {};
 
   public GetPluginNames(cancellationToken: CancellationToken): Promise<string[]> {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
   public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, workingScope: DataStoreView, cancellationToken: CancellationToken): Promise<boolean> {
-    const sid = AutoRestPlugin.createSessionId();
+    const sid = AutoRestPlugin.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.createEndpointFor(configuration, inputScope, workingScope, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(configuration, inputScope, workingScope, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
@@ -104,48 +109,63 @@ export class AutoRestPlugin {
     return result;
   }
 
-  private static createEndpointFor(configuration: (key: string) => any, inputScope: DataStoreViewReadonly, workingScope: DataStoreView, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
-    const workingScopeOutput = workingScope.createScope("output");
-    const workingScopeMessages = workingScope.createScope("messages");
+  private static CreateEndpointFor(configuration: (key: string) => any, inputScope: DataStoreViewReadonly, workingScope: DataStoreView, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
+    const workingScopeOutput = workingScope.CreateScope("output");
+    const workingScopeMessages = workingScope.CreateScope("messages");
     let messageId: number = 0;
 
     const inputFileHandles = async () => {
-      const inputFileNames = Array.from(await inputScope.enum());
-      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.read(fn)));
+      const inputFileNames = Array.from(await inputScope.Enum());
+      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.Read(fn)));
       return inputFiles as DataHandleRead[];
     }
 
-    const apiInitiator = {
+    let finishNotifications: Promise<void> = Promise.resolve();
+    const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
+      FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
-        const file = await inputScope.read(filename);
+        const file = await inputScope.Read(filename);
         if (file === null) {
           throw new Error(`Requested file '${filename}' not found`);
         }
-        return await file.readData();
+        return await file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
         return configuration(key);
       },
       async ListInputs(): Promise<string[]> {
-        const result = await inputScope.enum();
+        const result = await inputScope.Enum();
         return Array.from(result);
       },
 
       async WriteFile(filename: string, content: string, sourceMap: Mappings | RawSourceMap = []): Promise<void> {
-        const file = await workingScopeOutput.write(filename);
+        const finishPrev = finishNotifications;
+        let notify: () => void = () => { };
+        finishNotifications = new Promise<void>(res => notify = res);
+
+        const file = await workingScopeOutput.Write(filename);
         if (typeof (sourceMap as any).mappings === "string") {
-          await file.writeDataWithSourceMap(content, async () => sourceMap);
+          await file.WriteDataWithSourceMap(content, async () => sourceMap);
         } else {
-          await file.writeData(content, sourceMap as Mappings, await inputFileHandles());
+          await file.WriteData(content, sourceMap as Mappings, await inputFileHandles());
         }
+
+        await finishPrev;
+        notify();
       },
       async Message(message: Message<any>, path?: SmartPosition, sourceFile?: string): Promise<void> {
-        const dataHandle = await workingScopeMessages.write(`message_${messageId++}.yaml`);
+        const finishPrev = finishNotifications;
+        let notify: () => void = () => { };
+        finishNotifications = new Promise<void>(res => notify = res);
+
+        const dataHandle = await workingScopeMessages.Write(`message_${messageId++}.yaml`);
         const mappings: Mapping[] = [];
         const files = await inputFileHandles();
         if (path) {
           if (!sourceFile) {
             if (files.length !== 1) {
+              await finishPrev;
+              notify();
               throw new Error("Message did not specify blame origin but there are multiple input files");
             }
             sourceFile = files[0].key;
@@ -160,7 +180,10 @@ export class AutoRestPlugin {
             original: path
           });
         }
-        dataHandle.writeObject(message, mappings, files);
+        dataHandle.WriteObject(message, mappings, files);
+
+        await finishPrev;
+        notify();
       }
     };
     return apiInitiator;

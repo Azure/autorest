@@ -31,6 +31,9 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function legacyMain(autorestArgs: string[]): Promise<void> {
+
+
+
   const autorestExe = spawnLegacyAutoRest(autorestArgs);
   autorestExe.stdout.pipe(process.stdout);
   autorestExe.stderr.pipe(process.stderr);

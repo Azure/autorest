@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -5,14 +6,15 @@
 
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
-import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/sourceMap";
+import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/source-map";
 
 
 class DummyPlugin {
   public static readonly Name = "dummy";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
-    initiator.Message(sessionId, <Message<number>>{ channel: "DEBUG", message: "The truth.", payload: 42 });
+    const setting: string = await initiator.GetValue(sessionId, "truth");
+    initiator.Message(sessionId, <Message<number>>{ channel: "DEBUG", message: setting, payload: 42 });
     return true;
   }
 }
@@ -36,8 +38,6 @@ class PluginHost implements IAutoRestPluginTarget {
 
 
 async function main() {
-  console.log("dummy plugin loaded");
-
   // connection setup
   const channel = createMessageConnection(
     process.stdin,
@@ -73,7 +73,6 @@ async function main() {
   channel.onRequest(IAutoRestPluginTarget_Types.Process, target.Process.bind(target));
 
   // activate
-  console.log("dummy plugin active");
   channel.listen();
 }
 

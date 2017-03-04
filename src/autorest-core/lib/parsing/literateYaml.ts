@@ -5,8 +5,8 @@
 
 import { descendants, Kind, cloneAst, YAMLMapping, newScalar, parseNode } from "../approved-imports/yaml";
 import { mergeYamls, identitySourceMapping } from "../source-map/merging";
-import { Mapping } from "../approved-imports/sourceMap";
-import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/dataStore";
+import { Mapping } from "../approved-imports/source-map";
+import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { parse as parseLiterate } from "./literate";
 import { lines } from "./textUtility";
 
@@ -113,19 +113,19 @@ function resolveMarkdownPath(startNode: commonmark.Node, path: string[]): common
 export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
   let hsConfigFileBlocks: DataHandleRead[] = [];
 
-  const rawMarkdown = await hLiterate.readData();
+  const rawMarkdown = await hLiterate.ReadData();
 
   // try parsing as literate YAML
   if (tryMarkdown(rawMarkdown)) {
-    const scopeRawCodeBlocks = intermediateScope.createScope("raw");
-    const scopeEnlightenedCodeBlocks = intermediateScope.createScope("enlightened");
+    const scopeRawCodeBlocks = intermediateScope.CreateScope("raw");
+    const scopeEnlightenedCodeBlocks = intermediateScope.CreateScope("enlightened");
     const hsConfigFileBlocksWithContext = await parseLiterate(hLiterate, scopeRawCodeBlocks);
 
     // resolve md documentation (ALPHA)
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       ++codeBlockIndex;
-      const yamlAst = cloneAst(await (await data.readMetadata()).yamlAst);
+      const yamlAst = cloneAst(await (await data.ReadMetadata()).yamlAst);
       let mapping: Mapping[] = [];
       for (const { path, node } of descendants(yamlAst)) {
         if (path[path.length - 1] === "description" && node.kind === Kind.SEQ) {
@@ -157,8 +157,8 @@ export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite,
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
         mapping = mapping.concat(Array.from(identitySourceMapping(data.key, yamlAst)));
-        const hTarget = await scopeEnlightenedCodeBlocks.write(`${codeBlockIndex}.yaml`);
-        hsConfigFileBlocks.push(await hTarget.writeObject(parseNode(yamlAst), mapping, [hLiterate, data]));
+        const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
+        hsConfigFileBlocks.push(await hTarget.WriteObject(parseNode(yamlAst), mapping, [hLiterate, data]));
       } else {
         hsConfigFileBlocks.push(data);
       }
