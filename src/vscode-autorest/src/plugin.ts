@@ -1,8 +1,8 @@
 export interface IPluginResult {
-    Registration?: any;
-    Disposable: any;
+  Registration?: any;
+  Disposable: any;
 }
 
 export interface IPlugin {
-    setup(options?: any): IPluginResult;
+  setup(options?: any): IPluginResult;
 }

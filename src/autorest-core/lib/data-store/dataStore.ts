@@ -197,8 +197,14 @@ export class DataStore extends DataStoreView {
     }
   }
 
-  public constructor(private cancellationToken: CancellationToken = CancellationToken.none) {
+  public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
     super();
+  }
+
+  private throwIfCancelled(): void {
+    if (this.cancellationToken.isCancellationRequested) {
+      throw new Error("cancelled");
+    }
   }
 
   /****************
@@ -206,9 +212,9 @@ export class DataStore extends DataStoreView {
    ***************/
 
   public async write(key: string): Promise<DataHandleWrite> {
-    this.cancellationToken.throwIfCancelled();
+    this.throwIfCancelled();
     return new DataHandleWrite(key, async (data, metadataFactory) => {
-      this.cancellationToken.throwIfCancelled();
+      this.throwIfCancelled();
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }

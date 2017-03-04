@@ -11,6 +11,9 @@ export type DataFactory = (workingScope: DataStoreView) => DataPromise;
 
 
 
+
+
+
 // async function pluginJsonRpc(): DataPromise {
 //   return (workingScope: DataStoreView) => MultiPromiseUtility.map(literate, async (literateDoc, index) => {
 //     const docScope = workingScope.createScope(`doc${index}_tmp`);

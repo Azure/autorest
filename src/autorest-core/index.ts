@@ -21,7 +21,7 @@ function runInternal(configurationUri: string, dataStore: DataStoreView): DataPr
 export async function run(
   configurationUri: string,
   callback: (data: DataHandleRead) => Promise<void>,
-  cancellationToken: CancellationToken = CancellationToken.none)
+  cancellationToken: CancellationToken = CancellationToken.None)
   : Promise<void> {
 
   const dataStore: DataStoreView = new DataStore(cancellationToken);
@@ -34,7 +34,7 @@ export async function runWithKnownSetOfFiles(
   configuration: AutoRestConfiguration,
   inputFiles: { [fileName: string]: string },
   callback: (data: DataHandleRead) => Promise<void>,
-  cancellationToken: CancellationToken = CancellationToken.none)
+  cancellationToken: CancellationToken = CancellationToken.None)
   : Promise<void> {
 
   const dataStore = new DataStore(cancellationToken);
