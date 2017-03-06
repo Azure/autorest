@@ -60,8 +60,8 @@ export abstract class DataStoreViewReadonly {
         const metadata = await dataHandle.ReadMetadata();
         const targetFile = path.join(targetDir, key);
         await writeString(targetFile, data);
-        await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap.Value, null, 2));
-        await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap.Value, null, 2));
+        await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
+        await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
       }
     }
   }
@@ -190,7 +190,7 @@ export class DataStore extends DataStoreView {
     const data = this.store[key];
 
     // sourceMap
-    const sourceMap = await data.metadata.sourceMap.Value;
+    const sourceMap = await data.metadata.sourceMap;
     const inputFiles = sourceMap.sources.concat(sourceMap.file);
     for (const inputFile of inputFiles) {
       if (!this.store[inputFile]) {
@@ -227,7 +227,7 @@ export class DataStore extends DataStoreView {
       this.store[key] = storeEntry;
       storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
       storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
-      //await this.Validate(key);
+      await this.Validate(key);
       return await this.Read(key);
     });
   }
@@ -267,7 +267,7 @@ export class DataStore extends DataStoreView {
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];
     const metadata = await data.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap.Value);
+    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
     sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
@@ -345,12 +345,12 @@ export class DataHandleRead {
 
   public async ReadYamlAst(): Promise<YAMLNode> {
     const data = await this.ReadMetadata();
-    return await data.yamlAst.Value;
+    return await data.yamlAst;
   }
 
   public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
     const metadata = await this.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap.Value);
+    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
 
     // const singleResult = sourceMapConsumer.originalPositionFor(position);
     // does NOT support multiple sources :(
