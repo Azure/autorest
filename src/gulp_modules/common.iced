@@ -155,7 +155,7 @@ module.exports =
     echo ""
     echo "#{ error 'Task Failed:' }  #{error_message text}"
     echo ""
-    rm '-rf', workfolder
+    rm '-rf', workdir
     process.exit(1)
 
   execute: (cmdline,options,callback)->

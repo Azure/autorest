@@ -54,8 +54,8 @@ task 'test', 'typescript',['build/typescript'], (done)->
         next null
 
 task 'npm-install', 'typescript', (done)-> 
-  count = 4
-  typescriptProjectFolders()
+  count = 7
+  npminstalls()
     .pipe foreach (each,next)-> 
       #count++
       execute "npm install", {cwd: each.path }, (code,stdout,stderr) ->
