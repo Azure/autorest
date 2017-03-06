@@ -65,6 +65,7 @@ class AutoRestHeadExceptionTestService(object):
         self._client = ServiceClient(self.config.credentials, self.config)
 
         client_models = {}
+        self.api_version = '1.0.0'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
 
