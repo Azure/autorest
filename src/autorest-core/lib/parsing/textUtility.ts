@@ -22,10 +22,20 @@ export function lines(text: string): string[] {
 
 export function indexToPosition(text: string, index: number): sourceMap.Position {
   const startIndices = lineIndices(text);
-  const lineIndex = startIndices.map(i => i <= index).lastIndexOf(true); // TODO: binary search?
+  // bin. search for last `<item> <= index`
+  let lineIndexMin = 0;
+  let lineIndexMax = startIndices.length;
+  while (lineIndexMin < lineIndexMax - 1) {
+    const lineIndex = (lineIndexMin + lineIndexMax) / 2 | 0;
+    if (startIndices[lineIndex] <= index) {
+      lineIndexMin = lineIndex;
+    } else {
+      lineIndexMax = lineIndex;
+    }
+  }
 
   return {
-    column: index - startIndices[lineIndex],
-    line: 1 + lineIndex,
+    column: index - startIndices[lineIndexMin],
+    line: 1 + lineIndexMin,
   };
 }

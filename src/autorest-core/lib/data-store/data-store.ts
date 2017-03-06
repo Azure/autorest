@@ -227,7 +227,7 @@ export class DataStore extends DataStoreView {
       this.store[key] = storeEntry;
       storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
       storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
-      await this.Validate(key);
+      //await this.Validate(key);
       return await this.Read(key);
     });
   }
