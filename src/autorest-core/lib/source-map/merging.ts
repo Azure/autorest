@@ -87,7 +87,7 @@ export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputH
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.ReadData();
     resultObject = merge(resultObject, yaml.parse(rawYaml));
-    mappings.push(identitySourceMapping(yamlInputHandle.key, await (await yamlInputHandle.ReadMetadata()).yamlAst));
+    mappings.push(identitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
   }
 
   const resultObjectRaw = yaml.stringify(resultObject);

@@ -13,6 +13,7 @@ import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { compile, compilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
+import { Lazy } from "../approved-imports/lazy";
 
 export const helloworld = "hi"; // TODO: wat?
 
@@ -27,9 +28,9 @@ export module KnownScopes {
  ********************************************/
 
 export interface Metadata {
-  inputSourceMap: Promise<RawSourceMap>;
-  sourceMap: Promise<RawSourceMap>;
-  yamlAst: Promise<YAMLNode>;
+  inputSourceMap: Lazy<RawSourceMap>;
+  sourceMap: Lazy<RawSourceMap>;
+  yamlAst: Lazy<YAMLNode>;
 }
 
 interface Data {
@@ -48,7 +49,7 @@ type Store = { [key: string]: Data };
 
 export abstract class DataStoreViewReadonly {
   abstract Read(key: string): Promise<DataHandleRead | null>;
-  abstract Enum(): Promise<Iterable<string>>;
+  abstract Enum(): Promise<string[]>;
 
   public async Dump(targetDir: string): Promise<void> {
     const keys = await this.Enum();
@@ -59,8 +60,8 @@ export abstract class DataStoreViewReadonly {
         const metadata = await dataHandle.ReadMetadata();
         const targetFile = path.join(targetDir, key);
         await writeString(targetFile, data);
-        await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
-        await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
+        await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap.Value, null, 2));
+        await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap.Value, null, 2));
       }
     }
   }
@@ -103,11 +104,12 @@ class DataStoreViewScope extends DataStoreView {
     return this.slave.Read(this.Prefix + key);
   }
 
-  public async Enum(): Promise<Iterable<string>> {
+  public async Enum(): Promise<string[]> {
     const parentResult = await this.slave.Enum();
     return From(parentResult)
       .Where(key => key.startsWith(this.Prefix))
-      .Select(key => key.substr(this.Prefix.length));
+      .Select(key => key.substr(this.Prefix.length))
+      .ToArray();
   }
 }
 
@@ -135,7 +137,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     return readHandle;
   }
 
-  public async Enum(): Promise<Iterable<string>> {
+  public async Enum(): Promise<string[]> {
     return this.slave.Enum();
   }
 }
@@ -175,9 +177,9 @@ export class DataStoreFileView extends DataStoreView {
     return await this.slave.Write(key);
   }
 
-  public async Enum(): Promise<Iterable<string>> {
+  public async Enum(): Promise<string[]> {
     const slaveResult = await this.slave.Enum();
-    return From(slaveResult).Select(DataStoreFileView.DecodeUri);
+    return From(slaveResult).Select(DataStoreFileView.DecodeUri).ToArray();
   }
 }
 
@@ -188,7 +190,7 @@ export class DataStore extends DataStoreView {
     const data = this.store[key];
 
     // sourceMap
-    const sourceMap = await data.metadata.sourceMap;
+    const sourceMap = await data.metadata.sourceMap.Value;
     const inputFiles = sourceMap.sources.concat(sourceMap.file);
     for (const inputFile of inputFiles) {
       if (!this.store[inputFile]) {
@@ -224,8 +226,8 @@ export class DataStore extends DataStoreView {
       };
       this.store[key] = storeEntry;
       storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
-      storeEntry.metadata.inputSourceMap = this.CreateInputSourceMapFor(key);
-      await this.Validate(key);
+      storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
+      //await this.Validate(key);
       return await this.Read(key);
     });
   }
@@ -238,7 +240,7 @@ export class DataStore extends DataStoreView {
     return new DataHandleRead(key, Promise.resolve(data));
   }
 
-  public async Enum(): Promise<Iterable<string>> {
+  public async Enum(): Promise<string[]> {
     return Object.getOwnPropertyNames(this.store);
   }
 
@@ -265,7 +267,7 @@ export class DataStore extends DataStoreView {
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];
     const metadata = await data.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
+    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap.Value);
     sourceMapConsumer.eachMapping(m => targetPositions.push(<Position>{ column: m.generatedColumn, line: m.generatedLine }));
 
     // collect blame
@@ -302,10 +304,8 @@ export class DataHandleWrite {
   public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
     return await this.write(data, async readHandle => {
       return {
-        sourceMap: sourceMapFactory(readHandle), // defer initializing source map as it depends on read handle
-        yamlAst: new Promise<YAMLNode>((res, rej) => {
-          res(parseAst(data));
-        })
+        sourceMap: new Lazy(() => sourceMapFactory(readHandle)), // defer initializing source map as it depends on read handle
+        yamlAst: new Lazy<YAMLNode>(async () => parseAst(data))
       };
     });
   }
@@ -343,9 +343,14 @@ export class DataHandleRead {
     return parse<T>(data);
   }
 
+  public async ReadYamlAst(): Promise<YAMLNode> {
+    const data = await this.ReadMetadata();
+    return await data.yamlAst.Value;
+  }
+
   public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
     const metadata = await this.ReadMetadata();
-    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
+    const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap.Value);
 
     // const singleResult = sourceMapConsumer.originalPositionFor(position);
     // does NOT support multiple sources :(

@@ -10,7 +10,7 @@ import { DataHandleRead } from "../data-store/data-store";
 export async function compilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
   const path = (position as any).path;
   if (path) {
-    return yaml.resolvePath(await yamlFile, path);
+    return yaml.resolvePath(yamlFile, path);
   }
   return position as Position;
 }

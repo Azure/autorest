@@ -125,7 +125,7 @@ export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite,
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       ++codeBlockIndex;
-      const yamlAst = cloneAst(await (await data.ReadMetadata()).yamlAst);
+      const yamlAst = cloneAst(await data.ReadYamlAst());
       let mapping: Mapping[] = [];
       for (const { path, node } of descendants(yamlAst)) {
         if (path[path.length - 1] === "description" && node.kind === Kind.SEQ) {
