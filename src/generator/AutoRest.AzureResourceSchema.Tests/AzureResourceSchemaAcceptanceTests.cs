@@ -55,7 +55,7 @@ namespace AutoRest.AzureResourceSchema.Tests
         [Fact]
         public static void CommitmentPlans_2016_05_01_preview()
         {
-            RunSwaggerTest("CommitmentPlans", "2016-05-01-preview", "commitmentplans.json");
+            RunSwaggerTest("CommitmentPlans", "2016-05-01-preview", "commitmentPlans.json");
         }
 
         [Fact]
