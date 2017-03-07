@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"Models\Product.cs"));
+                Assert.True(fileSystem.FileExists(@"Models/Product.cs"));
 
                 var result = await Compile(fileSystem);
 
