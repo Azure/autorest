@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Validation
     /// </summary>
     public class HttpVerbValidation : TypedRule<Dictionary<string, Operation>>
     {
-        private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST)$", RegexOptions.IgnoreCase);
+        private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST|TRACE)$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Id of the Rule.
