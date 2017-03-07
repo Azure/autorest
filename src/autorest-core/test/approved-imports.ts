@@ -7,14 +7,14 @@ import * as jsonpath from "../lib/approved-imports/jsonpath";
   private roundTrip(s: string) { return jsonpath.stringify(jsonpath.parse(s)); }
 
   @test "round trip identity"() {
-    const roundTrips = (s: string) => assert.equal(s, this.roundTrip(s));
+    const roundTrips = (s: string) => assert.equal(this.roundTrip(s), s);
     roundTrips("$.asd.qwe[1].zxc");
     roundTrips("$[1][42][\"asd qwe\"]");
     roundTrips("$[1][\"1\"]");
   }
 
   @test "round trip simplification"() {
-    assert.equal("$.asd", this.roundTrip("$[\"asd\"]"));
-    assert.equal("$[1].asd[\"asd qwe\"]", this.roundTrip("$[1][\"asd\"][\"asd qwe\"]"));
+    assert.equal(this.roundTrip("$[\"asd\"]"), "$.asd");
+    assert.equal(this.roundTrip("$[1][\"asd\"][\"asd qwe\"]"), "$[1].asd[\"asd qwe\"]");
   }
 }
