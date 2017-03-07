@@ -50,11 +50,9 @@ export class AutoRestPlugin {
   }
 
   public constructor(channel: MessageConnection) {
-    const endpoints = this.apiInitiatorEndpoints;
-
     // initiator
     const dispatcher = (fnName: string) => (sessionId: string, ...rest: any[]) => {
-      const endpoint = endpoints[sessionId];
+      const endpoint = this.apiInitiatorEndpoints[sessionId];
       if (endpoint) {
         return (endpoint as any)[fnName](...rest);
       }
@@ -79,9 +77,7 @@ export class AutoRestPlugin {
         return await channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        const result = await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
-        await endpoints[sessionId].FinishNotifications();
-        return result;
+        return await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
       }
     };
   }
@@ -102,6 +98,9 @@ export class AutoRestPlugin {
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
+
+    // wait for outstanding notifications
+    await this.apiInitiatorEndpoints[sid].FinishNotifications();
 
     // unregister endpoint
     delete this.apiInitiatorEndpoints[sid];
@@ -138,7 +137,10 @@ export class AutoRestPlugin {
         return Array.from(result);
       },
 
-      async WriteFile(filename: string, content: string, sourceMap: Mappings | RawSourceMap = []): Promise<void> {
+      async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
+        if (!sourceMap) {
+          sourceMap = [];
+        }
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);

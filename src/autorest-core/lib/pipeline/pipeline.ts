@@ -66,7 +66,6 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   } else {
     // references within external file
-    console.log();
     const model = resolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
     for (const node of descendants(model, ["$", entityType, modelName])) {
       if (node.path[node.path.length - 1] === "$ref") {
@@ -80,6 +79,9 @@ async function EnsureCompleteDefinitionIsPresent(
   const inputs: DataHandleRead[] = [sourceDoc];
   for (const { node, path } of references) {
     const refPath = node.value as string;
+    if (refPath.indexOf("#") === -1) {
+      continue; // TODO: could inject entire referenced file here
+    }
     const refPathParts = refPath.split("#").filter(s => s.length > 0);
     let fileUri: string | null = null;
     let entityPath = refPath;

@@ -16,7 +16,7 @@ function mergeInternal(a: any, b: any, path: JsonPath): any {
   }
 
   // trivial case
-  if (a === b) {
+  if (yaml.stringify(a) === yaml.stringify(b)) {
     return a;
   }
 
@@ -31,7 +31,7 @@ function mergeInternal(a: any, b: any, path: JsonPath): any {
       //     }
       // }
       // return result;
-      throw new Error("No support for mergin arrays"); // requires remapping source, so no more identitySourceMapping!
+      // throw new Error(`No support for merging arrays (${stringify(path)}, ${yaml.stringify(a)}, ${yaml.stringify(b)})`); // requires remapping source, so no more identitySourceMapping!
     }
     else {
       // object nodes - iterate all members
