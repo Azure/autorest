@@ -1,0 +1,34 @@
+﻿---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+produces:
+- application/json
+paths:
+  "/operationInteger":
+    put:
+      operationId: products_list
+      parameters:
+      - name: prodReq
+        schema:
+          "$ref": "#/definitions/Product"
+      responses:
+        '200':
+          description: OK
+definitions:
+  Product:
+    description: product to put
+    properties:
+      productId:
+        type: number
+        default: 100
+        description: id of the product
+    allOf:
+    - "$ref": "#/definitions/ProductBase"
+  ProductBase:
+    description: Base product
+    properties:
+      manuf:
+        description: name of manufacturer
+        type: string
