@@ -95,7 +95,7 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const configFileUri = resolveUri(currentDirUri, args.configFile);
 
   // dispatch
-  await run(configFileUri, async () => { });
+  await run(configFileUri);
 }
 
 

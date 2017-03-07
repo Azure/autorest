@@ -48,7 +48,7 @@ export async function CreateConfiguration(inputScope: DataStoreViewReadonly, arg
   }
   result["input-file"] = inputFile;
 
-  const modeler = switches["modeler"] || "Swagger";
+  const modeler = switches["m"] || switches["modeler"] || "Swagger";
   if (modeler === "CompositeSwagger") {
     await ParseCompositeSwagger(inputScope, inputFile, result);
   }

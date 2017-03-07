@@ -44,17 +44,17 @@ async function EnsureCompleteDefinitionIsPresent(
   visitedEntities: string[],
   externalFiles: { [uri: string]: DataHandleRead },
   sourceFileUri: string,
-  currentFilePath?: string,
+  currentFileUri?: string,
   entityType?: string,
   modelName?: string) {
 
   const references: YAMLNodeWithPath[] = [];
   const sourceDoc = externalFiles[sourceFileUri];
-  if (currentFilePath == null) {
-    currentFilePath = sourceFileUri;
+  if (currentFileUri == null) {
+    currentFileUri = sourceFileUri;
   }
 
-  var currentDoc = await externalFiles[currentFilePath].ReadYamlAst();
+  var currentDoc = await externalFiles[currentFileUri].ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
     for (const node of descendants(currentDoc)) {
@@ -66,6 +66,7 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   } else {
     // references within external file
+    console.log();
     const model = resolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
     for (const node of descendants(model, ["$", entityType, modelName])) {
       if (node.path[node.path.length - 1] === "$ref") {
@@ -111,9 +112,9 @@ async function EnsureCompleteDefinitionIsPresent(
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
         }
         else {
-          await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFilePath, referencedEntityType, referencedModelName);
-          const currentObj = await externalFiles[currentFilePath].ReadObject<any>();
-          inputs.push(externalFiles[currentFilePath]);
+          await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFileUri, referencedEntityType, referencedModelName);
+          const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
+          inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
         }
       } else {
@@ -139,9 +140,9 @@ async function EnsureCompleteDefinitionIsPresent(
       const model = refs[1];
       if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
         //recursively check if the model is completely defined.
-        await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFilePath, defSec, model);
-        const currentObj = await externalFiles[currentFilePath].ReadObject<any>();
-        inputs.push(externalFiles[currentFilePath]);
+        await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFileUri, defSec, model);
+        const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
+        inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
       }
     }
@@ -194,7 +195,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
     workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => config.inputFileUris.indexOf(uri) !== -1),
     config.inputFileUris, workingScope.CreateScope("loader"));
 
-  //
+  // compose Swaggers
   const swagger = await MergeYaml(swaggers, workingScope.CreateScope("compose"));
 
   return {

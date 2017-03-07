@@ -2,7 +2,10 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { DataStore } from "../lib/data-store/data-store";
-import { LoadLiterateSwagger } from "../lib/pipeline/pipeline";
+import { LoadLiterateSwagger, RunPipeline } from "../lib/pipeline/pipeline";
+import { CreateConfiguration } from "../legacyCli";
+import { stringify } from "../lib/approved-imports/yaml";
+import { MultiPromiseUtility } from "../lib/approved-imports/multi-promise";
 
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
@@ -15,5 +18,28 @@ import { LoadLiterateSwagger } from "../lib/pipeline/pipeline";
 
     // check presence of SubResource (imported from "./network.json")
     assert.strictEqual(swaggerObj.definitions.SubResource != null, true);
+  }
+
+  @test @timeout(0) async "composite Swagger"() {
+    const dataStore = new DataStore();
+
+    const config = await CreateConfiguration(dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      [
+        "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
+        "-m", "CompositeSwagger"
+      ]);
+    assert.strictEqual(config["input-file"].length, 16);
+
+    const configFileUri = "file:///config.yaml";
+
+    // input
+    const inputView = dataStore.CreateScope("input").AsFileScope();
+    const hwConfig = await inputView.Write(configFileUri);
+    await hwConfig.WriteData(stringify(config));
+
+    const outputData = await RunPipeline(configFileUri, dataStore);
+    const file = MultiPromiseUtility.getSingle(outputData["swagger"]);
+
+
   }
 }

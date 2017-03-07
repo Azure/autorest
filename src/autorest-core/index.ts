@@ -15,7 +15,6 @@ import { CancellationToken } from "./lib/approved-imports/cancallation";
 /* @internal */
 export async function run(
   configurationUri: string,
-  callback: (data: DataHandleRead) => Promise<void>,
   cancellationToken: CancellationToken = CancellationToken.None)
   : Promise<void> {
 
@@ -27,7 +26,6 @@ export async function run(
 export async function runWithKnownSetOfFiles(
   configuration: AutoRestConfiguration,
   inputFiles: { [fileName: string]: string },
-  callback: (data: DataHandleRead) => Promise<void>,
   cancellationToken: CancellationToken = CancellationToken.None)
   : Promise<void> {
 
