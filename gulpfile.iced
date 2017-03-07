@@ -51,6 +51,9 @@ Import
   typescriptProjectFolders: ()->
     source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
 
+  npminstalls: ()->
+    source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest", "src/generator/AutoRest.NodeJS.Tests","src/generator/AutoRest.NodeJS.Azure.Tests" ,"src/dev/TestServer/server"]
+
   typescriptProjects: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
@@ -99,8 +102,9 @@ task 'autorest', 'Runs AutoRest', (done)->
     node = process.argv.shift()
     main = process.argv.shift()
     main = "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js"
-    while( process.argv.shift() == 'autorest') 
-      ""
+    while( arg = process.argv.shift() ) 
+      break if arg == 'autorest'
+      
     process.argv.unshift main
     process.argv.unshift node
     echo process.argv

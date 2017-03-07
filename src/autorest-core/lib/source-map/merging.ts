@@ -6,8 +6,8 @@
 import { From } from "../approved-imports/linq";
 import { JsonPath, stringify } from "../approved-imports/jsonpath";
 import * as yaml from "../approved-imports/yaml";
-import { Mappings } from "../approved-imports/sourceMap";
-import { DataHandleRead, DataHandleWrite } from "../data-store/dataStore";
+import { Mappings } from "../approved-imports/source-map";
+import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)
 function mergeInternal(a: any, b: any, path: JsonPath): any {
@@ -85,11 +85,11 @@ export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputH
   let resultObject: any = {};
   const mappings: Mappings[] = [];
   for (const yamlInputHandle of yamlInputHandles) {
-    const rawYaml = await yamlInputHandle.readData();
+    const rawYaml = await yamlInputHandle.ReadData();
     resultObject = merge(resultObject, yaml.parse(rawYaml));
-    mappings.push(identitySourceMapping(yamlInputHandle.key, await (await yamlInputHandle.readMetadata()).yamlAst));
+    mappings.push(identitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
   }
 
   const resultObjectRaw = yaml.stringify(resultObject);
-  return await yamlOutputHandle.writeData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
+  return await yamlOutputHandle.WriteData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
 }

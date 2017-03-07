@@ -4,20 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 
 import * as commonmark from "../approved-imports/commonmark";
-import { Mappings } from "../approved-imports/sourceMap";
-import { DataHandleRead, DataStoreView } from "../data-store/dataStore";
+import { Mappings } from "../approved-imports/source-map";
+import { DataHandleRead, DataStoreView } from "../data-store/data-store";
 
 export async function parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
   const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
-  const rawMarkdown = await hConfigFile.readData();
+  const rawMarkdown = await hConfigFile.ReadData();
   for (const codeBlock of parseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `${hConfigFile.key}_codeBlock_${codeBlock.sourcepos[0][0]}`;
 
     const data = codeBlock.literal;
     const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
-    const hwCodeBlock = await intermediateScope.write(codeBlockKey);
-    const hCodeBlock = await hwCodeBlock.writeData(data, mappings, [hConfigFile]);
+    const hwCodeBlock = await intermediateScope.Write(codeBlockKey);
+    const hCodeBlock = await hwCodeBlock.WriteData(data, mappings, [hConfigFile]);
     result.push({
       data: hCodeBlock,
       codeBlock: codeBlock
