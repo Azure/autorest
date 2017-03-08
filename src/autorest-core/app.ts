@@ -106,6 +106,13 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
 async function main() {
   try {
     const autorestArgs = process.argv.slice(2);
+
+    // temporary: --help displays legacy AutoRest's -Help message
+    if (autorestArgs.indexOf("--help") !== -1) {
+      await legacyMain(["-Help"]);
+      return;
+    }
+
     if (isLegacy(autorestArgs)) {
       await legacyMain(autorestArgs);
     } else {
