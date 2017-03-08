@@ -16,6 +16,7 @@ import { descendants, YAMLNodeWithPath, toAst } from "../approved-imports/yaml";
 import { resolveUri } from "../approved-imports/uri";
 import { From } from "../approved-imports/linq";
 import { Mapping } from "../approved-imports/source-map";
+import { CreateAssignmentMapping } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -230,15 +231,10 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
 
           // forward client param
           populate.push(() => Object.assign(apiVersionParameter.obj, apiVersionClientParam));
-          mapping.push(...From(descendants(toAst(apiVersionClientParam))).Select(x => x.path)
-            .Select(p => {
-              return <Mapping>{
-                name: "inlining api-version", source: inputSwagger.key,
-                original: { path: [<JsonPathComponent>"parameters", apiVersionClientParamName].concat(p) },
-                generated: { path: apiVersionParameter.path.concat(p) }
-              };
-            })
-            .ToArray());
+          mapping.push(...Array.from(CreateAssignmentMapping(
+            apiVersionClientParam, inputSwagger.key,
+            ["parameters", apiVersionClientParamName], apiVersionParameter.path,
+            "inlining api-version")));
 
           // make constant
           populate.push(() => apiVersionParameter.obj.enum = [version]);
@@ -265,15 +261,10 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
           for (const method of methods) {
             if (!method.obj[pc]) {
               populate.push(() => method.obj[pc] = clientPC);
-              mapping.push(...From(descendants(toAst(clientPC))).Select(x => x.path)
-                .Select(p => {
-                  return <Mapping>{
-                    name: `inlining ${pc}`, source: inputSwagger.key,
-                    original: { path: [<JsonPathComponent>pc].concat(p) },
-                    generated: { path: method.path.concat([pc]).concat(p) }
-                  };
-                })
-                .ToArray());
+              mapping.push(...Array.from(CreateAssignmentMapping(
+                clientPC, inputSwagger.key,
+                [pc], method.path.concat([pc]),
+                `inlining ${pc}`)));
             }
           }
         }

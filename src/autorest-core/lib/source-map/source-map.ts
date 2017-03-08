@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Mappings, Position, SmartPosition } from "../approved-imports/source-map";
+import { descendants, toAst } from "../approved-imports/yaml";
+import { JsonPath } from "../approved-imports/jsonpath";
 import * as yaml from "../parsing/yaml";
 import { DataHandleRead } from "../data-store/data-store";
 
@@ -37,5 +39,16 @@ export async function compile(mappings: Mappings, target: sourceMap.SourceMapGen
       name: mapping.name,
       source: mapping.source
     });
+  }
+}
+
+function* CreateAssignmentMapping(assignedObject: any, sourceUri: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string): Mappings {
+  for (const descendant of descendants(toAst(assignedObject))) {
+    const path = descendant.path;
+    yield {
+      name: subject, source: sourceUri,
+      original: { path: sourcePath.concat(path) },
+      generated: { path: targetPath.concat(path) }
+    };
   }
 }
