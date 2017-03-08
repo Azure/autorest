@@ -16,7 +16,6 @@ using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
 using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using AutoRest.Core.Extensibility;
 
 namespace AutoRest.Swagger
 {
@@ -77,7 +76,7 @@ namespace AutoRest.Swagger
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (!Settings.SkipValidation)
+            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
             {
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
@@ -85,18 +84,7 @@ namespace AutoRest.Swagger
                 {
                     Logger.Instance.Log(validationEx);
                 }
-            }
-            try
-            {
-                if (ExtensionsLoader.GetPlugin() is NoOpPlugin)
-                {
-                    return New<CodeModel>();
-                }
-            }
-            catch
-            {
-                // no problem: the above is just a shortcut for validation-only runs 
-                // (the modeler takes time and may throw exceptions, so bypassing it improves validation experience)
+                return New<CodeModel>();
             }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);

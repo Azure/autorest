@@ -45,11 +45,6 @@ namespace AutoRest.Core
             CodeModel codeModel = null;
             
             var modeler = ExtensionsLoader.GetModeler();
-            var plugin = ExtensionsLoader.GetPlugin();
-            if (!(plugin is NoOpPlugin))
-            {
-                Settings.Instance.SkipValidation = true;
-            }
 
             try
             {
@@ -77,6 +72,8 @@ namespace AutoRest.Core
             {
                 return; // no code gen in Json validation mode
             }
+
+            var plugin = ExtensionsLoader.GetPlugin();
             
             Console.ResetColor();
             Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
