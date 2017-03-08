@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, resolveAnchorRef } from "../approved-imports/yaml";
-import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
+import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, resolveAnchorRef, stringifyAst } from "../approved-imports/yaml";
+import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
 import { indexToPosition } from "./textUtility";
 import { DataHandleRead } from "../data-store/data-store";
 
@@ -16,7 +16,7 @@ import { DataHandleRead } from "../data-store/data-store";
  * @param jsonPathPart           Path component to resolve
  * @param deferResolvingMappings If set to true, if resolving to a mapping, will return the entire mapping node instead of just the value (useful if desiring keys)
  */
-export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
+function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
   switch (yamlAstCurrent.kind) {
     case Kind.SCALAR:
       throw new Error(`Trying to retrieve '${jsonPathPart}' from scalar value`);
@@ -62,24 +62,25 @@ export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode,
   throw new Error(`unexpected YAML AST node kind '${yamlAstCurrent.kind}'`);
 }
 
-export function resolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathParts: JsonPath): YAMLNode {
-  for (const jsonPathPart of jsonPathParts) {
-    yamlAstCurrent = resolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
+export function resolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
+  try {
+    for (const jsonPathPart of jsonPath) {
+      yamlAstCurrent = resolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
+    }
+    return yamlAstCurrent;
+  } catch (error) {
+    throw new Error(`Error retrieving '${stringify(jsonPath)}' from '${stringifyAst(yamlAstCurrent)}' (${error})`);
   }
-  return yamlAstCurrent;
 }
 
 export function resolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath): number {
-  if (jsonPathParts.length === 0 || jsonPathParts[0] !== "$") {
-    throw new Error(`Argument: Invalid JSON path '${JSON.stringify(jsonPathParts)}' (not starting with $)`);
-  }
   // special treatment of root "$", so it gets mapped to the VERY beginning of the document (possibly "---")
   // instead of the first YAML mapping node. This allows disambiguation of "$" and "$.<first prop>" in YAML.
-  if (jsonPathParts.length === 1) {
+  if (jsonPathParts.length === 0) {
     return 0;
   }
 
-  return resolveRelativeNode(yamlAstRoot, yamlAstRoot, jsonPathParts.slice(1)).startPosition;
+  return resolveRelativeNode(yamlAstRoot, yamlAstRoot, jsonPathParts).startPosition;
 }
 
 /**

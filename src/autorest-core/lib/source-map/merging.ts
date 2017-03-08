@@ -63,7 +63,7 @@ function mergeInternal(a: any, b: any, path: JsonPath): any {
 }
 
 export function merge<T, U>(a: T, b: U): T & U {
-  return mergeInternal(a, b, ["$"]);
+  return mergeInternal(a, b, []);
 }
 
 export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {

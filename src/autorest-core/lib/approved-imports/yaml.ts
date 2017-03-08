@@ -30,7 +30,7 @@ export function parseToAst(rawYaml: string): YAMLNode {
   return yamlAst.safeLoad(rawYaml, null) as YAMLNode;
 }
 
-export function* descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = ["$"]): Iterable<YAMLNodeWithPath> {
+export function* descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = []): Iterable<YAMLNodeWithPath> {
   yield { path: currentPath, node: yamlAstNode };
   switch (yamlAstNode.kind) {
     case Kind.MAPPING: {
@@ -111,6 +111,9 @@ export function stringifyAst(ast: YAMLNode): string {
 }
 export function clone<T>(object: T): T {
   return parse<T>(stringify(object));
+}
+export function toAst<T>(object: T): YAMLNode {
+  return parseToAst(stringify(object));
 }
 
 export function parse<T>(rawYaml: string): T {
