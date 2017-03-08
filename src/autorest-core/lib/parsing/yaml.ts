@@ -5,7 +5,7 @@
 
 import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef, StringifyAst } from "../approved-imports/yaml";
 import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
-import { indexToPosition } from "./textUtility";
+import { IndexToPosition } from "./textUtility";
 import { DataHandleRead } from "../data-store/data-store";
 
 
@@ -90,6 +90,6 @@ export async function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath):
   const yaml = await yamlFile.ReadData();
   const yamlAst = await yamlFile.ReadYamlAst();
   const textIndex = ResolvePathParts(yamlAst, jsonPath);
-  const result = indexToPosition(yaml, textIndex);
+  const result = IndexToPosition(yaml, textIndex);
   return result;
 }

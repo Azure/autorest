@@ -5,7 +5,7 @@
 
 import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configuration/configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
-import { parse } from "../parsing/literateYaml";
+import { Parse } from "../parsing/literateYaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { CancellationToken } from "../approved-imports/cancallation";
@@ -31,7 +31,7 @@ async function LoadUri(inputScope: DataStoreViewReadonly, inputFileUri: string):
 async function DeliteralizeYaml(literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
   const docScope = workingScope.CreateScope(`doc_tmp`);
   const hwRawDoc = await workingScope.Write(`doc.yaml`);
-  const hRawDoc = await parse(literate, hwRawDoc, docScope);
+  const hRawDoc = await Parse(literate, hwRawDoc, docScope);
   return hRawDoc;
 }
 

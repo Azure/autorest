@@ -186,19 +186,6 @@ export class DataStoreFileView extends DataStoreView {
 export class DataStore extends DataStoreView {
   private store: Store = {};
 
-  private async Validate(key: string): Promise<void> {
-    const data = this.store[key];
-
-    // sourceMap
-    const sourceMap = await data.metadata.sourceMap;
-    const inputFiles = sourceMap.sources.concat(sourceMap.file);
-    for (const inputFile of inputFiles) {
-      if (!this.store[inputFile]) {
-        throw new Error(`Source map of '${key}' references '${inputFile}' which does not exist`);
-      }
-    }
-  }
-
   public constructor(private cancellationToken: CancellationToken = CancellationToken.None) {
     super();
   }
@@ -228,10 +215,21 @@ export class DataStore extends DataStoreView {
 
       // metadata
       const result = await this.ReadStrict(key);
-      storeEntry.metadata.sourceMap = new Lazy(async () => sourceMapFactory(result));
+      storeEntry.metadata.sourceMap = new Lazy(async () => {
+        const sourceMap = await sourceMapFactory(result);
+
+        // validate
+        const inputFiles = sourceMap.sources.concat(sourceMap.file);
+        for (const inputFile of inputFiles) {
+          if (!this.store[inputFile]) {
+            throw new Error(`Source map of '${key}' references '${inputFile}' which does not exist`);
+          }
+        }
+
+        return sourceMap;
+      });
       storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
-      // await this.Validate(key);
       return result;
     });
   }
