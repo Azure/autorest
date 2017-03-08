@@ -54,10 +54,15 @@ namespace AutoRest.Core.Utilities
 
         public string ReadAllText(string path)
         {
-            if (VirtualStore.ContainsKey(path))
+            if (VirtualStore.ContainsKey(path.Replace("\\", "/")))
             {
-                return VirtualStore[path].ToString();
+                return VirtualStore[path.Replace("\\", "/")].ToString();
             }
+            else if (VirtualStore.ContainsKey(path.Replace("/", "\\")))
+            {
+                return VirtualStore[path.Replace("/", "\\")].ToString();
+            }
+            
             throw new IOException("File not found: " + path);
         }
 
