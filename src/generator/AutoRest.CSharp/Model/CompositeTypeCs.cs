@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Model
             _constructorModel = new ConstructorModel(this);
         }
 
-        public CompositeTypeCs(string name ) : base(name)
+        public CompositeTypeCs(string name) : base(name)
         {
             _constructorModel = new ConstructorModel(this);
         }
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Model
 
         [JsonIgnore]
         public IEnumerable<string> ConstructorParametersDocumentation => _constructorModel.SignatureDocumentation;
-
+        
         [JsonIgnore]
         public string BaseConstructorCall => _constructorModel.BaseCall;
 
@@ -114,53 +114,49 @@ namespace AutoRest.CSharp.Model
                 _model = model;
             }
 
-                // TODO: this could just be the "required" parameters instead of required and all the optional ones
-                // with defaults if we wanted a bit cleaner constructors
+            // TODO: this could just be the "required" parameters instead of required and all the optional ones
+            // with defaults if we wanted a bit cleaner constructors
             public IEnumerable<ConstructorParameterModel> Parameters => _model.AllPropertyTemplateModels.OrderBy(p => !p.Property.IsRequired).ThenBy(p => p.Depth).Select(p => new ConstructorParameterModel(p.Property));
 
-            public IEnumerable<string> SignatureDocumentation => CreateSignatureDocumentation(Parameters);
-
-            public string Signature => CreateSignature(Parameters);
-
-            public string BaseCall => CreateBaseCall(_model);
-
-            private static string CreateSignature(IEnumerable<ConstructorParameterModel> parameters)
+            public IEnumerable<string> SignatureDocumentation
             {
-                var declarations = new List<string>();
-                foreach (var property in parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                get
                 {
-                    string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture,
-                        format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
-                }
-
-                return string.Join(", ", declarations);
-            }
-
-            private static IEnumerable<string> CreateSignatureDocumentation(IEnumerable<ConstructorParameterModel> parameters)
-            {
-                var declarations = new List<string>();
-
-                IEnumerable<Property> parametersWithDocumentation =
-                   parameters.Where(p => !(string.IsNullOrEmpty(p.UnderlyingProperty.Summary) &&
+                   IEnumerable<Property> parametersWithDocumentation =
+                   Parameters.Where(p => !(string.IsNullOrEmpty(p.UnderlyingProperty.Summary) &&
                    string.IsNullOrEmpty(p.UnderlyingProperty.Documentation)) &&
                    !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty);
 
-                foreach (var property in parametersWithDocumentation)
-                {
-                    var documentationInnerText = string.IsNullOrEmpty(property.Summary) ? property.Documentation.EscapeXmlComment() : property.Summary.EscapeXmlComment();
+                    foreach (var property in parametersWithDocumentation)
+                    {
+                        var documentationInnerText = string.IsNullOrEmpty(property.Summary) ? property.Documentation.EscapeXmlComment() : property.Summary.EscapeXmlComment();
 
-                    var documentation = string.Format(
-                        CultureInfo.InvariantCulture,
-                        "<param name=\"{0}\">{1}</param>",
-                        char.ToLower(property.Name.CharAt(0)) + property.Name.Substring(1),
-                        documentationInnerText);
-
-                    declarations.Add(documentation);
+                        yield return string.Format(
+                            CultureInfo.InvariantCulture,
+                            "<param name=\"{0}\">{1}</param>",
+                            char.ToLower(property.Name.CharAt(0)) + property.Name.Substring(1),
+                            documentationInnerText);
+                    }
                 }
-
-                return declarations;
             }
+
+            public string Signature
+            {
+                get
+                {
+                    var declarations = new List<string>();
+                    foreach (var property in Parameters.Where(p => !p.UnderlyingProperty.IsConstant).Select(p => p.UnderlyingProperty))
+                    {
+                        string format = (property.IsRequired ? "{0} {1}" : "{0} {1} = default({0})");
+                        declarations.Add(string.Format(CultureInfo.InvariantCulture,
+                            format, property.ModelTypeName, CodeNamer.Instance.CamelCase(property.Name)));
+                    }
+
+                    return string.Join(", ", declarations);
+                }
+            }
+
+            public string BaseCall => CreateBaseCall(_model);
 
             private static string CreateBaseCall(CompositeTypeCs model)
             {
