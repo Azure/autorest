@@ -11,7 +11,7 @@ import { writeString } from "../approved-imports/writefs";
 import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../approved-imports/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
-import { compile, compilePosition } from "../source-map/source-map";
+import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
 import { Lazy } from "../approved-imports/lazy";
 
@@ -249,7 +249,7 @@ export class DataStore extends DataStoreView {
     if (data === null) {
       throw new Error(`Data with key '${key}' not found`);
     }
-    const resolvedPosition = await compilePosition(position, data);
+    const resolvedPosition = await CompilePosition(position, data);
     return BlameTree.Create(this, {
       source: key,
       column: resolvedPosition.column,
@@ -285,7 +285,7 @@ export class DataStore extends DataStoreView {
       }
     }
     const sourceMapGenerator = new SourceMapGenerator({ file: key });
-    await compile(mappings, sourceMapGenerator);
+    await Compile(mappings, sourceMapGenerator);
     return sourceMapGenerator.toJSON();
   }
 }
@@ -313,7 +313,7 @@ export class DataHandleWrite {
   public async WriteData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
     return await this.WriteDataWithSourceMap(data, async readHandle => {
       const sourceMapGenerator = new SourceMapGenerator({ file: this.key });
-      await compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
+      await Compile(mappings, sourceMapGenerator, mappingSources.concat(readHandle));
       return sourceMapGenerator.toJSON();
     });
   }
