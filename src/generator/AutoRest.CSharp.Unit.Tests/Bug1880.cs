@@ -34,6 +34,10 @@ namespace AutoRest.CSharp.Unit.Tests
             // simplified test pattern for unit testing aspects of code generation
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
+                foreach (var fileName in fileSystem.GetFiles(fileSystem.CurrentDirectory, "*.*", SearchOption.AllDirectories))
+                {
+                    Console.WriteLine("++++++++++++++++++++++++++ Found File : "+fileName+" +++++++++++++++++");
+                }
                 // check for the expected class.
                 Assert.True(fileSystem.FileExists(@"Models/Product.cs"));
 
