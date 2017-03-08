@@ -33,7 +33,7 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123.Models
         }
 
         /// <summary>
-        /// an Init method that performs custom operations like setting defaults
+        /// an initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
 
