@@ -16,7 +16,7 @@
     },
     "editor.tabSize": 2,
     "editor.detectIndentation": false,
-    
+    "csharp.suppressDotnetRestoreNotification": true,
     "[typescript]" :{
         "editor.formatOnSave": true,
         "editor.formatOnPaste": true,

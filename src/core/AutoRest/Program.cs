@@ -25,6 +25,10 @@ namespace AutoRest
         {
             int exitCode = (int)ExitCode.Error;
 
+            if( args[0] == "--server") {
+              return new AutoRestAsAsService().Run().Result;
+            }
+
             try
             {
                 using (NewContext)
