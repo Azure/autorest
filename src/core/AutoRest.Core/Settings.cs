@@ -238,13 +238,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool AddCredentials { get; set; }
 
         /// <summary>
-        /// If set to true, behave in a way consistent with earlier builds of AutoRest..
-        /// </summary>
-        [SettingsInfo("If true, skips the ARM specific Swagger validation step.")]
-        [SettingsAlias("skipvalidation")]
-        public bool SkipValidation { get; set; }
-
-        /// <summary>
         /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
         /// </summary>
         [SettingsInfo(
@@ -479,14 +472,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 {
                     Logger.Instance.Log(Category.Error, Resources.ParameterValueIsMissing, property.Name);
                     throw new CodeGenerationException(string.Format(Resources.ParameterValueIsMissing, property.Name));
-                }
-            }
-
-            if (CustomSettings != null)
-            {
-                foreach (var unmatchedSetting in CustomSettings.Keys)
-                {
-                    Logger.Instance.Log(Category.Warning, Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
         }
