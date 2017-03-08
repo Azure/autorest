@@ -107,7 +107,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
-        [Rule(typeof(ArmResourcePropertiesBag))]
         [Rule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(TrackedResourceValidation))]
