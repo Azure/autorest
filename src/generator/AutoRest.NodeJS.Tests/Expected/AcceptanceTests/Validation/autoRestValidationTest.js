@@ -60,6 +60,8 @@ function AutoRestValidationTest(subscriptionId, apiVersion, baseUri, options) {
   this.subscriptionId = subscriptionId;
   this.apiVersion = apiVersion;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   this.models = models;
   msRest.addSerializationMixin(this);
 }

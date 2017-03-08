@@ -62,6 +62,8 @@ function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQ
   this.requiredGlobalPath = requiredGlobalPath;
   this.requiredGlobalQuery = requiredGlobalQuery;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) {
     this.optionalGlobalQuery = options.optionalGlobalQuery;
   }
