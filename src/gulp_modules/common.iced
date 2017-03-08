@@ -3,6 +3,7 @@ fs = require('fs')
 concurrency = 0 
 queue = []
 global.completed = []
+vfs = require('vinyl-fs');
 
 module.exports =
   # lets us just handle each item in a stream easily.
@@ -29,7 +30,9 @@ module.exports =
       done null
 
   source: (globs, options ) -> 
-    gulp.src( globs, options) 
+    options = options or { }
+    options.follow = true
+    vfs.src( globs, options) 
 
   destination: (globs, options ) -> 
     gulp.dest( globs, options) 

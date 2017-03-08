@@ -13,6 +13,7 @@ Tasks "dotnet",  # compiling dotnet
 
 # Settings
 Import
+  initialized: false
   solution: "#{basefolder}/AutoRest.sln"
   packages: "#{basefolder}/packages"
   release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
@@ -112,7 +113,11 @@ task 'autorest', 'Runs AutoRest', (done)->
   else  
     Fail "You must run #{ info 'gulp build'}' first"
 
+
+
 task 'init', "" ,(done)->
+  return done() if initialized
+  global.initialized = true
   # is the main node_modules out of date?
   doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core") or (! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest")
 
