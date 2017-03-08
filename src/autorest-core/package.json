@@ -19,7 +19,6 @@
     "autorest": "./app.js"
   },
   "typings": "./index.d.ts",
-
   "devDependencies": {
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
@@ -30,7 +29,6 @@
     "@types/source-map": "^0.5.0",
     "@types/urijs": "^1.15.31"
   },
-  
   "dependencies": {
     "commonmark": "^0.27.0",
     "file-url": "^2.0.2",
@@ -41,6 +39,7 @@
     "source-map": "^0.5.6",
     "strip-bom": "^3.0.0",
     "urijs": "^1.18.7",
+    "vscode-jsonrpc": "^3.1.0",
     "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.32/yaml-ast-parser-0.0.32.tgz",
     "yargs": "^6.6.0"
   }

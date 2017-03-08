@@ -6,7 +6,7 @@
 import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, resolveAnchorRef } from "../approved-imports/yaml";
 import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
 import { indexToPosition } from "./textUtility";
-import { DataHandleRead } from "../data-store/dataStore";
+import { DataHandleRead } from "../data-store/data-store";
 
 
 /**
@@ -16,7 +16,7 @@ import { DataHandleRead } from "../data-store/dataStore";
  * @param jsonPathPart           Path component to resolve
  * @param deferResolvingMappings If set to true, if resolving to a mapping, will return the entire mapping node instead of just the value (useful if desiring keys)
  */
-function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
+export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
   switch (yamlAstCurrent.kind) {
     case Kind.SCALAR:
       throw new Error(`Trying to retrieve '${jsonPathPart}' from scalar value`);
@@ -62,6 +62,13 @@ function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
   throw new Error(`unexpected YAML AST node kind '${yamlAstCurrent.kind}'`);
 }
 
+export function resolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathParts: JsonPath): YAMLNode {
+  for (const jsonPathPart of jsonPathParts) {
+    yamlAstCurrent = resolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
+  }
+  return yamlAstCurrent;
+}
+
 export function resolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath): number {
   if (jsonPathParts.length === 0 || jsonPathParts[0] !== "$") {
     throw new Error(`Argument: Invalid JSON path '${JSON.stringify(jsonPathParts)}' (not starting with $)`);
@@ -72,19 +79,16 @@ export function resolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath)
     return 0;
   }
 
-  let yamlAstCurrent = yamlAstRoot;
-  for (let i = 1; i < jsonPathParts.length; ++i) {
-    yamlAstCurrent = resolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathParts[i], true);
-  }
-  return yamlAstCurrent.startPosition;
+  return resolveRelativeNode(yamlAstRoot, yamlAstRoot, jsonPathParts.slice(1)).startPosition;
 }
 
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
 export async function resolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<sourceMap.Position> {
-  const yaml = await yamlFile.readData();
-  const yamlAst = await (await yamlFile.readMetadata()).yamlAst;
+  const yaml = await yamlFile.ReadData();
+  const yamlAst = await yamlFile.ReadYamlAst();
   const textIndex = resolvePathParts(yamlAst, jsonPath);
-  return indexToPosition(yaml, textIndex);
+  const result = indexToPosition(yaml, textIndex);
+  return result;
 }

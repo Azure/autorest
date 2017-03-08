@@ -46,6 +46,8 @@ function AutoRestParameterizedHostTestClient(options) {
   AutoRestParameterizedHostTestClient['super_'].call(this, null, options);
   this.baseUri = 'http://{accountName}{host}';
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.host !== null && options.host !== undefined) {
     this.host = options.host;
   }

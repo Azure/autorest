@@ -56,6 +56,8 @@ function AutoRestUrlTestService(globalStringPath, baseUri, options) {
   }
   this.globalStringPath = globalStringPath;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.globalStringQuery !== null && options.globalStringQuery !== undefined) {
     this.globalStringQuery = options.globalStringQuery;
   }

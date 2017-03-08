@@ -66,6 +66,8 @@ function AzureCompositeModel(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
     this.acceptLanguage = options.acceptLanguage;
   }

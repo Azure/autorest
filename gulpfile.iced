@@ -13,6 +13,7 @@ Tasks "dotnet",  # compiling dotnet
 
 # Settings
 Import
+  initialized: false
   solution: "#{basefolder}/AutoRest.sln"
   packages: "#{basefolder}/packages"
   release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
@@ -32,7 +33,6 @@ Import
   tests:() ->
     source 'src/**/*[Tt]ests.csproj'
       .pipe except /AutoRest.Tests/ig #not used yet.
-      .pipe except /AutoRest.AzureResourceSchema.Tests/ig
       #.pipe except /AutoRest.Swagger.Tests/ig
     
   # assemblies that we sign
@@ -51,6 +51,16 @@ Import
   typescriptProjectFolders: ()->
     source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
 
+  npminstalls: ()->
+    source ["src/autorest-core", 
+      "src/autorest" 
+      "src/vscode-autorest/server"
+      "src/vscode-autorest"
+      "src/generator/AutoRest.NodeJS.Tests"
+      "src/generator/AutoRest.NodeJS.Azure.Tests" 
+      "src/dev/TestServer/server"
+    ]
+
   typescriptProjects: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
@@ -64,7 +74,7 @@ Import
   generatedFiles: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
-        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**","!#{each.path}/server/node_modules/**"])
+        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!**/node_modules/**"])
           .on 'end', -> 
             next null
           .pipe foreach (e,n)->
@@ -83,6 +93,11 @@ Import
             more.push e
             n null
 
+
+task "list","",->
+  generatedFiles()
+    .pipe showFiles()
+
 task 'install-binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
   source "src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/**"
@@ -99,8 +114,9 @@ task 'autorest', 'Runs AutoRest', (done)->
     node = process.argv.shift()
     main = process.argv.shift()
     main = "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js"
-    while( process.argv.shift() == 'autorest') 
-      ""
+    while( arg = process.argv.shift() ) 
+      break if arg == 'autorest'
+      
     process.argv.unshift main
     process.argv.unshift node
     echo process.argv
@@ -108,7 +124,11 @@ task 'autorest', 'Runs AutoRest', (done)->
   else  
     Fail "You must run #{ info 'gulp build'}' first"
 
+
+
 task 'init', "" ,(done)->
+  return done() if initialized
+  global.initialized = true
   # is the main node_modules out of date?
   doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core") or (! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest")
 

@@ -48,6 +48,8 @@ function AutoRestRFC1123DateTimeTestService(baseUri, options) {
     this.baseUri = 'https://localhost';
   }
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   this.datetimerfc1123 = new operations.Datetimerfc1123(this);
   this.models = models;
   msRest.addSerializationMixin(this);

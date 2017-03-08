@@ -3,7 +3,7 @@ task 'build', 'typescript', (done)->
   count = 4
   typescriptProjects()
     .pipe foreach (each,next) -> 
-      execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}",{retry:1} ,(code,stdout,stderr) ->
+      execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}",{retry:2} ,(code,stdout,stderr) ->
         echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0
@@ -54,8 +54,8 @@ task 'test', 'typescript',['build/typescript'], (done)->
         next null
 
 task 'npm-install', 'typescript', (done)-> 
-  count = 4
-  typescriptProjectFolders()
+  count = 7
+  npminstalls()
     .pipe foreach (each,next)-> 
       #count++
       execute "npm install", {cwd: each.path }, (code,stdout,stderr) ->
