@@ -1,10 +1,10 @@
 # <img align="center" src="./images/logo.png"> Sample : Generating a client using AutoRest
 
-First,Download the Swagger.json example:
+First, download the petstore.json example file:
 
 | Platform | Command |
 |----|---|
-|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json -o swagger.json`|
+|PowerShell|`iwr https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json -o petstore.json`|
 |Linux/OS X|`curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`|
 
 Next, generate the client:

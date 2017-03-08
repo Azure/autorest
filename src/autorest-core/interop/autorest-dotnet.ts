@@ -9,7 +9,7 @@ import { homedir } from "os";
 import * as path from "path";
 
 function AutoRestDllPath() {
-  let result = path.join(__dirname, "../../AutoRest.dll");
+  let result = path.join(__dirname, "../../../AutoRest.dll");
 
   // try relative path to __dirname
   if (fs.existsSync(result)) {

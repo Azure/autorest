@@ -76,7 +76,7 @@ namespace AutoRest.Swagger
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (!Settings.SkipValidation)
+            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
             {
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
@@ -84,6 +84,7 @@ namespace AutoRest.Swagger
                 {
                     Logger.Instance.Log(validationEx);
                 }
+                return New<CodeModel>();
             }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
