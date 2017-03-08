@@ -1,15 +1,17 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { createFileUri, resolveUri } from "../lib/approved-imports/uri";
+import { CreateFileUri, ResolveUri } from "../lib/approved-imports/uri";
 import { parse } from "../lib/approved-imports/jsonpath";
 import { DataStore } from "../lib/data-store/data-store";
 import { RunPipeline } from "../lib/pipeline/pipeline";
+import { SpawnSourceMapVisualization } from "../debug-tools";
 
 @suite class Blaming {
+
   @test async "end to end blaming with literate swagger"() {
     const dataStore = new DataStore();
-    const configFileUri = resolveUri(createFileUri(__dirname) + "/", "resources/literate-example/readme.md");
+    const configFileUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/readme.md");
     const results = await RunPipeline(configFileUri, dataStore);
 
     // regular description

@@ -6,7 +6,7 @@
 import * as path from "path";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/source-map";
-import { readUri } from "../approved-imports/uri";
+import { ReadUri } from "../approved-imports/uri";
 import { writeString } from "../approved-imports/writefs";
 import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../approved-imports/yaml";
 import { From } from "linq-es2015";
@@ -48,8 +48,16 @@ type Store = { [key: string]: Data };
  ********************************************/
 
 export abstract class DataStoreViewReadonly {
-  abstract Read(key: string): Promise<DataHandleRead | null>;
   abstract Enum(): Promise<string[]>;
+  abstract Read(key: string): Promise<DataHandleRead | null>;
+
+  public async ReadStrict(key: string): Promise<DataHandleRead> {
+    const result = await this.Read(key);
+    if (result === null) {
+      throw new Error(`Failed to read '${key}'. Key not found.`);
+    }
+    return result;
+  }
 
   public async Dump(targetDir: string): Promise<void> {
     const keys = await this.Enum();
@@ -131,7 +139,7 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     }
 
     // populate cache
-    const data = await readUri(uri);
+    const data = await ReadUri(uri);
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
     return readHandle;
@@ -240,14 +248,6 @@ export class DataStore extends DataStoreView {
       return null;
     }
     return new DataHandleRead(key, Promise.resolve(data));
-  }
-
-  public async ReadStrict(key: string): Promise<DataHandleRead> {
-    const result = await this.Read(key);
-    if (result === null) {
-      throw new Error(`Failed to read '${key}'. Key not found.`);
-    }
-    return result;
   }
 
   public async Enum(): Promise<string[]> {

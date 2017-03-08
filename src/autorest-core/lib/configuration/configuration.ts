@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { resolveUri } from "../approved-imports/uri";
+import { ResolveUri } from "../approved-imports/uri";
 
 export interface AutoRestConfigurationSwitches {
   [key: string]: string | null;
@@ -26,14 +26,14 @@ export class AutoRestConfigurationManager {
   }
 
   private get baseFolderUri(): string {
-    const configFileFolderUri = resolveUri(this.configurationFileUri, ".").toString();
+    const configFileFolderUri = ResolveUri(this.configurationFileUri, ".").toString();
     const baseFolder = this.config["base-folder"] || "";
-    const baseFolderUri = resolveUri(configFileFolderUri, baseFolder);
+    const baseFolderUri = ResolveUri(configFileFolderUri, baseFolder);
     return baseFolderUri.replace(/\/$/g, "") + "/";
   }
 
   private resolveUri(path: string): string {
-    return resolveUri(this.baseFolderUri, path);
+    return ResolveUri(this.baseFolderUri, path);
   }
 
   private inputFiles(): string[] {

@@ -12,7 +12,7 @@
 import { resolve as currentDirectory } from "path";
 import { existsSync } from "fs";
 import { ChildProcess } from "child_process";
-import { createFileUri, resolveUri } from "./lib/approved-imports/uri";
+import { CreateFileUri, ResolveUri } from "./lib/approved-imports/uri";
 import { spawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration/configuration";
@@ -91,8 +91,8 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   }
 
   // resolve configuration file
-  const currentDirUri = createFileUri(currentDirectory()) + "/";
-  const configFileUri = resolveUri(currentDirUri, args.configFile);
+  const currentDirUri = CreateFileUri(currentDirectory()) + "/";
+  const configFileUri = ResolveUri(currentDirUri, args.configFile);
 
   // dispatch
   await run(configFileUri);

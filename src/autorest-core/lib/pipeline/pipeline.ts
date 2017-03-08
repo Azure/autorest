@@ -13,7 +13,7 @@ import { AutoRestPlugin } from "./plugin-server";
 import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
 import { ResolveRelativeNode } from "../parsing/yaml";
 import { Descendants, YAMLNodeWithPath, ToAst } from "../approved-imports/yaml";
-import { resolveUri } from "../approved-imports/uri";
+import { ResolveUri } from "../approved-imports/uri";
 import { From } from "../approved-imports/linq";
 import { Mapping, Mappings } from "../approved-imports/source-map";
 import { CreateAssignmentMapping } from "../source-map/source-map";
@@ -92,7 +92,7 @@ async function EnsureCompleteDefinitionIsPresent(
       fileUri = refPathParts[0];
       entityPath = "#" + refPathParts[1];
       node.value = entityPath;
-      fileUri = resolveUri(sourceFileUri, fileUri);
+      fileUri = ResolveUri(sourceFileUri, fileUri);
       if (!externalFiles[fileUri]) {
         const externalFile = await LoadLiterateYaml(inputScope, fileUri, workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
         if (externalFile === null) {

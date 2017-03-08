@@ -4,7 +4,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { createFileUri } from "./lib/approved-imports/uri";
+import { CreateFileUri } from "./lib/approved-imports/uri";
 import { Stringify } from "./lib/approved-imports/yaml";
 import { DataStore, DataStoreView, KnownScopes, DataHandleRead } from "./lib/data-store/data-store";
 import { AutoRestConfiguration } from "./lib/configuration/configuration";
@@ -30,7 +30,7 @@ export async function runWithKnownSetOfFiles(
   : Promise<void> {
 
   const dataStore = new DataStore(cancellationToken);
-  const configFileUri = createFileUri("config.yaml");
+  const configFileUri = CreateFileUri("config.yaml");
 
   // input
   const inputView = dataStore.CreateScope(KnownScopes.Input).AsFileScope();
@@ -38,7 +38,7 @@ export async function runWithKnownSetOfFiles(
   await hwConfig.WriteData(Stringify(configuration));
   for (const fileName in inputFiles) {
     if (typeof fileName === "string") {
-      const hwFile = await inputView.Write(createFileUri(fileName));
+      const hwFile = await inputView.Write(CreateFileUri(fileName));
       await hwFile.WriteData(inputFiles[fileName]);
     }
   }
