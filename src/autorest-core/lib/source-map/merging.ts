@@ -31,9 +31,7 @@ function mergeInternal(a: any, b: any, path: JsonPath): any {
       //     }
       // }
       // return result;
-      // throw new Error(`No support for merging arrays (${stringify(path)}, ${yaml.stringify(a)}, ${yaml.stringify(b)})`); // requires remapping source, so no more identitySourceMapping!
-    }
-    else {
+    } else {
       // object nodes - iterate all members
       const result: any = {};
       let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b)).sort();
