@@ -10,7 +10,7 @@ import { mergeYamls, identitySourceMapping } from "../source-map/merging";
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { AutoRestPlugin } from "./plugin-server";
-import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
+import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
 import { resolveRelativeNode } from "../parsing/yaml";
 import { descendants, YAMLNodeWithPath, toAst } from "../approved-imports/yaml";
 import { resolveUri } from "../approved-imports/uri";
@@ -115,12 +115,20 @@ async function EnsureCompleteDefinitionIsPresent(
           const extObj = await externalFiles[fileUri].ReadObject<any>();
           inputs.push(externalFiles[fileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
+          mappings.push(...Array.from(CreateAssignmentMapping(
+            extObj[referencedEntityType][referencedModelName], externalFiles[fileUri].key,
+            [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
+            `resolving '${refPath}' in '${currentFileUri}'`)));
         }
         else {
           await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFileUri, referencedEntityType, referencedModelName);
           const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
           inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
+          mappings.push(...Array.from(CreateAssignmentMapping(
+            currentObj[referencedEntityType][referencedModelName], externalFiles[currentFileUri].key,
+            [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
+            `resolving '${refPath}' in '${currentFileUri}'`)));
         }
       } else {
         // throw new Error(`Model definition '${entityPath}' already present`);
@@ -149,6 +157,10 @@ async function EnsureCompleteDefinitionIsPresent(
         const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
         inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
+        mappings.push(...Array.from(CreateAssignmentMapping(
+          currentObj[defSec][model], externalFiles[currentFileUri].key,
+          [defSec, model], [defSec, model],
+          `resolving '${stringify(dependentRef.path)}' (has allOf on '${reference}') in '${currentFileUri}'`)));
       }
     }
   }
