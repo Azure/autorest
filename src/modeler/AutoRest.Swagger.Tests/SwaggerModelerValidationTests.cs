@@ -47,6 +47,7 @@ namespace AutoRest.Swagger.Tests
             {
                 new Settings
                 {
+                    CodeGenerator = "None",
                     Namespace = "Test",
                     Input = input
                 };
