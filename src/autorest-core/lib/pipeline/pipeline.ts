@@ -6,16 +6,16 @@
 import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configuration/configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
 import { parse } from "../parsing/literateYaml";
-import { mergeYamls, identitySourceMapping } from "../source-map/merging";
+import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { AutoRestPlugin } from "./plugin-server";
 import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
-import { resolveRelativeNode } from "../parsing/yaml";
-import { descendants, YAMLNodeWithPath, toAst } from "../approved-imports/yaml";
+import { ResolveRelativeNode } from "../parsing/yaml";
+import { Descendants, YAMLNodeWithPath, ToAst } from "../approved-imports/yaml";
 import { resolveUri } from "../approved-imports/uri";
 import { From } from "../approved-imports/linq";
-import { Mapping } from "../approved-imports/source-map";
+import { Mapping, Mappings } from "../approved-imports/source-map";
 import { CreateAssignmentMapping } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
@@ -60,7 +60,7 @@ async function EnsureCompleteDefinitionIsPresent(
   var currentDoc = await externalFiles[currentFileUri].ReadYamlAst();
   if (entityType == null || modelName == null) {
     // external references
-    for (const node of descendants(currentDoc)) {
+    for (const node of Descendants(currentDoc)) {
       if (node.path[node.path.length - 1] === "$ref") {
         if (!(node.node.value as string).startsWith("#")) {
           references.push(node);
@@ -69,8 +69,8 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   } else {
     // references within external file
-    const model = resolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
-    for (const node of descendants(model, [entityType, modelName])) {
+    const model = ResolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
+    for (const node of Descendants(model, [entityType, modelName])) {
       if (node.path[node.path.length - 1] === "$ref") {
         references.push(node);
       }
@@ -78,7 +78,7 @@ async function EnsureCompleteDefinitionIsPresent(
   }
 
   const sourceDocObj = await sourceDoc.ReadObject<any>();
-  const mappings = Array.from(identitySourceMapping(sourceDoc.key, await sourceDoc.ReadYamlAst()));
+  let mappings = From(IdentitySourceMapping(sourceDoc.key, await sourceDoc.ReadYamlAst()));
   const inputs: DataHandleRead[] = [sourceDoc];
   for (const { node, path } of references) {
     const refPath = node.value as string;
@@ -115,20 +115,20 @@ async function EnsureCompleteDefinitionIsPresent(
           const extObj = await externalFiles[fileUri].ReadObject<any>();
           inputs.push(externalFiles[fileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
-          mappings.push(...Array.from(CreateAssignmentMapping(
+          mappings = mappings.Concat(CreateAssignmentMapping(
             extObj[referencedEntityType][referencedModelName], externalFiles[fileUri].key,
             [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
-            `resolving '${refPath}' in '${currentFileUri}'`)));
+            `resolving '${refPath}' in '${currentFileUri}'`));
         }
         else {
           await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFileUri, referencedEntityType, referencedModelName);
           const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
           inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
-          mappings.push(...Array.from(CreateAssignmentMapping(
+          mappings = mappings.Concat(CreateAssignmentMapping(
             currentObj[referencedEntityType][referencedModelName], externalFiles[currentFileUri].key,
             [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
-            `resolving '${refPath}' in '${currentFileUri}'`)));
+            `resolving '${refPath}' in '${currentFileUri}'`));
         }
       } else {
         // throw new Error(`Model definition '${entityPath}' already present`);
@@ -140,7 +140,7 @@ async function EnsureCompleteDefinitionIsPresent(
   if (entityType != null && modelName != null) {
     var reference = "#/" + entityType + "/" + modelName;
     const dependentRefs: YAMLNodeWithPath[] = [];
-    for (const node of descendants(currentDoc)) {
+    for (const node of Descendants(currentDoc)) {
       const path = node.path;
       if (path.length > 3 && path[path.length - 3] === "allOf" && path[path.length - 1] === "$ref" && (node.node.value as string).indexOf(reference) !== -1) {
         dependentRefs.push(node);
@@ -157,10 +157,10 @@ async function EnsureCompleteDefinitionIsPresent(
         const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
         inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
-        mappings.push(...Array.from(CreateAssignmentMapping(
+        mappings = mappings.Concat(CreateAssignmentMapping(
           currentObj[defSec][model], externalFiles[currentFileUri].key,
           [defSec, model], [defSec, model],
-          `resolving '${stringify(dependentRef.path)}' (has allOf on '${reference}') in '${currentFileUri}'`)));
+          `resolving '${stringify(dependentRef.path)}' (has allOf on '${reference}') in '${currentFileUri}'`));
       }
     }
   }
@@ -212,7 +212,7 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
       const inputSwagger = inputSwaggers[i];
       const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
       const swagger = await inputSwagger.ReadObject<any>();
-      const mapping: Mapping[] = [];
+      let mapping = From([] as Mappings);
       const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
 
       // digest "info"
@@ -243,23 +243,24 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
 
           // forward client param
           populate.push(() => Object.assign(apiVersionParameter.obj, apiVersionClientParam));
-          mapping.push(...Array.from(CreateAssignmentMapping(
+          mapping = mapping.Concat(CreateAssignmentMapping(
             apiVersionClientParam, inputSwagger.key,
             ["parameters", apiVersionClientParamName], apiVersionParameter.path,
-            "inlining api-version")));
+            "inlining api-version"));
 
           // make constant
           populate.push(() => apiVersionParameter.obj.enum = [version]);
-          mapping.push({
-            name: "inlining api-version", source: inputSwagger.key,
-            original: { path: [<JsonPathComponent>"info", "version"] },
-            generated: { path: apiVersionParameter.path.concat("enum") }
-          });
-          mapping.push({
-            name: "inlining api-version", source: inputSwagger.key,
-            original: { path: [<JsonPathComponent>"info", "version"] },
-            generated: { path: apiVersionParameter.path.concat("enum", 0) }
-          });
+          mapping = mapping.Concat([
+            {
+              name: "inlining api-version", source: inputSwagger.key,
+              original: { path: [<JsonPathComponent>"info", "version"] },
+              generated: { path: apiVersionParameter.path.concat("enum") }
+            },
+            {
+              name: "inlining api-version", source: inputSwagger.key,
+              original: { path: [<JsonPathComponent>"info", "version"] },
+              generated: { path: apiVersionParameter.path.concat("enum", 0) }
+            }]);
         }
 
         // remove api-version client param
@@ -273,10 +274,10 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
           for (const method of methods) {
             if (!method.obj[pc]) {
               populate.push(() => method.obj[pc] = clientPC);
-              mapping.push(...Array.from(CreateAssignmentMapping(
+              mapping = mapping.Concat(CreateAssignmentMapping(
                 clientPC, inputSwagger.key,
                 [pc], method.path.concat([pc]),
-                `inlining ${pc}`)));
+                `inlining ${pc}`));
             }
           }
         }
@@ -284,7 +285,7 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
       }
 
       // finish source map
-      mapping.push(...Array.from(identitySourceMapping(inputSwagger.key, toAst(swagger))));
+      mapping = mapping.Concat(IdentitySourceMapping(inputSwagger.key, ToAst(swagger)));
 
       // populate object
       populate.forEach(f => f());
@@ -295,7 +296,7 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
   }
 
   const hwSwagger = await workingScope.Write("swagger.yaml");
-  let hSwagger = await mergeYamls(inputSwaggers, hwSwagger);
+  let hSwagger = await MergeYamls(inputSwaggers, hwSwagger);
 
   // custom info section
   if (infoSection) {
@@ -303,7 +304,7 @@ async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[]
     const hInfo = await hwInfo.WriteObject({ info: infoSection });
 
     const hwSwagger = await workingScope.Write("swagger_customInfo.yaml");
-    hSwagger = await mergeYamls([hSwagger, hInfo], hwSwagger);
+    hSwagger = await MergeYamls([hSwagger, hInfo], hwSwagger);
   }
 
   return hSwagger;

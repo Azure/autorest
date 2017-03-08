@@ -8,7 +8,7 @@ import { CancellationToken } from "../approved-imports/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/source-map";
 import { readUri } from "../approved-imports/uri";
 import { writeString } from "../approved-imports/writefs";
-import { parse, parseToAst as parseAst, YAMLNode, stringify } from "../approved-imports/yaml";
+import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../approved-imports/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
@@ -215,20 +215,24 @@ export class DataStore extends DataStoreView {
 
   public async Write(key: string): Promise<DataHandleWrite> {
     this.ThrowIfCancelled();
-    return new DataHandleWrite(key, async (data, metadataFactory) => {
+    return new DataHandleWrite(key, async (data, sourceMapFactory) => {
       this.ThrowIfCancelled();
       if (this.store[key]) {
         throw new Error(`can only write '${key}' once`);
       }
       const storeEntry: Data = {
         data: data,
-        metadata: <Metadata><Metadata | null>null
+        metadata: <Metadata><Metadata | null>{}
       };
       this.store[key] = storeEntry;
-      storeEntry.metadata = await metadataFactory(new DataHandleRead(key, Promise.resolve(storeEntry)));
+
+      // metadata
+      const result = await this.ReadStrict(key);
+      storeEntry.metadata.sourceMap = new Lazy(async () => sourceMapFactory(result));
       storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
+      storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
       // await this.Validate(key);
-      return await this.Read(key);
+      return result;
     });
   }
 
@@ -238,6 +242,14 @@ export class DataStore extends DataStoreView {
       return null;
     }
     return new DataHandleRead(key, Promise.resolve(data));
+  }
+
+  public async ReadStrict(key: string): Promise<DataHandleRead> {
+    const result = await this.Read(key);
+    if (result === null) {
+      throw new Error(`Failed to read '${key}'. Key not found.`);
+    }
+    return result;
   }
 
   public async Enum(): Promise<string[]> {
@@ -298,16 +310,11 @@ export class DataStore extends DataStoreView {
  ********************************************/
 
 export class DataHandleWrite {
-  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => Promise<Metadata>) => Promise<DataHandleRead>) {
+  constructor(public readonly key: string, private write: (rawData: string, metadataFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>) => Promise<DataHandleRead>) {
   }
 
   public async WriteDataWithSourceMap(data: string, sourceMapFactory: (readHandle: DataHandleRead) => Promise<RawSourceMap>): Promise<DataHandleRead> {
-    return await this.write(data, async readHandle => {
-      return {
-        sourceMap: new Lazy(() => sourceMapFactory(readHandle)), // defer initializing source map as it depends on read handle
-        yamlAst: new Lazy<YAMLNode>(async () => parseAst(data))
-      };
-    });
+    return await this.write(data, sourceMapFactory);
   }
 
   public async WriteData(data: string, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
@@ -319,7 +326,7 @@ export class DataHandleWrite {
   }
 
   public WriteObject<T>(obj: T, mappings: Mappings = [], mappingSources: DataHandleRead[] = []): Promise<DataHandleRead> {
-    return this.WriteData(stringify(obj), mappings, mappingSources);
+    return this.WriteData(Stringify(obj), mappings, mappingSources);
   }
 }
 
@@ -340,7 +347,7 @@ export class DataHandleRead {
 
   public async ReadObject<T>(): Promise<T> {
     const data = await this.ReadData();
-    return parse<T>(data);
+    return Parse<T>(data);
   }
 
   public async ReadYamlAst(): Promise<YAMLNode> {

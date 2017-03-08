@@ -26,35 +26,35 @@ export interface YAMLNodeWithPath {
 /**
  * Parsing
  */
-export function parseToAst(rawYaml: string): YAMLNode {
+export function ParseToAst(rawYaml: string): YAMLNode {
   return yamlAst.safeLoad(rawYaml, null) as YAMLNode;
 }
 
-export function* descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = []): Iterable<YAMLNodeWithPath> {
+export function* Descendants(yamlAstNode: YAMLNode, currentPath: JsonPath = []): Iterable<YAMLNodeWithPath> {
   yield { path: currentPath, node: yamlAstNode };
   switch (yamlAstNode.kind) {
     case Kind.MAPPING: {
       let astSub = yamlAstNode as YAMLMapping;
-      yield* descendants(astSub.value, currentPath.concat([astSub.key.value]));
+      yield* Descendants(astSub.value, currentPath.concat([astSub.key.value]));
     }
       break;
     case Kind.MAP:
       for (let mapping of (yamlAstNode as YAMLMap).mappings) {
-        yield* descendants(mapping, currentPath);
+        yield* Descendants(mapping, currentPath);
       }
       break;
     case Kind.SEQ: {
       let astSub = yamlAstNode as YAMLSequence;
       for (let i = 0; i < astSub.items.length; ++i) {
-        yield* descendants(astSub.items[i], currentPath.concat([i]));
+        yield* Descendants(astSub.items[i], currentPath.concat([i]));
       }
     }
       break;
   }
 }
 
-export function resolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAMLNodeWithPath {
-  for (let yamlAstNode of descendants(yamlAstRoot)) {
+export function ResolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAMLNodeWithPath {
+  for (let yamlAstNode of Descendants(yamlAstRoot)) {
     if (yamlAstNode.node.anchorId === anchorRef) {
       return yamlAstNode;
     }
@@ -62,7 +62,7 @@ export function resolveAnchorRef(yamlAstRoot: YAMLNode, anchorRef: string): YAML
   throw new Error(`Anchor '${anchorRef}' not found`);
 }
 
-function parseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode): any {
+function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode): any {
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
@@ -77,7 +77,7 @@ function parseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode): any {
         if (mapping.key.kind !== Kind.SCALAR) {
           throw new Error(`Only scalar keys are allowed`);
         }
-        yamlNode.valueObject[mapping.key.value] = parseNodeInternal(yamlRootNode, mapping.value);
+        yamlNode.valueObject[mapping.key.value] = ParseNodeInternal(yamlRootNode, mapping.value);
       }
       return yamlNode.valueObject;
     }
@@ -85,43 +85,43 @@ function parseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode): any {
       yamlNode.valueObject = [];
       const yamlNodeSequence = yamlNode as YAMLSequence;
       for (const item of yamlNodeSequence.items) {
-        yamlNode.valueObject.push(parseNodeInternal(yamlRootNode, item));
+        yamlNode.valueObject.push(ParseNodeInternal(yamlRootNode, item));
       }
       return yamlNode.valueObject;
     }
     case Kind.ANCHOR_REF: {
       const yamlNodeRef = yamlNode as YAMLAnchorReference;
-      return resolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node.valueObject;
+      return ResolveAnchorRef(yamlRootNode, yamlNodeRef.referencesAnchor).node.valueObject;
     }
     case Kind.INCLUDE_REF:
       throw new Error(`INCLUDE_REF not implemented`);
   }
 }
 
-export function parseNode<T>(yamlNode: YAMLNode): T {
-  parseNodeInternal(yamlNode, yamlNode);
+export function ParseNode<T>(yamlNode: YAMLNode): T {
+  ParseNodeInternal(yamlNode, yamlNode);
   return yamlNode.valueObject;
 }
 
-export function cloneAst(ast: YAMLNode): YAMLNode {
-  return parseToAst(stringifyAst(ast));
+export function CloneAst(ast: YAMLNode): YAMLNode {
+  return ParseToAst(StringifyAst(ast));
 }
-export function stringifyAst(ast: YAMLNode): string {
-  return stringify(parseNode<any>(ast));
+export function StringifyAst(ast: YAMLNode): string {
+  return Stringify(ParseNode<any>(ast));
 }
-export function clone<T>(object: T): T {
-  return parse<T>(stringify(object));
+export function Clone<T>(object: T): T {
+  return Parse<T>(Stringify(object));
 }
-export function toAst<T>(object: T): YAMLNode {
-  return parseToAst(stringify(object));
-}
-
-export function parse<T>(rawYaml: string): T {
-  const node = parseToAst(rawYaml);
-  return parseNode<T>(node);
+export function ToAst<T>(object: T): YAMLNode {
+  return ParseToAst(Stringify(object));
 }
 
-export function stringify<T>(object: T): string {
+export function Parse<T>(rawYaml: string): T {
+  const node = ParseToAst(rawYaml);
+  return ParseNode<T>(node);
+}
+
+export function Stringify<T>(object: T): string {
   return "---\n" + yamlAst.safeDump(object, null);
 }
 

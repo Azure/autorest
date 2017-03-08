@@ -5,7 +5,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createFileUri } from "./lib/approved-imports/uri";
-import { stringify } from "./lib/approved-imports/yaml";
+import { Stringify } from "./lib/approved-imports/yaml";
 import { DataStore, DataStoreView, KnownScopes, DataHandleRead } from "./lib/data-store/data-store";
 import { AutoRestConfiguration } from "./lib/configuration/configuration";
 import { RunPipeline, DataPromise } from "./lib/pipeline/pipeline";
@@ -35,7 +35,7 @@ export async function runWithKnownSetOfFiles(
   // input
   const inputView = dataStore.CreateScope(KnownScopes.Input).AsFileScope();
   const hwConfig = await inputView.Write(configFileUri);
-  await hwConfig.WriteData(stringify(configuration));
+  await hwConfig.WriteData(Stringify(configuration));
   for (const fileName in inputFiles) {
     if (typeof fileName === "string") {
       const hwFile = await inputView.Write(createFileUri(fileName));

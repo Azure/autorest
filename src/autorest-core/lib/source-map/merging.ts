@@ -10,13 +10,13 @@ import { Mappings } from "../approved-imports/source-map";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)
-function mergeInternal(a: any, b: any, path: JsonPath): any {
+function Merge(a: any, b: any, path: JsonPath = []): any {
   if (a === null || b === null) {
     throw new Error("Argument cannot be null");
   }
 
   // trivial case
-  if (yaml.stringify(a) === yaml.stringify(b)) {
+  if (yaml.Stringify(a) === yaml.Stringify(b)) {
     return a;
   }
 
@@ -53,21 +53,17 @@ function mergeInternal(a: any, b: any, path: JsonPath): any {
         // try merge objects otherwise
         const aMember = a[key];
         const bMember = b[key];
-        result[key] = mergeInternal(aMember, bMember, subpath);
+        result[key] = Merge(aMember, bMember, subpath);
       }
       return result;
     }
   }
 
-  throw new Error(`'${stringify(path)}' has incomaptible values (${yaml.stringify(a)}, ${yaml.stringify(b)}).`);
+  throw new Error(`'${stringify(path)}' has incomaptible values (${yaml.Stringify(a)}, ${yaml.Stringify(b)}).`);
 }
 
-export function merge<T, U>(a: T, b: U): T & U {
-  return mergeInternal(a, b, []);
-}
-
-export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
-  const descendantsWithPath = yaml.descendants(sourceYamlAst);
+export function* IdentitySourceMapping(sourceYamlFileName: string, sourceYamlAst: yaml.YAMLNode): Mappings {
+  const descendantsWithPath = yaml.Descendants(sourceYamlAst);
   for (const descendantWithPath of descendantsWithPath) {
     const descendantPath = descendantWithPath.path;
     yield {
@@ -79,15 +75,15 @@ export function* identitySourceMapping(sourceYamlFileName: string, sourceYamlAst
   }
 }
 
-export async function mergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
+export async function MergeYamls(yamlInputHandles: DataHandleRead[], yamlOutputHandle: DataHandleWrite): Promise<DataHandleRead> {
   let resultObject: any = {};
   const mappings: Mappings[] = [];
   for (const yamlInputHandle of yamlInputHandles) {
     const rawYaml = await yamlInputHandle.ReadData();
-    resultObject = merge(resultObject, yaml.parse(rawYaml));
-    mappings.push(identitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
+    resultObject = Merge(resultObject, yaml.Parse(rawYaml));
+    mappings.push(IdentitySourceMapping(yamlInputHandle.key, await yamlInputHandle.ReadYamlAst()));
   }
 
-  const resultObjectRaw = yaml.stringify(resultObject);
+  const resultObjectRaw = yaml.Stringify(resultObject);
   return await yamlOutputHandle.WriteData(resultObjectRaw, From(mappings).SelectMany(x => x), yamlInputHandles);
 }

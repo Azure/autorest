@@ -6,7 +6,7 @@
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
 import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/source-map";
-import { parse, stringify } from "../../approved-imports/yaml";
+import { Parse, Stringify } from "../../approved-imports/yaml";
 const utils = require("../../../../../../openapi-validation-tools/lib/util/utils");
 const validation = require("../../../../../../openapi-validation-tools/index");
 
@@ -17,10 +17,10 @@ class OpenApiValidationSemantic {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
-      const swagger = parse<any>(swaggerFile);
+      const swagger = Parse<any>(swaggerFile);
       utils.docCache[swaggerFileName] = swagger;
       const specValidationResult = await validation.validateSpec(swaggerFileName, "off");
-      initiator.WriteFile(sessionId, swaggerFileName, stringify(specValidationResult));
+      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
     }
     return true;
   }
@@ -33,10 +33,10 @@ class OpenApiValidationExample {
     const swaggerFileNames = await initiator.ListInputs(sessionId);
     for (const swaggerFileName of swaggerFileNames) {
       const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
-      const swagger = parse<any>(swaggerFile);
+      const swagger = Parse<any>(swaggerFile);
       utils.docCache[swaggerFileName] = swagger;
       const specValidationResult = await validation.validateExamples(swaggerFileName, null, "off");
-      initiator.WriteFile(sessionId, swaggerFileName, stringify(specValidationResult));
+      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
     }
     return true;
   }

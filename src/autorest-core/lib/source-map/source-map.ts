@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Mappings, Position, SmartPosition } from "../approved-imports/source-map";
-import { descendants, toAst } from "../approved-imports/yaml";
+import { Descendants, ToAst } from "../approved-imports/yaml";
 import { JsonPath, stringify } from "../approved-imports/jsonpath";
 import * as yaml from "../parsing/yaml";
 import { DataHandleRead } from "../data-store/data-store";
@@ -12,7 +12,7 @@ import { DataHandleRead } from "../data-store/data-store";
 export async function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
   const path = (position as any).path;
   if (path) {
-    return yaml.resolvePath(yamlFile, path);
+    return yaml.ResolvePath(yamlFile, path);
   }
   return position as Position;
 }
@@ -43,7 +43,7 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
 }
 
 export function* CreateAssignmentMapping(assignedObject: any, sourceUri: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string): Mappings {
-  for (const descendant of descendants(toAst(assignedObject))) {
+  for (const descendant of Descendants(ToAst(assignedObject))) {
     const path = descendant.path;
     yield {
       name: `${subject} (${stringify(path)})`, source: sourceUri,

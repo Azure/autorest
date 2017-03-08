@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { descendants, Kind, cloneAst, YAMLMapping, newScalar, parseNode } from "../approved-imports/yaml";
-import { mergeYamls, identitySourceMapping } from "../source-map/merging";
+import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "../approved-imports/yaml";
+import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../approved-imports/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { parse as parseLiterate } from "./literate";
@@ -125,12 +125,12 @@ export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite,
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       ++codeBlockIndex;
-      const yamlAst = cloneAst(await data.ReadYamlAst());
+      const yamlAst = CloneAst(await data.ReadYamlAst());
       let mapping: Mapping[] = [];
-      for (const { path, node } of descendants(yamlAst)) {
+      for (const { path, node } of Descendants(yamlAst)) {
         if (path[path.length - 1] === "description" && node.kind === Kind.SEQ) {
           // resolve documentation
-          const mdPath = parseNode<string[]>(node);
+          const mdPath = ParseNode<string[]>(node);
           const heading = resolveMarkdownPath(codeBlock, mdPath);
           if (heading == null) {
             throw new Error(`Heading at path ${mdPath} not found`); // TODO: uniform error reporting with blaming!
@@ -156,9 +156,9 @@ export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite,
       }
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
-        mapping = mapping.concat(Array.from(identitySourceMapping(data.key, yamlAst)));
+        mapping = mapping.concat(Array.from(IdentitySourceMapping(data.key, yamlAst)));
         const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
-        hsConfigFileBlocks.push(await hTarget.WriteObject(parseNode(yamlAst), mapping, [hLiterate, data]));
+        hsConfigFileBlocks.push(await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]));
       } else {
         hsConfigFileBlocks.push(data);
       }
@@ -171,5 +171,5 @@ export async function parse(hLiterate: DataHandleRead, hResult: DataHandleWrite,
   }
 
   // merge
-  return await mergeYamls(hsConfigFileBlocks, hResult);
+  return await MergeYamls(hsConfigFileBlocks, hResult);
 }

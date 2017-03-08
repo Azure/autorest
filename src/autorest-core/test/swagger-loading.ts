@@ -4,7 +4,7 @@ import * as assert from "assert";
 import { DataStore } from "../lib/data-store/data-store";
 import { LoadLiterateSwagger, RunPipeline } from "../lib/pipeline/pipeline";
 import { CreateConfiguration } from "../legacyCli";
-import { stringify } from "../lib/approved-imports/yaml";
+import { Stringify } from "../lib/approved-imports/yaml";
 import { MultiPromiseUtility } from "../lib/approved-imports/multi-promise";
 
 @suite class SwaggerLoading {
@@ -35,7 +35,7 @@ import { MultiPromiseUtility } from "../lib/approved-imports/multi-promise";
     // input
     const inputView = dataStore.CreateScope("input").AsFileScope();
     const hwConfig = await inputView.Write(configFileUri);
-    await hwConfig.WriteData(stringify(config));
+    await hwConfig.WriteData(Stringify(config));
 
     const outputData = await RunPipeline(configFileUri, dataStore);
     const file = MultiPromiseUtility.getSingle(outputData["swagger"]);
