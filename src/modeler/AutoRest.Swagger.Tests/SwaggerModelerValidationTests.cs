@@ -571,6 +571,21 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "arm-resource-properties-bag-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 0);
         }
+
+        [Fact]
+        public void ValidServiceDefinitionParameters()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "service-def-valid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters), 0);
+        }
+
+        [Fact]
+        public void ValidOperationParameters()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "operations-valid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 0);
+        }
+
     }
 
     #endregion
