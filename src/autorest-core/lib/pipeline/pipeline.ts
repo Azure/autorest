@@ -10,10 +10,12 @@ import { mergeYamls, identitySourceMapping } from "../source-map/merging";
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { AutoRestPlugin } from "./plugin-server";
-import { JsonPath } from "../approved-imports/jsonpath";
+import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
 import { resolveRelativeNode } from "../parsing/yaml";
-import { descendants, YAMLNodeWithPath } from "../approved-imports/yaml";
+import { descendants, YAMLNodeWithPath, toAst } from "../approved-imports/yaml";
 import { resolveUri } from "../approved-imports/uri";
+import { From } from "../approved-imports/linq";
+import { Mapping } from "../approved-imports/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -67,7 +69,7 @@ async function EnsureCompleteDefinitionIsPresent(
   } else {
     // references within external file
     const model = resolveRelativeNode(currentDoc, currentDoc, [entityType, modelName]);
-    for (const node of descendants(model, ["$", entityType, modelName])) {
+    for (const node of descendants(model, [entityType, modelName])) {
       if (node.path[node.path.length - 1] === "$ref") {
         references.push(node);
       }
@@ -137,7 +139,7 @@ async function EnsureCompleteDefinitionIsPresent(
     }
     for (const dependentRef of dependentRefs) {
       //the JSON Path "definitions.ModelName.allOf[0].$ref" provides the name of the model that is an allOf on the current model
-      const refs = dependentRef.path.slice(1);
+      const refs = dependentRef.path;
       const defSec = refs[0];
       const model = refs[1];
       if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
@@ -177,9 +179,130 @@ async function LoadLiterateSwaggers(inputScope: DataStoreViewReadonly, inputFile
   return rawSwaggers;
 }
 
-async function MergeYaml(inputSwaggers: DataHandleRead[], workingScope: DataStoreView): Promise<DataHandleRead> {
+type ObjectWithPath<T> = { obj: T, path: JsonPath };
+function getPropertyValues<T, U>(obj: ObjectWithPath<T>): ObjectWithPath<U>[] {
+  const o: T = obj.obj || {};
+  return Object.getOwnPropertyNames(o).map(n => getProperty<T, U>(obj, n));
+}
+function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<U> {
+  return { obj: (obj.obj as any)[key], path: obj.path.concat([key]) };
+}
+function getArrayValues<T>(obj: ObjectWithPath<T[]>): ObjectWithPath<T>[] {
+  const o: T[] = obj.obj || [];
+  return o.map((x, i) => { return { obj: x, path: obj.path.concat([i]) }; });
+}
+
+async function ComposeSwaggers(infoSection: any, inputSwaggers: DataHandleRead[], workingScope: DataStoreView, azureMode: boolean): Promise<DataHandleRead> {
+  if (azureMode) {
+    // prepare component Swaggers (override info, lift version param, ...)
+    for (let i = 0; i < inputSwaggers.length; ++i) {
+      const inputSwagger = inputSwaggers[i];
+      const outputSwagger = await workingScope.Write(`prepared_${i}.yaml`);
+      const swagger = await inputSwagger.ReadObject<any>();
+      const mapping: Mapping[] = [];
+      const populate: (() => void)[] = []; // populate swagger; deferred in order to simplify source map generation
+
+      // digest "info"
+      const info = swagger.info;
+      const version = info.version;
+      delete info.title;
+      delete info.description;
+      delete info.version;
+
+      // extract interesting nodes
+      const paths = From<ObjectWithPath<any>>([])
+        .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "paths")))
+        .Concat(getPropertyValues(getProperty({ obj: swagger, path: [] }, "x-ms-paths")));
+      const methods = paths.SelectMany(getPropertyValues);
+      const parameters =
+        methods.SelectMany(method => getArrayValues<any>(getProperty<any, any>(method, "parameters"))).Concat(
+          paths.SelectMany(path => getArrayValues<any>(getProperty<any, any>(path, "parameters"))));
+
+      // inline api-version params
+      const clientParams = swagger.parameters || {};
+      const apiVersionClientParamName = Object.getOwnPropertyNames(clientParams).filter(n => clientParams[n].name === "api-version")[0];
+      const apiVersionClientParam = apiVersionClientParamName ? clientParams[apiVersionClientParamName] : null;
+      if (apiVersionClientParam) {
+        const apiVersionClientParam = clientParams[apiVersionClientParamName];
+        const apiVersionParameters = parameters.Where(p => p.obj.$ref === `#/parameters/${apiVersionClientParamName}`);
+        for (let apiVersionParameter of apiVersionParameters) {
+          delete apiVersionParameter.obj.$ref;
+
+          // forward client param
+          populate.push(() => Object.assign(apiVersionParameter.obj, apiVersionClientParam));
+          mapping.push(...From(descendants(toAst(apiVersionClientParam))).Select(x => x.path)
+            .Select(p => {
+              return <Mapping>{
+                name: "inlining api-version", source: inputSwagger.key,
+                original: { path: [<JsonPathComponent>"parameters", apiVersionClientParamName].concat(p) },
+                generated: { path: apiVersionParameter.path.concat(p) }
+              };
+            })
+            .ToArray());
+
+          // make constant
+          populate.push(() => apiVersionParameter.obj.enum = [version]);
+          mapping.push({
+            name: "inlining api-version", source: inputSwagger.key,
+            original: { path: [<JsonPathComponent>"info", "version"] },
+            generated: { path: apiVersionParameter.path.concat("enum") }
+          });
+          mapping.push({
+            name: "inlining api-version", source: inputSwagger.key,
+            original: { path: [<JsonPathComponent>"info", "version"] },
+            generated: { path: apiVersionParameter.path.concat("enum", 0) }
+          });
+        }
+
+        // remove api-version client param
+        delete clientParams[apiVersionClientParamName];
+      }
+
+      // inline produces/consumes
+      for (const pc of ["produces", "consumes"]) {
+        const clientPC = swagger[pc];
+        if (clientPC) {
+          for (const method of methods) {
+            if (!method.obj[pc]) {
+              populate.push(() => method.obj[pc] = clientPC);
+              mapping.push(...From(descendants(toAst(clientPC))).Select(x => x.path)
+                .Select(p => {
+                  return <Mapping>{
+                    name: `inlining ${pc}`, source: inputSwagger.key,
+                    original: { path: [<JsonPathComponent>pc].concat(p) },
+                    generated: { path: method.path.concat([pc]).concat(p) }
+                  };
+                })
+                .ToArray());
+            }
+          }
+        }
+        delete swagger[pc];
+      }
+
+      // finish source map
+      mapping.push(...Array.from(identitySourceMapping(inputSwagger.key, toAst(swagger))));
+
+      // populate object
+      populate.forEach(f => f());
+
+      // write back
+      inputSwaggers[i] = await outputSwagger.WriteObject(swagger, mapping, [inputSwagger]);
+    }
+  }
+
   const hwSwagger = await workingScope.Write("swagger.yaml");
-  const hSwagger = await mergeYamls(inputSwaggers, hwSwagger);
+  let hSwagger = await mergeYamls(inputSwaggers, hwSwagger);
+
+  // custom info section
+  if (infoSection) {
+    const hwInfo = await workingScope.Write("info.yaml");
+    const hInfo = await hwInfo.WriteObject({ info: infoSection });
+
+    const hwSwagger = await workingScope.Write("swagger_customInfo.yaml");
+    hSwagger = await mergeYamls([hSwagger, hInfo], hwSwagger);
+  }
+
   return hSwagger;
 }
 
@@ -198,7 +321,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
     config.inputFileUris, workingScope.CreateScope("loader"));
 
   // compose Swaggers
-  const swagger = await MergeYaml(swaggers, workingScope.CreateScope("compose"));
+  const swagger = await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, workingScope.CreateScope("compose"), true);
 
   return {
     componentSwaggers: MultiPromiseUtility.list(swaggers),
