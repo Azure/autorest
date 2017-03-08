@@ -6,49 +6,46 @@
 
 import { createFileUri } from "./lib/approved-imports/uri";
 import { stringify } from "./lib/approved-imports/yaml";
-import { parse } from "./lib/parsing/literateYaml";
-import { DataStore, DataStoreView, KnownScopes } from "./lib/data-store/dataStore";
-import { AutoRestConfiguration, AutoRestConfigurationManager } from "./lib/configuration/configuration";
-import { Pipeline, PipelineProducts } from "./lib/pipeline/pipeline";
+import { DataStore, DataStoreView, KnownScopes, DataHandleRead } from "./lib/data-store/data-store";
+import { AutoRestConfiguration } from "./lib/configuration/configuration";
+import { RunPipeline, DataPromise } from "./lib/pipeline/pipeline";
+import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
+import { CancellationToken } from "./lib/approved-imports/cancallation";
 
 /* @internal */
-export async function run(configurationUri: string, dataStore: DataStoreView = new DataStore()): Promise<PipelineProducts> {
-  // load configuration file
-  const inputView = dataStore.createReadThroughScope(KnownScopes.Input, uri => uri === configurationUri);
-  const hLiterateConfig = await inputView.read(configurationUri);
-  if (hLiterateConfig === null) {
-    throw new Error(`Configuration file '${configurationUri}' not found`);
-  }
+export async function run(
+  configurationUri: string,
+  callback: (data: DataHandleRead) => Promise<void>,
+  cancellationToken: CancellationToken = CancellationToken.None)
+  : Promise<void> {
 
-  // deliteralize
-  const configScope = dataStore.createScope(KnownScopes.Configuration);
-  const hwConfig = await configScope.write("config.yaml");
-  const hConfig = await parse(hLiterateConfig, hwConfig, configScope.createScope("tmp"));
-
-  // configuration manager
-  const config = new AutoRestConfigurationManager(await hConfig.readObject<AutoRestConfiguration>(), configurationUri);
-  const pipeline = new Pipeline(config);
-  return await pipeline.run(dataStore);
+  const dataStore: DataStoreView = new DataStore(cancellationToken);
+  const outputData = await RunPipeline(configurationUri, dataStore);
 }
 
 /* @internal */
-export async function runWithKnownSetOfFiles(configuration: AutoRestConfiguration, inputFiles: { [fileName: string]: string }): Promise<PipelineProducts> {
-  const dataStore = new DataStore();
+export async function runWithKnownSetOfFiles(
+  configuration: AutoRestConfiguration,
+  inputFiles: { [fileName: string]: string },
+  callback: (data: DataHandleRead) => Promise<void>,
+  cancellationToken: CancellationToken = CancellationToken.None)
+  : Promise<void> {
 
+  const dataStore = new DataStore(cancellationToken);
   const configFileUri = createFileUri("config.yaml");
 
   // input
-  const inputView = dataStore.createFileScope(KnownScopes.Input);
-  const hwConfig = await inputView.write(configFileUri);
-  await hwConfig.writeData(stringify(configuration));
+  const inputView = dataStore.CreateScope(KnownScopes.Input).AsFileScope();
+  const hwConfig = await inputView.Write(configFileUri);
+  await hwConfig.WriteData(stringify(configuration));
   for (const fileName in inputFiles) {
     if (typeof fileName === "string") {
-      const hwFile = await inputView.write(createFileUri(fileName));
-      await hwFile.writeData(inputFiles[fileName]);
+      const hwFile = await inputView.Write(createFileUri(fileName));
+      await hwFile.WriteData(inputFiles[fileName]);
     }
   }
 
-  return await run(configFileUri, dataStore);
+  const outputData = await RunPipeline(configFileUri, dataStore);
 }
 
 export interface IFileSystem {
