@@ -54,7 +54,11 @@ namespace AutoRest.Core.Utilities
 
         public string ReadAllText(string path)
         {
-            if (VirtualStore.ContainsKey(path.Replace("\\", "/")))
+            if (VirtualStore.ContainsKey(path))
+            {
+                return VirtualStore[path].ToString();
+            }
+            else if (VirtualStore.ContainsKey(path.Replace("\\", "/")))
             {
                 return VirtualStore[path.Replace("\\", "/")].ToString();
             }
