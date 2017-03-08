@@ -67,7 +67,7 @@ task 'sign-assemblies','', (done) ->
 
     .on 'end', () =>
       # after the files are in the folder, we can call the signing utility
-      codesign "Microsoft Azure SDK (Perks)",
+      codesign "AutoRest",
         "Microsoft Azure .NET SDK"
         unsigned,
         signed,

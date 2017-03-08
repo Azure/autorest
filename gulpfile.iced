@@ -13,6 +13,7 @@ Tasks "dotnet",  # compiling dotnet
 
 # Settings
 Import
+  initialized: false
   solution: "#{basefolder}/AutoRest.sln"
   packages: "#{basefolder}/packages"
   release_name: if argv.nightly then "#{version}-#{today}-2300-nightly"              else if argv.preview then "#{version}-#{now}-preview"              else "#{version}"
@@ -51,7 +52,14 @@ Import
     source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
 
   npminstalls: ()->
-    source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest", "src/generator/AutoRest.NodeJS.Tests","src/generator/AutoRest.NodeJS.Azure.Tests" ,"src/dev/TestServer/server"]
+    source ["src/autorest-core", 
+      "src/autorest" 
+      "src/vscode-autorest/server"
+      "src/vscode-autorest"
+      "src/generator/AutoRest.NodeJS.Tests"
+      "src/generator/AutoRest.NodeJS.Azure.Tests" 
+      "src/dev/TestServer/server"
+    ]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
@@ -66,7 +74,7 @@ Import
   generatedFiles: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
-        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**","!#{each.path}/server/node_modules/**"])
+        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!**/node_modules/**"])
           .on 'end', -> 
             next null
           .pipe foreach (e,n)->
@@ -84,6 +92,11 @@ Import
             e.base = each.base
             more.push e
             n null
+
+
+task "list","",->
+  generatedFiles()
+    .pipe showFiles()
 
 task 'install-binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
@@ -111,7 +124,11 @@ task 'autorest', 'Runs AutoRest', (done)->
   else  
     Fail "You must run #{ info 'gulp build'}' first"
 
+
+
 task 'init', "" ,(done)->
+  return done() if initialized
+  global.initialized = true
   # is the main node_modules out of date?
   doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core") or (! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest")
 

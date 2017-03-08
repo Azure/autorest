@@ -3,6 +3,7 @@ fs = require('fs')
 concurrency = 0 
 queue = []
 global.completed = []
+vfs = require('vinyl-fs');
 
 module.exports =
   # lets us just handle each item in a stream easily.
@@ -29,7 +30,9 @@ module.exports =
       done null
 
   source: (globs, options ) -> 
-    gulp.src( globs, options) 
+    options = options or { }
+    options.follow = true
+    vfs.src( globs, options) 
 
   destination: (globs, options ) -> 
     gulp.dest( globs, options) 
@@ -190,13 +193,16 @@ module.exports =
         fn = (queue.shift())
         fn() 
 
-      if code 
-        echo error "#{options.cwd}"
-        echo error "#{cmdline}"
-        echo warning stderr
-        echo error stdout
+      if code            
+        echo error "Exec Failed #{quiet_info options.cwd} :: #{info cmdline}"  
+        if( stderr.length )
+          echo error "(stderr)"
+          echo marked  ">> #{error stderr}"
+        if( stdout.length ) 
+          echo warning "(stdout)" 
+          echo marked ">> #{ warning stdout}" 
 
-        Fail "Task failed, fast exit"
+        Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)
 
 # build task for global build

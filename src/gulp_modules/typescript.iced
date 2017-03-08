@@ -3,7 +3,7 @@ task 'build', 'typescript', (done)->
   count = 4
   typescriptProjects()
     .pipe foreach (each,next) -> 
-      execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}",{retry:1} ,(code,stdout,stderr) ->
+      execute "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}",{retry:2} ,(code,stdout,stderr) ->
         echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0

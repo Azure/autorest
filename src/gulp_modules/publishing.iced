@@ -3,7 +3,7 @@ task 'build/dotnet/binaries','', (done) ->
     Fail "Build Failed #{ warning stdout } \n#{ error stderr }" if code 
     done();
 
-task 'zip-autorest', '', (done) ->
+task 'zip-autorest', '', () ->
   packagefiles()
     .pipe zip package_name
     .pipe destination packages
@@ -16,7 +16,7 @@ task 'install-node-files' ,'', (done)->
   
   if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules/autorest-core"
     fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/publish/node_modules/autorest-core",'junction' 
-    
+  done();
   return null;
 
 task 'package','From scratch build, sign, and package autorest', (done) -> 
