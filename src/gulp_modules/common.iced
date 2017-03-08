@@ -193,13 +193,16 @@ module.exports =
         fn = (queue.shift())
         fn() 
 
-      if code 
-        echo error "#{options.cwd}"
-        echo error "#{cmdline}"
-        echo warning stderr
-        echo error stdout
+      if code            
+        echo error "Exec Failed #{quiet_info options.cwd} :: #{info cmdline}"  
+        if( stderr.length )
+          echo error "(stderr)"
+          echo marked  ">> #{error stderr}"
+        if( stdout.length ) 
+          echo warning "(stdout)" 
+          echo marked ">> #{ warning stdout}" 
 
-        Fail "Task failed, fast exit"
+        Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)
 
 # build task for global build

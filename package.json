@@ -51,6 +51,7 @@
     "through2": "^2.0.3",
     "typescript": "^2.1.5",
     "vinyl-paths": "^2.1.0",
+    "vinyl-fs": "^2.4.4",
     "yargs": "^6.6.0"
   },
   "dependencies": {

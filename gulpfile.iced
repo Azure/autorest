@@ -52,7 +52,14 @@ Import
     source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
 
   npminstalls: ()->
-    source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest", "src/generator/AutoRest.NodeJS.Tests","src/generator/AutoRest.NodeJS.Azure.Tests" ,"src/dev/TestServer/server"]
+    source ["src/autorest-core", 
+      "src/autorest" 
+      "src/vscode-autorest/server"
+      "src/vscode-autorest"
+      "src/generator/AutoRest.NodeJS.Tests"
+      "src/generator/AutoRest.NodeJS.Azure.Tests" 
+      "src/dev/TestServer/server"
+    ]
 
   typescriptProjects: () -> 
     typescriptProjectFolders()
@@ -67,7 +74,7 @@ Import
   generatedFiles: () -> 
     typescriptProjectFolders()
       .pipe foreach (each,next,more)=>
-        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!#{each.path}/node_modules/**","!#{each.path}/server/node_modules/**"])
+        source(["#{each.path}/**/*.js","#{each.path}/**/*.d.ts" ,"#{each.path}/**/*.js.map", "!**/node_modules/**"])
           .on 'end', -> 
             next null
           .pipe foreach (e,n)->
@@ -85,6 +92,11 @@ Import
             e.base = each.base
             more.push e
             n null
+
+
+task "list","",->
+  generatedFiles()
+    .pipe showFiles()
 
 task 'install-binaries', '', (done)->
   mkdir "-p", "#{os.homedir()}/.autorest/plugins/autorest/#{version}-#{now}-private"
