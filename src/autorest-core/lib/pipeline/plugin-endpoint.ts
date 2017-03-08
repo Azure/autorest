@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { fork } from "child_process";
+import { fork, ChildProcess } from "child_process";
 import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../approved-imports/source-map";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { createMessageConnection, MessageConnection } from "../approved-imports/jsonrpc";
@@ -33,6 +33,10 @@ export class AutoRestPlugin {
 
   public static async FromModule(modulePath: string): Promise<AutoRestPlugin> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
+    return AutoRestPlugin.FromChildProcess(childProc);
+  }
+
+  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestPlugin> {
     // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,

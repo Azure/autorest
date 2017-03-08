@@ -2,7 +2,7 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { Message } from "../lib/pipeline/plugin-api";
-import { AutoRestPlugin } from "../lib/pipeline/plugin-server";
+import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
 import { CancellationToken } from "../lib/approved-imports/cancallation";
 import { DataStore } from "../lib/data-store/data-store";
 

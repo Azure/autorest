@@ -9,7 +9,7 @@ import { Parse } from "../parsing/literateYaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { CancellationToken } from "../approved-imports/cancallation";
-import { AutoRestPlugin } from "./plugin-server";
+import { AutoRestPlugin } from "./plugin-endpoint";
 import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
 import { ResolveRelativeNode } from "../parsing/yaml";
 import { Descendants, YAMLNodeWithPath, ToAst } from "../approved-imports/yaml";

@@ -73,6 +73,21 @@ export abstract class DataStoreViewReadonly {
   }
 }
 
+export class QuickScope extends DataStoreViewReadonly {
+  public constructor(private handles: DataHandleRead[]) {
+    super();
+  }
+
+  public async Enum(): Promise<string[]> {
+    return this.handles.map(x => x.key);
+  }
+
+  public async Read(key: string): Promise<DataHandleRead | null> {
+    const data = this.handles.filter(x => x.key === key)[0];
+    return data || null;
+  }
+}
+
 export abstract class DataStoreView extends DataStoreViewReadonly {
   abstract Write(key: string): Promise<DataHandleWrite>;
 

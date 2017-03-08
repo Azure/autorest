@@ -13,7 +13,7 @@ import { resolve as currentDirectory } from "path";
 import { existsSync } from "fs";
 import { ChildProcess } from "child_process";
 import { CreateFileUri, ResolveUri } from "./lib/approved-imports/uri";
-import { spawnLegacyAutoRest } from "./interop/autorest-dotnet";
+import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration/configuration";
 import { run } from "./index";
@@ -34,7 +34,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
 
 
 
-  const autorestExe = spawnLegacyAutoRest(autorestArgs);
+  const autorestExe = SpawnLegacyAutoRest(autorestArgs);
   autorestExe.stdout.pipe(process.stdout);
   autorestExe.stderr.pipe(process.stderr);
   const exitCode = await awaitable(autorestExe);

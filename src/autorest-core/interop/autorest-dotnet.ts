@@ -38,12 +38,12 @@ function DotNetPath() {
   return "dotnet";
 }
 
-export function spawnLegacyAutoRest(args: string[]): ChildProcess {
+export function SpawnLegacyAutoRest(args: string[]): ChildProcess {
   return spawn(
-    path.join(homedir(), ".autorest", "frameworks", "dotnet"),
+    DotNetPath(),
     [AutoRestDllPath(), ...args]);
 }
 
-export function spawnJsonRpcAutoRest(): ChildProcess {
-  return spawnLegacyAutoRest(["-JsonRpc"]); // TODO: sync with the cowboy
+export function SpawnJsonRpcAutoRest(): ChildProcess {
+  return SpawnLegacyAutoRest(["--server"]);
 }
