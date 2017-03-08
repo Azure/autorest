@@ -15,10 +15,7 @@ export function isLegacy(args: string[]): boolean {
 }
 
 async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfiguration): Promise<void> {
-  const compositeSwaggerFile = await inputScope.Read(uri);
-  if (compositeSwaggerFile === null) {
-    throw new Error(`File '${uri}' not found.`);
-  }
+  const compositeSwaggerFile = await inputScope.ReadStrict(uri);
   const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
   targetConfig["input-file"] = documents.map(d => ResolveUri(uri, d));

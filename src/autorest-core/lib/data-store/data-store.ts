@@ -62,15 +62,13 @@ export abstract class DataStoreViewReadonly {
   public async Dump(targetDir: string): Promise<void> {
     const keys = await this.Enum();
     for (const key of keys) {
-      const dataHandle = await this.Read(key);
-      if (dataHandle !== null) {
-        const data = await dataHandle.ReadData();
-        const metadata = await dataHandle.ReadMetadata();
-        const targetFile = path.join(targetDir, key);
-        await writeString(targetFile, data);
-        await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
-        await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
-      }
+      const dataHandle = await this.ReadStrict(key);
+      const data = await dataHandle.ReadData();
+      const metadata = await dataHandle.ReadMetadata();
+      const targetFile = path.join(targetDir, key);
+      await writeString(targetFile, data);
+      await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
+      await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
     }
   }
 }
@@ -255,10 +253,7 @@ export class DataStore extends DataStoreView {
   }
 
   public async Blame(key: string, position: SmartPosition): Promise<BlameTree> {
-    const data = await this.Read(key);
-    if (data === null) {
-      throw new Error(`Data with key '${key}' not found`);
-    }
+    const data = await this.ReadStrict(key);
     const resolvedPosition = await CompilePosition(position, data);
     return BlameTree.Create(this, {
       source: key,
@@ -269,10 +264,7 @@ export class DataStore extends DataStoreView {
   }
 
   private async CreateInputSourceMapFor(key: string): Promise<RawSourceMap> {
-    const data = await this.Read(key);
-    if (data === null) {
-      throw new Error(`Data with key '${key}' not found`);
-    }
+    const data = await this.ReadStrict(key);
 
     // retrieve all target positions
     const targetPositions: SmartPosition[] = [];

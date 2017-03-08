@@ -115,18 +115,15 @@ export class AutoRestPlugin {
 
     const inputFileHandles = async () => {
       const inputFileNames = Array.from(await inputScope.Enum());
-      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.Read(fn)));
-      return inputFiles as DataHandleRead[];
+      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.ReadStrict(fn)));
+      return inputFiles;
     }
 
     let finishNotifications: Promise<void> = Promise.resolve();
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
-        const file = await inputScope.Read(filename);
-        if (file === null) {
-          throw new Error(`Requested file '${filename}' not found`);
-        }
+        const file = await inputScope.ReadStrict(filename);
         return await file.ReadData();
       },
       async GetValue(key: string): Promise<any> {

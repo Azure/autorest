@@ -20,10 +20,7 @@ import { DataStore } from "../lib/data-store/data-store";
     assert.strictEqual(result, true);
     const producedFiles = await scopeWork.Enum();
     assert.strictEqual(producedFiles.length, 1);
-    const fileHandle = await scopeWork.Read(producedFiles[0]);
-    if (fileHandle === null) {
-      throw new Error("Could not retrieve file.");
-    }
+    const fileHandle = await scopeWork.ReadStrict(producedFiles[0]);
     const message = await fileHandle.ReadObject<Message<number>>();
     assert.strictEqual(message.payload, 42);
   }
@@ -46,10 +43,7 @@ import { DataStore } from "../lib/data-store/data-store";
       assert.strictEqual(result, true);
       const producedFiles = await scopeWork.Enum();
       assert.strictEqual(producedFiles.length, (await scopeInput.Enum()).length);
-      const producedFile = await scopeWork.Read(producedFiles[0]);
-      if (producedFile === null) {
-        throw new Error("Could not retrieve file.");
-      }
+      const producedFile = await scopeWork.ReadStrict(producedFiles[0]);
     }
   }
 }

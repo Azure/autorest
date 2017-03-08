@@ -20,14 +20,6 @@ import { CreateAssignmentMapping } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-async function LoadUri(inputScope: DataStoreViewReadonly, inputFileUri: string): Promise<DataHandleRead> {
-  const handle = await inputScope.Read(inputFileUri);
-  if (handle === null) {
-    throw new Error(`Input file '${inputFileUri}' not found.`);
-  }
-  return handle;
-}
-
 async function DeliteralizeYaml(literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
   const docScope = workingScope.CreateScope(`doc_tmp`);
   const hwRawDoc = await workingScope.Write(`doc.yaml`);
@@ -36,7 +28,7 @@ async function DeliteralizeYaml(literate: DataHandleRead, workingScope: DataStor
 }
 
 async function LoadLiterateYaml(inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
-  const pluginSwaggerInput = await LoadUri(inputScope, inputFileUri);
+  const pluginSwaggerInput = await inputScope.ReadStrict(inputFileUri);
   const pluginDeliteralizeSwagger = DeliteralizeYaml(pluginSwaggerInput, workingScope);
   return pluginDeliteralizeSwagger;
 }
