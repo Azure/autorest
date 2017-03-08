@@ -19,9 +19,13 @@ async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: str
   if (compositeSwaggerFile === null) {
     throw new Error(`File '${uri}' not found.`);
   }
-  const data = await compositeSwaggerFile.ReadObject<{ documents: string[] }>();
+  const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
   targetConfig["input-file"] = documents.map(d => resolveUri(uri, d));
+
+  // forward info section
+  targetConfig.__specials = targetConfig.__specials || {};
+  targetConfig.__specials.infoSectionOverride = data.info;
 }
 
 export async function CreateConfiguration(inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfiguration> {
