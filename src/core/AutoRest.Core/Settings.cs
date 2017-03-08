@@ -240,6 +240,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// If set to true, behave in a way consistent with earlier builds of AutoRest..
         /// </summary>
+        [SettingsInfo("If true, skips the ARM specific Swagger validation step.")]
         [SettingsAlias("skipvalidation")]
         public bool SkipValidation { get; set; }
 
