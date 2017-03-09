@@ -5,7 +5,7 @@
 
 import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef, StringifyAst } from "../approved-imports/yaml";
 import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
-import { IndexToPosition } from "./textUtility";
+import { IndexToPosition } from "./text-utility";
 import { DataHandleRead } from "../data-store/data-store";
 
 

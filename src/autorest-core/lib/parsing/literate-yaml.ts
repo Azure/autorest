@@ -8,7 +8,7 @@ import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 import { Mapping } from "../approved-imports/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { Parse as parseLiterate } from "./literate";
-import { Lines } from "./textUtility";
+import { Lines } from "./text-utility";
 
 function TryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
@@ -110,7 +110,14 @@ function ResolveMarkdownPath(startNode: commonmark.Node, path: string[]): common
   return ResolveMarkdownPath(heading, path);
 }
 
-export async function Parse(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
+export async function Parse(literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const docScope = workingScope.CreateScope(`doc_tmp`);
+  const hwRawDoc = await workingScope.Write(`doc.yaml`);
+  const hRawDoc = await ParseInternal(literate, hwRawDoc, docScope);
+  return hRawDoc;
+}
+
+async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
   let hsConfigFileBlocks: DataHandleRead[] = [];
 
   const rawMarkdown = await hLiterate.ReadData();

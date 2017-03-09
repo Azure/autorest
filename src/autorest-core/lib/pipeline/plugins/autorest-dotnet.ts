@@ -42,10 +42,10 @@ export class AutoRestDotNetPlugin {
   }
 
   public async Validate(swagger: DataHandleRead, workingScope: DataStoreView): Promise<void> {
-    await this.CautiousProcess("validator", _ => { }, new QuickScope([swagger]), workingScope);
+    await this.CautiousProcess("Azure-Validator", _ => { }, new QuickScope([swagger]), workingScope);
   }
 
   public async GenerateCode(targetLanguage: string, swagger: DataHandleRead, workingScope: DataStoreView): Promise<void> {
-    await this.CautiousProcess("generator", _ => targetLanguage, new QuickScope([swagger]), workingScope);
+    await this.CautiousProcess(`${targetLanguage}-Generator`, _ => { }, new QuickScope([swagger]), workingScope);
   }
 }

@@ -2,7 +2,8 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
 import { DataStore } from "../lib/data-store/data-store";
-import { LoadLiterateSwagger, RunPipeline } from "../lib/pipeline/pipeline";
+import { RunPipeline } from "../lib/pipeline/pipeline";
+import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { CreateConfiguration } from "../legacyCli";
 import { Stringify } from "../lib/approved-imports/yaml";
 import { MultiPromiseUtility } from "../lib/approved-imports/multi-promise";
