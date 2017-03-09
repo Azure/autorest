@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         }
 
         /// <summary>
-        /// an initialization method that performs custom operations like setting defaults
+        /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
 
