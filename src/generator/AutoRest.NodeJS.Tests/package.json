@@ -19,12 +19,11 @@
   ],
   "dependencies": {
     "@types/mocha": "^2.2.39",
-    "@types/node": "^7.0.5",
     "@types/should": "^8.1.30",
     "ms-rest": "^1.15.7",
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
-    "mocha": "2.2.5",
+    "mocha": "^3.2.0",
     "moment": "^2.14.1",
     "should": "5.2.0",
     "underscore": "*"
