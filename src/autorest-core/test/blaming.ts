@@ -5,7 +5,6 @@ import { CreateFileUri, ResolveUri } from "../lib/approved-imports/uri";
 import { parse } from "../lib/approved-imports/jsonpath";
 import { DataStore } from "../lib/data-store/data-store";
 import { RunPipeline } from "../lib/pipeline/pipeline";
-import { SpawnSourceMapVisualization } from "../debug-tools";
 
 @suite class Blaming {
 

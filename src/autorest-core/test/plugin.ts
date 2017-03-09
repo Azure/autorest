@@ -25,7 +25,8 @@ import { DataStore } from "../lib/data-store/data-store";
     assert.strictEqual(message.payload, 42);
   }
 
-  @test @timeout(10000) async "validation"() {
+  // SKIPPING because Amar's tool is resolved hacky right now (waiting for "getting plugin bits to disk part")
+  @skip @test @timeout(10000) async "openapi-validation-tools"() {
     const cancellationToken = CancellationToken.None;
     const dataStore = new DataStore(cancellationToken);
     const scopeInput = dataStore.CreateScope("input").AsFileScopeReadThrough();
