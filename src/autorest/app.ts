@@ -112,8 +112,10 @@ class App {
       this.networkEnabled = networkEnabled;
       Console.Debug(`Network Enabled: ${this.networkEnabled}`);
 
+      const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--debug", "--verbose", "--quiet"]);
+
       // Remove bootstrapper args from cmdline
-      // process.argv = From<string>(process.argv).Where(each => From<string>(["version", "list-installed", "list-available", "reset", "help"]).Any(i => each == `--${i}`)).ToArray();
+      process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i)).ToArray();
 
       if (this.reset) {
         rm('-rf', Installer.RootFolder);
