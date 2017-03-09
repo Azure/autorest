@@ -249,6 +249,7 @@ namespace AutoRest.Python.Azure
             codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "long_running_operation_retry_timeout"));
             codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "generate_client_request_id"));
             codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "accept_language"));
+            codeModel.Remove(codeModel.Properties.FirstOrDefault(p => p.Name == "api_version"));
 
             if (acceptLanguage != null) // && acceptLanguage.DefaultValue != "en-US"
             {

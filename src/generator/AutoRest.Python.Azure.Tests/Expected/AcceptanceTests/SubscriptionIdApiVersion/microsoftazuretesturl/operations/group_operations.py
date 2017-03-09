@@ -22,6 +22,7 @@ class GroupOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An objec model deserializer.
+    :ivar api_version: API Version with value '2014-04-01-preview'. Constant value: "2014-04-01-preview".
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -29,6 +30,7 @@ class GroupOperations(object):
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
+        self.api_version = "2014-04-01-preview"
 
         self.config = config
 
@@ -61,7 +63,7 @@ class GroupOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.api_version", self.api_version, 'str')
 
         # Construct headers
         header_parameters = {}
