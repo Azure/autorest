@@ -7,11 +7,6 @@ namespace Petstore.Models
 
     public partial class StorageAccountCheckNameAvailabilityParameters
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// StorageAccountCheckNameAvailabilityParameters class.
-        /// </summary>
-        public StorageAccountCheckNameAvailabilityParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the

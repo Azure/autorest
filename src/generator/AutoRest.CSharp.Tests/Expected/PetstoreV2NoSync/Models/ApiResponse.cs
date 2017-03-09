@@ -16,10 +16,6 @@ namespace Fixtures.PetstoreV2NoSync.Models
 
     public partial class ApiResponse
     {
-        /// <summary>
-        /// Initializes a new instance of the ApiResponse class.
-        /// </summary>
-        public ApiResponse() { }
 
         /// <summary>
         /// Initializes a new instance of the ApiResponse class.

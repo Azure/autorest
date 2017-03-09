@@ -18,10 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     [JsonTransformation]
     public partial class SubProduct : SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of the SubProduct class.
-        /// </summary>
-        public SubProduct() { }
 
         /// <summary>
         /// Initializes a new instance of the SubProduct class.

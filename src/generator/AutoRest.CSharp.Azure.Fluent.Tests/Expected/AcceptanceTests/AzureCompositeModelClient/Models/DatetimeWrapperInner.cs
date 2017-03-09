@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class DatetimeWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the DatetimeWrapperInner class.
-        /// </summary>
-        public DatetimeWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the DatetimeWrapperInner class.

@@ -14,10 +14,6 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     public partial class BurmeseCat : SiameseCat
     {
-        /// <summary>
-        /// Initializes a new instance of the BurmeseCat class.
-        /// </summary>
-        public BurmeseCat() { }
 
         /// <summary>
         /// Initializes a new instance of the BurmeseCat class.

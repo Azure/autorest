@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseLongHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseLongHeaders class.
-        /// </summary>
-        public HeaderResponseLongHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseLongHeaders class.

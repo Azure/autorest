@@ -20,10 +20,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     [JsonTransformation]
     public partial class FlattenParameterGroup
     {
-        /// <summary>
-        /// Initializes a new instance of the FlattenParameterGroup class.
-        /// </summary>
-        public FlattenParameterGroup() { }
 
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.

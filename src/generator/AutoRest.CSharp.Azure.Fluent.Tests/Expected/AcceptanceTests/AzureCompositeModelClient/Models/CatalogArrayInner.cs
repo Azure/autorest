@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class CatalogArrayInner
     {
-        /// <summary>
-        /// Initializes a new instance of the CatalogArrayInner class.
-        /// </summary>
-        public CatalogArrayInner() { }
 
         /// <summary>
         /// Initializes a new instance of the CatalogArrayInner class.

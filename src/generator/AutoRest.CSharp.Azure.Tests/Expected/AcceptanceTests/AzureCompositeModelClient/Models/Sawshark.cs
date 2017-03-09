@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     [Newtonsoft.Json.JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
-        /// <summary>
-        /// Initializes a new instance of the Sawshark class.
-        /// </summary>
-        public Sawshark() { }
 
         /// <summary>
         /// Initializes a new instance of the Sawshark class.

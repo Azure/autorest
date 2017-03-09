@@ -14,10 +14,6 @@ namespace Fixtures.MirrorPrimitives.Models
 
     public partial class Error
     {
-        /// <summary>
-        /// Initializes a new instance of the Error class.
-        /// </summary>
-        public Error() { }
 
         /// <summary>
         /// Initializes a new instance of the Error class.

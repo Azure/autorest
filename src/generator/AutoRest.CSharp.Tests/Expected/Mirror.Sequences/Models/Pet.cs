@@ -17,10 +17,6 @@ namespace Fixtures.MirrorSequences.Models
 
     public partial class Pet
     {
-        /// <summary>
-        /// Initializes a new instance of the Pet class.
-        /// </summary>
-        public Pet() { }
 
         /// <summary>
         /// Initializes a new instance of the Pet class.

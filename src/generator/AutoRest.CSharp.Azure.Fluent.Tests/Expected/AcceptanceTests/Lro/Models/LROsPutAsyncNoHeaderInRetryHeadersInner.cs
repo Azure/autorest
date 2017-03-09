@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROsPutAsyncNoHeaderInRetryHeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROsPutAsyncNoHeaderInRetryHeadersInner class.
-        /// </summary>
-        public LROsPutAsyncNoHeaderInRetryHeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

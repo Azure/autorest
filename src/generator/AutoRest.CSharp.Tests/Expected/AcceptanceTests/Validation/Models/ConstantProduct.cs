@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     /// </summary>
     public partial class ConstantProduct
     {
-        /// <summary>
-        /// Initializes a new instance of the ConstantProduct class.
-        /// </summary>
-        public ConstantProduct() { }
 
         /// <summary>
         /// Static constructor for ConstantProduct class.

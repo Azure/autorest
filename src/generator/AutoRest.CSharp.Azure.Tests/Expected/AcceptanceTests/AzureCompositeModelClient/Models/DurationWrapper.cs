@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class DurationWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the DurationWrapper class.
-        /// </summary>
-        public DurationWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the DurationWrapper class.

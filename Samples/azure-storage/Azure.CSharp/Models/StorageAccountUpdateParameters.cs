@@ -13,11 +13,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class StorageAccountUpdateParameters : IResource
     {
-        /// <summary>
-        /// Initializes a new instance of the StorageAccountUpdateParameters
-        /// class.
-        /// </summary>
-        public StorageAccountUpdateParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccountUpdateParameters

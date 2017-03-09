@@ -10,10 +10,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class Usage
     {
-        /// <summary>
-        /// Initializes a new instance of the Usage class.
-        /// </summary>
-        public Usage() { }
 
         /// <summary>
         /// Initializes a new instance of the Usage class.

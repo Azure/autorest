@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class ByteWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the ByteWrapper class.
-        /// </summary>
-        public ByteWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the ByteWrapper class.

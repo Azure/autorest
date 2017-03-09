@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class DoubleWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the DoubleWrapper class.
-        /// </summary>
-        public DoubleWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the DoubleWrapper class.

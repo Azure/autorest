@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROSADsPostNonRetry400Headers
     {
-        /// <summary>
-        /// Initializes a new instance of the LROSADsPostNonRetry400Headers
-        /// class.
-        /// </summary>
-        public LROSADsPostNonRetry400Headers() { }
 
         /// <summary>
         /// Initializes a new instance of the LROSADsPostNonRetry400Headers

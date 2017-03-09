@@ -19,10 +19,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     [JsonTransformation]
     public partial class SubProductInner : Microsoft.Rest.Azure.SubResource
     {
-        /// <summary>
-        /// Initializes a new instance of the SubProductInner class.
-        /// </summary>
-        public SubProductInner() { }
 
         /// <summary>
         /// Initializes a new instance of the SubProductInner class.

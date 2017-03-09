@@ -14,10 +14,6 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     public partial class Error2
     {
-        /// <summary>
-        /// Initializes a new instance of the Error2 class.
-        /// </summary>
-        public Error2() { }
 
         /// <summary>
         /// Initializes a new instance of the Error2 class.

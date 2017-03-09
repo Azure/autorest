@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     /// </summary>
     public partial class GenericUrl
     {
-        /// <summary>
-        /// Initializes a new instance of the GenericUrl class.
-        /// </summary>
-        public GenericUrl() { }
 
         /// <summary>
         /// Initializes a new instance of the GenericUrl class.

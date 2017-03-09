@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 
     public partial class ClassOptionalWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the ClassOptionalWrapper class.
-        /// </summary>
-        public ClassOptionalWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the ClassOptionalWrapper class.

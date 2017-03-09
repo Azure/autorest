@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class StringWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the StringWrapper class.
-        /// </summary>
-        public StringWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the StringWrapper class.

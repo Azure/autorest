@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     [Newtonsoft.Json.JsonObject("Fish")]
     public partial class FishInner
     {
-        /// <summary>
-        /// Initializes a new instance of the FishInner class.
-        /// </summary>
-        public FishInner() { }
 
         /// <summary>
         /// Initializes a new instance of the FishInner class.

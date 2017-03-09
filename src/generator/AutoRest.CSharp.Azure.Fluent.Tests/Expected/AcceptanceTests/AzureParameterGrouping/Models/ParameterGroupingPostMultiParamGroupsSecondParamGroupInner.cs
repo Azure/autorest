@@ -19,11 +19,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     /// </summary>
     public partial class ParameterGroupingPostMultiParamGroupsSecondParamGroupInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// ParameterGroupingPostMultiParamGroupsSecondParamGroupInner class.
-        /// </summary>
-        public ParameterGroupingPostMultiParamGroupsSecondParamGroupInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

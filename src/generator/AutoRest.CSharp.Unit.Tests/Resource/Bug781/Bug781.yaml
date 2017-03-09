@@ -1,0 +1,30 @@
+﻿---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/operation":
+    put:
+      operationId: deprecated_operation
+      parameters:
+      - name: reqObj
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/ReqObject"
+      responses:
+        '200':
+          description: OK
+definitions:
+  ReqObject:
+    properties:
+      Message:
+        type: string
+        description: This is a response.
+        default: helloserver
+      prop1:
+        type: number
+        description: This is a response.
+    required:
+    - Message

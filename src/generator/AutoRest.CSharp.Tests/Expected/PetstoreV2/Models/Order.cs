@@ -16,10 +16,6 @@ namespace Fixtures.PetstoreV2.Models
 
     public partial class Order
     {
-        /// <summary>
-        /// Initializes a new instance of the Order class.
-        /// </summary>
-        public Order() { }
 
         /// <summary>
         /// Initializes a new instance of the Order class.

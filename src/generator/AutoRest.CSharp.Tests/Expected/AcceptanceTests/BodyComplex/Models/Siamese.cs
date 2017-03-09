@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class Siamese : Cat
     {
-        /// <summary>
-        /// Initializes a new instance of the Siamese class.
-        /// </summary>
-        public Siamese() { }
 
         /// <summary>
         /// Initializes a new instance of the Siamese class.

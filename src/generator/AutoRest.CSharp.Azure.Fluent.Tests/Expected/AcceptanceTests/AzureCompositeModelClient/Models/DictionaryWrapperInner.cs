@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class DictionaryWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the DictionaryWrapperInner class.
-        /// </summary>
-        public DictionaryWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the DictionaryWrapperInner class.

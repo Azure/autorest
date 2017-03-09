@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class DurationWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the DurationWrapperInner class.
-        /// </summary>
-        public DurationWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the DurationWrapperInner class.

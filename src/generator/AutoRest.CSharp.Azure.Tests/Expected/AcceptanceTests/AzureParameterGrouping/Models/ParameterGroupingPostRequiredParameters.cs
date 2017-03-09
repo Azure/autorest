@@ -19,11 +19,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     /// </summary>
     public partial class ParameterGroupingPostRequiredParameters
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// ParameterGroupingPostRequiredParameters class.
-        /// </summary>
-        public ParameterGroupingPostRequiredParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the

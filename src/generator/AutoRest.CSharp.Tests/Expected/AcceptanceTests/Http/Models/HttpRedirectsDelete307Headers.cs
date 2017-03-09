@@ -17,11 +17,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
     /// </summary>
     public partial class HttpRedirectsDelete307Headers
     {
-        /// <summary>
-        /// Initializes a new instance of the HttpRedirectsDelete307Headers
-        /// class.
-        /// </summary>
-        public HttpRedirectsDelete307Headers() { }
 
         /// <summary>
         /// Initializes a new instance of the HttpRedirectsDelete307Headers

@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class SiameseInner : Cat
     {
-        /// <summary>
-        /// Initializes a new instance of the SiameseInner class.
-        /// </summary>
-        public SiameseInner() { }
 
         /// <summary>
         /// Initializes a new instance of the SiameseInner class.

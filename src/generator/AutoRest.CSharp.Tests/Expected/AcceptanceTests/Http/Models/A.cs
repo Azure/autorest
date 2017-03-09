@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
     public partial class A
     {
-        /// <summary>
-        /// Initializes a new instance of the A class.
-        /// </summary>
-        public A() { }
 
         /// <summary>
         /// Initializes a new instance of the A class.

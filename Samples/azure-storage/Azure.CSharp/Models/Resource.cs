@@ -10,10 +10,6 @@ namespace Petstore.Models
 
     public partial class Resource : IResource
     {
-        /// <summary>
-        /// Initializes a new instance of the Resource class.
-        /// </summary>
-        public Resource() { }
 
         /// <summary>
         /// Initializes a new instance of the Resource class.

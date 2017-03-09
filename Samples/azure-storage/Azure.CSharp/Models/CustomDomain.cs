@@ -11,10 +11,6 @@ namespace Petstore.Models
     /// </summary>
     public partial class CustomDomain
     {
-        /// <summary>
-        /// Initializes a new instance of the CustomDomain class.
-        /// </summary>
-        public CustomDomain() { }
 
         /// <summary>
         /// Initializes a new instance of the CustomDomain class.

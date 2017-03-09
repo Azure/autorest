@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class CatalogDictionary
     {
-        /// <summary>
-        /// Initializes a new instance of the CatalogDictionary class.
-        /// </summary>
-        public CatalogDictionary() { }
 
         /// <summary>
         /// Initializes a new instance of the CatalogDictionary class.

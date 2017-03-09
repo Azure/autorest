@@ -21,10 +21,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     [JsonTransformation]
     public partial class ProductInner : Microsoft.Rest.Azure.Resource
     {
-        /// <summary>
-        /// Initializes a new instance of the ProductInner class.
-        /// </summary>
-        public ProductInner() { }
 
         /// <summary>
         /// Initializes a new instance of the ProductInner class.

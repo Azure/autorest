@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class DateWrapper
     {
-        /// <summary>
-        /// Initializes a new instance of the DateWrapper class.
-        /// </summary>
-        public DateWrapper() { }
 
         /// <summary>
         /// Initializes a new instance of the DateWrapper class.

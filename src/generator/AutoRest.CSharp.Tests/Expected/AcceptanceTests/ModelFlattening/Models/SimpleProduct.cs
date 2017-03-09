@@ -20,10 +20,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     [JsonTransformation]
     public partial class SimpleProduct : BaseProduct
     {
-        /// <summary>
-        /// Initializes a new instance of the SimpleProduct class.
-        /// </summary>
-        public SimpleProduct() { }
 
         /// <summary>
         /// Initializes a new instance of the SimpleProduct class.

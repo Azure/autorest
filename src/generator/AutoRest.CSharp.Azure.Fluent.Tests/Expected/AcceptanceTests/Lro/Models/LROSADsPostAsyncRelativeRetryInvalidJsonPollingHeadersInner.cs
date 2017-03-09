@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner class.
-        /// </summary>
-        public LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

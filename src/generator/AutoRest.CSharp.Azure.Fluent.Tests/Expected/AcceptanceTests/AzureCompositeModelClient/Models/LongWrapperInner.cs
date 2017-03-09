@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     public partial class LongWrapperInner
     {
-        /// <summary>
-        /// Initializes a new instance of the LongWrapperInner class.
-        /// </summary>
-        public LongWrapperInner() { }
 
         /// <summary>
         /// Initializes a new instance of the LongWrapperInner class.

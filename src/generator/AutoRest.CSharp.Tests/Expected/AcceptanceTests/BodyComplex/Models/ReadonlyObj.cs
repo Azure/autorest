@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     public partial class ReadonlyObj
     {
-        /// <summary>
-        /// Initializes a new instance of the ReadonlyObj class.
-        /// </summary>
-        public ReadonlyObj() { }
 
         /// <summary>
         /// Initializes a new instance of the ReadonlyObj class.

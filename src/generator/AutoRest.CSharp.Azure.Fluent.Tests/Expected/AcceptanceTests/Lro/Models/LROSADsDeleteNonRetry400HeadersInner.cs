@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROSADsDeleteNonRetry400HeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROSADsDeleteNonRetry400HeadersInner class.
-        /// </summary>
-        public LROSADsDeleteNonRetry400HeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

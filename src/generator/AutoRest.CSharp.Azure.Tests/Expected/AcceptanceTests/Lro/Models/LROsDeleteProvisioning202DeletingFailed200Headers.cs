@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROsDeleteProvisioning202DeletingFailed200Headers
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROsDeleteProvisioning202DeletingFailed200Headers class.
-        /// </summary>
-        public LROsDeleteProvisioning202DeletingFailed200Headers() { }
 
         /// <summary>
         /// Initializes a new instance of the

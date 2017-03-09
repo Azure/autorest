@@ -15,10 +15,6 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 
     public partial class ProductProperties
     {
-        /// <summary>
-        /// Initializes a new instance of the ProductProperties class.
-        /// </summary>
-        public ProductProperties() { }
 
         /// <summary>
         /// Initializes a new instance of the ProductProperties class.

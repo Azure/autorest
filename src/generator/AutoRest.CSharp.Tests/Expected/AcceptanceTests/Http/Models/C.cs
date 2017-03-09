@@ -14,10 +14,6 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
     public partial class C
     {
-        /// <summary>
-        /// Initializes a new instance of the C class.
-        /// </summary>
-        public C() { }
 
         /// <summary>
         /// Initializes a new instance of the C class.

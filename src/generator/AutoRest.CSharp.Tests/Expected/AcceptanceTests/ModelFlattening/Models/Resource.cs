@@ -16,10 +16,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
     public partial class Resource
     {
-        /// <summary>
-        /// Initializes a new instance of the Resource class.
-        /// </summary>
-        public Resource() { }
 
         /// <summary>
         /// Initializes a new instance of the Resource class.

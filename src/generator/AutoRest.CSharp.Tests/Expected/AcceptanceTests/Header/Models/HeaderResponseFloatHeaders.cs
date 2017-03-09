@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseFloatHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseFloatHeaders class.
-        /// </summary>
-        public HeaderResponseFloatHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseFloatHeaders class.

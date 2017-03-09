@@ -20,10 +20,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
     /// </summary>
     public partial class FirstParameterGroupInner
     {
-        /// <summary>
-        /// Initializes a new instance of the FirstParameterGroupInner class.
-        /// </summary>
-        public FirstParameterGroupInner() { }
 
         /// <summary>
         /// Initializes a new instance of the FirstParameterGroupInner class.

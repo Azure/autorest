@@ -17,11 +17,6 @@ namespace Fixtures.AcceptanceTestsHeader.Models
     /// </summary>
     public partial class HeaderResponseDoubleHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the HeaderResponseDoubleHeaders
-        /// class.
-        /// </summary>
-        public HeaderResponseDoubleHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseDoubleHeaders

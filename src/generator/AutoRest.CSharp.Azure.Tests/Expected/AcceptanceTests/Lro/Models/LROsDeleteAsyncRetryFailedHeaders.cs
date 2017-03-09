@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROsDeleteAsyncRetryFailedHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the LROsDeleteAsyncRetryFailedHeaders
-        /// class.
-        /// </summary>
-        public LROsDeleteAsyncRetryFailedHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the LROsDeleteAsyncRetryFailedHeaders

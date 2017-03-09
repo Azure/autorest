@@ -6,11 +6,6 @@ namespace Petstore.Models
 
     public partial class StorageAccountPropertiesUpdateParameters
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// StorageAccountPropertiesUpdateParameters class.
-        /// </summary>
-        public StorageAccountPropertiesUpdateParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the

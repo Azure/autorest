@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     [Newtonsoft.Json.JsonObject("salmon")]
     public partial class Salmon : Fish
     {
-        /// <summary>
-        /// Initializes a new instance of the Salmon class.
-        /// </summary>
-        public Salmon() { }
 
         /// <summary>
         /// Initializes a new instance of the Salmon class.

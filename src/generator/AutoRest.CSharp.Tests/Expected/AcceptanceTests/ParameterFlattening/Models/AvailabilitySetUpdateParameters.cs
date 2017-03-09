@@ -17,11 +17,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
 
     public partial class AvailabilitySetUpdateParameters
     {
-        /// <summary>
-        /// Initializes a new instance of the AvailabilitySetUpdateParameters
-        /// class.
-        /// </summary>
-        public AvailabilitySetUpdateParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the AvailabilitySetUpdateParameters

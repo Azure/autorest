@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
     /// </summary>
     public partial class HeaderCustomNamedRequestIdHeadersInner
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// HeaderCustomNamedRequestIdHeadersInner class.
-        /// </summary>
-        public HeaderCustomNamedRequestIdHeadersInner() { }
 
         /// <summary>
         /// Initializes a new instance of the

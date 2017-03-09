@@ -16,10 +16,6 @@ namespace Fixtures.AdditionalProperties.Models
 
     public partial class WithUntypedDictionary
     {
-        /// <summary>
-        /// Initializes a new instance of the WithUntypedDictionary class.
-        /// </summary>
-        public WithUntypedDictionary() { }
 
         /// <summary>
         /// Initializes a new instance of the WithUntypedDictionary class.

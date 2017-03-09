@@ -18,11 +18,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
     /// </summary>
     public partial class LROsPostAsyncRetrySucceededHeaders
     {
-        /// <summary>
-        /// Initializes a new instance of the
-        /// LROsPostAsyncRetrySucceededHeaders class.
-        /// </summary>
-        public LROsPostAsyncRetrySucceededHeaders() { }
 
         /// <summary>
         /// Initializes a new instance of the

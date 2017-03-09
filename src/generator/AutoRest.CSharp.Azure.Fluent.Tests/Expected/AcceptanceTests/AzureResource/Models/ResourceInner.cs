@@ -21,10 +21,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
     /// </summary>
     public partial class ResourceInner
     {
-        /// <summary>
-        /// Initializes a new instance of the ResourceInner class.
-        /// </summary>
-        public ResourceInner() { }
 
         /// <summary>
         /// Initializes a new instance of the ResourceInner class.

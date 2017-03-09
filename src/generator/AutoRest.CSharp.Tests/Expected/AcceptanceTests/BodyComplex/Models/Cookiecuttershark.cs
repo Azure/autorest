@@ -17,10 +17,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     [Newtonsoft.Json.JsonObject("cookiecuttershark")]
     public partial class Cookiecuttershark : Shark
     {
-        /// <summary>
-        /// Initializes a new instance of the Cookiecuttershark class.
-        /// </summary>
-        public Cookiecuttershark() { }
 
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.

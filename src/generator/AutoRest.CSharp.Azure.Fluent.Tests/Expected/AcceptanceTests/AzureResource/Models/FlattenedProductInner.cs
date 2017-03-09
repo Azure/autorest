@@ -21,10 +21,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
     [JsonTransformation]
     public partial class FlattenedProductInner : Microsoft.Rest.Azure.Resource
     {
-        /// <summary>
-        /// Initializes a new instance of the FlattenedProductInner class.
-        /// </summary>
-        public FlattenedProductInner() { }
 
         /// <summary>
         /// Initializes a new instance of the FlattenedProductInner class.
