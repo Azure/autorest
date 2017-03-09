@@ -1,8 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
-
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
@@ -12,16 +14,22 @@ namespace AutoRest.Go.Model
 {
     public class CodeModelGo : CodeModel
     {
+
+      private static readonly Regex semVerPattern = new Regex(@"^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<tag>\S+))?$", RegexOptions.Compiled);
+      public string Version { get; }
+      public string UserAgent { 
+        get
+        {
+          return $"Azure-SDK-For-Go/{Version} arm-{Namespace}/{ApiVersion}";
+        } 
+      }
+
         public CodeModelGo()
         {
             NextMethodUndefined = new List<IModelType>();
             PagedTypes = new Dictionary<IModelType, string>();
+            Version = FormatVersion(Settings.Instance.PackageVersion);
         }
-
-        public string[] Version => CodeNamerGo.SDKVersionFromPackageVersion(
-                                            !string.IsNullOrEmpty(Settings.Instance.PackageVersion)
-                                                    ? Settings.Instance.PackageVersion
-                                                    : "0.0.0");
 
         public override string Namespace
         {
@@ -227,6 +235,34 @@ namespace AutoRest.Go.Model
                 // client methods are the ones with no method group
                 return Methods.Cast<MethodGo>().Where(m => string.IsNullOrEmpty(m.MethodGroup.Name));
             }
+        }
+
+        /// FormatVersion normalizes a version string into a SemVer if it resembles one. Otherwise,
+        /// it returns the original string unmodified. If version is empty or only comprised of
+        /// whitespace, 
+        public static string FormatVersion(string version) {
+
+          if (string.IsNullOrWhiteSpace(version)){
+            return "0.0.0";
+          }
+
+          var semVerMatch = semVerPattern.Match(version);
+
+          if (semVerMatch.Success) {
+            var builder = new StringBuilder("v");
+            builder.Append(semVerMatch.Groups["major"].Value);
+            builder.Append('.');
+            builder.Append(semVerMatch.Groups["minor"].Value);
+            builder.Append('.');
+            builder.Append(semVerMatch.Groups["patch"].Value);
+            if (semVerMatch.Groups["tag"].Success) {
+              builder.Append('-');
+              builder.Append(semVerMatch.Groups["tag"].Value);
+            }
+            return builder.ToString();
+          }
+
+          return version;
         }
     }
 }

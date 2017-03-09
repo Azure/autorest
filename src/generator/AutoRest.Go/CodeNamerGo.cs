@@ -90,7 +90,6 @@ namespace AutoRest.Go
         public IReadOnlyDictionary<HttpStatusCode, string> StatusCodeToGoString;
 
 
-        private static readonly Regex semVerPattern = new Regex(@"^v?(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)(?:-(?<tag>\S+))?$", RegexOptions.Compiled);
 
         /// <summary>
         /// Initializes a new instance of CodeNamerGo.
@@ -424,27 +423,6 @@ namespace AutoRest.Go
                 builder.Append(CommonInitialisms.Contains(s) ? s.ToUpper() : s);
             }
             return builder.ToString();
-        }
-
-        public static string[] SDKVersionFromPackageVersion(string v)
-        {
-            if (string.IsNullOrEmpty(v))
-            {
-                throw new ArgumentNullException("package version");
-            }
-
-            var ver = semVerPattern.Match(v);
-
-            if (ver.Success)
-            {
-                var tagVal = ver.Groups["tag"].Success ? ver.Groups["tag"].Value : "";
-                return new[] { ver.Groups["major"].Value, ver.Groups["minor"].Value, ver.Groups["patch"].Value, tagVal };
-                 
-            }
-            throw new ArgumentException(
-                paramName: nameof(v),
-                message: "Version strings should be either of the format \"<major>.<minor>.<patch>\" or \"<major>.<minor>.<patch>-<tag>\". Where major, minor, and patch are decimal numbers and tag does not include whitespace.");
-
         }
 
         public override string EscapeDefaultValue(string defaultValue, IModelType type)
