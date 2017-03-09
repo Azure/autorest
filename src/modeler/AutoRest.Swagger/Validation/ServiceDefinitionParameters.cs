@@ -26,12 +26,12 @@ namespace AutoRest.Swagger.Validation
             var serviceDefinition = (ServiceDefinition)context.Root;
             // Check if subscriptionId is used but not defined in global parameters
             bool isSubscriptionIdReferenced = serviceDefinition.Paths.Keys.Any(key => key.ToLower().Contains("{" + SubscriptionId.ToLower() + "}"));
-            if (isSubscriptionIdReferenced && (ParametersMap?.Values.Any(parameter => parameter.Name.ToLower().Equals(SubscriptionId.ToLower()))) == false)
+            if (isSubscriptionIdReferenced && (ParametersMap?.Values.Any(parameter => parameter.Name?.ToLower().Equals(SubscriptionId) == true)) == false)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, SubscriptionId);
             }
             // For ARM specs, api version is almost always required, call it out if it isn't defined in the global params
-            if (ParametersMap?.Values.Any(parameter => parameter.Name.ToLower().Equals(ApiVersion)) == false)
+            if (ParametersMap?.Values.Any(parameter => parameter.Name?.ToLower().Equals(ApiVersion) == true) == false)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ApiVersion);
             }
