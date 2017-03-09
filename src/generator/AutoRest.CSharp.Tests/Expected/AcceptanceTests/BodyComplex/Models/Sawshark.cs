@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark() { }
+        public Sawshark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

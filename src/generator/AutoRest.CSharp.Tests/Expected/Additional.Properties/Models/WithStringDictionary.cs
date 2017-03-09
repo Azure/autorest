@@ -19,7 +19,10 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the WithStringDictionary class.
         /// </summary>
-        public WithStringDictionary() { }
+        public WithStringDictionary()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the WithStringDictionary class.
@@ -30,7 +33,13 @@ namespace Fixtures.AdditionalProperties.Models
         {
             AdditionalProperties = additionalProperties;
             Abc = abc;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unmatched properties from the message are deserialized

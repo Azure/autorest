@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the LROsPostAsyncRetryFailedHeaders
         /// class.
         /// </summary>
-        public LROsPostAsyncRetryFailedHeaders() { }
+        public LROsPostAsyncRetryFailedHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the LROsPostAsyncRetryFailedHeaders
@@ -40,7 +43,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
             AzureAsyncOperation = azureAsyncOperation;
             Location = location;
             RetryAfter = retryAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to

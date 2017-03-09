@@ -19,7 +19,10 @@ namespace Fixtures.PetstoreV2.Models
         /// <summary>
         /// Initializes a new instance of the Tag class.
         /// </summary>
-        public Tag() { }
+        public Tag()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Tag class.
@@ -28,7 +31,13 @@ namespace Fixtures.PetstoreV2.Models
         {
             Id = id;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the IntOptionalWrapper class.
         /// </summary>
-        public IntOptionalWrapper() { }
+        public IntOptionalWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the IntOptionalWrapper class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         public IntOptionalWrapper(int? value = default(int?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark() { }
+        public Shark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Shark class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Age = age;
             Birthday = birthday;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseFloatHeaders class.
         /// </summary>
-        public HeaderResponseFloatHeaders() { }
+        public HeaderResponseFloatHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseFloatHeaders class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseFloatHeaders(double? value = default(double?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header value "value": 0.07 or -3.0

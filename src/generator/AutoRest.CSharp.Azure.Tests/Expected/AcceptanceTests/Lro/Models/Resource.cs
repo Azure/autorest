@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Resource class.
         /// </summary>
-        public Resource() { }
+        public Resource()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Resource class.
@@ -38,7 +41,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
             Tags = tags;
             Location = location;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets resource Id

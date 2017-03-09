@@ -19,7 +19,10 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product() { }
+        public Product()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
@@ -33,7 +36,13 @@ namespace Fixtures.MirrorRecursiveTypes.Models
             ProductId = productId;
             ParentProduct = parentProduct;
             InnerProducts = innerProducts;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for

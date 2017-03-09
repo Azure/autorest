@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the D class.
         /// </summary>
-        public D() { }
+        public D()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the D class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         public D(string httpStatusCode = default(string))
         {
             HttpStatusCode = httpStatusCode;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

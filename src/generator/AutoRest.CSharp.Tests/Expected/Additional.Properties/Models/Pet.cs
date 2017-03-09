@@ -19,7 +19,10 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet() { }
+        public Pet()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Pet class.
@@ -34,7 +37,13 @@ namespace Fixtures.AdditionalProperties.Models
             Wsd = wsd;
             Wud = wud;
             Wtd = wtd;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unmatched properties from the message are deserialized
