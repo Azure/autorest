@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Validation
     {
         private const string SubscriptionId = "SubscriptionId";
         private const string ApiVersion = "api-version";
-        
+
         /// <summary>
         /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
         /// </summary>
@@ -24,22 +24,19 @@ namespace AutoRest.Swagger.Validation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, SwaggerParameter> ParametersMap, RuleContext context)
         {
             var serviceDefinition = (ServiceDefinition)context.Root;
-            if (ValidationUtilities.IsARMServiceDefinition(serviceDefinition))
+            // Check if subscriptionId is used but not defined in global parameters
+            bool isSubscriptionIdReferenced = serviceDefinition.Paths.Keys.Any(key => key.ToLower().Contains("{" + SubscriptionId.ToLower() + "}"));
+            if (isSubscriptionIdReferenced && (ParametersMap?.Values.Any(parameter => parameter.Name.ToLower().Equals(SubscriptionId.ToLower()))) == false)
             {
-                // Check if subscriptionId is used but not defined in global parameters
-                bool isSubscriptionIdReferenced = serviceDefinition.Paths.Keys.Any(key => key.ToLower().Contains("{" + SubscriptionId.ToLower() + "}"));
-                if (isSubscriptionIdReferenced && (ParametersMap?.Values.Any(parameter => parameter.Name.ToLower().Equals(SubscriptionId.ToLower())))==false)
-                {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, SubscriptionId);
-                }
-                // For ARM specs, api version is almost always required, call it out if it isn't defined in the global params
-                if (ParametersMap?.Values.Any(parameter => parameter.Name.ToLower().Equals(ApiVersion)) == false)
-                {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ApiVersion);
-                }
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, SubscriptionId);
+            }
+            // For ARM specs, api version is almost always required, call it out if it isn't defined in the global params
+            if (ParametersMap?.Values.Any(parameter => parameter.Name.ToLower().Equals(ApiVersion)) == false)
+            {
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ApiVersion);
             }
         }
-        
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>

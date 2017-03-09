@@ -17,11 +17,6 @@ namespace AutoRest.Swagger.Model.Utilities
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private const string AzureHostSignature = "management.azure.com";
 
-        // if x-ms-parameterized-host extension is used or if the host is anything of the form management.azure, assume this to be an ARMServiceDefinition
-        // TODO: refine this definition for azure data plain also check x-ms-parameterized-host in detail to ensure this is ARM
-        public static bool IsARMServiceDefinition(ServiceDefinition serviceDefinition) => 
-            serviceDefinition.Extensions.ContainsKey("x-ms-parameterized-host") || serviceDefinition.Host?.EqualsIgnoreCase(AzureHostSignature) == true;
-
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
