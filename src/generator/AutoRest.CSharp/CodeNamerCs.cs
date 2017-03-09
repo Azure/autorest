@@ -88,6 +88,10 @@ namespace AutoRest.CSharp
                 {
                     if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
                     {
+                        if (primaryType.DeclarationName.EqualsIgnoreCase("char"))
+                        {
+                            return "'" + defaultValue + "'";
+                        }
                         return Instance.QuoteValue(defaultValue);
                     }
                     if (primaryType.KnownPrimaryType == KnownPrimaryType.Boolean)
@@ -105,6 +109,10 @@ namespace AutoRest.CSharp
                         return
                             $"Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<{primaryType.Name}>"+
                             $"({Instance.QuoteValue($"\"{defaultValue}\"")}, this.Client.SerializationSettings)";
+                    }
+                    if (primaryType.KnownPrimaryType == KnownPrimaryType.Uuid)
+                    {
+                        return string.Format("new {0}(\"{1}\")", type.Name, defaultValue);
                     }
                 }
             }
