@@ -30,7 +30,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='fooClientRequestId'>
             /// The fooRequestId
             /// </param>
-            public static HeaderCustomNamedRequestIdHeadersInner CustomNamedRequestId(this IHeaderOperations operations, string fooClientRequestId)
+            public static HeaderCustomNamedRequestIdHeaders CustomNamedRequestId(this IHeaderOperations operations, string fooClientRequestId)
             {
                 return operations.CustomNamedRequestIdAsync(fooClientRequestId).GetAwaiter().GetResult();
             }
@@ -48,7 +48,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HeaderCustomNamedRequestIdHeadersInner> CustomNamedRequestIdAsync(this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestIdAsync(this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CustomNamedRequestIdWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -66,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='headerCustomNamedRequestIdParamGroupingParameters'>
             /// Additional parameters for the operation
             /// </param>
-            public static HeaderCustomNamedRequestIdParamGroupingHeadersInner CustomNamedRequestIdParamGrouping(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters)
+            public static HeaderCustomNamedRequestIdParamGroupingHeaders CustomNamedRequestIdParamGrouping(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters)
             {
                 return operations.CustomNamedRequestIdParamGroupingAsync(headerCustomNamedRequestIdParamGroupingParameters).GetAwaiter().GetResult();
             }
@@ -84,7 +84,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HeaderCustomNamedRequestIdParamGroupingHeadersInner> CustomNamedRequestIdParamGroupingAsync(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HeaderCustomNamedRequestIdParamGroupingHeaders> CustomNamedRequestIdParamGroupingAsync(this IHeaderOperations operations, HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(headerCustomNamedRequestIdParamGroupingParameters, null, cancellationToken).ConfigureAwait(false))
                 {

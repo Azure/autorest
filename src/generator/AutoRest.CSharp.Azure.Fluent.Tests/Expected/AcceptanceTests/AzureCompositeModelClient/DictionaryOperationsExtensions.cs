@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DictionaryWrapperInner GetValid(this IDictionaryOperations operations)
+            public static DictionaryWrapper GetValid(this IDictionaryOperations operations)
             {
                 return operations.GetValidAsync().GetAwaiter().GetResult();
             }
@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapperInner> GetValidAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetValidAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DictionaryWrapperInner GetEmpty(this IDictionaryOperations operations)
+            public static DictionaryWrapper GetEmpty(this IDictionaryOperations operations)
             {
                 return operations.GetEmptyAsync().GetAwaiter().GetResult();
             }
@@ -98,7 +98,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapperInner> GetEmptyAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetEmptyAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DictionaryWrapperInner GetNull(this IDictionaryOperations operations)
+            public static DictionaryWrapper GetNull(this IDictionaryOperations operations)
             {
                 return operations.GetNullAsync().GetAwaiter().GetResult();
             }
@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapperInner> GetNullAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetNullAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -170,7 +170,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DictionaryWrapperInner GetNotProvided(this IDictionaryOperations operations)
+            public static DictionaryWrapper GetNotProvided(this IDictionaryOperations operations)
             {
                 return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
@@ -185,7 +185,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapperInner> GetNotProvidedAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetNotProvidedAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

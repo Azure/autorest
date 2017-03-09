@@ -21,6 +21,7 @@ import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.azureresource.ErrorException;
+import fixtures.azureresource.ResourceCollection;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -197,7 +198,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService putResourceCollection" })
         @PUT("azure/resource-flatten/resourcecollection")
-        Observable<Response<ResponseBody>> putResourceCollection(@Body ResourceCollectionInner resourceComplexObject, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
+        Observable<Response<ResponseBody>> putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage, @Header("User-Agent") String userAgent);
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.azureresource.AutoRestResourceFlatteningTestService getResourceCollection" })
         @GET("azure/resource-flatten/resourcecollection")
@@ -639,7 +640,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync() {
-        final ResourceCollectionInner resourceComplexObject = null;
+        final ResourceCollection resourceComplexObject = null;
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
                 @Override
@@ -662,7 +663,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
-    public void putResourceCollection(ResourceCollectionInner resourceComplexObject) {
+    public void putResourceCollection(ResourceCollection resourceComplexObject) {
         putResourceCollectionWithServiceResponseAsync(resourceComplexObject).toBlocking().single().body();
     }
 
@@ -674,7 +675,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+    public ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
         return ServiceFuture.fromResponse(putResourceCollectionWithServiceResponseAsync(resourceComplexObject), serviceCallback);
     }
 
@@ -685,7 +686,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<Void> putResourceCollectionAsync(ResourceCollectionInner resourceComplexObject) {
+    public Observable<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject) {
         return putResourceCollectionWithServiceResponseAsync(resourceComplexObject).map(new Func1<ServiceResponse<Void>, Void>() {
             @Override
             public Void call(ServiceResponse<Void> response) {
@@ -701,7 +702,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
-    public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollectionInner resourceComplexObject) {
+    public Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject) {
         Validator.validate(resourceComplexObject);
         return service.putResourceCollection(resourceComplexObject, this.acceptLanguage(), this.userAgent())
             .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
@@ -730,9 +731,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
-     * @return the ResourceCollectionInner object if successful.
+     * @return the ResourceCollection object if successful.
      */
-    public ResourceCollectionInner getResourceCollection() {
+    public ResourceCollection getResourceCollection() {
         return getResourceCollectionWithServiceResponseAsync().toBlocking().single().body();
     }
 
@@ -743,7 +744,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
-    public ServiceFuture<ResourceCollectionInner> getResourceCollectionAsync(final ServiceCallback<ResourceCollectionInner> serviceCallback) {
+    public ServiceFuture<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         return ServiceFuture.fromResponse(getResourceCollectionWithServiceResponseAsync(), serviceCallback);
     }
 
@@ -751,12 +752,12 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ResourceCollectionInner object
+     * @return the observable to the ResourceCollection object
      */
-    public Observable<ResourceCollectionInner> getResourceCollectionAsync() {
-        return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollectionInner>, ResourceCollectionInner>() {
+    public Observable<ResourceCollection> getResourceCollectionAsync() {
+        return getResourceCollectionWithServiceResponseAsync().map(new Func1<ServiceResponse<ResourceCollection>, ResourceCollection>() {
             @Override
-            public ResourceCollectionInner call(ServiceResponse<ResourceCollectionInner> response) {
+            public ResourceCollection call(ServiceResponse<ResourceCollection> response) {
                 return response.body();
             }
         });
@@ -766,15 +767,15 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
      * Get External Resource as a ResourceCollection.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
-     * @return the observable to the ResourceCollectionInner object
+     * @return the observable to the ResourceCollection object
      */
-    public Observable<ServiceResponse<ResourceCollectionInner>> getResourceCollectionWithServiceResponseAsync() {
+    public Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync() {
         return service.getResourceCollection(this.acceptLanguage(), this.userAgent())
-            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ResourceCollectionInner>>>() {
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<ResourceCollection>>>() {
                 @Override
-                public Observable<ServiceResponse<ResourceCollectionInner>> call(Response<ResponseBody> response) {
+                public Observable<ServiceResponse<ResourceCollection>> call(Response<ResponseBody> response) {
                     try {
-                        ServiceResponse<ResourceCollectionInner> clientResponse = getResourceCollectionDelegate(response);
+                        ServiceResponse<ResourceCollection> clientResponse = getResourceCollectionDelegate(response);
                         return Observable.just(clientResponse);
                     } catch (Throwable t) {
                         return Observable.error(t);
@@ -783,9 +784,9 @@ public class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClien
             });
     }
 
-    private ServiceResponse<ResourceCollectionInner> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return this.restClient().responseBuilderFactory().<ResourceCollectionInner, ErrorException>newInstance(this.serializerAdapter())
-                .register(200, new TypeToken<ResourceCollectionInner>() { }.getType())
+    private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.restClient().responseBuilderFactory().<ResourceCollection, ErrorException>newInstance(this.serializerAdapter())
+                .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

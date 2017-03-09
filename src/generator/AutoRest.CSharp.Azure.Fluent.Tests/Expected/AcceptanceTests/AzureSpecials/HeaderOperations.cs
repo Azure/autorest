@@ -74,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeadersInner>> CustomNamedRequestIdWithHttpMessagesAsync(string fooClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdWithHttpMessagesAsync(string fooClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (fooClientRequestId == null)
             {
@@ -191,7 +191,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeadersInner>();
+            var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("foo-request-id"))
@@ -200,7 +200,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -243,7 +243,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationHeaderResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner>> CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(HeaderCustomNamedRequestIdParamGroupingParametersInner headerCustomNamedRequestIdParamGroupingParameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationHeaderResponse<HeaderCustomNamedRequestIdParamGroupingHeaders>> CustomNamedRequestIdParamGroupingWithHttpMessagesAsync(HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (headerCustomNamedRequestIdParamGroupingParameters == null)
             {
@@ -369,7 +369,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdParamGroupingHeadersInner>();
+            var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdParamGroupingHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("foo-request-id"))
@@ -378,7 +378,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdParamGroupingHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdParamGroupingHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
@@ -421,7 +421,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<bool,HeaderCustomNamedRequestIdHeadHeadersInner>> CustomNamedRequestIdHeadWithHttpMessagesAsync(string fooClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<bool,HeaderCustomNamedRequestIdHeadHeaders>> CustomNamedRequestIdHeadWithHttpMessagesAsync(string fooClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (fooClientRequestId == null)
             {
@@ -538,7 +538,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<bool,HeaderCustomNamedRequestIdHeadHeadersInner>();
+            var _result = new AzureOperationResponse<bool,HeaderCustomNamedRequestIdHeadHeaders>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = _statusCode == System.Net.HttpStatusCode.OK;
@@ -548,7 +548,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             }
             try
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeadHeadersInner>(JsonSerializer.Create(Client.DeserializationSettings));
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeadHeaders>(JsonSerializer.Create(Client.DeserializationSettings));
             }
             catch (JsonException ex)
             {
