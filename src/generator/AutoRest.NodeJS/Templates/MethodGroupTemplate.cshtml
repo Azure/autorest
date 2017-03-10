@@ -10,7 +10,7 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var WebResource = msRest.WebResource;
-
+var HttpOperationResponse = msRest.HttpOperationResponse;
 @if (Model.ContainsTimeSpan)
 {
 @:var moment = require('moment');
@@ -28,6 +28,10 @@ var WebResource = msRest.WebResource;
  */
 function @(Model.TypeName)(client) {
   this.client = client;
+@foreach (var method in Model.MethodTemplateModels)
+{
+  @:this._@(method.Name) = _@(method.Name);
+}
 }
 
 @EmptyLine

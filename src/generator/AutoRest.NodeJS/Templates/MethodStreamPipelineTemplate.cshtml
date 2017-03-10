@@ -2,20 +2,20 @@
 @inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodJs>
 // Send Request
 httpRequest.streamedResponse = true;
-return client.pipeline(httpRequest, function (err, response, responseBody) {
+return client.pipeline(httpRequest, (err, response, responseBody) => {
   if (err) {
     return callback(err);
   }
 @EmptyLine
 
-  var statusCode = response.statusCode;
+  let statusCode = response.statusCode;
   if (@(Model.FailureStatusCodePredicate)) {
-    var error = new Error(util.format('Unexpected status code: %s', statusCode));
+    let error = new Error(util.format('Unexpected status code: %s', statusCode));
     error.statusCode = response.statusCode;
     error.request = msRest.stripRequest(httpRequest);
     error.response = msRest.stripResponse(response);
     if (responseBody === '') responseBody = null;
-    var parsedErrorResponse;
+    let parsedErrorResponse;
     try {
       if (responseBody !== undefined) parsedErrorResponse = JSON.parse(responseBody);
       if (parsedErrorResponse) {
@@ -41,6 +41,6 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
 @EmptyLine
 
   // Create Result
-  var result = response;
+  let result = response;
   return callback(null, result, httpRequest, response);
 });

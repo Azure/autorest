@@ -224,7 +224,7 @@ namespace AutoRest.Core
         /// <param name="prefix"></param>
         /// <param name="comment"></param>
         /// <returns></returns>
-        protected virtual string WrapComment(string prefix, string comment)
+        public virtual string WrapComment(string prefix, string comment)
         {
             if (string.IsNullOrWhiteSpace(comment))
             {

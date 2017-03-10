@@ -13,40 +13,42 @@
 else
 {
     <text>
-/**
- *
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
- @WrapComment(" * ", "@summary " + Model.Summary)@:
-@: *
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
- @WrapComment(" * ", Model.Description)@:
-@: *
-}
-@foreach (var parameter in Model.DocumentationParameters)
-{
- @MethodJs.ConstructParameterDocumentation(
-                      WrapComment(" * ", "@param {"
-                                        + MethodJs.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
-                                        + " " + parameter.Documentation))
-}
-@WrapComment(" * ", " @param {function} callback")
- *
-@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
-@WrapComment(" *                      ", Model.ReturnTypeInfo)
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse))
+@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase())WithHttpOperationResponse = function @(Model.Name.ToCamelCase())WithHttpOperationResponse(@(Model.MethodParameterDeclaration)) {
+  let client = @(Model.ClientReference);
+  let self = this;
+  return new Promise((resolve, reject) => {
+    self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
+      let httpOperationResponse = new HttpOperationResponse(request, response);
+      httpOperationResponse.body = result;
+      err ? reject(err) : resolve(httpOperationResponse);
+      return;
+    });
+  });
+};
+@EmptyLine
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise))
+@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function @(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true))) {
+  let client = @(Model.ClientReference);
+  let self = this;
+  if (!optionalCallback && typeof options === 'function') {
+    optionalCallback = options;
+    options = null;
+  }
+  if (!optionalCallback) {
+    return new Promise((resolve, reject) => {
+      self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
+        err ? reject(err) : resolve(result);
+        return;
+      });
+    });
+  } else {
+    return self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true)));
+  }
+};
+@EmptyLine
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
+function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
   var client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -58,14 +60,14 @@ else
   }
   @EmptyLine
   // Send request
-  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, parsedResult, httpRequest, response){
+  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration), (err, parsedResult, httpRequest, response) => {
     if (err) return callback(err);
     @EmptyLine
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, function (err, pollingResult) {
+    client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, (err, pollingResult) => {
       if (err) return callback(err);
       @EmptyLine
       // Create Result

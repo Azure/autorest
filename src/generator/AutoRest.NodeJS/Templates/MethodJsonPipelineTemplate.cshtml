@@ -2,18 +2,18 @@
 @using AutoRest.NodeJS.Model
 @inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodJs>
 // Send Request
-return client.pipeline(httpRequest, function (err, response, responseBody) {
+return client.pipeline(httpRequest, (err, response, responseBody) => {
   if (err) {
     return callback(err);
   }
-  var statusCode = response.statusCode;
+  let statusCode = response.statusCode;
   if (@(Model.FailureStatusCodePredicate)) {
-    var error = new Error(responseBody);
+    let error = new Error(responseBody);
     error.statusCode = response.statusCode;
     error.request = msRest.stripRequest(httpRequest);
     error.response = msRest.stripResponse(response);
     if (responseBody === '') responseBody = null;
-    var parsedErrorResponse;
+    let parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
       if (parsedErrorResponse) {
@@ -38,7 +38,7 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
   }
 
   // Create Result
-  var result = null;
+  let result = null;
   if (responseBody === '') responseBody = null;
   @Model.InitializeResult
   @foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
