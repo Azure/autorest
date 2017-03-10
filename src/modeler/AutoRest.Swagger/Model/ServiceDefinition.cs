@@ -6,11 +6,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
 using System.Text.RegularExpressions;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -169,7 +169,7 @@ namespace AutoRest.Swagger.Model
         /// <param name="context">The modified document context.</param>
         /// <param name="previous">The original document model.</param>
         /// <returns>A list of messages from the comparison.</returns>
-        public override IEnumerable<ComparisonMessage> Compare(ComparisonContext context, SwaggerBase previous)
+        public override IEnumerable<LogMessage> Compare(ComparisonContext context, SwaggerBase previous)
         {
             if (previous == null)
                 throw new ArgumentNullException("previous");
