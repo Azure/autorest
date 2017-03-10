@@ -10,10 +10,10 @@ using System.Diagnostics.CodeAnalysis;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Properties;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {

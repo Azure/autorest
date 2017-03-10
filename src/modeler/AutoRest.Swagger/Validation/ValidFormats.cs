@@ -4,8 +4,8 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -31,7 +31,7 @@ namespace AutoRest.Swagger.Validation
             var swaggerObject = (context.Parent?.Value as SwaggerObject);
             var knownFormat = swaggerObject?.KnownFormat;
 
-            if(knownFormat != null && knownFormat == Core.Model.KnownFormat.unknown)
+            if(knownFormat != null && knownFormat == AutoRest.Core.Model.KnownFormat.unknown)
             {
                 formatParams = new string[] { swaggerObject?.Format };
                 return false;

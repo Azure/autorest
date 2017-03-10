@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using System.Collections.Generic;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Core.Utilities.Collections;
