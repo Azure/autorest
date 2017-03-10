@@ -50,8 +50,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     }
   }
 
-  // SKIPPING until the cowboy has pushed his JsonRpc stuff ^_^
-  @skip @test async "AutoRest.dll"() {
+  @test async "AutoRest.dll"() {
     const dataStore = new DataStore(CancellationToken.None);
 
     // load swagger

@@ -1,14 +1,21 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"outDir": "out",
-		"lib": [ "es2016" ],
-		"sourceMap": true
-	},
-	"exclude": [
-		"node_modules",
-		"server"
-	]
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [
+      "es6",
+      "es2016",
+      "es2015.collection",
+      "es2015.promise",
+      "es2015.core"
+    ],
+    "newLine": "LF",
+    "experimentalDecorators": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules",
+    "server"
+  ]
 }
