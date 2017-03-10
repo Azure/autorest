@@ -55,4 +55,15 @@ export class AutoRestDotNetPlugin {
     await this.CautiousProcess(`Generator`, _ => targetLanguage, new QuickScope([swagger]), outputScope, messageScope);
     return outputScope;
   }
+
+  public async Model(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
+    const outputScope = workingScope.CreateScope("output");
+    const messageScope = workingScope.CreateScope("messages");
+    await this.CautiousProcess("Modeler", _ => { }, new QuickScope([swagger]), outputScope, messageScope);
+    const results = await outputScope.Enum();
+    if (results.length !== 1) {
+      throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
+    }
+    return await outputScope.ReadStrict(results[0]);
+  }
 }

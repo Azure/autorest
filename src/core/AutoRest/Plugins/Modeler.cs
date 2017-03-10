@@ -10,11 +10,9 @@ using AutoRest.Core.Extensibility;
 using AutoRest.Core;
 using AutoRest.Core.Model;
 
-public class Generator : NewPlugin
+public class Modeler : NewPlugin
 {
-  private string codeGenerator;
-
-  public Generator(Connection connection, string sessionId) : base(connection, sessionId)
+  public Modeler(Connection connection, string sessionId) : base(connection, sessionId)
   { }
 
   protected override async Task<bool> ProcessInternal()
@@ -40,20 +38,7 @@ public class Generator : NewPlugin
     var genericSerializer = new ModelSerializer<CodeModel>();
     var modelAsJson = genericSerializer.ToJson(codeModel);
 
-    using (plugin.Activate())
-    {
-        codeModel = plugin.Serializer.Load(modelAsJson);
-        codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-        plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
-    }
-
-    // write out files
-    var outFS = Settings.Instance.FileSystemOutput;
-    var outFiles = outFS.GetFiles("", "*", System.IO.SearchOption.AllDirectories);
-    foreach (var outFile in outFiles)
-    {
-        WriteFile(outFile, outFS.ReadAllText(outFile), null);
-    }
+    WriteFile("codeMode.yaml", modelAsJson, null);
 
     return true;
   }

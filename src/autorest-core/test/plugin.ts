@@ -90,7 +90,24 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     }
   }
 
-  @test async "AutoRest.dll Generator"() {
+  @test @timeout(5000) async "AutoRest.dll Modeler"() {
+    const dataStore = new DataStore(CancellationToken.None);
+
+    // load swagger
+    const swagger = await LoadLiterateSwagger(
+      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
+      dataStore.CreateScope("loader"));
+
+    // call validator
+    const autorestPlugin = new AutoRestDotNetPlugin();
+    const pluginScope = dataStore.CreateScope("plugin");
+    const resultScope = await autorestPlugin.Model(swagger, pluginScope);
+
+    // check results
+  }
+
+  @test @timeout(5000) async "AutoRest.dll Generator"() {
     const dataStore = new DataStore(CancellationToken.None);
 
     // load swagger
