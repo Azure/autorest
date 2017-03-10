@@ -93,26 +93,33 @@ public class AzureValidator : NewPlugin
   }
   public async Task<bool> Process()
   {
-    using (Start)
+    try
     {
-      AddMessageListener();
-
-      var files = await ListInputs();
-      if (files.Length != 1)
+      using (Start)
       {
-        return false;
-      }
+        AddMessageListener();
 
-      var content = await ReadFile(files[0]);
-      var fs = new MemoryFileSystem();
-      fs.VirtualStore.Add(files[0], new StringBuilder(content));
+        var files = await ListInputs();
+        if (files.Length != 1)
+        {
+          return false;
+        }
 
-      var serviceDefinition = SwaggerParser.Load(files[0], fs);
-      var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-      foreach (var validationEx in validator.GetValidationExceptions(new Uri(files[0]), serviceDefinition))
-      {
-        Logger.Instance.Log(validationEx);
+        var content = await ReadFile(files[0]);
+        var fs = new MemoryFileSystem();
+        fs.VirtualStore.Add(files[0], new StringBuilder(content));
+
+        var serviceDefinition = SwaggerParser.Load(files[0], fs);
+        var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+        foreach (var validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
+        {
+          Logger.Instance.Log(validationEx);
+        }
       }
+    }
+    catch
+    {
+      return false; // replace by more verbose feedback
     }
 
     return true;
