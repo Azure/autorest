@@ -47,7 +47,7 @@ namespace AutoRest.Swagger.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                IEnumerable<ComparisonMessage> messages = modeler.Compare();
+                var messages = modeler.Compare().OfType<ComparisonMessage>();
 
                 // remove debug-level messages
                 messages = messages.Where(each => each.Severity > Category.Debug);
