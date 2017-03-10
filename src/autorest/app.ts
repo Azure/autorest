@@ -20,10 +20,10 @@ class App {
   private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;
   private static listInstalled: number = cli['list-installed'] ? (Number.isInteger(cli['list-installed']) ? cli['list-installed'] : 10) : 0;
 
-  private static version: string = cli.version || cli.latest ? 'latest' : cli['latest-release'] ? 'latest-release' : null;
+  private static version: string = cli.version || (cli.latest ? 'latest' : (cli['latest-release'] ? 'latest-release' : null));
   private static reset: boolean = cli.reset || false;
 
-  private static help: string = cli.help || cli.h || false;
+  private static help: string = cli.help || false;
 
   private static networkEnabled: boolean = true;
   private static pkgVersion: string = require(`${__dirname}/package.json`).version;
@@ -33,9 +33,11 @@ class App {
 
   private static get BuildInfo(): string {
     return `> __Build Information__
-> Bootstrapper :        __${this.pkgVersion}__
-> NetCore framework :   __${this.frameworkVersion || '<none>'}__
-> AutoRest core :       __${this.currentVersion || '<none>'}__`;
+> Autorest Bootstrapper :  __${this.pkgVersion}__
+> NetCore framework :      __${this.frameworkVersion || '<none>'}__
+> Latest Core Installed :  __${this.currentVersion || '<none>'}__
+> Requested Core Version : __${this.version || '<none>'}__`;
+
   }
 
   private static async GetReleases(): Promise<IEnumerable<Release>> {
@@ -115,7 +117,7 @@ class App {
       const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--debug", "--verbose", "--quiet"]);
 
       // Remove bootstrapper args from cmdline
-      process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i)).ToArray();
+      process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i || each.startsWith(`${i}=`) || each.startsWith(`${i}:`))).ToArray();
 
       if (this.reset) {
         rm('-rf', Installer.RootFolder);
@@ -128,7 +130,12 @@ class App {
       this.currentVersion = Installer.LatestAutorestVersion;
       this.frameworkVersion = Installer.LatestFrameworkVersion;
 
-      Console.Log(`# AutoRest`);
+      if (this.version) {
+        Console.Log(`# AutoRest Code Generator (${this.version})`);
+      } else {
+        Console.Log(`# AutoRest Code Generator`);
+      }
+      Console.Log(`(c) 2017 Microsoft Corporation. https://aka.ms/autorest \n`)
       // asking for help
       if (this.help) {
         this.ShowHelp();
@@ -218,7 +225,7 @@ class App {
       }
 
       // check if it's installed
-      if (!Installer.InstalledAutorestVersions.Any(each => each == this.version)) {
+      if (!Installer.InstalledAutorestVersions.Any(each => each === this.version)) {
         Console.Verbose(`AutoRest version '${this.version}' not installed.`);
 
         installs.push(this.GetReleases().then(releases => {
