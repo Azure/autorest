@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { fork } from "child_process";
+import { fork, ChildProcess } from "child_process";
 import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../approved-imports/source-map";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { createMessageConnection, MessageConnection } from "../approved-imports/jsonrpc";
@@ -33,28 +33,26 @@ export class AutoRestPlugin {
 
   public static async FromModule(modulePath: string): Promise<AutoRestPlugin> {
     const childProc = fork(modulePath, [], <any>{ silent: true });
+    return AutoRestPlugin.FromChildProcess(childProc);
+  }
+
+  public static async FromChildProcess(childProc: ChildProcess): Promise<AutoRestPlugin> {
     // childProc.on("error", err => { throw err; });
     const channel = createMessageConnection(
       childProc.stdout,
       childProc.stdin,
-      {
-        error(message) { console.error(message); },
-        info(message) { console.info(message); },
-        log(message) { console.log(message); },
-        warn(message) { console.warn(message); }
-      }
+      console
     );
+    childProc.stderr.pipe(process.stderr);
     const plugin = new AutoRestPlugin(channel);
     channel.listen();
     return plugin;
   }
 
   public constructor(channel: MessageConnection) {
-    const endpoints = this.apiInitiatorEndpoints;
-
     // initiator
     const dispatcher = (fnName: string) => (sessionId: string, ...rest: any[]) => {
-      const endpoint = endpoints[sessionId];
+      const endpoint = this.apiInitiatorEndpoints[sessionId];
       if (endpoint) {
         return (endpoint as any)[fnName](...rest);
       }
@@ -79,9 +77,7 @@ export class AutoRestPlugin {
         return await channel.sendRequest(IAutoRestPluginTarget_Types.GetPluginNames, cancellationToken);
       },
       async Process(pluginName: string, sessionId: string, cancellationToken: CancellationToken): Promise<boolean> {
-        const result = await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
-        await endpoints[sessionId].FinishNotifications();
-        return result;
+        return await channel.sendRequest(IAutoRestPluginTarget_Types.Process, pluginName, sessionId, cancellationToken);
       }
     };
   }
@@ -103,6 +99,9 @@ export class AutoRestPlugin {
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
 
+    // wait for outstanding notifications
+    await this.apiInitiatorEndpoints[sid].FinishNotifications();
+
     // unregister endpoint
     delete this.apiInitiatorEndpoints[sid];
 
@@ -116,18 +115,15 @@ export class AutoRestPlugin {
 
     const inputFileHandles = async () => {
       const inputFileNames = Array.from(await inputScope.Enum());
-      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.Read(fn)));
-      return inputFiles as DataHandleRead[];
+      const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.ReadStrict(fn)));
+      return inputFiles;
     }
 
     let finishNotifications: Promise<void> = Promise.resolve();
     const apiInitiator: IAutoRestPluginInitiatorEndpoint = {
       FinishNotifications(): Promise<void> { return finishNotifications; },
       async ReadFile(filename: string): Promise<string> {
-        const file = await inputScope.Read(filename);
-        if (file === null) {
-          throw new Error(`Requested file '${filename}' not found`);
-        }
+        const file = await inputScope.ReadStrict(filename);
         return await file.ReadData();
       },
       async GetValue(key: string): Promise<any> {
@@ -138,7 +134,10 @@ export class AutoRestPlugin {
         return Array.from(result);
       },
 
-      async WriteFile(filename: string, content: string, sourceMap: Mappings | RawSourceMap = []): Promise<void> {
+      async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {
+        if (!sourceMap) {
+          sourceMap = [];
+        }
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
