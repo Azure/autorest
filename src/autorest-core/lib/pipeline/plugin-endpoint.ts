@@ -90,11 +90,11 @@ export class AutoRestPlugin {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
-  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, workingScope: DataStoreView, cancellationToken: CancellationToken): Promise<boolean> {
+  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, messageScope: DataStoreView, cancellationToken: CancellationToken): Promise<boolean> {
     const sid = AutoRestPlugin.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(configuration, inputScope, workingScope, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(configuration, inputScope, outputScope, messageScope, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
@@ -108,9 +108,7 @@ export class AutoRestPlugin {
     return result;
   }
 
-  private static CreateEndpointFor(configuration: (key: string) => any, inputScope: DataStoreViewReadonly, workingScope: DataStoreView, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
-    const workingScopeOutput = workingScope.CreateScope("output");
-    const workingScopeMessages = workingScope.CreateScope("messages");
+  private static CreateEndpointFor(configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, messageScope: DataStoreView, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
     let messageId: number = 0;
 
     const inputFileHandles = async () => {
@@ -142,7 +140,7 @@ export class AutoRestPlugin {
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
-        const file = await workingScopeOutput.Write(filename);
+        const file = await outputScope.Write(filename);
         if (typeof (sourceMap as any).mappings === "string") {
           await file.WriteDataWithSourceMap(content, async () => sourceMap);
         } else {
@@ -153,11 +151,15 @@ export class AutoRestPlugin {
         notify();
       },
       async Message(message: Message<any>, path?: SmartPosition, sourceFile?: string): Promise<void> {
+        if (message.channel === "FATAL") {
+          throw new Error(message.message);
+        }
+
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
-        const dataHandle = await workingScopeMessages.Write(`message_${messageId++}.yaml`);
+        const dataHandle = await messageScope.Write(`message_${messageId++}.yaml`);
         const mappings: Mapping[] = [];
         const files = await inputFileHandles();
         if (path) {

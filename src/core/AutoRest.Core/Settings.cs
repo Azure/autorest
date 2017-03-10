@@ -90,8 +90,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         public IDictionary<string, object> CustomSettings { get; private set; }
 
-        private string _input;
-
         // The CommandLineInfo attribute is reflected to display help.
         // Prefer to show required properties before optional.
         // Although not guaranteed by the Framework, the iteration order matches the

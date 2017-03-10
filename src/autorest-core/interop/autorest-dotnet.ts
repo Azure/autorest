@@ -8,7 +8,7 @@ import * as fs from "fs";
 import { homedir } from "os";
 import * as path from "path";
 
-function AutoRestDllPath() {
+function AutoRestDllPath(): string {
   // try relative path to __dirname
   let result = path.join(__dirname, "../../AutoRest.dll");
   if (fs.existsSync(result)) {
@@ -30,9 +30,9 @@ function AutoRestDllPath() {
   throw new Error("Unable to find AutoRest.dll.");
 }
 
-function DotNetPath() {
+function DotNetPath(): string {
   // try global installation directory
-  let result = path.join(homedir(), ".autorest", "frameworks", "dotnet")
+  let result = path.join(homedir(), ".autorest", "frameworks", "dotnet");
   if (fs.existsSync(result)) {
     return result;
   }
