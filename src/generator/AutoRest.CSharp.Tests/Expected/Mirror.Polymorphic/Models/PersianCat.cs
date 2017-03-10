@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the PersianCat class.
         /// </summary>
-        public PersianCat() { }
+        public PersianCat()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the PersianCat class.
@@ -30,7 +33,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description, color)
         {
             Size = size;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets cat size

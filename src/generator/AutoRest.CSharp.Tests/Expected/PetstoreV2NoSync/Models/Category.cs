@@ -19,7 +19,10 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Initializes a new instance of the Category class.
         /// </summary>
-        public Category() { }
+        public Category()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Category class.
@@ -28,7 +31,13 @@ namespace Fixtures.PetstoreV2NoSync.Models
         {
             Id = id;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

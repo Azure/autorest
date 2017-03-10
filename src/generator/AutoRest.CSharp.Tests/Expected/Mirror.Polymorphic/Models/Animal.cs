@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Animal class.
         /// </summary>
-        public Animal() { }
+        public Animal()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Animal class.
@@ -28,7 +31,13 @@ namespace Fixtures.MirrorPolymorphic.Models
         {
             Id = id;
             Description = description;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets id.

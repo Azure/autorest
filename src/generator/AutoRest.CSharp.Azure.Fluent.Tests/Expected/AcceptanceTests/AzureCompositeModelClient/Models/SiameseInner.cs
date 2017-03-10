@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the SiameseInner class.
         /// </summary>
-        public SiameseInner() { }
+        public SiameseInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SiameseInner class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             : base(id, name, color, hates)
         {
             Breed = breed;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

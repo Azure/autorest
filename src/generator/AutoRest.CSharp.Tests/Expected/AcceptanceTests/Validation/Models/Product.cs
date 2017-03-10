@@ -26,6 +26,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public Product()
         {
             Child = new ChildProduct();
+            CustomInit();
         }
 
         /// <summary>
@@ -46,6 +47,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             Image = image;
             Child = child;
             ConstStringAsEnum = constStringAsEnum;
+            CustomInit();
         }
         /// <summary>
         /// Static constructor for Product class.
@@ -56,6 +58,11 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             ConstInt = 0;
             ConstString = "constant";
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets non required array of unique items from 0 to 6

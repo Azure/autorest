@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the DictionaryWrapperInner class.
         /// </summary>
-        public DictionaryWrapperInner() { }
+        public DictionaryWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DictionaryWrapperInner class.
@@ -27,7 +30,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public DictionaryWrapperInner(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
         {
             DefaultProgram = defaultProgram;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

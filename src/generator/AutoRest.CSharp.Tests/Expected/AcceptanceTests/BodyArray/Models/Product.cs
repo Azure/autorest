@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyArray.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product() { }
+        public Product()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyArray.Models
         {
             Integer = integer;
             StringProperty = stringProperty;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

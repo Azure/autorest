@@ -48,6 +48,8 @@ function AutoRestResourceFlatteningTestService(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   this.models = models;
   msRest.addSerializationMixin(this);
 }

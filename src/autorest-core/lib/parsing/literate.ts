@@ -7,14 +7,14 @@ import * as commonmark from "../approved-imports/commonmark";
 import { Mappings } from "../approved-imports/source-map";
 import { DataHandleRead, DataStoreView } from "../data-store/data-store";
 
-export async function parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
+export async function Parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {
   const result: { data: DataHandleRead, codeBlock: commonmark.Node }[] = [];
   const rawMarkdown = await hConfigFile.ReadData();
-  for (const codeBlock of parseCodeblocks(rawMarkdown)) {
+  for (const codeBlock of ParseCodeblocks(rawMarkdown)) {
     const codeBlockKey = `${hConfigFile.key}_codeBlock_${codeBlock.sourcepos[0][0]}`;
 
     const data = codeBlock.literal;
-    const mappings = getSourceMapForCodeBlock(hConfigFile.key, codeBlock);
+    const mappings = GetSourceMapForCodeBlock(hConfigFile.key, codeBlock);
 
     const hwCodeBlock = await intermediateScope.Write(codeBlockKey);
     const hCodeBlock = await hwCodeBlock.WriteData(data, mappings, [hConfigFile]);
@@ -26,7 +26,7 @@ export async function parse(hConfigFile: DataHandleRead, intermediateScope: Data
   return result;
 }
 
-function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
+function* GetSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark.Node): Mappings {
   const numLines = codeBlock.sourcepos[1][0] - codeBlock.sourcepos[0][0] + (codeBlock.info === null ? 1 : -1);
   for (var i = 0; i < numLines; ++i) {
     yield {
@@ -44,7 +44,7 @@ function* getSourceMapForCodeBlock(sourceFileName: string, codeBlock: commonmark
   }
 }
 
-function* parseCodeblocks(markdown: string): Iterable<commonmark.Node> {
+function* ParseCodeblocks(markdown: string): Iterable<commonmark.Node> {
   const parser = new commonmark.Parser();
   const parsed = parser.parse(markdown);
   const walker = parsed.walker();

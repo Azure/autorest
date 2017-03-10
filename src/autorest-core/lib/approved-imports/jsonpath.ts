@@ -9,9 +9,9 @@ export type JsonPathComponent = jsonpath.PathComponent;
 export type JsonPath = JsonPathComponent[];
 
 export function parse(jsonPath: string): JsonPath {
-  return jsonpath.parse(jsonPath).map(part => part.expression.value);
+  return jsonpath.parse(jsonPath).map(part => part.expression.value).slice(1);
 }
 
 export function stringify(jsonPath: JsonPath): string {
-  return jsonpath.stringify(jsonPath);
+  return jsonpath.stringify(["$" as JsonPathComponent].concat(jsonPath));
 }

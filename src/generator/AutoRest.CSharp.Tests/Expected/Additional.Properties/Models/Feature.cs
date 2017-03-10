@@ -17,7 +17,10 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the Feature class.
         /// </summary>
-        public Feature() { }
+        public Feature()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Feature class.
@@ -26,7 +29,13 @@ namespace Fixtures.AdditionalProperties.Models
         {
             Foo = foo;
             Bar = bar;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

@@ -20,11 +20,30 @@ namespace AutoRest.Python
         {
             var codeModel = cm as CodeModelPy;
 
+            TransformGroupApiVersionToLocal(codeModel);
             SwaggerExtensions.NormalizeClientModel(codeModel);
             PopulateAdditionalProperties(codeModel);
             Flattening(codeModel);
             GenerateConstantProperties(codeModel);
             return codeModel;
+        }
+
+        private void TransformGroupApiVersionToLocal(CodeModelPy codeModel)
+        {
+            foreach (var methodGroup in codeModel.MethodGroupModels)
+            {
+                // isClientProperty + ApiVersion will not select anything in Composite mode
+                var apiVersionParameters = methodGroup.MethodTemplateModels.SelectMany(x => x.Parameters)
+                    .Where(p => p.IsClientProperty && p.SerializedName == "api-version");
+
+                foreach (var apiVersionParameter in apiVersionParameters)
+                {
+                    apiVersionParameter.Name = "api_version";
+                    apiVersionParameter.ClientProperty = null;
+                    apiVersionParameter.IsConstant = true;
+                    apiVersionParameter.DefaultValue = codeModel.ApiVersion;
+                }
+            }
         }
 
         protected void Flattening(CodeModelPy codeModel)
