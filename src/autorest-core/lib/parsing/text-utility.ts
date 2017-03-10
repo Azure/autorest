@@ -5,7 +5,7 @@
 
 const regexNewLine = /\r?\n/g;
 
-function lineIndices(text: string): number[] {
+function LineIndices(text: string): number[] {
   let indices = [0];
 
   let match: RegExpExecArray | null;
@@ -16,12 +16,12 @@ function lineIndices(text: string): number[] {
   return indices;
 }
 
-export function lines(text: string): string[] {
+export function Lines(text: string): string[] {
   return text.split(regexNewLine);
 }
 
-export function indexToPosition(text: string, index: number): sourceMap.Position {
-  const startIndices = lineIndices(text);
+export function IndexToPosition(text: string, index: number): sourceMap.Position {
+  const startIndices = LineIndices(text);
   // bin. search for last `<item> <= index`
   let lineIndexMin = 0;
   let lineIndexMax = startIndices.length;

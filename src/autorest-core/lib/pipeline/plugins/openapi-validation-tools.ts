@@ -6,14 +6,38 @@
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
 import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/source-map";
+import { Parse, Stringify } from "../../approved-imports/yaml";
+const utils = require("../../../../../../openapi-validation-tools/lib/util/utils");
+const validation = require("../../../../../../openapi-validation-tools/index");
 
-
-class DummyPlugin {
-  public static readonly Name = "dummy";
+class OpenApiValidationSemantic {
+  public static readonly Name = "semantic validation";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
-    const setting: string = await initiator.GetValue(sessionId, "truth");
-    initiator.Message(sessionId, <Message<number>>{ channel: "DEBUG", message: setting, payload: 42 });
+    const swaggerFileNames = await initiator.ListInputs(sessionId);
+    for (const swaggerFileName of swaggerFileNames) {
+      const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
+      const swagger = Parse<any>(swaggerFile);
+      utils.docCache[swaggerFileName] = swagger;
+      const specValidationResult = await validation.validateSpec(swaggerFileName, "off");
+      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
+    }
+    return true;
+  }
+}
+
+class OpenApiValidationExample {
+  public static readonly Name = "example validation";
+
+  public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
+    const swaggerFileNames = await initiator.ListInputs(sessionId);
+    for (const swaggerFileName of swaggerFileNames) {
+      const swaggerFile = await initiator.ReadFile(sessionId, swaggerFileName);
+      const swagger = Parse<any>(swaggerFile);
+      utils.docCache[swaggerFileName] = swagger;
+      const specValidationResult = await validation.validateExamples(swaggerFileName, null, "off");
+      initiator.WriteFile(sessionId, swaggerFileName, Stringify(specValidationResult));
+    }
     return true;
   }
 }
@@ -22,13 +46,15 @@ class PluginHost implements IAutoRestPluginTarget {
   public constructor(private readonly initiator: IAutoRestPluginInitiator) { }
 
   public async GetPluginNames(): Promise<string[]> {
-    return [DummyPlugin.Name];
+    return [OpenApiValidationSemantic.Name, OpenApiValidationExample.Name];
   }
 
   public async Process(pluginName: string, sessionId: string): Promise<boolean> {
     switch (pluginName) {
-      case DummyPlugin.Name:
-        return new DummyPlugin().Process(sessionId, this.initiator);
+      case OpenApiValidationSemantic.Name:
+        return new OpenApiValidationSemantic().Process(sessionId, this.initiator);
+      case OpenApiValidationExample.Name:
+        return new OpenApiValidationExample().Process(sessionId, this.initiator);
       default:
         return false;
     }
