@@ -41,13 +41,9 @@ export class AutoRestPlugin {
     const channel = createMessageConnection(
       childProc.stdout,
       childProc.stdin,
-      {
-        error(message) { console.error(message); },
-        info(message) { console.info(message); },
-        log(message) { console.log(message); },
-        warn(message) { console.warn(message); }
-      }
+      console
     );
+    childProc.stderr.pipe(process.stderr);
     const plugin = new AutoRestPlugin(channel);
     channel.listen();
     return plugin;

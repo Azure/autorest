@@ -140,6 +140,12 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
   }
 
   public async Read(uri: string): Promise<DataHandleRead> {
+    // special URI handlers
+    // - GitHub
+    if (uri.startsWith('https://github')) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    }
+
     // prope cache
     const existingData = await this.slave.Read(uri);
     if (existingData !== null) {

@@ -35,17 +35,17 @@ export class AutoRestDotNetPlugin {
       throw new Error(`The AutoRest dotnet extension does not offer a plugin called '${pluginName}'.`);
     }
     // process
-    const success = ep.Process(pluginName, configuration, inputScope, workingScope, CancellationToken.None);
+    const success = await ep.Process(pluginName, configuration, inputScope, workingScope, CancellationToken.None);
     if (!success) {
       throw new Error(`Plugin ${pluginName} failed.`);
     }
   }
 
   public async Validate(swagger: DataHandleRead, workingScope: DataStoreView): Promise<void> {
-    await this.CautiousProcess("Azure-Validator", _ => { }, new QuickScope([swagger]), workingScope);
+    await this.CautiousProcess("AzureValidator", _ => { }, new QuickScope([swagger]), workingScope);
   }
 
   public async GenerateCode(targetLanguage: string, swagger: DataHandleRead, workingScope: DataStoreView): Promise<void> {
-    await this.CautiousProcess(`${targetLanguage}-Generator`, _ => { }, new QuickScope([swagger]), workingScope);
+    await this.CautiousProcess(`${targetLanguage}Generator`, _ => { }, new QuickScope([swagger]), workingScope);
   }
 }

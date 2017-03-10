@@ -9,27 +9,30 @@ import { homedir } from "os";
 import * as path from "path";
 
 function AutoRestDllPath() {
-  let result = path.join(__dirname, "../../../AutoRest.dll");
-
   // try relative path to __dirname
+  let result = path.join(__dirname, "../../AutoRest.dll");
   if (fs.existsSync(result)) {
     return result;
   }
 
   // try relative to process.argv[1]
   result = path.join(path.dirname(process.argv[1]), "../../AutoRest.dll");
-  // try relative path to __dirname
   if (fs.existsSync(result)) {
     return result;
   }
 
-  throw "Unable to find AutoRest.Dll.";
+  // try relative path to __dirname in solution
+  result = path.join(__dirname, "../../core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll");
+  if (fs.existsSync(result)) {
+    return result;
+  }
+
+  throw new Error("Unable to find AutoRest.dll.");
 }
 
 function DotNetPath() {
+  // try global installation directory
   let result = path.join(homedir(), ".autorest", "frameworks", "dotnet")
-
-  // try relative path to __dirname
   if (fs.existsSync(result)) {
     return result;
   }
