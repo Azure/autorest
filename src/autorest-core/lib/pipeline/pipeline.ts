@@ -73,7 +73,6 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
       // commit to disk (TODO: extract output path more elegantly)
       const relPath = decodeURIComponent(fileHandle.key.replace("generate/output/", ""));
       const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
-      console.log(outputFileUri);
       await WriteString(outputFileUri, await fileHandle.ReadData());
     });
   }
