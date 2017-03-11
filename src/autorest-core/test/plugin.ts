@@ -1,10 +1,11 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { CancellationToken } from "../lib/approved-imports/cancallation";
+import { CreateFileUri, ResolveUri } from "../lib/approved-imports/uri";
 import { Message } from "../lib/pipeline/plugin-api";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
-import { CancellationToken } from "../lib/approved-imports/cancallation";
 import { DataStore } from "../lib/data-store/data-store";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
@@ -99,27 +100,28 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
-    // call validator
+    // call modeler
     const autorestPlugin = new AutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
-    const resultScope = await autorestPlugin.Model(swagger, pluginScope);
+    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope);
 
     // check results
+    const codeModel = await codeModelHandle.ReadData();
+    assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 
   @test @timeout(5000) async "AutoRest.dll Generator"() {
     const dataStore = new DataStore(CancellationToken.None);
 
-    // load swagger
-    const swagger = await LoadLiterateSwagger(
-      dataStore.CreateScope("input").AsFileScopeReadThrough(),
-      "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
-      dataStore.CreateScope("loader"));
+    // load code model
+    const codeModelUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/code-model.yaml");
+    const inputScope = dataStore.CreateScope("input").AsFileScopeReadThrough(uri => uri === codeModelUri);
+    const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
-    // call validator
+    // call generator
     const autorestPlugin = new AutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
-    const resultScope = await autorestPlugin.GenerateCode("Azure.CSharp", swagger, pluginScope);
+    const resultScope = await autorestPlugin.GenerateCode("Azure.CSharp", codeModelHandle, pluginScope);
 
     // check results
     const results = await resultScope.Enum();

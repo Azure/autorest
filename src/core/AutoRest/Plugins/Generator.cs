@@ -28,21 +28,12 @@ public class Generator : NewPlugin
       return false;
     }
 
-    var content = await ReadFile(files[0]);
-    var fs = new MemoryFileSystem();
-    fs.WriteAllText(files[0], content);
-
-    var serviceDefinition = SwaggerParser.Load(files[0], fs);
-    var modeler = new SwaggerModeler();
-    var codeModel = modeler.Build(serviceDefinition);
     var plugin = ExtensionsLoader.GetPlugin(codeGenerator);
-        
-    var genericSerializer = new ModelSerializer<CodeModel>();
-    var modelAsJson = genericSerializer.ToJson(codeModel);
+    var modelAsJson = await ReadFile(files[0]);
 
     using (plugin.Activate())
     {
-        codeModel = plugin.Serializer.Load(modelAsJson);
+        var codeModel = plugin.Serializer.Load(modelAsJson);
         codeModel = plugin.Transformer.TransformCodeModel(codeModel);
         plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
     }
