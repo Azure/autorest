@@ -11,11 +11,14 @@ export interface AutoRestConfigurationSwitches {
 
 export interface AutoRestConfigurationSpecials {
   infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
+  codeGenerator?: string;
+  azureValidator?: boolean;
 }
 
 export interface AutoRestConfiguration {
   __specials?: AutoRestConfigurationSpecials;
   "input-file": string[] | string;
+  "output-folder"?: string;
   "base-folder"?: string;
 }
 
@@ -25,10 +28,13 @@ export class AutoRestConfigurationManager {
     private configurationFileUri: string) {
   }
 
+  private get configFileFolderUri(): string {
+    return ResolveUri(this.configurationFileUri, ".").toString();
+  }
+
   private get baseFolderUri(): string {
-    const configFileFolderUri = ResolveUri(this.configurationFileUri, ".").toString();
     const baseFolder = this.config["base-folder"] || "";
-    const baseFolderUri = ResolveUri(configFileFolderUri, baseFolder);
+    const baseFolderUri = ResolveUri(this.configFileFolderUri, baseFolder);
     return baseFolderUri.replace(/\/$/g, "") + "/";
   }
 
@@ -45,6 +51,12 @@ export class AutoRestConfigurationManager {
 
   public get inputFileUris(): string[] {
     return this.inputFiles().map(inputFile => this.resolveUri(inputFile));
+  }
+
+  public get outputFolderUri(): string {
+    const folder = this.config["output-folder"] || "generated";
+    const outputFolderUri = ResolveUri(this.configFileFolderUri, folder);
+    return outputFolderUri.replace(/\/$/g, "") + "/";
   }
 
   public get __specials(): AutoRestConfigurationSpecials {

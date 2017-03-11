@@ -49,10 +49,10 @@ export class AutoRestDotNetPlugin {
     return messageScope;
   }
 
-  public async GenerateCode(targetLanguage: string, swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataStoreViewReadonly> {
+  public async GenerateCode(targetLanguage: string, codeModel: DataHandleRead, workingScope: DataStoreView): Promise<DataStoreViewReadonly> {
     const outputScope = workingScope.CreateScope("output");
     const messageScope = workingScope.CreateScope("messages");
-    await this.CautiousProcess(`Generator`, _ => targetLanguage, new QuickScope([swagger]), outputScope, messageScope);
+    await this.CautiousProcess(`Generator`, _ => targetLanguage, new QuickScope([codeModel]), outputScope, messageScope);
     return outputScope;
   }
 

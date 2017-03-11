@@ -49,9 +49,19 @@ export async function CreateConfiguration(inputScope: DataStoreViewReadonly, arg
   }
   result["input-file"] = inputFile;
 
+  result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
+
   const modeler = switches["m"] || switches["modeler"] || "Swagger";
   if (modeler === "CompositeSwagger") {
     await ParseCompositeSwagger(inputScope, inputFile, result);
+  }
+
+  const codegenerator = switches["g"] || switches["codegenerator"] || "CSharp";
+  result.__specials = result.__specials || {};
+  if (codegenerator.toLowerCase() === "none") {
+    result.__specials.azureValidator = true;
+  } else {
+    result.__specials.codeGenerator = codegenerator;
   }
 
   return result;

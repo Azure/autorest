@@ -3,11 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as path from "path";
 import { CancellationToken } from "../approved-imports/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/source-map";
-import { ReadUri } from "../approved-imports/uri";
-import { writeString } from "../approved-imports/writefs";
+import { ReadUri, ResolveUri } from "../approved-imports/uri";
+import { WriteString } from "../approved-imports/writefs";
 import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../approved-imports/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
@@ -59,16 +58,16 @@ export abstract class DataStoreViewReadonly {
     return result;
   }
 
-  public async Dump(targetDir: string): Promise<void> {
+  public async Dump(targetDirUri: string): Promise<void> {
     const keys = await this.Enum();
     for (const key of keys) {
       const dataHandle = await this.ReadStrict(key);
       const data = await dataHandle.ReadData();
       const metadata = await dataHandle.ReadMetadata();
-      const targetFile = path.join(targetDir, key);
-      await writeString(targetFile, data);
-      await writeString(targetFile + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
-      await writeString(targetFile + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
+      const targetFileUri = ResolveUri(targetDirUri, key);
+      await WriteString(targetFileUri, data);
+      await WriteString(targetFileUri + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
+      await WriteString(targetFileUri + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));
     }
   }
 }

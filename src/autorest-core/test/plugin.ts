@@ -126,6 +126,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // check results
     const results = await resultScope.Enum();
     assert.notEqual(results.length, 0);
+    assert.notEqual(results.map(path => path.startsWith("Models")).length, 0);
+    assert.ok(results.every(path => path.endsWith(".cs")));
     console.log(results);
   }
 }
