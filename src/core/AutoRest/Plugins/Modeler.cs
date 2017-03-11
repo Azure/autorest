@@ -17,8 +17,10 @@ public class Modeler : NewPlugin
 
   protected override async Task<bool> ProcessInternal()
   {
-    new Settings { };
-    var codeGenerator = await GetValue("codeGenerator");
+    new Settings
+    {
+      Namespace = await GetValue("namespace")
+    };
 
     var files = await ListInputs();
     if (files.Length != 1)
@@ -33,7 +35,6 @@ public class Modeler : NewPlugin
     var serviceDefinition = SwaggerParser.Load(files[0], fs);
     var modeler = new SwaggerModeler();
     var codeModel = modeler.Build(serviceDefinition);
-    var plugin = ExtensionsLoader.GetPlugin(codeGenerator);
         
     var genericSerializer = new ModelSerializer<CodeModel>();
     var modelAsJson = genericSerializer.ToJson(codeModel);

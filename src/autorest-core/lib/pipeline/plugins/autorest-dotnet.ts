@@ -49,17 +49,25 @@ export class AutoRestDotNetPlugin {
     return messageScope;
   }
 
-  public async GenerateCode(targetLanguage: string, codeModel: DataHandleRead, workingScope: DataStoreView): Promise<DataStoreViewReadonly> {
+  public async GenerateCode(
+    codeModel: DataHandleRead,
+    workingScope: DataStoreView,
+    settings: { codeGenerator: string, namespace: string, clientNameOverride?: string }): Promise<DataStoreViewReadonly> {
+
     const outputScope = workingScope.CreateScope("output");
     const messageScope = workingScope.CreateScope("messages");
-    await this.CautiousProcess(`Generator`, _ => targetLanguage, new QuickScope([codeModel]), outputScope, messageScope);
+    await this.CautiousProcess(`Generator`, key => (settings as any)[key], new QuickScope([codeModel]), outputScope, messageScope);
     return outputScope;
   }
 
-  public async Model(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
+  public async Model(
+    swagger: DataHandleRead,
+    workingScope: DataStoreView,
+    settings: { namespace: string }): Promise<DataHandleRead> {
+
     const outputScope = workingScope.CreateScope("output");
     const messageScope = workingScope.CreateScope("messages");
-    await this.CautiousProcess("Modeler", _ => { }, new QuickScope([swagger]), outputScope, messageScope);
+    await this.CautiousProcess("Modeler", key => (settings as any)[key], new QuickScope([swagger]), outputScope, messageScope);
     const results = await outputScope.Enum();
     if (results.length !== 1) {
       throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);

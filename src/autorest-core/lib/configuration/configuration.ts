@@ -13,6 +13,7 @@ export interface AutoRestConfigurationSpecials {
   infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
   codeGenerator?: string;
   azureValidator?: boolean;
+  namespace?: string;
 }
 
 export interface AutoRestConfiguration {

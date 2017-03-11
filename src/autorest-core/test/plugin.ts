@@ -103,7 +103,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // call modeler
     const autorestPlugin = new AutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
-    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope);
+    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" });
 
     // check results
     const codeModel = await codeModelHandle.ReadData();
@@ -121,7 +121,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // call generator
     const autorestPlugin = new AutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
-    const resultScope = await autorestPlugin.GenerateCode("Azure.CSharp", codeModelHandle, pluginScope);
+    const resultScope = await autorestPlugin.GenerateCode(codeModelHandle, pluginScope, { codeGenerator: "Azure.CSharp", namespace: "SomeNamespace" });
 
     // check results
     const results = await resultScope.Enum();

@@ -9,6 +9,7 @@ using AutoRest.Swagger;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core;
 using AutoRest.Core.Model;
+using AutoRest.Simplify;
 
 public class Generator : NewPlugin
 {
@@ -19,7 +20,11 @@ public class Generator : NewPlugin
 
   protected override async Task<bool> ProcessInternal()
   {
-    new Settings { };
+    new Settings
+    {
+      Namespace = await GetValue("namespace"),
+      ClientName = await GetValue("clientNameOverride")
+    };
     var codeGenerator = await GetValue("codeGenerator");
 
     var files = await ListInputs();
@@ -36,6 +41,12 @@ public class Generator : NewPlugin
         var codeModel = plugin.Serializer.Load(modelAsJson);
         codeModel = plugin.Transformer.TransformCodeModel(codeModel);
         plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
+    }
+
+    // TODO: extract to own plugin
+    if (codeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
+    {
+        new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
     }
 
     // write out files

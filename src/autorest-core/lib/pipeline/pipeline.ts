@@ -28,7 +28,10 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
     config.inputFileUris, workingScope.CreateScope("loader"));
 
   // compose Swaggers (may happen in LoadLiterateSwaggers, BUT then we can't call other people (e.g. Amar's tools) with the component swaggers... hmmm...)
-  const swagger = await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, workingScope.CreateScope("compose"), true);
+  const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
+    ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, workingScope.CreateScope("compose"), true)
+    : swaggers[0];
+  const rawSwagger = await swagger.ReadObject<any>();
 
   const result: { [name: string]: DataPromise } = {
     componentSwaggers: MultiPromiseUtility.list(swaggers),
@@ -42,12 +45,20 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
 
     // modeler
-    const codeModel = await autoRestDotNetPlugin.Model(swagger, workingScope.CreateScope("model"));
+    const codeModel = await autoRestDotNetPlugin.Model(swagger, workingScope.CreateScope("model"),
+      {
+        namespace: config.__specials.namespace || ""
+      });
 
     // code generator
     result["generatedFiles"] = MultiPromiseUtility.fromCallbacks(async callback => {
       if (config.__specials.codeGenerator) {
-        const generatedFileScope = await autoRestDotNetPlugin.GenerateCode(config.__specials.codeGenerator, codeModel, workingScope.CreateScope("generate"));
+        const generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, workingScope.CreateScope("generate"),
+          {
+            namespace: config.__specials.namespace || "",
+            codeGenerator: config.__specials.codeGenerator,
+            clientNameOverride: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].name; } catch (e) { return null; } })()
+          });
         for (const fileName of await generatedFileScope.Enum()) {
           callback(await generatedFileScope.ReadStrict(fileName));
         }

@@ -3,6 +3,7 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
+import * as path from "path";
 import { ResolveUri } from "./lib/approved-imports/uri";
 import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
@@ -50,6 +51,9 @@ export async function CreateConfiguration(inputScope: DataStoreViewReadonly, arg
   result["input-file"] = inputFile;
 
   result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
+
+  result.__specials = result.__specials || {};
+  result.__specials.namespace = switches["n"] || switches["namespace"] || (() => { const x = inputFile.split("/").reverse()[0].split("\\").reverse()[0]; return x.substr(0, x.length - path.extname(x).length); })();
 
   const modeler = switches["m"] || switches["modeler"] || "Swagger";
   if (modeler === "CompositeSwagger") {
