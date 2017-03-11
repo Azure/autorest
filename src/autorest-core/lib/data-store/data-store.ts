@@ -139,6 +139,11 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
   }
 
   public async Read(uri: string): Promise<DataHandleRead> {
+    // validation before hitting the file system or web
+    if (!this.customUriFilter(uri)) {
+      throw new Error(`Provided URI '${uri}' violated the filter`);
+    }
+
     // special URI handlers
     // - GitHub
     if (uri.startsWith('https://github')) {
@@ -149,11 +154,6 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
     const existingData = await this.slave.Read(uri);
     if (existingData !== null) {
       return existingData;
-    }
-
-    // validation before hitting the file system or web
-    if (!this.customUriFilter(uri)) {
-      throw new Error(`Provided URI '${uri}' violated the filter`);
     }
 
     // populate cache
