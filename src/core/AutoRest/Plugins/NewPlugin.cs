@@ -15,11 +15,13 @@ public abstract class NewPlugin
 {
   private IDisposable Start => NewContext;
 
-  public Func<string, Task<string>> ReadFile;
-  public Func<string, Task<string>> GetValue;
-  public Action<Dictionary<string, string>, object> Message;
-  public Action<string, string, object> WriteFile;
-  public Func<Task<string[]>> ListInputs;
+  public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
+    public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
+    public Task<string> GetValue(string key) => GetValue<string>(key);
+    public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
+
+  public void Message(Dictionary<string, string> details, object sourcemap) => _connection.Notify("Message", _sessionId, details, sourcemap);
+  public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
 
   protected string _sessionId;
   private Connection _connection;
@@ -28,15 +30,6 @@ public abstract class NewPlugin
   {
     _sessionId = sessionId;
     _connection = connection;
-
-    // remote requests
-    ReadFile = (filename) => connection.Request<string>("ReadFile", sessionId, filename);
-    GetValue = (key) => connection.Request<string>("GetValue", sessionId, key);
-    ListInputs = () => connection.Request<string[]>("ListInputs", sessionId);
-
-    // remote notifications
-    Message = (details, sourcemap) => connection.Notify("Message", sessionId, details, sourcemap);
-    WriteFile = (filename, content, sourcemap) => connection.Notify("WriteFile", sessionId, filename, content, sourcemap);
   }
     
   public async Task<bool> Process()

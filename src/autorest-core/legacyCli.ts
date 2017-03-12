@@ -68,5 +68,9 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
     result.__specials.codeGenerator = codegenerator;
   }
 
+  result.__specials.header = switches["header"] || null;
+
+  result.__specials.payloadFlatteningThreshold = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
+
   return result;
 }

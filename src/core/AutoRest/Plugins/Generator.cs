@@ -23,8 +23,15 @@ public class Generator : NewPlugin
     new Settings
     {
       Namespace = await GetValue("namespace"),
-      ClientName = await GetValue("clientNameOverride")
+      ClientName = await GetValue("clientNameOverride"),
+      PayloadFlatteningThreshold = await GetValue<int>("payloadFlatteningThreshold")
     };
+    var header = await GetValue("header");
+    if (header != null)
+    {
+      Settings.Instance.Header = header;
+    }
+
     var codeGenerator = await GetValue("codeGenerator");
 
     var files = await ListInputs();
