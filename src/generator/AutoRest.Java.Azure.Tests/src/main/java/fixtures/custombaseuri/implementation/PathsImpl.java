@@ -63,6 +63,9 @@ public class PathsImpl implements Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getEmpty(String accountName) {
         getEmptyWithServiceResponseAsync(accountName).toBlocking().single().body();
@@ -73,6 +76,7 @@ public class PathsImpl implements Paths {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
@@ -83,6 +87,7 @@ public class PathsImpl implements Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getEmptyAsync(String accountName) {
@@ -98,6 +103,7 @@ public class PathsImpl implements Paths {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName) {

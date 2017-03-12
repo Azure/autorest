@@ -72,6 +72,9 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Fish object if successful.
      */
     public Fish getValid() {
@@ -82,6 +85,7 @@ public class PolymorphismsImpl implements Polymorphisms {
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
@@ -91,6 +95,7 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Fish object
      */
     public Observable<Fish> getValidAsync() {
@@ -105,6 +110,7 @@ public class PolymorphismsImpl implements Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Fish object
      */
     public Observable<ServiceResponse<Fish>> getValidWithServiceResponseAsync() {
@@ -165,6 +171,9 @@ public class PolymorphismsImpl implements Polymorphisms {
                }
              ]
            };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValid(Fish complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -207,6 +216,7 @@ public class PolymorphismsImpl implements Polymorphisms {
              ]
            };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
@@ -249,6 +259,7 @@ public class PolymorphismsImpl implements Polymorphisms {
                }
              ]
            };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidAsync(Fish complexBody) {
@@ -296,6 +307,7 @@ public class PolymorphismsImpl implements Polymorphisms {
                }
              ]
            };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Fish complexBody) {
@@ -353,6 +365,9 @@ public class PolymorphismsImpl implements Polymorphisms {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValidMissingRequired(Fish complexBody) {
         putValidMissingRequiredWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -388,6 +403,7 @@ public class PolymorphismsImpl implements Polymorphisms {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     public ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
@@ -423,6 +439,7 @@ public class PolymorphismsImpl implements Polymorphisms {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidMissingRequiredAsync(Fish complexBody) {
@@ -463,6 +480,7 @@ public class PolymorphismsImpl implements Polymorphisms {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putValidMissingRequiredWithServiceResponseAsync(Fish complexBody) {

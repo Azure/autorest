@@ -20,7 +20,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
         /// </summary>
-        public ResourceCollection() { }
+        public ResourceCollection()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
@@ -30,7 +33,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
             Productresource = productresource;
             Arrayofresources = arrayofresources;
             Dictionaryofresources = dictionaryofresources;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

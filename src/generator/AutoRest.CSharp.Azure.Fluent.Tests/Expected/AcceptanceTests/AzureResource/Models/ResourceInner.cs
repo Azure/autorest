@@ -24,7 +24,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the ResourceInner class.
         /// </summary>
-        public ResourceInner() { }
+        public ResourceInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ResourceInner class.
@@ -40,7 +43,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
             Tags = tags;
             Location = location;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets resource Id

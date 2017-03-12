@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the DurationWrapper class.
         /// </summary>
-        public DurationWrapper() { }
+        public DurationWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DurationWrapper class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public DurationWrapper(System.TimeSpan? field = default(System.TimeSpan?))
         {
             Field = field;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

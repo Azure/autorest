@@ -13,7 +13,9 @@ package fixtures.bodycomplex;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -24,6 +26,9 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ReadonlyObj object if successful.
      */
     ReadonlyObj getValid();
@@ -32,6 +37,7 @@ public interface Readonlypropertys {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<ReadonlyObj> getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
@@ -39,6 +45,7 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReadonlyObj object
      */
     Observable<ReadonlyObj> getValidAsync();
@@ -46,6 +53,7 @@ public interface Readonlypropertys {
     /**
      * Get complex types that have readonly properties.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ReadonlyObj object
      */
     Observable<ServiceResponse<ReadonlyObj>> getValidWithServiceResponseAsync();
@@ -54,6 +62,9 @@ public interface Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putValid(ReadonlyObj complexBody);
 
@@ -62,6 +73,7 @@ public interface Readonlypropertys {
      *
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceFuture} object
      */
     ServiceFuture<Void> putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
@@ -70,6 +82,7 @@ public interface Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putValidAsync(ReadonlyObj complexBody);
@@ -78,6 +91,7 @@ public interface Readonlypropertys {
      * Put complex types that have readonly properties.
      *
      * @param complexBody the ReadonlyObj value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(ReadonlyObj complexBody);

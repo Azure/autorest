@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Fish class.
         /// </summary>
-        public Fish() { }
+        public Fish()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Fish class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
             Species = species;
             Length = length;
             Siblings = siblings;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

@@ -89,6 +89,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Top level property names should not be repeated inside the properties bag for ARM resource &quot;{0}&quot;. Properties [{1}] conflict with ARM top level properties. Please rename these..
+        /// </summary>
+        public static string ArmPropertiesBagValidationMessage {
+            get {
+                return ResourceManager.GetString("ArmPropertiesBagValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AutoRest Core {0}.
         /// </summary>
         public static string AutoRestCore {
@@ -103,6 +112,15 @@ namespace AutoRest.Core.Properties {
         public static string BodyMustHaveSchema {
             get {
                 return ResourceManager.GetString("BodyMustHaveSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, must follow camelCase style. Example: &quot;{1}&quot;..
+        /// </summary>
+        public static string BodyPropertyNameCamelCase {
+            get {
+                return ResourceManager.GetString("BodyPropertyNameCamelCase", resourceCulture);
             }
         }
         
@@ -197,11 +215,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Properties defined alongside $ref will be ignored according to JSON specification..
+        ///   Looks up a localized string similar to Property named: &quot;{0}&quot;, for definition: &quot;{1}&quot; must follow camelCase style. Example: &quot;{2}&quot;..
         /// </summary>
-        public static string ConflictingRef {
+        public static string DefinitionsPropertiesNameCamelCase {
             get {
-                return ResourceManager.GetString("ConflictingRef", resourceCulture);
+                return ResourceManager.GetString("DefinitionsPropertiesNameCamelCase", resourceCulture);
             }
         }
         
@@ -683,12 +701,12 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+        ///   Looks up a localized string similar to Tracked Resource failing validation is: &quot;{0}&quot;. Validation Failed: {1}.
         ///    A Tracked Resource must have: 
         ///    1. A Get Operation 
         ///    2. A ListByResourceGroup operation with x-ms-pageable extension and 
         ///    3. A ListBySubscriptionId operation with x-ms-pageable extension.
-        ///    4. Type, Location, Tags should not be used in the properties..
+        ///    4. &quot;type&quot;,&quot;location&quot;,&quot;tags&quot; should not be used in the RP property bag named &quot;properties&quot;..
         /// </summary>
         public static string TrackedResourceIsNotValid {
             get {

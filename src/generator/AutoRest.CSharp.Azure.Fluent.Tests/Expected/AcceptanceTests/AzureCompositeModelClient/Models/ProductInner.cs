@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ProductInner class.
         /// </summary>
-        public ProductInner() { }
+        public ProductInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ProductInner class.
@@ -41,7 +44,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             DisplayName = displayName;
             Capacity = capacity;
             Image = image;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for

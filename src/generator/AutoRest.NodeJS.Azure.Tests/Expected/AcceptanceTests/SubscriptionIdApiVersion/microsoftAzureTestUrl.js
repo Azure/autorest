@@ -73,6 +73,8 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.apiVersion !== null && options.apiVersion !== undefined) {
     this.apiVersion = options.apiVersion;
   }

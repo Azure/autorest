@@ -1,6 +1,0 @@
-*.ts
-*.js.map
-tsconfig.json
-.npmignore
-bin
-*.tgz

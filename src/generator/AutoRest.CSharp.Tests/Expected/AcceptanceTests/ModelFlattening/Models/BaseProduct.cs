@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the BaseProduct class.
         /// </summary>
-        public BaseProduct() { }
+        public BaseProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BaseProduct class.
@@ -35,7 +38,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         {
             ProductId = productId;
             Description = description;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unique identifier representing a specific product for

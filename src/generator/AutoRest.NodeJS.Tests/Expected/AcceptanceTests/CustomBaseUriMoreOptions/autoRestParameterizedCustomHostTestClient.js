@@ -52,6 +52,8 @@ function AutoRestParameterizedCustomHostTestClient(subscriptionId, options) {
   this.baseUri = '{vault}{secret}{dnsSuffix}';
   this.subscriptionId = subscriptionId;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.dnsSuffix !== null && options.dnsSuffix !== undefined) {
     this.dnsSuffix = options.dnsSuffix;
   }

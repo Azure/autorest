@@ -254,21 +254,18 @@ Modelers:
     <value>Operations API must be implemented for the service.</value>
   </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
-    <value>Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+    <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
     A Tracked Resource must have: 
     1. A Get Operation 
     2. A ListByResourceGroup operation with x-ms-pageable extension and 
     3. A ListBySubscriptionId operation with x-ms-pageable extension.
-    4. Type, Location, Tags should not be used in the properties.</value>
+    4. "type","location","tags" should not be used in the RP property bag named "properties".</value>
   </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>
   <data name="BodyWithType" xml:space="preserve">
     <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
-  </data>
-  <data name="ConflictingRef" xml:space="preserve">
-    <value>Properties defined alongside $ref will be ignored according to JSON specification.</value>
   </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>
@@ -377,5 +374,14 @@ Modelers:
   </data>
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
+  </data>
+  <data name="BodyPropertyNameCamelCase" xml:space="preserve">
+    <value>Property named: "{0}", must follow camelCase style. Example: "{1}".</value>
+  </data>
+  <data name="DefinitionsPropertiesNameCamelCase" xml:space="preserve">
+    <value>Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".</value>
+  </data>
+  <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
+    <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
 </root>

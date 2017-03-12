@@ -58,6 +58,15 @@ namespace AutoRest.Core.Utilities
             {
                 return VirtualStore[path].ToString();
             }
+            else if (VirtualStore.ContainsKey(path.Replace("\\", "/")))
+            {
+                return VirtualStore[path.Replace("\\", "/")].ToString();
+            }
+            else if (VirtualStore.ContainsKey(path.Replace("/", "\\")))
+            {
+                return VirtualStore[path.Replace("/", "\\")].ToString();
+            }
+            
             throw new IOException("File not found: " + path);
         }
 

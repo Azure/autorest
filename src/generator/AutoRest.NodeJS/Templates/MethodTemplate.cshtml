@@ -8,40 +8,43 @@
 @using AutoRest.NodeJS.Templates
 @inherits AutoRest.Core.Template<MethodJs>
 
-/**
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
-  @WrapComment(" * ", "@summary " + Model.Summary)@:
-@: *
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
-  @WrapComment(" * ", Model.Description)@:
-@: *
-}
-@foreach (var parameter in Model.DocumentationParameters)
-{
- @MethodJs.ConstructParameterDocumentation(
-                      WrapComment(" * ", "@param {"
-                                        + MethodJs.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
-                                        + " " + parameter.Documentation))
-}
-@WrapComment(" * ", " @param {function} callback")
- *
-@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
-@WrapComment(" *                      ", Model.ReturnTypeInfo)
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
-  var client = @(Model.ClientReference);
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse))
+@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase())WithHttpOperationResponse = function @(Model.Name.ToCamelCase())WithHttpOperationResponse(@(Model.MethodParameterDeclaration)) {
+  let client = @(Model.ClientReference);
+  let self = this;
+  return new Promise((resolve, reject) => {
+    self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
+      let httpOperationResponse = new HttpOperationResponse(request, response);
+      httpOperationResponse.body = result;
+      err ? reject(err) : resolve(httpOperationResponse);
+      return;
+    });
+  });
+};
+
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise))
+@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function @(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true))) {
+  let client = @(Model.ClientReference);
+  let self = this;
+  if (!optionalCallback && typeof options === 'function') {
+    optionalCallback = options;
+    options = null;
+  }
+  if (!optionalCallback) {
+    return new Promise((resolve, reject) => {
+      self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
+        err ? reject(err) : resolve(result);
+        return;
+      });
+    });
+  } else {
+    return self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true)));
+  }
+};
+
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
+function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
+  let client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -59,7 +62,7 @@
   {
     if (parameter.IsConstant && !parameter.IsClientProperty)
     {
-  @:var @(parameter.Name) = @(parameter.DefaultValue);
+  @:let @(parameter.Name) = @(parameter.DefaultValue);
     }
 
     if (parameter.ModelType is CompositeType
@@ -90,22 +93,22 @@
   </text>
   }
   }
-  @(Model.BuildInputMappings())
+@(Model.BuildInputMappings())
   @EmptyLine
   // Construct URL
   @if (Model.IsAbsoluteUrl)
   {
-  @:var requestUrl = '@(((string)Model.Url).EscapeSingleQuotes())';
+  @:let requestUrl = '@(((string)Model.Url).EscapeSingleQuotes())';
   }
   else
   {
-  @:var baseUrl = @(Model.ClientReference).baseUri;
-  @:var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url).EscapeSingleQuotes())';
+  @:let baseUrl = @(Model.ClientReference).baseUri;
+  @:let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url).EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
   @EmptyLine
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = '@(Model.HttpMethod.ToString().ToUpper())';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -119,7 +122,7 @@
   @:}
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -133,7 +136,7 @@
       {
   <text>
   // Serialize Request  
-  var requestContent = @(Model.RequestBody.Name);
+  let requestContent = @(Model.RequestBody.Name);
   httpRequest.body = requestContent;
   </text>
       }
@@ -141,8 +144,8 @@
       { 
   <text>
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (@(Model.RequestBody.Name) !== null && @(Model.RequestBody.Name) !== undefined) {
       @(Model.ConstructRequestBodyMapper)
@@ -150,7 +153,7 @@
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+    let serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
         'payload - "%s"', error.message, util.inspect(@(Model.RequestBody.Name), {depth: null})));
     return callback(serializationError);
   }
@@ -163,7 +166,7 @@
   {      
   <text>
   // Serialize Request  
-  var formData = {};  
+  let formData = {};  
       @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
       {
   @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {

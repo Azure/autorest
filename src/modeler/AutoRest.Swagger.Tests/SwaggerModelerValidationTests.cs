@@ -47,6 +47,7 @@ namespace AutoRest.Swagger.Tests
             {
                 new Settings
                 {
+                    CodeGenerator = "None",
                     Namespace = "Test",
                     Input = input
                 };
@@ -236,11 +237,19 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json"));
             messages.AssertOnlyValidationWarning(typeof(InvalidConstraint), 18);
         }
-
+        [Fact]
         public void BodyTopLevelPropertiesValidation()
         {
-            var messages = ValidateSwagger(Path.Combine("Swagger", "Validation", "body-top-level-properties.json"));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyTopLevelProperties), 2);
+        }
+
+        [Fact]
+        public void PropertyNameCasingValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "property-names-casing.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 1);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 1);
         }
 
         [Fact]
@@ -537,6 +546,17 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "providers-path-valid.json"));
             messages.AssertOnlyValidationWarning(typeof(ProvidersPathValidation), 0);
+        }
+
+        /// <summary>
+        /// Verifies that property names follow camelCase style
+        /// </summary>
+        [Fact]
+        public void ValidPropertyNameCasing()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "property-names-casing-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 0);
+            messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 0);
         }
 
     }
