@@ -39,7 +39,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const currentDirUri = CreateFileUri(currentDirectory()) + "/";
     const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
-    const config = await CreateConfiguration(dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
+    const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
     await (await dataStore.CreateScope("input").AsFileScope().Write(configFileUri)).WriteObject(config);
     const restultStreams = await RunPipeline(configFileUri, dataStore);
   }

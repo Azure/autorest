@@ -23,7 +23,7 @@ import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-l
   @test @timeout(0) async "composite Swagger"() {
     const dataStore = new DataStore();
 
-    const config = await CreateConfiguration(dataStore.CreateScope("input").AsFileScopeReadThrough(),
+    const config = await CreateConfiguration("file:///", dataStore.CreateScope("input").AsFileScopeReadThrough(),
       [
         "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
         "-m", "CompositeSwagger"

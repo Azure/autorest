@@ -26,7 +26,7 @@ async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: str
   targetConfig.__specials.infoSectionOverride = data.info;
 }
 
-export async function CreateConfiguration(inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfiguration> {
+export async function CreateConfiguration(baseFolderUri: string, inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfiguration> {
   let result: AutoRestConfiguration = {
     "input-file": []
   };
@@ -57,7 +57,7 @@ export async function CreateConfiguration(inputScope: DataStoreViewReadonly, arg
 
   const modeler = switches["m"] || switches["modeler"] || "Swagger";
   if (modeler === "CompositeSwagger") {
-    await ParseCompositeSwagger(inputScope, inputFile, result);
+    await ParseCompositeSwagger(inputScope, ResolveUri(baseFolderUri, inputFile), result);
   }
 
   const codegenerator = switches["g"] || switches["codegenerator"] || "CSharp";

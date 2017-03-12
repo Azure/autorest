@@ -21,7 +21,7 @@ Import
   autorest: (args,done) ->
     # Run AutoRest from the original current directory.
     echo info "AutoRest #{args.join(' ')}"
-    execute "dotnet #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/AutoRest.dll #{args.join(' ')}" , {silent:true}, (code,stdout,stderr) ->
+    execute "node #{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core/app.js #{args.join(' ')}" , {silent:true}, (code,stdout,stderr) ->
       return done()
 
   # which projects to care about
