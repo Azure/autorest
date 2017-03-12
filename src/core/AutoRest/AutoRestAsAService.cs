@@ -19,7 +19,7 @@ namespace AutoRest
 
     public async Task<int> Run()
     {
-      connection = new Connection(Console.Out, Console.In);
+      connection = new Connection(Console.Out, Console.OpenStandardInput());
       // connection.OnDebug += (t) => Console.Error.WriteLine(t);
 
       connection.Dispatch<IEnumerable<string>>(nameof(GetPluginNames), GetPluginNames);

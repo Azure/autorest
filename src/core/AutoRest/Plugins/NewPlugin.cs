@@ -30,9 +30,9 @@ public abstract class NewPlugin
     _connection = connection;
 
     // remote requests
-    ReadFile = async (filename) => await connection.Request<string>("ReadFile", sessionId, filename);
-    GetValue = async (key) => await connection.Request<string>("GetValue", sessionId, key);
-    ListInputs = async () => await connection.Request<string[]>("ListInputs", sessionId);
+    ReadFile = (filename) => connection.Request<string>("ReadFile", sessionId, filename);
+    GetValue = (key) => connection.Request<string>("GetValue", sessionId, key);
+    ListInputs = () => connection.Request<string[]>("ListInputs", sessionId);
 
     // remote notifications
     Message = (details, sourcemap) => connection.Notify("Message", sessionId, details, sourcemap);
