@@ -2083,7 +2083,7 @@ class LROsOperations(object):
 
         def get_long_running_output(response):
 
-            if response.status_code not in [202, 204]:
+            if response.status_code not in [204, 202]:
                 exp = CloudError(response)
                 exp.request_id = response.headers.get('x-ms-request-id')
                 raise exp
@@ -2154,7 +2154,7 @@ class LROsOperations(object):
 
         def get_long_running_output(response):
 
-            if response.status_code not in [202, 204]:
+            if response.status_code not in [204, 202]:
                 exp = CloudError(response)
                 exp.request_id = response.headers.get('x-ms-request-id')
                 raise exp
@@ -2518,16 +2518,16 @@ class LROsOperations(object):
 
         def get_long_running_output(response):
 
-            if response.status_code not in [200, 202]:
+            if response.status_code not in [202, 200]:
                 exp = CloudError(response)
                 exp.request_id = response.headers.get('x-ms-request-id')
                 raise exp
 
             deserialized = None
 
-            if response.status_code == 200:
-                deserialized = self._deserialize('Sku', response)
             if response.status_code == 202:
+                deserialized = self._deserialize('Sku', response)
+            if response.status_code == 200:
                 deserialized = self._deserialize('Sku', response)
 
             if raw:
@@ -2781,7 +2781,7 @@ class LROsOperations(object):
 
         def get_long_running_output(response):
 
-            if response.status_code not in [200, 202]:
+            if response.status_code not in [202, 200]:
                 exp = CloudError(response)
                 exp.request_id = response.headers.get('x-ms-request-id')
                 raise exp
@@ -2875,7 +2875,7 @@ class LROsOperations(object):
 
         def get_long_running_output(response):
 
-            if response.status_code not in [200, 202]:
+            if response.status_code not in [202, 200]:
                 exp = CloudError(response)
                 exp.request_id = response.headers.get('x-ms-request-id')
                 raise exp

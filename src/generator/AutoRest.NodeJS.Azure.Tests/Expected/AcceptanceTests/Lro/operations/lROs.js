@@ -6133,7 +6133,7 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 202 && statusCode !== 204) {
+    if (statusCode !== 204 && statusCode !== 202) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -6241,7 +6241,7 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 202 && statusCode !== 204) {
+    if (statusCode !== 204 && statusCode !== 202) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -6782,7 +6782,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 202) {
+    if (statusCode !== 202 && statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -6811,7 +6811,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
     var result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
-    if (statusCode === 200) {
+    if (statusCode === 202) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
@@ -6828,7 +6828,7 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
       }
     }
     // Deserialize Response
-    if (statusCode === 202) {
+    if (statusCode === 200) {
       var parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
@@ -7227,7 +7227,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 202) {
+    if (statusCode !== 202 && statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -7376,7 +7376,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 202) {
+    if (statusCode !== 202 && statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
