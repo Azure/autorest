@@ -467,6 +467,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Model definition &apos;{0}&apos; is missing required property &apos;description&apos;..
+        /// </summary>
+        public static string ModelDescriptionMissing {
+            get {
+                return ResourceManager.GetString("ModelDescriptionMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully initialized modeler {0} v {1}..
         /// </summary>
         public static string ModelerInitialized {
