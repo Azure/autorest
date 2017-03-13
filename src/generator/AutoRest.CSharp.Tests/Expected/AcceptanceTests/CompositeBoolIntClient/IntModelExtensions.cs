@@ -18,34 +18,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
     public static partial class IntModelExtensions
     {
             /// <summary>
-            /// Get null Int value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static int? GetNull(this IIntModel operations)
-            {
-                return operations.GetNullAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get null Int value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<int?> GetNullAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
             /// Get invalid Int value
             /// </summary>
             /// <param name='operations'>
@@ -74,18 +46,18 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
 
             /// <summary>
-            /// Get overflow Int32 value
+            /// Get invalid Unix time value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static int? GetOverflowInt32(this IIntModel operations)
+            public static System.DateTime? GetInvalidUnixTime(this IIntModel operations)
             {
-                return operations.GetOverflowInt32Async().GetAwaiter().GetResult();
+                return operations.GetInvalidUnixTimeAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get overflow Int32 value
+            /// Get invalid Unix time value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -93,93 +65,9 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> GetOverflowInt32Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<System.DateTime?> GetInvalidUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get underflow Int32 value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static int? GetUnderflowInt32(this IIntModel operations)
-            {
-                return operations.GetUnderflowInt32Async().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get underflow Int32 value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<int?> GetUnderflowInt32Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get overflow Int64 value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static long? GetOverflowInt64(this IIntModel operations)
-            {
-                return operations.GetOverflowInt64Async().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get overflow Int64 value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<long?> GetOverflowInt64Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get underflow Int64 value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static long? GetUnderflowInt64(this IIntModel operations)
-            {
-                return operations.GetUnderflowInt64Async().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get underflow Int64 value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<long?> GetUnderflowInt64Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetInvalidUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -302,6 +190,174 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
 
             /// <summary>
+            /// Get null Int value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static int? GetNull(this IIntModel operations)
+            {
+                return operations.GetNullAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get null Int value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<int?> GetNullAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get null Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static System.DateTime? GetNullUnixTime(this IIntModel operations)
+            {
+                return operations.GetNullUnixTimeAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get null Unix time value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<System.DateTime?> GetNullUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNullUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get overflow Int32 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static int? GetOverflowInt32(this IIntModel operations)
+            {
+                return operations.GetOverflowInt32Async().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get overflow Int32 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<int?> GetOverflowInt32Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get overflow Int64 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static long? GetOverflowInt64(this IIntModel operations)
+            {
+                return operations.GetOverflowInt64Async().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get overflow Int64 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<long?> GetOverflowInt64Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get underflow Int32 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static int? GetUnderflowInt32(this IIntModel operations)
+            {
+                return operations.GetUnderflowInt32Async().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get underflow Int32 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<int?> GetUnderflowInt32Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get underflow Int64 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static long? GetUnderflowInt64(this IIntModel operations)
+            {
+                return operations.GetUnderflowInt64Async().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get underflow Int64 value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<long?> GetUnderflowInt64Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get datetime encoded as Unix time value
             /// </summary>
             /// <param name='operations'>
@@ -356,62 +412,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             public static async Task PutUnixTimeDateAsync(this IIntModel operations, System.DateTime intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutUnixTimeDateWithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Get invalid Unix time value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static System.DateTime? GetInvalidUnixTime(this IIntModel operations)
-            {
-                return operations.GetInvalidUnixTimeAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get invalid Unix time value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<System.DateTime?> GetInvalidUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetInvalidUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get null Unix time value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static System.DateTime? GetNullUnixTime(this IIntModel operations)
-            {
-                return operations.GetNullUnixTimeAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get null Unix time value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<System.DateTime?> GetNullUnixTimeAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetNullUnixTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
             }
 
     }

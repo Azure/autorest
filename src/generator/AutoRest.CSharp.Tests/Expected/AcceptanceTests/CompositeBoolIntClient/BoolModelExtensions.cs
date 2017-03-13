@@ -18,63 +18,6 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
     public static partial class BoolModelExtensions
     {
             /// <summary>
-            /// Get true Boolean value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static bool? GetTrue(this IBoolModel operations)
-            {
-                return operations.GetTrueAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get true Boolean value
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<bool?> GetTrueAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Set Boolean value true
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='boolBody'>
-            /// </param>
-            public static void PutTrue(this IBoolModel operations, bool boolBody)
-            {
-                operations.PutTrueAsync(boolBody).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Set Boolean value true
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='boolBody'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutTrueAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
             /// Get false Boolean value
             /// </summary>
             /// <param name='operations'>
@@ -132,6 +75,34 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
 
             /// <summary>
+            /// Get invalid Boolean value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static bool? GetInvalid(this IBoolModel operations)
+            {
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get invalid Boolean value
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<bool?> GetInvalidAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get null Boolean value
             /// </summary>
             /// <param name='operations'>
@@ -160,18 +131,18 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             }
 
             /// <summary>
-            /// Get invalid Boolean value
+            /// Get true Boolean value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static bool? GetInvalid(this IBoolModel operations)
+            public static bool? GetTrue(this IBoolModel operations)
             {
-                return operations.GetInvalidAsync().GetAwaiter().GetResult();
+                return operations.GetTrueAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get invalid Boolean value
+            /// Get true Boolean value
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -179,12 +150,41 @@ namespace Fixtures.AcceptanceTestsCompositeBoolIntClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetInvalidAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> GetTrueAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <summary>
+            /// Set Boolean value true
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='boolBody'>
+            /// </param>
+            public static void PutTrue(this IBoolModel operations, bool boolBody)
+            {
+                operations.PutTrueAsync(boolBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set Boolean value true
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='boolBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutTrueAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
