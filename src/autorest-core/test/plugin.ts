@@ -62,7 +62,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     }
   }
 
-  @test @timeout(5000) async "AutoRest.dll AzureValidator"() {
+  @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
     const dataStore = new DataStore(CancellationToken.None);
 
     // load swagger
@@ -91,7 +91,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     }
   }
 
-  @test @timeout(5000) async "AutoRest.dll Modeler"() {
+  @test @timeout(10000) async "AutoRest.dll Modeler"() {
     const dataStore = new DataStore(CancellationToken.None);
 
     // load swagger
@@ -110,7 +110,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.notEqual(codeModel.indexOf("isPolymorphicDiscriminator"), -1);
   }
 
-  @test @timeout(5000) async "AutoRest.dll Generator"() {
+  @test @timeout(10000) async "AutoRest.dll Generator"() {
     const dataStore = new DataStore(CancellationToken.None);
 
     // load code model
