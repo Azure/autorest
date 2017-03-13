@@ -61,7 +61,7 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (isAbsolute(pathOrUri)) {
     return CreateFileUri(pathOrUri);
   }
-  pathOrUri = pathOrUri.replace("\\", "/");
+  pathOrUri = pathOrUri.replace(/\\/g, "/");
   if (!baseUri) {
     throw "'pathOrUri' was detected to be relative so 'baseUri' is required";
   }
