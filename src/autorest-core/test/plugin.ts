@@ -128,7 +128,10 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         codeGenerator: "Azure.CSharp",
         namespace: "SomeNamespace",
         header: null,
-        payloadFlatteningThreshold: 0
+        payloadFlatteningThreshold: 0,
+        internalConstructors: false,
+        syncMethods: "essential",
+        useDateTimeOffset: false
       });
 
     // check results

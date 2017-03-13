@@ -52,7 +52,16 @@ export class AutoRestDotNetPlugin {
   public async GenerateCode(
     codeModel: DataHandleRead,
     workingScope: DataStoreView,
-    settings: { codeGenerator: string, namespace: string, clientNameOverride?: string, header: string | null, payloadFlatteningThreshold: number }): Promise<DataStoreViewReadonly> {
+    settings: {
+      codeGenerator: string,
+      namespace: string,
+      clientNameOverride?: string,
+      header: string | null,
+      payloadFlatteningThreshold: number,
+      syncMethods: "all" | "essential" | "none",
+      internalConstructors: boolean,
+      useDateTimeOffset: boolean
+    }): Promise<DataStoreViewReadonly> {
 
     const outputScope = workingScope.CreateScope("output");
     const messageScope = workingScope.CreateScope("messages");

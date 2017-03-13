@@ -16,6 +16,7 @@ export interface AutoRestConfigurationSpecials {
   header?: string | null;
   namespace?: string;
   payloadFlatteningThreshold?: number;
+  syncMethods?: "all" | "essential" | "none";
 }
 
 export interface AutoRestConfiguration {

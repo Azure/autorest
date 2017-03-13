@@ -72,5 +72,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result.__specials.payloadFlatteningThreshold = parseInt(switches["fs"] || switches["payloadflatteningthreshold"] || "0");
 
+  result.__specials.syncMethods = <any>switches["syncmethods"] || null;
+
   return result;
 }

@@ -24,13 +24,16 @@ public class Generator : NewPlugin
     {
       Namespace = await GetValue("namespace"),
       ClientName = await GetValue("clientNameOverride"),
-      PayloadFlatteningThreshold = await GetValue<int>("payloadFlatteningThreshold")
+      PayloadFlatteningThreshold = await GetValue<int>("payloadFlatteningThreshold"),
     };
     var header = await GetValue("header");
     if (header != null)
     {
       Settings.Instance.Header = header;
     }
+    Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool>("internalConstructors"));
+    Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue<string>("syncMethods"));
+    Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool>("useDateTimeOffset"));
 
     var codeGenerator = await GetValue("codeGenerator");
 
