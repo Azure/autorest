@@ -60,7 +60,8 @@ export class AutoRestDotNetPlugin {
       payloadFlatteningThreshold: number,
       syncMethods: "all" | "essential" | "none",
       internalConstructors: boolean,
-      useDateTimeOffset: boolean
+      useDateTimeOffset: boolean,
+      addCredentials: boolean
     }): Promise<DataStoreViewReadonly> {
 
     const outputScope = workingScope.CreateScope("output");

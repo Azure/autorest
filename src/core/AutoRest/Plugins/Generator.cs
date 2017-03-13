@@ -25,6 +25,7 @@ public class Generator : NewPlugin
       Namespace = await GetValue("namespace"),
       ClientName = await GetValue("clientNameOverride"),
       PayloadFlatteningThreshold = await GetValue<int>("payloadFlatteningThreshold"),
+      AddCredentials = await GetValue<bool>("addCredentials"),
     };
     var header = await GetValue("header");
     if (header != null)

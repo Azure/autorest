@@ -62,7 +62,8 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
             useDateTimeOffset: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].useDateTimeOffset; } catch (e) { return null; } })() || false,
             header: config.__specials.header || null,
             payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || 0,
-            syncMethods: config.__specials.syncMethods || "essential"
+            syncMethods: config.__specials.syncMethods || "essential",
+            addCredentials: config.__specials.addCredentials || false,
           });
         for (const fileName of await generatedFileScope.Enum()) {
           callback(await generatedFileScope.ReadStrict(fileName));

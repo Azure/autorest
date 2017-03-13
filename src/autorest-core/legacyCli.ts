@@ -74,5 +74,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result.__specials.syncMethods = <any>switches["syncmethods"] || null;
 
+  result.__specials.addCredentials = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
+
   return result;
 }

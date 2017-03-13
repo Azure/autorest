@@ -131,7 +131,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         payloadFlatteningThreshold: 0,
         internalConstructors: false,
         syncMethods: "essential",
-        useDateTimeOffset: false
+        useDateTimeOffset: false,
+        addCredentials: false
       });
 
     // check results
