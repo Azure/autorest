@@ -120,8 +120,10 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void OperationParametersValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation));
+            // ignore ServiceDefinitionParameters validation rule since it overlaps with this
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"))
+                            .Where(msg => msg.Rule.GetType().Name != "ServiceDefinitionParameters");
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 2);
         }
         
         [Fact]

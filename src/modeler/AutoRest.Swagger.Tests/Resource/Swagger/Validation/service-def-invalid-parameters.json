@@ -17,7 +17,7 @@
     "application/json"
   ],
   "paths": {
-    "Subscription/{subscriptionId}/foo": {
+    "/foo/Subscriptions/{subscriptionId}": {
       "post": {
         "operationId": "Noun_Verb",
         "summary": "Foo path",

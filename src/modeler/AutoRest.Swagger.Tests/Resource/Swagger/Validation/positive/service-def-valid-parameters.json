@@ -17,11 +17,19 @@
     "application/json"
   ],
   "paths": {
-    "Subscription/{subscriptionId}/foo": {
+    "/foo/Subscriptions/{subscriptionId}": {
       "post": {
         "operationId": "Noun_Verb",
         "summary": "Foo path",
         "description": "Foo operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
         "responses": {
           "default": {
             "description": "Unexpected error"

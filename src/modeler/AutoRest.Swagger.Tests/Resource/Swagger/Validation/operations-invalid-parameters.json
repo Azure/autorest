@@ -17,25 +17,32 @@
     "application/json"
   ],
   "paths": {
-    "/foo": {
+    "/foo/subscriptions/{SubscriptionId}": {
       "post": {
         "operationId": "Noun_Verb",
         "summary": "Foo path",
         "description": "Foo operation",
-        "responses": {
-          "default": {
-            "description": "Unexpected error"
-          }
-        },
         "parameters": [
           {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "invalid node for subscriptionId"
+            "description": "test subscription id"
+          },
+          {
+            "name": "api-version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "test api version"
           }
-        ]
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
       }
     },
     "/operations": {
@@ -59,22 +66,6 @@
           }
         }
       }
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "test subscription id"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "test api version"
     }
   },
   "definitions": {

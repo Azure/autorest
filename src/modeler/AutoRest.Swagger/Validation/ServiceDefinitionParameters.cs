@@ -13,7 +13,7 @@ namespace AutoRest.Swagger.Validation
 {
     public class ServiceDefinitionParameters : TypedRule<Dictionary<string, SwaggerParameter>>
     {
-        private const string SubscriptionId = "SubscriptionId";
+        private const string SubscriptionId = "subscriptionid";
         private const string ApiVersion = "api-version";
 
         /// <summary>
