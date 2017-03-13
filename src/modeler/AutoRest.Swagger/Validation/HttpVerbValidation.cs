@@ -26,7 +26,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
-        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
         /// <summary>
         /// The template message for this Rule. 

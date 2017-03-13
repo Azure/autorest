@@ -356,7 +356,7 @@ namespace AutoRest.Swagger.Tests
         public void DeleteRequestBodyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-delete-request-body-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(DeleteMustHaveEmptyRequestBody), 1);
+            messages.AssertOnlyValidationMessage(typeof(DeleteMustNotHaveRequestBody), 1);
         }
 
         [Fact]
