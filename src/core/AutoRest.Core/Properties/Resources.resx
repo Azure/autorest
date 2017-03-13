@@ -339,9 +339,6 @@ Modelers:
   <data name="GetOperationNameNotValid" xml:space="preserve">
     <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
   </data>
-  <data name="LongRunningResponseNotValid" xml:space="preserve">
-    <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
-  </data>
   <data name="InvalidMutabilityValues" xml:space="preserve">
     <value>Valid values for an x-ms-mutability extension are 'create', 'read' and 'update'. Applied extension contains invalid value(s): '{0}'.</value>
   </data>
@@ -383,5 +380,8 @@ Modelers:
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
     <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
+  </data>
+  <data name="LongRunningResponseNotValid" xml:space="preserve">
+    <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
   </data>
 </root>
