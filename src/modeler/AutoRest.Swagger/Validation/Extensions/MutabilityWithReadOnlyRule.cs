@@ -6,10 +6,11 @@ using System.Linq;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class MutabilityWithReadOnlyRule : MutabilityValidValuesRule
+    public class MutabilityWithReadOnlyRule : MutabilityExtensionRule
     {
         /// <summary>
         /// Array of valid values for x-ms-mutability extension when property is marked as "readonly": true.
@@ -70,5 +71,10 @@ namespace AutoRest.Swagger.Validation
 
             return isValid;
         }
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Error;
     }
 }

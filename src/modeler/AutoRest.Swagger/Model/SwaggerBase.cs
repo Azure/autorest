@@ -24,7 +24,6 @@ namespace AutoRest.Swagger.Model
         [CollectionRule(typeof(NextLinkPropertyMustExist))]
         [CollectionRule(typeof(PageableRequires200Response))]
         [CollectionRule(typeof(LongRunningResponseValidation))]
-        [CollectionRule(typeof(MutabilityValidValuesRule))]
         [CollectionRule(typeof(MutabilityWithReadOnlyRule))]
         public Dictionary<string, object> Extensions { get; set; }
 
