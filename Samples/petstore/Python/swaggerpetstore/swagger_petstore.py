@@ -188,7 +188,7 @@ class SwaggerPetstore(object):
         response = self._client.send(
             request, header_parameters, body_content, **operation_config)
 
-        if response.status_code not in [400, 404, 405]:
+        if response.status_code not in [405, 404, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
@@ -338,7 +338,7 @@ class SwaggerPetstore(object):
         request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [200, 400, 404]:
+        if response.status_code not in [404, 200, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
@@ -392,7 +392,7 @@ class SwaggerPetstore(object):
         request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [200, 400, 404]:
+        if response.status_code not in [404, 200, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
@@ -705,7 +705,7 @@ class SwaggerPetstore(object):
         request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [200, 400, 404]:
+        if response.status_code not in [404, 200, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
@@ -759,7 +759,7 @@ class SwaggerPetstore(object):
         request = self._client.delete(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [400, 404]:
+        if response.status_code not in [404, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
@@ -1038,7 +1038,7 @@ class SwaggerPetstore(object):
         request = self._client.get(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [200, 400, 404]:
+        if response.status_code not in [404, 200, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         deserialized = None
@@ -1100,7 +1100,7 @@ class SwaggerPetstore(object):
         response = self._client.send(
             request, header_parameters, body_content, **operation_config)
 
-        if response.status_code not in [400, 404]:
+        if response.status_code not in [404, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         if raw:
@@ -1146,7 +1146,7 @@ class SwaggerPetstore(object):
         request = self._client.delete(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [400, 404]:
+        if response.status_code not in [404, 400]:
             raise HttpOperationError(self._deserialize, response)
 
         if raw:

@@ -64,7 +64,9 @@ export abstract class DataStoreViewReadonly {
       const dataHandle = await this.ReadStrict(key);
       const data = await dataHandle.ReadData();
       const metadata = await dataHandle.ReadMetadata();
-      const targetFileUri = ResolveUri(targetDirUri, key);
+      const targetFileUri = ResolveUri(
+        targetDirUri.replace(/\/$/g, "") + "/",
+        key.replace(/%3A/g, "")); // bug: ResolveUri (or rather its internals) unescape "%3A" to ":"
       await WriteString(targetFileUri, data);
       await WriteString(targetFileUri + ".map", JSON.stringify(await metadata.sourceMap, null, 2));
       await WriteString(targetFileUri + ".input.map", JSON.stringify(await metadata.inputSourceMap, null, 2));

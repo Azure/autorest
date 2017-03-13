@@ -9,6 +9,9 @@ export function NewEmptyObject(): any {
     get(target, key) {
       return target[key];
     },
+    has(target, key) {
+      return keys.indexOf(key) !== -1;
+    },
     set(target, key, value) {
       if (keys.indexOf(key) === -1) {
         keys.push(key);
@@ -18,12 +21,15 @@ export function NewEmptyObject(): any {
     },
     deleteProperty(target, key) {
       if (keys.indexOf(key) !== -1) {
-        keys = keys.filter(x => x === key);
+        keys = keys.filter(x => x !== key);
       }
       delete target[key];
       return true;
     },
     ownKeys(target) {
+      return keys;
+    },
+    enumerate(target) {
       return keys;
     }
   });

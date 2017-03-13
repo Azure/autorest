@@ -40,7 +40,7 @@ export function WriteString(fileUri: string, data: string): Promise<void> {
   }
   if (path.sep === "\\") {
     p = p.substr(p.startsWith("/") ? 1 : 0);
-    p = p.replace("/", "\\");
+    p = p.replace(/\//g, "\\");
   }
   return WriteStringInternal(p, data);
 }

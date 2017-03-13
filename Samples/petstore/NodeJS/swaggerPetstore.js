@@ -381,7 +381,7 @@ SwaggerPetstore.prototype.updatePet = function (options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 400 && statusCode !== 404 && statusCode !== 405) {
+    if (statusCode !== 405 && statusCode !== 404 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -762,7 +762,7 @@ SwaggerPetstore.prototype.findPetsWithByteArray = function (petId, options, call
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 200 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -885,7 +885,7 @@ SwaggerPetstore.prototype.getPetById = function (petId, options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 200 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -1588,7 +1588,7 @@ SwaggerPetstore.prototype.getOrderById = function (orderId, options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 200 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -1704,7 +1704,7 @@ SwaggerPetstore.prototype.deleteOrder = function (orderId, options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -2374,7 +2374,7 @@ SwaggerPetstore.prototype.getUserByName = function (username, options, callback)
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 200 && statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 200 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -2522,7 +2522,7 @@ SwaggerPetstore.prototype.updateUser = function (username, options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
@@ -2620,7 +2620,7 @@ SwaggerPetstore.prototype.deleteUser = function (username, options, callback) {
       return callback(err);
     }
     var statusCode = response.statusCode;
-    if (statusCode !== 400 && statusCode !== 404) {
+    if (statusCode !== 404 && statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);

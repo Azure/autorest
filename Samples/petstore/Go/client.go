@@ -377,7 +377,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusNotFound,http.StatusBadRequest),
                 autorest.ByClosing())
         result.Response = resp
         return
@@ -489,7 +489,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusNotFound,http.StatusBadRequest),
                 autorest.ByClosing())
         result.Response = resp
         return
@@ -662,7 +662,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusNotFound,http.StatusOK,http.StatusBadRequest),
                 autorest.ByUnmarshallingJSON(&result.Value),
                 autorest.ByClosing())
         result.Response = autorest.Response{Response: resp}
@@ -767,7 +767,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusNotFound,http.StatusOK,http.StatusBadRequest),
                 autorest.ByUnmarshallingJSON(&result),
                 autorest.ByClosing())
         result.Response = autorest.Response{Response: resp}
@@ -823,7 +823,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusNotFound,http.StatusOK,http.StatusBadRequest),
                 autorest.ByUnmarshallingJSON(&result),
                 autorest.ByClosing())
         result.Response = autorest.Response{Response: resp}
@@ -878,7 +878,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusNotFound,http.StatusOK,http.StatusBadRequest),
                 autorest.ByUnmarshallingJSON(&result),
                 autorest.ByClosing())
         result.Response = autorest.Response{Response: resp}
@@ -1109,7 +1109,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound,http.StatusMethodNotAllowed),
+                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusMethodNotAllowed,http.StatusNotFound,http.StatusBadRequest),
                 autorest.ByClosing())
         result.Response = resp
         return
@@ -1227,7 +1227,7 @@ func New()ManagementClient {
         err = autorest.Respond(
                 resp,
                 client.ByInspecting(),
-                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusBadRequest,http.StatusNotFound),
+                azure.WithErrorUnlessStatusCode(http.StatusOK,http.StatusNotFound,http.StatusBadRequest),
                 autorest.ByClosing())
         result.Response = resp
         return
