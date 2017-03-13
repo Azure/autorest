@@ -14,11 +14,11 @@
 
 'use strict';
 
-exports.ArrayModel = require('./arrayModel');
 exports.BasicOperations = require('./basicOperations');
+exports.Primitive = require('./primitive');
+exports.ArrayModel = require('./arrayModel');
 exports.Dictionary = require('./dictionary');
 exports.Inheritance = require('./inheritance');
-exports.Polymorphicrecursive = require('./polymorphicrecursive');
 exports.Polymorphism = require('./polymorphism');
-exports.Primitive = require('./primitive');
+exports.Polymorphicrecursive = require('./polymorphicrecursive');
 exports.Readonlyproperty = require('./readonlyproperty');

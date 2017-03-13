@@ -77,13 +77,13 @@ function AzureCompositeModel(credentials, baseUri, options) {
   if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
     this.generateClientRequestId = options.generateClientRequestId;
   }
-  this.arrayModel = new operations.ArrayModel(this);
   this.basicOperations = new operations.BasicOperations(this);
+  this.primitive = new operations.Primitive(this);
+  this.arrayModel = new operations.ArrayModel(this);
   this.dictionary = new operations.Dictionary(this);
   this.inheritance = new operations.Inheritance(this);
-  this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
   this.polymorphism = new operations.Polymorphism(this);
-  this.primitive = new operations.Primitive(this);
+  this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
   this.readonlyproperty = new operations.Readonlyproperty(this);
   this.models = models;
   msRest.addSerializationMixin(this);

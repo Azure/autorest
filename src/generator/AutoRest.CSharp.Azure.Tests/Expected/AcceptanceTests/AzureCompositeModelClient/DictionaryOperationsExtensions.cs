@@ -22,6 +22,63 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     public static partial class DictionaryOperationsExtensions
     {
             /// <summary>
+            /// Get complex types with dictionary property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static DictionaryWrapper GetValid(this IDictionaryOperations operations)
+            {
+                return operations.GetValidAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with dictionary property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DictionaryWrapper> GetValidAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types with dictionary property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='defaultProgram'>
+            /// </param>
+            public static void PutValid(this IDictionaryOperations operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
+            {
+                operations.PutValidAsync(defaultProgram).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with dictionary property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='defaultProgram'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutValidAsync(this IDictionaryOperations operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Get complex types with dictionary property which is empty
             /// </summary>
             /// <param name='operations'>
@@ -79,36 +136,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
 
             /// <summary>
-            /// Get complex types with dictionary property while server doesn't provide a
-            /// response payload
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static DictionaryWrapper GetNotProvided(this IDictionaryOperations operations)
-            {
-                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get complex types with dictionary property while server doesn't provide a
-            /// response payload
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<DictionaryWrapper> GetNotProvidedAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
             /// Get complex types with dictionary property which is null
             /// </summary>
             /// <param name='operations'>
@@ -137,18 +164,20 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
 
             /// <summary>
-            /// Get complex types with dictionary property
+            /// Get complex types with dictionary property while server doesn't provide a
+            /// response payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static DictionaryWrapper GetValid(this IDictionaryOperations operations)
+            public static DictionaryWrapper GetNotProvided(this IDictionaryOperations operations)
             {
-                return operations.GetValidAsync().GetAwaiter().GetResult();
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get complex types with dictionary property
+            /// Get complex types with dictionary property while server doesn't provide a
+            /// response payload
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -156,41 +185,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetValidAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetNotProvidedAsync(this IDictionaryOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
-            }
-
-            /// <summary>
-            /// Put complex types with dictionary property
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='defaultProgram'>
-            /// </param>
-            public static void PutValid(this IDictionaryOperations operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>))
-            {
-                operations.PutValidAsync(defaultProgram).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put complex types with dictionary property
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='defaultProgram'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutValidAsync(this IDictionaryOperations operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

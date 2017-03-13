@@ -51,13 +51,13 @@ declare class AzureCompositeModel {
     generateClientRequestId: boolean;
 
     // Operation groups
-    arrayModel: operations.ArrayModel;
     basicOperations: operations.BasicOperations;
+    primitive: operations.Primitive;
+    arrayModel: operations.ArrayModel;
     dictionary: operations.Dictionary;
     inheritance: operations.Inheritance;
-    polymorphicrecursive: operations.Polymorphicrecursive;
     polymorphism: operations.Polymorphism;
-    primitive: operations.Primitive;
+    polymorphicrecursive: operations.Polymorphicrecursive;
     readonlyproperty: operations.Readonlyproperty;
 
             /**

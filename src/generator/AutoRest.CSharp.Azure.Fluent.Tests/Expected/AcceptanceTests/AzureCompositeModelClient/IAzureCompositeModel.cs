@@ -67,14 +67,19 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
 
 
         /// <summary>
-        /// Gets the IArrayOperations.
-        /// </summary>
-        IArrayOperations Array { get; }
-
-        /// <summary>
         /// Gets the IBasicOperations.
         /// </summary>
         IBasicOperations Basic { get; }
+
+        /// <summary>
+        /// Gets the IPrimitiveOperations.
+        /// </summary>
+        IPrimitiveOperations Primitive { get; }
+
+        /// <summary>
+        /// Gets the IArrayOperations.
+        /// </summary>
+        IArrayOperations Array { get; }
 
         /// <summary>
         /// Gets the IDictionaryOperations.
@@ -87,19 +92,14 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         IInheritanceOperations Inheritance { get; }
 
         /// <summary>
-        /// Gets the IPolymorphicrecursiveOperations.
-        /// </summary>
-        IPolymorphicrecursiveOperations Polymorphicrecursive { get; }
-
-        /// <summary>
         /// Gets the IPolymorphismOperations.
         /// </summary>
         IPolymorphismOperations Polymorphism { get; }
 
         /// <summary>
-        /// Gets the IPrimitiveOperations.
+        /// Gets the IPolymorphicrecursiveOperations.
         /// </summary>
-        IPrimitiveOperations Primitive { get; }
+        IPolymorphicrecursiveOperations Polymorphicrecursive { get; }
 
         /// <summary>
         /// Gets the IReadonlypropertyOperations.

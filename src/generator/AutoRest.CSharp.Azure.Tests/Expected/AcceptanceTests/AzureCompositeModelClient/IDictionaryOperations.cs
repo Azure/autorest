@@ -22,6 +22,37 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     public partial interface IDictionaryOperations
     {
         /// <summary>
+        /// Get complex types with dictionary property
+        /// </summary>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
+        Task<AzureOperationResponse<DictionaryWrapper>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put complex types with dictionary property
+        /// </summary>
+        /// <param name='defaultProgram'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
         /// Get complex types with dictionary property which is empty
         /// </summary>
         /// <param name='customHeaders'>
@@ -53,23 +84,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </exception>
         Task<AzureOperationResponse> PutEmptyWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get complex types with dictionary property while server doesn't
-        /// provide a response payload
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="ErrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.SerializationException">
-        /// Thrown when unable to deserialize the response
-        /// </exception>
-        Task<AzureOperationResponse<DictionaryWrapper>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Get complex types with dictionary property which is null
         /// </summary>
         /// <param name='customHeaders'>
@@ -86,7 +100,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </exception>
         Task<AzureOperationResponse<DictionaryWrapper>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get complex types with dictionary property
+        /// Get complex types with dictionary property while server doesn't
+        /// provide a response payload
         /// </summary>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -100,21 +115,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<AzureOperationResponse<DictionaryWrapper>> GetValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Put complex types with dictionary property
-        /// </summary>
-        /// <param name='defaultProgram'>
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="ErrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<DictionaryWrapper>> GetNotProvidedWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

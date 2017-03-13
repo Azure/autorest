@@ -20,120 +20,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     public static partial class BasicOperationsExtensions
     {
             /// <summary>
-            /// Get a basic complex type that is empty
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static BasicInner GetEmpty(this IBasicOperations operations)
-            {
-                return operations.GetEmptyAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get a basic complex type that is empty
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<BasicInner> GetEmptyAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get a basic complex type that is invalid for the local strong type
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static BasicInner GetInvalid(this IBasicOperations operations)
-            {
-                return operations.GetInvalidAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get a basic complex type that is invalid for the local strong type
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<BasicInner> GetInvalidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get a basic complex type while the server doesn't provide a response
-            /// payload
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static BasicInner GetNotProvided(this IBasicOperations operations)
-            {
-                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get a basic complex type while the server doesn't provide a response
-            /// payload
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<BasicInner> GetNotProvidedAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Get a basic complex type whose properties are null
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static BasicInner GetNull(this IBasicOperations operations)
-            {
-                return operations.GetNullAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get a basic complex type whose properties are null
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<BasicInner> GetNullAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
             /// Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
             /// </summary>
             /// <param name='operations'>
@@ -190,6 +76,120 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             public static async Task PutValidAsync(this IBasicOperations operations, BasicInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get a basic complex type that is invalid for the local strong type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static BasicInner GetInvalid(this IBasicOperations operations)
+            {
+                return operations.GetInvalidAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a basic complex type that is invalid for the local strong type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<BasicInner> GetInvalidAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get a basic complex type that is empty
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static BasicInner GetEmpty(this IBasicOperations operations)
+            {
+                return operations.GetEmptyAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a basic complex type that is empty
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<BasicInner> GetEmptyAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get a basic complex type whose properties are null
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static BasicInner GetNull(this IBasicOperations operations)
+            {
+                return operations.GetNullAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a basic complex type whose properties are null
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<BasicInner> GetNullAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get a basic complex type while the server doesn't provide a response
+            /// payload
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static BasicInner GetNotProvided(this IBasicOperations operations)
+            {
+                return operations.GetNotProvidedAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get a basic complex type while the server doesn't provide a response
+            /// payload
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<BasicInner> GetNotProvidedAsync(this IBasicOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

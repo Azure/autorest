@@ -31,6 +31,1028 @@ function Primitive(client) {
 }
 
 /**
+ * Get complex types with integer properties
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link IntWrapper} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.getInt = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/integer';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['IntWrapper']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put complex types with integer properties
+ *
+ * @param {object} complexBody Please put -1 and 2
+ *
+ * @param {number} [complexBody.field1]
+ *
+ * @param {number} [complexBody.field2]
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.putInt = function (complexBody, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/integer';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (complexBody !== null && complexBody !== undefined) {
+      var requestModelMapper = new client.models['IntWrapper']().mapper();
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
+        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Get complex types with long properties
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link LongWrapper} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.getLong = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/long';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['LongWrapper']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put complex types with long properties
+ *
+ * @param {object} complexBody Please put 1099511627775 and -999511627788
+ *
+ * @param {number} [complexBody.field1]
+ *
+ * @param {number} [complexBody.field2]
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.putLong = function (complexBody, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/long';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (complexBody !== null && complexBody !== undefined) {
+      var requestModelMapper = new client.models['LongWrapper']().mapper();
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
+        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Get complex types with float properties
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link FloatWrapper} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.getFloat = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/float';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['FloatWrapper']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put complex types with float properties
+ *
+ * @param {object} complexBody Please put 1.05 and -0.003
+ *
+ * @param {number} [complexBody.field1]
+ *
+ * @param {number} [complexBody.field2]
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.putFloat = function (complexBody, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/float';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (complexBody !== null && complexBody !== undefined) {
+      var requestModelMapper = new client.models['FloatWrapper']().mapper();
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
+        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Get complex types with double properties
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link DoubleWrapper} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.getDouble = function (options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/double';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'GET';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.body = null;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['DoubleWrapper']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put complex types with double properties
+ *
+ * @param {object} complexBody Please put 3e-100 and
+ * -0.000000000000000000000000000000000000000000000000000000005
+ *
+ * @param {number} [complexBody.field1]
+ *
+ * @param {number}
+ * [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
+ *
+ * @param {object} [options] Optional Parameters.
+ *
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ *
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {null} [result]   - The deserialized result object.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+Primitive.prototype.putDouble = function (complexBody, options, callback) {
+  var client = this.client;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var baseUrl = this.client.baseUri;
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/double';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (complexBody !== null && complexBody !== undefined) {
+      var requestModelMapper = new client.models['DoubleWrapper']().mapper();
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
+      requestContent = JSON.stringify(requestModel);
+    }
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
+        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          var internalError = null;
+          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
+          error.code = internalError ? internalError.code : parsedErrorResponse.code;
+          error.message = internalError ? internalError.message : parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
  * Get complex types with bool properties
  *
  * @param {object} [options] Optional Parameters.
@@ -286,7 +1308,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
 };
 
 /**
- * Get complex types with byte properties
+ * Get complex types with string properties
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -300,13 +1322,13 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link ByteWrapper} for more information.
+ *                      See {@link StringWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.getByte = function (options, callback) {
+Primitive.prototype.getString = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -326,7 +1348,7 @@ Primitive.prototype.getByte = function (options, callback) {
 
   // Construct URL
   var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/byte';
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/string';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -395,7 +1417,7 @@ Primitive.prototype.getByte = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ByteWrapper']().mapper();
+          var resultMapper = new client.models['StringWrapper']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
@@ -411,11 +1433,17 @@ Primitive.prototype.getByte = function (options, callback) {
 };
 
 /**
- * Put complex types with byte properties
+ * Put complex types with string properties
+ *
+ * @param {object} complexBody Please put 'goodrequest', '', and null
+ *
+ * @param {string} [complexBody.field]
+ *
+ * @param {string} [complexBody.empty]
+ *
+ * @param {string} [complexBody.nullProperty]
  *
  * @param {object} [options] Optional Parameters.
- *
- * @param {buffer} [options.field]
  *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -432,7 +1460,7 @@ Primitive.prototype.getByte = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.putByte = function (options, callback) {
+Primitive.prototype.putString = function (complexBody, options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -441,11 +1469,10 @@ Primitive.prototype.putByte = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var field = (options && options.field !== undefined) ? options.field : undefined;
   // Validate
   try {
-    if (field && !Buffer.isBuffer(field)) {
-      throw new Error('field must be of type buffer.');
+    if (complexBody === null || complexBody === undefined) {
+      throw new Error('complexBody cannot be null or undefined.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -453,15 +1480,10 @@ Primitive.prototype.putByte = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-    var complexBody;
-  if (field !== null && field !== undefined) {
-      complexBody = new client.models['ByteWrapper']();
-      complexBody.field = field;
-  }
 
   // Construct URL
   var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/byte';
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/string';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -492,7 +1514,7 @@ Primitive.prototype.putByte = function (options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client.models['ByteWrapper']().mapper();
+      var requestModelMapper = new client.models['StringWrapper']().mapper();
       requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
       requestContent = JSON.stringify(requestModel);
     }
@@ -1311,263 +2333,6 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
 };
 
 /**
- * Get complex types with double properties
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object.
- *                      See {@link DoubleWrapper} for more information.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.getDouble = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/double';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['DoubleWrapper']().mapper();
-          result = client.deserialize(resultMapper, parsedResponse, 'result');
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = msRest.stripRequest(httpRequest);
-        deserializationError.response = msRest.stripResponse(response);
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Put complex types with double properties
- *
- * @param {object} complexBody Please put 3e-100 and
- * -0.000000000000000000000000000000000000000000000000000000005
- *
- * @param {number} [complexBody.field1]
- *
- * @param {number}
- * [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {null} [result]   - The deserialized result object.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.putDouble = function (complexBody, options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
-    }
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/double';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
-  try {
-    if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client.models['DoubleWrapper']().mapper();
-      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
-      requestContent = JSON.stringify(requestModel);
-    }
-  } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
-    return callback(serializationError);
-  }
-  httpRequest.body = requestContent;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
  * Get complex types with duration properties
  *
  * @param {object} [options] Optional Parameters.
@@ -1825,7 +2590,7 @@ Primitive.prototype.putDuration = function (options, callback) {
 };
 
 /**
- * Get complex types with float properties
+ * Get complex types with byte properties
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -1839,13 +2604,13 @@ Primitive.prototype.putDuration = function (options, callback) {
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
  *                      {object} [result]   - The deserialized result object.
- *                      See {@link FloatWrapper} for more information.
+ *                      See {@link ByteWrapper} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.getFloat = function (options, callback) {
+Primitive.prototype.getByte = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1865,7 +2630,7 @@ Primitive.prototype.getFloat = function (options, callback) {
 
   // Construct URL
   var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/float';
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/byte';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -1934,7 +2699,7 @@ Primitive.prototype.getFloat = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['FloatWrapper']().mapper();
+          var resultMapper = new client.models['ByteWrapper']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
@@ -1950,15 +2715,11 @@ Primitive.prototype.getFloat = function (options, callback) {
 };
 
 /**
- * Put complex types with float properties
- *
- * @param {object} complexBody Please put 1.05 and -0.003
- *
- * @param {number} [complexBody.field1]
- *
- * @param {number} [complexBody.field2]
+ * Put complex types with byte properties
  *
  * @param {object} [options] Optional Parameters.
+ *
+ * @param {buffer} [options.field]
  *
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1975,7 +2736,7 @@ Primitive.prototype.getFloat = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Primitive.prototype.putFloat = function (complexBody, options, callback) {
+Primitive.prototype.putByte = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1984,10 +2745,11 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var field = (options && options.field !== undefined) ? options.field : undefined;
   // Validate
   try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
+    if (field && !Buffer.isBuffer(field)) {
+      throw new Error('field must be of type buffer.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -1995,10 +2757,15 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   } catch (error) {
     return callback(error);
   }
+    var complexBody;
+  if (field !== null && field !== undefined) {
+      complexBody = new client.models['ByteWrapper']();
+      complexBody.field = field;
+  }
 
   // Construct URL
   var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/float';
+  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/byte';
   var queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
@@ -2029,774 +2796,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client.models['FloatWrapper']().mapper();
-      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
-      requestContent = JSON.stringify(requestModel);
-    }
-  } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
-    return callback(serializationError);
-  }
-  httpRequest.body = requestContent;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Get complex types with integer properties
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object.
- *                      See {@link IntWrapper} for more information.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.getInt = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/integer';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['IntWrapper']().mapper();
-          result = client.deserialize(resultMapper, parsedResponse, 'result');
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = msRest.stripRequest(httpRequest);
-        deserializationError.response = msRest.stripResponse(response);
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Put complex types with integer properties
- *
- * @param {object} complexBody Please put -1 and 2
- *
- * @param {number} [complexBody.field1]
- *
- * @param {number} [complexBody.field2]
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {null} [result]   - The deserialized result object.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.putInt = function (complexBody, options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
-    }
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/integer';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
-  try {
-    if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client.models['IntWrapper']().mapper();
-      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
-      requestContent = JSON.stringify(requestModel);
-    }
-  } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
-    return callback(serializationError);
-  }
-  httpRequest.body = requestContent;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Get complex types with long properties
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object.
- *                      See {@link LongWrapper} for more information.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.getLong = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/long';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['LongWrapper']().mapper();
-          result = client.deserialize(resultMapper, parsedResponse, 'result');
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = msRest.stripRequest(httpRequest);
-        deserializationError.response = msRest.stripResponse(response);
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Put complex types with long properties
- *
- * @param {object} complexBody Please put 1099511627775 and -999511627788
- *
- * @param {number} [complexBody.field1]
- *
- * @param {number} [complexBody.field2]
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {null} [result]   - The deserialized result object.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.putLong = function (complexBody, options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
-    }
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/long';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
-  try {
-    if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client.models['LongWrapper']().mapper();
-      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
-      requestContent = JSON.stringify(requestModel);
-    }
-  } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(complexBody, {depth: null})));
-    return callback(serializationError);
-  }
-  httpRequest.body = requestContent;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Get complex types with string properties
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {object} [result]   - The deserialized result object.
- *                      See {@link StringWrapper} for more information.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.getString = function (options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/string';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'GET';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  httpRequest.body = null;
-  // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
-    if (err) {
-      return callback(err);
-    }
-    var statusCode = response.statusCode;
-    if (statusCode !== 200) {
-      var error = new Error(responseBody);
-      error.statusCode = response.statusCode;
-      error.request = msRest.stripRequest(httpRequest);
-      error.response = msRest.stripResponse(response);
-      if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
-      try {
-        parsedErrorResponse = JSON.parse(responseBody);
-        if (parsedErrorResponse) {
-          var internalError = null;
-          if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
-          error.code = internalError ? internalError.code : parsedErrorResponse.code;
-          error.message = internalError ? internalError.message : parsedErrorResponse.message;
-        }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
-      } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
-        return callback(error);
-      }
-      return callback(error);
-    }
-    // Create Result
-    var result = null;
-    if (responseBody === '') responseBody = null;
-    // Deserialize Response
-    if (statusCode === 200) {
-      var parsedResponse = null;
-      try {
-        parsedResponse = JSON.parse(responseBody);
-        result = JSON.parse(responseBody);
-        if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['StringWrapper']().mapper();
-          result = client.deserialize(resultMapper, parsedResponse, 'result');
-        }
-      } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = msRest.stripRequest(httpRequest);
-        deserializationError.response = msRest.stripResponse(response);
-        return callback(deserializationError);
-      }
-    }
-
-    return callback(null, result, httpRequest, response);
-  });
-};
-
-/**
- * Put complex types with string properties
- *
- * @param {object} complexBody Please put 'goodrequest', '', and null
- *
- * @param {string} [complexBody.field]
- *
- * @param {string} [complexBody.empty]
- *
- * @param {string} [complexBody.nullProperty]
- *
- * @param {object} [options] Optional Parameters.
- *
- * @param {object} [options.customHeaders] Headers that will be added to the
- * request
- *
- * @param {function} callback
- *
- * @returns {function} callback(err, result, request, response)
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {null} [result]   - The deserialized result object.
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-Primitive.prototype.putString = function (complexBody, options, callback) {
-  var client = this.client;
-  if(!callback && typeof options === 'function') {
-    callback = options;
-    options = null;
-  }
-  if (!callback) {
-    throw new Error('callback cannot be null.');
-  }
-  // Validate
-  try {
-    if (complexBody === null || complexBody === undefined) {
-      throw new Error('complexBody cannot be null or undefined.');
-    }
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
-
-  // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'complex/primitive/string';
-  var queryParameters = [];
-  if (queryParameters.length > 0) {
-    requestUrl += '?' + queryParameters.join('&');
-  }
-
-  // Create HTTP transport objects
-  var httpRequest = new WebResource();
-  httpRequest.method = 'PUT';
-  httpRequest.headers = {};
-  httpRequest.url = requestUrl;
-  // Set Headers
-  if (this.client.generateClientRequestId) {
-      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
-  }
-  if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
-    httpRequest.headers['accept-language'] = this.client.acceptLanguage;
-  }
-  if(options) {
-    for(var headerName in options['customHeaders']) {
-      if (options['customHeaders'].hasOwnProperty(headerName)) {
-        httpRequest.headers[headerName] = options['customHeaders'][headerName];
-      }
-    }
-  }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
-  // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
-  try {
-    if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client.models['StringWrapper']().mapper();
+      var requestModelMapper = new client.models['ByteWrapper']().mapper();
       requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
       requestContent = JSON.stringify(requestModel);
     }

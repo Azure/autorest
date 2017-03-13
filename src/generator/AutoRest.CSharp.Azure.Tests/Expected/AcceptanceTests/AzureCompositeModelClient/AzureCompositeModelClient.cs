@@ -70,14 +70,19 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
-        /// Gets the IArrayOperations.
-        /// </summary>
-        public virtual IArrayOperations Array { get; private set; }
-
-        /// <summary>
         /// Gets the IBasicOperations.
         /// </summary>
         public virtual IBasicOperations Basic { get; private set; }
+
+        /// <summary>
+        /// Gets the IPrimitiveOperations.
+        /// </summary>
+        public virtual IPrimitiveOperations Primitive { get; private set; }
+
+        /// <summary>
+        /// Gets the IArrayOperations.
+        /// </summary>
+        public virtual IArrayOperations Array { get; private set; }
 
         /// <summary>
         /// Gets the IDictionaryOperations.
@@ -90,19 +95,14 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         public virtual IInheritanceOperations Inheritance { get; private set; }
 
         /// <summary>
-        /// Gets the IPolymorphicrecursiveOperations.
-        /// </summary>
-        public virtual IPolymorphicrecursiveOperations Polymorphicrecursive { get; private set; }
-
-        /// <summary>
         /// Gets the IPolymorphismOperations.
         /// </summary>
         public virtual IPolymorphismOperations Polymorphism { get; private set; }
 
         /// <summary>
-        /// Gets the IPrimitiveOperations.
+        /// Gets the IPolymorphicrecursiveOperations.
         /// </summary>
-        public virtual IPrimitiveOperations Primitive { get; private set; }
+        public virtual IPolymorphicrecursiveOperations Polymorphicrecursive { get; private set; }
 
         /// <summary>
         /// Gets the IReadonlypropertyOperations.
@@ -310,13 +310,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         private void Initialize()
         {
-            Array = new ArrayOperations(this);
             Basic = new BasicOperations(this);
+            Primitive = new PrimitiveOperations(this);
+            Array = new ArrayOperations(this);
             Dictionary = new DictionaryOperations(this);
             Inheritance = new InheritanceOperations(this);
-            Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
             Polymorphism = new PolymorphismOperations(this);
-            Primitive = new PrimitiveOperations(this);
+            Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
             Readonlyproperty = new ReadonlypropertyOperations(this);
             BaseUri = new System.Uri("http://localhost");
             SubscriptionId = "123456";

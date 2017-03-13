@@ -22,6 +22,63 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     public static partial class ArrayOperationsExtensions
     {
             /// <summary>
+            /// Get complex types with array property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static ArrayWrapper GetValid(this IArrayOperations operations)
+            {
+                return operations.GetValidAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with array property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<ArrayWrapper> GetValidAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types with array property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='array'>
+            /// </param>
+            public static void PutValid(this IArrayOperations operations, IList<string> array = default(IList<string>))
+            {
+                operations.PutValidAsync(array).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with array property
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='array'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutValidAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Get complex types with array property which is empty
             /// </summary>
             /// <param name='operations'>
@@ -106,63 +163,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     return _result.Body;
                 }
-            }
-
-            /// <summary>
-            /// Get complex types with array property
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static ArrayWrapper GetValid(this IArrayOperations operations)
-            {
-                return operations.GetValidAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get complex types with array property
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<ArrayWrapper> GetValidAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Put complex types with array property
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='array'>
-            /// </param>
-            public static void PutValid(this IArrayOperations operations, IList<string> array = default(IList<string>))
-            {
-                operations.PutValidAsync(array).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put complex types with array property
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='array'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutValidAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

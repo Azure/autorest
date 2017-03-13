@@ -22,53 +22,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     public partial interface IPolymorphismOperations
     {
         /// <summary>
-        /// Put complex types that are polymorphic, attempting to omit required
-        /// 'birthday' field - the request should not be allowed from the
-        /// client
-        /// </summary>
-        /// <param name='complexBody'>
-        /// Please attempt put a sawshark that looks like this, the client
-        /// should not allow this data to be sent:
-        /// {
-        /// "fishtype": "sawshark",
-        /// "species": "snaggle toothed",
-        /// "length": 18.5,
-        /// "age": 2,
-        /// "birthday": "2013-06-01T01:00:00Z",
-        /// "location": "alaska",
-        /// "picture": base64(FF FF FF FF FE),
-        /// "siblings": [
-        /// {
-        /// "fishtype": "shark",
-        /// "species": "predator",
-        /// "birthday": "2012-01-05T01:00:00Z",
-        /// "length": 20,
-        /// "age": 6
-        /// },
-        /// {
-        /// "fishtype": "sawshark",
-        /// "species": "dangerous",
-        /// "picture": base64(FF FF FF FF FE),
-        /// "length": 10,
-        /// "age": 105
-        /// }
-        /// ]
-        /// }
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="ErrorException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<AzureOperationResponse> PutValidMissingRequiredWithHttpMessagesAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Get complex types that are polymorphic
         /// </summary>
         /// <param name='customHeaders'>
@@ -136,5 +89,52 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// Thrown when a required parameter is null
         /// </exception>
         Task<AzureOperationResponse> PutValidWithHttpMessagesAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Put complex types that are polymorphic, attempting to omit required
+        /// 'birthday' field - the request should not be allowed from the
+        /// client
+        /// </summary>
+        /// <param name='complexBody'>
+        /// Please attempt put a sawshark that looks like this, the client
+        /// should not allow this data to be sent:
+        /// {
+        /// "fishtype": "sawshark",
+        /// "species": "snaggle toothed",
+        /// "length": 18.5,
+        /// "age": 2,
+        /// "birthday": "2013-06-01T01:00:00Z",
+        /// "location": "alaska",
+        /// "picture": base64(FF FF FF FF FE),
+        /// "siblings": [
+        /// {
+        /// "fishtype": "shark",
+        /// "species": "predator",
+        /// "birthday": "2012-01-05T01:00:00Z",
+        /// "length": 20,
+        /// "age": 6
+        /// },
+        /// {
+        /// "fishtype": "sawshark",
+        /// "species": "dangerous",
+        /// "picture": base64(FF FF FF FF FE),
+        /// "length": 10,
+        /// "age": 105
+        /// }
+        /// ]
+        /// }
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="ErrorException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<AzureOperationResponse> PutValidMissingRequiredWithHttpMessagesAsync(Fish complexBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
