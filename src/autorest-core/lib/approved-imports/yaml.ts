@@ -66,7 +66,9 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode): any {
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
-      return yamlNode.valueObject = yamlNodeScalar.valueObject || yamlNodeScalar.value;
+      return yamlNode.valueObject = yamlNodeScalar.valueObject !== undefined
+        ? yamlNodeScalar.valueObject
+        : yamlNodeScalar.value;
     }
     case Kind.MAPPING:
       throw new Error(`Cannot turn single mapping into an object`);
