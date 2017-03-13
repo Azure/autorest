@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the
         /// ParameterGroupingPostRequiredParameters class.
         /// </summary>
-        public ParameterGroupingPostRequiredParameters() { }
+        public ParameterGroupingPostRequiredParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -37,7 +40,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
             CustomHeader = customHeader;
             Query = query;
             Path = path;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

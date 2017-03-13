@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseBoolHeaders class.
         /// </summary>
-        public HeaderResponseBoolHeaders() { }
+        public HeaderResponseBoolHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseBoolHeaders class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseBoolHeaders(bool? value = default(bool?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header value "value": true or false

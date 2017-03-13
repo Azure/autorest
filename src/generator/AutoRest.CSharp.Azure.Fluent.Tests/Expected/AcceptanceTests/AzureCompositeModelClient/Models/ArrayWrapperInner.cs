@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapperInner class.
         /// </summary>
-        public ArrayWrapperInner() { }
+        public ArrayWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ArrayWrapperInner class.
@@ -27,7 +30,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public ArrayWrapperInner(IList<string> array = default(IList<string>))
         {
             Array = array;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

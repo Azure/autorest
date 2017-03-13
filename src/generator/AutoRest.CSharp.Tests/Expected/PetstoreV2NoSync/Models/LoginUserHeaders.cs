@@ -22,7 +22,10 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Initializes a new instance of the LoginUserHeaders class.
         /// </summary>
-        public LoginUserHeaders() { }
+        public LoginUserHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the LoginUserHeaders class.
@@ -33,7 +36,13 @@ namespace Fixtures.PetstoreV2NoSync.Models
         {
             XRateLimit = xRateLimit;
             XExpiresAfter = xExpiresAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets calls per hour allowed by the user

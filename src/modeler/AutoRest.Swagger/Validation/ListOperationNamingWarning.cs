@@ -14,7 +14,6 @@ namespace AutoRest.Swagger.Validation
 {
     public class ListOperationNamingWarning : TypedRule<Dictionary<string,Dictionary<string, Operation>>>
     {
-        private readonly string XmsPageable = "x-ms-pageable";
         private readonly Regex ListRegex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
 
         /// <summary>

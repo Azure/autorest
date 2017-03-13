@@ -14,7 +14,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the StorageAccount class.
         /// </summary>
-        public StorageAccount() { }
+        public StorageAccount()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccount class.
@@ -28,7 +31,13 @@ namespace Petstore.Models
             : base(id, name, type, location, tags)
         {
             Properties = properties;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

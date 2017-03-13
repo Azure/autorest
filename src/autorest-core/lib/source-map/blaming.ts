@@ -8,10 +8,7 @@ import { From } from "../approved-imports/linq";
 
 export class BlameTree {
   public static async Create(dataStore: DataStore, position: sourceMap.MappedPosition): Promise<BlameTree> {
-    const data = await dataStore.Read(position.source);
-    if (data === null) {
-      throw new Error(`Data with key '${position.source}' not found`);
-    }
+    const data = await dataStore.ReadStrict(position.source);
     const blames = await data.Blame(position);
     return new BlameTree(position, await Promise.all(blames.map(pos => BlameTree.Create(dataStore, pos))));
   }

@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Initializes a new instance of the
         /// LROsDeleteProvisioning202DeletingFailed200Headers class.
         /// </summary>
-        public LROsDeleteProvisioning202DeletingFailed200Headers() { }
+        public LROsDeleteProvisioning202DeletingFailed200Headers()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -36,7 +39,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             Location = location;
             RetryAfter = retryAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to

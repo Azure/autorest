@@ -21,6 +21,7 @@ class BasicOperations(object):
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
+    :ivar api_version: API ID. Constant value: "2016-02-29".
     """
 
     def __init__(self, client, config, serializer, deserializer):
@@ -30,6 +31,7 @@ class BasicOperations(object):
         self._deserialize = deserializer
 
         self.config = config
+        self.api_version = "2016-02-29"
 
     def get_valid(
             self, custom_headers=None, raw=False, **operation_config):
@@ -100,7 +102,7 @@ class BasicOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize.query("self.config.api_version", self.config.api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.api_version", self.api_version, 'str')
 
         # Construct headers
         header_parameters = {}

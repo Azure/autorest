@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Error2 class.
         /// </summary>
-        public Error2() { }
+        public Error2()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Error2 class.
@@ -27,7 +30,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             Code = code;
             Message = message;
             Fields = fields;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

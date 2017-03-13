@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, resolveAnchorRef } from "../approved-imports/yaml";
-import { JsonPath, JsonPathComponent } from "../approved-imports/jsonpath";
-import { indexToPosition } from "./textUtility";
+import { Kind, YAMLNode, YAMLMapping, YAMLMap, YAMLSequence, YAMLAnchorReference, ResolveAnchorRef, StringifyAst } from "../approved-imports/yaml";
+import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
+import { IndexToPosition } from "./text-utility";
 import { DataHandleRead } from "../data-store/data-store";
 
 
@@ -16,14 +16,14 @@ import { DataHandleRead } from "../data-store/data-store";
  * @param jsonPathPart           Path component to resolve
  * @param deferResolvingMappings If set to true, if resolving to a mapping, will return the entire mapping node instead of just the value (useful if desiring keys)
  */
-export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
+function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathPart: JsonPathComponent, deferResolvingMappings: boolean): YAMLNode {
   switch (yamlAstCurrent.kind) {
     case Kind.SCALAR:
       throw new Error(`Trying to retrieve '${jsonPathPart}' from scalar value`);
     case Kind.MAPPING: {
       let astSub = yamlAstCurrent as YAMLMapping;
       if (deferResolvingMappings) {
-        return resolvePathPart(yamlAstRoot, astSub.value, jsonPathPart, deferResolvingMappings);
+        return ResolvePathPart(yamlAstRoot, astSub.value, jsonPathPart, deferResolvingMappings);
       }
       if (jsonPathPart.toString() !== astSub.key.value) {
         throw new Error(`Trying to retrieve '${jsonPathPart}' from mapping with key '${astSub.key.value}'`);
@@ -36,7 +36,7 @@ export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode,
         if (jsonPathPart.toString() === mapping.key.value) {
           return deferResolvingMappings
             ? mapping
-            : resolvePathPart(yamlAstRoot, mapping, jsonPathPart, deferResolvingMappings);
+            : ResolvePathPart(yamlAstRoot, mapping, jsonPathPart, deferResolvingMappings);
         }
       }
       throw new Error(`Trying to retrieve '${jsonPathPart}' from mapping that contains no such key`);
@@ -53,8 +53,8 @@ export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode,
     }
     case Kind.ANCHOR_REF: {
       let astSub = yamlAstCurrent as YAMLAnchorReference;
-      let newCurrent = resolveAnchorRef(yamlAstRoot, astSub.referencesAnchor).node;
-      return resolvePathPart(yamlAstRoot, newCurrent, jsonPathPart, deferResolvingMappings);
+      let newCurrent = ResolveAnchorRef(yamlAstRoot, astSub.referencesAnchor).node;
+      return ResolvePathPart(yamlAstRoot, newCurrent, jsonPathPart, deferResolvingMappings);
     }
     case Kind.INCLUDE_REF:
       throw new Error(`INCLUDE_REF not implemented`);
@@ -62,33 +62,34 @@ export function resolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode,
   throw new Error(`unexpected YAML AST node kind '${yamlAstCurrent.kind}'`);
 }
 
-export function resolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPathParts: JsonPath): YAMLNode {
-  for (const jsonPathPart of jsonPathParts) {
-    yamlAstCurrent = resolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
+export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
+  try {
+    for (const jsonPathPart of jsonPath) {
+      yamlAstCurrent = ResolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
+    }
+    return yamlAstCurrent;
+  } catch (error) {
+    throw new Error(`Error retrieving '${stringify(jsonPath)}' from '${StringifyAst(yamlAstCurrent)}' (${error})`);
   }
-  return yamlAstCurrent;
 }
 
-export function resolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath): number {
-  if (jsonPathParts.length === 0 || jsonPathParts[0] !== "$") {
-    throw new Error(`Argument: Invalid JSON path '${JSON.stringify(jsonPathParts)}' (not starting with $)`);
-  }
+export function ResolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath): number {
   // special treatment of root "$", so it gets mapped to the VERY beginning of the document (possibly "---")
   // instead of the first YAML mapping node. This allows disambiguation of "$" and "$.<first prop>" in YAML.
-  if (jsonPathParts.length === 1) {
+  if (jsonPathParts.length === 0) {
     return 0;
   }
 
-  return resolveRelativeNode(yamlAstRoot, yamlAstRoot, jsonPathParts.slice(1)).startPosition;
+  return ResolveRelativeNode(yamlAstRoot, yamlAstRoot, jsonPathParts).startPosition;
 }
 
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export async function resolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<sourceMap.Position> {
+export async function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<sourceMap.Position> {
   const yaml = await yamlFile.ReadData();
   const yamlAst = await yamlFile.ReadYamlAst();
-  const textIndex = resolvePathParts(yamlAst, jsonPath);
-  const result = indexToPosition(yaml, textIndex);
+  const textIndex = ResolvePathParts(yamlAst, jsonPath);
+  const result = IndexToPosition(yaml, textIndex);
   return result;
 }

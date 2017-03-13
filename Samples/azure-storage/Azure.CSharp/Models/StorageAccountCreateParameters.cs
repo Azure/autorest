@@ -17,7 +17,10 @@ namespace Petstore.Models
         /// Initializes a new instance of the StorageAccountCreateParameters
         /// class.
         /// </summary>
-        public StorageAccountCreateParameters() { }
+        public StorageAccountCreateParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the StorageAccountCreateParameters
@@ -30,7 +33,13 @@ namespace Petstore.Models
             Location = location;
             Tags = tags;
             Properties = properties;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets resource location

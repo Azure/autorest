@@ -3,7 +3,7 @@
 *  Licensed under the MIT License. See License.txt in the project root for license information.
 *--------------------------------------------------------------------------------------------*/
 
-import { resolveUri } from "./lib/approved-imports/uri";
+import { ResolveUri } from "./lib/approved-imports/uri";
 import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
 import { AutoRestConfiguration } from "./lib/configuration/configuration"
@@ -15,13 +15,14 @@ export function isLegacy(args: string[]): boolean {
 }
 
 async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfiguration): Promise<void> {
-  const compositeSwaggerFile = await inputScope.Read(uri);
-  if (compositeSwaggerFile === null) {
-    throw new Error(`File '${uri}' not found.`);
-  }
-  const data = await compositeSwaggerFile.ReadObject<{ documents: string[] }>();
+  const compositeSwaggerFile = await inputScope.ReadStrict(uri);
+  const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
-  targetConfig["input-file"] = documents.map(d => resolveUri(uri, d));
+  targetConfig["input-file"] = documents.map(d => ResolveUri(uri, d));
+
+  // forward info section
+  targetConfig.__specials = targetConfig.__specials || {};
+  targetConfig.__specials.infoSectionOverride = data.info;
 }
 
 export async function CreateConfiguration(inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfiguration> {
@@ -48,7 +49,7 @@ export async function CreateConfiguration(inputScope: DataStoreViewReadonly, arg
   }
   result["input-file"] = inputFile;
 
-  const modeler = switches["modeler"] || "Swagger";
+  const modeler = switches["m"] || switches["modeler"] || "Swagger";
   if (modeler === "CompositeSwagger") {
     await ParseCompositeSwagger(inputScope, inputFile, result);
   }

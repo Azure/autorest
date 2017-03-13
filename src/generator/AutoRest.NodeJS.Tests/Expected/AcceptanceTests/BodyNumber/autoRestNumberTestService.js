@@ -48,6 +48,8 @@ function AutoRestNumberTestService(baseUri, options) {
     this.baseUri = 'https://localhost';
   }
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   this.number = new operations.Number(this);
   this.models = models;
   msRest.addSerializationMixin(this);

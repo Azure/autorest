@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon() { }
+        public Salmon()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Salmon class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Location = location;
             Iswild = iswild;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>

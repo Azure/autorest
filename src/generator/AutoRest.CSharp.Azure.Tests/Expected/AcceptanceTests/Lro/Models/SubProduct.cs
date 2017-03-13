@@ -21,7 +21,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the SubProduct class.
         /// </summary>
-        public SubProduct() { }
+        public SubProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SubProduct class.
@@ -36,7 +39,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
