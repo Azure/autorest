@@ -19,41 +19,41 @@ var msRestAzure = require('ms-rest-azure');
 exports.BaseResource = msRestAzure.BaseResource;
 exports.CloudError = msRestAzure.CloudError;
 exports.Product = require('./product');
-exports.CatalogDictionary = require('./catalogDictionary');
 exports.CatalogArray = require('./catalogArray');
 exports.CatalogArrayOfDictionary = require('./catalogArrayOfDictionary');
+exports.CatalogDictionary = require('./catalogDictionary');
 exports.CatalogDictionaryOfArray = require('./catalogDictionaryOfArray');
 exports.ErrorModel = require('./errorModel');
+exports.Fish = require('./fish');
+exports.ArrayWrapper = require('./arrayWrapper');
 exports.Basic = require('./basic');
+exports.BooleanWrapper = require('./booleanWrapper');
+exports.ByteWrapper = require('./byteWrapper');
 exports.Pet = require('./pet');
 exports.Dog = require('./dog');
 exports.Cat = require('./cat');
-exports.Siamese = require('./siamese');
-exports.Fish = require('./fish');
-exports.Salmon = require('./salmon');
 exports.Shark = require('./shark');
-exports.Sawshark = require('./sawshark');
-exports.Goblinshark = require('./goblinshark');
 exports.Cookiecuttershark = require('./cookiecuttershark');
-exports.IntWrapper = require('./intWrapper');
-exports.LongWrapper = require('./longWrapper');
-exports.FloatWrapper = require('./floatWrapper');
-exports.DoubleWrapper = require('./doubleWrapper');
-exports.BooleanWrapper = require('./booleanWrapper');
-exports.StringWrapper = require('./stringWrapper');
 exports.DateWrapper = require('./dateWrapper');
 exports.DatetimeWrapper = require('./datetimeWrapper');
 exports.Datetimerfc1123Wrapper = require('./datetimerfc1123Wrapper');
-exports.DurationWrapper = require('./durationWrapper');
-exports.ByteWrapper = require('./byteWrapper');
-exports.ArrayWrapper = require('./arrayWrapper');
 exports.DictionaryWrapper = require('./dictionaryWrapper');
+exports.DoubleWrapper = require('./doubleWrapper');
+exports.DurationWrapper = require('./durationWrapper');
+exports.FloatWrapper = require('./floatWrapper');
+exports.Goblinshark = require('./goblinshark');
+exports.IntWrapper = require('./intWrapper');
+exports.LongWrapper = require('./longWrapper');
 exports.ReadonlyObj = require('./readonlyObj');
+exports.Salmon = require('./salmon');
+exports.Sawshark = require('./sawshark');
+exports.Siamese = require('./siamese');
+exports.StringWrapper = require('./stringWrapper');
 exports.discriminators = {
   'Fish' : exports.Fish,
-  'Fish.salmon' : exports.Salmon,
-  'Fish.shark' : exports.Shark,
-  'Fish.sawshark' : exports.Sawshark,
+  'Fish.cookiecuttershark' : exports.Cookiecuttershark,
   'Fish.goblin' : exports.Goblinshark,
-  'Fish.cookiecuttershark' : exports.Cookiecuttershark
+  'Fish.salmon' : exports.Salmon,
+  'Fish.sawshark' : exports.Sawshark,
+  'Fish.shark' : exports.Shark
 };

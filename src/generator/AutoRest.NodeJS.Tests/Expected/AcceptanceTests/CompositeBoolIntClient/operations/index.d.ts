@@ -21,36 +21,6 @@ import * as models from '../models';
 export interface Bool {
 
     /**
-     * Get true Boolean value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getTrue(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
-    getTrue(callback: ServiceCallback<boolean>): void;
-
-    /**
-     * Set Boolean value true
-     *
-     * @param {boolean} boolBody
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    putTrue(boolBody: boolean, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    putTrue(boolBody: boolean, callback: ServiceCallback<void>): void;
-
-    /**
      * Get false Boolean value
      *
      * @param {object} [options] Optional Parameters.
@@ -81,6 +51,20 @@ export interface Bool {
     putFalse(boolBody: boolean, callback: ServiceCallback<void>): void;
 
     /**
+     * Get invalid Boolean value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    getInvalid(callback: ServiceCallback<boolean>): void;
+
+    /**
      * Get null Boolean value
      *
      * @param {object} [options] Optional Parameters.
@@ -95,7 +79,7 @@ export interface Bool {
     getNull(callback: ServiceCallback<boolean>): void;
 
     /**
-     * Get invalid Boolean value
+     * Get true Boolean value
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -105,8 +89,24 @@ export interface Bool {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
-    getInvalid(callback: ServiceCallback<boolean>): void;
+    getTrue(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<boolean>): void;
+    getTrue(callback: ServiceCallback<boolean>): void;
+
+    /**
+     * Set Boolean value true
+     *
+     * @param {boolean} boolBody
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putTrue(boolBody: boolean, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putTrue(boolBody: boolean, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -116,20 +116,6 @@ export interface Bool {
  * instance of the CompositeBoolInt.
  */
 export interface IntModel {
-
-    /**
-     * Get null Int value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getNull(callback: ServiceCallback<number>): void;
 
     /**
      * Get invalid Int value
@@ -146,7 +132,7 @@ export interface IntModel {
     getInvalid(callback: ServiceCallback<number>): void;
 
     /**
-     * Get overflow Int32 value
+     * Get invalid Unix time value
      *
      * @param {object} [options] Optional Parameters.
      *
@@ -156,50 +142,8 @@ export interface IntModel {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getOverflowInt32(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getOverflowInt32(callback: ServiceCallback<number>): void;
-
-    /**
-     * Get underflow Int32 value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getUnderflowInt32(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getUnderflowInt32(callback: ServiceCallback<number>): void;
-
-    /**
-     * Get overflow Int64 value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getOverflowInt64(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getOverflowInt64(callback: ServiceCallback<number>): void;
-
-    /**
-     * Get underflow Int64 value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getUnderflowInt64(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
-    getUnderflowInt64(callback: ServiceCallback<number>): void;
+    getInvalidUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getInvalidUnixTime(callback: ServiceCallback<Date>): void;
 
     /**
      * Put max int32 value
@@ -266,6 +210,90 @@ export interface IntModel {
     putMin64(intBody: number, callback: ServiceCallback<void>): void;
 
     /**
+     * Get null Int value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getNull(callback: ServiceCallback<number>): void;
+
+    /**
+     * Get null Unix time value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getNullUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
+    getNullUnixTime(callback: ServiceCallback<Date>): void;
+
+    /**
+     * Get overflow Int32 value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getOverflowInt32(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getOverflowInt32(callback: ServiceCallback<number>): void;
+
+    /**
+     * Get overflow Int64 value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getOverflowInt64(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getOverflowInt64(callback: ServiceCallback<number>): void;
+
+    /**
+     * Get underflow Int32 value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getUnderflowInt32(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getUnderflowInt32(callback: ServiceCallback<number>): void;
+
+    /**
+     * Get underflow Int64 value
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getUnderflowInt64(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<number>): void;
+    getUnderflowInt64(callback: ServiceCallback<number>): void;
+
+    /**
      * Get datetime encoded as Unix time value
      *
      * @param {object} [options] Optional Parameters.
@@ -294,32 +322,4 @@ export interface IntModel {
      */
     putUnixTimeDate(intBody: Date, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putUnixTimeDate(intBody: Date, callback: ServiceCallback<void>): void;
-
-    /**
-     * Get invalid Unix time value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getInvalidUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
-    getInvalidUnixTime(callback: ServiceCallback<Date>): void;
-
-    /**
-     * Get null Unix time value
-     *
-     * @param {object} [options] Optional Parameters.
-     *
-     * @param {object} [options.customHeaders] Headers that will be added to the
-     * request
-     *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
-     */
-    getNullUnixTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<Date>): void;
-    getNullUnixTime(callback: ServiceCallback<Date>): void;
 }

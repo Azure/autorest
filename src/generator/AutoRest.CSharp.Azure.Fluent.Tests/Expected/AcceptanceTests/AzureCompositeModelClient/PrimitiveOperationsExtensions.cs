@@ -20,244 +20,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     public static partial class PrimitiveOperationsExtensions
     {
             /// <summary>
-            /// Get complex types with integer properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static IntWrapperInner GetInt(this IPrimitiveOperations operations)
-            {
-                return operations.GetIntAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get complex types with integer properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<IntWrapperInner> GetIntAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Put complex types with integer properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put -1 and 2
-            /// </param>
-            public static void PutInt(this IPrimitiveOperations operations, IntWrapperInner complexBody)
-            {
-                operations.PutIntAsync(complexBody).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put complex types with integer properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put -1 and 2
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutIntAsync(this IPrimitiveOperations operations, IntWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Get complex types with long properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static LongWrapperInner GetLong(this IPrimitiveOperations operations)
-            {
-                return operations.GetLongAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get complex types with long properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<LongWrapperInner> GetLongAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Put complex types with long properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put 1099511627775 and -999511627788
-            /// </param>
-            public static void PutLong(this IPrimitiveOperations operations, LongWrapperInner complexBody)
-            {
-                operations.PutLongAsync(complexBody).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put complex types with long properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put 1099511627775 and -999511627788
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutLongAsync(this IPrimitiveOperations operations, LongWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Get complex types with float properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static FloatWrapperInner GetFloat(this IPrimitiveOperations operations)
-            {
-                return operations.GetFloatAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get complex types with float properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<FloatWrapperInner> GetFloatAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Put complex types with float properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put 1.05 and -0.003
-            /// </param>
-            public static void PutFloat(this IPrimitiveOperations operations, FloatWrapperInner complexBody)
-            {
-                operations.PutFloatAsync(complexBody).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put complex types with float properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put 1.05 and -0.003
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutFloatAsync(this IPrimitiveOperations operations, FloatWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Get complex types with double properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static DoubleWrapperInner GetDouble(this IPrimitiveOperations operations)
-            {
-                return operations.GetDoubleAsync().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get complex types with double properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<DoubleWrapperInner> GetDoubleAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                using (var _result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
-            }
-
-            /// <summary>
-            /// Put complex types with double properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put 3e-100 and
-            /// -0.000000000000000000000000000000000000000000000000000000005
-            /// </param>
-            public static void PutDouble(this IPrimitiveOperations operations, DoubleWrapperInner complexBody)
-            {
-                operations.PutDoubleAsync(complexBody).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Put complex types with double properties
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='complexBody'>
-            /// Please put 3e-100 and
-            /// -0.000000000000000000000000000000000000000000000000000000005
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task PutDoubleAsync(this IPrimitiveOperations operations, DoubleWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
             /// Get complex types with bool properties
             /// </summary>
             /// <param name='operations'>
@@ -317,18 +79,18 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
 
             /// <summary>
-            /// Get complex types with string properties
+            /// Get complex types with byte properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static StringWrapperInner GetString(this IPrimitiveOperations operations)
+            public static ByteWrapperInner GetByte(this IPrimitiveOperations operations)
             {
-                return operations.GetStringAsync().GetAwaiter().GetResult();
+                return operations.GetByteAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get complex types with string properties
+            /// Get complex types with byte properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -336,43 +98,41 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<StringWrapperInner> GetStringAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ByteWrapperInner> GetByteAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Put complex types with string properties
+            /// Put complex types with byte properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put 'goodrequest', '', and null
+            /// <param name='field'>
             /// </param>
-            public static void PutString(this IPrimitiveOperations operations, StringWrapperInner complexBody)
+            public static void PutByte(this IPrimitiveOperations operations, byte[] field = default(byte[]))
             {
-                operations.PutStringAsync(complexBody).GetAwaiter().GetResult();
+                operations.PutByteAsync(field).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Put complex types with string properties
+            /// Put complex types with byte properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='complexBody'>
-            /// Please put 'goodrequest', '', and null
+            /// <param name='field'>
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutStringAsync(this IPrimitiveOperations operations, StringWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutByteAsync(this IPrimitiveOperations operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -555,6 +315,67 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
 
             /// <summary>
+            /// Get complex types with double properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static DoubleWrapperInner GetDouble(this IPrimitiveOperations operations)
+            {
+                return operations.GetDoubleAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with double properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DoubleWrapperInner> GetDoubleAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types with double properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 3e-100 and
+            /// -0.000000000000000000000000000000000000000000000000000000005
+            /// </param>
+            public static void PutDouble(this IPrimitiveOperations operations, DoubleWrapperInner complexBody)
+            {
+                operations.PutDoubleAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with double properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 3e-100 and
+            /// -0.000000000000000000000000000000000000000000000000000000005
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutDoubleAsync(this IPrimitiveOperations operations, DoubleWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Get complex types with duration properties
             /// </summary>
             /// <param name='operations'>
@@ -612,18 +433,18 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             }
 
             /// <summary>
-            /// Get complex types with byte properties
+            /// Get complex types with float properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static ByteWrapperInner GetByte(this IPrimitiveOperations operations)
+            public static FloatWrapperInner GetFloat(this IPrimitiveOperations operations)
             {
-                return operations.GetByteAsync().GetAwaiter().GetResult();
+                return operations.GetFloatAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get complex types with byte properties
+            /// Get complex types with float properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -631,41 +452,220 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ByteWrapperInner> GetByteAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<FloatWrapperInner> GetFloatAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Put complex types with byte properties
+            /// Put complex types with float properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='field'>
+            /// <param name='complexBody'>
+            /// Please put 1.05 and -0.003
             /// </param>
-            public static void PutByte(this IPrimitiveOperations operations, byte[] field = default(byte[]))
+            public static void PutFloat(this IPrimitiveOperations operations, FloatWrapperInner complexBody)
             {
-                operations.PutByteAsync(field).GetAwaiter().GetResult();
+                operations.PutFloatAsync(complexBody).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Put complex types with byte properties
+            /// Put complex types with float properties
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='field'>
+            /// <param name='complexBody'>
+            /// Please put 1.05 and -0.003
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutByteAsync(this IPrimitiveOperations operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutFloatAsync(this IPrimitiveOperations operations, FloatWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get complex types with integer properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IntWrapperInner GetInt(this IPrimitiveOperations operations)
+            {
+                return operations.GetIntAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with integer properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IntWrapperInner> GetIntAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types with integer properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put -1 and 2
+            /// </param>
+            public static void PutInt(this IPrimitiveOperations operations, IntWrapperInner complexBody)
+            {
+                operations.PutIntAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with integer properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put -1 and 2
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutIntAsync(this IPrimitiveOperations operations, IntWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get complex types with long properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static LongWrapperInner GetLong(this IPrimitiveOperations operations)
+            {
+                return operations.GetLongAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with long properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<LongWrapperInner> GetLongAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types with long properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 1099511627775 and -999511627788
+            /// </param>
+            public static void PutLong(this IPrimitiveOperations operations, LongWrapperInner complexBody)
+            {
+                operations.PutLongAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with long properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 1099511627775 and -999511627788
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutLongAsync(this IPrimitiveOperations operations, LongWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get complex types with string properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static StringWrapperInner GetString(this IPrimitiveOperations operations)
+            {
+                return operations.GetStringAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get complex types with string properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<StringWrapperInner> GetStringAsync(this IPrimitiveOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put complex types with string properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 'goodrequest', '', and null
+            /// </param>
+            public static void PutString(this IPrimitiveOperations operations, StringWrapperInner complexBody)
+            {
+                operations.PutStringAsync(complexBody).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put complex types with string properties
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='complexBody'>
+            /// Please put 'goodrequest', '', and null
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutStringAsync(this IPrimitiveOperations operations, StringWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }

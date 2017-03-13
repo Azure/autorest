@@ -587,9 +587,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<Void> updatePetDelegate(Response<ResponseBody> response) throws RestException, IOException {
         return this.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.serializerAdapter())
-                .register(405, new TypeToken<Void>() { }.getType())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
+                .register(405, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -944,9 +944,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<String> findPetsWithByteArrayDelegate(Response<ResponseBody> response) throws RestException, IOException {
         return this.restClient().responseBuilderFactory().<String, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<String>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -1019,9 +1019,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<Pet> getPetByIdDelegate(Response<ResponseBody> response) throws RestException, IOException {
         return this.restClient().responseBuilderFactory().<Pet, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Pet>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -1725,9 +1725,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<Order> getOrderByIdDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<Order, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Order>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -1802,8 +1802,8 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<Void> deleteOrderDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -2462,9 +2462,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<User> getUserByNameDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<User, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<User>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -2614,8 +2614,8 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<Void> updateUserDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 
@@ -2690,8 +2690,8 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
 
     private ServiceResponse<Void> deleteUserDelegate(Response<ResponseBody> response) throws RestException, IOException, IllegalArgumentException {
         return this.restClient().responseBuilderFactory().<Void, RestException>newInstance(this.serializerAdapter())
-                .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
+                .register(404, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
 

@@ -5155,8 +5155,8 @@ public class LROsImpl implements LROs {
 
     private ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> beginDeleteNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteNoHeaderInRetryHeaders.class);
     }
@@ -5269,8 +5269,8 @@ public class LROsImpl implements LROs {
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> beginDeleteAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncNoHeaderInRetryHeaders.class);
     }
@@ -5837,8 +5837,8 @@ public class LROsImpl implements LROs {
 
     private ServiceResponse<Sku> beginPost200WithPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Sku, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Sku>() { }.getType())
                 .register(200, new TypeToken<Sku>() { }.getType())
+                .register(202, new TypeToken<Sku>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -6536,8 +6536,8 @@ public class LROsImpl implements LROs {
 
     private ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Product>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncRetrySucceededHeaders.class);
     }
@@ -6771,8 +6771,8 @@ public class LROsImpl implements LROs {
 
     private ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> beginPostAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Product, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Product>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncNoRetrySucceededHeaders.class);
     }

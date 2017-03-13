@@ -5128,8 +5128,8 @@ public class LROsInner {
 
     private ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeadersInner> beginDeleteNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteNoHeaderInRetryHeadersInner.class);
     }
@@ -5242,8 +5242,8 @@ public class LROsInner {
 
     private ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeadersInner> beginDeleteAsyncNoHeaderInRetryDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
-                .register(204, new TypeToken<Void>() { }.getType())
                 .register(202, new TypeToken<Void>() { }.getType())
+                .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsDeleteAsyncNoHeaderInRetryHeadersInner.class);
     }
@@ -5810,8 +5810,8 @@ public class LROsInner {
 
     private ServiceResponse<SkuInner> beginPost200WithPayloadDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<SkuInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<SkuInner>() { }.getType())
                 .register(200, new TypeToken<SkuInner>() { }.getType())
+                .register(202, new TypeToken<SkuInner>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
     }
@@ -6509,8 +6509,8 @@ public class LROsInner {
 
     private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncRetrySucceededHeadersInner> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncRetrySucceededHeadersInner.class);
     }
@@ -6744,8 +6744,8 @@ public class LROsInner {
 
     private ServiceResponseWithHeaders<ProductInner, LROsPostAsyncNoRetrySucceededHeadersInner> beginPostAsyncNoRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<ProductInner, CloudException>newInstance(this.client.serializerAdapter())
-                .register(202, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<ProductInner>() { }.getType())
+                .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsPostAsyncNoRetrySucceededHeadersInner.class);
     }

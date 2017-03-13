@@ -42,17 +42,6 @@ export interface Product {
 
 /**
  * @class
- * Initializes a new instance of the CatalogDictionary class.
- * @constructor
- * @member {object} [productDictionary] Dictionary of products
- *
- */
-export interface CatalogDictionary {
-  productDictionary?: { [propertyName: string]: Product };
-}
-
-/**
- * @class
  * Initializes a new instance of the CatalogArray class.
  * @constructor
  * @member {array} [productArray] Array of products
@@ -71,6 +60,17 @@ export interface CatalogArray {
  */
 export interface CatalogArrayOfDictionary {
   productArrayOfDictionary?: { [propertyName: string]: Product }[];
+}
+
+/**
+ * @class
+ * Initializes a new instance of the CatalogDictionary class.
+ * @constructor
+ * @member {object} [productDictionary] Dictionary of products
+ *
+ */
+export interface CatalogDictionary {
+  productDictionary?: { [propertyName: string]: Product };
 }
 
 /**
@@ -100,6 +100,37 @@ export interface ErrorModel {
 
 /**
  * @class
+ * Initializes a new instance of the Fish class.
+ * @constructor
+ * @member {string} [species]
+ *
+ * @member {number} length
+ *
+ * @member {array} [siblings]
+ *
+ * @member {string} fishtype Polymorphic Discriminator
+ *
+ */
+export interface Fish {
+  species?: string;
+  length: number;
+  siblings?: Fish[];
+  fishtype: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ArrayWrapper class.
+ * @constructor
+ * @member {array} [arrayProperty]
+ *
+ */
+export interface ArrayWrapper {
+  arrayProperty?: string[];
+}
+
+/**
+ * @class
  * Initializes a new instance of the Basic class.
  * @constructor
  * @member {number} [id] Basic Id
@@ -115,6 +146,31 @@ export interface Basic {
   id?: number;
   name?: string;
   color?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the BooleanWrapper class.
+ * @constructor
+ * @member {boolean} [fieldTrue]
+ *
+ * @member {boolean} [fieldFalse]
+ *
+ */
+export interface BooleanWrapper {
+  fieldTrue?: boolean;
+  fieldFalse?: boolean;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ByteWrapper class.
+ * @constructor
+ * @member {buffer} [field]
+ *
+ */
+export interface ByteWrapper {
+  field?: Buffer;
 }
 
 /**
@@ -158,51 +214,6 @@ export interface Cat extends Pet {
 
 /**
  * @class
- * Initializes a new instance of the Siamese class.
- * @constructor
- * @member {string} [breed]
- *
- */
-export interface Siamese extends Cat {
-  breed?: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the Fish class.
- * @constructor
- * @member {string} [species]
- *
- * @member {number} length
- *
- * @member {array} [siblings]
- *
- * @member {string} fishtype Polymorphic Discriminator
- *
- */
-export interface Fish {
-  species?: string;
-  length: number;
-  siblings?: Fish[];
-  fishtype: string;
-}
-
-/**
- * @class
- * Initializes a new instance of the Salmon class.
- * @constructor
- * @member {string} [location]
- *
- * @member {boolean} [iswild]
- *
- */
-export interface Salmon extends Fish {
-  location?: string;
-  iswild?: boolean;
-}
-
-/**
- * @class
  * Initializes a new instance of the Shark class.
  * @constructor
  * @member {number} [age]
@@ -217,120 +228,10 @@ export interface Shark extends Fish {
 
 /**
  * @class
- * Initializes a new instance of the Sawshark class.
- * @constructor
- * @member {buffer} [picture]
- *
- */
-export interface Sawshark extends Shark {
-  picture?: Buffer;
-}
-
-/**
- * @class
- * Initializes a new instance of the Goblinshark class.
- * @constructor
- * @member {number} [jawsize]
- *
- */
-export interface Goblinshark extends Shark {
-  jawsize?: number;
-}
-
-/**
- * @class
  * Initializes a new instance of the Cookiecuttershark class.
  * @constructor
  */
 export interface Cookiecuttershark extends Shark {
-}
-
-/**
- * @class
- * Initializes a new instance of the IntWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number} [field2]
- *
- */
-export interface IntWrapper {
-  field1?: number;
-  field2?: number;
-}
-
-/**
- * @class
- * Initializes a new instance of the LongWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number} [field2]
- *
- */
-export interface LongWrapper {
-  field1?: number;
-  field2?: number;
-}
-
-/**
- * @class
- * Initializes a new instance of the FloatWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number} [field2]
- *
- */
-export interface FloatWrapper {
-  field1?: number;
-  field2?: number;
-}
-
-/**
- * @class
- * Initializes a new instance of the DoubleWrapper class.
- * @constructor
- * @member {number} [field1]
- *
- * @member {number}
- * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
- *
- */
-export interface DoubleWrapper {
-  field1?: number;
-  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: number;
-}
-
-/**
- * @class
- * Initializes a new instance of the BooleanWrapper class.
- * @constructor
- * @member {boolean} [fieldTrue]
- *
- * @member {boolean} [fieldFalse]
- *
- */
-export interface BooleanWrapper {
-  fieldTrue?: boolean;
-  fieldFalse?: boolean;
-}
-
-/**
- * @class
- * Initializes a new instance of the StringWrapper class.
- * @constructor
- * @member {string} [field]
- *
- * @member {string} [empty]
- *
- * @member {string} [nullProperty]
- *
- */
-export interface StringWrapper {
-  field?: string;
-  empty?: string;
-  nullProperty?: string;
 }
 
 /**
@@ -377,6 +278,32 @@ export interface Datetimerfc1123Wrapper {
 
 /**
  * @class
+ * Initializes a new instance of the DictionaryWrapper class.
+ * @constructor
+ * @member {object} [defaultProgram]
+ *
+ */
+export interface DictionaryWrapper {
+  defaultProgram?: { [propertyName: string]: string };
+}
+
+/**
+ * @class
+ * Initializes a new instance of the DoubleWrapper class.
+ * @constructor
+ * @member {number} [field1]
+ *
+ * @member {number}
+ * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
+ *
+ */
+export interface DoubleWrapper {
+  field1?: number;
+  field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose?: number;
+}
+
+/**
+ * @class
  * Initializes a new instance of the DurationWrapper class.
  * @constructor
  * @member {moment.duration} [field]
@@ -388,35 +315,55 @@ export interface DurationWrapper {
 
 /**
  * @class
- * Initializes a new instance of the ByteWrapper class.
+ * Initializes a new instance of the FloatWrapper class.
  * @constructor
- * @member {buffer} [field]
+ * @member {number} [field1]
+ *
+ * @member {number} [field2]
  *
  */
-export interface ByteWrapper {
-  field?: Buffer;
+export interface FloatWrapper {
+  field1?: number;
+  field2?: number;
 }
 
 /**
  * @class
- * Initializes a new instance of the ArrayWrapper class.
+ * Initializes a new instance of the Goblinshark class.
  * @constructor
- * @member {array} [arrayProperty]
+ * @member {number} [jawsize]
  *
  */
-export interface ArrayWrapper {
-  arrayProperty?: string[];
+export interface Goblinshark extends Shark {
+  jawsize?: number;
 }
 
 /**
  * @class
- * Initializes a new instance of the DictionaryWrapper class.
+ * Initializes a new instance of the IntWrapper class.
  * @constructor
- * @member {object} [defaultProgram]
+ * @member {number} [field1]
+ *
+ * @member {number} [field2]
  *
  */
-export interface DictionaryWrapper {
-  defaultProgram?: { [propertyName: string]: string };
+export interface IntWrapper {
+  field1?: number;
+  field2?: number;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the LongWrapper class.
+ * @constructor
+ * @member {number} [field1]
+ *
+ * @member {number} [field2]
+ *
+ */
+export interface LongWrapper {
+  field1?: number;
+  field2?: number;
 }
 
 /**
@@ -431,5 +378,58 @@ export interface DictionaryWrapper {
 export interface ReadonlyObj {
   id?: string;
   size?: number;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the Salmon class.
+ * @constructor
+ * @member {string} [location]
+ *
+ * @member {boolean} [iswild]
+ *
+ */
+export interface Salmon extends Fish {
+  location?: string;
+  iswild?: boolean;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the Sawshark class.
+ * @constructor
+ * @member {buffer} [picture]
+ *
+ */
+export interface Sawshark extends Shark {
+  picture?: Buffer;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the Siamese class.
+ * @constructor
+ * @member {string} [breed]
+ *
+ */
+export interface Siamese extends Cat {
+  breed?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the StringWrapper class.
+ * @constructor
+ * @member {string} [field]
+ *
+ * @member {string} [empty]
+ *
+ * @member {string} [nullProperty]
+ *
+ */
+export interface StringWrapper {
+  field?: string;
+  empty?: string;
+  nullProperty?: string;
 }
 

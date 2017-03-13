@@ -61,7 +61,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
             internalConstructors: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].internalConstructors; } catch (e) { return null; } })() || false,
             useDateTimeOffset: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].useDateTimeOffset; } catch (e) { return null; } })() || false,
             header: config.__specials.header || null,
-            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || 0,
+            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].ft; } catch (e) { return null; } })() || 0,
             syncMethods: config.__specials.syncMethods || "essential",
             addCredentials: config.__specials.addCredentials || false,
           });
