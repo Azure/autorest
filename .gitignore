@@ -213,3 +213,7 @@ src/client/**/*
 
 src/extension/old/**/*
 *.d.ts
+
+src/bootstrapper
+src/extension/out
+src/next-gen

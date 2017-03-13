@@ -751,11 +751,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
+        ///   Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as &apos;{0}&apos; Property/Model..
         /// </summary>
-        public static string XmsClientNameInValid {
+        public static string XmsClientNameInvalid {
             get {
-                return ResourceManager.GetString("XmsClientNameInValid", resourceCulture);
+                return ResourceManager.GetString("XmsClientNameInvalid", resourceCulture);
             }
         }
         
