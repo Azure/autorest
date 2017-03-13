@@ -67,3 +67,9 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   }
   return new URI(pathOrUri).absoluteTo(baseUri).toString();
 }
+
+export function GetFilenameWithoutExtension(uri: string) {
+  const lastPart = uri.split("/").reverse()[0];
+  const ext = lastPart.indexOf(".") === -1 ? "" : lastPart.split(".").reverse()[0];
+  return lastPart.substr(0, lastPart.length - ext.length - 1);
+}

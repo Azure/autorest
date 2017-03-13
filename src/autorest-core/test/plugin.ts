@@ -132,7 +132,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         internalConstructors: false,
         syncMethods: "essential",
         useDateTimeOffset: false,
-        addCredentials: false
+        addCredentials: false,
+        rubyPackageName: "rubyrubyrubyruby"
       });
 
     // check results

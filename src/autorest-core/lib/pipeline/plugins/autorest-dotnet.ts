@@ -61,7 +61,8 @@ export class AutoRestDotNetPlugin {
       syncMethods: "all" | "essential" | "none",
       internalConstructors: boolean,
       useDateTimeOffset: boolean,
-      addCredentials: boolean
+      addCredentials: boolean,
+      rubyPackageName: string
     }): Promise<DataStoreViewReadonly> {
 
     const outputScope = workingScope.CreateScope("output");

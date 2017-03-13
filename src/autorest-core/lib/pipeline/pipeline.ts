@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
-import { ResolveUri } from "../approved-imports/uri";
+import { ResolveUri, GetFilenameWithoutExtension } from "../approved-imports/uri";
 import { WriteString } from "../approved-imports/writefs";
 import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configuration/configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
@@ -64,6 +64,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
             payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].ft; } catch (e) { return null; } })() || 0,
             syncMethods: config.__specials.syncMethods || "essential",
             addCredentials: config.__specials.addCredentials || false,
+            rubyPackageName: GetFilenameWithoutExtension(config.inputFileUris[0]).replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase()
           });
         for (const fileName of await generatedFileScope.Enum()) {
           callback(await generatedFileScope.ReadStrict(fileName));

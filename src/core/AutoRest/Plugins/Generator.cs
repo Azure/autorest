@@ -20,6 +20,9 @@ public class Generator : NewPlugin
 
   protected override async Task<bool> ProcessInternal()
   {
+    var codeGenerator = await GetValue("codeGenerator");
+
+    // build settings
     new Settings
     {
       Namespace = await GetValue("namespace"),
@@ -35,9 +38,12 @@ public class Generator : NewPlugin
     Settings.Instance.CustomSettings.Add("InternalConstructors", await GetValue<bool>("internalConstructors"));
     Settings.Instance.CustomSettings.Add("SyncMethods", await GetValue<string>("syncMethods"));
     Settings.Instance.CustomSettings.Add("UseDateTimeOffset", await GetValue<bool>("useDateTimeOffset"));
+    if (codeGenerator.EndsWith("Ruby"))
+    {
+      Settings.Instance.PackageName = await GetValue("rubyPackageName");
+    }
 
-    var codeGenerator = await GetValue("codeGenerator");
-
+    // process
     var files = await ListInputs();
     if (files.Length != 1)
     {
