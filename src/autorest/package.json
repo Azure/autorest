@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "0.9.14",
+  "version": "0.9.17",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
   "repository": {
     "type": "git",
