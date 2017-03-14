@@ -948,7 +948,7 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = 103400000000000000000;
+  var floatQuery = 1.034E+20;
 
   // Construct URL
   var baseUrl = this.client.baseUri;
@@ -1043,7 +1043,7 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = -1.034e-20;
+  var floatQuery = -1.034E-20;
 
   // Construct URL
   var baseUrl = this.client.baseUri;

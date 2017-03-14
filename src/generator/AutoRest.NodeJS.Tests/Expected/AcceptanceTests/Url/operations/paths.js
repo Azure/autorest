@@ -603,7 +603,7 @@ Paths.prototype.floatScientificPositive = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatPath = 103400000000000000000;
+  var floatPath = 1.034E+20;
 
   // Construct URL
   var baseUrl = this.client.baseUri;
@@ -694,7 +694,7 @@ Paths.prototype.floatScientificNegative = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatPath = -1.034e-20;
+  var floatPath = -1.034E-20;
 
   // Construct URL
   var baseUrl = this.client.baseUri;
