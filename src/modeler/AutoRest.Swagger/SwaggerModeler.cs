@@ -19,7 +19,7 @@ using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger
 {
-    public class SwaggerModeler : Modeler
+    public class SwaggerModeler
     {
         private const string BaseUriParameterName = "BaseUri";
 
@@ -37,11 +37,6 @@ namespace AutoRest.Swagger
             DefaultProtocol = TransferProtocolScheme.Http;
         }
 
-        public override string Name
-        {
-            get { return "Swagger"; }
-        }
-
         /// <summary>
         /// Swagger service model.
         /// </summary>
@@ -57,36 +52,10 @@ namespace AutoRest.Swagger
         /// </summary>
         public TransferProtocolScheme DefaultProtocol { get; set; }
 
-        /// <summary>
-        /// Builds service model from swagger file.
-        /// </summary>
-        /// <returns></returns>
-        public override CodeModel Build()
-        {
-            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
-            return Build(serviceDefinition);
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
-            {
-                // Look for semantic errors and warnings in the document.
-                var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition))
-                {
-                    Logger.Instance.Log(validationEx);
-                }
-                return New<CodeModel>();
-            }
-
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
             // Update settings
             UpdateSettings();
@@ -164,41 +133,6 @@ namespace AutoRest.Swagger
             return CodeModel;
         }
 
-        /// <summary>
-        /// Copares two versions of the same service specification.
-        /// </summary>
-        /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override IEnumerable<LogMessage> Compare()
-        {
-            var settings = Settings.Instance;
-
-            Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
-            if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
-            {
-                throw ErrorManager.CreateError(Resources.InputRequired);
-            }
-
-            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystemInput);
-            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystemInput);
-
-            var context = new ComparisonContext(oldDefintion, newDefintion);
-
-            // Look for semantic errors and warnings in the new document.
-            var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var LogMessages = validator.GetValidationExceptions(newDefintion.FilePath, newDefintion).ToList();
-
-            // Only compare versions if the new version is correct.
-            var comparisonMessages = 
-                !LogMessages.Any(m => m.Severity > Category.Error) ? 
-                newDefintion.Compare(context, oldDefintion) : 
-                Enumerable.Empty<ComparisonMessage>();
-
-            return LogMessages
-                .Select(msg => new ComparisonMessage(new MessageTemplate { Id = 0, Message = msg.Message }, msg.Path, msg.Severity))
-                .Concat(comparisonMessages);
-        }
-
         private void UpdateSettings()
         {
             if (ServiceDefinition.Info.CodeGenerationSettings != null)
@@ -206,10 +140,10 @@ namespace AutoRest.Swagger
                 foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
                 {
                     //Don't overwrite settings that come in from the command line
-                    if (!this.Settings.CustomSettings.ContainsKey(key))
-                        this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
+                    if (!Settings.Instance.CustomSettings.ContainsKey(key))
+                        Settings.Instance.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key];
                 }
-                Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
+                Settings.PopulateSettings(Settings.Instance, Settings.Instance.CustomSettings);
             }
         }
 
@@ -231,15 +165,15 @@ namespace AutoRest.Swagger
 
             CodeModel = New<CodeModel>();
 
-            if (string.IsNullOrWhiteSpace(Settings.ClientName) && ServiceDefinition.Info.Title == null)
+            if (string.IsNullOrWhiteSpace(Settings.Instance.ClientName) && ServiceDefinition.Info.Title == null)
             {
                 throw ErrorManager.CreateError(Resources.TitleMissing);
             }
 
             CodeModel.Name = ServiceDefinition.Info.Title?.Replace(" ", "");
 
-            CodeModel.Namespace = Settings.Namespace;
-            CodeModel.ModelsName = Settings.ModelsName;
+            CodeModel.Namespace = Settings.Instance.Namespace;
+            CodeModel.ModelsName = Settings.Instance.ModelsName;
             CodeModel.ApiVersion = ServiceDefinition.Info.Version;
             CodeModel.Documentation = ServiceDefinition.Info.Description;
             if (ServiceDefinition.Schemes == null || ServiceDefinition.Schemes.Count != 1)

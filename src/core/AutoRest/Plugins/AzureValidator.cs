@@ -57,10 +57,8 @@ public class AzureValidator : NewPlugin
     }
 
     var content = await ReadFile(files[0]);
-    var fs = new MemoryFileSystem();
-    fs.WriteAllText(files[0], content);
 
-    var serviceDefinition = SwaggerParser.Load(files[0], fs);
+    var serviceDefinition = SwaggerParser.Parse(files[0], content);
     var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
     foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
     {
