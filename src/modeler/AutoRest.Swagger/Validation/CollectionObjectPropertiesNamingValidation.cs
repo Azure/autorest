@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Validation
             foreach (var opPair in listOperations)
             {
                 // if the operation id is not of type _list* or does not return an array type, skip
-                if (!ListRegex.IsMatch(opPair.Value.OperationId) || !ValidationUtilities.IsXmsPageableOrArrayResponseOperation(opPair.Value, serviceDefinition))
+                if (!ListRegex.IsMatch(opPair.Value.OperationId) || !ValidationUtilities.IsXmsPageableOperation(opPair.Value))
                 {
                     continue;
                 }
