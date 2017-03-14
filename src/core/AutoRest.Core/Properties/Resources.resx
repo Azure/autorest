@@ -307,7 +307,7 @@ Modelers:
     <value>Errors found during Swagger document validation.</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
-    <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-path must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
+    <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
     <value>The value provided for description is not descriptive enough.</value>
