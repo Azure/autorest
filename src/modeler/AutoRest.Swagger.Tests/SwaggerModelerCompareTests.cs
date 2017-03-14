@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using System.Collections.Generic;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Core.Utilities.Collections;
@@ -47,7 +47,7 @@ namespace AutoRest.Swagger.Tests
                 };
 
                 var modeler = new SwaggerModeler();
-                IEnumerable<ComparisonMessage> messages = modeler.Compare();
+                var messages = modeler.Compare().OfType<ComparisonMessage>();
 
                 // remove debug-level messages
                 messages = messages.Where(each => each.Severity > Category.Debug);

@@ -3,8 +3,8 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;

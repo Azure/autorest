@@ -6,16 +6,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoRest.Core.Logging;
 using Microsoft.Perks.JsonRPC;
-using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using AutoRest.Core.Utilities;
 using System.Text.RegularExpressions;
-using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.Swagger;
+using AutoRest.Swagger.Validation.Core;
 
 public class NewPlugin
 {

@@ -9,7 +9,6 @@ using System.Linq;
 using System.Net;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
-using AutoRest.Core.Validation;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -63,7 +62,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the method name.
         /// </summary>
-        [Rule(typeof(IsIdentifier))]
+        //[Rule(typeof(IsIdentifier))]
         public Fixable<string> Name { get { return _name; } set { _name.CopyFrom(value); } }
 
         /// <summary>

@@ -35,11 +35,14 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        // determine if the operation is xms pageable or returns an object of array type
-        public static bool IsArrayTypeResponseOperation(Operation op, ServiceDefinition entity)
+        // determine if an operation is xms pageable operation
+        public static bool IsXmsPageableOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
+        
+        // determine if an operation returns an object of array type
+        public static bool IsArrayResponseOperation(Operation op, ServiceDefinition entity)
         {
             // if a success response is not defined, we have nothing to check, return false
-            if (op.Responses?.ContainsKey("200") !=true) return false;
+            if (op.Responses?.ContainsKey("200") != true) return false;
 
             // if we have a non-null response schema, and the schema is of type array, return true
             if (op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) == false)
@@ -58,7 +61,7 @@ namespace AutoRest.Swagger.Model.Utilities
                     return false;
                 }
 
-                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array)??false)
+                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
                 {
                     return true;
                 }
@@ -67,7 +70,9 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
+        // determine if the operation is xms pageable or returns an object of array type
+        public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity) => 
+            (IsXmsPageableOperation(op) || IsArrayResponseOperation(op, entity));
         
         public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
         {

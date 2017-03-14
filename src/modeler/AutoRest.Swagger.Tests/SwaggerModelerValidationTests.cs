@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using System.Collections.Generic;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Swagger.Validation;
@@ -315,13 +315,6 @@ namespace AutoRest.Swagger.Tests
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "long-running-invalid-response-delete.json"));
             messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
-        }
-
-        [Fact]
-        public void MutabilityNotModeledValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values.json"));
-            messages.AssertOnlyValidationMessage(typeof(MutabilityValidValuesRule), 2);
         }
 
         [Fact]
