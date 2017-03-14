@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 

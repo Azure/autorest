@@ -9,8 +9,9 @@ using AutoRest.Core.Utilities.Collections;
 using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
+using AutoRest.Swagger.Model;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     ///     A validator that traverses an object graph, applies validation rules, and logs validation messages
@@ -33,7 +34,7 @@ namespace AutoRest.Core.Validation
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
         /// </summary>
         /// <param name="entity">The object to validate</param>
-        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, object entity)
+        public IEnumerable<LogMessage> GetValidationExceptions(Uri filePath, ServiceDefinition entity)
         {
             return RecursiveValidate(entity, ObjectPath.Empty, new RuleContext(entity, filePath), Enumerable.Empty<Rule>());
         }

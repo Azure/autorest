@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     /// A rule that validates objects of type <typeparamref name="T"/>

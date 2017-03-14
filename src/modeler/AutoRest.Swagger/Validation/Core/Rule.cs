@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using AutoRest.Core.Logging;
 using System;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     /// Defines validation logic for an object

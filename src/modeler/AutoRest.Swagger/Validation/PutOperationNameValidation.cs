@@ -3,8 +3,8 @@
 
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
+using AutoRest.Swagger.Validation.Core;
 using System;
 using System.Collections.Generic;
 
