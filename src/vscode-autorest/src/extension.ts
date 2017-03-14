@@ -15,7 +15,8 @@ export function activate(context: ExtensionContext) {
 	StatusBar.setup();
 
 	// The server is implemented in node
-	let serverModule = context.asAbsolutePath(path.join('server', 'server.js'));
+	let serverModule = context.asAbsolutePath(path.join('server',"src", 'server.js'));
+	
 	// The debug options for the server
 	let debugOptions = { execArgv: ["--nolazy", "--debug=6009"] };
 	
@@ -33,8 +34,13 @@ export function activate(context: ExtensionContext) {
 		synchronize: {
 			// Synchronize the setting section 'autorest' to the server
 			configurationSection: 'autorest',
-			// Notify the server about file changes to '.clientrc files contain in the workspace
-			fileEvents: workspace.createFileSystemWatcher('**/.clientrc')
+			// Notify the server about file changes to files contain in the workspace
+			fileEvents: [
+				workspace.createFileSystemWatcher('**/*.md'),
+				workspace.createFileSystemWatcher('**/*.yaml'),
+				workspace.createFileSystemWatcher('**/*.json')
+			]
+			
 		}
 	}
 	

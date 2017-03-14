@@ -12,10 +12,10 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.52",
-    "typescript": "^2.1.5"
+    "typescript": "^2.3.0-dev.20170314"
   },
   "scripts": {
-    "compile": "installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -p .",
-    "watch": "installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc --watch -p ."
+    "_compile": "installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc -p .",
+    "_watch": "installServerIntoExtension ../client ./package.json ./tsconfig.json && tsc --watch -p ."
   }
 }

@@ -22,7 +22,7 @@
   "devDependencies": {
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
-    "typescript": "^2.1.5",
+    "typescript": "^2.3.0-dev.20170314",
     "@types/commonmark": "^0.22.29",
     "@types/jsonpath": "^0.1.29",
     "@types/pify": "0.0.28",

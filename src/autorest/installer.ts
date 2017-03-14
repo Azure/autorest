@@ -21,6 +21,7 @@ import * as https from 'https';
 import * as unzip from 'unzipper'
 import { Console } from './console';
 import * as StreamSink from 'streamsink';
+import { AutoRest } from "autorest-core"
 
 export class Installer {
   private static ensureExists(dir: string) {
@@ -49,6 +50,9 @@ export class Installer {
   }
   public static get AutorestFolder(): string {
     return this.ensureExists(join(this.PluginsFolder, 'autorest'));
+  }
+  public static AutorestImplementation(): typeof AutoRest {
+    return <typeof AutoRest>require(join(Installer.AutorestFolder, this.LatestAutorestVersion, 'node_modules', 'autorest-core'));
   }
   public static get LatestAutorestVersion(): string {
     return this.InstalledAutorestVersions.FirstOrDefault();
@@ -85,10 +89,6 @@ export class Installer {
       unpack = download.pipe(tgz().createWriteStream(targetFolder))
     }
 
-    unpack.on('end', () => {
-      setTimeout(resolve, 100);
-    });
-
     unpack.on('error', () => {
       let newUrl = this.GetFallbackUrl(url);
       if (newUrl == null) {
@@ -98,6 +98,11 @@ export class Installer {
       Console.Error(`Failed to download file: ${filename}, trying fallback url.`);
       this.HttpGet(newUrl, filename, targetFolder, resolve, reject);
     });
+
+    unpack.on('finish', () => {
+      setTimeout(resolve, 200);
+    });
+
   }
 
   public static async InstallFramework() {

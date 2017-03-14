@@ -3,4 +3,4 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export { From } from "linq-es2015";
+export { Enumerable as IEnumerable, From } from "linq-es2015";

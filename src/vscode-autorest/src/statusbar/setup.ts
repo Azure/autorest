@@ -13,10 +13,11 @@ module StatusBar {
         let editor = window.activeTextEditor;
         if (!editor) {
             statusBarItem.hide();
-            return;
+            return null;
         }
         statusBarItem.text = "AutoRest Language Service Active";
         statusBarItem.show();
+        return null;
     }
 }
 var statusBar: IPlugin = StatusBar;

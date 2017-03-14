@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
-    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "stripInternal": true,
+    "target": "es2016",
+    "types": [
+      "node"
+    ],
+    //"moduleResolution": "node",
     "lib": [
-      "es6",
-      "es2016",
-      "es2015.collection",
-      "es2015.promise",
-      "es2015.core"
+      "esnext"
     ],
     "newLine": "LF",
-    "experimentalDecorators": true,
-    "sourceMap": true
+    "experimentalDecorators": true
   },
   "exclude": [
     "node_modules",

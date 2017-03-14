@@ -1,21 +1,34 @@
 {
 	"compilerOptions": {
-		"target": "es6",
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"sourceMap": true,
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "stripInternal": true,
+    "target": "es2016",
+    "types": [
+      "node"
+    ],
     "lib": [
-      "es5",
-      "es6",
-      "es2015.collection",
-      "es2015.promise",
-      "es2015.core" 
-    ]
+      "esnext"
+    ],
+    "experimentalDecorators": true,
+    "newLine": "LF"
+
+
 	},
   "include": [
     "src/server.ts"
   ],
 	"exclude": [
-		"node_modules/**"
+		"node_modules/**",
+    "../../autorest/**",
+    "../../autorest-core/**"
 	]
 }

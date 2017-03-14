@@ -4,7 +4,9 @@
     "noImplicitAny": false,
     "module": "commonjs",
     "sourceMap": true,
-    "types" : ["node"],
+    "types": [
+      "node"
+    ],
     "newLine": "LF",
     "experimentalDecorators": true,
     "declaration": true,
@@ -13,7 +15,8 @@
       "es6",
       "es2015.collection",
       "es2015.promise",
-      "es2015.core" 
+      "es2015.core",
+      "esnext"
     ]
   },
   "exclude": [

@@ -15,6 +15,7 @@ import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
 import * as fs from 'fs'
+require("./lib/polyfill.min.js")
 
 class App {
   private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;
@@ -241,6 +242,7 @@ class App {
           }
         }));
       }
+
 
       await Promise.all(installs);
 

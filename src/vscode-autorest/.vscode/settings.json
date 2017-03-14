@@ -1,10 +1,26 @@
 // Place your settings in this file to overwrite default and user settings.
 {
 	"files.exclude": {
-		"out": false // set this to true to hide the "out" folder with the compiled JS files
+		"out": false, // set this to true to hide the "out" folder with the compiled JS files
+		"**/*.js" : true,
+        "**/*.js.map": true,
+        "**/*.d.ts": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true
+
 	},
 	"search.exclude": {
-		"out": true // set this to false to include "out" folder in search results
+		"out": true, // set this to false to include "out" folder in search results
+		"**/*.js" : true,
+        "**/*.js.map": true,
+        "**/*.d.ts": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true
+    
 	},
 	"typescript.tsdk": "./node_modules/typescript/lib" // we want to use the TS server from our node_modules folder to control its version
 }

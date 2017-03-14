@@ -49,6 +49,7 @@ type Store = { [key: string]: Data };
 
 export abstract class DataStoreViewReadonly {
   abstract Enum(): Promise<string[]>;
+  abstract Enum(prefix: string): Promise<string[]>;
   abstract Read(key: string): Promise<DataHandleRead | null>;
 
   public async ReadStrict(key: string): Promise<DataHandleRead> {
