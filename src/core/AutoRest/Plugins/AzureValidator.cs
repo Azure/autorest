@@ -2,15 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Logging;
-using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
-using AutoRest.Swagger;
 using Microsoft.Perks.JsonRPC;
-using System;
+using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Utilities;
+using System.Text.RegularExpressions;
+using AutoRest.Core.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using System.Text;
+using AutoRest.Swagger;
+using AutoRest.Swagger.Validation.Core;
 
 public class AzureValidator : NewPlugin
 {

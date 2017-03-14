@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using System.Collections.Generic;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Swagger.Validation;
@@ -260,13 +260,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void RequiredPropertiesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-property-not-in-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMustExist));
-        }
-
-        [Fact]
         public void OperationDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operation-missing-description.json"));
@@ -356,7 +349,7 @@ namespace AutoRest.Swagger.Tests
         public void DeleteRequestBodyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-delete-request-body-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(DeleteMustHaveEmptyRequestBody), 1);
+            messages.AssertOnlyValidationMessage(typeof(DeleteMustNotHaveRequestBody), 1);
         }
 
         [Fact]
