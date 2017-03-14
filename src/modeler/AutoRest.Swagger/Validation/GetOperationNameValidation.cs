@@ -26,7 +26,7 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.GetOperationNameNotValid;
 
         /// <summary>
-        /// Validates whether PUT operation name is named correctly
+        /// Validates whether GET operation name is named correctly
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
