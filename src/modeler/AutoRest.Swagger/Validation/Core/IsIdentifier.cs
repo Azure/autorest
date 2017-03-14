@@ -5,7 +5,7 @@
 using System.Linq;
 using AutoRest.Core.Logging;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     ///     This validator should be applied to all elements in the model that

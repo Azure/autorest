@@ -7,7 +7,6 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.Core.Utilities;
@@ -119,9 +118,7 @@ namespace AutoRest.Core
 
             try
             {
-                IEnumerable<ComparisonMessage> messages = modeler.Compare();
-
-                foreach (var message in messages)
+                foreach (var message in modeler.Compare())
                 {
                     Logger.Instance.Log(message);
                 }

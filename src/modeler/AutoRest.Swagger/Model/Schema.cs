@@ -6,7 +6,7 @@ using System.Linq;
 using System.Globalization;
 
 using AutoRest.Core.Model;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 
