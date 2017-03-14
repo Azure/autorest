@@ -17,13 +17,8 @@ namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
     {
-        public static IAnyPlugin GetPlugin(string pluginName = null)
+        public static IAnyPlugin GetPlugin(string pluginName)
         {
-            if (pluginName == null)
-            {
-                pluginName = Settings.Instance.CodeGenerator;
-            }
-
             Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
 
             if (string.IsNullOrEmpty(pluginName))

@@ -66,8 +66,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
             OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRestController.Version);
-            CodeGenerator = "CSharp";
-            Modeler = "Swagger";
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";
         }
@@ -95,20 +93,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         #region ordered_properties
 
         /// <summary>
-        /// Gets or sets the path to the input specification file.
-        /// </summary>
-        [SettingsInfo("The location of the input specification.", true)]
-        [SettingsAlias("i")]
-        [SettingsAlias("input")]
-        public string Input { get; set; }
-
-        /// <summary>
-        /// Gets of sets the path to a previous version of the input specification file. This will cause
-        /// Autorest to compare the two versions rather than generate code.
-        /// </summary>
-        public string Previous { get; set; }
-
-        /// <summary>
         /// Gets or sets a name for the generated client models Namespace and Models output folder
         /// </summary>
         [SettingsInfo("Name to use for the generated client models namespace and folder name. Not supported by all code generators.")]
@@ -129,20 +113,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("o")]
         [SettingsAlias("output")]
         public string OutputDirectory { get; set; }
-
-        /// <summary>
-        /// Gets or sets the code generation language.
-        /// </summary>
-        [SettingsInfo("The code generator language. If not specified, defaults to CSharp.")]
-        [SettingsAlias("g")]
-        public string CodeGenerator { get; set; }
-
-        /// <summary>
-        /// Gets or sets the modeler to use for processing the input specification.
-        /// </summary>
-        [SettingsInfo("The Modeler to use on the input. If not specified, defaults to Swagger.")]
-        [SettingsAlias("m")]
-        public string Modeler { get; set; }
 
         #endregion
 
