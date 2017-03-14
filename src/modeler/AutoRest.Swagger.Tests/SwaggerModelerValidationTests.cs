@@ -318,13 +318,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void MutabilityNotModeledValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values.json"));
-            messages.AssertOnlyValidationMessage(typeof(MutabilityValidValuesRule), 2);
-        }
-
-        [Fact]
         public void MutabilityNotModeledWithReadOnlyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
