@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
-import { ResolveUri, GetFilenameWithoutExtension } from "../approved-imports/uri";
+import { ResolveUri } from "../approved-imports/uri";
 import { WriteString } from "../approved-imports/writefs";
 import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configuration/configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
@@ -22,9 +22,9 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
   const config = new AutoRestConfigurationManager(await hConfig.ReadObject<AutoRestConfiguration>(), configurationUri);
 
   // load Swaggers
+  const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri); // TODO: unlock further URIs here
   const swaggers = await LoadLiterateSwaggers(
-    // TODO: unlock further URIs here
-    workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => config.inputFileUris.indexOf(uri) !== -1),
+    workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
     config.inputFileUris, workingScope.CreateScope("loader"));
 
   // compose Swaggers (may happen in LoadLiterateSwaggers, BUT then we can't call other people (e.g. Amar's tools) with the component swaggers... hmmm...)
