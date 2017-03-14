@@ -15,7 +15,7 @@
     },
     "documents": {
       "type": "array",
-      "minItems": 2,
+      "minItems": 1,
       "description": "Describes the list of relative or absolute swagger document urls or file paths.",
      "items": {
         "type": "string",
