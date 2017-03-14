@@ -260,13 +260,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void RequiredPropertiesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-property-not-in-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMustExist));
-        }
-
-        [Fact]
         public void OperationDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operation-missing-description.json"));
