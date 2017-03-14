@@ -440,6 +440,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Since operation {0} response is {1} type, it should be named as &quot;list_*&quot;.
+        /// </summary>
+        public static string ListOperationsNamingWarningMessage {
+            get {
+                return ResourceManager.GetString("ListOperationsNamingWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete..
         /// </summary>
         public static string LongRunningResponseNotValid {

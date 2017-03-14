@@ -384,4 +384,7 @@ Modelers:
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
     <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
+  <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
+    <value>Since operation {0} response is {1} type, it should be named as "list_*"</value>
+  </data>
 </root>

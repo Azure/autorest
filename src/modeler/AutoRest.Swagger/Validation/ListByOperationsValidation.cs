@@ -47,7 +47,8 @@ namespace AutoRest.Swagger.Validation
                                         // operation id should be of the form *_list(by)
                                         .Where(pair => (ListByRegex.IsMatch(pair.Value.OperationId) || pair.Value.OperationId.ToLower().EndsWith("_list")))
                                         // operation is xmspageable or returns an array
-                                        .Where(pair => (ValidationUtilities.IsXmsPageableOrArrayResponseOperation(pair.Value, serviceDefinition)))
+                                        .Where(pair => (ValidationUtilities.IsArrayTypeResponseOperation(pair.Value, serviceDefinition)) 
+                                                        || (ValidationUtilities.IsXmsPageableResponseOperation(pair.Value)))
                                         // select the operation id
                                         .Select(pair => pair.Value.OperationId);
 
