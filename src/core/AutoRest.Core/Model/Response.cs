@@ -50,5 +50,7 @@ namespace AutoRest.Core.Model
                 && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
         }
         public Dictionary<string, object> Extensions { get; set; } = new Dictionary<string, object>();
+
+        public bool IsNullable => Extensions?.Get<bool>("x-nullable") ?? true;
     }
 }
