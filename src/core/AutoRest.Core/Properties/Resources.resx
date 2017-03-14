@@ -370,7 +370,7 @@ Modelers:
     <value>'PUT' operation '{0}' must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
-    <value>Collection object {0} returned by list operation {1} has no property named 'value'.</value>
+    <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
   </data>
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
