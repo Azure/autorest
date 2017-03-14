@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Model
 {
