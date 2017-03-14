@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
-using AutoRest.Core.Validation;
 using Newtonsoft.Json;
 
 namespace AutoRest.Core.Model
@@ -103,7 +102,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        [Rule(typeof(IsIdentifier))]
+        //[Rule(typeof(IsIdentifier))]
         public Fixable<string> Name
         {
             get { return _name; }

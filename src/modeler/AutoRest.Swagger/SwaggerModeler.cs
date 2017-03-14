@@ -14,8 +14,8 @@ using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
-using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger
 {
@@ -169,7 +169,7 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override IEnumerable<ComparisonMessage> Compare()
+        public override IEnumerable<LogMessage> Compare()
         {
             var settings = Settings.Instance;
 
