@@ -33,7 +33,8 @@ namespace AutoRest.Swagger.Validation
         /// <returns>ValidationMessage</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(string operationId, RuleContext context)
         {
-            if (!String.IsNullOrWhiteSpace(operationId) && operationId.EqualsIgnoreCase("PATCH"))
+            string httpVerb = context?.Parent?.Key;
+            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("PATCH") && !IsPatchValid(operationId))
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, operationId);
             }
