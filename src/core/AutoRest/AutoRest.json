@@ -1,17 +1,20 @@
 ﻿{
   "plugins": {
+    "AutoRest.TypeScript.SuperAgent": {
+      "type": "PluginTs, AutoRest.TypeScript.SuperAgent"
+    },
     "CSharp": {
       "type": "PluginCs, AutoRest.CSharp"
     },
     "Azure.CSharp": {
       "type": "PluginCsa, AutoRest.CSharp.Azure"
     },
-        "Ruby": {
-            "type": "PluginRb, AutoRest.Ruby"
-        },
-        "Azure.Ruby": {
-            "type": "PluginRba, AutoRest.Ruby.Azure"
-        },
+    "Ruby": {
+      "type": "PluginRb, AutoRest.Ruby"
+    },
+    "Azure.Ruby": {
+      "type": "PluginRba, AutoRest.Ruby.Azure"
+    },
     "NodeJS": {
       "type": "PluginJs, AutoRest.NodeJS"
     },
@@ -19,10 +22,10 @@
       "type": "PluginJsa, AutoRest.NodeJS.Azure"
     },
     "Python": {
-        "type": "PluginPy, AutoRest.Python"
+      "type": "PluginPy, AutoRest.Python"
     },
     "Azure.Python": {
-        "type": "PluginPya, AutoRest.Python.Azure"
+      "type": "PluginPya, AutoRest.Python.Azure"
     },
     "Go": {
       "type": "PluginGo, AutoRest.Go"
@@ -37,7 +40,7 @@
       "type": "PluginJvaf, AutoRest.Java.Azure.Fluent"
     },
     "AzureResourceSchema": {
-        "type": "PluginArs, AutoRest.AzureResourceSchema"
+      "type": "PluginArs, AutoRest.AzureResourceSchema"
     },
     "Azure.CSharp.Fluent": {
       "type": "PluginCsaf, AutoRest.CSharp.Azure.Fluent"
@@ -45,6 +48,9 @@
   },
 
   "codeGenerators": {
+    "CodeGeneratorTs": {
+      "type": "CodeGeneratorTs, AutoRest.TypeScript.SuperAgent"
+    },
     "Ruby": {
       "type": "RubyCodeGenerator, AutoRest.Ruby"
     },
