@@ -15,7 +15,6 @@ namespace AutoRest.Swagger.Validation
     public class CollectionObjectPropertiesNamingValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         private readonly Regex ListRegex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
-        private static readonly string XmsPageable = "x-ms-pageable";
 
         /// <summary>
         /// Id of the Rule.
@@ -35,7 +34,7 @@ namespace AutoRest.Swagger.Validation
             foreach (var opPair in listOperations)
             {
                 // if the operation id is not of type _list* or does not return an array type, skip
-                if (!ListRegex.IsMatch(opPair.Value.OperationId) || !(opPair.Value.Extensions.GetValueOrNull(XmsPageable) != null))
+                if (!ListRegex.IsMatch(opPair.Value.OperationId) || !ValidationUtilities.IsXmsPageableOperation(opPair.Value))
                 {
                     continue;
                 }
