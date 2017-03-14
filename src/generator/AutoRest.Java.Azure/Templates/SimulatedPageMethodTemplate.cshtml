@@ -84,7 +84,7 @@ else
 }
  */
 public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
-    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
         @@Override
         public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
             @Model.ReturnTypeJv.GenericBodyWireTypeString page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
@@ -184,7 +184,7 @@ public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)Wit
  */
 public PagedList<@Model.ReturnTypeJv.SequenceElementTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) {
     @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<@Model.ReturnTypeJv.SequenceElementTypeString> page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
-    page.setItems(@(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().body());
+    page.setItems(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().body());
     page.setNextPageLink(null);
     return new PagedList<@Model.ReturnTypeJv.SequenceElementTypeString>(page) {
         @@Override
