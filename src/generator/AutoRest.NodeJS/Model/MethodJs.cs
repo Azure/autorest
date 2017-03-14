@@ -171,7 +171,7 @@ namespace AutoRest.NodeJS.Model
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: { ");
+                declarations.Append("options?: { ");
                 var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.ModelType).Properties.OrderBy(each => each.Name == "customHeaders" ? 1 : 0).ToArray();
                 for (int i = 0; i < optionalParameters.Length; i++)
                 {
@@ -198,11 +198,12 @@ namespace AutoRest.NodeJS.Model
 
         /// <summary>
         /// Generate the method parameter declarations with callback or optionalCallback for a method
+        /// <param name="isCallbackOptional">If true, the method signature has an optional callback, otherwise the callback is required.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallback(bool isOptional=false)
+        public string MethodParameterDeclarationWithCallback(bool isCallbackOptional = false)
         {
             var parameters = MethodParameterDeclaration;
-            if (isOptional)
+            if (isCallbackOptional)
             {
                 parameters += ", optionalCallback";
             }
@@ -217,8 +218,9 @@ namespace AutoRest.NodeJS.Model
         /// <summary>
         /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+        /// <param name="isCallbackOptional">If true, the method signature has an optional callback, otherwise the callback is required.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
+        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions, bool isCallbackOptional = false)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
             var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
@@ -228,8 +230,14 @@ namespace AutoRest.NodeJS.Model
 
             if (parameters.Length > 0)
                 parameters.Append(", ");
-
-            parameters.Append("callback: ServiceCallback<" + returnTypeTSString + ">");
+            if (isCallbackOptional)
+            {
+                parameters.Append("optionalCallback: ServiceCallback<" + returnTypeTSString + ">");
+            }
+            else
+            {
+                parameters.Append("callback: ServiceCallback<" + returnTypeTSString + ">");
+            }
             return parameters.ToString();
         }
 
@@ -930,6 +938,12 @@ namespace AutoRest.NodeJS.Model
             return builder.ToString();
         }
 
+        /// <summary>
+        /// Generates documentation for every method on the client.
+        /// </summary>
+        /// <param name="flavor">Describes the flavor of the method (Callback based, promise based, 
+        /// raw httpOperationResponse based) to be documented.</param>
+        /// <returns></returns>
         public string GenerateMethodDocumentation(MethodFlavor flavor)
         {
             var template = new NodeJSTemplate<Object>();
@@ -937,11 +951,11 @@ namespace AutoRest.NodeJS.Model
             builder.AppendLine("/**");
             if (!String.IsNullOrEmpty(Summary))
             {
-                builder.AppendLine(template.WrapComment(" * ", "@summary " + Summary)).AppendLine("*");
+                builder.AppendLine(template.WrapComment(" * ", "@summary " + Summary)).AppendLine(" *");
             }
             if (!String.IsNullOrEmpty(Description))
             {
-                builder.AppendLine(template.WrapComment(" * ", Description)).AppendLine("*");
+                builder.AppendLine(template.WrapComment(" * ", Description)).AppendLine(" *");
             }
             foreach (var parameter in DocumentationParameters)
             {

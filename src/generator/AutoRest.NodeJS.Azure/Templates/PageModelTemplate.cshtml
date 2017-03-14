@@ -10,8 +10,6 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-var util = require('util');
-@EmptyLine
 /**
  * @@class
  * Initializes a new instance of the @(Model.Name) class.
@@ -37,19 +35,17 @@ var util = require('util');
     }
 }
  */
-function @(Model.Name)() {
+class @(Model.Name) extends Array {
 }
 @EmptyLine
-util.inherits(@(Model.Name), Array);
-@EmptyLine
-/**
- * Defines the metadata of @Model.Name
- *
- * @@returns {object} metadata of @Model.Name
- *
- */
-@(Model.Name).prototype.mapper = function () {
+  /**
+   * Defines the metadata of @Model.Name
+   *
+   * @@returns {object} metadata of @Model.Name
+   *
+   */
+  mapper() {
   @(Model.ConstructModelMapper())
-};
+}
 @EmptyLine
 module.exports = @(Model.Name);

@@ -14,7 +14,7 @@ else
 {
     <text>
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse))
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase())WithHttpOperationResponse = function @(Model.Name.ToCamelCase())WithHttpOperationResponse(@(Model.MethodParameterDeclaration)) {
+@(Model.Name.ToCamelCase())WithHttpOperationResponse(@(Model.MethodParameterDeclaration)) {
   let client = @(Model.ClientReference);
   let self = this;
   return new Promise((resolve, reject) => {
@@ -25,10 +25,10 @@ else
       return;
     });
   });
-};
+}
 @EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise))
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function @(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true))) {
+@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true))) {
   let client = @(Model.ClientReference);
   let self = this;
   if (!optionalCallback && typeof options === 'function') {
@@ -45,10 +45,10 @@ else
   } else {
     return self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true)));
   }
-};
+}
 @EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
-function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
+_@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
   var client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -91,6 +91,6 @@ function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCall
       return callback(null, result, httpRequest, response);
     });
   });
-};
+}
     </text>
 }

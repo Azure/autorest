@@ -14,25 +14,24 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRestAzure.AzureServiceClient;
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const ServiceClient = msRestAzure.AzureServiceClient;
 @if (Model.ContainsDurationProperty())
 {
-@:var moment = require('moment');
+@:const moment = require('moment');
 @EmptyLine
 }
 @if (Model.MethodTemplateModels.Any())
 {
-@:var WebResource = msRest.WebResource;
+@:const WebResource = msRest.WebResource;
 }
 
 @EmptyLine
-var models = require('./models');
+const models = require('./models');
 @if (Model.MethodGroupModels.Any())
 {
-@:var operations = require('./operations');
+@:const operations = require('./operations');
 }
 @EmptyLine
 @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
@@ -68,58 +67,59 @@ var models = require('./models');
 @: *
 }
  */
-function @(Model.Name)(@(!string.IsNullOrEmpty(Model.RequiredConstructorParameters) ? Model.RequiredConstructorParameters + ", " : "")options) {
+class @(Model.Name) extends ServiceClient {
+  constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParameters) ? Model.RequiredConstructorParameters + ", " : "")options) {
 @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
 {
-  @:this.@(property.Name) = @(property.DefaultValue);
+    @:this.@(property.Name) = @(property.DefaultValue);
 }
 @foreach (var param in requiredParameters)
 {
-@:  if (@(param.Name) === null || @(param.Name) === undefined) {
-@:    throw new Error('\'@(param.Name)\' cannot be null.');
-@:  }
+  @:  if (@(param.Name) === null || @(param.Name) === undefined) {
+  @:    throw new Error('\'@(param.Name)\' cannot be null.');
+  @:  }
 }
-  @EmptyLine
-  if (!options) options = {};
-  @EmptyLine
-  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
+    @EmptyLine
+    if (!options) options = {};
+    @EmptyLine
+    super(@(requiredParameters.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
 @if(!Model.IsCustomBaseUri)
 {
-  @:this.baseUri = baseUri;
-  @:if (!this.baseUri) {
-    @:this.baseUri = '@Model.BaseUrl';
-  @:}
+    @:this.baseUri = baseUri;
+    @:if (!this.baseUri) {
+      @:this.baseUri = '@Model.BaseUrl';
+    @:}
 }
 else
 {
-  @:this.baseUri = '@Model.BaseUrl';
+    @:this.baseUri = '@Model.BaseUrl';
 }
 
 
 @foreach (var param in requiredParameters)
 {
-@:  this.@(param.Name) = @(param.Name);
+  @:  this.@(param.Name) = @(param.Name);
 }
-  @EmptyLine
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
+    @EmptyLine
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
   @foreach (var property in optionalParameters)
   { 
-  @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
-  @:  this.@(property.Name) = options.@(property.Name);
-  @:}
+    @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
+    @:  this.@(property.Name) = options.@(property.Name);
+    @:}
   }
   
   @foreach (var methodGroup in Model.MethodGroupModels)
   {
-  @:this.@(methodGroup.NameForProperty) = new operations.@(methodGroup.TypeName)(this);
+    @:this.@(methodGroup.NameForProperty) = new operations.@(methodGroup.TypeName)(this);
   }
   
-  this.models = models;
-  msRest.addSerializationMixin(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
+  }
 }
 @EmptyLine
-util.inherits(@Model.Name, ServiceClient);
 @foreach (var method in Model.MethodTemplateModels)
 {
 @EmptyLine

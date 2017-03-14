@@ -20,7 +20,7 @@
                                         + "} " + MethodJs.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
-@WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")
+@WrapComment(" * ", " @param {ServiceCallback} [optionalCallback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details.")
  */
-@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS(true))): void;
+@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS(true, true))): void;
 @(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallbackTS(false))): void;
