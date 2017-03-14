@@ -95,26 +95,22 @@ $scrp = {
   }
 }
 
-# @( "CSharp",
-#  "Azure.CSharp",
-#  "Ruby",
-#  "Azure.Ruby",
-#  "NodeJS",
-#  "Azure.NodeJS",
-#  "Python",
-#  "Azure.Python",
-#  "Go",
-#  "Java",
-#  "Azure.Java",
-#  "Azure.Java.Fluent",
-#  "AzureResourceSchema",
-#  "Azure.CSharp.Fluent" ) |% {
-
- @( "CSharp",
-  "Azure.CSharp",
-  "Ruby",
-  "Azure.Ruby",
-  "Azure.CSharp.Fluent" ) |% {
+@( "CSharp",
+ "Azure.CSharp",
+ "Ruby",
+ "Azure.Ruby",
+ "NodeJS",
+ "Azure.NodeJS",
+ "Python",
+ "Azure.Python",
+ "Go",
+ "Java",
+ "Azure.Java",
+ "Azure.Java.Fluent",
+ "AzureResourceSchema",
+ "Azure.CSharp.Fluent" ) |% {
+   
+# @( "CSharp" ) |% {
   $gen = $_;
  
 

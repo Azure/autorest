@@ -4,12 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoRest.Core.Logging;
 using Microsoft.Perks.JsonRPC;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using System.Text.RegularExpressions;
-using System.Linq;
-using AutoRest.Core.Validation;
 
 public abstract class NewPlugin
 {
