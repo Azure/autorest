@@ -2,12 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
@@ -152,6 +151,35 @@ namespace AutoRest.Swagger.Model.Utilities
         public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
         {
             return serviceDefinition.Definitions.Where(defPair=> defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions["x-ms-azure-resource"] == true);
+        }
+
+        /// <summary>
+        /// Evaluates if the reference is of the provided data type.
+        /// </summary>
+        /// <param name="reference">reference to evaluate</param>
+        /// <param name="definitions">definition list</param>
+        /// <param name="dataType">Datatype value to evaluate</param>
+        /// <returns>true if the reference is of the provided data type. False otherwise.</returns>
+        public static bool IsReferenceOfType(string reference, Dictionary<string, Schema> definitions, Model.DataType dataType)
+        {
+            if (reference == null)
+            {
+                return false;
+            }
+
+            string definitionName = Extensions.StripDefinitionPath(reference);
+            Schema schema = definitions.GetValueOrNull(definitionName);
+            if (schema == null)
+            {
+                return false;
+            }
+
+            if (schema.Type == dataType || (schema.Type == null && schema.Reference != null && IsReferenceOfType(schema.Reference, definitions, dataType)))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

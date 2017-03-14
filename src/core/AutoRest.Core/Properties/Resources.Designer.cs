@@ -665,7 +665,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties..
+        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have &apos;name&apos; property. It can also have &apos;tier&apos;, &apos;size&apos;, &apos;family&apos;, &apos;capacity&apos; as optional properties..
         /// </summary>
         public static string SkuModelIsNotValid {
             get {

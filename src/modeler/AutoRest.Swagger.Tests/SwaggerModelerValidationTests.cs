@@ -545,6 +545,16 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 0);
         }
 
+        /// <summary>
+        /// Verifies that sku object
+        /// </summary>
+        [Fact]
+        public void ValidSkuObjectStructure()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
+        }
+
     }
 
     #endregion
