@@ -4,7 +4,9 @@
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Validation;
+using AutoRest.Core.Logging;
 using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -24,21 +26,17 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.PatchOperationNameNotValid;
 
         /// <summary>
-        /// Validates whether operation name confirms to the PATCH rule naming convension.
+        /// Validates whether PUT operation name is named correctly
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
-        /// <returns><c>true</c> if PATCH operation name confirms to PATCH rule, otherwise <c>false</c>.</returns>
-        public override bool IsValid(string entity, RuleContext context)
+        /// <returns>ValidationMessage</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(string operationId, RuleContext context)
         {
-            string httpVerb = context?.Parent?.Key;
-
-            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("PATCH"))
+            if (!String.IsNullOrWhiteSpace(operationId) && operationId.EqualsIgnoreCase("PATCH"))
             {
-                return IsPatchValid(entity);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, operationId);
             }
-
-            return true;
         }
     }
 }
