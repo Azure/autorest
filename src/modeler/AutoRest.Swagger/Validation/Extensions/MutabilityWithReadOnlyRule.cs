@@ -18,6 +18,29 @@ namespace AutoRest.Swagger.Validation
         protected readonly string[] ValidValuesForReadOnlyProperty = { "read" };
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2008";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// The template message for this Rule.
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.InvalidMutabilityValueForReadOnly;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Error;
+
+        /// <summary>
         /// An x-ms-mutability extension passes this rule if it has only valid possible values in context of Read Only property.
         /// </summary>
         /// <param name="mutable">mutability extension object.</param>
@@ -27,14 +50,6 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>This rule corresponds to M2006.</remarks>
         public override bool IsValid(object mutable, RuleContext context, out object[] formatParameters) => 
             ValidateMutabilityValuesWithReadOnlyProperty(mutable, context, out formatParameters);
-
-        /// <summary>
-        /// The template message for this Rule.
-        /// </summary>
-        /// <remarks>
-        /// This may contain placeholders '{0}' for parameterized messages.
-        /// </remarks>
-        public override string MessageTemplate => Resources.InvalidMutabilityValueForReadOnly;
 
         /// <summary>
         /// Verify that mutability values are valid in context of Read Only property.
@@ -71,10 +86,5 @@ namespace AutoRest.Swagger.Validation
 
             return isValid;
         }
-
-        /// <summary>
-        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
-        /// </summary>
-        public override Category Severity => Category.Error;
     }
 }
