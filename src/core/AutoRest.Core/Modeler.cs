@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Core.Logging;
 using AutoRest.Core.Model;
-using AutoRest.Core.Validation;
 using System.Collections.Generic;
 
 namespace AutoRest.Core
@@ -19,6 +19,6 @@ namespace AutoRest.Core
         /// Copares two versions of the same service specification.
         /// </summary>
         /// <returns></returns>
-        public abstract IEnumerable<ComparisonMessage> Compare();
+        public abstract IEnumerable<LogMessage> Compare();
     }
 }

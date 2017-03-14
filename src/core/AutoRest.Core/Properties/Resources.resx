@@ -241,8 +241,8 @@ Modelers:
   <data name="XmsClientNameInValid" xml:space="preserve">
     <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
   </data>
-  <data name="DeleteMustHaveEmptyRequestBody" xml:space="preserve">
-    <value>'Delete' operation cannot have parameters in the request body.</value>
+  <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
+    <value>'Delete' operation must not have a request body.</value>
   </data>
   <data name="SkuModelIsNotValid" xml:space="preserve">
     <value>Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.</value>

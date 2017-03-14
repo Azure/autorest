@@ -3,7 +3,7 @@
 
 using System;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     [Flags]
     public enum ValidationCategory

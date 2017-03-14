@@ -4,9 +4,9 @@
 using System;
 using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {

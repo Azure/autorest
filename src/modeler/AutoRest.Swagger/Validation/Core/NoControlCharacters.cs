@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using AutoRest.Core.Logging;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     ///     This validator is applied all string members, and ensures that no control

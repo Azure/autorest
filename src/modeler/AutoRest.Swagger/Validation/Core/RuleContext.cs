@@ -1,8 +1,9 @@
 ﻿
 using AutoRest.Core.Logging;
+using AutoRest.Swagger.Model;
 using System;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     /// Provides context for a rule, such as the ancestors in the validation tree, the root object
@@ -14,7 +15,7 @@ namespace AutoRest.Core.Validation
         /// Initializes a top level context for rules
         /// </summary>
         /// <param name="root"></param>
-        public RuleContext(object root, Uri file) : this(null)
+        public RuleContext(ServiceDefinition root, Uri file) : this(null)
         {
             this.Root = root;
             this.Value = root;
@@ -64,7 +65,7 @@ namespace AutoRest.Core.Validation
         /// <summary>
         /// The root object in the graph that this rule is being applied to
         /// </summary>
-        public object Root { get; private set; }
+        public ServiceDefinition Root { get; private set; }
 
         /// <summary>
         /// The key value that the object is part of if it's in a dictionary

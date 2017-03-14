@@ -15,7 +15,7 @@ using AutoRest.Core.Parsing;
 using YamlDotNet.RepresentationModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-
+using AutoRest.Swagger.Logging.Core;
 
 namespace AutoRest
 {
