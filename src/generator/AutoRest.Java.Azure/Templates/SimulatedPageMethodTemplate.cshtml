@@ -83,7 +83,7 @@ else
 @: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
 }
  */
-public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
     return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
         @@Override
         public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {

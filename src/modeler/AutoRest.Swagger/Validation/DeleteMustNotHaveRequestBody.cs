@@ -10,9 +10,9 @@ using System.Collections.Generic;
 namespace AutoRest.Swagger.Validation
 {
     /// <summary>
-    /// Validates if the request body of the delete operation is empty.
+    /// Validates if there is no request body for the delete operation.
     /// </summary>
-    public class DeleteMustHaveEmptyRequestBody : TypedRule<Dictionary<string, Operation>>
+    public class DeleteMustNotHaveRequestBody : TypedRule<Dictionary<string, Operation>>
     {
         /// <summary>
         /// Id of the Rule.
@@ -30,7 +30,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.DeleteMustHaveEmptyRequestBody;
+        public override string MessageTemplate => Resources.DeleteMustNotHaveRequestBody;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -38,10 +38,10 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
-        /// An <paramref name="operationDefinition"/> fails this rule if delete operation does not have an empty request body.
+        /// An <paramref name="operationDefinition"/> fails this rule if delete operation has a request body.
         /// </summary>
         /// <param name="operationDefinition">Operation Definition to validate</param>
-        /// <returns>true if delete operation does not have a body. false otherwise.</returns>
+        /// <returns>true if delete operation does not have a request body. false otherwise.</returns>
         public override bool IsValid(Dictionary<string, Operation> operationDefinition, RuleContext context)
         {
             foreach (string httpVerb in operationDefinition.Keys)

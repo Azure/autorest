@@ -224,11 +224,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in the request body..
+        ///   Looks up a localized string similar to &apos;Delete&apos; operation must not have a request body..
         /// </summary>
-        public static string DeleteMustHaveEmptyRequestBody {
+        public static string DeleteMustNotHaveRequestBody {
             get {
-                return ResourceManager.GetString("DeleteMustHaveEmptyRequestBody", resourceCulture);
+                return ResourceManager.GetString("DeleteMustNotHaveRequestBody", resourceCulture);
             }
         }
         

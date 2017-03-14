@@ -8,22 +8,41 @@ import * as fs from "fs";
 import { homedir } from "os";
 import * as path from "path";
 
-function AutoRestDllPath() {
-  // try relative path to __dirname
-  let result = path.join(__dirname, "../../AutoRest.dll");
+const empty = "";
+
+function WalkUpPath(startPath: string, relativePath: string, maxParents: number): string {
+  const result = path.resolve(startPath, relativePath);
+
   if (fs.existsSync(result)) {
+    return result;
+  }
+  const parent = path.resolve(startPath, '..');
+
+
+  if (startPath === parent || (maxParents--) < 1) {
+    return empty;
+  }
+
+  return WalkUpPath(parent, relativePath, maxParents);
+}
+
+function AutoRestDllPath(): string {
+  // try relative path to __dirname
+  let result = WalkUpPath(__dirname, "AutoRest.dll", 4);
+  if (result !== empty) {
     return result;
   }
 
   // try relative to process.argv[1]
-  result = path.join(path.dirname(process.argv[1]), "../../AutoRest.dll");
-  if (fs.existsSync(result)) {
+  result = WalkUpPath(process.argv[1], "AutoRest.dll", 4);
+  if (result !== empty) {
     return result;
   }
 
+
   // try relative path to __dirname in solution
-  result = path.join(__dirname, "../../core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll");
-  if (fs.existsSync(result)) {
+  result = WalkUpPath(__dirname, "core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll", 8);
+  if (result !== empty) {
     return result;
   }
 
