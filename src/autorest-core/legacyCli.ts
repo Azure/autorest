@@ -15,6 +15,12 @@ export function isLegacy(args: string[]): boolean {
   return args.some(arg => regexLegacyArg.test(arg));
 }
 
+function GetFilenameWithoutExtension(uri: string) {
+  const lastPart = uri.split("/").reverse()[0].split("\\").reverse()[0];
+  const ext = lastPart.indexOf(".") === -1 ? "" : lastPart.split(".").reverse()[0];
+  return lastPart.substr(0, lastPart.length - ext.length - 1);
+}
+
 async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfiguration): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
   const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
@@ -53,7 +59,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   result["output-folder"] = switches["o"] || switches["output"] || switches["outputdirectory"] || "Generated";
 
   result.__specials = result.__specials || {};
-  result.__specials.namespace = switches["n"] || switches["namespace"] || (() => { const x = inputFile.split("/").reverse()[0].split("\\").reverse()[0]; return x.substr(0, x.length - path.extname(x).length); })();
+  result.__specials.namespace = switches["n"] || switches["namespace"] || GetFilenameWithoutExtension(inputFile);
 
   const modeler = switches["m"] || switches["modeler"] || "Swagger";
   if (modeler === "CompositeSwagger") {
@@ -75,6 +81,8 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   result.__specials.syncMethods = <any>switches["syncmethods"] || null;
 
   result.__specials.addCredentials = switches["addcredentials"] === null || ((switches["addcredentials"] + "").toLowerCase() === "true");
+
+  result.__specials.rubyPackageName = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
 
   return result;
 }

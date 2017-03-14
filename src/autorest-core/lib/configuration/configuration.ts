@@ -18,6 +18,7 @@ export interface AutoRestConfigurationSpecials {
   payloadFlatteningThreshold?: number;
   syncMethods?: "all" | "essential" | "none";
   addCredentials?: boolean;
+  rubyPackageName?: string;
 }
 
 export interface AutoRestConfiguration {

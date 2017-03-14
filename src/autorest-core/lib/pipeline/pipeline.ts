@@ -62,9 +62,9 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
             useDateTimeOffset: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].useDateTimeOffset; } catch (e) { return null; } })() || false,
             header: config.__specials.header || null,
             payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].ft; } catch (e) { return null; } })() || 0,
-            syncMethods: config.__specials.syncMethods || "essential",
+            syncMethods: config.__specials.syncMethods || (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].syncMethods; } catch (e) { return null; } })() || "essential",
             addCredentials: config.__specials.addCredentials || false,
-            rubyPackageName: GetFilenameWithoutExtension(config.inputFileUris[0]).replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase()
+            rubyPackageName: config.__specials.rubyPackageName || "client"
           });
         for (const fileName of await generatedFileScope.Enum()) {
           callback(await generatedFileScope.ReadStrict(fileName));
