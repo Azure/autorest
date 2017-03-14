@@ -26,7 +26,8 @@ export class AutoRestDotNetPlugin {
     pluginName: string,
     configuration: (key: string) => any,
     inputScope: DataStoreViewReadonly,
-    workingScope: DataStoreView): Promise<void> {
+    outputScope: DataStoreView,
+    messageScope: DataStoreView): Promise<void> {
 
     const ep = await this.pluginEndpoint;
     // probe
@@ -35,17 +36,53 @@ export class AutoRestDotNetPlugin {
       throw new Error(`The AutoRest dotnet extension does not offer a plugin called '${pluginName}'.`);
     }
     // process
-    const success = await ep.Process(pluginName, configuration, inputScope, workingScope, CancellationToken.None);
+    const success = await ep.Process(pluginName, configuration, inputScope, outputScope, messageScope, CancellationToken.None);
     if (!success) {
       throw new Error(`Plugin ${pluginName} failed.`);
     }
   }
 
-  public async Validate(swagger: DataHandleRead, workingScope: DataStoreView): Promise<void> {
-    await this.CautiousProcess("AzureValidator", _ => { }, new QuickScope([swagger]), workingScope);
+  public async Validate(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataStoreViewReadonly> {
+    const outputScope = workingScope.CreateScope("output");
+    const messageScope = workingScope.CreateScope("messages");
+    await this.CautiousProcess("AzureValidator", _ => { }, new QuickScope([swagger]), outputScope, messageScope);
+    return messageScope;
   }
 
-  public async GenerateCode(targetLanguage: string, swagger: DataHandleRead, workingScope: DataStoreView): Promise<void> {
-    await this.CautiousProcess(`${targetLanguage}Generator`, _ => { }, new QuickScope([swagger]), workingScope);
+  public async GenerateCode(
+    codeModel: DataHandleRead,
+    workingScope: DataStoreView,
+    settings: {
+      codeGenerator: string,
+      namespace: string,
+      clientNameOverride?: string,
+      header: string | null,
+      payloadFlatteningThreshold: number,
+      syncMethods: "all" | "essential" | "none",
+      internalConstructors: boolean,
+      useDateTimeOffset: boolean,
+      addCredentials: boolean,
+      rubyPackageName: string
+    }): Promise<DataStoreViewReadonly> {
+
+    const outputScope = workingScope.CreateScope("output");
+    const messageScope = workingScope.CreateScope("messages");
+    await this.CautiousProcess(`Generator`, key => (settings as any)[key], new QuickScope([codeModel]), outputScope, messageScope);
+    return outputScope;
+  }
+
+  public async Model(
+    swagger: DataHandleRead,
+    workingScope: DataStoreView,
+    settings: { namespace: string }): Promise<DataHandleRead> {
+
+    const outputScope = workingScope.CreateScope("output");
+    const messageScope = workingScope.CreateScope("messages");
+    await this.CautiousProcess("Modeler", key => (settings as any)[key], new QuickScope([swagger]), outputScope, messageScope);
+    const results = await outputScope.Enum();
+    if (results.length !== 1) {
+      throw new Error(`Modeler plugin produced '${results.length}' items. Only expected one (the code model).`);
+    }
+    return await outputScope.ReadStrict(results[0]);
   }
 }
