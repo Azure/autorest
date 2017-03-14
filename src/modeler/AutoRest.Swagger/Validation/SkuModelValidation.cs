@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using AutoRest.Swagger.Model;
 using System.Text.RegularExpressions;
 using System.Linq;
+using AutoRest.Swagger.Model.Utilities;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -60,7 +61,7 @@ namespace AutoRest.Swagger.Validation
 
                     bool hasName = schema.Properties.Any(property =>
                         property.Key.EqualsIgnoreCase("name") &&
-                        (property.Value.Type == Model.DataType.String || (property.Value.Type == null && evaluateIf(property.Value.Reference, definitions, Model.DataType.String))));
+                        (property.Value.Type == Model.DataType.String || (property.Value.Type == null && ValidationUtilities.IsReferenceOfType(property.Value.Reference, definitions, Model.DataType.String))));
 
                     if (!hasName)
                         return false;
@@ -71,35 +72,6 @@ namespace AutoRest.Swagger.Validation
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Evaluates if the reference is of the provided data type.
-        /// </summary>
-        /// <param name="reference">reference to evaluate</param>
-        /// <param name="definitions">definition list</param>
-        /// <param name="dataType">Datatype value to evaluate</param>
-        /// <returns>true if the reference is of the provided data type. False otherwise.</returns>
-        private bool evaluateIf(string reference, Dictionary<string, Schema> definitions, Model.DataType dataType)
-        {
-            if (reference == null)
-            {
-                return false;
-            }
-
-            string definitionName = reference.Substring(reference.LastIndexOf('/') + 1).Trim();
-            Schema schema = definitions.GetValueOrNull(definitionName);
-            if (schema == null)
-            {
-                return false;
-            }
-
-            if (schema.Type == dataType || (schema.Type == null && schema.Reference != null && evaluateIf(schema.Reference, definitions, dataType)))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }
