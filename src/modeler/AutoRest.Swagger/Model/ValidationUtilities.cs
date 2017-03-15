@@ -35,26 +35,6 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        public static bool IsAllOfOnModelNamedResource(Schema schema, Dictionary<string, Schema> definitions)
-        {
-            if (schema.AllOf != null)
-            {
-                foreach (Schema item in schema.AllOf)
-                {
-                    if (ResRegEx.IsMatch(item.Reference))
-                    {
-                       return true;
-                    }
-                    else
-                    {
-                       return IsAllOfOnModelNamedResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
-                    }
-                }
-            }
-            return false;
-        }
-
-
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
         /// </summary>
@@ -64,13 +44,13 @@ namespace AutoRest.Swagger.Model.Utilities
         {
             // Get all models that are returned by PUT operations (200 response)
             var putOperations = GetOperationsByRequestMethod("put", serviceDefinition);
-            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference.StripDefinitionPath()).Where(modelName => modelName != null);
+            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference.StripDefinitionPath()).Where(modelName => string.IsNullOrEmpty(modelName));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
             var getOperationsResponseModels = GetResponseModelDefinitions(serviceDefinition);
             var modelsAllOfOnResource =
                 getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
-                                           .Where(modelName => IsAllOfOnModelNamedResource(serviceDefinition.Definitions[modelName], serviceDefinition.Definitions));
+                                           .Where(modelName => IsAllOfOnModelNamedResource(modelName, serviceDefinition.Definitions));
             
             // Get all models that have the "x-ms-azure-resource" extension set on them
             var xmsAzureResourceModels =
@@ -86,6 +66,7 @@ namespace AutoRest.Swagger.Model.Utilities
             // for every model in definitions, recurse its allOfs and discover if there is a baseResourceModel reference
             foreach (var modelName in serviceDefinition.Definitions.Keys)
             {
+                // make sure we are excluding models which have the x-ms-azure-resource extension set on them
                 if (!xmsAzureResourceModels.Contains(modelName) && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels))
                 {
                     yield return modelName;
@@ -93,6 +74,36 @@ namespace AutoRest.Swagger.Model.Utilities
             }
         }
 
+        /// <summary>
+        /// For a given model determines if it allOfs on a model named 'Resource'
+        /// </summary>
+        /// <param name="modelName">model for which to check the allOfs</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <returns>List of resource models</returns>
+        public static bool IsAllOfOnModelNamedResource(string modelName, Dictionary<string, Schema> definitions)
+        {
+            if (!definitions.ContainsKey(modelName)) return false;
+
+            var modelSchema = definitions[modelName];
+
+            if (modelSchema.AllOf?.Any() != true) return false;
+
+            if (modelSchema.AllOf != null)
+            {
+                foreach (Schema item in modelSchema.AllOf)
+                {
+                    if (ResRegEx.IsMatch(item.Reference))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return IsAllOfOnModelNamedResource(item.Reference, definitions);
+                    }
+                }
+            }
+            return false;
+        }
 
         /// <summary>
         /// For a given model, recursively traverses its allOfs and checks if any of them refer to 
