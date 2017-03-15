@@ -41,8 +41,6 @@ namespace AutoRest.Swagger.Validation
         /// <param name="entity"></param>
         /// <returns></returns>
         public override bool IsValid(SwaggerParameter entity) =>
-            entity == null || entity.Schema == null || AnonymousTypesRule.IsValid(entity.Schema);
-
-
+            entity?.Schema == null || AnonymousTypesRule.IsValid(entity.Schema);
     }
 }
