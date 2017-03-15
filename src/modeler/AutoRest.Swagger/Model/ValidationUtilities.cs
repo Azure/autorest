@@ -54,6 +54,12 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
+
+        /// <summary>
+        /// Populates a list of 'Resource' models found in the service definition
+        /// </summary>
+        /// <param name="serviceDefinition">serviceDefinition for which to populate the resources</param>
+        /// <returns>List of resource models</returns>
         public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
         {
             // Get all models that are returned by PUT operations (200 response)
@@ -86,7 +92,16 @@ namespace AutoRest.Swagger.Model.Utilities
                 }
             }
         }
-        
+
+
+        /// <summary>
+        /// For a given model, recursively traverses its allOfs and checks if any of them refer to 
+        /// the base resourceModels
+        /// </summary>
+        /// <param name="modelName">model for which to determine if it is resource model type</param>
+        /// <param name="definitions">dictionary that contains model definitions</param>
+        /// <param name="baseResourceModels">the list of base resource models</param>
+        /// <returns>true if model is of resource model type</returns>
         public static bool IsAllOfOnResourceTypeModel(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> baseResourceModels)
         {
             // if model can't be found in definitions we can't verify
@@ -102,9 +117,23 @@ namespace AutoRest.Swagger.Model.Utilities
             return IsAllOfOnResourceTypeModel(definitions[modelName].AllOf.First().Reference.StripDefinitionPath(), definitions, baseResourceModels);
         }
 
+
+        /// <summary>
+        /// For a given set of resource models evaluates which models are tracked and returns those
+        /// </summary>
+        /// <param name="resourceModels">list of resourceModels from which to evaluate the tracked resources</param>
+        /// <param name="definitions">the dictionary of model definitions</param>
+        /// <returns>list of tracked resources</returns>
         public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) =>
             resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
-        
+
+
+        /// <summary>
+        /// For a given set of resource models evaluates which models are tracked and returns those
+        /// </summary>
+        /// <param name="modelName">model for which to check the 'location' property</param>
+        /// <param name="definitions">dictionary containing the model definitions</param>
+        /// <returns>list of tracked resources</returns>
         private static bool ContainsLocationProperty(string modelName, Dictionary<string, Schema> definitions)
         {
             // if model name is null or empty or not found in definitions, return false
@@ -115,21 +144,15 @@ namespace AutoRest.Swagger.Model.Utilities
             if (modelSchema == null) return false;
 
             // if model properties has a property named location, return true
-            if (modelSchema.Properties.ContainsKey("location"))
+            if (modelSchema.Properties?.ContainsKey("location") == true)  return true;
+
+            var allOfedModels = modelSchema.AllOf?.Select(modelRef => modelRef.Reference).Where(modelRef=>!string.IsNullOrEmpty(modelRef));
+            if (allOfedModels != null && allOfedModels.Any())
             {
-                return true;
-            }
-
-            // if any of the allOfed models have a property named location, return true
-            if (ContainsLocationProperty(modelSchema.AllOf?.First()?.Reference?.StripDefinitionPath(), definitions)) return true;
-
-
-            // if any of the property references have a property named location, return true
-            foreach (var prop in modelSchema.Properties.Values)
-            {
-                if (definitions.ContainsKey(prop.Reference?.StripDefinitionPath()))
+                foreach (var modelRef in allOfedModels)
                 {
-                    if (ContainsLocationProperty(prop.Reference.StripDefinitionPath(), definitions)) return true;
+                    // if any of the allOfed models have a property named location, return true
+                    if (ContainsLocationProperty(modelRef, definitions)) return true;
                 }
             }
 
@@ -137,7 +160,6 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        // determine if the operation is xms pageable or returns an object of array type
         public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
         {
             // if xmspageable type, return true
@@ -234,11 +256,6 @@ namespace AutoRest.Swagger.Model.Utilities
                 }
             }
             return sb.ToString();
-        }
-
-        public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
-        {
-            return serviceDefinition.Definitions.Where(defPair=> defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions["x-ms-azure-resource"] == true);
         }
     }
 }
