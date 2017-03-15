@@ -34,8 +34,8 @@ function Merge(a: any, b: any, path: JsonPath = []): any {
     } else {
       // object nodes - iterate all members
       const result: any = {};
-      let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b)).sort();
-      keys = keys.filter((v, i) => i === 0 || v !== keys[i - 1]); // distinct
+      let keys = Object.getOwnPropertyNames(a).concat(Object.getOwnPropertyNames(b));
+      keys = keys.filter((v, i) => { const idx = keys.indexOf(v); return idx === -1 || idx >= i; }); // distinct
 
       for (const key of keys) {
         const subpath = path.concat(key);

@@ -17,15 +17,16 @@ namespace AutoRest.Core.Extensibility
 {
     public static class ExtensionsLoader
     {
-        public static IAnyPlugin GetPlugin()
+        public static IAnyPlugin GetPlugin(string pluginName = null)
         {
-            Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
-            if (Settings.Instance == null)
+            if (pluginName == null)
             {
-                throw new ArgumentNullException("settings");
+                pluginName = Settings.Instance.CodeGenerator;
             }
 
-            if (string.IsNullOrEmpty(Settings.Instance.CodeGenerator))
+            Logger.Instance.Log(Category.Info, Resources.InitializingCodeGenerator);
+
+            if (string.IsNullOrEmpty(pluginName))
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -34,18 +35,18 @@ namespace AutoRest.Core.Extensibility
 
             IAnyPlugin plugin = null;
 
-            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
+            if (pluginName.EqualsIgnoreCase("None"))
             {
                 plugin = new NoOpPlugin();
             }
             else
             {
                 var config = AutoRestConfiguration.Get();
-                plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, Settings.Instance.CodeGenerator);
+                plugin = LoadTypeFromAssembly<IAnyPlugin>(config.Plugins, pluginName);
                 Settings.PopulateSettings(plugin.Settings, Settings.Instance.CustomSettings);
             }
             Logger.Instance.Log(Category.Info, Resources.GeneratorInitialized,
-                Settings.Instance.CodeGenerator,
+                pluginName,
                 plugin.GetType().GetAssembly().GetName().Version);
             return plugin;
 

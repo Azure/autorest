@@ -318,13 +318,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void MutabilityNotModeledValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values.json"));
-            messages.AssertOnlyValidationMessage(typeof(MutabilityValidValuesRule), 2);
-        }
-
-        [Fact]
         public void MutabilityNotModeledWithReadOnlyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
@@ -565,6 +558,16 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(4, context.ResourceModels.Count());
             Assert.Equal(1, context.TrackedResourceModels.Count());
             Assert.Equal(3, context.ProxyResourceModels.Count());
+        }
+
+        /// <summary>
+        /// Verifies that sku object
+        /// </summary>
+        [Fact]
+        public void ValidSkuObjectStructure()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
     }
 

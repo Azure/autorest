@@ -5,6 +5,7 @@
 
 import * as yamlAst from "yaml-ast-parser";
 import { JsonPath } from "./jsonpath";
+import { NewEmptyObject } from "./stable-object";
 
 /**
  * reexport required elements
@@ -66,12 +67,14 @@ function ParseNodeInternal(yamlRootNode: YAMLNode, yamlNode: YAMLNode): any {
   switch (yamlNode.kind) {
     case Kind.SCALAR: {
       const yamlNodeScalar = yamlNode as YAMLScalar;
-      return yamlNode.valueObject = yamlNodeScalar.valueObject || yamlNodeScalar.value;
+      return yamlNode.valueObject = yamlNodeScalar.valueObject !== undefined
+        ? yamlNodeScalar.valueObject
+        : yamlNodeScalar.value;
     }
     case Kind.MAPPING:
       throw new Error(`Cannot turn single mapping into an object`);
     case Kind.MAP: {
-      yamlNode.valueObject = {};
+      yamlNode.valueObject = NewEmptyObject();
       const yamlNodeMapping = yamlNode as YAMLMap;
       for (const mapping of yamlNodeMapping.mappings) {
         if (mapping.key.kind !== Kind.SCALAR) {

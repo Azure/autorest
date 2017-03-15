@@ -245,7 +245,7 @@ Modelers:
     <value>'Delete' operation must not have a request body.</value>
   </data>
   <data name="SkuModelIsNotValid" xml:space="preserve">
-    <value>Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties.</value>
+    <value>Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.</value>
   </data>
   <data name="PutGetPatchResponseInvalid" xml:space="preserve">
     <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
@@ -307,7 +307,7 @@ Modelers:
     <value>Errors found during Swagger document validation.</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
-    <value>Paths in x-ms-paths must overload a normal path in the paths section.</value>
+    <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
     <value>The value provided for description is not descriptive enough.</value>
@@ -370,7 +370,7 @@ Modelers:
     <value>'PUT' operation must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
-    <value>Collection object {0} returned by list operation {1} has no property named 'value'.</value>
+    <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
   </data>
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>

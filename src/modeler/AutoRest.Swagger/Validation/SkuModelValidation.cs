@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using AutoRest.Swagger.Model;
 using System.Text.RegularExpressions;
 using System.Linq;
+using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
@@ -27,6 +28,16 @@ namespace AutoRest.Swagger.Validation
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public override string MessageTemplate => Resources.SkuModelIsNotValid;
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2057";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -50,7 +61,7 @@ namespace AutoRest.Swagger.Validation
 
                     bool hasName = schema.Properties.Any(property =>
                         property.Key.EqualsIgnoreCase("name") &&
-                        property.Value.Type == Model.DataType.String);
+                        (property.Value.Type == Model.DataType.String || (property.Value.Type == null && ValidationUtilities.IsReferenceOfType(property.Value.Reference, definitions, Model.DataType.String))));
 
                     if (!hasName)
                         return false;
