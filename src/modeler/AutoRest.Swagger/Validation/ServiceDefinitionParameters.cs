@@ -31,6 +31,8 @@ namespace AutoRest.Swagger.Validation
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, SubscriptionId);
             }
             // For ARM specs, api version is almost always required, call it out if it isn't defined in the global params
+            // We are not distinguishing between ARM and non-ARM specs currently, so let's apply this for all specs regardless
+            // and make appropriate changes in the future so this gets applied only for ARM specs
             if (ParametersMap?.Values.Any(parameter => parameter.Name?.ToLower().Equals(ApiVersion) == true) == false)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ApiVersion);
