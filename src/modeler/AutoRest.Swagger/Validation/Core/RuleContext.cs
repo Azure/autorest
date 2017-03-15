@@ -1,7 +1,10 @@
 ﻿
 using AutoRest.Core.Logging;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Model.Utilities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation.Core
 {
@@ -20,6 +23,7 @@ namespace AutoRest.Swagger.Validation.Core
             this.Root = root;
             this.Value = root;
             this.File = file;
+            PopulateResourceTypes(root);
         }
 
         /// <summary>
@@ -81,7 +85,22 @@ namespace AutoRest.Swagger.Validation.Core
         /// The value of the object
         /// </summary>
         public object Value { get; private set; }
-        
+
+        /// <summary>
+        /// List of resources in serviceDefinition
+        /// </summary>
+        public IList<string> Resources { get; private set; }
+
+        /// <summary>
+        /// List of tracked resources in serviceDefinition
+        /// </summary>
+        public IList<string> TrackedResources { get; private set; }
+
+        /// <summary>
+        /// List of proxy resources in serviceDefinition
+        /// </summary>
+        public IList<string> ProxyResources { get; private set; }
+
         public ObjectPath Path => 
             Parent == null
                 ? ObjectPath.Empty
@@ -90,5 +109,15 @@ namespace AutoRest.Swagger.Validation.Core
                     : Parent.Path.AppendProperty(Key);
 
         public Uri File { get; private set;  }
+
+        private void PopulateResourceTypes(ServiceDefinition serviceDefinition)
+        {
+            /*
+            var resourceModels = ValidationUtilities.GetResourceModels(serviceDefinition);
+            var trackedResourceModels = ValidationUtilities.GetTrackedResources(resourceModels);
+            var proxyResources = ValidationUtilities.GetProxyResources(resourceModels, trackedResourceModels);
+            */
+        }
+
     }
 }

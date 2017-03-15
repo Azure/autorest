@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Model.Utilities
     public static class ValidationUtilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
-        private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex ResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
 
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
@@ -22,7 +22,7 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 foreach (Schema item in schema.AllOf)
                 {
-                    if (TrackedResRegEx.IsMatch(item.Reference))
+                    if (ResRegEx.IsMatch(item.Reference))
                     {
                         return true;
                     }
@@ -33,6 +33,72 @@ namespace AutoRest.Swagger.Model.Utilities
                 }
             }
             return false;
+        }
+
+        public static bool IsModelAllOfOnResource(Schema schema, Dictionary<string, Schema> definitions)
+        {
+            if (schema.AllOf != null)
+            {
+                foreach (Schema item in schema.AllOf)
+                {
+                    if (ResRegEx.IsMatch(item.Reference))
+                    {
+                       return true;
+                    }
+                    else
+                    {
+                       return IsModelAllOfOnResource(Schema.FindReferencedSchema(item.Reference, definitions), definitions);
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static IList<string> GetResourceModels(ServiceDefinition serviceDefinition)
+        {
+            // Get all models that are returned by PUT operations (200 response)
+            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition);
+            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference.StripDefinitionPath()).Where(modelName => modelName != null);
+
+            // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
+            var getOperationsResponseModels = GetResponseModelDefinitions(serviceDefinition);
+            var modelsAllOfOnResource =
+                getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
+                                           .Where(modelName => IsModelAllOfOnResource(serviceDefinition.Definitions[modelName], serviceDefinition.Definitions));
+
+            return null;    
+        }
+
+        public static IList<string> GetXmsAzureResourceModels(ServiceDefinition serviceDefinition)
+        {
+            var xmsAzureResourceModels = 
+                serviceDefinition.Definitions.Where(defPair => 
+                defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") ==true &&
+                defPair.Value.Extensions["x-ms-azure-resource"].Equals(true));
+            foreach (var defPair in serviceDefinition.Definitions)
+            {
+                if (IsAllOfOnXmsAzureResource(defPair.Value, serviceDefinition.Definitions, xmsAzureResourceModels))
+                {
+                    yield return defPair.Key;
+                }
+
+            }
+        }
+
+        private static bool IsAllOfOnXmsAzureResources(Schema schema, Dictionary<string, Schema> definitions, IEnumerable<string> xmsAzureResourceModels)
+        {
+            // if schema is null or does not have an allOf return false
+            if (schema?.AllOf == null)
+            {
+                return false;
+            }
+            // model allofs on xms-azure-resource, early return true
+            if (schema.AllOf?.Select(modelRef => modelRef.Reference?.StripDefinitionPath()).Intersect(xmsAzureResourceModels).Any() == true)
+            {
+                return true;
+            }
+            // recurse on the allOfed model
+            return IsAllOfOnXmsAzureResources(definitions[schema.Reference.StripDefinitionPath()], definitions, xmsAzureResourceModels);
         }
 
         // determine if the operation is xms pageable or returns an object of array type
