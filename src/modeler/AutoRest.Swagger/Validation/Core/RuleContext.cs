@@ -14,7 +14,6 @@ namespace AutoRest.Swagger.Validation.Core
     /// </summary>
     public class RuleContext
     {
-        private IEnumerable<string> _resourceModels;
 
         /// <summary>
         /// Initializes a top level context for rules

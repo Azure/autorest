@@ -64,7 +64,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // set of base resource models is the union of all three aboce
             var baseResourceModels = putResponseModelNames.Union(modelsAllOfOnResource).Union(xmsAzureResourceModels);
-            var result = new List<string>();
+
             // for every model in definitions, recurse its allOfs and discover if there is a baseResourceModel reference
             foreach (var modelName in serviceDefinition.Definitions.Keys)
             {
@@ -73,11 +73,9 @@ namespace AutoRest.Swagger.Model.Utilities
                     && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels)
                     && ResNameRegEx.IsMatch(modelName))
                 {
-                    //yield return modelName;
-                    result.Add(modelName);
+                    yield return modelName;
                 }
             }
-            return result;
         }
 
         /// <summary>
@@ -147,19 +145,9 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="resourceModels">list of resourceModels from which to evaluate the tracked resources</param>
         /// <param name="definitions">the dictionary of model definitions</param>
         /// <returns>list of tracked resources</returns>
-        public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions)
-        // => resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
-        {
-            var result = new List<string>();
-            foreach (var resModel in resourceModels)
-            {
-                if (ContainsLocationProperty(resModel, definitions))
-                {
-                    result.Add(resModel);
-                }
-            }
-            return result;
-        }
+        public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) 
+            => resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
+
 
 
         /// <summary>
