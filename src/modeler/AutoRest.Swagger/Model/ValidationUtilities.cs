@@ -36,10 +36,10 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         // determine if an operation is xms pageable operation
-        public static bool IsXmsPageableOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
         
         // determine if an operation returns an object of array type
-        public static bool IsArrayResponseOperation(Operation op, ServiceDefinition entity)
+        public static bool IsArrayTypeResponseOperation(Operation op, ServiceDefinition entity)
         {
             // if a success response is not defined, we have nothing to check, return false
             if (op.Responses?.ContainsKey("200") != true) return false;
@@ -71,8 +71,8 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         // determine if the operation is xms pageable or returns an object of array type
-        public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity) => 
-            (IsXmsPageableOperation(op) || IsArrayResponseOperation(op, entity));
+        public static bool IsXmsPageableOrArrayTypeResponseOperation(Operation op, ServiceDefinition entity) => 
+            (IsXmsPageableResponseOperation(op) || IsArrayTypeResponseOperation(op, entity));
         
         public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
         {
