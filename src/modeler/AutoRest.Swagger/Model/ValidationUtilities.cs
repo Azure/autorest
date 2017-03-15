@@ -100,6 +100,41 @@ namespace AutoRest.Swagger.Model.Utilities
             return IsAllOfOnResourceTypeModel(definitions[modelName].AllOf.First().Reference.StripDefinitionPath(), definitions, baseResourceModels);
         }
 
+        public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) =>
+            resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
+        
+        private static bool ContainsLocationProperty(string modelName, Dictionary<string, Schema> definitions)
+        {
+            // if model name is null or empty or not found in definitions, return false
+            if (string.IsNullOrEmpty(modelName) || !definitions.ContainsKey(modelName)) return false;
+
+            // if model schema is null, return false
+            var modelSchema = definitions[modelName];
+            if (modelSchema == null) return false;
+
+            // if model properties has a property named location, return true
+            if (modelSchema.Properties.ContainsKey("location"))
+            {
+                return true;
+            }
+
+            // if any of the allOfed models have a property named location, return true
+            if (ContainsLocationProperty(modelSchema.AllOf?.First()?.Reference?.StripDefinitionPath(), definitions)) return true;
+
+
+            // if any of the property references have a property named location, return true
+            foreach (var prop in modelSchema.Properties.Values)
+            {
+                if (definitions.ContainsKey(prop.Reference?.StripDefinitionPath()))
+                {
+                    if (ContainsLocationProperty(prop.Reference.StripDefinitionPath(), definitions)) return true;
+                }
+            }
+
+            // when all else fails, return false
+            return false;
+        }
+
         // determine if the operation is xms pageable or returns an object of array type
         public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
         {

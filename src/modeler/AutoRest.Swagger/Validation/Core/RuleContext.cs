@@ -89,17 +89,17 @@ namespace AutoRest.Swagger.Validation.Core
         /// <summary>
         /// List of resources in serviceDefinition
         /// </summary>
-        public IList<string> Resources { get; private set; }
+        public IEnumerable<string> ResourceModels { get; private set; }
 
         /// <summary>
         /// List of tracked resources in serviceDefinition
         /// </summary>
-        public IList<string> TrackedResources { get; private set; }
+        public IEnumerable<string> TrackedResourceModels { get; private set; }
 
         /// <summary>
         /// List of proxy resources in serviceDefinition
         /// </summary>
-        public IList<string> ProxyResources { get; private set; }
+        public IEnumerable<string> ProxyResourceModels { get; private set; }
 
         public ObjectPath Path => 
             Parent == null
@@ -110,13 +110,14 @@ namespace AutoRest.Swagger.Validation.Core
 
         public Uri File { get; private set;  }
 
+        /// <summary>
+        /// Populates list of resources, tracked resources and proxy resources
+        /// </summary>
         private void PopulateResourceTypes(ServiceDefinition serviceDefinition)
         {
-            /*
-            var resourceModels = ValidationUtilities.GetResourceModels(serviceDefinition);
-            var trackedResourceModels = ValidationUtilities.GetTrackedResources(resourceModels);
-            var proxyResources = ValidationUtilities.GetProxyResources(resourceModels, trackedResourceModels);
-            */
+            this.ResourceModels = ValidationUtilities.GetResourceModels(serviceDefinition);
+            this.TrackedResourceModels = ValidationUtilities.GetTrackedResources(this.ResourceModels, serviceDefinition.Definitions);
+            this.ProxyResourceModels = this.ResourceModels.Except(this.TrackedResourceModels);
         }
 
     }
