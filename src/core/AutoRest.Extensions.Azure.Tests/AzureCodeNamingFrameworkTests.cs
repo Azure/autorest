@@ -9,23 +9,21 @@ using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Core.Model;
 
 namespace AutoRest.Extensions.Azure.Tests
 {
     public class AzureCodeNamingFrameworkTests
     {
+        private static CodeModel Build(string swaggerPath) => new SwaggerModeler().Build(SwaggerParser.Parse(swaggerPath, File.ReadAllText(swaggerPath)));
+
         [Fact]
         public void ConvertsPageResultsToPageTypeTest()
         {
             using (NewContext)
             {
-                var settings = new Settings
-                {
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "azure-paging.json")
-                };
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                new Settings { };
+                var codeModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "azure-paging.json"));
                 AzureExtensions.NormalizeAzureClientModel(codeModel);
 
                 Assert.Equal(7, codeModel.Methods.Count);

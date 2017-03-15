@@ -8,49 +8,24 @@ namespace AutoRest.Core.Logging
 {
     public class ConsoleLogListener : ILogListener
     {
-        private static IDictionary<Category, ConsoleColor> colors = new Dictionary<Category, ConsoleColor>
-        {
-            { Category.Debug, ConsoleColor.Gray },
-            { Category.Fatal, ConsoleColor.Red },
-            { Category.Error, ConsoleColor.Red },
-            { Category.Warning, ConsoleColor.Yellow },
-            { Category.Info, ConsoleColor.White },
-        };
-
-        private static ConsoleColor GetColorForSeverity(Category severity)
-        {
-            ConsoleColor color;
-            if (!colors.TryGetValue(severity, out color))
-            {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "No color defined for severity {0}", severity));
-            }
-            return color;
-        }
-
         public ConsoleLogListener(
-            Category minSeverityForStdout = Category.Info,
-            Category minSeverityForStderr = Category.Error,
+            Category minSeverity = Category.Info,
             bool verbose = false)
         {
-            MinSeverityForStdout = minSeverityForStdout;
-            MinSeverityForStderr = minSeverityForStderr;
+            MinSeverity = minSeverity;
             Verbose = verbose;
         }
 
-        public Category MinSeverityForStdout { get; }
-
-        public Category MinSeverityForStderr { get; }
+        public Category MinSeverity { get; }
 
         public bool Verbose { get; }
 
         public void Log(LogMessage message)
         {
-            if (message.Severity >= MinSeverityForStdout || message.Severity >= MinSeverityForStderr)
+            if (message.Severity >= MinSeverity)
             {
-                var original = Console.ForegroundColor;
-                Console.ForegroundColor = GetColorForSeverity(message.Severity);
                 // Write the severity and message to console
-                var targetStream = message.Severity >= MinSeverityForStderr ? Console.Error : Console.Out;
+                var targetStream = Console.Error;
 
                 targetStream.WriteLine($"{message.Severity.ToString().ToUpperInvariant()}: {message.Message}");
                 if (message.Path != null)
@@ -63,8 +38,6 @@ namespace AutoRest.Core.Logging
                     targetStream.WriteLine();
                 }
                 targetStream.Flush();
-
-                Console.ForegroundColor = original;
             }
         }
     }

@@ -12,24 +12,21 @@ namespace AutoRest.CSharp.Tests
 {
     public static class SwaggerSpecRunner
     {
-        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string generator = "CSharp")
+        public static void RunTests(string specFile, string resultFolder, string generator = "CSharp")
         {
             using (NewContext)
             {
                 var settings = new Settings
                 {
-                    Input = specFile,
                     Header = "MICROSOFT_MIT_NO_VERSION",
-                    Modeler = modeler,
-                    CodeGenerator = generator,
                     PayloadFlatteningThreshold = 1
                 };
 
-                RunTests(settings, resultFolder);
+                RunTests(settings, resultFolder, specFile, generator);
             }
         }
 
-        public static void RunTests(Settings settings, string resultFolder)
+        public static void RunTests(Settings settings, string resultFolder, string specFile, string generator)
         {
             // TODO: Run as process
 

@@ -88,10 +88,6 @@ namespace AutoRest.CSharp.Unit.Tests {
             return false;
         }
 
-        internal void ShowGeneratedCode(IFileSystem fileSystem) {
-            InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name));
-        }
-
         internal void InspectWithFavoriteCodeEditor(string folder, FileLinePositionSpan? span = null) {
             if (span != null) {
                 FileLinePositionSpan s = (FileLinePositionSpan)span;
@@ -109,13 +105,13 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger") {
-            return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp") {
+            return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator);
         }
 
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp", string modeler = "Swagger") {
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp") {
             var fs = CreateMockFilesystem();
-            return dirName.GenerateCodeInto(fs, codeGenerator, modeler);
+            return dirName.GenerateCodeInto(fs, codeGenerator);
         }
 
         protected virtual void WriteLine(object value) {
@@ -211,7 +207,7 @@ namespace AutoRest.CSharp.Unit.Tests {
 
         };
 
-        protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
+        protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(MemoryFileSystem fileSystem) {
             var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
                 .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
             var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);

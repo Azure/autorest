@@ -29,14 +29,6 @@ namespace AutoRest.Core.Utilities.Collections
             }
         }
 
-        public IEnumerable<IEnumerator<T>> GetEnumerators(int copies)
-        {
-            for (var i = 0; i < copies; i++)
-            {
-                yield return GetEnumerator();
-            }
-        }
-
         protected abstract bool ItemExists(int index);
 
         internal class Enumerator<TT> : IEnumerator<TT>

@@ -28,15 +28,6 @@ namespace AutoRest.Core.Utilities.Collections
 
         /// <summary>
         /// </summary>
-        /// <param name="sourceIterator"></param>
-        public ReEnumerable(IEnumerator<T> sourceIterator)
-        {
-            _source = null;
-            _sourceIterator = sourceIterator;
-        }
-
-        /// <summary>
-        /// </summary>
         /// <param name="index"></param>
         public T this[int index] => ItemExists(index) ? List[index] : default(T);
 
@@ -81,15 +72,6 @@ namespace AutoRest.Core.Utilities.Collections
                 }
             }
             return false;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="additionalItems"></param>
-        /// <returns></returns>
-        public MutableEnumerable<T> Concat(IEnumerable<T> additionalItems)
-        {
-            return Enumerable.Concat(this, additionalItems).ReEnumerable();
         }
 
         public virtual bool CopyFrom(object source)

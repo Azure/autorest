@@ -22,9 +22,6 @@ namespace AutoRest.Core
         {
         }
 
-        // TODO: header files aren't part of most target languages. Remove?
-        public virtual string HeaderFileExtension => null;
-
         public abstract string ImplementationFileExtension { get; }
 
         /// <summary>
@@ -88,7 +85,7 @@ namespace AutoRest.Core
                 if (!IsSingleFileGenerationSupported)
                 {
                     Logger.Instance.Log(Category.Error, // new ArgumentException(Settings.Instance.OutputFileName),
-                        Resources.LanguageDoesNotSupportSingleFileGeneration, Settings.Instance.CodeGenerator);
+                        Resources.LanguageDoesNotSupportSingleFileGeneration, GetType());
                     return;
                 }
 

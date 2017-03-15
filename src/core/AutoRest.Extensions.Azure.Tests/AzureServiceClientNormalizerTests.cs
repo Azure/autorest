@@ -397,6 +397,8 @@ namespace AutoRest.Extensions.Azure.Tests
                 Assert.Equal("pedigree", codeModel.ModelTypes.First(m => m.Name == "Dog").Properties[3].Name.FixedValue);
             }
         }
+ 
+        private static CodeModel Build(string swaggerPath) => new SwaggerModeler().Build(SwaggerParser.Parse(swaggerPath, File.ReadAllText(swaggerPath)));
 
         [Fact]
         public void SwaggerODataSpecParsingTest()
@@ -405,13 +407,11 @@ namespace AutoRest.Extensions.Azure.Tests
             {
                 var settings = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json")
+                    Namespace = "Test"
                 };
 
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                
+                var codeModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json"));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -429,13 +429,10 @@ namespace AutoRest.Extensions.Azure.Tests
             {
                 var settings = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "resource-external-false.json")
+                    Namespace = "Test"
                 };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                
+                var codeModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "resource-external-false.json"));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
                 Assert.NotNull(codeModel);
@@ -456,13 +453,10 @@ namespace AutoRest.Extensions.Azure.Tests
             {
                 var settings = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json")
+                    Namespace = "Test"
                 };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                
+                var codeModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json"));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -489,13 +483,10 @@ namespace AutoRest.Extensions.Azure.Tests
             {
                 var settings = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json")
+                    Namespace = "Test"
                 };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                
+                var codeModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-odata-spec.json"));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
 
@@ -519,13 +510,10 @@ namespace AutoRest.Extensions.Azure.Tests
             {
                 var settings = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-resource-flattening.json")
+                    Namespace = "Test"
                 };
-
-
-                var modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                
+                var codeModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-resource-flattening.json"));
                 var transformer = new SampleAzureTransformer();
                 codeModel = transformer.TransformCodeModel(codeModel);
                 Assert.NotNull(codeModel);

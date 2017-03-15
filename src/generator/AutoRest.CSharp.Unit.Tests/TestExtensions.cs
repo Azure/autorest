@@ -10,6 +10,7 @@ using AutoRest.Core;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Swagger;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -30,13 +31,13 @@ namespace AutoRest.CSharp.Unit.Tests
             return name[0] == '<' && name[1] == '>' && name.IndexOf("AnonymousType", StringComparison.Ordinal) > 0;
         }
 
-        internal static void CopyFile(this IFileSystem fileSystem, string source, string destination)
+        internal static void CopyFile(this MemoryFileSystem fileSystem, string source, string destination)
         {
             destination = destination.Replace("._", ".");
             fileSystem.WriteAllText(destination, File.ReadAllText(source));
         }
 
-        internal static void CopyFolder(this IFileSystem fileSystem, string basePath, string source, string destination)
+        internal static void CopyFolder(this MemoryFileSystem fileSystem, string basePath, string source, string destination)
         {
             fileSystem.CreateDirectory(destination);
         
@@ -53,50 +54,48 @@ namespace AutoRest.CSharp.Unit.Tests
             }
         }
 
-        internal static string[] GetFilesByExtension(this IFileSystem fileSystem, string path, SearchOption s, params string[] fileExts)
+        internal static string[] GetFilesByExtension(this MemoryFileSystem fileSystem, string path, SearchOption s, params string[] fileExts)
         {
             return fileSystem.GetFiles(path, "*.*", s).Where(f => fileExts.Contains(f.Substring(f.LastIndexOf(".")+1))).ToArray();
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, string codeGenerator="CSharp", string modeler = "Swagger")
+        internal static MemoryFileSystem GenerateCodeInto(this string testName,  MemoryFileSystem inputFileSystem, string codeGenerator="CSharp")
         {
             using (NewContext)
             {
                 var settings = new Settings
                 {
-                    Modeler = modeler,
-                    CodeGenerator = codeGenerator,
-                    FileSystemInput = inputFileSystem,
                     OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-client"
                 };
 
-                return testName.GenerateCodeInto(inputFileSystem, settings);
+                return testName.GenerateCodeInto(inputFileSystem, settings, codeGenerator);
             }
         }
 
-        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem inputFileSystem, Settings settings)
+        internal static MemoryFileSystem GenerateCodeInto(this string testName, MemoryFileSystem inputFileSystem, Settings settings, string codeGenerator = "CSharp")
         {
-            Settings.Instance.FileSystemInput = inputFileSystem;
             // copy the whole input directory into the memoryfilesystem.
             inputFileSystem.CopyFolder("Resource", testName,"");
+
+            string input = null;
 
             // find the appropriately named .yaml or .json file for the swagger. 
             foreach (var ext in new[] {".yaml", ".json", ".md"}) {
                 var name = testName + ext;
                 if (inputFileSystem.FileExists(name)) {
-                    settings.Input = name;
+                    input = name;
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(settings.Input)) {
+            if (string.IsNullOrWhiteSpace(input)) {
                 throw new Exception($"Can't find swagger file ${testName} [.yaml] [.json] [.md]");
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
-            var modeler = ExtensionsLoader.GetModeler();
-            var codeModel = modeler.Build();
+            var plugin = ExtensionsLoader.GetPlugin(codeGenerator);
+            var modeler = new SwaggerModeler();
+            var codeModel = modeler.Build(SwaggerParser.Parse(input, inputFileSystem.ReadAllText(input)));
 
             using (plugin.Activate())
             {
@@ -114,7 +113,7 @@ namespace AutoRest.CSharp.Unit.Tests
             }
         }
 
-        internal static string SaveFilesToTemp(this IFileSystem fileSystem, string folderName = null)
+        internal static string SaveFilesToTemp(this MemoryFileSystem fileSystem, string folderName = null)
         {
             folderName = string.IsNullOrWhiteSpace(folderName) ? Guid.NewGuid().ToString() : folderName;
             var outputFolder = Path.Combine(Path.GetTempPath(), folderName);

@@ -18,11 +18,10 @@ namespace AutoRest.Swagger.Tests
             {
                 new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine("Resource","Swagger", "vendor-extension-in-path.json")
+                    Namespace = "Test"
                 };
                 SwaggerModeler modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse("", File.ReadAllText(Path.Combine("Resource", "Swagger", "vendor-extension-in-path.json"))));
 
                 // should return a valid model.
                 Assert.NotNull(clientModel);

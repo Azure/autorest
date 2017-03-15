@@ -9,7 +9,6 @@ namespace AutoRest.Core
 {
     public class CodeModelTransformer<TCodeModel> : ITransformer<TCodeModel> where TCodeModel : CodeModel
     {
-        public virtual Trigger Trigger { get; set; } = Trigger.AfterModelCreation;
         public virtual int Priority { get; set; } = 0;
 
         /// <summary>

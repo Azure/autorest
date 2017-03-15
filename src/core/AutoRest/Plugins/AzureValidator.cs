@@ -3,7 +3,6 @@
 
 using AutoRest.Core.Logging;
 using Microsoft.Perks.JsonRPC;
-using AutoRest.Core.Utilities;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,11 +56,9 @@ public class AzureValidator : NewPlugin
     }
 
     var content = await ReadFile(files[0]);
-    var fs = new MemoryFileSystem();
-    fs.WriteAllText(files[0], content);
 
-    var serviceDefinition = SwaggerParser.Load(files[0], fs);
-    var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
+    var serviceDefinition = SwaggerParser.Parse(files[0], content);
+    var validator = new RecursiveObjectValidator();
     foreach (ValidationMessage validationEx in validator.GetValidationExceptions(new Uri(files[0], UriKind.RelativeOrAbsolute), serviceDefinition))
     {
       LogValidationMessage(validationEx);

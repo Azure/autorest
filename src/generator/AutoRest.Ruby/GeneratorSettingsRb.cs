@@ -66,8 +66,7 @@ namespace AutoRest.Ruby
                 return
                     Singleton<CodeNamerRb>.Instance.UnderscoreCase(
                         Singleton<CodeNamerRb>.Instance.RubyRemoveInvalidCharacters(
-                            _sdkName.Else(
-                                Path.GetFileNameWithoutExtension(Settings.Instance.Input).Else("client"))));
+                            _sdkName.Else("client")));
             }
             set { _sdkName = value; }
         }

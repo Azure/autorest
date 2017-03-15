@@ -16,19 +16,12 @@ namespace AutoRest.Core.Utilities.Collections
     {
         private readonly List<T> _list = new List<T>();
 
-        public ListEx(Func<T, T> addMethod)
-        {
-            AddMethod = addMethod;
-        }
-
         public ListEx()
         {
             // set AddMethod manually.
         }
 
         public Func<T, T> AddMethod { get; set; }
-
-        public virtual bool IsReadOnly => false;
 
         public bool CopyFrom(IEnumerable<T> source)
         {
@@ -61,17 +54,6 @@ namespace AutoRest.Core.Utilities.Collections
             return CopyFrom(source as IEnumerable<T>);
         }
 
-        public virtual int RemoveAll(Predicate<T> match)
-        {
-            var i = 0;
-            foreach (var each in this.Where(each => match(each)).ToArray())
-            {
-                Remove(each);
-                i++;
-            }
-            return i;
-        }
-
         public virtual T Add(T item)
         {
             if (!_list.Contains(item))
@@ -81,31 +63,14 @@ namespace AutoRest.Core.Utilities.Collections
             return item;
         }
 
-        public virtual void Clear()
-        {
-            _list.Clear();
-        }
-
         public virtual bool Contains(T item) => _list.Contains(item);
 
-        public virtual void CopyTo(T[] array, int arrayIndex)
-        {
-            _list.CopyTo(array, arrayIndex);
-        }
-
         public virtual bool Remove(T item) => _list.Remove(item);
-
-        public virtual int IndexOf(T item) => _list.IndexOf(item);
 
         public virtual T Insert(int index, T item)
         {
             _list.Insert(index, item);
             return item;
-        }
-
-        public virtual void RemoveAt(int index)
-        {
-            _list.RemoveAt(index);
         }
     }
 }

@@ -46,8 +46,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private string _header;
 
-        public static string AutoRestFolder { get; set; }
-
         public Settings()
         {
             if (!Context.IsActive)
@@ -63,22 +61,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
             // requests for settings.
             Singleton<Settings>.Instance = this;
 
-            FileSystemInput = new FileSystem();
             FileSystemOutput = new MemoryFileSystem();
             OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRestController.Version);
-            CodeGenerator = "CSharp";
-            Modeler = "Swagger";
-            ValidationLevel = Category.Error;
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";
         }
-
-        /// <summary>
-        /// Gets or sets the IFileSystem used by code generation.
-        /// </summary>
-        public IFileSystem FileSystemInput { get; set; }
 
         /// <summary>
         /// Gets the Uri for the path to the folder that contains the input specification file.
@@ -96,20 +85,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         // order of definition.
 
         #region ordered_properties
-
-        /// <summary>
-        /// Gets or sets the path to the input specification file.
-        /// </summary>
-        [SettingsInfo("The location of the input specification.", true)]
-        [SettingsAlias("i")]
-        [SettingsAlias("input")]
-        public string Input { get; set; }
-
-        /// <summary>
-        /// Gets of sets the path to a previous version of the input specification file. This will cause
-        /// Autorest to compare the two versions rather than generate code.
-        /// </summary>
-        public string Previous { get; set; }
 
         /// <summary>
         /// Gets or sets a name for the generated client models Namespace and Models output folder
@@ -133,20 +108,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("output")]
         public string OutputDirectory { get; set; }
 
-        /// <summary>
-        /// Gets or sets the code generation language.
-        /// </summary>
-        [SettingsInfo("The code generator language. If not specified, defaults to CSharp.")]
-        [SettingsAlias("g")]
-        public string CodeGenerator { get; set; }
-
-        /// <summary>
-        /// Gets or sets the modeler to use for processing the input specification.
-        /// </summary>
-        [SettingsInfo("The Modeler to use on the input. If not specified, defaults to Swagger.")]
-        [SettingsAlias("m")]
-        public string Modeler { get; set; }
-
         #endregion
 
         /// <summary>
@@ -158,9 +119,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
                       "the value of the 'Title' field from the Swagger input.")]
         [SettingsAlias("name")]
         public string ClientName { get; set; }
-
-        [SettingsInfo("Disables post-codegeneration simplifier")]
-        public bool DisableSimplifier { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of properties in the request body.
@@ -257,18 +215,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool Verbose { get; set; }
 
         /// <summary>
-        /// If set to true, collect and print out validation messages as single JSON blob.
-        /// </summary>
-        [SettingsAlias("JsonValidationMessages")]
-        public bool JsonValidationMessages { get; set; }
-
-        /// <summary>
-        /// If set to true, print out debug messages.
-        /// </summary>
-        [SettingsAlias("debug")]
-        public bool Debug { get; set; }
-
-        /// <summary>
         /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
         /// </summary>
         [SettingsAlias("pn")]
@@ -281,112 +227,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("pv")]
         [SettingsInfo("Package version of then generated code package. Should be then version wanted for the package in then package manager.")]
         public string PackageVersion { get; set; }
-
-        [SettingsAlias("cgs")]
-        [SettingsInfo("The path for a json file containing code generation settings.")]
-        public string CodeGenSettings { get; set; }
-
-        /// <summary>
-        /// The input validation severity level that will prevent code generation
-        /// </summary>
-        [SettingsAlias("vl")]
-        [SettingsAlias("validation")]
-        [SettingsInfo("The input validation severity level that will prevent code generation")]
-        public Category ValidationLevel { get; set; }
-
-        /// <summary>
-        /// If set, preprocesses a swagger file by expanding and resolving some advanced convenience syntax.
-        /// </summary>
-        [SettingsAlias("preprocessor")]
-        public bool Preprocessor { get; set; }
-
-        private static Dictionary<string, object> ParseArgs(string[] arguments)
-        {
-            var argsDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-            if (arguments != null && arguments.Length > 0)
-            {
-                string key = null;
-                string value = null;
-                for (int i = 0; i < arguments.Length; i++)
-                {
-                    string argument = arguments[i] ?? String.Empty;
-                    argument = argument.Trim();
-
-                    if (argument.StartsWith("-", StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (key != null)
-                        {
-                            AddArgumentToDictionary(key, value, argsDictionary);
-                            value = null;
-                        }
-                        key = argument.TrimStart('-');
-                    }
-                    else
-                    {
-                        value = argument;
-                    }
-                }
-                if (key != null)
-                {
-                AddArgumentToDictionary(key, value, argsDictionary);
-            }
-            }
-            return argsDictionary;
-        }
-
-        /// <summary>
-        /// Factory method to generate Settings from command line arguments.
-        /// Matches dictionary keys to the settings properties.
-        /// </summary>
-        /// <param name="arguments">Command line arguments</param>
-        /// <returns>Settings</returns>
-        public static Settings Create(string[] arguments)
-        {
-            var argsDictionary = ParseArgs(arguments);
-            if (argsDictionary.Count == 0)
-            {
-                argsDictionary["?"] = String.Empty;
-            }
-
-            return Create(argsDictionary);
-        }
-
-        private static void AddArgumentToDictionary(string key, string value, IDictionary<string, object> argsDictionary)
-        {
-            value = value ?? String.Empty;
-            argsDictionary[key] = value;
-        }
-
-        /// <summary>
-        /// Factory method to generate Settings from a dictionary. Matches dictionary
-        /// keys to the settings properties.
-        /// </summary>
-        /// <param name="settings">Dictionary of settings</param>
-        /// <returns>Settings</returns>
-        public static Settings Create(IDictionary<string, object> settings)
-        {
-            var autoRestSettings = new Settings();
-            if (settings == null || settings.Count == 0)
-            {
-                autoRestSettings.ShowHelp = true;
-            }
-
-            PopulateSettings(autoRestSettings, settings);
-
-            autoRestSettings.CustomSettings = settings;
-            if (!string.IsNullOrEmpty(autoRestSettings.CodeGenSettings))
-            {
-                var settingsContent = autoRestSettings.FileSystemInput.ReadAllText(autoRestSettings.CodeGenSettings);
-                var codeGenSettingsDictionary =
-                    JsonConvert.DeserializeObject<Dictionary<string, object>>(settingsContent);
-                foreach (var pair in codeGenSettingsDictionary)
-                {
-                    autoRestSettings.CustomSettings[pair.Key] = pair.Value;
-                }
-            }
-            return autoRestSettings;
-        }
-
+ 
         /// <summary>
         /// Sets object properties from the dictionary matching keys to property names or aliases.
         /// </summary>
@@ -456,20 +297,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                 setting.Key, property.GetType().Name), exception);
                         }
                     }
-                }
-            }
-        }
-
-        public void Validate()
-        {
-            foreach (PropertyInfo property in (typeof(Settings)).GetProperties())
-            {
-                // If property value is not set - throw exception.
-                var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
-                if (doc != null && doc.IsRequired && property.GetValue(this) == null)
-                {
-                    Logger.Instance.Log(Category.Error, Resources.ParameterValueIsMissing, property.Name);
-                    throw new CodeGenerationException(string.Format(Resources.ParameterValueIsMissing, property.Name));
                 }
             }
         }

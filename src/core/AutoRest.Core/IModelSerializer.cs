@@ -8,7 +8,6 @@ namespace AutoRest.Core {
 
     public interface IModelSerializer<out TCodeModel> {
         TCodeModel Load(string jsonText);
-        TCodeModel Load(IFileSystem fileSystem, string path);
         TCodeModel Load(CodeModel codeModel);
     }
 }
