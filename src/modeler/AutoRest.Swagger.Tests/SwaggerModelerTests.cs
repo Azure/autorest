@@ -61,13 +61,13 @@ namespace AutoRest.Swagger.Tests
         {
             using (NewContext)
             {
+                string path = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-simple-spec.json");
                 new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-simple-spec.json")
+                    Namespace = "Test"
                 };
-                Modeler modeler = new SwaggerModeler();
-                var codeModel = modeler.Build();
+                var modeler = new SwaggerModeler();
+                var codeModel = modeler.Build(SwaggerParser.Parse(path, File.ReadAllText(path)));
 
                 var description =
                     "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.";

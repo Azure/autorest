@@ -61,7 +61,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
             // requests for settings.
             Singleton<Settings>.Instance = this;
 
-            FileSystemInput = new FileSystem();
             FileSystemOutput = new MemoryFileSystem();
             OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
@@ -69,11 +68,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";
         }
-
-        /// <summary>
-        /// Gets or sets the IFileSystem used by code generation.
-        /// </summary>
-        public IFileSystem FileSystemInput { get; set; }
 
         /// <summary>
         /// Gets the Uri for the path to the folder that contains the input specification file.
