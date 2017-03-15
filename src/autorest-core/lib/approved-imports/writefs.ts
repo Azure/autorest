@@ -14,7 +14,11 @@ async function createDirectoryFor(filePath: string): Promise<void> {
   var dirname = path.dirname(filePath);
   if (!fs.existsSync(dirname)) {
     await createDirectoryFor(dirname);
-    await fsAsync.mkdir(dirname);
+    try {
+      await fsAsync.mkdir(dirname);
+    } catch (e) {
+      // mkdir throws if directory already exists - which happens occasionally due to race conditions
+    }
   }
 }
 
