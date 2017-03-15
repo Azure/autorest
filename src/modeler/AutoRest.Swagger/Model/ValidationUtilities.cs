@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.Swagger;
 using AutoRest.Core.Utilities;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,8 @@ namespace AutoRest.Swagger.Model.Utilities
         public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
         {
             // Get all models that are returned by PUT operations (200 response)
-            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition);
-            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference.StripDefinitionPath()).Where(modelName => string.IsNullOrEmpty(modelName));
+            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition).Where(op=>op.Responses.ContainsKey("200"));
+            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Where(modelName => string.IsNullOrEmpty(modelName));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
             var getOperationsResponseModels = GetResponseModelDefinitions(serviceDefinition);
@@ -62,16 +63,18 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // set of base resource models is the union of all three aboce
             var baseResourceModels = putResponseModelNames.Union(modelsAllOfOnResource).Union(xmsAzureResourceModels);
-
+            var resultModels = new List<string>();
             // for every model in definitions, recurse its allOfs and discover if there is a baseResourceModel reference
             foreach (var modelName in serviceDefinition.Definitions.Keys)
             {
                 // make sure we are excluding models which have the x-ms-azure-resource extension set on them
                 if (!xmsAzureResourceModels.Contains(modelName) && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels))
                 {
-                    yield return modelName;
+                    //yield return modelName;
+                    resultModels.Add(modelName);
                 }
             }
+            return resultModels;
         }
 
         /// <summary>

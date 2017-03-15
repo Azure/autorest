@@ -14,6 +14,8 @@ namespace AutoRest.Swagger.Validation.Core
     /// </summary>
     public class RuleContext
     {
+        private IEnumerable<string> _resourceModels;
+
         /// <summary>
         /// Initializes a top level context for rules
         /// </summary>
@@ -35,6 +37,9 @@ namespace AutoRest.Swagger.Validation.Core
             this.Parent = parent;
             this.Root = parent?.Root;
             this.File = parent?.File;
+            this.ResourceModels = parent?.ResourceModels;
+            this.TrackedResourceModels = parent?.ResourceModels;
+            this.ProxyResourceModels = parent?.ProxyResourceModels;
         }
 
         /// <summary>
@@ -85,6 +90,8 @@ namespace AutoRest.Swagger.Validation.Core
         /// The value of the object
         /// </summary>
         public object Value { get; private set; }
+
+
 
         /// <summary>
         /// List of resources in serviceDefinition
