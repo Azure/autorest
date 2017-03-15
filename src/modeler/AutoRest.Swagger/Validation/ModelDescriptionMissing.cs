@@ -36,9 +36,9 @@ namespace AutoRest.Swagger.Validation
 
         public override IEnumerable<ValidationMessage> GetValidationMessages(Schema schema, RuleContext context)
         {
-            if (schema != null && string.IsNullOrEmpty(schema.Reference) && schema.RepresentsCompositeType())
+            if (string.IsNullOrEmpty(schema?.Reference) && schema.RepresentsCompositeType())
             {
-                if (schema.Description == null)
+                if (string.IsNullOrEmpty(schema.Description))
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Key);
                 }
