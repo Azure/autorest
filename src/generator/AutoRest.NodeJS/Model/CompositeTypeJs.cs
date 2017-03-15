@@ -222,7 +222,7 @@ namespace AutoRest.NodeJS.Model
                 throw new ArgumentNullException(nameof(property));
             }
 
-            string typeString = property.ModelType.TSType(inModelsModule);
+            string typeString = property.ModelType.TSType(inModelsModule, property.ModelType.CodeModel?.ModelsName);
 
             if (! property.IsRequired)
                 return property.Name + "?: " + typeString;

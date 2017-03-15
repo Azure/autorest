@@ -156,7 +156,7 @@ namespace AutoRest.NodeJS.Model
                 var type = parameter.ModelType;
                 if (type.IsPrimaryType(KnownPrimaryType.Date) || type.IsPrimaryType(KnownPrimaryType.DateTime))
                     declarations.Append("Date|string");
-                else declarations.Append(type.TSType(false));
+                else declarations.Append(type.TSType(false, CodeModel?.ModelsName));
 
                 first = false;
             }
@@ -181,7 +181,7 @@ namespace AutoRest.NodeJS.Model
                     }
                     else
                     {
-                        declarations.Append(optionalParameters[i].ModelType.TSType(false));
+                        declarations.Append(optionalParameters[i].ModelType.TSType(false, CodeModel?.ModelsName));
                     }
                 }
                 declarations.Append(" }");
@@ -210,7 +210,7 @@ namespace AutoRest.NodeJS.Model
         public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
+            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(inModelsModule: false, modelsName: CodeModel?.ModelsName);
 
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));

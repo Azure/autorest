@@ -6,16 +6,22 @@
 @Header(" * ")
  */
 @EmptyLine
-import * as msRestAzure from 'ms-rest-azure';
-exports.BaseResource = msRestAzure.BaseResource;
-exports.CloudError = msRestAzure.CloudError;
-@foreach (var model in Model.OrderedModelTemplateModels) {
+import { BaseResource } from 'ms-rest-azure';
+import { CloudError } from 'ms-rest-azure';
 @EmptyLine
-@:@(Include(new ModelTemplateTS(), model))
-}
+export { BaseResource } from 'ms-rest-azure';
+export { CloudError } from 'ms-rest-azure';
 @EmptyLine
-@foreach (var model in Model.PageTemplateModels)
-{
-@EmptyLine
-@:@(Include(new PageModelTemplateTS(), model))
+@{@:export namespace @Model.ModelsName {
+    @foreach (var model in Model.OrderedModelTemplateModels) {
+    @EmptyLine
+    @:@(Include(new ModelTemplateTS(), model))
+    }
+    @EmptyLine
+    @foreach (var model in Model.PageTemplateModels)
+    {
+    @EmptyLine
+    @:@(Include(new PageModelTemplateTS(), model))
+    }
+@:}
 }

@@ -44,7 +44,7 @@ namespace AutoRest.NodeJS.Azure.Model
         public string ConstructTSItemTypeName()
         {
             var builder = new IndentedStringBuilder("  ");
-            builder.AppendFormat("<{0}>", ClientModelExtensions.TSType(ItemType, true));
+            builder.AppendFormat("<{0}>", ClientModelExtensions.TSType(ItemType, true, this.CodeModel?.ModelsName));
             return builder.ToString();
         }
 
