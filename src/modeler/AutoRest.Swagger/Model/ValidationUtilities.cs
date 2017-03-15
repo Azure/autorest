@@ -15,7 +15,8 @@ namespace AutoRest.Swagger.Model.Utilities
     public static class ValidationUtilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
-        private static readonly Regex ResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex ResNameRegEx = new Regex(@"Resource$", RegexOptions.IgnoreCase);
 
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
@@ -23,7 +24,7 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 foreach (Schema item in schema.AllOf)
                 {
-                    if (ResRegEx.IsMatch(item.Reference))
+                    if (UrlResRegEx.IsMatch(item.Reference))
                     {
                         return true;
                     }
@@ -45,7 +46,7 @@ namespace AutoRest.Swagger.Model.Utilities
         {
             // Get all models that are returned by PUT operations (200 response)
             var putOperations = GetOperationsByRequestMethod("put", serviceDefinition).Where(op=>op.Responses.ContainsKey("200"));
-            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Where(modelName => string.IsNullOrEmpty(modelName));
+            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Where(modelName => !string.IsNullOrEmpty(modelName));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
             var getOperationsResponseModels = GetResponseModelDefinitions(serviceDefinition);
@@ -63,16 +64,20 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // set of base resource models is the union of all three aboce
             var baseResourceModels = putResponseModelNames.Union(modelsAllOfOnResource).Union(xmsAzureResourceModels);
-            
+            var result = new List<string>();
             // for every model in definitions, recurse its allOfs and discover if there is a baseResourceModel reference
             foreach (var modelName in serviceDefinition.Definitions.Keys)
             {
                 // make sure we are excluding models which have the x-ms-azure-resource extension set on them
-                if (!xmsAzureResourceModels.Contains(modelName) && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels))
+                if (!xmsAzureResourceModels.Contains(modelName) 
+                    && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels)
+                    && ResNameRegEx.IsMatch(modelName))
                 {
-                    yield return modelName;
+                    //yield return modelName;
+                    result.Add(modelName);
                 }
             }
+            return result;
         }
 
         /// <summary>
@@ -93,7 +98,7 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 foreach (Schema item in modelSchema.AllOf)
                 {
-                    if (ResRegEx.IsMatch(item.Reference))
+                    if (UrlResRegEx.IsMatch(item.Reference))
                     {
                         return true;
                     }
@@ -116,6 +121,12 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>true if model is of resource model type</returns>
         public static bool IsAllOfOnResourceTypeModel(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> baseResourceModels)
         {
+            // if the model itself is a base resource model, return true
+            // there is separate check to weed out resources which
+            // a. have x-ms-azure-resource extension set to true
+            // b. have the name "Resource"
+            if (baseResourceModels.Contains(modelName)) return true;
+
             // if model can't be found in definitions we can't verify
             if (!definitions.ContainsKey(modelName)) return false;
             
@@ -136,8 +147,19 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="resourceModels">list of resourceModels from which to evaluate the tracked resources</param>
         /// <param name="definitions">the dictionary of model definitions</param>
         /// <returns>list of tracked resources</returns>
-        public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) =>
-            resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
+        public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions)
+        // => resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
+        {
+            var result = new List<string>();
+            foreach (var resModel in resourceModels)
+            {
+                if (ContainsLocationProperty(resModel, definitions))
+                {
+                    result.Add(resModel);
+                }
+            }
+            return result;
+        }
 
 
         /// <summary>
@@ -164,7 +186,7 @@ namespace AutoRest.Swagger.Model.Utilities
                 foreach (var modelRef in allOfedModels)
                 {
                     // if any of the allOfed models have a property named location, return true
-                    if (ContainsLocationProperty(modelRef, definitions)) return true;
+                    if (ContainsLocationProperty(modelRef.StripDefinitionPath(), definitions)) return true;
                 }
             }
 
