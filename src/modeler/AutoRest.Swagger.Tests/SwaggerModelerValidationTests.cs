@@ -47,15 +47,10 @@ namespace AutoRest.Swagger.Tests
             {
                 new Settings
                 {
-                    CodeGenerator = "None",
-                    Namespace = "Test",
-                    Input = input
+                    Namespace = "Test"
                 };
-                var modeler = new SwaggerModeler();
-                var messages = new List<LogMessage>();
-                Logger.Instance.AddListener(new SignalingLogListener(Category.Info, messages.Add));
-                modeler.Build();
-                return messages.OfType<ValidationMessage>();
+                var validator = new RecursiveObjectValidator();
+                return validator.GetValidationExceptions(new Uri(input, UriKind.RelativeOrAbsolute), SwaggerParser.Parse(input, File.ReadAllText(input))).OfType<ValidationMessage>();
             }
         }
 

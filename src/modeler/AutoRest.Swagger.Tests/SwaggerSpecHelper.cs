@@ -15,25 +15,22 @@ namespace AutoRest.Swagger.Tests
 
     public static class SwaggerSpecHelper
     {
-        public static void RunTests(string specFile, string resultFolder, string modeler = "Swagger", string plugin = "CSharp", string nameSpace = null)
+        public static void RunTests(string specFile, string resultFolder, string plugin = "CSharp", string nameSpace = null)
         {
             using (NewContext)
             {
                 var settings = new Settings
                     {
-                        Input = specFile,
                         Header = "MICROSOFT_MIT_NO_VERSION",
-                        Modeler = modeler,
                         PayloadFlatteningThreshold = 1,
-                        CodeGenerator =  plugin,
                         Namespace = nameSpace
                     };
 
-                RunTests(resultFolder);
+                RunTests(resultFolder, specFile, plugin);
             }
         }
 
-        public static void RunTests(string resultFolder)
+        public static void RunTests(string resultFolder, string specFile, string codeGenerator)
         {
             if (resultFolder == null)
             {
@@ -41,25 +38,21 @@ namespace AutoRest.Swagger.Tests
             }
             var settings = Settings.Instance;
 
-            settings.FileSystemInput = new MemoryFileSystem();
-            settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
-            settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
-
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
                 ? resultFolder.Substring(expectedWithSeparator.Length)
                 : resultFolder;
 
-            var name = ExtensionsLoader.GetPlugin().Settings.Name;
             settings.Namespace = string.IsNullOrEmpty(settings.Namespace)
-                ? "Fixtures." + (name.Contains("Azure") ? "Azure." : "") + specFileName.
+                ? "Fixtures." + (codeGenerator.Contains("Azure") ? "Azure." : "") + specFileName.
                     Replace(".cs", "").Replace(".Cs", "").Replace(".java", "").
                     Replace(".js", "").Replace(".", "").
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
-            settings.DisableSimplifier = true;
 
-            AutoRestController.Generate();
+            var sd = SwaggerParser.Parse(specFile, File.ReadAllText(specFile));
+            var model = new SwaggerModeler().Build(sd);
+            ExtensionsLoader.GetPlugin(codeGenerator).CodeGenerator.Generate(model).GetAwaiter().GetResult();
 
             var actualFiles = settings.FileSystemOutput.GetFiles("", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];

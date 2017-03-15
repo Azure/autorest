@@ -32,9 +32,6 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 var settings = new Settings
                 {
-                    Modeler = "Swagger",
-                    CodeGenerator = "CSharp",
-                    FileSystemInput = fileSystem,
                     OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-server"

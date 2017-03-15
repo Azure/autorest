@@ -18,18 +18,15 @@ namespace AutoRest.CSharp.Tests
         {
             using (NewContext)
             {
+                var path = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json");
                 var settings = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json"),
                     PayloadFlatteningThreshold = 3
                 };
-                settings.FileSystemInput = new MemoryFileSystem();
-                settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
-                settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
                 
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = modeler.Build(SwaggerParser.Parse(path, File.ReadAllText(path)));
                 var plugin = new PluginCs();
                 using (plugin.Activate())
                 {

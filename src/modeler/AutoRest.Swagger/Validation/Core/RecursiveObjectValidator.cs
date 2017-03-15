@@ -10,6 +10,7 @@ using System;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
+using Newtonsoft.Json;
 
 namespace AutoRest.Swagger.Validation.Core
 {
@@ -18,17 +19,7 @@ namespace AutoRest.Swagger.Validation.Core
     /// </summary>
     public class RecursiveObjectValidator
     {
-        private Func<PropertyInfo, string> resolver;
-
-        /// <summary>
-        /// Initializes the object validator with a custom <paramref name="resolver"/>
-        /// that returns the name for a property when setting the location of messages
-        /// </summary>
-        /// <param name="resolver">A function that resolves the name of a property</param>
-        public RecursiveObjectValidator(Func<PropertyInfo, string> resolver)
-        {
-            this.resolver = resolver;
-        }
+        private string Resolve(PropertyInfo prop) => prop?.GetCustomAttributes<JsonPropertyAttribute>(true).Select(p => p.PropertyName).FirstOrDefault() ?? prop.Name.ToCamelCase();
 
         /// <summary>
         /// Recursively validates <paramref name="entity"/> by traversing all of its properties
@@ -118,7 +109,7 @@ namespace AutoRest.Swagger.Validation.Core
         private IEnumerable<LogMessage> ValidateProperty(PropertyInfo prop, object value, ObjectPath entityPath, RuleContext parentContext)
         {
             // Uses the property name resolver to get the name to use in the path of messages
-            var propName = resolver(prop);
+            var propName = Resolve(prop);
             // Determine if anything about this property indicates that it shouldn't be traversed further 
             var shouldTraverseObject = prop.IsTraversableProperty();
             // Create the context that's available to rules that validate this value
