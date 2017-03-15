@@ -268,7 +268,7 @@ namespace AutoRest.Core.Model
         public virtual HashSet<string> LocallyUsedNames { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         [JsonIgnore]
-        public virtual bool IsXNullableReturnType { get { return (Responses.Keys.Any(key => Responses[key].Extensions?.Get<bool>("x-nullable") ?? true)); } }
+        public virtual bool IsXNullableReturnType { get { return (Responses.Keys.Any(key => Responses[key].IsNullable)); } }
        
     }
 }
