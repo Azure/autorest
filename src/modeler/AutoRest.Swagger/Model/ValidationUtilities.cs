@@ -76,7 +76,9 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // set of base resource models is the union of all three aboce
             var baseResourceModels = putResponseModelNames.Union(modelsAllOfOnResource).Union(xmsAzureResourceModels);
-            foreach (var modelName in baseResourceModels)
+
+            // for every model in definitions, recurse its allOfs and discover if there is a baseResourceModel reference
+            foreach (var modelName in serviceDefinition.Definitions.Keys)
             {
                 if (!xmsAzureResourceModels.Contains(modelName) && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels))
                 {
