@@ -12,11 +12,6 @@ namespace AutoRest.Core.Utilities.Collections
 {
     public static class LinqExtensions
     {
-        private static readonly MethodInfo _castMethod = typeof(Enumerable).GetMethod("Cast");
-        private static readonly MethodInfo _toArrayMethod = typeof(Enumerable).GetMethod("ToArray");
-        private static readonly IDictionary<Type, MethodInfo> _castMethods = new Dictionary<Type, MethodInfo>();
-        private static readonly IDictionary<Type, MethodInfo> _toArrayMethods = new Dictionary<Type, MethodInfo>();
-
         /// <summary>
         ///     Returns a ReEnumerable wrapper around the collection which timidly (cautiously) pulls items
         ///     but still allows you to to re-enumerate without re-running the query.
@@ -31,22 +26,6 @@ namespace AutoRest.Core.Utilities.Collections
                 return new ReEnumerable<T>(Enumerable.Empty<T>());
             }
             return collection as MutableEnumerable<T> ?? new ReEnumerable<T>(collection);
-        }
-
-        public static IEnumerable<TSource> FilterWithFinalizer<TSource>(this IEnumerable<TSource> source,
-            Func<TSource, bool> predicate, Action<TSource> onFilterAction)
-        {
-            foreach (var i in source)
-            {
-                if (predicate(i))
-                {
-                    onFilterAction(i);
-                }
-                else
-                {
-                    yield return i;
-                }
-            }
         }
 
         public static TValue AddOrSet<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
@@ -86,14 +65,6 @@ namespace AutoRest.Core.Utilities.Collections
 
         public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable) => enumerable?.Where(each => each != null) ?? Enumerable.Empty<T>();
 
-        public static IEnumerable<T> ToIEnumerable<T>(this IEnumerator<T> enumerator)
-        {
-            while (true == enumerator?.MoveNext())
-            {
-                yield return enumerator.Current;
-            }
-        }
-
         public static IEnumerable<TResult> SelectMany<TResult>(this IDictionary source, Func<object,object,IEnumerable<TResult>> selector)
         {
             if (source == null) throw new ArgumentNullException(nameof(source));
@@ -102,20 +73,6 @@ namespace AutoRest.Core.Utilities.Collections
             while (e.MoveNext())
             {
                 foreach (TResult subElement in selector(e.Key, e.Value))
-                {
-                    yield return subElement;
-                }
-            }
-        }
-
-        public static IEnumerable<TResult> SelectMany<TResult>(this IEnumerable source, Func<object, IEnumerable<TResult>> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-            var e = source.GetEnumerator();
-            while (e.MoveNext())
-            {
-                foreach (TResult subElement in selector(e.Current))
                 {
                     yield return subElement;
                 }
@@ -137,152 +94,7 @@ namespace AutoRest.Core.Utilities.Collections
             }
         }
 
-
-        public static IEnumerable<TResult> Select<TResult>(this IDictionary source, Func<object, object, TResult> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            var e = source.GetEnumerator();
-            while (e.MoveNext())
-            {
-                yield return selector( e.Key, e.Value);
-            }
-        }
-
-        public static IEnumerable<TResult> Select<TResult>(this IEnumerable source, Func<object, TResult> selector)
-        {
-            if (source == null) throw new ArgumentNullException(nameof(source));
-            if (selector == null) throw new ArgumentNullException(nameof(selector));
-
-            var e = source.GetEnumerator();
-            while (e.MoveNext())
-            {
-                yield return selector(e.Current);
-            }
-        }
-
-        public static IEnumerable<T> Concat<T>(this IEnumerable<T> set1, IEnumerator<T> set2)
-        {
-            var s1 = set1 ?? Enumerable.Empty<T>();
-            var s2 = set2?.ToIEnumerable();
-            return s1.Concat(s2);
-        }
-
         public static IEnumerable<T> SingleItemAsEnumerable<T>(this T item) => new[] { item };
-
-        /// <summary>
-        ///     returns the index position where the predicate matches the value
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public static int IndexWhere<T>(this IEnumerable<T> source, Func<T, int, bool> predicate)
-        {
-            if (source != null && predicate != null)
-            {
-                var index = -1;
-                if (source.Any(element => predicate(element, ++index)))
-                {
-                    return index;
-                }
-            }
-            return -1;
-        }
-
-        /// <summary>
-        ///     returns the index position where the predicate matches the value
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public static int IndexWhere<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-        {
-            if (source != null && predicate != null)
-            {
-                var index = -1;
-                if (source.Any(element =>
-                {
-                    ++index;
-                    return predicate(element);
-                }))
-                {
-                    return index;
-                }
-            }
-            return -1;
-        }
-
-        public static void AddRangeLocked<T>(this List<T> list, IEnumerable<T> items)
-        {
-            if (list == null)
-            {
-                throw new ArgumentNullException(nameof(list));
-            }
-            lock (list)
-            {
-                list.AddRange(items);
-            }
-        }
-
-        public static object ToIEnumerableT(this IEnumerable<object> enumerable, Type elementType) => 
-            _castMethods.GetOrAdd(elementType, () => _castMethod.MakeGenericMethod(elementType))
-            .Invoke(null, new object[] {enumerable});
-
-        public static object ToArrayT(this IEnumerable<object> enumerable, Type elementType) => 
-            _toArrayMethods.GetOrAdd(elementType, () => _toArrayMethod.MakeGenericMethod(elementType))
-            .Invoke(null, new[] {enumerable.ToIEnumerableT(elementType)});
-
-        public static Dictionary<TKey, TElement> ToDictionaryNicely<TSource, TKey, TElement>(
-            this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector,
-            IEqualityComparer<TKey> comparer)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (keySelector == null)
-            {
-                throw new ArgumentNullException(nameof(keySelector));
-            }
-            if (elementSelector == null)
-            {
-                throw new ArgumentNullException(nameof(elementSelector));
-            }
-
-            var dictionary = new Dictionary<TKey, TElement>(comparer);
-            foreach (var element in source)
-            {
-                dictionary.AddOrSet(keySelector(element), elementSelector(element));
-            }
-            return dictionary;
-        }
-
-        public static Dictionary<TKey, TElement> ToDictionaryNicely<TSource, TKey, TElement>(
-            this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (keySelector == null)
-            {
-                throw new ArgumentNullException(nameof(keySelector));
-            }
-            if (elementSelector == null)
-            {
-                throw new ArgumentNullException(nameof(elementSelector));
-            }
-
-            var dictionary = new Dictionary<TKey, TElement>();
-            foreach (var element in source)
-            {
-                dictionary.AddOrSet(keySelector(element), elementSelector(element));
-            }
-            return dictionary;
-        }
 
         public static IDictionary<TKey, TElement> AddRange<TKey, TElement>(this IDictionary<TKey, TElement> destination, IDictionary<TKey, TElement> source) 
         {

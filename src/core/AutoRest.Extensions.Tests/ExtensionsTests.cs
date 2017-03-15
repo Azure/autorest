@@ -14,6 +14,8 @@ namespace AutoRest.Extensions.Tests
 {
     public class ExtensionsTests
     {
+        private static CodeModel Build(string swaggerPath) => new SwaggerModeler().Build(SwaggerParser.Parse(swaggerPath, File.ReadAllText(swaggerPath)));
+
         private string CreateCSharpDeclarationString(Parameter parameter)
         {
             return $"{parameter.ModelType.Name} {parameter.Name}";
@@ -27,11 +29,9 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json"),
                     PayloadFlatteningThreshold = 3
                 };
-                var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-payload-flatten.json"));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -63,11 +63,9 @@ namespace AutoRest.Extensions.Tests
                 var setting = new Settings
                 {
                     Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-parameter-location.json"),
                     PayloadFlatteningThreshold = 3
                 };
-                var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-parameter-location.json"));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -92,11 +90,10 @@ namespace AutoRest.Extensions.Tests
             {
                 var setting = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-flatten.json")
+                    Namespace = "Test"
                 };
                 var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                var clientModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-flatten.json"));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -157,12 +154,10 @@ namespace AutoRest.Extensions.Tests
             {
                 var setting = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
+                    Namespace = "Test"
                 };
-
-                var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                
+                var clientModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json"));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
@@ -202,12 +197,10 @@ namespace AutoRest.Extensions.Tests
             {
                 var setting = new Settings
                 {
-                    Namespace = "Test",
-                    Input = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json")
+                    Namespace = "Test"
                 };
-
-                var modeler = new SwaggerModeler();
-                var clientModel = modeler.Build();
+                
+                var clientModel = Build(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "swagger-x-ms-client-name.json"));
                 SwaggerExtensions.NormalizeClientModel(clientModel);
 
                 Assert.NotNull(clientModel);
