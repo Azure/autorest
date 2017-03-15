@@ -36,8 +36,10 @@
 }
  */
 class @(Model.Name) extends Array {
-}
-@EmptyLine
+  constructor() {
+    super();
+  }
+  @EmptyLine
   /**
    * Defines the metadata of @Model.Name
    *
@@ -45,7 +47,8 @@ class @(Model.Name) extends Array {
    *
    */
   mapper() {
-  @(Model.ConstructModelMapper())
+    @(Model.ConstructModelMapper())
+  }
 }
 @EmptyLine
 module.exports = @(Model.Name);

@@ -12,9 +12,14 @@ const WebResource = msRest.WebResource;
 const HttpOperationResponse = msRest.HttpOperationResponse;
 @if (Model.ContainsTimeSpan)
 {
-@:var moment = require('moment');
+@:const moment = require('moment');
 }
 @EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@:@(Include(new MethodTemplate(), method))
+@EmptyLine
+}
 /**
  * @@class
  * @Model.TypeName
@@ -37,8 +42,8 @@ class @(Model.TypeName) {
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-  @:@(Include(new MethodTemplate(), method))
-@EmptyLine
+  @:@(Include(new MethodPromiseWrapperTemplate(), method))
+  @EmptyLine
 }
 }
 @EmptyLine

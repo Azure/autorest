@@ -72,11 +72,6 @@ const ServiceClient = msRest.ServiceClient;
 class @(Model.Name) extends ServiceClient {
 
   constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParameters) ? Model.RequiredConstructorParameters + ", ": "")options) {
-@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
-{
-    @:this.@(property.Name) = @(property.DefaultValue);
-}
-
 @foreach (var param in requiredParameters)
 {
   @:  if (@(param.Name) === null || @(param.Name) === undefined) {
@@ -87,6 +82,11 @@ class @(Model.Name) extends ServiceClient {
     if (!options) options = {};
     @EmptyLine
     super(@(requiredParameters.Any(p => p.ModelType.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
+    @EmptyLine
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+    @:this.@(property.Name) = @(property.DefaultValue);
+}
   
 @if(!Model.IsCustomBaseUri)
 {
@@ -100,8 +100,6 @@ else
 {
     @:this.baseUri = '@Model.BaseUrl';
 }
-
-
 
 @foreach (var param in requiredParameters)
 {

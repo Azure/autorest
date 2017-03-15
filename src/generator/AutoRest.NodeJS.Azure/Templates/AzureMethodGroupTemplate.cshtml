@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @using AutoRest.NodeJS.Azure.Model
+@using AutoRest.NodeJS.Templates
 @using AutoRest.NodeJS.Azure.Templates
 @inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodGroupJs>
 /*
@@ -17,6 +18,11 @@ const HttpOperationResponse = msRest.HttpOperationResponse;
 @:const moment = require('moment');
 }
 @EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
+@EmptyLine
+}
 /**
  * @@class
  * @Model.TypeName
@@ -35,11 +41,10 @@ class @(Model.TypeName) {
     @:this._@(method.Name) = _@(method.Name);
 }
   }
-
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-  @:@(Include(new AzureMethodTemplate(), method as MethodJsa))
+  @:@(Include(new MethodPromiseWrapperTemplate(), method))
 @EmptyLine
 }
 }

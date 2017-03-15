@@ -8,42 +8,8 @@
 @using AutoRest.NodeJS.Templates
 @inherits AutoRest.Core.Template<MethodJs>
 
-@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse))
-@(Model.Name.ToCamelCase())WithHttpOperationResponse(@(Model.MethodParameterDeclaration)) {
-  let client = @(Model.ClientReference);
-  let self = this;
-  return new Promise((resolve, reject) => {
-    self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
-      let httpOperationResponse = new HttpOperationResponse(request, response);
-      httpOperationResponse.body = result;
-      err ? reject(err) : resolve(httpOperationResponse);
-      return;
-    });
-  });
-}
-@EmptyLine
-@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise))
-@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true))) {
-  let client = @(Model.ClientReference);
-  let self = this;
-  if (!optionalCallback && typeof options === 'function') {
-    optionalCallback = options;
-    options = null;
-  }
-  if (!optionalCallback) {
-    return new Promise((resolve, reject) => {
-      self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
-        err ? reject(err) : resolve(result);
-        return;
-      });
-    });
-  } else {
-    return self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true)));
-  }
-}
-@EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
-_@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
+function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
   let client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
