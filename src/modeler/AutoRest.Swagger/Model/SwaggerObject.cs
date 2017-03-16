@@ -74,37 +74,26 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         public virtual string Default { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string MultipleOf { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string Maximum { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual bool ExclusiveMaximum { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string Minimum { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual bool ExclusiveMinimum { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string MaxLength { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string MinLength { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string Pattern { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string MaxItems { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual string MinItems { get; set; }
 
-        [Rule(typeof(InvalidConstraint))]
         public virtual bool UniqueItems { get; set; }
 
         public virtual IList<string> Enum { get; set; }
