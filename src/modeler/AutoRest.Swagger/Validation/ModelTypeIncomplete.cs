@@ -8,30 +8,30 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ModelTypeIncomplete : TypedRule<Schema>
+    public class ModelTypeIncomplete : DescriptionRequired<Dictionary<string, Schema>>
     {
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Schema schema, RuleContext context)
+        private static readonly string ModelTypeFormatter = "'{0}' model/property";
+
+        /// <summary>
+        /// Validates model for description property
+        /// </summary>
+        /// <param name="schema">Schema being validated</param>
+        /// <param name="context">Rule context</param>
+        /// <returns><c>true</c> if model contains description, <c>false</c> otherwise</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
-            if (schema != null && string.IsNullOrEmpty(schema.Reference) && schema.RepresentsCompositeType())
+            foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                if (schema.Description == null)
+                string key = definition.Key;
+                Schema schema = definition.Value;
+                if (string.IsNullOrWhiteSpace(schema?.Reference))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, "description");
+                    if (string.IsNullOrWhiteSpace(schema.Description))
+                    {
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Format(ModelTypeFormatter, key));
+                    }
                 }
             }
         }
-
-        /// <summary>
-        /// The template message for this Rule. 
-        /// </summary>
-        /// <remarks>
-        /// This may contain placeholders '{0}' for parameterized messages.
-        /// </remarks>
-        public override string MessageTemplate => "This definition lacks the property '{0}', which is required for model types";
-
-        /// <summary>
-        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
-        /// </summary>
-        public override Category Severity => Category.Warning;
     }
 }

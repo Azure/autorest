@@ -283,7 +283,7 @@ Modelers:
     <value>'{0}' is not a known format.</value>
   </data>
   <data name="MissingDescription" xml:space="preserve">
-    <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
+    <value>This {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
   </data>
   <data name="MissingRequiredProperty" xml:space="preserve">
     <value>'{0}' is supposedly required, but no such property exists.</value>
@@ -307,7 +307,7 @@ Modelers:
     <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
-    <value>The value provided for description is not descriptive enough.</value>
+    <value>The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.</value>
   </data>
   <data name="OperationIdNounInVerb" xml:space="preserve">
     <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.</value>

@@ -71,11 +71,13 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "description for bar",
           "items": {
             "type": "string"
           }
         },
         "bar": {
+          "description": "description for bar",
           "type": "string"
         }
       }
