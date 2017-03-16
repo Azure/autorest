@@ -233,7 +233,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; must use method name &apos;Delete&apos;..
         /// </summary>
         public static string DeleteOperationNameNotValid {
             get {
@@ -323,7 +323,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
+        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
         /// </summary>
         public static string GetOperationNameNotValid {
             get {
@@ -602,7 +602,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PATCH&apos; operation must use method name &apos;Update&apos;..
+        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; must use method name &apos;Update&apos;..
         /// </summary>
         public static string PatchOperationNameNotValid {
             get {
@@ -629,7 +629,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PUT&apos; operation must use method name &apos;Create&apos;..
+        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; must use method name &apos;Create&apos;..
         /// </summary>
         public static string PutOperationNameNotValid {
             get {

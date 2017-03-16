@@ -340,7 +340,7 @@ Modelers:
     <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation must use method name 'Get' or Method name start with 'List'</value>
+    <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
@@ -361,13 +361,13 @@ Modelers:
     <value>Tracked resource '{0}' must have a get operation.</value>
   </data>
   <data name="DeleteOperationNameNotValid" xml:space="preserve">
-    <value>'DELETE' operation must use method name 'Delete'.</value>
+    <value>'DELETE' operation '{0}' must use method name 'Delete'.</value>
   </data>
   <data name="PatchOperationNameNotValid" xml:space="preserve">
-    <value>'PATCH' operation must use method name 'Update'.</value>
+    <value>'PATCH' operation '{0}' must use method name 'Update'.</value>
   </data>
   <data name="PutOperationNameNotValid" xml:space="preserve">
-    <value>'PUT' operation must use method name 'Create'.</value>
+    <value>'PUT' operation '{0}' must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
     <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
