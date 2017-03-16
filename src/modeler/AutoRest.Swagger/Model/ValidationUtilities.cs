@@ -44,7 +44,7 @@ namespace AutoRest.Swagger.Model.Utilities
         public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
         {
             // Get all models that are returned by PUT operations (200 response)
-            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition).Where(op=>op.Responses.ContainsKey("200"));
+            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition).Where(op=>op.Responses?.ContainsKey("200")==true);
             var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Where(modelName => !string.IsNullOrEmpty(modelName));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
