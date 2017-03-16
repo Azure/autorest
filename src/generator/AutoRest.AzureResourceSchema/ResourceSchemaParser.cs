@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using AutoRest.Core.Model;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.AzureResourceSchema
 {
@@ -30,12 +31,6 @@ namespace AutoRest.AzureResourceSchema
                 throw new ArgumentNullException(nameof(serviceClient));
             }
 
-            string apiVersion = serviceClient.ApiVersion;
-            if (string.IsNullOrWhiteSpace(apiVersion))
-            {
-                throw new ArgumentException("No API version is provided in the swagger document.");
-            }
-
             Dictionary<string, ResourceSchema> resourceSchemas = new Dictionary<string, ResourceSchema>();
 
             foreach (Method method in serviceClient.Methods)
@@ -57,6 +52,13 @@ namespace AutoRest.AzureResourceSchema
                     // If the resourceProvider is a path variable, such as {someValue}, then this
                     // is not a create resource method. Skip it.
                     continue;
+                }
+
+                // extract API version
+                string apiVersion = serviceClient.ApiVersion.Else(method.Parameters.FirstOrDefault(p => p.SerializedName == "api-version")?.DefaultValue);
+                if (string.IsNullOrWhiteSpace(apiVersion))
+                {
+                    throw new ArgumentException("No API version is provided in the swagger document or the method.");
                 }
 
                 ResourceSchema resourceSchema;

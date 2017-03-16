@@ -127,6 +127,10 @@ namespace AutoRest.Python
             PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                {
+                    return double.Parse(defaultValue).ToString();
+                }
                 if (primaryType.KnownPrimaryType == KnownPrimaryType.String || primaryType.KnownPrimaryType== KnownPrimaryType.Uuid)
                 {
                     parsedDefault = QuoteValue(defaultValue);

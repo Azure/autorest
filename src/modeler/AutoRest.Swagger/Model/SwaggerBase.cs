@@ -4,8 +4,8 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -24,7 +24,6 @@ namespace AutoRest.Swagger.Model
         [CollectionRule(typeof(NextLinkPropertyMustExist))]
         [CollectionRule(typeof(PageableRequires200Response))]
         [CollectionRule(typeof(LongRunningResponseValidation))]
-        [CollectionRule(typeof(MutabilityValidValuesRule))]
         [CollectionRule(typeof(MutabilityWithReadOnlyRule))]
         public Dictionary<string, object> Extensions { get; set; }
 

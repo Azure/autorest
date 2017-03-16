@@ -4,7 +4,9 @@ Some information about My Sample API. It's a great API, and it's mine.
 
 ## Common Settings
    ``` yaml 
-   input-file: swagger.md
+   input-file:
+    - swagger.md
+    - swagger.md
 
    AutoRest: 
        includes: 

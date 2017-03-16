@@ -183,6 +183,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                     // return type may have been removed as a side effect
                     imports.AddRange(this.ReturnTypeJva.ImplImports);
                 }
+                imports = imports.Distinct().ToList();
                 if (this.IsPagingOperation || this.IsPagingNextOperation || SimulateAsPagingOperation)
                 {
                     imports.Add("com.microsoft.azure.PagedList");
@@ -197,6 +198,7 @@ namespace AutoRest.Java.Azure.Fluent.Model
                         imports.Remove("com.microsoft.rest.ServiceCallback");
                     }
 
+                    imports.Remove("java.util.ArrayList");
                     imports.Add("com.microsoft.azure.Page");
                     if (pageType != null)
                     {

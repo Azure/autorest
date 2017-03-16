@@ -170,7 +170,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} has no property named &apos;value&apos;..
+        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
         /// </summary>
         public static string CollectionObjectPropertiesNamingMessage {
             get {
@@ -224,16 +224,16 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in the request body..
+        ///   Looks up a localized string similar to &apos;Delete&apos; operation must not have a request body..
         /// </summary>
-        public static string DeleteMustHaveEmptyRequestBody {
+        public static string DeleteMustNotHaveRequestBody {
             get {
-                return ResourceManager.GetString("DeleteMustHaveEmptyRequestBody", resourceCulture);
+                return ResourceManager.GetString("DeleteMustNotHaveRequestBody", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; must use method name &apos;Delete&apos;..
         /// </summary>
         public static string DeleteOperationNameNotValid {
             get {
@@ -323,7 +323,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
+        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
         /// </summary>
         public static string GetOperationNameNotValid {
             get {
@@ -602,7 +602,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PATCH&apos; operation must use method name &apos;Update&apos;..
+        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; must use method name &apos;Update&apos;..
         /// </summary>
         public static string PatchOperationNameNotValid {
             get {
@@ -629,7 +629,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PUT&apos; operation must use method name &apos;Create&apos;..
+        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; must use method name &apos;Create&apos;..
         /// </summary>
         public static string PutOperationNameNotValid {
             get {
@@ -665,7 +665,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties..
+        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have &apos;name&apos; property. It can also have &apos;tier&apos;, &apos;size&apos;, &apos;family&apos;, &apos;capacity&apos; as optional properties..
         /// </summary>
         public static string SkuModelIsNotValid {
             get {
@@ -760,7 +760,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section..
+        ///   Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters..
         /// </summary>
         public static string XMSPathBaseNotInPaths {
             get {

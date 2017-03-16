@@ -32,6 +32,9 @@
               "$ref": "#/definitions/Models"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -83,7 +86,10 @@
         ],
         "schemes": [
           "https"
-        ]
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     }
   },

@@ -1,0 +1,637 @@
+{
+  "modelTypes": [
+    {
+      "$id": "1",
+      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
+      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "properties": [
+        {
+          "$id": "2",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "code"
+          ],
+          "realXmlPath": [
+            "code"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "3",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "code",
+          "#serializedName": "code"
+        },
+        {
+          "$id": "4",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "target"
+          ],
+          "realXmlPath": [
+            "target"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "5",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "target",
+          "#serializedName": "target"
+        },
+        {
+          "$id": "6",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "message"
+          ],
+          "realXmlPath": [
+            "message"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "7",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "message",
+          "#serializedName": "message"
+        }
+      ],
+      "containsConstantProperties": false,
+      "className": "ErrorDetails",
+      "declarationName": "ErrorDetails",
+      "#serializedName": "ErrorDetails",
+      "#name": "ErrorDetails"
+    },
+    {
+      "$id": "8",
+      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
+      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "properties": [
+        {
+          "$id": "9",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "code"
+          ],
+          "realXmlPath": [
+            "code"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "10",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "code",
+          "#serializedName": "code"
+        },
+        {
+          "$id": "11",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "message"
+          ],
+          "realXmlPath": [
+            "message"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "12",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "message",
+          "#serializedName": "message"
+        },
+        {
+          "$id": "13",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "target"
+          ],
+          "realXmlPath": [
+            "target"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "14",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "target",
+          "#serializedName": "target"
+        },
+        {
+          "$id": "15",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "details"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "IList<ErrorDetails>",
+          "modelType": {
+            "$id": "16",
+            "$type": "AutoRest.Core.Model.SequenceType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.SequenceType",
+            "elementType": {
+              "$ref": "1"
+            },
+            "isConstant": false,
+            "className": "IList<ErrorDetails>",
+            "declarationName": "IList<ErrorDetails>"
+          },
+          "#name": "details",
+          "#serializedName": "details"
+        },
+        {
+          "$id": "17",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "innerError"
+          ],
+          "realXmlPath": [
+            "innerError"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "18",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#name": "innerError",
+          "#serializedName": "innerError"
+        }
+      ],
+      "containsConstantProperties": false,
+      "className": "Error",
+      "declarationName": "Error",
+      "#serializedName": "Error",
+      "#name": "Error"
+    },
+    {
+      "$id": "19",
+      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
+      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "properties": [
+        {
+          "$id": "20",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "status"
+          ],
+          "realXmlPath": [
+            "status"
+          ],
+          "collectionFormat": "none",
+          "extensions": {
+            "x-ms-enum": {
+              "name": "NetworkOperationStatus",
+              "modelAsString": true
+            }
+          },
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "NetworkOperationStatus",
+          "modelType": {
+            "$id": "21",
+            "$type": "AutoRest.Core.Model.EnumType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.EnumType",
+            "values": [
+              {
+                "name": "InProgress",
+                "memberName": "InProgress",
+                "#serializedName": "InProgress"
+              },
+              {
+                "name": "Succeeded",
+                "memberName": "Succeeded",
+                "#serializedName": "Succeeded"
+              },
+              {
+                "name": "Failed",
+                "memberName": "Failed",
+                "#serializedName": "Failed"
+              }
+            ],
+            "modelAsString": true,
+            "declarationName": "String",
+            "extendedDocumentation": "Possible values include: 'InProgress', 'Succeeded', 'Failed'",
+            "isConstant": false,
+            "className": "NetworkOperationStatus",
+            "#serializedName": "NetworkOperationStatus",
+            "#name": "NetworkOperationStatus"
+          },
+          "#documentation": "Status of the Azure async operation. Possible values are: 'InProgress', 'Succeeded', and 'Failed'.",
+          "#name": "status",
+          "#serializedName": "status"
+        },
+        {
+          "$id": "22",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "error"
+          ],
+          "realXmlPath": [
+            "error"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "Error",
+          "modelType": {
+            "$ref": "8"
+          },
+          "#name": "error",
+          "#serializedName": "error"
+        }
+      ],
+      "documentation": "The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.",
+      "containsConstantProperties": false,
+      "className": "AzureAsyncOperationResult",
+      "declarationName": "AzureAsyncOperationResult",
+      "#serializedName": "AzureAsyncOperationResult",
+      "#name": "AzureAsyncOperationResult"
+    },
+    {
+      "$id": "23",
+      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
+      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "properties": [
+        {
+          "$id": "24",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "id"
+          ],
+          "realXmlPath": [
+            "id"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "25",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#documentation": "Resource ID.",
+          "#name": "id",
+          "#serializedName": "id"
+        },
+        {
+          "$id": "26",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": true,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "name"
+          ],
+          "realXmlPath": [
+            "name"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "27",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#documentation": "Resource name.",
+          "#name": "name",
+          "#serializedName": "name"
+        },
+        {
+          "$id": "28",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": true,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "type"
+          ],
+          "realXmlPath": [
+            "type"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "29",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#documentation": "Resource type.",
+          "#name": "type",
+          "#serializedName": "type"
+        },
+        {
+          "$id": "30",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "location"
+          ],
+          "realXmlPath": [
+            "location"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "31",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#documentation": "Resource location.",
+          "#name": "location",
+          "#serializedName": "location"
+        },
+        {
+          "$id": "32",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "tags"
+          ],
+          "realXmlPath": [
+            "tags"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "Dictionary<string,String>",
+          "modelType": {
+            "$id": "33",
+            "$type": "AutoRest.Core.Model.DictionaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.DictionaryType",
+            "valueType": {
+              "$id": "34",
+              "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+              "$actualType": "AutoRest.Core.Model.PrimaryType",
+              "knownFormat": "none",
+              "knownPrimaryType": "string",
+              "isConstant": false,
+              "className": "String",
+              "declarationName": "String",
+              "#name": "String"
+            },
+            "supportsAdditionalProperties": false,
+            "isConstant": false,
+            "className": "Dictionary<string,String>",
+            "declarationName": "Dictionary<string,String>"
+          },
+          "#documentation": "Resource tags.",
+          "#name": "tags",
+          "#serializedName": "tags"
+        }
+      ],
+      "containsConstantProperties": false,
+      "className": "Resource",
+      "declarationName": "Resource",
+      "extensions": {
+        "x-ms-azure-resource": true
+      },
+      "#serializedName": "Resource",
+      "#name": "Resource"
+    },
+    {
+      "$id": "35",
+      "$type": "AutoRest.Core.Model.CompositeType, AutoRest.Core",
+      "$actualType": "AutoRest.Core.Model.CompositeType",
+      "properties": [
+        {
+          "$id": "36",
+          "$actualType": "AutoRest.Core.Model.Property",
+          "isReadOnly": false,
+          "isPolymorphicDiscriminator": false,
+          "realPath": [
+            "id"
+          ],
+          "realXmlPath": [
+            "id"
+          ],
+          "collectionFormat": "none",
+          "isRequired": false,
+          "isConstant": false,
+          "modelTypeName": "String",
+          "modelType": {
+            "$id": "37",
+            "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+            "$actualType": "AutoRest.Core.Model.PrimaryType",
+            "knownFormat": "none",
+            "knownPrimaryType": "string",
+            "isConstant": false,
+            "className": "String",
+            "declarationName": "String",
+            "#name": "String"
+          },
+          "#documentation": "Resource ID.",
+          "#name": "id",
+          "#serializedName": "id"
+        }
+      ],
+      "containsConstantProperties": false,
+      "className": "SubResource",
+      "declarationName": "SubResource",
+      "extensions": {
+        "x-ms-azure-resource": true
+      },
+      "#serializedName": "SubResource",
+      "#name": "SubResource"
+    }
+  ],
+  "enumTypes": [
+    {
+      "$ref": "21"
+    }
+  ],
+  "modelsName": "Models",
+  "apiVersion": "2016-12-01",
+  "baseUrl": "https://management.azure.com",
+  "documentation": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+  "shouldGenerateXmlSerialization": false,
+  "properties": [
+    {
+      "$id": "38",
+      "$actualType": "AutoRest.Core.Model.Property",
+      "isReadOnly": false,
+      "isPolymorphicDiscriminator": false,
+      "realPath": [
+        "subscriptionId"
+      ],
+      "realXmlPath": [
+        "subscriptionId"
+      ],
+      "collectionFormat": "none",
+      "isRequired": true,
+      "isConstant": false,
+      "modelTypeName": "String",
+      "modelType": {
+        "$id": "39",
+        "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+        "$actualType": "AutoRest.Core.Model.PrimaryType",
+        "knownFormat": "none",
+        "knownPrimaryType": "string",
+        "isConstant": false,
+        "className": "String",
+        "declarationName": "String",
+        "#name": "String"
+      },
+      "#documentation": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "#name": "subscriptionId",
+      "#serializedName": "subscriptionId"
+    },
+    {
+      "$id": "40",
+      "$actualType": "AutoRest.Core.Model.Property",
+      "isReadOnly": false,
+      "isPolymorphicDiscriminator": false,
+      "realPath": [
+        "api-version"
+      ],
+      "realXmlPath": [
+        "api-version"
+      ],
+      "collectionFormat": "none",
+      "isRequired": true,
+      "isConstant": false,
+      "modelTypeName": "String",
+      "modelType": {
+        "$id": "41",
+        "$type": "AutoRest.Core.Model.PrimaryType, AutoRest.Core",
+        "$actualType": "AutoRest.Core.Model.PrimaryType",
+        "knownFormat": "none",
+        "knownPrimaryType": "string",
+        "isConstant": false,
+        "className": "String",
+        "declarationName": "String",
+        "#name": "String"
+      },
+      "#documentation": "Client API version.",
+      "#name": "api-version",
+      "#serializedName": "api-version"
+    }
+  ],
+  "#name": "NetworkManagementClient"
+}

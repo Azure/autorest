@@ -12,7 +12,6 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
-using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core

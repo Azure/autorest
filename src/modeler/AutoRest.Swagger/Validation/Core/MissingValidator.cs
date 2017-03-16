@@ -4,7 +4,7 @@
 
 using AutoRest.Core.Logging;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     /// This validator is applied by default to all string members,

@@ -6,7 +6,7 @@ using AutoRest.Core.Utilities.Collections;
 using Newtonsoft.Json;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     internal static class RulesExtensions
     {

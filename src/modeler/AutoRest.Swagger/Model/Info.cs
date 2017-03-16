@@ -5,7 +5,7 @@ using System;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using AutoRest.Swagger.Validation;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {

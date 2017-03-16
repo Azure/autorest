@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities;
 
-namespace AutoRest.Core.Validation
+namespace AutoRest.Swagger.Validation.Core
 {
     /// <summary>
     /// An attribute that describes a rule to apply to the property or class that it decorates

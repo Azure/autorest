@@ -19,7 +19,7 @@ namespace AutoRest
 
     public async Task<int> Run()
     {
-      connection = new Connection(Console.Out, Console.In);
+      connection = new Connection(Console.Out, Console.OpenStandardInput());
       // connection.OnDebug += (t) => Console.Error.WriteLine(t);
 
       connection.Dispatch<IEnumerable<string>>(nameof(GetPluginNames), GetPluginNames);
@@ -35,7 +35,7 @@ namespace AutoRest
 
     public async Task<IEnumerable<string>> GetPluginNames()
     {
-      return new[] { nameof(AzureValidator) };
+      return new[] { nameof(AzureValidator), nameof(Modeler), nameof(Generator) };
     }
 
     public async Task<bool> Process(string plugin, string sessionId)
@@ -44,6 +44,10 @@ namespace AutoRest
       {
         case nameof(AzureValidator):
           return await new AzureValidator(connection, sessionId).Process();
+        case nameof(Modeler):
+          return await new Modeler(connection, sessionId).Process();
+        case nameof(Generator):
+          return await new Generator(connection, sessionId).Process();
       }
       return false;
       /*

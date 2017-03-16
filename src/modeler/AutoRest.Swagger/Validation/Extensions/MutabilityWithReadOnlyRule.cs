@@ -4,17 +4,41 @@
 using System;
 using System.Linq;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
+using AutoRest.Core.Logging;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class MutabilityWithReadOnlyRule : MutabilityValidValuesRule
+    public class MutabilityWithReadOnlyRule : MutabilityExtensionRule
     {
         /// <summary>
         /// Array of valid values for x-ms-mutability extension when property is marked as "readonly": true.
         /// </summary>
         protected readonly string[] ValidValuesForReadOnlyProperty = { "read" };
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2008";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// The template message for this Rule.
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.InvalidMutabilityValueForReadOnly;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// An x-ms-mutability extension passes this rule if it has only valid possible values in context of Read Only property.
@@ -26,14 +50,6 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>This rule corresponds to M2006.</remarks>
         public override bool IsValid(object mutable, RuleContext context, out object[] formatParameters) => 
             ValidateMutabilityValuesWithReadOnlyProperty(mutable, context, out formatParameters);
-
-        /// <summary>
-        /// The template message for this Rule.
-        /// </summary>
-        /// <remarks>
-        /// This may contain placeholders '{0}' for parameterized messages.
-        /// </remarks>
-        public override string MessageTemplate => Resources.InvalidMutabilityValueForReadOnly;
 
         /// <summary>
         /// Verify that mutability values are valid in context of Read Only property.

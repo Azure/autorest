@@ -8,7 +8,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
 
 @suite class Blaming {
 
-  @test async "end to end blaming with literate swagger"() {
+  @test @timeout(10000) async "end to end blaming with literate swagger"() {
     const dataStore = new DataStore();
     const configFileUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/readme.md");
     const results = await RunPipeline(configFileUri, dataStore);

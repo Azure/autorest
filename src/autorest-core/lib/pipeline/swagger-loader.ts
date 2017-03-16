@@ -6,13 +6,15 @@
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
 import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
 import { ResolveRelativeNode } from "../parsing/yaml";
-import { Descendants, YAMLNodeWithPath, ToAst } from "../approved-imports/yaml";
+import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../approved-imports/yaml";
 import { ResolveUri } from "../approved-imports/uri";
-import { From } from "../approved-imports/linq";
-import { Mappings } from "../approved-imports/source-map";
+import { From, Enumerable } from "../approved-imports/linq";
+import { Mappings, Mapping } from "../approved-imports/source-map";
 import { CreateAssignmentMapping } from "../source-map/source-map";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
+
+import { WriteString } from "../approved-imports/writefs";
 
 async function EnsureCompleteDefinitionIsPresent(
   inputScope: DataStoreViewReadonly,
@@ -20,6 +22,8 @@ async function EnsureCompleteDefinitionIsPresent(
   visitedEntities: string[],
   externalFiles: { [uri: string]: DataHandleRead },
   sourceFileUri: string,
+  sourceDocObj: any,
+  sourceDocMappings: Enumerable<Mapping>,
   currentFileUri?: string,
   entityType?: string,
   modelName?: string) {
@@ -50,8 +54,6 @@ async function EnsureCompleteDefinitionIsPresent(
     }
   }
 
-  const sourceDocObj = await sourceDoc.ReadObject<any>();
-  let mappings = From(IdentitySourceMapping(sourceDoc.key, await sourceDoc.ReadYamlAst()));
   const inputs: DataHandleRead[] = [sourceDoc];
   for (const { node, path } of references) {
     const refPath = node.value as string;
@@ -64,7 +66,6 @@ async function EnsureCompleteDefinitionIsPresent(
     if (refPathParts.length === 2) {
       fileUri = refPathParts[0];
       entityPath = "#" + refPathParts[1];
-      node.value = entityPath;
       fileUri = ResolveUri(sourceFileUri, fileUri);
       if (!externalFiles[fileUri]) {
         const externalFile = await ParseLiterateYaml(await inputScope.ReadStrict(fileUri), workingScope.CreateScope(`ext_${Object.getOwnPropertyNames(externalFiles).length}`));
@@ -84,21 +85,21 @@ async function EnsureCompleteDefinitionIsPresent(
       visitedEntities.push(entityPath);
       if (sourceDocObj[referencedEntityType][referencedModelName] === undefined) {
         if (fileUri != null) {
-          await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, fileUri, referencedEntityType, referencedModelName);
+          sourceDocMappings = await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, fileUri, referencedEntityType, referencedModelName);
           const extObj = await externalFiles[fileUri].ReadObject<any>();
           inputs.push(externalFiles[fileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = extObj[referencedEntityType][referencedModelName];
-          mappings = mappings.Concat(CreateAssignmentMapping(
+          sourceDocMappings = sourceDocMappings.Concat(CreateAssignmentMapping(
             extObj[referencedEntityType][referencedModelName], externalFiles[fileUri].key,
             [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
             `resolving '${refPath}' in '${currentFileUri}'`));
         }
         else {
-          await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFileUri, referencedEntityType, referencedModelName);
+          sourceDocMappings = await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, referencedEntityType, referencedModelName);
           const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
           inputs.push(externalFiles[currentFileUri]);
           sourceDocObj[referencedEntityType][referencedModelName] = currentObj[referencedEntityType][referencedModelName];
-          mappings = mappings.Concat(CreateAssignmentMapping(
+          sourceDocMappings = sourceDocMappings.Concat(CreateAssignmentMapping(
             currentObj[referencedEntityType][referencedModelName], externalFiles[currentFileUri].key,
             [referencedEntityType, referencedModelName], [referencedEntityType, referencedModelName],
             `resolving '${refPath}' in '${currentFileUri}'`));
@@ -126,11 +127,11 @@ async function EnsureCompleteDefinitionIsPresent(
       const model = refs[1];
       if (typeof defSec === "string" && typeof model === "string" && visitedEntities.indexOf(model) === -1) {
         //recursively check if the model is completely defined.
-        await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, currentFileUri, defSec, model);
+        sourceDocMappings = await EnsureCompleteDefinitionIsPresent(inputScope, workingScope, visitedEntities, externalFiles, sourceFileUri, sourceDocObj, sourceDocMappings, currentFileUri, defSec, model);
         const currentObj = await externalFiles[currentFileUri].ReadObject<any>();
         inputs.push(externalFiles[currentFileUri]);
         sourceDocObj[defSec][model] = currentObj[defSec][model];
-        mappings = mappings.Concat(CreateAssignmentMapping(
+        sourceDocMappings = sourceDocMappings.Concat(CreateAssignmentMapping(
           currentObj[defSec][model], externalFiles[currentFileUri].key,
           [defSec, model], [defSec, model],
           `resolving '${stringify(dependentRef.path)}' (has allOf on '${reference}') in '${currentFileUri}'`));
@@ -141,15 +142,40 @@ async function EnsureCompleteDefinitionIsPresent(
   // commit back
   const id = (await workingScope.Enum()).length;
   const target = await workingScope.Write(`revision_${id}.yaml`);
-  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, mappings, inputs);
+  externalFiles[sourceFileUri] = await target.WriteObject(sourceDocObj, sourceDocMappings, inputs);
+  return sourceDocMappings;
+}
+
+async function StripExternalReferences(swagger: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
+  const result = await workingScope.Write("result.yaml");
+  const ast = CloneAst(await swagger.ReadYamlAst());
+  const mapping = IdentitySourceMapping(swagger.key, ast);
+  for (const node of Descendants(ast)) {
+    if (node.path[node.path.length - 1] === "$ref") {
+      const parts = (node.node.value as string).split('#');
+      if (parts.length === 2) {
+        node.node.value = "#" + (node.node.value as string).split('#')[1];
+      }
+    }
+  }
+  return await result.WriteData(StringifyAst(ast), mapping, [swagger]);
 }
 
 export async function LoadLiterateSwagger(inputScope: DataStoreViewReadonly, inputFileUri: string, workingScope: DataStoreView): Promise<DataHandleRead> {
   const data = await ParseLiterateYaml(await inputScope.ReadStrict(inputFileUri), workingScope.CreateScope("yaml"));
   const externalFiles: { [uri: string]: DataHandleRead } = {};
   externalFiles[inputFileUri] = data;
-  await EnsureCompleteDefinitionIsPresent(inputScope, workingScope.CreateScope("ref-resolving"), [], externalFiles, inputFileUri);
-  return externalFiles[inputFileUri];
+  //WriteString(`file:///C:/output/${(<any>workingScope).name}_before.yaml`, await externalFiles[inputFileUri].ReadData());
+  await EnsureCompleteDefinitionIsPresent(inputScope,
+    workingScope.CreateScope("ref-resolving"),
+    [],
+    externalFiles,
+    inputFileUri,
+    await data.ReadObject<any>(),
+    From(IdentitySourceMapping(data.key, await data.ReadYamlAst())));
+  const result = await StripExternalReferences(externalFiles[inputFileUri], workingScope.CreateScope("strip-ext-references"));
+  //WriteString(`file:///C:/output/${(<any>workingScope).name}_after.yaml`, await result.ReadData());
+  return result;
 }
 
 export async function LoadLiterateSwaggers(inputScope: DataStoreViewReadonly, inputFileUris: string[], workingScope: DataStoreView): Promise<DataHandleRead[]> {
