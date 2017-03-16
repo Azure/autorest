@@ -91,18 +91,15 @@ namespace AutoRest.Swagger.Model.Utilities
 
             if (modelSchema.AllOf?.Any() != true) return false;
 
-            if (modelSchema.AllOf != null)
+            foreach (Schema item in modelSchema.AllOf)
             {
-                foreach (Schema item in modelSchema.AllOf)
+                if (UrlResRegEx.IsMatch(item.Reference))
                 {
-                    if (UrlResRegEx.IsMatch(item.Reference))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return IsAllOfOnModelNamedResource(item.Reference, definitions);
-                    }
+                    return true;
+                }
+                else
+                {
+                    return IsAllOfOnModelNamedResource(item.Reference, definitions);
                 }
             }
             return false;
@@ -133,8 +130,14 @@ namespace AutoRest.Swagger.Model.Utilities
             // if model allOfs on a base resource type, return true
             if (definitions[modelName].AllOf.Select(modelRef => modelRef.Reference.StripDefinitionPath()).Intersect(baseResourceModels).Any()) return true;
 
-            // when all else fails, recurse into allOfed references, just check the first reference since we only support one
-            return IsAllOfOnResourceTypeModel(definitions[modelName].AllOf.First().Reference.StripDefinitionPath(), definitions, baseResourceModels);
+            // recurse into allOfed references
+            foreach (var modelRef in definitions[modelName].AllOf.Select(allofModel => allofModel.Reference?.StripDefinitionPath()).Where(allOfModel => !string.IsNullOrEmpty(allOfModel)))
+            {
+                if (IsAllOfOnResourceTypeModel(modelRef, definitions, baseResourceModels)) return true;
+            }
+
+            // if all else fails return false
+            return false;
         }
 
 
