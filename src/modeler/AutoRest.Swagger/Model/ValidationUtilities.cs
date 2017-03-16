@@ -37,6 +37,35 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
+        /// Checks whether a model definition has the properties "id, name and type" (which are "Resource" type properties)
+        /// anywhere in its heirarchy
+        /// </summary>
+        /// <param name="modelName">model for which to check the resource properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <param name="propertyList">List of properties to be checked for in a model heirarchy</param>
+        /// <returns>true if the model heirarchy contains all of the resource model properties</returns>
+        private static bool ContainsResourceModelProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList)
+        {
+            if (!definitions.ContainsKey(modelName)) return false;
+            var modelSchema = definitions[modelName];
+
+            propertyList = propertyList.Except(modelSchema.Properties.Keys);
+            if (!propertyList.Any()) return false;
+
+            if (modelSchema.AllOf?.Any() != true) return false;
+
+            var modelRefNames = modelSchema.AllOf.Select(modelRefSchema => modelRefSchema.Reference?.StripDefinitionPath())
+                                    .Where(modelRef=>!string.IsNullOrEmpty(modelRef) && definitions.ContainsKey(modelRef));
+
+            foreach (var modelRef in modelRefNames)
+            {
+                if (ContainsResourceModelProperties(modelRef, definitions, propertyList)) return true;
+            }
+            
+            return false;
+        }
+
+        /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
         /// </summary>
         /// <param name="serviceDefinition">serviceDefinition for which to populate the resources</param>
@@ -44,11 +73,19 @@ namespace AutoRest.Swagger.Model.Utilities
         public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
         {
             // Get all models that are returned by PUT operations (200 response)
-            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition).Where(op=>op.Responses?.ContainsKey("200")==true);
-            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Where(modelName => !string.IsNullOrEmpty(modelName));
+            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition)
+                                    .Where(op => op.Responses?.ContainsKey("200")==true);
+            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())
+                                            .Where(modelName => !string.IsNullOrEmpty(modelName));
+            // for each putResponseModel, check if the properties "id, type and name" exist anywhere in its heirarchy
+            putResponseModelNames = putResponseModelNames.Where(putRespModel => ContainsResourceModelProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
-            var getOperationsResponseModels = GetResponseModelDefinitions(serviceDefinition);
+            var getOperationsResponseModels = GetOperationsByRequestMethod("get", serviceDefinition)
+                                                .Where(op => op.Responses?.ContainsKey("200") == true)
+                                                .Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())
+                                                .Where(modelName => !string.IsNullOrEmpty(modelName));
+
             var modelsAllOfOnResource =
                 getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
                                            .Where(modelName => IsAllOfOnModelNamedResource(modelName, serviceDefinition.Definitions));
@@ -234,27 +271,31 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
+        /// <summary>
+        /// Returns all operations that match the httpverb (from all paths in service definitions)
+        /// </summary>
+        /// <param name="id">httpverb to check for</param>
+        /// <param name="serviceDefinition">service definition in which to find the operations</param>
+        /// <param name="includeCustomPaths">whether to include the x-ms-paths</param>
+        /// <returns>list if operations that match the httpverb</returns>
+        public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition, bool includeCustomPaths = true)
         {
-            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
+            var pathOperations = SelectOperationsFromPaths(id, serviceDefinition.Paths);
+            if (includeCustomPaths)
+            {
+                pathOperations.Concat(SelectOperationsFromPaths(id, serviceDefinition.CustomPaths));
+            }
+            return pathOperations;
         }
 
-        public static IEnumerable<string> GetResponseModelDefinitions(ServiceDefinition serviceDefinition)
-        {
-            // for every path, check its response object and get its model definition
-            var respDefinitions = serviceDefinition.Paths.SelectMany(
-                                    pathPair => pathPair.Value.Select(
-                                        pathObj => pathObj.Value.Responses?.ContainsKey("200") == true ? pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() : string.Empty));
-
-            respDefinitions = respDefinitions.Concat(
-                                    serviceDefinition.CustomPaths.SelectMany(
-                                        pathPair => pathPair.Value.Select(
-                                            pathObj => pathObj.Value.Responses?.ContainsKey("200") == true ? pathObj.Value.Responses["200"]?.Schema?.Reference?.StripDefinitionPath() : string.Empty)));
-
-            respDefinitions = respDefinitions.Where(def => !string.IsNullOrWhiteSpace(def)).Distinct();
-
-            return respDefinitions;
-        }
+        /// <summary>
+        /// Returns all operations that match the httpverb
+        /// </summary>
+        /// <param name="id">httpverb to check for</param>
+        /// <param name="paths">paths in which to find the operations with given verb</param>
+        /// <returns>list if operations that match the httpverb</returns>
+        private static IEnumerable<Operation> SelectOperationsFromPaths(string id, Dictionary<string, Dictionary<string, Operation>> paths)
+            => paths.Values.SelectMany(pathObjs=>pathObjs.Where(pair => pair.Key.ToLower().Equals(id.ToLower())).Select(pair => pair.Value));
 
         /// <summary>
         /// Returns whether a string follows camel case style.
