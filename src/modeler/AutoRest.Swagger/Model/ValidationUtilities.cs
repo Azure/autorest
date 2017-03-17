@@ -43,6 +43,11 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>List of resource models</returns>
         public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
         {
+            if (serviceDefinition.Definitions?.Any() != true)
+            {
+                return new List<string>();
+            }
+
             var xmsAzureResourceModels = GetXmsAzureResourceModels(serviceDefinition.Definitions);
 
             // Get all models that are returned by PUT operations (200 response)
@@ -86,8 +91,12 @@ namespace AutoRest.Swagger.Model.Utilities
             if (!definitions.ContainsKey(modelName)) return false;
             var modelSchema = definitions[modelName];
 
-            propertyList = propertyList.Except(modelSchema.Properties.Keys);
-            if (!propertyList.Any()) return false;
+            if (modelSchema.Properties?.Any() == true)
+            {
+                propertyList = propertyList.Except(modelSchema.Properties.Keys);
+                // if all properties are found, return true!
+                if (!propertyList.Any()) return true;
+            }
 
             if (modelSchema.AllOf?.Any() != true) return false;
 
