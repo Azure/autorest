@@ -36,6 +36,58 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
+        private static IEnumerable<string> GetOperationResponseModels(string httpVerb, ServiceDefinition serviceDefinition, string respCode = "200")
+        {
+            var operations = GetOperationsByRequestMethod(httpVerb, serviceDefinition)
+                                    .Where(op => op.Responses?.ContainsKey(respCode) == true);
+            return operations.Select(op => op.Responses[respCode]?.Schema?.Reference?.StripDefinitionPath())
+                                            .Where(modelName => !string.IsNullOrEmpty(modelName));
+        }
+
+        private static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
+            => definitions.Where(defPair =>
+                            defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
+                            defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))
+                            .Select(defPair => defPair.Key);
+
+
+        /// <summary>
+        /// Populates a list of 'Resource' models found in the service definition
+        /// </summary>
+        /// <param name="serviceDefinition">serviceDefinition for which to populate the resources</param>
+        /// <returns>List of resource models</returns>
+        public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
+        {
+            var xmsAzureResourceModels = GetXmsAzureResourceModels(serviceDefinition.Definitions);
+
+            // Get all models that are returned by PUT operations (200 response)
+            var putOperationsResponseModels = GetOperationResponseModels("put", serviceDefinition).Except(xmsAzureResourceModels);
+            // for each putResponseModel, check if the properties "id, type and name" exist anywhere in its heirarchy
+            putOperationsResponseModels = putOperationsResponseModels.Where(putRespModel => ContainsProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
+
+            // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
+            var getOperationsResponseModels = GetOperationResponseModels("get", serviceDefinition).Except(xmsAzureResourceModels);
+            getOperationsResponseModels = getOperationsResponseModels.Where(putRespModel => ContainsProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
+
+            var modelsAllOfOnResource =
+                getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
+                                           .Where(modelName => IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, new List<string>() { "Resource" }));
+
+            var resourceModels = putOperationsResponseModels.Union(getOperationsResponseModels);
+            
+            // Pick all models other than the ones that have already been determined to be resources
+            // or are of type xms azure resource
+            var modelsAllOfOnXmsAzureResources = serviceDefinition.Definitions.Keys.Except(resourceModels).Except(xmsAzureResourceModels);
+
+            // Now pick all models that allOf on xmsAzureResourceModels at any level of heirarchy
+            modelsAllOfOnXmsAzureResources = modelsAllOfOnXmsAzureResources.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName)
+                                                                                                && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
+            
+            // return the union 
+            return resourceModels.Union(modelsAllOfOnXmsAzureResources);
+
+        }
+
         /// <summary>
         /// Checks whether a model definition has the properties "id, name and type" (which are "Resource" type properties)
         /// anywhere in its heirarchy
@@ -44,7 +96,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of properties to be checked for in a model heirarchy</param>
         /// <returns>true if the model heirarchy contains all of the resource model properties</returns>
-        private static bool ContainsResourceModelProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList)
+        private static bool ContainsProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList)
         {
             if (!definitions.ContainsKey(modelName)) return false;
             var modelSchema = definitions[modelName];
@@ -55,90 +107,13 @@ namespace AutoRest.Swagger.Model.Utilities
             if (modelSchema.AllOf?.Any() != true) return false;
 
             var modelRefNames = modelSchema.AllOf.Select(modelRefSchema => modelRefSchema.Reference?.StripDefinitionPath())
-                                    .Where(modelRef=>!string.IsNullOrEmpty(modelRef) && definitions.ContainsKey(modelRef));
+                                    .Where(modelRef => !string.IsNullOrEmpty(modelRef) && definitions.ContainsKey(modelRef));
 
             foreach (var modelRef in modelRefNames)
             {
-                if (ContainsResourceModelProperties(modelRef, definitions, propertyList)) return true;
+                if (ContainsProperties(modelRef, definitions, propertyList)) return true;
             }
-            
-            return false;
-        }
 
-        /// <summary>
-        /// Populates a list of 'Resource' models found in the service definition
-        /// </summary>
-        /// <param name="serviceDefinition">serviceDefinition for which to populate the resources</param>
-        /// <returns>List of resource models</returns>
-        public static IEnumerable<string> GetResourceModels(ServiceDefinition serviceDefinition)
-        {
-            // Get all models that are returned by PUT operations (200 response)
-            var putOperations = GetOperationsByRequestMethod("put", serviceDefinition)
-                                    .Where(op => op.Responses?.ContainsKey("200")==true);
-            var putResponseModelNames = putOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())
-                                            .Where(modelName => !string.IsNullOrEmpty(modelName));
-            // for each putResponseModel, check if the properties "id, type and name" exist anywhere in its heirarchy
-            putResponseModelNames = putResponseModelNames.Where(putRespModel => ContainsResourceModelProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
-
-            // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
-            var getOperationsResponseModels = GetOperationsByRequestMethod("get", serviceDefinition)
-                                                .Where(op => op.Responses?.ContainsKey("200") == true)
-                                                .Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath())
-                                                .Where(modelName => !string.IsNullOrEmpty(modelName));
-
-            var modelsAllOfOnResource =
-                getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
-                                           .Where(modelName => IsAllOfOnModelNamedResource(modelName, serviceDefinition.Definitions));
-            
-            // Get all models that have the "x-ms-azure-resource" extension set on them
-            var xmsAzureResourceModels =
-                serviceDefinition.Definitions
-                    .Where(defPair =>
-                            defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
-                            defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))
-                    .Select(defPair => defPair.Key);
-
-            // set of base resource models is the union of all three aboce
-            var baseResourceModels = putResponseModelNames.Union(modelsAllOfOnResource).Union(xmsAzureResourceModels);
-
-            // for every model in definitions, recurse its allOfs and discover if there is a baseResourceModel reference
-            foreach (var modelName in serviceDefinition.Definitions.Keys)
-            {
-                // make sure we are excluding models which have the x-ms-azure-resource extension set on them
-                if (!xmsAzureResourceModels.Contains(modelName) 
-                    && IsAllOfOnResourceTypeModel(modelName, serviceDefinition.Definitions, baseResourceModels)
-                    && ResNameRegEx.IsMatch(modelName))
-                {
-                    yield return modelName;
-                }
-            }
-        }
-
-        /// <summary>
-        /// For a given model determines if it allOfs on a model named 'Resource'
-        /// </summary>
-        /// <param name="modelName">model for which to check the allOfs</param>
-        /// <param name="definitions">dictionary of model definitions</param>
-        /// <returns>List of resource models</returns>
-        public static bool IsAllOfOnModelNamedResource(string modelName, Dictionary<string, Schema> definitions)
-        {
-            if (!definitions.ContainsKey(modelName)) return false;
-
-            var modelSchema = definitions[modelName];
-
-            if (modelSchema.AllOf?.Any() != true) return false;
-
-            foreach (Schema item in modelSchema.AllOf)
-            {
-                if (UrlResRegEx.IsMatch(item.Reference))
-                {
-                    return true;
-                }
-                else
-                {
-                    return IsAllOfOnModelNamedResource(item.Reference, definitions);
-                }
-            }
             return false;
         }
 
@@ -150,7 +125,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">dictionary that contains model definitions</param>
         /// <param name="baseResourceModels">the list of base resource models</param>
         /// <returns>true if model is of resource model type</returns>
-        public static bool IsAllOfOnResourceTypeModel(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> baseResourceModels)
+        public static bool IsAllOfOnModelNames(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> baseResourceModels)
         {
             // if the model itself is a base resource model, return true
             // there is separate check to weed out resources which
@@ -170,7 +145,7 @@ namespace AutoRest.Swagger.Model.Utilities
             // recurse into allOfed references
             foreach (var modelRef in definitions[modelName].AllOf.Select(allofModel => allofModel.Reference?.StripDefinitionPath()).Where(allOfModel => !string.IsNullOrEmpty(allOfModel)))
             {
-                if (IsAllOfOnResourceTypeModel(modelRef, definitions, baseResourceModels)) return true;
+                if (IsAllOfOnModelNames(modelRef, definitions, baseResourceModels)) return true;
             }
 
             // if all else fails return false
@@ -185,41 +160,8 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">the dictionary of model definitions</param>
         /// <returns>list of tracked resources</returns>
         public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) 
-            => resourceModels.Where(resModel => ContainsLocationProperty(resModel, definitions));
+            => resourceModels.Where(resModel => ContainsProperties(resModel, definitions, new List<string>() { "location" }));
 
-
-
-        /// <summary>
-        /// For a given set of resource models evaluates which models are tracked and returns those
-        /// </summary>
-        /// <param name="modelName">model for which to check the 'location' property</param>
-        /// <param name="definitions">dictionary containing the model definitions</param>
-        /// <returns>list of tracked resources</returns>
-        private static bool ContainsLocationProperty(string modelName, Dictionary<string, Schema> definitions)
-        {
-            // if model name is null or empty or not found in definitions, return false
-            if (string.IsNullOrEmpty(modelName) || !definitions.ContainsKey(modelName)) return false;
-
-            // if model schema is null, return false
-            var modelSchema = definitions[modelName];
-            if (modelSchema == null) return false;
-
-            // if model properties has a property named location, return true
-            if (modelSchema.Properties?.ContainsKey("location") == true)  return true;
-
-            var allOfedModels = modelSchema.AllOf?.Select(modelRef => modelRef.Reference).Where(modelRef=>!string.IsNullOrEmpty(modelRef));
-            if (allOfedModels != null && allOfedModels.Any())
-            {
-                foreach (var modelRef in allOfedModels)
-                {
-                    // if any of the allOfed models have a property named location, return true
-                    if (ContainsLocationProperty(modelRef.StripDefinitionPath(), definitions)) return true;
-                }
-            }
-
-            // when all else fails, return false
-            return false;
-        }
 
         // determine if an operation is xms pageable operation
         public static bool IsXmsPageableOperation(Operation op)

@@ -89,9 +89,7 @@ namespace AutoRest.Swagger.Validation.Core
         /// The value of the object
         /// </summary>
         public object Value { get; private set; }
-
-
-
+        
         /// <summary>
         /// List of resources in serviceDefinition
         /// </summary>
@@ -121,9 +119,9 @@ namespace AutoRest.Swagger.Validation.Core
         /// </summary>
         private void PopulateResourceTypes(ServiceDefinition serviceDefinition)
         {
-            this.ResourceModels = ValidationUtilities.GetResourceModels(serviceDefinition);
-            this.TrackedResourceModels = ValidationUtilities.GetTrackedResources(this.ResourceModels, serviceDefinition.Definitions);
-            this.ProxyResourceModels = this.ResourceModels.Except(this.TrackedResourceModels);
+            this.ResourceModels = ValidationUtilities.GetResourceModels(serviceDefinition).ToList();
+            this.TrackedResourceModels = ValidationUtilities.GetTrackedResources(this.ResourceModels, serviceDefinition.Definitions).ToList();
+            this.ProxyResourceModels = this.ResourceModels.Except(this.TrackedResourceModels).ToList();
         }
 
     }
