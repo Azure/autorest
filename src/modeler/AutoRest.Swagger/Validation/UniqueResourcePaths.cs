@@ -36,7 +36,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.UniqueResourcePathsWarning;
+        public override string MessageTemplate => Resources.UniqueResourcePaths;
 
         /// <summary>
         /// This rule passes if the paths contain reference to exactly one of the namespace resources

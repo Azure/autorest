@@ -735,9 +735,9 @@ namespace AutoRest.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: &apos;{0}&apos;..
         /// </summary>
-        public static string UniqueResourcePathsWarning {
+        public static string UniqueResourcePaths {
             get {
-                return ResourceManager.GetString("UniqueResourcePathsWarning", resourceCulture);
+                return ResourceManager.GetString("UniqueResourcePaths", resourceCulture);
             }
         }
         
