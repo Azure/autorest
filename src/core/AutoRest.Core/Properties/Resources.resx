@@ -251,7 +251,7 @@ Modelers:
     <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
   </data>
   <data name="OperationsAPINotImplemented" xml:space="preserve">
-    <value>Operations API must be implemented for the service.</value>
+    <value>Operations API must be implemented for '{0}'.</value>
   </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
     <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
