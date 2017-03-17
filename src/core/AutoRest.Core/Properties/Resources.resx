@@ -325,7 +325,7 @@ Modelers:
     <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
   </data>
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
-    <value>Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition</value>
+    <value>Parameters "subscriptionId" and "api-version" must be defined in the parameters section in the swagger for the Azure Management Plane service.</value>
   </data>
   <data name="UniqueResourcePaths" xml:space="preserve">
     <value>Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.</value>
