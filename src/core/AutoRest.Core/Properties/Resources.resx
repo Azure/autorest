@@ -291,9 +291,6 @@ Modelers:
   <data name="NoDefinitionForPathParameter" xml:space="preserve">
     <value>Could not find a definition for the path parameter '{0}'</value>
   </data>
-  <data name="NoResponses" xml:space="preserve">
-    <value>No responses defined.</value>
-  </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
   </data>

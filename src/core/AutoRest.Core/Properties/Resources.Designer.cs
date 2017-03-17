@@ -521,15 +521,6 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No responses defined..
-        /// </summary>
-        public static string NoResponses {
-            get {
-                return ResourceManager.GetString("NoResponses", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Only 1 underscore is permitted in the operation id, following Noun_Verb conventions..
         /// </summary>
         public static string OnlyOneUnderscoreAllowedInOperationId {

@@ -190,13 +190,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void NoResponsesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-no-responses.json"));
-            messages.AssertOnlyValidationMessage(typeof(ResponseRequired));
-        }
-
-        [Fact]
         public void XmsPathNotInPathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-path-not-in-paths.json"));
