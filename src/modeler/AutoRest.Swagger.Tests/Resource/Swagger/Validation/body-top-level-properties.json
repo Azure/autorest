@@ -77,7 +77,7 @@
   "definitions": {
     "ParameterWithExtraProperty": {
       "properties": {
-        "kind": {
+        "extraProperty": {
           "type": "string",
           "description": "Required. Indicates the type of account.",
           "enum": [
@@ -85,7 +85,7 @@
             "BlobStorage"
           ],
           "x-ms-enum": {
-            "name": "Kind",
+            "name": "extraProperty",
             "modelAsString": false
           }
         },
