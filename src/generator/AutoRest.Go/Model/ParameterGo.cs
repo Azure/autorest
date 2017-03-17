@@ -3,7 +3,8 @@
 
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Model;
-using AutoRest.Go;
+using AutoRest.Extensions;
+using AutoRest.Extensions.Azure;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,6 @@ namespace AutoRest.Go.Model
 {
   public class ParameterGo : Parameter
   {
-    public const string ApiVersionName = "APIVersion";
-
-    public const string ApiVersionSerializedName = "api-version";
-
-    public const string SkipUrlEncoding = "x-ms-skip-url-encoding";
-
     public ParameterGo()
     {
 
@@ -63,13 +58,13 @@ namespace AutoRest.Go.Model
     public string NameForMap()
     {
       return SerializedName.Value.IsApiVersion()
-                 ? ApiVersionSerializedName
+                  ? AzureExtensions.ApiVersion
                   : SerializedName.Value;
     }
 
     public bool RequiresUrlEncoding()
     {
-      return (Location == Core.Model.ParameterLocation.Query || Location == Core.Model.ParameterLocation.Path) && !Extensions.ContainsKey(SkipUrlEncoding);
+      return (Location == Core.Model.ParameterLocation.Query || Location == Core.Model.ParameterLocation.Path) && !Extensions.ContainsKey(SwaggerExtensions.SkipUrlEncodingExtension);
     }
 
     /// <summary>
