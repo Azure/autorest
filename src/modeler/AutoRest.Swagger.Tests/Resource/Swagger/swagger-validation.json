@@ -1,0 +1,213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Swagger With Validation",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/{id}/Redis?api-version={apiVersion}": {
+      "get": {
+        "operationId": "list",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParamterer"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group Name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 3,
+            "pattern": "[a-zA-Z0-9]+",
+            "multipleOf": 10,
+            "maximum": 1000,
+            "minimum": 100,
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Resource Group ID.",
+            "required": true,
+            "type": "integer",
+            "multipleOf": 10,
+            "maximum": 1000,
+            "minimum": 100,
+            "minItems": 1,
+            "maxItems": 1,
+            "uniqueItems": true,
+            "minLength": 1,
+            "maxLength": 1,
+            "pattern": "[0-9]+"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "myintconst",
+            "in": "query",
+            "description": "Constant query param.",
+            "required": true,
+            "type": "integer",
+            "enum": [ 0 ]
+          },
+          {
+            "name": "mystrconst",
+            "in": "query",
+            "description": "Constant query param.",
+            "required": true,
+            "type": "string",
+            "enum": [ "constant" ]
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "description": "The product documentation.",
+      "required": [ "myintconst", "mystrconst", "RefStrEnumRequiredConstant", "RefIntEnumRequiredConstant" ],
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of product."
+        },
+        "display_names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Display names of product.",
+          "maxItems": 6,
+          "uniqueItems": true,
+          "minItems": 0,
+          "multipleOf": 10,
+          "maximum": 1000,
+          "minimum": 100,
+          "minLength": 1,
+          "maxLength": 1,
+          "pattern": "[0-9]+"
+        },
+        "capacity": {
+          "type": "integer",
+          "description": "Capacity of product. For example, 4 people.",
+          "exclusiveMinimum": true,
+          "exclusiveMaximum": true,
+          "maximum": 100,
+          "minimum": 0
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product.",
+          "pattern": "http://\\w+"
+        },
+        "myintconst": {
+          "type": "integer",
+          "description": "Constant int.",
+          "enum": [ 0 ]
+        },
+        "mystrconst": {
+          "type": "string",
+          "description": "Constant string.",
+          "enum": [ "constant" ]
+        },
+        "RefStrEnumRequiredConstant": {
+          "$ref": "#/definitions/RefStrEnum",
+          "description": "RefStrEnumRequiredConstant Description."
+        },
+        "RefIntEnumRequiredConstant": {
+          "$ref": "#/definitions/RefIntEnum",
+          "description": "RefIntEnumRequiredConstant Description."
+        },
+        "RefStrEnum": {
+          "$ref": "#/definitions/RefStrEnum",
+          "description": "RefStrEnumRequiredConstant Description."
+        },
+        "RefIntEnum": {
+          "$ref": "#/definitions/RefIntEnum",
+          "description": "RefIntEnumRequiredConstant Description."
+        },
+        "example": {
+          "name": "Puma",
+          "id": 1
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    },
+    "RefStrEnum": {
+      "type": "string",
+      "enum": [ "ReferenceEnum1" ],
+      "description": "RefStrEnum Description."
+    },
+    "RefIntEnum": {
+      "type": "integer",
+      "enum": [ 0 ],
+      "description": "RefIntEnum Description."
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "query",
+      "description": "API ID.",
+      "required": true,
+      "type": "string",
+      "pattern": "\\d{2}-\\d{2}-\\d{4}"
+    }
+  }
+}
