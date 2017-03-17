@@ -1,24 +1,24 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.Properties;
 using AutoRest.Core.Logging;
+using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
-using AutoRest.Swagger;
 using AutoRest.Swagger.Model;
 using System.Text.RegularExpressions;
-using System.Linq;
 using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class TrackedResourcePatchOperationValidation : TypedRule<Dictionary<string, Schema>>
+    public class TrackedResourceListBySubscription : TypedRule<Dictionary<string, Schema>>
     {
+        private readonly Regex listBySidRegEx = new Regex(@".+_(List|ListBySubscriptionId|ListBySubscription|ListBySubscriptions)$", RegexOptions.IgnoreCase);
+
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M3026";
+        public override string Id => "M3027";
 
         /// <summary>
         /// Violation category of the Rule.
@@ -31,26 +31,27 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.TrackedResourcePatchOperationMissing;
+        public override string MessageTemplate => Resources.TrackedResourceListBySubscriptionsOperationMissing;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Error;
 
-        // Verifies if a tracked resource has a corresponding patch operation
+        // Verifies if a tracked resource has a corresponding get operation
         public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
             // Retrieve the list of TrackedResources
             List<string> trackedResources = ValidationUtilities.GetTrackedResources();
 
             // Retrieve the list of getOperations
-            IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", context.Root);
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", context.Root);
 
             foreach (string trackedResource in trackedResources)
             {
-                // check for 200 status response models since they correspond to a successful get operation
-                if (!patchOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Equals(trackedResource)))
+                bool listBySubscriptionsCheck = ValidationUtilities.ListByXCheck(getOperations, listBySidRegEx, trackedResource, definitions);
+
+                if (!listBySubscriptionsCheck)
                 {
                     formatParameters = new object[1];
                     formatParameters[0] = trackedResource;

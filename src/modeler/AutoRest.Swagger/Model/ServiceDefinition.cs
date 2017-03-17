@@ -109,13 +109,16 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
-        [Rule(typeof(TrackedResourceValidation))]
-        [Rule(typeof(TrackedResourcePatchOperationValidation))]
-        [Rule(typeof(TrackedResourceGetOperationValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
+        [Rule(typeof(TrackedResourceGetOperationValidation))]
+        [Rule(typeof(TrackedResourceListByImmediateParent))]
+        [Rule(typeof(TrackedResourceListByResourceGroup))]
+        [Rule(typeof(TrackedResourceListBySubscription))]
+        [Rule(typeof(TrackedResourcePatchOperationValidation))]
+        [Rule(typeof(TrackedResourcePropertiesValidation))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>

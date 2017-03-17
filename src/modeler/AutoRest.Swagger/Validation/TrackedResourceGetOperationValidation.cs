@@ -6,7 +6,6 @@ using AutoRest.Core.Properties;
 using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
-using System.Text.RegularExpressions;
 using System.Linq;
 using AutoRest.Swagger.Validation.Core;
 
@@ -14,7 +13,6 @@ namespace AutoRest.Swagger.Validation
 {
     public class TrackedResourceGetOperationValidation : TypedRule<Dictionary<string, Schema>>
     {
-        
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -39,25 +37,27 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         // Verifies if a tracked resource has a corresponding get operation
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
+        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
-            ServiceDefinition serviceDefinition = context.Root;
-            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", serviceDefinition);
-            // filter out the model definitions that are not being returned as a response
-            var respDefinitions = ValidationUtilities.GetResponseModelDefinitions(serviceDefinition);
-            foreach (KeyValuePair<string, Schema> definition in definitions)
+            // Retrieve the list of TrackedResources
+            List<string> trackedResources = ValidationUtilities.GetTrackedResources();
+
+            // Retrieve the list of getOperations
+            IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", context.Root);
+
+            foreach (string trackedResource in trackedResources)
             {
-                if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
+                // check for 200 status response models since they correspond to a successful get operation
+                if (!getOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()).Equals(trackedResource)))
                 {
-                    // check for 200 status response models since they correspond to a successful get operation
-                    if (!getOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
-                    {
-                        // if no GET operation returns current tracked resource as a response, 
-                        // the tracked resource does not have a corresponding get operation
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
-                    }
+                    formatParameters = new object[1];
+                    formatParameters[0] = trackedResource;
+                    return false;
                 }
             }
+
+            formatParameters = new object[0];
+            return true;
         }
     }
 }

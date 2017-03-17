@@ -181,5 +181,33 @@ namespace AutoRest.Swagger.Model.Utilities
 
             return false;
         }
+
+        public static List<string> GetTrackedResources()
+        {
+            List<string> list = new List<string>();
+            list.Add("Profile");
+            list.Add("EndPoint");
+            list.Add("origin");
+            list.Add("customdomain");
+            return list;
+        }
+
+        public static bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
+        {
+            return getOperations.Any(operation =>
+                       regEx.IsMatch(operation.OperationId) &&
+                       operation.Extensions != null &&
+                       operation.Extensions.Any(extension => extension.Key.ToLower().Equals(XmsPageable)) &&
+                       operation.Responses.Any(
+                           response => response.Key.Equals("200") &&
+                           response.Value.Schema != null && IsArrayOf(response.Value.Schema.Reference, definitionKey, definitions))
+                    );
+        }
+
+        private static bool IsArrayOf(string reference, string referenceToMatch, Dictionary<string, Schema> definitions)
+        {
+            Schema schema = Schema.FindReferencedSchema(reference, definitions);
+            return schema.Properties.Any(property => property.Value.Type == DataType.Array && property.Value.Items != null && property.Value.Items.Reference.EndsWith("/" + referenceToMatch));
+        }
     }
 }

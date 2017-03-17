@@ -253,6 +253,18 @@ Modelers:
   <data name="OperationsAPINotImplemented" xml:space="preserve">
     <value>Operations API must be implemented for the service.</value>
   </data>
+  <data name="TrackedResourceListByImmediateParentOperationMissing" xml:space="preserve">
+    <value>The child tracked resource, "{0}" with immediate parent "{1}", must have a list by immediate parent operation.</value>
+  </data>
+  <data name="TrackedResourceListByResourceGroupOperationMissing" xml:space="preserve">
+    <value>The tracked resource, "{0}", must have a list by resource group operation.</value>
+  </data>
+  <data name="TrackedResourceListBySubscriptionsOperationMissing" xml:space="preserve">
+    <value>The tracked resource, "{0}", must have a list by subscriptions operation.</value>
+  </data>
+  <data name="TrackedResourcePropertiesValidation" xml:space="preserve">
+    <value>The tracked resource, "{0}", should not use properties "type","location","tags" in the RP property bag named "properties".</value>
+  </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
     <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
     A Tracked Resource must have: 
