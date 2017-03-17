@@ -17,7 +17,7 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Swagger schema object.
     /// </summary>
-    [Rule(typeof(ModelTypeIncomplete))]
+    [Rule(typeof(ModelDescriptionMissing))]
     public class Schema : SwaggerObject
     {
         public string Title { get; set; }

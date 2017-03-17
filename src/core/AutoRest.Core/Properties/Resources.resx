@@ -381,4 +381,7 @@ Modelers:
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
     <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
+  <data name="ModelDescriptionMissing" xml:space="preserve">
+    <value>Model definition '{0}' is missing required property 'description'.</value>
+  </data>
 </root>
