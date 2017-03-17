@@ -4,7 +4,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "commonjs",
     "noEmitOnError": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "sourceMap": true,
@@ -14,7 +14,7 @@
     "types": [
       "node"
     ],
-    //"moduleResolution": "node",
+    "moduleResolution": "node",
     "lib": [
       "esnext"
     ],
@@ -22,7 +22,6 @@
     "experimentalDecorators": true
   },
   "exclude": [
-    "node_modules",
-    "server"
+    "node_modules"
   ]
 }

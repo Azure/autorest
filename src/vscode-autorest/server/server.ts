@@ -3,6 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 'use strict';
+debugger;
 
 import {
   IPCMessageReader, IPCMessageWriter,
@@ -12,7 +13,8 @@ import {
   CompletionItem, CompletionItemKind
 } from 'vscode-languageserver';
 
-import {AutoRest, IFileSystem, IAutoRest } from "autorest";
+import { AutoRest, IFileSystem, IAutoRest, Installer } from "autorest";
+import { VSCodeHybridFileSystem } from "./FileSystem";
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
 let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
@@ -20,7 +22,6 @@ let connection: IConnection = createConnection(new IPCMessageReader(process), ne
 // Create a simple text document manager. The text document manager
 // supports full document sync only
 let documents: TextDocuments = new TextDocuments();
-
 // Make the text document manager listen on the connection
 // for open, change and close text document events
 documents.listen(connection);
@@ -28,34 +29,19 @@ documents.listen(connection);
 // After the server has started the client sends an initialize request. The server receives
 // in the passed params the rootPath of the workspace plus the client capabilities. 
 let workspaceRoot: string;
-let myfs:IFileSystem;
-let autorest:IAutoRest;
+let myfs: VSCodeHybridFileSystem;
+let autorest: IAutoRest;
 
-class VSCodeHybridFileSystem implements IFileSystem {  
-  private _rootUri:string;
-  get RootUri(): string  {
-    return this._rootUri;
-  }
-  constructor(rootUri:string) {
-    this._rootUri = rootUri;
-  }
-
-  async *EnumerateFiles(prefix:string):AsyncIterable<string>  {
-    // get the files 
-    yield "foo";
-  }
-
-  async ReadFile(path: string): Promise<string> {
-    throw new Error('Method not implemented.');
-  }
-  
-}
 
 connection.onInitialize((params): InitializeResult => {
   workspaceRoot = params.rootUri;
-  myfs = new VSCodeHybridFileSystem(params.rootUri);
+  connection.console.log('Starting Server Side...');
+  myfs = new VSCodeHybridFileSystem(connection, params.rootUri);
+
   autorest = new AutoRest(myfs);
-  
+
+  connection.console.log(`Has config: ${autorest.HasConfiguration}`);
+
   return {
     capabilities: {
       // Tell the client that the server works in FULL text document sync mode
@@ -87,7 +73,6 @@ interface AutoRestSettings {
 
 // hold the maxNumberOfProblems setting
 let maxNumberOfProblems: number;
-
 // The settings have changed. Is send on server activation
 // as well.
 connection.onDidChangeConfiguration((change) => {
@@ -99,32 +84,33 @@ connection.onDidChangeConfiguration((change) => {
 
 function validateTextDocument(textDocument: TextDocument): void {
   /*
-  let diagnostics: Diagnostic[] = [];
-  let lines = textDocument.getText().split(/\r?\n/g);
-  let problems = 0;
-  for (var i = 0; i < lines.length && problems < maxNumberOfProblems; i++) {
-    let line = lines[i];
-    let index = line.indexOf('typescript');
-    if (index >= 0) {
-      problems++;
-      diagnostics.push({
-        severity: DiagnosticSeverity.Warning,
-        range: {
-          start: { line: i, character: index },
-          end: { line: i, character: index + 10 }
-        },
-        message: `${line.substr(index, 10)} should be spelled TypeScript`,
-        source: 'ex'
-      });
+    let diagnostics: Diagnostic[] = [];
+    let lines = textDocument.getText().split(/\r?\n/g);
+    let problems = 0;
+    for (var i = 0; i < lines.length && problems < maxNumberOfProblems; i++) {
+      let line = lines[i];
+      let index = line.indexOf('typescript');
+      if (index >= 0) {
+        problems++;
+        diagnostics.push({
+          severity: DiagnosticSeverity.Warning,
+          range: {
+            start: { line: i, character: index},
+            end: { line: i, character: index + 10 }
+          },
+          message: `${line.substr(index, 10)} should be spelled TypeScript`,
+          source: 'ex'
+        });
+      }
     }
-  }
-  // Send the computed diagnostics to VSCode.
-  connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+    // Send the computed diagnostics to VSCode.
+    connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
   */
 }
 
 connection.onDidChangeWatchedFiles((change) => {
   // Monitored files have change in VSCode
+  myfs.ChangedFile(change);
   connection.console.log('We received an file change event');
 });
 

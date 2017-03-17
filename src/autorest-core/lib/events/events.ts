@@ -33,7 +33,6 @@ export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEv
   }
 }
 
-
 export class EventEmitter extends events.EventEmitter {
   private _subscriptions: Map<string, any> = new Map();
 
@@ -45,8 +44,10 @@ export class EventEmitter extends events.EventEmitter {
   protected static Event<TSender extends EventEmitter, TArgs>(target: TSender, propertyKey: string) {
     var init = target._init;
     target._init = (instance: TSender) => {
+      let i = instance;
       // call previous init
-      init.bind(instance)();
+      init.bind(instance)(instance);
+
       instance._subscriptions.set(propertyKey, new EventDispatcher<TSender, TArgs>(instance, propertyKey));
 
       var prop: PropertyDescriptor = {

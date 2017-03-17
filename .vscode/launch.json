@@ -1,13 +1,56 @@
 {
   "version": "0.2.0",
-  "configurations": [{
-    "diagnosticLogging": true,
-    "type": "node2",
-    "request": "launch",
-    "name": "bootstrapper",
-    "program": "${workspaceRoot}/src/autorest/app.js",
-    "cwd": "${workspaceRoot}",
-    "preLaunchTask": "build/typescript"
-  }],
-  "compounds": []
+  "configurations": [
+    {
+      "name": "Client Side",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceRoot}/src/vscode-autorest"
+      ],
+      "stopOnEntry": false,
+      "sourceMaps": true
+      // "preLaunchTask": "build/typescript"
+    },
+    {
+      "name": "Launch Tests",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceRoot}/src/vscode-autorest",
+        "--extensionTestsPath=${workspaceRoot}/src/vscode-autorest"
+      ],
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "preLaunchTask": "build/typescript"
+    },
+    {
+      "name": "Server Side",
+      "type": "node",
+      "request": "attach",
+      "port": 6009,
+      "sourceMaps": true,
+      "protocol": "legacy"
+    },
+    {
+      "diagnosticLogging": true,
+      "type": "node2",
+      "request": "launch",
+      "name": "run bootstrapper",
+      "program": "${workspaceRoot}/src/autorest/app.js",
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": "build/typescript"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Both",
+      "configurations": [
+        "Client Side",
+        "Server Side"
+      ]
+    }
+  ]
 }

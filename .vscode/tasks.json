@@ -20,16 +20,6 @@
         "$msCompile",
         "$tsc"
       ]
-    },
-    {
-      "taskName": "build/typescript",
-      "args": [],
-      "isBuildCommand": true,
-      "isBackground": false,
-      "problemMatcher": [
-        "$msCompile",
-        "$tsc"
-      ]
     }
   ]
 }

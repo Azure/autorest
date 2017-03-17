@@ -51,8 +51,8 @@ export class Installer {
   public static get AutorestFolder(): string {
     return this.ensureExists(join(this.PluginsFolder, 'autorest'));
   }
-  public static AutorestImplementation(): typeof AutoRest {
-    return <typeof AutoRest>require(join(Installer.AutorestFolder, this.LatestAutorestVersion, 'node_modules', 'autorest-core'));
+  public static get AutorestImplementationPath(): string {
+    return join(Installer.AutorestFolder, this.LatestAutorestVersion, 'node_modules', 'autorest-core');
   }
   public static get LatestAutorestVersion(): string {
     return this.InstalledAutorestVersions.FirstOrDefault();

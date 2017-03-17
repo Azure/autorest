@@ -12,10 +12,6 @@
     "declaration": true,
     "stripInternal": true,
     "lib": [
-      "es6",
-      "es2015.collection",
-      "es2015.promise",
-      "es2015.core",
       "esnext"
     ]
   },

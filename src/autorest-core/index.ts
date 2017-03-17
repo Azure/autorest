@@ -58,7 +58,6 @@ export interface Message {
   Text: string;
 }
 
-
 export class AutoRest extends EventEmitter {
   /**
    * 

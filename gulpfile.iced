@@ -49,12 +49,11 @@ Import
       .pipe onlyFiles()
   
   typescriptProjectFolders: ()->
-    source ["src/autorest-core", "src/autorest" ,"src/vscode-autorest/server","src/vscode-autorest"]
+    source ["src/autorest-core", "src/autorest","src/vscode-autorest" ]
 
   npminstalls: ()->
     source ["src/autorest-core", 
       "src/autorest" 
-      "src/vscode-autorest/server"
       "src/vscode-autorest"
       "src/generator/AutoRest.NodeJS.Tests"
       "src/generator/AutoRest.NodeJS.Azure.Tests" 
@@ -127,12 +126,31 @@ task 'autorest', 'Runs AutoRest', (done)->
     Fail "You must run #{ info 'gulp build'}' first"
 
 
-
 task 'init', "" ,(done)->
   return done() if initialized
   global.initialized = true
-  # is the main node_modules out of date?
-  doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") or (! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core") or (! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest")
+  # if the node_modules isn't created, do it.
+  doit = true if (newer "#{basefolder}/package.json",  "#{basefolder}/node_modules") 
+
+  # make sure the node_modules folder is created for vscode-autorest
+  if ! test '-d', "#{basefolder}/src/vscode-autorest/node_modules"
+    doit = true 
+    mkdir "-p",  "#{basefolder}/src/vscode-autorest/node_modules"
+
+  # make sure the node_modules folder is created for autorest
+  if ! test '-d', "#{basefolder}/src/autorest/node_modules"
+    doit = true
+    mkdir "-p",  "#{basefolder}/src/autorest/node_modules"
+
+  # symlink autorest-core into autorest
+  if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
+    doit = true
+    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
+
+  # symlink autorest into vscode-autorest
+  if ! test '-d', "#{basefolder}/src/vscode-autorest/node_modules/autorest"
+    doit = true
+    fs.symlinkSync "#{basefolder}/src/autorest", "#{basefolder}/src/vscode-autorest/node_modules/autorest",'junction' 
 
   typescriptProjectFolders()
     .on 'end', -> 
@@ -140,11 +158,8 @@ task 'init', "" ,(done)->
         echo warning "\n#{ info 'NOTE:' } 'node_modules' may be out of date - running 'npm install' for you.\n"
         exec "npm install",{silent:false},(c,o,e)->
           # after npm, hookup symlinks/junctions for dependent packages in projects
-          if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
-            fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
-
-          if ! test '-d', "#{basefolder}/src/vscode-autorest/server/node_modules/autorest"        
-            fs.symlinkSync "#{basefolder}/src/autorest", "#{basefolder}/src/vscode-autorest/server/node_modules/autorest",'junction'         
+          #if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
+          #  fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
 
           done null
       else 
