@@ -192,7 +192,7 @@ export async function LoadLiterateSwaggers(inputScope: DataStoreViewReadonly, in
 
 type ObjectWithPath<T> = { obj: T, path: JsonPath };
 function getPropertyValues<T, U>(obj: ObjectWithPath<T>): ObjectWithPath<U>[] {
-  const o: T = obj.obj || {};
+  const o: T = obj.obj || <T>{};
   return Object.getOwnPropertyNames(o).map(n => getProperty<T, U>(obj, n));
 }
 function getProperty<T, U>(obj: ObjectWithPath<T>, key: string): ObjectWithPath<U> {

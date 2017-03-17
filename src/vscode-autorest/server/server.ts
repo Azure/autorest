@@ -13,7 +13,7 @@ import {
   CompletionItem, CompletionItemKind
 } from 'vscode-languageserver';
 
-import { AutoRest, IFileSystem, IAutoRest, Installer } from "autorest";
+import { AutoRest, IFileSystem, Installer, Configuration } from "autorest";
 import { VSCodeHybridFileSystem } from "./FileSystem";
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
@@ -30,15 +30,22 @@ documents.listen(connection);
 // in the passed params the rootPath of the workspace plus the client capabilities. 
 let workspaceRoot: string;
 let myfs: VSCodeHybridFileSystem;
-let autorest: IAutoRest;
+let autorest: AutoRest;
+let myConfig: Configuration;
 
-
-connection.onInitialize((params): InitializeResult => {
-  workspaceRoot = params.rootUri;
+connection.onInitialize(async (params): Promise<InitializeResult> => {
   connection.console.log('Starting Server Side...');
-  myfs = new VSCodeHybridFileSystem(connection, params.rootUri);
 
-  autorest = new AutoRest(myfs);
+  workspaceRoot = params.rootUri;
+
+  myfs = new VSCodeHybridFileSystem(connection, params.rootUri);
+  myConfig = await Configuration.Create(myfs);
+  autorest = new AutoRest(myConfig);
+
+  autorest.Debug.Subscribe((instance, args) => {
+    // on debug message
+  });
+
 
   connection.console.log(`Has config: ${autorest.HasConfiguration}`);
 
@@ -110,7 +117,7 @@ function validateTextDocument(textDocument: TextDocument): void {
 
 connection.onDidChangeWatchedFiles((change) => {
   // Monitored files have change in VSCode
-  myfs.ChangedFile(change);
+  // myfs.ChangedFile(change);
   connection.console.log('We received an file change event');
 });
 

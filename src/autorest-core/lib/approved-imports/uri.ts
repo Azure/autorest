@@ -37,7 +37,7 @@ export async function ReadUri(uri: string): Promise<string> {
  * URI manipulation
  ***********************/
 import { isAbsolute } from "path";
-import * as URI from "urijs";
+const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
 
 /**

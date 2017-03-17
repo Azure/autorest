@@ -7,12 +7,17 @@
 import { CreateFileUri } from "./lib/approved-imports/uri";
 import { Stringify } from "./lib/approved-imports/yaml";
 import { DataStore, DataStoreView, KnownScopes, DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
-import { AutoRestConfiguration } from "./lib/configuration/configuration";
+import { AutoRestConfigurationImpl } from "./lib/configuration";
 import { RunPipeline, DataPromise } from "./lib/pipeline/pipeline";
 import { MultiPromiseUtility, MultiPromise } from "./lib/approved-imports/multi-promise";
 import { CancellationToken } from "./lib/approved-imports/cancallation";
 import { IEnumerable, From } from './lib/approved-imports/linq';
-import { IEvent, EventDispatcher, EventEmitter } from "./lib/events/events"
+import { IEvent, EventDispatcher, EventEmitter } from "./lib/events"
+
+export { IFileSystem } from "./lib/file-system"
+export { AutoRest } from "./lib/autorest-core"
+export { Message } from "./lib/autorest-core"
+export { Configuration } from "./lib/configuration"
 
 /* @internal */
 export async function run(
@@ -26,7 +31,7 @@ export async function run(
 
 /* @internal */
 export async function runWithKnownSetOfFiles(
-  configuration: AutoRestConfiguration,
+  configuration: AutoRestConfigurationImpl,
   inputFiles: { [fileName: string]: string },
   cancellationToken: CancellationToken = CancellationToken.None)
   : Promise<void> {
@@ -47,73 +52,3 @@ export async function runWithKnownSetOfFiles(
 
   const outputData = await RunPipeline(configFileUri, dataStore);
 }
-
-export interface IFileSystem {
-  readonly RootUri: string;
-  EnumerateFiles(prefixPath: string): AsyncIterable<string>;
-  ReadFile(path: string): Promise<string>;
-}
-
-export interface Message {
-  Text: string;
-}
-
-export class AutoRest extends EventEmitter {
-  /**
-   * 
-   * @param rootUri The rootUri of the workspace. Is null if no workspace is open. 
-   * @param fileSystem The implementation of the filesystem to load and save files from the host application.
-   */
-  public constructor(fileSystem: IFileSystem) {
-    super();
-
-  }
-
-  /**
-   * Using the fileSystem associated with this instance, this will look at the root level for *.md files 
-   * and find the configuration file.
-   * 
-   * The "configuration file" must have the string `\n>see https://aka.ms/autorest` in the file somewhere. 
-   * 
-   * If there are multiple configuration files, the file with the shortest filename wins. (aka, foo.md wins over foo.bak.md )
-   */
-  public get HasConfiguration(): boolean {
-
-    return false;
-  }
-
-  /**
-   * This should be called to notify AutoRest that a file has changed. 
-   * 
-   * @param path the path of the files that has changed 
-   */
-  public FileChanged(path: string) {
-
-  }
-
-  /**
-   * Called to start processing of the files. 
-   */
-  public Start(): void {
-
-  }
-
-  /**
-   * Called to stop the processing.
-   */
-  public Stop(): void {
-
-  }
-
-  /**
-   * Event: Signals when a debug message is sent from AutoRest
-   */
-  @EventEmitter.Event public Debug: IEvent<AutoRest, Message>;
-
-
-  @EventEmitter.Event public Success: IEvent<AutoRest, Message>;
-
-
-
-}
-

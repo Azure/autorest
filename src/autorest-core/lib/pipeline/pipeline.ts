@@ -6,7 +6,7 @@
 import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
 import { ResolveUri } from "../approved-imports/uri";
 import { WriteString } from "../approved-imports/writefs";
-import { AutoRestConfigurationManager, AutoRestConfiguration } from "../configuration/configuration";
+import { Configuration, AutoRestConfigurationImpl } from "../configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
@@ -19,7 +19,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
   const hConfig = await ParseLiterateYaml(
     await workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => uri === configurationUri).ReadStrict(configurationUri),
     workingScope.CreateScope("config"));
-  const config = new AutoRestConfigurationManager(await hConfig.ReadObject<AutoRestConfiguration>(), configurationUri);
+  const config = new Configuration(await hConfig.ReadObject<AutoRestConfigurationImpl>(), configurationUri);
 
   // load Swaggers
   const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri); // TODO: unlock further URIs here

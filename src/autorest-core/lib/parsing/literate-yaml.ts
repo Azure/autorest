@@ -43,7 +43,7 @@ function* CommonmarkSubHeadings(startNode: commonmark.Node): Iterable<commonmark
             yield startNode;
           }
         } else {
-          return;
+          break;
         }
       }
       startNode = startNode.next;

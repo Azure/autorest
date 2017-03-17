@@ -16,7 +16,7 @@ import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
 import { CreateFileUri, ResolveUri } from "./lib/approved-imports/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { AutoRestConfigurationSwitches } from "./lib/configuration/configuration";
+import { AutoRestConfigurationSwitches } from "./lib/configuration";
 import { run } from "./index";
 import { DataStore } from "./lib/data-store/data-store";
 import { RunPipeline } from "./lib/pipeline/pipeline";

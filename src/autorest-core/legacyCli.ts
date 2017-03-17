@@ -7,7 +7,7 @@ import * as path from "path";
 import { ResolveUri } from "./lib/approved-imports/uri";
 import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
-import { AutoRestConfiguration } from "./lib/configuration/configuration"
+import { AutoRestConfigurationImpl } from "./lib/configuration"
 
 const regexLegacyArg = /^-[^-]/;
 
@@ -21,7 +21,7 @@ function GetFilenameWithoutExtension(uri: string) {
   return lastPart.substr(0, lastPart.length - ext.length - 1);
 }
 
-async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfiguration): Promise<void> {
+async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
   const compositeSwaggerFile = await inputScope.ReadStrict(uri);
   const data = await compositeSwaggerFile.ReadObject<{ info: any, documents: string[] }>();
   const documents = data.documents;
@@ -32,8 +32,8 @@ async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: str
   targetConfig.__specials.infoSectionOverride = data.info;
 }
 
-export async function CreateConfiguration(baseFolderUri: string, inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfiguration> {
-  let result: AutoRestConfiguration = {
+export async function CreateConfiguration(baseFolderUri: string, inputScope: DataStoreViewReadonly, args: string[]): Promise<AutoRestConfigurationImpl> {
+  let result: AutoRestConfigurationImpl = {
     "input-file": []
   };
   const switches: { [key: string]: string | null } = {};

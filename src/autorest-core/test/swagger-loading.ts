@@ -1,7 +1,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { AutoRestConfigurationManager } from "../lib/configuration/configuration";
+import { Configuration } from "../lib/configuration";
 import { DataStore } from "../lib/data-store/data-store";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { CreateConfiguration } from "../legacyCli";
@@ -31,7 +31,7 @@ import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-l
     assert.strictEqual(config["input-file"].length, 16);
 
     // load Swaggers
-    const configMgr = new AutoRestConfigurationManager(config, "file:///config.yaml")
+    const configMgr = new Configuration(config, "file:///config.yaml")
     const swaggers = await LoadLiterateSwaggers(
       dataStore.CreateScope("input").AsFileScopeReadThrough(),
       configMgr.inputFileUris, dataStore.CreateScope("loader"));
