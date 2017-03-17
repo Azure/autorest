@@ -319,7 +319,7 @@ Modelers:
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
-    <value>Media types other than 'application/json' has limited support</value>
+    <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
     <value>Non-HTTPS/HTTP schemes have limited support</value>

@@ -512,7 +512,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Media types other than &apos;application/json&apos; has limited support.
+        ///   Looks up a localized string similar to Please make sure that media types other than &apos;application/json&apos; are supported by your service..
         /// </summary>
         public static string NonAppJsonTypeNotSupported {
             get {
