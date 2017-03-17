@@ -36,21 +36,6 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        private static IEnumerable<string> GetOperationResponseModels(string httpVerb, ServiceDefinition serviceDefinition, string respCode = "200")
-        {
-            var operations = GetOperationsByRequestMethod(httpVerb, serviceDefinition)
-                                    .Where(op => op.Responses?.ContainsKey(respCode) == true);
-            return operations.Select(op => op.Responses[respCode]?.Schema?.Reference?.StripDefinitionPath())
-                                            .Where(modelName => !string.IsNullOrEmpty(modelName));
-        }
-
-        private static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
-            => definitions.Where(defPair =>
-                            defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
-                            defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))
-                            .Select(defPair => defPair.Key);
-
-
         /// <summary>
         /// Populates a list of 'Resource' models found in the service definition
         /// </summary>
@@ -118,34 +103,58 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
+        /// Gets response models returned by operations with given httpVerb
+        /// by default looks at the '200' response 
+        /// </summary>
+        /// <param name="httpVerb">operation verb for which to determine the response model</param>
+        /// <param name="serviceDefinition">service definition containing the operations</param>
+        /// <param name="respCode">The response code to look at when fetching models, by default '200'</param>
+        /// <returns>list of model names that are returned by all operations matching the httpVerb</returns>
+        public static IEnumerable<string> GetOperationResponseModels(string httpVerb, ServiceDefinition serviceDefinition, string respCode = "200")
+        {
+            var operations = GetOperationsByRequestMethod(httpVerb, serviceDefinition)
+                                    .Where(op => op.Responses?.ContainsKey(respCode) == true);
+            return operations.Select(op => op.Responses[respCode]?.Schema?.Reference?.StripDefinitionPath())
+                                            .Where(modelName => !string.IsNullOrEmpty(modelName));
+        }
+
+        /// <summary>
+        /// Gets all models that have the x-ms-azure-resource extension set on them
+        /// </summary>
+        /// <param name="definitions">model definitions in which to find the x-ms-azure-resource extension</param>
+        /// <returns>list of model names that have the x-ms-azure-resource extension set on them</returns>
+        private static IEnumerable<string> GetXmsAzureResourceModels(Dictionary<string, Schema> definitions)
+            => definitions.Where(defPair =>
+                            defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource") == true &&
+                            defPair.Value.Extensions["x-ms-azure-resource"].Equals(true))
+                            .Select(defPair => defPair.Key);
+
+
+        /// <summary>
         /// For a given model, recursively traverses its allOfs and checks if any of them refer to 
         /// the base resourceModels
         /// </summary>
-        /// <param name="modelName">model for which to determine if it is resource model type</param>
+        /// <param name="modelName">model for which to determine if it is allOfs on given model names</param>
         /// <param name="definitions">dictionary that contains model definitions</param>
-        /// <param name="baseResourceModels">the list of base resource models</param>
-        /// <returns>true if model is of resource model type</returns>
-        public static bool IsAllOfOnModelNames(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> baseResourceModels)
+        /// <param name="allOfedModels">list allOfed models</param>
+        /// <returns>true if given model allOfs on given allOf list at any level of heirarchy</returns>
+        public static bool IsAllOfOnModelNames(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> allOfedModels)
         {
-            // if the model itself is a base resource model, return true
-            // there is separate check to weed out resources which
-            // a. have x-ms-azure-resource extension set to true
-            // b. have the name "Resource"
-            if (baseResourceModels.Contains(modelName)) return true;
-
+            // if the model being tested belongs to the allOfed list, return false
             // if model can't be found in definitions we can't verify
-            if (!definitions.ContainsKey(modelName)) return false;
-            
             // if model does not have any allOfs, return early 
-            if (definitions[modelName]?.AllOf?.Any() != true) return false;
-
-            // if model allOfs on a base resource type, return true
-            if (definitions[modelName].AllOf.Select(modelRef => modelRef.Reference.StripDefinitionPath()).Intersect(baseResourceModels).Any()) return true;
+            if (allOfedModels.Contains(modelName) || !definitions.ContainsKey(modelName) || definitions[modelName]?.AllOf?.Any() != true)
+            {
+                return false;
+            }
+            
+            // if model allOfs on any model in the allOfs list, return true
+            if (definitions[modelName].AllOf.Select(modelRef => modelRef.Reference.StripDefinitionPath()).Intersect(allOfedModels).Any()) return true;
 
             // recurse into allOfed references
             foreach (var modelRef in definitions[modelName].AllOf.Select(allofModel => allofModel.Reference?.StripDefinitionPath()).Where(allOfModel => !string.IsNullOrEmpty(allOfModel)))
             {
-                if (IsAllOfOnModelNames(modelRef, definitions, baseResourceModels)) return true;
+                if (IsAllOfOnModelNames(modelRef, definitions, allOfedModels)) return true;
             }
 
             // if all else fails return false
