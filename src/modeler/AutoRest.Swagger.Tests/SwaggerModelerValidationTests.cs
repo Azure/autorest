@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using System.Collections.Generic;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Logging;
 using AutoRest.Core;
 using AutoRest.Swagger.Validation;
@@ -190,13 +190,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void NoResponsesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-no-responses.json"));
-            messages.AssertOnlyValidationMessage(typeof(ResponseRequired));
-        }
-
-        [Fact]
         public void XmsPathNotInPathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "xms-path-not-in-paths.json"));
@@ -260,13 +253,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void RequiredPropertiesValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "required-property-not-in-properties.json"));
-            messages.AssertOnlyValidationMessage(typeof(RequiredPropertiesMustExist));
-        }
-
-        [Fact]
         public void OperationDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operation-missing-description.json"));
@@ -325,13 +311,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void MutabilityNotModeledValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values.json"));
-            messages.AssertOnlyValidationMessage(typeof(MutabilityValidValuesRule), 2);
-        }
-
-        [Fact]
         public void MutabilityNotModeledWithReadOnlyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "mutability-invalid-values-for-readonly.json"));
@@ -356,7 +335,7 @@ namespace AutoRest.Swagger.Tests
         public void DeleteRequestBodyValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-delete-request-body-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(DeleteMustHaveEmptyRequestBody), 1);
+            messages.AssertOnlyValidationMessage(typeof(DeleteMustNotHaveRequestBody), 1);
         }
 
         [Fact]
@@ -557,6 +536,16 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "property-names-casing-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 0);
             messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 0);
+        }
+
+        /// <summary>
+        /// Verifies that sku object
+        /// </summary>
+        [Fact]
+        public void ValidSkuObjectStructure()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
 
     }

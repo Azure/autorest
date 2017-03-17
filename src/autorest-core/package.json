@@ -41,7 +41,7 @@
     "strip-bom": "^3.0.0",
     "urijs": "^1.18.7",
     "vscode-jsonrpc": "^3.1.0",
-    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.32/yaml-ast-parser-0.0.32.tgz",
+    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
     "yargs": "^6.6.0"
   }
 }

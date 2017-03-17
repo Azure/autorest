@@ -62,7 +62,7 @@ namespace AutoRest.Core
         /// <param name="template"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task Write(ITemplate template, string fileName)
+        public virtual async Task Write(ITemplate template, string fileName)
         {
             Logger.Instance.Log(Category.Info, $"[WRITING] {template.GetType().Name} => {fileName}");
             template.Settings = Settings.Instance;

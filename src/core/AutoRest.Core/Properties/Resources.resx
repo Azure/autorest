@@ -241,11 +241,11 @@ Modelers:
   <data name="XmsClientNameInValid" xml:space="preserve">
     <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
   </data>
-  <data name="DeleteMustHaveEmptyRequestBody" xml:space="preserve">
-    <value>'Delete' operation cannot have parameters in the request body.</value>
+  <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
+    <value>'Delete' operation must not have a request body.</value>
   </data>
   <data name="SkuModelIsNotValid" xml:space="preserve">
-    <value>Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties.</value>
+    <value>Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.</value>
   </data>
   <data name="PutGetPatchResponseInvalid" xml:space="preserve">
     <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
@@ -291,9 +291,6 @@ Modelers:
   <data name="NoDefinitionForPathParameter" xml:space="preserve">
     <value>Could not find a definition for the path parameter '{0}'</value>
   </data>
-  <data name="NoResponses" xml:space="preserve">
-    <value>No responses defined.</value>
-  </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
   </data>
@@ -307,7 +304,7 @@ Modelers:
     <value>Errors found during Swagger document validation.</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
-    <value>Paths in x-ms-paths must overload a normal path in the paths section.</value>
+    <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
     <value>The value provided for description is not descriptive enough.</value>
@@ -340,7 +337,7 @@ Modelers:
     <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation must use method name 'Get' or Method name start with 'List'</value>
+    <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
@@ -361,16 +358,16 @@ Modelers:
     <value>Tracked resource '{0}' must have a get operation.</value>
   </data>
   <data name="DeleteOperationNameNotValid" xml:space="preserve">
-    <value>'DELETE' operation must use method name 'Delete'.</value>
+    <value>'DELETE' operation '{0}' must use method name 'Delete'.</value>
   </data>
   <data name="PatchOperationNameNotValid" xml:space="preserve">
-    <value>'PATCH' operation must use method name 'Update'.</value>
+    <value>'PATCH' operation '{0}' must use method name 'Update'.</value>
   </data>
   <data name="PutOperationNameNotValid" xml:space="preserve">
-    <value>'PUT' operation must use method name 'Create'.</value>
+    <value>'PUT' operation '{0}' must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
-    <value>Collection object {0} returned by list operation {1} has no property named 'value'.</value>
+    <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
   </data>
   <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
     <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>

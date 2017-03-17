@@ -1,12 +1,11 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { AutoRestConfigurationManager } from "../lib/configuration/configuration";
 import { DataStore } from "../lib/data-store/data-store";
-import { RunPipeline } from "../lib/pipeline/pipeline";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 import { CreateConfiguration } from "../legacyCli";
-import { Stringify } from "../lib/approved-imports/yaml";
-import { MultiPromiseUtility } from "../lib/approved-imports/multi-promise";
+import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-loader";
 
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
@@ -24,23 +23,20 @@ import { MultiPromiseUtility } from "../lib/approved-imports/multi-promise";
   @test @timeout(0) async "composite Swagger"() {
     const dataStore = new DataStore();
 
-    const config = await CreateConfiguration(dataStore.CreateScope("input").AsFileScopeReadThrough(),
+    const config = await CreateConfiguration("file:///", dataStore.CreateScope("input").AsFileScopeReadThrough(),
       [
         "-i", "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/compositeNetworkClient.json",
         "-m", "CompositeSwagger"
       ]);
     assert.strictEqual(config["input-file"].length, 16);
 
-    const configFileUri = "file:///config.yaml";
+    // load Swaggers
+    const configMgr = new AutoRestConfigurationManager(config, "file:///config.yaml")
+    const swaggers = await LoadLiterateSwaggers(
+      dataStore.CreateScope("input").AsFileScopeReadThrough(),
+      configMgr.inputFileUris, dataStore.CreateScope("loader"));
 
-    // input
-    const inputView = dataStore.CreateScope("input").AsFileScope();
-    const hwConfig = await inputView.Write(configFileUri);
-    await hwConfig.WriteData(Stringify(config));
-
-    const outputData = await RunPipeline(configFileUri, dataStore);
-    const file = MultiPromiseUtility.getSingle(outputData["swagger"]);
-
-
+    // compose Swaggers
+    const swagger = await ComposeSwaggers({}, swaggers, dataStore.CreateScope("compose"), true);
   }
 }

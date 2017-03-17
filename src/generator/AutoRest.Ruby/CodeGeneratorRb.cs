@@ -24,13 +24,6 @@ namespace AutoRest.Ruby
         /// </summary>
         private const string GeneratedFolderName = "generated";
 
-        public CodeGeneratorRb() 
-        {
-            // todo: make sure this doesn't happen more than once.
-            Settings.Instance.OutputDirectory = Path.Combine(Settings.Instance.OutputDirectory,
-                GeneratedFolderName);
-        }
-
         /// <summary>
         ///     Gets the file extension of the generated code files.
         /// </summary>
@@ -43,6 +36,11 @@ namespace AutoRest.Ruby
             => @"The ""gem 'ms_rest' ~> 0.6"" is required for working with generated code.";
 
         public CodeNamerRb CodeNamer => Singleton<CodeNamerRb>.Instance;
+
+        public override Task Write(ITemplate template, string fileName)
+        {
+            return base.Write(template, Path.Combine(GeneratedFolderName, fileName));
+        }
 
         /// <summary>
         ///     Generates Ruby code for service client.
