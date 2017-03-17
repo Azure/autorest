@@ -27,7 +27,13 @@
             "description": "Unexpected error",
             "schema": {
               "type": "string",
-              "description": "error"
+              "description": "error",
+			  "properties": {
+			  	  "prop1": {
+				  	  "type": "string",
+					  "description": "property 1"
+				  }
+			  }
             }
           }
         }

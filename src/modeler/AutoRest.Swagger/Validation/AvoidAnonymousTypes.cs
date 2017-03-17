@@ -34,11 +34,12 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.AnonymousTypesDiscouraged;
 
         /// <summary>
-        /// An <paramref name="entity"/> fails this rule if it doesn't have a reference (meaning it's defined inline)
+        /// An <paramref name="entity"/> fails this rule if is not a schema or if the schema has no properties. 
+        /// A schema of primitive type does not violate the rule. 
         /// </summary>
         /// <param name="entity">The entity to validate</param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerObject entity) => !string.IsNullOrEmpty(entity?.Reference);
-
+        public override bool IsValid(SwaggerObject entity) => (entity?.GetType() == typeof(Schema) &&
+            ((((Schema)entity).Properties == null) || ((Schema)entity).Properties?.Count == 0));
     }
 }
