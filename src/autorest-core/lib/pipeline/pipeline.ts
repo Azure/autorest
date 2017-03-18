@@ -11,15 +11,18 @@ import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } fro
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
+import { DiskFileSystem } from "../file-system"
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
 export async function RunPipeline(configurationUri: string, workingScope: DataStoreView): Promise<{ [name: string]: DataPromise }> {
   // load config
+  const fs = new DiskFileSystem(configurationUri);
+
   const hConfig = await ParseLiterateYaml(
     await workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => uri === configurationUri).ReadStrict(configurationUri),
     workingScope.CreateScope("config"));
-  const config = new Configuration(await hConfig.ReadObject<AutoRestConfigurationImpl>(), configurationUri);
+  const config = await Configuration.Create(fs, await hConfig.ReadObject<AutoRestConfigurationImpl>());
 
   // load Swaggers
   const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri); // TODO: unlock further URIs here

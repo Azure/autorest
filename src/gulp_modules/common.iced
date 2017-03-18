@@ -180,7 +180,7 @@ module.exports =
     
     options.silent = !verbose 
 
-    exec cmdline, options, (code,stdout,stderr)-> 
+    proc = exec cmdline, options, (code,stdout,stderr)-> 
       concurrency--
 
       if code and (options.retry or 0) > 0
@@ -204,6 +204,9 @@ module.exports =
 
         Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)
+
+    return proc
+
 
 # build task for global build
 module.exports.task 'build', 'builds project', -> 

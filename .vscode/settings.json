@@ -1,30 +1,33 @@
 {
-    "files.exclude": {
-        "src/autorest-core/**/*.js" : true,
-        "src/autorest-core/**/*.d.ts" : true,
-        "src/autorest-core/**/*.js.map": true,
-        "src/autorest/**/*.js" : true,
-        "src/autorest/**/*.js.map": true,
-        "src/autorest/**/*.d.ts": true,
-        "src/vscode-autorest/**/*.js" : true,
-        "src/vscode-autorest/**/*.js.map": true,
-        "src/vscode-autorest/**/*.d.ts": true,
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/.DS_Store": true
-    },
-    "editor.tabSize": 2,
-    "editor.detectIndentation": false,
-    "csharp.suppressDotnetRestoreNotification": true,
+  "files.exclude": {
+    "src/autorest-core/**/*.js": true,
+    "src/autorest-core/**/*.d.ts": true,
+    "src/autorest-core/**/*.js.map": true,
+    "src/autorest/**/*.js": true,
+    "src/autorest/**/*.js.map": true,
+    "src/autorest/**/*.d.ts": true,
+    "src/vscode-autorest/**/*.js": true,
+    "src/vscode-autorest/**/*.js.map": true,
+    "src/vscode-autorest/**/*.d.ts": true,
+    "src/vscode-autorest/node_modules/**": true,
+    "src/autorest/node_modules/**": true,
+    "src/autorest-core/node_modules/**": true,
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true
+  },
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "csharp.suppressDotnetRestoreNotification": true,
+  "editor.formatOnSave": true,
+  "[typescript]": {
     "editor.formatOnSave": true,
-    "[typescript]" :{
-        "editor.formatOnSave": true,
-        "editor.formatOnPaste": true,
-        "editor.tabSize": 2,
-        "editor.detectIndentation": false
-    },
-    "files.associations": {
-        "*.iced": "coffeescript"
-    }
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
+  },
+  "files.associations": {
+    "*.iced": "coffeescript"
+  }
 }

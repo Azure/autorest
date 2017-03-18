@@ -45,7 +45,7 @@ export class VSCodeHybridFileSystem implements IFileSystem {
   // on startup, we can look at the filesystem pointed to by the root uri.
   // after that, we should respond to 
 
-  async EnumerateFiles(): Promise<Array<string>> {
+  async *EnumerateFiles(): AsyncIterator<string> {
     return [];
     /* if (this.IsValidRoot()) {
       if (!this._folders.has(prefix)) {

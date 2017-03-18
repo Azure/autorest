@@ -32,21 +32,23 @@ export interface AutoRestConfigurationImpl {
 export class Configuration {
   private constructor(
     private fileSystem: IFileSystem,
-    private config?: AutoRestConfigurationImpl
+    private config: AutoRestConfigurationImpl
   ) {
   }
 
   public static async Create(fileSystem: IFileSystem, config?: AutoRestConfigurationImpl): Promise<Configuration> {
-    let result = new Configuration(fileSystem);
     if (config) {
       // passed a configuration template, no scanning required
-    } else {
-      // scan the filesystem items for the configuration.
-
-      // having found the configuation, parse and load it.
-
-      // add that to the result object.
+      return new Configuration(fileSystem, config);
     }
+
+    let result = new Configuration(fileSystem, <AutoRestConfigurationImpl>{});
+    // scan the filesystem items for the configuration.
+
+    // having found the configuation, parse and load it.
+
+    // add that to the result object.
+
     return result;
   }
   private configurationFileUri: string

@@ -1,28 +1,36 @@
 # build task for tsc 
 task 'build', 'typescript', (done)-> 
   count = 4
+
+  # symlink the build into the target folder for the binaries.
+  if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+    mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
+
+  if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
+    fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
+
   typescriptProjects()
-    .pipe foreach (each,next) -> 
+    .pipe foreach (each,next) ->
       cmd = "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}"
       cmd = "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path} --watch" if watch
-      execute cmd,{retry:2,silent:!watch} ,(code,stdout,stderr) ->
-        echo stdout.replace("src/","#{basefolder}/src/".trim()) 
+      proc = execute cmd,{retry:2} ,(code,stdout,stderr) ->
+        # echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0
-          if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
-            mkdir "-p", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"
-  
-          if ! test '-d', "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core"
-            fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules/autorest-core",'junction' 
           done()
+
+      proc.stdout.on 'data', (data) => 
+        echo data.replace(/^src\//mig, "#{basefolder}/src/")
+
       next null
+    
+
   return null
 
 task 'fix-line-endings', 'typescript', ->
   typescriptFiles()
     .pipe eol {eolc: 'LF', encoding:'utf8'}
     .pipe destination 'src'
-    #.pipe showFiles()
 
 Import
   install_package: (from,to,done)->
