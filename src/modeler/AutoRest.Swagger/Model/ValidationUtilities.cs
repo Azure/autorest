@@ -17,6 +17,8 @@ namespace AutoRest.Swagger.Model.Utilities
         private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private static readonly Regex ResNameRegEx = new Regex(@"Resource$", RegexOptions.IgnoreCase);
 
+        public enum PropertyListType { Properties, RequiredProperties, ReadOnlyProperties };
+
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
@@ -86,14 +88,39 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of properties to be checked for in a model heirarchy</param>
         /// <returns>true if the model heirarchy contains all of the resource model properties</returns>
-        private static bool ContainsProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList)
+        private static bool EnumerateProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList)
+
+
+        /// <summary>
+        /// Checks whether a model definition has the properties "id, name and type" (which are "Resource" type properties)
+        /// anywhere in its heirarchy
+        /// </summary>
+        /// <param name="modelName">model for which to check the resource properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <param name="propertyList">List of properties to be checked for in a model heirarchy</param>
+        /// <returns>true if the model heirarchy contains all of the resource model properties</returns>
+        private static bool ContainsProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList, PropertyListType listType = PropertyListType.Properties)
         {
             if (!definitions.ContainsKey(modelName)) return false;
             var modelSchema = definitions[modelName];
 
             if (modelSchema.Properties?.Any() == true)
             {
-                propertyList = propertyList.Except(modelSchema.Properties.Keys);
+                switch(listType)
+                {
+                    case PropertyListType.Properties:
+                        propertyList = propertyList.Except(modelSchema.Properties.Keys);
+                        break;
+
+                    case PropertyListType.ReadOnlyProperties:
+                        propertyList = propertyList.Except(modelSchema.Properties.Where(propPair => propPair.Value.ReadOnly == true).Select(propPair=>propPair.Key));
+                        break;
+
+                    case PropertyListType.RequiredProperties:
+                        propertyList = propertyList.Except(modelSchema.Required);
+                        break;
+                }
+                
                 // if all properties are found, return true!
                 if (!propertyList.Any()) return true;
             }
@@ -105,7 +132,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
             foreach (var modelRef in modelRefNames)
             {
-                if (ContainsProperties(modelRef, definitions, propertyList)) return true;
+                if (ContainsProperties(modelRef, definitions, propertyList, listType)) return true;
             }
 
             return false;
