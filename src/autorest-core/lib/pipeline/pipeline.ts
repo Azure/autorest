@@ -55,20 +55,28 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
 
     // code generator
     result["generatedFiles"] = MultiPromiseUtility.fromCallbacks(async callback => {
-      if (config.__specials.codeGenerator) {
-        const generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, workingScope.CreateScope("generate"),
+      const codeGenerator = config.__specials.codeGenerator;
+      if (codeGenerator) {
+        const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, workingScope.CreateScope("generate"),
           {
             namespace: config.__specials.namespace || "",
-            codeGenerator: config.__specials.codeGenerator,
-            clientNameOverride: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].name; } catch (e) { return null; } })(),
-            internalConstructors: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].internalConstructors; } catch (e) { return null; } })() || false,
-            useDateTimeOffset: (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].useDateTimeOffset; } catch (e) { return null; } })() || false,
+            codeGenerator: codeGenerator,
+            clientNameOverride: getXmsCodeGenSetting("name"),
+            internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
+            useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
             header: config.__specials.header || null,
-            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].ft; } catch (e) { return null; } })() || 0,
-            syncMethods: config.__specials.syncMethods || (() => { try { return rawSwagger.info["x-ms-code-generation-settings"].syncMethods; } catch (e) { return null; } })() || "essential",
+            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
+            syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
             addCredentials: config.__specials.addCredentials || false,
             rubyPackageName: config.__specials.rubyPackageName || "client"
           });
+
+        // C# simplifier
+        if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
+          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, workingScope.CreateScope("simplify"));
+        }
+
         for (const fileName of await generatedFileScope.Enum()) {
           callback(await generatedFileScope.ReadStrict(fileName));
         }
@@ -92,7 +100,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
   if (result["generatedFiles"]) {
     await MultiPromiseUtility.toAsyncCallbacks(result["generatedFiles"], async fileHandle => {
       // commit to disk (TODO: extract output path more elegantly)
-      const relPath = decodeURIComponent(fileHandle.key.replace("generate/output/", ""));
+      const relPath = decodeURIComponent(fileHandle.key.split("/output/")[1]);
       const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
       await WriteString(outputFileUri, await fileHandle.ReadData());
     });

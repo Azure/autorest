@@ -2,6 +2,7 @@ import { IEnumerable, From } from './approved-imports/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./events"
 import { IFileSystem } from "./file-system"
 import { Configuration } from "./configuration"
+import { DocumentType } from "./document-type"
 
 export interface Message {
   Text: string;
@@ -32,6 +33,15 @@ export class AutoRest extends EventEmitter {
   }
 
   /**
+   *  Given a file's content, does this represent a swagger file of some sort?
+   * 
+   * @param content - the file content to evaluate
+   */
+  public static async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
+    return true;
+  }
+
+  /**
    * This should be called to notify AutoRest that a file has changed. 
    * 
    * @param path the path of the files that has changed 
@@ -58,7 +68,6 @@ export class AutoRest extends EventEmitter {
    * Event: Signals when a debug message is sent from AutoRest
    */
   @EventEmitter.Event public Debug: IEvent<AutoRest, Message>;
-
 
   @EventEmitter.Event public Success: IEvent<AutoRest, Message>;
 

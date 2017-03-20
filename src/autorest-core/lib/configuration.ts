@@ -32,7 +32,6 @@ export interface AutoRestConfigurationImpl {
 }
 
 export class Configuration {
-
   private constructor(
     private fileSystem: IFileSystem,
     private config: AutoRestConfigurationImpl
@@ -68,6 +67,11 @@ export class Configuration {
     // create the configuration object.
     return new Configuration(fileSystem, <AutoRestConfigurationImpl>{ /* ??? */ });
   }
+
+  public Add(path: string, value: any) {
+
+  }
+
 
   private configurationFileUri: string
 
