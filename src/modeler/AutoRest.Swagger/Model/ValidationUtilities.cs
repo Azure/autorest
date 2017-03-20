@@ -90,7 +90,7 @@ namespace AutoRest.Swagger.Model.Utilities
         {
             if (modelHierarchy == null)
             {
-                modelHierarchy = new List<string>();
+                modelHierarchy = new List<string>() { modelName };
             }
 
             if (!definitions.ContainsKey(modelName)) return modelHierarchy;
