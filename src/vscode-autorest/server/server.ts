@@ -10,7 +10,7 @@ import {
   createConnection, IConnection, TextDocumentSyncKind,
   TextDocuments, TextDocument, Diagnostic, DiagnosticSeverity,
   InitializeParams, InitializeResult, TextDocumentPositionParams,
-  CompletionItem, CompletionItemKind
+  CompletionItem, CompletionItemKind, Range, Position
 } from 'vscode-languageserver';
 
 import { AutoRest, IFileSystem, Installer, Configuration } from "autorest";
@@ -32,6 +32,24 @@ let workspaceRoot: string;
 let myfs: VSCodeHybridFileSystem;
 let autorest: AutoRest;
 let myConfig: Configuration;
+let diagnostics: Map<string, Diagnostic[]> = new Map<string, Diagnostic[]>();
+let queuedToSend: NodeJS.Timer;
+
+async function sendDiagnostics() {
+  if (!queuedToSend) {
+    queuedToSend = setTimeout(sendQueuedDiagnostics, 25)
+  }
+}
+
+async function sendQueuedDiagnostics() {
+  queuedToSend = null;
+  for await (const each of diagnostics) {
+    connection.sendDiagnostics({
+      uri: each[0],
+      diagnostics: each[1]
+    });
+  }
+}
 
 connection.onInitialize(async (params): Promise<InitializeResult> => {
   connection.console.log('Starting Server Side...');
@@ -44,10 +62,87 @@ connection.onInitialize(async (params): Promise<InitializeResult> => {
 
   autorest.Debug.Subscribe((instance, args) => {
     // on debug message
+    connection.console.warn(args.Text);
+  });
+
+  autorest.Fatal.Subscribe((instance, args) => {
+    // on fatal message
+    connection.console.error(args.Text);
+  });
+
+  autorest.Verbose.Subscribe((instance, args) => {
+    // on verbose message
+    connection.console.log(args.Text);
   });
 
 
-  connection.console.log(`Has config: ${autorest.HasConfiguration}`);
+  autorest.Information.Subscribe(async (instance, args) => {
+    // information messages come from autorest and represent a document 
+    // issue.
+    // if this is for this source file, add it to the diagnostics
+
+    for await (const each of args.Range) {
+      if (!diagnostics.has(each.document)) {
+        diagnostics.set(each.document, []);
+      }
+
+      diagnostics.get(each.document).push({
+        severity: DiagnosticSeverity.Information,
+        range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+        message: args.Text,
+        source: args.Plugin
+      });
+    }
+
+    // send when you've got the time...
+    sendDiagnostics();
+  });
+
+  autorest.Warning.Subscribe(async (instance, args) => {
+    // warning messages come from autorest and represent a document 
+    // issue.
+    for await (const each of args.Range) {
+      if (!diagnostics.has(each.document)) {
+        diagnostics.set(each.document, []);
+      }
+
+      diagnostics.get(each.document).push({
+        severity: DiagnosticSeverity.Warning,
+        range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+        message: args.Text,
+        source: args.Plugin
+      });
+    }
+    // send when you've got the time...
+    sendDiagnostics();
+  });
+
+  autorest.Error.Subscribe(async (instance, args) => {
+    // Error messages come from autorest and represent a document 
+    // issue.
+    for await (const each of args.Range) {
+      if (!diagnostics.has(each.document)) {
+        diagnostics.set(each.document, []);
+      }
+
+      diagnostics.get(each.document).push({
+        severity: DiagnosticSeverity.Error,
+        range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+        message: args.Text,
+        source: args.Plugin
+      });
+    }
+    // send when you've got the time...
+    sendDiagnostics();
+  });
+
+  autorest.Finished.Subscribe((instance, args) => {
+    diagnostics = new Map<string, Diagnostic[]>();
+    if (queuedToSend) {
+      clearTimeout(queuedToSend)
+    }
+  })
+  // connection.console.log(`Has config: ${autorest.HasConfiguration}`);
 
   return {
     capabilities: {

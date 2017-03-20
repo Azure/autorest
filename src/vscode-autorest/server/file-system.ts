@@ -9,12 +9,13 @@ import * as _fs from 'fs';
 let fs = promisify(_fs);
 
 export class VSCodeHybridFileSystem implements IFileSystem {
+  constructor(private connection: IConnection, public RootUri: string) {
+  }
+
   WriteFile(path: string, content: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  private _rootUri: string;
-  private _connection: IConnection;
 
   private async exists(dir: string): Promise<boolean> {
     try {
@@ -25,26 +26,21 @@ export class VSCodeHybridFileSystem implements IFileSystem {
     return false;
   }
 
-  get RootUri(): string {
-    return this._rootUri;
-  }
 
   async IsValidRoot(): Promise<boolean> {
-    if (this._rootUri != null && this._rootUri !== "") {
-      return this.exists(this._rootUri);
+    if (this.RootUri != null && this.RootUri !== "") {
+      return this.exists(this.RootUri);
     }
     return false;
   }
 
-  constructor(connection: IConnection, rootUri: string) {
-    this._rootUri = rootUri;
-  }
 
   // virtualizing the filesystem:
   // on startup, we can look at the filesystem pointed to by the root uri.
   // after that, we should respond to 
 
   async *EnumerateFiles(): AsyncIterable<string> {
+
     return [];
     /* if (this.IsValidRoot()) {
       if (!this._folders.has(prefix)) {
