@@ -54,7 +54,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // Get all models that are returned by PUT operations (200 response)
             var putOperationsResponseModels = GetOperationResponseModels("put", serviceDefinition).Except(xmsAzureResourceModels);
-            // for each putResponseModel, check if the properties "id, type and name" exist anywhere in its heirarchy
+            // for each putResponseModel, check if the properties "id, type and name" exist anywhere in its hierarchy
             putOperationsResponseModels = putOperationsResponseModels.Where(putRespModel => ContainsProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
@@ -71,7 +71,7 @@ namespace AutoRest.Swagger.Model.Utilities
             // or are of type xms azure resource
             var modelsAllOfOnXmsAzureResources = serviceDefinition.Definitions.Keys.Except(resourceModels).Except(xmsAzureResourceModels);
 
-            // Now pick all models that allOf on xmsAzureResourceModels at any level of heirarchy
+            // Now pick all models that allOf on xmsAzureResourceModels at any level of hierarchy
             modelsAllOfOnXmsAzureResources = modelsAllOfOnXmsAzureResources.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName)
                                                                                                 && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
             
@@ -81,61 +81,128 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
-        /// Checks whether a model definition has the properties "id, name and type" (which are "Resource" type properties)
-        /// anywhere in its heirarchy
+        /// Returns the cumulative list of all 'allOfed' references for a model
         /// </summary>
-        /// <param name="modelName">model for which to check the resource properties</param>
+        /// <param name="modelName">model for which to determine the model hierarchy</param>
         /// <param name="definitions">dictionary of model definitions</param>
-        /// <param name="propertyList">List of properties to be checked for in a model heirarchy</param>
-        /// <returns>true if the model heirarchy contains all of the resource model properties</returns>
-        private static bool EnumerateProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList)
+        /// <param name="propertyList">List of 'allOfed' models</param>
+        public static IEnumerable<string> EnumerateModelHierarchy(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> modelHierarchy = null)
+        {
+            if (modelHierarchy == null)
+            {
+                modelHierarchy = new List<string>();
+            }
+
+            if (!definitions.ContainsKey(modelName)) return modelHierarchy;
+
+            var modelSchema = definitions[modelName];
+            if (modelSchema.AllOf?.Any() != true) return modelHierarchy;
+
+            var allOfs = modelSchema.AllOf.Select(allOfSchema => allOfSchema.Reference?.StripDefinitionPath()).Where(modelRef => !string.IsNullOrEmpty(modelRef));
+            modelHierarchy.Union(allOfs);
+            
+            foreach (var allOf in allOfs)
+            {
+                modelHierarchy.Union(EnumerateModelHierarchy(allOf, definitions, modelHierarchy));
+            }
+            return modelHierarchy;
+        }
+
+        /// <summary>
+        /// Returns the cumulative list of all properties found in the entire model hierarchy
+        /// </summary>
+        /// <param name="modelName">model for which to check the  properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <returns>List of properties found in model hierarchy</returns>
+        private static IEnumerable<KeyValuePair<string, Schema>> EnumerateProperties(string modelName, Dictionary<string, Schema> definitions)
+        {
+            var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
+            var propertiesList = new List<KeyValuePair<string, Schema>>();
+            foreach (var modelRef in modelsToCheck)
+            {
+                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
+
+                propertiesList.Union(definitions[modelRef].Properties);
+            }
+            return propertiesList;
+        }
+
+        /// <summary>
+        /// Returns the cumulative list of all required properties found in the entire model hierarchy
+        /// </summary>
+        /// <param name="modelName">model for which to check the required properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <param name="propertyList">List of required properties found in model hierarchy</param>
+        private static IEnumerable<string> EnumerateRequiredProperties(string modelName, Dictionary<string, Schema> definitions)
+        {
+            var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
+            var propertiesList = new List<string>();
+            foreach (var modelRef in modelsToCheck)
+            {
+                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Required?.Any() != true) continue;
+
+                propertiesList.Union(definitions[modelRef].Required);
+            }
+            return propertiesList;
+        }
+
+        /// <summary>
+        /// Returns the cumulative list of all read only properties found in the entire model hierarchy
+        /// </summary>
+        /// <param name="modelName">model for which to find the read only properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <param name="propertyList">List of read only properties found in model hierarchy</param>
+        private static IEnumerable<string> EnumerateReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions)
+        {
+            var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
+            var propertiesList = new List<string>();
+            foreach (var modelRef in modelsToCheck)
+            {
+                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
+
+                propertiesList.Union(definitions[modelRef].Properties.Where(prop=>prop.Value.ReadOnly == true ).Select(prop=>prop.Key));
+            }
+            return propertiesList;
+        }
 
 
         /// <summary>
-        /// Checks whether a model definition has the properties "id, name and type" (which are "Resource" type properties)
-        /// anywhere in its heirarchy
+        /// Checks if model hierarchy consists of given set of properties
         /// </summary>
         /// <param name="modelName">model for which to check the resource properties</param>
         /// <param name="definitions">dictionary of model definitions</param>
-        /// <param name="propertyList">List of properties to be checked for in a model heirarchy</param>
-        /// <returns>true if the model heirarchy contains all of the resource model properties</returns>
-        private static bool ContainsProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertyList, PropertyListType listType = PropertyListType.Properties)
+        /// <param name="propertyList">List of properties to be checked for in a model hierarchy</param>
+        /// <returns>true if the model hierarchy contains all of the resource model properties</returns>
+        public static bool ContainsProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertiesToCheck)
         {
-            if (!definitions.ContainsKey(modelName)) return false;
-            var modelSchema = definitions[modelName];
+            var propertyList = EnumerateProperties(modelName, definitions);
+            return propertiesToCheck.Except(propertyList.Select(prop=>prop.Key)).Any();
+        }
 
-            if (modelSchema.Properties?.Any() == true)
-            {
-                switch(listType)
-                {
-                    case PropertyListType.Properties:
-                        propertyList = propertyList.Except(modelSchema.Properties.Keys);
-                        break;
+        /// <summary>
+        /// Checks if model hierarchy consists of given set of required properties
+        /// </summary>
+        /// <param name="modelName">model for which to check the resource properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <param name="propertyList">List of required properties to be checked for in a model hierarchy</param>
+        /// <returns>true if the model hierarchy contains all of the required properties</returns>
+        public static bool ContainsRequiredProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> requiredPropertiesToCheck)
+        {
+            var propertyList = EnumerateRequiredProperties(modelName, definitions);
+            return requiredPropertiesToCheck.Except(propertyList).Any();
+        }
 
-                    case PropertyListType.ReadOnlyProperties:
-                        propertyList = propertyList.Except(modelSchema.Properties.Where(propPair => propPair.Value.ReadOnly == true).Select(propPair=>propPair.Key));
-                        break;
-
-                    case PropertyListType.RequiredProperties:
-                        propertyList = propertyList.Except(modelSchema.Required);
-                        break;
-                }
-                
-                // if all properties are found, return true!
-                if (!propertyList.Any()) return true;
-            }
-
-            if (modelSchema.AllOf?.Any() != true) return false;
-
-            var modelRefNames = modelSchema.AllOf.Select(modelRefSchema => modelRefSchema.Reference?.StripDefinitionPath())
-                                    .Where(modelRef => !string.IsNullOrEmpty(modelRef) && definitions.ContainsKey(modelRef));
-
-            foreach (var modelRef in modelRefNames)
-            {
-                if (ContainsProperties(modelRef, definitions, propertyList, listType)) return true;
-            }
-
-            return false;
+        /// <summary>
+        /// Checks if model hierarchy consists of given set of read only properties
+        /// </summary>
+        /// <param name="modelName">model for which to check the resource properties</param>
+        /// <param name="definitions">dictionary of model definitions</param>
+        /// <param name="propertyList">List of read only properties to be checked for in a model hierarchy</param>
+        /// <returns>true if the model hierarchy contains all of the read only properties</returns>
+        public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> requiredPropertiesToCheck)
+        {
+            var propertyList = EnumerateRequiredProperties(modelName, definitions);
+            return requiredPropertiesToCheck.Except(propertyList).Any();
         }
 
         /// <summary>
@@ -173,7 +240,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to determine if it is allOfs on given model names</param>
         /// <param name="definitions">dictionary that contains model definitions</param>
         /// <param name="allOfedModels">list allOfed models</param>
-        /// <returns>true if given model allOfs on given allOf list at any level of heirarchy</returns>
+        /// <returns>true if given model allOfs on given allOf list at any level of hierarchy</returns>
         public static bool IsAllOfOnModelNames(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> allOfedModels)
         {
             // if the model being tested belongs to the allOfed list, return false
