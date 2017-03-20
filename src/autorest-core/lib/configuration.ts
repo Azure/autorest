@@ -1,3 +1,11 @@
+import {
+  DataHandleRead,
+  DataHandleWrite,
+  DataStore,
+  DataStoreFileView,
+  DataStoreView,
+  DataStoreViewReadonly
+} from './data-store/data-store';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -31,49 +39,17 @@ export interface AutoRestConfigurationImpl {
   "base-folder"?: string;
 }
 
-export class Configuration {
-  private constructor(
-    private fileSystem: IFileSystem,
-    private config: AutoRestConfigurationImpl
-  ) {
+// protected static CreateDefaultConfiguration(): AutoRestConfigurationImpl {
+//   return {
+//     "input-file": []
+//   };
+// }
+
+export class ConfigurationView {
+  constructor(
+    private configurationFileUri: string,
+    private config: AutoRestConfigurationImpl) {
   }
-
-  public static async Create(fileSystem: IFileSystem, config?: AutoRestConfigurationImpl): Promise<Configuration> {
-    if (config) {
-      // passed a configuration template, no scanning required
-      return new Configuration(fileSystem, config);
-    }
-
-    // scan the filesystem items for the configuration.
-    const configFiles = new Map<string, string>();
-
-    for await (const name of fileSystem.EnumerateFiles()) {
-      const content = await fileSystem.ReadFile(name);
-      if (content.indexOf(Constants.MagicString) > -1) {
-        configFiles.set(name, content);
-      }
-    }
-
-    if (configFiles.size == 0) {
-      throw new Error(`No configuation file found in the filesystem '${fileSystem.RootUri}'`);
-    }
-
-    // it's the readme.md or the shortest filename.
-    let found = From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase() == Constants.DefaultConfiguratiion) || From<string>(configFiles.keys()).OrderBy(each => each.length).FirstOrDefault();
-
-    // having found the configuation, parse and load it.
-    // ???
-
-    // create the configuration object.
-    return new Configuration(fileSystem, <AutoRestConfigurationImpl>{ /* ??? */ });
-  }
-
-  public Add(path: string, value: any) {
-
-  }
-
-
-  private configurationFileUri: string
 
   private get configFileFolderUri(): string {
     return ResolveUri(this.configurationFileUri, ".").toString();
@@ -111,4 +87,93 @@ export class Configuration {
   }
 
   // TODO: stuff like generator specific settings (= YAML merging root with generator's section)
+}
+
+
+export interface Configuration {
+  Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }>;
+  HasConfiguration(): Promise<boolean>;
+}
+
+export class ConstantConfiguration implements Configuration {
+  public constructor(
+    private configurationUri: string,
+    private configuration: AutoRestConfigurationImpl
+  ) {
+  }
+
+  public async Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }> {
+    const inputView = data.CreateScope("input").AsFileScope();
+    await inputView.Write(this.configurationUri);
+    return {
+      inputView: inputView,
+      uri: this.configurationUri
+    };
+  }
+
+  public async HasConfiguration(): Promise<boolean> {
+    return true;
+  }
+}
+
+export class FileSystemConfiguration implements Configuration {
+  private cachedConfigurationFileName: string | null | undefined;
+
+  public constructor(
+    private fileSystem: IFileSystem,
+    private configurationFileName?: string
+  ) {
+    this.FileChanged();
+  }
+
+  public FileChanged() {
+    this.cachedConfigurationFileName = undefined;
+  }
+
+  private async DetectConfigurationFile(): Promise<string | null> {
+    if (this.cachedConfigurationFileName !== undefined) {
+      return this.cachedConfigurationFileName;
+    }
+
+    // scan the filesystem items for the configuration.
+    const configFiles = new Map<string, string>();
+
+    for await (const name of this.fileSystem.EnumerateFiles()) {
+      const content = await this.fileSystem.ReadFile(name);
+      if (content.indexOf(Constants.MagicString) > -1) {
+        configFiles.set(name, content);
+      }
+    }
+
+    if (configFiles.size === 0) {
+      return null;
+    }
+
+    // it's the readme.md or the shortest filename.
+    let found =
+      From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase() === Constants.DefaultConfiguratiion) ||
+      From<string>(configFiles.keys()).OrderBy(each => each.length).First();
+
+    return this.cachedConfigurationFileName = ResolveUri(this.fileSystem.RootUri, found);
+  }
+
+  public async Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }> {
+    const inputView = data.CreateScope("input").AsFileScopeReadThroughFileSystem(this.fileSystem);
+    const result = await this.DetectConfigurationFile();
+    if (result === null) {
+      throw new Error(`No configuation file found in the filesystem '${this.fileSystem.RootUri}'`);
+    }
+    return {
+      inputView: inputView,
+      uri: result
+    };
+  }
+
+  public async HasConfiguration(): Promise<boolean> {
+    return await this.DetectConfigurationFile() !== null;
+  }
+
+  public Add(path: string, value: any) {
+
+  }
 }

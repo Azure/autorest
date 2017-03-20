@@ -6,26 +6,32 @@
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
 import { ResolveUri } from "../ref/uri";
 import { WriteString } from "../ref/writefs";
-import { Configuration, AutoRestConfigurationImpl } from "../configuration";
-import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
+import { AutoRestConfigurationImpl, Configuration, ConfigurationView } from '../configuration';
+import {
+  DataHandleRead,
+  DataStore,
+  DataStoreView,
+  DataStoreViewReadonly,
+  KnownScopes
+} from '../data-store/data-store';
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
-import { DiskFileSystem } from "../file-system"
+import { RealFileSystem } from "../file-system"
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-export async function RunPipeline(configurationUri: string, workingScope: DataStoreView): Promise<{ [name: string]: DataPromise }> {
-  // load config
-  const fs = new DiskFileSystem(configurationUri);
+export async function RunPipeline(configuration: Configuration, workingScope: DataStoreView = new DataStore()): Promise<{ [name: string]: DataPromise }> {
+  const configResult = await configuration.Acquire(workingScope);
 
+  // load config
   const hConfig = await ParseLiterateYaml(
-    await workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uri => uri === configurationUri).ReadStrict(configurationUri),
+    await configResult.inputView.ReadStrict(configResult.uri),
     workingScope.CreateScope("config"));
-  const config = await Configuration.Create(fs, await hConfig.ReadObject<AutoRestConfigurationImpl>());
+  const config = await new ConfigurationView(configResult.uri, await hConfig.ReadObject<AutoRestConfigurationImpl>());
 
   // load Swaggers
-  const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri); // TODO: unlock further URIs here
+  const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri) || true; // TODO: unlock further URIs here
   const swaggers = await LoadLiterateSwaggers(
     workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
     config.inputFileUris, workingScope.CreateScope("loader"));

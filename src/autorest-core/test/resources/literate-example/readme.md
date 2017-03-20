@@ -1,5 +1,7 @@
 ﻿# MySample API
 
+> see https://aka.ms/autorest
+
 Some information about My Sample API. It's a great API, and it's mine.
 
 ## Common Settings

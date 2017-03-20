@@ -10,15 +10,14 @@
 // this file should get 'required' by the boostrapper
 
 import { resolve as currentDirectory } from "path";
-import { existsSync } from "fs";
 import { ChildProcess } from "child_process";
-import { MultiPromiseUtility } from "./lib/multi-promise";
 import { CreateFileUri, ResolveUri } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { AutoRestConfigurationSwitches } from "./lib/configuration";
+import { AutoRestConfigurationSwitches, ConstantConfiguration, FileSystemConfiguration } from "./lib/configuration";
 import { DataStore } from "./lib/data-store/data-store";
 import { RunPipeline } from "./lib/pipeline/pipeline";
+import { RealFileSystem } from "./lib/file-system";
 
 
 /**
@@ -39,8 +38,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
-    await (await dataStore.CreateScope("input").AsFileScope().Write(configFileUri)).WriteObject(config);
-    const restultStreams = await RunPipeline(configFileUri, dataStore);
+    const restultStreams = await RunPipeline(new ConstantConfiguration(configFileUri, config), dataStore);
   }
   else {
     // exec
@@ -58,8 +56,6 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
  */
 
 type CommandLineArgs = { configFile?: string, switches: AutoRestConfigurationSwitches };
-
-const defaultConfigurationFileName = "readme.md";
 
 function parseArgs(autorestArgs: string[]): CommandLineArgs {
   const result: CommandLineArgs = {
@@ -87,26 +83,13 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
     result.switches[key] = value === undefined ? null : value;
   }
 
-  // default configuration file
-  if (!result.configFile && existsSync(defaultConfigurationFileName)) {
-    result.configFile = defaultConfigurationFileName;
-  }
-
   return result;
 }
 
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
-  if (!args.configFile) {
-    throw new Error(`No configuration file specified and default ('${defaultConfigurationFileName}') not found`);
-  }
-
-  // resolve configuration file
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-  const configFileUri = ResolveUri(currentDirUri, args.configFile);
-
-  // dispatch
-  await RunPipeline(configFileUri, new DataStore());
+  await RunPipeline(new FileSystemConfiguration(new RealFileSystem(currentDirUri), args.configFile), new DataStore());
 }
 
 
