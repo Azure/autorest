@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Logging.Core
     {
         private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
 
-        private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resource>[^{/]+)/)?((?<resourceName>[^/]+)/)?((?<childResource>[^{/]+)/)?((?<childResourceName>[^/]+)/)?((?<grandChildResource>[^{/]+)/)?((?<grandChildResourceName>[^\/]+))?");
+        private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
 
         public void Log(LogMessage message)
         {
@@ -30,22 +30,6 @@ namespace AutoRest.Swagger.Logging.Core
                 var pathComponents = resPathPattern.Match(path ?? "");
                 var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
                 var pathComponentResource = pathComponents.Groups["resource"];
-                var pathComponentChildResource = pathComponents.Groups["childResource"];
-                var pathComponentGrandChildResource = pathComponents.Groups["grandChildResource"];
-
-                string violatingResourceType = "";
-                if (pathComponentResource.Success)
-                {
-                    violatingResourceType = string.IsNullOrWhiteSpace(pathComponentResource.Value) ? violatingResourceType : pathComponentResource.Value;
-                }
-                if (pathComponentChildResource.Success)
-                {
-                    violatingResourceType = string.IsNullOrWhiteSpace(pathComponentChildResource.Value) ? violatingResourceType : pathComponentChildResource.Value;
-                }
-                if (pathComponentGrandChildResource.Success)
-                {
-                    violatingResourceType = string.IsNullOrWhiteSpace(pathComponentGrandChildResource.Value) ? violatingResourceType : pathComponentGrandChildResource.Value;
-                }
 
                 var rawMessage = new Dictionary<string, string>();
                 rawMessage["type"] = validationMessage.Severity.ToString();
@@ -56,7 +40,7 @@ namespace AutoRest.Swagger.Logging.Core
                 rawMessage["id"] = validationMessage.Rule.Id;
                 rawMessage["validationCategory"] = validationMessage.Rule.ValidationCategory.ToString();
                 rawMessage["providerNamespace"] = pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null;
-                rawMessage["resourceType"] = violatingResourceType;
+                rawMessage["resourceType"] = pathComponentResource.Value;
                 rawMessageCollection.Add(rawMessage);
             }
         }
