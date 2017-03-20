@@ -5,7 +5,7 @@
 
 import * as yamlAst from "yaml-ast-parser";
 import { JsonPath } from "./jsonpath";
-import { NewEmptyObject } from "./stable-object";
+import { NewEmptyObject } from "../parsing/stable-object";
 
 /**
  * reexport required elements
