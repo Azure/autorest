@@ -10,8 +10,12 @@
   "showOutput": "always",
   "tasks": [
     {
+      "showInStatusBar": false,
+      "suppressTaskName": true,
+      "command": "gulp",
       "taskName": "build/typescript",
       "args": [
+        "build/typescript",
         "--watch"
       ],
       "isBuildCommand": true,
@@ -19,6 +23,61 @@
       "problemMatcher": [
         "$msCompile",
         "$tsc"
+      ]
+    },
+    {
+      "suppressTaskName": true,
+      "command": "gulp",
+      "taskName": "build (all)",
+      "args": [
+        "build"
+      ],
+      "isBuildCommand": false,
+      "isBackground": true,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "suppressTaskName": true,
+      "command": "gulp",
+      "taskName": "build (typescript)",
+      "args": [
+        "build/typescript"
+      ],
+      "isBuildCommand": true,
+      "isBackground": false,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "suppressTaskName": true,
+      "command": "${workspaceRoot}/src/autorest-core/node_modules/.bin/mocha",
+      "taskName": "test (autorest-core)",
+      "options": {
+        "cwd": "${workspaceRoot}/src/autorest-core"
+      },
+      "args": [
+        "${workspaceRoot}/src/autorest-core/test",
+        "-g",
+        "File*"
+      ],
+      "isTestCommand": true,
+      "isBackground": false,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "taskName": "kill node",
+      "suppressTaskName": true,
+      "command": "pskill",
+      "args": [
+        "node"
       ]
     }
   ]

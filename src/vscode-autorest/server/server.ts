@@ -14,7 +14,7 @@ import {
 } from 'vscode-languageserver';
 
 import { AutoRest, IFileSystem, Installer, Configuration } from "autorest";
-import { VSCodeHybridFileSystem } from "./FileSystem";
+import { VSCodeHybridFileSystem } from "./file-system";
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
 let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));

@@ -4,7 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ResolveUri } from "./approved-imports/uri";
+import { From } from "./approved-imports/linq";
 import { IFileSystem } from "./file-system"
+import * as Constants from "./constants"
 
 export interface AutoRestConfigurationSwitches {
   [key: string]: string | null;
@@ -30,6 +32,7 @@ export interface AutoRestConfigurationImpl {
 }
 
 export class Configuration {
+
   private constructor(
     private fileSystem: IFileSystem,
     private config: AutoRestConfigurationImpl
@@ -42,17 +45,31 @@ export class Configuration {
       return new Configuration(fileSystem, config);
     }
 
-    let result = new Configuration(fileSystem, <AutoRestConfigurationImpl>{});
     // scan the filesystem items for the configuration.
+    const configFiles = new Map<string, string>();
+
+    for await (const name of fileSystem.EnumerateFiles()) {
+      const content = await fileSystem.ReadFile(name);
+      if (content.indexOf(Constants.MagicString) > -1) {
+        configFiles.set(name, content);
+      }
+    }
+
+    if (configFiles.size == 0) {
+      throw new Error(`No configuation file found in the filesystem '${fileSystem.RootUri}'`);
+    }
+
+    // it's the readme.md or the shortest filename.
+    let found = From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase() == Constants.DefaultConfiguratiion) || From<string>(configFiles.keys()).OrderBy(each => each.length).FirstOrDefault();
 
     // having found the configuation, parse and load it.
+    // ???
 
-    // add that to the result object.
-
-    return result;
+    // create the configuration object.
+    return new Configuration(fileSystem, <AutoRestConfigurationImpl>{ /* ??? */ });
   }
-  private configurationFileUri: string
 
+  private configurationFileUri: string
 
   private get configFileFolderUri(): string {
     return ResolveUri(this.configurationFileUri, ".").toString();

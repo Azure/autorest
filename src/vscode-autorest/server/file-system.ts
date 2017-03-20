@@ -8,7 +8,6 @@ import * as _fs from 'fs';
 
 let fs = promisify(_fs);
 
-
 export class VSCodeHybridFileSystem implements IFileSystem {
   WriteFile(path: string, content: string): Promise<void> {
     throw new Error('Method not implemented.');
@@ -45,7 +44,7 @@ export class VSCodeHybridFileSystem implements IFileSystem {
   // on startup, we can look at the filesystem pointed to by the root uri.
   // after that, we should respond to 
 
-  async *EnumerateFiles(): AsyncIterator<string> {
+  async *EnumerateFiles(): AsyncIterable<string> {
     return [];
     /* if (this.IsValidRoot()) {
       if (!this._folders.has(prefix)) {
