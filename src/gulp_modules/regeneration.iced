@@ -13,7 +13,7 @@ regenExpected = (opts,done) ->
     optsMappingsValue = opts.mappings[key]
     swaggerFile = if optsMappingsValue instanceof Array then optsMappingsValue[0] else optsMappingsValue
     args = [
-      #'-FANCY',
+      '-FANCY',
       '-SkipValidation',
       '-CodeGenerator', opts.codeGenerator,
       '-OutputDirectory', "#{outputDir}/#{key}",
