@@ -1,8 +1,8 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { CreateFileUri, ResolveUri } from "../lib/approved-imports/uri";
-import { parse } from "../lib/approved-imports/jsonpath";
+import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
+import { parse } from "../lib/ref/jsonpath";
 import { DataStore } from "../lib/data-store/data-store";
 import { RunPipeline } from "../lib/pipeline/pipeline";
 

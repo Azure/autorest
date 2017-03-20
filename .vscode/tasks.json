@@ -11,11 +11,8 @@
   "tasks": [
     {
       "showInStatusBar": false,
-      "suppressTaskName": true,
-      "command": "gulp",
       "taskName": "build/typescript",
       "args": [
-        "build/typescript",
         "--watch"
       ],
       "isBuildCommand": true,

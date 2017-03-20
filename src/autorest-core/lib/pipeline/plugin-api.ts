@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { RequestType0, RequestType1, RequestType2 } from "../approved-imports/jsonrpc";
-import { NotificationType0, NotificationType1, NotificationType2, NotificationType3, NotificationType4 } from "../approved-imports/jsonrpc";
-import { Mapping, RawSourceMap, SmartPosition } from "../approved-imports/source-map";
+import { RequestType0, RequestType1, RequestType2 } from "../ref/jsonrpc";
+import { NotificationType0, NotificationType1, NotificationType2, NotificationType3, NotificationType4 } from "../ref/jsonrpc";
+import { Mapping, RawSourceMap, SmartPosition } from "../ref/source-map";
 
 
 export type MessageChannel =

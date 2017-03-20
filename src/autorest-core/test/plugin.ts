@@ -1,8 +1,8 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { CancellationToken } from "../lib/approved-imports/cancallation";
-import { CreateFileUri, ResolveUri } from "../lib/approved-imports/uri";
+import { CancellationToken } from "../lib/ref/cancallation";
+import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
 import { Message } from "../lib/pipeline/plugin-api";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";

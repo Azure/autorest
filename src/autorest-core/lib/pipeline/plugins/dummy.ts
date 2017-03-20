@@ -5,7 +5,7 @@
 
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
-import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/source-map";
+import { SmartPosition, Mapping, RawSourceMap } from "../../ref/source-map";
 
 
 class DummyPlugin {

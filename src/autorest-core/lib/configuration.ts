@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { ResolveUri } from "./approved-imports/uri";
-import { From } from "./approved-imports/linq";
+import { ResolveUri } from "./ref/uri";
+import { From } from "./ref/linq";
 import { IFileSystem } from "./file-system"
 import * as Constants from "./constants"
 

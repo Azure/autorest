@@ -4,9 +4,9 @@
 *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { ResolveUri } from "./lib/approved-imports/uri";
+import { ResolveUri } from "./lib/ref/uri";
 import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
-import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
+import { MultiPromiseUtility } from "./lib/multi-promise";
 import { AutoRestConfigurationImpl } from "./lib/configuration"
 
 const regexLegacyArg = /^-[^-]/;

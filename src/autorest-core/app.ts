@@ -12,8 +12,8 @@
 import { resolve as currentDirectory } from "path";
 import { existsSync } from "fs";
 import { ChildProcess } from "child_process";
-import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
-import { CreateFileUri, ResolveUri } from "./lib/approved-imports/uri";
+import { MultiPromiseUtility } from "./lib/multi-promise";
+import { CreateFileUri, ResolveUri } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration";

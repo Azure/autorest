@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ChildProcess } from "child_process";
-import { CancellationToken } from "../../approved-imports/cancallation";
+import { CancellationToken } from "../../ref/cancallation";
 import { SpawnJsonRpcAutoRest } from "../../../interop/autorest-dotnet";
 import { AutoRestPlugin } from "../plugin-endpoint";
 import { DataHandleRead, DataStoreViewReadonly, QuickScope, DataStoreView } from "../../data-store/data-store";

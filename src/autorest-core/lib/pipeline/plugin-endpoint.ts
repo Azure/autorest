@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { fork, ChildProcess } from "child_process";
-import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../approved-imports/source-map";
-import { CancellationToken } from "../approved-imports/cancallation";
-import { createMessageConnection, MessageConnection } from "../approved-imports/jsonrpc";
+import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../ref/source-map";
+import { CancellationToken } from "../ref/cancallation";
+import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/data-store";
 import { Message, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
 

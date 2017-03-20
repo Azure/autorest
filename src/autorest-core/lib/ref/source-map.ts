@@ -7,7 +7,7 @@
 export { Position } from "source-map";
 import { Position } from "source-map";
 export { RawSourceMap } from "source-map";
-import { JsonPath } from "../approved-imports/jsonpath";
+import { JsonPath } from "../ref/jsonpath";
 
 export type SmartPosition = Position | { path: JsonPath };
 

@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { From } from "../approved-imports/linq";
-import { JsonPath, stringify } from "../approved-imports/jsonpath";
-import * as yaml from "../approved-imports/yaml";
-import { Mappings } from "../approved-imports/source-map";
+import { From } from "../ref/linq";
+import { JsonPath, stringify } from "../ref/jsonpath";
+import * as yaml from "../ref/yaml";
+import { Mappings } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite } from "../data-store/data-store";
 
 // TODO: may want ASTy merge! (keeping circular structure and such?)

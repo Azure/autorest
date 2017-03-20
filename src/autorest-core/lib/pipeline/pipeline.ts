@@ -3,9 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { MultiPromiseUtility, MultiPromise } from "../approved-imports/multi-promise";
-import { ResolveUri } from "../approved-imports/uri";
-import { WriteString } from "../approved-imports/writefs";
+import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
+import { ResolveUri } from "../ref/uri";
+import { WriteString } from "../ref/writefs";
 import { Configuration, AutoRestConfigurationImpl } from "../configuration";
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly, KnownScopes } from "../data-store/data-store";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";

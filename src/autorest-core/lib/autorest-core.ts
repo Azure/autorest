@@ -1,4 +1,4 @@
-import { IEnumerable, From } from './approved-imports/linq';
+import { IEnumerable, From } from './ref/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./events"
 import { IFileSystem } from "./file-system"
 import { Configuration } from "./configuration"

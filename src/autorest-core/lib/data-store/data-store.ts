@@ -3,16 +3,16 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationToken } from "../approved-imports/cancallation";
-import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/source-map";
-import { ReadUri, ResolveUri } from "../approved-imports/uri";
-import { WriteString } from "../approved-imports/writefs";
-import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../approved-imports/yaml";
+import { CancellationToken } from "../ref/cancallation";
+import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
+import { ReadUri, ResolveUri } from "../ref/uri";
+import { WriteString } from "../ref/writefs";
+import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
-import { Lazy } from "../approved-imports/lazy";
+import { Lazy } from "../lazy";
 
 export const helloworld = "hi"; // TODO: wat?
 

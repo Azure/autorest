@@ -1,7 +1,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import * as jsonpath from "../lib/approved-imports/jsonpath";
+import * as jsonpath from "../lib/ref/jsonpath";
 
 @suite class JsonPath {
   private roundTrip(s: string) { return jsonpath.stringify(jsonpath.parse(s)); }

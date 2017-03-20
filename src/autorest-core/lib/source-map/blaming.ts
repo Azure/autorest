@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataStore } from "../data-store/data-store";
-import { From } from "../approved-imports/linq";
+import { From } from "../ref/linq";
 
 export class BlameTree {
   public static async Create(dataStore: DataStore, position: sourceMap.MappedPosition): Promise<BlameTree> {

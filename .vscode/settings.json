@@ -1,5 +1,6 @@
 {
   "files.exclude": {
+    "node_modules/**": true,
     "src/autorest-core/**/*.js": true,
     "src/autorest-core/**/*.d.ts": true,
     "src/autorest-core/**/*.js.map": true,

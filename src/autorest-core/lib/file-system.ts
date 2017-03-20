@@ -1,6 +1,6 @@
 import * as a from "./async";
-import { From } from "./approved-imports/linq"
-import * as uri from "./approved-imports/uri"
+import { From } from "./ref/linq"
+import * as uri from "./ref/uri"
 
 export interface IFileSystem {
   readonly RootUri: string;

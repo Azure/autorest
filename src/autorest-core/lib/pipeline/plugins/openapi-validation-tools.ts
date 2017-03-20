@@ -5,8 +5,8 @@
 
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
 import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
-import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/source-map";
-import { Parse, Stringify } from "../../approved-imports/yaml";
+import { SmartPosition, Mapping, RawSourceMap } from "../../ref/source-map";
+import { Parse, Stringify } from "../../ref/yaml";
 const utils = require("../../../../../../openapi-validation-tools/lib/util/utils");
 const validation = require("../../../../../../openapi-validation-tools/index");
 

@@ -1,6 +1,6 @@
 # build task for tsc 
 task 'build', 'typescript', (done)-> 
-  count = 4
+  count = 3
 
   # symlink the build into the target folder for the binaries.
   if ! test '-d',"#{basefolder}/src/core/AutoRest/bin/#{configuration}/netcoreapp1.0/node_modules"

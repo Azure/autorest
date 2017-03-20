@@ -4,17 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { DataStoreView, DataHandleRead, DataStoreViewReadonly } from "../data-store/data-store";
-import { JsonPath, JsonPathComponent, stringify } from "../approved-imports/jsonpath";
+import { JsonPath, JsonPathComponent, stringify } from "../ref/jsonpath";
 import { ResolveRelativeNode } from "../parsing/yaml";
-import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../approved-imports/yaml";
-import { ResolveUri } from "../approved-imports/uri";
-import { From, Enumerable } from "../approved-imports/linq";
-import { Mappings, Mapping } from "../approved-imports/source-map";
+import { Descendants, YAMLNodeWithPath, ToAst, StringifyAst, CloneAst } from "../ref/yaml";
+import { ResolveUri } from "../ref/uri";
+import { From, Enumerable } from "../ref/linq";
+import { Mappings, Mapping } from "../ref/source-map";
 import { CreateAssignmentMapping } from "../source-map/source-map";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 
-import { WriteString } from "../approved-imports/writefs";
+import { WriteString } from "../ref/writefs";
 
 async function EnsureCompleteDefinitionIsPresent(
   inputScope: DataStoreViewReadonly,
