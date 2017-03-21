@@ -1,6 +1,8 @@
+import { FileUriToPath } from "./ref/uri";
+import { WriteString } from "./ref/writefs";
 import * as a from "./async";
-import { From } from "./ref/linq"
-import * as uri from "./ref/uri"
+import { From } from "./ref/linq";
+import * as uri from "./ref/uri";
 
 export interface IFileSystem {
   readonly RootUri: string;
@@ -30,17 +32,19 @@ export class MemoryFileSystem implements IFileSystem {
   }
 }
 
-export class DiskFileSystem implements IFileSystem {
+export class RealFileSystem implements IFileSystem {
   public constructor(public RootUri: string) {
   }
   async *EnumerateFiles(): AsyncIterable<string> {
-    return await a.readdir(this.RootUri);
+    if (this.RootUri.startsWith("file:")) {
+      yield* await a.readdir(FileUriToPath(this.RootUri));
+    }
   }
   async ReadFile(path: string): Promise<string> {
-    return a.readFile(uri.ResolveUri(this.RootUri, path));
+    return uri.ReadUri(uri.ResolveUri(this.RootUri, path));
   }
   async WriteFile(path: string, content: string): Promise<void> {
-    return a.writeFile(path, content);
+    return WriteString(uri.ResolveUri(this.RootUri, path), content);
   }
 }
 

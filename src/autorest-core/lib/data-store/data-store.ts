@@ -13,6 +13,7 @@ import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map"
 import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
 import { Lazy } from "../lazy";
+import { IFileSystem } from "../file-system";
 
 export const helloworld = "hi"; // TODO: wat?
 
@@ -105,6 +106,10 @@ export abstract class DataStoreView extends DataStoreViewReadonly {
     return new DataStoreViewReadThrough(this.AsFileScope(), customUriFilter);
   }
 
+  public AsFileScopeReadThroughFileSystem(fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThroughFS(this.AsFileScope(), fs);
+  }
+
   public AsReadonly(): DataStoreViewReadonly {
     return this;
   }
@@ -161,6 +166,36 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // populate cache
     const data = await ReadUri(uri);
+    const writeHandle = await this.slave.Write(uri);
+    const readHandle = await writeHandle.WriteData(data);
+    return readHandle;
+  }
+
+  public async Enum(): Promise<string[]> {
+    return this.slave.Enum();
+  }
+}
+
+class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
+  constructor(private slave: DataStoreFileView, private fs: IFileSystem) {
+    super();
+  }
+
+  public async Read(uri: string): Promise<DataHandleRead> {
+    // special URI handlers
+    // - GitHub
+    if (uri.startsWith('https://github')) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    }
+
+    // prope cache
+    const existingData = await this.slave.Read(uri);
+    if (existingData !== null) {
+      return existingData;
+    }
+
+    // populate cache
+    const data = await this.fs.ReadFile(uri);
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
     return readHandle;

@@ -8,6 +8,8 @@
  ***********************/
 import * as promisify from "pify";
 import { Readable } from "stream";
+import { parse } from "url";
+import { sep } from "path";
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
 const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
@@ -48,6 +50,23 @@ const fileUri: (path: string, options: { resolve: boolean }) => string = require
  */
 export function CreateFileUri(path: string): string {
   return fileUri(path, { resolve: false });
+}
+
+export function FileUriToPath(fileUri: string): string {
+  const uri = parse(fileUri);
+  if (uri.protocol !== "file:") {
+    throw `Protocol '${uri.protocol}' not supported for writing.`;
+  }
+  // convert to path
+  let p = uri.path;
+  if (p === undefined) {
+    throw `Cannot write to '${uri}'. Path not found.`;
+  }
+  if (sep === "\\") {
+    p = p.substr(p.startsWith("/") ? 1 : 0);
+    p = p.replace(/\//g, "\\");
+  }
+  return p;
 }
 
 /**

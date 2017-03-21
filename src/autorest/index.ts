@@ -7,7 +7,8 @@ export { IFileSystem, Message, AutoRest as IAutoRest } from 'autorest-core';
 
 // the local class definition of the AutoRest Interface
 import { AutoRest as IAutoRest } from 'autorest-core';
-import { Configuration as IConfiguration } from 'autorest-core';
+import { IConfiguration } from 'autorest-core';
+import { FileSystemConfiguration as configuration_implementation } from 'autorest-core';
 
 // export the selected implementation of the AutoRest interface.
 import { Installer } from "./installer"
@@ -18,5 +19,5 @@ let impl = require(modulePath);
 export const AutoRest: typeof IAutoRest = <typeof IAutoRest><any>impl.AutoRest
 export declare type AutoRest = IAutoRest;
 
-export const Configuration: typeof IConfiguration = <typeof IConfiguration><any>impl.Configuration
-export declare type Configuration = IConfiguration;
+export const Configuration: typeof configuration_implementation = <typeof configuration_implementation><any>impl.Configuration
+export declare type Configuration = configuration_implementation;

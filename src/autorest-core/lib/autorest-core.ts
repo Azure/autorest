@@ -1,11 +1,10 @@
 import { SmartPosition, Position } from './ref/source-map';
+import { DataStore, Metadata } from './data-store/data-store';
 import { IEnumerable, From } from './ref/linq';
-import { IEvent, EventDispatcher, EventEmitter } from "./events"
-import { IFileSystem } from "./file-system"
-import { Configuration } from "./configuration"
-import { DocumentType } from "./document-type"
-
-// export type Channel = Information | Warning | Error | Debug | Verbose | Fatal |
+import { IEvent, EventDispatcher, EventEmitter } from "./events";
+import { IFileSystem } from "./file-system";
+import { Configuration } from "./configuration";
+import { DocumentType } from "./document-type";
 
 export type Channel = {
   readonly Information: "information",
@@ -47,36 +46,37 @@ export interface Message {
 };
 
 export class AutoRest extends EventEmitter {
+
   /**
    * 
-   * @param rootUri The rootUri of the workspace. Is null if no workspace is open. 
+   * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    */
-  public constructor(configuration: Configuration) {
+  public constructor(private configuration: Configuration) {
     super();
-
   }
 
   /**
    *  Given a file's content, does this represent a swagger file of some sort?
-   * 
+   *
    * @param content - the file content to evaluate
    */
   public static async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
+
     return true;
   }
 
   /**
-   * This should be called to notify AutoRest that a file has changed. 
-   * 
-   * @param path the path of the files that has changed 
+   * This should be called to notify AutoRest that a file has changed.
+   *
+   * @param path the path of the files that has changed
    */
   public FileChanged(path: string) {
 
   }
 
   /**
-   * Called to start processing of the files. 
+   * Called to start processing of the files.
    */
   public Start(): void {
 

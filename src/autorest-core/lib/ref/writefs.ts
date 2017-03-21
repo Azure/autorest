@@ -3,10 +3,10 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { FileUriToPath } from './uri';
 import * as fs from "fs";
 import * as path from "path";
 import * as pify from "pify";
-import { parse } from "url";
 
 const fsAsync = pify(fs);
 
@@ -33,18 +33,5 @@ async function WriteStringInternal(fileName: string, data: string): Promise<void
  * @param data     String to write (encoding: UTF8).
  */
 export function WriteString(fileUri: string, data: string): Promise<void> {
-  const uri = parse(fileUri);
-  if (uri.protocol !== "file:") {
-    throw `Protocol '${uri.protocol}' not supported for writing.`;
-  }
-  // convert to path
-  let p = uri.path;
-  if (p === undefined) {
-    throw `Cannot write to '${uri}'. Path not found.`;
-  }
-  if (path.sep === "\\") {
-    p = p.substr(p.startsWith("/") ? 1 : 0);
-    p = p.replace(/\//g, "\\");
-  }
-  return WriteStringInternal(p, data);
+  return WriteStringInternal(FileUriToPath(fileUri), data);
 }

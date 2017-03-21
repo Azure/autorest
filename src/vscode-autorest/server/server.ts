@@ -34,12 +34,15 @@ let autorest: AutoRest;
 let myConfig: Configuration;
 let diagnostics: Map<string, Diagnostic[]> = new Map<string, Diagnostic[]>();
 let queuedToSend: NodeJS.Timer;
+let readyToProcess: NodeJS.Timer;
 
 async function sendDiagnostics() {
   if (!queuedToSend) {
     queuedToSend = setTimeout(sendQueuedDiagnostics, 25)
   }
 }
+
+
 
 async function sendQueuedDiagnostics() {
   queuedToSend = null;
@@ -57,7 +60,9 @@ connection.onInitialize(async (params): Promise<InitializeResult> => {
   workspaceRoot = params.rootUri;
 
   myfs = new VSCodeHybridFileSystem(connection, params.rootUri);
-  myConfig = await Configuration.Create(myfs);
+  myConfig = new Configuration(myfs);
+  let cfg = await myConfig.HasConfiguration;
+
   autorest = new AutoRest(myConfig);
 
   autorest.Debug.Subscribe((instance, args) => {
@@ -156,10 +161,24 @@ connection.onInitialize(async (params): Promise<InitializeResult> => {
   }
 });
 
+async function processDocuments() {
+
+}
+
+async function queueProcess() {
+  if (readyToProcess) {
+    clearTimeout(readyToProcess);
+    readyToProcess = setTimeout(processDocuments, 25);
+  }
+}
 // The content of a text document has changed. This event is emitted
 // when the text document first opened or when its content has changed.
 documents.onDidChangeContent((change) => {
-  validateTextDocument(change.document);
+  // send the document change to the configuration
+  //
+
+  // queue up the Process.
+  queueProcess();
 });
 
 // The settings interface describe the server relevant settings part
@@ -251,27 +270,29 @@ connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
 
 let t: Thenable<string>;
 
-/*
 connection.onDidOpenTextDocument((params) => {
-	// A text document got opened in VSCode.
-	// params.textDocument.uri uniquely identifies the document. For documents store on disk this is a file URI.
-	// params.textDocument.text the initial full content of the document.
-	connection.console.log(`${params.textDocument.uri} opened.`);
+  // A text document got opened in VSCode.
+  // params.textDocument.uri uniquely identifies the document. For documents store on disk this is a file URI.
+  // params.textDocument.text the initial full content of the document.
+
+  // add this to our filesystem
+
+  connection.console.log(`${params.textDocument.uri} opened.`);
 });
 
 connection.onDidChangeTextDocument((params) => {
-	// The content of a text document did change in VSCode.
-	// params.textDocument.uri uniquely identifies the document.
-	// params.contentChanges describe the content changes to the document.
-	connection.console.log(`${params.textDocument.uri} changed: ${JSON.stringify(params.contentChanges)}`);
+  // The content of a text document did change in VSCode.
+  // params.textDocument.uri uniquely identifies the document.
+  // params.contentChanges describe the content changes to the document.
+  connection.console.log(`${params.textDocument.uri} changed: ${JSON.stringify(params.contentChanges)}`);
 });
 
 connection.onDidCloseTextDocument((params) => {
-	// A text document got closed in VSCode.
-	// params.textDocument.uri uniquely identifies the document.
-	connection.console.log(`${params.textDocument.uri} closed.`);
+  // A text document got closed in VSCode.
+  // params.textDocument.uri uniquely identifies the document.
+  connection.console.log(`${params.textDocument.uri} closed.`);
 });
-*/
+
 
 // Listen on the connection
 connection.listen();

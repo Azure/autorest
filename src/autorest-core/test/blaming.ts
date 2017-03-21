@@ -1,3 +1,5 @@
+import { FileSystemConfiguration } from '../lib/configuration';
+import { RealFileSystem } from '../lib/file-system';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -10,8 +12,9 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
 
   @test @timeout(10000) async "end to end blaming with literate swagger"() {
     const dataStore = new DataStore();
-    const configFileUri = ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/readme.md");
-    const results = await RunPipeline(configFileUri, dataStore);
+    const results = await RunPipeline(
+      new FileSystemConfiguration(new RealFileSystem(ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/"))),
+      dataStore);
 
     // regular description
     {
