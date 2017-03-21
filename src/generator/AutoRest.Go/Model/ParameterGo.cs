@@ -13,6 +13,7 @@ namespace AutoRest.Go.Model
 {
   public class ParameterGo : Parameter
   {
+    public const string ApiVersionName = "APIVersion";
     public ParameterGo()
     {
 
