@@ -97,6 +97,8 @@ namespace AutoRest.Core.Model
         {
             get
             {
+                // logic: true == (_isConstant ?? ModelType?.IsConstant)
+
                 if (_isConstant.HasValue)
                 {
                     return _isConstant.Value;
@@ -108,7 +110,11 @@ namespace AutoRest.Core.Model
                 while (todo.Count > 0)
                 {
                     var type = todo.Dequeue();
-                    if (type != null && !seen.Contains(type))
+                    if (type == null)
+                    {
+                        return false;
+                    }
+                    else if (!seen.Contains(type))
                     {
                         seen.Add(type);
                         var typeComp = type as CompositeType;
@@ -131,7 +137,7 @@ namespace AutoRest.Core.Model
                                 }
                             }
                         }
-                        else if (type.IsConstant == false)
+                        else if (!type.IsConstant)
                         {
                             return false;
                         }
