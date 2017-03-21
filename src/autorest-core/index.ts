@@ -15,5 +15,6 @@ import { IEnumerable, From } from './lib/ref/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./lib/events"
 
 export { IFileSystem } from "./lib/file-system"
-export { AutoRest, Message, ConfigurationView } from "./lib/autorest-core"
+export { Message } from "./lib/message"
+export { AutoRest, ConfigurationView } from "./lib/autorest-core"
 

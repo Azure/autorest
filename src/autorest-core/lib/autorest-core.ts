@@ -6,45 +6,7 @@ import { IFileSystem } from "./file-system";
 import { Configuration, ConfigurationView, FileSystemConfiguration } from './configuration';
 import { DocumentType } from "./document-type";
 export { ConfigurationView } from './configuration';
-
-export type Channel = {
-  readonly Information: "information",
-  readonly Warning: "warning",
-  readonly Error: "error",
-  readonly Debug: "debug",
-  readonly Verbose: "verbose",
-  readonly Fatal: "fatal",
-};
-
-export const Channel: Channel = {
-  Information: "information",
-  Warning: "warning",
-  Error: "error",
-  Debug: "debug",
-  Verbose: "verbose",
-  Fatal: "fatal",
-}
-
-export interface SourceLocation {
-  Id: string;
-  Position: SmartPosition;
-}
-
-export interface Range {
-  document: string;
-  start: Position;
-  end: Position;
-}
-
-export interface Message {
-  Channel: Channel;
-  Key: AsyncIterable<string>;
-  Details: any;
-  Text: string;
-  Source: Array<SourceLocation>;
-  Range: AsyncIterable<Range>;
-  Plugin: string;
-};
+import { Message } from './message';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -53,6 +15,14 @@ export class AutoRest extends EventEmitter {
     return new Promise<ConfigurationView>(async (r, j) => {
       if (!this._view) {
         this._view = await new FileSystemConfiguration(this.fileSystem).CreateView(...this._configurations)
+
+        // subscribe to the events for the current configuration view 
+        this._view.Debug.Subscribe((cfg, message) => this.Debug.Dispatch(message));
+        this._view.Verbose.Subscribe((cfg, message) => this.Verbose.Dispatch(message));
+        this._view.Fatal.Subscribe((cfg, message) => this.Fatal.Dispatch(message));
+        this._view.Information.Subscribe((cfg, message) => this.Information.Dispatch(message));
+        this._view.Error.Subscribe((cfg, message) => this.Error.Dispatch(message));
+        this._view.Warning.Subscribe((cfg, message) => this.Warning.Dispatch(message));
       }
       r(this._view);
     })
@@ -72,7 +42,7 @@ export class AutoRest extends EventEmitter {
    * @param content - the file content to evaluate
    */
   public static async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
-
+    // this checks to see if the document is a 
     return true;
   }
 

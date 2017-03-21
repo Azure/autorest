@@ -12,11 +12,13 @@ import {
   DataStoreViewReadonly
 } from './data-store/data-store';
 
+import { EventEmitter, IEvent } from './events';
 import { CodeBlock, Parse as ParseLiterateYaml, ParseCodeBlocks } from './parsing/literate-yaml';
 import { ResolveUri } from "./ref/uri";
 import { From, Enumerable as IEnumerable } from "./ref/linq";
 import { IFileSystem } from "./file-system"
 import * as Constants from './constants';
+import { Message } from "./message";
 
 export interface AutoRestConfigurationSwitches {
   [key: string]: string | null;
@@ -60,15 +62,24 @@ function key(target: string) {
 };
 */
 
-export class ConfigurationView {
+export class ConfigurationView extends EventEmitter {
 
   /* @internal */ constructor(
     public workingScope: DataStore,
     private configurationFileUri: string,
     ...configs: Array<AutoRestConfigurationImpl>
   ) {
+    super();
     this.config = configs;
+    this.Debug.Dispatch({ Text: `Creating ConfigurationView : ${configs.length} sections.` })
   }
+
+  @EventEmitter.Event public Information: IEvent<ConfigurationView, Message>;
+  @EventEmitter.Event public Warning: IEvent<ConfigurationView, Message>;
+  @EventEmitter.Event public Error: IEvent<ConfigurationView, Message>;
+  @EventEmitter.Event public Debug: IEvent<ConfigurationView, Message>;
+  @EventEmitter.Event public Verbose: IEvent<ConfigurationView, Message>;
+  @EventEmitter.Event public Fatal: IEvent<ConfigurationView, Message>;
 
   private config: Array<AutoRestConfigurationImpl>
 
