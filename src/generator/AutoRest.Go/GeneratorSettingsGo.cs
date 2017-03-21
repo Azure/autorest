@@ -7,10 +7,10 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Go
 {
-    public class GeneratorSettingsGo : IsSingleton<GeneratorSettingsGo>, IGeneratorSettings
-    {
-        public virtual string Name => "Go";
+  public class GeneratorSettingsGo : IsSingleton<GeneratorSettingsGo>, IGeneratorSettings
+  {
+    public virtual string Name => "Go";
 
-        public virtual string Description => "Generic Go code generator.";
-    }
+    public virtual string Description => "Generic Go code generator.";
+  }
 }
