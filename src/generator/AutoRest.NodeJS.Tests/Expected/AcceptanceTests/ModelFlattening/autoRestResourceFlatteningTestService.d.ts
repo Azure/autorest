@@ -62,6 +62,36 @@ declare class AutoRestResourceFlatteningTestService {
         getArray(callback: ServiceCallback<models.FlattenedProduct[]>): void;
 
         /**
+         * Put External Resource as an Array
+         *
+         * @param {object} [options] Optional Parameters.
+         *
+         * @param {array} [options.resourceArray] External Resource as an Array to put
+         *
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         *
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        putWrappedArray(options: { resourceArray? : models.WrappedProduct[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        putWrappedArray(callback: ServiceCallback<void>): void;
+
+        /**
+         * Get External Resource as an Array
+         *
+         * @param {object} [options] Optional Parameters.
+         *
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         *
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        getWrappedArray(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductWrapper[]>): void;
+        getWrappedArray(callback: ServiceCallback<models.ProductWrapper[]>): void;
+
+        /**
          * Put External Resource as a Dictionary
          *
          * @param {object} [options] Optional Parameters.

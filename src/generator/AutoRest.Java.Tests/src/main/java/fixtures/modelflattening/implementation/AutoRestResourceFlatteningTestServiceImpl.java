@@ -23,9 +23,11 @@ import com.microsoft.rest.Validator;
 import fixtures.modelflattening.models.ErrorException;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.FlattenParameterGroup;
+import fixtures.modelflattening.models.ProductWrapper;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
+import fixtures.modelflattening.models.WrappedProduct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +121,14 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getArray" })
         @GET("model-flatten/array")
         Observable<Response<ResponseBody>> getArray();
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putWrappedArray" })
+        @PUT("model-flatten/wrappedarray")
+        Observable<Response<ResponseBody>> putWrappedArray(@Body List<WrappedProduct> resourceArray);
+
+        @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService getWrappedArray" })
+        @GET("model-flatten/wrappedarray")
+        Observable<Response<ResponseBody>> getWrappedArray();
 
         @Headers({ "Content-Type: application/json; charset=utf-8", "x-ms-logging-context: fixtures.modelflattening.AutoRestResourceFlatteningTestService putDictionary" })
         @PUT("model-flatten/dictionary")
@@ -341,6 +351,201 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return this.restClient().responseBuilderFactory().<List<FlattenedProduct>, ErrorException>newInstance(this.serializerAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void putWrappedArray() {
+        putWrappedArrayWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> putWrappedArrayAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putWrappedArrayWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> putWrappedArrayAsync() {
+        return putWrappedArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putWrappedArrayWithServiceResponseAsync() {
+        final List<WrappedProduct> resourceArray = null;
+        return service.putWrappedArray(resourceArray)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putWrappedArrayDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     */
+    public void putWrappedArray(List<WrappedProduct> resourceArray) {
+        putWrappedArrayWithServiceResponseAsync(resourceArray).toBlocking().single().body();
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putWrappedArrayWithServiceResponseAsync(resourceArray), serviceCallback);
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray) {
+        return putWrappedArrayWithServiceResponseAsync(resourceArray).map(new Func1<ServiceResponse<Void>, Void>() {
+            @Override
+            public Void call(ServiceResponse<Void> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Put External Resource as an Array.
+     *
+     * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceResponse} object if successful.
+     */
+    public Observable<ServiceResponse<Void>> putWrappedArrayWithServiceResponseAsync(List<WrappedProduct> resourceArray) {
+        Validator.validate(resourceArray);
+        return service.putWrappedArray(resourceArray)
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<Void>>>() {
+                @Override
+                public Observable<ServiceResponse<Void>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<Void> clientResponse = putWrappedArrayDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<Void> putWrappedArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.restClient().responseBuilderFactory().<Void, ErrorException>newInstance(this.serializerAdapter())
+                .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
+     * @return the List&lt;ProductWrapper&gt; object if successful.
+     */
+    public List<ProductWrapper> getWrappedArray() {
+        return getWrappedArrayWithServiceResponseAsync().toBlocking().single().body();
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
+     */
+    public ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(final ServiceCallback<List<ProductWrapper>> serviceCallback) {
+        return ServiceFuture.fromResponse(getWrappedArrayWithServiceResponseAsync(), serviceCallback);
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;ProductWrapper&gt; object
+     */
+    public Observable<List<ProductWrapper>> getWrappedArrayAsync() {
+        return getWrappedArrayWithServiceResponseAsync().map(new Func1<ServiceResponse<List<ProductWrapper>>, List<ProductWrapper>>() {
+            @Override
+            public List<ProductWrapper> call(ServiceResponse<List<ProductWrapper>> response) {
+                return response.body();
+            }
+        });
+    }
+
+    /**
+     * Get External Resource as an Array.
+     *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the observable to the List&lt;ProductWrapper&gt; object
+     */
+    public Observable<ServiceResponse<List<ProductWrapper>>> getWrappedArrayWithServiceResponseAsync() {
+        return service.getWrappedArray()
+            .flatMap(new Func1<Response<ResponseBody>, Observable<ServiceResponse<List<ProductWrapper>>>>() {
+                @Override
+                public Observable<ServiceResponse<List<ProductWrapper>>> call(Response<ResponseBody> response) {
+                    try {
+                        ServiceResponse<List<ProductWrapper>> clientResponse = getWrappedArrayDelegate(response);
+                        return Observable.just(clientResponse);
+                    } catch (Throwable t) {
+                        return Observable.error(t);
+                    }
+                }
+            });
+    }
+
+    private ServiceResponse<List<ProductWrapper>> getWrappedArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return this.restClient().responseBuilderFactory().<List<ProductWrapper>, ErrorException>newInstance(this.serializerAdapter())
+                .register(200, new TypeToken<List<ProductWrapper>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

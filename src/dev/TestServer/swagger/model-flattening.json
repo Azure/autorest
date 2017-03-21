@@ -73,6 +73,63 @@
         }
       }
     },
+    "/model-flatten/wrappedarray": {
+      "put": {
+        "operationId": "putWrappedArray",
+        "description": "Put External Resource as an Array",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "parameters": [
+          {
+            "name": "ResourceArray",
+            "description": "External Resource as an Array to put",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WrappedProduct"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getWrappedArray",
+        "description": "Get External Resource as an Array",
+        "externalDocs": {
+          "url": "http://tempuri.org"
+        },
+        "responses": {
+          "200": {
+            "description": "External Resource as an Array from get",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProductWrapper"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/model-flatten/dictionary": {
       "put": {
         "operationId": "putDictionary",
@@ -480,6 +537,25 @@
         "@odata.value": {
           "type": "string",
           "description": "URL value."
+        }
+      }
+    },
+    "WrappedProduct": {
+      "description": "The wrapped produc.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "the product value",
+        }
+      }
+    },
+    "ProductWrapper": {
+      "description": "The wrapped produc.",
+      "properties": {
+        "property": {
+          "type": "object",
+          "$ref": "#/definitions/WrappedProduct",
+          "x-ms-client-flatten": true
         }
       }
     }
