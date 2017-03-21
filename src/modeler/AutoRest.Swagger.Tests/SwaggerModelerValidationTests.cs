@@ -100,7 +100,7 @@ namespace AutoRest.Swagger.Tests
         public void UniqueResourcePathsValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "network-interfaces-api.json"));
-            messages.AssertOnlyValidationWarning(typeof(UniqueResourcePaths));
+            messages.AssertOnlyValidationMessage(typeof(UniqueResourcePaths));
         }
 
         [Fact]

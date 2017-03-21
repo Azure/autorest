@@ -327,8 +327,8 @@ Modelers:
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
     <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
   </data>
-  <data name="UniqueResourcePathsWarning" xml:space="preserve">
-    <value>More than one resource path is not allowed in a single spec (found: {0}).</value>
+  <data name="UniqueResourcePaths" xml:space="preserve">
+    <value>Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.</value>
   </data>
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
