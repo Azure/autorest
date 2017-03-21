@@ -152,7 +152,9 @@ class AutoRestResourceFlatteningTestService(object):
 
     def put_wrapped_array(
             self, resource_array=None, custom_headers=None, raw=False, **operation_config):
-        """Put External Resource as an Array.
+        """No need to have a route in Express server for this operation. Used to
+        verify the type flattened is not removed if it's referenced in an
+        array.
 
         :param resource_array: External Resource as an Array to put
         :type resource_array: list of :class:`WrappedProduct
@@ -200,7 +202,9 @@ class AutoRestResourceFlatteningTestService(object):
 
     def get_wrapped_array(
             self, custom_headers=None, raw=False, **operation_config):
-        """Get External Resource as an Array.
+        """No need to have a route in Express server for this operation. Used to
+        verify the type flattened is not removed if it's referenced in an
+        array.
 
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the

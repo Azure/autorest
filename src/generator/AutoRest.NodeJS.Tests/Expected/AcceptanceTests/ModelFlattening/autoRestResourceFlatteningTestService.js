@@ -297,7 +297,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
 };
 
 /**
- * Put External Resource as an Array
+ * No need to have a route in Express server for this operation. Used to verify
+ * the type flattened is not removed if it's referenced in an array
  *
  * @param {object} [options] Optional Parameters.
  *
@@ -417,7 +418,8 @@ AutoRestResourceFlatteningTestService.prototype.putWrappedArray = function (opti
 };
 
 /**
- * Get External Resource as an Array
+ * No need to have a route in Express server for this operation. Used to verify
+ * the type flattened is not removed if it's referenced in an array
  *
  * @param {object} [options] Optional Parameters.
  *

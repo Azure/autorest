@@ -62,7 +62,8 @@ declare class AutoRestResourceFlatteningTestService {
         getArray(callback: ServiceCallback<models.FlattenedProduct[]>): void;
 
         /**
-         * Put External Resource as an Array
+         * No need to have a route in Express server for this operation. Used to verify
+         * the type flattened is not removed if it's referenced in an array
          *
          * @param {object} [options] Optional Parameters.
          *
@@ -78,7 +79,8 @@ declare class AutoRestResourceFlatteningTestService {
         putWrappedArray(callback: ServiceCallback<void>): void;
 
         /**
-         * Get External Resource as an Array
+         * No need to have a route in Express server for this operation. Used to verify
+         * the type flattened is not removed if it's referenced in an array
          *
          * @param {object} [options] Optional Parameters.
          *

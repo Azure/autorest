@@ -356,7 +356,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -367,7 +367,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -378,7 +378,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -393,7 +393,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -415,7 +415,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -427,7 +427,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -439,7 +439,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -455,7 +455,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -485,7 +485,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -497,7 +497,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -508,7 +508,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;ProductWrapper&gt; object
@@ -523,7 +523,7 @@ public class AutoRestResourceFlatteningTestServiceImpl extends ServiceClient imp
     }
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;ProductWrapper&gt; object

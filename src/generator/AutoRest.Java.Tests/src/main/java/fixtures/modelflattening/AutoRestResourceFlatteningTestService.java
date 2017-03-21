@@ -150,7 +150,7 @@ public interface AutoRestResourceFlatteningTestService {
     Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -159,7 +159,7 @@ public interface AutoRestResourceFlatteningTestService {
     void putWrappedArray();
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -168,7 +168,7 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceFuture<Void> putWrappedArrayAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
@@ -176,14 +176,14 @@ public interface AutoRestResourceFlatteningTestService {
     Observable<Void> putWrappedArrayAsync();
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putWrappedArrayWithServiceResponseAsync();
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -193,7 +193,7 @@ public interface AutoRestResourceFlatteningTestService {
     void putWrappedArray(List<WrappedProduct> resourceArray);
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
@@ -203,7 +203,7 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceFuture<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -212,7 +212,7 @@ public interface AutoRestResourceFlatteningTestService {
     Observable<Void> putWrappedArrayAsync(List<WrappedProduct> resourceArray);
 
     /**
-     * Put External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param resourceArray External Resource as an Array to put
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -221,7 +221,7 @@ public interface AutoRestResourceFlatteningTestService {
     Observable<ServiceResponse<Void>> putWrappedArrayWithServiceResponseAsync(List<WrappedProduct> resourceArray);
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @throws ErrorException thrown if the request is rejected by server
@@ -231,7 +231,7 @@ public interface AutoRestResourceFlatteningTestService {
     List<ProductWrapper> getWrappedArray();
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @throws IllegalArgumentException thrown if parameters fail the validation
@@ -240,7 +240,7 @@ public interface AutoRestResourceFlatteningTestService {
     ServiceFuture<List<ProductWrapper>> getWrappedArrayAsync(final ServiceCallback<List<ProductWrapper>> serviceCallback);
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;ProductWrapper&gt; object
@@ -248,7 +248,7 @@ public interface AutoRestResourceFlatteningTestService {
     Observable<List<ProductWrapper>> getWrappedArrayAsync();
 
     /**
-     * Get External Resource as an Array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
      *
      * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;ProductWrapper&gt; object

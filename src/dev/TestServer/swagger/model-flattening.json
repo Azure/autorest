@@ -76,7 +76,7 @@
     "/model-flatten/wrappedarray": {
       "put": {
         "operationId": "putWrappedArray",
-        "description": "Put External Resource as an Array",
+        "description": "No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array",
         "externalDocs": {
           "url": "http://tempuri.org"
         },
@@ -107,7 +107,7 @@
       },
       "get": {
         "operationId": "getWrappedArray",
-        "description": "Get External Resource as an Array",
+        "description": "No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array",
         "externalDocs": {
           "url": "http://tempuri.org"
         },

@@ -394,7 +394,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         }
 
         /// <summary>
-        /// Put External Resource as an Array
+        /// No need to have a route in Express server for this operation. Used to
+        /// verify the type flattened is not removed if it's referenced in an array
         /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='resourceArray'>
@@ -511,7 +512,8 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         }
 
         /// <summary>
-        /// Get External Resource as an Array
+        /// No need to have a route in Express server for this operation. Used to
+        /// verify the type flattened is not removed if it's referenced in an array
         /// <see href="http://tempuri.org" />
         /// </summary>
         /// <param name='customHeaders'>
