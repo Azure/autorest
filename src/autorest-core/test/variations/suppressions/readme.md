@@ -1,4 +1,6 @@
 # Sample Configuration
+
+_note:the following line identifies this as an AutoRest configuration file_
 > see https://aka.ms/autorest
 
 ## Notes:
@@ -8,7 +10,7 @@ This shows some examples of how to suppress messages from AutoRest
 ### Typical Settings
 ``` yaml
 version: latest     # autorest version
-azure-arm: false    # no special ARM consideratons 
+azure-arm: true     # enable Azure validations and code generation features
 input-file: 
   - myApi.md    # multiple swaggers 
   - yourApi.md 
