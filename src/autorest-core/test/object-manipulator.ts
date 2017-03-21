@@ -3,8 +3,9 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { DataStore } from '../lib/data-store/data-store';
-import { ManipulateObject } from '../lib/pipeline/object-manipulator';
+import { safeEval } from "../lib/ref/safe-eval";
+import { DataStore } from "../lib/data-store/data-store";
+import { ManipulateObject } from "../lib/pipeline/object-manipulator";
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
@@ -100,6 +101,15 @@ definitions:
       // make all descriptions upper case
       const bestDescriptionEver = "best description ever";
       const result = await ManipulateObject(input, dataStore.CreateScope(`manip3`), "$..description", x => (x as string).toUpperCase());
+      assert.strictEqual(result.anyHit, true);
+      const resultObject = await result.result.ReadObject<any>();
+      assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
+      assert.strictEqual(resultObject.paths["/api/circular"].get.description, "FUN TIME");
+    }
+    {
+      // make all descriptions upper case by using safe-eval
+      const bestDescriptionEver = "best description ever";
+      const result = await ManipulateObject(input, dataStore.CreateScope(`manip4`), "$..description", x => safeEval("$.toUpperCase()", { $: x }));
       assert.strictEqual(result.anyHit, true);
       const resultObject = await result.result.ReadObject<any>();
       assert.strictEqual(resultObject.definitions.NodeA.description, "DESCRIPTION");
