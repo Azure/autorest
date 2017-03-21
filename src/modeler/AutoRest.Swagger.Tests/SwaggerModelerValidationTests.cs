@@ -225,12 +225,6 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
-        public void InvalidConstraintValidation()
-        {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "swagger-validation.json"));
-            messages.AssertOnlyValidationWarning(typeof(InvalidConstraint), 18);
-        }
-        [Fact]
         public void BodyTopLevelPropertiesValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "body-top-level-properties.json"));
