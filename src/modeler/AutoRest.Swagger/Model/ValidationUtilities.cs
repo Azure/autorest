@@ -122,7 +122,7 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
 
-                propertiesList.Union(definitions[modelRef].Properties);
+                propertiesList = propertiesList.Union(definitions[modelRef].Properties).ToList();
             }
             return propertiesList;
         }
@@ -139,9 +139,9 @@ namespace AutoRest.Swagger.Model.Utilities
             var propertiesList = new List<string>();
             foreach (var modelRef in modelsToCheck)
             {
-                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Required?.Any() != true) continue;
+                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
 
-                propertiesList.Union(definitions[modelRef].Required);
+                propertiesList = propertiesList.Union(definitions[modelRef].Required).ToList();
             }
             return propertiesList;
         }
@@ -160,7 +160,7 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
 
-                propertiesList.Union(definitions[modelRef].Properties.Where(prop=>prop.Value.ReadOnly == true ).Select(prop=>prop.Key));
+                propertiesList = propertiesList.Union(definitions[modelRef].Properties.Where(prop=>prop.Value.ReadOnly == true ).Select(prop=>prop.Key)).ToList();
             }
             return propertiesList;
         }
@@ -176,7 +176,7 @@ namespace AutoRest.Swagger.Model.Utilities
         public static bool ContainsProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> propertiesToCheck)
         {
             var propertyList = EnumerateProperties(modelName, definitions);
-            return propertiesToCheck.Except(propertyList.Select(prop=>prop.Key)).Any();
+            return !propertiesToCheck.Except(propertyList.Select(prop=>prop.Key)).Any();
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace AutoRest.Swagger.Model.Utilities
         public static bool ContainsRequiredProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> requiredPropertiesToCheck)
         {
             var propertyList = EnumerateRequiredProperties(modelName, definitions);
-            return requiredPropertiesToCheck.Except(propertyList).Any();
+            return !requiredPropertiesToCheck.Except(propertyList).Any();
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace AutoRest.Swagger.Model.Utilities
         public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> requiredPropertiesToCheck)
         {
             var propertyList = EnumerateRequiredProperties(modelName, definitions);
-            return requiredPropertiesToCheck.Except(propertyList).Any();
+            return !requiredPropertiesToCheck.Except(propertyList).Any();
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">the dictionary of model definitions</param>
         /// <returns>list of tracked resources</returns>
         public static IEnumerable<string> GetTrackedResources(IEnumerable<string> resourceModels, Dictionary<string, Schema> definitions) 
-            => resourceModels.Where(resModel => ContainsProperties(resModel, definitions, new List<string>() { "location" }));
+            => resourceModels.Where(resModel => ContainsRequiredProperties(resModel, definitions, new List<string>() { "location" }));
 
 
         // determine if an operation is xms pageable operation
