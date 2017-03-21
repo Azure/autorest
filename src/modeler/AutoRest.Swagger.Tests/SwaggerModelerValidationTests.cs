@@ -559,6 +559,7 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(1, context.TrackedResourceModels.Count());
             Assert.Equal(3, context.ProxyResourceModels.Count());
         }
+        
 
         /// <summary>
         /// Verifies that sku object

@@ -99,11 +99,11 @@ namespace AutoRest.Swagger.Model.Utilities
             if (modelSchema.AllOf?.Any() != true) return modelHierarchy;
 
             var allOfs = modelSchema.AllOf.Select(allOfSchema => allOfSchema.Reference?.StripDefinitionPath()).Where(modelRef => !string.IsNullOrEmpty(modelRef));
-            modelHierarchy.Union(allOfs);
+            modelHierarchy = modelHierarchy.Union(allOfs);
             
             foreach (var allOf in allOfs)
             {
-                modelHierarchy.Union(EnumerateModelHierarchy(allOf, definitions, modelHierarchy));
+                modelHierarchy = modelHierarchy.Union(EnumerateModelHierarchy(allOf, definitions, modelHierarchy));
             }
             return modelHierarchy;
         }
@@ -141,7 +141,7 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
 
-                propertiesList = propertiesList.Union(definitions[modelRef].Required).ToList();
+                propertiesList = propertiesList.Union(definitions[modelRef].Required.Where(reqProp=>!string.IsNullOrEmpty(reqProp))).ToList();
             }
             return propertiesList;
         }
