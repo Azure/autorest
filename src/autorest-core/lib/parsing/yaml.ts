@@ -73,6 +73,47 @@ export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLN
   }
 }
 
+export function ReplaceNode(yamlAstRoot: YAMLNode, target: YAMLNode, value: YAMLNode | undefined): YAMLNode | undefined {
+  // root replacement?
+  if (target === yamlAstRoot) {
+    return value;
+  }
+
+  const parent = target.kind === Kind.MAPPING ? target : target.parent;
+  switch (parent.kind) {
+    case Kind.MAPPING: {
+      const astSub = parent as YAMLMapping;
+
+      // replace the mapping's value
+      if (value !== undefined && value.kind !== Kind.MAPPING) {
+        astSub.value = value;
+        return yamlAstRoot;
+      }
+
+      // replace the mapping
+      const parentMap = parent.parent as YAMLMap;
+      const index = parentMap.mappings.indexOf(astSub);
+      if (value !== undefined) {
+        parentMap.mappings[index] = value as YAMLMapping;
+      } else {
+        parentMap.mappings = parentMap.mappings.filter((x, i) => i !== index);
+      }
+      return yamlAstRoot;
+    }
+    case Kind.SEQ: {
+      const astSub = parent as YAMLSequence;
+      const index = astSub.items.indexOf(target);
+      if (value !== undefined) {
+        astSub.items[index] = value;
+      } else {
+        astSub.items = astSub.items.filter((x, i) => i !== index);
+      }
+      return yamlAstRoot;
+    }
+  }
+  throw new Error(`unexpected YAML AST node kind '${parent.kind}' for a parent`);
+}
+
 export function ResolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath): number {
   // special treatment of root "$", so it gets mapped to the VERY beginning of the document (possibly "---")
   // instead of the first YAML mapping node. This allows disambiguation of "$" and "$.<first prop>" in YAML.
