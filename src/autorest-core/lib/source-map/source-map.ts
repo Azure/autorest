@@ -42,11 +42,11 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
   }
 }
 
-export function* CreateAssignmentMapping(assignedObject: any, sourceUri: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string): Mappings {
+export function* CreateAssignmentMapping(assignedObject: any, sourceKey: string, sourcePath: JsonPath, targetPath: JsonPath, subject: string): Mappings {
   for (const descendant of Descendants(ToAst(assignedObject))) {
     const path = descendant.path;
     yield {
-      name: `${subject} (${stringify(path)})`, source: sourceUri,
+      name: `${subject} (${stringify(path)})`, source: sourceKey,
       original: { path: sourcePath.concat(path) },
       generated: { path: targetPath.concat(path) }
     };
