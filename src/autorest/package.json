@@ -30,6 +30,7 @@
     "@types/chalk": "*",
     "@types/marked": "*",
     "@types/node": "^7.0.5",
+    "@types/pify": "0.0.28",
     "@types/request": "0.0.39",
     "@types/semver": "^5.3.30",
     "@types/shelljs": "^0.6.0",
@@ -37,6 +38,7 @@
     "del": "^2.2.2",
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
+    "pify": "^2.3.0",
     "typescript": "^2.3.0-dev.20170314"
   },
   "dependencies": {

@@ -1,8 +1,8 @@
 import * as promisify from "pify";
 import * as path from "path";
-
+import * as a from '../lib/ref/async'
 import { IFileSystem } from "autorest";
-import { IConnection } from "vscode-languageserver";
+import { IConnection, TextDocumentIdentifier } from "vscode-languageserver";
 
 import * as _fs from 'fs';
 
@@ -12,30 +12,29 @@ export class VSCodeHybridFileSystem implements IFileSystem {
 
   // if the RootUri is null, this means we're in a folder without a AutoRest config file at all.
   // so, if you want to work on a swagger 
+  private _trackedFiles = new Map<string, TextDocumentIdentifier>();
 
   constructor(private connection: IConnection, public RootUri: string) {
+    // track opening and closing documents 
+    connection.onDidOpenTextDocument((params) => {
+      this._trackedFiles.set(params.textDocument.uri, params.textDocument);
+    });
+
+    connection.onDidCloseTextDocument((params) => {
+      this._trackedFiles.delete(params.textDocument.uri);
+    });
+
+    connection.onDidChangeTextDocument((params) => {
+      this._trackedFiles.set(params.textDocument.uri, params.textDocument);
+    });
   }
 
   WriteFile(path: string, content: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-
-  private async exists(dir: string): Promise<boolean> {
-    try {
-      let s: _fs.Stats = await fs.stat(dir);
-      return s.isDirectory();
-    } catch (x) {
-    }
-    return false;
-  }
-
-
   async IsValidRoot(): Promise<boolean> {
-    if (this.RootUri != null && this.RootUri !== "") {
-      return this.exists(this.RootUri);
-    }
-    return false;
+    return this.RootUri && this.RootUri !== "" && await a.isDirectory(this.RootUri);
   }
 
 
@@ -44,30 +43,11 @@ export class VSCodeHybridFileSystem implements IFileSystem {
   // after that, we should respond to 
 
   async *EnumerateFiles(): AsyncIterable<string> {
+    if (await this.IsValidRoot()) {
+      yield* await a.readdir(this.RootUri);
 
-    return [];
-    /* if (this.IsValidRoot()) {
-      if (!this._folders.has(prefix)) {
-        var dir = path.join(this.RootUri, prefix);
-        if( await this.exists( dir ) ) {
-          // yes, there is a folder there.
-          dir
-        }
-      }
+      // if there are any documents open in VSCode, we should 
     }
-  
-
-
-    if( !this._folders.has(prefix)) {
-      path.join(_rootUr)
-      this._folders
-    }
-    try {
-      var x = await fs.readdir(this._rootUri)
-
-    } catch (ex) {
-      // can't get files from that!
-    }*/
   }
 
   async ReadFile(path: string): Promise<string> {

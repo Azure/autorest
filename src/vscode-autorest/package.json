@@ -51,6 +51,7 @@
     "@types/pify": "0.0.28",
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
+    "pify": "^2.3.0",
     "typescript": "^2.3.0-dev.20170314",
     "vscode": "^1.1.0",
     "vscode-languageserver": "^3.2.0"
