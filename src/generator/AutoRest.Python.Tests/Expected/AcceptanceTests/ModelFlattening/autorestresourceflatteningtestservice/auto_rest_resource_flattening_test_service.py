@@ -150,6 +150,104 @@ class AutoRestResourceFlatteningTestService(object):
 
         return deserialized
 
+    def put_wrapped_array(
+            self, resource_array=None, custom_headers=None, raw=False, **operation_config):
+        """No need to have a route in Express server for this operation. Used to
+        verify the type flattened is not removed if it's referenced in an
+        array.
+
+        :param resource_array: External Resource as an Array to put
+        :type resource_array: list of :class:`WrappedProduct
+         <fixtures.acceptancetestsmodelflattening.models.WrappedProduct>`
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: None
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
+        """
+        # Construct URL
+        url = '/model-flatten/wrappedarray'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if resource_array is not None:
+            body_content = self._serialize.body(resource_array, '[WrappedProduct]')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
+
+    def get_wrapped_array(
+            self, custom_headers=None, raw=False, **operation_config):
+        """No need to have a route in Express server for this operation. Used to
+        verify the type flattened is not removed if it's referenced in an
+        array.
+
+        :param dict custom_headers: headers that will be added to the request
+        :param bool raw: returns the direct response alongside the
+         deserialized response
+        :param operation_config: :ref:`Operation configuration
+         overrides<msrest:optionsforoperations>`.
+        :rtype: list of :class:`ProductWrapper
+         <fixtures.acceptancetestsmodelflattening.models.ProductWrapper>`
+        :rtype: :class:`ClientRawResponse<msrest.pipeline.ClientRawResponse>`
+         if raw=true
+        :raises:
+         :class:`ErrorException<fixtures.acceptancetestsmodelflattening.models.ErrorException>`
+        """
+        # Construct URL
+        url = '/model-flatten/wrappedarray'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('[ProductWrapper]', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
     def put_dictionary(
             self, resource_dictionary=None, custom_headers=None, raw=False, **operation_config):
         """Put External Resource as a Dictionary.
