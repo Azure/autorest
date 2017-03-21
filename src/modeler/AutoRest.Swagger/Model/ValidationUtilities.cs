@@ -15,7 +15,8 @@ namespace AutoRest.Swagger.Model.Utilities
     {
         private static readonly string XmsPageable = "x-ms-pageable";
         private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        private static readonly Regex ResNameRegEx = new Regex(@"Resource$", RegexOptions.IgnoreCase);
+        private static readonly IEnumerable<string> baseResourceModelNames = 
+            new List<string>() { "trackedresource", "proxyresource", "resource" };
 
         public enum PropertyListType { Properties, RequiredProperties, ReadOnlyProperties };
 
@@ -52,33 +53,36 @@ namespace AutoRest.Swagger.Model.Utilities
 
             var xmsAzureResourceModels = GetXmsAzureResourceModels(serviceDefinition.Definitions);
 
-            // Get all models that are returned by PUT operations (200 response)
+            // Get all models that are returned by PUT operations (200/201 response)
             var putOperationsResponseModels = GetOperationResponseModels("put", serviceDefinition).Except(xmsAzureResourceModels);
-            // for each putResponseModel, check if the properties "id, type and name" exist anywhere in its hierarchy
-            putOperationsResponseModels = putOperationsResponseModels.Where(putRespModel => ContainsProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
+            putOperationsResponseModels = putOperationsResponseModels.Union(GetOperationResponseModels("put", serviceDefinition, "201").Except(xmsAzureResourceModels));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
             var getOperationsResponseModels = GetOperationResponseModels("get", serviceDefinition).Except(xmsAzureResourceModels);
-            getOperationsResponseModels = getOperationsResponseModels.Where(putRespModel => ContainsProperties(putRespModel, serviceDefinition.Definitions, new List<string>() { "id", "name", "type"}));
 
-            var modelsAllOfOnResource =
+            getOperationsResponseModels =
                 getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
                                            .Where(modelName => IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, new List<string>() { "Resource" }));
 
             var resourceModels = putOperationsResponseModels.Union(getOperationsResponseModels);
-            
-            // Pick all models other than the ones that have already been determined to be resources
-            // or are of type xms azure resource
-            var modelsAllOfOnXmsAzureResources = serviceDefinition.Definitions.Keys.Except(resourceModels).Except(xmsAzureResourceModels);
 
-            // Now pick all models that allOf on xmsAzureResourceModels at any level of hierarchy
-            modelsAllOfOnXmsAzureResources = modelsAllOfOnXmsAzureResources.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName)
-                                                                                                && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
+            // Pick all models other than the ones that have already been determined to be resources
+            // then pick all models that allOf on xmsAzureResourceModels at any level of hierarchy
+            var modelsAllOfOnXmsAzureResources = serviceDefinition.Definitions.Keys.Except(resourceModels)
+                                                    .Where(modelName => !(IsBaseResourceModelName(modelName))
+                                                                        && serviceDefinition.Definitions.ContainsKey(modelName)
+                                                                        && IsAllOfOnModelNames(modelName, serviceDefinition.Definitions, xmsAzureResourceModels));
             
             // return the union 
             return resourceModels.Union(modelsAllOfOnXmsAzureResources);
 
         }
+
+        /// <summary>
+        /// Returns the cumulative list of all 'allOfed' references for a model
+        /// </summary>
+        /// <param name="modelName">model name to check</param>
+        public static bool IsBaseResourceModelName(string modelName) => baseResourceModelNames.Contains(modelName.ToLower());
 
         /// <summary>
         /// Returns the cumulative list of all 'allOfed' references for a model
@@ -199,10 +203,10 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of read only properties to be checked for in a model hierarchy</param>
         /// <returns>true if the model hierarchy contains all of the read only properties</returns>
-        public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> requiredPropertiesToCheck)
+        public static bool ContainsReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> readOnlyPropertiesToCheck)
         {
             var propertyList = EnumerateRequiredProperties(modelName, definitions);
-            return !requiredPropertiesToCheck.Except(propertyList).Any();
+            return !readOnlyPropertiesToCheck.Except(propertyList).Any();
         }
 
         /// <summary>
@@ -239,7 +243,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="modelName">model for which to determine if it is allOfs on given model names</param>
         /// <param name="definitions">dictionary that contains model definitions</param>
-        /// <param name="allOfedModels">list allOfed models</param>
+        /// <param name="allOfedModels">list of allOfed models</param>
         /// <returns>true if given model allOfs on given allOf list at any level of hierarchy</returns>
         public static bool IsAllOfOnModelNames(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> allOfedModels)
         {
@@ -250,18 +254,10 @@ namespace AutoRest.Swagger.Model.Utilities
             {
                 return false;
             }
-            
-            // if model allOfs on any model in the allOfs list, return true
-            if (definitions[modelName].AllOf.Select(modelRef => modelRef.Reference.StripDefinitionPath()).Intersect(allOfedModels).Any()) return true;
 
-            // recurse into allOfed references
-            foreach (var modelRef in definitions[modelName].AllOf.Select(allofModel => allofModel.Reference?.StripDefinitionPath()).Where(allOfModel => !string.IsNullOrEmpty(allOfModel)))
-            {
-                if (IsAllOfOnModelNames(modelRef, definitions, allOfedModels)) return true;
-            }
-
-            // if all else fails return false
-            return false;
+            var modelHierarchy = EnumerateModelHierarchy(modelName, definitions);
+            // if the given model is allOfing on any of the given models, return true
+            return allOfedModels.Intersect(modelHierarchy).Any();
         }
 
 
