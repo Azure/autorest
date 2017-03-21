@@ -3,8 +3,9 @@ import { DataStore, Metadata } from './data-store/data-store';
 import { IEnumerable, From } from './ref/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./events";
 import { IFileSystem } from "./file-system";
-import { Configuration } from "./configuration";
+import { Configuration, ConfigurationView, FileSystemConfiguration } from './configuration';
 import { DocumentType } from "./document-type";
+export { ConfigurationView } from './configuration';
 
 export type Channel = {
   readonly Information: "information",
@@ -46,13 +47,22 @@ export interface Message {
 };
 
 export class AutoRest extends EventEmitter {
-
+  private _configurations = new Array<any>();
+  private _view: ConfigurationView | undefined;
+  public get view(): Promise<ConfigurationView> {
+    return new Promise<ConfigurationView>(async (r, j) => {
+      if (!this._view) {
+        this._view = await new FileSystemConfiguration(this.fileSystem).CreateView(...this._configurations)
+      }
+      r(this._view);
+    })
+  }
   /**
    * 
    * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    */
-  public constructor(private configuration: Configuration) {
+  public constructor(private fileSystem: IFileSystem) {
     super();
   }
 
@@ -66,27 +76,61 @@ export class AutoRest extends EventEmitter {
     return true;
   }
 
+  private invalidate() {
+    this._view = undefined;
+  }
+
   /**
    * This should be called to notify AutoRest that a file has changed.
    *
    * @param path the path of the files that has changed
    */
   public FileChanged(path: string) {
+    this.invalidate();
+  }
 
+  public async AddConfiguration(configuratuion: any): Promise<void> {
+    this._configurations.push(configuratuion);
+    this.invalidate();
+  }
+
+  public async ResetConfiguration(): Promise<void> {
+    // clear the configuratiion array.
+    this._configurations.length = 0;
+    this.invalidate();
+  }
+
+  public get HasConfiguration(): Promise<boolean> {
+    return new Promise(async (r, f) => {
+      (await this.view);
+      r(false);
+    });
   }
 
   /**
    * Called to start processing of the files.
    */
   public Start(): void {
+    try {
+      // implement RunPipeline here.
 
+      // finished cleanly
+      this.Finished.Dispatch(true);
+    }
+    catch (e) {
+      // finished not cleanly
+      this.Finished.Dispatch(false);
+    }
+    finally {
+      this.invalidate();
+    }
   }
 
   /**
    * Called to stop the processing.
    */
   public Stop(): void {
-
+    // or better excuse to cancel.
   }
 
 

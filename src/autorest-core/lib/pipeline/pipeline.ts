@@ -18,27 +18,22 @@ import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { RealFileSystem } from "../file-system"
+import { From } from "../ref/linq"
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-export async function RunPipeline(configuration: Configuration, workingScope: DataStoreView = new DataStore()): Promise<{ [name: string]: DataPromise }> {
-  const configResult = await configuration.Acquire(workingScope);
-
-  // load config
-  const hConfig = await ParseLiterateYaml(
-    await configResult.inputView.ReadStrict(configResult.uri),
-    workingScope.CreateScope("config"));
-  const config = await new ConfigurationView(configResult.uri, await hConfig.ReadObject<AutoRestConfigurationImpl>());
-
+export async function RunPipeline(config: ConfigurationView): Promise<{ [name: string]: DataPromise }> {
   // load Swaggers
-  const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri) || true; // TODO: unlock further URIs here
+  let inputs = From(config.inputFileUris).ToArray();
+
+  const uriScope = (uri: string) => inputs.indexOf(uri) !== -1 || /^http/.test(uri) || true; // TODO: unlock further URIs here
   const swaggers = await LoadLiterateSwaggers(
-    workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
-    config.inputFileUris, workingScope.CreateScope("loader"));
+    config.workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
+    inputs, config.workingScope.CreateScope("loader"));
 
   // compose Swaggers (may happen in LoadLiterateSwaggers, BUT then we can't call other people (e.g. Amar's tools) with the component swaggers... hmmm...)
   const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
-    ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, workingScope.CreateScope("compose"), true)
+    ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, config.workingScope.CreateScope("compose"), true)
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 
@@ -54,7 +49,7 @@ export async function RunPipeline(configuration: Configuration, workingScope: Da
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
 
     // modeler
-    const codeModel = await autoRestDotNetPlugin.Model(swagger, workingScope.CreateScope("model"),
+    const codeModel = await autoRestDotNetPlugin.Model(swagger, config.workingScope.CreateScope("model"),
       {
         namespace: config.__specials.namespace || ""
       });
@@ -64,7 +59,7 @@ export async function RunPipeline(configuration: Configuration, workingScope: Da
       const codeGenerator = config.__specials.codeGenerator;
       if (codeGenerator) {
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, workingScope.CreateScope("generate"),
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.workingScope.CreateScope("generate"),
           {
             namespace: config.__specials.namespace || "",
             codeGenerator: codeGenerator,
@@ -80,7 +75,7 @@ export async function RunPipeline(configuration: Configuration, workingScope: Da
 
         // C# simplifier
         if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
-          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, workingScope.CreateScope("simplify"));
+          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.workingScope.CreateScope("simplify"));
         }
 
         for (const fileName of await generatedFileScope.Enum()) {
@@ -93,7 +88,7 @@ export async function RunPipeline(configuration: Configuration, workingScope: Da
     result["azureValidationMessages"] = MultiPromiseUtility.fromCallbacks(async callback => {
       if (config.__specials.azureValidator) {
         // TODO: streamify
-        const messages = await autoRestDotNetPlugin.Validate(swagger, workingScope.CreateScope("validate"));
+        const messages = await autoRestDotNetPlugin.Validate(swagger, config.workingScope.CreateScope("validate"));
         for (const fileName of await messages.Enum()) {
           callback(await messages.ReadStrict(fileName));
         }

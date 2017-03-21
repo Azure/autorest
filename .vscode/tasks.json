@@ -58,9 +58,7 @@
         "cwd": "${workspaceRoot}/src/autorest-core"
       },
       "args": [
-        "${workspaceRoot}/src/autorest-core/test",
-        "-g",
-        "File*"
+        "${workspaceRoot}/src/autorest-core/test"
       ],
       "isTestCommand": true,
       "isBackground": false,

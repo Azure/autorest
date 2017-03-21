@@ -13,7 +13,7 @@ import {
   CompletionItem, CompletionItemKind, Range, Position
 } from 'vscode-languageserver';
 
-import { AutoRest, IFileSystem, Installer, Configuration } from "autorest";
+import { AutoRest, IFileSystem, Installer } from "autorest";
 import { VSCodeHybridFileSystem } from "./file-system";
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
@@ -31,7 +31,6 @@ documents.listen(connection);
 let workspaceRoot: string;
 let myfs: VSCodeHybridFileSystem;
 let autorest: AutoRest;
-let myConfig: Configuration;
 let diagnostics: Map<string, Diagnostic[]> = new Map<string, Diagnostic[]>();
 let queuedToSend: NodeJS.Timer;
 let readyToProcess: NodeJS.Timer;
@@ -60,10 +59,7 @@ connection.onInitialize(async (params): Promise<InitializeResult> => {
   workspaceRoot = params.rootUri;
 
   myfs = new VSCodeHybridFileSystem(connection, params.rootUri);
-  myConfig = new Configuration(myfs);
-  let cfg = await myConfig.HasConfiguration;
-
-  autorest = new AutoRest(myConfig);
+  autorest = new AutoRest(myfs);
 
   autorest.Debug.Subscribe((instance, args) => {
     // on debug message

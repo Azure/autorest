@@ -1,3 +1,8 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 import {
   DataHandleRead,
   DataHandleWrite,
@@ -6,15 +11,12 @@ import {
   DataStoreView,
   DataStoreViewReadonly
 } from './data-store/data-store';
-/*---------------------------------------------------------------------------------------------
- *  Copyright (c) Microsoft Corporation. All rights reserved.
- *  Licensed under the MIT License. See License.txt in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
 
+import { CodeBlock, Parse as ParseLiterateYaml, ParseCodeBlocks } from './parsing/literate-yaml';
 import { ResolveUri } from "./ref/uri";
-import { From } from "./ref/linq";
+import { From, Enumerable as IEnumerable } from "./ref/linq";
 import { IFileSystem } from "./file-system"
-import * as Constants from "./constants"
+import * as Constants from './constants';
 
 export interface AutoRestConfigurationSwitches {
   [key: string]: string | null;
@@ -33,6 +35,8 @@ export interface AutoRestConfigurationSpecials {
 }
 
 export interface AutoRestConfigurationImpl {
+  [key: string]: any;
+  __info?: string | null;
   __specials?: AutoRestConfigurationSpecials;
   "input-file": string[] | string;
   "output-folder"?: string;
@@ -45,61 +49,116 @@ export interface AutoRestConfigurationImpl {
 //   };
 // }
 
+/*
+function key(target: string) {
+  return (target, propertyKey) => {
+
+    @key("base-folder") baseFolder: string;
+    @key("output-folder") outputFolder: string;
+
+  };
+};
+*/
+
 export class ConfigurationView {
-  constructor(
+
+  /* @internal */ constructor(
+    public workingScope: DataStore,
     private configurationFileUri: string,
-    private config: AutoRestConfigurationImpl) {
+    ...configs: Array<AutoRestConfigurationImpl>
+  ) {
+    this.config = configs;
   }
 
-  private get configFileFolderUri(): string {
-    return ResolveUri(this.configurationFileUri, ".").toString();
+  private config: Array<AutoRestConfigurationImpl>
+
+  private ValuesOf(fieldName: string): IEnumerable<any> {
+    return From<AutoRestConfigurationImpl>(this.config).Select(config => config[fieldName]);
   }
 
-  private get baseFolderUri(): string {
-    const baseFolder = this.config["base-folder"] || "";
-    const baseFolderUri = ResolveUri(this.configFileFolderUri, baseFolder);
-    return baseFolderUri.replace(/\/$/g, "") + "/";
+  private SingleValue<T>(fieldName: string): T | null {
+    return this.ValuesOf(fieldName).FirstOrDefault();
   }
 
-  private resolveUri(path: string): string {
+  private *MultipleValues<T>(fieldName: string): Iterable<T> {
+    for (const each of this.ValuesOf(fieldName)) {
+      if (each != undefined && each != null) {
+        if (typeof each == 'string') {
+          yield <T><any>each;
+        } else if (each[Symbol.iterator]) {
+          yield* each;
+        } else {
+          yield each;
+        }
+      }
+    }
+  }
+
+  private ResolveAsFolder(path: string): string {
+    return ResolveUri(this.configFileFolderUri, path).replace(/\/$/g, "") + "/";
+  }
+
+  private ResolveAsPath(path: string): string {
     return ResolveUri(this.baseFolderUri, path);
   }
 
-  private inputFiles(): string[] {
-    const raw = this.config["input-file"];
-    return typeof raw === "string"
-      ? [raw]
-      : raw;
+  private get configFileFolderUri(): string {
+    return ResolveUri(this.configurationFileUri, ".");
   }
 
-  public get inputFileUris(): string[] {
-    return this.inputFiles().map(inputFile => this.resolveUri(inputFile));
+  private get baseFolderUri(): string {
+    return this.ResolveAsFolder(this.SingleValue<string>("base-folder") || "");
+  }
+
+  // public methods 
+
+  public get inputFileUris(): Iterable<string> {
+    return From<string>(this.MultipleValues<string>("input-file"))
+      .Select(each => this.ResolveAsPath(each));
   }
 
   public get outputFolderUri(): string {
-    const folder = this.config["output-folder"] || "generated";
-    const outputFolderUri = ResolveUri(this.configFileFolderUri, folder);
-    return outputFolderUri.replace(/\/$/g, "") + "/";
+    return this.ResolveAsFolder(this.SingleValue<string>("output-folder") || "generated")
   }
 
   public get __specials(): AutoRestConfigurationSpecials {
-    return this.config.__specials || {};
+    return this.ValuesOf("__specials").FirstOrDefault() || {};
   }
 
   // TODO: stuff like generator specific settings (= YAML merging root with generator's section)
 }
 
 
-export interface Configuration {
-  Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }>;
-  HasConfiguration(): Promise<boolean>;
+export abstract class Configuration {
+  abstract Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }>;
+  abstract HasConfiguration(): Promise<boolean>;
+
+  public async CreateView(...configs: Array<any>): Promise<ConfigurationView> {
+    let workingScope: DataStore = new DataStore()
+    const configResult = await this.Acquire(workingScope);
+    const defaults = require("../resources/default-configuration.json");
+
+    // load config
+    const hConfig = await ParseCodeBlocks(
+      await configResult.inputView.ReadStrict(configResult.uri),
+      workingScope.CreateScope("config"));
+
+    const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
+      const block = await each.data.ReadObject<AutoRestConfigurationImpl>();
+      block.__info = each.info;
+      return block;
+    }));
+
+    return new ConfigurationView(workingScope, configResult.uri, defaults, ...configs, ...blocks);
+  }
 }
 
-export class ConstantConfiguration implements Configuration {
+export class ConstantConfiguration extends Configuration {
   public constructor(
     private configurationUri: string,
     private configuration: AutoRestConfigurationImpl
   ) {
+    super();
   }
 
   public async Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }> {
@@ -116,27 +175,19 @@ export class ConstantConfiguration implements Configuration {
   }
 }
 
-export class FileSystemConfiguration implements Configuration {
+export class FileSystemConfiguration extends Configuration {
   private cachedConfigurationFileName: string | null | undefined;
-  private _view: DataStore | null;
-  private get view(): DataStore {
-    if (!this._view) {
-      this._view = new DataStore();
-    }
-    return this._view;
-  }
 
   public constructor(
     private fileSystem: IFileSystem,
     private configurationFileName?: string
   ) {
+    super();
     this.FileChanged();
   }
 
-
   public FileChanged() {
     this.cachedConfigurationFileName = undefined;
-    this._view = null;
   }
 
   private async DetectConfigurationFile(): Promise<string | null> {
@@ -179,7 +230,6 @@ export class FileSystemConfiguration implements Configuration {
   }
 
   public async HasConfiguration(): Promise<boolean> {
-    await this.Acquire(this.view);
     return await this.DetectConfigurationFile() !== null;
   }
 

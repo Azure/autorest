@@ -10,6 +10,11 @@ import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/da
 import { Parse as parseLiterate } from "./literate";
 import { Lines } from "./text-utility";
 
+export class CodeBlock {
+  info: string | null;
+  data: DataHandleRead;
+}
+
 function TryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
 }
@@ -117,8 +122,21 @@ export async function Parse(literate: DataHandleRead, workingScope: DataStoreVie
   return hRawDoc;
 }
 
+export async function ParseCodeBlocks(literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
+  const docScope = workingScope.CreateScope(`doc_tmp`);
+  const hwRawDoc = await workingScope.Write(`doc.yaml`);
+  return await ParseCodeBlocksInternal(literate, hwRawDoc, docScope);
+}
+
 async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
-  let hsConfigFileBlocks: DataHandleRead[] = [];
+  // merge the parsed codeblocks
+  const blocks = (await ParseCodeBlocksInternal(hLiterate, hResult, intermediateScope)).map(each => each.data);
+  return await MergeYamls(blocks, hResult);
+}
+
+
+async function ParseCodeBlocksInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
+  let hsConfigFileBlocks: CodeBlock[] = [];
 
   const rawMarkdown = await hLiterate.ReadData();
 
@@ -132,6 +150,7 @@ async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       ++codeBlockIndex;
+
       const yamlAst = CloneAst(await data.ReadYamlAst());
       let mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
@@ -165,18 +184,17 @@ async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite
       if (mapping.length > 0) {
         mapping = mapping.concat(Array.from(IdentitySourceMapping(data.key, yamlAst)));
         const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
-        hsConfigFileBlocks.push(await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]));
+        hsConfigFileBlocks.push({ info: codeBlock.info, data: await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]) });
       } else {
-        hsConfigFileBlocks.push(data);
+        hsConfigFileBlocks.push({ info: codeBlock.info, data: data });
       }
     }
   }
 
   // fall back to raw YAML
   if (hsConfigFileBlocks.length === 0) {
-    hsConfigFileBlocks = [hLiterate];
+    hsConfigFileBlocks = [{ info: null, data: hLiterate }];
   }
 
-  // merge
-  return await MergeYamls(hsConfigFileBlocks, hResult);
+  return hsConfigFileBlocks;
 }
