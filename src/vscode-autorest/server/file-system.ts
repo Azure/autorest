@@ -9,6 +9,10 @@ import * as _fs from 'fs';
 let fs = promisify(_fs);
 
 export class VSCodeHybridFileSystem implements IFileSystem {
+
+  // if the RootUri is null, this means we're in a folder without a AutoRest config file at all.
+  // so, if you want to work on a swagger 
+
   constructor(private connection: IConnection, public RootUri: string) {
   }
 

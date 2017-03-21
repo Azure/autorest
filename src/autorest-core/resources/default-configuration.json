@@ -1,0 +1,5 @@
+{
+  "azure-arm": false,
+  "output-folder": "$(base-folder)/generated",
+  "disable-validation": false
+}

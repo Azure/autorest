@@ -38,7 +38,10 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
-    const restultStreams = await RunPipeline(new ConstantConfiguration(configFileUri, config), dataStore);
+    const restultStreams = await RunPipeline(await new ConstantConfiguration(configFileUri, config).CreateView());
+
+
+
   }
   else {
     // exec
@@ -89,7 +92,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-  await RunPipeline(new FileSystemConfiguration(new RealFileSystem(currentDirUri), args.configFile), new DataStore());
+  await RunPipeline(await new FileSystemConfiguration(new RealFileSystem(currentDirUri), args.configFile).CreateView(args.switches));
 }
 
 

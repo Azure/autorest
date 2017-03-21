@@ -21,7 +21,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const scopeInput = dataStore.CreateScope("input");
     const scopeWork = dataStore.CreateScope("working");
 
-    const dummyPlugin = await AutoRestPlugin.FromModule("./lib/pipeline/plugins/dummy");
+    const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
     const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
     assert.deepStrictEqual(pluginNames, ["dummy"]);
     const result = await dummyPlugin.Process(
