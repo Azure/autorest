@@ -17,9 +17,7 @@ namespace AutoRest.Swagger.Model.Utilities
         private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private static readonly IEnumerable<string> baseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
-
-        public enum PropertyListType { Properties, RequiredProperties, ReadOnlyProperties };
-
+        
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
@@ -79,9 +77,10 @@ namespace AutoRest.Swagger.Model.Utilities
         }
 
         /// <summary>
-        /// Returns the cumulative list of all 'allOfed' references for a model
+        /// checks if a model is a base resource type (resource, trackedresource or proxyresource)
         /// </summary>
         /// <param name="modelName">model name to check</param>
+        /// <returns> true if model is a base resource type </returns>
         public static bool IsBaseResourceModelName(string modelName) => baseResourceModelNames.Contains(modelName.ToLower());
 
         /// <summary>
@@ -144,8 +143,8 @@ namespace AutoRest.Swagger.Model.Utilities
             foreach (var modelRef in modelsToCheck)
             {
                 if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
-
-                propertiesList = propertiesList.Union(definitions[modelRef].Required.Where(reqProp=>!string.IsNullOrEmpty(reqProp))).ToList();
+                
+                propertiesList = propertiesList.Union(definitions[modelRef].Required.Where(reqProp => !string.IsNullOrEmpty(reqProp))).ToList();
             }
             return propertiesList;
         }
@@ -157,17 +156,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of read only properties found in model hierarchy</param>
         private static IEnumerable<string> EnumerateReadOnlyProperties(string modelName, Dictionary<string, Schema> definitions)
-        {
-            var modelsToCheck = EnumerateModelHierarchy(modelName, definitions);
-            var propertiesList = new List<string>();
-            foreach (var modelRef in modelsToCheck)
-            {
-                if (!definitions.ContainsKey(modelRef) || definitions[modelRef].Properties?.Any() != true) continue;
-
-                propertiesList = propertiesList.Union(definitions[modelRef].Properties.Where(prop=>prop.Value.ReadOnly == true ).Select(prop=>prop.Key)).ToList();
-            }
-            return propertiesList;
-        }
+            => EnumerateProperties(modelName, definitions).Where(prop => prop.Value.ReadOnly).Select(prop => prop.Key);
 
 
         /// <summary>
