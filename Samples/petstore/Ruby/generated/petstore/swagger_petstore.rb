@@ -216,7 +216,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = Pet.mapper()
+      request_mapper = Petstore::Models::Pet.mapper()
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -291,7 +291,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = Pet.mapper()
+      request_mapper = Petstore::Models::Pet.mapper()
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -694,7 +694,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = Pet.mapper()
+            result_mapper = Petstore::Models::Pet.mapper()
             result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -1066,7 +1066,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = Order.mapper()
+      request_mapper = Petstore::Models::Order.mapper()
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -1095,7 +1095,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = Order.mapper()
+            result_mapper = Petstore::Models::Order.mapper()
             result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -1183,7 +1183,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = Order.mapper()
+            result_mapper = Petstore::Models::Order.mapper()
             result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -1322,7 +1322,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = User.mapper()
+      request_mapper = Petstore::Models::User.mapper()
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -1751,7 +1751,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = User.mapper()
+            result_mapper = Petstore::Models::User.mapper()
             result.body = self.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -1817,7 +1817,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = User.mapper()
+      request_mapper = Petstore::Models::User.mapper()
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
