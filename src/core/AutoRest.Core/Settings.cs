@@ -73,7 +73,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
             ValidationLevel = Category.Error;
             ModelsName = "Models";
             CodeGenerationMode = "rest-client";
+            GroupingMethod = "underscore";
         }
+
+        /// <summary>
+        /// Gets or sets the method for grouping operations
+        /// </summary>
+        public string GroupingMethod { get; set; }
 
         /// <summary>
         /// Gets or sets the IFileSystem used by code generation.
