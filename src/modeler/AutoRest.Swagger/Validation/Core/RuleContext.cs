@@ -37,7 +37,7 @@ namespace AutoRest.Swagger.Validation.Core
             this.Root = parent?.Root;
             this.File = parent?.File;
             this.ResourceModels = parent?.ResourceModels;
-            this.TrackedResourceModels = parent?.ResourceModels;
+            this.TrackedResourceModels = parent?.TrackedResourceModels;
             this.ProxyResourceModels = parent?.ProxyResourceModels;
         }
 
