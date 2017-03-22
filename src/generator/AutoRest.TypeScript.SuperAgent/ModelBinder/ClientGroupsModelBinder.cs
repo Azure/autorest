@@ -85,7 +85,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Path))
             {
-                url = url.Replace($"{{{param.Name.Value}}}", $"${{requestDto.{param.Name.Value}}}");
+                url = url.Replace($"{{{param.Name.Value}}}", $"${{request.{param.Name.Value}}}");
             }
 
             for (var index = 0;
@@ -94,7 +94,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
             {
                 var param = method.Parameters.Where(p => p.Location == ParameterLocation.Query).ToArray()[index];
                 char separator = index == 0 ? '?' : '&';
-                url += $"{separator}{param.Name.Value}=${{requestDto.{param.Name.Value}}}";
+                url += $"{separator}{param.Name.Value}=${{request.{param.Name.Value}}}";
             }
 
             return $"${{this.baseUrl}}{url}";

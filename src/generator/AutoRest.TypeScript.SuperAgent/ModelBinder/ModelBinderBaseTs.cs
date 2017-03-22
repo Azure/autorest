@@ -1,20 +1,22 @@
 ﻿using System.Linq;
 using System.Net;
+using AutoRest.Core;
 using AutoRest.Core.Model;
 
 namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 {
     public class ModelBinderBaseTs
     {
-        protected bool TryGetResponseName(Method method, out IModelType modelType, out string responseName, out string requestName, string moduleName = null)
+        protected bool TryGetResponseName(Method method, out IModelType modelType, out string responseName,
+            out string requestName, string moduleName = null)
         {
             responseName = null;
             requestName = null;
             modelType = null;
 
-            Response okResponse = method.Responses.ContainsKey(HttpStatusCode.OK) ? 
-                method.Responses[HttpStatusCode.OK] : 
-                method.Responses.Values.FirstOrDefault(r => r.Body != null);
+            var okResponse = method.Responses.ContainsKey(HttpStatusCode.OK)
+                ? method.Responses[HttpStatusCode.OK]
+                : method.Responses.Values.FirstOrDefault(r => r.Body != null);
 
             if (okResponse == null)
             {
@@ -23,31 +25,14 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             modelType = okResponse.Body;
 
-            var doNotWrap = modelType.IsPrimaryType() || modelType.IsSequenceType() || modelType.IsEnumType();
-
-            if (doNotWrap)
-            {
-                var serializedName = method.SerializedName.Value;
-                var parts = serializedName.Split('_');
-                if (parts.Length > 1)
-                {
-                    requestName = parts[0];
-                }
-            }
-
             responseName = GetTypeText(modelType, moduleName);
 
             if (requestName == null)
             {
-                requestName = GetTypeText(modelType);
-            }
-         
-            if (requestName.Contains("[]"))
-            {
-                requestName = requestName.Replace("[]", "List");
+                requestName = method.Name.RawValue + "Request";
             }
 
-            requestName = $"{requestName}Request".TrimStart('I');
+            requestName = CodeNamer.Instance.PascalCase(requestName);
 
             if (!string.IsNullOrWhiteSpace(moduleName) && !requestName.StartsWith(moduleName))
             {
@@ -63,7 +48,7 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             var prefix = string.IsNullOrWhiteSpace(moduleName) ? "" : $"{moduleName}.";
 
-            string name = "";
+            var name = "";
 
             if (seqType == null)
             {
@@ -82,7 +67,5 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
 
             return SequenceTypeTs.CreateSeqTypeText(elementType.IsPrimaryType() ? name : $"{prefix}I{name}");
         }
-
-
     }
 }

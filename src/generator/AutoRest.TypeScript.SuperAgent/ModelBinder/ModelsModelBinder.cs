@@ -32,12 +32,12 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                     var propertyType = variable.ModelType;
                     string typeName = null;
 
-                    if (propertyType.IsEnumType())
-                    {
-                        var enumType = (EnumTypeTs) propertyType;
-                        typeName = enumType.GetImplementationName(variable);
-                        enumsInModels.Add(new Tuple<string, IModelType>(typeName, propertyType));
-                    }
+                    //if (propertyType.IsEnumType())
+                    //{
+                    //    var enumType = (EnumTypeTs) propertyType;
+                    //    typeName = enumType.GetImplementationName(variable);
+                    //    enumsInModels.Add(new Tuple<string, IModelType>(typeName, propertyType));
+                    //}
 
                     return new ModelProperty
                            {
@@ -120,22 +120,24 @@ namespace AutoRest.TypeScript.SuperAgent.ModelBinder
                 }
             }
 
-            foreach (var pair in enumsInModels)
-            {
-                var enumType = (EnumTypeTs) pair.Item2;
-                var enumModel = new EnumModel {Name = pair.Item1};
+            // disable enum generation for now #ranantawat.
 
-                if (enumType.ModelAsString)
-                {
-                    for (var index = 0; index < enumType.EnumValues.Length; index++)
-                    {
-                        var value = enumType.Children.Cast<EnumValue>().ToArray()[index];
-                        enumModel.Values.Add(value.Name, index);
-                    }
-                }
+            // foreach (var pair in enumsInModels)
+            // {
+            //    var enumType = (EnumTypeTs) pair.Item2;
+            //    var enumModel = new EnumModel {Name = pair.Item1};
 
-                models.EnumModels.Add(enumModel);
-            }
+            //    if (enumType.ModelAsString)
+            //    {
+            //        for (var index = 0; index < enumType.EnumValues.Length; index++)
+            //        {
+            //            var value = enumType.Children.Cast<EnumValue>().ToArray()[index];
+            //            enumModel.Values.Add(value.Name, index);
+            //        }
+            //    }
+
+            //    models.EnumModels.Add(enumModel);
+            // }
 
             models.EnumModels = models.EnumModels.Distinct().ToList();
 

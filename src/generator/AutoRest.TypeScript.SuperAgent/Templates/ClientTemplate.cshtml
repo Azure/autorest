@@ -15,7 +15,7 @@ import * as httpUtil from "./httpUtil"
 @:export interface @(client.InterfaceName) {
     foreach (var method in client.Methods)
     {
-@:    @(method.MethodName)(requestDto: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName);
+@:    @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName);
     }
 @:}
 
@@ -26,11 +26,11 @@ import * as httpUtil from "./httpUtil"
 @:    }
     foreach (var method in client.Methods)
     {
-@:    async @(method.MethodName)(requestDto: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName) {
-@:        return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(requestDto)
+@:    async @(method.MethodName)(request: @(method.RequestTypeName)) : @(method.ResponsePromiseTypeName) {
+@:        return await httpUtil.req<@($"{method.RequestTypeName}, {method.ResponseTypeName}")>(request)
 @:            .withUrl(`@(method.UrlTemplate)`) 
-@:            .withHeaders({@(string.Join(",", method.ParamNamesInHeader.Select(p => $"'{p}' : requestDto.{p}").ToArray()))})
-@:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"requestDto.{method.ParamNamesInBody.First()}" : ""));
+@:            .withHeaders({@(string.Join(",", method.ParamNamesInHeader.Select(p => $"'{p}' : request.{p}").ToArray()))})
+@:            .http@(method.HttpMethod.ToPascalCase())(@(method.ParamNamesInBody.Any() ? $"request.{method.ParamNamesInBody.First()}" : ""));
 @:    }
     }
 @:}
