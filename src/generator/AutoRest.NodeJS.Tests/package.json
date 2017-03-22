@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/mocha": "^2.2.39",
     "@types/should": "^8.1.30",
+    "@types/node": "^6.0.66",
     "ms-rest": "^1.15.7",
     "jshint": "2.8.0",
     "xunit-file": "0.0.5",
@@ -30,7 +31,7 @@
   },
   "devDependencies": {
     "tslint": "^2.5.1",
-    "typescript": "^2.1.4"
+    "typescript": "^2.2.1"
   },
   "homepage": "https://github.com/Azure/AutoRest/src/generator/AutoRest.NodeJS.Tests",
   "repository": {
