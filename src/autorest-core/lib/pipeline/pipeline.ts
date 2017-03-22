@@ -45,15 +45,20 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
 
     // modeler
-    const codeModel = await autoRestDotNetPlugin.Model(swagger, workingScope.CreateScope("model"),
-      {
-        namespace: config.__specials.namespace || ""
-      });
 
     // code generator
     result["generatedFiles"] = MultiPromiseUtility.fromCallbacks(async callback => {
       const codeGenerator = config.__specials.codeGenerator;
-      if (codeGenerator) {
+      if (codeGenerator && codeGenerator.toLowerCase() === "swaggerresolver") {
+        const target = await workingScope.CreateScope("output").Write(config.__specials.namespace ? config.__specials.namespace + ".json" : config.inputFileUris[0]);
+        callback(await target.WriteData(JSON.stringify(rawSwagger, null, 2)));
+      }
+      else if (codeGenerator) {
+        const codeModel = await autoRestDotNetPlugin.Model(swagger, workingScope.CreateScope("model"),
+          {
+            namespace: config.__specials.namespace || ""
+          });
+
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
         let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, workingScope.CreateScope("generate"),
           {
@@ -97,7 +102,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
   if (result["generatedFiles"]) {
     await MultiPromiseUtility.toAsyncCallbacks(result["generatedFiles"], async fileHandle => {
       // commit to disk (TODO: extract output path more elegantly)
-      const relPath = decodeURIComponent(fileHandle.key.split("/output/")[1]);
+      const relPath = config.__specials.outputFile || decodeURIComponent(fileHandle.key.split("output/")[1]);
       const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
       await WriteString(outputFileUri, await fileHandle.ReadData());
     });
