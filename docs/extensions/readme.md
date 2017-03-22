@@ -105,7 +105,7 @@ modelAsString | `boolean` | **Default: false** When set to `true` the enum will 
   - Explanation: The above condition specifies that the server always expects the model property or the parameter and with a specific value. Hence, it makes sense to treat it as a constant. In the future, if more values are added to the enum then, it is a breaking change to the API provided by the client library.
 - If the **single value** enum is an **optional** model property or an **optional** parameter and if `x-ms-enum` extension is provided then it will be honoured.
 
-##x-ms-parameter-grouping
+## x-ms-parameter-grouping
 By default operation parameters are generated in the client as method arguments. This behavior can sometimes be undesirable when the number of parameters is high. `x-ms-parameter-grouping` extension is used to group multiple primitive parameters into a composite type to improve the API.
 
 **Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)
@@ -270,7 +270,7 @@ The `x-ms-paths` extension has the same schema as [Paths Object](https://github.
    },
 }
 ```
-##x-ms-client-name
+## x-ms-client-name
 
 In some situations, data passed by name, such as query parameters, entity headers, or elements of a JSON document body, are not suitable for use in client-side code.
 For example, a header like 'x-ms-version' would turn out like xMsVersion, or x_ms_version, or XMsVersion, depending on the preferences of a particular code generator.
@@ -319,7 +319,7 @@ It can be used for query parameters and header parameters, as well as properties
   }
 }        
 ```
-##x-ms-external
+## x-ms-external
 To allow generated clients to share models via shared libraries an `x-ms-external` extension was introduced. When a [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) contains this extensions it's definition will be excluded from generated library. Note that in strongly typed languages the code will not compile unless the assembly containing the type is referenced with the project/library. 
 
 **Parent element**: [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject)
@@ -342,7 +342,7 @@ To allow generated clients to share models via shared libraries an `x-ms-externa
 }        
 ```
 
-##x-ms-discriminator-value
+## x-ms-discriminator-value
 Swagger 2.0 specification requires that when used, the value of `discriminator` field MUST match the name of the schema or any schema that inherits it. To overcome this limitation `x-ms-discriminator-value` extension was introduced.
 
 **Schema**:
@@ -363,7 +363,7 @@ Swagger 2.0 specification requires that when used, the value of `discriminator` 
    }
 }
 ```
-##x-ms-client-flatten
+## x-ms-client-flatten
 This extension allows to flatten deeply nested payloads into a more user friendly object. For example a payload that looks like this on the wire:
 ```json5
 {
@@ -464,7 +464,7 @@ and
 }
 ```
 
-##x-ms-parameterized-host
+## x-ms-parameterized-host
 When used, replaces the standard Swagger "host" attribute with a host that contains variables to be replaced as part of method execution or client construction, very similar to how path parameters work.
 
 **Parent element**:  [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
@@ -532,7 +532,7 @@ parameters | [Array of Parameter Objects](https://github.com/OAI/OpenAPI-Specifi
   }
 ```
 
-##x-ms-mutability
+## x-ms-mutability
 This extension offers insight to Autorest on how to generate code (mutability of the property of the model classes being generated). It doesn't alter the modeling of the actual payload that is sent on the wire.
 
 It is an array of strings with three possible values. The array cannot have repeatable values. Valid values are: **"create", "read", "update"**.
@@ -621,7 +621,7 @@ Examples:
 ```
 
 
-##x-ms-odata
+## x-ms-odata
 When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
 
 **Schema**:
@@ -640,7 +640,7 @@ When present the `x-ms-odata` extensions indicates the operation includes one or
 }
 ```
 
-##x-ms-pageable
+## x-ms-pageable
 The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in Swagger as the list of items and the nextLink. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
 
 **Schema**:
@@ -692,7 +692,7 @@ x-ms-pageable model definition
 }
 ```
 
-##x-ms-long-running-operation
+## x-ms-long-running-operation
 Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in Swagger, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
@@ -713,7 +713,7 @@ Some requests like creating/deleting a resource cannot be carried out immediatel
 }
 ```
 
-##x-ms-azure-resource
+## x-ms-azure-resource
 Resource types as defined by the [Resource Managemer API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx) are tagged by using a `x-ms-azure-resource` extension.
 
 **Parent element**:  [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject)
@@ -735,7 +735,7 @@ Resource types as defined by the [Resource Managemer API](https://msdn.microsoft
 }
 ```
 
-##x-ms-request-id
+## x-ms-request-id
 When set, allows to overwrite the `x-ms-request-id` response header (default is x-ms-request-id).
 
 **Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
@@ -755,7 +755,7 @@ When set, allows to overwrite the `x-ms-request-id` response header (default is 
 }
 ```
 
-##x-ms-client-request-id
+## x-ms-client-request-id
 When set, specifies the header parameter to be used instead of `x-ms-client-request-id` (default is x-ms-client-request-id).
 
 **Parent element**:  [Header Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)
