@@ -238,8 +238,8 @@ Modelers:
   <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
     <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
   </data>
-  <data name="XmsClientNameInValid" xml:space="preserve">
-    <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
+  <data name="XmsClientNameInvalid" xml:space="preserve">
+    <value>Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.</value>
   </data>
   <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
     <value>'Delete' operation must not have a request body.</value>
