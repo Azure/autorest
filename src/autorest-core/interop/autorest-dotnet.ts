@@ -8,28 +8,50 @@ import * as fs from "fs";
 import { homedir } from "os";
 import * as path from "path";
 
-function AutoRestDllPath() {
-  let result = path.join(__dirname, "../../../AutoRest.dll");
+const empty = "";
 
-  // try relative path to __dirname
+function WalkUpPath(startPath: string, relativePath: string, maxParents: number): string {
+  const result = path.resolve(startPath, relativePath);
+
   if (fs.existsSync(result)) {
+    return result;
+  }
+  const parent = path.resolve(startPath, '..');
+
+
+  if (startPath === parent || (maxParents--) < 1) {
+    return empty;
+  }
+
+  return WalkUpPath(parent, relativePath, maxParents);
+}
+
+function AutoRestDllPath(): string {
+  // try relative path to __dirname
+  let result = WalkUpPath(__dirname, "AutoRest.dll", 4);
+  if (result !== empty) {
     return result;
   }
 
   // try relative to process.argv[1]
-  result = path.join(path.dirname(process.argv[1]), "../../AutoRest.dll");
-  // try relative path to __dirname
-  if (fs.existsSync(result)) {
+  result = WalkUpPath(process.argv[1], "AutoRest.dll", 4);
+  if (result !== empty) {
     return result;
   }
 
-  throw "Unable to find AutoRest.Dll.";
+
+  // try relative path to __dirname in solution
+  result = WalkUpPath(__dirname, "core/AutoRest/bin/Debug/netcoreapp1.0/AutoRest.dll", 8);
+  if (result !== empty) {
+    return result;
+  }
+
+  throw new Error("Unable to find AutoRest.dll.");
 }
 
 function DotNetPath() {
+  // try global installation directory
   let result = path.join(homedir(), ".autorest", "frameworks", "dotnet")
-
-  // try relative path to __dirname
   if (fs.existsSync(result)) {
     return result;
   }
@@ -38,12 +60,12 @@ function DotNetPath() {
   return "dotnet";
 }
 
-export function spawnLegacyAutoRest(args: string[]): ChildProcess {
+export function SpawnLegacyAutoRest(args: string[]): ChildProcess {
   return spawn(
-    path.join(homedir(), ".autorest", "frameworks", "dotnet"),
+    DotNetPath(),
     [AutoRestDllPath(), ...args]);
 }
 
-export function spawnJsonRpcAutoRest(): ChildProcess {
-  return spawnLegacyAutoRest(["-JsonRpc"]); // TODO: sync with the cowboy
+export function SpawnJsonRpcAutoRest(): ChildProcess {
+  return SpawnLegacyAutoRest(["--server"]);
 }

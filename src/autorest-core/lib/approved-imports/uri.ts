@@ -15,7 +15,7 @@ const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
 /**
  * Loads a UTF8 string from given URI.
  */
-export async function readUri(uri: string): Promise<string> {
+export async function ReadUri(uri: string): Promise<string> {
   try {
     const readable = await getUriAsync(uri);
 
@@ -46,7 +46,7 @@ const fileUri: (path: string, options: { resolve: boolean }) => string = require
  * - making existing local paths consumable by `readUri` (e.g. "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml")
  * - creating "fake" URIs for virtual FS files (e.g. "input/swagger.yaml" -> "file:///input/swagger.yaml")
  */
-export function createFileUri(path: string): string {
+export function CreateFileUri(path: string): string {
   return fileUri(path, { resolve: false });
 }
 
@@ -57,10 +57,11 @@ export function createFileUri(path: string): string {
  * @param pathOrUri Relative/absolute path/URI
  * @returns Absolute URI
  */
-export function resolveUri(baseUri: string, pathOrUri: string): string {
+export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (isAbsolute(pathOrUri)) {
-    return createFileUri(pathOrUri);
+    return CreateFileUri(pathOrUri);
   }
+  pathOrUri = pathOrUri.replace(/\\/g, "/");
   if (!baseUri) {
     throw "'pathOrUri' was detected to be relative so 'baseUri' is required";
   }

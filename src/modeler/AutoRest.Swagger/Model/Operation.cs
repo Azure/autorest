@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 using System;
 using System.Linq;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 using AutoRest.Core.Utilities;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -84,7 +84,6 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// The list of possible responses as they are returned from executing this operation.
         /// </summary>
-        [Rule(typeof(ResponseRequired))]
         public Dictionary<string, OperationResponse> Responses { get; set; }
 
         /// <summary>

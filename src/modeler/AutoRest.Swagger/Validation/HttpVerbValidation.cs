@@ -3,7 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Validation
     /// </summary>
     public class HttpVerbValidation : TypedRule<Dictionary<string, Operation>>
     {
-        private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST)$", RegexOptions.IgnoreCase);
+        private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST|TRACE)$", RegexOptions.IgnoreCase);
 
         /// <summary>
         /// Id of the Rule.
@@ -26,7 +26,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
-        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
         /// <summary>
         /// The template message for this Rule. 

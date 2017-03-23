@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
-using AutoRest.Core.Validation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,7 +22,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the IModelType name.
         /// </summary>
-        [Rule(typeof(IsIdentifier))]
+        // [Rule(typeof(IsIdentifier))]
         Fixable<string> Name { get; }
 
         /// <summary>

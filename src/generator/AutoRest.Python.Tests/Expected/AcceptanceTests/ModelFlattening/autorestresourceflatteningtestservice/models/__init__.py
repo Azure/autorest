@@ -16,6 +16,8 @@ from .resource_collection import ResourceCollection
 from .base_product import BaseProduct
 from .simple_product import SimpleProduct
 from .generic_url import GenericUrl
+from .wrapped_product import WrappedProduct
+from .product_wrapper import ProductWrapper
 from .flatten_parameter_group import FlattenParameterGroup
 
 __all__ = [
@@ -26,5 +28,7 @@ __all__ = [
     'BaseProduct',
     'SimpleProduct',
     'GenericUrl',
+    'WrappedProduct',
+    'ProductWrapper',
     'FlattenParameterGroup',
 ]

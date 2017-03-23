@@ -83,6 +83,73 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             }
 
             /// <summary>
+            /// No need to have a route in Express server for this operation. Used to
+            /// verify the type flattened is not removed if it's referenced in an array
+            /// <see href="http://tempuri.org" />
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceArray'>
+            /// External Resource as an Array to put
+            /// </param>
+            public static void PutWrappedArray(this IAutoRestResourceFlatteningTestService operations, IList<WrappedProduct> resourceArray = default(IList<WrappedProduct>))
+            {
+                operations.PutWrappedArrayAsync(resourceArray).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// No need to have a route in Express server for this operation. Used to
+            /// verify the type flattened is not removed if it's referenced in an array
+            /// <see href="http://tempuri.org" />
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='resourceArray'>
+            /// External Resource as an Array to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutWrappedArrayAsync(this IAutoRestResourceFlatteningTestService operations, IList<WrappedProduct> resourceArray = default(IList<WrappedProduct>), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.PutWrappedArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// No need to have a route in Express server for this operation. Used to
+            /// verify the type flattened is not removed if it's referenced in an array
+            /// <see href="http://tempuri.org" />
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<ProductWrapper> GetWrappedArray(this IAutoRestResourceFlatteningTestService operations)
+            {
+                return operations.GetWrappedArrayAsync().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// No need to have a route in Express server for this operation. Used to
+            /// verify the type flattened is not removed if it's referenced in an array
+            /// <see href="http://tempuri.org" />
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<ProductWrapper>> GetWrappedArrayAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetWrappedArrayWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Put External Resource as a Dictionary
             /// <see href="http://tempuri.org" />
             /// </summary>
