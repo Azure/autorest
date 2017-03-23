@@ -7,6 +7,23 @@ using System.Threading.Tasks;
 using Microsoft.Perks.JsonRPC;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
+static class Channel
+{
+    public static readonly string Information = "information";
+    public static readonly string Warning = "warning";
+    public static readonly string Error = "error";
+    public static readonly string Debug = "debug";
+    public static readonly string Verbose = "verbose";
+    public static readonly string Fatal = "fatal";
+}
+
+public class Message
+{
+  public string Channel { get; set; }
+  public object Details { get; set; }
+  public string Text { get; set; }
+}
+
 public abstract class NewPlugin
 {
   private IDisposable Start => NewContext;
@@ -16,7 +33,7 @@ public abstract class NewPlugin
   public Task<string> GetValue(string key) => GetValue<string>(key);
   public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
 
-  public void Message(Dictionary<string, string> details, object sourcemap) => _connection.Notify("Message", _sessionId, details, sourcemap);
+  public void Message(Message message, object sourcemap) => _connection.Notify("Message", _sessionId, message, sourcemap);
   public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
 
   protected string _sessionId;
@@ -39,10 +56,10 @@ public abstract class NewPlugin
     }
     catch (Exception e)
     {
-      Message(new Dictionary<string, string>
+      Message(new Message
       {
-          { "channel", "FATAL" },
-          { "message", e.ToString() }
+          Channel = "fatal",
+          Text = e.ToString()
       }, null);
       return false;
     }

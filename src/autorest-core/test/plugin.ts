@@ -86,11 +86,11 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.notEqual(messages.length, 0);
     for (const message of messages) {
       assert.ok(message);
-      // assert.ok(message.Details.code);
-      // assert.ok(message.Text);
-      // assert.ok(message.Details.jsonref);
-      // assert.ok(message.Details["json-path"]);
-      // assert.ok(message.Details.validationCategory);
+      assert.ok(message.Details.code);
+      assert.ok(message.Text);
+      assert.ok(message.Details.jsonref);
+      assert.ok(message.Details["json-path"]);
+      assert.ok(message.Details.validationCategory);
     }
   }
 
