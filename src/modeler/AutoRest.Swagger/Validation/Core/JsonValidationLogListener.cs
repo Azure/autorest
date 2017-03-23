@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Logging.Core
                 rawMessage["id"] = validationMessage.Rule.Id;
                 rawMessage["validationCategory"] = validationMessage.Rule.ValidationCategory.ToString();
                 rawMessage["providerNamespace"] = pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null;
-                rawMessage["resourceType"] = pathComponentResource.Value;
+                rawMessage["resourceType"] = pathComponentResource.Success ? pathComponentResource.Value : null;
                 rawMessageCollection.Add(rawMessage);
             }
         }
