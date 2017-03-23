@@ -1,15 +1,17 @@
+import { EventEmitter, IEvent } from '../events';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { MultiPromise, MultiPromiseUtility } from '../multi-promise';
 import { fork, ChildProcess } from "child_process";
 import { Mappings, Mapping, RawSourceMap, SmartPosition, Position } from "../ref/source-map";
 import { CancellationToken } from "../ref/cancallation";
 import { createMessageConnection, MessageConnection } from "../ref/jsonrpc";
 import { DataStoreViewReadonly, DataStoreView, DataHandleRead } from "../data-store/data-store";
-import { Message, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
-
+import { IAutoRestPluginInitiator_Types, IAutoRestPluginTarget_Types, IAutoRestPluginInitiator } from "./plugin-api";
+import { Channel, Message } from "../message";
 
 interface IAutoRestPluginTargetEndpoint {
   GetPluginNames(cancellationToken: CancellationToken): Promise<string[]>;
@@ -24,10 +26,10 @@ interface IAutoRestPluginInitiatorEndpoint {
   ListInputs(): Promise<string[]>;
 
   WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void>;
-  Message(message: Message<any>, path?: SmartPosition, sourceFile?: string): Promise<void>;
+  Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void>;
 }
 
-export class AutoRestPlugin {
+export class AutoRestPlugin extends EventEmitter {
   private static lastSessionId: number = 0;
   private static CreateSessionId(): string { return `session_${++AutoRestPlugin.lastSessionId}`; }
 
@@ -49,7 +51,10 @@ export class AutoRestPlugin {
     return plugin;
   }
 
+  @EventEmitter.Event public Message: IEvent<AutoRestPlugin, Message>;
+
   public constructor(channel: MessageConnection) {
+    super();
     // initiator
     const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
       try {
@@ -95,11 +100,11 @@ export class AutoRestPlugin {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
-  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, messageScope: DataStoreView, cancellationToken: CancellationToken): Promise<boolean> {
+  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, cancellationToken: CancellationToken): Promise<boolean> {
     const sid = AutoRestPlugin.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(configuration, inputScope, outputScope, messageScope, cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, m => this.Message.Dispatch(m), cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);
@@ -113,7 +118,7 @@ export class AutoRestPlugin {
     return result;
   }
 
-  private static CreateEndpointFor(configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, messageScope: DataStoreView, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
+  private static CreateEndpointFor(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): IAutoRestPluginInitiatorEndpoint {
     let messageId: number = 0;
 
     const inputFileHandles = async () => {
@@ -155,38 +160,34 @@ export class AutoRestPlugin {
         await finishPrev;
         notify();
       },
-      async Message(message: Message<any>, path?: SmartPosition, sourceFile?: string): Promise<void> {
-        if (message.channel === "FATAL") {
-          throw new Error(message.message);
-        }
+      async Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void> {
+        // if (message.Channel === Channel.Fatal) {
+        //   throw new Error(message.Text);
+        // }
 
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
-        const dataHandle = await messageScope.Write(`message_${messageId++}.yaml`);
-        const mappings: Mapping[] = [];
-        const files = await inputFileHandles();
-        if (path) {
-          if (!sourceFile) {
-            if (files.length !== 1) {
-              await finishPrev;
-              notify();
-              throw new Error("Message did not specify blame origin but there are multiple input files");
-            }
-            sourceFile = files[0].key;
-          }
-          var a: Position = { line: 1, column: 0 };
-          var b: SmartPosition = a;
+        message.Plugin = pluginName;
+        onMessage(message);
+        // const files = await inputFileHandles();
+        // if (path) {
+        //   if (!sourceFile) {
+        //     if (files.length !== 1) {
+        //       await finishPrev;
+        //       notify();
+        //       throw new Error("Message did not specify blame origin but there are multiple input files");
+        //     }
+        //     sourceFile = files[0].key;
+        //   }
 
-          mappings.push({
-            name: `location of ${message.channel} '${message.message}'`,
-            source: sourceFile,
-            generated: <Position>{ line: 1, column: 0 },
-            original: path
-          });
-        }
-        dataHandle.WriteObject(message, mappings, files);
+        //   mappings.push({
+        //     name: `location of ${message.Channel} '${message.Text}'`,
+        //     source: sourceFile,
+        //     original: path
+        //   });
+        // }
 
         await finishPrev;
         notify();

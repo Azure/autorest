@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Channel } from '../message';
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
 import { ResolveUri } from "../ref/uri";
 import { ConfigurationView } from '../configuration';
@@ -43,6 +44,16 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
   //
   if (config.__specials.azureValidator || config.__specials.codeGenerator) {
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
+    autoRestDotNetPlugin.Message.Subscribe((_, m) => {
+      switch (m.Channel) {
+        case Channel.Debug: config.Debug.Dispatch(m); break;
+        case Channel.Error: config.Error.Dispatch(m); break;
+        case Channel.Fatal: config.Fatal.Dispatch(m); break;
+        case Channel.Information: config.Information.Dispatch(m); break;
+        case Channel.Verbose: config.Verbose.Dispatch(m); break;
+        case Channel.Warning: config.Warning.Dispatch(m); break;
+      }
+    });
 
     // modeler
     const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
@@ -86,11 +97,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
 
     // validator
     if (config.__specials.azureValidator) {
-      const messages = await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
-      for (const fileName of await messages.Enum()) {
-        const messageHandle = await messages.ReadStrict(fileName);
-        // TODO: dispatch
-      }
+      await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
     }
   }
 }

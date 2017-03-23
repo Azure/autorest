@@ -4,9 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
-import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
+import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types } from "../plugin-api";
 import { SmartPosition, Mapping, RawSourceMap } from "../../ref/source-map";
 import { Parse, Stringify } from "../../ref/yaml";
+import { Message } from "../../message";
 const utils = require("../../../../../../openapi-validation-tools/lib/util/utils");
 const validation = require("../../../../../../openapi-validation-tools/index");
 
@@ -89,7 +90,7 @@ async function main() {
     WriteFile(sessionId: string, filename: string, content: string, sourceMap?: Mapping[] | RawSourceMap): void {
       channel.sendNotification(IAutoRestPluginInitiator_Types.WriteFile, sessionId, filename, content, sourceMap);
     },
-    Message(sessionId: string, message: Message<any>, path?: SmartPosition, sourceFile?: string): void {
+    Message(sessionId: string, message: Message, path?: SmartPosition, sourceFile?: string): void {
       channel.sendNotification(IAutoRestPluginInitiator_Types.Message, sessionId, message, path, sourceFile);
     }
   };

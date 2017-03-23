@@ -1,21 +1,12 @@
 import { SmartPosition, Position } from './ref/source-map';
 
-export type Channel = {
-  readonly Information: "information",
-  readonly Warning: "warning",
-  readonly Error: "error",
-  readonly Debug: "debug",
-  readonly Verbose: "verbose",
-  readonly Fatal: "fatal",
-};
-
-export const Channel: Channel = {
-  Information: "information",
-  Warning: "warning",
-  Error: "error",
-  Debug: "debug",
-  Verbose: "verbose",
-  Fatal: "fatal",
+export enum Channel {
+  Information = <any>"information",
+  Warning = <any>"warning",
+  Error = <any>"error",
+  Debug = <any>"debug",
+  Verbose = <any>"verbose",
+  Fatal = <any>"fatal",
 }
 
 export interface SourceLocation {
