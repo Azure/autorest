@@ -43,9 +43,9 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        ///// <summary>
-        ///// Validates whether property names are camelCase for definitions.
-        ///// </summary>
+        /// <summary>
+        /// Validates whether property names are camelCase for definitions.
+        /// </summary>
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             foreach (KeyValuePair<string, Schema> definition in definitions)

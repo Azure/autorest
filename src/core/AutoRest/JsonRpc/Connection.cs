@@ -193,7 +193,7 @@ namespace Microsoft.Perks.JsonRPC
                     if (-1 == ch)
                     {
                         // didn't get anything. start again, it'll know if we're shutting down
-                        continue;
+                        break;
                     }
 
                     if ('{' == ch || '[' == ch)

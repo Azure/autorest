@@ -96,7 +96,7 @@ namespace AutoRest
                         AutoRestController.Generate();
                         if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                         {
-                            new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
+                            new Simplify.CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                         }
                         if (!settings.JsonValidationMessages)
                         {

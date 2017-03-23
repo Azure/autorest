@@ -51,10 +51,15 @@ export class AutoRestPlugin {
 
   public constructor(channel: MessageConnection) {
     // initiator
-    const dispatcher = (fnName: string) => (sessionId: string, ...rest: any[]) => {
-      const endpoint = this.apiInitiatorEndpoints[sessionId];
-      if (endpoint) {
-        return (endpoint as any)[fnName](...rest);
+    const dispatcher = (fnName: string) => async (sessionId: string, ...rest: any[]) => {
+      try {
+        const endpoint = this.apiInitiatorEndpoints[sessionId];
+        if (endpoint) {
+          return await (endpoint as any)[fnName](...rest);
+        }
+      } catch (e) {
+        console.error(`Error occurred in handler for '${fnName}' in session '${sessionId}':`);
+        console.error(e);
       }
     };
     this.apiInitiator = {

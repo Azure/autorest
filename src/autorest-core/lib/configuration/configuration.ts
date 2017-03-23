@@ -19,6 +19,7 @@ export interface AutoRestConfigurationSpecials {
   syncMethods?: "all" | "essential" | "none";
   addCredentials?: boolean;
   rubyPackageName?: string;
+  outputFile?: string | null;
 }
 
 export interface AutoRestConfiguration {

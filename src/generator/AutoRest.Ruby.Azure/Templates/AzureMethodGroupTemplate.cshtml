@@ -11,10 +11,6 @@ module @Settings.Namespace
   @WrapComment("# ", Model.CodeModel.Documentation.Else((string) Model.TypeName) )
   #
   class @((string) Model.TypeName)
-@if (Model.CodeModel.ModelTypes.Any())
-{
-    @:include @(Settings.Namespace)::Models
-}
 @foreach (var include in Model.Includes)
 {
     @:include @include

@@ -71,6 +71,16 @@ export class AutoRestDotNetPlugin {
     return outputScope;
   }
 
+  public async SimplifyCSharpCode(
+    inputScope: DataStoreViewReadonly,
+    workingScope: DataStoreView): Promise<DataStoreViewReadonly> {
+
+    const outputScope = workingScope.CreateScope("output");
+    const messageScope = workingScope.CreateScope("messages");
+    await this.CautiousProcess(`CSharpSimplifier`, _ => null, inputScope, outputScope, messageScope);
+    return outputScope;
+  }
+
   public async Model(
     swagger: DataHandleRead,
     workingScope: DataStoreView,

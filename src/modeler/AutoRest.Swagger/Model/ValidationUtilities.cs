@@ -17,7 +17,11 @@ namespace AutoRest.Swagger.Model.Utilities
         private static readonly Regex UrlResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private static readonly IEnumerable<string> baseResourceModelNames = 
             new List<string>() { "trackedresource", "proxyresource", "resource" };
+
+        private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         
+
+        // This needs to be deprecated in favor of context.TrackedResources
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
@@ -255,15 +259,21 @@ namespace AutoRest.Swagger.Model.Utilities
             => resourceModels.Where(resModel => ContainsRequiredProperties(resModel, definitions, new List<string>() { "location" }));
 
 
-        // determine if an operation is xms pageable operation
-        public static bool IsXmsPageableOperation(Operation op)
-        {
-            // if xmspageable type, return true
-            return (op.Extensions.GetValue<object>(XmsPageable) != null);
-        }
+        /// <summary>
+        /// Determines if an operation is xms pageable operation
+        /// </summary>
+        /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
+        /// <returns>true if operation is x-ms-pageable</returns>
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
 
-        // determine if an operation returns an object of array type
-        public static bool IsArrayResponseOperation(Operation op, ServiceDefinition entity)
+
+        /// <summary>
+        /// Determines if an operation returns an object of array type
+        /// </summary>
+        /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
+        /// <param name="serviceDefinition">Service definition that contains the operation</param>
+        /// <returns>true if operation returns an array type</returns>
+        public static bool IsArrayTypeResponseOperation(Operation op, ServiceDefinition entity)
         {
             // if a success response is not defined, we have nothing to check, return false
             if (op.Responses?.ContainsKey("200") != true) return false;
@@ -294,17 +304,6 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        // determine if the operation is xms pageable or returns an object of array type
-        public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
-        {
-            if (IsXmsPageableOperation(op) || IsArrayResponseOperation(op, entity))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         /// <summary>
         /// Returns all operations that match the httpverb (from all paths in service definitions)
         /// </summary>
@@ -322,6 +321,10 @@ namespace AutoRest.Swagger.Model.Utilities
             return pathOperations;
         }
 
+
+        public static bool IsXmsPageableOrArrayTypeResponseOperation(Operation op, ServiceDefinition entity) => 
+            (IsXmsPageableResponseOperation(op) || IsArrayTypeResponseOperation(op, entity));
+        
         /// <summary>
         /// Returns all operations that match the httpverb
         /// </summary>
@@ -371,11 +374,6 @@ namespace AutoRest.Swagger.Model.Utilities
                 }
             }
             return sb.ToString();
-        }
-
-        public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
-        {
-            return serviceDefinition.Definitions.Where(defPair=> defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions["x-ms-azure-resource"] == true);
         }
 
         /// <summary>

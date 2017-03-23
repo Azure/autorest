@@ -16,7 +16,7 @@ namespace AutoRest.Swagger.Validation
 
         private readonly Regex resourceRefRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private readonly string[] allowedTopLevelProperties = { "name", "type", "id", "location", "properties", "tags", "plan", "sku", "etag",
-                                                                "managedBy", "identity"};
+                                                                "managedBy", "identity", "kind"};
 
         /// <summary>
         /// Id of the Rule.

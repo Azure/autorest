@@ -17,7 +17,7 @@
     "application/json"
   ],
   "paths": {
-    "/foo": {
+    "/foo/Subscriptions/{subscriptionId}": {
       "post": {
         "operationId": "Noun_Verb",
         "summary": "Foo path",
@@ -25,6 +25,28 @@
         "responses": {
           "default": {
             "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
           }
         }
       }
@@ -37,6 +59,21 @@
       "required": true,
       "type": "string",
       "description": "test id"
+    }
+  },
+  "definitions": {
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "the operation"
+          },
+          "description": "List of Operations"
+        }
+      }
     }
   }
 }

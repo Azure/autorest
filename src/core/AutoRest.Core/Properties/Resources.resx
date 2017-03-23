@@ -238,8 +238,8 @@ Modelers:
   <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
     <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
   </data>
-  <data name="XmsClientNameInValid" xml:space="preserve">
-    <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
+  <data name="XmsClientNameInvalid" xml:space="preserve">
+    <value>Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.</value>
   </data>
   <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
     <value>'Delete' operation must not have a request body.</value>
@@ -291,9 +291,6 @@ Modelers:
   <data name="NoDefinitionForPathParameter" xml:space="preserve">
     <value>Could not find a definition for the path parameter '{0}'</value>
   </data>
-  <data name="NoResponses" xml:space="preserve">
-    <value>No responses defined.</value>
-  </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
   </data>
@@ -319,19 +316,19 @@ Modelers:
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
-    <value>Media types other than 'application/json' has limited support</value>
+    <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
     <value>Non-HTTPS/HTTP schemes have limited support</value>
   </data>
   <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section</value>
+    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
   </data>
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
+    <value>Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition</value>
   </data>
-  <data name="UniqueResourcePathsWarning" xml:space="preserve">
-    <value>More than one resource path is not allowed in a single spec (found: {0}).</value>
+  <data name="UniqueResourcePaths" xml:space="preserve">
+    <value>Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.</value>
   </data>
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
@@ -340,7 +337,7 @@ Modelers:
     <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation must use method name 'Get' or Method name start with 'List'</value>
+    <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
@@ -361,13 +358,13 @@ Modelers:
     <value>Tracked resource '{0}' must have a get operation.</value>
   </data>
   <data name="DeleteOperationNameNotValid" xml:space="preserve">
-    <value>'DELETE' operation must use method name 'Delete'.</value>
+    <value>'DELETE' operation '{0}' must use method name 'Delete'.</value>
   </data>
   <data name="PatchOperationNameNotValid" xml:space="preserve">
-    <value>'PATCH' operation must use method name 'Update'.</value>
+    <value>'PATCH' operation '{0}' must use method name 'Update'.</value>
   </data>
   <data name="PutOperationNameNotValid" xml:space="preserve">
-    <value>'PUT' operation must use method name 'Create'.</value>
+    <value>'PUT' operation '{0}' must use method name 'Create'.</value>
   </data>
   <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
     <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
@@ -383,5 +380,8 @@ Modelers:
   </data>
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
     <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
+  </data>
+  <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
+    <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
   </data>
 </root>

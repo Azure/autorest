@@ -12,9 +12,9 @@ public abstract class NewPlugin
   private IDisposable Start => NewContext;
 
   public Task<string> ReadFile(string filename) => _connection.Request<string>("ReadFile", _sessionId, filename);
-    public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
-    public Task<string> GetValue(string key) => GetValue<string>(key);
-    public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
+  public Task<T> GetValue<T>(string key) => _connection.Request<T>("GetValue", _sessionId, key);
+  public Task<string> GetValue(string key) => GetValue<string>(key);
+  public Task<string[]> ListInputs() => _connection.Request<string[]>("ListInputs", _sessionId);
 
   public void Message(Dictionary<string, string> details, object sourcemap) => _connection.Notify("Message", _sessionId, details, sourcemap);
   public void WriteFile(string filename, string content, object sourcemap) => _connection.Notify("WriteFile", _sessionId, filename, content, sourcemap);
