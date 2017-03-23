@@ -35,7 +35,7 @@ declare class AutoRestRequiredOptionalTestService {
      * @param {number} [options.optionalGlobalQuery] - number of items to skip
      *
      */
-    constructor(requiredGlobalPath: string, requiredGlobalQuery: string, baseUri: string, options: ServiceClientOptions);
+    constructor(requiredGlobalPath: string, requiredGlobalQuery: string, baseUri: string, options?: ServiceClientOptions);
 
     requiredGlobalPath: string;
 
