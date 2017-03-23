@@ -20,6 +20,10 @@ namespace AutoRest.Go
 
     public const string ReadOnlyConstraint = "ReadOnly";
 
+    private static readonly Regex IsApiVersionPattern = new Regex(@"^api[^a-zA-Z0-9_]?version", RegexOptions.IgnoreCase);
+
+    private static readonly Regex UnwrapAnchorTagsPattern = new Regex("([^<>]*)<a\\s*.*\\shref\\s*=\\s*[\'\"]([^\'\"]*)[\'\"][^>]*>(.*)</a>");
+
     private static readonly Regex WordSplitPattern = new Regex(@"(\p{Lu}\p{Ll}+)");
 
     private static Dictionary<string, string> plural = new Dictionary<string, string>()
@@ -184,9 +188,8 @@ namespace AutoRest.Go
     // Still, nobody uses this...
     public static string UnwrapAnchorTags(this string comments)
     {
-      string pattern = "([^<>]*)<a\\s*.*\\shref\\s*=\\s*[\'\"]([^\'\"]*)[\'\"][^>]*>(.*)</a>";
-      Regex r = new Regex(pattern);
-      Match match = r.Match(comments);
+
+      Match match = UnwrapAnchorTagsPattern.Match(comments);
 
       if (match.Success)
       {
@@ -227,8 +230,7 @@ namespace AutoRest.Go
 
     public static bool IsApiVersion(this string name)
     {
-      string rgx = @"^api[^a-zA-Z0-9_]?version";
-      return Regex.IsMatch(name, rgx, RegexOptions.IgnoreCase);
+      return IsApiVersionPattern.IsMatch(name);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
@@ -242,7 +244,6 @@ namespace AutoRest.Go
       var r = body as CompositeTypeGo;
       return r != null && (r.BaseType.PrimaryType(KnownPrimaryType.Stream));
     }
-
 
     public static bool PrimaryType(this IModelType type, KnownPrimaryType typeToMatch)
     {
