@@ -182,7 +182,7 @@ async function ParseCodeBlocksInternal(hLiterate: DataHandleRead, hResult: DataH
       }
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
-        mapping = mapping.concat(Array.from(IdentitySourceMapping(data.key, yamlAst)));
+        mapping = mapping.concat([...IdentitySourceMapping(data.key, yamlAst)]);
         const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
         hsConfigFileBlocks.push({ info: codeBlock.info, data: await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]) });
       } else {

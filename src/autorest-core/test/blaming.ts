@@ -19,7 +19,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
       const blameTree = await view.DataStore.Blame(
         "compose/swagger.yaml",
         { path: parse("$.securityDefinitions.azure_auth.description") });
-      const blameInputs = Array.from(blameTree.BlameInputs());
+      const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 1);
     }
 
@@ -28,7 +28,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
       const blameTree = await view.DataStore.Blame(
         "compose/swagger.yaml",
         { path: parse("$.definitions.SearchServiceListResult.description") });
-      const blameInputs = Array.from(blameTree.BlameInputs());
+      const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 2);
     }
   }
