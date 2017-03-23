@@ -120,15 +120,17 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void OperationParametersValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"));
-            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation));
+            // ignore ServiceDefinitionParameters validation rule since it overlaps with this
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "operations-invalid-parameters.json"))
+                            .Where(msg => msg.Rule.GetType().Name != "ServiceDefinitionParameters");
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 2);
         }
 
         [Fact]
         public void ServiceDefinitionParametersValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "service-def-invalid-parameters.json"));
-            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters), 2);
         }
 
         [Fact]
@@ -531,6 +533,20 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "property-names-casing-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(BodyPropertiesNamesCamelCase), 0);
             messages.AssertOnlyValidationMessage(typeof(DefinitionsPropertiesNamesCamelCase), 0);
+        }
+
+        [Fact]
+        public void ValidServiceDefinitionParameters()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "service-def-valid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(ServiceDefinitionParameters), 0);
+        }
+
+        [Fact]
+        public void ValidOperationParameters()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "operations-valid-parameters.json"));
+            messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 0);
         }
 
         /// <summary>
