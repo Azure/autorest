@@ -7,6 +7,7 @@ import { Configuration, ConfigurationView, FileSystemConfiguration } from './con
 import { DocumentType } from "./document-type";
 export { ConfigurationView } from './configuration';
 import { Message } from './message';
+import * as Constants from './constants';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -46,28 +47,28 @@ export class AutoRest extends EventEmitter {
     return true;
   }
 
-  private invalidate() {
-    this._view = undefined;
+  public static async IsConfigurationFile(content: string): Promise<boolean> {
+    // this checks to see if the document is an autorest markdown configuration file
+    return content.indexOf(Constants.MagicString) > -1
   }
 
-  /**
-   * This should be called to notify AutoRest that a file has changed.
-   *
-   * @param path the path of the files that has changed
-   */
-  public FileChanged(path: string) {
-    this.invalidate();
+  public async FindDocumentRoot(documentPath: string): Promise<string> {
+    return "null";
+  }
+
+  public Invalidate() {
+    this._view = undefined;
   }
 
   public async AddConfiguration(configuratuion: any): Promise<void> {
     this._configurations.push(configuratuion);
-    this.invalidate();
+    this.Invalidate();
   }
 
   public async ResetConfiguration(): Promise<void> {
     // clear the configuratiion array.
     this._configurations.length = 0;
-    this.invalidate();
+    this.Invalidate();
   }
 
   public get HasConfiguration(): Promise<boolean> {
@@ -92,7 +93,7 @@ export class AutoRest extends EventEmitter {
       this.Finished.Dispatch(false);
     }
     finally {
-      this.invalidate();
+      this.Invalidate();
     }
   }
 

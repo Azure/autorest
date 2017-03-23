@@ -1,9 +1,12 @@
+import { EventEmitter, IEvent } from '../autorest-core/lib/events';
+import { DocumentPatterns } from '../autorest-core/lib/document-type';
 // polyfill for the AsyncIterator support
 require("./lib/polyfill.min.js")
 
 // exports the public AutoRest definitions
 export { Installer } from "./installer";
-export { IFileSystem, Message, AutoRest as IAutoRest } from 'autorest-core';
+export { IFileSystem, Message, AutoRest as IAutoRest, DocumentType, DocumentExtension, DocumentPatterns } from 'autorest-core';
+export { EventEmitter, IEvent } from '../autorest-core/lib/events';
 
 // the local class definition of the AutoRest Interface
 import { AutoRest as IAutoRest } from 'autorest-core';

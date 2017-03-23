@@ -1,9 +1,9 @@
+import { AutoRestManager } from './autorest-manager';
 /* --------------------------------------------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 'use strict';
-debugger;
 
 import {
   IPCMessageReader, IPCMessageWriter,
@@ -14,23 +14,29 @@ import {
 } from 'vscode-languageserver';
 
 import { AutoRest, IFileSystem, Installer } from "autorest";
-import { VSCodeHybridFileSystem } from "./file-system";
+import { DocumentContext } from "./file-system";
+
+// The settings interface describe the server relevant settings part
+interface Settings {
+  autorest: AutoRestSettings;
+}
+
+// These are the settings we defined in the client's package.json
+// file
+interface AutoRestSettings {
+  maxNumberOfProblems: number;
+}
 
 // Create a connection for the server. The connection uses Node's IPC as a transport
 let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
+let manager: AutoRestManager = new AutoRestManager(connection);
 
-// Create a simple text document manager. The text document manager
-// supports full document sync only
-let documents: TextDocuments = new TextDocuments();
-// Make the text document manager listen on the connection
-// for open, change and close text document events
-documents.listen(connection);
+// let myfs = new VSCodeHybridFileSystem(connection);
+// let autorest = new AutoRest(myfs);
+
 
 // After the server has started the client sends an initialize request. The server receives
 // in the passed params the rootPath of the workspace plus the client capabilities. 
-let workspaceRoot: string;
-let myfs: VSCodeHybridFileSystem;
-let autorest: AutoRest;
 let diagnostics: Map<string, Diagnostic[]> = new Map<string, Diagnostic[]>();
 let queuedToSend: NodeJS.Timer;
 let readyToProcess: NodeJS.Timer;
@@ -40,8 +46,6 @@ async function sendDiagnostics() {
     queuedToSend = setTimeout(sendQueuedDiagnostics, 25)
   }
 }
-
-
 
 async function sendQueuedDiagnostics() {
   queuedToSend = null;
@@ -55,104 +59,104 @@ async function sendQueuedDiagnostics() {
 
 connection.onInitialize(async (params): Promise<InitializeResult> => {
   connection.console.log('Starting Server Side...');
+  manager.SetRootUri(params.rootUri);
 
-  workspaceRoot = params.rootUri;
+  // myfs.RootUri = params.rootUri;
 
-  myfs = new VSCodeHybridFileSystem(connection, params.rootUri);
-  autorest = new AutoRest(myfs);
-
-  autorest.Debug.Subscribe((instance, args) => {
-    // on debug message
-    connection.console.warn(args.Text);
-  });
-
-  autorest.Fatal.Subscribe((instance, args) => {
-    // on fatal message
-    connection.console.error(args.Text);
-  });
-
-  autorest.Verbose.Subscribe((instance, args) => {
-    // on verbose message
-    connection.console.log(args.Text);
-  });
-
-
-  autorest.Information.Subscribe(async (instance, args) => {
-    // information messages come from autorest and represent a document 
-    // issue.
-    // if this is for this source file, add it to the diagnostics
-
-    for await (const each of args.Range) {
-      if (!diagnostics.has(each.document)) {
-        diagnostics.set(each.document, []);
+  /*
+    autorest.Debug.Subscribe((instance, args) => {
+      // on debug message
+      connection.console.warn(args.Text);
+    });
+  
+    autorest.Fatal.Subscribe((instance, args) => {
+      // on fatal message
+      connection.console.error(args.Text);
+    });
+  
+    autorest.Verbose.Subscribe((instance, args) => {
+      // on verbose message
+      connection.console.log(args.Text);
+    });
+  
+    autorest.Information.Subscribe(async (instance, args) => {
+      // information messages come from autorest and represent a document 
+      // issue.
+      // if this is for this source file, add it to the diagnostics
+  
+      for await (const each of args.Range) {
+        if (!diagnostics.has(each.document)) {
+          diagnostics.set(each.document, []);
+        }
+  
+        diagnostics.get(each.document).push({
+          severity: DiagnosticSeverity.Information,
+          range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+          message: args.Text,
+          source: args.Plugin
+        });
       }
-
-      diagnostics.get(each.document).push({
-        severity: DiagnosticSeverity.Information,
-        range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-        message: args.Text,
-        source: args.Plugin
-      });
-    }
-
-    // send when you've got the time...
-    sendDiagnostics();
-  });
-
-  autorest.Warning.Subscribe(async (instance, args) => {
-    // warning messages come from autorest and represent a document 
-    // issue.
-    for await (const each of args.Range) {
-      if (!diagnostics.has(each.document)) {
-        diagnostics.set(each.document, []);
+  
+      // send when you've got the time...
+      sendDiagnostics();
+    });
+  
+    autorest.Warning.Subscribe(async (instance, args) => {
+      // warning messages come from autorest and represent a document 
+      // issue.
+      for await (const each of args.Range) {
+        if (!diagnostics.has(each.document)) {
+          diagnostics.set(each.document, []);
+        }
+  
+        diagnostics.get(each.document).push({
+          severity: DiagnosticSeverity.Warning,
+          range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+          message: args.Text,
+          source: args.Plugin
+        });
       }
-
-      diagnostics.get(each.document).push({
-        severity: DiagnosticSeverity.Warning,
-        range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-        message: args.Text,
-        source: args.Plugin
-      });
-    }
-    // send when you've got the time...
-    sendDiagnostics();
-  });
-
-  autorest.Error.Subscribe(async (instance, args) => {
-    // Error messages come from autorest and represent a document 
-    // issue.
-    for await (const each of args.Range) {
-      if (!diagnostics.has(each.document)) {
-        diagnostics.set(each.document, []);
+      // send when you've got the time...
+      sendDiagnostics();
+    });
+  
+    autorest.Error.Subscribe(async (instance, args) => {
+      // Error messages come from autorest and represent a document 
+      // issue.
+      for await (const each of args.Range) {
+        if (!diagnostics.has(each.document)) {
+          diagnostics.set(each.document, []);
+        }
+  
+        diagnostics.get(each.document).push({
+          severity: DiagnosticSeverity.Error,
+          range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+          message: args.Text,
+          source: args.Plugin
+        });
       }
-
-      diagnostics.get(each.document).push({
-        severity: DiagnosticSeverity.Error,
-        range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-        message: args.Text,
-        source: args.Plugin
-      });
-    }
-    // send when you've got the time...
-    sendDiagnostics();
-  });
-
-  autorest.Finished.Subscribe((instance, args) => {
-    diagnostics = new Map<string, Diagnostic[]>();
-    if (queuedToSend) {
-      clearTimeout(queuedToSend)
-    }
-  })
-  // connection.console.log(`Has config: ${autorest.HasConfiguration}`);
-
+      // send when you've got the time...
+      sendDiagnostics();
+    });
+  
+    autorest.Finished.Subscribe((instance, args) => {
+      diagnostics = new Map<string, Diagnostic[]>();
+      if (queuedToSend) {
+        clearTimeout(queuedToSend)
+      }
+    })
+    // connection.console.log(`Has config: ${autorest.HasConfiguration}`);
+  */
   return {
     capabilities: {
       // Tell the client that the server works in FULL text document sync mode
-      textDocumentSync: documents.syncKind,
+      textDocumentSync: TextDocumentSyncKind.Full,
+
       // Tell the client that the server support code complete
       completionProvider: {
         resolveProvider: true
       }
+
     }
   }
 });
@@ -167,26 +171,6 @@ async function queueProcess() {
     readyToProcess = setTimeout(processDocuments, 25);
   }
 }
-// The content of a text document has changed. This event is emitted
-// when the text document first opened or when its content has changed.
-documents.onDidChangeContent((change) => {
-  // send the document change to the configuration
-  //
-
-  // queue up the Process.
-  queueProcess();
-});
-
-// The settings interface describe the server relevant settings part
-interface Settings {
-  autorest: AutoRestSettings;
-}
-
-// These are the settings we defined in the client's package.json
-// file
-interface AutoRestSettings {
-  maxNumberOfProblems: number;
-}
 
 // hold the maxNumberOfProblems setting
 let maxNumberOfProblems: number;
@@ -196,41 +180,8 @@ connection.onDidChangeConfiguration((change) => {
   let settings = <Settings>change.settings;
   maxNumberOfProblems = settings.autorest.maxNumberOfProblems || 100;
   // Revalidate any open text documents
-  documents.all().forEach(validateTextDocument);
+  // documents.all().forEach(validateTextDocument);
 });
-
-function validateTextDocument(textDocument: TextDocument): void {
-  /*
-    let diagnostics: Diagnostic[] = [];
-    let lines = textDocument.getText().split(/\r?\n/g);
-    let problems = 0;
-    for (var i = 0; i < lines.length && problems < maxNumberOfProblems; i++) {
-      let line = lines[i];
-      let index = line.indexOf('typescript');
-      if (index >= 0) {
-        problems++;
-        diagnostics.push({
-          severity: DiagnosticSeverity.Warning,
-          range: {
-            start: { line: i, character: index},
-            end: { line: i, character: index + 10 }
-          },
-          message: `${line.substr(index, 10)} should be spelled TypeScript`,
-          source: 'ex'
-        });
-      }
-    }
-    // Send the computed diagnostics to VSCode.
-    connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
-  */
-}
-
-connection.onDidChangeWatchedFiles((change) => {
-  // Monitored files have change in VSCode
-  // myfs.ChangedFile(change);
-  connection.console.log('We received an file change event');
-});
-
 
 // This handler provides the initial list of the completion items.
 connection.onCompletion((textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
@@ -266,11 +217,51 @@ connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
 
 let t: Thenable<string>;
 
+
+connection.onDidChangeWatchedFiles((change) => {
+  // Monitored files have change in VSCode
+  // myfs.ChangedFile(change);
+  connection.console.log('We received an file change event');
+
+});
+
+/*
+myfs.onDidOpen((open) => {
+  // a document was opened
+  // unti it's closed again, we should tracking the state and using it.
+  // hmm. Only if it's a swagger doc
+  "foo";
+});
+
+myfs.onDidClose((close) => {
+  // a document was closed.
+  "foo";
+})
+
+myfs.onDidSave((saved) => {
+  // a document was saved to disk.
+  "foo";
+});
+
+// The content of a text document has changed. This event is emitted
+// when the text document first opened or when its content has changed.
+myfs.onDidChangeContent((change) => {
+  // send the document change to the configuration
+  //
+  myfs.ChangedFile(change);
+  autorest.Invalidate();
+
+  // queue up the Process.
+  queueProcess();
+});
+*/
+
+/*
 connection.onDidOpenTextDocument((params) => {
   // A text document got opened in VSCode.
   // params.textDocument.uri uniquely identifies the document. For documents store on disk this is a file URI.
   // params.textDocument.text the initial full content of the document.
-
+  myfs.OpenedFile()
   // add this to our filesystem
 
   connection.console.log(`${params.textDocument.uri} opened.`);
@@ -289,6 +280,6 @@ connection.onDidCloseTextDocument((params) => {
   connection.console.log(`${params.textDocument.uri} closed.`);
 });
 
-
+*/
 // Listen on the connection
 connection.listen();

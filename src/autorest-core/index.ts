@@ -17,4 +17,4 @@ import { IEvent, EventDispatcher, EventEmitter } from "./lib/events"
 export { IFileSystem } from "./lib/file-system"
 export { Message } from "./lib/message"
 export { AutoRest, ConfigurationView } from "./lib/autorest-core"
-
+export { DocumentType, DocumentExtension, DocumentPatterns } from "./lib/document-type"

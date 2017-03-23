@@ -160,8 +160,9 @@ task 'init', "" ,(done)->
           # after npm, hookup symlinks/junctions for dependent packages in projects
           #if ! test '-d', "#{basefolder}/src/autorest/node_modules/autorest-core"
           #  fs.symlinkSync "#{basefolder}/src/autorest-core", "#{basefolder}/src/autorest/node_modules/autorest-core",'junction' 
-
-          done null
+          echo warning "\n#{ info 'NOTE:' } it also seems prudent to do a 'gulp clean' at this point.\n"
+          exec "gulp clean", (c,o,e) -> 
+            done null
       else 
         done null
 
