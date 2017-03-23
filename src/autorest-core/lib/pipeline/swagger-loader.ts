@@ -14,8 +14,6 @@ import { CreateAssignmentMapping } from "../source-map/source-map";
 import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
 
-import { WriteString } from "../ref/writefs";
-
 async function EnsureCompleteDefinitionIsPresent(
   inputScope: DataStoreViewReadonly,
   workingScope: DataStoreView,

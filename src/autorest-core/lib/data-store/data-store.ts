@@ -5,8 +5,7 @@
 
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
-import { ReadUri, ResolveUri } from "../ref/uri";
-import { WriteString } from "../ref/writefs";
+import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
 import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";

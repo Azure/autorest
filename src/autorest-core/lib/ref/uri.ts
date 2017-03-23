@@ -34,39 +34,44 @@ export async function ReadUri(uri: string): Promise<string> {
   }
 }
 
+export async function ExistsUri(uri: string): Promise<boolean> {
+  try {
+    await ReadUri(uri);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 
 /***********************
  * URI manipulation
  ***********************/
-import { isAbsolute } from "path";
+import { isAbsolute, dirname } from "path";
 const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
 
 /**
- * Create a 'file:///' URI from given path, performing no checking of path validity whatsoever.
- * Possible usage includes:
- * - making existing local paths consumable by `readUri` (e.g. "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml")
- * - creating "fake" URIs for virtual FS files (e.g. "input/swagger.yaml" -> "file:///input/swagger.yaml")
+ * Create a 'file:///' URI from given absolute path.
+ * Examples:
+ * - "C:\swagger\storage.yaml" -> "file:///C:/swagger/storage.yaml"
+ * - "/input/swagger.yaml" -> "file:///input/swagger.yaml"
  */
-export function CreateFileUri(path: string): string {
-  return fileUri(path, { resolve: false });
+export function CreateFileUri(absolutePath: string): string {
+  if (!isAbsolute(absolutePath)) {
+    throw new Error("Can only create file URIs from absolute paths.");
+  }
+  return EnsureIsFileUri(fileUri(absolutePath, { resolve: false }));
+}
+export function CreateFolderUri(absolutePath: string): string {
+  return EnsureIsFolderUri(CreateFileUri(absolutePath));
 }
 
-export function FileUriToPath(fileUri: string): string {
-  const uri = parse(fileUri);
-  if (uri.protocol !== "file:") {
-    throw `Protocol '${uri.protocol}' not supported for writing.`;
-  }
-  // convert to path
-  let p = uri.path;
-  if (p === undefined) {
-    throw `Cannot write to '${uri}'. Path not found.`;
-  }
-  if (sep === "\\") {
-    p = p.substr(p.startsWith("/") ? 1 : 0);
-    p = p.replace(/\//g, "\\");
-  }
-  return p;
+export function EnsureIsFolderUri(uri: string) {
+  return EnsureIsFileUri(uri) + "/";
+}
+export function EnsureIsFileUri(uri: string) {
+  return uri.replace(/\/$/g, "");
 }
 
 /**
@@ -85,4 +90,93 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
     throw "'pathOrUri' was detected to be relative so 'baseUri' is required";
   }
   return new URI(pathOrUri).absoluteTo(baseUri).toString();
+}
+
+export function ParentUri(uri: string): string | null {
+  // root?
+  if (uri.endsWith("//")) {
+    return null;
+  }
+  // folder? => cut away last "/"
+  if (uri.endsWith("/")) {
+    uri = uri.slice(0, uri.length - 1);
+  }
+  // cut away last component
+  const compLen = uri.split("/").reverse()[0].length;
+  return uri.slice(0, uri.length - compLen);
+}
+
+/***********************
+ * OS abstraction (writing files, enumerating files)
+ ***********************/
+import { readdir, mkdir, exists, writeFile } from "./async";
+
+function FileUriToLocalPath(fileUri: string): string {
+  const uri = parse(fileUri);
+  if (uri.protocol !== "file:") {
+    throw `Protocol '${uri.protocol}' not supported for writing.`;
+  }
+  // convert to path
+  let p = uri.path;
+  if (p === undefined) {
+    throw `Cannot write to '${uri}'. Path not found.`;
+  }
+  if (sep === "\\") {
+    p = p.substr(p.startsWith("/") ? 1 : 0);
+    p = p.replace(/\//g, "\\");
+  }
+  return p;
+}
+
+export async function* EnumerateFiles(folderUri: string, probeFiles: string[] = []): AsyncIterable<string> {
+  if (folderUri.startsWith("file:")) {
+    yield* (await readdir(FileUriToLocalPath(folderUri))).map(f => ResolveUri(folderUri, f));
+  } else {
+    for (const candid of probeFiles.map(f => ResolveUri(folderUri, f))) {
+      if (await ExistsUri(candid)) {
+        yield candid;
+      }
+    }
+  }
+}
+
+async function CreateDirectoryFor(filePath: string): Promise<void> {
+  var dir: string = dirname(filePath);
+  if (!await exists(dir)) {
+    await CreateDirectoryFor(dir);
+    try {
+      await mkdir(dir);
+    } catch (e) {
+      // mkdir throws if directory already exists - which happens occasionally due to race conditions
+    }
+  }
+}
+
+async function WriteStringInternal(fileName: string, data: string): Promise<void> {
+  await CreateDirectoryFor(fileName);
+  await writeFile(fileName, data);
+}
+
+/**
+ * Writes string to local file system.
+ * @param fileUri  Target file uri.
+ * @param data     String to write (encoding: UTF8).
+ */
+export function WriteString(fileUri: string, data: string): Promise<void> {
+  return WriteStringInternal(FileUriToLocalPath(fileUri), data);
+}
+
+
+
+
+
+
+
+/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
+async function* yieldFromMap(): AsyncIterable<string> {
+  yield* ["hello", "world"];
+};
+async function foo() {
+  for await (const each of yieldFromMap()) {
+  }
 }

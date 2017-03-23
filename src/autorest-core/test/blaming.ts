@@ -11,7 +11,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
 @suite class Blaming {
 
   @test @timeout(10000) async "end to end blaming with literate swagger"() {
-    const view = await new Configuration(new RealFileSystem(ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/"))).CreateView();
+    const view = await new Configuration(new RealFileSystem(), ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/")).CreateView();
     const results = await RunPipeline(view);
 
     // regular description
