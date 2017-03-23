@@ -53,10 +53,10 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // Get all models that are returned by PUT operations (200/201 response)
             var putOperationsResponseModels = GetOperationResponseModels("put", serviceDefinition).Except(xmsAzureResourceModels);
-            putOperationsResponseModels = putOperationsResponseModels.Union(GetOperationResponseModels("put", serviceDefinition, "201").Except(xmsAzureResourceModels));
+            putOperationsResponseModels = putOperationsResponseModels.Union(GetOperationResponseModels("put", serviceDefinition, "201"));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
-            var getOperationsResponseModels = GetOperationResponseModels("get", serviceDefinition).Except(xmsAzureResourceModels);
+            var getOperationsResponseModels = GetOperationResponseModels("get", serviceDefinition);
 
             getOperationsResponseModels =
                 getOperationsResponseModels.Where(modelName => serviceDefinition.Definitions.ContainsKey(modelName))
