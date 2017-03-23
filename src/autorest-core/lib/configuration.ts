@@ -8,7 +8,6 @@ import {
   DataHandleWrite,
   DataStore,
   DataStoreFileView,
-  DataStoreView,
   DataStoreViewReadonly
 } from './data-store/data-store';
 
@@ -19,6 +18,7 @@ import { From, Enumerable as IEnumerable } from "./ref/linq";
 import { IFileSystem } from "./file-system"
 import * as Constants from './constants';
 import { Message } from "./message";
+import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
 export interface AutoRestConfigurationSwitches {
   [key: string]: string | null;
@@ -65,14 +65,28 @@ function key(target: string) {
 export class ConfigurationView extends EventEmitter {
 
   /* @internal */ constructor(
-    public workingScope: DataStore,
-    private configurationFileUri: string,
+    /* @internal */
+    private configFileFolderUri: string,
     ...configs: Array<AutoRestConfigurationImpl>
   ) {
     super();
+    this.DataStore = new DataStore(this.CancellationToken);
+    // TODO: fix configuration loading, note that there was no point in passing that DataStore used 
+    // for loading in here as all connection to the sources is lost when passing `Array<AutoRestConfigurationImpl>` instead of `DataHandleRead`s...
+    // theoretically the `ValuesOf` approach and such won't support blaming (who to blame if $.directives[3] sucks? which code block was it from)
+    // long term, we simply gotta write a `Merge` method that adheres to the rules we need in here.
     this.config = configs;
-    this.Debug.Dispatch({ Text: `Creating ConfigurationView : ${configs.length} sections.` })
+    this.Debug.Dispatch({ Text: `Creating ConfigurationView : ${configs.length} sections.` });
   }
+
+  /* @internal */
+  public readonly DataStore: DataStore;
+
+  private cancellationTokenSource = new CancellationTokenSource();
+  /* @internal */
+  public get CancellationTokenSource(): CancellationTokenSource { return this.cancellationTokenSource; }
+  /* @internal */
+  public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
 
   @EventEmitter.Event public Information: IEvent<ConfigurationView, Message>;
   @EventEmitter.Event public Warning: IEvent<ConfigurationView, Message>;
@@ -81,7 +95,7 @@ export class ConfigurationView extends EventEmitter {
   @EventEmitter.Event public Verbose: IEvent<ConfigurationView, Message>;
   @EventEmitter.Event public Fatal: IEvent<ConfigurationView, Message>;
 
-  private config: Array<AutoRestConfigurationImpl>
+  private config: Array<AutoRestConfigurationImpl>;
 
   private ValuesOf(fieldName: string): IEnumerable<any> {
     return From<AutoRestConfigurationImpl>(this.config).Select(config => config[fieldName]);
@@ -94,7 +108,7 @@ export class ConfigurationView extends EventEmitter {
   private *MultipleValues<T>(fieldName: string): Iterable<T> {
     for (const each of this.ValuesOf(fieldName)) {
       if (each != undefined && each != null) {
-        if (typeof each == 'string') {
+        if (typeof each === "string") {
           yield <T><any>each;
         } else if (each[Symbol.iterator]) {
           yield* each;
@@ -113,15 +127,11 @@ export class ConfigurationView extends EventEmitter {
     return ResolveUri(this.baseFolderUri, path);
   }
 
-  private get configFileFolderUri(): string {
-    return ResolveUri(this.configurationFileUri, ".");
-  }
-
   private get baseFolderUri(): string {
     return this.ResolveAsFolder(this.SingleValue<string>("base-folder") || "");
   }
 
-  // public methods 
+  // public methods
 
   public get inputFileUris(): Iterable<string> {
     return From<string>(this.MultipleValues<string>("input-file"))
@@ -140,76 +150,59 @@ export class ConfigurationView extends EventEmitter {
 }
 
 
-export abstract class Configuration {
-  abstract Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }>;
-  abstract HasConfiguration(): Promise<boolean>;
-
+export class Configuration {
   public async CreateView(...configs: Array<any>): Promise<ConfigurationView> {
-    let workingScope: DataStore = new DataStore()
-    const configResult = await this.Acquire(workingScope);
+    const workingScope: DataStore = new DataStore();
+    const configFileUri = await this.DetectConfigurationFile();
+
     const defaults = require("../resources/default-configuration.json");
 
-    // load config
-    const hConfig = await ParseCodeBlocks(
-      await configResult.inputView.ReadStrict(configResult.uri),
-      workingScope.CreateScope("config"));
+    if (configFileUri === null) {
+      return new ConfigurationView("file:///", defaults, ...configs);
+    } else {
+      const inputView = workingScope.CreateScope("input").AsFileScopeReadThroughFileSystem(this.fileSystem as IFileSystem);
 
-    const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
-      const block = await each.data.ReadObject<AutoRestConfigurationImpl>();
-      block.__info = each.info;
-      return block;
-    }));
+      // load config
+      const hConfig = await ParseCodeBlocks(
+        await inputView.ReadStrict(configFileUri),
+        workingScope.CreateScope("config"));
 
-    return new ConfigurationView(workingScope, configResult.uri, defaults, ...configs, ...blocks);
-  }
-}
+      const blocks = await Promise.all(From<CodeBlock>(hConfig).Select(async each => {
+        const block = await each.data.ReadObject<AutoRestConfigurationImpl>();
+        block.__info = each.info;
+        return block;
+      }));
 
-export class ConstantConfiguration extends Configuration {
-  public constructor(
-    private configurationUri: string,
-    private configuration: AutoRestConfigurationImpl
-  ) {
-    super();
+      return new ConfigurationView(ResolveUri(configFileUri, "."), defaults, ...configs, ...blocks);
+    }
   }
 
-  public async Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }> {
-    const inputView = data.CreateScope("input").AsFileScope();
-    await inputView.Write(this.configurationUri);
-    return {
-      inputView: inputView,
-      uri: this.configurationUri
-    };
-  }
-
-  public async HasConfiguration(): Promise<boolean> {
-    return true;
-  }
-}
-
-export class FileSystemConfiguration extends Configuration {
-  private cachedConfigurationFileName: string | null | undefined;
+  private cachedConfigurationUri: string | null | undefined;
 
   public constructor(
-    private fileSystem: IFileSystem,
+    private fileSystem?: IFileSystem,
     private configurationFileName?: string
   ) {
-    super();
     this.FileChanged();
   }
 
   public FileChanged() {
-    this.cachedConfigurationFileName = undefined;
+    this.cachedConfigurationUri = undefined;
   }
 
   private async DetectConfigurationFile(): Promise<string | null> {
-    if (this.cachedConfigurationFileName !== undefined) {
-      return this.cachedConfigurationFileName;
+    if (this.cachedConfigurationUri !== undefined) {
+      return this.cachedConfigurationUri;
+    }
+
+    if (!this.fileSystem) {
+      return null;
     }
 
     // scan the filesystem items for the configuration.
     const configFiles = new Map<string, string>();
 
-    for await (const name of this.fileSystem.EnumerateFiles()) {
+    for await (const name of this.fileSystem.EnumerateFileUris()) {
       const content = await this.fileSystem.ReadFile(name);
       if (content.indexOf(Constants.MagicString) > -1) {
         configFiles.set(name, content);
@@ -222,33 +215,13 @@ export class FileSystemConfiguration extends Configuration {
 
     // it's the readme.md or the shortest filename.
     let found =
-      From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase() === Constants.DefaultConfiguratiion) ||
+      From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
       From<string>(configFiles.keys()).OrderBy(each => each.length).First();
 
-    return this.cachedConfigurationFileName = ResolveUri(this.fileSystem.RootUri, found);
+    return this.cachedConfigurationUri = found;
   }
 
-  public async Acquire(data: DataStoreView): Promise<{ inputView: DataStoreViewReadonly, uri: string }> {
-    const inputView = data.CreateScope("input").AsFileScopeReadThroughFileSystem(this.fileSystem);
-    const result = await this.DetectConfigurationFile();
-    if (result === null) {
-      throw new Error(`No configuation file found in the filesystem '${this.fileSystem.RootUri}'`);
-    }
-    return {
-      inputView: inputView,
-      uri: result
-    };
-  }
-
-  public async HasConfiguration(): Promise<boolean> {
-    return await this.DetectConfigurationFile() !== null;
-  }
-
-  public Add(path: string, value: any) {
-
-  }
-
-  public Remove(path: string) {
-
-  }
+  // public async HasConfiguration(): Promise<boolean> {
+  //   return await this.DetectConfigurationFile() !== null;
+  // }
 }

@@ -9,7 +9,7 @@ require("./polyfill.min.js");
   @test async "does async iterable work"() {
     let f: IFileSystem = new MemoryFileSystem("c:\\foo", new Map<string, string>([['readme.md', '# this is a test\n see https://aka.ms/autorest'], ['other.md', '#My Doc.']]));
     let n = 0;
-    for await (const name of f.EnumerateFiles()) {
+    for await (const name of f.EnumerateFileUris()) {
       n++;
     }
     assert.equal(n, 2);

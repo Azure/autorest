@@ -1,9 +1,10 @@
+import { RunPipeline } from './pipeline/pipeline';
 import { SmartPosition, Position } from './ref/source-map';
 import { DataStore, Metadata } from './data-store/data-store';
 import { IEnumerable, From } from './ref/linq';
 import { IEvent, EventDispatcher, EventEmitter } from "./events";
 import { IFileSystem } from "./file-system";
-import { Configuration, ConfigurationView, FileSystemConfiguration } from './configuration';
+import { Configuration, ConfigurationView } from './configuration';
 import { DocumentType } from "./document-type";
 export { ConfigurationView } from './configuration';
 import { Message } from './message';
@@ -15,9 +16,9 @@ export class AutoRest extends EventEmitter {
   public get view(): Promise<ConfigurationView> {
     return new Promise<ConfigurationView>(async (r, j) => {
       if (!this._view) {
-        this._view = await new FileSystemConfiguration(this.fileSystem).CreateView(...this._configurations)
+        this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(...this._configurations);
 
-        // subscribe to the events for the current configuration view 
+        // subscribe to the events for the current configuration view
         this._view.Debug.Subscribe((cfg, message) => this.Debug.Dispatch(message));
         this._view.Verbose.Subscribe((cfg, message) => this.Verbose.Dispatch(message));
         this._view.Fatal.Subscribe((cfg, message) => this.Fatal.Dispatch(message));
@@ -26,14 +27,14 @@ export class AutoRest extends EventEmitter {
         this._view.Warning.Subscribe((cfg, message) => this.Warning.Dispatch(message));
       }
       r(this._view);
-    })
+    });
   }
   /**
    * 
    * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    */
-  public constructor(private fileSystem: IFileSystem) {
+  public constructor(private fileSystem?: IFileSystem, private configFileUri?: string) {
     super();
   }
 
@@ -81,9 +82,15 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Start(): void {
+  public async Process(cancellationProvider: (cancel: () => void) => void = _ => null): Promise<void> {
     try {
-      // implement RunPipeline here.
+      const view = await this.view;
+
+      // expose cancallation token
+      cancellationProvider(() => view.CancellationTokenSource.cancel());
+
+      // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
+      await RunPipeline(await this.view);
 
       // finished cleanly
       this.Finished.Dispatch(true);
@@ -96,14 +103,6 @@ export class AutoRest extends EventEmitter {
       this.Invalidate();
     }
   }
-
-  /**
-   * Called to stop the processing.
-   */
-  public Stop(): void {
-    // or better excuse to cancel.
-  }
-
 
   @EventEmitter.Event public Finished: IEvent<AutoRest, boolean>;
 

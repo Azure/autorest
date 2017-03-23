@@ -62,6 +62,12 @@ export async function ManipulateObject(
             generated: { path: hit.path.concat(descendant.path) }
           };
         }));
+      mapping = mapping.Concat([{
+        name: `Original object at '${stringify(hit.path)}' (${mappingInfo.reason})`,
+        source: src.key,
+        original: { path: hit.path },
+        generated: { path: hit.path }
+      }]);
     }
   }
 
