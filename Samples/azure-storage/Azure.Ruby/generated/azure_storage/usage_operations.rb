@@ -64,7 +64,7 @@ module Petstore
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
+      path_template = 'subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'
 
       request_url = @base_url || @client.base_url
 

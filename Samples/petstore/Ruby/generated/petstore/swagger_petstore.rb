@@ -136,7 +136,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/pet'
+      path_template = 'pet'
 
       request_url = @base_url || self.base_url
 
@@ -220,7 +220,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/pet'
+      path_template = 'pet'
 
       request_url = @base_url || self.base_url
 
@@ -295,7 +295,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/pet'
+      path_template = 'pet'
 
       request_url = @base_url || self.base_url
 
@@ -372,7 +372,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/pet/findByStatus'
+      path_template = 'pet/findByStatus'
 
       request_url = @base_url || self.base_url
 
@@ -473,7 +473,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/pet/findByTags'
+      path_template = 'pet/findByTags'
 
       request_url = @base_url || self.base_url
 
@@ -575,7 +575,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/pet/{petId}'
+      path_template = 'pet/{petId}'
 
       request_url = @base_url || self.base_url
 
@@ -669,7 +669,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/pet/{petId}'
+      path_template = 'pet/{petId}'
 
       request_url = @base_url || self.base_url
 
@@ -753,7 +753,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/pet/{petId}'
+      path_template = 'pet/{petId}'
 
       request_url = @base_url || self.base_url
 
@@ -827,7 +827,7 @@ module Petstore
 
       # Set Headers
       request_headers['api_key'] = api_key unless api_key.nil?
-      path_template = '/pet/{petId}'
+      path_template = 'pet/{petId}'
 
       request_url = @base_url || self.base_url
 
@@ -901,7 +901,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/pet/{petId}/uploadImage'
+      path_template = 'pet/{petId}/uploadImage'
 
       request_url = @base_url || self.base_url
 
@@ -972,7 +972,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/store/inventory'
+      path_template = 'store/inventory'
 
       request_url = @base_url || self.base_url
 
@@ -1070,7 +1070,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/store/order'
+      path_template = 'store/order'
 
       request_url = @base_url || self.base_url
 
@@ -1158,7 +1158,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/store/order/{orderId}'
+      path_template = 'store/order/{orderId}'
 
       request_url = @base_url || self.base_url
 
@@ -1245,7 +1245,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/store/order/{orderId}'
+      path_template = 'store/order/{orderId}'
 
       request_url = @base_url || self.base_url
 
@@ -1326,7 +1326,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/user'
+      path_template = 'user'
 
       request_url = @base_url || self.base_url
 
@@ -1415,7 +1415,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/user/createWithArray'
+      path_template = 'user/createWithArray'
 
       request_url = @base_url || self.base_url
 
@@ -1504,7 +1504,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/user/createWithList'
+      path_template = 'user/createWithList'
 
       request_url = @base_url || self.base_url
 
@@ -1575,7 +1575,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/user/login'
+      path_template = 'user/login'
 
       request_url = @base_url || self.base_url
 
@@ -1655,7 +1655,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/user/logout'
+      path_template = 'user/logout'
 
       request_url = @base_url || self.base_url
 
@@ -1726,7 +1726,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/user/{username}'
+      path_template = 'user/{username}'
 
       request_url = @base_url || self.base_url
 
@@ -1821,7 +1821,7 @@ module Petstore
       request_content = self.serialize(request_mapper,  body, 'body')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/user/{username}'
+      path_template = 'user/{username}'
 
       request_url = @base_url || self.base_url
 
@@ -1896,7 +1896,7 @@ module Petstore
 
 
       request_headers = {}
-      path_template = '/user/{username}'
+      path_template = 'user/{username}'
 
       request_url = @base_url || self.base_url
 

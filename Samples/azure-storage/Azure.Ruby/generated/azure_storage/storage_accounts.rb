@@ -82,7 +82,7 @@ module Petstore
       request_content = @client.serialize(request_mapper,  account_name, 'account_name')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
+      path_template = 'subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
 
       request_url = @base_url || @client.base_url
 
@@ -238,7 +238,7 @@ module Petstore
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
 
       request_url = @base_url || @client.base_url
 
@@ -334,7 +334,7 @@ module Petstore
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
 
       request_url = @base_url || @client.base_url
 
@@ -485,7 +485,7 @@ module Petstore
       request_content = @client.serialize(request_mapper,  parameters, 'parameters')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
 
       request_url = @base_url || @client.base_url
 
@@ -577,7 +577,7 @@ module Petstore
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
 
       request_url = @base_url || @client.base_url
 
@@ -663,7 +663,7 @@ module Petstore
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
+      path_template = 'subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
 
       request_url = @base_url || @client.base_url
 
@@ -756,7 +756,7 @@ module Petstore
       # Set Headers
       request_headers['x-ms-client-request-id'] = SecureRandom.uuid
       request_headers['accept-language'] = @client.accept_language unless @client.accept_language.nil?
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
 
       request_url = @base_url || @client.base_url
 
@@ -871,7 +871,7 @@ module Petstore
       request_content = @client.serialize(request_mapper,  regenerate_key, 'regenerate_key')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'
 
       request_url = @base_url || @client.base_url
 
@@ -999,7 +999,7 @@ module Petstore
       request_content = @client.serialize(request_mapper,  parameters, 'parameters')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
-      path_template = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
+      path_template = 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
 
       request_url = @base_url || @client.base_url
 
