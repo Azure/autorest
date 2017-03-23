@@ -89,25 +89,20 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="modelName">model for which to determine the model hierarchy</param>
         /// <param name="definitions">dictionary of model definitions</param>
         /// <param name="propertyList">List of 'allOfed' models</param>
-        public static IEnumerable<string> EnumerateModelHierarchy(string modelName, Dictionary<string, Schema> definitions, IEnumerable<string> modelHierarchy = null)
+        public static IEnumerable<string> EnumerateModelHierarchy(string modelName, Dictionary<string, Schema> definitions)
         {
-            if (modelHierarchy == null)
-            {
-                modelHierarchy = new List<string>() { modelName };
-            }
+            if (!definitions.ContainsKey(modelName)) return new List<string>();
 
-            if (!definitions.ContainsKey(modelName)) return modelHierarchy;
+            IEnumerable<string> modelHierarchy = new List<string>() { modelName };
 
+            // If schema has no allOfs, return 
             var modelSchema = definitions[modelName];
             if (modelSchema.AllOf?.Any() != true) return modelHierarchy;
 
+            // for each allOf in the schema, recursively pick the models
             var allOfs = modelSchema.AllOf.Select(allOfSchema => allOfSchema.Reference?.StripDefinitionPath()).Where(modelRef => !string.IsNullOrEmpty(modelRef));
-            modelHierarchy = modelHierarchy.Union(allOfs);
+            modelHierarchy.Union(allOfs.SelectMany(allOf => EnumerateModelHierarchy(allOf, definitions)));
             
-            foreach (var allOf in allOfs)
-            {
-                modelHierarchy = modelHierarchy.Union(EnumerateModelHierarchy(allOf, definitions, modelHierarchy));
-            }
             return modelHierarchy;
         }
 
