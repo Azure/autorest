@@ -10,7 +10,6 @@ import { AutoRestConfigurationImpl, Configuration, ConfigurationView } from '../
 import {
   DataHandleRead,
   DataStore,
-  DataStoreView,
   DataStoreViewReadonly,
   KnownScopes
 } from '../data-store/data-store';
@@ -22,18 +21,18 @@ import { From } from "../ref/linq"
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
-export async function RunPipeline(config: ConfigurationView): Promise<{ [name: string]: DataPromise }> {
+export async function RunPipeline(config: ConfigurationView): Promise<void> {
   // load Swaggers
   let inputs = From(config.inputFileUris).ToArray();
 
   const uriScope = (uri: string) => inputs.indexOf(uri) !== -1 || /^http/.test(uri) || true; // TODO: unlock further URIs here
   const swaggers = await LoadLiterateSwaggers(
-    config.workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
-    inputs, config.workingScope.CreateScope("loader"));
+    config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
+    inputs, config.DataStore.CreateScope("loader"));
 
   // compose Swaggers (may happen in LoadLiterateSwaggers, BUT then we can't call other people (e.g. Amar's tools) with the component swaggers... hmmm...)
   const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
-    ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, config.workingScope.CreateScope("compose"), true)
+    ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 
@@ -49,7 +48,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<{ [name: s
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
 
     // modeler
-    const codeModel = await autoRestDotNetPlugin.Model(swagger, config.workingScope.CreateScope("model"),
+    const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
       {
         namespace: config.__specials.namespace || ""
       });
@@ -59,7 +58,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<{ [name: s
       const codeGenerator = config.__specials.codeGenerator;
       if (codeGenerator) {
         const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.workingScope.CreateScope("generate"),
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
           {
             namespace: config.__specials.namespace || "",
             codeGenerator: codeGenerator,
@@ -75,7 +74,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<{ [name: s
 
         // C# simplifier
         if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
-          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.workingScope.CreateScope("simplify"));
+          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"));
         }
 
         for (const fileName of await generatedFileScope.Enum()) {
@@ -88,7 +87,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<{ [name: s
     result["azureValidationMessages"] = MultiPromiseUtility.fromCallbacks(async callback => {
       if (config.__specials.azureValidator) {
         // TODO: streamify
-        const messages = await autoRestDotNetPlugin.Validate(swagger, config.workingScope.CreateScope("validate"));
+        const messages = await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
         for (const fileName of await messages.Enum()) {
           callback(await messages.ReadStrict(fileName));
         }
@@ -113,6 +112,4 @@ export async function RunPipeline(config: ConfigurationView): Promise<{ [name: s
       console.log(await fileHandle.ReadData());
     });
   }
-
-  return result;
 }

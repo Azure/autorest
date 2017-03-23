@@ -1,4 +1,4 @@
-import { FileSystemConfiguration } from '../lib/configuration';
+import { Configuration } from '../lib/configuration';
 import { RealFileSystem } from '../lib/file-system';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
@@ -11,12 +11,12 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
 @suite class Blaming {
 
   @test @timeout(10000) async "end to end blaming with literate swagger"() {
-    const view = await new FileSystemConfiguration(new RealFileSystem(ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/"))).CreateView();
+    const view = await new Configuration(new RealFileSystem(ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/"))).CreateView();
     const results = await RunPipeline(view);
 
     // regular description
     {
-      const blameTree = await view.workingScope.Blame(
+      const blameTree = await view.DataStore.Blame(
         "compose/swagger.yaml",
         { path: parse("$.securityDefinitions.azure_auth.description") });
       const blameInputs = Array.from(blameTree.BlameInputs());
@@ -25,7 +25,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
 
     // markdown description (blames both the swagger's json path and the markdown source of the description)
     {
-      const blameTree = await view.workingScope.Blame(
+      const blameTree = await view.DataStore.Blame(
         "compose/swagger.yaml",
         { path: parse("$.definitions.SearchServiceListResult.description") });
       const blameInputs = Array.from(blameTree.BlameInputs());

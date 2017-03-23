@@ -9,12 +9,13 @@
 
 // this file should get 'required' by the boostrapper
 
+import { AutoRest } from './lib/autorest-core';
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFileUri, ResolveUri } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { AutoRestConfigurationSwitches, ConstantConfiguration, FileSystemConfiguration } from "./lib/configuration";
+import { AutoRestConfigurationSwitches } from "./lib/configuration";
 import { DataStore } from "./lib/data-store/data-store";
 import { RunPipeline } from "./lib/pipeline/pipeline";
 import { RealFileSystem } from "./lib/file-system";
@@ -38,10 +39,9 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
-    const restultStreams = await RunPipeline(await new ConstantConfiguration(configFileUri, config).CreateView());
-
-
-
+    const api = new AutoRest(new RealFileSystem(currentDirUri), configFileUri);
+    await api.AddConfiguration(config);
+    await api.Process();
   }
   else {
     // exec
@@ -92,7 +92,9 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-  await RunPipeline(await new FileSystemConfiguration(new RealFileSystem(currentDirUri), args.configFile).CreateView(args.switches));
+  const api = new AutoRest(new RealFileSystem(currentDirUri), args.configFile);
+  await api.AddConfiguration(args.switches);
+  await api.Process();
 }
 
 
