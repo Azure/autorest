@@ -174,12 +174,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <returns>Array of resource providers</returns>
         public static string[] GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            if (paths == null)
-            {
-                throw new System.ArgumentNullException(nameof(paths));
-            }
-
-            string[] resourceProviders = paths.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+            string[] resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
                                         .OfType<Match>()
                                         .Select(match => match.Groups["resPath"].Value.ToString()))
                                         .Distinct()

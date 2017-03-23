@@ -11,7 +11,7 @@
   ],
   "basePath": "/",
   "paths": {
-    "/operations": {
+    "/subscriptions/xxxx-xxxx-xxxx/providers/Microsoft.Cdn/operations": {
       "get": {
         "summary": "Lists all foo.",
         "description": "foo",

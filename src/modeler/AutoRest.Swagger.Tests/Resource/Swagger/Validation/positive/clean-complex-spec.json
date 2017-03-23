@@ -19,16 +19,16 @@
     "application/json"
   ],
   "paths": {
-    "/operations": {
+    "/subscriptions/xxxx-xxxx-xxxx/providers/Microsoft.Cdn/operations": {
       "get": {
         "summary": "Lists all foo.",
-        "description":  "foo",
+        "description": "foo",
         "operationId": "Operations_List",
         "parameters": [
           {
             "name": "limit",
             "type": "string",
-            "description":  "foo"
+            "description": "foo"
           }
         ],
         "responses": {
