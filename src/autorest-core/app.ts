@@ -17,7 +17,6 @@ import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration";
 import { DataStore } from "./lib/data-store/data-store";
-import { RunPipeline } from "./lib/pipeline/pipeline";
 import { RealFileSystem } from "./lib/file-system";
 
 

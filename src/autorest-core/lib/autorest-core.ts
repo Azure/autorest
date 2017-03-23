@@ -8,6 +8,7 @@ import { Configuration, ConfigurationView } from './configuration';
 import { DocumentType } from "./document-type";
 export { ConfigurationView } from './configuration';
 import { Message } from './message';
+import { GeneratedFile } from './generated-file';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -18,6 +19,7 @@ export class AutoRest extends EventEmitter {
         this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(...this._configurations);
 
         // subscribe to the events for the current configuration view
+        this._view.GeneratedFile.Subscribe((cfg, file) => this.GeneratedFile.Dispatch(file));
         this._view.Debug.Subscribe((cfg, message) => this.Debug.Dispatch(message));
         this._view.Verbose.Subscribe((cfg, message) => this.Verbose.Dispatch(message));
         this._view.Fatal.Subscribe((cfg, message) => this.Fatal.Dispatch(message));
@@ -116,6 +118,8 @@ export class AutoRest extends EventEmitter {
   }
 
   @EventEmitter.Event public Finished: IEvent<AutoRest, boolean>;
+
+  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, GeneratedFile>;
 
   @EventEmitter.Event public Information: IEvent<AutoRest, Message>;
   @EventEmitter.Event public Warning: IEvent<AutoRest, Message>;
