@@ -50,11 +50,11 @@ export class AutoRest extends EventEmitter {
 
   public static async IsConfigurationFile(content: string): Promise<boolean> {
     // this checks to see if the document is an autorest markdown configuration file
-    return content.indexOf(Constants.MagicString) > -1
+    return content.indexOf(Constants.MagicString) > -1;
   }
 
-  public async FindDocumentRoot(documentPath: string): Promise<string> {
-    return "null";
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath: string): Promise<string | null> {
+    return null;
   }
 
   public Invalidate() {

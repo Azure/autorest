@@ -9,17 +9,29 @@ export interface IEvent<TSender extends events.EventEmitter, TArgs> {
 export class EventDispatcher<TSender extends EventEmitter, TArgs> implements IEvent<TSender, TArgs> {
   private _instance: TSender;
   private _name: string;
+  private _subscriptions = new Array<() => void>();
 
   constructor(instance: TSender, name: string) {
     this._instance = instance;
     this._name = name;
   }
 
+  UnsubscribeAll() {
+    // call all the unsubscribes 
+    for (let each of this._subscriptions) {
+      each();
+    }
+    // and clear the subscriptions.
+    this._subscriptions.length = 0;
+  }
+
   Subscribe(fn: (sender: TSender, args: TArgs) => void): () => void {
     if (fn) {
       this._instance.addListener(this._name, fn);
     }
-    return () => { this.Unsubscribe(fn) };
+    let unsub = () => { this.Unsubscribe(fn) };
+    this._subscriptions.push(unsub);
+    return unsub;
   }
 
   Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void {

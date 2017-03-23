@@ -7,7 +7,6 @@ import { ResolveUri, ReadUri } from "./ref/uri";
 export interface IFileSystem {
   EnumerateFileUris(folderUri: string): AsyncIterable<string>;
   ReadFile(uri: string): Promise<string>;
-  WriteFile(uri: string, content: string): Promise<void>;
 }
 
 export class MemoryFileSystem implements IFileSystem {

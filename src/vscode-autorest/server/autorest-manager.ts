@@ -1,9 +1,10 @@
+import { ResolveUri } from '../lib/ref/uri';
 import { AutoRest } from '../../autorest';
 
 import { DocumentContext } from './file-system';
 import * as a from '../lib/ref/async'
-import { EventEmitter, IEvent, IFileSystem, DocumentType, DocumentExtension } from "autorest";
-import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments, DidChangeWatchedFilesParams } from "vscode-languageserver";
+import { EventEmitter, IEvent, IFileSystem, DocumentType, DocumentExtension, } from "autorest";
+import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments, DidChangeWatchedFilesParams, Diagnostic, DiagnosticSeverity, Range, Position } from "vscode-languageserver";
 import { From } from '../lib/ref/linq'
 import * as vfs from 'vinyl-fs';
 import * as path from 'path';
@@ -14,8 +15,43 @@ export class File extends EventEmitter {
   private _content: string | null;
   private _checksum: string | null;
   public IsActive: boolean = false;
+  private diagnostics = new Map<string, Diagnostic>();
+  private queuedToSend: NodeJS.Timer | null = null;
 
   @EventEmitter.Event public Changed: IEvent<File, boolean>;
+  @EventEmitter.Event public DiagnosticsToSend: IEvent<File, Map<string, Diagnostic>>;
+
+  public ClearDiagnostics() {
+    this.diagnostics.clear();
+  }
+
+  public PushDiagnostic(diagnostic: Diagnostic) {
+    let hash = md5(JSON.stringify(diagnostic))
+    if (!this.diagnostics.has(hash)) {
+      this.diagnostics.set(hash, diagnostic);
+    }
+
+    // Strategy #1 - queue up, but wait no longer than 25 milliseconds before sending it out.
+    if (!this.queuedToSend) {
+      this.queuedToSend = setTimeout(() => {
+        this.queuedToSend = null;
+        this.DiagnosticsToSend.Dispatch(this.diagnostics);
+      }, 25);
+
+    }
+
+    /*
+        // Strategy #2 - queue up, but reset the timeout to wait until at least 25 milliseconds has passed 
+        if (this.queuedToSend) {
+          clearTimeout(this.queuedToSend);
+          this.queuedToSend = setTimeout(() =>{ 
+            this.queuedToSend = null;
+            this.DiagnosticsToSend.Dispatch(this.diagnostics);
+          }, 25)
+        }
+    */
+
+  }
 
   public get content(): Promise<string | null> {
     if (this._content) {
@@ -80,7 +116,7 @@ export class AutoRestManager extends TextDocuments {
     } else {
       // not an active context -- this is the expectation.
       try {
-        ctx = new DocumentContext(uri);
+        ctx = new DocumentContext(this, uri);
         this.activeContexts.set(uri, ctx);
         ctx.Activate();
       } catch (exception) {
@@ -124,35 +160,41 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
-  private async AcquireTrackedFile(documentUri: string): Promise<File> {
+  public AcquireTrackedFile(documentUri: string): File {
     let doc = this.trackedFiles.get(documentUri);
     if (doc) {
       return doc;
     }
     // not tracked yet, let's do that now.
-    return new File(documentUri);
+    const f = new File(documentUri);
+    f.DiagnosticsToSend.Subscribe((file, diags) => this.connection.sendDiagnostics({ uri: file.fullPath, diagnostics: [...diags.values()] }));
+    return f;
   }
 
   private async GetDocumentContextForDocument(documentUri: string): Promise<DocumentContext> {
     // get the folder for this documentUri
-    let folder = path.dirname;
+    let folder = path.dirname(documentUri);
 
-    // :CHECK FOLDER:    
-    // is there a root at that folder 
-    a.readdir()
+    let configFile = await AutoRest.DetectConfigurationFile(new DocumentContext(this, folder), folder);
+    if (configFile) {
+      folder = path.dirname(configFile);
+      // do we have this config already?
+      let ctx = this.activeContexts.get(folder);
+      if (!ctx) {
+        ctx = new DocumentContext(this, folder, configFile)
+        this.activeContexts.set(folder, ctx);
+      }
+      return ctx;
+    }
 
-    //   yes -- is it still valid ? (is it without configuration?)
-    //     yes -- cool, that's it.
-
-    //     no -- it's not valid anymore. continue searching.
-
-    //   no -- lets go up a folder and try again  (:CHECK FOLDER:)
-
-    // did not find a configuration folder
-    // we will assume that folder for this document is the right one.
-    // and create a 'root' without configuration 
-
-    return null;
+    // there was no configuration file for that file.
+    // let's create a faux one at that level and call it readme.md
+    configFile = ResolveUri(folder, "readme.md");
+    let file = this.AcquireTrackedFile(configFile);
+    file.SetContent("");
+    let ctx = new DocumentContext(this, folder, configFile);
+    this.activeContexts.set(folder, ctx);
+    return ctx;
   }
 
   private async opened(open: TextDocumentChangeEvent): Promise<void> {
@@ -171,10 +213,10 @@ export class AutoRestManager extends TextDocuments {
     }
 
     // not before this, but now we should
-    let root = await this.GetDocumentContextForDocument(open.document.uri);
+    let ctx = await this.GetDocumentContextForDocument(open.document.uri);
     // hey garrett -- make sure that the event dispatch in vscode doesn't wait for this method or makes this bad for some reason.
-    let file = new File(open.document.uri);
-    file.Changed.Subscribe(root.ChangedFile)
+    let file = this.AcquireTrackedFile(open.document.uri)
+    ctx.Track(file);
   }
 
   private changed(change: TextDocumentChangeEvent) {
@@ -198,4 +240,71 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
+  listenForResults(autorest: AutoRest) {
+    autorest.Debug.Subscribe((instance, args) => {
+      // on debug message
+      this.connection.console.warn(args.Text);
+    });
+
+    autorest.Fatal.Subscribe((instance, args) => {
+      // on fatal message
+      this.connection.console.error(args.Text);
+    });
+
+    autorest.Verbose.Subscribe((instance, args) => {
+      // on verbose message
+      this.connection.console.log(args.Text);
+    });
+
+    autorest.Information.Subscribe(async (instance, args) => {
+      // information messages come from autorest and represent a document issue of some kind
+
+      for await (const each of args.Range) {
+        // get the file reference first
+        let file = this.trackedFiles.get(each.document);
+        if (file) {
+          file.PushDiagnostic({
+            severity: DiagnosticSeverity.Information,
+            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+            message: args.Text,
+            source: args.Plugin
+          });
+        }
+      }
+    });
+
+    autorest.Warning.Subscribe(async (instance, args) => {
+      // information messages come from autorest and represent a document issue of some kind
+
+      for await (const each of args.Range) {
+        // get the file reference first
+        let file = this.trackedFiles.get(each.document);
+        if (file) {
+          file.PushDiagnostic({
+            severity: DiagnosticSeverity.Warning,
+            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+            message: args.Text,
+            source: args.Plugin
+          });
+        }
+      }
+    });
+
+    autorest.Error.Subscribe(async (instance, args) => {
+      // information messages come from autorest and represent a document issue of some kind
+
+      for await (const each of args.Range) {
+        // get the file reference first
+        let file = this.trackedFiles.get(each.document);
+        if (file) {
+          file.PushDiagnostic({
+            severity: DiagnosticSeverity.Error,
+            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+            message: args.Text,
+            source: args.Plugin
+          });
+        }
+      }
+    });
+  }
 }
