@@ -5,13 +5,13 @@ import { From } from "./ref/linq";
 import { ResolveUri, ReadUri } from "./ref/uri";
 
 export interface IFileSystem {
-  EnumerateFileUris(): AsyncIterable<string>;
+  EnumerateFileUris(folderUri: string): AsyncIterable<string>;
   ReadFile(uri: string): Promise<string>;
   WriteFile(uri: string, content: string): Promise<void>;
 }
 
 export class MemoryFileSystem implements IFileSystem {
-  public constructor(public RootUri: string, private files: Map<string, string>) {
+  public constructor(private files: Map<string, string>) {
   }
   public readonly Outputs: Map<string, string> = new Map<string, string>();
 
@@ -22,8 +22,16 @@ export class MemoryFileSystem implements IFileSystem {
     return <string>this.files.get(uri);
   }
 
-  async *EnumerateFileUris(): AsyncIterable<string> {
-    yield* this.files.keys();
+  async *EnumerateFileUris(folderUri: string): AsyncIterable<string> {
+    yield* From(this.files.keys()).Where(uri => {
+      // in folder?
+      if (!uri.startsWith(folderUri)) {
+        return false;
+      }
+
+      // not in subfolder?
+      return uri.substr(folderUri.length).indexOf("/") === -1;
+    });
   }
 
   async WriteFile(uri: string, content: string): Promise<void> {
@@ -32,12 +40,12 @@ export class MemoryFileSystem implements IFileSystem {
 }
 
 export class RealFileSystem implements IFileSystem {
-  public constructor(public RootUri: string) {
+  public constructor() {
   }
 
-  async *EnumerateFileUris(): AsyncIterable<string> {
-    if (this.RootUri.startsWith("file:")) {
-      yield* From(await a.readdir(FileUriToPath(this.RootUri))).Select(f => ResolveUri(this.RootUri, f));
+  async *EnumerateFileUris(folderUri: string): AsyncIterable<string> {
+    if (folderUri.startsWith("file:")) {
+      yield* From(await a.readdir(FileUriToPath(folderUri))).Select(f => ResolveUri(folderUri, f));
     }
   }
   async ReadFile(uri: string): Promise<string> {

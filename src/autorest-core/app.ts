@@ -39,7 +39,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
-    const api = new AutoRest(new RealFileSystem(currentDirUri), configFileUri);
+    const api = new AutoRest(new RealFileSystem(), configFileUri);
     await api.AddConfiguration(config);
     await api.Process();
   }
@@ -92,7 +92,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-  const api = new AutoRest(new RealFileSystem(currentDirUri), args.configFile);
+  const api = new AutoRest(new RealFileSystem(), args.configFile);
   await api.AddConfiguration(args.switches);
   await api.Process();
 }
