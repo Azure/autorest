@@ -12,6 +12,18 @@ namespace AutoRest.Swagger.Validation
     {
         private const string SubscriptionId = "subscriptionId";
         private const string ApiVersion = "api-version";
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2014";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+
         /// <summary>
         /// This rule passes if the parameters are not subscriptionId or api-version
         /// </summary>
