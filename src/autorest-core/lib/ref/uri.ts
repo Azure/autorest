@@ -92,7 +92,7 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   return new URI(pathOrUri).absoluteTo(baseUri).toString();
 }
 
-export function ParentUri(uri: string): string | null {
+export function ParentFolderUri(uri: string): string | null {
   // root?
   if (uri.endsWith("//")) {
     return null;

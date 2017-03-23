@@ -189,31 +189,35 @@ export class Configuration {
   public FileChanged() {
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, uriToConfigFileOrWorkingFolder: string): Promise<string | null> {
-    if (!uriToConfigFileOrWorkingFolder.endsWith("/")) {
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, uriToConfigFileOrWorkingFolder: string | null): Promise<string | null> {
+    if (!uriToConfigFileOrWorkingFolder || !uriToConfigFileOrWorkingFolder.endsWith("/")) {
       return uriToConfigFileOrWorkingFolder;
     }
 
-    // scan the filesystem items for the configuration.
-    const configFiles = new Map<string, string>();
+    // search for a config file, walking up the folder tree
+    while (uriToConfigFileOrWorkingFolder !== null) {
+      // scan the filesystem items for the configuration.
+      const configFiles = new Map<string, string>();
 
-    for await (const name of fileSystem.EnumerateFileUris(uriToConfigFileOrWorkingFolder)) {
-      const content = await fileSystem.ReadFile(name);
-      if (content.indexOf(Constants.MagicString) > -1) {
-        configFiles.set(name, content);
+      for await (const name of fileSystem.EnumerateFileUris(uriToConfigFileOrWorkingFolder)) {
+        const content = await fileSystem.ReadFile(name);
+        if (content.indexOf(Constants.MagicString) > -1) {
+          configFiles.set(name, content);
+        }
+      }
+
+      // walk up
+      if (configFiles.size > 0) {
+        // it's the readme.md or the shortest filename.
+        let found =
+          From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
+          From<string>(configFiles.keys()).OrderBy(each => each.length).First();
+
+        return found;
       }
     }
 
-    if (configFiles.size === 0) {
-      return null;
-    }
-
-    // it's the readme.md or the shortest filename.
-    let found =
-      From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
-      From<string>(configFiles.keys()).OrderBy(each => each.length).First();
-
-    return found;
+    return null
   }
 
   // public async HasConfiguration(): Promise<boolean> {
