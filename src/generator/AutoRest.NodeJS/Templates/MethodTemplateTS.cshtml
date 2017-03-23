@@ -9,4 +9,4 @@
 @(Model.Name)WithHttpOperationResponse(@(Model.MethodParameterDeclarationTS(true))): Promise;
 @EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise, MethodJs.Language.TypeScript))
-@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(true, true))): Promise|void;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(true, true))): Promise<@(Model.ReturnTypeTSString)>|void;

@@ -229,8 +229,6 @@ namespace AutoRest.NodeJS.Model
         public string MethodParameterDeclarationWithCallbackTS(bool includeOptions, bool isCallbackOptional = false)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
-
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));
 
@@ -238,11 +236,11 @@ namespace AutoRest.NodeJS.Model
                 parameters.Append(", ");
             if (isCallbackOptional)
             {
-                parameters.Append("optionalCallback?: ServiceCallback<" + returnTypeTSString + ">");
+                parameters.Append("optionalCallback?: ServiceCallback<" + ReturnTypeTSString + ">");
             }
             else
             {
-                parameters.Append("callback: ServiceCallback<" + returnTypeTSString + ">");
+                parameters.Append("callback: ServiceCallback<" + ReturnTypeTSString + ">");
             }
             return parameters.ToString();
         }
@@ -358,6 +356,25 @@ namespace AutoRest.NodeJS.Model
                 else
                 {
                     return "null";
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get the type name for the method's return type for TS
+        /// </summary>
+        [JsonIgnore]
+        public string ReturnTypeTSString
+        {
+            get
+            {
+                if (ReturnType.Body != null)
+                {
+                    return ReturnType.Body.TSType(false);
+                }
+                else
+                {
+                    return "void";
                 }
             }
         }
@@ -990,7 +1007,10 @@ namespace AutoRest.NodeJS.Model
                         builder.AppendLine(template.WrapComment(" * ", " @param {function} [optionalCallback] - The optional callback.")).AppendLine(" *")
                             .AppendLine(template.WrapComment(" * ", " @returns {function|Promise} If a callback was passed as the last parameter " +
                             "then it returns the callback else returns a Promise.")).AppendLine(" *")
-                            .AppendLine(template.WrapComment(" * ", "        {function} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                            .AppendLine(" * {Promise} A promise is returned").AppendLine(" *")
+                            .AppendLine(" *                      @resolve {{{0}}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                            .AppendLine(" *                      @reject {Error} - The error object.").AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", "{function} optionalCallback(err, result, request, response)")).AppendLine(" *");
                     }
                     builder.AppendLine(" *                      {Error}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
                         .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object if an error did not occur.", DocumentReturnTypeString)
@@ -1010,7 +1030,10 @@ namespace AutoRest.NodeJS.Model
                         builder.AppendLine(template.WrapComment(" * ", " @param {ServiceCallback} [optionalCallback] - The optional callback.")).AppendLine(" *")
                             .AppendLine(template.WrapComment(" * ", " @returns {ServiceCallback|Promise} If a callback was passed as the last parameter " +
                             "then it returns the callback else returns a Promise.")).AppendLine(" *")
-                            .AppendLine(template.WrapComment(" * ", "        {ServiceCallback} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                            .AppendLine(" * {Promise} A promise is returned.").AppendLine(" *")
+                            .AppendLine(" *                      @resolve {{{0}}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                            .AppendLine(" *                      @reject {Error|ServiceError} - The error object.").AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", "{ServiceCallback} optionalCallback(err, result, request, response)")).AppendLine(" *");
                     }
                     builder.AppendLine(" *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
                         .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object if an error did not occur.", ReturnTypeString)
