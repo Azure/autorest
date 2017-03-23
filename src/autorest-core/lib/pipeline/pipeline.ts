@@ -4,8 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
-import { ResolveUri } from "../ref/uri";
-import { WriteString } from "../ref/writefs";
+import { ResolveUri, WriteString } from "../ref/uri";
 import { AutoRestConfigurationImpl, Configuration, ConfigurationView } from '../configuration';
 import {
   DataHandleRead,

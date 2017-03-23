@@ -1,4 +1,4 @@
-import { ResolveUri } from '../lib/ref/uri';
+import { ResolveUri, CreateFileUri, NormalizeUri } from '../lib/ref/uri';
 import { AutoRest } from '../../autorest';
 
 import { DocumentContext } from './file-system';
@@ -101,6 +101,17 @@ export class AutoRestManager extends TextDocuments {
     return this._rootUri;
   }
 
+  public log(text: string) {
+    this.connection.console.log(text);
+  }
+
+  public warn(text: string) {
+    this.connection.console.warn(text);
+  }
+
+  public error(text: string) {
+    this.connection.console.error(text);
+  }
   public async SetRootUri(uri: string): Promise<void> {
     // when we set the RootURI we look to see if we have a configuration file 
     // there, and then we automatically start validating that folder.
@@ -128,7 +139,7 @@ export class AutoRestManager extends TextDocuments {
 
   constructor(private connection: IConnection) {
     super();
-
+    this.log("setting up AutoRestManager.")
     // ask vscode to track 
     this.onDidOpen((open) => this.opened(open));
     this.onDidChangeContent((change) => this.changed(change));
@@ -138,14 +149,18 @@ export class AutoRestManager extends TextDocuments {
     connection.onDidChangeWatchedFiles((changes) => this.changedOnDisk(changes));
 
     this.listen(connection);
+    this.log("AutoRestManager is Listening.")
   }
 
   private changedOnDisk(changes: DidChangeWatchedFilesParams) {
+
     // files on disk changed in the workspace. Let's see if we care.
     // changes.changes[0].type 1/2/3 == created/changed/deleted
     // changes.changes[0].uri
     for (const each of changes.changes) {
-      let doc = this.trackedFiles.get(each.uri);
+      let docUri = NormalizeUri(each.uri);
+      this.log(`Changed On Disk: ${docUri}`);
+      let doc = this.trackedFiles.get(docUri);
       if (doc) {
         // we are currently tracking this file already.
         if (doc.IsActive) {
@@ -161,17 +176,22 @@ export class AutoRestManager extends TextDocuments {
   }
 
   public AcquireTrackedFile(documentUri: string): File {
+    documentUri = NormalizeUri(documentUri);
     let doc = this.trackedFiles.get(documentUri);
     if (doc) {
       return doc;
     }
     // not tracked yet, let's do that now.
+    this.log(`Tracking file: ${documentUri}`);
+
     const f = new File(documentUri);
+    this.trackedFiles.set(documentUri, f);
     f.DiagnosticsToSend.Subscribe((file, diags) => this.connection.sendDiagnostics({ uri: file.fullPath, diagnostics: [...diags.values()] }));
     return f;
   }
 
   private async GetDocumentContextForDocument(documentUri: string): Promise<DocumentContext> {
+    documentUri = NormalizeUri(documentUri);
     // get the folder for this documentUri
     let folder = path.dirname(documentUri);
 
@@ -202,8 +222,8 @@ export class AutoRestManager extends TextDocuments {
       // we don't do anything with files that aren't one of our concerned types.
       return;
     }
-
-    let doc = this.trackedFiles.get(open.document.uri);
+    var documentUri = NormalizeUri(open.document.uri);
+    let doc = this.trackedFiles.get(documentUri);
     // are we tracking this file?
     if (doc) {
       // yes we are. 
@@ -213,9 +233,9 @@ export class AutoRestManager extends TextDocuments {
     }
 
     // not before this, but now we should
-    let ctx = await this.GetDocumentContextForDocument(open.document.uri);
+    let ctx = await this.GetDocumentContextForDocument(documentUri);
     // hey garrett -- make sure that the event dispatch in vscode doesn't wait for this method or makes this bad for some reason.
-    let file = this.AcquireTrackedFile(open.document.uri)
+    let file = this.AcquireTrackedFile(documentUri)
     ctx.Track(file);
   }
 
@@ -224,7 +244,9 @@ export class AutoRestManager extends TextDocuments {
       // we don't do anything with files that aren't one of our concerned types.
       return;
     }
-    let doc = this.trackedFiles.get(change.document.uri);
+    var documentUri = NormalizeUri(change.document.uri);
+
+    let doc = this.trackedFiles.get(documentUri);
     if (doc) {
       // set the document content.
       doc.SetContent(change.document.getText());
@@ -233,7 +255,7 @@ export class AutoRestManager extends TextDocuments {
 
   private closed(close: TextDocumentChangeEvent) {
     // if we have this document, we can mark it 
-    let doc = this.trackedFiles.get(close.document.uri);
+    let doc = this.trackedFiles.get(NormalizeUri(close.document.uri));
     if (doc) {
       // we're not tracking this from vscode anymore.
       doc.IsActive = false;

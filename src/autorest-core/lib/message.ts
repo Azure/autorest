@@ -9,6 +9,7 @@ export type Channel = {
   readonly Fatal: "fatal",
 };
 
+
 export const Channel: Channel = {
   Information: "information",
   Warning: "warning",

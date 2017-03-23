@@ -11,7 +11,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
 @suite class Blaming {
 
   @test @timeout(10000) async "end to end blaming with literate swagger"() {
-    const view = await new Configuration(new RealFileSystem(ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/"))).CreateView();
+    const view = await new Configuration(new RealFileSystem(), ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/")).CreateView();
     const results = await RunPipeline(view);
 
     // regular description
@@ -19,7 +19,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
       const blameTree = await view.DataStore.Blame(
         "compose/swagger.yaml",
         { path: parse("$.securityDefinitions.azure_auth.description") });
-      const blameInputs = Array.from(blameTree.BlameInputs());
+      const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 1);
     }
 
@@ -28,7 +28,7 @@ import { RunPipeline } from "../lib/pipeline/pipeline";
       const blameTree = await view.DataStore.Blame(
         "compose/swagger.yaml",
         { path: parse("$.definitions.SearchServiceListResult.description") });
-      const blameInputs = Array.from(blameTree.BlameInputs());
+      const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 2);
     }
   }

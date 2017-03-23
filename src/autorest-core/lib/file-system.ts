@@ -1,8 +1,8 @@
-import { FileUriToPath } from "./ref/uri";
-import { WriteString } from "./ref/writefs";
-import * as a from "./async";
+import { EnumerateFiles, ExistsUri } from './ref/uri';
 import { From } from "./ref/linq";
-import { ResolveUri, ReadUri } from "./ref/uri";
+import * as a from "./ref/async";
+import { ResolveUri, ReadUri, WriteString } from "./ref/uri";
+import * as Constants from "./constants";
 
 export interface IFileSystem {
   EnumerateFileUris(folderUri: string): AsyncIterable<string>;
@@ -10,19 +10,27 @@ export interface IFileSystem {
 }
 
 export class MemoryFileSystem implements IFileSystem {
-  public constructor(private files: Map<string, string>) {
+  public static readonly DefaultVirtualRootUri = "file:///";
+  private filesByUri: Map<string, string>;
+
+  public constructor(files: Map<string, string>) {
+    this.filesByUri = new Map<string, string>(
+      From(files.entries()).Select(entry => [
+        ResolveUri(MemoryFileSystem.DefaultVirtualRootUri, entry[0]),
+        entry[1]
+      ] as [string, string]));
   }
   public readonly Outputs: Map<string, string> = new Map<string, string>();
 
   async ReadFile(uri: string): Promise<string> {
-    if (!this.files.has(uri)) {
+    if (!this.filesByUri.has(uri)) {
       throw new Error(`File ${uri} is not in the MemoryFileSystem`);
     }
-    return <string>this.files.get(uri);
+    return <string>this.filesByUri.get(uri);
   }
 
-  async *EnumerateFileUris(folderUri: string): AsyncIterable<string> {
-    yield* From(this.files.keys()).Where(uri => {
+  async *EnumerateFileUris(folderUri: string = MemoryFileSystem.DefaultVirtualRootUri): AsyncIterable<string> {
+    yield* From(this.filesByUri.keys()).Where(uri => {
       // in folder?
       if (!uri.startsWith(folderUri)) {
         return false;
@@ -42,10 +50,10 @@ export class RealFileSystem implements IFileSystem {
   public constructor() {
   }
 
-  async *EnumerateFileUris(folderUri: string): AsyncIterable<string> {
-    if (folderUri.startsWith("file:")) {
-      yield* From(await a.readdir(FileUriToPath(folderUri))).Select(f => ResolveUri(folderUri, f));
-    }
+  EnumerateFileUris(folderUri: string): AsyncIterable<string> {
+    return EnumerateFiles(folderUri, [
+      Constants.DefaultConfiguratiion
+    ]);
   }
   async ReadFile(uri: string): Promise<string> {
     return ReadUri(uri);

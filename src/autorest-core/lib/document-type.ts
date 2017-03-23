@@ -1,23 +1,16 @@
-export type DocumentType = {
-  readonly unknown: "unknown",
-  readonly yaml: "yaml",
-  readonly markdown: "markdown",
-  readonly json: "json"
-};
-
-export const DocumentType: DocumentType = {
-  unknown: "unknown",
-  yaml: "yaml",
-  markdown: "markdown",
-  json: "json"
+export enum DocumentType {
+  Markdown = <any>"markdown",
+  Yaml = <any>"yaml",
+  Json = <any>"json",
+  Unknown = <any>"unknown"
 }
 
 export const DocumentExtension = {
-  "yaml": DocumentType.yaml,
-  "yml": DocumentType.yaml,
-  "json": DocumentType.json,
-  "md": DocumentType.markdown,
-  "markdown": DocumentType.markdown
+  "yaml": DocumentType.Yaml,
+  "yml": DocumentType.Yaml,
+  "json": DocumentType.Json,
+  "md": DocumentType.Markdown,
+  "markdown": DocumentType.Markdown
 }
 
 export const DocumentPatterns = {

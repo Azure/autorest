@@ -82,25 +82,37 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public async Process(cancellationProvider: (cancel: () => void) => void = _ => null): Promise<void> {
-    try {
+  public Process(): { finish: Promise<void>, cancel: () => void } {
+    let earlyCancel = false;
+    let cancel: () => void = () => earlyCancel = true;
+    const processInternal = async () => {
       const view = await this.view;
 
       // expose cancallation token
-      cancellationProvider(() => view.CancellationTokenSource.cancel());
+      cancel = () => view.CancellationTokenSource.cancel();
+      if (earlyCancel) {
+        this.Finished.Dispatch(false);
+        return;
+      }
 
-      // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
-      await RunPipeline(await this.view);
+      try {
+        // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
+        await RunPipeline(await this.view);
 
-      // finished cleanly
-      this.Finished.Dispatch(true);
-    }
-    catch (e) {
-      // finished not cleanly
-      this.Finished.Dispatch(false);
-    }
-    finally {
-      this.Invalidate();
+        // finished cleanly
+        this.Finished.Dispatch(true);
+      }
+      catch (e) {
+        // finished not cleanly
+        this.Finished.Dispatch(false);
+      }
+      finally {
+        this.Invalidate();
+      }
+    };
+    return {
+      cancel: () => cancel(),
+      finish: processInternal()
     }
   }
 

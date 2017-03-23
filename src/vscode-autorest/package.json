@@ -61,6 +61,9 @@
     "vscode-languageserver": "^3.2.0"
   },
   "dependencies": {
+    "file-url": "^2.0.2",
+    "urijs": "^1.18.9",
+    "get-uri": "^2.0.0",
     "pify": "^2.3.0",
     "vscode-languageclient": "^3.1.0"
   }

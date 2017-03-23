@@ -42,6 +42,10 @@ import { isAbsolute } from "path";
 const URI = require("urijs");
 const fileUri: (path: string, options: { resolve: boolean }) => string = require("file-url");
 
+export function NormalizeUri(uri: string): string {
+  return uri.replace("%3A", ":").replace(/(.:)/ig, (v) => v.toLowerCase());
+}
+
 /**
  * Create a 'file:///' URI from given path, performing no checking of path validity whatsoever.
  * Possible usage includes:
@@ -49,7 +53,10 @@ const fileUri: (path: string, options: { resolve: boolean }) => string = require
  * - creating "fake" URIs for virtual FS files (e.g. "input/swagger.yaml" -> "file:///input/swagger.yaml")
  */
 export function CreateFileUri(path: string): string {
-  return fileUri(path, { resolve: false });
+  if (path.startsWith("file://")) {
+    return NormalizeUri(path);
+  }
+  return NormalizeUri(fileUri(path, { resolve: false }));
 }
 
 export function FileUriToPath(fileUri: string): string {
@@ -66,7 +73,7 @@ export function FileUriToPath(fileUri: string): string {
     p = p.substr(p.startsWith("/") ? 1 : 0);
     p = p.replace(/\//g, "\\");
   }
-  return p;
+  return NormalizeUri(p);
 }
 
 /**
@@ -84,5 +91,5 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   if (!baseUri) {
     throw "'pathOrUri' was detected to be relative so 'baseUri' is required";
   }
-  return new URI(pathOrUri).absoluteTo(baseUri).toString();
+  return NormalizeUri(new URI(pathOrUri).absoluteTo(baseUri).toString());
 }

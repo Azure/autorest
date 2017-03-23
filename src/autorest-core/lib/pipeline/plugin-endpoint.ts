@@ -117,7 +117,7 @@ export class AutoRestPlugin {
     let messageId: number = 0;
 
     const inputFileHandles = async () => {
-      const inputFileNames = Array.from(await inputScope.Enum());
+      const inputFileNames = [...await inputScope.Enum()];
       const inputFiles = await Promise.all(inputFileNames.map(fn => inputScope.ReadStrict(fn)));
       return inputFiles;
     }
@@ -134,7 +134,7 @@ export class AutoRestPlugin {
       },
       async ListInputs(): Promise<string[]> {
         const result = await inputScope.Enum();
-        return Array.from(result);
+        return [...result];
       },
 
       async WriteFile(filename: string, content: string, sourceMap?: Mappings | RawSourceMap): Promise<void> {

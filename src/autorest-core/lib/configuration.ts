@@ -13,7 +13,7 @@ import {
 
 import { EventEmitter, IEvent } from './events';
 import { CodeBlock, Parse as ParseLiterateYaml, ParseCodeBlocks } from './parsing/literate-yaml';
-import { ResolveUri } from "./ref/uri";
+import { EnsureIsFolderUri, ResolveUri } from './ref/uri';
 import { From, Enumerable as IEnumerable } from "./ref/linq";
 import { IFileSystem } from "./file-system"
 import * as Constants from './constants';
@@ -120,7 +120,7 @@ export class ConfigurationView extends EventEmitter {
   }
 
   private ResolveAsFolder(path: string): string {
-    return ResolveUri(this.configFileFolderUri, path).replace(/\/$/g, "") + "/";
+    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, path));
   }
 
   private ResolveAsPath(path: string): string {
@@ -153,7 +153,9 @@ export class ConfigurationView extends EventEmitter {
 export class Configuration {
   public async CreateView(...configs: Array<any>): Promise<ConfigurationView> {
     const workingScope: DataStore = new DataStore();
-    const configFileUri = await this.DetectConfigurationFile();
+    const configFileUri = this.fileSystem && this.uriToConfigFileOrWorkingFolder
+      ? await Configuration.DetectConfigurationFile(this.fileSystem, this.uriToConfigFileOrWorkingFolder)
+      : null;
 
     const defaults = require("../resources/default-configuration.json");
 
@@ -177,48 +179,45 @@ export class Configuration {
     }
   }
 
-  private cachedConfigurationUri: string | null | undefined;
-
   public constructor(
     private fileSystem?: IFileSystem,
-    private configurationFileName?: string
+    private uriToConfigFileOrWorkingFolder?: string
   ) {
     this.FileChanged();
   }
 
   public FileChanged() {
-    this.cachedConfigurationUri = undefined;
   }
 
-  private async DetectConfigurationFile(): Promise<string | null> {
-    if (this.cachedConfigurationUri !== undefined) {
-      return this.cachedConfigurationUri;
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, uriToConfigFileOrWorkingFolder: string | null): Promise<string | null> {
+    if (!uriToConfigFileOrWorkingFolder || !uriToConfigFileOrWorkingFolder.endsWith("/")) {
+      return uriToConfigFileOrWorkingFolder;
     }
 
-    if (!this.fileSystem) {
-      return null;
-    }
+    // search for a config file, walking up the folder tree
+    while (uriToConfigFileOrWorkingFolder !== null) {
+      // scan the filesystem items for the configuration.
+      const configFiles = new Map<string, string>();
 
-    // scan the filesystem items for the configuration.
-    const configFiles = new Map<string, string>();
+      for await (const name of fileSystem.EnumerateFileUris(uriToConfigFileOrWorkingFolder)) {
+        const content = await fileSystem.ReadFile(name);
+        if (content.indexOf(Constants.MagicString) > -1) {
+          configFiles.set(name, content);
+        }
+      }
 
-    for await (const name of this.fileSystem.EnumerateFileUris()) {
-      const content = await this.fileSystem.ReadFile(name);
-      if (content.indexOf(Constants.MagicString) > -1) {
-        configFiles.set(name, content);
+      // walk up
+      if (configFiles.size > 0) {
+        // it's the readme.md or the shortest filename.
+        let found =
+          From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
+          From<string>(configFiles.keys()).OrderBy(each => each.length).First();
+
+        return found;
       }
     }
 
-    if (configFiles.size === 0) {
-      return null;
-    }
-
-    // it's the readme.md or the shortest filename.
-    let found =
-      From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
-      From<string>(configFiles.keys()).OrderBy(each => each.length).First();
-
-    return this.cachedConfigurationUri = found;
+    return null
   }
 
   // public async HasConfiguration(): Promise<boolean> {

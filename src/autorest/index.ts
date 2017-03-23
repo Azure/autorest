@@ -1,7 +1,9 @@
 import { EventEmitter, IEvent } from '../autorest-core/lib/events';
 import { DocumentPatterns } from '../autorest-core/lib/document-type';
 // polyfill for the AsyncIterator support
-require("./lib/polyfill.min.js")
+if (!Symbol.asyncIterator) {
+  require("./lib/polyfill.min.js")
+}
 
 // exports the public AutoRest definitions
 export { Installer } from "./installer";
