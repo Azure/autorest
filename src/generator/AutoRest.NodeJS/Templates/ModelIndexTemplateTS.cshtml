@@ -7,9 +7,7 @@
 @EmptyLine
 import * as moment from "moment";
 @EmptyLine
-@{@:export namespace @Model.ModelsName {
-    @foreach (var model in Model.OrderedModelTemplateModels) {
-    @EmptyLine
-    @:@(Include(new ModelTemplateTS(), model))
-    }
-@:}
+@foreach (var model in Model.OrderedModelTemplateModels) {
+@EmptyLine
+@:@(Include(new ModelTemplateTS(), model))
+}

@@ -178,7 +178,7 @@ namespace AutoRest.NodeJS.Model
 
                     requiredParams.Append(p.Name);
                     requiredParams.Append(": ");
-                    requiredParams.Append(p.ModelType.TSType(inModelsModule: false, modelsName: ModelsName));
+                    requiredParams.Append(p.ModelType.TSType(inModelsModule: false));
 
                     first = false;
                 }

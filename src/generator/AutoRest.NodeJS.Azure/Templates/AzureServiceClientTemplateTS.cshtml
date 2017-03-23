@@ -10,13 +10,11 @@
 @Model.ConstructImportTS()
 @if (Model.MethodTemplateModels.Any())
 {
-@:import { Models } from "./models";
+@:import * as models from "./models";
 }
 @if (Model.MethodGroupModels.Any()) {
 @:import * as operations from "./operations";
 }
-@EmptyLine
-export * from "./models";
 @EmptyLine
 declare class @(Model.Name) {
     @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
@@ -58,7 +56,7 @@ declare class @(Model.Name) {
     @foreach (var property in Model.Properties)
     {
     @EmptyLine
-    @:@(property.Name): @(property.ModelType.TSType(false, Model.ModelsName));
+    @:@(property.Name): @(property.ModelType.TSType(false));
     }
 
     @if (Model.MethodGroupModels.Any())
@@ -77,4 +75,4 @@ declare class @(Model.Name) {
     }
 }
 @EmptyLine
-export { @(Model.Name) };
+export = @(Model.Name);

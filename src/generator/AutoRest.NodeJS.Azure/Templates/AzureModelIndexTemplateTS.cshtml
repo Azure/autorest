@@ -12,16 +12,13 @@ import { CloudError } from 'ms-rest-azure';
 export { BaseResource } from 'ms-rest-azure';
 export { CloudError } from 'ms-rest-azure';
 @EmptyLine
-@{@:export namespace @Model.ModelsName {
-    @foreach (var model in Model.OrderedModelTemplateModels) {
-    @EmptyLine
-    @:@(Include(new ModelTemplateTS(), model))
-    }
-    @EmptyLine
-    @foreach (var model in Model.PageTemplateModels)
-    {
-    @EmptyLine
-    @:@(Include(new PageModelTemplateTS(), model))
-    }
-@:}
+@foreach (var model in Model.OrderedModelTemplateModels) {
+@EmptyLine
+@:@(Include(new ModelTemplateTS(), model))
+}
+@EmptyLine
+@foreach (var model in Model.PageTemplateModels)
+{
+@EmptyLine
+@:@(Include(new PageModelTemplateTS(), model))
 }

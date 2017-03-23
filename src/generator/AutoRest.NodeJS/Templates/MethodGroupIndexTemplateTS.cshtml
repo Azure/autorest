@@ -23,7 +23,7 @@ break;
 }
 }
 @if (Model.ModelTypes.Any() || Model.IsAzure) {
-@:import { @Model.ModelsName } from '../models';
+@:import * as models from '../models';
 }
 @EmptyLine
 @foreach (var methodGroup in Model.MethodGroupModels) {

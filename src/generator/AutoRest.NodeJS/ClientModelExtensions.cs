@@ -505,7 +505,7 @@ namespace AutoRest.NodeJS
         /// <param name="type">IType to query</param>
         /// <param name="inModelsModule">Pass true if generating the code for the models module, thus model types don't need a "models." prefix</param>
         /// <returns>TypeScript type string for type</returns>
-        public static string TSType(this IModelType type, bool inModelsModule, string modelsName) {
+        public static string TSType(this IModelType type, bool inModelsModule) {
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
@@ -530,18 +530,18 @@ namespace AutoRest.NodeJS
                     tsType = compositeName.Substring(compositeName.IndexOf('.') + 1);
                 else if (inModelsModule || compositeName.Contains('.'))
                     tsType = compositeName;
-                else tsType = string.Concat(modelsName ?? "Models", "." , compositeName);
+                else tsType = "models." + compositeName;
             }
             else if (sequence != null)
             {
-                tsType = sequence.ElementType.TSType(inModelsModule, modelsName) + "[]";
+                tsType = sequence.ElementType.TSType(inModelsModule) + "[]";
             }
             else if (dictionary != null)
             {
                 // TODO: Confirm with Mark exactly what cases for additionalProperties AutoRest intends to handle (what about
                 // additonalProperties combined with explicit properties?) and add support for those if needed to at least match
                 // C# target level of functionality
-                tsType = "{ [propertyName: string]: " + dictionary.ValueType.TSType(inModelsModule, modelsName) + " }";
+                tsType = "{ [propertyName: string]: " + dictionary.ValueType.TSType(inModelsModule) + " }";
             }
             else throw new NotImplementedException($"Type '{type}' not implemented");
 
