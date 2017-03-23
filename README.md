@@ -36,6 +36,20 @@ Installing AutoRest on Windows, MacOS or Linux involves two steps:
   npm install -g autorest
   ```
 
+### Updating Autorest
+  To update AutoRest if you have previous versions installed, please run:
+    
+  ``` powershell
+  autorest --latest
+  ``` 
+or 
+  ```powershell
+  # Removes all other versions and installs the latest
+  autorest --reset
+  ```
+  For more information, run  `autorest --help`
+
+
 ### Status on various platforms:
  
 |OS | Status | 
