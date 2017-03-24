@@ -1,4 +1,4 @@
-import { ResolveUri, CreateFileUri, NormalizeUri } from '../lib/ref/uri';
+import { ResolveUri, CreateFileUri, NormalizeUri, FileUriToPath } from '../lib/ref/uri';
 import { AutoRest } from '../../autorest';
 
 import { DocumentContext } from './file-system';
@@ -9,6 +9,8 @@ import { From } from '../lib/ref/linq'
 import * as vfs from 'vinyl-fs';
 import * as path from 'path';
 import * as crypto from 'crypto'
+import { connection } from "./server"
+
 const md5 = (content: string) => content ? crypto.createHash('md5').update(content).digest("hex") : null;
 
 export class File extends EventEmitter {
@@ -53,22 +55,24 @@ export class File extends EventEmitter {
 
   }
 
-  public get content(): Promise<string | null> {
+  private async getContent(): Promise<string | null> {
     if (this._content) {
-      return Promise.resolve<string>(this._content);
+      return this._content;
     }
 
-    // need to reload the content.
-    return new Promise<string>(async (r, j) => {
-      try {
-        // acquire the content and set the checksum.
-        this.SetContent(await a.readFile(this.fullPath));
-      } catch (exception) {
-        // failed! well, set the content to null. it'll try again later. 
-        this.SetContent(null);
-      }
-      return this._content;
-    });
+    try {
+      connection.console.log(`Reading content for ${this.fullPath} `)
+      // acquire the content and set the checksum.
+      this.SetContent(await a.readFile(FileUriToPath(this.fullPath)));
+    } catch (exception) {
+      connection.console.error(`Exception reading content for ${this.fullPath} `)
+      // failed! well, set the content to null. it'll try again later. 
+      this.SetContent(null);
+    }
+    return this._content;
+  }
+  public get content(): Promise<string | null> {
+    return this.getContent();
   };
 
   public SetContent(text: string | null) {
@@ -116,6 +120,11 @@ export class AutoRestManager extends TextDocuments {
     // when we set the RootURI we look to see if we have a configuration file 
     // there, and then we automatically start validating that folder.
 
+    if (!uri || uri.length == 0) {
+      connection.console.log(`No workspace uri.`);
+      return;
+    }
+
     if (this._rootUri) {
       // I'm assuming that this doesn't happen...
       throw new Error("BAD ASSUMPTION DUDE.")
@@ -132,7 +141,7 @@ export class AutoRestManager extends TextDocuments {
         ctx.Activate();
       } catch (exception) {
         // that's not good. 
-
+        connection.console.error(`Exception setting Workspace URI ${uri} `)
       }
     }
   }
@@ -175,7 +184,7 @@ export class AutoRestManager extends TextDocuments {
     }
   }
 
-  public AcquireTrackedFile(documentUri: string): File {
+  public async AcquireTrackedFile(documentUri: string): Promise<File> {
     documentUri = NormalizeUri(documentUri);
     let doc = this.trackedFiles.get(documentUri);
     if (doc) {
@@ -186,6 +195,9 @@ export class AutoRestManager extends TextDocuments {
 
     const f = new File(documentUri);
     this.trackedFiles.set(documentUri, f);
+    let contnet = await (await f).content; // get the content to see if we should be doing something with this.
+    // check if it's a swagger?
+
     f.DiagnosticsToSend.Subscribe((file, diags) => this.connection.sendDiagnostics({ uri: file.fullPath, diagnostics: [...diags.values()] }));
     return f;
   }
@@ -193,10 +205,12 @@ export class AutoRestManager extends TextDocuments {
   private async GetDocumentContextForDocument(documentUri: string): Promise<DocumentContext> {
     documentUri = NormalizeUri(documentUri);
     // get the folder for this documentUri
-    let folder = path.dirname(documentUri);
+    let folder = ResolveUri(documentUri, ".");
 
     let configFile = await AutoRest.DetectConfigurationFile(new DocumentContext(this, folder), folder);
     if (configFile) {
+      this.log(`Configuration File Selected: ${configFile}`);
+
       folder = path.dirname(configFile);
       // do we have this config already?
       let ctx = this.activeContexts.get(folder);
@@ -210,7 +224,7 @@ export class AutoRestManager extends TextDocuments {
     // there was no configuration file for that file.
     // let's create a faux one at that level and call it readme.md
     configFile = ResolveUri(folder, "readme.md");
-    let file = this.AcquireTrackedFile(configFile);
+    let file = await this.AcquireTrackedFile(configFile);
     file.SetContent("");
     let ctx = new DocumentContext(this, folder, configFile);
     this.activeContexts.set(folder, ctx);
@@ -236,7 +250,7 @@ export class AutoRestManager extends TextDocuments {
     let ctx = await this.GetDocumentContextForDocument(documentUri);
     // hey garrett -- make sure that the event dispatch in vscode doesn't wait for this method or makes this bad for some reason.
     let file = this.AcquireTrackedFile(documentUri)
-    ctx.Track(file);
+    ctx.Track(await file);
   }
 
   private changed(change: TextDocumentChangeEvent) {
@@ -328,5 +342,14 @@ export class AutoRestManager extends TextDocuments {
         }
       }
     });
+  }
+}
+
+/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
+async function* yieldFromMap(): AsyncIterable<string> {
+  yield* ["hello", "world"];
+};
+async function foo() {
+  for await (const each of yieldFromMap()) {
   }
 }

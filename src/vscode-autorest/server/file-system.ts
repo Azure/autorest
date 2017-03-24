@@ -1,11 +1,12 @@
-import { normalizeUnits } from 'moment';
-import { ManipulateObject } from '../../autorest-core/lib/pipeline/object-manipulator';
 import * as a from '../lib/ref/async'
-import { IFileSystem, AutoRest, EventEmitter, IEvent } from "autorest";
+import { IFileSystem, AutoRest, EventEmitter, IEvent, DocumentExtension } from "autorest";
+
 import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments } from "vscode-languageserver";
 import { File, AutoRestManager } from "./autorest-manager"
 import { From } from "../lib/ref/linq"
-import { CreateFileUri, FileUriToPath, NormalizeUri, ResolveUri } from '../lib/ref/uri';
+import { CreateFileUri, FileUriToPath, NormalizeUri, ResolveUri, GetExtension } from '../lib/ref/uri';
+import { connection } from "./server";
+import * as path from "path"
 
 export class DocumentContext extends EventEmitter implements IFileSystem {
   private _autoRest: AutoRest | null;
@@ -50,6 +51,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
     }
 
     this.Manager.log(`Queueing up Autorest to process.`);
+
     return new Promise<void>((r, j) => {
       // queue up the AutoRest restart
       this._readyToRun = setTimeout(() => {
@@ -72,20 +74,36 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
   }
 
   async *EnumerateFileUris(folderUri: string): AsyncIterable<string> {
+    connection.console.log(`Enumerating files for ${folderUri}`);
     folderUri = NormalizeUri(folderUri)
     if (folderUri && folderUri.startsWith("file:")) {
-      yield* From(await a.readdir(FileUriToPath(folderUri))).Select(f => ResolveUri(folderUri, f));
+      const folderPath = FileUriToPath(folderUri);
+      var st = await a.stat(folderPath);
+      var isdir = st.isDirectory();
+      if (isdir) {
+        const items = await a.readdir(folderPath);
+        yield* From<string>(items).Where(each => AutoRest.IsConfigurationExtension(GetExtension(each))).Select(each => ResolveUri(folderUri, each));
+      }
+
     }
   }
 
   async ReadFile(fileUri: string): Promise<string> {
     fileUri = NormalizeUri(fileUri);
-
+    connection.console.log(`IFileSystem:ReadFile : ${fileUri}`);
     let file = (await this.Manager.AcquireTrackedFile(fileUri));
     if (this._autoRest) {
       // track this because it looks like we're being asked for the file during process()
       this.Track(file);
     }
-    return file.content;
+    return await file.content;
+  }
+}
+/// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
+async function* yieldFromMap(): AsyncIterable<string> {
+  yield* ["hello", "world"];
+};
+async function foo() {
+  for await (const each of yieldFromMap()) {
   }
 }
