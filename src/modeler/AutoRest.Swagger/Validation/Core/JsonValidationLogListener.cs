@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Logging.Core
     {
         private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
 
-        private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
+        private static readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
 
         public void Log(LogMessage message)
         {
@@ -29,7 +29,7 @@ namespace AutoRest.Swagger.Logging.Core
                     .FirstOrDefault();
                 var pathComponents = resPathPattern.Match(path ?? "");
                 var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
-                var pathComponentResource = pathComponents.Groups["resource"];
+                var pathComponentResourceType = pathComponents.Groups["resourceType"];
 
                 var rawMessage = new Dictionary<string, string>();
                 rawMessage["type"] = validationMessage.Severity.ToString();
@@ -40,7 +40,7 @@ namespace AutoRest.Swagger.Logging.Core
                 rawMessage["id"] = validationMessage.Rule.Id;
                 rawMessage["validationCategory"] = validationMessage.Rule.ValidationCategory.ToString();
                 rawMessage["providerNamespace"] = pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null;
-                rawMessage["resourceType"] = pathComponentResource.Success ? pathComponentResource.Value : null;
+                rawMessage["resourceType"] = pathComponentResourceType.Success ? pathComponentResourceType.Value : null;
                 rawMessageCollection.Add(rawMessage);
             }
         }
