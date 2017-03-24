@@ -3,7 +3,11 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Channel } from '../message';
+import { BlameTree } from '../source-map/blaming';
+import { Artifact } from '../artifact';
+import { Supressor } from './supression';
+import { IEvent } from '../events';
+import { Channel, Message, SourceLocation } from '../message';
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
 import { ResolveUri } from "../ref/uri";
 import { ConfigurationView } from '../configuration';
@@ -19,7 +23,33 @@ import { From } from "../ref/linq";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
+class OutstandingTaskAwaiter {
+  private outstandingTaskCount: number = 0;
+  private awaiter: Promise<void>;
+  private resolve: () => void;
+
+  public constructor() {
+    this.awaiter = new Promise<void>(res => this.resolve = res);
+  }
+
+  public async Wait(): Promise<void> {
+    return this.awaiter;
+  }
+
+  public Enter(): void { this.outstandingTaskCount++; }
+  public Exit(): void { this.outstandingTaskCount--; this.Signal(); }
+
+  private Signal(): void {
+    if (this.outstandingTaskCount === 0) {
+      this.resolve();
+    }
+  }
+}
+
 export async function RunPipeline(config: ConfigurationView): Promise<void> {
+  const outstandingTaskAwaiter = new OutstandingTaskAwaiter();
+  outstandingTaskAwaiter.Enter();
+
   // load Swaggers
   let inputs = From(config.inputFileUris).ToArray();
 
@@ -27,6 +57,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
   const swaggers = await LoadLiterateSwaggers(
     config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
     inputs, config.DataStore.CreateScope("loader"));
+  // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 
   // compose Swaggers
   const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
@@ -39,19 +70,60 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
     swagger: MultiPromiseUtility.single(swagger)
   };
 
+  const azureValidator = config.__specials.azureValidator || (config.azureArm && !config.disableValidation);
+
   //
   // AutoRest.dll realm
   //
-  if (config.__specials.azureValidator || config.__specials.codeGenerator) {
+  if (azureValidator || config.__specials.codeGenerator) {
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
+    const supressor = new Supressor(config);
+
+    // setup message pipeline (source map resolution, filter, forward)
+    const processMessage = async (sink: IEvent<ConfigurationView, Message>, m: Message) => {
+      outstandingTaskAwaiter.Enter();
+
+      try {
+        // update source locations to point to loaded Swagger
+        if (m.Source) {
+          const blameSources = await Promise.all(m.Source.map(async s => {
+            try {
+              const blameTree = await config.DataStore.Blame(s.document, s.Position);
+              const result = [...blameTree.BlameInputs()];
+              if (result.length > 0) {
+                return result.map(r => <SourceLocation>{ document: r.source, Position: r });
+              }
+            } catch (e) {
+              // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
+              //console.log(`Failed blaming '${JSON.stringify(s.Position)}' in '${s.document}'`);
+              //console.log(e);
+            }
+            return [s];
+          }));
+          m.Source = blameSources.map(x => x[0]); // just take the first source of every issue (or take all of them? has impact on both supression and highlighting!)
+        }
+
+        // filter
+        const mx = supressor.Filter(m);
+
+        // forward
+        if (mx !== null) {
+          sink.Dispatch(mx);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+
+      outstandingTaskAwaiter.Exit();
+    };
     autoRestDotNetPlugin.Message.Subscribe((_, m) => {
       switch (m.Channel) {
-        case Channel.Debug: config.Debug.Dispatch(m); break;
-        case Channel.Error: config.Error.Dispatch(m); break;
-        case Channel.Fatal: config.Fatal.Dispatch(m); break;
-        case Channel.Information: config.Information.Dispatch(m); break;
-        case Channel.Verbose: config.Verbose.Dispatch(m); break;
-        case Channel.Warning: config.Warning.Dispatch(m); break;
+        case Channel.Debug: processMessage(config.Debug, m); break;
+        case Channel.Error: processMessage(config.Error, m); break;
+        case Channel.Fatal: processMessage(config.Fatal, m); break;
+        case Channel.Information: processMessage(config.Information, m); break;
+        case Channel.Verbose: processMessage(config.Verbose, m); break;
+        case Channel.Warning: processMessage(config.Warning, m); break;
       }
     });
 
@@ -96,8 +168,12 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
     }
 
     // validator
-    if (config.__specials.azureValidator) {
+    if (azureValidator) {
       await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
     }
   }
+
+
+  outstandingTaskAwaiter.Exit();
+  await outstandingTaskAwaiter.Wait();
 }

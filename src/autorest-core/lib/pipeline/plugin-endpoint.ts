@@ -161,33 +161,12 @@ export class AutoRestPlugin extends EventEmitter {
         notify();
       },
       async Message(message: Message, path?: SmartPosition, sourceFile?: string): Promise<void> {
-        // if (message.Channel === Channel.Fatal) {
-        //   throw new Error(message.Text);
-        // }
-
         const finishPrev = finishNotifications;
         let notify: () => void = () => { };
         finishNotifications = new Promise<void>(res => notify = res);
 
         message.Plugin = pluginName;
         onMessage(message);
-        // const files = await inputFileHandles();
-        // if (path) {
-        //   if (!sourceFile) {
-        //     if (files.length !== 1) {
-        //       await finishPrev;
-        //       notify();
-        //       throw new Error("Message did not specify blame origin but there are multiple input files");
-        //     }
-        //     sourceFile = files[0].key;
-        //   }
-
-        //   mappings.push({
-        //     name: `location of ${message.Channel} '${message.Text}'`,
-        //     source: sourceFile,
-        //     original: path
-        //   });
-        // }
 
         await finishPrev;
         notify();

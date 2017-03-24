@@ -16,12 +16,25 @@ static class Channel
     public static readonly string Verbose = "verbose";
     public static readonly string Fatal = "fatal";
 }
+// KEEP IN SYNC with message.ts
+public class SmartPosition
+{
+  public object[] path { get; set; }
+}
+
+public class SourceLocation
+{
+  public string document { get; set; }
+  public SmartPosition Position { get; set; }
+}
 
 public class Message
 {
   public string Channel { get; set; }
   public object Details { get; set; }
   public string Text { get; set; }
+  public string[] Key { get; set; }
+  public SourceLocation[] Source { get; set; }
 }
 
 public abstract class NewPlugin

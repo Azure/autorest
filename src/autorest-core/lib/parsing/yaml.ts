@@ -63,13 +63,14 @@ function ResolvePathPart(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPa
 }
 
 export function ResolveRelativeNode(yamlAstRoot: YAMLNode, yamlAstCurrent: YAMLNode, jsonPath: JsonPath): YAMLNode {
+  const yamlAstFirst = yamlAstCurrent;
   try {
     for (const jsonPathPart of jsonPath) {
       yamlAstCurrent = ResolvePathPart(yamlAstRoot, yamlAstCurrent, jsonPathPart, true);
     }
     return yamlAstCurrent;
   } catch (error) {
-    throw new Error(`Error retrieving '${stringify(jsonPath)}' from '${StringifyAst(yamlAstCurrent)}' (${error})`);
+    throw new Error(`Error retrieving '${stringify(jsonPath)}' (${error})`);
   }
 }
 

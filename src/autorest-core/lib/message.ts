@@ -22,10 +22,10 @@ export interface Range {
 
 export interface Message {
   Channel?: Channel;
-  Key?: AsyncIterable<string>;
+  Key?: Iterable<string>;
   Details?: any;
   Text: string;
   Source?: Array<SourceLocation>;
-  Range?: AsyncIterable<Range>;
+  Range?: Iterable<Range>;
   Plugin?: string;
 };

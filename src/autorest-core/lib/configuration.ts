@@ -18,7 +18,7 @@ import { From, Enumerable as IEnumerable } from "./ref/linq";
 import { IFileSystem } from "./file-system"
 import * as Constants from './constants';
 import { Message } from "./message";
-import { GeneratedFile } from "./generated-file";
+import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
 export interface AutoRestConfigurationSwitches {
@@ -44,6 +44,7 @@ export interface AutoRestConfigurationImpl {
   "input-file": string[] | string;
   "output-folder"?: string;
   "base-folder"?: string;
+  "directive"?: Directive[] | Directive;
 }
 
 // protected static CreateDefaultConfiguration(): AutoRestConfigurationImpl {
@@ -62,6 +63,66 @@ function key(target: string) {
   };
 };
 */
+
+function ValuesOf(objs: Iterable<any>, fieldName: string): IEnumerable<any> {
+  return From(objs).Select(o => o[fieldName]).Where(o => o !== undefined);
+}
+
+function SingleValue<T>(objs: Iterable<any>, fieldName: string): T | null {
+  return ValuesOf(objs, fieldName).LastOrDefault();
+}
+
+function* MultipleValues<T>(objs: Iterable<any>, fieldName: string): Iterable<T> {
+  for (const each of ValuesOf(objs, fieldName)) {
+    if (typeof each === "string") {
+      yield <T><any>each;
+    } else if (each[Symbol.iterator]) {
+      yield* each;
+    } else {
+      yield each;
+    }
+  }
+}
+
+export interface Directive {
+  from?: string[] | string;
+  where?: string[] | string;
+  reason?: string;
+
+  // one of:
+  supress?: string[] | string;
+  set?: string[] | string;
+  transform?: string[] | string;
+}
+
+export class DirectiveView {
+  constructor(private directive: Directive) {
+  }
+
+  public get from(): Iterable<string> {
+    return MultipleValues<string>([this.directive], "from");
+  }
+
+  public get where(): Iterable<string> {
+    return MultipleValues<string>([this.directive], "where");
+  }
+
+  public get reason(): string | null {
+    return this.directive.reason || null;
+  }
+
+  public get suppress(): Iterable<string> {
+    return MultipleValues<string>([this.directive], "suppress");
+  }
+
+  public get set(): Iterable<string> {
+    return MultipleValues<string>([this.directive], "set");
+  }
+
+  public get transform(): Iterable<string> {
+    return MultipleValues<string>([this.directive], "transform");
+  }
+}
 
 export class ConfigurationView extends EventEmitter {
 
@@ -89,7 +150,7 @@ export class ConfigurationView extends EventEmitter {
   /* @internal */
   public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
 
-  @EventEmitter.Event public GeneratedFile: IEvent<ConfigurationView, GeneratedFile>;
+  @EventEmitter.Event public GeneratedFile: IEvent<ConfigurationView, Artifact>;
 
   @EventEmitter.Event public Information: IEvent<ConfigurationView, Message>;
   @EventEmitter.Event public Warning: IEvent<ConfigurationView, Message>;
@@ -100,28 +161,6 @@ export class ConfigurationView extends EventEmitter {
 
   private config: Array<AutoRestConfigurationImpl>;
 
-  private ValuesOf(fieldName: string): IEnumerable<any> {
-    return From<AutoRestConfigurationImpl>(this.config).Select(config => config[fieldName]);
-  }
-
-  private SingleValue<T>(fieldName: string): T | null {
-    return this.ValuesOf(fieldName).FirstOrDefault();
-  }
-
-  private *MultipleValues<T>(fieldName: string): Iterable<T> {
-    for (const each of this.ValuesOf(fieldName)) {
-      if (each != undefined && each != null) {
-        if (typeof each === "string") {
-          yield <T><any>each;
-        } else if (each[Symbol.iterator]) {
-          yield* each;
-        } else {
-          yield each;
-        }
-      }
-    }
-  }
-
   private ResolveAsFolder(path: string): string {
     return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, path));
   }
@@ -131,22 +170,39 @@ export class ConfigurationView extends EventEmitter {
   }
 
   private get baseFolderUri(): string {
-    return this.ResolveAsFolder(this.SingleValue<string>("base-folder") || "");
+    return this.ResolveAsFolder(SingleValue<string>(this.config, "base-folder") || "");
   }
 
   // public methods
 
+  public get directives(): Iterable<DirectiveView> {
+    return From(MultipleValues<Directive>(this.config, "directive"))
+      .Select(each => new DirectiveView(each));
+  }
+
   public get inputFileUris(): Iterable<string> {
-    return From<string>(this.MultipleValues<string>("input-file"))
+    return From<string>(MultipleValues<string>(this.config, "input-file"))
       .Select(each => this.ResolveAsPath(each));
   }
 
   public get outputFolderUri(): string {
-    return this.ResolveAsFolder(this.SingleValue<string>("output-folder") || "generated");
+    return this.ResolveAsFolder(SingleValue<string>(this.config, "output-folder") || "generated");
   }
 
   public get __specials(): AutoRestConfigurationSpecials {
-    return this.ValuesOf("__specials").FirstOrDefault() || {};
+    return ValuesOf(this.config, "__specials").FirstOrDefault() || {};
+  }
+
+  public pluginSection(pluginName: string): any {
+    return SingleValue<any>(this.config, pluginName);
+  }
+
+  public get disableValidation(): boolean {
+    return SingleValue<boolean>(this.config, "disable-validation") || false;
+  }
+
+  public get azureArm(): boolean {
+    return SingleValue<boolean>(this.config, "azure-arm") || false;
   }
 
   // TODO: stuff like generator specific settings (= YAML merging root with generator's section)

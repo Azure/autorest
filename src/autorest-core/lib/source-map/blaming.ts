@@ -30,5 +30,11 @@ export class BlameTree {
     // recurse
     yield* From(this.blaming).SelectMany(child => child.BlameInputs()).Distinct(x => JSON.stringify(x));
   }
+
+  public * All(): Iterable<sourceMap.MappedPosition> {
+    yield this.node;
+    // recurse
+    yield* From(this.blaming).SelectMany(child => child.All());
+  }
 }
 

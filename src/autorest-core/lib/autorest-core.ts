@@ -1,3 +1,4 @@
+import { Stringify } from './ref/yaml';
 import { RunPipeline } from './pipeline/pipeline';
 import { SmartPosition, Position } from './ref/source-map';
 import { DataStore, Metadata } from './data-store/data-store';
@@ -9,7 +10,7 @@ import { DocumentType } from "./document-type";
 export { ConfigurationView } from './configuration';
 import { Message } from './message';
 import * as Constants from './constants';
-import { GeneratedFile } from './generated-file';
+import { Artifact } from './artifact';
 
 export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
@@ -84,7 +85,7 @@ export class AutoRest extends EventEmitter {
   /**
    * Called to start processing of the files.
    */
-  public Process(): { finish: Promise<void>, cancel: () => void } {
+  public Process(): { finish: Promise<boolean>, cancel: () => void } {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
@@ -103,10 +104,13 @@ export class AutoRest extends EventEmitter {
 
         // finished cleanly
         this.Finished.Dispatch(true);
+        return true;
       }
       catch (e) {
+        console.error(e);
         // finished not cleanly
         this.Finished.Dispatch(false);
+        return false;
       }
       finally {
         this.Invalidate();
@@ -120,7 +124,7 @@ export class AutoRest extends EventEmitter {
 
   @EventEmitter.Event public Finished: IEvent<AutoRest, boolean>;
 
-  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, GeneratedFile>;
+  @EventEmitter.Event public GeneratedFile: IEvent<AutoRest, Artifact>;
 
   @EventEmitter.Event public Information: IEvent<AutoRest, Message>;
   @EventEmitter.Event public Warning: IEvent<AutoRest, Message>;

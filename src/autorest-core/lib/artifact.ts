@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export interface GeneratedFile {
+export interface Artifact {
   uri: string;
   content: string;
 }

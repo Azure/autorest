@@ -91,6 +91,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       assert.ok(message.Details.jsonref);
       assert.ok(message.Details["json-path"]);
       assert.ok(message.Details.validationCategory);
+      assert.strictEqual(message.Plugin, "AzureValidator");
     }
   }
 

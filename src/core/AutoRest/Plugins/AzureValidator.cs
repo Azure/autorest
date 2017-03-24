@@ -49,7 +49,19 @@ public class AzureValidator : NewPlugin
     {
         Text = validationMessage.Message,
         Channel = validationMessage.Severity.ToString().ToLowerInvariant(),
-        Details = rawMessageDetails
+        Details = rawMessageDetails,
+        Key = new string[] { validationMessage.Rule.GetType().Name, validationMessage.Rule.Id },
+        Source = new[]
+        {
+            new SourceLocation
+            {
+                document = validationMessage.Path.FilePath.ToString(),
+                Position = new SmartPosition
+                {
+                    path = validationMessage.Path.ObjectPath.Path.Select(x => x.RawPath).ToArray()
+                }
+            }
+        }
     }, new object[0]);
   }
 

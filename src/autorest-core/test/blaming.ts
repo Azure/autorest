@@ -4,13 +4,13 @@ import { RealFileSystem } from '../lib/file-system';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
+import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
 import { parse } from "../lib/ref/jsonpath";
 
 @suite class Blaming {
 
   @test @timeout(10000) async "end to end blaming with literate swagger"() {
-    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFileUri(__dirname) + "/", "resources/literate-example/"));
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-composite.md"));
     const view = await autoRest.view;
     await autoRest.Process().finish;
 
