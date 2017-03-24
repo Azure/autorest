@@ -19,9 +19,10 @@ namespace AutoRest.Swagger.Model.Utilities
             new List<string>() { "trackedresource", "proxyresource", "resource" };
 
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        
 
         // This needs to be deprecated in favor of context.TrackedResources
+        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
+
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
@@ -401,6 +402,22 @@ namespace AutoRest.Swagger.Model.Utilities
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Returns array of resource providers
+        /// </summary>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>Array of resource providers</returns>
+        public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
+        {
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+                                                    .OfType<Match>()
+                                                    .Select(match => match.Groups["resPath"].Value.ToString()))
+                                                    .Distinct()
+                                                    .ToList();
+
+            return resourceProviders;
         }
     }
 }
