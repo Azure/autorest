@@ -9,6 +9,7 @@ import { Position } from "source-map";
 export { RawSourceMap } from "source-map";
 import { JsonPath } from "../ref/jsonpath";
 
+// internally, we will also use the *intersection* of both whenever both information is available!
 export type SmartPosition = Position | { path: JsonPath };
 
 export interface Mapping {
