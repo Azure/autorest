@@ -56,7 +56,7 @@ namespace AutoRest.Swagger.Model.Utilities
             var xmsAzureResourceModels = GetXmsAzureResourceModels(serviceDefinition.Definitions);
 
             // Get all models that are returned by PUT operations (200/201 response)
-            var putOperationsResponseModels = GetOperationResponseModels("put", serviceDefinition).Except(xmsAzureResourceModels);
+            var putOperationsResponseModels = GetOperationResponseModels("put", serviceDefinition);
             putOperationsResponseModels = putOperationsResponseModels.Union(GetOperationResponseModels("put", serviceDefinition, "201"));
 
             // Get all models that 'allOf' on models that are named 'Resource' and are returned by any GET operation
@@ -105,9 +105,7 @@ namespace AutoRest.Swagger.Model.Utilities
 
             // for each allOf in the schema, recursively pick the models
             var allOfs = modelSchema.AllOf.Select(allOfSchema => allOfSchema.Reference?.StripDefinitionPath()).Where(modelRef => !string.IsNullOrEmpty(modelRef));
-            modelHierarchy.Union(allOfs.SelectMany(allOf => EnumerateModelHierarchy(allOf, definitions)));
-            
-            return modelHierarchy;
+            return modelHierarchy.Union(allOfs.SelectMany(allOf => EnumerateModelHierarchy(allOf, definitions))).ToList();
         }
 
         /// <summary>
