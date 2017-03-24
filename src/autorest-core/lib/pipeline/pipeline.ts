@@ -3,20 +3,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Channel } from '../message';
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
-import { ResolveUri, WriteString } from "../ref/uri";
-import { AutoRestConfigurationImpl, Configuration, ConfigurationView } from '../configuration';
+import { ResolveUri } from "../ref/uri";
+import { ConfigurationView } from '../configuration';
 import {
   DataHandleRead,
   DataStore,
   DataStoreViewReadonly,
   KnownScopes
 } from '../data-store/data-store';
-import { Parse as ParseLiterateYaml } from "../parsing/literate-yaml";
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
-import { RealFileSystem } from "../file-system"
-import { From } from "../ref/linq"
+import { From } from "../ref/linq";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -29,7 +28,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
     config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
     inputs, config.DataStore.CreateScope("loader"));
 
-  // compose Swaggers (may happen in LoadLiterateSwaggers, BUT then we can't call other people (e.g. Amar's tools) with the component swaggers... hmmm...)
+  // compose Swaggers
   const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
     ? await ComposeSwaggers(config.__specials.infoSectionOverride || {}, swaggers, config.DataStore.CreateScope("compose"), true)
     : swaggers[0];
@@ -45,6 +44,16 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
   //
   if (config.__specials.azureValidator || config.__specials.codeGenerator) {
     const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
+    autoRestDotNetPlugin.Message.Subscribe((_, m) => {
+      switch (m.Channel) {
+        case Channel.Debug: config.Debug.Dispatch(m); break;
+        case Channel.Error: config.Error.Dispatch(m); break;
+        case Channel.Fatal: config.Fatal.Dispatch(m); break;
+        case Channel.Information: config.Information.Dispatch(m); break;
+        case Channel.Verbose: config.Verbose.Dispatch(m); break;
+        case Channel.Warning: config.Warning.Dispatch(m); break;
+      }
+    });
 
     // modeler
     const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
@@ -53,62 +62,42 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
       });
 
     // code generator
-    result["generatedFiles"] = MultiPromiseUtility.fromCallbacks(async callback => {
-      const codeGenerator = config.__specials.codeGenerator;
-      if (codeGenerator) {
-        const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
-          {
-            namespace: config.__specials.namespace || "",
-            codeGenerator: codeGenerator,
-            clientNameOverride: getXmsCodeGenSetting("name"),
-            internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
-            useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
-            header: config.__specials.header || null,
-            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
-            syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
-            addCredentials: config.__specials.addCredentials || false,
-            rubyPackageName: config.__specials.rubyPackageName || "client"
-          });
+    const codeGenerator = config.__specials.codeGenerator;
+    if (codeGenerator) {
+      const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
+      let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
+        {
+          namespace: config.__specials.namespace || "",
+          codeGenerator: codeGenerator,
+          clientNameOverride: getXmsCodeGenSetting("name"),
+          internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
+          useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
+          header: config.__specials.header || null,
+          payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
+          syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
+          addCredentials: config.__specials.addCredentials || false,
+          rubyPackageName: config.__specials.rubyPackageName || "client"
+        });
 
-        // C# simplifier
-        if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
-          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"));
-        }
-
-        for (const fileName of await generatedFileScope.Enum()) {
-          callback(await generatedFileScope.ReadStrict(fileName));
-        }
+      // C# simplifier
+      if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
+        generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"));
       }
-    });
+
+      for (const fileName of await generatedFileScope.Enum()) {
+        const handle = await generatedFileScope.ReadStrict(fileName);
+        const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
+        const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
+        config.GeneratedFile.Dispatch({
+          uri: outputFileUri,
+          content: await handle.ReadData()
+        });
+      }
+    }
 
     // validator
-    result["azureValidationMessages"] = MultiPromiseUtility.fromCallbacks(async callback => {
-      if (config.__specials.azureValidator) {
-        // TODO: streamify
-        const messages = await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
-        for (const fileName of await messages.Enum()) {
-          callback(await messages.ReadStrict(fileName));
-        }
-      }
-    });
-  }
-
-  // sinks (TODO: parallelize, streamify)
-
-  if (result["generatedFiles"]) {
-    await MultiPromiseUtility.toAsyncCallbacks(result["generatedFiles"], async fileHandle => {
-      // commit to disk (TODO: extract output path more elegantly)
-      const relPath = decodeURIComponent(fileHandle.key.split("/output/")[1]);
-      const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
-      await WriteString(outputFileUri, await fileHandle.ReadData());
-    });
-  }
-
-  if (result["azureValidationMessages"]) {
-    await MultiPromiseUtility.toAsyncCallbacks(result["azureValidationMessages"], async fileHandle => {
-      // print
-      console.log(await fileHandle.ReadData());
-    });
+    if (config.__specials.azureValidator) {
+      await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
+    }
   }
 }

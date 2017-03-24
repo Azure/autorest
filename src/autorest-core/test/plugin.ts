@@ -8,7 +8,7 @@ import * as assert from "assert";
 
 import { CancellationToken } from "../lib/ref/cancallation";
 import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
-import { Message } from "../lib/pipeline/plugin-api";
+import { Message } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
 import { DataStore } from "../lib/data-store/data-store";
@@ -24,19 +24,18 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
     const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
     assert.deepStrictEqual(pluginNames, ["dummy"]);
+    const messages: Message[] = [];
+    dummyPlugin.Message.Subscribe((_, m) => messages.push(m));
     const result = await dummyPlugin.Process(
       "dummy",
       key => key,
       scopeInput,
       scopeWork,
-      scopeWork,
       cancellationToken);
     assert.strictEqual(result, true);
-    const producedFiles = await scopeWork.Enum();
-    assert.strictEqual(producedFiles.length, 1);
-    const fileHandle = await scopeWork.ReadStrict(producedFiles[0]);
-    const message = await fileHandle.ReadObject<Message<number>>();
-    assert.strictEqual(message.payload, 42);
+    assert.strictEqual(messages.length, 1);
+    const message = messages[0];
+    assert.strictEqual(message.Details, 42);
   }
 
   // SKIPPING because Amar's tool is resolved hacky right now (waiting for "getting plugin bits to disk part")
@@ -54,16 +53,16 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
       const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
+      const messages: Message[] = [];
+      validationPlugin.Message.Subscribe((_, m) => messages.push(m));
       const result = await validationPlugin.Process(
         pluginNames[pluginIndex], _ => null,
         scopeInput,
         scopeWork.CreateScope("output"),
-        scopeWork.CreateScope("messages"),
         cancellationToken);
       assert.strictEqual(result, true);
-      const producedFiles = await scopeWork.Enum();
-      assert.strictEqual(producedFiles.length, (await scopeInput.Enum()).length);
-      const producedFile = await scopeWork.ReadStrict(producedFiles[0]);
+      assert.strictEqual(messages.length, (await scopeInput.Enum()).length);
+      const message = messages[0];
     }
   }
 
@@ -79,20 +78,19 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     // call validator
     const autorestPlugin = new AutoRestDotNetPlugin();
     const pluginScope = dataStore.CreateScope("plugin");
+    const messages: Message[] = [];
+    autorestPlugin.Message.Subscribe((_, m) => messages.push(m));
     const resultScope = await autorestPlugin.Validate(swagger, pluginScope);
 
     // check results
-    const results = await resultScope.Enum();
-    assert.notEqual(results.length, 0);
-    for (const result of results) {
-      const resultHandle = await resultScope.ReadStrict(result);
-      const resultObject = await resultHandle.ReadObject<any>();
-      assert.ok(resultObject);
-      assert.ok(resultObject.code);
-      assert.ok(resultObject.message);
-      assert.ok(resultObject.jsonref);
-      assert.ok(resultObject["json-path"]);
-      assert.ok(resultObject.validationCategory);
+    assert.notEqual(messages.length, 0);
+    for (const message of messages) {
+      assert.ok(message);
+      assert.ok(message.Details.code);
+      assert.ok(message.Text);
+      assert.ok(message.Details.jsonref);
+      assert.ok(message.Details["json-path"]);
+      assert.ok(message.Details.validationCategory);
     }
   }
 
@@ -167,7 +165,6 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         pluginNames[pluginIndex], _ => null,
         scopeInput,
         scopeWork.CreateScope("output"),
-        scopeWork.CreateScope("messages"),
         cancellationToken);
       assert.strictEqual(result, true);
     }

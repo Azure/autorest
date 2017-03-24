@@ -18,6 +18,7 @@ import { From, Enumerable as IEnumerable } from "./ref/linq";
 import { IFileSystem } from "./file-system"
 import * as Constants from './constants';
 import { Message } from "./message";
+import { GeneratedFile } from "./generated-file";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
 export interface AutoRestConfigurationSwitches {
@@ -88,6 +89,8 @@ export class ConfigurationView extends EventEmitter {
   /* @internal */
   public get CancellationToken(): CancellationToken { return this.cancellationTokenSource.token; }
 
+  @EventEmitter.Event public GeneratedFile: IEvent<ConfigurationView, GeneratedFile>;
+
   @EventEmitter.Event public Information: IEvent<ConfigurationView, Message>;
   @EventEmitter.Event public Warning: IEvent<ConfigurationView, Message>;
   @EventEmitter.Event public Error: IEvent<ConfigurationView, Message>;
@@ -139,7 +142,7 @@ export class ConfigurationView extends EventEmitter {
   }
 
   public get outputFolderUri(): string {
-    return this.ResolveAsFolder(this.SingleValue<string>("output-folder") || "generated")
+    return this.ResolveAsFolder(this.SingleValue<string>("output-folder") || "generated");
   }
 
   public get __specials(): AutoRestConfigurationSpecials {
