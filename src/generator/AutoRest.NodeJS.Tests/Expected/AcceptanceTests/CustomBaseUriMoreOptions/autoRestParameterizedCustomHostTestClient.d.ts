@@ -31,7 +31,7 @@ declare class AutoRestParameterizedCustomHostTestClient {
      * @param {string} [options.dnsSuffix] - A string value that is used as a global part of the parameterized host. Default value 'host'.
      *
      */
-    constructor(subscriptionId: string, options: ServiceClientOptions);
+    constructor(subscriptionId: string, options?: ServiceClientOptions);
 
     subscriptionId: string;
 

@@ -29,7 +29,7 @@ declare class AutoRestResourceFlatteningTestService {
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
      */
-    constructor(baseUri: string, options: ServiceClientOptions);
+    constructor(baseUri: string, options?: ServiceClientOptions);
 
             /**
          * Put External Resource as an Array

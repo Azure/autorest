@@ -52,7 +52,7 @@ declare class @(Model.Name) {
     @: *
     }
      */
-    constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options: ServiceClientOptions);
+    constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options?: ServiceClientOptions);
 
     @foreach (var property in Model.Properties)
     {
