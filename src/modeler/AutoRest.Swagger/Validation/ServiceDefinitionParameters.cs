@@ -15,7 +15,6 @@ namespace AutoRest.Swagger.Validation
     {
         private static readonly string SubscriptionId = "subscriptionId";
         private static readonly string ApiVersion = "api-version";
-        private static readonly string AzureManagementHost = "management.azure.com";
         private static readonly string XMsParameterizedHostExtensionName = "x-ms-parameterized-host";
 
         /// <summary>
@@ -53,8 +52,8 @@ namespace AutoRest.Swagger.Validation
             formatParameters = new object[0];
             ServiceDefinition serviceDefinition = context.Root;
             
-            // Rule does not apply if not an Azure management plane or x-ms-parameterized-host extension is not applied
-            if (!serviceDefinition.Host.ToLower().Equals(AzureManagementHost) && !serviceDefinition.Extensions.ContainsKey(XMsParameterizedHostExtensionName))
+            // Rule does not apply if x-ms-parameterized-host extension is not applied
+            if (!serviceDefinition.Extensions.ContainsKey(XMsParameterizedHostExtensionName))
             {
                 return true;
             }
