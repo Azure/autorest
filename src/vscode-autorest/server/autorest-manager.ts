@@ -105,7 +105,15 @@ export class AutoRestManager extends TextDocuments {
     return this._rootUri;
   }
 
-  public log(text: string) {
+  public information(text: string) {
+    this.connection.console.log(text);
+  }
+
+  public verbose(text: string) {
+    this.connection.console.log(text);
+  }
+
+  public debug(text: string) {
     this.connection.console.log(text);
   }
 
@@ -148,7 +156,7 @@ export class AutoRestManager extends TextDocuments {
 
   constructor(private connection: IConnection) {
     super();
-    this.log("setting up AutoRestManager.")
+    this.debug("setting up AutoRestManager.")
     // ask vscode to track 
     this.onDidOpen((open) => this.opened(open));
     this.onDidChangeContent((change) => this.changed(change));
@@ -158,7 +166,7 @@ export class AutoRestManager extends TextDocuments {
     connection.onDidChangeWatchedFiles((changes) => this.changedOnDisk(changes));
 
     this.listen(connection);
-    this.log("AutoRestManager is Listening.")
+    this.verbose("AutoRestManager is Listening.")
   }
 
   private changedOnDisk(changes: DidChangeWatchedFilesParams) {
@@ -168,7 +176,7 @@ export class AutoRestManager extends TextDocuments {
     // changes.changes[0].uri
     for (const each of changes.changes) {
       let docUri = NormalizeUri(each.uri);
-      this.log(`Changed On Disk: ${docUri}`);
+      this.verbose(`Changed On Disk: ${docUri}`);
       let doc = this.trackedFiles.get(docUri);
       if (doc) {
         // we are currently tracking this file already.
@@ -191,7 +199,7 @@ export class AutoRestManager extends TextDocuments {
       return doc;
     }
     // not tracked yet, let's do that now.
-    this.log(`Tracking file: ${documentUri}`);
+    this.verbose(`Tracking file: ${documentUri}`);
 
     const f = new File(documentUri);
     this.trackedFiles.set(documentUri, f);
@@ -209,7 +217,7 @@ export class AutoRestManager extends TextDocuments {
 
     let configFile = await AutoRest.DetectConfigurationFile(new DocumentContext(this, folder), folder);
     if (configFile) {
-      this.log(`Configuration File Selected: ${configFile}`);
+      this.verbose(`Configuration File Selected: ${configFile}`);
 
       folder = path.dirname(configFile);
       // do we have this config already?
@@ -236,6 +244,7 @@ export class AutoRestManager extends TextDocuments {
       // we don't do anything with files that aren't one of our concerned types.
       return;
     }
+
     var documentUri = NormalizeUri(open.document.uri);
     let doc = this.trackedFiles.get(documentUri);
     // are we tracking this file?

@@ -12,14 +12,14 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
   private _autoRest: AutoRest | null;
   private _readyToRun: NodeJS.Timer | null = null;
   private _fileSubscriptions = new Map<File, () => void>();
-  public cancel: () => void = () => { };
+  public cancel: () => boolean = () => true;
 
   private get autorest(): AutoRest {
     if (!this._autoRest) {
       this._autoRest = new AutoRest(this);
       this.Manager.listenForResults(this._autoRest);
       this._autoRest.Finished.Subscribe((autorest, success) => {
-        this.Manager.log(`AutoRest Process Finished with '${success}'.`);
+        this.Manager.verbose(`AutoRest Process Finished with '${success}'.`);
       })
     }
     return this._autoRest || (this._autoRest = new AutoRest(this));
@@ -39,7 +39,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
 
   public Activate(): Promise<void> {
     // tell autorest that it's view needs to be re-created.
-    this.Manager.log(`Invalidating Autorest view.`);
+    this.Manager.verbose(`Invalidating Autorest view.`);
     this.autorest.Invalidate();
     this.cancel();
 
@@ -50,24 +50,27 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
       this._readyToRun = null;
     }
 
-    this.Manager.log(`Queueing up Autorest to process.`);
+    this.Manager.verbose(`Queueing up Autorest to process.`);
 
     return new Promise<void>((r, j) => {
       // queue up the AutoRest restart
       this._readyToRun = setTimeout(() => {
         // clear the 
-        this.Manager.log(`Clearing diagnostics.`);
+        this.Manager.verbose(`Clearing diagnostics.`);
         for (let each of this._fileSubscriptions.keys()) {
           each.ClearDiagnostics();
         }
 
-        this.Manager.log(`Staring AutoRest Process().`);
+        this.Manager.verbose(`Staring AutoRest Process().`);
         var process = this.autorest.Process();
-        process.finish.then(r);
+        process.finish.then(() => {
+          return r();
+        });
         this.cancel = () => {
           process.cancel();
-          this.Manager.log(`Cancelling AutoRest Process().`);
-          this.cancel = () => { }
+          this.Manager.verbose(`Cancelling AutoRest Process().`);
+          this.cancel = () => true;
+          return true;
         };
       }, 25);
     });

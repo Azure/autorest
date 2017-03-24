@@ -30,8 +30,6 @@ interface AutoRestSettings {
   maxNumberOfProblems: number;
 }
 
-
-
 let manager: AutoRestManager = new AutoRestManager(connection);
 
 // After the server has started the client sends an initialize request. The server receives

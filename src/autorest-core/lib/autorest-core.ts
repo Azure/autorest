@@ -116,7 +116,7 @@ export class AutoRest extends EventEmitter {
       cancel = () => view.CancellationTokenSource.cancel();
       if (earlyCancel) {
         this.Finished.Dispatch(false);
-        return;
+        return false;
       }
 
       try {
