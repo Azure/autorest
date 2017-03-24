@@ -23,7 +23,10 @@ export class HttpCall<TReq, TRes> {
                 if ((<any>this.requestDto).validate) {
                     (<any>this.requestDto).validate();
                 }
+
                 var httpRequest = req(this.url);
+                httpRequest.set("Accept", "application/json");
+
                 if (body) {httpRequest.send(body);}
                 httpRequest.end((err: any, res: any) => !err ? resolve(res.body as TRes) : reject(err));
             }
