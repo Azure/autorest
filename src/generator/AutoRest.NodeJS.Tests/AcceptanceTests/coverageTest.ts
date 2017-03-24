@@ -5,7 +5,6 @@
 
 import should = require('should');
 import http = require('http');
-import util = require('util');
 import assert = require('assert');
 import msRest = require('ms-rest');
 var _ = require('underscore')

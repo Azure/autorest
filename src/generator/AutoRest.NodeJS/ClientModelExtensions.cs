@@ -381,7 +381,7 @@ namespace AutoRest.NodeJS
             {
                 if (isRequired)
                 {
-                    return builder.AppendLine("if (!util.isArray({0})) {{", valueReference)
+                    return builder.AppendLine("if (!Array.isArray({0})) {{", valueReference)
                         .Indent()
                           .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
                           escapedValueReference, sequence.Name.ToLower())
@@ -394,7 +394,7 @@ namespace AutoRest.NodeJS
                           .AppendLine("}").ToString();
                 }
 
-                return builder.AppendLine("if (util.isArray({0})) {{", valueReference)
+                return builder.AppendLine("if (Array.isArray({0})) {{", valueReference)
                         .Indent()
                           .AppendLine("for (let {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
                             .Indent()
