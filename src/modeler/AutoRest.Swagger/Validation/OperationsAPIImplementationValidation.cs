@@ -47,10 +47,10 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
         {
             string[] operationPathsEndingWithOperations = paths.Keys.Where(x => x.Trim().ToLower().EndsWith("/operations")).ToArray();
-            string[] resourceProviders = ValidationUtilities.GetResourceProviders(paths);
+            IEnumerable<string> resourceProviders = ValidationUtilities.GetResourceProviders(paths);
 
             // We'll check for only one RP in the swagger as other rules can validate having many RPs in one swagger
-            string resourceProvider = resourceProviders?.Length > 0 ? resourceProviders[0] : null;
+            string resourceProvider = resourceProviders?.ToList().Count > 0 ? resourceProviders.First() : null;
             string operationApiPath = string.Format("/providers/{0}/operations", resourceProvider);
 
             formatParameters = new object[] { };

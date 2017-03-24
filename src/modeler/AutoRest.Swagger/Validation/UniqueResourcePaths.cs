@@ -7,6 +7,7 @@ using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -42,9 +43,9 @@ namespace AutoRest.Swagger.Validation
         /// <returns></returns>
         public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
         {
-            string[] resourceProviders = ValidationUtilities.GetResourceProviders(paths);
+            IEnumerable<string> resourceProviders = ValidationUtilities.GetResourceProviders(paths);
             formatParameters = new [] { string.Join(", ", resourceProviders) };
-            return resourceProviders.Length <= 1;
+            return resourceProviders.ToList().Count <= 1;
         }
     }
 }

@@ -172,13 +172,13 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="paths">Dictionary of paths to look for</param>
         /// <returns>Array of resource providers</returns>
-        public static string[] GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
+        public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
         {
-            string[] resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
-                                        .OfType<Match>()
-                                        .Select(match => match.Groups["resPath"].Value.ToString()))
-                                        .Distinct()
-                                        .ToArray();
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+                                                    .OfType<Match>()
+                                                    .Select(match => match.Groups["resPath"].Value.ToString()))
+                                                    .Distinct()
+                                                    .ToList();
 
             return resourceProviders;
         }
