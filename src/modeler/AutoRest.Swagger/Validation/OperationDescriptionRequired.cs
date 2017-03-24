@@ -17,7 +17,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns><c>true</c> if entity contains description, <c>false</c> otherwise</returns>
         public override bool IsValid(Operation entity, RuleContext context, out object[] formatParameters)
         {
-            formatParameters = new string[] { string.Format("operation '{0}'", entity.OperationId) };
+            formatParameters = new string[] { string.Format("Operation '{0}'", entity.OperationId) };
             return !string.IsNullOrWhiteSpace(entity?.Description);
         }
     }

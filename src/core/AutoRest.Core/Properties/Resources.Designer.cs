@@ -458,7 +458,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This {0} lacks &apos;description&apos; property. Consider adding a &apos;description&apos; element. Accurate description is essential for maintaining reference documentation..
+        ///   Looks up a localized string similar to {0} lacks &apos;description&apos; property. Consider adding a &apos;description&apos; element. Accurate description is essential for maintaining reference documentation..
         /// </summary>
         public static string MissingDescription {
             get {

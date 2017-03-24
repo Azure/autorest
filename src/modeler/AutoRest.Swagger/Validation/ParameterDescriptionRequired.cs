@@ -20,7 +20,7 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid(SwaggerParameter entity, RuleContext context, out object[] formatParameters)
         {
             formatParameters = new string[] { string.Format(ParameterTypeFormatter, entity.Name) };
-            return !string.IsNullOrWhiteSpace(entity?.Description) || !string.IsNullOrWhiteSpace(entity.Reference);
+            return !string.IsNullOrWhiteSpace(entity.Description);
         }
     }
 }

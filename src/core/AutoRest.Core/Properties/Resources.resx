@@ -283,7 +283,7 @@ Modelers:
     <value>'{0}' is not a known format.</value>
   </data>
   <data name="MissingDescription" xml:space="preserve">
-    <value>This {0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
+    <value>{0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
   </data>
   <data name="MissingRequiredProperty" xml:space="preserve">
     <value>'{0}' is supposedly required, but no such property exists.</value>
