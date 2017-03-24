@@ -26,7 +26,7 @@ export interface YAMLNodeWithPath {
 
 /**
  * Parsing
- */
+*/
 export function ParseToAst(rawYaml: string): YAMLNode {
   return yamlAst.safeLoad(rawYaml, null) as YAMLNode;
 }

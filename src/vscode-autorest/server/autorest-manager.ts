@@ -303,34 +303,36 @@ export class AutoRestManager extends TextDocuments {
 
     autorest.Information.Subscribe(async (instance, args) => {
       // information messages come from autorest and represent a document issue of some kind
-
-      for await (const each of args.Range) {
-        // get the file reference first
-        let file = this.trackedFiles.get(each.document);
-        if (file) {
-          file.PushDiagnostic({
-            severity: DiagnosticSeverity.Information,
-            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-            message: args.Text,
-            source: args.Plugin
-          });
+      if (args.Range) {
+        for await (const each of args.Range) {
+          // get the file reference first
+          let file = this.trackedFiles.get(each.document);
+          if (file) {
+            file.PushDiagnostic({
+              severity: DiagnosticSeverity.Information,
+              range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+              message: args.Text,
+              source: args.Plugin
+            });
+          }
         }
       }
     });
 
     autorest.Warning.Subscribe(async (instance, args) => {
       // information messages come from autorest and represent a document issue of some kind
-
-      for await (const each of args.Range) {
-        // get the file reference first
-        let file = this.trackedFiles.get(each.document);
-        if (file) {
-          file.PushDiagnostic({
-            severity: DiagnosticSeverity.Warning,
-            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-            message: args.Text,
-            source: args.Plugin
-          });
+      if (args.Range) {
+        for await (const each of args.Range) {
+          // get the file reference first
+          let file = this.trackedFiles.get(each.document);
+          if (file) {
+            file.PushDiagnostic({
+              severity: DiagnosticSeverity.Warning,
+              range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+              message: args.Text,
+              source: args.Plugin
+            });
+          }
         }
       }
     });
@@ -338,16 +340,18 @@ export class AutoRestManager extends TextDocuments {
     autorest.Error.Subscribe(async (instance, args) => {
       // information messages come from autorest and represent a document issue of some kind
 
-      for await (const each of args.Range) {
-        // get the file reference first
-        let file = this.trackedFiles.get(each.document);
-        if (file) {
-          file.PushDiagnostic({
-            severity: DiagnosticSeverity.Error,
-            range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
-            message: args.Text,
-            source: args.Plugin
-          });
+      if (args.Range) {
+        for await (const each of args.Range) {
+          // get the file reference first
+          let file = this.trackedFiles.get(each.document);
+          if (file) {
+            file.PushDiagnostic({
+              severity: DiagnosticSeverity.Error,
+              range: Range.create(Position.create(each.start.line - 1, each.start.column), Position.create(each.end.line - 1, each.end.column)),
+              message: args.Text,
+              source: args.Plugin
+            });
+          }
         }
       }
     });

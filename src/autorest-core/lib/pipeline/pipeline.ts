@@ -20,6 +20,7 @@ import {
 import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
+import { IFileSystem } from "../file-system";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -46,7 +47,7 @@ class OutstandingTaskAwaiter {
   }
 }
 
-export async function RunPipeline(config: ConfigurationView): Promise<void> {
+export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const outstandingTaskAwaiter = new OutstandingTaskAwaiter();
   outstandingTaskAwaiter.Enter();
 
@@ -55,9 +56,8 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
 
   config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
 
-  const uriScope = (uri: string) => inputs.indexOf(uri) !== -1 || /^http/.test(uri) || true; // TODO: unlock further URIs here
   const swaggers = await LoadLiterateSwaggers(
-    config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
+    config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThroughFileSystem(fileSystem),
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
 

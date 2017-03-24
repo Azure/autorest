@@ -37,9 +37,10 @@ export class AutoRest extends EventEmitter {
    * @param rootUri The rootUri of the workspace. Is null if no workspace is open.
    * @param fileSystem The implementation of the filesystem to load and save files from the host application.
    */
-  public constructor(private fileSystem?: IFileSystem, private configFileUri?: string) {
+  public constructor(private fileSystem?: IFileSystem, public configFileUri?: string) {
     super();
   }
+
 
   /**
    *  Given a file's content, does this represent a swagger file of some sort?
@@ -122,7 +123,7 @@ export class AutoRest extends EventEmitter {
       try {
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
         this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` })
-        await RunPipeline(await this.view);
+        await RunPipeline(await this.view, <IFileSystem>this.fileSystem);
 
         // finished cleanly
         this.Finished.Dispatch(true);

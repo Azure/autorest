@@ -27,7 +27,7 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
 
   constructor(public Manager: AutoRestManager, public RootUri: string, public configurationFile?: string) {
     super();
-    this.RootUri = NormalizeUri(this.RootUri);
+    this.RootUri = NormalizeUri(this.RootUri + "/");
   }
 
   public Track(file: File) {
@@ -37,10 +37,14 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
   }
 
 
-  public Activate(): Promise<void> {
+  public async Activate(): Promise<void> {
     // tell autorest that it's view needs to be re-created.
     this.Manager.verbose(`Invalidating Autorest view.`);
     this.autorest.Invalidate();
+
+    // reaquire the config file.
+    this.autorest.configFileUri = await AutoRest.DetectConfigurationFile(this, this.RootUri);
+
     this.cancel();
 
     // if autorest is about to restart the work, stop that
@@ -52,6 +56,10 @@ export class DocumentContext extends EventEmitter implements IFileSystem {
 
     this.Manager.verbose(`Queueing up Autorest to process.`);
 
+    return await this.RunAutoRest();
+  }
+
+  private RunAutoRest(): Promise<void> {
     return new Promise<void>((r, j) => {
       // queue up the AutoRest restart
       this._readyToRun = setTimeout(() => {
