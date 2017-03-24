@@ -14,7 +14,8 @@ namespace AutoRest.Swagger.Model.Utilities
     {
         private const string XmsPageable = "x-ms-pageable";
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        
+        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
+
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
@@ -75,7 +76,7 @@ namespace AutoRest.Swagger.Model.Utilities
         
         public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
         {
-            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
+            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair => pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
         }
 
         public static IEnumerable<string> GetResponseModelDefinitions(ServiceDefinition serviceDefinition)
@@ -164,6 +165,22 @@ namespace AutoRest.Swagger.Model.Utilities
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Returns array of resource providers
+        /// </summary>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>Array of resource providers</returns>
+        public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
+        {
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+                                                    .OfType<Match>()
+                                                    .Select(match => match.Groups["resPath"].Value.ToString()))
+                                                    .Distinct()
+                                                    .ToList();
+
+            return resourceProviders;
         }
     }
 }

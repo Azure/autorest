@@ -566,7 +566,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations API must be implemented for the service..
+        ///   Looks up a localized string similar to Operations API must be implemented for &apos;{0}&apos;..
         /// </summary>
         public static string OperationsAPINotImplemented {
             get {
