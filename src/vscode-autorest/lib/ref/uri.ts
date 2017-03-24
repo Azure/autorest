@@ -9,7 +9,8 @@
 import * as promisify from "pify";
 import { Readable } from "stream";
 import { parse } from "url";
-import { sep } from "path";
+import { sep, extname } from "path";
+
 const stripBom: (text: string) => string = require("strip-bom");
 const getUri = require("get-uri");
 const getUriAsync: (uri: string) => Promise<Readable> = promisify(getUri);
@@ -92,4 +93,12 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
     throw "'pathOrUri' was detected to be relative so 'baseUri' is required";
   }
   return NormalizeUri(new URI(pathOrUri).absoluteTo(baseUri).toString());
+}
+
+export function GetExtension(name: string) {
+  let ext = extname(name);
+  if (ext) {
+    return ext.substr(1).toLowerCase();
+  }
+  return ext;
 }

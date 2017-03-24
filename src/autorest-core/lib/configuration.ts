@@ -265,15 +265,17 @@ export class Configuration {
         }
       }
 
-      // walk up
       if (configFiles.size > 0) {
         // it's the readme.md or the shortest filename.
-        let found =
+        const found =
           From<string>(configFiles.keys()).FirstOrDefault(each => each.toLowerCase().endsWith("/" + Constants.DefaultConfiguratiion)) ||
           From<string>(configFiles.keys()).OrderBy(each => each.length).First();
 
         return found;
       }
+
+      // walk up
+      uriToConfigFileOrWorkingFolder = ResolveUri(uriToConfigFileOrWorkingFolder, "..");
     }
 
     return null

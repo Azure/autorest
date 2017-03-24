@@ -11,6 +11,67 @@ disable-validation: false
 
 ## Implicit plugins
 
+``` yaml 
+swagger-loader:
+  consumes: swagger-file
+  produces: swagger-document
+
+# when process == merge ?
+swagger-composer:
+  consumes: swagger-document
+  produces: swagger-document
+
+azure-validator:
+  consumes: swagger-document
+  produces: nothing
+
+model-validator:
+  consumes: swagger-document
+  produces: nothing
+
+modeler:
+  consumes: swagger-document
+  produces: code-model-v1
+
+csharp:
+  consumes: code-model-v1
+  produces: c# source files
+
+csharp-simplifier:
+  consumes: c# source files
+  produces: c# source files
+  priority:
+    last: true
+
+csharp-compiler:
+  consumes: c# source files
+  produces: dotnet-binaries
+
+output-artifact:
+  - swagger-document
+  - c# source files
+  - code-model
+
+
+# csharp
+csharp:
+  output-artifact: 
+    - c# source files
+  
+
+## my own file
+output-artifact:
+  - swagger-document
+
+csharp:
+ruby:
+python:
+
+
+```
+
+
+
 ### Parser
 ``` yaml
 swagger-parser:
@@ -56,14 +117,39 @@ produces: C# Source Files
 ### csharp simplifier
 The C# simplifier cleans up c# code.
 
-``` yaml
+``` yaml (maybe should end up in package.json)
+plugin-name: csharp-simplifier
+consumes: C# Source Files
+produces: C# Source Files
 priority:
   first: false
   last: true
   before: <plugin-name>
   after: <plugin-name>
-
-consumes: C# Source Files
-produces: C# Source Files
+  priority: 100 
 
 ```
+
+``` yaml
+fx-cop: 
+  after: csharp-simplifier
+  
+csharp-simplifier:
+
+```
+
+A swagger -> c# 
+B c# -> c#
+
+C c# -> c#
+
+D c# -> c#
+
+
+XXX => YYY => ZZZ
+
+           => AAAA
+
+c# => binaries => signing
+
+c# => binaries => signing 

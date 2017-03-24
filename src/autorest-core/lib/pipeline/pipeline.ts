@@ -53,11 +53,15 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
   // load Swaggers
   let inputs = From(config.inputFileUris).ToArray();
 
+  config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
+
   const uriScope = (uri: string) => inputs.indexOf(uri) !== -1 || /^http/.test(uri) || true; // TODO: unlock further URIs here
   const swaggers = await LoadLiterateSwaggers(
     config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));
+
+  config.Debug.Dispatch({ Text: `Loading Literate Swaggers` });
 
   // compose Swaggers
   const swagger = config.__specials.infoSectionOverride || swaggers.length !== 1
@@ -65,6 +69,7 @@ export async function RunPipeline(config: ConfigurationView): Promise<void> {
     : swaggers[0];
   const rawSwagger = await swagger.ReadObject<any>();
 
+  config.Debug.Dispatch({ Text: `Composing Swaggers. ` });
   const result: { [name: string]: DataPromise } = {
     componentSwaggers: MultiPromiseUtility.list(swaggers),
     swagger: MultiPromiseUtility.single(swagger)

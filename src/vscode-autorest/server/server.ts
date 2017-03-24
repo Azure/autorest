@@ -16,6 +16,9 @@ import {
 import { AutoRest, IFileSystem, Installer } from "autorest";
 import { DocumentContext } from "./file-system";
 
+// Create a connection for the server. The connection uses Node's IPC as a transport
+export const connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
+
 // The settings interface describe the server relevant settings part
 interface Settings {
   autorest: AutoRestSettings;
@@ -27,8 +30,8 @@ interface AutoRestSettings {
   maxNumberOfProblems: number;
 }
 
-// Create a connection for the server. The connection uses Node's IPC as a transport
-let connection: IConnection = createConnection(new IPCMessageReader(process), new IPCMessageWriter(process));
+
+
 let manager: AutoRestManager = new AutoRestManager(connection);
 
 // After the server has started the client sends an initialize request. The server receives

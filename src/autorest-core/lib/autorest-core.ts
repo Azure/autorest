@@ -46,18 +46,39 @@ export class AutoRest extends EventEmitter {
    *
    * @param content - the file content to evaluate
    */
-  public static async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
+  public async IsSwaggerFile(documentType: DocumentType, content: string): Promise<boolean> {
     // this checks to see if the document is a 
     return true;
   }
 
-  public static async IsConfigurationFile(content: string): Promise<boolean> {
+  public async IsConfigurationFile(content: string): Promise<boolean> {
     // this checks to see if the document is an autorest markdown configuration file
     return content.indexOf(Constants.MagicString) > -1;
   }
 
-  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath: string): Promise<string | null> {
-    return null;
+  public static IsConfigurationExtension(extension: string): boolean {
+    switch (extension) {
+      case "markdown":
+      case "md":
+        return true;
+    }
+    return false;
+  }
+
+  public static IsSwaggerExtension(extension: string): boolean {
+    switch (extension) {
+      case "yaml":
+      case "yml":
+      case "markdown":
+      case "md":
+      case "json":
+        return true;
+    }
+    return false;
+  }
+
+  public static async DetectConfigurationFile(fileSystem: IFileSystem, documentPath?: string): Promise<string | null> {
+    return Configuration.DetectConfigurationFile(fileSystem, (documentPath || null));
   }
 
   public Invalidate() {
@@ -100,6 +121,7 @@ export class AutoRest extends EventEmitter {
 
       try {
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
+        this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` })
         await RunPipeline(await this.view);
 
         // finished cleanly
@@ -109,6 +131,7 @@ export class AutoRest extends EventEmitter {
       catch (e) {
         console.error(e);
         // finished not cleanly
+        this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` })
         this.Finished.Dispatch(false);
         return false;
       }
