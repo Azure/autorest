@@ -8,19 +8,22 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("sawshark")]
+    [Newtonsoft.Json.JsonObject("sawshark")]
     public partial class Sawshark : Shark
     {
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark() { }
+        public Sawshark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -48,4 +57,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         }
     }
 }
-

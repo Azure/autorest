@@ -10,10 +10,12 @@
 
 package fixtures.bodyfile;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -24,6 +26,9 @@ public interface Files {
     /**
      * Get file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the InputStream object if successful.
      */
     InputStream getFile();
@@ -32,13 +37,15 @@ public interface Files {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     Observable<InputStream> getFileAsync();
@@ -46,6 +53,7 @@ public interface Files {
     /**
      * Get file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     Observable<ServiceResponse<InputStream>> getFileWithServiceResponseAsync();
@@ -53,6 +61,9 @@ public interface Files {
     /**
      * Get a large file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the InputStream object if successful.
      */
     InputStream getFileLarge();
@@ -61,13 +72,15 @@ public interface Files {
      * Get a large file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> getFileLargeAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get a large file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     Observable<InputStream> getFileLargeAsync();
@@ -75,6 +88,7 @@ public interface Files {
     /**
      * Get a large file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     Observable<ServiceResponse<InputStream>> getFileLargeWithServiceResponseAsync();
@@ -82,6 +96,9 @@ public interface Files {
     /**
      * Get empty file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the InputStream object if successful.
      */
     InputStream getEmptyFile();
@@ -90,13 +107,15 @@ public interface Files {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceFuture<InputStream> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get empty file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     Observable<InputStream> getEmptyFileAsync();
@@ -104,6 +123,7 @@ public interface Files {
     /**
      * Get empty file.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the InputStream object
      */
     Observable<ServiceResponse<InputStream>> getEmptyFileWithServiceResponseAsync();

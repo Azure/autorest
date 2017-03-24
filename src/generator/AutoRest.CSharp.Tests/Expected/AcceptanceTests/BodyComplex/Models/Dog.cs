@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Dog class.
         /// </summary>
-        public Dog() { }
+        public Dog()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Dog class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
             : base(id, name)
         {
             Food = food;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -35,4 +44,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
-

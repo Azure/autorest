@@ -20,7 +20,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet() { }
+        public Pet()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Pet class.
@@ -36,7 +39,13 @@ namespace Petstore.Models
             PhotoUrls = photoUrls;
             Tags = tags;
             Status = status;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the id of the pet.
@@ -181,4 +190,3 @@ namespace Petstore.Models
         }
     }
 }
-

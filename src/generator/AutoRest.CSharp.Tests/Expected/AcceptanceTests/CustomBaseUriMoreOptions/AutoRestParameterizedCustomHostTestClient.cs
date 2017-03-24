@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestParameterizedCustomHostTestClient(params System.Net.Http.DelegatingHandler[] handlers) : base(handlers)
+        public AutoRestParameterizedCustomHostTestClient(params DelegatingHandler[] handlers) : base(handlers)
         {
             Initialize();
         }
@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public AutoRestParameterizedCustomHostTestClient(System.Net.Http.HttpClientHandler rootHandler, params System.Net.Http.DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        public AutoRestParameterizedCustomHostTestClient(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             Initialize();
         }
@@ -92,11 +92,11 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             DnsSuffix = "host";
             SerializationSettings = new JsonSerializerSettings
             {
-                Formatting = Formatting.Indented,
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new  List<JsonConverter>
                     {
@@ -105,10 +105,10 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
             };
             DeserializationSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Ignore,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc,
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
                 ContractResolver = new ReadOnlyJsonContractResolver(),
                 Converters = new List<JsonConverter>
                     {
@@ -119,4 +119,3 @@ namespace Fixtures.AcceptanceTestsCustomBaseUriMoreOptions
         }
     }
 }
-

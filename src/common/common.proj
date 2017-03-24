@@ -1,0 +1,15 @@
+<Project ToolsVersion="15.0">
+  <PropertyGroup Condition="$(Common) == '*Undefined*' OR $(Common) == '' " >
+    <VersionPrefix>1.0.1</VersionPrefix>
+    <Common>$(MsBuildThisFileDirectory)</Common>
+    <GenerateFullPaths>true</GenerateFullPaths>
+    <!-- <SolutionDir>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory),AutoRest.sln))/</SolutionDir> -->
+    <Common>$(MsBuildThisFileDirectory)</Common>
+    <SolutionDir>$(Common)../../</SolutionDir>
+  </PropertyGroup>
+
+  <Target Name="Nuke" AfterTargets="clean" >
+    <Delete Files="$(BaseOutputPath)**;$(BaseIntermediateOutputPath)razor/**;$(BaseIntermediateOutputPath)Debug/**;$(BaseIntermediateOutputPath)Release/**" />
+    <RemoveDir Directories="$(BaseOutputPath);$(BaseIntermediateOutputPath)/Debug;$(BaseIntermediateOutputPath)/Release" />
+  </Target>
+</Project>

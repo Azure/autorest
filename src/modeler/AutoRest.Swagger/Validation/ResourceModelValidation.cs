@@ -3,7 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
 
@@ -17,6 +17,16 @@ namespace AutoRest.Swagger.Validation
     public class ResourceModelValidation: TypedRule<Dictionary<string, Schema>>
     {
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3001";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
@@ -27,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// Validates the structure of Resource Model

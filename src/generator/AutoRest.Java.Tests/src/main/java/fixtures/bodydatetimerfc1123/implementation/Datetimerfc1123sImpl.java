@@ -14,8 +14,8 @@ import retrofit2.Retrofit;
 import fixtures.bodydatetimerfc1123.Datetimerfc1123s;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
@@ -96,6 +96,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getNull() {
@@ -106,15 +109,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get null datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getNullWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get null datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getNullAsync() {
@@ -129,6 +134,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get null datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getNullWithServiceResponseAsync() {
@@ -161,6 +167,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getInvalid() {
@@ -171,15 +180,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get invalid datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getInvalidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get invalid datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getInvalidAsync() {
@@ -194,6 +205,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get invalid datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getInvalidWithServiceResponseAsync() {
@@ -226,6 +238,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getOverflow() {
@@ -236,15 +251,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get overflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getOverflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get overflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getOverflowAsync() {
@@ -259,6 +276,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get overflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getOverflowWithServiceResponseAsync() {
@@ -291,6 +309,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getUnderflow() {
@@ -301,15 +322,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get underflow datetime value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUnderflowWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get underflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getUnderflowAsync() {
@@ -324,6 +347,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get underflow datetime value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUnderflowWithServiceResponseAsync() {
@@ -357,6 +381,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putUtcMaxDateTime(DateTime datetimeBody) {
         putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
@@ -367,16 +394,18 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+    public ServiceFuture<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putUtcMaxDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putUtcMaxDateTimeAsync(DateTime datetimeBody) {
@@ -392,6 +421,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Put max datetime value Fri, 31 Dec 9999 23:59:59 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putUtcMaxDateTimeWithServiceResponseAsync(DateTime datetimeBody) {
@@ -423,6 +453,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getUtcLowercaseMaxDateTime() {
@@ -433,15 +466,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUtcLowercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getUtcLowercaseMaxDateTimeAsync() {
@@ -456,6 +491,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value fri, 31 dec 9999 23:59:59 gmt.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcLowercaseMaxDateTimeWithServiceResponseAsync() {
@@ -488,6 +524,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getUtcUppercaseMaxDateTime() {
@@ -498,15 +537,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUtcUppercaseMaxDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getUtcUppercaseMaxDateTimeAsync() {
@@ -521,6 +562,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get max datetime value FRI, 31 DEC 9999 23:59:59 GMT.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcUppercaseMaxDateTimeWithServiceResponseAsync() {
@@ -554,6 +596,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putUtcMinDateTime(DateTime datetimeBody) {
         putUtcMinDateTimeWithServiceResponseAsync(datetimeBody).toBlocking().single().body();
@@ -564,16 +609,18 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      *
      * @param datetimeBody the DateTimeRfc1123 value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
+    public ServiceFuture<Void> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putUtcMinDateTimeWithServiceResponseAsync(datetimeBody), serviceCallback);
     }
 
     /**
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putUtcMinDateTimeAsync(DateTime datetimeBody) {
@@ -589,6 +636,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Put min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param datetimeBody the DateTimeRfc1123 value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putUtcMinDateTimeWithServiceResponseAsync(DateTime datetimeBody) {
@@ -620,6 +668,9 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DateTime object if successful.
      */
     public DateTime getUtcMinDateTime() {
@@ -630,15 +681,17 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
-        return ServiceCall.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<DateTime> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+        return ServiceFuture.fromResponse(getUtcMinDateTimeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<DateTime> getUtcMinDateTimeAsync() {
@@ -653,6 +706,7 @@ public class Datetimerfc1123sImpl implements Datetimerfc1123s {
     /**
      * Get min datetime value Mon, 1 Jan 0001 00:00:00 GMT.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DateTime object
      */
     public Observable<ServiceResponse<DateTime>> getUtcMinDateTimeWithServiceResponseAsync() {

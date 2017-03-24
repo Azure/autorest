@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -94,4 +94,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         Task<AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroupInner firstParameterGroup = default(FirstParameterGroupInner), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

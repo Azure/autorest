@@ -6,11 +6,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
 using System.Text.RegularExpressions;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -19,9 +19,11 @@ namespace AutoRest.Swagger.Model
     /// http://json.schemastore.org/swagger-2.0
     /// Swagger Object - https://github.com/wordnik/swagger-spec/blob/master/versions/2.0.md#swagger-object- 
     /// </summary>
-    [Serializable]
     public class ServiceDefinition : SpecObject
     {
+        // as long as AAAS does not provide that
+        public static ServiceDefinition Instance { get; set; }
+
         public ServiceDefinition()
         {
             Definitions = new Dictionary<string, Schema>();
@@ -79,29 +81,41 @@ namespace AutoRest.Swagger.Model
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [Rule(typeof(UniqueResourcePaths))]
+        [Rule(typeof(ListOperationNamingWarning))]
+        [Rule(typeof(ListByOperationsValidation))]
+        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
         [Rule(typeof(PutGetPatchResponseValidation))]
         [Rule(typeof(OperationsAPIImplementationValidation))]
+        [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(BodyTopLevelProperties))]
         [CollectionRule(typeof(HttpVerbValidation))]
-        [CollectionRule(typeof(DeleteMustHaveEmptyRequestBody))]
+        [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
+        [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
         /// <summary>
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         [JsonProperty("x-ms-paths")]
+        [Rule(typeof(ListOperationNamingWarning))]
+        [Rule(typeof(CollectionObjectPropertiesNamingValidation))]
+        [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(XmsPathsMustOverloadPaths))]
+        [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
         public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
-        /// <summary>
+        /// </summary>
         [Rule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(TrackedResourceValidation))]
+        [Rule(typeof(TrackedResourcePatchOperationValidation))]
+        [Rule(typeof(TrackedResourceGetOperationValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
+        [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
@@ -143,6 +157,11 @@ namespace AutoRest.Swagger.Model
         /// Additional external documentation
         /// </summary>
         public ExternalDoc ExternalDocs { get; set; }
+
+        /// <summary>
+        /// Path to this Swagger.
+        /// </summary>
+        internal Uri FilePath { get; set; }
 
         /// <summary>
         /// Compare a modified document node (this) to a previous one and look for breaking as well as non-breaking changes.
@@ -444,7 +463,7 @@ namespace AutoRest.Swagger.Model
 
                 if (!versionChanged && !integers)
                 {
-                    versionChanged = !oldVer.ToLower(CultureInfo.CurrentCulture).Equals(newVer.ToLower(CultureInfo.CurrentCulture));
+                    versionChanged = !oldVer.ToLower().Equals(newVer.ToLower());
                 }
 
                 context.Strict = !versionChanged;

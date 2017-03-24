@@ -8,19 +8,22 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("salmon")]
+    [Newtonsoft.Json.JsonObject("salmon")]
     public partial class Salmon : Fish
     {
         /// <summary>
         /// Initializes a new instance of the Salmon class.
         /// </summary>
-        public Salmon() { }
+        public Salmon()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Salmon class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Location = location;
             Iswild = iswild;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -54,4 +63,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         }
     }
 }
-

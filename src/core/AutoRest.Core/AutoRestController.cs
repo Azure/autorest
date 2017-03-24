@@ -7,9 +7,9 @@ using AutoRest.Core.Model;
 using AutoRest.Core.Extensibility;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Core.Utilities;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Core
@@ -26,8 +26,7 @@ namespace AutoRest.Core
         {
             get
             {
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo((typeof(Settings)).Assembly.Location);
-                return fvi.FileVersion;
+                return typeof(Settings).GetAssembly().GetName().Version.ToString();
             }
         }
 
@@ -56,12 +55,6 @@ namespace AutoRest.Core
                     // generate model from swagger 
                     codeModel = modeler.Build();
 
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.AfterModelCreation, codeModel);
-
-                    // After swagger Parser
-                    codeModel = RunExtensions(Trigger.BeforeLoadingLanguageSpecificModel, codeModel);
-
                     if (validationErrorFound)
                     {
                         Logger.Instance.Log(Category.Error, "Errors found during Swagger validation");
@@ -74,8 +67,13 @@ namespace AutoRest.Core
                 throw ErrorManager.CreateError(Resources.ErrorGeneratingClientModel, exception);
             }
 
-            var plugin = ExtensionsLoader.GetPlugin();
+            if (Settings.Instance.JsonValidationMessages)
+            {
+                return; // no code gen in Json validation mode
+            }
 
+            var plugin = ExtensionsLoader.GetPlugin();
+            
             Console.ResetColor();
             Console.WriteLine(plugin.CodeGenerator.UsageInstructions);
 
@@ -92,19 +90,9 @@ namespace AutoRest.Core
                     // load model into language-specific code model
                     codeModel = plugin.Serializer.Load(modelAsJson);
 
-                    // we've loaded the model, run the extensions for after it's loaded
-                    codeModel = RunExtensions(Trigger.AfterLoadingLanguageSpecificModel, codeModel);
-     
                     // apply language-specific tranformation (more than just language-specific types)
                     // used to be called "NormalizeClientModel" . 
                     codeModel = plugin.Transformer.TransformCodeModel(codeModel);
-
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.AfterLanguageSpecificTransform, codeModel);
-
-
-                    // next set of extensions
-                    codeModel = RunExtensions(Trigger.BeforeGeneratingCode, codeModel);
 
                     // Generate code from CodeModel.
                     plugin.CodeGenerator.Generate(codeModel).GetAwaiter().GetResult();
@@ -114,16 +102,6 @@ namespace AutoRest.Core
             {
                 throw ErrorManager.CreateError(Resources.ErrorSavingGeneratedCode, exception);
             }
-        }
-
-        public static CodeModel RunExtensions(Trigger trigger, CodeModel codeModel)
-        {
-            /*
-             foreach (var extension in extensions.Where(each => each.trigger == trugger).SortBy(each => each.Priority))
-                 codeModel = extension.Transform(codeModel);
-            */
-
-            return codeModel;
         }
 
         /// <summary>
@@ -140,9 +118,7 @@ namespace AutoRest.Core
 
             try
             {
-                IEnumerable<ComparisonMessage> messages = modeler.Compare();
-
-                foreach (var message in messages)
+                foreach (var message in modeler.Compare())
                 {
                     Logger.Instance.Log(message);
                 }

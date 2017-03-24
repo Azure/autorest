@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.DictionaryWrapper;
+import fixtures.bodycomplex.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -24,6 +26,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DictionaryWrapper object if successful.
      */
     DictionaryWrapper getValid();
@@ -32,13 +37,15 @@ public interface Dictionarys {
      * Get complex types with dictionary property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<DictionaryWrapper> getValidAsync();
@@ -46,6 +53,7 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<ServiceResponse<DictionaryWrapper>> getValidWithServiceResponseAsync();
@@ -54,6 +62,9 @@ public interface Dictionarys {
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putValid(DictionaryWrapper complexBody);
 
@@ -62,14 +73,16 @@ public interface Dictionarys {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putValidAsync(DictionaryWrapper complexBody);
@@ -78,6 +91,7 @@ public interface Dictionarys {
      * Put complex types with dictionary property.
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(DictionaryWrapper complexBody);
@@ -85,6 +99,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DictionaryWrapper object if successful.
      */
     DictionaryWrapper getEmpty();
@@ -93,13 +110,15 @@ public interface Dictionarys {
      * Get complex types with dictionary property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<DictionaryWrapper> getEmptyAsync();
@@ -107,6 +126,7 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is empty.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<ServiceResponse<DictionaryWrapper>> getEmptyWithServiceResponseAsync();
@@ -115,6 +135,9 @@ public interface Dictionarys {
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putEmpty(DictionaryWrapper complexBody);
 
@@ -123,14 +146,16 @@ public interface Dictionarys {
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putEmptyAsync(DictionaryWrapper complexBody);
@@ -139,6 +164,7 @@ public interface Dictionarys {
      * Put complex types with dictionary property which is empty.
      *
      * @param complexBody Please put an empty dictionary
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putEmptyWithServiceResponseAsync(DictionaryWrapper complexBody);
@@ -146,6 +172,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DictionaryWrapper object if successful.
      */
     DictionaryWrapper getNull();
@@ -154,13 +183,15 @@ public interface Dictionarys {
      * Get complex types with dictionary property which is null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<DictionaryWrapper> getNullAsync();
@@ -168,6 +199,7 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property which is null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<ServiceResponse<DictionaryWrapper>> getNullWithServiceResponseAsync();
@@ -175,6 +207,9 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the DictionaryWrapper object if successful.
      */
     DictionaryWrapper getNotProvided();
@@ -183,13 +218,15 @@ public interface Dictionarys {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceFuture<DictionaryWrapper> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<DictionaryWrapper> getNotProvidedAsync();
@@ -197,6 +234,7 @@ public interface Dictionarys {
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the DictionaryWrapper object
      */
     Observable<ServiceResponse<DictionaryWrapper>> getNotProvidedWithServiceResponseAsync();

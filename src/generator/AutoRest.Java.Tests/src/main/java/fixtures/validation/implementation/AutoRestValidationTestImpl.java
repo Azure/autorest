@@ -17,8 +17,8 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
@@ -177,6 +177,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Product object if successful.
      */
     public Product validationOfMethodParameters(String resourceGroupName, int id) {
@@ -189,10 +192,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+    public ServiceFuture<Product> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(validationOfMethodParametersWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -200,6 +204,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<Product> validationOfMethodParametersAsync(String resourceGroupName, int id) {
@@ -216,6 +221,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> validationOfMethodParametersWithServiceResponseAsync(String resourceGroupName, int id) {
@@ -254,6 +260,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id) {
@@ -266,10 +275,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
+    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id), serviceCallback);
     }
 
     /**
@@ -277,6 +287,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<Product> validationOfBodyAsync(String resourceGroupName, int id) {
@@ -293,6 +304,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> validationOfBodyWithServiceResponseAsync(String resourceGroupName, int id) {
@@ -326,6 +338,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Product object if successful.
      */
     public Product validationOfBody(String resourceGroupName, int id, Product body) {
@@ -339,10 +354,11 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
+    public ServiceFuture<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(validationOfBodyWithServiceResponseAsync(resourceGroupName, id, body), serviceCallback);
     }
 
     /**
@@ -351,6 +367,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<Product> validationOfBodyAsync(String resourceGroupName, int id, Product body) {
@@ -368,6 +385,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> validationOfBodyWithServiceResponseAsync(String resourceGroupName, int id, Product body) {
@@ -404,6 +422,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getWithConstantInPath() {
         getWithConstantInPathWithServiceResponseAsync().toBlocking().single().body();
@@ -412,14 +433,16 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getWithConstantInPathAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getWithConstantInPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getWithConstantInPathAsync() {
@@ -433,6 +456,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getWithConstantInPathWithServiceResponseAsync() {
@@ -459,6 +483,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody() {
@@ -468,14 +495,16 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Product> postWithConstantInBodyAsync(final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(postWithConstantInBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<Product> postWithConstantInBodyAsync() {
@@ -489,6 +518,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
 
     /**
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> postWithConstantInBodyWithServiceResponseAsync() {
@@ -511,6 +541,9 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Product object if successful.
      */
     public Product postWithConstantInBody(Product body) {
@@ -521,15 +554,17 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
      *
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
-        return ServiceCall.fromResponse(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Product> postWithConstantInBodyAsync(Product body, final ServiceCallback<Product> serviceCallback) {
+        return ServiceFuture.fromResponse(postWithConstantInBodyWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
      *
      * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<Product> postWithConstantInBodyAsync(Product body) {
@@ -544,6 +579,7 @@ public class AutoRestValidationTestImpl extends ServiceClient implements AutoRes
     /**
      *
      * @param body the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Product object
      */
     public Observable<ServiceResponse<Product>> postWithConstantInBodyWithServiceResponseAsync(Product body) {

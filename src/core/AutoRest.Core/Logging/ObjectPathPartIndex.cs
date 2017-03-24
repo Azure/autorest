@@ -17,9 +17,11 @@ namespace AutoRest.Core.Logging
 
         public int Index { get; }
 
-        public override string XPath => $"[{Index + 1}]";
+        public override string JsonPointer => $"/{Index + 1}";
 
-        public override string ReadablePath => XPath;
+        public override string JsonPath => $"[{Index + 1}]";
+
+        public override string ReadablePath => JsonPath;
 
         public override YamlNode SelectNode(ref YamlNode node)
         {

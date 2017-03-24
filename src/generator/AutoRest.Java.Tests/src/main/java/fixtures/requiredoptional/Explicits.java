@@ -10,19 +10,21 @@
 
 package fixtures.requiredoptional;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
 import fixtures.requiredoptional.models.ClassWrapper;
 import fixtures.requiredoptional.models.Error;
+import fixtures.requiredoptional.models.ErrorException;
 import fixtures.requiredoptional.models.IntOptionalWrapper;
 import fixtures.requiredoptional.models.IntWrapper;
 import fixtures.requiredoptional.models.Product;
 import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
+import java.io.IOException;
 import java.util.List;
 import rx.Observable;
 
@@ -35,6 +37,9 @@ public interface Explicits {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredIntegerParameter(int bodyParameter);
@@ -44,14 +49,16 @@ public interface Explicits {
      *
      * @param bodyParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredIntegerParameterAsync(int bodyParameter);
@@ -60,6 +67,7 @@ public interface Explicits {
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredIntegerParameterWithServiceResponseAsync(int bodyParameter);
@@ -67,6 +75,9 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalIntegerParameter();
 
@@ -74,13 +85,15 @@ public interface Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerParameterAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalIntegerParameterAsync();
@@ -88,6 +101,7 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalIntegerParameterWithServiceResponseAsync();
@@ -95,6 +109,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalIntegerParameter(Integer bodyParameter);
 
@@ -103,14 +120,16 @@ public interface Explicits {
      *
      * @param bodyParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalIntegerParameterAsync(Integer bodyParameter);
@@ -119,6 +138,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put null.
      *
      * @param bodyParameter the Integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalIntegerParameterWithServiceResponseAsync(Integer bodyParameter);
@@ -127,6 +147,9 @@ public interface Explicits {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredIntegerProperty(IntWrapper bodyParameter);
@@ -136,14 +159,16 @@ public interface Explicits {
      *
      * @param bodyParameter the IntWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter);
@@ -152,6 +177,7 @@ public interface Explicits {
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the IntWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredIntegerPropertyWithServiceResponseAsync(IntWrapper bodyParameter);
@@ -159,6 +185,9 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalIntegerProperty();
 
@@ -166,13 +195,15 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerPropertyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalIntegerPropertyAsync();
@@ -180,6 +211,7 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalIntegerPropertyWithServiceResponseAsync();
@@ -187,6 +219,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalIntegerProperty(IntOptionalWrapper bodyParameter);
 
@@ -195,14 +230,16 @@ public interface Explicits {
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter);
@@ -211,6 +248,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
      *
      * @param bodyParameter the IntOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalIntegerPropertyWithServiceResponseAsync(IntOptionalWrapper bodyParameter);
@@ -219,6 +257,9 @@ public interface Explicits {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredIntegerHeader(int headerParameter);
@@ -228,14 +269,16 @@ public interface Explicits {
      *
      * @param headerParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredIntegerHeaderAsync(int headerParameter);
@@ -244,6 +287,7 @@ public interface Explicits {
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the int value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredIntegerHeaderWithServiceResponseAsync(int headerParameter);
@@ -251,6 +295,9 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalIntegerHeader();
 
@@ -258,13 +305,15 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalIntegerHeaderAsync();
@@ -272,6 +321,7 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalIntegerHeaderWithServiceResponseAsync();
@@ -279,6 +329,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalIntegerHeader(Integer headerParameter);
 
@@ -287,14 +340,16 @@ public interface Explicits {
      *
      * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalIntegerHeaderAsync(Integer headerParameter);
@@ -303,6 +358,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the Integer value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalIntegerHeaderWithServiceResponseAsync(Integer headerParameter);
@@ -311,6 +367,9 @@ public interface Explicits {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredStringParameter(String bodyParameter);
@@ -320,14 +379,16 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredStringParameterAsync(String bodyParameter);
@@ -336,6 +397,7 @@ public interface Explicits {
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredStringParameterWithServiceResponseAsync(String bodyParameter);
@@ -343,6 +405,9 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalStringParameter();
 
@@ -350,13 +415,15 @@ public interface Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringParameterAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalStringParameterAsync();
@@ -364,6 +431,7 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalStringParameterWithServiceResponseAsync();
@@ -371,6 +439,9 @@ public interface Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalStringParameter(String bodyParameter);
 
@@ -379,14 +450,16 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalStringParameterAsync(String bodyParameter);
@@ -395,6 +468,7 @@ public interface Explicits {
      * Test explicitly optional string. Please put null.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalStringParameterWithServiceResponseAsync(String bodyParameter);
@@ -403,6 +477,9 @@ public interface Explicits {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredStringProperty(StringWrapper bodyParameter);
@@ -412,14 +489,16 @@ public interface Explicits {
      *
      * @param bodyParameter the StringWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredStringPropertyAsync(StringWrapper bodyParameter);
@@ -428,6 +507,7 @@ public interface Explicits {
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the StringWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredStringPropertyWithServiceResponseAsync(StringWrapper bodyParameter);
@@ -435,6 +515,9 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalStringProperty();
 
@@ -442,13 +525,15 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringPropertyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalStringPropertyAsync();
@@ -456,6 +541,7 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalStringPropertyWithServiceResponseAsync();
@@ -463,6 +549,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalStringProperty(StringOptionalWrapper bodyParameter);
 
@@ -471,14 +560,16 @@ public interface Explicits {
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter);
@@ -487,6 +578,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
      *
      * @param bodyParameter the StringOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalStringPropertyWithServiceResponseAsync(StringOptionalWrapper bodyParameter);
@@ -495,6 +587,9 @@ public interface Explicits {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredStringHeader(String headerParameter);
@@ -504,14 +599,16 @@ public interface Explicits {
      *
      * @param headerParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredStringHeaderAsync(String headerParameter);
@@ -520,6 +617,7 @@ public interface Explicits {
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredStringHeaderWithServiceResponseAsync(String headerParameter);
@@ -527,6 +625,9 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalStringHeader();
 
@@ -534,13 +635,15 @@ public interface Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalStringHeaderAsync();
@@ -548,6 +651,7 @@ public interface Explicits {
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalStringHeaderWithServiceResponseAsync();
@@ -555,6 +659,9 @@ public interface Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalStringHeader(String bodyParameter);
 
@@ -563,14 +670,16 @@ public interface Explicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalStringHeaderAsync(String bodyParameter);
@@ -579,6 +688,7 @@ public interface Explicits {
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalStringHeaderWithServiceResponseAsync(String bodyParameter);
@@ -587,6 +697,9 @@ public interface Explicits {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredClassParameter(Product bodyParameter);
@@ -596,14 +709,16 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredClassParameterAsync(Product bodyParameter);
@@ -612,6 +727,7 @@ public interface Explicits {
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredClassParameterWithServiceResponseAsync(Product bodyParameter);
@@ -619,6 +735,9 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalClassParameter();
 
@@ -626,13 +745,15 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassParameterAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalClassParameterAsync();
@@ -640,6 +761,7 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalClassParameterWithServiceResponseAsync();
@@ -647,6 +769,9 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalClassParameter(Product bodyParameter);
 
@@ -655,14 +780,16 @@ public interface Explicits {
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalClassParameterAsync(Product bodyParameter);
@@ -671,6 +798,7 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put null.
      *
      * @param bodyParameter the Product value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalClassParameterWithServiceResponseAsync(Product bodyParameter);
@@ -679,6 +807,9 @@ public interface Explicits {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredClassProperty(ClassWrapper bodyParameter);
@@ -688,14 +819,16 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredClassPropertyAsync(ClassWrapper bodyParameter);
@@ -704,6 +837,7 @@ public interface Explicits {
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ClassWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredClassPropertyWithServiceResponseAsync(ClassWrapper bodyParameter);
@@ -711,6 +845,9 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalClassProperty();
 
@@ -718,13 +855,15 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassPropertyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalClassPropertyAsync();
@@ -732,6 +871,7 @@ public interface Explicits {
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalClassPropertyWithServiceResponseAsync();
@@ -739,6 +879,9 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalClassProperty(ClassOptionalWrapper bodyParameter);
 
@@ -747,14 +890,16 @@ public interface Explicits {
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter);
@@ -763,6 +908,7 @@ public interface Explicits {
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
      *
      * @param bodyParameter the ClassOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalClassPropertyWithServiceResponseAsync(ClassOptionalWrapper bodyParameter);
@@ -771,6 +917,9 @@ public interface Explicits {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredArrayParameter(List<String> bodyParameter);
@@ -780,14 +929,16 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredArrayParameterAsync(List<String> bodyParameter);
@@ -796,6 +947,7 @@ public interface Explicits {
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredArrayParameterWithServiceResponseAsync(List<String> bodyParameter);
@@ -803,6 +955,9 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalArrayParameter();
 
@@ -810,13 +965,15 @@ public interface Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayParameterAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalArrayParameterAsync();
@@ -824,6 +981,7 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalArrayParameterWithServiceResponseAsync();
@@ -831,6 +989,9 @@ public interface Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalArrayParameter(List<String> bodyParameter);
 
@@ -839,14 +1000,16 @@ public interface Explicits {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalArrayParameterAsync(List<String> bodyParameter);
@@ -855,6 +1018,7 @@ public interface Explicits {
      * Test explicitly optional array. Please put null.
      *
      * @param bodyParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalArrayParameterWithServiceResponseAsync(List<String> bodyParameter);
@@ -863,6 +1027,9 @@ public interface Explicits {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredArrayProperty(ArrayWrapper bodyParameter);
@@ -872,14 +1039,16 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter);
@@ -888,6 +1057,7 @@ public interface Explicits {
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
      *
      * @param bodyParameter the ArrayWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredArrayPropertyWithServiceResponseAsync(ArrayWrapper bodyParameter);
@@ -895,6 +1065,9 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalArrayProperty();
 
@@ -902,13 +1075,15 @@ public interface Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayPropertyAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalArrayPropertyAsync();
@@ -916,6 +1091,7 @@ public interface Explicits {
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalArrayPropertyWithServiceResponseAsync();
@@ -923,6 +1099,9 @@ public interface Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter);
 
@@ -931,14 +1110,16 @@ public interface Explicits {
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter);
@@ -947,6 +1128,7 @@ public interface Explicits {
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
      *
      * @param bodyParameter the ArrayOptionalWrapper value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalArrayPropertyWithServiceResponseAsync(ArrayOptionalWrapper bodyParameter);
@@ -955,6 +1137,9 @@ public interface Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     Error postRequiredArrayHeader(List<String> headerParameter);
@@ -964,14 +1149,16 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Error> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceFuture<Error> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<Error> postRequiredArrayHeaderAsync(List<String> headerParameter);
@@ -980,6 +1167,7 @@ public interface Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     Observable<ServiceResponse<Error>> postRequiredArrayHeaderWithServiceResponseAsync(List<String> headerParameter);
@@ -987,6 +1175,9 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalArrayHeader();
 
@@ -994,13 +1185,15 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayHeaderAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalArrayHeaderAsync();
@@ -1008,6 +1201,7 @@ public interface Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync();
@@ -1015,6 +1209,9 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void postOptionalArrayHeader(List<String> headerParameter);
 
@@ -1023,14 +1220,16 @@ public interface Explicits {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> postOptionalArrayHeaderAsync(List<String> headerParameter);
@@ -1039,6 +1238,7 @@ public interface Explicits {
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      *
      * @param headerParameter the List&lt;String&gt; value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> postOptionalArrayHeaderWithServiceResponseAsync(List<String> headerParameter);

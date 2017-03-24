@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
-    using AcceptanceTestsHttp;
+    using Fixtures.AcceptanceTestsHttp;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// Initializes a new instance of the HttpRedirectsPost307Headers
         /// class.
         /// </summary>
-        public HttpRedirectsPost307Headers() { }
+        public HttpRedirectsPost307Headers()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HttpRedirectsPost307Headers
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         public HttpRedirectsPost307Headers(string location = default(string))
         {
             Location = location;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the redirect location for this request. Possible
@@ -43,4 +52,3 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
     }
 }
-

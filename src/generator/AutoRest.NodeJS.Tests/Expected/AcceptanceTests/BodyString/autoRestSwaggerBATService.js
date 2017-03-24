@@ -48,6 +48,8 @@ function AutoRestSwaggerBATService(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   this.string = new operations.String(this);
   this.enumModel = new operations.EnumModel(this);
   this.models = models;

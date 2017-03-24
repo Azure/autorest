@@ -12,8 +12,8 @@ package fixtures.subscriptionidapiversion.implementation;
 
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.subscriptionidapiversion.ErrorException;
 import java.io.IOException;
@@ -63,6 +63,9 @@ public class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the SampleResourceGroupInner object if successful.
      */
     public SampleResourceGroupInner getSampleResourceGroup(String resourceGroupName) {
@@ -74,16 +77,18 @@ public class GroupsInner {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
-        return ServiceCall.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
+    public ServiceFuture<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroupInner> serviceCallback) {
+        return ServiceFuture.fromResponse(getSampleResourceGroupWithServiceResponseAsync(resourceGroupName), serviceCallback);
     }
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SampleResourceGroupInner object
      */
     public Observable<SampleResourceGroupInner> getSampleResourceGroupAsync(String resourceGroupName) {
@@ -99,6 +104,7 @@ public class GroupsInner {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the SampleResourceGroupInner object
      */
     public Observable<ServiceResponse<SampleResourceGroupInner>> getSampleResourceGroupWithServiceResponseAsync(String resourceGroupName) {

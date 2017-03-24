@@ -402,4 +402,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         Task<HttpOperationResponse> PutByteWithHttpMessagesAsync(byte[] field = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

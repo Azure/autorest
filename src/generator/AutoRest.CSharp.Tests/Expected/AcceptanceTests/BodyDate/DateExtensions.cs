@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task PutMaxDateAsync(this IDate operations, System.DateTime dateBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMaxDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMaxDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -212,7 +212,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task PutMinDateAsync(this IDate operations, System.DateTime dateBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMinDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMinDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -245,4 +245,3 @@ namespace Fixtures.AcceptanceTestsBodyDate
 
     }
 }
-

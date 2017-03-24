@@ -8,16 +8,13 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using MirrorSequences;
+    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Security;
 
     /// <summary>
     /// Exception thrown for an invalid response with ErrorModel information.
     /// </summary>
-#if !PORTABLE
+#if LEGACY
     [System.Serializable]
 #endif
     public class ErrorModelException : RestException
@@ -63,13 +60,13 @@ namespace Fixtures.MirrorSequences.Models
         {
         }
 
-#if !PORTABLE
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the ErrorModelException class.
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected ErrorModelException(SerializationInfo info, StreamingContext context)
+        protected ErrorModelException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
         }
@@ -83,7 +80,7 @@ namespace Fixtures.MirrorSequences.Models
         /// Thrown when a required parameter is null
         /// </exception>
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)
@@ -98,4 +95,3 @@ namespace Fixtures.MirrorSequences.Models
 #endif
     }
 }
-

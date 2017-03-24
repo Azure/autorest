@@ -1,0 +1,57 @@
+{
+  "name": "autorest",
+  "version": "0.9.17",
+  "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Azure/autorest"
+  },
+  "readme": "https://github.com/Azure/AutoRest/readme.md",
+  "keywords": [
+    "autorest",
+    "rest",
+    "swagger"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
+  "main": "./app.js",
+  "bin": {
+    "autorest": "./app.js"
+  },
+  "typings": "./index.d.ts",
+  "engines": {
+    "node": ">=6.9.5"
+  },
+  "devDependencies": {
+    "@types/chalk": "*",
+    "@types/marked": "*",
+    "@types/node": "^7.0.5",
+    "@types/request": "0.0.39",
+    "@types/semver": "^5.3.30",
+    "@types/shelljs": "^0.6.0",
+    "@types/tmp": "0.0.32",
+    "del": "^2.2.2",
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.22",
+    "typescript": "^2.1.5"
+  },
+  "dependencies": {
+    "chalk": "^1.1.2",
+    "linq-es2015": "^2.4.13",
+    "marked": "^0.3.6",
+    "marked-terminal": "^2.0.0",
+    "request": "^2.79.0",
+    "semver": "^5.3.0",
+    "shelljs": "^0.7.6",
+    "streamsink": "^1.2.0",
+    "tar.gz2": "^1.0.0",
+    "tmp": "0.0.31",
+    "unzipper": "^0.8.4",
+    "yargs": "^6.6.0",
+    "yauzl": "^2.7.0"
+  }
+}

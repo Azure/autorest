@@ -8,6 +8,8 @@
  * regenerated.
  */
 
+import * as moment from "moment";
+
 
 /**
  * @class
@@ -148,6 +150,32 @@ export interface SimpleProduct extends BaseProduct {
  */
 export interface GenericUrl {
   genericValue?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the WrappedProduct class.
+ * @constructor
+ * The wrapped produc.
+ *
+ * @member {string} [value] the product value
+ *
+ */
+export interface WrappedProduct {
+  value?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ProductWrapper class.
+ * @constructor
+ * The wrapped produc.
+ *
+ * @member {string} [value] the product value
+ *
+ */
+export interface ProductWrapper {
+  value?: string;
 }
 
 /**

@@ -8,7 +8,7 @@
 
 namespace Fixtures.AdditionalProperties.Models
 {
-    using AdditionalProperties;
+    using Fixtures.AdditionalProperties;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AdditionalProperties.Models
         /// <summary>
         /// Initializes a new instance of the WithUntypedDictionary class.
         /// </summary>
-        public WithUntypedDictionary() { }
+        public WithUntypedDictionary()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the WithUntypedDictionary class.
@@ -30,7 +33,13 @@ namespace Fixtures.AdditionalProperties.Models
         {
             AdditionalProperties = additionalProperties;
             Abc = abc;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets unmatched properties from the message are deserialized
@@ -46,4 +55,3 @@ namespace Fixtures.AdditionalProperties.Models
 
     }
 }
-

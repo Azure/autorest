@@ -15,8 +15,8 @@ import fixtures.url.Paths;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.Base64Url;
 import com.microsoft.rest.CollectionFormat;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.url.models.ErrorException;
@@ -170,6 +170,9 @@ public class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getBooleanTrue() {
         getBooleanTrueWithServiceResponseAsync().toBlocking().single().body();
@@ -179,15 +182,17 @@ public class PathsImpl implements Paths {
      * Get true Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getBooleanTrueAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getBooleanTrueWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get true Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getBooleanTrueAsync() {
@@ -202,6 +207,7 @@ public class PathsImpl implements Paths {
     /**
      * Get true Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getBooleanTrueWithServiceResponseAsync() {
@@ -230,6 +236,9 @@ public class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getBooleanFalse() {
         getBooleanFalseWithServiceResponseAsync().toBlocking().single().body();
@@ -239,15 +248,17 @@ public class PathsImpl implements Paths {
      * Get false Boolean value on path.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getBooleanFalseAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getBooleanFalseWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get false Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getBooleanFalseAsync() {
@@ -262,6 +273,7 @@ public class PathsImpl implements Paths {
     /**
      * Get false Boolean value on path.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getBooleanFalseWithServiceResponseAsync() {
@@ -290,6 +302,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getIntOneMillion() {
         getIntOneMillionWithServiceResponseAsync().toBlocking().single().body();
@@ -299,15 +314,17 @@ public class PathsImpl implements Paths {
      * Get '1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getIntOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getIntOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getIntOneMillionAsync() {
@@ -322,6 +339,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getIntOneMillionWithServiceResponseAsync() {
@@ -350,6 +368,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getIntNegativeOneMillion() {
         getIntNegativeOneMillionWithServiceResponseAsync().toBlocking().single().body();
@@ -359,15 +380,17 @@ public class PathsImpl implements Paths {
      * Get '-1000000' integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getIntNegativeOneMillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getIntNegativeOneMillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '-1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getIntNegativeOneMillionAsync() {
@@ -382,6 +405,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1000000' integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getIntNegativeOneMillionWithServiceResponseAsync() {
@@ -410,6 +434,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getTenBillion() {
         getTenBillionWithServiceResponseAsync().toBlocking().single().body();
@@ -419,15 +446,17 @@ public class PathsImpl implements Paths {
      * Get '10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getTenBillionAsync() {
@@ -442,6 +471,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getTenBillionWithServiceResponseAsync() {
@@ -470,6 +500,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getNegativeTenBillion() {
         getNegativeTenBillionWithServiceResponseAsync().toBlocking().single().body();
@@ -479,15 +512,17 @@ public class PathsImpl implements Paths {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getNegativeTenBillionAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getNegativeTenBillionWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '-10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getNegativeTenBillionAsync() {
@@ -502,6 +537,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '-10000000000' 64 bit integer value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getNegativeTenBillionWithServiceResponseAsync() {
@@ -530,6 +566,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void floatScientificPositive() {
         floatScientificPositiveWithServiceResponseAsync().toBlocking().single().body();
@@ -539,15 +578,17 @@ public class PathsImpl implements Paths {
      * Get '1.034E+20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> floatScientificPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(floatScientificPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '1.034E+20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> floatScientificPositiveAsync() {
@@ -562,6 +603,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '1.034E+20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> floatScientificPositiveWithServiceResponseAsync() {
@@ -590,6 +632,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void floatScientificNegative() {
         floatScientificNegativeWithServiceResponseAsync().toBlocking().single().body();
@@ -599,15 +644,17 @@ public class PathsImpl implements Paths {
      * Get '-1.034E-20' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> floatScientificNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(floatScientificNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '-1.034E-20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> floatScientificNegativeAsync() {
@@ -622,6 +669,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '-1.034E-20' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> floatScientificNegativeWithServiceResponseAsync() {
@@ -650,6 +698,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void doubleDecimalPositive() {
         doubleDecimalPositiveWithServiceResponseAsync().toBlocking().single().body();
@@ -659,15 +710,17 @@ public class PathsImpl implements Paths {
      * Get '9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> doubleDecimalPositiveAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(doubleDecimalPositiveWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> doubleDecimalPositiveAsync() {
@@ -682,6 +735,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> doubleDecimalPositiveWithServiceResponseAsync() {
@@ -710,6 +764,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void doubleDecimalNegative() {
         doubleDecimalNegativeWithServiceResponseAsync().toBlocking().single().body();
@@ -719,15 +776,17 @@ public class PathsImpl implements Paths {
      * Get '-9999999.999' numeric value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> doubleDecimalNegativeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(doubleDecimalNegativeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '-9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> doubleDecimalNegativeAsync() {
@@ -742,6 +801,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '-9999999.999' numeric value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> doubleDecimalNegativeWithServiceResponseAsync() {
@@ -770,6 +830,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringUnicode() {
         stringUnicodeWithServiceResponseAsync().toBlocking().single().body();
@@ -779,15 +842,17 @@ public class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringUnicodeAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringUnicodeWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> stringUnicodeAsync() {
@@ -802,6 +867,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> stringUnicodeWithServiceResponseAsync() {
@@ -830,6 +896,9 @@ public class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringUrlEncoded() {
         stringUrlEncodedWithServiceResponseAsync().toBlocking().single().body();
@@ -839,15 +908,17 @@ public class PathsImpl implements Paths {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringUrlEncodedAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringUrlEncodedWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> stringUrlEncodedAsync() {
@@ -862,6 +933,7 @@ public class PathsImpl implements Paths {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> stringUrlEncodedWithServiceResponseAsync() {
@@ -890,6 +962,9 @@ public class PathsImpl implements Paths {
     /**
      * Get ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringEmpty() {
         stringEmptyWithServiceResponseAsync().toBlocking().single().body();
@@ -899,15 +974,17 @@ public class PathsImpl implements Paths {
      * Get ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> stringEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> stringEmptyAsync() {
@@ -922,6 +999,7 @@ public class PathsImpl implements Paths {
     /**
      * Get ''.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> stringEmptyWithServiceResponseAsync() {
@@ -951,6 +1029,9 @@ public class PathsImpl implements Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void stringNull(String stringPath) {
         stringNullWithServiceResponseAsync(stringPath).toBlocking().single().body();
@@ -961,16 +1042,18 @@ public class PathsImpl implements Paths {
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
+    public ServiceFuture<Void> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(stringNullWithServiceResponseAsync(stringPath), serviceCallback);
     }
 
     /**
      * Get null (should throw).
      *
      * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> stringNullAsync(String stringPath) {
@@ -986,6 +1069,7 @@ public class PathsImpl implements Paths {
      * Get null (should throw).
      *
      * @param stringPath null string value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> stringNullWithServiceResponseAsync(String stringPath) {
@@ -1017,6 +1101,9 @@ public class PathsImpl implements Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void enumValid(UriColor enumPath) {
         enumValidWithServiceResponseAsync(enumPath).toBlocking().single().body();
@@ -1027,16 +1114,18 @@ public class PathsImpl implements Paths {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
+    public ServiceFuture<Void> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(enumValidWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> enumValidAsync(UriColor enumPath) {
@@ -1052,6 +1141,7 @@ public class PathsImpl implements Paths {
      * Get using uri with 'green color' in path parameter.
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> enumValidWithServiceResponseAsync(UriColor enumPath) {
@@ -1083,6 +1173,9 @@ public class PathsImpl implements Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void enumNull(UriColor enumPath) {
         enumNullWithServiceResponseAsync(enumPath).toBlocking().single().body();
@@ -1093,16 +1186,18 @@ public class PathsImpl implements Paths {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
+    public ServiceFuture<Void> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(enumNullWithServiceResponseAsync(enumPath), serviceCallback);
     }
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> enumNullAsync(UriColor enumPath) {
@@ -1118,6 +1213,7 @@ public class PathsImpl implements Paths {
      * Get null (should throw on the client before the request is sent on wire).
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> enumNullWithServiceResponseAsync(UriColor enumPath) {
@@ -1149,6 +1245,9 @@ public class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteMultiByte(byte[] bytePath) {
         byteMultiByteWithServiceResponseAsync(bytePath).toBlocking().single().body();
@@ -1159,16 +1258,18 @@ public class PathsImpl implements Paths {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
+    public ServiceFuture<Void> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteMultiByteWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> byteMultiByteAsync(byte[] bytePath) {
@@ -1184,6 +1285,7 @@ public class PathsImpl implements Paths {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> byteMultiByteWithServiceResponseAsync(byte[] bytePath) {
@@ -1215,6 +1317,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteEmpty() {
         byteEmptyWithServiceResponseAsync().toBlocking().single().body();
@@ -1224,15 +1329,17 @@ public class PathsImpl implements Paths {
      * Get '' as byte array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> byteEmptyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteEmptyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '' as byte array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> byteEmptyAsync() {
@@ -1247,6 +1354,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '' as byte array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> byteEmptyWithServiceResponseAsync() {
@@ -1277,6 +1385,9 @@ public class PathsImpl implements Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void byteNull(byte[] bytePath) {
         byteNullWithServiceResponseAsync(bytePath).toBlocking().single().body();
@@ -1287,16 +1398,18 @@ public class PathsImpl implements Paths {
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
+    public ServiceFuture<Void> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(byteNullWithServiceResponseAsync(bytePath), serviceCallback);
     }
 
     /**
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> byteNullAsync(byte[] bytePath) {
@@ -1312,6 +1425,7 @@ public class PathsImpl implements Paths {
      * Get null as byte array (should throw).
      *
      * @param bytePath null as byte array (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> byteNullWithServiceResponseAsync(byte[] bytePath) {
@@ -1343,6 +1457,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateValid() {
         dateValidWithServiceResponseAsync().toBlocking().single().body();
@@ -1352,15 +1469,17 @@ public class PathsImpl implements Paths {
      * Get '2012-01-01' as date.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> dateValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '2012-01-01' as date.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> dateValidAsync() {
@@ -1375,6 +1494,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01' as date.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> dateValidWithServiceResponseAsync() {
@@ -1404,6 +1524,9 @@ public class PathsImpl implements Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateNull(LocalDate datePath) {
         dateNullWithServiceResponseAsync(datePath).toBlocking().single().body();
@@ -1414,16 +1537,18 @@ public class PathsImpl implements Paths {
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateNullWithServiceResponseAsync(datePath), serviceCallback);
+    public ServiceFuture<Void> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateNullWithServiceResponseAsync(datePath), serviceCallback);
     }
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> dateNullAsync(LocalDate datePath) {
@@ -1439,6 +1564,7 @@ public class PathsImpl implements Paths {
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
      *
      * @param datePath null as date (should throw)
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> dateNullWithServiceResponseAsync(LocalDate datePath) {
@@ -1469,6 +1595,9 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateTimeValid() {
         dateTimeValidWithServiceResponseAsync().toBlocking().single().body();
@@ -1478,15 +1607,17 @@ public class PathsImpl implements Paths {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> dateTimeValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateTimeValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> dateTimeValidAsync() {
@@ -1501,6 +1632,7 @@ public class PathsImpl implements Paths {
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> dateTimeValidWithServiceResponseAsync() {
@@ -1530,6 +1662,9 @@ public class PathsImpl implements Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void dateTimeNull(DateTime dateTimePath) {
         dateTimeNullWithServiceResponseAsync(dateTimePath).toBlocking().single().body();
@@ -1540,16 +1675,18 @@ public class PathsImpl implements Paths {
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
+    public ServiceFuture<Void> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(dateTimeNullWithServiceResponseAsync(dateTimePath), serviceCallback);
     }
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> dateTimeNullAsync(DateTime dateTimePath) {
@@ -1565,6 +1702,7 @@ public class PathsImpl implements Paths {
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
      *
      * @param dateTimePath null as date-time
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> dateTimeNullWithServiceResponseAsync(DateTime dateTimePath) {
@@ -1596,6 +1734,9 @@ public class PathsImpl implements Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void base64Url(byte[] base64UrlPath) {
         base64UrlWithServiceResponseAsync(base64UrlPath).toBlocking().single().body();
@@ -1606,16 +1747,18 @@ public class PathsImpl implements Paths {
      *
      * @param base64UrlPath base64url encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
+    public ServiceFuture<Void> base64UrlAsync(byte[] base64UrlPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(base64UrlWithServiceResponseAsync(base64UrlPath), serviceCallback);
     }
 
     /**
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> base64UrlAsync(byte[] base64UrlPath) {
@@ -1631,6 +1774,7 @@ public class PathsImpl implements Paths {
      * Get 'lorem' encoded value as 'bG9yZW0' (base64url).
      *
      * @param base64UrlPath base64url encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> base64UrlWithServiceResponseAsync(byte[] base64UrlPath) {
@@ -1663,6 +1807,9 @@ public class PathsImpl implements Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void arrayCsvInPath(List<String> arrayPath) {
         arrayCsvInPathWithServiceResponseAsync(arrayPath).toBlocking().single().body();
@@ -1673,16 +1820,18 @@ public class PathsImpl implements Paths {
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
+    public ServiceFuture<Void> arrayCsvInPathAsync(List<String> arrayPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(arrayCsvInPathWithServiceResponseAsync(arrayPath), serviceCallback);
     }
 
     /**
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> arrayCsvInPathAsync(List<String> arrayPath) {
@@ -1698,6 +1847,7 @@ public class PathsImpl implements Paths {
      * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> arrayCsvInPathWithServiceResponseAsync(List<String> arrayPath) {
@@ -1731,6 +1881,9 @@ public class PathsImpl implements Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void unixTimeUrl(DateTime unixTimeUrlPath) {
         unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath).toBlocking().single().body();
@@ -1741,16 +1894,18 @@ public class PathsImpl implements Paths {
      *
      * @param unixTimeUrlPath Unix time encoded value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
+    public ServiceFuture<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(unixTimeUrlWithServiceResponseAsync(unixTimeUrlPath), serviceCallback);
     }
 
     /**
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> unixTimeUrlAsync(DateTime unixTimeUrlPath) {
@@ -1766,6 +1921,7 @@ public class PathsImpl implements Paths {
      * Get the date 2016-04-13 encoded value as '1460505600' (Unix time).
      *
      * @param unixTimeUrlPath Unix time encoded value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> unixTimeUrlWithServiceResponseAsync(DateTime unixTimeUrlPath) {

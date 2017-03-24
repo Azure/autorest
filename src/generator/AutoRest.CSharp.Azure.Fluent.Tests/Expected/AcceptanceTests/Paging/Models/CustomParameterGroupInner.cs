@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using Azure;
-    using AcceptanceTestsPaging;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsPaging;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
@@ -24,7 +24,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the CustomParameterGroupInner class.
         /// </summary>
-        public CustomParameterGroupInner() { }
+        public CustomParameterGroupInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CustomParameterGroupInner class.
@@ -35,7 +38,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         {
             ApiVersion = apiVersion;
             Tenant = tenant;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets sets the api version to use.
@@ -68,4 +77,3 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         }
     }
 }
-

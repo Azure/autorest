@@ -8,19 +8,22 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("Fish")]
+    [Newtonsoft.Json.JsonObject("Fish")]
     public partial class FishInner
     {
         /// <summary>
         /// Initializes a new instance of the FishInner class.
         /// </summary>
-        public FishInner() { }
+        public FishInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the FishInner class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             Species = species;
             Length = length;
             Siblings = siblings;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -68,4 +77,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         }
     }
 }
-

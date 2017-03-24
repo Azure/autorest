@@ -50,6 +50,8 @@ function ComplexModelClient(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   this.models = models;
   msRest.addSerializationMixin(this);
 }
@@ -235,7 +237,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
   } catch (error) {
     return callback(error);
   }
-  var bodyParameter;
+    var bodyParameter;
   if (productDictionaryOfArray !== null && productDictionaryOfArray !== undefined) {
       bodyParameter = new client.models['CatalogDictionaryOfArray']();
       bodyParameter.productDictionaryOfArray = productDictionaryOfArray;
@@ -389,7 +391,7 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
   } catch (error) {
     return callback(error);
   }
-  var bodyParameter;
+    var bodyParameter;
   if (productArrayOfDictionary !== null && productArrayOfDictionary !== undefined) {
       bodyParameter = new client.models['CatalogArrayOfDictionary']();
       bodyParameter.productArrayOfDictionary = productArrayOfDictionary;

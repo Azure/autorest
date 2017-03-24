@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the DateWrapperInner class.
         /// </summary>
-        public DateWrapperInner() { }
+        public DateWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DateWrapperInner class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Field = field;
             Leap = leap;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -44,4 +53,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

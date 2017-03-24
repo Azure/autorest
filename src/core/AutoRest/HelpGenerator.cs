@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using AutoRest.Core;
 using AutoRest.Core.Extensibility;
-using Newtonsoft.Json;
 using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest
@@ -124,20 +123,7 @@ namespace AutoRest
             GetParametersInfo(typeof(Settings).GetProperties().OrderBy(p => p.Name), parametersSection, parameterTemplate,
                               "$parameter$", "$parameter-desc$");
 
-            // Parse autorest.json
-            AutoRestConfiguration autorestConfig = new AutoRestConfiguration();
-            string configurationFile = ExtensionsLoader.GetConfigurationFileContent(settings);
-            if (configurationFile != null)
-            {
-                try
-                {
-                    autorestConfig = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);                    
-                }
-                catch
-                {
-                    // Ignore
-                }
-            }
+            var autorestConfig = AutoRestConfiguration.Get();
 
             // Generate generators section
             var generatorsSection = new StringBuilder();

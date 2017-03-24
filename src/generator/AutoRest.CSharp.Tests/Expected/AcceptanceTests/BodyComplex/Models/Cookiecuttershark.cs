@@ -8,19 +8,22 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("cookiecuttershark")]
+    [Newtonsoft.Json.JsonObject("cookiecuttershark")]
     public partial class Cookiecuttershark : Shark
     {
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.
         /// </summary>
-        public Cookiecuttershark() { }
+        public Cookiecuttershark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Cookiecuttershark class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public Cookiecuttershark(double length, System.DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
             : base(length, birthday, species, siblings, age)
         {
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Validate the object.
@@ -42,4 +51,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         }
     }
 }
-

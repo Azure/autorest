@@ -1,8 +1,8 @@
 package fixtures.lro;
 
-import com.microsoft.azure.CustomHeaderInterceptor;
-
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
+import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
+import fixtures.lro.models.Product;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,13 +10,9 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import fixtures.lro.implementation.AutoRestLongRunningOperationTestServiceImpl;
-import fixtures.lro.models.Product;
-
 public class LROsCustomHeaderTests {
     private static AutoRestLongRunningOperationTestServiceImpl client;
     private static Map<String, String> customHeaders;
-    private static CustomHeaderInterceptor customHeaderInterceptor;
 
     @BeforeClass
     public static void setup() {

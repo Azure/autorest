@@ -11,7 +11,7 @@ using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Python
 {
-    public sealed class PluginPy : Plugin<GeneratorSettingsPy, ModelSerializer<CodeModelPy>, TransformerPy, CodeGeneratorPy, CodeNamerPy, CodeModelPy>
+    public sealed class PluginPy : Plugin<GeneratorSettingsPy, TransformerPy, CodeGeneratorPy, CodeNamerPy, CodeModelPy>
     {
         public PluginPy()
         {

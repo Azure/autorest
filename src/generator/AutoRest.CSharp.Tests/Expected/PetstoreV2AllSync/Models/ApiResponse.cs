@@ -8,7 +8,7 @@
 
 namespace Fixtures.PetstoreV2AllSync.Models
 {
-    using PetstoreV2AllSync;
+    using Fixtures.PetstoreV2AllSync;
     using Newtonsoft.Json;
     using System.Linq;
     using System.Xml;
@@ -19,7 +19,10 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// Initializes a new instance of the ApiResponse class.
         /// </summary>
-        public ApiResponse() { }
+        public ApiResponse()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ApiResponse class.
@@ -29,7 +32,13 @@ namespace Fixtures.PetstoreV2AllSync.Models
             Code = code;
             Type = type;
             Message = message;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -98,4 +107,3 @@ namespace Fixtures.PetstoreV2AllSync.Models
         }
     }
 }
-

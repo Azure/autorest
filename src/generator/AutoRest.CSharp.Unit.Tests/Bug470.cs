@@ -31,24 +31,21 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 string modelsName = "MyModels";
 
-                MemoryFileSystem fileSystem = CreateMockFilesystem();
-
                 var settings = new Settings
                 {
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
-                    FileSystem = fileSystem,
-                    OutputDirectory = "GeneratedCode",
+                    OutputDirectory = "",
                     Namespace = "Test",
                     ModelsName = modelsName
                 };
 
-                using (fileSystem = $"{GetType().Name}".GenerateCodeInto(fileSystem, settings))
+                using (var fileSystem = $"{GetType().Name}".GenerateCodeInto(new MemoryFileSystem(), settings))
                 {
                     // Expected Files
-                    Assert.True(fileSystem.FileExists($@"{settings.OutputDirectory}\{modelsName}\ResultObject.cs"));
+                    Assert.True(fileSystem.FileExists($@"{modelsName}\ResultObject.cs"));
 
-                    var result = await Compile(fileSystem);
+                    var result = await Compile(settings.FileSystemOutput);
 
                     // filter the warnings
                     var warnings = result.Messages.Where(
@@ -77,7 +74,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     Assert.True(result.Succeeded);
 
                     // try to load the assembly
-                    var asm = Assembly.Load(result.Output.GetBuffer());
+                    var asm = LoadAssembly(result.Output);
                     Assert.NotNull(asm);
 
                     // verify that we have the class we expected

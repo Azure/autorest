@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -47,4 +47,3 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         Task<AzureOperationResponse<SampleResourceGroupInner>> GetSampleResourceGroupWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

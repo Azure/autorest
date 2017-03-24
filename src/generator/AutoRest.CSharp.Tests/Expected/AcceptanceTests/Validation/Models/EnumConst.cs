@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsValidation.Models
 {
-    using AcceptanceTestsValidation;
+    using Fixtures.AcceptanceTestsValidation;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using System.Runtime;
@@ -24,4 +24,3 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         ConstantStringAsEnum
     }
 }
-

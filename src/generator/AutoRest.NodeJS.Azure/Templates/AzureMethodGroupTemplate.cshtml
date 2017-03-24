@@ -1,5 +1,6 @@
 ﻿@using System.Linq
 @using AutoRest.NodeJS.Azure.Model
+@using AutoRest.NodeJS.Templates
 @using AutoRest.NodeJS.Azure.Templates
 @inherits AutoRest.Core.Template<AutoRest.NodeJS.Model.MethodGroupJs>
 /*
@@ -8,15 +9,20 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var WebResource = msRest.WebResource;
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const WebResource = msRest.WebResource;
+const HttpOperationResponse = msRest.HttpOperationResponse;
 @if (Model.ContainsTimeSpan)
 {
-@:var moment = require('moment');
+@:const moment = require('moment');
 }
 @EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
+@EmptyLine
+}
 /**
  * @@class
  * @Model.TypeName
@@ -27,15 +33,20 @@ var WebResource = msRest.WebResource;
  *
  * @@param {@Model.CodeModel.Name} client Reference to the service client.
  */
-function @(Model.TypeName)(client) {
-  this.client = client;
+class @(Model.TypeName) {
+  constructor(client) {
+    this.client = client;
+@foreach (var method in Model.MethodTemplateModels)
+{
+    @:this._@(method.Name) = _@(method.Name);
 }
-
+  }
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
+  @:@(Include(new MethodPromiseWrapperTemplate(), method))
 @EmptyLine
+}
 }
 @EmptyLine
 module.exports = @(Model.TypeName);

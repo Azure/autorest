@@ -55,7 +55,7 @@ namespace AutoRest.AzureResourceSchema.Tests
         [Fact]
         public static void CommitmentPlans_2016_05_01_preview()
         {
-            RunSwaggerTest("CommitmentPlans", "2016-05-01-preview", "commitmentplans.json");
+            RunSwaggerTest("CommitmentPlans", "2016-05-01-preview", "commitmentPlans.json");
         }
 
         [Fact]
@@ -112,13 +112,7 @@ namespace AutoRest.AzureResourceSchema.Tests
             RunSwaggerTest("DNS", "2016-04-01", "dns.json");
         }
 
-        [Fact]
-        public static void Insights_2016_03_01()
-        {
-            RunSwaggerTest("Insights", "2016-03-01", "insightsManagementClient.json");
-        }
-
-        [Fact]
+        [Fact(Skip = "invalid Swagger spec, nowadays AutoRest complains")]
         public static void Logic_2015_02_01_preview()
         {
             RunSwaggerTest("Logic", "2015-02-01-preview", "logic.json");
@@ -296,8 +290,9 @@ namespace AutoRest.AzureResourceSchema.Tests
         private static void RunSwaggerTest(string resourceType, string apiVersion, string swaggerFileName)
         {
             SwaggerSpecHelper.RunTests(
-                Path.Combine("Swagger", resourceType, apiVersion, swaggerFileName),
-                Path.Combine("Expected", resourceType, apiVersion),plugin:"AzureResourceSchema");
+                Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", resourceType, apiVersion, swaggerFileName),
+                Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Expected", resourceType, apiVersion),
+                plugin: "AzureResourceSchema");
         }
     }
 }

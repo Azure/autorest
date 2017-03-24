@@ -5,7 +5,6 @@
 
 var should = require('should');
 var http = require('http');
-var util = require('util');
 var assert = require('assert');
 import msRest = require('ms-rest');
 import moment = require('moment');

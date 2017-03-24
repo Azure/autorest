@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.Core.Utilities;
 using AutoRest.Core.Utilities.Collections;
-using AutoRest.Core.Validation;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -23,7 +22,7 @@ namespace AutoRest.Core.Model
         /// <summary>
         /// Gets or sets the IModelType name.
         /// </summary>
-        [Rule(typeof(IsIdentifier))]
+        // [Rule(typeof(IsIdentifier))]
         Fixable<string> Name { get; }
 
         /// <summary>
@@ -166,7 +165,7 @@ namespace AutoRest.Core.Model
 
             var ta = JsonConvert.SerializeObject(this, CodeModelSettings.SerializerSettings);
             var tb = JsonConvert.SerializeObject(other, CodeModelSettings.SerializerSettings);
-            return ta == tb;
+            return JToken.DeepEquals(JsonConvert.DeserializeObject(ta) as JToken, JsonConvert.DeserializeObject(tb) as JToken);
         }
 
         /// <summary>

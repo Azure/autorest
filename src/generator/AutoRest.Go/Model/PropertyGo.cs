@@ -6,16 +6,16 @@ using AutoRest.Core.Model;
 
 namespace AutoRest.Go.Model
 {
-    public class PropertyGo : Property
+  public class PropertyGo : Property
+  {
+    public PropertyGo()
     {
-        public PropertyGo()
-        {
-            
-        }
 
-        public string JsonTag(bool omitEmpty = true)
-        {
-            return string.Format("`json:\"{0}{1}\"`", SerializedName, omitEmpty ? ",omitempty" : "");
-        }
     }
+
+    public string JsonTag(bool omitEmpty = true)
+    {
+      return string.Format("`json:\"{0}{1}\"`", SerializedName, omitEmpty ? ",omitempty" : "");
+    }
+  }
 }

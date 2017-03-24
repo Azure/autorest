@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
         /// </summary>
-        public ArrayWrapper() { }
+        public ArrayWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
@@ -27,7 +30,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public ArrayWrapper(IList<string> array = default(IList<string>))
         {
             Array = array;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -36,4 +45,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

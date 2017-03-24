@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using AutoRest.Core.Utilities;
 
 namespace AutoRest.Core.Model
 {
@@ -49,5 +50,8 @@ namespace AutoRest.Core.Model
             return (Body == null ? other.Body == null : Body.StructurallyEquals(other.Body))
                 && (Headers == null ? other.Headers == null : Headers.StructurallyEquals(other.Headers));
         }
+        public Dictionary<string, object> Extensions { get; set; } = new Dictionary<string, object>();
+
+        public bool IsNullable => Extensions?.Get<bool>("x-nullable") ?? true;
     }
 }

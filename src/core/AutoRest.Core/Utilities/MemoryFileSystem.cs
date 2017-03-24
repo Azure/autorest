@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Core.Utilities
 {
-    // TODO: MemoryFileSystem is for testing. Consider moving to test project.
     public class MemoryFileSystem : IFileSystem, IDisposable
     {
         private const string FolderKey = "Folder";
@@ -50,31 +49,24 @@ namespace AutoRest.Core.Utilities
             }
         }
         
-        public void WriteFile(string path, string contents)
-        {
-            var directory = Path.GetDirectoryName(path);
-            if (!string.IsNullOrEmpty((directory)) && !VirtualStore.ContainsKey(directory))
-            {
-                throw new IOException(string.Format(CultureInfo.InvariantCulture, "Directory {0} does not exist.", directory));
-            }
-            var result = new StringBuilder();
-            var lines = contents.Split(new[] {"\r\n", "\r", "\n"}, StringSplitOptions.None);
-            var eol = path.LineEnding();
+        public void WriteAllText(string path, string contents)
+            => VirtualStore[path] = new StringBuilder(contents);
 
-            foreach (var l in lines)
-            {
-                result.Append(l);
-                result.Append(eol);
-            }
-            VirtualStore[path] = result;
-        }
-
-        public string ReadFileAsText(string path)
+        public string ReadAllText(string path)
         {
             if (VirtualStore.ContainsKey(path))
             {
                 return VirtualStore[path].ToString();
             }
+            else if (VirtualStore.ContainsKey(path.Replace("\\", "/")))
+            {
+                return VirtualStore[path.Replace("\\", "/")].ToString();
+            }
+            else if (VirtualStore.ContainsKey(path.Replace("/", "\\")))
+            {
+                return VirtualStore[path.Replace("/", "\\")].ToString();
+            }
+            
             throw new IOException("File not found: " + path);
         }
 
@@ -98,9 +90,9 @@ namespace AutoRest.Core.Utilities
         }
 
         public bool FileExists(string path)
-        {
-            return VirtualStore.ContainsKey(path);
-        }
+            => VirtualStore.ContainsKey(path) 
+            || VirtualStore.ContainsKey(path.Replace("/", "\\")) 
+            || VirtualStore.ContainsKey(path.Replace("\\", "/")); // TODO: uniform treatment
 
         public void DeleteFile(string path)
         {
@@ -110,44 +102,11 @@ namespace AutoRest.Core.Utilities
             }
         }
 
-        public void DeleteDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
-
-        public void EmptyDirectory(string directory)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(directory, StringComparison.Ordinal))
-                {
-                    VirtualStore.Remove(key);
-                }
-            }
-        }
-
         public bool DirectoryExists(string path)
-        {
-            foreach (var key in VirtualStore.Keys.ToArray())
-            {
-                if (key.StartsWith(path, StringComparison.Ordinal))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+            => VirtualStore.Keys.Any(key => key.StartsWith(path, StringComparison.Ordinal));
 
         public void CreateDirectory(string path)
-        {
-            VirtualStore[path] = new StringBuilder(FolderKey);
-        }
+            => VirtualStore[path] = new StringBuilder(FolderKey);
 
         public string[] GetDirectories(string startDirectory, string filePattern, SearchOption options)
         {
@@ -225,6 +184,27 @@ namespace AutoRest.Core.Utilities
                 _virtualStore?.Clear();
             }
         }
+
+        public void CommitToDisk(string targetDirectory)
+        {
+            var fs = new FileSystem();
+            foreach (var entry in VirtualStore)
+            {
+                if (entry.Value.ToString() == FolderKey)
+                {
+                    var targetDirName = Path.Combine(targetDirectory, entry.Key);
+                    fs.CreateDirectory(targetDirName);
+                }
+                else
+                {
+                    var targetFileName = Path.Combine(targetDirectory, entry.Key);
+                    var targetFileDir = Path.GetDirectoryName(targetFileName);
+                    fs.CreateDirectory(targetFileDir);
+                    fs.WriteAllText(targetFileName, entry.Value.ToString());
+                }
+            }
+        }
+
         public string CurrentDirectory
         {
             get

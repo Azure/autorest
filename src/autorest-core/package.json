@@ -1,0 +1,46 @@
+{
+  "name": "autorest-core",
+  "version": "1.0.1",
+  "description": "AutoRest",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/autorest.git"
+  },
+  "keywords": [
+    "autorest"
+  ],
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/autorest/issues"
+  },
+  "homepage": "https://github.com/Azure/autorest/readme.md",
+  "bin": {
+    "autorest": "./app.js"
+  },
+  "typings": "./index.d.ts",
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.22",
+    "typescript": "^2.1.5",
+    "@types/commonmark": "^0.22.29",
+    "@types/jsonpath": "^0.1.29",
+    "@types/pify": "0.0.28",
+    "@types/source-map": "^0.5.0",
+    "@types/urijs": "^1.15.31"
+  },
+  "dependencies": {
+    "commonmark": "^0.27.0",
+    "file-url": "^2.0.2",
+    "get-uri": "^2.0.0",
+    "jsonpath": "^0.2.11",
+    "linq-es2015": "^2.4.13",
+    "pify": "^2.3.0",
+    "source-map": "^0.5.6",
+    "strip-bom": "^3.0.0",
+    "urijs": "^1.18.7",
+    "vscode-jsonrpc": "^3.1.0",
+    "yaml-ast-parser": "https://github.com/olydis/yaml-ast-parser/releases/download/0.0.34/yaml-ast-parser-0.0.34.tgz",
+    "yargs": "^6.6.0"
+  }
+}

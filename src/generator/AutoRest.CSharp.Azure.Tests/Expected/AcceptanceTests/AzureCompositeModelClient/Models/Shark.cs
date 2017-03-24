@@ -8,19 +8,22 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("shark")]
+    [Newtonsoft.Json.JsonObject("shark")]
     public partial class Shark : Fish
     {
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark() { }
+        public Shark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Shark class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Age = age;
             Birthday = birthday;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -54,4 +63,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         }
     }
 }
-

@@ -7,9 +7,9 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
+using AutoRest.NodeJS.Templates;
 using Newtonsoft.Json;
 using static AutoRest.Core.Utilities.DependencyInjection;
 
@@ -59,6 +59,19 @@ namespace AutoRest.NodeJS.Model
             OptionsParameterModelType.Remove(prop => prop.Name == item.Name);
         }
 
+        public enum MethodFlavor
+        {
+            Callback,
+            Promise,
+            HttpOperationResponse
+        }
+
+        public enum Language
+        {
+            JavaScript,
+            TypeScript
+        }
+
         public override Parameter Add(Parameter item)
         {
             var parameter = base.Add(item) as ParameterJs;
@@ -79,12 +92,12 @@ namespace AutoRest.NodeJS.Model
                     Extensions = parameter.Extensions // optionalProperty.Extensions.AddRange(parameter.Extensions);
                 }));
             }
-            
+
             return parameter;
         }
 
         [JsonIgnore]
-        private CompositeType OptionsParameterModelType => ((CompositeType) OptionsParameterTemplateModel.ModelType);
+        private CompositeType OptionsParameterModelType => ((CompositeType)OptionsParameterTemplateModel.ModelType);
 
         [JsonIgnore]
         public IEnumerable<ParameterJs> ParameterTemplateModels => Parameters.Cast<ParameterJs>();
@@ -129,7 +142,6 @@ namespace AutoRest.NodeJS.Model
                 }
 
                 var declaration = string.Join(", ", declarations);
-                declaration += ", ";
                 return declaration;
             }
         }
@@ -165,9 +177,9 @@ namespace AutoRest.NodeJS.Model
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: { ");
+                declarations.Append("options?: { ");
                 var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.ModelType).Properties.OrderBy(each => each.Name == "customHeaders" ? 1 : 0).ToArray();
-                for(int i = 0; i < optionalParameters.Length; i++)
+                for (int i = 0; i < optionalParameters.Length; i++)
                 {
                     if (i != 0)
                     {
@@ -191,34 +203,45 @@ namespace AutoRest.NodeJS.Model
         }
 
         /// <summary>
-        /// Generate the method parameter declarations with callback for a method
+        /// Generate the method parameter declarations with callback or optionalCallback for a method
+        /// <param name="isCallbackOptional">If true, the method signature has an optional callback, otherwise the callback is required.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallback
+        public string MethodParameterDeclarationWithCallback(bool isCallbackOptional = false)
         {
-            get
+            var parameters = MethodParameterDeclaration;
+            if (isCallbackOptional)
             {
-                var parameters = MethodParameterDeclaration;
-                parameters += "callback";
-                return parameters;
+                parameters += ", optionalCallback";
             }
+            else
+            {
+                parameters += ", callback";
+            }
+            
+            return parameters;
         }
 
         /// <summary>
         /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+        /// <param name="isCallbackOptional">If true, the method signature has an optional callback, otherwise the callback is required.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
+        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions, bool isCallbackOptional = false)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
-
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));
 
             if (parameters.Length > 0)
                 parameters.Append(", ");
-
-            parameters.Append("callback: ServiceCallback<" + returnTypeTSString + ">");
+            if (isCallbackOptional)
+            {
+                parameters.Append("optionalCallback?: ServiceCallback<" + ReturnTypeTSString + ">");
+            }
+            else
+            {
+                parameters.Append("callback: ServiceCallback<" + ReturnTypeTSString + ">");
+            }
             return parameters.ToString();
         }
 
@@ -282,7 +305,7 @@ namespace AutoRest.NodeJS.Model
                         if (!visitedHash.Contains(param.ModelType.Name))
                         {
                             traversalStack.Push(param);
-                            foreach (var property in param.ComposedProperties.OrderBy( each => each.Name == "customHeaders"? 1:0)) //.OrderBy( each => each.Name.Else("")))
+                            foreach (var property in param.ComposedProperties.OrderBy(each => each.Name == "customHeaders" ? 1 : 0)) //.OrderBy( each => each.Name.Else("")))
                             {
                                 if (property.IsReadOnly || property.IsConstant)
                                 {
@@ -293,7 +316,7 @@ namespace AutoRest.NodeJS.Model
                                 propertyParameter.ModelType = property.ModelType;
                                 propertyParameter.IsRequired = property.IsRequired;
                                 propertyParameter.Name.FixedValue = param.Name + "." + property.Name;
-                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation}).Where(s => !string.IsNullOrEmpty(s)));
+                                string documentationString = string.Join(" ", (new[] { property.Summary, property.Documentation }).Where(s => !string.IsNullOrEmpty(s)));
                                 propertyParameter.Documentation = documentationString;
                                 traversalStack.Push(propertyParameter);
                             }
@@ -338,6 +361,25 @@ namespace AutoRest.NodeJS.Model
         }
 
         /// <summary>
+        /// Get the type name for the method's return type for TS
+        /// </summary>
+        [JsonIgnore]
+        public string ReturnTypeTSString
+        {
+            get
+            {
+                if (ReturnType.Body != null)
+                {
+                    return ReturnType.Body.TSType(false);
+                }
+                else
+                {
+                    return "void";
+                }
+            }
+        }
+
+        /// <summary>
         /// The Deserialization Error handling code block that provides a useful Error 
         /// message when exceptions occur in deserialization along with the request 
         /// and response object
@@ -349,8 +391,8 @@ namespace AutoRest.NodeJS.Model
             {
                 var builder = new IndentedStringBuilder("  ");
                 var errorVariable = this.GetUniqueName("deserializationError");
-                return builder.AppendLine("var {0} = new Error(util.format('Error \"%s\" occurred in " +
-                    "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
+                return builder.AppendLine("let {0} = new Error(`Error ${{JSON.stringify(error, null, 2)}} occurred in " +
+                    "deserializing the responseBody - ${{responseBody}}`);", errorVariable)
                     .AppendLine("{0}.request = msRest.stripRequest(httpRequest);", errorVariable)
                     .AppendLine("{0}.response = msRest.stripResponse(response);", errorVariable)
                     .AppendLine("return callback({0});", errorVariable).ToString();
@@ -360,7 +402,7 @@ namespace AutoRest.NodeJS.Model
         public string PopulateErrorCodeAndMessage()
         {
             var builder = new IndentedStringBuilder("  ");
-            if (DefaultResponse.Body != null && DefaultResponse.Body.Name.RawValue.Equals("CloudError", StringComparison.InvariantCultureIgnoreCase))
+            if (DefaultResponse.Body != null && DefaultResponse.Body.Name.RawValue.EqualsIgnoreCase("CloudError"))
             {
                 builder.AppendLine("if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;")
                        .AppendLine("if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;")
@@ -368,7 +410,7 @@ namespace AutoRest.NodeJS.Model
             }
             else
             {
-                builder.AppendLine("var internalError = null;")
+                builder.AppendLine("let internalError = null;")
                        .AppendLine("if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;")
                        .AppendLine("error.code = internalError ? internalError.code : parsedErrorResponse.code;")
                        .AppendLine("error.message = internalError ? internalError.message : parsedErrorResponse.message;");
@@ -419,7 +461,7 @@ namespace AutoRest.NodeJS.Model
                 typeName = "string";
             }
 
-            return typeName.ToLower(CultureInfo.InvariantCulture);
+            return typeName.ToLowerInvariant();
         }
 
         public string GetDeserializationString(IModelType type, string valueReference = "result", string responseVariable = "parsedResponse")
@@ -427,11 +469,11 @@ namespace AutoRest.NodeJS.Model
             var builder = new IndentedStringBuilder("  ");
             if (type is CompositeType)
             {
-                builder.AppendLine("var resultMapper = new client.models['{0}']().mapper();", type.Name);
+                builder.AppendLine("let resultMapper = new client.models['{0}']().mapper();", type.Name);
             }
             else
             {
-                builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable, null, false, false));
+                builder.AppendLine("let resultMapper = {{{0}}};", type.ConstructMapper(responseVariable, null, false, false));
             }
             builder.AppendLine("{1} = client.deserialize(resultMapper, {0}, '{1}');", responseVariable, valueReference);
             return builder.ToString();
@@ -464,7 +506,7 @@ namespace AutoRest.NodeJS.Model
                             builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", parameter.Name).Indent();
                             builder = parameter.ModelType.AppendConstraintValidations(parameter.Name, parameter.Constraints, builder);
                             builder.Outdent().AppendLine("}");
-                        }        
+                        }
                     }
                 }
                 return builder.ToString();
@@ -479,7 +521,7 @@ namespace AutoRest.NodeJS.Model
             }
 
             var builder = new IndentedStringBuilder("  ");
-            builder.AppendLine("var {0} = null;", responseVariable)
+            builder.AppendLine("let {0} = null;", responseVariable)
                    .AppendLine("try {")
                    .Indent()
                      .AppendLine("{0} = JSON.parse(responseBody);", responseVariable)
@@ -579,7 +621,7 @@ namespace AutoRest.NodeJS.Model
                 throw new ArgumentNullException(nameof(builder));
             }
 
-            builder.AppendLine("var queryParameters = [];");
+            builder.AppendLine("let queryParameters = [];");
             foreach (var queryParameter in LogicalParameters
                 .Where(p => p.Location == ParameterLocation.Query))
             {
@@ -623,7 +665,7 @@ namespace AutoRest.NodeJS.Model
                 {
                     pathReplaceFormat = "{0} = {0}.replace('{{{1}}}', {2});";
                 }
-                
+
                 builder.AppendLine(pathReplaceFormat, variableName, pathParameter.SerializedName,
                     pathParameter.ModelType.ToString(pathParameter.Name));
             }
@@ -648,11 +690,11 @@ namespace AutoRest.NodeJS.Model
                 var builder = new IndentedStringBuilder("  ");
                 if (RequestBody.ModelType is CompositeType)
                 {
-                    builder.AppendLine("var requestModelMapper = new client.models['{0}']().mapper();", RequestBody.ModelType.Name);
+                    builder.AppendLine("let requestModelMapper = new client.models['{0}']().mapper();", RequestBody.ModelType.Name);
                 }
                 else
                 {
-                    builder.AppendLine("var requestModelMapper = {{{0}}};",
+                    builder.AppendLine("let requestModelMapper = {{{0}}};",
                         RequestBody.ModelType.ConstructMapper(RequestBody.SerializedName, RequestBody, false, false));
                 }
                 return builder.ToString();
@@ -730,7 +772,7 @@ namespace AutoRest.NodeJS.Model
                     typeName = "string";
                 }
 
-                return typeName.ToLower(CultureInfo.InvariantCulture);
+                return typeName.ToLowerInvariant();
             }
         }
 
@@ -758,7 +800,7 @@ namespace AutoRest.NodeJS.Model
         public virtual bool AreWeFlatteningParameters()
         {
             bool result = true;
-            foreach(var transformation in InputParameterTransformation)
+            foreach (var transformation in InputParameterTransformation)
             {
                 var compositeOutputParameter = transformation.OutputParameter.ModelType as CompositeType;
                 if (compositeOutputParameter == null)
@@ -785,10 +827,10 @@ namespace AutoRest.NodeJS.Model
 
         public virtual string BuildFlattenParameterMappings()
         {
-            var builder = new IndentedStringBuilder();
+            var builder = new IndentedStringBuilder("  ");
             foreach (var transformation in InputParameterTransformation)
             {
-                builder.AppendLine("var {0};",
+                builder.AppendLine("let {0};",
                         transformation.OutputParameter.Name);
 
                 builder.AppendLine("if ({0}) {{", BuildNullCheckExpression(transformation))
@@ -822,18 +864,18 @@ namespace AutoRest.NodeJS.Model
                 // Declare all the output paramaters outside the try block
                 foreach (var transformation in InputParameterTransformation)
                 {
-                    if (transformation.OutputParameter.ModelType is CompositeType && 
+                    if (transformation.OutputParameter.ModelType is CompositeType &&
                         transformation.OutputParameter.IsRequired)
                     {
-                        builder.AppendLine("var {0} = new client.models['{1}']();",
+                        builder.AppendLine("let {0} = new client.models['{1}']();",
                             transformation.OutputParameter.Name,
                             transformation.OutputParameter.ModelType.Name);
                     }
                     else
                     {
-                        builder.AppendLine("var {0};", transformation.OutputParameter.Name);
+                        builder.AppendLine("let {0};", transformation.OutputParameter.Name);
                     }
-                    
+
                 }
                 builder.AppendLine("try {").Indent();
                 foreach (var transformation in InputParameterTransformation)
@@ -852,7 +894,7 @@ namespace AutoRest.NodeJS.Model
                                 transformation.OutputParameter.Name,
                                 transformation.OutputParameter.ModelType.Name);
                         }
-                        
+
                         noCompositeTypeInitialized = false;
                     }
 
@@ -888,7 +930,7 @@ namespace AutoRest.NodeJS.Model
             if (transformation.ParameterMappings.Count == 1)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "{0} !== null && {0} !== undefined", 
+                    "{0} !== null && {0} !== undefined",
                     transformation.ParameterMappings[0].InputParameter.Name);
             }
             else
@@ -900,9 +942,9 @@ namespace AutoRest.NodeJS.Model
             }
         }
 
-        public string  BuildOptionalMappings()
+        public string BuildOptionalMappings()
         {
-            IEnumerable<Core.Model.Property> optionalParameters = 
+            IEnumerable<Core.Model.Property> optionalParameters =
                 ((CompositeType)OptionsParameterTemplateModel.ModelType)
                 .Properties.Where(p => p.Name != "customHeaders");
             var builder = new IndentedStringBuilder("  ");
@@ -913,10 +955,95 @@ namespace AutoRest.NodeJS.Model
                 {
                     defaultValue = optionalParam.DefaultValue;
                 }
-                builder.AppendLine("var {0} = ({1} && {1}.{2} !== undefined) ? {1}.{2} : {3};", 
+                builder.AppendLine("let {0} = ({1} && {1}.{2} !== undefined) ? {1}.{2} : {3};",
                     optionalParam.Name, OptionsParameterTemplateModel.Name, optionalParam.Name, defaultValue);
             }
             return builder.ToString();
         }
-    }        
+
+        /// <summary>
+        /// Generates documentation for every method on the client.
+        /// </summary>
+        /// <param name="flavor">Describes the flavor of the method (Callback based, promise based, 
+        /// raw httpOperationResponse based) to be documented.</param>
+        /// <param name = "language" > Describes the language in which the method needs to be documented (Javascript (default), TypeScript).</param>
+        /// <returns></returns>
+        public string GenerateMethodDocumentation(MethodFlavor flavor, Language language = Language.JavaScript)
+        {
+            var template = new NodeJSTemplate<Object>();
+            var builder = new IndentedStringBuilder("  ");
+            builder.AppendLine("/**");
+            if (!String.IsNullOrEmpty(Summary))
+            {
+                builder.AppendLine(template.WrapComment(" * ", "@summary " + Summary)).AppendLine(" *");
+            }
+            if (!String.IsNullOrEmpty(Description))
+            {
+                builder.AppendLine(template.WrapComment(" * ", Description)).AppendLine(" *");
+            }
+            foreach (var parameter in DocumentationParameters)
+            {
+                var paramDoc = $"@param {{{GetParameterDocumentationType(parameter)}}} {GetParameterDocumentationName(parameter)} {parameter.Documentation}";
+                builder.AppendLine(ConstructParameterDocumentation(template.WrapComment(" * ", paramDoc)));
+            }
+            if (flavor == MethodFlavor.HttpOperationResponse)
+            {
+                var errorType = (language == Language.JavaScript) ?  "Error" : "Error|ServiceError";
+                builder.AppendLine(" * @returns {Promise} A promise is returned").AppendLine(" *")
+                    .AppendLine(" * @resolve {{HttpOperationResponse<{0}>}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                    .AppendLine(" * @reject {{{0}}} - The error object.", errorType);
+            }
+            else
+            {
+                if (language == Language.JavaScript)
+                {
+                    if (flavor == MethodFlavor.Callback)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {function} callback - The callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {function} callback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    else if (flavor == MethodFlavor.Promise)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {function} [optionalCallback] - The optional callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {function|Promise} If a callback was passed as the last parameter " +
+                            "then it returns the callback else returns a Promise.")).AppendLine(" *")
+                            .AppendLine(" * {Promise} A promise is returned").AppendLine(" *")
+                            .AppendLine(" *                      @resolve {{{0}}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                            .AppendLine(" *                      @reject {Error} - The error object.").AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", "{function} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    builder.AppendLine(" *                      {Error}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
+                        .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object if an error did not occur.", DocumentReturnTypeString)
+                        .AppendLine(template.WrapComment(" *                      ", ReturnTypeInfo)).AppendLine(" *")
+                        .AppendLine(" *                      {object} [request]  - The HTTP Request object if an error did not occur.").AppendLine(" *")
+                        .AppendLine(" *                      {stream} [response] - The HTTP Response stream if an error did not occur.");
+                }
+                else
+                {
+                    if (flavor == MethodFlavor.Callback)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {ServiceCallback} callback - The callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {ServiceCallback} callback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    else if (flavor == MethodFlavor.Promise)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {ServiceCallback} [optionalCallback] - The optional callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {ServiceCallback|Promise} If a callback was passed as the last parameter " +
+                            "then it returns the callback else returns a Promise.")).AppendLine(" *")
+                            .AppendLine(" * {Promise} A promise is returned.").AppendLine(" *")
+                            .AppendLine(" *                      @resolve {{{0}}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                            .AppendLine(" *                      @reject {Error|ServiceError} - The error object.").AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", "{ServiceCallback} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    builder.AppendLine(" *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
+                        .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object if an error did not occur.", ReturnTypeString)
+                        .AppendLine(template.WrapComment(" *                      ", ReturnTypeInfo)).AppendLine(" *")
+                        .AppendLine(" *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.").AppendLine(" *")
+                        .AppendLine(" *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.");
+                }
+            }
+            builder.AppendLine(" */");
+            return builder.ToString();
+        }
+    }
 }

@@ -249,6 +249,7 @@ namespace AutoRest.Swagger
                             methodName,
                             response.Key));
                     }
+                    method.Responses[response.Key.ToHttpStatusCode()].Extensions = response.Value.Extensions;
                 }
             }
 
@@ -402,6 +403,7 @@ namespace AutoRest.Swagger
                 if (TryBuildResponseBody(methodName, response, s => GenerateErrorModelName(s), out errorModel))
                 {
                     method.DefaultResponse = new Response(errorModel, headerType);
+                    method.DefaultResponse.Extensions = response.Extensions;
                 }
             }
         }

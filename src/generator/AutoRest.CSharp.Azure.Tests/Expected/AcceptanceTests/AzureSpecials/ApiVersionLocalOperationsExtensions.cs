@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -44,7 +44,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodLocalValidAsync(this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -79,7 +79,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetMethodLocalNullAsync(this IApiVersionLocalOperations operations, string apiVersion = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodLocalNullWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetMethodLocalNullWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -106,7 +106,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetPathLocalValidAsync(this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetPathLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetPathLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -133,9 +133,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetSwaggerLocalValidAsync(this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetSwaggerLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

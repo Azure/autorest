@@ -641,7 +641,7 @@ namespace AutoRest.Java.Model
                 builder.AppendLine("if (serviceCallback != null) {")
                     .Indent().AppendLine("serviceCallback.success(clientResponse);", ReturnTypeJv.GenericBodyClientTypeString)
                     .Outdent().AppendLine("}");
-                builder.AppendLine("serviceCall.success(clientResponse);");
+                builder.AppendLine("serviceFuture.success(clientResponse);");
             }
             else
             {
@@ -649,7 +649,7 @@ namespace AutoRest.Java.Model
                 builder.AppendLine("if (serviceCallback != null) {")
                     .Indent().AppendLine("serviceCallback.success(clientResponse);", this.Name)
                     .Outdent().AppendLine("}");
-                builder.AppendLine("serviceCall.success(clientResponse);");
+                builder.AppendLine("serviceFuture.success(clientResponse);");
             }
             return builder.ToString();
         }
@@ -675,7 +675,7 @@ namespace AutoRest.Java.Model
         }
 
         [JsonIgnore]
-        public virtual string ServiceCallFactoryMethod
+        public virtual string ServiceFutureFactoryMethod
         {
             get
             {
@@ -705,14 +705,20 @@ namespace AutoRest.Java.Model
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("rx.Observable");
-                imports.Add("com.microsoft.rest.ServiceCall");
+                imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.OfType<ParameterJv>().ForEach(p => imports.AddRange(p.InterfaceImports));
                 // return type
                 imports.AddRange(this.ReturnTypeJv.InterfaceImports);
-                return imports.ToList();
+                // exceptions
+                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                    .ForEach(ex =>
+                    {
+                        string exceptionImport = CodeNamerJv.GetJavaException(ex, CodeModel);
+                        if (exceptionImport != null) imports.Add(CodeNamerJv.GetJavaException(ex, CodeModel));
+                    });                return imports.ToList();
             }
         }
 
@@ -738,7 +744,7 @@ namespace AutoRest.Java.Model
                 {
                     imports.Add("okhttp3.ResponseBody");
                 }
-                imports.Add("com.microsoft.rest.ServiceCall");
+                imports.Add("com.microsoft.rest.ServiceFuture");
                 imports.Add("com.microsoft.rest." + ReturnTypeJv.ClientResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 this.RetrofitParameters.ForEach(p => imports.AddRange(p.RetrofitImports));

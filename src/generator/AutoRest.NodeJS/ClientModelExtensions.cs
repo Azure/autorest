@@ -150,7 +150,7 @@ namespace AutoRest.NodeJS
         private static IndentedStringBuilder ConstructValidationCheck(IndentedStringBuilder builder, string errorMessage, string valueReference, string typeName)
         {
             var escapedValueReference = valueReference.EscapeSingleQuotes();
-            var lowercaseTypeName = typeName.ToLower(CultureInfo.InvariantCulture);
+            var lowercaseTypeName = typeName.ToLowerInvariant();
 
             return builder.Indent()
                             .AppendLine(errorMessage, escapedValueReference, lowercaseTypeName)
@@ -321,7 +321,7 @@ namespace AutoRest.NodeJS
 
             builder.AppendLine("if ({0}) {{", valueReference)
                         .Indent()
-                            .AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
+                            .AppendLine("let {0} = {1};", allowedValues, enumType.GetEnumValuesArray())
                             .AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, valueReference)
                             .Indent()
                                 .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", valueReference, allowedValues)
@@ -381,22 +381,22 @@ namespace AutoRest.NodeJS
             {
                 if (isRequired)
                 {
-                    return builder.AppendLine("if (!util.isArray({0})) {{", valueReference)
+                    return builder.AppendLine("if (!Array.isArray({0})) {{", valueReference)
                         .Indent()
                           .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
                           escapedValueReference, sequence.Name.ToLower())
                         .Outdent()
                       .AppendLine("}")
-                      .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
+                      .AppendLine("for (let {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
                             .Indent()
                               .AppendLine(innerValidation)
                             .Outdent()
                           .AppendLine("}").ToString();
                 }
 
-                return builder.AppendLine("if (util.isArray({0})) {{", valueReference)
+                return builder.AppendLine("if (Array.isArray({0})) {{", valueReference)
                         .Indent()
-                          .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
+                          .AppendLine("for (let {1} = 0; {1} < {0}.length; {1}++) {{", valueReference, indexVar)
                             .Indent()
                               .AppendLine(innerValidation)
                             .Outdent()
@@ -429,7 +429,7 @@ namespace AutoRest.NodeJS
                             escapedValueReference, dictionary.Name.ToLower())
                         .Outdent()
                       .AppendLine("}")
-                      .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                      .AppendLine("for(let {0} in {1}) {{", valueVar, valueReference)
                         .Indent()
                           .AppendLine(innerValidation)
                         .Outdent()
@@ -438,7 +438,7 @@ namespace AutoRest.NodeJS
 
                 return builder.AppendLine("if ({0} && typeof {0} === 'object') {{", valueReference)
                         .Indent()
-                          .AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
+                          .AppendLine("for(let {0} in {1}) {{", valueVar, valueReference)
                             .Indent()
                               .AppendLine(innerValidation)
                             .Outdent()

@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsParameterFlattening.Models
 {
-    using AcceptanceTestsParameterFlattening;
+    using Fixtures.AcceptanceTestsParameterFlattening;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         /// Initializes a new instance of the AvailabilitySetUpdateParameters
         /// class.
         /// </summary>
-        public AvailabilitySetUpdateParameters() { }
+        public AvailabilitySetUpdateParameters()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the AvailabilitySetUpdateParameters
@@ -31,7 +34,13 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         public AvailabilitySetUpdateParameters(IDictionary<string, string> tags)
         {
             Tags = tags;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets a set of tags.
@@ -57,4 +66,3 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
         }
     }
 }
-

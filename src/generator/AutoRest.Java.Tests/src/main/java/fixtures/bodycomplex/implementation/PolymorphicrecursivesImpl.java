@@ -13,8 +13,8 @@ package fixtures.bodycomplex.implementation;
 import retrofit2.Retrofit;
 import fixtures.bodycomplex.Polymorphicrecursives;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.bodycomplex.models.ErrorException;
@@ -68,6 +68,9 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Fish object if successful.
      */
     public Fish getValid() {
@@ -78,15 +81,17 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
-        return ServiceCall.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+        return ServiceFuture.fromResponse(getValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Fish object
      */
     public Observable<Fish> getValidAsync() {
@@ -101,6 +106,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
     /**
      * Get complex types that are polymorphic and have recursive references.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Fish object
      */
     public Observable<ServiceResponse<Fish>> getValidWithServiceResponseAsync() {
@@ -181,6 +187,9 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putValid(Fish complexBody) {
         putValidWithServiceResponseAsync(complexBody).toBlocking().single().body();
@@ -243,10 +252,11 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
+    public ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putValidWithServiceResponseAsync(complexBody), serviceCallback);
     }
 
     /**
@@ -305,6 +315,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putValidAsync(Fish complexBody) {
@@ -372,6 +383,7 @@ public class PolymorphicrecursivesImpl implements Polymorphicrecursives {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Fish complexBody) {

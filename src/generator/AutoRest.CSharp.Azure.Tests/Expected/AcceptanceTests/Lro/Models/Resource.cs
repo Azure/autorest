@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Azure;
-    using AcceptanceTestsLro;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsLro;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Newtonsoft.Json;
@@ -22,7 +22,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the Resource class.
         /// </summary>
-        public Resource() { }
+        public Resource()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Resource class.
@@ -38,19 +41,25 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
             Tags = tags;
             Location = location;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; protected set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets resource Type
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; protected set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -67,8 +76,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// Gets resource Name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
     }
 }
-

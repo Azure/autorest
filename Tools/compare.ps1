@@ -27,11 +27,11 @@ $null = mkdir -ea 0 $newRoot
 
 if( -not $lastAutorest  ) {
   # install last nightly build.
-  write-host -fore green "Installing latest nightly autorest."
-  $null = &"$PSScriptRoot\NuGet.exe" install autorest -source https://www.myget.org/F/autorest/api/v3/index.json -prerelease -Version 0.17.3-Nightly20161101 -outputdirectory $baseFolder
+  # write-host -fore green "Installing latest nightly autorest."
+  # $null = &"$PSScriptRoot\NuGet.exe" install autorest -source https://www.myget.org/F/autorest/api/v3/index.json -prerelease -Version 0.17.3-Nightly20161101 -outputdirectory $baseFolder
 
   # get autorest nightly exe
-  $lastAutoRest = (dir "$baseFolder\autorest*\tools\AutoRest.exe").FullName
+  $lastAutoRest = (dir "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
 }
 
 if( -not (resolve-path $lastAutoRest -ea 0 )) {
@@ -39,7 +39,7 @@ if( -not (resolve-path $lastAutoRest -ea 0 )) {
 }
 
 if( -not $newAutoRest  ) {
-  $newAutorest = (dir "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\net451\win7-x64\AutoRest.exe").FullName
+  $newAutorest = (dir "$PSScriptRoot\..\src\core\AutoRest\bin\Debug\netcoreapp1.0\node_modules\autorest-core\app.js").FullName
 }
 
 if( -not (resolve-path $newAutorest -ea 0 )) {
@@ -66,11 +66,11 @@ function ProcessBackgroundJobs() {
 $scrp = { 
   param($lastexe, $newexe, $commonFolder,$uniqueName ,$spec, $gen, $modeler, $notrim)
   $output = "$lastexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\Last\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
-  $output += &$lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
+  $output += &node $lastexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\Last\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
   # set-content -value $output -path "$commonFolder\last\$uniqueName\output-$gen.txt"
   
-  write-output "$newexe `n-Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
-  $output += &$newexe -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
+  write-output "$newexe `n-FANCY -Namespace Test.NameSpace -OutputDirectory  ""$commonFolder\New\$uniqueName\$gen"" -input $spec -CodeGenerator $gen -verbose -modeler $modeler`n"
+  $output += &node $newexe -FANCY -Namespace Test.NameSpace -OutputDirectory  "$commonFolder\New\$uniqueName\$gen" -input $spec -CodeGenerator $gen -verbose -modeler $modeler
   #set-content -value $output -path "$commonFolder\new\$uniqueName\output-$gen.txt"
 
   if( !$notrim ) {
@@ -95,8 +95,22 @@ $scrp = {
   }
 }
 
-# @("Azure.CSharp", "Azure.Python", "Azure.NodeJS", "Azure.CSharp") |% {
- @("Azure.Java", "Azure.Java.Fluent" ) |% {
+@( "CSharp",
+ "Azure.CSharp",
+ "Azure.CSharp.Fluent",
+ "AzureResourceSchema",
+ "Ruby",
+ "Azure.Ruby",
+ "NodeJS",
+ "Azure.NodeJS",
+ "Python",
+ "Azure.Python",
+ "Go",
+ "Java",
+ "Azure.Java",
+ "Azure.Java.Fluent" ) |% {
+
+# @( "CSharp" ) |% {
   $gen = $_;
  
 

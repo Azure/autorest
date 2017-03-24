@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the Siamese class.
         /// </summary>
-        public Siamese() { }
+        public Siamese()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Siamese class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             : base(id, name, color, hates)
         {
             Breed = breed;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -37,4 +46,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

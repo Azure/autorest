@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\JobDefinitionsOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"JobDefinitionsOperations.cs"));
 
                 var result = await Compile(fileSystem);
                 // filter the warnings
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that class with the expected name is present

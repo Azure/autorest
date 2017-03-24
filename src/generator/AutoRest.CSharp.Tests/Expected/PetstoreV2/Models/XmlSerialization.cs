@@ -87,4 +87,3 @@ namespace Fixtures.PetstoreV2
         }
     }
 }
-

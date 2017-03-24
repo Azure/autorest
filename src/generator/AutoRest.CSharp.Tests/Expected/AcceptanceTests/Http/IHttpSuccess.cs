@@ -301,4 +301,3 @@ namespace Fixtures.AcceptanceTestsHttp
         Task<HttpOperationResponse> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

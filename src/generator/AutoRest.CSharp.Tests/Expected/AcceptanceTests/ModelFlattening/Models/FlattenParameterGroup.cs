@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using AcceptanceTestsModelFlattening;
+    using Fixtures.AcceptanceTestsModelFlattening;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -23,7 +23,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.
         /// </summary>
-        public FlattenParameterGroup() { }
+        public FlattenParameterGroup()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.
@@ -46,7 +49,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             MaxProductDisplayName = maxProductDisplayName;
             GenericValue = genericValue;
             Odatavalue = odatavalue;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets product name with value 'groupproduct'
@@ -110,4 +119,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
     }
 }
-

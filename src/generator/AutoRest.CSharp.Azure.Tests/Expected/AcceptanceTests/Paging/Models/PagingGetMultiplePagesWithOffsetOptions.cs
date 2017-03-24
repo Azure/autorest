@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using Azure;
-    using AcceptanceTestsPaging;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsPaging;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// Initializes a new instance of the
         /// PagingGetMultiplePagesWithOffsetOptions class.
         /// </summary>
-        public PagingGetMultiplePagesWithOffsetOptions() { }
+        public PagingGetMultiplePagesWithOffsetOptions()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -40,7 +43,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
             Maxresults = maxresults;
             Offset = offset;
             Timeout = timeout;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets sets the maximum number of items to return in the
@@ -74,4 +83,3 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         }
     }
 }
-

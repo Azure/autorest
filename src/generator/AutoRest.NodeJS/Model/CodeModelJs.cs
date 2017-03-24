@@ -216,5 +216,7 @@ namespace AutoRest.NodeJS.Model
                     m => m.Parameters.FirstOrDefault(p => p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan)) != null) != null;
             }
         }
+
+        public override IEnumerable<string> MyReservedNames => new[] { Name.Value };
     }
 }

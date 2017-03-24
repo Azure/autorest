@@ -11,7 +11,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Tag class.
         /// </summary>
-        public Tag() { }
+        public Tag()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Tag class.
@@ -20,7 +23,13 @@ namespace Petstore.Models
         {
             Id = id;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -74,4 +83,3 @@ namespace Petstore.Models
         }
     }
 }
-

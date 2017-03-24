@@ -1,44 +1,69 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // 
-using AutoRest.Core;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using AutoRest.Core.Utilities;
-using Microsoft.CodeAnalysis;
-using Microsoft.Rest.CSharp.Compiler.Compilation;
-using Xunit.Abstractions;
-using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
 
-namespace AutoRest.CSharp.Unit.Tests
-{
-    public class BugTest
-    {
-        private ITestOutputHelper _output;
-        internal static string[] SuppressWarnings = {"CS1701", "CS1591" , "CS1573"};
+namespace AutoRest.CSharp.Unit.Tests {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Runtime.Serialization;
+    using System.Threading.Tasks;
+    using Core.Utilities;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.CodeAnalysis;
+    using Microsoft.Rest;
+    using Microsoft.Rest.Azure;
+    using Microsoft.Rest.CSharp.Compiler.Compilation;
+    using Newtonsoft.Json;
+    using Xunit.Abstractions;
+    using OutputKind = Microsoft.Rest.CSharp.Compiler.Compilation.OutputKind;
+    using System.Reflection;
+#if !LEGACY
+    using System.Runtime.Loader;
+#else     
+#endif    
+    
+
+    public class BugTest {
+        internal static string[] SuppressWarnings = {"CS1701","CS1702", "CS1591"};
         //Todo: Remove CS1591 when issue https://github.com/Azure/autorest/issues/1387 is fixed
-
 
         internal static string[] VsCode = new string[] {
             @"C:\Program Files (x86)\Microsoft VS Code Insiders\Code - Insiders.exe",
             @"C:\Program Files (x86)\Microsoft VS Code\Code.exe"
         };
 
-        
+        protected Assembly LoadAssembly(MemoryStream stream) {
+#if !Legacy
+            return AssemblyLoadContext.Default.LoadFromStream(stream);
+#else 
+           return Assembly.Load(stream.ToArray());
+#endif            
+        }
+
         internal static char Q = '"';
+        private ITestOutputHelper _output;
+
+        public BugTest(ITestOutputHelper output) {
+            _output = output;
+        }
+
+        public BugTest() {
+        }
+
         internal static string Quote(string text) => $"{Q}{text}{Q}";
 
         /// <summary>
-        ///  Tries to run VSCode 
+        ///     Tries to run VSCode
         /// </summary>
         /// <param name="args"></param>
-        internal bool StartVsCode(params object[] args)
-        {
+        internal bool StartVsCode(params object[] args) {
+            /*
             ProcessStartInfo startInfo = null;
             foreach (var exe in VsCode)
             {
@@ -59,149 +84,149 @@ namespace AutoRest.CSharp.Unit.Tests
             {
                 return Process.Start(startInfo) != null;
             }
-
+            */
             return false;
         }
 
-        internal void ShowGeneratedCode(IFileSystem fileSystem)
-        {
+        internal void ShowGeneratedCode(IFileSystem fileSystem) {
             InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name));
         }
 
-        internal void InspectWithFavoriteCodeEditor(string folder, FileLinePositionSpan? span = null)
-        {
-            if (span != null)
-            {
+        internal void InspectWithFavoriteCodeEditor(string folder, FileLinePositionSpan? span = null) {
+            if (span != null) {
                 FileLinePositionSpan s = (FileLinePositionSpan)span;
                 // when working locally on windows we can pop up vs code to see if the code failure.
                 if (!StartVsCode(
                     folder,
                     "-g",
-                    $"{Path.Combine(folder, s.Path)}:{s.StartLinePosition.Line + 1}:{s.StartLinePosition.Character + 1}"))
-                {
+                    $"{Path.Combine(folder, s.Path)}:{s.StartLinePosition.Line + 1}:{s.StartLinePosition.Character + 1}")) {
                     // todo: add code here to try another editor?
                 }
-            }
-            else
-            {
+            } else {
                 StartVsCode(folder);
             }
         }
-        public BugTest(ITestOutputHelper output)
-        {
-            _output = output;
+
+        protected virtual MemoryFileSystem CreateMockFilesystem() => new MemoryFileSystem();
+
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger") {
+            return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
         }
 
-        public BugTest()
-        {
-        }
-
-        protected virtual MemoryFileSystem CreateMockFilesystem()
-        {
-            var fs = new MemoryFileSystem();
-            fs.CopyFile(Path.Combine("Resource", "AutoRest.json"), "AutoRest.json");
-            return fs;
-        }
-
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string codeGenerator = "CSharp", string modeler = "Swagger")
-        {
-           return GenerateCodeForTestFromSpec($"{GetType().Name}", codeGenerator, modeler);
-        }
-
-        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator="CSharp", string modeler = "Swagger")
-        {
+        protected virtual MemoryFileSystem GenerateCodeForTestFromSpec(string dirName, string codeGenerator = "CSharp", string modeler = "Swagger") {
             var fs = CreateMockFilesystem();
-            dirName.GenerateCodeInto(fs, codeGenerator, modeler);
-            return fs;
+            return dirName.GenerateCodeInto(fs, codeGenerator, modeler);
         }
 
-        protected virtual void WriteLine(object value)
-        {
-            if (value != null)
-            {
+        protected virtual void WriteLine(object value) {
+            if (value != null) {
                 _output?.WriteLine(value.ToString());
                 Debug.WriteLine(value.ToString());
-            }
-            else
-            {
+            } else {
                 _output?.WriteLine("<null>");
                 Debug.WriteLine("<null>");
             }
         }
 
-        protected virtual void WriteLine(string format, params object[] values)
-        {
-            if (format != null)
-            {
-                if (values != null && values.Length > 0)
-                {
+        protected virtual void WriteLine(string format, params object[] values) {
+            if (format != null) {
+                if (values != null && values.Length > 0) {
                     _output?.WriteLine(format, values);
                     Debug.WriteLine(format, values);
-                }
-                else
-                {
+                } else {
                     _output?.WriteLine(format);
                     Debug.WriteLine(format);
                 }
-            }
-            else
-            {
+            } else {
                 _output?.WriteLine("<null>");
                 Debug.WriteLine("<null>");
             }
         }
 
-        protected void Write(IEnumerable<Diagnostic> messages, MemoryFileSystem fileSystem)
-        {
-            if (messages.Any())
-            {
-                foreach (var file in messages.GroupBy(each => each.Location?.SourceTree?.FilePath, each => each))
-                {
+        protected void Write(IEnumerable<Diagnostic> messages, MemoryFileSystem fileSystem) {
+            if (messages.Any()) {
+                foreach (var file in messages.GroupBy(each => each.Location?.SourceTree?.FilePath, each => each)) {
                     var text = file.Key != null ? fileSystem.VirtualStore[file.Key].ToString() : string.Empty;
 
-                    foreach (var error in file)
-                    {
+                    foreach (var error in file) {
                         WriteLine(error.ToString());
                         // WriteLine(text.Substring(error.Location.SourceSpan.Start, error.Location.SourceSpan.Length));
                     }
                 }
             }
         }
+        
+        protected static string DOTNET = Path.GetDirectoryName( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        protected static string Shared = Path.Combine( DOTNET, "shared", "Microsoft.NETCore.App" );
 
-        protected async Task<CompilationResult> Compile(IFileSystem fileSystem)
-        {
-            string dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var assemblies = new[]
-                        {
-                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.dll"),
-                            Path.Combine(dllPath, "Microsoft.Rest.ClientRuntime.Azure.dll")
-                        };
-            assemblies = assemblies.ToList().Concat(System.IO.Directory.GetFiles(dllPath, "*.dll", System.IO.SearchOption.TopDirectoryOnly).Where(f => Path.GetFileName(f).StartsWith("Microsoft.AspNetCore."))).ToArray();
-                
-            var compiler = new CSharpCompiler(
-                fileSystem.GetFiles("GeneratedCode", "*.cs", SearchOption.AllDirectories)
-                    .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadFileAsText(each))).ToArray(),
-                ManagedAssets.FrameworkAssemblies.Concat(
-                    AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(each => !each.IsDynamic && !string.IsNullOrEmpty(each.Location) )
-                        .Select(each => each.Location)
-                        .Concat(assemblies)
-                    ));
-            
-            var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
-            
-            // if it failed compiling and we're in an interactive session
-            if (!result.Succeeded && System.Environment.OSVersion.Platform == PlatformID.Win32NT && System.Environment.UserInteractive)
+        private static int VerNum(string version) 	{
+            int n = 0;
+            foreach (var i in version.Split('.'))
             {
-                var error = result.Messages.FirstOrDefault(each => each.Severity == DiagnosticSeverity.Error);
-                if (error != null)
+                int p;
+                if (!Int32.TryParse(i, out p))
                 {
+                    return n;
+                }
+                n = (n << 8) + p;
+            }
+            return n;
+        }
+        private static string _framework;
+        protected static string FRAMEWORK { 
+            get {
+                if (string.IsNullOrEmpty(_framework ) ) {
+                    _framework = Path.Combine( Shared, Directory.EnumerateDirectories(Shared).OrderBy( each => VerNum(each) ).FirstOrDefault());
+                }
+                return _framework;
+            }
+        }
+
+        protected static readonly string[] _assemblies = new[] {
+            
+            Path.Combine(FRAMEWORK, "System.Runtime.dll"),
+            Path.Combine(FRAMEWORK, "System.Net.Http.dll"),
+            Path.Combine(FRAMEWORK, "mscorlib.dll"),
+            Path.Combine(FRAMEWORK, "System.Threading.Tasks.dll"),
+            Path.Combine(FRAMEWORK, "System.Net.Primitives.dll"),
+            Path.Combine(FRAMEWORK, "System.Collections.dll"),
+            Path.Combine(FRAMEWORK, "System.Text.Encoding.dll"),
+            Path.Combine(FRAMEWORK, "System.Text.RegularExpressions.dll"),
+            Path.Combine(FRAMEWORK, "System.IO.dll"),
+            
+
+            typeof(Object).GetAssembly().Location,
+            typeof(Attribute).GetAssembly().Location,
+            typeof(IAzureClient).GetAssembly().Location,
+            typeof(RestException).GetAssembly().Location,
+            typeof(Uri).GetAssembly().Location,
+            typeof(File).GetAssembly().Location,
+            typeof(ActionContext).GetAssembly().Location,
+            typeof(Controller).GetAssembly().Location,
+            typeof(Enumerable).GetAssembly().Location,
+            typeof(JsonArrayAttribute).GetAssembly().Location,
+            typeof(EnumMemberAttribute).GetAssembly().Location,
+            typeof(InlineRouteParameterParser).GetAssembly().Location,
+            typeof(ControllerBase).GetAssembly().Location,
+
+        };
+
+        protected async Task<Microsoft.Rest.CSharp.Compiler.Compilation.CompilationResult> Compile(IFileSystem fileSystem) {
+            var compiler = new CSharpCompiler(fileSystem.GetFiles("", "*.cs", SearchOption.AllDirectories)
+                .Select(each => new KeyValuePair<string, string>(each, fileSystem.ReadAllText(each))).ToArray(), _assemblies);
+            var result = await compiler.Compile(OutputKind.DynamicallyLinkedLibrary);
+
+#if false
+            // if it failed compiling and we're in an interactive session
+            if (!result.Succeeded && Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.UserInteractive) {
+                var error = result.Messages.FirstOrDefault(each => each.Severity == DiagnosticSeverity.Error);
+                if (error != null) {
                     // use this to dump the files to disk for examination
                     // open in Favorite Code Editor
                     InspectWithFavoriteCodeEditor(fileSystem.SaveFilesToTemp(GetType().Name), error.Location.GetMappedLineSpan());
                 }
             }
-
+#endif 
             return result;
         }
     }

@@ -59,9 +59,8 @@ namespace Fixtures.AcceptanceTestsParameterFlattening
             /// </param>
             public static async Task UpdateAsync(this IAvailabilitySets operations, string resourceGroupName, string avset, IDictionary<string, string> tags, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.UpdateWithHttpMessagesAsync(resourceGroupName, avset, tags, null, cancellationToken).ConfigureAwait(false);
+                (await operations.UpdateWithHttpMessagesAsync(resourceGroupName, avset, tags, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

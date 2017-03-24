@@ -13,7 +13,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Resource class.
         /// </summary>
-        public Resource() { }
+        public Resource()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Resource class.
@@ -30,25 +33,31 @@ namespace Petstore.Models
             Type = type;
             Location = location;
             Tags = tags;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; protected set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets resource name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Gets resource type
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; protected set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// Gets or sets resource location
@@ -64,4 +73,3 @@ namespace Petstore.Models
 
     }
 }
-

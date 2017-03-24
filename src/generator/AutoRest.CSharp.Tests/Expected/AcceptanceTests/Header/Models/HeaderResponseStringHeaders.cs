@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using AcceptanceTestsHeader;
+    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseStringHeaders
         /// class.
         /// </summary>
-        public HeaderResponseStringHeaders() { }
+        public HeaderResponseStringHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseStringHeaders
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseStringHeaders(string value = default(string))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header values "The quick brown fox jumps
@@ -43,4 +52,3 @@ namespace Fixtures.AcceptanceTestsHeader.Models
 
     }
 }
-

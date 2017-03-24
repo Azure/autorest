@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
         /// </summary>
-        public ArrayWrapper() { }
+        public ArrayWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ArrayWrapper class.
@@ -27,7 +30,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public ArrayWrapper(IList<string> array = default(IList<string>))
         {
             Array = array;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -36,4 +45,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
-

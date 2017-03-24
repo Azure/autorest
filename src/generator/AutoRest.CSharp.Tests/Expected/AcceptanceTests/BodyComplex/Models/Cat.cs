@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Cat class.
         /// </summary>
-        public Cat() { }
+        public Cat()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Cat class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Color = color;
             Hates = hates;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -43,4 +52,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
-

@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the BasicInner class.
         /// </summary>
-        public BasicInner() { }
+        public BasicInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the BasicInner class.
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
             Id = id;
             Name = name;
             Color = color;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets basic Id
@@ -56,4 +65,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

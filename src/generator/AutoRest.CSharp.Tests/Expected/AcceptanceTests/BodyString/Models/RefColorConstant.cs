@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyString.Models
 {
-    using AcceptanceTestsBodyString;
+    using Fixtures.AcceptanceTestsBodyString;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         /// <summary>
         /// Initializes a new instance of the RefColorConstant class.
         /// </summary>
-        public RefColorConstant() { }
+        public RefColorConstant()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the RefColorConstant class.
@@ -26,6 +29,7 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         public RefColorConstant(string field1 = default(string))
         {
             Field1 = field1;
+            CustomInit();
         }
         /// <summary>
         /// Static constructor for RefColorConstant class.
@@ -34,6 +38,11 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
         {
             ColorConstant = "green-color";
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets sample string.
@@ -49,4 +58,3 @@ namespace Fixtures.AcceptanceTestsBodyString.Models
 
     }
 }
-

@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Azure;
-    using AcceptanceTestsLro;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsLro;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -24,7 +24,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner
         /// class.
         /// </summary>
-        public LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner() { }
+        public LRORetrysDeleteProvisioning202Accepted200SucceededHeadersInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the
@@ -40,7 +43,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             Location = location;
             RetryAfter = retryAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets location to poll for result status: will be set to
@@ -58,4 +67,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     }
 }
-

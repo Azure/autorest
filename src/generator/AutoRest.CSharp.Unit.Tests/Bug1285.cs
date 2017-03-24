@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\DeprecatedExtensions.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\ApprovedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
+                Assert.True(fileSystem.FileExists(@"DeprecatedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"ApprovedExtensions.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operation is marked correctly

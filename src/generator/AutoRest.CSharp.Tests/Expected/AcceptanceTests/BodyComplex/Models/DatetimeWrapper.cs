@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the DatetimeWrapper class.
         /// </summary>
-        public DatetimeWrapper() { }
+        public DatetimeWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DatetimeWrapper class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Field = field;
             Now = now;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -40,4 +49,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
-

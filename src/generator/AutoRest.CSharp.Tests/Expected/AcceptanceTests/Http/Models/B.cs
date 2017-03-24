@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHttp.Models
 {
-    using AcceptanceTestsHttp;
+    using Fixtures.AcceptanceTestsHttp;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsHttp.Models
         /// <summary>
         /// Initializes a new instance of the B class.
         /// </summary>
-        public B() { }
+        public B()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the B class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsHttp.Models
             : base(statusCode)
         {
             TextStatusCode = textStatusCode;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -35,4 +44,3 @@ namespace Fixtures.AcceptanceTestsHttp.Models
 
     }
 }
-

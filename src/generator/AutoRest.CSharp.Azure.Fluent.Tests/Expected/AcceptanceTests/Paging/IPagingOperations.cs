@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -512,4 +512,3 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesFailureUriNextWithHttpMessagesAsync(string nextPageLink, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

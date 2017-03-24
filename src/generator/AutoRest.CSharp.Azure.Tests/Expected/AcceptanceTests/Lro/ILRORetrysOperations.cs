@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -284,4 +284,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         Task<AzureOperationHeaderResponse<LRORetrysPostAsyncRelativeRetrySucceededHeaders>> BeginPostAsyncRelativeRetrySucceededWithHttpMessagesAsync(Product product = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

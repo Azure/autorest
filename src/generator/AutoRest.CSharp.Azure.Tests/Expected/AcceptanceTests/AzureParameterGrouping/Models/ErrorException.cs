@@ -8,17 +8,14 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureParameterGrouping;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
     using Microsoft.Rest;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Security;
 
     /// <summary>
     /// Exception thrown for an invalid response with Error information.
     /// </summary>
-#if !PORTABLE
+#if LEGACY
     [System.Serializable]
 #endif
     public class ErrorException : RestException
@@ -64,13 +61,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         {
         }
 
-#if !PORTABLE
+#if LEGACY
         /// <summary>
         /// Initializes a new instance of the ErrorException class.
         /// </summary>
         /// <param name="info">Serialization info.</param>
         /// <param name="context">Streaming context.</param>
-        protected ErrorException(SerializationInfo info, StreamingContext context)
+        protected ErrorException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
         }
@@ -84,7 +81,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Thrown when a required parameter is null
         /// </exception>
         [System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand, SerializationFormatter = true)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        public override void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
         {
             base.GetObjectData(info, context);
             if (info == null)
@@ -99,4 +96,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 #endif
     }
 }
-

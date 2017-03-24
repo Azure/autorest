@@ -3,7 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,18 @@ namespace AutoRest.Swagger.Validation
 
         private readonly Regex resourceRefRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
         private readonly string[] allowedTopLevelProperties = { "name", "type", "id", "location", "properties", "tags", "plan", "sku", "etag",
-                                                                "managedBy", "identity"}; 
+                                                                "managedBy", "identity", "kind"};
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3006";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
         /// <summary>
         /// This rule passes if the body parameter contains top level properties only from the allowed set: name, type,
         /// id, location, properties, tags, plan, sku, etag, managedBy, identity
@@ -84,7 +95,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
     }
 }

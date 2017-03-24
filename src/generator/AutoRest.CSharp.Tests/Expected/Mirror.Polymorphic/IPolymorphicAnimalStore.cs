@@ -59,4 +59,3 @@ namespace Fixtures.MirrorPolymorphic
 
     }
 }
-

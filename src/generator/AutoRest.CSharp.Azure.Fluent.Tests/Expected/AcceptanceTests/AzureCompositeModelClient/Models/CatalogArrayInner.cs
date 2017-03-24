@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the CatalogArrayInner class.
         /// </summary>
-        public CatalogArrayInner() { }
+        public CatalogArrayInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CatalogArrayInner class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public CatalogArrayInner(IList<ProductInner> productArray = default(IList<ProductInner>))
         {
             ProductArray = productArray;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets array of products
@@ -38,4 +47,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

@@ -14,8 +14,8 @@ import retrofit2.Retrofit;
 import fixtures.parameterflattening.AvailabilitySets;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
@@ -68,6 +68,9 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param resourceGroupName The name of the resource group.
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void update(String resourceGroupName, String avset, Map<String, String> tags) {
         updateWithServiceResponseAsync(resourceGroupName, avset, tags).toBlocking().single().body();
@@ -80,10 +83,11 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
+    public ServiceFuture<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updateWithServiceResponseAsync(resourceGroupName, avset, tags), serviceCallback);
     }
 
     /**
@@ -92,6 +96,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param resourceGroupName The name of the resource group.
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updateAsync(String resourceGroupName, String avset, Map<String, String> tags) {
@@ -109,6 +114,7 @@ public class AvailabilitySetsImpl implements AvailabilitySets {
      * @param resourceGroupName The name of the resource group.
      * @param avset The name of the storage availability set.
      * @param tags A set of tags. A description about the set of tags.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updateWithServiceResponseAsync(String resourceGroupName, String avset, Map<String, String> tags) {

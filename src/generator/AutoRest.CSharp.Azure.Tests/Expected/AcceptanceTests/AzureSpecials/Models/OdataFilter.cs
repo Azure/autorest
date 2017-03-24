@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureSpecials;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureSpecials;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Initializes a new instance of the OdataFilter class.
         /// </summary>
-        public OdataFilter() { }
+        public OdataFilter()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the OdataFilter class.
@@ -27,7 +30,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         {
             Id = id;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -41,4 +50,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 
     }
 }
-

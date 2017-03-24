@@ -1,7 +1,11 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "types" : ["node"],
+        "lib": [
+          "es2016"
+        ]
     },
     "exclude": [
         "node_modules/typescript",

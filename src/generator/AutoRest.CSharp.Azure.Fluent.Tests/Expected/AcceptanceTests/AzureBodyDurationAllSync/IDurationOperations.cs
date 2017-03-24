@@ -86,4 +86,3 @@ namespace Fixtures.AcceptanceTestsAzureBodyDurationAllSync
         Task<AzureOperationResponse<System.TimeSpan?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

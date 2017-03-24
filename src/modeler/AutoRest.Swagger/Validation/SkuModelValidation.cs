@@ -3,11 +3,13 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Core.Utilities;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
 using System.Text.RegularExpressions;
 using System.Linq;
+using AutoRest.Swagger.Model.Utilities;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -28,6 +30,16 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.SkuModelIsNotValid;
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2057";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
+        /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
         public override Category Severity => Category.Warning;
@@ -41,15 +53,15 @@ namespace AutoRest.Swagger.Validation
         {
             foreach(KeyValuePair<string, Schema> definition in definitions)
             {
-                if(definition.Key.Equals("sku", System.StringComparison.InvariantCultureIgnoreCase))
+                if(definition.Key.EqualsIgnoreCase("sku"))
                 {
                     Schema schema = definition.Value;
                     if (schema.Properties == null)
                         return false;
 
                     bool hasName = schema.Properties.Any(property =>
-                        property.Key.Equals("name", System.StringComparison.InvariantCultureIgnoreCase) &&
-                        property.Value.Type == Model.DataType.String);
+                        property.Key.EqualsIgnoreCase("name") &&
+                        (property.Value.Type == Model.DataType.String || (property.Value.Type == null && ValidationUtilities.IsReferenceOfType(property.Value.Reference, definitions, Model.DataType.String))));
 
                     if (!hasName)
                         return false;

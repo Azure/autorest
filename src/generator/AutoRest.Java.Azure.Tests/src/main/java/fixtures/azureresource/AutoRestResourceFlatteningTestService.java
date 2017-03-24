@@ -13,11 +13,13 @@ package fixtures.azureresource;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.Resource;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.azureresource.models.ErrorException;
 import fixtures.azureresource.models.FlattenedProduct;
 import fixtures.azureresource.models.ResourceCollection;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import rx.Observable;
@@ -94,6 +96,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putArray();
 
@@ -101,13 +106,15 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putArrayAsync();
@@ -115,6 +122,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync();
@@ -122,6 +130,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putArray(List<Resource> resourceArray);
 
@@ -130,14 +141,16 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putArrayAsync(List<Resource> resourceArray);
@@ -146,6 +159,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putArrayWithServiceResponseAsync(List<Resource> resourceArray);
@@ -153,6 +167,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;FlattenedProduct&gt; object if successful.
      */
     List<FlattenedProduct> getArray();
@@ -161,13 +178,15 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+    ServiceFuture<List<FlattenedProduct>> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
 
     /**
      * Get External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
     Observable<List<FlattenedProduct>> getArrayAsync();
@@ -175,6 +194,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as an Array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;FlattenedProduct&gt; object
      */
     Observable<ServiceResponse<List<FlattenedProduct>>> getArrayWithServiceResponseAsync();
@@ -182,6 +202,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putDictionary();
 
@@ -189,13 +212,15 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putDictionaryAsync();
@@ -203,6 +228,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync();
@@ -210,6 +236,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putDictionary(Map<String, FlattenedProduct> resourceDictionary);
 
@@ -218,14 +247,16 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary);
@@ -234,6 +265,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a Dictionary.
      *
      * @param resourceDictionary External Resource as a Dictionary to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putDictionaryWithServiceResponseAsync(Map<String, FlattenedProduct> resourceDictionary);
@@ -241,6 +273,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Map&lt;String, FlattenedProduct&gt; object if successful.
      */
     Map<String, FlattenedProduct> getDictionary();
@@ -249,13 +284,15 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+    ServiceFuture<Map<String, FlattenedProduct>> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
 
     /**
      * Get External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
     Observable<Map<String, FlattenedProduct>> getDictionaryAsync();
@@ -263,6 +300,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a Dictionary.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, FlattenedProduct&gt; object
      */
     Observable<ServiceResponse<Map<String, FlattenedProduct>>> getDictionaryWithServiceResponseAsync();
@@ -270,6 +308,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putResourceCollection();
 
@@ -277,13 +318,15 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putResourceCollectionAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putResourceCollectionAsync();
@@ -291,6 +334,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync();
@@ -298,6 +342,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putResourceCollection(ResourceCollection resourceComplexObject);
 
@@ -306,14 +353,16 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putResourceCollectionAsync(ResourceCollection resourceComplexObject);
@@ -322,6 +371,7 @@ public interface AutoRestResourceFlatteningTestService {
      * Put External Resource as a ResourceCollection.
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putResourceCollectionWithServiceResponseAsync(ResourceCollection resourceComplexObject);
@@ -329,6 +379,9 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the ResourceCollection object if successful.
      */
     ResourceCollection getResourceCollection();
@@ -337,13 +390,15 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+    ServiceFuture<ResourceCollection> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
 
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollection object
      */
     Observable<ResourceCollection> getResourceCollectionAsync();
@@ -351,6 +406,7 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Get External Resource as a ResourceCollection.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the ResourceCollection object
      */
     Observable<ServiceResponse<ResourceCollection>> getResourceCollectionWithServiceResponseAsync();

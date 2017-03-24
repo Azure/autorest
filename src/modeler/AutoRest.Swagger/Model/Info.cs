@@ -5,7 +5,7 @@ using System;
 using AutoRest.Core.Utilities;
 using Newtonsoft.Json;
 using AutoRest.Swagger.Validation;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -14,7 +14,6 @@ namespace AutoRest.Swagger.Model
     /// The metadata can be used by the clients if needed, and can be presented 
     /// in the Swagger-UI for convenience.
     /// </summary>
-    [Serializable]
     public class Info : SpecObject
     {
         private string _description;

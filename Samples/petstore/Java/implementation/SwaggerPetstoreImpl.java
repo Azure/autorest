@@ -11,8 +11,8 @@ import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CollectionFormat;
 import com.microsoft.rest.RestException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.Validator;
 import java.io.InputStream;
@@ -203,6 +203,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void addPetUsingByteArray() {
         addPetUsingByteArrayWithServiceResponseAsync().toBlocking().single().body();
@@ -212,15 +215,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> addPetUsingByteArrayAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> addPetUsingByteArrayAsync() {
@@ -235,6 +240,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> addPetUsingByteArrayWithServiceResponseAsync() {
@@ -257,6 +263,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param body Pet object in the form of byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void addPetUsingByteArray(String body) {
         addPetUsingByteArrayWithServiceResponseAsync(body).toBlocking().single().body();
@@ -267,16 +276,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Pet object in the form of byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Void> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(addPetUsingByteArrayWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param body Pet object in the form of byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> addPetUsingByteArrayAsync(String body) {
@@ -292,6 +303,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param body Pet object in the form of byte array
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> addPetUsingByteArrayWithServiceResponseAsync(String body) {
@@ -319,6 +331,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Add a new pet to the store.
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void addPet() {
         addPetWithServiceResponseAsync().toBlocking().single().body();
@@ -329,16 +344,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> addPetAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(addPetWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> addPetAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(addPetWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Add a new pet to the store.
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> addPetAsync() {
@@ -354,6 +371,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Add a new pet to the store.
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> addPetWithServiceResponseAsync() {
@@ -377,6 +395,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void addPet(Pet body) {
         addPetWithServiceResponseAsync(body).toBlocking().single().body();
@@ -388,10 +409,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(addPetWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Void> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(addPetWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -399,6 +421,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> addPetAsync(Pet body) {
@@ -415,6 +438,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Adds a new pet to the store. You may receive an HTTP invalid input if your pet is invalid.
      *
      * @param body Pet object that needs to be added to the store
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> addPetWithServiceResponseAsync(Pet body) {
@@ -442,6 +466,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Update an existing pet.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void updatePet() {
         updatePetWithServiceResponseAsync().toBlocking().single().body();
@@ -451,15 +478,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Update an existing pet.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updatePetWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> updatePetAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updatePetWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Update an existing pet.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updatePetAsync() {
@@ -474,6 +503,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Update an existing pet.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updatePetWithServiceResponseAsync() {
@@ -496,6 +526,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Update an existing pet.
      *
      * @param body Pet object that needs to be added to the store
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void updatePet(Pet body) {
         updatePetWithServiceResponseAsync(body).toBlocking().single().body();
@@ -506,16 +539,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updatePetWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Void> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updatePetWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
      * Update an existing pet.
      *
      * @param body Pet object that needs to be added to the store
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updatePetAsync(Pet body) {
@@ -531,6 +566,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Update an existing pet.
      *
      * @param body Pet object that needs to be added to the store
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updatePetWithServiceResponseAsync(Pet body) {
@@ -561,6 +597,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Finds Pets by status.
      * Multiple status values can be provided with comma seperated strings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Pet&gt; object if successful.
      */
     public List<Pet> findPetsByStatus() {
@@ -572,16 +611,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Multiple status values can be provided with comma seperated strings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceCall.fromResponse(findPetsByStatusWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<Pet>> findPetsByStatusAsync(final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceFuture.fromResponse(findPetsByStatusWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Finds Pets by status.
      * Multiple status values can be provided with comma seperated strings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<List<Pet>> findPetsByStatusAsync() {
@@ -597,6 +638,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Finds Pets by status.
      * Multiple status values can be provided with comma seperated strings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<ServiceResponse<List<Pet>>> findPetsByStatusWithServiceResponseAsync() {
@@ -621,6 +663,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Multiple status values can be provided with comma seperated strings.
      *
      * @param status Status values that need to be considered for filter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Pet&gt; object if successful.
      */
     public List<Pet> findPetsByStatus(List<String> status) {
@@ -633,10 +678,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param status Status values that need to be considered for filter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceCall.fromResponse(findPetsByStatusWithServiceResponseAsync(status), serviceCallback);
+    public ServiceFuture<List<Pet>> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceFuture.fromResponse(findPetsByStatusWithServiceResponseAsync(status), serviceCallback);
     }
 
     /**
@@ -644,6 +690,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Multiple status values can be provided with comma seperated strings.
      *
      * @param status Status values that need to be considered for filter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<List<Pet>> findPetsByStatusAsync(List<String> status) {
@@ -660,6 +707,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Multiple status values can be provided with comma seperated strings.
      *
      * @param status Status values that need to be considered for filter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<ServiceResponse<List<Pet>>> findPetsByStatusWithServiceResponseAsync(List<String> status) {
@@ -690,6 +738,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Finds Pets by tags.
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Pet&gt; object if successful.
      */
     public List<Pet> findPetsByTags() {
@@ -701,16 +752,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceCall.fromResponse(findPetsByTagsWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<List<Pet>> findPetsByTagsAsync(final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceFuture.fromResponse(findPetsByTagsWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Finds Pets by tags.
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<List<Pet>> findPetsByTagsAsync() {
@@ -726,6 +779,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Finds Pets by tags.
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<ServiceResponse<List<Pet>>> findPetsByTagsWithServiceResponseAsync() {
@@ -750,6 +804,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
      * @param tags Tags to filter by
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the List&lt;Pet&gt; object if successful.
      */
     public List<Pet> findPetsByTags(List<String> tags) {
@@ -762,10 +819,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param tags Tags to filter by
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
-        return ServiceCall.fromResponse(findPetsByTagsWithServiceResponseAsync(tags), serviceCallback);
+    public ServiceFuture<List<Pet>> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
+        return ServiceFuture.fromResponse(findPetsByTagsWithServiceResponseAsync(tags), serviceCallback);
     }
 
     /**
@@ -773,6 +831,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
      * @param tags Tags to filter by
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<List<Pet>> findPetsByTagsAsync(List<String> tags) {
@@ -789,6 +848,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
      *
      * @param tags Tags to filter by
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the List&lt;Pet&gt; object
      */
     public Observable<ServiceResponse<List<Pet>>> findPetsByTagsWithServiceResponseAsync(List<String> tags) {
@@ -820,6 +880,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
      *
      * @param petId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String findPetsWithByteArray(long petId) {
@@ -832,10 +895,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.fromResponse(findPetsWithByteArrayWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceFuture<String> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
+        return ServiceFuture.fromResponse(findPetsWithByteArrayWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -843,6 +907,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
      *
      * @param petId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> findPetsWithByteArrayAsync(long petId) {
@@ -859,6 +924,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
      *
      * @param petId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> findPetsWithByteArrayWithServiceResponseAsync(long petId) {
@@ -889,6 +955,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
      *
      * @param petId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Pet object if successful.
      */
     public Pet getPetById(long petId) {
@@ -901,10 +970,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
-        return ServiceCall.fromResponse(getPetByIdWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceFuture<Pet> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
+        return ServiceFuture.fromResponse(getPetByIdWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
@@ -912,6 +982,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
      *
      * @param petId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Pet object
      */
     public Observable<Pet> getPetByIdAsync(long petId) {
@@ -928,6 +999,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
      *
      * @param petId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Pet object
      */
     public Observable<ServiceResponse<Pet>> getPetByIdWithServiceResponseAsync(long petId) {
@@ -957,6 +1029,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Updates a pet in the store with form data.
      *
      * @param petId ID of pet that needs to be updated
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void updatePetWithForm(String petId) {
         updatePetWithFormWithServiceResponseAsync(petId).toBlocking().single().body();
@@ -967,16 +1042,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet that needs to be updated
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updatePetWithFormWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceFuture<Void> updatePetWithFormAsync(String petId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updatePetWithFormWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
      * Updates a pet in the store with form data.
      *
      * @param petId ID of pet that needs to be updated
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updatePetWithFormAsync(String petId) {
@@ -992,6 +1069,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Updates a pet in the store with form data.
      *
      * @param petId ID of pet that needs to be updated
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updatePetWithFormWithServiceResponseAsync(String petId) {
@@ -1020,6 +1098,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId ID of pet that needs to be updated
      * @param name Updated name of the pet
      * @param status Updated status of the pet
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void updatePetWithForm(String petId, String name, String status) {
         updatePetWithFormWithServiceResponseAsync(petId, name, status).toBlocking().single().body();
@@ -1032,10 +1113,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param name Updated name of the pet
      * @param status Updated status of the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updatePetWithFormWithServiceResponseAsync(petId, name, status), serviceCallback);
+    public ServiceFuture<Void> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updatePetWithFormWithServiceResponseAsync(petId, name, status), serviceCallback);
     }
 
     /**
@@ -1044,6 +1126,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId ID of pet that needs to be updated
      * @param name Updated name of the pet
      * @param status Updated status of the pet
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updatePetWithFormAsync(String petId, String name, String status) {
@@ -1061,6 +1144,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId ID of pet that needs to be updated
      * @param name Updated name of the pet
      * @param status Updated status of the pet
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updatePetWithFormWithServiceResponseAsync(String petId, String name, String status) {
@@ -1091,6 +1175,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Deletes a pet.
      *
      * @param petId Pet id to delete
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void deletePet(long petId) {
         deletePetWithServiceResponseAsync(petId).toBlocking().single().body();
@@ -1101,16 +1188,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId Pet id to delete
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(deletePetWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceFuture<Void> deletePetAsync(long petId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deletePetWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
      * Deletes a pet.
      *
      * @param petId Pet id to delete
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> deletePetAsync(long petId) {
@@ -1126,6 +1215,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Deletes a pet.
      *
      * @param petId Pet id to delete
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> deletePetWithServiceResponseAsync(long petId) {
@@ -1149,6 +1239,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId Pet id to delete
      * @param apiKey the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void deletePet(long petId, String apiKey) {
         deletePetWithServiceResponseAsync(petId, apiKey).toBlocking().single().body();
@@ -1160,10 +1253,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId Pet id to delete
      * @param apiKey the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(deletePetWithServiceResponseAsync(petId, apiKey), serviceCallback);
+    public ServiceFuture<Void> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deletePetWithServiceResponseAsync(petId, apiKey), serviceCallback);
     }
 
     /**
@@ -1171,6 +1265,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId Pet id to delete
      * @param apiKey the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> deletePetAsync(long petId, String apiKey) {
@@ -1187,6 +1282,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId Pet id to delete
      * @param apiKey the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> deletePetWithServiceResponseAsync(long petId, String apiKey) {
@@ -1214,6 +1310,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * uploads an image.
      *
      * @param petId ID of pet to update
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void uploadFile(long petId) {
         uploadFileWithServiceResponseAsync(petId).toBlocking().single().body();
@@ -1224,16 +1323,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param petId ID of pet to update
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(petId), serviceCallback);
+    public ServiceFuture<Void> uploadFileAsync(long petId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(uploadFileWithServiceResponseAsync(petId), serviceCallback);
     }
 
     /**
      * uploads an image.
      *
      * @param petId ID of pet to update
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> uploadFileAsync(long petId) {
@@ -1249,6 +1350,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * uploads an image.
      *
      * @param petId ID of pet to update
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> uploadFileWithServiceResponseAsync(long petId) {
@@ -1278,6 +1380,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId ID of pet to update
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void uploadFile(long petId, String additionalMetadata, byte[] file) {
         uploadFileWithServiceResponseAsync(petId, additionalMetadata, file).toBlocking().single().body();
@@ -1290,10 +1395,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(uploadFileWithServiceResponseAsync(petId, additionalMetadata, file), serviceCallback);
+    public ServiceFuture<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(uploadFileWithServiceResponseAsync(petId, additionalMetadata, file), serviceCallback);
     }
 
     /**
@@ -1302,6 +1408,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId ID of pet to update
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> uploadFileAsync(long petId, String additionalMetadata, byte[] file) {
@@ -1319,6 +1426,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param petId ID of pet to update
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> uploadFileWithServiceResponseAsync(long petId, String additionalMetadata, byte[] file) {
@@ -1349,6 +1457,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns pet inventories by status.
      * Returns a map of status codes to quantities.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getInventory() {
@@ -1360,16 +1471,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns a map of status codes to quantities.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.fromResponse(getInventoryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Map<String, Integer>> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceFuture.fromResponse(getInventoryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Returns pet inventories by status.
      * Returns a map of status codes to quantities.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getInventoryAsync() {
@@ -1385,6 +1498,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Returns pet inventories by status.
      * Returns a map of status codes to quantities.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getInventoryWithServiceResponseAsync() {
@@ -1411,6 +1525,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Place an order for a pet.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Order object if successful.
      */
     public Order placeOrder() {
@@ -1421,15 +1538,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Place an order for a pet.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback) {
-        return ServiceCall.fromResponse(placeOrderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Order> placeOrderAsync(final ServiceCallback<Order> serviceCallback) {
+        return ServiceFuture.fromResponse(placeOrderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Place an order for a pet.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Order object
      */
     public Observable<Order> placeOrderAsync() {
@@ -1444,6 +1563,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Place an order for a pet.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Order object
      */
     public Observable<ServiceResponse<Order>> placeOrderWithServiceResponseAsync() {
@@ -1466,6 +1586,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Place an order for a pet.
      *
      * @param body order placed for purchasing the pet
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Order object if successful.
      */
     public Order placeOrder(Order body) {
@@ -1477,16 +1600,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body order placed for purchasing the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
-        return ServiceCall.fromResponse(placeOrderWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Order> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
+        return ServiceFuture.fromResponse(placeOrderWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
      * Place an order for a pet.
      *
      * @param body order placed for purchasing the pet
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Order object
      */
     public Observable<Order> placeOrderAsync(Order body) {
@@ -1502,6 +1627,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Place an order for a pet.
      *
      * @param body order placed for purchasing the pet
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Order object
      */
     public Observable<ServiceResponse<Order>> placeOrderWithServiceResponseAsync(Order body) {
@@ -1532,6 +1658,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions.
      *
      * @param orderId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Order object if successful.
      */
     public Order getOrderById(String orderId) {
@@ -1544,10 +1673,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param orderId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
-        return ServiceCall.fromResponse(getOrderByIdWithServiceResponseAsync(orderId), serviceCallback);
+    public ServiceFuture<Order> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
+        return ServiceFuture.fromResponse(getOrderByIdWithServiceResponseAsync(orderId), serviceCallback);
     }
 
     /**
@@ -1555,6 +1685,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions.
      *
      * @param orderId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Order object
      */
     public Observable<Order> getOrderByIdAsync(String orderId) {
@@ -1571,6 +1702,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions.
      *
      * @param orderId ID of pet that needs to be fetched
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Order object
      */
     public Observable<ServiceResponse<Order>> getOrderByIdWithServiceResponseAsync(String orderId) {
@@ -1604,6 +1736,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors.
      *
      * @param orderId ID of the order that needs to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void deleteOrder(String orderId) {
         deleteOrderWithServiceResponseAsync(orderId).toBlocking().single().body();
@@ -1615,10 +1750,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param orderId ID of the order that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(deleteOrderWithServiceResponseAsync(orderId), serviceCallback);
+    public ServiceFuture<Void> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteOrderWithServiceResponseAsync(orderId), serviceCallback);
     }
 
     /**
@@ -1626,6 +1762,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors.
      *
      * @param orderId ID of the order that needs to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> deleteOrderAsync(String orderId) {
@@ -1642,6 +1779,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors.
      *
      * @param orderId ID of the order that needs to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> deleteOrderWithServiceResponseAsync(String orderId) {
@@ -1673,6 +1811,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Create user.
      * This can only be done by the logged in user.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void createUser() {
         createUserWithServiceResponseAsync().toBlocking().single().body();
@@ -1683,16 +1824,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> createUserAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(createUserWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> createUserAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(createUserWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Create user.
      * This can only be done by the logged in user.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> createUserAsync() {
@@ -1708,6 +1851,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Create user.
      * This can only be done by the logged in user.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> createUserWithServiceResponseAsync() {
@@ -1731,6 +1875,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param body Created user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void createUser(User body) {
         createUserWithServiceResponseAsync(body).toBlocking().single().body();
@@ -1742,10 +1889,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body Created user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(createUserWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Void> createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(createUserWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
@@ -1753,6 +1901,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param body Created user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> createUserAsync(User body) {
@@ -1769,6 +1918,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param body Created user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> createUserWithServiceResponseAsync(User body) {
@@ -1795,6 +1945,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Creates list of users with given input array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void createUsersWithArrayInput() {
         createUsersWithArrayInputWithServiceResponseAsync().toBlocking().single().body();
@@ -1804,15 +1957,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> createUsersWithArrayInputAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Creates list of users with given input array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> createUsersWithArrayInputAsync() {
@@ -1827,6 +1982,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Creates list of users with given input array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> createUsersWithArrayInputWithServiceResponseAsync() {
@@ -1849,6 +2005,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param body List of user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void createUsersWithArrayInput(List<User> body) {
         createUsersWithArrayInputWithServiceResponseAsync(body).toBlocking().single().body();
@@ -1859,16 +2018,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Void> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(createUsersWithArrayInputWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
      * Creates list of users with given input array.
      *
      * @param body List of user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> createUsersWithArrayInputAsync(List<User> body) {
@@ -1884,6 +2045,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param body List of user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> createUsersWithArrayInputWithServiceResponseAsync(List<User> body) {
@@ -1910,6 +2072,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Creates list of users with given input array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void createUsersWithListInput() {
         createUsersWithListInputWithServiceResponseAsync().toBlocking().single().body();
@@ -1919,15 +2084,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(createUsersWithListInputWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> createUsersWithListInputAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(createUsersWithListInputWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Creates list of users with given input array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> createUsersWithListInputAsync() {
@@ -1942,6 +2109,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Creates list of users with given input array.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> createUsersWithListInputWithServiceResponseAsync() {
@@ -1964,6 +2132,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param body List of user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void createUsersWithListInput(List<User> body) {
         createUsersWithListInputWithServiceResponseAsync(body).toBlocking().single().body();
@@ -1974,16 +2145,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(createUsersWithListInputWithServiceResponseAsync(body), serviceCallback);
+    public ServiceFuture<Void> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(createUsersWithListInputWithServiceResponseAsync(body), serviceCallback);
     }
 
     /**
      * Creates list of users with given input array.
      *
      * @param body List of user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> createUsersWithListInputAsync(List<User> body) {
@@ -1999,6 +2172,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Creates list of users with given input array.
      *
      * @param body List of user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> createUsersWithListInputWithServiceResponseAsync(List<User> body) {
@@ -2025,6 +2199,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Logs user into the system.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String loginUser() {
@@ -2035,15 +2212,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Logs user into the system.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<String> loginUserAsync(final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.fromResponse(loginUserWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<String> loginUserAsync(final ServiceCallback<String> serviceCallback) {
+        return ServiceFuture.fromResponse(loginUserWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Logs user into the system.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> loginUserAsync() {
@@ -2058,6 +2237,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Logs user into the system.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> loginUserWithServiceResponseAsync() {
@@ -2082,6 +2262,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The user name for login
      * @param password The password for login in clear text
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the String object if successful.
      */
     public String loginUser(String username, String password) {
@@ -2094,10 +2277,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param username The user name for login
      * @param password The password for login in clear text
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
-        return ServiceCall.fromResponse(loginUserWithServiceResponseAsync(username, password), serviceCallback);
+    public ServiceFuture<String> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
+        return ServiceFuture.fromResponse(loginUserWithServiceResponseAsync(username, password), serviceCallback);
     }
 
     /**
@@ -2105,6 +2289,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The user name for login
      * @param password The password for login in clear text
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<String> loginUserAsync(String username, String password) {
@@ -2121,6 +2306,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The user name for login
      * @param password The password for login in clear text
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the String object
      */
     public Observable<ServiceResponse<String>> loginUserWithServiceResponseAsync(String username, String password) {
@@ -2148,6 +2334,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Logs out current logged in user session.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void logoutUser() {
         logoutUserWithServiceResponseAsync().toBlocking().single().body();
@@ -2157,15 +2346,17 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Logs out current logged in user session.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(logoutUserWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(logoutUserWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Logs out current logged in user session.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> logoutUserAsync() {
@@ -2180,6 +2371,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
     /**
      * Logs out current logged in user session.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> logoutUserWithServiceResponseAsync() {
@@ -2206,6 +2398,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Get user by user name.
      *
      * @param username The name that needs to be fetched. Use user1 for testing.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the User object if successful.
      */
     public User getUserByName(String username) {
@@ -2217,16 +2412,18 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The name that needs to be fetched. Use user1 for testing.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
-        return ServiceCall.fromResponse(getUserByNameWithServiceResponseAsync(username), serviceCallback);
+    public ServiceFuture<User> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
+        return ServiceFuture.fromResponse(getUserByNameWithServiceResponseAsync(username), serviceCallback);
     }
 
     /**
      * Get user by user name.
      *
      * @param username The name that needs to be fetched. Use user1 for testing.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the User object
      */
     public Observable<User> getUserByNameAsync(String username) {
@@ -2242,6 +2439,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * Get user by user name.
      *
      * @param username The name that needs to be fetched. Use user1 for testing.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the User object
      */
     public Observable<ServiceResponse<User>> getUserByNameWithServiceResponseAsync(String username) {
@@ -2275,6 +2473,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param username name that need to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void updateUser(String username) {
         updateUserWithServiceResponseAsync(username).toBlocking().single().body();
@@ -2286,10 +2487,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username name that need to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updateUserWithServiceResponseAsync(username), serviceCallback);
+    public ServiceFuture<Void> updateUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updateUserWithServiceResponseAsync(username), serviceCallback);
     }
 
     /**
@@ -2297,6 +2499,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param username name that need to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updateUserAsync(String username) {
@@ -2313,6 +2516,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param username name that need to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updateUserWithServiceResponseAsync(String username) {
@@ -2340,6 +2544,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username name that need to be deleted
      * @param body Updated user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void updateUser(String username, User body) {
         updateUserWithServiceResponseAsync(username, body).toBlocking().single().body();
@@ -2352,10 +2559,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * @param username name that need to be deleted
      * @param body Updated user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(updateUserWithServiceResponseAsync(username, body), serviceCallback);
+    public ServiceFuture<Void> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(updateUserWithServiceResponseAsync(username, body), serviceCallback);
     }
 
     /**
@@ -2364,6 +2572,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username name that need to be deleted
      * @param body Updated user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> updateUserAsync(String username, User body) {
@@ -2381,6 +2590,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username name that need to be deleted
      * @param body Updated user object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> updateUserWithServiceResponseAsync(String username, User body) {
@@ -2414,6 +2624,9 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param username The name that needs to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws RestException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void deleteUser(String username) {
         deleteUserWithServiceResponseAsync(username).toBlocking().single().body();
@@ -2425,10 +2638,11 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      *
      * @param username The name that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(deleteUserWithServiceResponseAsync(username), serviceCallback);
+    public ServiceFuture<Void> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(deleteUserWithServiceResponseAsync(username), serviceCallback);
     }
 
     /**
@@ -2436,6 +2650,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param username The name that needs to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> deleteUserAsync(String username) {
@@ -2452,6 +2667,7 @@ public class SwaggerPetstoreImpl extends ServiceClient implements SwaggerPetstor
      * This can only be done by the logged in user.
      *
      * @param username The name that needs to be deleted
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> deleteUserWithServiceResponseAsync(String username) {

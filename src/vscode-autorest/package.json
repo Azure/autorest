@@ -1,0 +1,60 @@
+{
+  "name": "autorest",
+  "displayName": "autorest",
+  "description": "AutoRest Langugage Service",
+  "author": "Microsoft Corporation",
+  "license": "MIT",
+  "version": "0.0.1",
+  "publisher": "Microsoft",
+  "engines": {
+    "vscode": "^1.8.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:plaintext"
+  ],
+  "main": "./out/src/extension",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Default configuration",
+      "properties": {
+        "autorest.maxNumberOfProblems": {
+          "type": "number",
+          "default": 100,
+          "description": "Controls the maximum number of problems produced by the server."
+        },
+
+        "autorest.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VSCode and the AutoRest Langugage Service"
+        }        
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "update-vscode": "node ./node_modules/vscode/bin/install",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.33",
+    "@types/node": "^6.0.52",
+    "mocha": "^3.2.0",
+    "mocha-typescript": "^1.0.22",
+    "typescript": "^2.1.5",
+    "vscode": "^1.0.4"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^3.0.3"
+  }
+}

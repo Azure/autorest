@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Datetimerfc1123Wrapper class.
         /// </summary>
-        public Datetimerfc1123Wrapper() { }
+        public Datetimerfc1123Wrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Datetimerfc1123Wrapper class.
@@ -28,7 +31,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         {
             Field = field;
             Now = now;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -44,4 +53,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
 
     }
 }
-

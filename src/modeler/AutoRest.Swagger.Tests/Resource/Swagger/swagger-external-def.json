@@ -1,0 +1,96 @@
+{
+  "definitions": {
+    "Product": {
+      "x-ms-external" : null,
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of product."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people."
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product."
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    },
+    "Pet": {
+      "required": [ "type" ],
+      "discriminator": "type",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Cat": {
+      "properties": {
+        "color": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Pet"
+        }
+      ]
+    },
+    "Dog": {
+      "properties": {
+        "weight": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Pet"
+        }
+      ]
+    },
+    "SiameseCat": {
+      "properties": {
+        "eyeColor": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Cat"
+        }
+      ]
+    }
+  }
+}

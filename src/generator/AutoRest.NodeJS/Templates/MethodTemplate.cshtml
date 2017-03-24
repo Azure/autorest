@@ -8,40 +8,10 @@
 @using AutoRest.NodeJS.Templates
 @inherits AutoRest.Core.Template<MethodJs>
 
-/**
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
-  @WrapComment(" * ", "@summary " + Model.Summary)@:
-@: *
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
-  @WrapComment(" * ", Model.Description)@:
-@: *
-}
-@foreach (var parameter in Model.DocumentationParameters)
-{
- @MethodJs.ConstructParameterDocumentation(
-                      WrapComment(" * ", "@param {"
-                                        + MethodJs.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
-                                        + " " + parameter.Documentation))
-}
-@WrapComment(" * ", " @param {function} callback")
- *
-@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
-@WrapComment(" *                      ", Model.ReturnTypeInfo)
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function (@(Model.MethodParameterDeclarationWithCallback)) {
-  var client = @(Model.ClientReference);
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
+function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
+   /* jshint validthis: true */
+  let client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -59,7 +29,7 @@
   {
     if (parameter.IsConstant && !parameter.IsClientProperty)
     {
-  @:var @(parameter.Name) = @(parameter.DefaultValue);
+  @:let @(parameter.Name) = @(parameter.DefaultValue);
     }
 
     if (parameter.ModelType is CompositeType
@@ -90,22 +60,22 @@
   </text>
   }
   }
-  @(Model.BuildInputMappings())
+@(Model.BuildInputMappings())
   @EmptyLine
   // Construct URL
   @if (Model.IsAbsoluteUrl)
   {
-  @:var requestUrl = '@(((string)Model.Url).EscapeSingleQuotes())';
+  @:let requestUrl = '@(((string)Model.Url).EscapeSingleQuotes())';
   }
   else
   {
-  @:var baseUrl = @(Model.ClientReference).baseUri;
-  @:var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url).EscapeSingleQuotes())';
+  @:let baseUrl = @(Model.ClientReference).baseUri;
+  @:let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '@((Model.Url.StartsWith("/") ? Model.Url.TrimStart('/') : (string)Model.Url).EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
   @EmptyLine
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = '@(Model.HttpMethod.ToString().ToUpper())';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -119,7 +89,7 @@
   @:}
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -133,7 +103,7 @@
       {
   <text>
   // Serialize Request  
-  var requestContent = @(Model.RequestBody.Name);
+  let requestContent = @(Model.RequestBody.Name);
   httpRequest.body = requestContent;
   </text>
       }
@@ -141,8 +111,8 @@
       { 
   <text>
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (@(Model.RequestBody.Name) !== null && @(Model.RequestBody.Name) !== undefined) {
       @(Model.ConstructRequestBodyMapper)
@@ -150,8 +120,8 @@
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
-        'payload - "%s"', error.message, util.inspect(@(Model.RequestBody.Name), {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` + 
+        `payload - ${JSON.stringify(@(Model.RequestBody.Name), null, 2)}.`);
     return callback(serializationError);
   }
 
@@ -163,7 +133,7 @@
   {      
   <text>
   // Serialize Request  
-  var formData = {};  
+  let formData = {};  
       @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
       {
   @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
@@ -195,4 +165,4 @@
   {
 @:  @Include(new MethodJsonPipelineTemplate(), Model)
   }
-};
+}

@@ -13,8 +13,8 @@ package fixtures.azurespecials.implementation;
 import retrofit2.Retrofit;
 import fixtures.azurespecials.ApiVersionDefaults;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
@@ -74,6 +74,9 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodGlobalValid() {
         getMethodGlobalValidWithServiceResponseAsync().toBlocking().single().body();
@@ -83,15 +86,17 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getMethodGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getMethodGlobalValidAsync() {
@@ -106,6 +111,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getMethodGlobalValidWithServiceResponseAsync() {
@@ -136,6 +142,9 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getMethodGlobalNotProvidedValid() {
         getMethodGlobalNotProvidedValidWithServiceResponseAsync().toBlocking().single().body();
@@ -145,15 +154,17 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getMethodGlobalNotProvidedValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getMethodGlobalNotProvidedValidAsync() {
@@ -168,6 +179,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getMethodGlobalNotProvidedValidWithServiceResponseAsync() {
@@ -198,6 +210,9 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getPathGlobalValid() {
         getPathGlobalValidWithServiceResponseAsync().toBlocking().single().body();
@@ -207,15 +222,17 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getPathGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getPathGlobalValidAsync() {
@@ -230,6 +247,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getPathGlobalValidWithServiceResponseAsync() {
@@ -260,6 +278,9 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getSwaggerGlobalValid() {
         getSwaggerGlobalValidWithServiceResponseAsync().toBlocking().single().body();
@@ -269,15 +290,17 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getSwaggerGlobalValidWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getSwaggerGlobalValidAsync() {
@@ -292,6 +315,7 @@ public class ApiVersionDefaultsImpl implements ApiVersionDefaults {
     /**
      * GET method with api-version modeled in global settings.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getSwaggerGlobalValidWithServiceResponseAsync() {

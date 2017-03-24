@@ -8,7 +8,6 @@ using AutoRest.Core;
 using AutoRest.Core.Utilities;
 using Xunit;
 using static AutoRest.Core.Utilities.DependencyInjection;
-using IAnyPlugin = AutoRest.Core.Extensibility.IPlugin<AutoRest.Core.Extensibility.IGeneratorSettings, AutoRest.Core.IModelSerializer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.ITransformer<AutoRest.Core.Model.CodeModel>, AutoRest.Core.CodeGenerator, AutoRest.Core.CodeNamer, AutoRest.Core.Model.CodeModel>;
 
 namespace AutoRest.Swagger.Tests
 {
@@ -23,7 +22,6 @@ namespace AutoRest.Swagger.Tests
                 var settings = new Settings
                     {
                         Input = specFile,
-                        OutputDirectory = "X:\\Output",
                         Header = "MICROSOFT_MIT_NO_VERSION",
                         Modeler = modeler,
                         PayloadFlatteningThreshold = 1,
@@ -43,10 +41,9 @@ namespace AutoRest.Swagger.Tests
             }
             var settings = Settings.Instance;
 
-            settings.FileSystem = new MemoryFileSystem();
-            settings.FileSystem.WriteFile("AutoRest.json", File.ReadAllText("AutoRest.json"));
-            settings.FileSystem.CreateDirectory(Path.GetDirectoryName(settings.Input));
-            settings.FileSystem.WriteFile(settings.Input, File.ReadAllText(settings.Input));
+            settings.FileSystemInput = new MemoryFileSystem();
+            settings.FileSystemInput.CreateDirectory(Path.GetDirectoryName(settings.Input));
+            settings.FileSystemInput.WriteAllText(settings.Input, File.ReadAllText(settings.Input));
 
             var expectedWithSeparator = "Expected" + Path.DirectorySeparatorChar;
             var specFileName = resultFolder.StartsWith(expectedWithSeparator, StringComparison.Ordinal)
@@ -60,11 +57,11 @@ namespace AutoRest.Swagger.Tests
                     Replace(".js", "").Replace(".", "").
                     Replace(Path.DirectorySeparatorChar.ToString(), "").Replace("-", "")
                 : settings.Namespace;
+            settings.DisableSimplifier = true;
 
-            AutoRest.Core.AutoRestController.Generate();
-            Assert.NotEmpty(((MemoryFileSystem)settings.FileSystem).VirtualStore);
+            AutoRestController.Generate();
 
-            var actualFiles = settings.FileSystem.GetFiles("X:\\Output", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
+            var actualFiles = settings.FileSystemOutput.GetFiles("", "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray();
             var expectedFiles = Directory.Exists(resultFolder) ? Directory.GetFiles(resultFolder, "*.*", SearchOption.AllDirectories).OrderBy(f => f).ToArray() : new string[0];
             Assert.Equal(expectedFiles.Length, actualFiles.Length);
 
@@ -72,15 +69,15 @@ namespace AutoRest.Swagger.Tests
             {
                 var actualFile = actualFiles[i];
                 var expectedFile = expectedFiles[i];
-                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystem.ReadFileAsText(actualFile));
+                EnsureFilesMatch(File.ReadAllText(expectedFile), settings.FileSystemOutput.ReadAllText(actualFile));
             }
         }
 
         private static void EnsureFilesMatch(string expectedFileContent, string actualFileContent)
         {
             char[] wsChars = { '\r', ' ' };
-            string[] expectedLines = expectedFileContent.Split('\n').Select(p => p.TrimEnd(wsChars)).ToArray();
-            string[] actualLines = actualFileContent.Split('\n').Select(p => p.TrimEnd(wsChars)).ToArray();
+            string[] expectedLines = expectedFileContent.Trim().Split('\n').Select(p => p.TrimEnd(wsChars)).ToArray();
+            string[] actualLines = actualFileContent.Trim().Split('\n').Select(p => p.TrimEnd(wsChars)).ToArray();
 
             Assert.Equal(expectedLines.Length, actualLines.Length);
 

@@ -66,6 +66,8 @@ function AzureCompositeModel(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
+  var packageInfo = this.getPackageJsonInfo(__dirname);
+  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
   if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
     this.acceptLanguage = options.acceptLanguage;
   }
@@ -282,7 +284,7 @@ AzureCompositeModel.prototype.create = function (subscriptionId, resourceGroupNa
   } catch (error) {
     return callback(error);
   }
-  var bodyParameter;
+    var bodyParameter;
   if (productDictionaryOfArray !== null && productDictionaryOfArray !== undefined) {
       bodyParameter = new client.models['CatalogDictionaryOfArray']();
       bodyParameter.productDictionaryOfArray = productDictionaryOfArray;
@@ -446,7 +448,7 @@ AzureCompositeModel.prototype.update = function (subscriptionId, resourceGroupNa
   } catch (error) {
     return callback(error);
   }
-  var bodyParameter;
+    var bodyParameter;
   if (productArrayOfDictionary !== null && productArrayOfDictionary !== undefined) {
       bodyParameter = new client.models['CatalogArrayOfDictionary']();
       bodyParameter.productArrayOfDictionary = productArrayOfDictionary;

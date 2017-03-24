@@ -8,7 +8,7 @@
 
 namespace Fixtures.PetstoreV2AllSync.Models
 {
-    using PetstoreV2AllSync;
+    using Fixtures.PetstoreV2AllSync;
     using Newtonsoft.Json;
     using System.Linq;
     using System.Xml;
@@ -19,7 +19,10 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// Initializes a new instance of the Category class.
         /// </summary>
-        public Category() { }
+        public Category()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Category class.
@@ -28,7 +31,13 @@ namespace Fixtures.PetstoreV2AllSync.Models
         {
             Id = id;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -82,4 +91,3 @@ namespace Fixtures.PetstoreV2AllSync.Models
         }
     }
 }
-

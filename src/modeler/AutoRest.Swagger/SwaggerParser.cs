@@ -14,6 +14,7 @@ using AutoRest.Swagger.Properties;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using static AutoRest.Core.Utilities.DependencyInjection;
 
 namespace AutoRest.Swagger
 {
@@ -28,7 +29,7 @@ namespace AutoRest.Swagger
                 throw new ArgumentNullException("fileSystem");
             }
 
-            var swaggerDocument = fileSystem.ReadFileAsText(path);
+            var swaggerDocument = fileSystem.ReadAllText(path);
             return Parse(path, swaggerDocument);
         }
 
@@ -44,9 +45,15 @@ namespace AutoRest.Swagger
             return result;
         }
 
-        public static void EnsureCompleteDefinitionIsPresent(HashSet<string> visitedEntities, Dictionary<string, JObject> externalFiles, string currentFilePath, string entityType = null, string modelName = null, JToken externalDoc = null)
+        public static void EnsureCompleteDefinitionIsPresent(HashSet<string> visitedEntities, Dictionary<string, JObject> externalFiles, string sourceFilePath, string currentFilePath = null, string entityType = null, string modelName = null)
         {
             IEnumerable<JToken> references;
+            var sourceDoc = externalFiles[sourceFilePath];
+            if (currentFilePath == null)
+            {
+                currentFilePath = sourceFilePath;
+            }
+
             var currentDoc = externalFiles[currentFilePath];
             if (entityType == null && modelName == null)
             {
@@ -58,7 +65,7 @@ namespace AutoRest.Swagger
                 //It is possible that the external doc had a fully defined model. Hence we need to process all the refs of that model.
                 references = currentDoc[entityType][modelName].SelectTokens("$..$ref");
             }
-            
+
             foreach (JValue value in references)
             {
                 var path = (string)value;
@@ -70,44 +77,60 @@ namespace AutoRest.Swagger
                     entityPath = "#" + splitReference[1];
                     value.Value = entityPath;
                     // Make sure the filePath is either an absolute uri, or a rooted path
-                    if (!Settings.FileSystem.IsCompletePath(filePath))
+                    if (!Settings.FileSystemInput.IsCompletePath(filePath))
                     {
                         // Otherwise, root it from the directory (one level up) of the current swagger file path
-                        filePath = Settings.FileSystem.MakePathRooted(Settings.FileSystem.GetParentDir(currentFilePath), filePath);
+                        filePath = Settings.FileSystemInput.MakePathRooted(Settings.FileSystemInput.GetParentDir(currentFilePath), filePath);
                     }
                     if (!externalFiles.ContainsKey(filePath))
                     {
-                        var externalDefinitionString = Settings.FileSystem.ReadFileAsText(filePath);
+                        var externalDefinitionString = Settings.FileSystemInput.ReadAllText(filePath);
                         externalFiles[filePath] = JObject.Parse(externalDefinitionString);
                     }
                 }
 
-                entityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                modelName = entityPath.StripDefinitionPath();
+                var referencedEntityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                var referencedModelName = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[2];
 
-                if (currentDoc[entityType] == null)
+                if (sourceDoc[referencedEntityType] == null)
                 {
-                    currentDoc[entityType] = new JObject();
+                    sourceDoc[referencedEntityType] = new JObject();
                 }
-                if (currentDoc[entityType][modelName] == null && !visitedEntities.Contains(modelName))
+                if (sourceDoc[referencedEntityType][referencedModelName] == null && !visitedEntities.Contains(referencedModelName))
                 {
-                    visitedEntities.Add(modelName);
+                    visitedEntities.Add(referencedModelName);
                     if (filePath != null)
                     {
-                        currentDoc[entityType][modelName] = externalFiles[filePath][entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, filePath, entityType, modelName, externalFiles[filePath]);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, filePath, referencedEntityType, referencedModelName);
+                        sourceDoc[referencedEntityType][referencedModelName] = externalFiles[filePath][referencedEntityType][referencedModelName];
                     }
                     else
                     {
-                        currentDoc[entityType][modelName] = externalDoc[entityType][modelName];
                         //recursively check if the model is completely defined.
-                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, currentFilePath, entityType, modelName, externalDoc);
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, currentFilePath, referencedEntityType, referencedModelName);
+                        sourceDoc[referencedEntityType][referencedModelName] = currentDoc[referencedEntityType][referencedModelName];
                     }
-                    
+
                 }
             }
-            return;
+
+            //ensure that all the models that are an allOf on the current model in the external doc are also included
+            if (entityType != null && modelName != null) {
+                var reference = "#/" + entityType + "/" + modelName;
+                IEnumerable<JToken> dependentRefs = currentDoc.SelectTokens("$..allOf[*].$ref").Where(r => ((string)r).Contains(reference));
+                foreach (JToken dependentRef in dependentRefs)
+                {
+                    //the JSON Path "definitions.ModelName.allOf[0].$ref" provides the name of the model that is an allOf on the current model
+                    string[] refs = dependentRef.Path.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (refs[1] != null && !visitedEntities.Contains(refs[1]))
+                    {
+                        //recursively check if the model is completely defined.
+                        EnsureCompleteDefinitionIsPresent(visitedEntities, externalFiles, sourceFilePath, currentFilePath, refs[0], refs[1]);
+                        sourceDoc[refs[0]][refs[1]] = currentDoc[refs[0]][refs[1]];
+                    }
+                }
+            }
         }
 
         public static string Normalize(string path, string swaggerDocument)
@@ -115,7 +138,7 @@ namespace AutoRest.Swagger
             if (!swaggerDocument.IsYaml()) // try parse as markdown if it is not YAML
             {
                 Logger.Instance.Log(Category.Info, "Parsing as literate Swagger");
-                swaggerDocument = new LiterateYamlParser().Parse(swaggerDocument, true);
+                swaggerDocument = LiterateYamlParser.Parse(swaggerDocument);
             }
             // normalize YAML to JSON since that's what we process
             swaggerDocument = swaggerDocument.EnsureYamlIsJson();
@@ -140,6 +163,11 @@ namespace AutoRest.Swagger
                 settings.Converters.Add(new SecurityDefinitionConverter());
                 var swaggerService = JsonConvert.DeserializeObject<ServiceDefinition>(swaggerDocument, settings);
 
+                // for parameterized host, will be made available via JsonRpc accessible state in the future
+                ServiceDefinition.Instance = swaggerService;
+                Uri filePath = null;
+                Uri.TryCreate(path, UriKind.RelativeOrAbsolute, out filePath);
+                swaggerService.FilePath = filePath;
                 return swaggerService;
             }
             catch (JsonException ex)

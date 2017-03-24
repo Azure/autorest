@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using AcceptanceTestsModelFlattening;
+    using Fixtures.AcceptanceTestsModelFlattening;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
         /// </summary>
-        public ResourceCollection() { }
+        public ResourceCollection()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ResourceCollection class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             Productresource = productresource;
             Arrayofresources = arrayofresources;
             Dictionaryofresources = dictionaryofresources;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -48,4 +57,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
     }
 }
-

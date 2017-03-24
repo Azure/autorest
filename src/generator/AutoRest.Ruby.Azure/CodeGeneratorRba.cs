@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 using AutoRest.Core;
 using AutoRest.Core.Model;
@@ -23,10 +22,6 @@ namespace AutoRest.Ruby.Azure
     /// </summary>
     public class CodeGeneratorRba : CodeGeneratorRb
     {
-        public CodeGeneratorRba() 
-        {
-        }
-
         /// <summary>
         /// Gets the usage instructions for the code generator.
         /// </summary>

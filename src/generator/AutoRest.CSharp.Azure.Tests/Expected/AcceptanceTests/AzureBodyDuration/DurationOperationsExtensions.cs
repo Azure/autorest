@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -74,7 +74,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static async Task PutPositiveDurationAsync(this IDurationOperations operations, System.TimeSpan durationBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -135,4 +135,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
 
     }
 }
-

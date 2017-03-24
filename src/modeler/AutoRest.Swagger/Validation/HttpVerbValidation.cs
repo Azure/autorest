@@ -3,7 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,7 +16,17 @@ namespace AutoRest.Swagger.Validation
     /// </summary>
     public class HttpVerbValidation : TypedRule<Dictionary<string, Operation>>
     {
-        private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST)$", RegexOptions.IgnoreCase);
+        private readonly Regex opRegExp = new Regex(@"^(DELETE|GET|PUT|PATCH|HEAD|OPTIONS|POST|TRACE)$", RegexOptions.IgnoreCase);
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2044";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
 
         /// <summary>
         /// The template message for this Rule. 
@@ -29,7 +39,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// An <paramref name="operationDefinition"/> fails this rule if it does not have the correct HTTP Verb.

@@ -137,7 +137,7 @@ namespace AutoRest.Java
                     }
                 }
             }
-            return result.ToUpper(CultureInfo.InvariantCulture);
+            return result.ToUpperInvariant();
         }
 
         public override string GetParameterName(string name)
@@ -177,7 +177,7 @@ namespace AutoRest.Java
                 case "InterruptedException":
                     return null;
                 default:
-                    return (cm.Namespace.ToLower(CultureInfo.InvariantCulture))
+                    return (cm.Namespace.ToLowerInvariant())
                         + ".models." + exception;
             }
         }
@@ -194,6 +194,10 @@ namespace AutoRest.Java
             var primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                {
+                    return double.Parse(defaultValue).ToString();
+                }
                 if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
                 {
                     return QuoteValue(defaultValue);

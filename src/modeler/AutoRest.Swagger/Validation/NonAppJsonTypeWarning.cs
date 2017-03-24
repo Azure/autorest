@@ -3,15 +3,26 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
     public class NonAppJsonTypeWarning : TypedRule<string>
     {
         private const string AppJsonType = "application/json";
+
         /// <summary>
-        /// This rule passes if the entity contains application/json type 
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "S2004";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// This rule passes if the entity contains application/json type
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>

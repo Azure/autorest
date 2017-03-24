@@ -1,0 +1,347 @@
+@using System.Linq;
+@using AutoRest.Core.Model
+@using AutoRest.Core.Utilities
+@using AutoRest.Java
+@using AutoRest.Java.Model
+@using AutoRest.Java.Azure.Model
+@inherits AutoRest.Core.Template<AutoRest.Java.Azure.Model.MethodJva>
+@if (Model.LocalParameters.Any(p => !p.IsConstant && !p.IsRequired))
+{
+<text>
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the PagedList<@Model.ReturnTypeJv.SequenceElementTypeString> object if successful.
+}
+ */
+public PagedList<@Model.ReturnTypeJv.SequenceElementTypeString> @(Model.Name)(@Model.MethodRequiredParameterDeclaration) {
+    @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<@Model.ReturnTypeJv.SequenceElementTypeString> page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
+    page.setItems(@(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).toBlocking().single().body());
+    page.setNextPageLink(null);
+    return new PagedList<@Model.ReturnTypeJv.SequenceElementTypeString>(page) {
+        @@Override
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> nextPage(String nextPageLink) {
+            return null;
+        }
+    };
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@Model.CallbackDocumentation
+ * @@return the {@@link ServiceFuture} object
+ */
+public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodRequiredParameterDeclarationWithCallback) {
+    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation), serviceCallback);
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+}
+ */
+public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodRequiredParameterDeclaration) {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
+        @@Override
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
+            @Model.ReturnTypeJv.GenericBodyWireTypeString page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
+            page.setItems(response.body());
+            return page;
+        }
+    });
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant && p.IsRequired))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+}
+ */
+public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodRequiredParameterDeclaration) {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate.Where(p => p.IsRequired))
+{
+@:    Validator.validate(@(param.Name));
+}
+@foreach (ParameterJv parameter in Model.LocalParameters)
+{
+    if (!parameter.IsRequired)
+    {
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.ClientType.GetDefaultValue(Model) ?? "null");
+    }
+    if (parameter.IsConstant)
+    {
+@:    final @(parameter.ClientType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
+
+    }
+}
+    @Model.BuildInputMappings(true)
+
+@if (Model.IsParameterizedHost)
+{
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
+}
+    @Model.ParameterConversion
+    return service.@(Model.Name)(@Model.MethodRequiredParameterApiInvocation)
+        .flatMap(new Func1<Response<@Model.CallType>, Observable<@(Model.ReturnTypeJv.ClientResponseTypeString)>>() {
+            @@Override
+            public Observable<@(Model.ReturnTypeJv.ClientResponseTypeString)> call(Response<@Model.CallType> response) {
+                try {
+                    @Model.ClientResponse()
+                    return Observable.just(clientResponse);
+                } catch (Throwable t) {
+                    return Observable.error(t);
+                }
+            }
+        });
+}
+@EmptyLine
+</text>
+}
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the PagedList<@Model.ReturnTypeJv.SequenceElementTypeString> object if successful.
+}
+ */
+public PagedList<@Model.ReturnTypeJv.SequenceElementTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) {
+    @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<@Model.ReturnTypeJv.SequenceElementTypeString> page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
+    page.setItems(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).toBlocking().single().body());
+    page.setNextPageLink(null);
+    return new PagedList<@Model.ReturnTypeJv.SequenceElementTypeString>(page) {
+        @@Override
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> nextPage(String nextPageLink) {
+            return null;
+        }
+    };
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@Model.CallbackDocumentation
+ * @@return the {@@link ServiceFuture} object
+ */
+public ServiceFuture<@Model.ReturnTypeJv.ServiceFutureGenericParameterString> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+    return ServiceFuture.@(Model.ServiceFutureFactoryMethod)(@(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation), serviceCallback);
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+}
+ */
+public Observable<Page<@Model.ReturnTypeJv.SequenceElementTypeString>> @(Model.Name)Async(@Model.MethodParameterDeclaration) {
+    return @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterInvocation).map(new Func1<@Model.ReturnTypeJv.ClientResponseTypeString, Page<@Model.ReturnTypeJv.SequenceElementTypeString>>() {
+        @@Override
+        public Page<@Model.ReturnTypeJv.SequenceElementTypeString> call(@Model.ReturnTypeJv.ClientResponseTypeString response) {
+            @Model.ReturnTypeJv.GenericBodyWireTypeString page = new @((Model.ReturnTypeJv.BodyClientType as SequenceTypeJva).PageImplType)<>();
+            page.setItems(response.body());
+            return page;
+        }
+    });
+}
+@EmptyLine
+/**
+@if (!string.IsNullOrEmpty(Model.Summary))
+{
+@: * @Model.Summary.EscapeXmlComment().Period()
+}
+@if (!string.IsNullOrEmpty(Model.Description))
+{
+@: * @Model.Description.EscapeXmlComment().Period()
+}
+ *
+@foreach (var param in Model.LocalParameters.Where(p => !p.IsConstant))
+{
+@: * @@param @param.Name @(param.Documentation.Else("the " + param.ModelType.Name + " value").EscapeXmlComment().Trim())
+}
+@if (Model.ReturnType.Body != null)
+{
+@: * @@return the observable to the @Model.ReturnTypeJv.GenericBodyClientTypeString.EscapeXmlComment() object
+}
+else
+{
+@: * @@return the {@@link @Model.ReturnTypeJv.ClientResponseType} object if successful.
+}
+ */
+public Observable<@Model.ReturnTypeJv.ClientResponseTypeString> @(Model.Name)WithServiceResponseAsync(@Model.MethodParameterDeclaration) {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name));
+}
+@foreach (ParameterJv parameter in Model.LocalParameters)
+{
+    if (parameter.IsConstant)
+    {
+@:    final @(parameter.ModelType.Name) @(parameter.Name) = @(parameter.DefaultValue ?? "null");
+    }
+}
+    @Model.BuildInputMappings()
+
+@if (Model.IsParameterizedHost)
+{
+@:    String parameterizedHost = Joiner.on(", ").join(@Model.HostParameterReplacementArgs);
+}
+    @Model.ParameterConversion
+    return service.@(Model.Name)(@Model.MethodParameterApiInvocation)
+        .flatMap(new Func1<Response<@Model.CallType>, Observable<@(Model.ReturnTypeJv.ClientResponseTypeString)>>() {
+            @@Override
+            public Observable<@(Model.ReturnTypeJv.ClientResponseTypeString)> call(Response<@Model.CallType> response) {
+                try {
+                    @Model.ClientResponse()
+                    return Observable.just(clientResponse);
+                } catch (Throwable t) {
+                    return Observable.error(t);
+                }
+            }
+        });
+}
+@EmptyLine
+private @Model.ReturnTypeJv.WireResponseTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
+    return @(Model.ClientReference).restClient().responseBuilderFactory().<@Model.ReturnTypeJv.GenericBodyWireTypeString, @Model.OperationExceptionTypeString>newInstance(@(Model.ClientReference).serializerAdapter())
+@foreach (var response in Model.Responses)
+{
+
+            @:.register(@((int)response.Key), new TypeToken<@((response.Value as ResponseJv).GenericBodyWireTypeString)>() { }.getType())
+}
+@if (Model.DefaultResponse.Body != null)
+{
+            @:.registerError(@(Model.OperationExceptionTypeString).class)
+}
+@if (Model.HttpMethod == HttpMethod.Head)
+{
+    if (Model.ReturnType.Headers != null)
+    {
+            @:.buildEmptyWithHeaders(response, @(Model.ReturnType.Headers.Name).class);
+    }
+    else
+    {
+            @:.buildEmpty(response);
+    }
+}
+else
+{
+    if (Model.ReturnType.Headers != null)
+    {
+            @:.buildWithHeaders(response, @(Model.ReturnType.Headers.Name).class);
+    }
+    else
+    {
+            @:.build(response);
+    }
+}
+}

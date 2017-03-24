@@ -10,9 +10,11 @@
 
 package fixtures.bodyduration;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodyduration.models.ErrorException;
+import java.io.IOException;
 import org.joda.time.Period;
 import rx.Observable;
 
@@ -24,6 +26,9 @@ public interface Durations {
     /**
      * Get null duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Period object if successful.
      */
     Period getNull();
@@ -32,13 +37,15 @@ public interface Durations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Period> getNullAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getNullAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get null duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
     Observable<Period> getNullAsync();
@@ -46,6 +53,7 @@ public interface Durations {
     /**
      * Get null duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
     Observable<ServiceResponse<Period>> getNullWithServiceResponseAsync();
@@ -54,6 +62,9 @@ public interface Durations {
      * Put a positive duration value.
      *
      * @param durationBody the Period value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putPositiveDuration(Period durationBody);
 
@@ -62,14 +73,16 @@ public interface Durations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put a positive duration value.
      *
      * @param durationBody the Period value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putPositiveDurationAsync(Period durationBody);
@@ -78,6 +91,7 @@ public interface Durations {
      * Put a positive duration value.
      *
      * @param durationBody the Period value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putPositiveDurationWithServiceResponseAsync(Period durationBody);
@@ -85,6 +99,9 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Period object if successful.
      */
     Period getPositiveDuration();
@@ -93,13 +110,15 @@ public interface Durations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get a positive duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
     Observable<Period> getPositiveDurationAsync();
@@ -107,6 +126,7 @@ public interface Durations {
     /**
      * Get a positive duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
     Observable<ServiceResponse<Period>> getPositiveDurationWithServiceResponseAsync();
@@ -114,6 +134,9 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Period object if successful.
      */
     Period getInvalid();
@@ -122,13 +145,15 @@ public interface Durations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceFuture<Period> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
     Observable<Period> getInvalidAsync();
@@ -136,6 +161,7 @@ public interface Durations {
     /**
      * Get an invalid duration value.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Period object
      */
     Observable<ServiceResponse<Period>> getInvalidWithServiceResponseAsync();

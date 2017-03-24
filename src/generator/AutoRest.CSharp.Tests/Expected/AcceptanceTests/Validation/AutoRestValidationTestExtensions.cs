@@ -117,7 +117,7 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static async Task GetWithConstantInPathAsync(this IAutoRestValidationTest operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetWithConstantInPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetWithConstantInPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <param name='operations'>
@@ -148,4 +148,3 @@ namespace Fixtures.AcceptanceTestsValidation
 
     }
 }
-

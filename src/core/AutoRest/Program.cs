@@ -15,6 +15,7 @@ using AutoRest.Core.Parsing;
 using YamlDotNet.RepresentationModel;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using AutoRest.Swagger.Logging.Core;
 
 namespace AutoRest
 {
@@ -24,29 +25,43 @@ namespace AutoRest
         {
             int exitCode = (int)ExitCode.Error;
 
+            if( args[0] == "--server") {
+              return new AutoRestAsAsService().Run().Result;
+            }
+
             try
             {
                 using (NewContext)
                 {
                     bool generationFailed = false;
                     Settings settings = null;
+                    var jsonValidationLogListener = new JsonValidationLogListener();
                     try
                     {
                         settings = Settings.Create(args);
 
                         // set up logging
-                        Logger.Instance.AddListener(new ConsoleLogListener(
-                            settings.Debug ? Category.Debug : Category.Warning,
-                            settings.ValidationLevel,
-                            settings.Verbose));
+                        if (settings.JsonValidationMessages)
+                        {
+                            Logger.Instance.AddListener(jsonValidationLogListener);
+                        }
+                        else
+                        {
+                            Logger.Instance.AddListener(new ConsoleLogListener(
+                                settings.Debug ? Category.Debug : Category.Warning,
+                                settings.ValidationLevel,
+                                settings.Verbose));
+                        }
                         Logger.Instance.AddListener(new SignalingLogListener(Category.Error, _ => generationFailed = true));
 
                         // internal preprocesor
                         if (settings.Preprocessor)
                         {
-                            Console.Write(InternalPreprocessor(settings.FileSystem.ReadFileAsText(settings.Input)));
+                            Console.Write(InternalPreprocessor(settings.FileSystemInput.ReadAllText(settings.Input)));
                             return 0;
                         }
+
+                        Settings.AutoRestFolder = Path.GetDirectoryName( typeof(Program).GetAssembly().Location);
 
                         // determine some reasonable default namespace
                         if (settings.Namespace == null)
@@ -55,38 +70,39 @@ namespace AutoRest
                             {
                                 settings.Namespace = Path.GetFileNameWithoutExtension(settings.Input);
                             }
-                            else if (settings.InputFolder != null)
-                            {
-                                settings.Namespace = Path.GetFileNameWithoutExtension(settings.InputFolder.Segments.Last().Trim('/'));
-                            }
                             else
                             {
                                 settings.Namespace = "default";
                             }
                         }
 
+                        // help requested?
                         string defCodeGen = (args.Where(arg => arg.ToLowerInvariant().Contains("codegenerator")).IsNullOrEmpty()) ? "" : settings.CodeGenerator;
-                        if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
+                        if (settings.ShowHelp)
                         {
                             settings.CodeGenerator = defCodeGen;
-                            Console.WriteLine(HelpGenerator.Generate(Resources.HelpMarkdownTemplate, settings));
+                            Console.WriteLine(HelpGenerator.Generate(IsShowMarkdownHelpIncluded(args) ? Resources.HelpMarkdownTemplate : Resources.HelpTextTemplate, settings));
+                            return 0;
                         }
-                        else if (settings.ShowHelp)
+
+                        // comparison?
+                        if (!string.IsNullOrEmpty(settings.Previous))
                         {
-                            settings.CodeGenerator = defCodeGen;
-                            Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, settings));
+                            AutoRestController.Compare();
+                            return 0;
                         }
-                        else if (!string.IsNullOrEmpty(settings.Previous))
+
+                        // main pipeline
+                        AutoRestController.Generate();
+                        if (!Settings.Instance.JsonValidationMessages && !Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
                         {
-                            Core.AutoRestController.Compare();
+                            new Simplify.CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
                         }
-                        else
+                        if (!settings.JsonValidationMessages)
                         {
-                            Core.AutoRestController.Generate();
-                            if (!Settings.Instance.DisableSimplifier && Settings.Instance.CodeGenerator.IndexOf("csharp", StringComparison.OrdinalIgnoreCase) > -1)
-                            {
-                                new CSharpSimplifier().Run().ConfigureAwait(false).GetAwaiter().GetResult();
-                            }
+                            Settings.Instance.FileSystemOutput.CommitToDisk(Settings.Instance.OutputFileName == null
+                                ? Settings.Instance.OutputDirectory
+                                : Path.GetDirectoryName(Settings.Instance.OutputFileName));
                         }
                     }
                     catch (Exception exception)
@@ -95,6 +111,10 @@ namespace AutoRest
                     }
                     finally
                     {
+                        if (settings != null && settings.JsonValidationMessages)
+                        {
+                            Console.WriteLine(jsonValidationLogListener.GetValidationMessagesAsJson());
+                        }
                         if (settings != null && !settings.ShowHelp)
                         {
                             if (generationFailed)
@@ -103,7 +123,7 @@ namespace AutoRest
                                 {
                                     Logger.Instance.Log(Category.Error, Resources.GenerationFailed);
                                     Logger.Instance.Log(Category.Error, "{0} {1}",
-                                        typeof(Program).Assembly.ManifestModule.Name, string.Join(" ", args));
+                                        typeof(Program).GetAssembly().ManifestModule.Name, string.Join(" ", args));
                                 }
                             }
                             else

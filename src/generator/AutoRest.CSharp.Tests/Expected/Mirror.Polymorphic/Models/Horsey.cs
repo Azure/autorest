@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorPolymorphic.Models
 {
-    using MirrorPolymorphic;
+    using Fixtures.MirrorPolymorphic;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.MirrorPolymorphic.Models
         /// <summary>
         /// Initializes a new instance of the Horsey class.
         /// </summary>
-        public Horsey() { }
+        public Horsey()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Horsey class.
@@ -29,7 +32,13 @@ namespace Fixtures.MirrorPolymorphic.Models
             : base(id, description)
         {
             Breed = breed;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets horse breed
@@ -39,4 +48,3 @@ namespace Fixtures.MirrorPolymorphic.Models
 
     }
 }
-

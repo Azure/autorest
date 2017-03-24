@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "diagnosticLogging": true,
+    "type": "node2",
+    "request": "launch",
+    "name": "bootstrapper",
+    "program": "${workspaceRoot}/src/autorest/app.js",
+    "cwd": "${workspaceRoot}",
+    "preLaunchTask": "build/typescript"
+  }],
+  "compounds": []
+}

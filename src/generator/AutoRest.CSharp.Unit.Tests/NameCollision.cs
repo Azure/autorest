@@ -24,8 +24,8 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\Action.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\HttpOperationResponse.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\Action.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\HttpOperationResponse.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that we have the class we expected

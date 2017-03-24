@@ -11,7 +11,10 @@ namespace Petstore.Models
         /// <summary>
         /// Initializes a new instance of the Order class.
         /// </summary>
-        public Order() { }
+        public Order()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Order class.
@@ -26,12 +29,18 @@ namespace Petstore.Models
             ShipDate = shipDate;
             Status = status;
             Complete = complete;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public long? Id { get; protected set; }
+        public long? Id { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -142,4 +151,3 @@ namespace Petstore.Models
         }
     }
 }
-

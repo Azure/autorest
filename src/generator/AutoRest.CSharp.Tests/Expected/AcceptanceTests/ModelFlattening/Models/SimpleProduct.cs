@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using AcceptanceTestsModelFlattening;
+    using Fixtures.AcceptanceTestsModelFlattening;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -23,7 +23,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the SimpleProduct class.
         /// </summary>
-        public SimpleProduct() { }
+        public SimpleProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SimpleProduct class.
@@ -43,6 +46,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             MaxProductDisplayName = maxProductDisplayName;
             GenericValue = genericValue;
             Odatavalue = odatavalue;
+            CustomInit();
         }
         /// <summary>
         /// Static constructor for SimpleProduct class.
@@ -51,6 +55,11 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         {
             Capacity = "Large";
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets display name of product.
@@ -92,4 +101,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         }
     }
 }
-

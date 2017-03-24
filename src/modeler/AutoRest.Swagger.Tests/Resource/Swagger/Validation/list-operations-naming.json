@@ -1,0 +1,150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Operations schemes has non-http/https type",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "paths": {
+    "/foo": {
+      "post": {
+        "operationId": "Noun_Verb",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ]
+      }
+    },
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/foo?{id}": {
+      "get": {
+        "operationId": "foo_getByID",
+        "summary": "Foo get path",
+        "description": "Foo get operation",
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test subscription id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    },
+    "id": {
+      "name": "api-id",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api id"
+    }
+  },
+  "definitions": {
+    "Models": {
+      "description": "the models to return",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Model"
+          }
+        }
+      }
+    },
+    "Model": {
+      "description": "the model returned",
+      "properties": {
+        "prop0": {
+          "description": "some property",
+          "type": "string"
+        }
+      }
+    },
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Operations"
+        }
+      }
+    }
+  }
+}

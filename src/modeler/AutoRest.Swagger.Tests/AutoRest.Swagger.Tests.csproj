@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), common/common.proj ))/common/common.proj" />
+  <Import Project="$(common)transform-designer-cs.proj" />
+  <Import Project="$(common)copy-resource-to-output.proj" />
+  <Import Project="$(common)package-fallback.proj" />
+  <Import Project="$(common)project-xunittest.proj" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Resource\Swagger\Validation\positive\property-names-casing-valid.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Swagger\Validation\positive\swagger-skumodel-validation-valid.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Swagger\Validation\property-names-casing.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)src/core/AutoRest.Core/AutoRest.Core.csproj" />
+    <ProjectReference Include="$(SolutionDir)src/modeler/AutoRest.Swagger/AutoRest.Swagger.csproj" />
+  </ItemGroup>
+</Project>

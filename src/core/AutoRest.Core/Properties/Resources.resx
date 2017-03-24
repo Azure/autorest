@@ -120,6 +120,43 @@
   <data name="AutoRestCore" xml:space="preserve">
     <value>AutoRest Core {0}</value>
   </data>
+  <data name="ConfigurationKnownPlugins" xml:space="preserve">
+    <value>Plugins:
+  CSharp:
+    TypeName: PluginCs, AutoRest.CSharp
+  Azure.CSharp:
+    TypeName: PluginCsa, AutoRest.CSharp.Azure
+  Azure.CSharp.Fluent:
+    TypeName: PluginCsaf, AutoRest.CSharp.Azure.Fluent
+  Ruby:
+    TypeName: PluginRb, AutoRest.Ruby
+  Azure.Ruby:
+    TypeName: PluginRba, AutoRest.Ruby.Azure
+  NodeJS:
+    TypeName: PluginJs, AutoRest.NodeJS
+  Azure.NodeJS:
+    TypeName: PluginJsa, AutoRest.NodeJS.Azure
+  Python:
+    TypeName: PluginPy, AutoRest.Python
+  Azure.Python:
+    TypeName: PluginPya, AutoRest.Python.Azure
+  Go:
+    TypeName: PluginGo, AutoRest.Go
+  Java:
+    TypeName: PluginJv, AutoRest.Java
+  Azure.Java:
+    TypeName: PluginJva, AutoRest.Java.Azure
+  Azure.Java.Fluent:
+    TypeName: PluginJvaf, AutoRest.Java.Azure.Fluent
+  AzureResourceSchema:
+    TypeName: PluginArs, AutoRest.AzureResourceSchema
+Modelers:
+  Swagger:
+    TypeName: SwaggerModeler, AutoRest.Swagger
+  CompositeSwagger:
+    TypeName: CompositeSwaggerModeler, AutoRest.CompositeSwagger
+    </value>
+  </data>
   <data name="CodeGenerationFailed" xml:space="preserve">
     <value>Code generation failed with errors. See inner exceptions for details.</value>
   </data>
@@ -128,9 +165,6 @@
   </data>
   <data name="CommentString" xml:space="preserve">
     <value>\\\\</value>
-  </data>
-  <data name="ConfigurationFileNotFound" xml:space="preserve">
-    <value>AutoRest.json was not found in the current directory</value>
   </data>
   <data name="DirectoryNotExist" xml:space="preserve">
     <value>Directory {0} does not exist.</value>
@@ -144,14 +178,11 @@
   <data name="ErrorLoadingAssembly" xml:space="preserve">
     <value>Error loading {0} assembly: {1}</value>
   </data>
-  <data name="ErrorParsingConfig" xml:space="preserve">
-    <value>Error parsing AutoRest.json file: {0}</value>
-  </data>
   <data name="ErrorSavingGeneratedCode" xml:space="preserve">
     <value>Error saving generated code: {0}</value>
   </data>
   <data name="ExtensionNotFound" xml:space="preserve">
-    <value>Plugin {0} does not have an assembly name in AutoRest.json</value>
+    <value>Plugin {0} not found</value>
   </data>
   <data name="GeneratorInitialized" xml:space="preserve">
     <value>Successfully initialized {0} Code Generator {1}</value>
@@ -210,11 +241,11 @@
   <data name="XmsClientNameInValid" xml:space="preserve">
     <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
   </data>
-  <data name="DeleteMustHaveEmptyRequestBody" xml:space="preserve">
-    <value>'Delete' operation cannot have parameters in the request body.</value>
+  <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
+    <value>'Delete' operation must not have a request body.</value>
   </data>
   <data name="SkuModelIsNotValid" xml:space="preserve">
-    <value>Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties.</value>
+    <value>Sku Model is not valid. A Sku model must have 'name' property. It can also have 'tier', 'size', 'family', 'capacity' as optional properties.</value>
   </data>
   <data name="PutGetPatchResponseInvalid" xml:space="preserve">
     <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
@@ -223,21 +254,18 @@
     <value>Operations API must be implemented for the service.</value>
   </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
-    <value>Tracked Resource failing validation is: {0}. Validation Failed: {1}. 
+    <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
     A Tracked Resource must have: 
     1. A Get Operation 
     2. A ListByResourceGroup operation with x-ms-pageable extension and 
     3. A ListBySubscriptionId operation with x-ms-pageable extension.
-    4. Type, Location, Tags should not be used in the properties.</value>
+    4. "type","location","tags" should not be used in the RP property bag named "properties".</value>
   </data>
   <data name="BodyMustHaveSchema" xml:space="preserve">
     <value>Each body parameter must have a schema</value>
   </data>
   <data name="BodyWithType" xml:space="preserve">
     <value>A body parameter cannot have a type, format, or any other properties describing its type.</value>
-  </data>
-  <data name="ConflictingRef" xml:space="preserve">
-    <value>Properties defined alongside $ref will be ignored according to JSON specification.</value>
   </data>
   <data name="EmptyClientName" xml:space="preserve">
     <value>Empty x-ms-client-name property.</value>
@@ -263,9 +291,6 @@
   <data name="NoDefinitionForPathParameter" xml:space="preserve">
     <value>Could not find a definition for the path parameter '{0}'</value>
   </data>
-  <data name="NoResponses" xml:space="preserve">
-    <value>No responses defined.</value>
-  </data>
   <data name="OnlyOneUnderscoreAllowedInOperationId" xml:space="preserve">
     <value>Only 1 underscore is permitted in the operation id, following Noun_Verb conventions.</value>
   </data>
@@ -279,7 +304,7 @@
     <value>Errors found during Swagger document validation.</value>
   </data>
   <data name="XMSPathBaseNotInPaths" xml:space="preserve">
-    <value>Paths in x-ms-paths must overload a normal path in the paths section.</value>
+    <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
     <value>The value provided for description is not descriptive enough.</value>
@@ -291,7 +316,7 @@
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
-    <value>Media types other than 'application/json' has limited support</value>
+    <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
     <value>Non-HTTPS/HTTP schemes have limited support</value>
@@ -302,8 +327,8 @@
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
     <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
   </data>
-  <data name="UniqueResourcePathsWarning" xml:space="preserve">
-    <value>More than one resource path is not allowed in a single spec (found: {0}).</value>
+  <data name="UniqueResourcePaths" xml:space="preserve">
+    <value>Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.</value>
   </data>
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>
@@ -311,8 +336,8 @@
   <data name="GuidUsageNotRecommended" xml:space="preserve">
     <value>Guid used at the #/Definitions/{1}/.../{0}. Usage of Guid is not recommanded. If GUIDs are absolutely required in your service, please get sign off from the Azure API review board.</value>
   </data>
-  <data name="OperationNameNotValid" xml:space="preserve">
-    <value>'GET' operation must use method name 'Get' or Method name start with 'List', 'PUT' operation must use method name 'Create', 'PATCH' operation must use method name 'Update' and 'DELETE' operation must use method name 'Delete'.</value>
+  <data name="GetOperationNameNotValid" xml:space="preserve">
+    <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
   </data>
   <data name="LongRunningResponseNotValid" xml:space="preserve">
     <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
@@ -326,7 +351,37 @@
   <data name="BooleanPropertyNotRecommended" xml:space="preserve">
     <value>Booleans are not descriptive and make them hard to use. Instead use string enums with allowed set of values defined: '{0}'.</value>
   </data>
-    <data name="AllowedTopLevelProperties" xml:space="preserve">
+  <data name="AllowedTopLevelProperties" xml:space="preserve">
     <value>Top level properties should be one of name, type, id, location, properties, tags, plan, sku, etag, managedBy, identity. Extra properties found: "{0}".</value>
+  </data>
+  <data name="TrackedResourceGetOperationMissing" xml:space="preserve">
+    <value>Tracked resource '{0}' must have a get operation.</value>
+  </data>
+  <data name="DeleteOperationNameNotValid" xml:space="preserve">
+    <value>'DELETE' operation '{0}' must use method name 'Delete'.</value>
+  </data>
+  <data name="PatchOperationNameNotValid" xml:space="preserve">
+    <value>'PATCH' operation '{0}' must use method name 'Update'.</value>
+  </data>
+  <data name="PutOperationNameNotValid" xml:space="preserve">
+    <value>'PUT' operation '{0}' must use method name 'Create'.</value>
+  </data>
+  <data name="CollectionObjectPropertiesNamingMessage" xml:space="preserve">
+    <value>Collection object {0} returned by list operation {1} with 'x-ms-pageable' extension, has no property named 'value'.</value>
+  </data>
+  <data name="TrackedResourcePatchOperationMissing" xml:space="preserve">
+    <value>Tracked resource '{0}' must have patch operation that at least supports the update of tags.</value>
+  </data>
+  <data name="BodyPropertyNameCamelCase" xml:space="preserve">
+    <value>Property named: "{0}", must follow camelCase style. Example: "{1}".</value>
+  </data>
+  <data name="DefinitionsPropertiesNameCamelCase" xml:space="preserve">
+    <value>Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".</value>
+  </data>
+  <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
+    <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
+  </data>
+  <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
+    <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
   </data>
 </root>

@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsRequiredOptional.Models
 {
-    using AcceptanceTestsRequiredOptional;
+    using Fixtures.AcceptanceTestsRequiredOptional;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the ClassOptionalWrapper class.
         /// </summary>
-        public ClassOptionalWrapper() { }
+        public ClassOptionalWrapper()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ClassOptionalWrapper class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         public ClassOptionalWrapper(Product value = default(Product))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -47,4 +56,3 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         }
     }
 }
-

@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureResource;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureResource;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -24,7 +24,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the ResourceInner class.
         /// </summary>
-        public ResourceInner() { }
+        public ResourceInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ResourceInner class.
@@ -40,19 +43,25 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
             Tags = tags;
             Location = location;
             Name = name;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets resource Id
         /// </summary>
         [JsonProperty(PropertyName = "id")]
-        public string Id { get; protected set; }
+        public string Id { get; private set; }
 
         /// <summary>
         /// Gets resource Type
         /// </summary>
         [JsonProperty(PropertyName = "type")]
-        public string Type { get; protected set; }
+        public string Type { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -69,8 +78,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// Gets resource Name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
-        public string Name { get; protected set; }
+        public string Name { get; private set; }
 
     }
 }
-

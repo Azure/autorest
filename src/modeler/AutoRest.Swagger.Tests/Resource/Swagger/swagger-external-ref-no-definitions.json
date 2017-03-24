@@ -1,0 +1,106 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}": {
+      "get": {
+        "operationId": "list",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiVersion",
+            "in": "path",
+            "description": "API ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "./swagger-external-def.json#/definitions/Product"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "./swagger-external-def.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "reset",
+        "summary": "Resets products",
+        "description": "Resets products.",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiVersion",
+            "in": "path",
+            "description": "API ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Redis"
+        ],
+        "responses": {
+          "204": {
+            "description": "A list of caches"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "./swagger-external-def.json#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}

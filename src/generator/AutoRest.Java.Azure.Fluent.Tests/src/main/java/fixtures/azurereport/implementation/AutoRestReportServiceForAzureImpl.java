@@ -15,8 +15,8 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.RestClient;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurereport.ErrorException;
 import java.io.IOException;
@@ -183,6 +183,9 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Map&lt;String, Integer&gt; object if successful.
      */
     public Map<String, Integer> getReport() {
@@ -193,15 +196,17 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
-        return ServiceCall.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Map<String, Integer>> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+        return ServiceFuture.fromResponse(getReportWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<Map<String, Integer>> getReportAsync() {
@@ -216,6 +221,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient {
     /**
      * Get test coverage report.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Map&lt;String, Integer&gt; object
      */
     public Observable<ServiceResponse<Map<String, Integer>>> getReportWithServiceResponseAsync() {

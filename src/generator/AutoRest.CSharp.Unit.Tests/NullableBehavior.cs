@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists($@"GeneratedCode\Models\{modelName}.cs"));
+                Assert.True(fileSystem.FileExists($@"Models\{modelName}.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operations are marked correctly

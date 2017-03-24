@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using AcceptanceTestsModelFlattening;
+    using Fixtures.AcceptanceTestsModelFlattening;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the GenericUrl class.
         /// </summary>
-        public GenericUrl() { }
+        public GenericUrl()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the GenericUrl class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public GenericUrl(string genericValue = default(string))
         {
             GenericValue = genericValue;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets generic URL value.
@@ -39,4 +48,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
     }
 }
-

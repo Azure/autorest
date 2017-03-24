@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Azure;
-    using AcceptanceTestsLro;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsLro;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -21,7 +21,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the SubProduct class.
         /// </summary>
-        public SubProduct() { }
+        public SubProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SubProduct class.
@@ -36,7 +39,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -49,8 +58,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public string ProvisioningStateValues { get; protected set; }
+        public string ProvisioningStateValues { get; private set; }
 
     }
 }
-

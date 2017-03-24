@@ -1,18 +1,28 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.Validation;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
     public class OperationIdNounInVerb : TypedRule<string>
     {
         private const string NOUN_VERB_PATTERN = "^(\\w+)?_(\\w+)$";
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M1001";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
         /// This rule passes if the operation id doesn't contain a repeated value before and after the underscore
@@ -60,7 +70,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
     }
 }

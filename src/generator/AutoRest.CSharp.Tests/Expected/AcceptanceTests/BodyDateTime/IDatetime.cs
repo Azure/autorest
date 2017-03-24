@@ -326,4 +326,3 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         Task<HttpOperationResponse<System.DateTime?>> GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

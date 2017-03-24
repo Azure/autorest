@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 {
-    using Azure;
-    using AcceptanceTestsSubscriptionIdApiVersion;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         /// <summary>
         /// Initializes a new instance of the SampleResourceGroup class.
         /// </summary>
-        public SampleResourceGroup() { }
+        public SampleResourceGroup()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the SampleResourceGroup class.
@@ -29,7 +32,13 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
         {
             Name = name;
             Location = location;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets resource group name 'testgroup101'
@@ -45,4 +54,3 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion.Models
 
     }
 }
-

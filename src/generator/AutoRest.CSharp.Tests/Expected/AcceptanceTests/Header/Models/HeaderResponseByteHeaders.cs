@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using AcceptanceTestsHeader;
+    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// <summary>
         /// Initializes a new instance of the HeaderResponseByteHeaders class.
         /// </summary>
-        public HeaderResponseByteHeaders() { }
+        public HeaderResponseByteHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseByteHeaders class.
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseByteHeaders(byte[] value = default(byte[]))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header values "啊齄丂狛狜隣郎隣兀﨩"
@@ -40,4 +49,3 @@ namespace Fixtures.AcceptanceTestsHeader.Models
 
     }
 }
-

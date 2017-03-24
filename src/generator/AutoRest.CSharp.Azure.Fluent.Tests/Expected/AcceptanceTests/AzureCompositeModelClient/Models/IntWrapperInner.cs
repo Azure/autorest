@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the IntWrapperInner class.
         /// </summary>
-        public IntWrapperInner() { }
+        public IntWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the IntWrapperInner class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Field1 = field1;
             Field2 = field2;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -40,4 +49,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

@@ -3,7 +3,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
 
@@ -17,7 +17,17 @@ namespace AutoRest.Swagger.Validation
         private static readonly string requiredExtension = "x-ms-azure-resource";
 
         /// <summary>
-        /// The template message for this Rule. 
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2019";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// The template message for this Rule.
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
@@ -27,7 +37,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
         /// <summary>
         /// An <paramref name="definitions"/> fails this rule if the resource definition does not have 

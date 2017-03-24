@@ -10,19 +10,15 @@ namespace AutoRest.Core.Utilities
     {
         bool IsCompletePath(string path);
 
-        void WriteFile(string path, string contents);
+        void WriteAllText(string path, string contents);
 
-        string ReadFileAsText(string path);
+        string ReadAllText(string path);
 
         TextWriter GetTextWriter(string path);
 
         bool FileExists(string path);
 
         void DeleteFile(string path);
-
-        void DeleteDirectory(string directory);
-
-        void EmptyDirectory(string directory);
 
         bool DirectoryExists(string path);
 

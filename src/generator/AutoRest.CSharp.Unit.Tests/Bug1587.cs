@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIClient.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPIClient.cs"));
 
                 // compilation is key in this test, as `x-ms-long-running-operation: false`
                 // creates method that contains call to non-existent method.
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that correct methods exist.

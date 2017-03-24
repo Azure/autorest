@@ -27,8 +27,8 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPI.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\SimpleAPIExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPI.cs"));
+                Assert.True(fileSystem.FileExists(@"SimpleAPIExtensions.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that parameter is of correct type

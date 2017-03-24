@@ -4,7 +4,7 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
@@ -32,6 +32,16 @@ namespace AutoRest.Swagger.Validation
 
     public class DefaultMustBeInEnum : TypedRule<SwaggerObject>
     {
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2027";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
         /// <summary>
         ///     An <paramref name="entity" /> fails this rule if it has both default defined and enum and the default isn't in the
         ///     enum

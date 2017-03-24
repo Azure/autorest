@@ -10,9 +10,11 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.azurespecials.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -23,6 +25,9 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getMethodLocalValid();
 
@@ -30,13 +35,15 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getMethodLocalValidAsync();
@@ -44,6 +51,7 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getMethodLocalValidWithServiceResponseAsync();
@@ -51,6 +59,9 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getMethodLocalNull();
 
@@ -58,13 +69,15 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalNullAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getMethodLocalNullAsync();
@@ -72,6 +85,7 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync();
@@ -79,6 +93,9 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getMethodLocalNull(String apiVersion);
 
@@ -87,14 +104,16 @@ public interface ApiVersionLocals {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getMethodLocalNullAsync(String apiVersion);
@@ -103,6 +122,7 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getMethodLocalNullWithServiceResponseAsync(String apiVersion);
@@ -110,6 +130,9 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getPathLocalValid();
 
@@ -117,13 +140,15 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getPathLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getPathLocalValidAsync();
@@ -131,6 +156,7 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getPathLocalValidWithServiceResponseAsync();
@@ -138,6 +164,9 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getSwaggerLocalValid();
 
@@ -145,13 +174,15 @@ public interface ApiVersionLocals {
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getSwaggerLocalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getSwaggerLocalValidAsync();
@@ -159,6 +190,7 @@ public interface ApiVersionLocals {
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getSwaggerLocalValidWithServiceResponseAsync();

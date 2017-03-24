@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -20,7 +20,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// Initializes a new instance of the Datetimerfc1123WrapperInner
         /// class.
         /// </summary>
-        public Datetimerfc1123WrapperInner() { }
+        public Datetimerfc1123WrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Datetimerfc1123WrapperInner
@@ -30,7 +33,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         {
             Field = field;
             Now = now;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -46,4 +55,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

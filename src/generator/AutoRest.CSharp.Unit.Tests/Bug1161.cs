@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // check for the expected class.
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\RecurrenceSchedule.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\RecurrenceSchedule.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -50,9 +50,10 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 // Should also succeed.
                 Assert.True(result.Succeeded);
+                
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that we have the class we expected
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.Unit.Tests
 
                 var propGenericType = prop.PropertyType.GenericTypeArguments[0].GenericTypeArguments[0];
                 Assert.Equal(propGenericType.Name, "DayOfWeek");
-                Assert.True(propGenericType.IsEnum);
+                Assert.True(propGenericType.GetTypeInfo().IsEnum );
                 
             }
         }

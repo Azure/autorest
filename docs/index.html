@@ -129,7 +129,7 @@ docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
 
 <p>Next, we invoke <strong>AutoRest.exe</strong> with this swagger document to generate client library code (see <a href="docs/user/cli.md">Command Line Interface documentation</a> for details).</p>
 
-<p><strong>AutoRest</strong> is extensible and can support multiple types of input and output. <em>AutoRest.exe</em> comes with the <em>AutoRest.json</em> configuration file that defines the available inputs (<em>Modelers</em>) and outputs (<em>CodeGenerators</em>). When invoking <em>AutoRest.exe</em>, if you don't specify the <code>-Modeler</code> then Swagger is assumed and if you don't specify <code>-CodeGenerator</code> then CSharp is used.</p>
+<p><strong>AutoRest</strong> is extensible and can support multiple types of input and output. <em>AutoRest.exe</em> comes with a configuration file that defines the available inputs (<em>Modelers</em>) and outputs (<em>CodeGenerators</em>). When invoking <em>AutoRest.exe</em>, if you don't specify the <code>-Modeler</code> then Swagger is assumed and if you don't specify <code>-CodeGenerator</code> then CSharp is used.</p>
 
 <p>The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires <code>-Namespace</code> be specified.  By default, the CodeGenerator will place output in a directory named <em>Generated</em>. This can be overridden by providing the <code>-OutputDirectory</code> parameter.</p>
 

@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using AcceptanceTestsHeader;
+    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseProtectedKeyHeaders
         /// class.
         /// </summary>
-        public HeaderResponseProtectedKeyHeaders() { }
+        public HeaderResponseProtectedKeyHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseProtectedKeyHeaders
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseProtectedKeyHeaders(string contentType = default(string))
         {
             ContentType = contentType;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header value "Content-Type": "text/html"
@@ -42,4 +51,3 @@ namespace Fixtures.AcceptanceTestsHeader.Models
 
     }
 }
-

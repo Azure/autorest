@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +19,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the CatalogArrayOfDictionary class.
         /// </summary>
-        public CatalogArrayOfDictionary() { }
+        public CatalogArrayOfDictionary()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the CatalogArrayOfDictionary class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public CatalogArrayOfDictionary(IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>))
         {
             ProductArrayOfDictionary = productArrayOfDictionary;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets array of dictionary of products
@@ -39,4 +48,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

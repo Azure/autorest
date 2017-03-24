@@ -10,10 +10,12 @@
 
 package fixtures.bodycomplex;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -24,6 +26,9 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Fish object if successful.
      */
     Fish getValid();
@@ -32,13 +37,15 @@ public interface Polymorphisms {
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    ServiceFuture<Fish> getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Get complex types that are polymorphic.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Fish object
      */
     Observable<Fish> getValidAsync();
@@ -46,6 +53,7 @@ public interface Polymorphisms {
     /**
      * Get complex types that are polymorphic.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Fish object
      */
     Observable<ServiceResponse<Fish>> getValidWithServiceResponseAsync();
@@ -86,6 +94,9 @@ public interface Polymorphisms {
                }
              ]
            };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putValid(Fish complexBody);
 
@@ -126,9 +137,10 @@ public interface Polymorphisms {
              ]
            };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic.
@@ -166,6 +178,7 @@ public interface Polymorphisms {
                }
              ]
            };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putValidAsync(Fish complexBody);
@@ -206,6 +219,7 @@ public interface Polymorphisms {
                }
              ]
            };
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putValidWithServiceResponseAsync(Fish complexBody);
@@ -239,6 +253,9 @@ public interface Polymorphisms {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void putValidMissingRequired(Fish complexBody);
 
@@ -272,9 +289,10 @@ public interface Polymorphisms {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -305,6 +323,7 @@ public interface Polymorphisms {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> putValidMissingRequiredAsync(Fish complexBody);
@@ -338,6 +357,7 @@ public interface Polymorphisms {
              }
          ]
      }
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> putValidMissingRequiredWithServiceResponseAsync(Fish complexBody);

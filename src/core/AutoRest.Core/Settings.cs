@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
@@ -45,6 +46,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private string _header;
 
+        public static string AutoRestFolder { get; set; }
+
         public Settings()
         {
             if (!Context.IsActive)
@@ -60,8 +63,9 @@ Licensed under the MIT License. See License.txt in the project root for license 
             // requests for settings.
             Singleton<Settings>.Instance = this;
 
-            FileSystem = new FileSystem();
-            OutputDirectory = Path.Combine(Environment.CurrentDirectory, "Generated");
+            FileSystemInput = new FileSystem();
+            FileSystemOutput = new MemoryFileSystem();
+            OutputDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Generated");
             CustomSettings = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             Header = string.Format(CultureInfo.InvariantCulture, DefaultCodeGenerationHeader, AutoRestController.Version);
             CodeGenerator = "CSharp";
@@ -74,23 +78,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// <summary>
         /// Gets or sets the IFileSystem used by code generation.
         /// </summary>
-        public IFileSystem FileSystem { get; set; }
+        public IFileSystem FileSystemInput { get; set; }
 
-        private Uri _inputFolder = null;
         /// <summary>
         /// Gets the Uri for the path to the folder that contains the input specification file.
         /// </summary>
-        public Uri InputFolder
-        {
-            get
-            {
-                if (_inputFolder == null && Input != null)
-                {
-                    _inputFolder = this.FileSystem.GetParentDir(Input);
-                }
-                return _inputFolder;
-            }
-        }
+        public MemoryFileSystem FileSystemOutput { get; set; }
 
         /// <summary>
         /// Custom provider specific settings.
@@ -190,7 +183,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                       "Possible values: rest, rest-client, rest-server. " +
                       "Determines whether AutoRest generates " +
                       "the client or server side code for given spec.")]
-        public string  CodeGenerationMode{ get; set; }
+        public string CodeGenerationMode { get; set; }
 
         /// <summary>
         /// Gets or sets a comment header to include in each generated file.
@@ -243,20 +236,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool AddCredentials { get; set; }
 
         /// <summary>
-        /// If set to true, behave in a way consistent with earlier builds of AutoRest..
-        /// </summary>
-        [SettingsInfo(
-            "If true, the code generated will be generated in a way consistent with earlier builds of AutoRest" +
-            "But, will not necessarily be according to latest best practices..")]
-        public bool QuirksMode { get; set; } = true;
-
-        /// <summary>
-        /// If set to true, skips the validation step. (WILL BE REMOVED)
-        /// </summary>
-        [SettingsAlias("skipvalidation")]
-        public bool SkipValidation { get; set; }
-
-        /// <summary>
         /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
         /// </summary>
         [SettingsInfo(
@@ -276,6 +255,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsAlias("verbose")]
         public bool Verbose { get; set; }
+
+        /// <summary>
+        /// If set to true, collect and print out validation messages as single JSON blob.
+        /// </summary>
+        [SettingsAlias("JsonValidationMessages")]
+        public bool JsonValidationMessages { get; set; }
 
         /// <summary>
         /// If set to true, print out debug messages.
@@ -315,13 +300,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         [SettingsAlias("preprocessor")]
         public bool Preprocessor { get; set; }
 
-        /// <summary>
-        /// Factory method to generate CodeGenerationSettings from command line arguments.
-        /// Matches dictionary keys to the settings properties.
-        /// </summary>
-        /// <param name="arguments">Command line arguments</param>
-        /// <returns>CodeGenerationSettings</returns>
-        public static Settings Create(string[] arguments)
+        private static Dictionary<string, object> ParseArgs(string[] arguments)
         {
             var argsDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
             if (arguments != null && arguments.Length > 0)
@@ -347,9 +326,24 @@ Licensed under the MIT License. See License.txt in the project root for license 
                         value = argument;
                     }
                 }
+                if (key != null)
+                {
                 AddArgumentToDictionary(key, value, argsDictionary);
             }
-            else
+            }
+            return argsDictionary;
+        }
+
+        /// <summary>
+        /// Factory method to generate Settings from command line arguments.
+        /// Matches dictionary keys to the settings properties.
+        /// </summary>
+        /// <param name="arguments">Command line arguments</param>
+        /// <returns>Settings</returns>
+        public static Settings Create(string[] arguments)
+        {
+            var argsDictionary = ParseArgs(arguments);
+            if (argsDictionary.Count == 0)
             {
                 argsDictionary["?"] = String.Empty;
             }
@@ -359,7 +353,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         private static void AddArgumentToDictionary(string key, string value, IDictionary<string, object> argsDictionary)
         {
-            key = key ?? "Default";
             value = value ?? String.Empty;
             argsDictionary[key] = value;
         }
@@ -383,7 +376,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             autoRestSettings.CustomSettings = settings;
             if (!string.IsNullOrEmpty(autoRestSettings.CodeGenSettings))
             {
-                var settingsContent = autoRestSettings.FileSystem.ReadFileAsText(autoRestSettings.CodeGenSettings);
+                var settingsContent = autoRestSettings.FileSystemInput.ReadAllText(autoRestSettings.CodeGenSettings);
                 var codeGenSettingsDictionary =
                     JsonConvert.DeserializeObject<Dictionary<string, object>>(settingsContent);
                 foreach (var pair in codeGenSettingsDictionary)
@@ -425,7 +418,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             {
                                 property.SetValue(entityToPopulate, true);
                             }
-                            else if (property.PropertyType.IsEnum)
+                            else if (property.PropertyType.IsEnum())
                             {
                                 property.SetValue(entityToPopulate, Enum.Parse(property.PropertyType, setting.Value.ToString(), true));
                             }
@@ -449,7 +442,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                     property.SetValue(entityToPopulate, intValues);
                                 }
                             }
-                            else
+                            else if (property.CanWrite)
                             {
                                 property.SetValue(entityToPopulate,
                                     Convert.ChangeType(setting.Value, property.PropertyType, CultureInfo.InvariantCulture), null);
@@ -477,14 +470,6 @@ Licensed under the MIT License. See License.txt in the project root for license 
                 {
                     Logger.Instance.Log(Category.Error, Resources.ParameterValueIsMissing, property.Name);
                     throw new CodeGenerationException(string.Format(Resources.ParameterValueIsMissing, property.Name));
-                }
-            }
-
-            if (CustomSettings != null)
-            {
-                foreach (var unmatchedSetting in CustomSettings.Keys)
-                {
-                    Logger.Instance.Log(Category.Warning, Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
         }

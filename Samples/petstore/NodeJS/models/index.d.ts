@@ -1,6 +1,8 @@
 /*
  */
 
+import * as moment from "moment";
+
 
 /**
  * @class

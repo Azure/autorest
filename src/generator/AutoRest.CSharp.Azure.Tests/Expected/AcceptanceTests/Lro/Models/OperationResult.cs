@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsLro.Models
 {
-    using Azure;
-    using AcceptanceTestsLro;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsLro;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
         /// </summary>
-        public OperationResult() { }
+        public OperationResult()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
@@ -31,7 +34,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
         {
             Status = status;
             Error = error;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the status of the request. Possible values include:
@@ -48,4 +57,3 @@ namespace Fixtures.Azure.AcceptanceTestsLro.Models
 
     }
 }
-

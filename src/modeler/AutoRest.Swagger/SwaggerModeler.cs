@@ -14,8 +14,8 @@ using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Properties;
 using ParameterLocation = AutoRest.Swagger.Model.ParameterLocation;
-using AutoRest.Core.Validation;
 using static AutoRest.Core.Utilities.DependencyInjection;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger
 {
@@ -68,7 +68,7 @@ namespace AutoRest.Swagger
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
-            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var serviceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystemInput);
             return Build(serviceDefinition);
         }
 
@@ -76,14 +76,15 @@ namespace AutoRest.Swagger
         public CodeModel Build(ServiceDefinition serviceDefinition)
         {
             ServiceDefinition = serviceDefinition;
-            if (!Settings.SkipValidation)
+            if (Settings.Instance.CodeGenerator.EqualsIgnoreCase("None"))
             {
                 // Look for semantic errors and warnings in the document.
                 var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition))
+                foreach (var validationEx in validator.GetValidationExceptions(ServiceDefinition.FilePath, ServiceDefinition))
                 {
                     Logger.Instance.Log(validationEx);
                 }
+                return New<CodeModel>();
             }
 
             Logger.Instance.Log(Category.Info, Resources.GeneratingClient);
@@ -168,22 +169,24 @@ namespace AutoRest.Swagger
         /// </summary>
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
-        public override IEnumerable<ComparisonMessage> Compare()
+        public override IEnumerable<LogMessage> Compare()
         {
+            var settings = Settings.Instance;
+
             Logger.Instance.Log(Category.Info, Resources.ParsingSwagger);
             if (string.IsNullOrWhiteSpace(Settings.Input) || string.IsNullOrWhiteSpace(Settings.Previous))
             {
                 throw ErrorManager.CreateError(Resources.InputRequired);
             }
 
-            var oldDefintion = SwaggerParser.Load(Settings.Previous, Settings.FileSystem);
-            var newDefintion = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
+            var oldDefintion = SwaggerParser.Load(settings.Previous, settings.FileSystemInput);
+            var newDefintion = SwaggerParser.Load(settings.Input, settings.FileSystemInput);
 
             var context = new ComparisonContext(oldDefintion, newDefintion);
 
             // Look for semantic errors and warnings in the new document.
             var validator = new RecursiveObjectValidator(PropertyNameResolver.JsonName);
-            var LogMessages = validator.GetValidationExceptions(newDefintion).ToList();
+            var LogMessages = validator.GetValidationExceptions(newDefintion.FilePath, newDefintion).ToList();
 
             // Only compare versions if the new version is correct.
             var comparisonMessages = 
@@ -248,7 +251,7 @@ namespace AutoRest.Swagger
                 ServiceDefinition.Host = "localhost";
             }
             CodeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
+                ServiceDefinition.Schemes[0].ToString().ToLower(),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
 
             // Copy extensions

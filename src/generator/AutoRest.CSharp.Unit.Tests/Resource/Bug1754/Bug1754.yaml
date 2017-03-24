@@ -1,0 +1,22 @@
+---
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Simple API
+paths:
+  "/someOp":
+    put:
+      operationId: test_put
+      responses:
+        '200':
+          description: OK
+    parameters:
+    - name: param
+      in: body
+      schema:
+        "$ref": "#/definitions/MyParam"
+definitions:
+  MyParam:
+    properties:
+      prop1:
+        type: string

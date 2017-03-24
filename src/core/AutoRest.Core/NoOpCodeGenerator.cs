@@ -9,7 +9,7 @@ namespace AutoRest.Core
 {
     
     public class NoOpPlugin :
-        Plugin<NoOpPlugin.NoSettings, ModelSerializer<CodeModel>, CodeModelTransformer<CodeModel>, NoOpCodeGenerator, CodeNamer, CodeModel>
+        Plugin<NoOpPlugin.NoSettings, CodeModelTransformer<CodeModel>, NoOpCodeGenerator, CodeNamer, CodeModel>
     {
         public class NoSettings : IGeneratorSettings
         {

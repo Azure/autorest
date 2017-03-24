@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
 
     /// <summary>
     /// Defines values for CMYKColors.
@@ -21,4 +21,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public const string BlacK = "blacK";
     }
 }
-

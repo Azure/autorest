@@ -3,6 +3,7 @@
 // 
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -25,12 +26,13 @@ namespace AutoRest.CSharp.Unit.Tests
         [Fact]
         public async Task CompositeSwaggerWithPayloadFlattening()
         {
+            
             // simplified test pattern for unit testing aspects of code generation
             using (var fileSystem = GenerateCodeForTestFromSpec(modeler: "CompositeSwagger"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\CompositeModel.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\Param1.cs"));
+                Assert.True(fileSystem.FileExists(Path.Combine("CompositeModel.cs")));
+                Assert.True(fileSystem.FileExists(Path.Combine("Models", "Param1.cs")));
 
                 var result = await Compile(fileSystem);
 
@@ -64,7 +66,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
                 
                 // verify that we have the composite class we expected

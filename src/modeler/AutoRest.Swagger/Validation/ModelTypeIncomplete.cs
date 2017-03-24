@@ -3,10 +3,8 @@
 
 using System.Collections.Generic;
 using AutoRest.Core.Logging;
-using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
-using System.Linq;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -18,7 +16,7 @@ namespace AutoRest.Swagger.Validation
             {
                 if (schema.Description == null)
                 {
-                    yield return new ValidationMessage(context.Path, this, "description");
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, "description");
                 }
             }
         }

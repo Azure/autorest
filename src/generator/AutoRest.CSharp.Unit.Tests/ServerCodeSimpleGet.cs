@@ -34,8 +34,8 @@ namespace AutoRest.CSharp.Unit.Tests
                 {
                     Modeler = "Swagger",
                     CodeGenerator = "CSharp",
-                    FileSystem = fileSystem,
-                    OutputDirectory = "GeneratedCode",
+                    FileSystemInput = fileSystem,
+                    OutputDirectory = "",
                     Namespace = "Test",
                     CodeGenerationMode = "rest-server"
                 };
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Unit.Tests
                     Assert.Empty(errors);
 
                     // Load and reflect on the assembly
-                    var asm = Assembly.Load(result.Output.GetBuffer());
+                    var asm = LoadAssembly(result.Output);
                     Assert.NotNull(asm);
 
                     // Verify the server controller

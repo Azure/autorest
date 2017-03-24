@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 {
-    using Azure;
-    using AcceptanceTestsPaging;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsPaging;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -18,7 +18,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
         /// </summary>
-        public OperationResult() { }
+        public OperationResult()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the OperationResult class.
@@ -30,7 +33,13 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
         public OperationResult(string status = default(string))
         {
             Status = status;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets the status of the request. Possible values include:
@@ -42,4 +51,3 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
 
     }
 }
-

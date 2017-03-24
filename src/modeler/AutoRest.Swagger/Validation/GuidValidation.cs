@@ -3,7 +3,8 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Core.Utilities;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 
@@ -15,6 +16,16 @@ namespace AutoRest.Swagger.Validation
     /// </summary>
     public class GuidValidation : TypedRule<Dictionary<string, Schema>>
     {
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3017";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
@@ -55,7 +66,7 @@ namespace AutoRest.Swagger.Validation
         private bool HandleSchema(Schema definition, Dictionary<string, Schema> definitions, out object[] formatParameters, string name)
         {
             // This could be a reference to another definition. But, that definition could be handled seperately.
-            if(definition.Type == DataType.String && definition.Format != null && definition.Format.Equals("uuid", System.StringComparison.InvariantCultureIgnoreCase))
+            if(definition.Type == DataType.String && definition.Format != null && definition.Format.EqualsIgnoreCase("uuid"))
             {
                 formatParameters = new object[2];
                 formatParameters[0] = name ;

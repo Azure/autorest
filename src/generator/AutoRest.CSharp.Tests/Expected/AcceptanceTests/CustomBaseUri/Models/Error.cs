@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 {
-    using AcceptanceTestsCustomBaseUri;
+    using Fixtures.AcceptanceTestsCustomBaseUri;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error() { }
+        public Error()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Error class.
@@ -26,7 +29,13 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
         {
             Status = status;
             Message = message;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -40,4 +49,3 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri.Models
 
     }
 }
-

@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
@@ -43,4 +43,3 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         Task<AzureOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
-

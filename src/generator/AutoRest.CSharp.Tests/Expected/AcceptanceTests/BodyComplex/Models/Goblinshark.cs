@@ -8,19 +8,22 @@
 
 namespace Fixtures.AcceptanceTestsBodyComplex.Models
 {
-    using AcceptanceTestsBodyComplex;
+    using Fixtures.AcceptanceTestsBodyComplex;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    [JsonObject("goblin")]
+    [Newtonsoft.Json.JsonObject("goblin")]
     public partial class Goblinshark : Shark
     {
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
         /// </summary>
-        public Goblinshark() { }
+        public Goblinshark()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Goblinshark class.
@@ -29,7 +32,13 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
             : base(length, birthday, species, siblings, age)
         {
             Jawsize = jawsize;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -48,4 +57,3 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         }
     }
 }
-

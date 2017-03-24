@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 {
-    using AcceptanceTestsAzureCompositeModelClient;
+    using Fixtures.AcceptanceTestsAzureCompositeModelClient;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         /// <summary>
         /// Initializes a new instance of the DurationWrapperInner class.
         /// </summary>
-        public DurationWrapperInner() { }
+        public DurationWrapperInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the DurationWrapperInner class.
@@ -25,7 +28,13 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
         public DurationWrapperInner(System.TimeSpan? field = default(System.TimeSpan?))
         {
             Field = field;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -34,4 +43,3 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
 
     }
 }
-

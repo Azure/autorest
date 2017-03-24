@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
+using AutoRest.Swagger.Validation.Core;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +12,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Describes a single response from an API Operation.
     /// </summary>
-    [Serializable]
     public class OperationResponse : SwaggerBase
     {
         private string _description;

@@ -1,0 +1,14 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Copyright>Copyright (c) Microsoft Corporation</Copyright>
+
+    <PackageIconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Azure/AutoRest</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    
+    <DelaySign Condition="$(Configuration) == 'Release'">true</DelaySign>
+    <AssemblyOriginatorKeyFile Condition="$(Configuration) == 'Release'">$(SolutionDir)/tools/MSSharedLibKey.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly Condition="$(Configuration) == 'Release'">true</SignAssembly>
+  </PropertyGroup>
+</Project>

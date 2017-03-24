@@ -13,8 +13,8 @@ package fixtures.custombaseuri.implementation;
 import retrofit2.Retrofit;
 import com.google.common.base.Joiner;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.ErrorException;
 import java.io.IOException;
@@ -62,6 +62,9 @@ public class PathsInner {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void getEmpty(String accountName) {
         getEmptyWithServiceResponseAsync(accountName).toBlocking().single().body();
@@ -72,16 +75,18 @@ public class PathsInner {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
+    public ServiceFuture<Void> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(getEmptyWithServiceResponseAsync(accountName), serviceCallback);
     }
 
     /**
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> getEmptyAsync(String accountName) {
@@ -97,6 +102,7 @@ public class PathsInner {
      * Get a 200 to test a valid base uri.
      *
      * @param accountName Account Name
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String accountName) {

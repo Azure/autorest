@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorRecursiveTypes.Models
 {
-    using MirrorRecursiveTypes;
+    using Fixtures.MirrorRecursiveTypes;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -17,7 +17,10 @@ namespace Fixtures.MirrorRecursiveTypes.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error() { }
+        public Error()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Error class.
@@ -27,7 +30,13 @@ namespace Fixtures.MirrorRecursiveTypes.Models
             Code = code;
             Message = message;
             Fields = fields;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -46,4 +55,3 @@ namespace Fixtures.MirrorRecursiveTypes.Models
 
     }
 }
-

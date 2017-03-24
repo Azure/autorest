@@ -27,13 +27,13 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\IDeprecated.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Deprecated.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\DeprecatedExtensions.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\IApproved.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Approved.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\ApprovedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
+                Assert.True(fileSystem.FileExists(@"IDeprecated.cs"));
+                Assert.True(fileSystem.FileExists(@"Deprecated.cs"));
+                Assert.True(fileSystem.FileExists(@"DeprecatedExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"IApproved.cs"));
+                Assert.True(fileSystem.FileExists(@"Approved.cs"));
+                Assert.True(fileSystem.FileExists(@"ApprovedExtensions.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operations are marked correctly
@@ -103,13 +103,13 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\Models\ResultObject.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\IDeprecatedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\DeprecatedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\DeprecatedOperationsExtensions.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\IApprovedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\ApprovedOperations.cs"));
-                Assert.True(fileSystem.FileExists(@"GeneratedCode\ApprovedOperationsExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"Models\ResultObject.cs"));
+                Assert.True(fileSystem.FileExists(@"IDeprecatedOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"DeprecatedOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"DeprecatedOperationsExtensions.cs"));
+                Assert.True(fileSystem.FileExists(@"IApprovedOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"ApprovedOperations.cs"));
+                Assert.True(fileSystem.FileExists(@"ApprovedOperationsExtensions.cs"));
 
                 var result = await Compile(fileSystem);
 
@@ -139,7 +139,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
 
                 // verify that deprecated_operations are marked correctly

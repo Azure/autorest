@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsHeader.Models
 {
-    using AcceptanceTestsHeader;
+    using Fixtures.AcceptanceTestsHeader;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -21,7 +21,10 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         /// Initializes a new instance of the HeaderResponseDoubleHeaders
         /// class.
         /// </summary>
-        public HeaderResponseDoubleHeaders() { }
+        public HeaderResponseDoubleHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the HeaderResponseDoubleHeaders
@@ -32,7 +35,13 @@ namespace Fixtures.AcceptanceTestsHeader.Models
         public HeaderResponseDoubleHeaders(double? value = default(double?))
         {
             Value = value;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets response with header value "value": 7e120 or -3.0
@@ -42,4 +51,3 @@ namespace Fixtures.AcceptanceTestsHeader.Models
 
     }
 }
-

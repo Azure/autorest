@@ -2,13 +2,23 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Logging;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Core.Properties;
 
 namespace AutoRest.Swagger.Validation
 {
     public class LongRunningResponseValidation : LongRunningExtensionRule
     {
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2005";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
         /// <summary>
         /// An x-ms-long-running-operation extension passes this rule if the operation that this extension has a valid response defined.
         /// </summary>
@@ -26,6 +36,6 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
     }
 }

@@ -2500,7 +2500,7 @@ Primitive.prototype.putDuration = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+    var complexBody;
   if (field !== null && field !== undefined) {
       complexBody = new client.models['DurationWrapper']();
       complexBody.field = field;
@@ -2757,7 +2757,7 @@ Primitive.prototype.putByte = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var complexBody;
+    var complexBody;
   if (field !== null && field !== undefined) {
       complexBody = new client.models['ByteWrapper']();
       complexBody.field = field;

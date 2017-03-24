@@ -68,8 +68,6 @@ namespace AutoRest.Extensions
 
                 if (codeModel.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
                 {
-                    SwaggerModeler modeler = new SwaggerModeler();
-                    modeler.Build();
                     var hostExtension = codeModel.Extensions[ParameterizedHostExtension] as JObject;
 
                     if (hostExtension != null)
@@ -101,6 +99,7 @@ namespace AutoRest.Extensions
 
                         if (!string.IsNullOrEmpty(parametersJson))
                         {
+                            var serviceDefinition = ServiceDefinition.Instance;
                             var jsonSettings = new JsonSerializerSettings
                             {
                                 TypeNameHandling = TypeNameHandling.None,
@@ -113,6 +112,9 @@ namespace AutoRest.Extensions
                             foreach (var swaggerParameter in swaggerParams)
                             {
                                 // Build parameter
+                                var modeler = new SwaggerModeler();
+                                modeler.ServiceDefinition = serviceDefinition;
+                                modeler.CodeModel = codeModel;
                                 var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
                                 var parameter = parameterBuilder.Build();
 
@@ -142,13 +144,13 @@ namespace AutoRest.Extensions
                             if (useSchemePrefix)
                             {
                                 codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                                    modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                                    hostTemplate, modeler.ServiceDefinition.BasePath);
+                                    serviceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                                    hostTemplate, serviceDefinition.BasePath);
                             }
                             else
                             {
                                 codeModel.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}{1}",
-                                    hostTemplate, modeler.ServiceDefinition.BasePath);
+                                    hostTemplate, serviceDefinition.BasePath);
                             }
 
                         }
@@ -373,11 +375,11 @@ namespace AutoRest.Extensions
                 var typeToDelete = codeModel.ModelTypes.First(t => t.Name == typeName);
 
                 var isUsedInErrorTypes = codeModel.ErrorTypes.Any(e => e.Name == typeName);
-                var isUsedInResponses = codeModel.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
-                var isUsedInParameters = codeModel.Methods.Any(m => m.Parameters.Any(p => p.ModelType == typeToDelete));
+                var isUsedInResponses = codeModel.Methods.Any(m => m.Responses.Any(r => typeReferenced(typeToDelete, r.Value.Body)));
+                var isUsedInParameters = codeModel.Methods.Any(m => m.Parameters.Any(p => typeReferenced(typeToDelete, p.ModelType)));
                 var isBaseType = codeModel.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
                 var isUsedInProperties = codeModel.ModelTypes.Where(t => !typeNames.Contains(t.Name))
-                                                                 .Any(t => t.Properties.Any(p => p.ModelType == typeToDelete));
+                                                                 .Any(t => t.Properties.Any(p => typeReferenced(typeToDelete, p.ModelType)));
                 if (!isUsedInErrorTypes &&
                     !isUsedInResponses &&
                     !isUsedInParameters &&
@@ -389,6 +391,26 @@ namespace AutoRest.Extensions
             }
         }
 
+        private static bool typeReferenced(CompositeType candidate, IModelType tester)
+        {
+            if (candidate == tester)
+            {
+                return true;
+            }
+
+            SequenceType sequenceTester = tester as SequenceType;
+            if (sequenceTester != null)
+            {
+                return typeReferenced(candidate, sequenceTester.ElementType);
+            }
+            DictionaryType dictionaryTester = tester as DictionaryType;
+            if (dictionaryTester != null)
+            {
+                return typeReferenced(candidate, dictionaryTester.ValueType);
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Flattens the request payload if the number of properties of the 

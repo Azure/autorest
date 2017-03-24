@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using AutoRest.Core.Validation;
 using AutoRest.Swagger.Validation;
+using AutoRest.Swagger.Validation.Core;
 using System;
 
 namespace AutoRest.Swagger.Model
@@ -11,7 +11,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Allows referencing an external resource for extended documentation.
     /// </summary>
-    [Serializable]
     public class ExternalDoc
     {
         private string _description;

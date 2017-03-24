@@ -8,7 +8,7 @@
 
 namespace Fixtures.PetstoreV2NoSync.Models
 {
-    using PetstoreV2NoSync;
+    using Fixtures.PetstoreV2NoSync;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Collections;
@@ -22,7 +22,10 @@ namespace Fixtures.PetstoreV2NoSync.Models
         /// <summary>
         /// Initializes a new instance of the Pet class.
         /// </summary>
-        public Pet() { }
+        public Pet()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Pet class.
@@ -40,7 +43,13 @@ namespace Fixtures.PetstoreV2NoSync.Models
             Birthday = birthday;
             Dictionary = dictionary;
             Status = status;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -230,4 +239,3 @@ namespace Fixtures.PetstoreV2NoSync.Models
         }
     }
 }
-

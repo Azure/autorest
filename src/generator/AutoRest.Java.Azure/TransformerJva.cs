@@ -133,10 +133,10 @@ namespace AutoRest.Java.Azure
 
             var convertedTypes = new Dictionary<IModelType, IModelType>();
 
-            foreach (MethodJva method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
+            foreach (MethodJva method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension) || (m as MethodJva).SimulateAsPagingOperation))
             {
                 string nextLinkString;
-                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
+                string pageClassName = GetPagingSetting(method.Extensions, pageClasses, method.SimulateAsPagingOperation, out nextLinkString);
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
@@ -145,15 +145,36 @@ namespace AutoRest.Java.Azure
                 {
                     method.Extensions[AzureExtensions.PageableExtension] = null;
                 }
-
+                bool anyTypeConverted = false;
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeTypeJva).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeTypeJva)method.Responses[responseStatus].Body;
-                    var sequenceType = compositType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
+                    anyTypeConverted = true;
+                    var compositeType = (CompositeTypeJva)method.Responses[responseStatus].Body;
+                    var sequenceType = compositeType.Properties.Select(p => p.ModelType).FirstOrDefault(t => t is SequenceTypeJva) as SequenceTypeJva;
 
                     // if the type is a wrapper over page-able response
                     if (sequenceType != null)
                     {
+                        IModelType pagedResult;
+                        pagedResult = new SequenceTypeJva
+                        {
+                            ElementType = sequenceType.ElementType,
+                            PageImplType = pageClassName
+                        };
+
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        var resp = New<Response>(pagedResult, method.Responses[responseStatus].Headers) as ResponseJva;
+                        resp.Parent = method;
+                        method.Responses[responseStatus] = resp;
+                    }
+                }
+
+                if (!anyTypeConverted && method.SimulateAsPagingOperation)
+                {
+                    foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is SequenceTypeJva).Select(s => s.Key).ToArray())
+                    {
+                        var sequenceType = (SequenceTypeJva)method.Responses[responseStatus].Body;
+
                         IModelType pagedResult;
                         pagedResult = new SequenceTypeJva
                         {
@@ -176,7 +197,8 @@ namespace AutoRest.Java.Azure
                 }
             }
 
-            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
+            SwaggerExtensions.RemoveUnreferencedTypes(serviceClient,
+                new HashSet<string>(convertedTypes.Keys.Where(x => x is CompositeTypeJva).Cast<CompositeTypeJva>().Select(t => t.Name.ToString())));
         }
 
         public virtual void NormalizeODataMethods(CodeModel client)
@@ -226,28 +248,39 @@ namespace AutoRest.Java.Azure
         }
 
         private static string GetPagingSetting(Dictionary<string, object> extensions,
-            IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
+            IDictionary<KeyValuePair<string, string>, string> pageClasses, bool simulatingPaging, out string nextLinkName)
         {
             // default value
             nextLinkName = null;
-            var ext = extensions[AzureExtensions.PageableExtension] as JContainer;
-            if (ext == null)
+            var itemName = "value";
+            string className = null;
+
+            if (extensions.ContainsKey(AzureExtensions.PageableExtension))
+            {
+                var ext = extensions[AzureExtensions.PageableExtension] as JContainer;
+
+                if (ext == null)
+                {
+                    return null;
+                }
+
+                nextLinkName = (string)ext["nextLinkName"];
+                itemName = (string)ext["itemName"] ?? "value";
+                className = (string)ext["className"];
+            }
+            else if (!simulatingPaging)
             {
                 return null;
             }
 
-            nextLinkName = (string)ext["nextLinkName"];
-            var itemName = (string)ext["itemName"] ?? "value";
-
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
             if (!pageClasses.ContainsKey(keypair))
             {
-                var className = (string)ext["className"];
-                if (string.IsNullOrEmpty(className))
+                if (string.IsNullOrWhiteSpace(className))
                 {
                     if (pageClasses.Count > 0)
                     {
-                        className = string.Format(CultureInfo.InvariantCulture, "PageImpl{0}", pageClasses.Count);
+                        className = $"PageImpl{pageClasses.Count}";
                     }
                     else
                     {

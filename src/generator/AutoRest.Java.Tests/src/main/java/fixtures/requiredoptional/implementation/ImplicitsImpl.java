@@ -13,8 +13,8 @@ package fixtures.requiredoptional.implementation;
 import retrofit2.Retrofit;
 import fixtures.requiredoptional.Implicits;
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
@@ -91,6 +91,9 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     public Error getRequiredPath(String pathParameter) {
@@ -102,16 +105,18 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getRequiredPathWithServiceResponseAsync(pathParameter), serviceCallback);
+    public ServiceFuture<Error> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getRequiredPathWithServiceResponseAsync(pathParameter), serviceCallback);
     }
 
     /**
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<Error> getRequiredPathAsync(String pathParameter) {
@@ -127,6 +132,7 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param pathParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getRequiredPathWithServiceResponseAsync(String pathParameter) {
@@ -156,6 +162,9 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putOptionalQuery() {
         putOptionalQueryWithServiceResponseAsync().toBlocking().single().body();
@@ -165,15 +174,17 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalQueryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putOptionalQueryAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putOptionalQueryAsync() {
@@ -188,6 +199,7 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalQueryWithServiceResponseAsync() {
@@ -210,6 +222,9 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putOptionalQuery(String queryParameter) {
         putOptionalQueryWithServiceResponseAsync(queryParameter).toBlocking().single().body();
@@ -220,16 +235,18 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalQueryWithServiceResponseAsync(queryParameter), serviceCallback);
+    public ServiceFuture<Void> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalQueryWithServiceResponseAsync(queryParameter), serviceCallback);
     }
 
     /**
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putOptionalQueryAsync(String queryParameter) {
@@ -245,6 +262,7 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param queryParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalQueryWithServiceResponseAsync(String queryParameter) {
@@ -272,6 +290,9 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putOptionalHeader() {
         putOptionalHeaderWithServiceResponseAsync().toBlocking().single().body();
@@ -281,15 +302,17 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional header parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalHeaderWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putOptionalHeaderAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalHeaderWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Test implicitly optional header parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putOptionalHeaderAsync() {
@@ -304,6 +327,7 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional header parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalHeaderWithServiceResponseAsync() {
@@ -326,6 +350,9 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putOptionalHeader(String queryParameter) {
         putOptionalHeaderWithServiceResponseAsync(queryParameter).toBlocking().single().body();
@@ -336,16 +363,18 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalHeaderWithServiceResponseAsync(queryParameter), serviceCallback);
+    public ServiceFuture<Void> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalHeaderWithServiceResponseAsync(queryParameter), serviceCallback);
     }
 
     /**
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putOptionalHeaderAsync(String queryParameter) {
@@ -361,6 +390,7 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional header parameter.
      *
      * @param queryParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalHeaderWithServiceResponseAsync(String queryParameter) {
@@ -388,6 +418,9 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putOptionalBody() {
         putOptionalBodyWithServiceResponseAsync().toBlocking().single().body();
@@ -397,15 +430,17 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional body parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalBodyWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> putOptionalBodyAsync(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalBodyWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Test implicitly optional body parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putOptionalBodyAsync() {
@@ -420,6 +455,7 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional body parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalBodyWithServiceResponseAsync() {
@@ -442,6 +478,9 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void putOptionalBody(String bodyParameter) {
         putOptionalBodyWithServiceResponseAsync(bodyParameter).toBlocking().single().body();
@@ -452,16 +491,18 @@ public class ImplicitsImpl implements Implicits {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(putOptionalBodyWithServiceResponseAsync(bodyParameter), serviceCallback);
+    public ServiceFuture<Void> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(putOptionalBodyWithServiceResponseAsync(bodyParameter), serviceCallback);
     }
 
     /**
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> putOptionalBodyAsync(String bodyParameter) {
@@ -477,6 +518,7 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional body parameter.
      *
      * @param bodyParameter the String value
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> putOptionalBodyWithServiceResponseAsync(String bodyParameter) {
@@ -504,6 +546,9 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalPath() {
@@ -514,15 +559,17 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getRequiredGlobalPathWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getRequiredGlobalPathWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Test implicitly required path parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<Error> getRequiredGlobalPathAsync() {
@@ -537,6 +584,7 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required path parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getRequiredGlobalPathWithServiceResponseAsync() {
@@ -566,6 +614,9 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     public Error getRequiredGlobalQuery() {
@@ -576,15 +627,17 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getRequiredGlobalQueryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getRequiredGlobalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Test implicitly required query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<Error> getRequiredGlobalQueryAsync() {
@@ -599,6 +652,7 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly required query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getRequiredGlobalQueryWithServiceResponseAsync() {
@@ -628,6 +682,9 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      * @return the Error object if successful.
      */
     public Error getOptionalGlobalQuery() {
@@ -638,15 +695,17 @@ public class ImplicitsImpl implements Implicits {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
-        return ServiceCall.fromResponse(getOptionalGlobalQueryWithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Error> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+        return ServiceFuture.fromResponse(getOptionalGlobalQueryWithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<Error> getOptionalGlobalQueryAsync() {
@@ -661,6 +720,7 @@ public class ImplicitsImpl implements Implicits {
     /**
      * Test implicitly optional query parameter.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the observable to the Error object
      */
     public Observable<ServiceResponse<Error>> getOptionalGlobalQueryWithServiceResponseAsync() {

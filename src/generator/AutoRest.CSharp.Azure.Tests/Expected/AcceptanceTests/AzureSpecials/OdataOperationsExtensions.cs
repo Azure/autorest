@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Microsoft.Rest.Azure.OData;
@@ -51,9 +51,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task GetWithFilterAsync(this IOdataOperations operations, ODataQuery<OdataFilter> odataQuery = default(ODataQuery<OdataFilter>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetWithFilterWithHttpMessagesAsync(odataQuery, null, cancellationToken).ConfigureAwait(false);
+                (await operations.GetWithFilterWithHttpMessagesAsync(odataQuery, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-

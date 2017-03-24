@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureResource;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureResource;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
         /// </summary>
-        public FlattenedProduct() { }
+        public FlattenedProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
@@ -38,7 +41,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
             Pname = pname;
             Lsize = lsize;
             ProvisioningState = provisioningState;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -57,4 +66,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureResource.Models
 
     }
 }
-

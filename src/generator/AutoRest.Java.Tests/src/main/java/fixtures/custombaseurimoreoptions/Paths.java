@@ -10,9 +10,11 @@
 
 package fixtures.custombaseurimoreoptions;
 
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
+import fixtures.custombaseurimoreoptions.models.ErrorException;
+import java.io.IOException;
 import rx.Observable;
 
 /**
@@ -26,6 +28,9 @@ public interface Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getEmpty(String vault, String secret, String keyName);
 
@@ -36,9 +41,10 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -46,6 +52,7 @@ public interface Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getEmptyAsync(String vault, String secret, String keyName);
@@ -56,6 +63,7 @@ public interface Paths {
      * @param vault The vault name, e.g. https://myvault
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName);
@@ -66,6 +74,9 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws ErrorException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     void getEmpty(String vault, String secret, String keyName, String keyVersion);
 
@@ -77,9 +88,10 @@ public interface Paths {
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    ServiceCall<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceFuture<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a 200 to test a valid base uri.
@@ -88,6 +100,7 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<Void> getEmptyAsync(String vault, String secret, String keyName, String keyVersion);
@@ -99,6 +112,7 @@ public interface Paths {
      * @param secret Secret value.
      * @param keyName The key name with value 'key1'.
      * @param keyVersion The key version. Default value 'v1'.
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     Observable<ServiceResponse<Void>> getEmptyWithServiceResponseAsync(String vault, String secret, String keyName, String keyVersion);

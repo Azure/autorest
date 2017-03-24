@@ -1,5 +1,4 @@
 @using System.Linq
-@using System.Runtime.Remoting.Messaging
 @using AutoRest.Core
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
@@ -58,12 +57,16 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
             @:this.@(property.Name) = new @(property.ModelTypeName)();
             }
+            CustomInit();
         }
 </text>
         }
         else
         {
-        @:public @(Model.Name)() { }
+        @:public @(Model.Name)() 
+        @:{
+        @:  CustomInit();
+        @:}
         }
 
         @EmptyLine
@@ -103,8 +106,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
                 {
             @:this.@(property.Name) = @propName;
                 }
-            }            
-
+            }
+        @:    CustomInit();
         @:}
         }
 
@@ -119,9 +122,15 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
             @:@(property.Name) = @(property.DefaultValue);
             }
+
         @:}
         }
-
+        @EmptyLine
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
+        
         @EmptyLine
         @foreach (var property in Model.Properties.Where(p => !p.IsConstant))
         {
@@ -159,7 +168,7 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             {
         @:[Newtonsoft.Json.JsonProperty(PropertyName = "@property.SerializedName")]
             }
-        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "protected " : "")set; }
+        @:public @property.ModelTypeName @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
         @EmptyLine
         }
 
@@ -361,7 +370,8 @@ namespace @(Settings.Namespace).@(Settings.ModelsName)
             if (@(deserializerName)(payload, "@property.XmlName", out @(resultName)))
             {
                 result.@(property.Name) = @(resultName);
-            }</text>
+            }
+</text>
         }
             return result;
         } 

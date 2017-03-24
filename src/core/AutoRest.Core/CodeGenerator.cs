@@ -18,8 +18,6 @@ namespace AutoRest.Core
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class CodeGenerator
     {
-        private bool firstTimeWriteSingleFile = true;
-
         protected CodeGenerator()
         {
         }
@@ -64,7 +62,7 @@ namespace AutoRest.Core
         /// <param name="template"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public async Task Write(ITemplate template, string fileName)
+        public virtual async Task Write(ITemplate template, string fileName)
         {
             Logger.Instance.Log(Category.Info, $"[WRITING] {template.GetType().Name} => {fileName}");
             template.Settings = Settings.Instance;
@@ -85,8 +83,6 @@ namespace AutoRest.Core
         /// <returns></returns>
         public async Task Write(string template, string fileName, bool skipEmptyLines)
         {
-            string filePath = null;
-
             if (Settings.Instance.OutputFileName != null)
             {
                 if (!IsSingleFileGenerationSupported)
@@ -96,33 +92,24 @@ namespace AutoRest.Core
                     return;
                 }
 
-                filePath = Path.Combine(Settings.Instance.OutputDirectory, Settings.Instance.OutputFileName);
-
-                if (firstTimeWriteSingleFile)
-                {
-                    // for SingleFileGeneration clean the file before writing only if its the first time
-                    Settings.Instance.FileSystem.DeleteFile(filePath);
-                    firstTimeWriteSingleFile = false;
-                }
+                fileName = Settings.Instance.OutputFileName;
             }
             else
             {
-                filePath = Path.Combine(Settings.Instance.OutputDirectory, fileName);
                 // cleans file before writing
-                if (FileList.Contains(filePath))
+                if (FileList.Contains(fileName))
                 {
-                    throw new Exception($"Duplicate File Generation: {filePath}");
+                    throw new Exception($"Duplicate File Generation: {fileName}");
                 }
-                FileList.Add(filePath);
-                Settings.Instance.FileSystem.DeleteFile(filePath);
+                FileList.Add(fileName);
             }
             // Make sure the directory exist
-            Settings.Instance.FileSystem.CreateDirectory(Path.GetDirectoryName(filePath));
+            Settings.Instance.FileSystemOutput.CreateDirectory(Path.GetDirectoryName(fileName));
 
-            var lineEnding = filePath.LineEnding();
+            var lineEnding = fileName.LineEnding();
 
             using (StringReader streamReader = new StringReader(template))
-            using (TextWriter textWriter = Settings.Instance.FileSystem.GetTextWriter(filePath))
+            using (TextWriter textWriter = Settings.Instance.FileSystemOutput.GetTextWriter(fileName))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)

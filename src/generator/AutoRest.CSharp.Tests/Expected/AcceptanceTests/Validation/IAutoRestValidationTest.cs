@@ -104,4 +104,3 @@ namespace Fixtures.AcceptanceTestsValidation
 
     }
 }
-

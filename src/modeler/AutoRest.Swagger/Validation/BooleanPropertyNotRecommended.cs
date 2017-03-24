@@ -3,9 +3,9 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -14,6 +14,16 @@ namespace AutoRest.Swagger.Validation
     /// </summary>
     public class BooleanPropertyNotRecommended : TypedRule<Dictionary<string, Schema>>
     {
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M3018";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>

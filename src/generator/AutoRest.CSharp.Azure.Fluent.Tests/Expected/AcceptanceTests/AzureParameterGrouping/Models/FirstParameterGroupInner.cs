@@ -8,8 +8,8 @@
 
 namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 {
-    using Azure;
-    using AcceptanceTestsAzureParameterGrouping;
+    using Fixtures.Azure;
+    using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
     using Newtonsoft.Json;
     using System.Linq;
 
@@ -23,7 +23,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// Initializes a new instance of the FirstParameterGroupInner class.
         /// </summary>
-        public FirstParameterGroupInner() { }
+        public FirstParameterGroupInner()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the FirstParameterGroupInner class.
@@ -33,7 +36,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         {
             HeaderOne = headerOne;
             QueryOne = queryOne;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -48,4 +57,3 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
 
     }
 }
-

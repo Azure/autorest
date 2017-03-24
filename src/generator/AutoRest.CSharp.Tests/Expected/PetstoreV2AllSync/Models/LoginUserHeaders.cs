@@ -8,7 +8,7 @@
 
 namespace Fixtures.PetstoreV2AllSync.Models
 {
-    using PetstoreV2AllSync;
+    using Fixtures.PetstoreV2AllSync;
     using Newtonsoft.Json;
     using System.Linq;
     using System.Xml;
@@ -22,7 +22,10 @@ namespace Fixtures.PetstoreV2AllSync.Models
         /// <summary>
         /// Initializes a new instance of the LoginUserHeaders class.
         /// </summary>
-        public LoginUserHeaders() { }
+        public LoginUserHeaders()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the LoginUserHeaders class.
@@ -33,7 +36,13 @@ namespace Fixtures.PetstoreV2AllSync.Models
         {
             XRateLimit = xRateLimit;
             XExpiresAfter = xExpiresAfter;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// Gets or sets calls per hour allowed by the user
@@ -89,4 +98,3 @@ namespace Fixtures.PetstoreV2AllSync.Models
         }
     }
 }
-

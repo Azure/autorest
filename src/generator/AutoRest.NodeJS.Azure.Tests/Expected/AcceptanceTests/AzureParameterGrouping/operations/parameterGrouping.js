@@ -81,7 +81,7 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   } catch (error) {
     return callback(error);
   }
-  var body;
+    var body;
   var customHeader;
   var query;
   var path;
@@ -261,7 +261,7 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-  var customHeader;
+    var customHeader;
   var query;
   try {
     if (parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined)
@@ -415,7 +415,7 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   } catch (error) {
     return callback(error);
   }
-  var headerOne;
+    var headerOne;
   var queryOne;
   var headerTwo;
   var queryTwo;
@@ -579,7 +579,7 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   } catch (error) {
     return callback(error);
   }
-  var headerOne;
+    var headerOne;
   var queryOne;
   try {
     if (firstParameterGroup !== null && firstParameterGroup !== undefined)

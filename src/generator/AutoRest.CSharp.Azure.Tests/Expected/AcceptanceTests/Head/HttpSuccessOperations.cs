@@ -8,7 +8,7 @@
 
 namespace Fixtures.Azure.AcceptanceTestsHead
 {
-    using Azure;
+    using Fixtures.Azure;
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Newtonsoft.Json;
@@ -84,9 +84,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("HEAD");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
@@ -175,7 +175,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            _result.Body = _statusCode == HttpStatusCode.OK;
+            _result.Body = _statusCode == System.Net.HttpStatusCode.OK;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -223,9 +223,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("HEAD");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
@@ -314,7 +314,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            _result.Body = _statusCode == HttpStatusCode.NoContent;
+            _result.Body = _statusCode == System.Net.HttpStatusCode.NoContent;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -362,9 +362,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 _url += (_url.Contains("?") ? "&" : "?") + string.Join("&", _queryParameters);
             }
             // Create HTTP transport objects
-            var _httpRequest = new System.Net.Http.HttpRequestMessage();
-            System.Net.Http.HttpResponseMessage _httpResponse = null;
-            _httpRequest.Method = new System.Net.Http.HttpMethod("HEAD");
+            var _httpRequest = new HttpRequestMessage();
+            HttpResponseMessage _httpResponse = null;
+            _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new System.Uri(_url);
             // Set Headers
             if (Client.GenerateClientRequestId != null && Client.GenerateClientRequestId.Value)
@@ -453,7 +453,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
-            _result.Body = _statusCode == HttpStatusCode.NoContent;
+            _result.Body = _statusCode == System.Net.HttpStatusCode.NoContent;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -467,4 +467,3 @@ namespace Fixtures.Azure.AcceptanceTestsHead
 
     }
 }
-

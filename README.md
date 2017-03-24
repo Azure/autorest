@@ -1,134 +1,94 @@
-[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
-
-# <img align="center" src="https://raw.githubusercontent.com/Azure/autorest/master/docs/images/autorest-small-flat.png">  AutoRest
+# <img align="center" src="./docs/images/logo.png">  AutoRest
 
 The **AutoRest** tool generates client libraries for accessing RESTful web services. Input to *AutoRest* is a spec that describes the REST API using the [Open API Initiative](https://github.com/OAI/OpenAPI-Specification) format.
 
-##Getting AutoRest
-The AutoRest tools can be installed with Nuget for use in a Visual Studio project:
-[![AutoRest NuGet](https://img.shields.io/nuget/v/autorest.svg?style=flat-square)](https://www.nuget.org/packages/autorest/)
+[![Repo Status](http://img.shields.io/travis/Azure/autorest/dev.svg?style=flat-square&label=build)](https://travis-ci.org/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/pr?style=flat-square)](http://issuestats.com/github/Azure/autorest) [![Issue Stats](http://issuestats.com/github/Azure/autorest/badge/issue?style=flat-square)](http://issuestats.com/github/Azure/autorest)
 
-Alternatively it can be installed from [Chocolatey](https://chocolatey.org/) by running:
-[![AutoRest Chocolatey](https://img.shields.io/chocolatey/v/autorest.svg?style=flat-square)](https://chocolatey.org/packages/AutoRest)
+# What's New (02/24/2017)
 
-    choco install autorest
-    
-Nightlies are available via MyGet:
-[![AutoRest MyGet](https://img.shields.io/myget/autorest/vpre/autorest.svg?style=flat-square)](https://www.myget.org/gallery/autorest)
+AutoRest has been thru a lot of changes recently, most notably:
+- we've switched to building the core components with the latest [dotnet-cli](https://github.com/dotnet/cli) tools, and the binaries are build for .NET Core 1.0 (aka 'CoreCLR')
+- we're starting to build some of the components in NodeJS - this allows us to leverage all sorts of other great functionality with less coding effort
+- we have a great cross-platform installation model for Windows, Mac OSX and Linux, which is built on top of NodeJS's `npm` package manager
 
-AutoRest can be run on macOS and *nix using [Mono](http://www.mono-project.com/download):
+> #### Why did you change that?
+> Previously, in order to get AutoRest, you had to either get an older version from Chocolatey, or install a 'nightly' build from the MyGet feed using the NuGet tool.
+> This didn't make it easier to keep up-to-date with AutoRest (as development happens pretty fast these days!), and often bugs were getting fixed and it was a pain for users to get the updated binaries.
+>
+> Now, you can "install" AutoRest just once, and AutoRest itself has the ability to download and install any updates, as well as allowing the user to choose any arbitrary build at runtime, and it will use the requested verion.
+>
+> This will let you install a 'release' version of AutoRest, and use that, but if you want to test a new nightly or preview version, you can just ask for it on the command line. 
+>
+> Additionally, we're making AutoRest work in multiple environments, (including a upcoming [Visual Studio Code](https://code.visualstudio.com/) extension), and using this model, AutoRest will give exactly the same results from the command line as in the IDE, without having to manually fight to switch versions when you want.
 
-  # Download & Unpack Autorest
-  curl -LO https://github.com/Azure/autorest/releases/download/AutoRest-0.16.0/autorest.0.16.0.zip && \
-  unzip autorest.0.16.0.zip -d autorest/ && \
-  cd autorest && \
 
-  # Download Swagger.json example
-  curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json && \
+# Installing Autorest 
 
-  # Run AutoRest using mono
-  mono AutoRest.exe \
-    -CodeGenerator CSharp \
-    -Input petstore.json \
-    -OutputDirectory CSharp_PetStore -Namespace PetStore
+Installing AutoRest on Windows, MacOS or Linux involves two steps:
 
-Or [Docker](https://docs.docker.com/engine/installation):
+1. __Install [Node.js](https://nodejs.org/en/)__ (6.9.5 or greater)
+> for more help, check out [Installing Node.JS on different platforms](./docs/developer/workstation.md#nodejs)
 
-  # Download Swagger.json example
-  `curl -O https://raw.githubusercontent.com/Azure/autorest/master/Samples/petstore/petstore.json`
+2. __Install AutoRest__ using `npm`
 
-  # Download latest AutoRest Docker image
-  `docker pull azuresdk/autorest:latest`
+  ``` powershell
+  # Depending on your configuration you may need to be elevated or root to run this. (on OSX/Linux use 'sudo' )
+  npm install -g autorest
+  ```
 
-  # Run AutoRest using Docker, mounting the current folder (pwd) into /home inside the container
-  `docker run -it --rm -v $(pwd):/home azuresdk/autorest:latest autorest \
-    -CodeGenerator CSharp \
-    -Input /home/petstore.json \
-    -OutputDirectory /home/CSharp_PetStore -Namespace PetStore`
+### Status on various platforms:
+ 
+|OS | Status | 
+|---|--------|
+|Windows x64| Verified - Working|
+|OSX 10.11 x64| Verified - Working (may have to install openssl manually?)|
+|Ubuntu 14.04 x64 (any) | Verified - Working -- use the following commands first: <br>`sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libunwind8 libicu52 -y` |
+|Ubuntu 16.04 x64 (desktop)| Verified - Working|
+|Ubuntu 16.04 x64 (server or via BashForWindows/WSL) | Verified - Working -- use the following commands first: <br>`sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libunwind8 -y` |
+|Ubuntu 16.10 x64| Verified - Working -- use the following commands first: <br>`sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install libunwind8 -y && wget  http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu55_55.1-7_amd64.deb && sudo dpkg -i libicu55_55.1-7_amd64.deb`   |
 
-## Building AutoRest
-AutoRest is developed primarily in C# but generates code for multiple languages. See [this link](docs/developer/guide/building-code.md) to build and test AutoRest.
+Other Linux platforms *might* work -- if the platform is listed https://github.com/Azure/autorest/releases/tag/dotnet-runtime-1.0.3 -- there is a fairly good chance that it'll work. As more testing is completed, we'll ensure that we update the status here.
 
-> Hint: There is a powershell script (`verify-settings.ps1`) in the `Tools` folder that can verify that you have the required compilers/tools/libraries installed on your development system before trying to build.
+### _PREVIEW AVAILABLE_ : Installer EXE for AutoRest now online 
+You can test out the PREVIEW AutoRest installer from : https://github.com/Azure/autorest/releases/download/dotnet-runtime-1.0.3/AutoInstaller.exe
 
-## Hello World
-For this version  of Hello World, we will use **AutoRest** to generate a client library and use it to call a web service. The trivial web service that just returns a string is defined as follows:
-```C#
-public class HelloWorldController : ApiController
-{
-    // GET: api/HelloWorld
-    public string Get()
-    {
-        return "Hello via AutoRest.";
-    }
-}
-```
-By convention, Swagger documents are exposed by web services with the name `swagger.json`.  The `title` property of the `info` object is used by **AutoRest**  as the name of the client object in the generated library. The `host` + `path` of the operation corresponds to the URL of the operation endpoint. The `operationId` is used as the method name. The spec declares that a `GET` request will return an HTTP 200 status code with content of mime-type `application/json` and the body will be a string. For a more in-depth overview of swagger processing, refer to [Defining Clients With Swagger](docs/developer/guide/defining-clients-swagger.md) section of the [documentation](docs).
+> **Note**: 
+> The Installer is a work-in-progress -- it has been tested for the happy path, some functionality isn't yet implemented:
+> - Remove/Uninstall - not yet implemented
+> - Upgrade - minimally tested
+> - About and Project buttons - not yet implemented
+> - not yet codesiged
+> - no silent/unattended mode yet
+> <br>
+> <br> ![image](https://cloud.githubusercontent.com/assets/133736/23370663/440ff1c4-fcca-11e6-9b66-5e0da642af55.png) <br>
 
-```json
-{
-  "swagger": "2.0",
-  "info": {
-    "title": "MyClient",
-    "version": "1.0.0"
-  },
-  "host": "swaggersample.azurewebsites.net",
-  "paths": {
-    "/api/HelloWorld": {
-      "get": {
-        "operationId": "GetGreeting",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "GETs a greeting.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-Next, we invoke **AutoRest.exe** with this swagger document to generate client library code (see [Command Line Interface documentation](docs/user/cli.md) for details).
+> - Feedback welcome at https://github.com/Azure/autorest/issues/1884
 
-**AutoRest** is extensible and can support multiple types of input and output. *AutoRest.exe* comes with the *AutoRest.json* configuration file that defines the available inputs (*Modelers*) and outputs (*CodeGenerators*). When invoking *AutoRest.exe*, if you don't specify the `-Modeler` then Swagger is assumed and if you don't specify `-CodeGenerator` then CSharp is used.
 
-The Swagger schema is language agnostic and doesn't include the notion of namespace, but for generating code, AutoRest requires `-Namespace` be specified.  By default, the CodeGenerator will place output in a directory named *Generated*. This can be overridden by providing the `-OutputDirectory` parameter.
+# Getting Started using AutoRest ![image](./docs/images/normal.png)
 
-```
-AutoRest.exe -CodeGenerator CSharp -Modeler Swagger -Input swagger.json -Namespace MyNamespace
-```
+Start by reading the documentation for using AutoRest:
+- [Managing Autorest](./docs/managing-autorest.md) - shows how to get new updates to AutoRest and choose which version to use for code generation
+- [Generating a Client using AutoRest](./docs/generating-a-client.md) - shows simple command line usage for generating a client library.
 
-Now, we will use the generated code to call the web service.
+# Developers ![image](./docs/images/glasses.png)
 
-Create a console application called *HelloWorld*. Add the generated files to it. They won't compile until you add the NuGet package the generated code depends on: `Microsoft.Rest.ClientRuntime`.
+Get yourself up and coding in AutoRest
 
-You can add it to the Visual Studio project using the NuGet package manager or in the Package Manager Console with this command:
-```PowerShell
-Install-Package Microsoft.Rest.ClientRuntime
-```
+- [Developer Workstation Requirements](./docs/developer/workstation.md) - what do you need to install to start working with the AutoRest code
+- [Compiling AutoRest](./docs/developer/compiling-autorest.md) - compiling/testing AutoRest using the build scripts 
 
-Add the namespace that was given to AutoRest.
-```C#
-using MyNamespace;
-```
-Access the REST API with very little code (see [Client Initialization](docs/client/init.md) and [Client Operations](docs/client/ops.md) for details).
-```C#
-var myClient = new MyClient();
-var salutation = myClient.GetGreeting();
-Console.WriteLine(salutation);
-```
-Running the console app shows the greeting retrieved from the service API.
-```bat
-C:\>HelloWorld.exe
-Hello via AutoRest.
-```
-
-With that same basic pattern in place, you can now explore how different REST API operations and payloads are described in Swagger and exposed in the code generated by **AutoRest**.
+Some information about the internal AutoRest architecture (may need updating!):
+- [Developer Guide](./docs/developer/guide/) - Notes on developing with AutoRest
+- [AutoRest and ClientRuntimes](./docs/developer/architecture/Autorest-and-Clientruntimes.md) - about the client runtime requirements for AutoRest
+- [The `CodeModel` data model](./docs/developer/architecture/CodeModel-and-the-Language-specific-Generator-Transformer-Namer.md) and the Language-specific Generator/Transformer/Namer
+- [`Fixable<T>` implemenation](./docs/developer/architecture/Fixable-T----When-a-value-is-both-calculated-and-or-fixed.md) - When a value is both calculated and/or fixed
+- [LODIS](./docs/developer/architecture/Least-Offensive-Dependency-Injection-System.md) - The Least Offensive Dependency Injection System
+- [Name Disambiguation](./docs/developer/architecture/Name-Disambiguation.md) - how names don't collide in code generation.
+- [Validation Rules & Linting](./docs/developer/validation-rules/readme.md) - about the validation rules in AutoRest
 
 ---
+
+### Code of Conduct 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+

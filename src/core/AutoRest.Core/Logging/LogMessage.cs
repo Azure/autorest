@@ -1,11 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using AutoRest.Core.Validation;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace AutoRest.Core.Logging
 {
@@ -14,7 +10,7 @@ namespace AutoRest.Core.Logging
     /// </summary>
     public class LogMessage
     {
-        public LogMessage(Category severity, string message, ObjectPath path = null)
+        public LogMessage(Category severity, string message, FileObjectPath path = null)
         {
             Severity = severity;
             Message = message;
@@ -41,7 +37,7 @@ namespace AutoRest.Core.Logging
         /// <summary>
         /// The JSON document path to the element being validated.
         /// </summary>
-        public ObjectPath Path { get; }
+        public FileObjectPath Path { get; }
 
         /// <summary>
         /// Additional data, set only if `Settings.Instance.Verbose` is set.

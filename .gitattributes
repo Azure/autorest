@@ -20,7 +20,8 @@
 *.htm text
 *.html text
 
-*.json text
+*.json text eol=lf
+*.ts text eol=lf
 
 *.msbuild text
 *.nuspec text

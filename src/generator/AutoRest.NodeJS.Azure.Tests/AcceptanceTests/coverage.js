@@ -5,9 +5,7 @@
 
 var should = require('should');
 var http = require('http');
-var util = require('util');
 var assert = require('assert');
-var _ = require('underscore')
 
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
@@ -28,11 +26,11 @@ describe('nodejs', function () {
     it('should have 100% coverage for Azure', function (done) {
       testClient.getReport(function (error, result) {
         should.not.exist(error);
-        //console.log('The test coverage for azure is ' + util.inspect(result));
+        //console.log(`The test coverage for azure is ${JSON.stringify(result)).`);
         
         var total = _.keys(result).length;
         var passed = 0;
-        _.keys(result).forEach(function(item) {
+        Object.keys(result).forEach(function(item) {
           if (result[item] > 0) {
             passed++;
           } else {

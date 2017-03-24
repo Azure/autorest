@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutNullAsync(this IStringModel operations, string stringBody = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutNullWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutNullWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -132,7 +132,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutEmptyAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutEmptyWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutEmptyWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -197,7 +197,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutMbcsAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutMbcsWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutMbcsWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -266,7 +266,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutWhitespaceAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutWhitespaceWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutWhitespaceWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -379,7 +379,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task PutBase64UrlEncodedAsync(this IStringModel operations, byte[] stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBase64UrlEncodedWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBase64UrlEncodedWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -412,4 +412,3 @@ namespace Fixtures.AcceptanceTestsBodyString
 
     }
 }
-

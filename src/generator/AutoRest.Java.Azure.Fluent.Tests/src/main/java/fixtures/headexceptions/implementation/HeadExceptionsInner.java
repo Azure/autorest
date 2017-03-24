@@ -13,8 +13,8 @@ package fixtures.headexceptions.implementation;
 import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceFuture;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import retrofit2.http.HEAD;
@@ -67,6 +67,9 @@ public class HeadExceptionsInner {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head200() {
         head200WithServiceResponseAsync().toBlocking().single().body();
@@ -76,15 +79,17 @@ public class HeadExceptionsInner {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(head200WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> head200Async() {
@@ -99,6 +104,7 @@ public class HeadExceptionsInner {
     /**
      * Return 200 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> head200WithServiceResponseAsync() {
@@ -119,12 +125,16 @@ public class HeadExceptionsInner {
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response);
     }
 
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head204() {
         head204WithServiceResponseAsync().toBlocking().single().body();
@@ -134,15 +144,17 @@ public class HeadExceptionsInner {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(head204WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> head204Async() {
@@ -157,6 +169,7 @@ public class HeadExceptionsInner {
     /**
      * Return 204 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> head204WithServiceResponseAsync() {
@@ -177,12 +190,16 @@ public class HeadExceptionsInner {
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response);
     }
 
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @throws CloudException thrown if the request is rejected by server
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent
      */
     public void head404() {
         head404WithServiceResponseAsync().toBlocking().single().body();
@@ -192,15 +209,17 @@ public class HeadExceptionsInner {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link ServiceCall} object
+     * @throws IllegalArgumentException thrown if parameters fail the validation
+     * @return the {@link ServiceFuture} object
      */
-    public ServiceCall<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
-        return ServiceCall.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
+    public ServiceFuture<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
+        return ServiceFuture.fromResponse(head404WithServiceResponseAsync(), serviceCallback);
     }
 
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<Void> head404Async() {
@@ -215,6 +234,7 @@ public class HeadExceptionsInner {
     /**
      * Return 404 status code if successful.
      *
+     * @throws IllegalArgumentException thrown if parameters fail the validation
      * @return the {@link ServiceResponse} object if successful.
      */
     public Observable<ServiceResponse<Void>> head404WithServiceResponseAsync() {
@@ -235,6 +255,7 @@ public class HeadExceptionsInner {
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws CloudException, IOException {
         return this.client.restClient().responseBuilderFactory().<Void, CloudException>newInstance(this.client.serializerAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response);
     }
 

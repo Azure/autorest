@@ -8,7 +8,7 @@
 
 namespace Fixtures.MirrorSequences.Models
 {
-    using MirrorSequences;
+    using Fixtures.MirrorSequences;
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
@@ -18,7 +18,10 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
         /// </summary>
-        public ErrorModel() { }
+        public ErrorModel()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
@@ -27,7 +30,13 @@ namespace Fixtures.MirrorSequences.Models
         {
             Code = code;
             Message = message;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -54,4 +63,3 @@ namespace Fixtures.MirrorSequences.Models
         }
     }
 }
-

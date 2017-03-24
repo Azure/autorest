@@ -8,7 +8,7 @@
 
 namespace Fixtures.AcceptanceTestsModelFlattening.Models
 {
-    using AcceptanceTestsModelFlattening;
+    using Fixtures.AcceptanceTestsModelFlattening;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -26,7 +26,10 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
         /// </summary>
-        public FlattenedProduct() { }
+        public FlattenedProduct()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the FlattenedProduct class.
@@ -46,7 +49,13 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             FlattenedProductType = flattenedProductType;
             ProvisioningStateValues = provisioningStateValues;
             ProvisioningState = provisioningState;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -64,7 +73,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// 'Deleting', 'Deleted', 'OK'
         /// </summary>
         [JsonProperty(PropertyName = "properties.provisioningStateValues")]
-        public string ProvisioningStateValues { get; protected set; }
+        public string ProvisioningStateValues { get; private set; }
 
         /// <summary>
         /// </summary>
@@ -73,4 +82,3 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
 
     }
 }
-

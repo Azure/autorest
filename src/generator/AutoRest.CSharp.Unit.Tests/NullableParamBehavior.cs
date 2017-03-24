@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Xunit;
 using Xunit.Abstractions;
+using System.IO;
 
 namespace AutoRest.CSharp.Unit.Tests
 {
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec())
             {
                 // Expected Files
-                string generatedCodeFileName = @"GeneratedCode\TestOperations.cs";
+                string generatedCodeFileName = "TestOperations.cs";
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
                 var testOperations = asm.ExportedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperations");
                 Assert.NotNull(testOperations);
@@ -123,7 +124,7 @@ namespace AutoRest.CSharp.Unit.Tests
             using (var fileSystem = GenerateCodeForTestFromSpec(codeGenerator: "Azure.CSharp"))
             {
                 // Expected Files
-                string generatedCodeFileName = @"GeneratedCode\TestOperations.cs";
+                string generatedCodeFileName = "TestOperations.cs";
                 Assert.True(fileSystem.FileExists(generatedCodeFileName));
                 var generatedCode = fileSystem.VirtualStore[generatedCodeFileName].ToString();
 
@@ -152,7 +153,7 @@ namespace AutoRest.CSharp.Unit.Tests
                 Assert.True(result.Succeeded);
 
                 // try to load the assembly
-                var asm = Assembly.Load(result.Output.GetBuffer());
+                var asm = LoadAssembly(result.Output);
                 Assert.NotNull(asm);
                 var testOperations = asm.DefinedTypes.FirstOrDefault(type => type.FullName == "Test.TestOperations");
                 Assert.NotNull(testOperations);

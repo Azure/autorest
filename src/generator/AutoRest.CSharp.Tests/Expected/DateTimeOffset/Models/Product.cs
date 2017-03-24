@@ -8,7 +8,7 @@
 
 namespace Fixtures.DateTimeOffset.Models
 {
-    using DateTimeOffset;
+    using Fixtures.DateTimeOffset;
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
@@ -21,7 +21,10 @@ namespace Fixtures.DateTimeOffset.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product() { }
+        public Product()
+        {
+          CustomInit();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
@@ -32,7 +35,13 @@ namespace Fixtures.DateTimeOffset.Models
             DateTime = dateTime;
             DateArray = dateArray;
             DateTimeArray = dateTimeArray;
+            CustomInit();
         }
+
+        /// <summary>
+        /// An initialization method that performs custom operations like setting defaults
+        /// </summary>
+        partial void CustomInit();
 
         /// <summary>
         /// </summary>
@@ -57,4 +66,3 @@ namespace Fixtures.DateTimeOffset.Models
 
     }
 }
-

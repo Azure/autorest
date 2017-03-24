@@ -75,7 +75,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutIntAsync(this IPrimitiveOperations operations, IntWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -134,7 +134,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutLongAsync(this IPrimitiveOperations operations, LongWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -193,7 +193,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutFloatAsync(this IPrimitiveOperations operations, FloatWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -254,7 +254,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutDoubleAsync(this IPrimitiveOperations operations, DoubleWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -313,7 +313,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutBoolAsync(this IPrimitiveOperations operations, BooleanWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -372,7 +372,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutStringAsync(this IPrimitiveOperations operations, StringWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -431,7 +431,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutDateAsync(this IPrimitiveOperations operations, DateWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -490,7 +490,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutDateTimeAsync(this IPrimitiveOperations operations, DatetimeWrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -551,7 +551,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutDateTimeRfc1123Async(this IPrimitiveOperations operations, Datetimerfc1123WrapperInner complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -608,7 +608,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutDurationAsync(this IPrimitiveOperations operations, System.TimeSpan? field = default(System.TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -665,9 +665,8 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// </param>
             public static async Task PutByteAsync(this IPrimitiveOperations operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
+                (await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
 }
-
