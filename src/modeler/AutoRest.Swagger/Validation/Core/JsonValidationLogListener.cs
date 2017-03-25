@@ -14,7 +14,7 @@ namespace AutoRest.Swagger.Logging.Core
     {
         private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
 
-        private readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
+        private static readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
 
         public void Log(LogMessage message)
         {

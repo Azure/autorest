@@ -12,8 +12,9 @@ namespace AutoRest.Swagger.Model.Utilities
 {
     public static class ValidationUtilities
     {
-        private static readonly string XmsPageable = "x-ms-pageable";
+        private const string XmsPageable = "x-ms-pageable";
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
 
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
@@ -75,7 +76,7 @@ namespace AutoRest.Swagger.Model.Utilities
         
         public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
         {
-            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
+            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair => pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
         }
 
         public static IEnumerable<string> GetResponseModelDefinitions(ServiceDefinition serviceDefinition)
@@ -137,11 +138,6 @@ namespace AutoRest.Swagger.Model.Utilities
             return sb.ToString();
         }
 
-        public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
-        {
-            return serviceDefinition.Definitions.Where(defPair=> defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions["x-ms-azure-resource"] == true);
-        }
-
         /// <summary>
         /// Evaluates if the reference is of the provided data type.
         /// </summary>
@@ -169,6 +165,22 @@ namespace AutoRest.Swagger.Model.Utilities
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Returns array of resource providers
+        /// </summary>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>Array of resource providers</returns>
+        public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
+        {
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+                                                    .OfType<Match>()
+                                                    .Select(match => match.Groups["resPath"].Value.ToString()))
+                                                    .Distinct()
+                                                    .ToList();
+
+            return resourceProviders;
         }
     }
 }

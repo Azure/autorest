@@ -1,7 +1,7 @@
-{
+﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Operations has invalid parameters",
+    "title": "Service definition does not contain required parameters",
     "description": "Some documentation.",
     "version": "2014-04-01-preview"
   },
@@ -17,25 +17,17 @@
     "application/json"
   ],
   "paths": {
-    "/foo/subscriptions/{SubscriptionId}": {
+    "/foo/Subscriptions/{subscriptionId}": {
       "post": {
         "operationId": "Noun_Verb",
         "summary": "Foo path",
         "description": "Foo operation",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "test subscription id"
+            "$ref": "#/parameters/SubscriptionId"
           },
           {
-            "name": "api-version",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "test api version"
+            "$ref": "#/parameters/ApiVersion"
           }
         ],
         "responses": {
@@ -66,6 +58,22 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
     }
   },
   "definitions": {

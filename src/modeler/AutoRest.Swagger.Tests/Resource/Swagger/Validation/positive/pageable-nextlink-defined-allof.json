@@ -17,12 +17,15 @@
     "application/json"
   ],
   "paths": {
-    "/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/operations": {
       "get": {
         "summary": "Lists all foo.",
         "description": "foo",
         "operationId": "Operations_List",
         "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
           {
             "name": "limit",
             "type": "string",
@@ -71,11 +74,13 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "description for bar",
           "items": {
             "type": "string"
           }
         },
         "bar": {
+          "description": "description for bar",
           "type": "string"
         }
       }

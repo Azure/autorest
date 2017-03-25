@@ -242,7 +242,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value provided for description is not descriptive enough..
+        ///   Looks up a localized string similar to The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation..
         /// </summary>
         public static string DescriptionNotDescriptive {
             get {
@@ -458,7 +458,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consider adding a &apos;description&apos; element, essential for maintaining reference documentation..
+        ///   Looks up a localized string similar to {0} lacks &apos;description&apos; property. Consider adding a &apos;description&apos; element. Accurate description is essential for maintaining reference documentation..
         /// </summary>
         public static string MissingDescription {
             get {
@@ -557,7 +557,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
+        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section, define these in the global parameters section instead.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
             get {
@@ -566,7 +566,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations API must be implemented for the service..
+        ///   Looks up a localized string similar to Operations API must be implemented for &apos;{0}&apos;..
         /// </summary>
         public static string OperationsAPINotImplemented {
             get {
@@ -656,7 +656,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
+        ///   Looks up a localized string similar to Parameter &quot;{0}&quot; is referenced but not defined in the global parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
             get {
@@ -751,11 +751,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
+        ///   Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as &apos;{0}&apos; Property/Model..
         /// </summary>
-        public static string XmsClientNameInValid {
+        public static string XmsClientNameInvalid {
             get {
-                return ResourceManager.GetString("XmsClientNameInValid", resourceCulture);
+                return ResourceManager.GetString("XmsClientNameInvalid", resourceCulture);
             }
         }
         

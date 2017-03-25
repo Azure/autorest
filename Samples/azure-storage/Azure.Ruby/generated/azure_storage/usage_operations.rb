@@ -5,7 +5,6 @@ module Petstore
   # The Storage Management Client.
   #
   class UsageOperations
-    include Petstore::Models
     include MsRestAzure
 
     #
@@ -92,7 +91,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = UsageListResult.mapper()
+            result_mapper = Petstore::Models::UsageListResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)

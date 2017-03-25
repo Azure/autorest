@@ -8,42 +8,29 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class OperationParametersValidation : TypedRule<SwaggerParameter>
+    public abstract class DescriptionRequired<T> : TypedRule<T>
     {
-        private const string SubscriptionId = "subscriptionid";
-        private const string ApiVersion = "api-version";
-
         /// <summary>
         /// Id of the Rule.
         /// </summary>
-        public override string Id => "M2014";
+        public override string Id => "M4000";
 
         /// <summary>
         /// Violation category of the Rule.
         /// </summary>
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
-
-        /// <summary>
-        /// This rule passes if the parameters are not subscriptionId or api-version
-        /// </summary>
-        /// <param name="paths"></param>
-        /// <returns></returns>
-        public override bool IsValid(SwaggerParameter Parameter) => 
-           (!string.IsNullOrEmpty(Parameter.Reference) ||Parameter?.Schema != null || !(Parameter?.Name?.ToLower().Equals(SubscriptionId) == true || Parameter?.Name?.ToLower().Equals(ApiVersion) == true));
-        
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.OperationParametersNotAllowedMessage;
+        public override string MessageTemplate => Resources.MissingDescription;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
-
+        public override Category Severity => Category.Warning;
     }
 }
