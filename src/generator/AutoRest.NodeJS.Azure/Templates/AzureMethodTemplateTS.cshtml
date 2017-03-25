@@ -13,9 +13,11 @@ else
     <text>
 @EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse, MethodJs.Language.TypeScript))
-@(Model.Name)WithHttpOperationResponse(@(Model.MethodParameterDeclarationTS(true))): Promise;
+@(Model.Name)WithHttpOperationResponse(@(Model.MethodParameterDeclarationTS(true))): Promise<HttpOperationResponse<@(Model.ReturnTypeTSString)>>;
 @EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise, MethodJs.Language.TypeScript))
-@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(true, true))): Promise<@(Model.ReturnTypeTSString)>|void;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(includeOptions: true, includeCallback: false))): Promise<@(Model.ReturnTypeTSString)>;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(includeOptions: false))): void;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(includeOptions: true))): void;
     </text>
 }

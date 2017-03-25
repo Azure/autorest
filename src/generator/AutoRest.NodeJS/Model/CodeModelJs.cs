@@ -188,7 +188,7 @@ namespace AutoRest.NodeJS.Model
                     if (!first)
                         requiredParams.Append(", ");
 
-                    requiredParams.Append("baseUri: string");
+                    requiredParams.Append("baseUri?: string");
                 }
 
                 return requiredParams.ToString();

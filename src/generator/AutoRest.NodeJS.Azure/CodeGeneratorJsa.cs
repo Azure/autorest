@@ -19,7 +19,7 @@ namespace AutoRest.NodeJS.Azure
 {
     public class CodeGeneratorJsa : NodeJS.CodeGeneratorJs
     {
-        private const string ClientRuntimePackage = "ms-rest-azure version 1.15.6";
+        private const string ClientRuntimePackage = "ms-rest-azure version 2.0.0";
 
         public override string UsageInstructions => string.Format(CultureInfo.InvariantCulture,
             Resources.UsageInformation, ClientRuntimePackage);

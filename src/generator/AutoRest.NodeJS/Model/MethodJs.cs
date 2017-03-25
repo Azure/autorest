@@ -149,8 +149,9 @@ namespace AutoRest.NodeJS.Model
         /// <summary>
         /// Generate the method parameter declarations for a method, using TypeScript declaration syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+        /// <param name="isOptionsOptional">whether the ServiceClientOptions parameter should be optional</param>
         /// </summary>
-        public string MethodParameterDeclarationTS(bool includeOptions)
+        public string MethodParameterDeclarationTS(bool includeOptions, bool isOptionsOptional = true)
         {
             StringBuilder declarations = new StringBuilder();
 
@@ -177,7 +178,14 @@ namespace AutoRest.NodeJS.Model
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options?: { ");
+                if (isOptionsOptional)
+                {
+                    declarations.Append("options?: { ");
+                }
+                else
+                {
+                    declarations.Append("options: { ");
+                }
                 var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.ModelType).Properties.OrderBy(each => each.Name == "customHeaders" ? 1 : 0).ToArray();
                 for (int i = 0; i < optionalParameters.Length; i++)
                 {
@@ -224,22 +232,39 @@ namespace AutoRest.NodeJS.Model
         /// <summary>
         /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
-        /// <param name="isCallbackOptional">If true, the method signature has an optional callback, otherwise the callback is required.</param>
+        /// <param name="includeCallback">If true, the method signature will have a callback, otherwise the callback will not be present.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions, bool isCallbackOptional = false)
+        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions, bool includeCallback = true)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
             StringBuilder parameters = new StringBuilder();
-            parameters.Append(MethodParameterDeclarationTS(includeOptions));
-
-            if (parameters.Length > 0)
-                parameters.Append(", ");
-            if (isCallbackOptional)
+            
+            if (!includeCallback)
             {
-                parameters.Append("optionalCallback?: ServiceCallback<" + ReturnTypeTSString + ">");
+                //Promise scenario no callback and options is optional
+                parameters.Append(MethodParameterDeclarationTS(includeOptions));
             }
             else
             {
+                //callback scenario
+                if (includeOptions)
+                {
+                    //with options as required parameter
+                    parameters.Append(MethodParameterDeclarationTS(includeOptions, isOptionsOptional: false));
+                }
+                else
+                {
+                    //with options as optional parameter
+                    parameters.Append(MethodParameterDeclarationTS(includeOptions: false));
+                }
+            }
+            
+            if (includeCallback)
+            {
+                if (parameters.Length > 0)
+                {
+                    parameters.Append(", ");
+                }
                 parameters.Append("callback: ServiceCallback<" + ReturnTypeTSString + ">");
             }
             return parameters.ToString();
