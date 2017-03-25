@@ -25,5 +25,29 @@ import * as jp from "../lib/ref/jsonpath";
     assert.strictEqual(jp.matches("$.a.b.c.d", jp.parse("$.a.b.c")), false);
   }
 
-  // TODO
+  @test async "querying"() {
+    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$..*").length, 3);
+    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$..a").length, 1);
+    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$.a").length, 1);
+    assert.strictEqual(jp.nodes({ a: 1, b: 2, c: 3 }, "$.d").length, 0);
+
+    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$..*").length, 3);
+    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$..a").length, 1);
+    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$.a").length, 1);
+    assert.strictEqual(jp.paths({ a: 1, b: 2, c: 3 }, "$.d").length, 0);
+  }
+
+  private roundTrip(s: string): string { return jp.stringify(jp.parse(s)); }
+
+  @test "round trip identity"() {
+    const roundTrips = (s: string) => assert.equal(this.roundTrip(s), s);
+    roundTrips("$.asd.qwe[1].zxc");
+    roundTrips("$[1][42][\"asd qwe\"]");
+    roundTrips("$[1][\"1\"]");
+  }
+
+  @test "round trip simplification"() {
+    assert.equal(this.roundTrip("$[\"asd\"]"), "$.asd");
+    assert.equal(this.roundTrip("$[1][\"asd\"][\"asd qwe\"]"), "$[1].asd[\"asd qwe\"]");
+  }
 }

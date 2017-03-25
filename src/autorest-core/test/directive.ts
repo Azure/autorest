@@ -1,12 +1,9 @@
-import { Stringify } from '../lib/ref/yaml';
-import { AutoRest } from '../lib/autorest-core';
-import { Configuration } from '../lib/configuration';
-import { RealFileSystem } from '../lib/file-system';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { AutoRest } from "../lib/autorest-core";
+import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { parse } from "../lib/ref/jsonpath";
 import { Message } from "../lib/message";
 
 @suite class Directive {
@@ -34,7 +31,6 @@ import { Message } from "../lib/message";
     autoRest.ResetConfiguration();
     autoRest.AddConfiguration({ "azure-arm": true });
     autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"] } });
-    let numWarningsMuted: number;
     {
       const messages: Message[] = [];
       const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
