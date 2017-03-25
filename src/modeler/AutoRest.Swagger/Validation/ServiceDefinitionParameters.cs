@@ -5,7 +5,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +14,6 @@ namespace AutoRest.Swagger.Validation
     {
         private static readonly string SubscriptionId = "subscriptionId";
         private static readonly string ApiVersion = "api-version";
-        private static readonly string XMsParameterizedHostExtensionName = "x-ms-parameterized-host";
 
         /// <summary>
         /// Id of the Rule.
@@ -28,7 +26,7 @@ namespace AutoRest.Swagger.Validation
         public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
-        /// The template message for this Rule. 
+        /// The template message for this Rule.
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
@@ -51,12 +49,6 @@ namespace AutoRest.Swagger.Validation
         {
             formatParameters = new object[0];
             ServiceDefinition serviceDefinition = context.Root;
-            
-            // Rule does not apply if x-ms-parameterized-host extension is not applied
-            if (!serviceDefinition.Extensions.ContainsKey(XMsParameterizedHostExtensionName))
-            {
-                return true;
-            }
 
             return true == (ParametersMap?.Values.Any(parameter => parameter.Name == SubscriptionId || parameter.Name == ApiVersion));
         }
