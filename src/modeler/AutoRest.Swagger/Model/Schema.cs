@@ -17,7 +17,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Swagger schema object.
     /// </summary>
-    [Rule(typeof(ModelTypeIncomplete))]
     public class Schema : SwaggerObject
     {
         public string Title { get; set; }
@@ -37,6 +36,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [CollectionRule(typeof(AvoidNestedProperties))]
         [Rule(typeof(XmsClientNamePropertyValidation))]
+        [Rule(typeof(ModelTypeIncomplete))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }

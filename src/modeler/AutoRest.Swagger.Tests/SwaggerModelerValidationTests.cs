@@ -63,7 +63,7 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete));
+            messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete), 2);
         }
 
         [Fact]
@@ -259,7 +259,7 @@ namespace AutoRest.Swagger.Tests
         public void ParameterDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "parameter-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired), 2);
         }
 
         [Fact]
