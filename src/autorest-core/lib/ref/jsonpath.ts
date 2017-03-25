@@ -28,11 +28,11 @@ export function IsPrefix(prefix: JsonPath, path: JsonPath): boolean {
   return prefix.length <= path.length && path.slice(0, prefix.length).every((pc, i) => pc === prefix[i]);
 }
 
-export function matches(jsonQuery: string, jsonPath: JsonPath) {
+export function matches(jsonQuery: string, jsonPath: JsonPath): boolean {
   // build dummy object from `jsonPath`
   const leafNode = "leaf";
   let obj = leafNode;
-  for (const jsonPathComponent of jsonPath) {
+  for (const jsonPathComponent of jsonPath.reverse()) {
     obj = typeof jsonPathComponent === "number"
       ? (() => { const result = Array.apply(null, Array(jsonPathComponent + 1)); result[jsonPathComponent] = obj; return result; })()
       : (() => { const result: any = {}; result[jsonPathComponent] = obj; return result; })();

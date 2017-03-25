@@ -72,16 +72,18 @@ function SingleValue<T>(objs: Iterable<any>, fieldName: string): T | null {
   return ValuesOf(objs, fieldName).LastOrDefault();
 }
 
-function* MultipleValues<T>(objs: Iterable<any>, fieldName: string): Iterable<T> {
-  for (const each of ValuesOf(objs, fieldName)) {
-    if (typeof each === "string") {
-      yield <T><any>each;
-    } else if (each[Symbol.iterator]) {
-      yield* each;
-    } else {
-      yield each;
+function MultipleValues<T>(objs: Iterable<any>, fieldName: string): Iterable<T> {
+  return [...(function* () {
+    for (const each of ValuesOf(objs, fieldName)) {
+      if (typeof each === "string") {
+        yield <T><any>each;
+      } else if (each[Symbol.iterator]) {
+        yield* each;
+      } else {
+        yield each;
+      }
     }
-  }
+  })()];
 }
 
 export interface Directive {
