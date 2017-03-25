@@ -63,7 +63,7 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete), 2);
+            messages.AssertOnlyValidationMessage(typeof(DescriptionMissing), 2);
         }
 
         [Fact]
