@@ -24,12 +24,12 @@
       "schema": {
         "type": "string",
         "description": "error",
-		"properties": {
-			"prop1": {
-				"type": "string",
-				"description": "property 1"
-			}
-		}
+        "properties": {
+          "prop1": {
+            "type": "string",
+            "description": "property 1"
+          }
+        }
       }
     },
     "SubscriptionIdParameter": {
