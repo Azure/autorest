@@ -170,7 +170,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} has no property named &apos;value&apos;..
+        ///   Looks up a localized string similar to Collection object {0} returned by list operation {1} with &apos;x-ms-pageable&apos; extension, has no property named &apos;value&apos;..
         /// </summary>
         public static string CollectionObjectPropertiesNamingMessage {
             get {
@@ -224,16 +224,16 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;Delete&apos; operation cannot have parameters in the request body..
+        ///   Looks up a localized string similar to &apos;Delete&apos; operation must not have a request body..
         /// </summary>
-        public static string DeleteMustHaveEmptyRequestBody {
+        public static string DeleteMustNotHaveRequestBody {
             get {
-                return ResourceManager.GetString("DeleteMustHaveEmptyRequestBody", resourceCulture);
+                return ResourceManager.GetString("DeleteMustNotHaveRequestBody", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;DELETE&apos; operation must use method name &apos;Delete&apos;..
+        ///   Looks up a localized string similar to &apos;DELETE&apos; operation &apos;{0}&apos; must use method name &apos;Delete&apos;..
         /// </summary>
         public static string DeleteOperationNameNotValid {
             get {
@@ -242,7 +242,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The value provided for description is not descriptive enough..
+        ///   Looks up a localized string similar to The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation..
         /// </summary>
         public static string DescriptionNotDescriptive {
             get {
@@ -323,7 +323,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;GET&apos; operation must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
+        ///   Looks up a localized string similar to &apos;GET&apos; operation &apos;{0}&apos; must use method name &apos;Get&apos; or Method name start with &apos;List&apos;.
         /// </summary>
         public static string GetOperationNameNotValid {
             get {
@@ -440,6 +440,15 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Since operation &apos;{0}&apos; response has model definition &apos;{1}&apos;, it should be named as &quot;list_*&quot;.
+        /// </summary>
+        public static string ListOperationsNamingWarningMessage {
+            get {
+                return ResourceManager.GetString("ListOperationsNamingWarningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete..
         /// </summary>
         public static string LongRunningResponseNotValid {
@@ -449,7 +458,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Consider adding a &apos;description&apos; element, essential for maintaining reference documentation..
+        ///   Looks up a localized string similar to {0} lacks &apos;description&apos; property. Consider adding a &apos;description&apos; element. Accurate description is essential for maintaining reference documentation..
         /// </summary>
         public static string MissingDescription {
             get {
@@ -512,20 +521,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Media types other than &apos;application/json&apos; has limited support.
+        ///   Looks up a localized string similar to Please make sure that media types other than &apos;application/json&apos; are supported by your service..
         /// </summary>
         public static string NonAppJsonTypeNotSupported {
             get {
                 return ResourceManager.GetString("NonAppJsonTypeNotSupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No responses defined..
-        /// </summary>
-        public static string NoResponses {
-            get {
-                return ResourceManager.GetString("NoResponses", resourceCulture);
             }
         }
         
@@ -557,7 +557,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section.
+        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; are not allowed in the operations section, define these in the global parameters section instead.
         /// </summary>
         public static string OperationParametersNotAllowedMessage {
             get {
@@ -566,7 +566,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations API must be implemented for the service..
+        ///   Looks up a localized string similar to Operations API must be implemented for &apos;{0}&apos;..
         /// </summary>
         public static string OperationsAPINotImplemented {
             get {
@@ -602,7 +602,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PATCH&apos; operation must use method name &apos;Update&apos;..
+        ///   Looks up a localized string similar to &apos;PATCH&apos; operation &apos;{0}&apos; must use method name &apos;Update&apos;..
         /// </summary>
         public static string PatchOperationNameNotValid {
             get {
@@ -629,7 +629,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;PUT&apos; operation must use method name &apos;Create&apos;..
+        ///   Looks up a localized string similar to &apos;PUT&apos; operation &apos;{0}&apos; must use method name &apos;Create&apos;..
         /// </summary>
         public static string PutOperationNameNotValid {
             get {
@@ -656,7 +656,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; or &quot;api-version&quot; are referenced but not defined in the parameters section of Service Definition.
+        ///   Looks up a localized string similar to Parameter &quot;{0}&quot; is referenced but not defined in the global parameters section of Service Definition.
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
             get {
@@ -665,7 +665,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have name property. It can also have tier, size, family, capacity as optional properties..
+        ///   Looks up a localized string similar to Sku Model is not valid. A Sku model must have &apos;name&apos; property. It can also have &apos;tier&apos;, &apos;size&apos;, &apos;family&apos;, &apos;capacity&apos; as optional properties..
         /// </summary>
         public static string SkuModelIsNotValid {
             get {
@@ -733,11 +733,11 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to More than one resource path is not allowed in a single spec (found: {0})..
+        ///   Looks up a localized string similar to Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: &apos;{0}&apos;..
         /// </summary>
-        public static string UniqueResourcePathsWarning {
+        public static string UniqueResourcePaths {
             get {
-                return ResourceManager.GetString("UniqueResourcePathsWarning", resourceCulture);
+                return ResourceManager.GetString("UniqueResourcePaths", resourceCulture);
             }
         }
         
@@ -751,16 +751,16 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as the property/model name..
+        ///   Looks up a localized string similar to Value of &apos;x-ms-client-name&apos; cannot be the same as &apos;{0}&apos; Property/Model..
         /// </summary>
-        public static string XmsClientNameInValid {
+        public static string XmsClientNameInvalid {
             get {
-                return ResourceManager.GetString("XmsClientNameInValid", resourceCulture);
+                return ResourceManager.GetString("XmsClientNameInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section..
+        ///   Looks up a localized string similar to Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters..
         /// </summary>
         public static string XMSPathBaseNotInPaths {
             get {

@@ -14,7 +14,6 @@ using AutoRest.Core.Utilities;
 using AutoRest.Swagger;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using AutoRest.Core.Validation;
 using System.Collections.Generic;
 using static AutoRest.Core.Utilities.DependencyInjection;
 using YamlDotNet.RepresentationModel;
@@ -149,7 +148,7 @@ namespace AutoRest.CompositeSwagger
         /// Copares two versions of the same service specification.
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ComparisonMessage> Compare()
+        public override IEnumerable<LogMessage> Compare()
         {
             throw new NotImplementedException("Version comparison of compositions. Please run the comparison on individual specifications");
         }

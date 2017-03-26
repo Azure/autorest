@@ -28,7 +28,7 @@ export class BlameTree {
       };
     }
     // recurse
-    yield* From(this.blaming).SelectMany(child => child.BlameInputs());
+    yield* From(this.blaming).SelectMany(child => child.BlameInputs()).Distinct(x => JSON.stringify(x));
   }
 }
 

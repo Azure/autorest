@@ -14,6 +14,9 @@
     <Content Include="Resource\Swagger\Validation\positive\property-names-casing-valid.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resource\Swagger\Validation\positive\swagger-skumodel-validation-valid.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Swagger\Validation\property-names-casing.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -178,7 +178,7 @@ namespace AutoRest.NodeJS.Model
 
                     requiredParams.Append(p.Name);
                     requiredParams.Append(": ");
-                    requiredParams.Append(p.ModelType.TSType(false));
+                    requiredParams.Append(p.ModelType.TSType(inModelsModule: false));
 
                     first = false;
                 }
@@ -188,7 +188,7 @@ namespace AutoRest.NodeJS.Model
                     if (!first)
                         requiredParams.Append(", ");
 
-                    requiredParams.Append("baseUri: string");
+                    requiredParams.Append("baseUri?: string");
                 }
 
                 return requiredParams.ToString();
@@ -216,5 +216,7 @@ namespace AutoRest.NodeJS.Model
                     m => m.Parameters.FirstOrDefault(p => p.ModelType.IsPrimaryType(KnownPrimaryType.TimeSpan)) != null) != null;
             }
         }
+
+        public override IEnumerable<string> MyReservedNames => new[] { Name.Value };
     }
 }

@@ -66,6 +66,12 @@ namespace AutoRest.NodeJS.Model
             HttpOperationResponse
         }
 
+        public enum Language
+        {
+            JavaScript,
+            TypeScript
+        }
+
         public override Parameter Add(Parameter item)
         {
             var parameter = base.Add(item) as ParameterJs;
@@ -143,8 +149,9 @@ namespace AutoRest.NodeJS.Model
         /// <summary>
         /// Generate the method parameter declarations for a method, using TypeScript declaration syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+        /// <param name="isOptionsOptional">whether the ServiceClientOptions parameter should be optional</param>
         /// </summary>
-        public string MethodParameterDeclarationTS(bool includeOptions)
+        public string MethodParameterDeclarationTS(bool includeOptions, bool isOptionsOptional = true)
         {
             StringBuilder declarations = new StringBuilder();
 
@@ -171,7 +178,14 @@ namespace AutoRest.NodeJS.Model
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: { ");
+                if (isOptionsOptional)
+                {
+                    declarations.Append("options?: { ");
+                }
+                else
+                {
+                    declarations.Append("options: { ");
+                }
                 var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.ModelType).Properties.OrderBy(each => each.Name == "customHeaders" ? 1 : 0).ToArray();
                 for (int i = 0; i < optionalParameters.Length; i++)
                 {
@@ -198,11 +212,12 @@ namespace AutoRest.NodeJS.Model
 
         /// <summary>
         /// Generate the method parameter declarations with callback or optionalCallback for a method
+        /// <param name="isCallbackOptional">If true, the method signature has an optional callback, otherwise the callback is required.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallback(bool isOptional=false)
+        public string MethodParameterDeclarationWithCallback(bool isCallbackOptional = false)
         {
             var parameters = MethodParameterDeclaration;
-            if (isOptional)
+            if (isCallbackOptional)
             {
                 parameters += ", optionalCallback";
             }
@@ -217,19 +232,41 @@ namespace AutoRest.NodeJS.Model
         /// <summary>
         /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
+        /// <param name="includeCallback">If true, the method signature will have a callback, otherwise the callback will not be present.</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
+        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions, bool includeCallback = true)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
-
             StringBuilder parameters = new StringBuilder();
-            parameters.Append(MethodParameterDeclarationTS(includeOptions));
-
-            if (parameters.Length > 0)
-                parameters.Append(", ");
-
-            parameters.Append("callback: ServiceCallback<" + returnTypeTSString + ">");
+            
+            if (!includeCallback)
+            {
+                //Promise scenario no callback and options is optional
+                parameters.Append(MethodParameterDeclarationTS(includeOptions));
+            }
+            else
+            {
+                //callback scenario
+                if (includeOptions)
+                {
+                    //with options as required parameter
+                    parameters.Append(MethodParameterDeclarationTS(includeOptions, isOptionsOptional: false));
+                }
+                else
+                {
+                    //with options as optional parameter
+                    parameters.Append(MethodParameterDeclarationTS(includeOptions: false));
+                }
+            }
+            
+            if (includeCallback)
+            {
+                if (parameters.Length > 0)
+                {
+                    parameters.Append(", ");
+                }
+                parameters.Append("callback: ServiceCallback<" + ReturnTypeTSString + ">");
+            }
             return parameters.ToString();
         }
 
@@ -349,6 +386,25 @@ namespace AutoRest.NodeJS.Model
         }
 
         /// <summary>
+        /// Get the type name for the method's return type for TS
+        /// </summary>
+        [JsonIgnore]
+        public string ReturnTypeTSString
+        {
+            get
+            {
+                if (ReturnType.Body != null)
+                {
+                    return ReturnType.Body.TSType(false);
+                }
+                else
+                {
+                    return "void";
+                }
+            }
+        }
+
+        /// <summary>
         /// The Deserialization Error handling code block that provides a useful Error 
         /// message when exceptions occur in deserialization along with the request 
         /// and response object
@@ -360,8 +416,8 @@ namespace AutoRest.NodeJS.Model
             {
                 var builder = new IndentedStringBuilder("  ");
                 var errorVariable = this.GetUniqueName("deserializationError");
-                return builder.AppendLine("let {0} = new Error(util.format('Error \"%s\" occurred in " +
-                    "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
+                return builder.AppendLine("let {0} = new Error(`Error ${{JSON.stringify(error, null, 2)}} occurred in " +
+                    "deserializing the responseBody - ${{responseBody}}`);", errorVariable)
                     .AppendLine("{0}.request = msRest.stripRequest(httpRequest);", errorVariable)
                     .AppendLine("{0}.response = msRest.stripResponse(response);", errorVariable)
                     .AppendLine("return callback({0});", errorVariable).ToString();
@@ -930,18 +986,25 @@ namespace AutoRest.NodeJS.Model
             return builder.ToString();
         }
 
-        public string GenerateMethodDocumentation(MethodFlavor flavor)
+        /// <summary>
+        /// Generates documentation for every method on the client.
+        /// </summary>
+        /// <param name="flavor">Describes the flavor of the method (Callback based, promise based, 
+        /// raw httpOperationResponse based) to be documented.</param>
+        /// <param name = "language" > Describes the language in which the method needs to be documented (Javascript (default), TypeScript).</param>
+        /// <returns></returns>
+        public string GenerateMethodDocumentation(MethodFlavor flavor, Language language = Language.JavaScript)
         {
             var template = new NodeJSTemplate<Object>();
             var builder = new IndentedStringBuilder("  ");
             builder.AppendLine("/**");
             if (!String.IsNullOrEmpty(Summary))
             {
-                builder.AppendLine(template.WrapComment(" * ", "@summary " + Summary)).AppendLine("*");
+                builder.AppendLine(template.WrapComment(" * ", "@summary " + Summary)).AppendLine(" *");
             }
             if (!String.IsNullOrEmpty(Description))
             {
-                builder.AppendLine(template.WrapComment(" * ", Description)).AppendLine("*");
+                builder.AppendLine(template.WrapComment(" * ", Description)).AppendLine(" *");
             }
             foreach (var parameter in DocumentationParameters)
             {
@@ -950,29 +1013,59 @@ namespace AutoRest.NodeJS.Model
             }
             if (flavor == MethodFlavor.HttpOperationResponse)
             {
+                var errorType = (language == Language.JavaScript) ?  "Error" : "Error|ServiceError";
                 builder.AppendLine(" * @returns {Promise} A promise is returned").AppendLine(" *")
                     .AppendLine(" * @resolve {{HttpOperationResponse<{0}>}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
-                    .AppendLine(" * @reject {Error} - The error object.");
+                    .AppendLine(" * @reject {{{0}}} - The error object.", errorType);
             }
             else
             {
-                if (flavor == MethodFlavor.Callback)
+                if (language == Language.JavaScript)
                 {
-                    builder.AppendLine(template.WrapComment(" * ", " @param {function} callback - The callback.")).AppendLine(" *")
-                        .AppendLine(template.WrapComment(" * ", " @returns {function} callback(err, result, request, response)")).AppendLine(" *");
+                    if (flavor == MethodFlavor.Callback)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {function} callback - The callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {function} callback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    else if (flavor == MethodFlavor.Promise)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {function} [optionalCallback] - The optional callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {function|Promise} If a callback was passed as the last parameter " +
+                            "then it returns the callback else returns a Promise.")).AppendLine(" *")
+                            .AppendLine(" * {Promise} A promise is returned").AppendLine(" *")
+                            .AppendLine(" *                      @resolve {{{0}}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                            .AppendLine(" *                      @reject {Error} - The error object.").AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", "{function} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    builder.AppendLine(" *                      {Error}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
+                        .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object if an error did not occur.", DocumentReturnTypeString)
+                        .AppendLine(template.WrapComment(" *                      ", ReturnTypeInfo)).AppendLine(" *")
+                        .AppendLine(" *                      {object} [request]  - The HTTP Request object if an error did not occur.").AppendLine(" *")
+                        .AppendLine(" *                      {stream} [response] - The HTTP Response stream if an error did not occur.");
                 }
-                else if (flavor == MethodFlavor.Promise)
+                else
                 {
-                    builder.AppendLine(template.WrapComment(" * ", " @param {function} [optionalCallback] - The optional callback.")).AppendLine(" *")
-                        .AppendLine(template.WrapComment(" * ", " @returns {function|Promise} If a callback was passed as the last parameter " +
-                        "then it returns the callback else returns a Promise.")).AppendLine(" *")
-                        .AppendLine(template.WrapComment(" * ", "        {function} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                    if (flavor == MethodFlavor.Callback)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {ServiceCallback} callback - The callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {ServiceCallback} callback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    else if (flavor == MethodFlavor.Promise)
+                    {
+                        builder.AppendLine(template.WrapComment(" * ", " @param {ServiceCallback} [optionalCallback] - The optional callback.")).AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", " @returns {ServiceCallback|Promise} If a callback was passed as the last parameter " +
+                            "then it returns the callback else returns a Promise.")).AppendLine(" *")
+                            .AppendLine(" * {Promise} A promise is returned.").AppendLine(" *")
+                            .AppendLine(" *                      @resolve {{{0}}} - The deserialized result object.", ReturnTypeString).AppendLine(" *")
+                            .AppendLine(" *                      @reject {Error|ServiceError} - The error object.").AppendLine(" *")
+                            .AppendLine(template.WrapComment(" * ", "{ServiceCallback} optionalCallback(err, result, request, response)")).AppendLine(" *");
+                    }
+                    builder.AppendLine(" *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
+                        .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object if an error did not occur.", ReturnTypeString)
+                        .AppendLine(template.WrapComment(" *                      ", ReturnTypeInfo)).AppendLine(" *")
+                        .AppendLine(" *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.").AppendLine(" *")
+                        .AppendLine(" *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.");
                 }
-                builder.AppendLine(" *                      {Error}  err        - The Error object if an error occurred, null otherwise.").AppendLine(" *")
-                    .AppendLine(" *                      {{{0}}} [result]   - The deserialized result object.", DocumentReturnTypeString)
-                    .AppendLine(template.WrapComment(" *                      ", ReturnTypeInfo)).AppendLine(" *")
-                    .AppendLine(" *                      {object} [request]  - The HTTP Request object if an error did not occur.").AppendLine(" *")
-                    .AppendLine(" *                      {stream} [response] - The HTTP Response stream if an error did not occur.");
             }
             builder.AppendLine(" */");
             return builder.ToString();

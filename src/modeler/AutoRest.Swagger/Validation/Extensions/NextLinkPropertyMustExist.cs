@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Logging;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using Newtonsoft.Json.Linq;
 
 namespace AutoRest.Swagger.Validation

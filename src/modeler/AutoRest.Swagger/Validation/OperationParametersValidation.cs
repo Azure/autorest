@@ -3,22 +3,35 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
     public class OperationParametersValidation : TypedRule<SwaggerParameter>
     {
-        private const string SubscriptionId = "subscriptionId";
+        private const string SubscriptionId = "subscriptionid";
         private const string ApiVersion = "api-version";
+
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2014";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+
         /// <summary>
         /// This rule passes if the parameters are not subscriptionId or api-version
         /// </summary>
         /// <param name="paths"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerParameter Parameter) => SubscriptionId != Parameter?.Name && ApiVersion != Parameter?.Name;
-
+        public override bool IsValid(SwaggerParameter Parameter) => 
+           (!string.IsNullOrEmpty(Parameter.Reference) ||Parameter?.Schema != null || !(Parameter?.Name?.ToLower().Equals(SubscriptionId) == true || Parameter?.Name?.ToLower().Equals(ApiVersion) == true));
+        
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
@@ -30,7 +43,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
     }
 }

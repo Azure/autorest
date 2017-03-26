@@ -37,7 +37,7 @@ declare class AutoRestParameterizedHostTestClient {
      * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
      */
-    constructor(credentials: ServiceClientCredentials, options: ServiceClientOptions);
+    constructor(credentials: ServiceClientCredentials, options?: ServiceClientOptions);
 
     credentials: ServiceClientCredentials;
 

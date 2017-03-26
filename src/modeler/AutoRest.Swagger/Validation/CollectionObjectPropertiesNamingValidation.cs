@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 using System.Linq;
@@ -34,7 +34,7 @@ namespace AutoRest.Swagger.Validation
             foreach (var opPair in listOperations)
             {
                 // if the operation id is not of type _list* or does not return an array type, skip
-                if (!ListRegex.IsMatch(opPair.Value.OperationId) || !ValidationUtilities.IsXmsPageableOrArrayResponseOperation(opPair.Value, serviceDefinition))
+                if (!ListRegex.IsMatch(opPair.Value.OperationId) || !ValidationUtilities.IsXmsPageableResponseOperation(opPair.Value))
                 {
                     continue;
                 }

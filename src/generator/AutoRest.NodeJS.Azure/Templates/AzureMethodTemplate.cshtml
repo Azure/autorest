@@ -13,43 +13,11 @@
 else
 {
     <text>
-@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse))
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase())WithHttpOperationResponse = function @(Model.Name.ToCamelCase())WithHttpOperationResponse(@(Model.MethodParameterDeclaration)) {
-  let client = @(Model.ClientReference);
-  let self = this;
-  return new Promise((resolve, reject) => {
-    self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
-      let httpOperationResponse = new HttpOperationResponse(request, response);
-      httpOperationResponse.body = result;
-      err ? reject(err) : resolve(httpOperationResponse);
-      return;
-    });
-  });
-};
-@EmptyLine
-@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise))
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name.ToCamelCase()) = function @(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true))) {
-  let client = @(Model.ClientReference);
-  let self = this;
-  if (!optionalCallback && typeof options === 'function') {
-    optionalCallback = options;
-    options = null;
-  }
-  if (!optionalCallback) {
-    return new Promise((resolve, reject) => {
-      self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
-        err ? reject(err) : resolve(result);
-        return;
-      });
-    });
-  } else {
-    return self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback(true)));
-  }
-};
 @EmptyLine
 @(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
 function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
-  var client = @(Model.ClientReference);
+   /* jshint validthis: true */
+  let client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -63,18 +31,51 @@ function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCall
   this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration), (err, parsedResult, httpRequest, response) => {
     if (err) return callback(err);
     @EmptyLine
-    var initialResult = new msRest.HttpOperationResponse();
+    let initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
     client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, (err, pollingResult) => {
       if (err) return callback(err);
       @EmptyLine
-      // Create Result
-      var result = null;
+      let statusCode = pollingResult.response.statusCode;
       httpRequest = pollingResult.request;
       response = pollingResult.response;
-      var responseBody = pollingResult.body;
+      let responseBody = pollingResult.body;
+      //Error handling for a failure in a long running operation after polling is completed.
+      if (@(Model.FailureStatusCodePredicate)) {
+        let error = new Error(responseBody);
+        error.statusCode = response.statusCode;
+        error.request = msRest.stripRequest(httpRequest);
+        error.response = msRest.stripResponse(response);
+        if (responseBody === '') responseBody = null;
+        let parsedErrorResponse;
+        try {
+          parsedErrorResponse = JSON.parse(responseBody);
+          if (parsedErrorResponse) {
+            @(Model.PopulateErrorCodeAndMessage())
+          }
+@if (Model.DefaultResponse.Body != null)
+{
+          var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse.Body, "error.body", "parsedErrorResponse");
+    if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
+    {
+    @:    if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+    @:      @(deserializeErrorBody)
+    @:    }
+    }
+}
+        } catch (defaultError) {
+          error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                          `- "${responseBody}" for the "default" response, after completing the polling ` + 
+                          `for long running operation.`;
+          return callback(error);
+        }
+        return callback(error);
+      }
+
+      // Create Result
+      let result = null;
       if (responseBody === '') responseBody = null;
       @EmptyLine
       // Deserialize Response
@@ -91,6 +92,6 @@ function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCall
       return callback(null, result, httpRequest, response);
     });
   });
-};
+}
     </text>
 }

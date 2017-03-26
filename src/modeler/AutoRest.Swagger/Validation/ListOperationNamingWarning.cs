@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using AutoRest.Swagger.Model.Utilities;
 using System.Linq;
@@ -15,7 +15,8 @@ namespace AutoRest.Swagger.Validation
     public class ListOperationNamingWarning : TypedRule<Dictionary<string,Dictionary<string, Operation>>>
     {
         private readonly Regex ListRegex = new Regex(@".+_List([^_]*)$", RegexOptions.IgnoreCase);
-
+        private readonly string XmsPageableViolation = "x-ms-pageable";
+        private readonly string ArrayTypeViolation = "array";
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -39,20 +40,24 @@ namespace AutoRest.Swagger.Validation
                     continue;
                 }
 
-                if(ValidationUtilities.IsXmsPageableOrArrayResponseOperation(opPair.Value, serviceDefinition))
+                if (ValidationUtilities.IsXmsPageableResponseOperation(opPair.Value))
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, opPair.Value.OperationId);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, opPair.Value.OperationId, XmsPageableViolation);
+                }
+                else if (ValidationUtilities.IsArrayTypeResponseOperation(opPair.Value, serviceDefinition))
+                {
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, opPair.Value.OperationId, ArrayTypeViolation);
                 }
             }
         }
-        
+
         /// <summary>
         /// The template message for this Rule. 
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Operation {0} returns an array or is x-ms-pageable and should be named as *_list";
+        public override string MessageTemplate => Resources.ListOperationsNamingWarningMessage;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)

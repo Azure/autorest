@@ -421,7 +421,7 @@ else
         {
             @if (Model.CodeModel.ShouldGenerateXmlSerialization)
             {<text>
-            @responsePair.Value.Body.AsNullableType() _tmp_ = null;
+            @responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType) _tmp_ = null;
             if (_httpResponse.Content.Headers.ContentType.MediaType == "application/xml" &&
                 @(XmlSerialization.XmlDeserializationClass).Root(@(XmlSerialization.GenerateDeserializer(Model.CodeModel, responsePair.Value.Body)))(System.Xml.Linq.XElement.Parse(_responseContent), out _tmp_))
             {
@@ -429,7 +429,7 @@ else
             }
             else
             {
-                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType())>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
+                _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<@(responsePair.Value.Body.AsNullableType(Model.IsXNullableReturnType))>(_responseContent, @(Model.GetDeserializationSettingsReference(responsePair.Value.Body)));
             }
 </text>
             }

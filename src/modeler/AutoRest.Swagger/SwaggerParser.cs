@@ -90,7 +90,7 @@ namespace AutoRest.Swagger
                 }
 
                 var referencedEntityType = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[1];
-                var referencedModelName = entityPath.StripDefinitionPath();
+                var referencedModelName = entityPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)[2];
 
                 if (sourceDoc[referencedEntityType] == null)
                 {

@@ -29,7 +29,7 @@ declare class AutoRestRFC1123DateTimeTestService {
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
      */
-    constructor(baseUri: string, options: ServiceClientOptions);
+    constructor(baseUri: string, options?: ServiceClientOptions);
 
     // Operation groups
     datetimerfc1123: operations.Datetimerfc1123;

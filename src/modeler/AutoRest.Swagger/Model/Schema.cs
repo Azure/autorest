@@ -6,7 +6,7 @@ using System.Linq;
 using System.Globalization;
 
 using AutoRest.Core.Model;
-using AutoRest.Core.Validation;
+using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Validation;
 using System.Collections.Generic;
 
@@ -17,7 +17,6 @@ namespace AutoRest.Swagger.Model
     /// <summary>
     /// Swagger schema object.
     /// </summary>
-    [Rule(typeof(ModelTypeIncomplete))]
     public class Schema : SwaggerObject
     {
         public string Title { get; set; }
@@ -36,7 +35,8 @@ namespace AutoRest.Swagger.Model
         /// Key is a type serviceTypeName.
         /// </summary>
         [CollectionRule(typeof(AvoidNestedProperties))]
-        [Rule(typeof(XmsClientNameValidation))]
+        [Rule(typeof(XmsClientNamePropertyValidation))]
+        [Rule(typeof(ModelTypeIncomplete))]
         public Dictionary<string, Schema> Properties { get; set; }
 
         public bool ReadOnly { get; set; }
@@ -60,7 +60,6 @@ namespace AutoRest.Swagger.Model
         //For now (till the PBI gets addressed for the refactoring work), a generic field is used
         //for the reason that SwaggerParameter inherits from this class, but per spec, it's 'IsRequired' 
         //field should be boolean, not an array.
-        [CollectionRule(typeof(RequiredPropertiesMustExist))]
         public IList<string> Required { get; set; }
 
         /// <summary>

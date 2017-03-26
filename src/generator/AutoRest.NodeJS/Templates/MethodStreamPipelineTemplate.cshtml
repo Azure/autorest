@@ -10,7 +10,7 @@ return client.pipeline(httpRequest, (err, response, responseBody) => {
 
   let statusCode = response.statusCode;
   if (@(Model.FailureStatusCodePredicate)) {
-    let error = new Error(util.format('Unexpected status code: %s', statusCode));
+    let error = new Error(`Unexpected status code: ${statusCode}`);
     error.statusCode = response.statusCode;
     error.request = msRest.stripRequest(httpRequest);
     error.response = msRest.stripResponse(response);
@@ -32,8 +32,8 @@ return client.pipeline(httpRequest, (err, response, responseBody) => {
       }
   }
     } catch (defaultError) {
-      error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
-                       '- "%s" for the default response.', defaultError.message, responseBody);
+      error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` + 
+                       `- "${responseBody}" for the default response.';
       return callback(error);
     }
     return callback(error);

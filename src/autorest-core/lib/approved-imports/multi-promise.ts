@@ -82,6 +82,32 @@ export module MultiPromiseUtility {
     return toAsyncCallbacks(promise, async item => callback(item));
   }
 
+  export function fromCallbacks<T>(executor: (callback: (item: T) => void) => Promise<void>): MultiPromise<T> {
+    let nextResolve: (item: MultiPromiseItem<T> | null) => void;
+    const end = () => { nextResolve(null); nextResolve = () => { }; };
+    const next = () => new Promise<MultiPromiseItem<T> | null>(res => nextResolve = res);
+    const result = next();
+    const worker = async () => {
+      await executor(item => {
+        nextResolve({
+          current: item,
+          next: next()
+        })
+      });
+      end();
+    };
+    process.nextTick(async () => {
+      try {
+        await worker();
+      } catch (e) {
+        console.error(`Error occurred in callback executor:`);
+        console.error(e);
+        end();
+      }
+    });
+    return result;
+  }
+
   export async function gather<T>(promise: MultiPromise<T>): Promise<T[]> {
     const result: T[] = [];
     await toCallbacks(promise, item => result.push(item));

@@ -29,7 +29,7 @@ declare class AutoRestResourceFlatteningTestService {
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
      */
-    constructor(baseUri: string, options: ServiceClientOptions);
+    constructor(baseUri: string, options?: ServiceClientOptions);
 
             /**
          * Put External Resource as an Array
@@ -60,6 +60,38 @@ declare class AutoRestResourceFlatteningTestService {
          */
         getArray(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.FlattenedProduct[]>): void;
         getArray(callback: ServiceCallback<models.FlattenedProduct[]>): void;
+
+        /**
+         * No need to have a route in Express server for this operation. Used to verify
+         * the type flattened is not removed if it's referenced in an array
+         *
+         * @param {object} [options] Optional Parameters.
+         *
+         * @param {array} [options.resourceArray] External Resource as an Array to put
+         *
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         *
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        putWrappedArray(options: { resourceArray? : models.WrappedProduct[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        putWrappedArray(callback: ServiceCallback<void>): void;
+
+        /**
+         * No need to have a route in Express server for this operation. Used to verify
+         * the type flattened is not removed if it's referenced in an array
+         *
+         * @param {object} [options] Optional Parameters.
+         *
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         *
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        getWrappedArray(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductWrapper[]>): void;
+        getWrappedArray(callback: ServiceCallback<models.ProductWrapper[]>): void;
 
         /**
          * Put External Resource as a Dictionary

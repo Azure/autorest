@@ -194,6 +194,10 @@ namespace AutoRest.Java
             var primaryType = type as PrimaryType;
             if (defaultValue != null && primaryType != null)
             {
+                if (primaryType.KnownPrimaryType == KnownPrimaryType.Double)
+                {
+                    return double.Parse(defaultValue).ToString();
+                }
                 if (primaryType.KnownPrimaryType == KnownPrimaryType.String)
                 {
                     return QuoteValue(defaultValue);

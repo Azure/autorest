@@ -1,254 +1,300 @@
+using AutoRest.JsonRpc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace Microsoft.Perks.JsonRPC
 {
-    public class Connection : IDisposable{
+    public class Connection : IDisposable
+    {
         private TextWriter _writer;
-        private PeekingTextReader _reader; 
-        private bool _isDisposed = false; 
+        private PeekingBinaryReader _reader;
+        private bool _isDisposed = false;
         private int _requestId;
-        private Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>(); 
-        
+        private Dictionary<string, ICallerResponse> _tasks = new Dictionary<string, ICallerResponse>();
+
         private Task _loop;
 
-        public event Action<string> OnDebug; 
+        public event Action<string> OnDebug;
 
-        public Connection(TextWriter writer, TextReader reader ) {
+        public Connection(TextWriter writer, Stream input)
+        {
             _writer = writer;
-            _reader = new PeekingTextReader(reader);
-            _loop = Task.Factory.StartNew(Listen);
+            _reader = new PeekingBinaryReader(input);
+            _loop = Task.Factory.StartNew(Listen).Unwrap();
         }
 
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        private CancellationToken  _cancellationToken=> _cancellationTokenSource.Token;
+        private CancellationToken _cancellationToken => _cancellationTokenSource.Token;
         public bool IsAlive => !_cancellationToken.IsCancellationRequested && _writer != null && _reader != null;
 
-        public void Stop() {
-          _cancellationTokenSource.Cancel();
-        }
+        public void Stop() => _cancellationTokenSource.Cancel();
 
-        private async Task<JToken> ReadJson() {
+        private async Task<JToken> ReadJson()
+        {
             var jsonText = string.Empty;
             JToken json = null;
-            while( json == null ) {
-                jsonText += await _reader.ReadLineAsync(); // + "\n";
-                if( jsonText.StartsWith("{") && jsonText.EndsWith("}") ) {
+            while (json == null)
+            {
+                jsonText += _reader.ReadAsciiLine(); // + "\n";
+                if (jsonText.StartsWith("{") && jsonText.EndsWith("}"))
+                {
                     // try to parse it.
-                    try {
+                    try
+                    {
                         json = JObject.Parse(jsonText);
-                        if( json != null) {
+                        if (json != null)
+                        {
                             return json;
                         }
-                    } catch {
+                    }
+                    catch
+                    {
                         // not enough text?
                     }
-                } else if( jsonText.StartsWith("[") && jsonText.EndsWith("]") ) {
+                }
+                else if (jsonText.StartsWith("[") && jsonText.EndsWith("]"))
+                {
                     // try to parse it.
                     // Log($"It's an array (batch!)");
-                    try {
+                    try
+                    {
                         json = JArray.Parse(jsonText);
-                        if( json != null) {
+                        if (json != null)
+                        {
                             return json;
                         }
-                    } catch {
+                    }
+                    catch
+                    {
                         // not enough text?
                     }
                 }
             }
             return json;
         }
-        private Dictionary<string,Func<JToken,Task<string>>> _dispatch = new Dictionary<string,Func<JToken,Task<string>>>();
-        public void Dispatch<T>(string path, Func<Task<T>> method) {
-          _dispatch.Add(path, async (input)=>{
-            var result = await method();
-            if( result == null) {
-              return "null";
-            }
-            return JsonConvert.SerializeObject(result);
-          });
+        private Dictionary<string, Func<JToken, Task<string>>> _dispatch = new Dictionary<string, Func<JToken, Task<string>>>();
+        public void Dispatch<T>(string path, Func<Task<T>> method)
+        {
+            _dispatch.Add(path, async (input) =>
+            {
+                var result = await method();
+                if (result == null)
+                {
+                    return "null";
+                }
+                return JsonConvert.SerializeObject(result);
+            });
         }
 
-        public void Dispatch(string path, Func<Task<string>> method) {
-          _dispatch.Add(path, async (input)=>{
-            var result = await method();
-            if( result == null) {
-              return "null";
-            }
-            return ProtocolExtensions.Quote(result);
-          });
-        }
-        
-        private JToken[] ReadArguments(JToken input, int expectedArgs ) {
-          var args = (input as JArray)?.ToArray();
-          var arg = (input as JObject);
-
-          if( expectedArgs == 0 ) {
-            if( args == null && arg == null )  {
-              // expected zero, recieved zero
-              return new JToken[0];
-            }
-            
-            throw new Exception($"Invalid nubmer of arguments {args.Length} or argument object passed '{arg}' for this call. Expected {expectedArgs}");
-          }
-
-          if(args.Length == expectedArgs) {
-            // passed as an array
-            return args;
-          }
-
-          if( expectedArgs == 1 ) {
-            if( args.Length == 0 && arg != null ) {
-              // passed as an object
-              return  new JToken[] { arg };
-            }
-          }
-
-          throw new Exception($"Invalid nubmer of arguments {args.Length} for this call. Expected {expectedArgs}");
+        public void Dispatch(string path, Func<Task<string>> method)
+        {
+            _dispatch.Add(path, async (input) =>
+            {
+                var result = await method();
+                if (result == null)
+                {
+                    return "null";
+                }
+                return ProtocolExtensions.Quote(result);
+            });
         }
 
-        public void DispatchNotification(string path, Action method ) {
-          _dispatch.Add( path, async (input)=> {
-            method();
-            return null;
-          });
-        }
+        private JToken[] ReadArguments(JToken input, int expectedArgs)
+        {
+            var args = (input as JArray)?.ToArray();
+            var arg = (input as JObject);
 
-        public void Dispatch<P1,T>(string path, Func<P1,Task<T>> method) {
-        }
+            if (expectedArgs == 0)
+            {
+                if (args == null && arg == null)
+                {
+                    // expected zero, recieved zero
+                    return new JToken[0];
+                }
 
-        public void Dispatch<P1,P2,T>(string path, Func<P1,P2,Task<T>> method) {
-           _dispatch.Add(path, async (input)=>{
-            var args = ReadArguments(input,2);
-            var a1 = args[0].Value<P1>();
-            var a2 = args[1].Value<P2>();
-
-            var result = await method(a1,a2);
-            if( result == null) {
-              return "null";
+                throw new Exception($"Invalid nubmer of arguments {args.Length} or argument object passed '{arg}' for this call. Expected {expectedArgs}");
             }
-            return ProtocolExtensions.ToJsonValue(result);
-          });
-        }
-        
-        private async Task<JToken> ReadJson(int contentLength) {
-            var buffer = new char[contentLength+1];
-            var chars = await _reader.ReadAsync(buffer, 0, contentLength);
-            while( chars < contentLength) {
-                chars += await _reader.ReadAsync( buffer, chars, contentLength - chars );
+
+            if (args.Length == expectedArgs)
+            {
+                // passed as an array
+                return args;
             }
-            var jsonText = new String(buffer);
-            if( jsonText.StartsWith("{")) {
+
+            if (expectedArgs == 1)
+            {
+                if (args.Length == 0 && arg != null)
+                {
+                    // passed as an object
+                    return new JToken[] { arg };
+                }
+            }
+
+            throw new Exception($"Invalid nubmer of arguments {args.Length} for this call. Expected {expectedArgs}");
+        }
+
+        public void DispatchNotification(string path, Action method)
+        {
+            _dispatch.Add(path, async (input) =>
+            {
+                method();
+                return null;
+            });
+        }
+
+        public void Dispatch<P1, T>(string path, Func<P1, Task<T>> method)
+        {
+        }
+
+        public void Dispatch<P1, P2, T>(string path, Func<P1, P2, Task<T>> method)
+        {
+            _dispatch.Add(path, async (input) =>
+            {
+                var args = ReadArguments(input, 2);
+                var a1 = args[0].Value<P1>();
+                var a2 = args[1].Value<P2>();
+
+                var result = await method(a1, a2);
+                if (result == null)
+                {
+                    return "null";
+                }
+                return ProtocolExtensions.ToJsonValue(result);
+            });
+        }
+
+        private async Task<JToken> ReadJson(int contentLength)
+        {
+            var jsonText = Encoding.UTF8.GetString(await _reader.ReadBytesAsync(contentLength));
+            if (jsonText.StartsWith("{"))
+            {
                 return JObject.Parse(jsonText);
             }
             return JArray.Parse(jsonText);
         }
 
-        private void Log(string text) {
-          if( OnDebug != null ) {
-            OnDebug(text);
-          }
-        }
-        
-        private async Task<bool> Listen() {
-          while( IsAlive ) {
-            try {
-              //Log("Listen");
-              var ch = await _reader?.PeekAsync();
-              if( null == ch) {
-                  // didn't get anything. start again, it'll know if we're shutting down
-                  continue;
-              }
+        private void Log(string text) => OnDebug?.Invoke(text);
 
-              if( '{' == ch || '[' == ch ) {
-                  // looks like a json block or array. let's do this.
-                  // don't wait for this to finish!
-                  Process(await ReadJson());
+        private async Task<bool> Listen()
+        {
+            while (IsAlive)
+            {
+                try
+                {
+                    // Log("Listen");
+                    var ch = _reader?.PeekByte();
+                    if (-1 == ch)
+                    {
+                        // didn't get anything. start again, it'll know if we're shutting down
+                        break;
+                    }
 
-                  // we're done here, start again.
-                  continue;
-              }
-                  
-              // We're looking at headers
-              // Log("Found Headers:");
-              var headers = new Dictionary<string,string>();
-              var line = await _reader.ReadLineAsync();
-              while( !string.IsNullOrWhiteSpace(line)) { 
-                // Log($"     '{line}'");
-                var bits = line.Split(new[]{':'},2);
-                if( bits.Length != 2 ) {
-                    // Log($"header not right! {line}");
+                    if ('{' == ch || '[' == ch)
+                    {
+                        // looks like a json block or array. let's do this.
+                        // don't wait for this to finish!
+                        Process(await ReadJson());
+
+                        // we're done here, start again.
+                        continue;
+                    }
+
+                    // We're looking at headers
+                    // Log("Found Headers:");
+                    var headers = new Dictionary<string, string>();
+                    var line = _reader.ReadAsciiLine();
+                    while (!string.IsNullOrWhiteSpace(line))
+                    {
+                        // Log($"     '{line}'");
+                        var bits = line.Split(new[] { ':' }, 2);
+                        if (bits.Length != 2)
+                        {
+                            // Log($"header not right! {line}");
+                        }
+                        headers.Add(bits[0].Trim(), bits[1].Trim());
+                        line = _reader.ReadAsciiLine();
+                    }
+
+                    ch = _reader?.PeekByte();
+                    // the next character had better be a { or [
+                    if ('{' == ch || '[' == ch)
+                    {
+                        if (headers.TryGetValue("Content-Length", out string value) && Int32.TryParse(value, out int contentLength))
+                        {
+                            // don't wait for this to finish!
+                            Process(await ReadJson(contentLength));
+                            continue;
+                        }
+                        // looks like a json block or array. let's do this.
+                        // don't wait for this to finish!
+                        Process(await ReadJson());
+                        // we're done here, start again.
+                        continue;
+                    }
+
+                    Log("SHOULD NEVER GET HERE!");
+                    return false;
+
                 }
-                headers.Add( bits[0].Trim(), bits[1].Trim());
-                line = await _reader.ReadLineAsync();
-              }
-
-              ch = await _reader?.PeekAsync();
-              // the next character had better be a { or [
-              if( '{' == ch || '[' == ch ) {
-                if( headers.TryGetValue("Content-Length", out string value) && Int32.TryParse( value, out int contentLength) ) {
-                    // don't wait for this to finish!
-                    Process(await ReadJson(contentLength));
-                    continue;
-                }
-                // looks like a json block or array. let's do this.
-                // don't wait for this to finish!
-                Process(await ReadJson());
-                // we're done here, start again.
-                continue;
-              }    
-
-              // Log("SHOULD NEVER GET HERE!");
-              return false;
-            
-            } catch(Exception e) {
-                if( IsAlive ) {
-                    // Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
-                    continue;
+                catch (Exception e)
+                {
+                    if (IsAlive)
+                    {
+                        Log($"Error during Listen {e.GetType().Name}/{e.Message}/{e.StackTrace}");
+                        continue;
+                    }
                 }
             }
-          }
             return false;
         }
 
-        public async Task Process( JToken content ) {
+        public async Task Process(JToken content)
+        {
             // Log("IN PROCESS");
-            if( content == null ) {
+            if (content == null)
+            {
                 // Log("BAD CONTENT");
                 return;
             }
-            if( content is JObject ) {
+            if (content is JObject)
+            {
                 Log($"RECV '{content}'");
 
                 var jobject = content as JObject;
-                try {
+                try
+                {
 
-                    if( jobject.Properties().Any(each => each.Name == "method")) {
+                    if (jobject.Properties().Any(each => each.Name == "method"))
+                    {
                         var method = jobject.Property("method").Value.ToString();
                         var id = jobject.Property("id")?.Value.ToString();
                         // this is a method call.
                         // pass it to the service that is listening...
                         //Log($"Dispatching: {method}");
-                        if( _dispatch.TryGetValue(method,out Func<JToken,Task<string>> fn) ) {
-                          var parameters = jobject.Property("params").Value;
-                          var result = await fn( parameters );
-                          if( id != null ) {
-                            // if this is a request, send the response.
-                            await this.Send( ProtocolExtensions.Response(id, result));
-                          }
-                          // 
+                        if (_dispatch.TryGetValue(method, out Func<JToken, Task<string>> fn))
+                        {
+                            var parameters = jobject.Property("params").Value;
+                            var result = await fn(parameters);
+                            if (id != null)
+                            {
+                                // if this is a request, send the response.
+                                await this.Send(ProtocolExtensions.Response(id, result));
+                            }
+                            // 
                         }
                         return;
                     }
 
                     // this is a result from a previous call.
-                    if( jobject.Properties().Any(each => each.Name == "result")) {
+                    if (jobject.Properties().Any(each => each.Name == "result"))
+                    {
                         var id = jobject.Property("id")?.Value.ToString();
                         if (!string.IsNullOrEmpty(id))
                         {
@@ -259,15 +305,18 @@ namespace Microsoft.Perks.JsonRPC
                             f.SetCompleted(jobject.Property("result").Value);
                             //Log("Should have unblocked?");
                         }
-                        
+
                     }
 
-                } catch( Exception e ) {
+                }
+                catch (Exception e)
+                {
                     //Log($"[PROCESS ERROR]: {e.GetType().FullName}/{e.Message}/{e.StackTrace}");
                     //Log($"[LISTEN CONTENT]: {jobject.ToString()}");
                 }
             }
-            if( content is JArray) {
+            if (content is JArray)
+            {
                 //Log("TODO: Batch");
                 return;
             }
@@ -289,7 +338,8 @@ namespace Microsoft.Perks.JsonRPC
                 _isDisposed = true;
                 if (disposing)
                 {
-                    foreach( var t in _tasks.Values ) {
+                    foreach (var t in _tasks.Values)
+                    {
                         t.SetCancelled();
                     }
 
@@ -305,44 +355,49 @@ namespace Microsoft.Perks.JsonRPC
         }
 
         private readonly Semaphore _streamReady = new Semaphore(1, 1);
-        private async Task Send( string text ) { 
+        private async Task Send(string text)
+        {
             _streamReady.WaitOne();
             Log($"SEND {text}");
-            await _writer.WriteAsync( $"Content-Length: {text.Length}\r\n\r\n");
-            await  _writer.WriteAsync(text);
+            await _writer.WriteAsync($"Content-Length: {Encoding.UTF8.GetByteCount(text)}\r\n\r\n");
+            await _writer.WriteAsync(text);
             _streamReady.Release();
         }
 
-        public async Task SendError(string id, int code, string message) {
-            await Send( ProtocolExtensions.Error(id, code, message)).ConfigureAwait(false);
+        public async Task SendError(string id, int code, string message)
+        {
+            await Send(ProtocolExtensions.Error(id, code, message)).ConfigureAwait(false);
         }
-        public async Task Respond(string request, string value ) {
-            await Send( ProtocolExtensions.Response(request, value ) ).ConfigureAwait(false);
+        public async Task Respond(string request, string value)
+        {
+            await Send(ProtocolExtensions.Response(request, value)).ConfigureAwait(false);
         }
 
-        public async Task Notify(string methodName, params object[] values ) => 
-            await Send( ProtocolExtensions.Notification(methodName, values) ).ConfigureAwait(false);
-        public async Task NotifyWithObject(string methodName, object parameter ) =>
-            await Send( ProtocolExtensions.NotificationWithObject( methodName, parameter)).ConfigureAwait(false);
-     
-        public async Task<T> Request<T>(string methodName, params object[] values ) {
+        public async Task Notify(string methodName, params object[] values) =>
+            await Send(ProtocolExtensions.Notification(methodName, values)).ConfigureAwait(false);
+        public async Task NotifyWithObject(string methodName, object parameter) =>
+            await Send(ProtocolExtensions.NotificationWithObject(methodName, parameter)).ConfigureAwait(false);
+
+        public async Task<T> Request<T>(string methodName, params object[] values)
+        {
             var id = Interlocked.Increment(ref _requestId).ToString();
-            var response =  new CallerResponse<T>(id);
-            _tasks.Add( id,response);
-            await Send( ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
+            var response = new CallerResponse<T>(id);
+            _tasks.Add(id, response);
+            await Send(ProtocolExtensions.Request(id, methodName, values)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
 
-        public async Task<T> RequestWithObject<T>(string methodName, object parameter ) {
+        public async Task<T> RequestWithObject<T>(string methodName, object parameter)
+        {
             var id = Interlocked.Increment(ref _requestId).ToString();
-            var response =  new CallerResponse<T>(id);
-            _tasks.Add( id,response);
-            await Send( ProtocolExtensions.Request(id, methodName, parameter)).ConfigureAwait(false);
+            var response = new CallerResponse<T>(id);
+            _tasks.Add(id, response);
+            await Send(ProtocolExtensions.Request(id, methodName, parameter)).ConfigureAwait(false);
             return await response.Task.ConfigureAwait(false);
         }
 
-        public async Task Batch(IEnumerable<string> calls ) =>
-            await Send( calls.JsonArray() );
+        public async Task Batch(IEnumerable<string> calls) =>
+            await Send(calls.JsonArray());
 
         public System.Runtime.CompilerServices.TaskAwaiter GetAwaiter() => _loop.GetAwaiter();
 

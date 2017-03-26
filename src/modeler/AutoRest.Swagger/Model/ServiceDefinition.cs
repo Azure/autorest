@@ -6,11 +6,11 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using Newtonsoft.Json;
-using AutoRest.Core.Validation;
 using AutoRest.Core.Logging;
 using AutoRest.Core.Utilities.Collections;
 using AutoRest.Swagger.Validation;
 using System.Text.RegularExpressions;
+using AutoRest.Swagger.Validation.Core;
 
 namespace AutoRest.Swagger.Model
 {
@@ -89,7 +89,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(ProvidersPathValidation))]
         [CollectionRule(typeof(BodyTopLevelProperties))]
         [CollectionRule(typeof(HttpVerbValidation))]
-        [CollectionRule(typeof(DeleteMustHaveEmptyRequestBody))]
+        [CollectionRule(typeof(DeleteMustNotHaveRequestBody))]
         [CollectionRule(typeof(BodyPropertiesNamesCamelCase))]
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
 
@@ -116,6 +116,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
+        [Rule(typeof(ModelTypeIncomplete))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>

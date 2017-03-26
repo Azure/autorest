@@ -19,16 +19,19 @@
     "application/json"
   ],
   "paths": {
-    "/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/operations": {
       "get": {
         "summary": "Lists all foo.",
-        "description":  "foo",
+        "description": "foo",
         "operationId": "Operations_List",
         "parameters": [
           {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
             "name": "limit",
             "type": "string",
-            "description":  "foo"
+            "description": "foo"
           }
         ],
         "responses": {

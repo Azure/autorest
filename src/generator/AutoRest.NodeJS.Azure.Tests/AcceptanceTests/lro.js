@@ -5,7 +5,6 @@
 
 var should = require('should');
 var http = require('http');
-var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');

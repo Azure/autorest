@@ -2,19 +2,19 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.Core.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using AutoRest.Swagger.Validation;
 
 namespace AutoRest.Swagger.Model.Utilities
 {
     public static class ValidationUtilities
     {
-        private static readonly string XmsPageable = "x-ms-pageable";
+        private const string XmsPageable = "x-ms-pageable";
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
+        private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
 
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
@@ -35,14 +35,14 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        // determine if the operation is xms pageable or returns an object of array type
-        public static bool IsXmsPageableOrArrayResponseOperation(Operation op, ServiceDefinition entity)
+        // determine if an operation is xms pageable operation
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
+        
+        // determine if an operation returns an object of array type
+        public static bool IsArrayTypeResponseOperation(Operation op, ServiceDefinition entity)
         {
-            // if xmspageable type, return true
-            if (op.Extensions.GetValue<object>(XmsPageable) != null) return true;
-
             // if a success response is not defined, we have nothing to check, return false
-            if (op.Responses?.ContainsKey("200") !=true) return false;
+            if (op.Responses?.ContainsKey("200") != true) return false;
 
             // if we have a non-null response schema, and the schema is of type array, return true
             if (op.Responses["200"]?.Schema?.Reference?.Equals(string.Empty) == false)
@@ -61,7 +61,7 @@ namespace AutoRest.Swagger.Model.Utilities
                     return false;
                 }
 
-                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array)??false)
+                if (entity.Definitions[modelLink.StripDefinitionPath()].Properties?.Values?.Any(type => type.Type == DataType.Array) ?? false)
                 {
                     return true;
                 }
@@ -70,9 +70,13 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
+        // determine if the operation is xms pageable or returns an object of array type
+        public static bool IsXmsPageableOrArrayTypeResponseOperation(Operation op, ServiceDefinition entity) => 
+            (IsXmsPageableResponseOperation(op) || IsArrayTypeResponseOperation(op, entity));
+        
         public static IEnumerable<Operation> GetOperationsByRequestMethod(string id, ServiceDefinition serviceDefinition)
         {
-            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair=> pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
+            return serviceDefinition.Paths.Values.Select(pathObj => pathObj.Where(pair => pair.Key.ToLower().Equals(id.ToLower()))).SelectMany(pathPair => pathPair.Select(opPair => opPair.Value));
         }
 
         public static IEnumerable<string> GetResponseModelDefinitions(ServiceDefinition serviceDefinition)
@@ -134,9 +138,49 @@ namespace AutoRest.Swagger.Model.Utilities
             return sb.ToString();
         }
 
-        public static IEnumerable<KeyValuePair<string, Schema>> GetArmResources(ServiceDefinition serviceDefinition)
+        /// <summary>
+        /// Evaluates if the reference is of the provided data type.
+        /// </summary>
+        /// <param name="reference">reference to evaluate</param>
+        /// <param name="definitions">definition list</param>
+        /// <param name="dataType">Datatype value to evaluate</param>
+        /// <returns>true if the reference is of the provided data type. False otherwise.</returns>
+        public static bool IsReferenceOfType(string reference, Dictionary<string, Schema> definitions, Model.DataType dataType)
         {
-            return serviceDefinition.Definitions.Where(defPair=> defPair.Value.Extensions?.ContainsKey("x-ms-azure-resource")==true && (bool?)defPair.Value.Extensions["x-ms-azure-resource"] == true);
+            if (reference == null)
+            {
+                return false;
+            }
+
+            string definitionName = Extensions.StripDefinitionPath(reference);
+            Schema schema = definitions.GetValueOrNull(definitionName);
+            if (schema == null)
+            {
+                return false;
+            }
+
+            if (schema.Type == dataType || (schema.Type == null && schema.Reference != null && IsReferenceOfType(schema.Reference, definitions, dataType)))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns array of resource providers
+        /// </summary>
+        /// <param name="paths">Dictionary of paths to look for</param>
+        /// <returns>Array of resource providers</returns>
+        public static IEnumerable<string> GetResourceProviders(Dictionary<string, Dictionary<string, Operation>> paths)
+        {
+            IEnumerable<string> resourceProviders = paths?.Keys.SelectMany(path => resourceProviderPathPattern.Matches(path)
+                                                    .OfType<Match>()
+                                                    .Select(match => match.Groups["resPath"].Value.ToString()))
+                                                    .Distinct()
+                                                    .ToList();
+
+            return resourceProviders;
         }
     }
 }

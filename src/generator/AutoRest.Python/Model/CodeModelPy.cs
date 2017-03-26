@@ -171,7 +171,7 @@ namespace AutoRest.Python.Model
 
         public virtual bool HasAnyModel => ModelTemplateModels.Any();
 
-        public string PackageName => Name.ToPythonCase().Replace("_", "");
+        public string PackageName => Settings.Instance.PackageName.Else(Name.ToPythonCase().Replace("_", ""));
 
         //TODO: Proper namespace validation and formatting
         public string modelNamespace => Namespace.Else(Name.ToPythonCase()).ToLower();

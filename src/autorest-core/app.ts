@@ -12,11 +12,13 @@
 import { resolve as currentDirectory } from "path";
 import { existsSync } from "fs";
 import { ChildProcess } from "child_process";
+import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
 import { CreateFileUri, ResolveUri } from "./lib/approved-imports/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
-import { isLegacy } from "./legacyCli";
+import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration/configuration";
-import { run } from "./index";
+import { DataStore } from "./lib/data-store/data-store";
+import { RunPipeline } from "./lib/pipeline/pipeline";
 
 
 /**
@@ -31,14 +33,23 @@ function awaitable(child: ChildProcess): Promise<number> {
 }
 
 async function legacyMain(autorestArgs: string[]): Promise<void> {
-
-
-
-  const autorestExe = SpawnLegacyAutoRest(autorestArgs);
-  autorestExe.stdout.pipe(process.stdout);
-  autorestExe.stderr.pipe(process.stderr);
-  const exitCode = await awaitable(autorestExe);
-  process.exit(exitCode);
+  if (autorestArgs.indexOf("-FANCY") !== -1) {
+    // generate virtual config file
+    const currentDirUri = CreateFileUri(currentDirectory()) + "/";
+    const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
+    const dataStore = new DataStore();
+    const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
+    await (await dataStore.CreateScope("input").AsFileScope().Write(configFileUri)).WriteObject(config);
+    const restultStreams = await RunPipeline(configFileUri, dataStore);
+  }
+  else {
+    // exec
+    const autorestExe = SpawnLegacyAutoRest(autorestArgs);
+    autorestExe.stdout.pipe(process.stdout);
+    autorestExe.stderr.pipe(process.stderr);
+    const exitCode = await awaitable(autorestExe);
+    process.exit(exitCode);
+  }
 }
 
 
@@ -95,7 +106,7 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const configFileUri = ResolveUri(currentDirUri, args.configFile);
 
   // dispatch
-  await run(configFileUri);
+  await RunPipeline(configFileUri, new DataStore());
 }
 
 
@@ -118,6 +129,7 @@ async function main() {
     } else {
       await currentMain(autorestArgs);
     }
+    process.exit(0);
   } catch (e) {
     console.error(e);
     process.exit(1);
