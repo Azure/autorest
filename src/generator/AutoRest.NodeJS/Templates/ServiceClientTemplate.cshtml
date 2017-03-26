@@ -35,6 +35,12 @@ const ServiceClient = msRest.ServiceClient;
 @:const operations = require('./operations');
 }
 @EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include(new MethodTemplate(), method))
+}
+@EmptyLine
 @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
 @{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
 /**
@@ -124,14 +130,18 @@ else
   {
     @:this.models = models;
   }
+@foreach (var method in Model.MethodTemplateModels)
+{
+    @:this._@(method.Name) = _@(method.Name);
+}
     msRest.addSerializationMixin(this);
   }
-}
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-@EmptyLine
-@:@(Include(new MethodTemplate(), method))
+  @:@(Include(new MethodPromiseWrapperTemplate(), method))
+  @EmptyLine
+}
 }
 @EmptyLine
 module.exports = @Model.Name;

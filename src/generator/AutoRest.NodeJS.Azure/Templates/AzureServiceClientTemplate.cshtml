@@ -1,6 +1,7 @@
 ﻿@using System.Linq
 @using AutoRest.Core.Model
 @using AutoRest.Core.Utilities
+@using AutoRest.NodeJS.Templates
 @using AutoRest.NodeJS.Azure.Model
 @using AutoRest.NodeJS.Azure.Templates
 @inherits AutoRest.Core.Template<AutoRest.NodeJS.Azure.Model.CodeModelJsa>
@@ -32,6 +33,12 @@ const models = require('./models');
 @if (Model.MethodGroupModels.Any())
 {
 @:const operations = require('./operations');
+}
+@EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
 }
 @EmptyLine
 @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
@@ -116,14 +123,18 @@ else
   }
   
     this.models = models;
+@foreach (var method in Model.MethodTemplateModels)
+{
+    @:this._@(method.Name) = _@(method.Name);
+}
     msRest.addSerializationMixin(this);
   }
-}
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-@EmptyLine
-@:@(Include(new AzureMethodTemplate(), method as MethodJsa))
+  @:@(Include(new MethodPromiseWrapperTemplate(), method))
+  @EmptyLine
+}
 }
 @EmptyLine
 module.exports = @Model.Name;
