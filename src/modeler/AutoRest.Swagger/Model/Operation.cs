@@ -79,6 +79,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [CollectionRule(typeof(OperationParametersValidation))]
         [CollectionRule(typeof(AnonymousParameterTypes))]
+        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
