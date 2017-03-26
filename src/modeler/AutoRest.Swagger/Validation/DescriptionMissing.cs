@@ -8,7 +8,7 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class ModelTypeIncomplete : DescriptionRequired<Dictionary<string, Schema>>
+    public class DescriptionMissing : DescriptionRequired<Dictionary<string, Schema>>
     {
         private static readonly string ModelTypeFormatter = "'{0}' model/property";
 
