@@ -123,7 +123,7 @@ export class AutoRest extends EventEmitter {
 
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
         this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` });
-        await RunPipeline(await this.view, <IFileSystem>this.fileSystem);
+        await RunPipeline(view, <IFileSystem>this.fileSystem);
 
         // finished cleanly
         this.Finished.Dispatch(true);

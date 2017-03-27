@@ -49,6 +49,8 @@ class OutstandingTaskAwaiter {
 }
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
+  const cancellationToken = config.CancellationToken;
+
   const outstandingTaskAwaiter = new OutstandingTaskAwaiter();
   outstandingTaskAwaiter.Enter();
 
