@@ -8,8 +8,10 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class AvoidAnonymousTypes : TypedRule<SwaggerObject>
+    public class AnonymousBodyParameter : TypedRule<SwaggerParameter>
     {
+        private static AvoidAnonymousTypes AnonymousTypesRule = new AvoidAnonymousTypes();
+
         /// <summary>
         /// Id of the Rule.
         /// </summary>
@@ -34,12 +36,11 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.AnonymousTypesDiscouraged;
 
         /// <summary>
-        /// An <paramref name="entity"/> fails this rule if is not a schema or if the schema has no properties. 
-        /// A schema of primitive type does not violate the rule. 
+        /// An entity fails this rule if it has a schema, and that schema is an anonymous type
         /// </summary>
-        /// <param name="entity">The entity to validate</param>
+        /// <param name="entity"></param>
         /// <returns></returns>
-        public override bool IsValid(SwaggerObject entity) => (entity?.GetType() == typeof(Schema) &&
-            ((((Schema)entity).Properties == null) || ((Schema)entity).Properties?.Count == 0));
+        public override bool IsValid(SwaggerParameter entity) =>
+            entity?.Schema == null || AnonymousTypesRule.IsValid(entity.Schema);
     }
 }

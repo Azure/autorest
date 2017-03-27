@@ -114,7 +114,7 @@ namespace AutoRest.Swagger.Tests
         public void AnonymousParameterSchemaValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "anonymous-parameter-type.json"));
-            messages.AssertOnlyValidationMessage(typeof(AnonymousParameterTypes));
+            messages.AssertOnlyValidationMessage(typeof(AnonymousBodyParameter));
         }
 
         [Fact]
