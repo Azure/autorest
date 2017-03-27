@@ -16,7 +16,7 @@ export class AutoRest extends EventEmitter {
   private _configurations = new Array<any>();
   private _view: ConfigurationView | undefined;
   public get view(): Promise<ConfigurationView> {
-    return new Promise<ConfigurationView>(async (r, j) => {
+    return (async () => {
       if (!this._view) {
         this._view = await new Configuration(this.fileSystem, this.configFileUri).CreateView(...this._configurations);
 
@@ -29,8 +29,8 @@ export class AutoRest extends EventEmitter {
         this._view.Error.Subscribe((cfg, message) => this.Error.Dispatch(message));
         this._view.Warning.Subscribe((cfg, message) => this.Warning.Dispatch(message));
       }
-      r(this._view);
-    });
+      return this._view;
+    })();
   }
   /**
    * 
@@ -111,18 +111,18 @@ export class AutoRest extends EventEmitter {
     let earlyCancel = false;
     let cancel: () => void = () => earlyCancel = true;
     const processInternal = async () => {
-      const view = await this.view;
-
-      // expose cancallation token
-      cancel = () => view.CancellationTokenSource.cancel();
-      if (earlyCancel) {
-        this.Finished.Dispatch(false);
-        return false;
-      }
-
       try {
+        const view = await this.view;
+
+        // expose cancallation token
+        cancel = () => view.CancellationTokenSource.cancel();
+        if (earlyCancel) {
+          this.Finished.Dispatch(false);
+          return false;
+        }
+
         // TODO: implement RunPipeline here. (i.e.: actually BUILD a pipeline instead of using the hard coded one...)
-        this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` })
+        this.Debug.Dispatch({ Text: `Starting Process() Run Pipeline.` });
         await RunPipeline(await this.view, <IFileSystem>this.fileSystem);
 
         // finished cleanly
@@ -132,7 +132,7 @@ export class AutoRest extends EventEmitter {
       catch (e) {
         console.error(e);
         // finished not cleanly
-        this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` })
+        this.Debug.Dispatch({ Text: `Process() Cancelled due to exception : ${e}` });
         this.Finished.Dispatch(false);
         return false;
       }

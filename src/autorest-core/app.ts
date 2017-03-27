@@ -12,7 +12,7 @@
 import { AutoRest } from './lib/autorest-core';
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
-import { CreateFileUri, ResolveUri } from "./lib/ref/uri";
+import { CreateFileUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
 import { AutoRestConfigurationSwitches } from "./lib/configuration";
@@ -35,12 +35,12 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
   if (autorestArgs.indexOf("-FANCY") !== -1) {
     // generate virtual config file
     const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-    const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
-    const api = new AutoRest(new RealFileSystem(), configFileUri);
+    const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);
-    await api.Process();
+    api.GeneratedFile.Subscribe((_, file) => WriteString(file.uri, file.content));
+    await api.Process().finish;
   }
   else {
     // exec
@@ -93,6 +93,7 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
   const api = new AutoRest(new RealFileSystem(), args.configFile);
   await api.AddConfiguration(args.switches);
+  api.GeneratedFile.Subscribe((_, file) => WriteString(file.uri, file.content));
   await api.Process();
 }
 

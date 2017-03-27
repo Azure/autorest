@@ -148,7 +148,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     // code generator
     const codeGenerator = config.__specials.codeGenerator;
     if (codeGenerator && codeGenerator.toLowerCase() === "swaggerresolver") {
-      const relPath = config.__specials.namespace ? config.__specials.namespace + ".json" : [...config.inputFileUris][0];
+      const relPath = config.__specials.outputFile || (config.__specials.namespace ? config.__specials.namespace + ".json" : [...config.inputFileUris][0]);
       const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
       config.GeneratedFile.Dispatch({
         uri: outputFileUri,
