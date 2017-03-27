@@ -84,5 +84,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   result.__specials.rubyPackageName = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
 
+  result.__specials.outputFile = switches["outputfilename"] || null;
+
   return result;
 }

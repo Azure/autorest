@@ -145,15 +145,23 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     });
 
-    // modeler
-    const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
-      {
-        namespace: config.__specials.namespace || ""
-      });
-
     // code generator
     const codeGenerator = config.__specials.codeGenerator;
-    if (codeGenerator) {
+    if (codeGenerator && codeGenerator.toLowerCase() === "swaggerresolver") {
+      const relPath = config.__specials.namespace ? config.__specials.namespace + ".json" : [...config.inputFileUris][0];
+      const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
+      config.GeneratedFile.Dispatch({
+        uri: outputFileUri,
+        content: JSON.stringify(rawSwagger, null, 2)
+      });
+    }
+    else if (codeGenerator) {
+      // modeler
+      const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
+        {
+          namespace: config.__specials.namespace || ""
+        });
+
       const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
       let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
         {

@@ -27,7 +27,7 @@ namespace AutoRest.Swagger.Validation
         }
     }
 
-    public class DescriptiveDescriptionRequired : TypedRule<string>
+    public class DescriptiveDescriptionRequired : DescriptionRequired<string>
     {
         /// <summary>
         /// This test passes if the <paramref name="description"/> is not just empty or whitespace and not explictly blocked
@@ -44,11 +44,5 @@ namespace AutoRest.Swagger.Validation
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public override string MessageTemplate => Resources.DescriptionNotDescriptive;
-
-        /// <summary>
-        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
-        /// </summary>
-        public override Category Severity => Category.Warning;
-
     }
 }

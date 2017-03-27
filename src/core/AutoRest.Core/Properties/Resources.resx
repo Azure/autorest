@@ -238,8 +238,8 @@ Modelers:
   <data name="ResourceIsMsResourceNotValid" xml:space="preserve">
     <value>A 'Resource' definition must have x-ms-azure-resource extension enabled and set to true.</value>
   </data>
-  <data name="XmsClientNameInValid" xml:space="preserve">
-    <value>Value of 'x-ms-client-name' cannot be the same as the property/model name.</value>
+  <data name="XmsClientNameInvalid" xml:space="preserve">
+    <value>Value of 'x-ms-client-name' cannot be the same as '{0}' Property/Model.</value>
   </data>
   <data name="DeleteMustNotHaveRequestBody" xml:space="preserve">
     <value>'Delete' operation must not have a request body.</value>
@@ -251,7 +251,7 @@ Modelers:
     <value>{0} has different responses for PUT/GET/PATCH operations. The PUT/GET/PATCH operations must have same schema response.</value>
   </data>
   <data name="OperationsAPINotImplemented" xml:space="preserve">
-    <value>Operations API must be implemented for the service.</value>
+    <value>Operations API must be implemented for '{0}'.</value>
   </data>
   <data name="TrackedResourceIsNotValid" xml:space="preserve">
     <value>Tracked Resource failing validation is: "{0}". Validation Failed: {1}.
@@ -283,7 +283,7 @@ Modelers:
     <value>'{0}' is not a known format.</value>
   </data>
   <data name="MissingDescription" xml:space="preserve">
-    <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
+    <value>{0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
   </data>
   <data name="MissingRequiredProperty" xml:space="preserve">
     <value>'{0}' is supposedly required, but no such property exists.</value>
@@ -307,7 +307,7 @@ Modelers:
     <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
-    <value>The value provided for description is not descriptive enough.</value>
+    <value>The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.</value>
   </data>
   <data name="OperationIdNounInVerb" xml:space="preserve">
     <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.</value>
@@ -316,19 +316,19 @@ Modelers:
     <value>Constraint is not supported for this type and will be ignored.</value>
   </data>
   <data name="NonAppJsonTypeNotSupported" xml:space="preserve">
-    <value>Media types other than 'application/json' has limited support</value>
+    <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
     <value>Non-HTTPS/HTTP schemes have limited support</value>
   </data>
   <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section</value>
+    <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
   </data>
   <data name="ServiceDefinitionParametersMissingMessage" xml:space="preserve">
-    <value>Parameters "subscriptionId" or "api-version" are referenced but not defined in the parameters section of Service Definition</value>
+    <value>Parameter "{0}" is referenced but not defined in the global parameters section of Service Definition</value>
   </data>
-  <data name="UniqueResourcePathsWarning" xml:space="preserve">
-    <value>More than one resource path is not allowed in a single spec (found: {0}).</value>
+  <data name="UniqueResourcePaths" xml:space="preserve">
+    <value>Multiple resource providers are not allowed in a single spec. More than one the resource paths were found: '{0}'.</value>
   </data>
   <data name="PathCannotBeNullOrEmpty" xml:space="preserve">
     <value>path cannot be null or an empty string or a string with white spaces while getting the parent directory</value>

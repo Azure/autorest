@@ -24,9 +24,8 @@
         "description": "Foo operation",
         "parameters": [
           {
-            "bar": {
-              "type": "string"
-            }
+            "name": "bar",
+            "type": "string"
           }
         ],
         "responses": {
@@ -49,8 +48,7 @@
       "name": "api-version",
       "in": "path",
       "required": true,
-      "type": "string",
-      "description": "test api version"
+      "type": "string"
     }
   }
 }

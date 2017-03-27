@@ -3,8 +3,10 @@
 
 using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
-using AutoRest.Swagger.Validation.Core;
+using AutoRest.Core.Utilities;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Validation.Core;
+using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -31,7 +33,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.XmsClientNameInValid;
+        public override string MessageTemplate => Resources.XmsClientNameInvalid;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
@@ -39,21 +41,20 @@ namespace AutoRest.Swagger.Validation
         public override Category Severity => Category.Error;
 
         /// <summary>
-        /// Validates if the name of property and x-ms-client-name(if exists) does not match.
+        /// Validates if the name of parameter model and x-ms-client-name(if exists) does not match.
         /// </summary>
-        /// <param name="definitions">Operation Definition to validate</param>
-        /// <returns>true if the validation succeeds. false otherwise.</returns>
-        public override bool IsValid(SwaggerParameter parameter)
+        /// <param name="parameter">Paramter model.</param>
+        /// <param name="context">Rule context.</param>
+        /// <returns></returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(SwaggerParameter parameter, RuleContext context)
         {
-            if(parameter.Extensions != null && parameter.Extensions.Count != 0)
+            if (parameter?.Extensions?.ContainsKey(extensionToCheck) == true)
             {
-                string valueToCompare = (string)parameter.Extensions.GetValueOrNull(extensionToCheck);
-                if (valueToCompare != null && valueToCompare.Equals(parameter.Name))
+                if (parameter.Extensions[extensionToCheck].ToString().EqualsIgnoreCase(parameter.Name))
                 {
-                    return false;
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, parameter.Name);
                 }
             }
-            return true;
         }
     }
 }

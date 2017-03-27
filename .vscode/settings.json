@@ -18,10 +18,7 @@
     "**/.hg": true,
     "**/.DS_Store": true
   },
-  "editor.tabSize": 2,
-  "editor.detectIndentation": false,
   "csharp.suppressDotnetRestoreNotification": true,
-  "editor.formatOnSave": true,
   "[typescript]": {
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
