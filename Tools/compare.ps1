@@ -97,6 +97,8 @@ $scrp = {
 
 @( "CSharp",
  "Azure.CSharp",
+ "Azure.CSharp.Fluent",
+ "AzureResourceSchema",
  "Ruby",
  "Azure.Ruby",
  "NodeJS",
@@ -106,10 +108,8 @@ $scrp = {
  "Go",
  "Java",
  "Azure.Java",
- "Azure.Java.Fluent",
- "AzureResourceSchema",
- "Azure.CSharp.Fluent" ) |% {
-   
+ "Azure.Java.Fluent" ) |% {
+
 # @( "CSharp" ) |% {
   $gen = $_;
  

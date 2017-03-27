@@ -143,4 +143,28 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     assert.ok(results.every(path => path.endsWith(".cs")));
     console.log(results);
   }
+
+  // SKIPPING because this is using a local path for now
+  @test @skip @timeout(0) async "custom plugin module"() {
+    const cancellationToken = CancellationToken.None;
+    const dataStore = new DataStore(cancellationToken);
+    const scopeInput = dataStore.CreateScope("input").AsFileScopeReadThrough();
+
+    const inputFileUri = "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json";
+    await scopeInput.Read(inputFileUri);
+
+    const validationPlugin = await AutoRestPlugin.FromModule("../../../../../Users/jobader/Documents/GitHub/autorest-interactive/index");
+    const pluginNames = await validationPlugin.GetPluginNames(cancellationToken);
+
+    for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
+      const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
+      const result = await validationPlugin.Process(
+        pluginNames[pluginIndex], _ => null,
+        scopeInput,
+        scopeWork.CreateScope("output"),
+        scopeWork.CreateScope("messages"),
+        cancellationToken);
+      assert.strictEqual(result, true);
+    }
+  }
 }

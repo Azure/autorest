@@ -21,13 +21,15 @@ namespace AutoRest.Simplify
 {
     public class CSharpSimplifier
     {
-        public async Task Run()
+        public Task Run() => Run(Settings.Instance.FileSystemOutput);
+
+        public async Task Run(MemoryFileSystem fs)
         {
             var op = new AzureAsyncOperation();
             var restOp = new RestException();
 
-            var files = Settings.Instance.FileSystemOutput.GetFiles("", "*.cs", SearchOption.AllDirectories).
-                ToDictionary(each => each, each => Settings.Instance.FileSystemOutput.ReadAllText(each));
+            var files = fs.GetFiles("", "*.cs", SearchOption.AllDirectories).
+                ToDictionary(each => each, each => fs.ReadAllText(each));
 
             var assemblies = new[] {
                 typeof(IAzureClient).GetAssembly().Location,
@@ -91,7 +93,7 @@ namespace AutoRest.Simplify
                         Replace("[Newtonsoft.Json.JsonExtensionData]", "[JsonExtensionData]");
 
                     // Write out the files back to their original location
-                    Settings.Instance.FileSystemOutput.WriteAllText(document.Name, text);
+                    fs.WriteAllText(document.Name, text);
                 }
             }
         }

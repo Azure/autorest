@@ -35,7 +35,7 @@ namespace AutoRest
 
     public async Task<IEnumerable<string>> GetPluginNames()
     {
-      return new[] { nameof(AzureValidator), nameof(Modeler), nameof(Generator) };
+      return new[] { nameof(AzureValidator), nameof(Modeler), nameof(Generator), nameof(CSharpSimplifier) };
     }
 
     public async Task<bool> Process(string plugin, string sessionId)
@@ -48,6 +48,8 @@ namespace AutoRest
           return await new Modeler(connection, sessionId).Process();
         case nameof(Generator):
           return await new Generator(connection, sessionId).Process();
+        case nameof(CSharpSimplifier):
+          return await new CSharpSimplifier(connection, sessionId).Process();
       }
       return false;
       /*

@@ -3,8 +3,10 @@
 
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Logging;
 using AutoRest.Swagger.Validation.Core;
 using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -22,23 +24,20 @@ namespace AutoRest.Swagger.Validation
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
         public override string MessageTemplate => Resources.PutOperationNameNotValid;
-
+        
         /// <summary>
-        /// Validates whether operation name confirms to the GET rule naming convension.
+        /// Validates whether PUT operation name is named correctly
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
-        /// <returns><c>true</c> if PUT operation name confirms to PUT rule, otherwise <c>false</c>.</returns>
-        public override bool IsValid(string entity, RuleContext context)
+        /// <returns>ValidationMessage</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(string operationId, RuleContext context)
         {
             string httpVerb = context?.Parent?.Key;
-
-            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("PUT"))
+            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("PUT") && !IsPutValid(operationId))
             {
-                return IsPutValid(entity);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, operationId);
             }
-
-            return true;
         }
     }
 }

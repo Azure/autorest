@@ -1,0 +1,223 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/foo": {
+      "get": {
+        "operationId": "ProxyRes_Get",
+        "description": "gets a proxy res",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "the resource",
+            "schema": {
+              "$ref": "#/definitions/SampleProxyResource"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "SampleModel_CreateOrUpdate",
+        "description": "creates a sample model",
+        "parameters": [
+          {
+            "name": "sampleModel",
+            "required": true,
+            "description": "sample model to put",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PutResponseResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "the resource",
+            "schema": {
+              "$ref": "#/definitions/PutResponseResource"
+            }
+          }
+        }
+      }
+    },
+    "/bar": {
+      "get": {
+        "operationId": "TrackedRes_Get",
+        "description": "gets a tracked res",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "the resource",
+            "schema": {
+              "$ref": "#/definitions/SampleTrackedResource"
+            }
+          }
+        }
+      }
+    },
+    "/foo/bar": {
+      "get": {
+        "operationId": "AzureRes_Get",
+        "description": "gets an azure res",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "the resource",
+            "schema": {
+              "$ref": "#/definitions/SampleAzureResource"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Resource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "resource with a location",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "proxy resource without a location property",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "SampleProxyResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "description": "sample proxy resource",
+      "properties": {
+        "prop0": {
+          "type": "string"
+        }
+      }
+    },
+    "SampleTrackedResource": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "description": "sample proxy resource",
+      "properties": {
+        "prop0": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBaseResource": {
+      "description": "Base resource with x-ms-azure-resource extension",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "SampleAzureResource": {
+      "description": "sample resource that allOfs on azure resource",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AzureBaseResource"
+        }
+      ],
+      "properties": {
+        "prop1": {
+          "description": "a sample prop",
+          "type": "string"
+        }
+      }
+    },
+    "PutResponseResource": {
+      "description": "resource returned by a put operation",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        }
+      }
+    }
+  }
+}

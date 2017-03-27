@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using AutoRest.Core;
 using AutoRest.Core.Model;
 using AutoRest.Core.Utilities;
 using AutoRest.Extensions;
@@ -552,6 +553,21 @@ namespace AutoRest.Ruby.Model
             }
             return string.Format(CultureInfo.InvariantCulture, "{{{0}}}", string.Join(",", encodedParameters));
         }
+
+        /// <summary>
+        /// Get the full name of the model including the namespace.
+        /// </summary>
+        /// <param name="modelName">name of the model</param>
+        /// <returns>full name of the model including the namespace</returns>
+        private string GetModelName(string modelName)
+        {
+            if (!string.IsNullOrWhiteSpace(Settings.Instance.Namespace))
+            {
+                modelName = Settings.Instance.Namespace + "::Models::" + modelName;
+            }
+
+            return modelName;
+        }
         
         /// <summary>
         /// Constructs mapper for the request body.
@@ -563,7 +579,7 @@ namespace AutoRest.Ruby.Model
             var builder = new IndentedStringBuilder("  ");
             if (RequestBody.ModelType is CompositeType)
             {
-                builder.AppendLine("{0} = {1}.mapper()", outputVariable, RequestBody.ModelType.Name);
+                builder.AppendLine("{0} = {1}.mapper()", outputVariable, GetModelName(RequestBody.ModelType.Name));
             }
             else
             {
@@ -591,7 +607,7 @@ namespace AutoRest.Ruby.Model
             var builder = new IndentedStringBuilder("  ");
             if (type is CompositeType)
             {
-                builder.AppendLine("result_mapper = {0}.mapper()", type.Name);
+                builder.AppendLine("result_mapper = {0}.mapper()", GetModelName(type.Name));
             }
             else
             {

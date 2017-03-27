@@ -7,6 +7,7 @@ using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.Swagger.Model.Utilities;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -43,6 +44,26 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="paths">API paths</param>
         /// <returns>true if the operations API has been implemented. false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths) => paths.Any(path => path.Key.Trim().ToLower().EndsWith("/operations"));
+        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
+        {
+            string[] operationPathsEndingWithOperations = paths.Keys.Where(x => x.Trim().ToLower().EndsWith("/operations")).ToArray();
+            IEnumerable<string> resourceProviders = ValidationUtilities.GetResourceProviders(paths);
+
+            // We'll check for only one RP in the swagger as other rules can validate having many RPs in one swagger
+            string resourceProvider = resourceProviders?.ToList().Count > 0 ? resourceProviders.First() : null;
+            string operationApiPath = string.Format("/providers/{0}/operations", resourceProvider);
+
+            formatParameters = new object[] { };
+            foreach (string operationPath in operationPathsEndingWithOperations)
+            {
+                if (operationPath.EndsWith(operationApiPath))
+                {
+                    return true;
+                }
+            }
+
+            formatParameters = new string[] { operationApiPath };
+            return false;
+        }
     }
 }

@@ -3,8 +3,10 @@
 
 using AutoRest.Core.Properties;
 using AutoRest.Core.Utilities;
+using AutoRest.Core.Logging;
 using AutoRest.Swagger.Validation.Core;
 using System;
+using System.Collections.Generic;
 
 namespace AutoRest.Swagger.Validation
 {
@@ -24,21 +26,18 @@ namespace AutoRest.Swagger.Validation
         public override string MessageTemplate => Resources.DeleteOperationNameNotValid;
 
         /// <summary>
-        /// Validates whether operation name confirms to the DELETE rule naming convension.
+        /// Validates whether PUT operation name is named correctly
         /// </summary>
         /// <param name="entity">Operation name to be verified.</param>
         /// <param name="context">Rule context.</param>
-        /// <returns><c>true</c> if DELETE operation name confirms to DELETE rule, otherwise <c>false</c>.</returns>
-        public override bool IsValid(string entity, RuleContext context)
+        /// <returns>ValidationMessage</returns>
+        public override IEnumerable<ValidationMessage> GetValidationMessages(string operationId, RuleContext context)
         {
             string httpVerb = context?.Parent?.Key;
-
-            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("DELETE"))
+            if (!String.IsNullOrWhiteSpace(httpVerb) && httpVerb.EqualsIgnoreCase("DELETE") && !IsDeleteValid(operationId))
             {
-                return IsDeleteValid(entity);
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, operationId);
             }
-
-            return true;
         }
     }
 }

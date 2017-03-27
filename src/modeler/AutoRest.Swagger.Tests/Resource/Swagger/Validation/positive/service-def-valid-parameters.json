@@ -1,0 +1,94 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Service definition does not contain required parameters",
+    "description": "Some documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/foo/Subscriptions/{subscriptionId}": {
+      "post": {
+        "operationId": "Noun_Verb",
+        "summary": "Foo path",
+        "description": "Foo operation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/operations": {
+      "get": {
+        "summary": "Lists all foo.",
+        "description": "foo",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "name": "limit",
+            "type": "string",
+            "description": "foo"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test id"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "test api version"
+    }
+  },
+  "definitions": {
+    "OperationsListResult": {
+      "description": "List of operations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "the operation"
+          },
+          "description": "List of Operations"
+        }
+      }
+    }
+  }
+}

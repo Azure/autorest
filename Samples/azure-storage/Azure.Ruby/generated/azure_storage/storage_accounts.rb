@@ -5,7 +5,6 @@ module Petstore
   # The Storage Management Client.
   #
   class StorageAccounts
-    include Petstore::Models
     include MsRestAzure
 
     #
@@ -79,7 +78,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = StorageAccountCheckNameAvailabilityParameters.mapper()
+      request_mapper = Petstore::Models::StorageAccountCheckNameAvailabilityParameters.mapper()
       request_content = @client.serialize(request_mapper,  account_name, 'account_name')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -111,7 +110,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = CheckNameAvailabilityResult.mapper()
+            result_mapper = Petstore::Models::CheckNameAvailabilityResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -169,7 +168,7 @@ module Petstore
       promise = promise.then do |response|
         # Defining deserialization method.
         deserialize_method = lambda do |parsed_response|
-          result_mapper = StorageAccount.mapper()
+          result_mapper = Petstore::Models::StorageAccount.mapper()
           parsed_response = @client.deserialize(result_mapper, parsed_response, 'parsed_response')
         end
 
@@ -362,7 +361,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccount.mapper()
+            result_mapper = Petstore::Models::StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -482,7 +481,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = StorageAccountUpdateParameters.mapper()
+      request_mapper = Petstore::Models::StorageAccountUpdateParameters.mapper()
       request_content = @client.serialize(request_mapper,  parameters, 'parameters')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -514,7 +513,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccount.mapper()
+            result_mapper = Petstore::Models::StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -605,7 +604,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccountKeys.mapper()
+            result_mapper = Petstore::Models::StorageAccountKeys.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -691,7 +690,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccountListResult.mapper()
+            result_mapper = Petstore::Models::StorageAccountListResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -784,7 +783,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccountListResult.mapper()
+            result_mapper = Petstore::Models::StorageAccountListResult.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -868,7 +867,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = StorageAccountRegenerateKeyParameters.mapper()
+      request_mapper = Petstore::Models::StorageAccountRegenerateKeyParameters.mapper()
       request_content = @client.serialize(request_mapper,  regenerate_key, 'regenerate_key')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -900,7 +899,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccountKeys.mapper()
+            result_mapper = Petstore::Models::StorageAccountKeys.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)
@@ -996,7 +995,7 @@ module Petstore
       request_headers['Content-Type'] = 'application/json; charset=utf-8'
 
       # Serialize Request
-      request_mapper = StorageAccountCreateParameters.mapper()
+      request_mapper = Petstore::Models::StorageAccountCreateParameters.mapper()
       request_content = @client.serialize(request_mapper,  parameters, 'parameters')
       request_content = request_content != nil ? JSON.generate(request_content, quirks_mode: true) : nil
 
@@ -1028,7 +1027,7 @@ module Petstore
         if status_code == 200
           begin
             parsed_response = response_content.to_s.empty? ? nil : JSON.load(response_content)
-            result_mapper = StorageAccount.mapper()
+            result_mapper = Petstore::Models::StorageAccount.mapper()
             result.body = @client.deserialize(result_mapper, parsed_response, 'result.body')
           rescue Exception => e
             fail MsRest::DeserializationError.new('Error occurred in deserializing the response', e.message, e.backtrace, result)

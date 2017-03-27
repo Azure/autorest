@@ -1,7 +1,10 @@
 ﻿
 using AutoRest.Core.Logging;
 using AutoRest.Swagger.Model;
+using AutoRest.Swagger.Model.Utilities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AutoRest.Swagger.Validation.Core
 {
@@ -11,6 +14,7 @@ namespace AutoRest.Swagger.Validation.Core
     /// </summary>
     public class RuleContext
     {
+
         /// <summary>
         /// Initializes a top level context for rules
         /// </summary>
@@ -20,6 +24,7 @@ namespace AutoRest.Swagger.Validation.Core
             this.Root = root;
             this.Value = root;
             this.File = file;
+            PopulateResourceTypes(root);
         }
 
         /// <summary>
@@ -31,6 +36,9 @@ namespace AutoRest.Swagger.Validation.Core
             this.Parent = parent;
             this.Root = parent?.Root;
             this.File = parent?.File;
+            this.ResourceModels = parent?.ResourceModels;
+            this.TrackedResourceModels = parent?.TrackedResourceModels;
+            this.ProxyResourceModels = parent?.ProxyResourceModels;
         }
 
         /// <summary>
@@ -82,6 +90,21 @@ namespace AutoRest.Swagger.Validation.Core
         /// </summary>
         public object Value { get; private set; }
         
+        /// <summary>
+        /// List of resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<string> ResourceModels { get; private set; }
+
+        /// <summary>
+        /// List of tracked resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<string> TrackedResourceModels { get; private set; }
+
+        /// <summary>
+        /// List of proxy resources in serviceDefinition
+        /// </summary>
+        public IEnumerable<string> ProxyResourceModels { get; private set; }
+
         public ObjectPath Path => 
             Parent == null
                 ? ObjectPath.Empty
@@ -90,5 +113,16 @@ namespace AutoRest.Swagger.Validation.Core
                     : Parent.Path.AppendProperty(Key);
 
         public Uri File { get; private set;  }
+
+        /// <summary>
+        /// Populates list of resources, tracked resources and proxy resources
+        /// </summary>
+        private void PopulateResourceTypes(ServiceDefinition serviceDefinition)
+        {
+            this.ResourceModels = ValidationUtilities.GetResourceModels(serviceDefinition).ToList();
+            this.TrackedResourceModels = ValidationUtilities.GetTrackedResources(this.ResourceModels, serviceDefinition.Definitions).ToList();
+            this.ProxyResourceModels = this.ResourceModels.Except(this.TrackedResourceModels).ToList();
+        }
+
     }
 }
