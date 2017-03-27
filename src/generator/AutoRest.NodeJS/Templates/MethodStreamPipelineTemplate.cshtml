@@ -33,7 +33,7 @@ return client.pipeline(httpRequest, (err, response, responseBody) => {
   }
     } catch (defaultError) {
       error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` + 
-                       `- "${responseBody}" for the default response.';
+                       `- "${responseBody}" for the default response.`;
       return callback(error);
     }
     return callback(error);
