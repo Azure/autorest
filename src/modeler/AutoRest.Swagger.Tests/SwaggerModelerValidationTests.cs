@@ -373,13 +373,8 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void TrackedResourceGetOperationValidation2()
         {
-<<<<<<< HEAD
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "swagger-tracked-resource-1-validation.json"));
             messages.AssertOnlyValidationMessage(typeof(TrackedResourceGetOperationValidation), 1);
-=======
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "swagger-tracked-resource-1-validation.json"));
-            messages.AssertOnlyValidationMessage(typeof(TrackedResourceValidation), 1);
->>>>>>> dsgouda/i1936
         }
 
         [Fact]
