@@ -449,7 +449,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete..
+        ///   Looks up a localized string similar to A &apos;{0}&apos; operation &apos;{1}&apos; with x-ms-long-running-operation extension must have a valid terminal success status code {2}..
         /// </summary>
         public static string LongRunningResponseNotValid {
             get {
