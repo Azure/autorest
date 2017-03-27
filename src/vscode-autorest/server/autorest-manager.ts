@@ -63,7 +63,7 @@ export class File extends EventEmitter {
     try {
       connection.console.log(`Reading content for ${this.fullPath} `)
       // acquire the content and set the checksum.
-      this.SetContent(await a.readFile(FileUriToPath(this.fullPath)));
+      this.SetContent(await a.readFile(FileUriToPath(this.fullPath), 'utf8'));
     } catch (exception) {
       connection.console.error(`Exception reading content for ${this.fullPath} `)
       // failed! well, set the content to null. it'll try again later. 
@@ -82,7 +82,7 @@ export class File extends EventEmitter {
       return;
     }
     this._content = text;
-    this._checksum = null;
+    this._checksum = ck;
     this.Changed.Dispatch(text == null);
   };
 
@@ -176,7 +176,7 @@ export class AutoRestManager extends TextDocuments {
     // changes.changes[0].uri
     for (const each of changes.changes) {
       let docUri = NormalizeUri(each.uri);
-      this.verbose(`Changed On Disk: ${docUri}`);
+      this.debug(`Changed On Disk: ${docUri}`);
       let doc = this.trackedFiles.get(docUri);
       if (doc) {
         // we are currently tracking this file already.
@@ -203,10 +203,10 @@ export class AutoRestManager extends TextDocuments {
 
     const f = new File(documentUri);
     this.trackedFiles.set(documentUri, f);
-    let contnet = await (await f).content; // get the content to see if we should be doing something with this.
-    // check if it's a swagger?
-
     f.DiagnosticsToSend.Subscribe((file, diags) => this.connection.sendDiagnostics({ uri: file.fullPath, diagnostics: [...diags.values()] }));
+
+    // check if it's a swagger?
+    let contnet = await (await f).content; // get the content to see if we should be doing something with this.
     return f;
   }
 
@@ -225,6 +225,10 @@ export class AutoRestManager extends TextDocuments {
       if (!ctx) {
         ctx = new DocumentContext(this, folder, configFile)
         this.activeContexts.set(folder, ctx);
+
+        // since we're creating a new context, might as well activate it now.
+        ctx.Activate();
+        ctx.Track(await this.AcquireTrackedFile(configFile));
       }
       return ctx;
     }
@@ -258,8 +262,9 @@ export class AutoRestManager extends TextDocuments {
     // not before this, but now we should
     let ctx = await this.GetDocumentContextForDocument(documentUri);
     // hey garrett -- make sure that the event dispatch in vscode doesn't wait for this method or makes this bad for some reason.
-    let file = this.AcquireTrackedFile(documentUri)
-    ctx.Track(await file);
+    doc = await this.AcquireTrackedFile(documentUri)
+    doc.IsActive = true;
+    ctx.Track(doc);
   }
 
   private changed(change: TextDocumentChangeEvent) {
