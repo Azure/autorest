@@ -15,7 +15,7 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="scheme"></param>
         /// <returns></returns>
-        public override bool IsValid(TransferProtocolScheme scheme) => (scheme==TransferProtocolScheme.Https) || (scheme == TransferProtocolScheme.Http);
+        public override bool IsValid(TransferProtocolScheme scheme) => (scheme==TransferProtocolScheme.Https);
 
         /// <summary>
         /// The template message for this Rule. 
