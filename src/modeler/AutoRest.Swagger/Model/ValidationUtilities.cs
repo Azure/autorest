@@ -404,16 +404,6 @@ namespace AutoRest.Swagger.Model.Utilities
             return false;
         }
 
-        public static List<string> GetTrackedResources()
-        {
-            List<string> list = new List<string>();
-            list.Add("Profile");
-            list.Add("EndPoint");
-            list.Add("origin");
-            list.Add("customdomain");
-            return list;
-        }
-
         public static bool ListByXCheck(IEnumerable<Operation> getOperations, Regex regEx, string definitionKey, Dictionary<string, Schema> definitions)
         {
             return getOperations.Any(operation =>

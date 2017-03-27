@@ -69,7 +69,7 @@ namespace AutoRest.Swagger.Validation
         public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
         {
             // Retrieve the list of TrackedResources
-            List<string> trackedResources = ValidationUtilities.GetTrackedResources();
+            IEnumerable<string> trackedResources = context.TrackedResourceModels;
 
             foreach (string trackedResource in trackedResources)
             {
