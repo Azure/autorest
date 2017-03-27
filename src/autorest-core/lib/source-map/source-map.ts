@@ -5,9 +5,35 @@
 
 import { Mappings, Position, SmartPosition } from "../ref/source-map";
 import { Descendants, ToAst } from "../ref/yaml";
-import { JsonPath, stringify } from "../ref/jsonpath";
+import { JsonPath, parse, stringify } from '../ref/jsonpath';
 import * as yaml from "../parsing/yaml";
 import { DataHandleRead } from "../data-store/data-store";
+
+// for carrying over rich information into the realm of line/col based source maps
+// convention: <original name (contains no `nameWithPathSeparator`)>\n(<path>)
+const nameWithPathSeparator = "\n\n(";
+const nameWithPathEndMark = ")";
+export function TryDecodePathFromName(name: string | undefined): JsonPath | undefined {
+  try {
+    if (!name) {
+      return undefined;
+    }
+    const sepIndex = name.indexOf(nameWithPathSeparator);
+    if (sepIndex === -1 || !name.endsWith(nameWithPathEndMark)) {
+      return undefined;
+    }
+    const secondPart = name.slice(sepIndex + 2, name.length - 1);
+    return parse(secondPart);
+  } catch (e) {
+    return undefined;
+  }
+}
+export function EncodePathInName(name: string | undefined, path: JsonPath): string {
+  if (name && name.indexOf(nameWithPathSeparator) !== -1) {
+    throw new Error("Cannot encode the path since the original name already contains the separator string.");
+  }
+  return (name || "") + nameWithPathSeparator + stringify(path) + nameWithPathEndMark;
+}
 
 export async function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
   const path = (position as any).path;
@@ -33,10 +59,12 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
   }
 
   for (const mapping of mappings) {
+    const associatedPath: JsonPath | null = (mapping.original as any).path || (mapping.generated as any).path || null;
+
     target.addMapping({
       generated: await compilePos(mapping.generated, generatedFile),
       original: await compilePos(mapping.original, mapping.source),
-      name: mapping.name,
+      name: associatedPath !== null ? EncodePathInName(mapping.name, associatedPath) : mapping.name,
       source: mapping.source
     });
   }

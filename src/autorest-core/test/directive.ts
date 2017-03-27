@@ -11,7 +11,7 @@ import { Message } from "../lib/message";
 
 @suite class Directive {
 
-  @test @timeout(30000) async "supression"() {
+  @test @timeout(30000) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
     autoRest.Fatal.Subscribe((_, m) => console.error(m.Text));
 
@@ -48,18 +48,28 @@ import { Message } from "../lib/message";
       dispose();
     }
 
-    // picky run (not all types)
-    autoRest.ResetConfiguration();
-    autoRest.AddConfiguration({ "azure-arm": true });
-    autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties"] } });
-    {
-      const messages: Message[] = [];
-      const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
+    // makes sure that neither all nor nothing was returned
+    const pickyRun = async (directive: any) => {
+      autoRest.ResetConfiguration();
+      autoRest.AddConfiguration({ "azure-arm": true });
+      autoRest.AddConfiguration({ directive: directive });
+      {
+        const messages: Message[] = [];
+        const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
 
-      await autoRest.Process().finish;
-      assert.notEqual(messages.length, numWarningsRef);
+        await autoRest.Process().finish;
+        //if (messages.length === 0 || messages.length === numWarningsRef) {
+        console.log(JSON.stringify(messages, null, 2));
+        //}
+        assert.notEqual(messages.length, 0);
+        assert.notEqual(messages.length, numWarningsRef);
 
-      dispose();
-    }
+        dispose();
+      }
+    };
+
+    // not all types
+    await pickyRun({ suppress: ["AvoidNestedProperties"] });
+    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"] });
   }
 }

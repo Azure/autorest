@@ -7,7 +7,7 @@ import { BlameTree } from '../source-map/blaming';
 import { Artifact } from '../artifact';
 import { Supressor } from './supression';
 import { IEvent } from '../events';
-import { Channel, Message, SourceLocation } from '../message';
+import { Channel, Message, SourceLocation, Range } from '../message';
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
 import { ResolveUri } from "../ref/uri";
 import { ConfigurationView } from '../configuration';
@@ -21,6 +21,7 @@ import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
+import { TryDecodePathFromName } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -96,7 +97,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
               const blameTree = await config.DataStore.Blame(s.document, s.Position);
               const result = [...blameTree.BlameInputs()];
               if (result.length > 0) {
-                return result.map(r => <SourceLocation>{ document: r.source, Position: r });
+                return result.map(r => <SourceLocation>{ document: r.source, Position: { line: r.line, column: r.column, path: TryDecodePathFromName(r.name) } });
               }
             } catch (e) {
               // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
@@ -107,6 +108,14 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           }));
           m.Source = blameSources.map(x => x[0]); // just take the first source of every issue (or take all of them? has impact on both supression and highlighting!)
         }
+
+        // set range (dummy)
+        m.Range = m.Source === undefined ? undefined : m.Source.map(s =>
+          <Range>{
+            document: s.document,
+            start: s.Position,
+            end: { column: (s.Position as any).column + 3, line: (s.Position as any).line }
+          });
 
         // filter
         const mx = supressor.Filter(m);
@@ -121,6 +130,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
       outstandingTaskAwaiter.Exit();
     };
+
     autoRestDotNetPlugin.Message.Subscribe((_, m) => {
       switch (m.Channel) {
         case Channel.Debug: processMessage(config.Debug, m); break;
