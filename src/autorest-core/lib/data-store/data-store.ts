@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { JsonPath } from '../ref/jsonpath';
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
@@ -409,7 +410,7 @@ export class DataHandleRead {
     return await data.yamlAst;
   }
 
-  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
+  public async Blame(position: sourceMap.Position): Promise<(sourceMap.MappedPosition & { path?: JsonPath })[]> {
     const metadata = await this.ReadMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
 

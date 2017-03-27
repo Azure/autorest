@@ -20,13 +20,13 @@ export class Supressor {
   private MatchesSourceFilter(document: string, path: JsonPath | undefined, supression: DirectiveView): boolean {
     // from
     const from = From(supression.from);
-    const matchesFrom = !from.Any() || from.Any(d => document.toLowerCase() === d.toLowerCase());
+    const matchesFrom = !from.Any() || from.Any(d => document.toLowerCase().endsWith(d.toLowerCase()));
 
     // where
     const where = From(supression.where);
     const matchesWhere = !where.Any() || (path && where.Any(w => matches(w, path))) || false;
 
-    return matchesFrom || matchesWhere;
+    return matchesFrom && matchesWhere;
   }
 
   public Filter(m: Message): Message | null {

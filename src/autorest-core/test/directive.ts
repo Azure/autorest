@@ -1,17 +1,14 @@
-import { Stringify } from '../lib/ref/yaml';
-import { AutoRest } from '../lib/autorest-core';
-import { Configuration } from '../lib/configuration';
-import { RealFileSystem } from '../lib/file-system';
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { AutoRest } from "../lib/autorest-core";
+import { RealFileSystem } from "../lib/file-system";
 import { CreateFolderUri, ResolveUri } from "../lib/ref/uri";
-import { parse } from "../lib/ref/jsonpath";
 import { Message } from "../lib/message";
 
 @suite class Directive {
 
-  @test @timeout(30000) async "suppression"() {
+  @test @timeout(60000) async "suppression"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/"));
     autoRest.Fatal.Subscribe((_, m) => console.error(m.Text));
 
@@ -34,14 +31,13 @@ import { Message } from "../lib/message";
     autoRest.ResetConfiguration();
     autoRest.AddConfiguration({ "azure-arm": true });
     autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"] } });
-    let numWarningsMuted: number;
     {
       const messages: Message[] = [];
       const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
 
       await autoRest.Process().finish;
       if (messages.length > 0) {
-        console.log(Stringify(messages));
+        console.log(JSON.stringify(messages, null, 2));
       }
       assert.strictEqual(messages.length, 0);
 
@@ -58,9 +54,9 @@ import { Message } from "../lib/message";
         const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
 
         await autoRest.Process().finish;
-        //if (messages.length === 0 || messages.length === numWarningsRef) {
-        console.log(JSON.stringify(messages, null, 2));
-        //}
+        if (messages.length === 0 || messages.length === numWarningsRef) {
+          console.log(JSON.stringify(messages, null, 2));
+        }
         assert.notEqual(messages.length, 0);
         assert.notEqual(messages.length, numWarningsRef);
 
@@ -70,6 +66,10 @@ import { Message } from "../lib/message";
 
     // not all types
     await pickyRun({ suppress: ["AvoidNestedProperties"] });
-    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"] });
+    // certain paths
+    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"], where: "$..Error" });
+    await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" });
+    // document
+    await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 }

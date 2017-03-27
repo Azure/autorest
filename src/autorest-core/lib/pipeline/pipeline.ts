@@ -97,7 +97,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
               const blameTree = await config.DataStore.Blame(s.document, s.Position);
               const result = [...blameTree.BlameInputs()];
               if (result.length > 0) {
-                return result.map(r => <SourceLocation>{ document: r.source, Position: { line: r.line, column: r.column, path: TryDecodePathFromName(r.name) } });
+                return result.map(r => <SourceLocation>{ document: r.source, Position: { line: r.line, column: r.column, path: r.path } });
               }
             } catch (e) {
               // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
@@ -110,12 +110,14 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         }
 
         // set range (dummy)
-        m.Range = m.Source === undefined ? undefined : m.Source.map(s =>
-          <Range>{
-            document: s.document,
-            start: s.Position,
-            end: { column: (s.Position as any).column + 3, line: (s.Position as any).line }
-          });
+        if (m.Source) {
+          m.Range = m.Source.map(s =>
+            <Range>{
+              document: s.document,
+              start: s.Position,
+              end: { column: (s.Position as any).column + 3, line: (s.Position as any).line }
+            });
+        }
 
         // filter
         const mx = supressor.Filter(m);

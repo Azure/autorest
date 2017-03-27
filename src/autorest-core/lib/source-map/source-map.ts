@@ -22,7 +22,7 @@ export function TryDecodePathFromName(name: string | undefined): JsonPath | unde
     if (sepIndex === -1 || !name.endsWith(nameWithPathEndMark)) {
       return undefined;
     }
-    const secondPart = name.slice(sepIndex + 2, name.length - 1);
+    const secondPart = name.slice(sepIndex + 3, name.length - 1);
     return parse(secondPart);
   } catch (e) {
     return undefined;
