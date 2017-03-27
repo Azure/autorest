@@ -334,13 +334,13 @@ namespace AutoRest.Swagger.Model.Utilities
             => paths.Values.SelectMany(pathObjs=>pathObjs.Where(pair => pair.Key.ToLower().Equals(id.ToLower())).Select(pair => pair.Value));
 
         /// <summary>
-        /// Returns whether a string follows camel case style.
+        /// Returns whether a string follows camel case style, allowing for 2 consecutive upper case characters for acronyms.
         /// </summary>
         /// <param name="name">String to check for style</param>
-        /// <returns>true if "name" follows camel case style, false otherwise.</returns>
+        /// <returns>true if "name" follows camel case style (allows for 2 consecutive upper case characters), false otherwise.</returns>
         public static bool isNameCamelCase(string name)
         {
-            Regex propNameRegEx = new Regex(@"^[a-z0-9]+([A-Z][a-z0-9]+)+|^[a-z0-9]+$|^[a-z0-9]+[A-Z]$");
+            Regex propNameRegEx = new Regex(@"^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)+$|^[a-z0-9\$-]+$|^[a-z0-9\$-]+([A-Z]{1,2}[a-z0-9\$-]+)*[A-Z]{1,2}$");
             return (propNameRegEx.IsMatch(name));
         }
 

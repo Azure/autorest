@@ -119,6 +119,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "description": "description of the value",
           "items": {
             "$ref": "#/definitions/Model"
           }

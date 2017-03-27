@@ -295,7 +295,7 @@ Modelers:
     <value>'{0}' is not a known format.</value>
   </data>
   <data name="MissingDescription" xml:space="preserve">
-    <value>Consider adding a 'description' element, essential for maintaining reference documentation.</value>
+    <value>{0} lacks 'description' property. Consider adding a 'description' element. Accurate description is essential for maintaining reference documentation.</value>
   </data>
   <data name="MissingRequiredProperty" xml:space="preserve">
     <value>'{0}' is supposedly required, but no such property exists.</value>
@@ -319,7 +319,7 @@ Modelers:
     <value>Paths in x-ms-paths must overload a normal path in the paths section, i.e. a path in the x-ms-paths must either be same as a path in the paths section or a path in the paths sections followed by additional parameters.</value>
   </data>
   <data name="DescriptionNotDescriptive" xml:space="preserve">
-    <value>The value provided for description is not descriptive enough.</value>
+    <value>The value provided for description is not descriptive enough. Accurate and descriptive description is essential for maintaining reference documentation.</value>
   </data>
   <data name="OperationIdNounInVerb" xml:space="preserve">
     <value>Per the Noun_Verb convention for Operation Ids, the noun '{0}' should not appear after the underscore.</value>
@@ -350,9 +350,6 @@ Modelers:
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
     <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
-  </data>
-  <data name="LongRunningResponseNotValid" xml:space="preserve">
-    <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
   </data>
   <data name="InvalidMutabilityValues" xml:space="preserve">
     <value>Valid values for an x-ms-mutability extension are 'create', 'read' and 'update'. Applied extension contains invalid value(s): '{0}'.</value>
@@ -395,5 +392,8 @@ Modelers:
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
     <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
+  </data>
+  <data name="LongRunningResponseNotValid" xml:space="preserve">
+    <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
   </data>
 </root>

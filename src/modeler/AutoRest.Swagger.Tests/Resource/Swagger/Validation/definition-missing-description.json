@@ -41,6 +41,18 @@
           "description": "Foo property"
         }
       }
+    },
+    "ParamWithProperties": {
+      "description": "Description for the param",
+      "properties": {
+        "property1": {
+          "type": "string"
+        },
+        "property2": {
+          "type": "string",
+          "description": "description for property2"
+        }
+      }
     }
   },
   "parameters": {

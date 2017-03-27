@@ -119,6 +119,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(TrackedResourceListBySubscription))]
         [Rule(typeof(TrackedResourcePatchOperationValidation))]
         [Rule(typeof(TrackedResourcePropertiesValidation))]
+        [Rule(typeof(DescriptionMissing))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>

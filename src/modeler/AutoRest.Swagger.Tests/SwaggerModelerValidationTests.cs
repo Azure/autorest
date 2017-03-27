@@ -63,7 +63,7 @@ namespace AutoRest.Swagger.Tests
         public void MissingDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "definition-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(ModelTypeIncomplete));
+            messages.AssertOnlyValidationMessage(typeof(DescriptionMissing), 2);
         }
 
         [Fact]
@@ -259,7 +259,7 @@ namespace AutoRest.Swagger.Tests
         public void ParameterDescriptionValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "parameter-missing-description.json"));
-            messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired));
+            messages.AssertOnlyValidationMessage(typeof(ParameterDescriptionRequired), 2);
         }
 
         [Fact]
@@ -288,22 +288,22 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void LongRunningResponseForPutValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-invalid-response-put.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "long-running-invalid-response-put.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule));
         }
 
         [Fact]
         public void LongRunningResponseForPostValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-invalid-response-post.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule));
         }
 
         [Fact]
         public void LongRunningResponseForDeleteValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-invalid-response-delete.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule));
         }
 
         [Fact]
@@ -475,8 +475,8 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void LongRunningResponseDefined()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "long-running-valid-response.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "positive", "long-running-valid-response.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule), 0);
         }
 
         /// <summary>
