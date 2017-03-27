@@ -674,7 +674,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
+        ///   Looks up a localized string similar to Azure Resource Management only supports HTTPS scheme..
         /// </summary>
         public static string SupportedSchemesWarningMessage {
             get {
