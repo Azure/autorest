@@ -94,7 +94,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   // AutoRest.dll realm
   //
   if (azureValidator || config.__specials.codeGenerator) {
-    const autoRestDotNetPlugin = new AutoRestDotNetPlugin();
+    const autoRestDotNetPlugin = AutoRestDotNetPlugin.Get();
     const supressor = new Supressor(config);
 
     // setup message pipeline (source map resolution, filter, forward)
@@ -118,6 +118,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
             }
             return [s];
           }));
+
           m.Source = blameSources.map(x => x[0]); // just take the first source of every issue (or take all of them? has impact on both supression and highlighting!)
         }
 
@@ -145,7 +146,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       outstandingTaskAwaiter.Exit();
     };
 
-    autoRestDotNetPlugin.Message.Subscribe((_, m) => {
+    const messageSink = (m: Message) => {
       switch (m.Channel) {
         case Channel.Debug: processMessage(config.Debug, m); break;
         case Channel.Error: processMessage(config.Error, m); break;
@@ -154,7 +155,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         case Channel.Verbose: processMessage(config.Verbose, m); break;
         case Channel.Warning: processMessage(config.Warning, m); break;
       }
-    });
+    };
 
     // code generator
     const codeGenerator = config.__specials.codeGenerator;
@@ -163,7 +164,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
         {
           namespace: config.__specials.namespace || ""
-        });
+        },
+        messageSink);
 
       const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
       let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
@@ -178,11 +180,12 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
           addCredentials: config.__specials.addCredentials || false,
           rubyPackageName: config.__specials.rubyPackageName || "client"
-        });
+        },
+        messageSink);
 
       // C# simplifier
       if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
-        generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"));
+        generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"), messageSink);
       }
 
       for (const fileName of await generatedFileScope.Enum()) {
@@ -196,7 +199,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
     // validator
     if (azureValidator) {
-      await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"));
+      await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"), messageSink);
     }
   }
 

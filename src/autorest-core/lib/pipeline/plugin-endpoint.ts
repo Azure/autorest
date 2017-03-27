@@ -51,8 +51,6 @@ export class AutoRestPlugin extends EventEmitter {
     return plugin;
   }
 
-  @EventEmitter.Event public Message: IEvent<AutoRestPlugin, Message>;
-
   public constructor(channel: MessageConnection) {
     super();
     // initiator
@@ -100,11 +98,11 @@ export class AutoRestPlugin extends EventEmitter {
     return this.apiTarget.GetPluginNames(cancellationToken);
   }
 
-  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, cancellationToken: CancellationToken): Promise<boolean> {
+  public async Process(pluginName: string, configuration: (key: string) => any, inputScope: DataStoreViewReadonly, outputScope: DataStoreView, onMessage: (message: Message) => void, cancellationToken: CancellationToken): Promise<boolean> {
     const sid = AutoRestPlugin.CreateSessionId();
 
     // register endpoint
-    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, m => this.Message.Dispatch(m), cancellationToken);
+    this.apiInitiatorEndpoints[sid] = AutoRestPlugin.CreateEndpointFor(pluginName, configuration, inputScope, outputScope, onMessage, cancellationToken);
 
     // dispatch
     const result = await this.apiTarget.Process(pluginName, sid, cancellationToken);

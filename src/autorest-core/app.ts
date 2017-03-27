@@ -78,11 +78,12 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // switch
     const key = match[1];
-    const value = match[3];
-    if (result.switches[key] !== undefined) {
-      throw new Error(`Multiple definitions of switch '${key}': '${result.switches[key]}', 'value'`);
-    }
-    result.switches[key] = value === undefined ? null : value;
+    const value = match[3] || null;
+    result.switches[key] = !result.switches[key]
+      ? value
+      : (typeof result.switches[key] === "string"
+        ? [result.switches[key], value]
+        : (result.switches[key] as any).concat(value));
   }
 
   return result;

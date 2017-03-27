@@ -26,12 +26,12 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
     assert.deepStrictEqual(pluginNames, ["dummy"]);
     const messages: Message[] = [];
-    dummyPlugin.Message.Subscribe((_, m) => messages.push(m));
     const result = await dummyPlugin.Process(
       "dummy",
       key => key,
       scopeInput,
       scopeWork,
+      m => messages.push(m),
       cancellationToken);
     assert.strictEqual(result, true);
     assert.strictEqual(messages.length, 1);
@@ -55,11 +55,11 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
       const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
       const messages: Message[] = [];
-      validationPlugin.Message.Subscribe((_, m) => messages.push(m));
       const result = await validationPlugin.Process(
         pluginNames[pluginIndex], _ => null,
         scopeInput,
         scopeWork.CreateScope("output"),
+        m => messages.push(m),
         cancellationToken);
       assert.strictEqual(result, true);
       assert.strictEqual(messages.length, (await scopeInput.Enum()).length);
@@ -80,11 +80,10 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       dataStore.CreateScope("loader"));
 
     // call validator
-    const autorestPlugin = new AutoRestDotNetPlugin();
+    const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const messages: Message[] = [];
-    autorestPlugin.Message.Subscribe((_, m) => messages.push(m));
-    const resultScope = await autorestPlugin.Validate(swagger, pluginScope);
+    const resultScope = await autorestPlugin.Validate(swagger, pluginScope, m => messages.push(m));
 
     // check results
     assert.notEqual(messages.length, 0);
@@ -112,9 +111,9 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
       dataStore.CreateScope("loader"));
 
     // call modeler
-    const autorestPlugin = new AutoRestDotNetPlugin();
+    const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
-    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" });
+    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
 
     // check results
     const codeModel = await codeModelHandle.ReadData();
@@ -130,7 +129,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
-    const autorestPlugin = new AutoRestDotNetPlugin();
+    const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const resultScope = await autorestPlugin.GenerateCode(
       codeModelHandle,
@@ -145,7 +144,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         useDateTimeOffset: false,
         addCredentials: false,
         rubyPackageName: "rubyrubyrubyruby"
-      });
+      },
+      m => null);
 
     // check results
     const results = await resultScope.Enum();
@@ -173,6 +173,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         pluginNames[pluginIndex], _ => null,
         scopeInput,
         scopeWork.CreateScope("output"),
+        m => null,
         cancellationToken);
       assert.strictEqual(result, true);
     }

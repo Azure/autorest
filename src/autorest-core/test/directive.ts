@@ -30,13 +30,14 @@ import { Message } from "../lib/message";
     // muted run
     autoRest.ResetConfiguration();
     autoRest.AddConfiguration({ "azure-arm": true });
-    autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"] } });
+    autoRest.AddConfiguration({ directive: { suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"] } });
     {
       const messages: Message[] = [];
       const dispose = autoRest.Warning.Subscribe((_, m) => messages.push(m));
 
       await autoRest.Process().finish;
       if (messages.length > 0) {
+        console.log("Should have been muted but found:");
         console.log(JSON.stringify(messages, null, 2));
       }
       assert.strictEqual(messages.length, 0);
@@ -67,9 +68,9 @@ import { Message } from "../lib/message";
     // not all types
     await pickyRun({ suppress: ["AvoidNestedProperties"] });
     // certain paths
-    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete"], where: "$..Error" });
+    await pickyRun({ suppress: ["AvoidNestedProperties", "ModelTypeIncomplete", "DescriptionMissing"], where: "$..properties" });
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties" });
-    // document
+    // // document
     await pickyRun({ suppress: ["AvoidNestedProperties"], where: "$..properties.properties", from: "swagger.md" });
   }
 }
