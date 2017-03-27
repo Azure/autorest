@@ -58,6 +58,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
 
   const swaggers = await LoadLiterateSwaggers(
+    config,
     config.DataStore.CreateScope(KnownScopes.Input).AsFileScopeReadThroughFileSystem(fileSystem),
     inputs, config.DataStore.CreateScope("loader"));
   // const rawSwaggers = await Promise.all(swaggers.map(async x => { return <Artifact>{ uri: x.key, content: await x.ReadData() }; }));

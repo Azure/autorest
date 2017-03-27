@@ -1,6 +1,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
+import { AutoRest } from '../lib/autorest-core';
 import { Configuration } from "../lib/configuration";
 import { DataStore } from "../lib/data-store/data-store";
 import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
@@ -9,8 +10,12 @@ import { LoadLiterateSwaggers, ComposeSwaggers } from "../lib/pipeline/swagger-l
 
 @suite class SwaggerLoading {
   @test @timeout(0) async "external reference resolving"() {
-    const dataStore = new DataStore();
+    const autoRest = new AutoRest();
+    const config = await autoRest.view;
+    const dataStore = config.DataStore;
+
     const swaggerFile = await LoadLiterateSwagger(
+      config,
       dataStore.CreateScope("input").AsFileScopeReadThrough(),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-12-01/swagger/applicationGateway.json",
       dataStore.CreateScope("work"));

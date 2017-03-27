@@ -227,6 +227,7 @@ export class Configuration {
 
       // load config
       const hConfig = await ParseCodeBlocks(
+        null,
         await inputView.ReadStrict(configFileUri),
         workingScope.CreateScope("config"));
 

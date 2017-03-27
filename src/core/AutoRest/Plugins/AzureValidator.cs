@@ -50,7 +50,12 @@ public class AzureValidator : NewPlugin
         Text = validationMessage.Message,
         Channel = validationMessage.Severity.ToString().ToLowerInvariant(),
         Details = rawMessageDetails,
-        Key = new string[] { validationMessage.Rule.GetType().Name, validationMessage.Rule.Id },
+        Key = new string[] 
+        {
+            validationMessage.Rule.GetType().Name,
+            validationMessage.Rule.Id,
+            validationMessage.Rule.ValidationCategory.ToString()
+        },
         Source = new[]
         {
             new SourceLocation

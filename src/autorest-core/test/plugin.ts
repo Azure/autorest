@@ -1,3 +1,4 @@
+import { AutoRest } from '../lib/autorest-core';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -67,10 +68,13 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
-    const dataStore = new DataStore(CancellationToken.None);
+    const autoRest = new AutoRest();
+    const config = await autoRest.view;
+    const dataStore = config.DataStore;
 
     // load swagger
     const swagger = await LoadLiterateSwagger(
+      config,
       dataStore.CreateScope("input").AsFileScopeReadThrough(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
@@ -96,10 +100,13 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
   }
 
   @test @timeout(10000) async "AutoRest.dll Modeler"() {
-    const dataStore = new DataStore(CancellationToken.None);
+    const autoRest = new AutoRest();
+    const config = await autoRest.view;
+    const dataStore = config.DataStore;
 
     // load swagger
     const swagger = await LoadLiterateSwagger(
+      config,
       dataStore.CreateScope("input").AsFileScopeReadThrough(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
