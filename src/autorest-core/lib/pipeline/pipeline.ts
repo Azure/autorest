@@ -9,7 +9,7 @@ import { Supressor } from './supression';
 import { IEvent } from '../events';
 import { Channel, Message, SourceLocation, Range } from '../message';
 import { MultiPromiseUtility, MultiPromise } from "../multi-promise";
-import { ResolveUri } from "../ref/uri";
+import { GetFilename, ResolveUri } from '../ref/uri';
 import { ConfigurationView } from '../configuration';
 import {
   DataHandleRead,
@@ -52,6 +52,12 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const outstandingTaskAwaiter = new OutstandingTaskAwaiter();
   outstandingTaskAwaiter.Enter();
 
+  // artifact emitter
+  const emitArtifact: (artifactType: string, uri: string, content: string) => void = (artifactType, uri, content) =>
+    From(config.outputArtifact).Contains(artifactType)
+      ? config.GeneratedFile.Dispatch({ uri: uri, content: content })
+      : null;
+
   // load Swaggers
   let inputs = From(config.inputFileUris).ToArray();
 
@@ -72,10 +78,15 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   const rawSwagger = await swagger.ReadObject<any>();
 
   config.Debug.Dispatch({ Text: `Composing Swaggers. ` });
-  const result: { [name: string]: DataPromise } = {
-    componentSwaggers: MultiPromiseUtility.list(swaggers),
-    swagger: MultiPromiseUtility.single(swagger)
-  };
+
+  // emit resolved swagger
+  {
+    const relPath =
+      config.__specials.outputFile ||
+      (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.inputFileUris][0]));
+    const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
+    emitArtifact("swagger-document", outputFileUri, JSON.stringify(rawSwagger, null, 2));
+  }
 
   const azureValidator = config.__specials.azureValidator || (config.azureArm && !config.disableValidation);
 
@@ -147,15 +158,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
     // code generator
     const codeGenerator = config.__specials.codeGenerator;
-    if (codeGenerator && codeGenerator.toLowerCase() === "swaggerresolver") {
-      const relPath = config.__specials.outputFile || (config.__specials.namespace ? config.__specials.namespace + ".json" : [...config.inputFileUris][0]);
-      const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
-      config.GeneratedFile.Dispatch({
-        uri: outputFileUri,
-        content: JSON.stringify(rawSwagger, null, 2)
-      });
-    }
-    else if (codeGenerator) {
+    if (codeGenerator) {
       // modeler
       const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
         {
@@ -186,10 +189,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         const handle = await generatedFileScope.ReadStrict(fileName);
         const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
         const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
-        config.GeneratedFile.Dispatch({
-          uri: outputFileUri,
-          content: await handle.ReadData()
-        });
+        emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
+          outputFileUri, await handle.ReadData());
       }
     }
 

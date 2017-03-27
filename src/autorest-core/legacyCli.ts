@@ -4,21 +4,15 @@
 *--------------------------------------------------------------------------------------------*/
 
 import * as path from "path";
-import { ResolveUri } from "./lib/ref/uri";
+import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
 import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
 import { MultiPromiseUtility } from "./lib/multi-promise";
-import { AutoRestConfigurationImpl } from "./lib/configuration"
+import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
 
 export function isLegacy(args: string[]): boolean {
   return args.some(arg => regexLegacyArg.test(arg));
-}
-
-function GetFilenameWithoutExtension(uri: string) {
-  const lastPart = uri.split("/").reverse()[0].split("\\").reverse()[0];
-  const ext = lastPart.indexOf(".") === -1 ? "" : lastPart.split(".").reverse()[0];
-  return lastPart.substr(0, lastPart.length - ext.length - 1);
 }
 
 async function ParseCompositeSwagger(inputScope: DataStoreViewReadonly, uri: string, targetConfig: AutoRestConfigurationImpl): Promise<void> {
@@ -85,6 +79,11 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   result.__specials.rubyPackageName = GetFilenameWithoutExtension(inputFile).replace(/[^a-zA-Z0-9-_]/g, "").replace(/-/g, '_').replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
 
   result.__specials.outputFile = switches["outputfilename"] || null;
+
+  if (codegenerator.toLowerCase() === "swaggerresolver") {
+    result["output-artifact"] = "swagger-document";
+    result.__specials.codeGenerator = "none";
+  }
 
   return result;
 }

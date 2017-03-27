@@ -74,6 +74,16 @@ export function EnsureIsFileUri(uri: string) {
   return uri.replace(/\/$/g, "");
 }
 
+export function GetFilename(uri: string) {
+  return uri.split("/").reverse()[0].split("\\").reverse()[0];
+}
+
+export function GetFilenameWithoutExtension(uri: string) {
+  const lastPart = GetFilename(uri);
+  const ext = lastPart.indexOf(".") === -1 ? "" : lastPart.split(".").reverse()[0];
+  return lastPart.substr(0, lastPart.length - ext.length - 1);
+}
+
 /**
  * The singularity of all resolving.
  * With URI as our one data type of truth, this method maps an absolute or relative path or URI to a URI using given base URI.
@@ -87,7 +97,7 @@ export function ResolveUri(baseUri: string, pathOrUri: string): string {
   }
   pathOrUri = pathOrUri.replace(/\\/g, "/");
   if (!baseUri) {
-    throw "'pathOrUri' was detected to be relative so 'baseUri' is required";
+    throw new Error("'pathOrUri' was detected to be relative so 'baseUri' is required");
   }
   return new URI(pathOrUri).absoluteTo(baseUri).toString();
 }
@@ -114,12 +124,12 @@ import { readdir, mkdir, exists, writeFile } from "./async";
 function FileUriToLocalPath(fileUri: string): string {
   const uri = parse(fileUri);
   if (uri.protocol !== "file:") {
-    throw `Protocol '${uri.protocol}' not supported for writing.`;
+    throw new Error(`Protocol '${uri.protocol}' not supported for writing.`);
   }
   // convert to path
   let p = uri.path;
   if (p === undefined) {
-    throw `Cannot write to '${uri}'. Path not found.`;
+    throw new Error(`Cannot write to '${uri}'. Path not found.`);
   }
   if (sep === "\\") {
     p = p.substr(p.startsWith("/") ? 1 : 0);

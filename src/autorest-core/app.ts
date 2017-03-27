@@ -40,7 +40,7 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);
     api.GeneratedFile.Subscribe((_, file) => WriteString(file.uri, file.content));
-    await api.Process().finish;
+    await api.Process().finish; // TODO: care about return value?
   }
   else {
     // exec
@@ -94,7 +94,7 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const api = new AutoRest(new RealFileSystem(), args.configFile);
   await api.AddConfiguration(args.switches);
   api.GeneratedFile.Subscribe((_, file) => WriteString(file.uri, file.content));
-  await api.Process();
+  await api.Process().finish; // TODO: care about return value?
 }
 
 

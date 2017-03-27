@@ -46,6 +46,7 @@ export interface AutoRestConfigurationImpl {
   "output-folder"?: string;
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
+  "output-artifact"?: string[] | string;
 }
 
 // protected static CreateDefaultConfiguration(): AutoRestConfigurationImpl {
@@ -206,6 +207,10 @@ export class ConfigurationView extends EventEmitter {
 
   public get azureArm(): boolean {
     return SingleValue<boolean>(this.config, "azure-arm") || false;
+  }
+
+  public get outputArtifact(): Iterable<string> {
+    return MultipleValues<string>(this.config, "output-artifact");
   }
 
   // TODO: stuff like generator specific settings (= YAML merging root with generator's section)
