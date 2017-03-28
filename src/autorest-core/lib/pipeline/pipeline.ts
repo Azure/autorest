@@ -68,7 +68,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     emitArtifact("swagger-document", outputFileUri, JSON.stringify(rawSwagger, null, 2));
   }
 
-  const azureValidator = config.__specials.azureValidator || (config.AzureArm && !config.DisableValidation);
+  const azureValidator = config.AzureArm && !config.DisableValidation;
 
   const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
   const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== null);

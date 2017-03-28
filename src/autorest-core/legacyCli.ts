@@ -63,11 +63,12 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   const usedCodeGenerator = codegenerator.toLowerCase().replace("azure.", "").replace(".fluent", "");
   result.__specials = result.__specials || {};
   if (codegenerator.toLowerCase() === "none") {
-    result.__specials.azureValidator = true;
+    result["azure-arm"] = true;
   } else {
     result[usedCodeGenerator] = {};
     if (codegenerator.toLowerCase().startsWith("azure.")) {
       result["azure-arm"] = true;
+      result["disable-validation"] = true;
     }
     if (codegenerator.toLowerCase().endsWith(".fluent")) {
       result["fluent"] = true;

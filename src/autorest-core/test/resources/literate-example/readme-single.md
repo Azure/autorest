@@ -17,6 +17,7 @@ Some information about My Sample API. It's a great API, and it's mine.
        modeler: standard
        base-folder : $ThisFileDirectory/outputfolder
 
+   #azure-arm: true
    ```
 
 or you could have it in a JSON block:

@@ -27,13 +27,12 @@ export interface AutoRestConfigurationSwitches {
 
 export interface AutoRestConfigurationSpecials {
   infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
-  azureValidator?: boolean;
   header?: string | null;
   namespace?: string;
   payloadFlatteningThreshold?: number;
   syncMethods?: "all" | "essential" | "none";
   addCredentials?: boolean;
-  rubyPackageName?: string;
+  rubyPackageName?: string; // TODO: figure out which settings are really just cared about by plugins and then DON'T specify them here (maybe give conventions)
   outputFile?: string | null;
 }
 
@@ -42,30 +41,14 @@ export interface AutoRestConfigurationImpl {
   __info?: string | null;
   __specials?: AutoRestConfigurationSpecials;
   "input-file": string[] | string;
-  "output-folder"?: string;
+  "output-folder"?: string; // TODO: could also be generator specific! (also makes a ton of sense, if you wanna generate for multiple languages at once...)
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
   "azure-arm"?: boolean | null;
+  "disable-validation"?: boolean | null;
   "fluent"?: boolean | null;
 }
-
-// protected static CreateDefaultConfiguration(): AutoRestConfigurationImpl {
-//   return {
-//     "input-file": []
-//   };
-// }
-
-/*
-function key(target: string) {
-  return (target, propertyKey) => {
-
-    @key("base-folder") baseFolder: string;
-    @key("output-folder") outputFolder: string;
-
-  };
-};
-*/
 
 function ValuesOf(objs: Iterable<any>, fieldName: string): IEnumerable<any> {
   return From(objs).Select(o => o[fieldName]).Where(o => o !== undefined);
