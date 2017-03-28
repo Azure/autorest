@@ -13,6 +13,7 @@ export class OutstandingTaskAwaiter {
   }
 
   public async Wait(): Promise<void> {
+    this.Signal();
     return this.awaiter;
   }
 
