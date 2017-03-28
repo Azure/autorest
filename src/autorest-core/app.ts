@@ -9,6 +9,7 @@
 
 // this file should get 'required' by the boostrapper
 
+import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
 import { AutoRest } from './lib/autorest-core';
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
@@ -40,8 +41,10 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
     config["base-folder"] = currentDirUri;
     const api = new AutoRest(new RealFileSystem());
     await api.AddConfiguration(config);
-    api.GeneratedFile.Subscribe((_, file) => WriteString(file.uri, file.content));
+    const outstanding = new OutstandingTaskAwaiter();
+    api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
     await api.Process().finish; // TODO: care about return value?
+    await outstanding.Wait();
   }
   else {
     // exec
@@ -95,8 +98,10 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
   const api = new AutoRest(new RealFileSystem(), args.configFile);
   await api.AddConfiguration(args.switches);
-  api.GeneratedFile.Subscribe((_, file) => WriteString(file.uri, file.content));
+  const outstanding = new OutstandingTaskAwaiter();
+  api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
   await api.Process().finish; // TODO: care about return value?
+  await outstanding.Wait();
 }
 
 

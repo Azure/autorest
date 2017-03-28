@@ -3,6 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { OutstandingTaskAwaiter } from "../outstanding-task-awaiter";
 import { BlameTree } from '../source-map/blaming';
 import { Artifact } from '../artifact';
 import { Supressor } from './supression';
@@ -24,29 +25,6 @@ import { IFileSystem } from "../file-system";
 import { TryDecodePathFromName } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
-
-class OutstandingTaskAwaiter {
-  private outstandingTaskCount: number = 0;
-  private awaiter: Promise<void>;
-  private resolve: () => void;
-
-  public constructor() {
-    this.awaiter = new Promise<void>(res => this.resolve = res);
-  }
-
-  public async Wait(): Promise<void> {
-    return this.awaiter;
-  }
-
-  public Enter(): void { this.outstandingTaskCount++; }
-  public Exit(): void { this.outstandingTaskCount--; this.Signal(); }
-
-  private Signal(): void {
-    if (this.outstandingTaskCount === 0) {
-      this.resolve();
-    }
-  }
-}
 
 export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSystem): Promise<void> {
   const cancellationToken = config.CancellationToken;
