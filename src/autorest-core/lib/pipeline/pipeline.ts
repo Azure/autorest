@@ -34,12 +34,12 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // artifact emitter
   const emitArtifact: (artifactType: string, uri: string, content: string) => void = (artifactType, uri, content) =>
-    From(config.outputArtifact).Contains(artifactType)
+    From(config.OutputArtifact).Contains(artifactType)
       ? config.GeneratedFile.Dispatch({ uri: uri, content: content })
       : null;
 
   // load Swaggers
-  let inputs = From(config.inputFileUris).ToArray();
+  let inputs = From(config.InputFileUris).ToArray();
 
   config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
 
@@ -63,17 +63,20 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   {
     const relPath =
       config.__specials.outputFile ||
-      (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.inputFileUris][0]));
-    const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
+      (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.InputFileUris][0]));
+    const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
     emitArtifact("swagger-document", outputFileUri, JSON.stringify(rawSwagger, null, 2));
   }
 
-  const azureValidator = config.__specials.azureValidator || (config.azureArm && !config.disableValidation);
+  const azureValidator = config.__specials.azureValidator || (config.AzureArm && !config.DisableValidation);
+
+  const allCodeGenerators = ["csharp", "ruby", "nodejs", "python", "go", "java", "azureresourceschema"];
+  const usedCodeGenerators = allCodeGenerators.filter(cg => config.PluginSection(cg) !== null);
 
   //
   // AutoRest.dll realm
   //
-  if (azureValidator || config.__specials.codeGenerator) {
+  if (azureValidator || usedCodeGenerators.length > 0) {
     const autoRestDotNetPlugin = AutoRestDotNetPlugin.Get();
     const supressor = new Supressor(config);
 
@@ -137,9 +140,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       }
     };
 
-    // code generator
-    const codeGenerator = config.__specials.codeGenerator;
-    if (codeGenerator) {
+
+
+    // code generators
+    if (usedCodeGenerators.length > 0) {
       // modeler
       const codeModel = await autoRestDotNetPlugin.Model(swagger, config.DataStore.CreateScope("model"),
         {
@@ -147,33 +151,46 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         },
         messageSink);
 
-      const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
-      let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
-        {
-          namespace: config.__specials.namespace || "",
-          codeGenerator: codeGenerator,
-          clientNameOverride: getXmsCodeGenSetting("name"),
-          internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
-          useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
-          header: config.__specials.header || null,
-          payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
-          syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
-          addCredentials: config.__specials.addCredentials || false,
-          rubyPackageName: config.__specials.rubyPackageName || "client"
-        },
-        messageSink);
+      for (const usedCodeGenerator of usedCodeGenerators) {
+        // get internal name
+        const languages = [
+          "CSharp",
+          "Ruby",
+          "NodeJS",
+          "Python",
+          "Go",
+          "Java",
+          "AzureResourceSchema"].filter(x => x.toLowerCase() === usedCodeGenerator.toLowerCase())[0];
+        const codeGenerator = (config.AzureArm ? "Azure." : "") + languages + (config.Fluent ? ".Fluent" : "");
 
-      // C# simplifier
-      if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
-        generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"), messageSink);
-      }
+        const getXmsCodeGenSetting = (name: string) => (() => { try { return rawSwagger.info["x-ms-code-generation-settings"][name]; } catch (e) { return null; } })();
+        let generatedFileScope = await autoRestDotNetPlugin.GenerateCode(codeModel, config.DataStore.CreateScope("generate"),
+          {
+            namespace: config.__specials.namespace || "",
+            codeGenerator: codeGenerator,
+            clientNameOverride: getXmsCodeGenSetting("name"),
+            internalConstructors: getXmsCodeGenSetting("internalConstructors") || false,
+            useDateTimeOffset: getXmsCodeGenSetting("useDateTimeOffset") || false,
+            header: config.__specials.header || null,
+            payloadFlatteningThreshold: config.__specials.payloadFlatteningThreshold || getXmsCodeGenSetting("ft") || 0,
+            syncMethods: config.__specials.syncMethods || getXmsCodeGenSetting("syncMethods") || "essential",
+            addCredentials: config.__specials.addCredentials || false,
+            rubyPackageName: config.__specials.rubyPackageName || "client"
+          },
+          messageSink);
 
-      for (const fileName of await generatedFileScope.Enum()) {
-        const handle = await generatedFileScope.ReadStrict(fileName);
-        const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
-        const outputFileUri = ResolveUri(config.outputFolderUri, relPath);
-        emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
-          outputFileUri, await handle.ReadData());
+        // C# simplifier
+        if (codeGenerator.toLowerCase().indexOf("csharp") !== -1) {
+          generatedFileScope = await autoRestDotNetPlugin.SimplifyCSharpCode(generatedFileScope, config.DataStore.CreateScope("simplify"), messageSink);
+        }
+
+        for (const fileName of await generatedFileScope.Enum()) {
+          const handle = await generatedFileScope.ReadStrict(fileName);
+          const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
+          const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
+          emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
+            outputFileUri, await handle.ReadData());
+        }
       }
     }
 

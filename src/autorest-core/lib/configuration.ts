@@ -27,7 +27,6 @@ export interface AutoRestConfigurationSwitches {
 
 export interface AutoRestConfigurationSpecials {
   infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
-  codeGenerator?: string;
   azureValidator?: boolean;
   header?: string | null;
   namespace?: string;
@@ -47,6 +46,8 @@ export interface AutoRestConfigurationImpl {
   "base-folder"?: string;
   "directive"?: Directive[] | Directive;
   "output-artifact"?: string[] | string;
+  "azure-arm"?: boolean | null;
+  "fluent"?: boolean | null;
 }
 
 // protected static CreateDefaultConfiguration(): AutoRestConfigurationImpl {
@@ -71,7 +72,7 @@ function ValuesOf(objs: Iterable<any>, fieldName: string): IEnumerable<any> {
 }
 
 function SingleValue<T>(objs: Iterable<any>, fieldName: string): T | null {
-  return ValuesOf(objs, fieldName).LastOrDefault();
+  return ValuesOf(objs, fieldName).LastOrDefault() || null;
 }
 
 function MultipleValues<T>(objs: Iterable<any>, fieldName: string): Iterable<T> {
@@ -170,26 +171,26 @@ export class ConfigurationView extends EventEmitter {
   }
 
   private ResolveAsPath(path: string): string {
-    return ResolveUri(this.baseFolderUri, path);
+    return ResolveUri(this.BaseFolderUri, path);
   }
 
-  private get baseFolderUri(): string {
+  private get BaseFolderUri(): string {
     return this.ResolveAsFolder(SingleValue<string>(this.config, "base-folder") || "");
   }
 
   // public methods
 
-  public get directives(): Iterable<DirectiveView> {
+  public get Directives(): Iterable<DirectiveView> {
     return From(MultipleValues<Directive>(this.config, "directive"))
       .Select(each => new DirectiveView(each));
   }
 
-  public get inputFileUris(): Iterable<string> {
+  public get InputFileUris(): Iterable<string> {
     return From<string>(MultipleValues<string>(this.config, "input-file"))
       .Select(each => this.ResolveAsPath(each));
   }
 
-  public get outputFolderUri(): string {
+  public get OutputFolderUri(): string {
     return this.ResolveAsFolder(SingleValue<string>(this.config, "output-folder") || "generated");
   }
 
@@ -197,19 +198,23 @@ export class ConfigurationView extends EventEmitter {
     return ValuesOf(this.config, "__specials").FirstOrDefault() || {};
   }
 
-  public pluginSection(pluginName: string): any {
+  public PluginSection(pluginName: string): any {
     return SingleValue<any>(this.config, pluginName);
   }
 
-  public get disableValidation(): boolean {
+  public get DisableValidation(): boolean {
     return SingleValue<boolean>(this.config, "disable-validation") || false;
   }
 
-  public get azureArm(): boolean {
+  public get AzureArm(): boolean {
     return SingleValue<boolean>(this.config, "azure-arm") || false;
   }
 
-  public get outputArtifact(): Iterable<string> {
+  public get Fluent(): boolean {
+    return SingleValue<boolean>(this.config, "fluent") || false;
+  }
+
+  public get OutputArtifact(): Iterable<string> {
     return MultipleValues<string>(this.config, "output-artifact");
   }
 
