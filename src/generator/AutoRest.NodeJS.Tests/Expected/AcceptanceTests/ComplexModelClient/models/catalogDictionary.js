@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -19,41 +19,43 @@ var models = require('./index');
  * @member {object} [productDictionary] Dictionary of products
  *
  */
-function CatalogDictionary() {
-}
+class CatalogDictionary {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of CatalogDictionary
- *
- * @returns {object} metadata of CatalogDictionary
- *
- */
-CatalogDictionary.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'CatalogDictionary',
-    type: {
-      name: 'Composite',
-      className: 'CatalogDictionary',
-      modelProperties: {
-        productDictionary: {
-          required: false,
-          serializedName: 'productDictionary',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'ProductElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'Product'
-                }
+  /**
+   * Defines the metadata of CatalogDictionary
+   *
+   * @returns {object} metadata of CatalogDictionary
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'CatalogDictionary',
+      type: {
+        name: 'Composite',
+        className: 'CatalogDictionary',
+        modelProperties: {
+          productDictionary: {
+            required: false,
+            serializedName: 'productDictionary',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'ProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'Product'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = CatalogDictionary;

@@ -1,7 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -26,8 +25,8 @@ namespace Petstore.Models
         /// resource name.</param>
         public UsageName(string value = default(string), string localizedValue = default(string))
         {
-            Value = value;
-            LocalizedValue = localizedValue;
+            this.Value = value;
+            this.LocalizedValue = localizedValue;
             CustomInit();
         }
 
@@ -39,13 +38,13 @@ namespace Petstore.Models
         /// <summary>
         /// Gets a string describing the resource name.
         /// </summary>
-        [JsonProperty(PropertyName = "value")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
 
         /// <summary>
         /// Gets a localized string describing the resource name.
         /// </summary>
-        [JsonProperty(PropertyName = "localizedValue")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "localizedValue")]
         public string LocalizedValue { get; set; }
 
     }

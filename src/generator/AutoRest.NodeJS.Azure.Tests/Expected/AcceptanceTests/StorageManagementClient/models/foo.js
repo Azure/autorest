@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -34,34 +34,36 @@ var models = require('./index');
  * @member {object} [barPoint.recursivePoint.fooPoint] Foo point
  *
  */
-function Foo() {
-}
+class Foo {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Foo
- *
- * @returns {object} metadata of Foo
- *
- */
-Foo.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Foo',
-    type: {
-      name: 'Composite',
-      className: 'Foo',
-      modelProperties: {
-        barPoint: {
-          required: false,
-          serializedName: 'Bar\\.Point',
-          type: {
-            name: 'Composite',
-            className: 'Bar'
+  /**
+   * Defines the metadata of Foo
+   *
+   * @returns {object} metadata of Foo
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Foo',
+      type: {
+        name: 'Composite',
+        className: 'Foo',
+        modelProperties: {
+          barPoint: {
+            required: false,
+            serializedName: 'Bar\\.Point',
+            type: {
+              name: 'Composite',
+              className: 'Bar'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Foo;

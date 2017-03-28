@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -25,89 +23,89 @@ var util = require('util');
  * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  */
-function Product() {
-  Product['super_'].call(this);
-}
+class Product extends models['Resource'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(Product, models['Resource']);
-
-/**
- * Defines the metadata of Product
- *
- * @returns {object} metadata of Product
- *
- */
-Product.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Product',
-    type: {
-      name: 'Composite',
-      className: 'Product',
-      modelProperties: {
-        id: {
-          required: false,
-          readOnly: true,
-          serializedName: 'id',
-          type: {
-            name: 'String'
-          }
-        },
-        type: {
-          required: false,
-          readOnly: true,
-          serializedName: 'type',
-          type: {
-            name: 'String'
-          }
-        },
-        tags: {
-          required: false,
-          serializedName: 'tags',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of Product
+   *
+   * @returns {object} metadata of Product
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Product',
+      type: {
+        name: 'Composite',
+        className: 'Product',
+        modelProperties: {
+          id: {
+            required: false,
+            readOnly: true,
+            serializedName: 'id',
+            type: {
+              name: 'String'
             }
-          }
-        },
-        location: {
-          required: false,
-          serializedName: 'location',
+          },
           type: {
-            name: 'String'
-          }
-        },
-        name: {
-          required: false,
-          readOnly: true,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        provisioningState: {
-          required: false,
-          serializedName: 'properties.provisioningState',
-          type: {
-            name: 'String'
-          }
-        },
-        provisioningStateValues: {
-          required: false,
-          readOnly: true,
-          serializedName: 'properties.provisioningStateValues',
-          type: {
-            name: 'String'
+            required: false,
+            readOnly: true,
+            serializedName: 'type',
+            type: {
+              name: 'String'
+            }
+          },
+          tags: {
+            required: false,
+            serializedName: 'tags',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
+            }
+          },
+          location: {
+            required: false,
+            serializedName: 'location',
+            type: {
+              name: 'String'
+            }
+          },
+          name: {
+            required: false,
+            readOnly: true,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
+          provisioningState: {
+            required: false,
+            serializedName: 'properties.provisioningState',
+            type: {
+              name: 'String'
+            }
+          },
+          provisioningStateValues: {
+            required: false,
+            readOnly: true,
+            serializedName: 'properties.provisioningStateValues',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Product;

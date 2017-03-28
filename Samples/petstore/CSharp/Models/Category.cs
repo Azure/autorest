@@ -1,10 +1,7 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
     using System.Linq;
-    using System.Xml;
-    using System.Xml.Linq;
 
     public partial class Category
     {
@@ -21,8 +18,8 @@ namespace Petstore.Models
         /// </summary>
         public Category(long? id = default(long?), string name = default(string))
         {
-            Id = id;
-            Name = name;
+            this.Id = id;
+            this.Name = name;
             CustomInit();
         }
 
@@ -33,26 +30,26 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Serializes the object to an XML node
         /// </summary>
-        internal XElement XmlSerialize(XElement result)
+        internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {
             if( null != Id )
             {
-                result.Add(new XElement("id", Id) );
+                result.Add(new System.Xml.Linq.XElement("id", Id) );
             }
             if( null != Name )
             {
-                result.Add(new XElement("name", Name) );
+                result.Add(new System.Xml.Linq.XElement("name", Name) );
             }
             return result;
         }
@@ -62,9 +59,9 @@ namespace Petstore.Models
         internal static Category XmlDeserialize(string payload)
         {
             // deserialize to xml and use the overload to do the work
-            return XmlDeserialize( XElement.Parse( payload ) );
+            return XmlDeserialize( System.Xml.Linq.XElement.Parse( payload ) );
         }
-        internal static Category XmlDeserialize(XElement payload)
+        internal static Category XmlDeserialize(System.Xml.Linq.XElement payload)
         {
             var result = new Category();
             var deserializeId = XmlSerialization.ToDeserializer(e => (long?)e);

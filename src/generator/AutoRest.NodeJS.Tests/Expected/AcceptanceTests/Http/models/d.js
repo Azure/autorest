@@ -17,33 +17,35 @@
  * @member {string} [httpStatusCode]
  *
  */
-function D() {
-}
+class D {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of D
- *
- * @returns {object} metadata of D
- *
- */
-D.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'D',
-    type: {
-      name: 'Composite',
-      className: 'D',
-      modelProperties: {
-        httpStatusCode: {
-          required: false,
-          serializedName: 'httpStatusCode',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of D
+   *
+   * @returns {object} metadata of D
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'D',
+      type: {
+        name: 'Composite',
+        className: 'D',
+        modelProperties: {
+          httpStatusCode: {
+            required: false,
+            serializedName: 'httpStatusCode',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = D;

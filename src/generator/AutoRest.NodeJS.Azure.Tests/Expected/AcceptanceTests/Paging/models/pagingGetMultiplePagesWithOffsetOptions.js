@@ -26,44 +26,46 @@
  * value: 30 .
  *
  */
-function PagingGetMultiplePagesWithOffsetOptions() {
-}
+class PagingGetMultiplePagesWithOffsetOptions {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of PagingGetMultiplePagesWithOffsetOptions
- *
- * @returns {object} metadata of PagingGetMultiplePagesWithOffsetOptions
- *
- */
-PagingGetMultiplePagesWithOffsetOptions.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'PagingGetMultiplePagesWithOffsetOptions',
-      modelProperties: {
-        maxresults: {
-          required: false,
-          type: {
-            name: 'Number'
-          }
-        },
-        offset: {
-          required: true,
-          type: {
-            name: 'Number'
-          }
-        },
-        timeout: {
-          required: false,
-          defaultValue: 30,
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of PagingGetMultiplePagesWithOffsetOptions
+   *
+   * @returns {object} metadata of PagingGetMultiplePagesWithOffsetOptions
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'PagingGetMultiplePagesWithOffsetOptions',
+        modelProperties: {
+          maxresults: {
+            required: false,
+            type: {
+              name: 'Number'
+            }
+          },
+          offset: {
+            required: true,
+            type: {
+              name: 'Number'
+            }
+          },
+          timeout: {
+            required: false,
+            defaultValue: 30,
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = PagingGetMultiplePagesWithOffsetOptions;

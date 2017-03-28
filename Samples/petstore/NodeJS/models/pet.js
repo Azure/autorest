@@ -3,9 +3,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -34,84 +32,86 @@ var util = require('util');
  * 'available', 'pending', 'sold'
  *
  */
-function Pet() {
-}
+class Pet {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Pet
- *
- * @returns {object} metadata of Pet
- *
- */
-Pet.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Pet',
-    type: {
-      name: 'Composite',
-      className: 'Pet',
-      modelProperties: {
-        id: {
-          required: false,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        category: {
-          required: false,
-          serializedName: 'category',
-          type: {
-            name: 'Composite',
-            className: 'Category'
-          }
-        },
-        name: {
-          required: true,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        photoUrls: {
-          required: true,
-          serializedName: 'photoUrls',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of Pet
+   *
+   * @returns {object} metadata of Pet
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Pet',
+      type: {
+        name: 'Composite',
+        className: 'Pet',
+        modelProperties: {
+          id: {
+            required: false,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
             }
-          }
-        },
-        tags: {
-          required: false,
-          serializedName: 'tags',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'TagElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'Tag'
-                }
+          },
+          category: {
+            required: false,
+            serializedName: 'category',
+            type: {
+              name: 'Composite',
+              className: 'Category'
             }
-          }
-        },
-        status: {
-          required: false,
-          serializedName: 'status',
-          type: {
-            name: 'String'
+          },
+          name: {
+            required: true,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
+          photoUrls: {
+            required: true,
+            serializedName: 'photoUrls',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
+            }
+          },
+          tags: {
+            required: false,
+            serializedName: 'tags',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'TagElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'Tag'
+                  }
+              }
+            }
+          },
+          status: {
+            required: false,
+            serializedName: 'status',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Pet;

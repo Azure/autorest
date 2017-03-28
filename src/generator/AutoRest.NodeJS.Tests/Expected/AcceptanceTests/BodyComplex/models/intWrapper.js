@@ -19,40 +19,42 @@
  * @member {number} [field2]
  *
  */
-function IntWrapper() {
-}
+class IntWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of IntWrapper
- *
- * @returns {object} metadata of IntWrapper
- *
- */
-IntWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'int-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'IntWrapper',
-      modelProperties: {
-        field1: {
-          required: false,
-          serializedName: 'field1',
-          type: {
-            name: 'Number'
-          }
-        },
-        field2: {
-          required: false,
-          serializedName: 'field2',
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of IntWrapper
+   *
+   * @returns {object} metadata of IntWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'int-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'IntWrapper',
+        modelProperties: {
+          field1: {
+            required: false,
+            serializedName: 'field1',
+            type: {
+              name: 'Number'
+            }
+          },
+          field2: {
+            required: false,
+            serializedName: 'field2',
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = IntWrapper;

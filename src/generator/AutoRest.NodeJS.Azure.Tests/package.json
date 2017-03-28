@@ -18,9 +18,9 @@
     }
   ],
   "dependencies": {
-    "ms-rest": "^1.15.7",
-    "ms-rest-azure": "^1.15.7",
-    "jshint": "2.8.0",
+    "ms-rest": "../../../node_modules/nodesdk-runtime/runtime/ms-rest",
+    "ms-rest-azure": "../../../node_modules/nodesdk-runtime/runtime/ms-rest-azure",
+    "jshint": "2.9.4",
     "moment":  "^2.14.1",
     "mocha": "2.2.5",
     "should": "5.2.0"

@@ -10,8 +10,6 @@
 
 'use strict';
 
-var util = require('util');
-
 /**
  * @class
  * Initializes a new instance of the ProductResult class.
@@ -21,50 +19,51 @@ var util = require('util');
  * @member {string} [nextLink]
  *
  */
-function ProductResult() {
-}
+class ProductResult extends Array {
+  constructor() {
+    super();
+  }
 
-util.inherits(ProductResult, Array);
-
-/**
- * Defines the metadata of ProductResult
- *
- * @returns {object} metadata of ProductResult
- *
- */
-ProductResult.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'ProductResult',
-    type: {
-      name: 'Composite',
-      className: 'ProductResult',
-      modelProperties: {
-        values: {
-          required: false,
-          serializedName: '',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'ProductElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'Product'
-                }
+  /**
+   * Defines the metadata of ProductResult
+   *
+   * @returns {object} metadata of ProductResult
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'ProductResult',
+      type: {
+        name: 'Composite',
+        className: 'ProductResult',
+        modelProperties: {
+          values: {
+            required: false,
+            serializedName: '',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'ProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'Product'
+                  }
+              }
             }
-          }
-        },
-        nextLink: {
-          required: false,
-          serializedName: 'nextLink',
-          type: {
-            name: 'String'
+          },
+          nextLink: {
+            required: false,
+            serializedName: 'nextLink',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ProductResult;

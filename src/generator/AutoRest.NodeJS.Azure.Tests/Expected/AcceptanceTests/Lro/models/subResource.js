@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -21,37 +19,37 @@ var util = require('util');
  * @member {string} [id] Sub Resource Id
  *
  */
-function SubResource() {
-  SubResource['super_'].call(this);
-}
+class SubResource extends models['BaseResource'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(SubResource, models['BaseResource']);
-
-/**
- * Defines the metadata of SubResource
- *
- * @returns {object} metadata of SubResource
- *
- */
-SubResource.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'SubResource',
-    type: {
-      name: 'Composite',
-      className: 'SubResource',
-      modelProperties: {
-        id: {
-          required: false,
-          readOnly: true,
-          serializedName: 'id',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of SubResource
+   *
+   * @returns {object} metadata of SubResource
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'SubResource',
+      type: {
+        name: 'Composite',
+        className: 'SubResource',
+        modelProperties: {
+          id: {
+            required: false,
+            readOnly: true,
+            serializedName: 'id',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = SubResource;

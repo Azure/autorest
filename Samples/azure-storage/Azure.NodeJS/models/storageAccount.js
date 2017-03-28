@@ -3,9 +3,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -90,82 +88,82 @@ var util = require('util');
  * endpoint.
  *
  */
-function StorageAccount() {
-  StorageAccount['super_'].call(this);
-}
+class StorageAccount extends models['Resource'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(StorageAccount, models['Resource']);
-
-/**
- * Defines the metadata of StorageAccount
- *
- * @returns {object} metadata of StorageAccount
- *
- */
-StorageAccount.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccount',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccount',
-      modelProperties: {
-        id: {
-          required: false,
-          readOnly: true,
-          serializedName: 'id',
-          type: {
-            name: 'String'
-          }
-        },
-        name: {
-          required: false,
-          readOnly: true,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        type: {
-          required: false,
-          readOnly: true,
-          serializedName: 'type',
-          type: {
-            name: 'String'
-          }
-        },
-        location: {
-          required: false,
-          serializedName: 'location',
-          type: {
-            name: 'String'
-          }
-        },
-        tags: {
-          required: false,
-          serializedName: 'tags',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of StorageAccount
+   *
+   * @returns {object} metadata of StorageAccount
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccount',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccount',
+        modelProperties: {
+          id: {
+            required: false,
+            readOnly: true,
+            serializedName: 'id',
+            type: {
+              name: 'String'
             }
-          }
-        },
-        properties: {
-          required: false,
-          serializedName: 'properties',
+          },
+          name: {
+            required: false,
+            readOnly: true,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
           type: {
-            name: 'Composite',
-            className: 'StorageAccountProperties'
+            required: false,
+            readOnly: true,
+            serializedName: 'type',
+            type: {
+              name: 'String'
+            }
+          },
+          location: {
+            required: false,
+            serializedName: 'location',
+            type: {
+              name: 'String'
+            }
+          },
+          tags: {
+            required: false,
+            serializedName: 'tags',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
+            }
+          },
+          properties: {
+            required: false,
+            serializedName: 'properties',
+            type: {
+              name: 'Composite',
+              className: 'StorageAccountProperties'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccount;

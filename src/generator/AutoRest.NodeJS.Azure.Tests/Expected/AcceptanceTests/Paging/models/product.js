@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -23,34 +23,36 @@ var models = require('./index');
  * @member {string} [properties.name]
  *
  */
-function Product() {
-}
+class Product {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Product
- *
- * @returns {object} metadata of Product
- *
- */
-Product.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Product',
-    type: {
-      name: 'Composite',
-      className: 'Product',
-      modelProperties: {
-        properties: {
-          required: false,
-          serializedName: 'properties',
-          type: {
-            name: 'Composite',
-            className: 'ProductProperties'
+  /**
+   * Defines the metadata of Product
+   *
+   * @returns {object} metadata of Product
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Product',
+      type: {
+        name: 'Composite',
+        className: 'Product',
+        modelProperties: {
+          properties: {
+            required: false,
+            serializedName: 'properties',
+            type: {
+              name: 'Composite',
+              className: 'ProductProperties'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Product;

@@ -38,44 +38,12 @@ function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCall
     client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, (err, pollingResult) => {
       if (err) return callback(err);
       @EmptyLine
-      let statusCode = pollingResult.response.statusCode;
+      // Create Result
+      let result = null;
+      @EmptyLine
       httpRequest = pollingResult.request;
       response = pollingResult.response;
       let responseBody = pollingResult.body;
-      //Error handling for a failure in a long running operation after polling is completed.
-      if (@(Model.FailureStatusCodePredicate)) {
-        let error = new Error(responseBody);
-        error.statusCode = response.statusCode;
-        error.request = msRest.stripRequest(httpRequest);
-        error.response = msRest.stripResponse(response);
-        if (responseBody === '') responseBody = null;
-        let parsedErrorResponse;
-        try {
-          parsedErrorResponse = JSON.parse(responseBody);
-          if (parsedErrorResponse) {
-            @(Model.PopulateErrorCodeAndMessage())
-          }
-@if (Model.DefaultResponse.Body != null)
-{
-          var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse.Body, "error.body", "parsedErrorResponse");
-    if (!string.IsNullOrWhiteSpace(deserializeErrorBody))
-    {
-    @:    if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-    @:      @(deserializeErrorBody)
-    @:    }
-    }
-}
-        } catch (defaultError) {
-          error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
-                          `- "${responseBody}" for the "default" response, after completing the polling ` + 
-                          `for long running operation.`;
-          return callback(error);
-        }
-        return callback(error);
-      }
-
-      // Create Result
-      let result = null;
       if (responseBody === '') responseBody = null;
       @EmptyLine
       // Deserialize Response

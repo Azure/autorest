@@ -10,33 +10,35 @@
  * @member {string} keyName
  *
  */
-function StorageAccountRegenerateKeyParameters() {
-}
+class StorageAccountRegenerateKeyParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StorageAccountRegenerateKeyParameters
- *
- * @returns {object} metadata of StorageAccountRegenerateKeyParameters
- *
- */
-StorageAccountRegenerateKeyParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccountRegenerateKeyParameters',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccountRegenerateKeyParameters',
-      modelProperties: {
-        keyName: {
-          required: true,
-          serializedName: 'keyName',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of StorageAccountRegenerateKeyParameters
+   *
+   * @returns {object} metadata of StorageAccountRegenerateKeyParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccountRegenerateKeyParameters',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccountRegenerateKeyParameters',
+        modelProperties: {
+          keyName: {
+            required: true,
+            serializedName: 'keyName',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccountRegenerateKeyParameters;

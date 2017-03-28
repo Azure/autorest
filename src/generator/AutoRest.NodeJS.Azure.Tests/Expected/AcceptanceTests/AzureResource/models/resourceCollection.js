@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -31,64 +29,66 @@ var util = require('util');
  * @member {object} [dictionaryofresources]
  *
  */
-function ResourceCollection() {
-}
+class ResourceCollection {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ResourceCollection
- *
- * @returns {object} metadata of ResourceCollection
- *
- */
-ResourceCollection.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'ResourceCollection',
-    type: {
-      name: 'Composite',
-      className: 'ResourceCollection',
-      modelProperties: {
-        productresource: {
-          required: false,
-          serializedName: 'productresource',
-          type: {
-            name: 'Composite',
-            className: 'FlattenedProduct'
-          }
-        },
-        arrayofresources: {
-          required: false,
-          serializedName: 'arrayofresources',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'FlattenedProductElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'FlattenedProduct'
-                }
+  /**
+   * Defines the metadata of ResourceCollection
+   *
+   * @returns {object} metadata of ResourceCollection
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'ResourceCollection',
+      type: {
+        name: 'Composite',
+        className: 'ResourceCollection',
+        modelProperties: {
+          productresource: {
+            required: false,
+            serializedName: 'productresource',
+            type: {
+              name: 'Composite',
+              className: 'FlattenedProduct'
             }
-          }
-        },
-        dictionaryofresources: {
-          required: false,
-          serializedName: 'dictionaryofresources',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'FlattenedProductElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'FlattenedProduct'
-                }
+          },
+          arrayofresources: {
+            required: false,
+            serializedName: 'arrayofresources',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'FlattenedProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'FlattenedProduct'
+                  }
+              }
+            }
+          },
+          dictionaryofresources: {
+            required: false,
+            serializedName: 'dictionaryofresources',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'FlattenedProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'FlattenedProduct'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ResourceCollection;

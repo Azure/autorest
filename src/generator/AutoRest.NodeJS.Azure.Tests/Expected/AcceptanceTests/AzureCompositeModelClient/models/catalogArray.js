@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -21,41 +19,43 @@ var util = require('util');
  * @member {array} [productArray] Array of products
  *
  */
-function CatalogArray() {
-}
+class CatalogArray {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of CatalogArray
- *
- * @returns {object} metadata of CatalogArray
- *
- */
-CatalogArray.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'CatalogArray',
-    type: {
-      name: 'Composite',
-      className: 'CatalogArray',
-      modelProperties: {
-        productArray: {
-          required: false,
-          serializedName: 'productArray',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'ProductElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'Product'
-                }
+  /**
+   * Defines the metadata of CatalogArray
+   *
+   * @returns {object} metadata of CatalogArray
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'CatalogArray',
+      type: {
+        name: 'Composite',
+        className: 'CatalogArray',
+        modelProperties: {
+          productArray: {
+            required: false,
+            serializedName: 'productArray',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'ProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'Product'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = CatalogArray;

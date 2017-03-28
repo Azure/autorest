@@ -10,24 +10,9 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var WebResource = msRest.WebResource;
-
-/**
- * @class
- * Paging
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestPagingTestService.
- * Initializes a new instance of the Paging class.
- * @constructor
- *
- * @param {AutoRestPagingTestService} client Reference to the service client.
- */
-function Paging(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const WebResource = msRest.WebResource;
 
 /**
  * A paging operation that finishes on the first call without a nextlink
@@ -37,21 +22,22 @@ function Paging(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getSinglePages = function (options, callback) {
-  var client = this.client;
+function _getSinglePages(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -69,15 +55,15 @@ Paging.prototype.getSinglePages = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/single';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/single';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -89,7 +75,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -98,18 +84,18 @@ Paging.prototype.getSinglePages = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -118,31 +104,31 @@ Paging.prototype.getSinglePages = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -151,7 +137,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
@@ -173,21 +159,22 @@ Paging.prototype.getSinglePages = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePages = function (options, callback) {
-  var client = this.client;
+function _getMultiplePages(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -195,8 +182,8 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
-  var pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
+  let clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  let pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
   // Validate
   try {
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
@@ -208,8 +195,8 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-    var maxresults;
-  var timeout;
+  let maxresults;
+  let timeout;
   try {
     if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
     {
@@ -230,15 +217,15 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -259,7 +246,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
     httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -268,18 +255,18 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -288,31 +275,31 @@ Paging.prototype.getMultiplePages = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -321,7 +308,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink in odata format that has 10
@@ -344,21 +331,22 @@ Paging.prototype.getMultiplePages = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link OdataProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getOdataMultiplePages = function (options, callback) {
-  var client = this.client;
+function _getOdataMultiplePages(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -366,8 +354,8 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
-  var pagingGetOdataMultiplePagesOptions = (options && options.pagingGetOdataMultiplePagesOptions !== undefined) ? options.pagingGetOdataMultiplePagesOptions : undefined;
+  let clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  let pagingGetOdataMultiplePagesOptions = (options && options.pagingGetOdataMultiplePagesOptions !== undefined) ? options.pagingGetOdataMultiplePagesOptions : undefined;
   // Validate
   try {
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
@@ -379,8 +367,8 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-    var maxresults;
-  var timeout;
+  let maxresults;
+  let timeout;
   try {
     if (pagingGetOdataMultiplePagesOptions !== null && pagingGetOdataMultiplePagesOptions !== undefined)
     {
@@ -401,15 +389,15 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/odata';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/odata';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -430,7 +418,7 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
     httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -439,18 +427,18 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -459,31 +447,31 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['OdataProductResult']().mapper();
+          let resultMapper = new client.models['OdataProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -492,7 +480,7 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
@@ -517,21 +505,22 @@ Paging.prototype.getOdataMultiplePages = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWithOffsetOptions, options, callback) {
-  var client = this.client;
+function _getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -539,7 +528,7 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  let clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
   // Validate
   try {
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
@@ -554,9 +543,9 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
   } catch (error) {
     return callback(error);
   }
-    var maxresults;
-  var offset;
-  var timeout;
+  let maxresults;
+  let offset;
+  let timeout;
   try {
     if (pagingGetMultiplePagesWithOffsetOptions !== null && pagingGetMultiplePagesWithOffsetOptions !== undefined)
     {
@@ -584,16 +573,16 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/withpath/{offset}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/withpath/{offset}';
   requestUrl = requestUrl.replace('{offset}', encodeURIComponent(offset.toString()));
-  var queryParameters = [];
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -614,7 +603,7 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
     httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -623,18 +612,18 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -643,31 +632,31 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -676,7 +665,7 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that fails on the first call with 500 and then retries
@@ -687,21 +676,22 @@ Paging.prototype.getMultiplePagesWithOffset = function (pagingGetMultiplePagesWi
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
-  var client = this.client;
+function _getMultiplePagesRetryFirst(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -719,15 +709,15 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/retryfirst';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/retryfirst';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -739,7 +729,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -748,18 +738,18 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -768,31 +758,31 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -801,7 +791,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink that has 10 pages, of which the
@@ -813,21 +803,22 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
-  var client = this.client;
+function _getMultiplePagesRetrySecond(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -845,15 +836,15 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/retrysecond';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/retrysecond';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -865,7 +856,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -874,18 +865,18 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -894,31 +885,31 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -927,7 +918,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that receives a 400 on the first call
@@ -937,21 +928,22 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getSinglePagesFailure = function (options, callback) {
-  var client = this.client;
+function _getSinglePagesFailure(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -969,15 +961,15 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/single/failure';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/single/failure';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -989,7 +981,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -998,18 +990,18 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1018,31 +1010,31 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1051,7 +1043,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that receives a 400 on the second call
@@ -1061,21 +1053,22 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesFailure = function (options, callback) {
-  var client = this.client;
+function _getMultiplePagesFailure(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1093,15 +1086,15 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/failure';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/failure';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1113,7 +1106,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1122,18 +1115,18 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1142,31 +1135,31 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1175,7 +1168,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that receives an invalid nextLink
@@ -1185,21 +1178,22 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
-  var client = this.client;
+function _getMultiplePagesFailureUri(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1217,15 +1211,15 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/failureuri';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/failureuri';
+  let queryParameters = [];
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1237,7 +1231,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1246,18 +1240,18 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1266,31 +1260,31 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1299,7 +1293,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that doesn't return a full URL, just a fragment
@@ -1313,21 +1307,22 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link OdataProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant, options, callback) {
-  var client = this.client;
+function _getMultiplePagesFragmentNextLink(apiVersion, tenant, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1351,17 +1346,17 @@ Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragment/{tenant}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragment/{tenant}';
   requestUrl = requestUrl.replace('{tenant}', encodeURIComponent(tenant));
-  var queryParameters = [];
+  let queryParameters = [];
   queryParameters.push('api_version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1373,7 +1368,7 @@ Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1382,18 +1377,18 @@ Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1402,31 +1397,31 @@ Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['OdataProductResult']().mapper();
+          let resultMapper = new client.models['OdataProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1435,7 +1430,7 @@ Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that doesn't return a full URL, just a fragment with
@@ -1452,21 +1447,22 @@ Paging.prototype.getMultiplePagesFragmentNextLink = function (apiVersion, tenant
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link OdataProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (customParameterGroup, options, callback) {
-  var client = this.client;
+function _getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1485,8 +1481,8 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
   } catch (error) {
     return callback(error);
   }
-    var apiVersion;
-  var tenant;
+  let apiVersion;
+  let tenant;
   try {
     if (customParameterGroup !== null && customParameterGroup !== undefined)
     {
@@ -1507,17 +1503,17 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragmentwithgrouping/{tenant}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragmentwithgrouping/{tenant}';
   requestUrl = requestUrl.replace('{tenant}', encodeURIComponent(tenant));
-  var queryParameters = [];
+  let queryParameters = [];
   queryParameters.push('api_version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1529,7 +1525,7 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1538,18 +1534,18 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1558,31 +1554,31 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['OdataProductResult']().mapper();
+          let resultMapper = new client.models['OdataProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1591,7 +1587,7 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that doesn't return a full URL, just a fragment
@@ -1607,21 +1603,22 @@ Paging.prototype.getMultiplePagesFragmentWithGroupingNextLink = function (custom
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link OdataProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options, callback) {
-  var client = this.client;
+function _nextFragment(apiVersion, tenant, nextLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1648,18 +1645,18 @@ Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options,
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragment/{tenant}/{nextLink}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragment/{tenant}/{nextLink}';
   requestUrl = requestUrl.replace('{tenant}', encodeURIComponent(tenant));
   requestUrl = requestUrl.replace('{nextLink}', nextLink);
-  var queryParameters = [];
+  let queryParameters = [];
   queryParameters.push('api_version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += (requestUrl.indexOf('?') !== -1 ? '&' : '?') + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1671,7 +1668,7 @@ Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options,
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1680,18 +1677,18 @@ Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options,
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1700,31 +1697,31 @@ Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options,
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['OdataProductResult']().mapper();
+          let resultMapper = new client.models['OdataProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1733,7 +1730,7 @@ Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options,
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that doesn't return a full URL, just a fragment
@@ -1751,21 +1748,22 @@ Paging.prototype.nextFragment = function (apiVersion, tenant, nextLink, options,
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link OdataProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterGroup, options, callback) {
-  var client = this.client;
+function _nextFragmentWithGrouping(nextLink, customParameterGroup, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1787,8 +1785,8 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
   } catch (error) {
     return callback(error);
   }
-    var apiVersion;
-  var tenant;
+  let apiVersion;
+  let tenant;
   try {
     if (customParameterGroup !== null && customParameterGroup !== undefined)
     {
@@ -1809,18 +1807,18 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'paging/multiple/fragmentwithgrouping/{tenant}/{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextLink);
   requestUrl = requestUrl.replace('{tenant}', encodeURIComponent(tenant));
-  var queryParameters = [];
+  let queryParameters = [];
   queryParameters.push('api_version=' + encodeURIComponent(apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += (requestUrl.indexOf('?') !== -1 ? '&' : '?') + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1832,7 +1830,7 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1841,18 +1839,18 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1861,31 +1859,31 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['OdataProductResult']().mapper();
+          let resultMapper = new client.models['OdataProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1894,7 +1892,7 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that finishes on the first call without a nextlink
@@ -1907,21 +1905,22 @@ Paging.prototype.nextFragmentWithGrouping = function (nextLink, customParameterG
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getSinglePagesNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1942,11 +1941,11 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -1958,7 +1957,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1967,18 +1966,18 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -1987,31 +1986,31 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2020,7 +2019,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
@@ -2045,21 +2044,22 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getMultiplePagesNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2067,8 +2067,8 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
-  var pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
+  let clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  let pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {
@@ -2083,8 +2083,8 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   } catch (error) {
     return callback(error);
   }
-    var maxresults;
-  var timeout;
+  let maxresults;
+  let timeout;
   try {
     if (pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined)
     {
@@ -2105,11 +2105,11 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2130,7 +2130,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
     httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2139,18 +2139,18 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -2159,31 +2159,31 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2192,7 +2192,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink in odata format that has 10
@@ -2218,21 +2218,22 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link OdataProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getOdataMultiplePagesNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2240,8 +2241,8 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
-  var pagingGetOdataMultiplePagesOptions = (options && options.pagingGetOdataMultiplePagesOptions !== undefined) ? options.pagingGetOdataMultiplePagesOptions : undefined;
+  let clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  let pagingGetOdataMultiplePagesOptions = (options && options.pagingGetOdataMultiplePagesOptions !== undefined) ? options.pagingGetOdataMultiplePagesOptions : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {
@@ -2256,8 +2257,8 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
   } catch (error) {
     return callback(error);
   }
-    var maxresults;
-  var timeout;
+  let maxresults;
+  let timeout;
   try {
     if (pagingGetOdataMultiplePagesOptions !== null && pagingGetOdataMultiplePagesOptions !== undefined)
     {
@@ -2278,11 +2279,11 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2303,7 +2304,7 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
     httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2312,18 +2313,18 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -2332,31 +2333,31 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['OdataProductResult']().mapper();
+          let resultMapper = new client.models['OdataProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2365,7 +2366,7 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink that has 10 pages
@@ -2392,21 +2393,22 @@ Paging.prototype.getOdataMultiplePagesNext = function (nextPageLink, options, ca
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getMultiplePagesWithOffsetNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2414,8 +2416,8 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
-  var pagingGetMultiplePagesWithOffsetNextOptions = (options && options.pagingGetMultiplePagesWithOffsetNextOptions !== undefined) ? options.pagingGetMultiplePagesWithOffsetNextOptions : undefined;
+  let clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  let pagingGetMultiplePagesWithOffsetNextOptions = (options && options.pagingGetMultiplePagesWithOffsetNextOptions !== undefined) ? options.pagingGetMultiplePagesWithOffsetNextOptions : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {
@@ -2430,8 +2432,8 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
   } catch (error) {
     return callback(error);
   }
-    var maxresults;
-  var timeout;
+  let maxresults;
+  let timeout;
   try {
     if (pagingGetMultiplePagesWithOffsetNextOptions !== null && pagingGetMultiplePagesWithOffsetNextOptions !== undefined)
     {
@@ -2452,11 +2454,11 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2477,7 +2479,7 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
     httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2486,18 +2488,18 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -2506,31 +2508,31 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2539,7 +2541,7 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that fails on the first call with 500 and then retries
@@ -2553,21 +2555,22 @@ Paging.prototype.getMultiplePagesWithOffsetNext = function (nextPageLink, option
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getMultiplePagesRetryFirstNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2588,11 +2591,11 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2604,7 +2607,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2613,18 +2616,18 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -2633,31 +2636,31 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2666,7 +2669,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that includes a nextLink that has 10 pages, of which the
@@ -2681,21 +2684,22 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getMultiplePagesRetrySecondNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2716,11 +2720,11 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2732,7 +2736,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2741,18 +2745,18 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -2761,31 +2765,31 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2794,7 +2798,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that receives a 400 on the first call
@@ -2807,21 +2811,22 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getSinglePagesFailureNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2842,11 +2847,11 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2858,7 +2863,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2867,18 +2872,18 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -2887,31 +2892,31 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -2920,7 +2925,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that receives a 400 on the second call
@@ -2933,21 +2938,22 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getMultiplePagesFailureNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -2968,11 +2974,11 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -2984,7 +2990,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -2993,18 +2999,18 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -3013,31 +3019,31 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3046,7 +3052,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * A paging operation that receives an invalid nextLink
@@ -3059,21 +3065,22 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ProductResult} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, options, callback) {
-  var client = this.client;
+function _getMultiplePagesFailureUriNext(nextPageLink, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -3094,11 +3101,11 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
   }
 
   // Construct URL
-  var requestUrl = '{nextLink}';
+  let requestUrl = '{nextLink}';
   requestUrl = requestUrl.replace('{nextLink}', nextPageLink);
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -3110,7 +3117,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -3119,18 +3126,18 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
@@ -3139,31 +3146,31 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['CloudError']().mapper();
+          let resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ProductResult']().mapper();
+          let resultMapper = new client.models['ProductResult']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -3172,7 +3179,2035 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * Paging
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestPagingTestService.
+ * Initializes a new instance of the Paging class.
+ * @constructor
+ *
+ * @param {AutoRestPagingTestService} client Reference to the service client.
+ */
+class Paging {
+  constructor(client) {
+    this.client = client;
+    this._getSinglePages = _getSinglePages;
+    this._getMultiplePages = _getMultiplePages;
+    this._getOdataMultiplePages = _getOdataMultiplePages;
+    this._getMultiplePagesWithOffset = _getMultiplePagesWithOffset;
+    this._getMultiplePagesRetryFirst = _getMultiplePagesRetryFirst;
+    this._getMultiplePagesRetrySecond = _getMultiplePagesRetrySecond;
+    this._getSinglePagesFailure = _getSinglePagesFailure;
+    this._getMultiplePagesFailure = _getMultiplePagesFailure;
+    this._getMultiplePagesFailureUri = _getMultiplePagesFailureUri;
+    this._getMultiplePagesFragmentNextLink = _getMultiplePagesFragmentNextLink;
+    this._getMultiplePagesFragmentWithGroupingNextLink = _getMultiplePagesFragmentWithGroupingNextLink;
+    this._nextFragment = _nextFragment;
+    this._nextFragmentWithGrouping = _nextFragmentWithGrouping;
+    this._getSinglePagesNext = _getSinglePagesNext;
+    this._getMultiplePagesNext = _getMultiplePagesNext;
+    this._getOdataMultiplePagesNext = _getOdataMultiplePagesNext;
+    this._getMultiplePagesWithOffsetNext = _getMultiplePagesWithOffsetNext;
+    this._getMultiplePagesRetryFirstNext = _getMultiplePagesRetryFirstNext;
+    this._getMultiplePagesRetrySecondNext = _getMultiplePagesRetrySecondNext;
+    this._getSinglePagesFailureNext = _getSinglePagesFailureNext;
+    this._getMultiplePagesFailureNext = _getMultiplePagesFailureNext;
+    this._getMultiplePagesFailureUriNext = _getMultiplePagesFailureUriNext;
+  }
+
+  /**
+   * A paging operation that finishes on the first call without a nextlink
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSinglePagesWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSinglePages(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that finishes on the first call without a nextlink
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSinglePages(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSinglePages(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSinglePages(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+   * maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePages(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+   * maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePages(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePages(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePages(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink in odata format that has 10
+   * pages
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+   * the maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
+   * the maximum time that the server can spend processing the request, in
+   * seconds. The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<OdataProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getOdataMultiplePagesWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getOdataMultiplePages(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink in odata format that has 10
+   * pages
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+   * the maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
+   * the maximum time that the server can spend processing the request, in
+   * seconds. The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {OdataProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link OdataProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getOdataMultiplePages(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getOdataMultiplePages(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getOdataMultiplePages(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {object} pagingGetMultiplePagesWithOffsetOptions Additional
+   * parameters for the operation
+   *
+   * @param {number} [pagingGetMultiplePagesWithOffsetOptions.maxresults] Sets
+   * the maximum number of items to return in the response.
+   *
+   * @param {number} pagingGetMultiplePagesWithOffsetOptions.offset Offset of
+   * return value
+   *
+   * @param {number} [pagingGetMultiplePagesWithOffsetOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesWithOffsetWithHttpOperationResponse(pagingGetMultiplePagesWithOffsetOptions, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {object} pagingGetMultiplePagesWithOffsetOptions Additional
+   * parameters for the operation
+   *
+   * @param {number} [pagingGetMultiplePagesWithOffsetOptions.maxresults] Sets
+   * the maximum number of items to return in the response.
+   *
+   * @param {number} pagingGetMultiplePagesWithOffsetOptions.offset Offset of
+   * return value
+   *
+   * @param {number} [pagingGetMultiplePagesWithOffsetOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that fails on the first call with 500 and then retries
+   * and then get a response including a nextLink that has 10 pages
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesRetryFirstWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesRetryFirst(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that fails on the first call with 500 and then retries
+   * and then get a response including a nextLink that has 10 pages
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesRetryFirst(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesRetryFirst(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesRetryFirst(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages, of which the
+   * 2nd call fails first with 500. The client should retry and finish all 10
+   * pages eventually.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesRetrySecondWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesRetrySecond(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages, of which the
+   * 2nd call fails first with 500. The client should retry and finish all 10
+   * pages eventually.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesRetrySecond(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesRetrySecond(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesRetrySecond(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that receives a 400 on the first call
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSinglePagesFailureWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSinglePagesFailure(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that receives a 400 on the first call
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSinglePagesFailure(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSinglePagesFailure(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSinglePagesFailure(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that receives a 400 on the second call
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesFailureWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesFailure(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that receives a 400 on the second call
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesFailure(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesFailure(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesFailure(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that receives an invalid nextLink
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesFailureUriWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesFailureUri(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that receives an invalid nextLink
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesFailureUri(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesFailureUri(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesFailureUri(options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment
+   *
+   * @param {string} apiVersion Sets the api version to use.
+   *
+   * @param {string} tenant Sets the tenant to use.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<OdataProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesFragmentNextLinkWithHttpOperationResponse(apiVersion, tenant, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesFragmentNextLink(apiVersion, tenant, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment
+   *
+   * @param {string} apiVersion Sets the api version to use.
+   *
+   * @param {string} tenant Sets the tenant to use.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {OdataProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link OdataProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesFragmentNextLink(apiVersion, tenant, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesFragmentNextLink(apiVersion, tenant, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesFragmentNextLink(apiVersion, tenant, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment with
+   * parameters grouped
+   *
+   * @param {object} customParameterGroup Additional parameters for the operation
+   *
+   * @param {string} customParameterGroup.apiVersion Sets the api version to use.
+   *
+   * @param {string} customParameterGroup.tenant Sets the tenant to use.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<OdataProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesFragmentWithGroupingNextLinkWithHttpOperationResponse(customParameterGroup, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment with
+   * parameters grouped
+   *
+   * @param {object} customParameterGroup Additional parameters for the operation
+   *
+   * @param {string} customParameterGroup.apiVersion Sets the api version to use.
+   *
+   * @param {string} customParameterGroup.tenant Sets the tenant to use.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {OdataProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link OdataProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesFragmentWithGroupingNextLink(customParameterGroup, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment
+   *
+   * @param {string} apiVersion Sets the api version to use.
+   *
+   * @param {string} tenant Sets the tenant to use.
+   *
+   * @param {string} nextLink Next link for list operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<OdataProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  nextFragmentWithHttpOperationResponse(apiVersion, tenant, nextLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._nextFragment(apiVersion, tenant, nextLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment
+   *
+   * @param {string} apiVersion Sets the api version to use.
+   *
+   * @param {string} tenant Sets the tenant to use.
+   *
+   * @param {string} nextLink Next link for list operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {OdataProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link OdataProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  nextFragment(apiVersion, tenant, nextLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._nextFragment(apiVersion, tenant, nextLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._nextFragment(apiVersion, tenant, nextLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment
+   *
+   * @param {string} nextLink Next link for list operation.
+   *
+   * @param {object} customParameterGroup Additional parameters for the operation
+   *
+   * @param {string} customParameterGroup.apiVersion Sets the api version to use.
+   *
+   * @param {string} customParameterGroup.tenant Sets the tenant to use.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<OdataProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  nextFragmentWithGroupingWithHttpOperationResponse(nextLink, customParameterGroup, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._nextFragmentWithGrouping(nextLink, customParameterGroup, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that doesn't return a full URL, just a fragment
+   *
+   * @param {string} nextLink Next link for list operation.
+   *
+   * @param {object} customParameterGroup Additional parameters for the operation
+   *
+   * @param {string} customParameterGroup.apiVersion Sets the api version to use.
+   *
+   * @param {string} customParameterGroup.tenant Sets the tenant to use.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {OdataProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link OdataProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  nextFragmentWithGrouping(nextLink, customParameterGroup, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._nextFragmentWithGrouping(nextLink, customParameterGroup, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._nextFragmentWithGrouping(nextLink, customParameterGroup, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that finishes on the first call without a nextlink
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSinglePagesNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSinglePagesNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that finishes on the first call without a nextlink
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSinglePagesNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSinglePagesNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSinglePagesNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+   * maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+   * maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink in odata format that has 10
+   * pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+   * the maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
+   * the maximum time that the server can spend processing the request, in
+   * seconds. The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<OdataProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getOdataMultiplePagesNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getOdataMultiplePagesNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink in odata format that has 10
+   * pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetOdataMultiplePagesOptions] Additional
+   * parameters for the operation
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.maxresults] Sets
+   * the maximum number of items to return in the response.
+   *
+   * @param {number} [options.pagingGetOdataMultiplePagesOptions.timeout] Sets
+   * the maximum time that the server can spend processing the request, in
+   * seconds. The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {OdataProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link OdataProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getOdataMultiplePagesNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getOdataMultiplePagesNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getOdataMultiplePagesNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetMultiplePagesWithOffsetNextOptions]
+   * Additional parameters for the operation
+   *
+   * @param {number}
+   * [options.pagingGetMultiplePagesWithOffsetNextOptions.maxresults] Sets the
+   * maximum number of items to return in the response.
+   *
+   * @param {number}
+   * [options.pagingGetMultiplePagesWithOffsetNextOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesWithOffsetNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesWithOffsetNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.clientRequestId]
+   *
+   * @param {object} [options.pagingGetMultiplePagesWithOffsetNextOptions]
+   * Additional parameters for the operation
+   *
+   * @param {number}
+   * [options.pagingGetMultiplePagesWithOffsetNextOptions.maxresults] Sets the
+   * maximum number of items to return in the response.
+   *
+   * @param {number}
+   * [options.pagingGetMultiplePagesWithOffsetNextOptions.timeout] Sets the
+   * maximum time that the server can spend processing the request, in seconds.
+   * The default is 30 seconds.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesWithOffsetNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesWithOffsetNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesWithOffsetNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that fails on the first call with 500 and then retries
+   * and then get a response including a nextLink that has 10 pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesRetryFirstNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesRetryFirstNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that fails on the first call with 500 and then retries
+   * and then get a response including a nextLink that has 10 pages
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesRetryFirstNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesRetryFirstNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesRetryFirstNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages, of which the
+   * 2nd call fails first with 500. The client should retry and finish all 10
+   * pages eventually.
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesRetrySecondNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesRetrySecondNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that includes a nextLink that has 10 pages, of which the
+   * 2nd call fails first with 500. The client should retry and finish all 10
+   * pages eventually.
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesRetrySecondNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesRetrySecondNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesRetrySecondNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that receives a 400 on the first call
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getSinglePagesFailureNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getSinglePagesFailureNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that receives a 400 on the first call
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getSinglePagesFailureNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getSinglePagesFailureNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getSinglePagesFailureNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that receives a 400 on the second call
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesFailureNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesFailureNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that receives a 400 on the second call
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesFailureNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesFailureNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesFailureNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+  /**
+   * A paging operation that receives an invalid nextLink
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ProductResult>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getMultiplePagesFailureUriNextWithHttpOperationResponse(nextPageLink, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getMultiplePagesFailureUriNext(nextPageLink, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * A paging operation that receives an invalid nextLink
+   *
+   * @param {string} nextPageLink The NextLink from the previous successful call
+   * to List operation.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ProductResult} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ProductResult} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getMultiplePagesFailureUriNext(nextPageLink, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getMultiplePagesFailureUriNext(nextPageLink, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getMultiplePagesFailureUriNext(nextPageLink, options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = Paging;

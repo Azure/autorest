@@ -14,47 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
+const WebResource = msRest.WebResource;
 
-var models = require('./models');
+const models = require('./models');
 
-/**
- * @class
- * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
- * @constructor
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- */
-function AutoRestResourceFlatteningTestService(baseUri, options) {
-
-  if (!options) options = {};
-
-  AutoRestResourceFlatteningTestService['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  this.models = models;
-  msRest.addSerializationMixin(this);
-}
-
-util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
 
 /**
  * Put External Resource as an Array
@@ -66,20 +31,21 @@ util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putArray = function (options, callback) {
-  var client = this;
+function _putArray(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -87,20 +53,20 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
+  let resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/array';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/array';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -108,11 +74,11 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (resourceArray !== null && resourceArray !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: false,
         serializedName: 'ResourceArray',
         type: {
@@ -131,50 +97,50 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(resourceArray, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(resourceArray, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get External Resource as an Array
@@ -184,20 +150,21 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {array} [result]   - The deserialized result object.
+ *                      {array} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.getArray = function (options, callback) {
-  var client = this;
+function _getArray(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -207,17 +174,17 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/array';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/array';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -226,48 +193,48 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -285,7 +252,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -294,7 +261,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * No need to have a route in Express server for this operation. Used to verify
@@ -307,20 +274,21 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putWrappedArray = function (options, callback) {
-  var client = this;
+function _putWrappedArray(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -328,20 +296,20 @@ AutoRestResourceFlatteningTestService.prototype.putWrappedArray = function (opti
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
+  let resourceArray = (options && options.resourceArray !== undefined) ? options.resourceArray : undefined;
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/wrappedarray';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/wrappedarray';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -349,11 +317,11 @@ AutoRestResourceFlatteningTestService.prototype.putWrappedArray = function (opti
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (resourceArray !== null && resourceArray !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: false,
         serializedName: 'ResourceArray',
         type: {
@@ -372,50 +340,50 @@ AutoRestResourceFlatteningTestService.prototype.putWrappedArray = function (opti
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(resourceArray, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(resourceArray, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * No need to have a route in Express server for this operation. Used to verify
@@ -426,20 +394,21 @@ AutoRestResourceFlatteningTestService.prototype.putWrappedArray = function (opti
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {array} [result]   - The deserialized result object.
+ *                      {array} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.getWrappedArray = function (options, callback) {
-  var client = this;
+function _getWrappedArray(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -449,17 +418,17 @@ AutoRestResourceFlatteningTestService.prototype.getWrappedArray = function (opti
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/wrappedarray';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/wrappedarray';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -468,48 +437,48 @@ AutoRestResourceFlatteningTestService.prototype.getWrappedArray = function (opti
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -527,7 +496,7 @@ AutoRestResourceFlatteningTestService.prototype.getWrappedArray = function (opti
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -536,7 +505,7 @@ AutoRestResourceFlatteningTestService.prototype.getWrappedArray = function (opti
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put External Resource as a Dictionary
@@ -549,20 +518,21 @@ AutoRestResourceFlatteningTestService.prototype.getWrappedArray = function (opti
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putDictionary = function (options, callback) {
-  var client = this;
+function _putDictionary(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -570,20 +540,20 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceDictionary = (options && options.resourceDictionary !== undefined) ? options.resourceDictionary : undefined;
+  let resourceDictionary = (options && options.resourceDictionary !== undefined) ? options.resourceDictionary : undefined;
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/dictionary';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/dictionary';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -591,11 +561,11 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (resourceDictionary !== null && resourceDictionary !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: false,
         serializedName: 'ResourceDictionary',
         type: {
@@ -614,50 +584,50 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(resourceDictionary, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(resourceDictionary, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get External Resource as a Dictionary
@@ -667,20 +637,21 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.getDictionary = function (options, callback) {
-  var client = this;
+function _getDictionary(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -690,17 +661,17 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/dictionary';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/dictionary';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -709,48 +680,48 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = {
+          let resultMapper = {
             required: false,
             serializedName: 'parsedResponse',
             type: {
@@ -768,7 +739,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -777,7 +748,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put External Resource as a ResourceCollection
@@ -809,20 +780,21 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function (options, callback) {
-  var client = this;
+function _putResourceCollection(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -830,20 +802,20 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var resourceComplexObject = (options && options.resourceComplexObject !== undefined) ? options.resourceComplexObject : undefined;
+  let resourceComplexObject = (options && options.resourceComplexObject !== undefined) ? options.resourceComplexObject : undefined;
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/resourcecollection';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/resourcecollection';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -851,59 +823,59 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
-      var requestModelMapper = new client.models['ResourceCollection']().mapper();
+      let requestModelMapper = new client.models['ResourceCollection']().mapper();
       requestModel = client.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(resourceComplexObject, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(resourceComplexObject, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Get External Resource as a ResourceCollection
@@ -913,21 +885,22 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link ResourceCollection} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function (options, callback) {
-  var client = this;
+function _getResourceCollection(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -937,17 +910,17 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/resourcecollection';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/resourcecollection';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -956,52 +929,52 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['ResourceCollection']().mapper();
+          let resultMapper = new client.models['ResourceCollection']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1010,7 +983,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put Simple Product with client flattening true on the model
@@ -1037,21 +1010,22 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link SimpleProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (options, callback) {
-  var client = this;
+function _putSimpleProduct(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1059,20 +1033,20 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var simpleBodyProduct = (options && options.simpleBodyProduct !== undefined) ? options.simpleBodyProduct : undefined;
+  let simpleBodyProduct = (options && options.simpleBodyProduct !== undefined) ? options.simpleBodyProduct : undefined;
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1080,67 +1054,67 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
-      var requestModelMapper = new client.models['SimpleProduct']().mapper();
+      let requestModelMapper = new client.models['SimpleProduct']().mapper();
       requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(simpleBodyProduct, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['SimpleProduct']().mapper();
+          let resultMapper = new client.models['SimpleProduct']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1149,7 +1123,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put Flattened Simple Product with client flattening true on the parameter
@@ -1171,21 +1145,22 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link SimpleProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = function (productId, maxProductDisplayName, options, callback) {
-  var client = this;
+function _postFlattenedSimpleProduct(productId, maxProductDisplayName, options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1193,9 +1168,9 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var description = (options && options.description !== undefined) ? options.description : undefined;
-  var genericValue = (options && options.genericValue !== undefined) ? options.genericValue : undefined;
-  var odatavalue = (options && options.odatavalue !== undefined) ? options.odatavalue : undefined;
+  let description = (options && options.description !== undefined) ? options.description : undefined;
+  let genericValue = (options && options.genericValue !== undefined) ? options.genericValue : undefined;
+  let odatavalue = (options && options.odatavalue !== undefined) ? options.odatavalue : undefined;
   // Validate
   try {
     if (productId === null || productId === undefined || typeof productId.valueOf() !== 'string') {
@@ -1216,7 +1191,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   } catch (error) {
     return callback(error);
   }
-    var simpleBodyProduct;
+  let simpleBodyProduct;
   try {
     if ((productId !== null && productId !== undefined) || (description !== null && description !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (genericValue !== null && genericValue !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
@@ -1232,17 +1207,17 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening';
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1250,67 +1225,67 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
-      var requestModelMapper = new client.models['SimpleProduct']().mapper();
+      let requestModelMapper = new client.models['SimpleProduct']().mapper();
       requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(simpleBodyProduct, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['SimpleProduct']().mapper();
+          let resultMapper = new client.models['SimpleProduct']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1319,7 +1294,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Put Simple Product with client flattening true on the model
@@ -1349,21 +1324,22 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link SimpleProduct} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = function (flattenParameterGroup, options, callback) {
-  var client = this;
+function _putSimpleProductWithGrouping(flattenParameterGroup, options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -1379,13 +1355,13 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   } catch (error) {
     return callback(error);
   }
-    var name;
-  var productId;
-  var description;
-  var maxProductDisplayName;
-  var genericValue;
-  var odatavalue;
-  var simpleBodyProduct;
+  let name;
+  let productId;
+  let description;
+  let maxProductDisplayName;
+  let genericValue;
+  let odatavalue;
+  let simpleBodyProduct;
   try {
     if (flattenParameterGroup !== null && flattenParameterGroup !== undefined)
     {
@@ -1443,18 +1419,18 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening/parametergrouping/{name}/';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'model-flatten/customFlattening/parametergrouping/{name}/';
   requestUrl = requestUrl.replace('{name}', encodeURIComponent(name));
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -1462,67 +1438,67 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
-      var requestModelMapper = new client.models['SimpleProduct']().mapper();
+      let requestModelMapper = new client.models['SimpleProduct']().mapper();
       requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(simpleBodyProduct, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['SimpleProduct']().mapper();
+          let resultMapper = new client.models['SimpleProduct']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -1531,6 +1507,1065 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
+
+/**
+ * @class
+ * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
+ * @constructor
+ *
+ * @param {string} [baseUri] - The base URI of the service.
+ *
+ * @param {object} [options] - The parameter options
+ *
+ * @param {Array} [options.filters] - Filters to be added to the request pipeline
+ *
+ * @param {object} [options.requestOptions] - Options for the underlying request object
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ */
+class AutoRestResourceFlatteningTestService extends ServiceClient {
+  constructor(baseUri, options) {
+
+    if (!options) options = {};
+
+    super(null, options);
+
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    this.models = models;
+    this._putArray = _putArray;
+    this._getArray = _getArray;
+    this._putWrappedArray = _putWrappedArray;
+    this._getWrappedArray = _getWrappedArray;
+    this._putDictionary = _putDictionary;
+    this._getDictionary = _getDictionary;
+    this._putResourceCollection = _putResourceCollection;
+    this._getResourceCollection = _getResourceCollection;
+    this._putSimpleProduct = _putSimpleProduct;
+    this._postFlattenedSimpleProduct = _postFlattenedSimpleProduct;
+    this._putSimpleProductWithGrouping = _putSimpleProductWithGrouping;
+    msRest.addSerializationMixin(this);
+  }
+
+  /**
+   * Put External Resource as an Array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {array} [options.resourceArray] External Resource as an Array to put
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putArrayWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putArray(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put External Resource as an Array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {array} [options.resourceArray] External Resource as an Array to put
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putArray(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putArray(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putArray(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get External Resource as an Array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Array>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getArrayWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getArray(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get External Resource as an Array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Array} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {array} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getArray(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getArray(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getArray(options, optionalCallback);
+    }
+  }
+
+  /**
+   * No need to have a route in Express server for this operation. Used to verify
+   * the type flattened is not removed if it's referenced in an array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {array} [options.resourceArray] External Resource as an Array to put
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putWrappedArrayWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putWrappedArray(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * No need to have a route in Express server for this operation. Used to verify
+   * the type flattened is not removed if it's referenced in an array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {array} [options.resourceArray] External Resource as an Array to put
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putWrappedArray(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putWrappedArray(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putWrappedArray(options, optionalCallback);
+    }
+  }
+
+  /**
+   * No need to have a route in Express server for this operation. Used to verify
+   * the type flattened is not removed if it's referenced in an array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Array>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getWrappedArrayWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getWrappedArray(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * No need to have a route in Express server for this operation. Used to verify
+   * the type flattened is not removed if it's referenced in an array
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Array} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {array} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getWrappedArray(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getWrappedArray(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getWrappedArray(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put External Resource as a Dictionary
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.resourceDictionary] External Resource as a
+   * Dictionary to put
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putDictionaryWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putDictionary(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put External Resource as a Dictionary
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.resourceDictionary] External Resource as a
+   * Dictionary to put
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putDictionary(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putDictionary(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putDictionary(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get External Resource as a Dictionary
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getDictionaryWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getDictionary(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get External Resource as a Dictionary
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getDictionary(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getDictionary(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getDictionary(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put External Resource as a ResourceCollection
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.resourceComplexObject] External Resource as a
+   * ResourceCollection to put
+   *
+   * @param {object} [options.resourceComplexObject.productresource]
+   *
+   * @param {string} [options.resourceComplexObject.productresource.pname]
+   *
+   * @param {string}
+   * [options.resourceComplexObject.productresource.flattenedProductType]
+   *
+   * @param {string}
+   * [options.resourceComplexObject.productresource.provisioningState]
+   *
+   * @param {object} [options.resourceComplexObject.productresource.tags]
+   *
+   * @param {string} [options.resourceComplexObject.productresource.location]
+   * Resource Location
+   *
+   * @param {array} [options.resourceComplexObject.arrayofresources]
+   *
+   * @param {object} [options.resourceComplexObject.dictionaryofresources]
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putResourceCollectionWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putResourceCollection(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put External Resource as a ResourceCollection
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.resourceComplexObject] External Resource as a
+   * ResourceCollection to put
+   *
+   * @param {object} [options.resourceComplexObject.productresource]
+   *
+   * @param {string} [options.resourceComplexObject.productresource.pname]
+   *
+   * @param {string}
+   * [options.resourceComplexObject.productresource.flattenedProductType]
+   *
+   * @param {string}
+   * [options.resourceComplexObject.productresource.provisioningState]
+   *
+   * @param {object} [options.resourceComplexObject.productresource.tags]
+   *
+   * @param {string} [options.resourceComplexObject.productresource.location]
+   * Resource Location
+   *
+   * @param {array} [options.resourceComplexObject.arrayofresources]
+   *
+   * @param {object} [options.resourceComplexObject.dictionaryofresources]
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putResourceCollection(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putResourceCollection(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putResourceCollection(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Get External Resource as a ResourceCollection
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<ResourceCollection>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getResourceCollectionWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getResourceCollection(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Get External Resource as a ResourceCollection
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {ResourceCollection} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link ResourceCollection} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getResourceCollection(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getResourceCollection(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getResourceCollection(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put Simple Product with client flattening true on the model
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.simpleBodyProduct] Simple body product to put
+   *
+   * @param {string} options.simpleBodyProduct.maxProductDisplayName Display name
+   * of product.
+   *
+   * @param {string} [options.simpleBodyProduct.genericValue] Generic URL value.
+   *
+   * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
+   *
+   * @param {string} options.simpleBodyProduct.productId Unique identifier
+   * representing a specific product for a given latitude & longitude. For
+   * example, uberX in San Francisco will have a different product_id than uberX
+   * in Los Angeles.
+   *
+   * @param {string} [options.simpleBodyProduct.description] Description of
+   * product.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<SimpleProduct>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putSimpleProductWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putSimpleProduct(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put Simple Product with client flattening true on the model
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.simpleBodyProduct] Simple body product to put
+   *
+   * @param {string} options.simpleBodyProduct.maxProductDisplayName Display name
+   * of product.
+   *
+   * @param {string} [options.simpleBodyProduct.genericValue] Generic URL value.
+   *
+   * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
+   *
+   * @param {string} options.simpleBodyProduct.productId Unique identifier
+   * representing a specific product for a given latitude & longitude. For
+   * example, uberX in San Francisco will have a different product_id than uberX
+   * in Los Angeles.
+   *
+   * @param {string} [options.simpleBodyProduct.description] Description of
+   * product.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {SimpleProduct} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link SimpleProduct} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putSimpleProduct(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putSimpleProduct(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putSimpleProduct(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put Flattened Simple Product with client flattening true on the parameter
+   *
+   * @param {string} productId Unique identifier representing a specific product
+   * for a given latitude & longitude. For example, uberX in San Francisco will
+   * have a different product_id than uberX in Los Angeles.
+   *
+   * @param {string} maxProductDisplayName Display name of product.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.description] Description of product.
+   *
+   * @param {string} [options.genericValue] Generic URL value.
+   *
+   * @param {string} [options.odatavalue] URL value.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<SimpleProduct>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postFlattenedSimpleProductWithHttpOperationResponse(productId, maxProductDisplayName, options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postFlattenedSimpleProduct(productId, maxProductDisplayName, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put Flattened Simple Product with client flattening true on the parameter
+   *
+   * @param {string} productId Unique identifier representing a specific product
+   * for a given latitude & longitude. For example, uberX in San Francisco will
+   * have a different product_id than uberX in Los Angeles.
+   *
+   * @param {string} maxProductDisplayName Display name of product.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {string} [options.description] Description of product.
+   *
+   * @param {string} [options.genericValue] Generic URL value.
+   *
+   * @param {string} [options.odatavalue] URL value.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {SimpleProduct} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link SimpleProduct} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postFlattenedSimpleProduct(productId, maxProductDisplayName, options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postFlattenedSimpleProduct(productId, maxProductDisplayName, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postFlattenedSimpleProduct(productId, maxProductDisplayName, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Put Simple Product with client flattening true on the model
+   *
+   * @param {object} flattenParameterGroup Additional parameters for the
+   * operation
+   *
+   * @param {string} flattenParameterGroup.name Product name with value
+   * 'groupproduct'
+   *
+   * @param {string} flattenParameterGroup.productId Unique identifier
+   * representing a specific product for a given latitude & longitude. For
+   * example, uberX in San Francisco will have a different product_id than uberX
+   * in Los Angeles.
+   *
+   * @param {string} [flattenParameterGroup.description] Description of product.
+   *
+   * @param {string} flattenParameterGroup.maxProductDisplayName Display name of
+   * product.
+   *
+   * @param {string} [flattenParameterGroup.genericValue] Generic URL value.
+   *
+   * @param {string} [flattenParameterGroup.odatavalue] URL value.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<SimpleProduct>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  putSimpleProductWithGroupingWithHttpOperationResponse(flattenParameterGroup, options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._putSimpleProductWithGrouping(flattenParameterGroup, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Put Simple Product with client flattening true on the model
+   *
+   * @param {object} flattenParameterGroup Additional parameters for the
+   * operation
+   *
+   * @param {string} flattenParameterGroup.name Product name with value
+   * 'groupproduct'
+   *
+   * @param {string} flattenParameterGroup.productId Unique identifier
+   * representing a specific product for a given latitude & longitude. For
+   * example, uberX in San Francisco will have a different product_id than uberX
+   * in Los Angeles.
+   *
+   * @param {string} [flattenParameterGroup.description] Description of product.
+   *
+   * @param {string} flattenParameterGroup.maxProductDisplayName Display name of
+   * product.
+   *
+   * @param {string} [flattenParameterGroup.genericValue] Generic URL value.
+   *
+   * @param {string} [flattenParameterGroup.odatavalue] URL value.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {SimpleProduct} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link SimpleProduct} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  putSimpleProductWithGrouping(flattenParameterGroup, options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._putSimpleProductWithGrouping(flattenParameterGroup, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._putSimpleProductWithGrouping(flattenParameterGroup, options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = AutoRestResourceFlatteningTestService;

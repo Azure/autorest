@@ -6,7 +6,7 @@
 import should = require('should');
 import http = require('http');
 import assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 import moment = require('moment');
 var _ = require('underscore');
 
@@ -55,8 +55,8 @@ describe('nodejs', function () {
 
       it('should put external resource as an array', function (done) {
         var resourceBody = [
-          <flatteningClientModels.Resource> { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
-          <flatteningClientModels.Resource> { "location": "Building 44", "pname": "Product2" }
+          <flatteningClientModels.Resource>{ "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+          <flatteningClientModels.Resource>{ "location": "Building 44", "pname": "Product2" }
         ];
         testClient.putArray({ resourceArray: resourceBody }, function (error, result) {
           should.not.exist(error);
@@ -95,8 +95,8 @@ describe('nodejs', function () {
       });
 
       it('should put external resource as a dictionary', function (done) {
-        var resourceBody: { [propertyName: string]: flatteningClientModels.FlattenedProduct } =  {
-          "Resource1":  { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+        var resourceBody: { [propertyName: string]: flatteningClientModels.FlattenedProduct } = {
+          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
           "Resource2": { "location": "Building 44", "pname": "Product2", "flattenedProductType": "Flat" }
         };
         testClient.putDictionary({ resourceDictionary: resourceBody }, function (error, result) {
@@ -167,7 +167,7 @@ describe('nodejs', function () {
       it('should put external resource as a complex type', function (done) {
         var resourceBody = <flatteningClientModels.ResourceCollection>{
           "arrayofresources": [
-            {"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "pname":"Product1", "flattenedProductType": "Flat" },
+            { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
             { "location": "East US", "pname": "Product2", "flattenedProductType": "Flat" }
           ],
           "dictionaryofresources": {
@@ -201,8 +201,8 @@ describe('nodejs', function () {
 
       it('should post simple product with param flattening', function (done) {
         var resourceBody = <flatteningClientModels.SimpleProduct>{
-            productId: "123",
-            description: "product description",
+          productId: "123",
+          description: "product description",
           maxProductDisplayName: "max name",
           odatavalue: "http://foo"
         };

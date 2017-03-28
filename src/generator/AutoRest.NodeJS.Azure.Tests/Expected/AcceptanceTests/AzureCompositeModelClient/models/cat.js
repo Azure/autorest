@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -23,65 +21,65 @@ var util = require('util');
  * @member {array} [hates]
  *
  */
-function Cat() {
-  Cat['super_'].call(this);
-}
+class Cat extends models['Pet'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(Cat, models['Pet']);
-
-/**
- * Defines the metadata of Cat
- *
- * @returns {object} metadata of Cat
- *
- */
-Cat.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'cat',
-    type: {
-      name: 'Composite',
-      className: 'Cat',
-      modelProperties: {
-        id: {
-          required: false,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        color: {
-          required: false,
-          serializedName: 'color',
-          type: {
-            name: 'String'
-          }
-        },
-        hates: {
-          required: false,
-          serializedName: 'hates',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'DogElementType',
-                type: {
-                  name: 'Composite',
-                  className: 'Dog'
-                }
+  /**
+   * Defines the metadata of Cat
+   *
+   * @returns {object} metadata of Cat
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'cat',
+      type: {
+        name: 'Composite',
+        className: 'Cat',
+        modelProperties: {
+          id: {
+            required: false,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
+          color: {
+            required: false,
+            serializedName: 'color',
+            type: {
+              name: 'String'
+            }
+          },
+          hates: {
+            required: false,
+            serializedName: 'hates',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'DogElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'Dog'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Cat;

@@ -14,7 +14,7 @@
   let self = this;
   return new Promise((resolve, reject) => {
     self._@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclaration), (err, result, request, response) => {
-      let httpOperationResponse = new HttpOperationResponse(request, response);
+      let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
       httpOperationResponse.body = result;
       if (err) { reject(err); }
       else { resolve(httpOperationResponse); }

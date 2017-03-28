@@ -416,7 +416,7 @@ namespace AutoRest.NodeJS.Model
             {
                 var builder = new IndentedStringBuilder("  ");
                 var errorVariable = this.GetUniqueName("deserializationError");
-                return builder.AppendLine("let {0} = new Error(`Error ${{JSON.stringify(error, null, 2)}} occurred in " +
+                return builder.AppendLine("let {0} = new Error(`Error ${{error}} occurred in " +
                     "deserializing the responseBody - ${{responseBody}}`);", errorVariable)
                     .AppendLine("{0}.request = msRest.stripRequest(httpRequest);", errorVariable)
                     .AppendLine("{0}.response = msRest.stripResponse(response);", errorVariable)

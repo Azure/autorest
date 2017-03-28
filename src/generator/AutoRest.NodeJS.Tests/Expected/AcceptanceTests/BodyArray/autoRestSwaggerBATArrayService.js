@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -38,23 +38,25 @@ var operations = require('./operations');
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
  */
-function AutoRestSwaggerBATArrayService(baseUri, options) {
+class AutoRestSwaggerBATArrayService extends ServiceClient {
+  constructor(baseUri, options) {
 
-  if (!options) options = {};
+    if (!options) options = {};
 
-  AutoRestSwaggerBATArrayService['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
+    super(null, options);
+
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    this.arrayModel = new operations.ArrayModel(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  this.arrayModel = new operations.ArrayModel(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestSwaggerBATArrayService, ServiceClient);
 
 module.exports = AutoRestSwaggerBATArrayService;
