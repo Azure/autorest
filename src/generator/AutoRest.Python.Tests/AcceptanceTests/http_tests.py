@@ -195,6 +195,8 @@ class HttpTests(unittest.TestCase):
         self.assertRaisesWithStatus(202,
             self.client.multiple_responses.get200_model_a202_valid)
 
+    @unittest.skipIf(int(requests.__version__.split('.')[1]) > 10,
+                     "The Pipeline hook is broken after 2.10.0")
     def test_server_error_status_codes(self):
 
         self.assertRaisesWithStatus(requests.codes.not_implemented,
