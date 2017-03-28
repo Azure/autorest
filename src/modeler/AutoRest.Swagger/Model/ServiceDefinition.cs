@@ -109,6 +109,7 @@ namespace AutoRest.Swagger.Model
         /// </summary>
         [Rule(typeof(ArmResourcePropertiesBag))]
         [Rule(typeof(BooleanPropertyNotRecommended))]
+        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(TrackedResourceValidation))]
         [Rule(typeof(TrackedResourcePatchOperationValidation))]

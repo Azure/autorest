@@ -21,6 +21,7 @@ import * as https from 'https';
 import * as unzip from 'unzipper'
 import { Console } from './console';
 import * as StreamSink from 'streamsink';
+// import { AutoRest } from "autorest-core"
 
 export class Installer {
   private static ensureExists(dir: string) {
@@ -49,6 +50,9 @@ export class Installer {
   }
   public static get AutorestFolder(): string {
     return this.ensureExists(join(this.PluginsFolder, 'autorest'));
+  }
+  public static get AutorestImplementationPath(): string {
+    return join(Installer.AutorestFolder, this.LatestAutorestVersion, 'node_modules', 'autorest-core');
   }
   public static get LatestAutorestVersion(): string {
     return this.InstalledAutorestVersions.FirstOrDefault();
@@ -85,10 +89,6 @@ export class Installer {
       unpack = download.pipe(tgz().createWriteStream(targetFolder))
     }
 
-    unpack.on('end', () => {
-      setTimeout(resolve, 100);
-    });
-
     unpack.on('error', () => {
       let newUrl = this.GetFallbackUrl(url);
       if (newUrl == null) {
@@ -98,15 +98,24 @@ export class Installer {
       Console.Error(`Failed to download file: ${filename}, trying fallback url.`);
       this.HttpGet(newUrl, filename, targetFolder, resolve, reject);
     });
+
+    unpack.on('finish', () => {
+      setTimeout(resolve, 200);
+    });
+
   }
 
-  public static async InstallFramework() {
-    const pi = await Utility.PlatformInformation();
+  public static async InstallFramework(runtimeId?: string) {
+    if (!runtimeId) {
+      const pi = await Utility.PlatformInformation();
+      runtimeId = pi.runtimeId;
+    }
+
     const fwks = await Github.GetAssets('dotnet-runtime-1.0.3');
-    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${pi.runtimeId}.1.0.3`));
+    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${runtimeId}.1.0.3`));
 
     if (runtime == null) {
-      throw `Unable to find framework for ${pi.runtimeId}`
+      throw `Unable to find framework for ${runtimeId}`
     }
 
     return new Promise<string>((resolve, reject) => {

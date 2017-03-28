@@ -17,6 +17,29 @@ namespace AutoRest.Swagger.Validation
         private const string ApiVersion = "api-version";
 
         /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2014";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
+        /// </summary>
+        public override Category Severity => Category.Warning;
+
+        /// <summary>
+        /// The template message for this Rule. 
+        /// </summary>
+        /// <remarks>
+        /// This may contain placeholders '{0}' for parameterized messages.
+        /// </remarks>
+        public override string MessageTemplate => Resources.ServiceDefinitionParametersMissingMessage;
+
+        /// <summary>
         /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
         /// </summary>
         /// <param name="paths"></param>
@@ -38,19 +61,5 @@ namespace AutoRest.Swagger.Validation
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ApiVersion);
             }
         }
-
-        /// <summary>
-        /// The template message for this Rule. 
-        /// </summary>
-        /// <remarks>
-        /// This may contain placeholders '{0}' for parameterized messages.
-        /// </remarks>
-        public override string MessageTemplate => Resources.ServiceDefinitionParametersMissingMessage;
-
-        /// <summary>
-        /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
-        /// </summary>
-        public override Category Severity => Category.Warning;
-
     }
 }

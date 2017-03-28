@@ -35,6 +35,12 @@ from unittest import TestLoader, TextTestRunner
 from os.path import dirname, pardir, join, realpath
 
 
+def load_tests(test_loader, tests, pattern):
+    cwd = dirname(realpath(__file__))
+    alltests = glob.glob(os.path.join(cwd, "*_tests.py"))
+    test_modules = sorted([os.path.basename(p).rstrip('.py') for p in alltests])
+    return test_loader.loadTestsFromNames(test_modules)
+
 #Ideally this would be in a common helper library shared between the tests
 def start_server_process():
     cmd = "node ../../dev/TestServer/server/startup/www.js"
@@ -50,21 +56,14 @@ def terminate_server_process(process):
     else:
         os.killpg(os.getpgid(process.pid), signal.SIGTERM)  # Send the signal to all the process groups
     
-if __name__ == '__main__':
-
-    cwd = dirname(realpath(__file__))
-
-    print("Current directory is: " + cwd)
-    
+if __name__ == '__main__':    
     server = start_server_process()
     try:
-        all = glob.glob(os.path.join(cwd, "*_tests.py"))
-        test_modules = sorted([os.path.basename(p).rstrip('.py') for p in all])
+        test_loader = TestLoader()
+        suite = load_tests(test_loader, None, None)
 
         runner = TextTestRunner(verbosity=2)
 
-        test_loader = TestLoader()
-        suite = test_loader.loadTestsFromNames(test_modules)
         result = runner.run(suite)
         if not result.wasSuccessful():
             sys.exit(1)

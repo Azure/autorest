@@ -1,9 +1,15 @@
+import { AutoRest } from '../lib/autorest-core';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { CancellationToken } from "../lib/approved-imports/cancallation";
-import { CreateFileUri, ResolveUri } from "../lib/approved-imports/uri";
-import { Message } from "../lib/pipeline/plugin-api";
+import { CancellationToken } from "../lib/ref/cancallation";
+import { CreateFileUri, ResolveUri } from "../lib/ref/uri";
+import { Message } from "../lib/message";
 import { AutoRestDotNetPlugin } from "../lib/pipeline/plugins/autorest-dotnet";
 import { AutoRestPlugin } from "../lib/pipeline/plugin-endpoint";
 import { DataStore } from "../lib/data-store/data-store";
@@ -16,22 +22,21 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const scopeInput = dataStore.CreateScope("input");
     const scopeWork = dataStore.CreateScope("working");
 
-    const dummyPlugin = await AutoRestPlugin.FromModule("./lib/pipeline/plugins/dummy");
+    const dummyPlugin = await AutoRestPlugin.FromModule(`${__dirname}/../lib/pipeline/plugins/dummy`);
     const pluginNames = await dummyPlugin.GetPluginNames(cancellationToken);
     assert.deepStrictEqual(pluginNames, ["dummy"]);
+    const messages: Message[] = [];
     const result = await dummyPlugin.Process(
       "dummy",
       key => key,
       scopeInput,
       scopeWork,
-      scopeWork,
+      m => messages.push(m),
       cancellationToken);
     assert.strictEqual(result, true);
-    const producedFiles = await scopeWork.Enum();
-    assert.strictEqual(producedFiles.length, 1);
-    const fileHandle = await scopeWork.ReadStrict(producedFiles[0]);
-    const message = await fileHandle.ReadObject<Message<number>>();
-    assert.strictEqual(message.payload, 42);
+    assert.strictEqual(messages.length, 1);
+    const message = messages[0];
+    assert.strictEqual(message.Details, 42);
   }
 
   // SKIPPING because Amar's tool is resolved hacky right now (waiting for "getting plugin bits to disk part")
@@ -49,61 +54,66 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
 
     for (let pluginIndex = 0; pluginIndex < pluginNames.length; ++pluginIndex) {
       const scopeWork = dataStore.CreateScope(`working_${pluginIndex}`);
+      const messages: Message[] = [];
       const result = await validationPlugin.Process(
         pluginNames[pluginIndex], _ => null,
         scopeInput,
         scopeWork.CreateScope("output"),
-        scopeWork.CreateScope("messages"),
+        m => messages.push(m),
         cancellationToken);
       assert.strictEqual(result, true);
-      const producedFiles = await scopeWork.Enum();
-      assert.strictEqual(producedFiles.length, (await scopeInput.Enum()).length);
-      const producedFile = await scopeWork.ReadStrict(producedFiles[0]);
+      assert.strictEqual(messages.length, (await scopeInput.Enum()).length);
+      const message = messages[0];
     }
   }
 
   @test @timeout(10000) async "AutoRest.dll AzureValidator"() {
-    const dataStore = new DataStore(CancellationToken.None);
+    const autoRest = new AutoRest();
+    const config = await autoRest.view;
+    const dataStore = config.DataStore;
 
     // load swagger
     const swagger = await LoadLiterateSwagger(
+      config,
       dataStore.CreateScope("input").AsFileScopeReadThrough(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // call validator
-    const autorestPlugin = new AutoRestDotNetPlugin();
+    const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
-    const resultScope = await autorestPlugin.Validate(swagger, pluginScope);
+    const messages: Message[] = [];
+    const resultScope = await autorestPlugin.Validate(swagger, pluginScope, m => messages.push(m));
 
     // check results
-    const results = await resultScope.Enum();
-    assert.notEqual(results.length, 0);
-    for (const result of results) {
-      const resultHandle = await resultScope.ReadStrict(result);
-      const resultObject = await resultHandle.ReadObject<any>();
-      assert.ok(resultObject);
-      assert.ok(resultObject.code);
-      assert.ok(resultObject.message);
-      assert.ok(resultObject.jsonref);
-      assert.ok(resultObject["json-path"]);
-      assert.ok(resultObject.validationCategory);
+    assert.notEqual(messages.length, 0);
+    for (const message of messages) {
+      assert.ok(message);
+      assert.ok(message.Details.code);
+      assert.ok(message.Text);
+      assert.ok(message.Details.jsonref);
+      assert.ok(message.Details["json-path"]);
+      assert.ok(message.Details.validationCategory);
+      assert.strictEqual(message.Plugin, "AzureValidator");
     }
   }
 
   @test @timeout(10000) async "AutoRest.dll Modeler"() {
-    const dataStore = new DataStore(CancellationToken.None);
+    const autoRest = new AutoRest();
+    const config = await autoRest.view;
+    const dataStore = config.DataStore;
 
     // load swagger
     const swagger = await LoadLiterateSwagger(
+      config,
       dataStore.CreateScope("input").AsFileScopeReadThrough(),
       "https://github.com/Azure/azure-rest-api-specs/blob/master/arm-network/2016-12-01/swagger/network.json",
       dataStore.CreateScope("loader"));
 
     // call modeler
-    const autorestPlugin = new AutoRestDotNetPlugin();
+    const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
-    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" });
+    const codeModelHandle = await autorestPlugin.Model(swagger, pluginScope, { namespace: "SomeNamespace" }, m => null);
 
     // check results
     const codeModel = await codeModelHandle.ReadData();
@@ -119,7 +129,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
     const codeModelHandle = await inputScope.ReadStrict(codeModelUri);
 
     // call generator
-    const autorestPlugin = new AutoRestDotNetPlugin();
+    const autorestPlugin = AutoRestDotNetPlugin.Get();
     const pluginScope = dataStore.CreateScope("plugin");
     const resultScope = await autorestPlugin.GenerateCode(
       codeModelHandle,
@@ -134,7 +144,8 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         useDateTimeOffset: false,
         addCredentials: false,
         rubyPackageName: "rubyrubyrubyruby"
-      });
+      },
+      m => null);
 
     // check results
     const results = await resultScope.Enum();
@@ -162,7 +173,7 @@ import { LoadLiterateSwagger } from "../lib/pipeline/swagger-loader";
         pluginNames[pluginIndex], _ => null,
         scopeInput,
         scopeWork.CreateScope("output"),
-        scopeWork.CreateScope("messages"),
+        m => null,
         cancellationToken);
       assert.strictEqual(result, true);
     }

@@ -3,8 +3,8 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as commonmark from "../approved-imports/commonmark";
-import { Mappings } from "../approved-imports/source-map";
+import * as commonmark from "../ref/commonmark";
+import { Mappings } from "../ref/source-map";
 import { DataHandleRead, DataStoreView } from "../data-store/data-store";
 
 export async function Parse(hConfigFile: DataHandleRead, intermediateScope: DataStoreView): Promise<{ data: DataHandleRead, codeBlock: commonmark.Node }[]> {

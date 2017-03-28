@@ -15,7 +15,7 @@
   "activationEvents": [
     "onLanguage:plaintext"
   ],
-  "main": "./out/src/extension",
+  "main": "./client/client",
   "contributes": {
     "configuration": {
       "type": "object",
@@ -26,7 +26,6 @@
           "default": 100,
           "description": "Controls the maximum number of problems produced by the server."
         },
-
         "autorest.trace.server": {
           "type": "string",
           "enum": [
@@ -36,12 +35,12 @@
           ],
           "default": "off",
           "description": "Traces the communication between VSCode and the AutoRest Langugage Service"
-        }        
+        }
       }
     }
   },
   "scripts": {
-    "vscode:prepublish": "tsc -p ./",
+    "_vscode:prepublish": "tsc -p ./",
     "compile": "tsc -watch -p ./",
     "update-vscode": "node ./node_modules/vscode/bin/install",
     "postinstall": "node ./node_modules/vscode/bin/install"
@@ -49,12 +48,24 @@
   "devDependencies": {
     "@types/mocha": "^2.2.33",
     "@types/node": "^6.0.52",
+    "@types/pify": "0.0.28",
+    "@types/vinyl": "^2.0.0",
+    "@types/vinyl-fs": "^2.4.2",
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
-    "typescript": "^2.1.5",
-    "vscode": "^1.0.4"
+    "typescript": "^2.3.0-dev.20170314",
+    "vscode": "^1.1.0",
+    "vscode-languageserver": "^3.2.0"
   },
   "dependencies": {
-    "vscode-languageclient": "^3.0.3"
+    "file-url": "^2.0.2",
+    "get-uri": "^2.0.0",
+    "linq-es2015": "^2.4.13",
+    "pify": "^2.3.0",
+    "semver": "^5.3.0",
+    "strip-bom": "^3.0.0",
+    "urijs": "^1.18.9",
+    "vscode-languageclient": "^3.1.0",
+    "vscode-languageserver": "^3.2.0"
   }
 }

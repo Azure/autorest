@@ -1,24 +1,79 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "command": "gulp",
-    "isShellCommand": true,
-    "args": ["--no-color"],
-    "showOutput": "always",
-    "tasks": [{
-        "taskName": "build",
-        "args": [],
-        "isBuildCommand": true,
-        "isBackground": false,
-        "problemMatcher": [ "$msCompile", "$tsc" ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "0.1.0",
+  "command": "gulp",
+  "isShellCommand": true,
+  "args": [
+    "--no-color"
+  ],
+  "showOutput": "always",
+  "tasks": [
+    {
+      "showInStatusBar": false,
+      "taskName": "build/typescript",
+      "args": [
+        "--watch"
+      ],
+      "isBuildCommand": true,
+      "isBackground": true,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
     },
     {
-        "taskName": "build/typescript",
-        "args": [],
-        "isBuildCommand": true,
-        "isBackground": false,
-        "problemMatcher": [ "$msCompile", "$tsc" ]
+      "suppressTaskName": true,
+      "command": "gulp",
+      "taskName": "build (all)",
+      "args": [
+        "build"
+      ],
+      "isBuildCommand": false,
+      "isBackground": true,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "suppressTaskName": true,
+      "command": "gulp",
+      "taskName": "build (typescript)",
+      "args": [
+        "build/typescript"
+      ],
+      "isBuildCommand": true,
+      "isBackground": false,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "suppressTaskName": true,
+      "command": "${workspaceRoot}/src/autorest-core/node_modules/.bin/mocha",
+      "taskName": "test (autorest-core)",
+      "options": {
+        "cwd": "${workspaceRoot}/src/autorest-core"
+      },
+      "args": [
+        "${workspaceRoot}/src/autorest-core/test"
+      ],
+      "isTestCommand": true,
+      "isBackground": false,
+      "problemMatcher": [
+        "$msCompile",
+        "$tsc"
+      ]
+    },
+    {
+      "taskName": "kill node",
+      "suppressTaskName": true,
+      "command": "pskill",
+      "args": [
+        "node"
+      ]
     }
-    ]
+  ]
 }

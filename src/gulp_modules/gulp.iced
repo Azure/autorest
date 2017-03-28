@@ -88,6 +88,7 @@ Import
   threshold: argv.threshold or ((os.cpus().length)-1 )
   verbose: argv.verbose or null
   workdir: "#{process.env.tmp}/gulp/#{guid()}"
+  watch: argv.watch or false
 
 mkdir "-p", workdir if !test "-d", workdir
 

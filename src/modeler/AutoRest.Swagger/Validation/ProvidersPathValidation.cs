@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.Core.Logging;
 using AutoRest.Swagger.Model;
@@ -11,8 +12,18 @@ namespace AutoRest.Swagger.Validation
 {
     public class ProvidersPathValidation : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
-        private readonly Regex FullRegex = new Regex(@"\/Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/[^\/]+(\/[^\/]+\/\{[^\}]+\})*(\/[^\/]+)?([\?]?[^\/]+)*$", RegexOptions.IgnoreCase);
-        private readonly Regex ProviderRegex = new Regex(@"Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/.+$", RegexOptions.IgnoreCase);
+        private readonly Regex ProviderRegex = new Regex(@"Subscriptions\/\{.+\}\/ResourceGroups\/\{.+\}\/providers\/([^\/]+)(?<typenamesandvalues>[^?]+)([\?]?.+)?$", RegexOptions.IgnoreCase);
+        
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M2061";
+
+        /// <summary>
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.RPCViolation;
+
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Dictionary<string, Operation>> entity, RuleContext context)
         {
             // get all operation objects that are either of get or post type
@@ -20,15 +31,20 @@ namespace AutoRest.Swagger.Validation
 
             foreach (var pathObj in entity)
             {
-                // if url is not of the providers pattern or if it ends with /operations, skip
-                if (!ProviderRegex.IsMatch(pathObj.Key))
+                var path = pathObj.Key.Trim('/');
+                var match = ProviderRegex.Match(path);
+                
+                // if url is not of the providers pattern, skip
+                if (!match.Success)
                 {
                     continue;
                 }
 
-                if (!FullRegex.IsMatch(pathObj.Key.TrimEnd('/')))
+                var typeValueTokens = match.Groups["typenamesandvalues"].Value.Trim('/').Split('/').Where((item, index) => index % 2 != 0);
+                typeValueTokens = typeValueTokens.Where(token => !(token.Contains("{") && token.Contains("}")));
+                if (typeValueTokens.Any())
                 {
-                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, pathObj.Key);
+                    yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Join(", ", typeValueTokens), pathObj.Key);
                 }
             }
         }
@@ -39,7 +55,7 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => "Path {0} must follow the pattern Subscriptions/{{subscriptionId}}/ResourceGroups/{{resourceGroupName}}/providers/namespace/typename1/{{typename1type}}/typename2/{{typename2type}}/operations";
+        public override string MessageTemplate => "Type values \"{0}\" in path \"{1}\" have default value(s), please consider parameterizing them";
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)

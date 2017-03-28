@@ -12,7 +12,7 @@ namespace AutoRest.Swagger.Validation
     /// <summary>
     /// Flags properties of boolean type as they are not recommended, unless it's the only option.
     /// </summary>
-    public class BooleanPropertyNotRecommended : TypedRule<Dictionary<string, Schema>>
+    public class BooleanPropertyNotRecommended : TypedRule<SwaggerObject>
     {
         /// <summary>
         /// Id of the Rule.
@@ -42,25 +42,26 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="definitions">Operation Definition to validate</param>
         /// <returns>true if there are no propeties of type boolean, false otherwise.</returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
+        public override IEnumerable<ValidationMessage> GetValidationMessages(SwaggerObject entity, RuleContext context)
         {
-            formatParameters = null;
-            List<string> booleanProperties = new List<string>();
-            foreach (KeyValuePair<string, Schema> definition in definitions)
+            if (entity.Type?.Equals(DataType.Boolean) == true)
             {
-                if (definition.Value?.Properties != null)
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Path.ReadablePath);
+            }
+            if (entity.GetType() == typeof(Schema) && ((Schema)entity).Properties != null)
+            {
+                foreach (KeyValuePair<string, Schema> property in ((Schema)entity).Properties)
                 {
-                    foreach (KeyValuePair<string, Schema> property in definition.Value.Properties)
+                    if (property.Value?.Type?.Equals(DataType.Boolean) == true)
                     {
-                        if (property.Value.Type.ToString().ToLower().Equals("boolean"))
-                        {
-                            booleanProperties.Add(definition.Key + "/" + property.Key);
-                        }
+                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, property.Key);
                     }
                 }
             }
-            formatParameters = new[] { string.Join(", ", booleanProperties.ToArray()) };
-            return (booleanProperties.Count == 0);
+            if (entity.GetType() == typeof(SwaggerParameter) && ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true)
+            {
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ((SwaggerParameter)entity).Name);
+            }
         }
     }
 }
