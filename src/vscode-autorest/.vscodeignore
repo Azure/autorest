@@ -5,6 +5,17 @@ out/test/**
 test/**
 src/**
 **/*.map
+**/*.ts
+cfg.md
+foo.md
+
 .gitignore
 tsconfig.json
 vsc-extension-quickstart.md
+
+node_modules/autorest/node_modules/@types/**
+node_modules/autorest/node_modules/autorest-core/**
+node_modules/autorest/node_modules/del/**
+node_modules/autorest/node_modules/mocha/**
+node_modules/autorest/node_modules/mocha-typescript/**
+node_modules/autorest/node_modules/typescript/**

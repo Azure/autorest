@@ -1,15 +1,101 @@
 import { ResolveUri, CreateFileUri, NormalizeUri, FileUriToPath } from '../lib/ref/uri';
-import { AutoRest } from '../../autorest';
 
 import { DocumentContext } from './file-system';
 import * as a from '../lib/ref/async'
-import { EventEmitter, IEvent, IFileSystem, DocumentType, DocumentExtension, } from "autorest";
-import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments, DidChangeWatchedFilesParams, Diagnostic, DiagnosticSeverity, Range, Position } from "vscode-languageserver";
+import { EventEmitter, IEvent, IFileSystem, AutoRest } from "autorest";
+// import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments, DidChangeWatchedFilesParams, Diagnostic, DiagnosticSeverity, Range, Position } from "vscode-languageserver";
 import { From } from '../lib/ref/linq'
 import * as vfs from 'vinyl-fs';
 import * as path from 'path';
 import * as crypto from 'crypto'
-import { connection } from "./server"
+
+import {
+  IPCMessageReader, IPCMessageWriter,
+  createConnection, IConnection, TextDocumentSyncKind,
+  TextDocuments, TextDocument, Diagnostic, DiagnosticSeverity,
+  InitializeParams, InitializeResult, TextDocumentPositionParams,
+  CompletionItem, CompletionItemKind, Range, Position, DidChangeWatchedFilesParams, TextDocumentChangeEvent
+} from 'vscode-languageserver';
+
+// Create a connection for the server. The connection uses Node's IPC as a transport
+export const connection: IConnection = (<any>global).connection
+
+// The settings interface describe the server relevant settings part
+interface Settings {
+  autorest: AutoRestSettings;
+}
+
+// These are the settings we defined in the client's package.json
+// file
+interface AutoRestSettings {
+  maxNumberOfProblems: number;
+}
+
+
+// After the server has started the client sends an initialize request. The server receives
+// in the passed params the rootPath of the workspace plus the client capabilities. 
+connection.onInitialize(async (params): Promise<InitializeResult> => {
+  connection.console.log('Starting Server Side...');
+  manager.SetRootUri(params.rootUri);
+
+  return {
+    capabilities: {
+      // Tell the client that the server works in FULL text document sync mode
+      textDocumentSync: TextDocumentSyncKind.Full,
+
+      // Tell the client that the server support code complete
+      completionProvider: {
+        resolveProvider: true
+      }
+
+    }
+  }
+});
+
+
+// hold the maxNumberOfProblems setting
+let maxNumberOfProblems: number;
+// The settings have changed. Is send on server activation
+// as well.
+connection.onDidChangeConfiguration((change) => {
+  let settings = <Settings>change.settings;
+  maxNumberOfProblems = settings.autorest.maxNumberOfProblems || 100;
+  // Revalidate any open text documents
+  // documents.all().forEach(validateTextDocument);
+});
+
+// This handler provides the initial list of the completion items.
+connection.onCompletion((textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
+  // The pass parameter contains the position of the text document in 
+  // which code complete got requested. For the example we ignore this
+  // info and always provide the same completion items.
+  return [
+    {
+      label: 'TypeScript',
+      kind: CompletionItemKind.Text,
+      data: 1
+    },
+    {
+      label: 'JavaScript',
+      kind: CompletionItemKind.Text,
+      data: 2
+    }
+  ]
+});
+
+// This handler resolve additional information for the item selected in
+// the completion list.
+connection.onCompletionResolve((item: CompletionItem): CompletionItem => {
+  if (item.data === 1) {
+    item.detail = 'TypeScript details',
+      item.documentation = 'TypeScript documentation'
+  } else if (item.data === 2) {
+    item.detail = 'JavaScript details',
+      item.documentation = 'JavaScript documentation'
+  }
+  return item;
+});
+
 
 const md5 = (content: string) => content ? crypto.createHash('md5').update(content).digest("hex") : null;
 
@@ -244,40 +330,35 @@ export class AutoRestManager extends TextDocuments {
   }
 
   private async opened(open: TextDocumentChangeEvent): Promise<void> {
-    if (!DocumentType[open.document.languageId]) {
-      // we don't do anything with files that aren't one of our concerned types.
-      return;
-    }
+    if (AutoRest.IsConfigurationExtension(open.document.languageId) || AutoRest.IsSwaggerExtension(open.document.languageId)) {
+      var documentUri = NormalizeUri(open.document.uri);
+      let doc = this.trackedFiles.get(documentUri);
+      // are we tracking this file?
+      if (doc) {
+        // yes we are. 
+        doc.SetContent(open.document.getText());
+        doc.IsActive = true;
+        return;
+      }
 
-    var documentUri = NormalizeUri(open.document.uri);
-    let doc = this.trackedFiles.get(documentUri);
-    // are we tracking this file?
-    if (doc) {
-      // yes we are. 
-      doc.SetContent(open.document.getText());
+      // not before this, but now we should
+      let ctx = await this.GetDocumentContextForDocument(documentUri);
+      // hey garrett -- make sure that the event dispatch in vscode doesn't wait for this method or makes this bad for some reason.
+      doc = await this.AcquireTrackedFile(documentUri)
       doc.IsActive = true;
-      return;
+      ctx.Track(doc);
     }
-
-    // not before this, but now we should
-    let ctx = await this.GetDocumentContextForDocument(documentUri);
-    // hey garrett -- make sure that the event dispatch in vscode doesn't wait for this method or makes this bad for some reason.
-    doc = await this.AcquireTrackedFile(documentUri)
-    doc.IsActive = true;
-    ctx.Track(doc);
   }
 
   private changed(change: TextDocumentChangeEvent) {
-    if (!DocumentType[change.document.languageId]) {
-      // we don't do anything with files that aren't one of our concerned types.
-      return;
-    }
-    var documentUri = NormalizeUri(change.document.uri);
+    if (AutoRest.IsConfigurationExtension(change.document.languageId) || AutoRest.IsSwaggerExtension(change.document.languageId)) {
+      var documentUri = NormalizeUri(change.document.uri);
 
-    let doc = this.trackedFiles.get(documentUri);
-    if (doc) {
-      // set the document content.
-      doc.SetContent(change.document.getText());
+      let doc = this.trackedFiles.get(documentUri);
+      if (doc) {
+        // set the document content.
+        doc.SetContent(change.document.getText());
+      }
     }
   }
 
@@ -362,6 +443,10 @@ export class AutoRestManager extends TextDocuments {
     });
   }
 }
+
+let manager: AutoRestManager = new AutoRestManager(connection);
+// Listen on the connection
+connection.listen();
 
 /// this stuff is to force __asyncValues to get emitted: see https://github.com/Microsoft/TypeScript/issues/14725
 async function* yieldFromMap(): AsyncIterable<string> {

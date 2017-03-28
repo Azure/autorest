@@ -1,11 +1,11 @@
 import * as a from '../lib/ref/async'
-import { IFileSystem, AutoRest, EventEmitter, IEvent, DocumentExtension } from "autorest";
+import { IFileSystem, AutoRest, EventEmitter, IEvent } from "autorest";
 
 import { IConnection, TextDocumentIdentifier, TextDocumentChangeEvent, TextDocuments } from "vscode-languageserver";
-import { File, AutoRestManager } from "./autorest-manager"
+import { File, AutoRestManager, connection } from "./autorest-manager"
 import { From } from "../lib/ref/linq"
 import { CreateFileUri, FileUriToPath, NormalizeUri, ResolveUri, GetExtension } from '../lib/ref/uri';
-import { connection } from "./server";
+
 import * as path from "path"
 
 export class DocumentContext extends EventEmitter implements IFileSystem {

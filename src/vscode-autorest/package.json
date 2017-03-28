@@ -40,7 +40,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "tsc -p ./",
+    "_vscode:prepublish": "tsc -p ./",
     "compile": "tsc -watch -p ./",
     "update-vscode": "node ./node_modules/vscode/bin/install",
     "postinstall": "node ./node_modules/vscode/bin/install"
@@ -53,18 +53,20 @@
     "@types/vinyl-fs": "^2.4.2",
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
-    "pify": "^2.3.0",
     "typescript": "^2.3.0-dev.20170314",
-    "vinyl": "^2.0.1",
-    "vinyl-fs": "^2.4.4",
     "vscode": "^1.1.0",
     "vscode-languageserver": "^3.2.0"
   },
   "dependencies": {
+    "autorest": "^0.9.21",
     "file-url": "^2.0.2",
-    "urijs": "^1.18.9",
     "get-uri": "^2.0.0",
+    "linq-es2015": "^2.4.13",
     "pify": "^2.3.0",
-    "vscode-languageclient": "^3.1.0"
+    "semver": "^5.3.0",
+    "strip-bom": "^3.0.0",
+    "urijs": "^1.18.9",
+    "vscode-languageclient": "^3.1.0",
+    "vscode-languageserver": "^3.2.0"
   }
 }

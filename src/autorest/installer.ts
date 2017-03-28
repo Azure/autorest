@@ -21,7 +21,7 @@ import * as https from 'https';
 import * as unzip from 'unzipper'
 import { Console } from './console';
 import * as StreamSink from 'streamsink';
-import { AutoRest } from "autorest-core"
+// import { AutoRest } from "autorest-core"
 
 export class Installer {
   private static ensureExists(dir: string) {

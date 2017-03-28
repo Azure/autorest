@@ -11,7 +11,7 @@ var child: child_process.ChildProcess;
 before(function (done) {
   var isWin = /^win/.test(process.platform);
   var nodeCmd = 'node.exe';
-  if(!isWin){
+  if (!isWin) {
     nodeCmd = 'node'
   }
   var started = false;
