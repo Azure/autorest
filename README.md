@@ -24,12 +24,14 @@ AutoRest has been thru a lot of changes recently, most notably:
 
 # Installing Autorest 
 
-Installing AutoRest on Windows, MacOS or Linux involves two steps:
+Installing AutoRest on Windows, MacOS or Linux involves three steps:
 
-1. __Install [Node.js](https://nodejs.org/en/)__ (6.9.5 or greater)
+1. __Install [.NET Core SDK](https://www.microsoft.com/net/core)__
+
+2. __Install [Node.js](https://nodejs.org/en/)__ (6.9.5 or greater)
 > for more help, check out [Installing Node.JS on different platforms](./docs/developer/workstation.md#nodejs)
 
-2. __Install AutoRest__ using `npm`
+3. __Install AutoRest__ using `npm`
 
   ``` powershell
   # Depending on your configuration you may need to be elevated or root to run this. (on OSX/Linux use 'sudo' )
