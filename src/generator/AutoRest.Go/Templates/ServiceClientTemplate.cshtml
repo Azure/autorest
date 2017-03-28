@@ -26,8 +26,6 @@ import (
 
 @EmptyLine
 const (
-    // APIVersion is the version of the @(Model.ServiceName)
-    APIVersion = "@Model.ApiVersion"
     @if (!Model.IsCustomBaseUri)
     {
         @EmptyLine
@@ -47,8 +45,7 @@ type @(Model.BaseClient) struct {
     @if (!Model.IsCustomBaseUri)
     {
         @:BaseURI string
-    }    
-    APIVersion string
+    }
     @foreach (var p in Model.Properties)
     {
         if (!p.SerializedName.FixedValue.IsApiVersion())
@@ -83,7 +80,6 @@ func New(@(Model.GlobalParameters))@(Model.BaseClient) {
         return @(Model.BaseClient){
             Client: autorest.NewClientWithUserAgent(UserAgent()),
             BaseURI: baseURI,
-            APIVersion: APIVersion,
             @foreach (var p in Model.Properties)
             {
                 if (!p.SerializedName.Value.IsApiVersion())
@@ -103,7 +99,6 @@ else
     func NewWithoutDefaults(@(Model.AllGlobalParameters)) @(Model.BaseClient) {
         return @(Model.BaseClient){
             Client: autorest.NewClientWithUserAgent(UserAgent()),
-            APIVersion: APIVersion,
             @foreach(var p in Model.Properties)
             {
                 if (!p.SerializedName.Value.IsApiVersion())

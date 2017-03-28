@@ -73,18 +73,22 @@ func (client @(Model.Owner)) @(Model.MethodSignature) (@Model.MethodReturnSignat
 @EmptyLine
 // @(Model.PreparerMethodName) prepares the @(Model.Name) request.
 func (client @(Model.Owner)) @(Model.PreparerMethodName)(@(Model.MethodParametersSignature)) (*http.Request, error) {
-@if (Model.IsCustomBaseUri && Model.URLParameters.Count() > 0)
+@if (Model.IsCustomBaseUri && Model.URLParameters.Any())
 {
     @:@(Model.URLMap)
     @:@EmptyLine
 }
-@if (Model.PathParameters.Count() > 0)
+@if (Model.PathParameters.Any())
 {
     @:@(Model.PathMap)
     @:@EmptyLine
 }
-@if (Model.QueryParameters.Count() > 0)
+@if (Model.QueryParameters.Any())
 {
+    @if (Model.QueryParameters.Any(p => p.GetParameterName().IsApiVersion())) 
+    {
+        @:@(string.Format("const APIVersion = \"{0}\"", Model.APIVersion))
+    }
     @:@(Model.QueryMap)
     foreach (var p in Model.OptionalQueryParameters)
     {
