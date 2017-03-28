@@ -28,7 +28,7 @@ describe('nodejs', function () {
         should.not.exist(error);
         //console.log(`The test coverage for azure is ${JSON.stringify(result)).`);
         
-        var total = _.keys(result).length;
+        var total = Object.keys(result).length;
         var passed = 0;
         Object.keys(result).forEach(function(item) {
           if (result[item] > 0) {
