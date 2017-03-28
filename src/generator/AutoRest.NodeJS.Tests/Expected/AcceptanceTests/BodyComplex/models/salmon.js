@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -23,84 +21,84 @@ var util = require('util');
  * @member {boolean} [iswild]
  *
  */
-function Salmon() {
-  Salmon['super_'].call(this);
-}
+class Salmon extends models['Fish'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(Salmon, models['Fish']);
-
-/**
- * Defines the metadata of Salmon
- *
- * @returns {object} metadata of Salmon
- *
- */
-Salmon.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'salmon',
-    type: {
-      name: 'Composite',
-      className: 'Salmon',
-      modelProperties: {
-        species: {
-          required: false,
-          serializedName: 'species',
-          type: {
-            name: 'String'
-          }
-        },
-        length: {
-          required: true,
-          serializedName: 'length',
-          type: {
-            name: 'Number'
-          }
-        },
-        siblings: {
-          required: false,
-          serializedName: 'siblings',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'FishElementType',
-                type: {
-                  name: 'Composite',
-                  polymorphicDiscriminator: {
-                    serializedName: 'fishtype',
-                    clientName: 'fishtype'
-                  },
-                  uberParent: 'Fish',
-                  className: 'Fish'
-                }
+  /**
+   * Defines the metadata of Salmon
+   *
+   * @returns {object} metadata of Salmon
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'salmon',
+      type: {
+        name: 'Composite',
+        className: 'Salmon',
+        modelProperties: {
+          species: {
+            required: false,
+            serializedName: 'species',
+            type: {
+              name: 'String'
             }
-          }
-        },
-        fishtype: {
-          required: true,
-          serializedName: 'fishtype',
-          type: {
-            name: 'String'
-          }
-        },
-        location: {
-          required: false,
-          serializedName: 'location',
-          type: {
-            name: 'String'
-          }
-        },
-        iswild: {
-          required: false,
-          serializedName: 'iswild',
-          type: {
-            name: 'Boolean'
+          },
+          length: {
+            required: true,
+            serializedName: 'length',
+            type: {
+              name: 'Number'
+            }
+          },
+          siblings: {
+            required: false,
+            serializedName: 'siblings',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'FishElementType',
+                  type: {
+                    name: 'Composite',
+                    polymorphicDiscriminator: {
+                      serializedName: 'fishtype',
+                      clientName: 'fishtype'
+                    },
+                    uberParent: 'Fish',
+                    className: 'Fish'
+                  }
+              }
+            }
+          },
+          fishtype: {
+            required: true,
+            serializedName: 'fishtype',
+            type: {
+              name: 'String'
+            }
+          },
+          location: {
+            required: false,
+            serializedName: 'location',
+            type: {
+              name: 'String'
+            }
+          },
+          iswild: {
+            required: false,
+            serializedName: 'iswild',
+            type: {
+              name: 'Boolean'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Salmon;

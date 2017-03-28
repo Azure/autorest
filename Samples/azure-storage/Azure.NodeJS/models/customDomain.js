@@ -17,40 +17,42 @@
  * is enabled. Default value is false. This should only be set on updates
  *
  */
-function CustomDomain() {
-}
+class CustomDomain {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of CustomDomain
- *
- * @returns {object} metadata of CustomDomain
- *
- */
-CustomDomain.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'CustomDomain',
-    type: {
-      name: 'Composite',
-      className: 'CustomDomain',
-      modelProperties: {
-        name: {
-          required: true,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        useSubDomain: {
-          required: false,
-          serializedName: 'useSubDomain',
-          type: {
-            name: 'Boolean'
+  /**
+   * Defines the metadata of CustomDomain
+   *
+   * @returns {object} metadata of CustomDomain
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'CustomDomain',
+      type: {
+        name: 'Composite',
+        className: 'CustomDomain',
+        modelProperties: {
+          name: {
+            required: true,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
+          useSubDomain: {
+            required: false,
+            serializedName: 'useSubDomain',
+            type: {
+              name: 'Boolean'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = CustomDomain;

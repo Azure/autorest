@@ -17,33 +17,35 @@
  * @member {number} [value]
  *
  */
-function IntOptionalWrapper() {
-}
+class IntOptionalWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of IntOptionalWrapper
- *
- * @returns {object} metadata of IntOptionalWrapper
- *
- */
-IntOptionalWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'int-optional-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'IntOptionalWrapper',
-      modelProperties: {
-        value: {
-          required: false,
-          serializedName: 'value',
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of IntOptionalWrapper
+   *
+   * @returns {object} metadata of IntOptionalWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'int-optional-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'IntOptionalWrapper',
+        modelProperties: {
+          value: {
+            required: false,
+            serializedName: 'value',
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = IntOptionalWrapper;

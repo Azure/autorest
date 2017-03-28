@@ -19,54 +19,56 @@
  * @member {string} [file] Gets the file endpoint.
  *
  */
-function Endpoints() {
-}
+class Endpoints {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Endpoints
- *
- * @returns {object} metadata of Endpoints
- *
- */
-Endpoints.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Endpoints',
-    type: {
-      name: 'Composite',
-      className: 'Endpoints',
-      modelProperties: {
-        blob: {
-          required: false,
-          serializedName: 'blob',
-          type: {
-            name: 'String'
-          }
-        },
-        queue: {
-          required: false,
-          serializedName: 'queue',
-          type: {
-            name: 'String'
-          }
-        },
-        table: {
-          required: false,
-          serializedName: 'table',
-          type: {
-            name: 'String'
-          }
-        },
-        file: {
-          required: false,
-          serializedName: 'file',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of Endpoints
+   *
+   * @returns {object} metadata of Endpoints
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Endpoints',
+      type: {
+        name: 'Composite',
+        className: 'Endpoints',
+        modelProperties: {
+          blob: {
+            required: false,
+            serializedName: 'blob',
+            type: {
+              name: 'String'
+            }
+          },
+          queue: {
+            required: false,
+            serializedName: 'queue',
+            type: {
+              name: 'String'
+            }
+          },
+          table: {
+            required: false,
+            serializedName: 'table',
+            type: {
+              name: 'String'
+            }
+          },
+          file: {
+            required: false,
+            serializedName: 'file',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Endpoints;

@@ -21,7 +21,7 @@
     "@types/mocha": "^2.2.39",
     "@types/should": "^8.1.30",
     "@types/node": "^6.0.66",
-    "ms-rest": "../../../../upstream/azure-sdk-for-node/runtime/ms-rest",
+    "ms-rest": "../../../node_modules/nodesdk-runtime/runtime/ms-rest",
     "jshint": "2.9.4",
     "xunit-file": "0.0.5",
     "mocha": "^3.2.0",

@@ -17,42 +17,44 @@
  * @member {string} [field1] Sample string.
  *
  */
-function RefColorConstant() {
-}
+class RefColorConstant {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of RefColorConstant
- *
- * @returns {object} metadata of RefColorConstant
- *
- */
-RefColorConstant.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'RefColorConstant',
-    type: {
-      name: 'Composite',
-      className: 'RefColorConstant',
-      modelProperties: {
-        colorConstant: {
-          required: true,
-          isConstant: true,
-          serializedName: 'ColorConstant',
-          defaultValue: 'green-color',
-          type: {
-            name: 'String'
-          }
-        },
-        field1: {
-          required: false,
-          serializedName: 'field1',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of RefColorConstant
+   *
+   * @returns {object} metadata of RefColorConstant
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'RefColorConstant',
+      type: {
+        name: 'Composite',
+        className: 'RefColorConstant',
+        modelProperties: {
+          colorConstant: {
+            required: true,
+            isConstant: true,
+            serializedName: 'ColorConstant',
+            defaultValue: 'green-color',
+            type: {
+              name: 'String'
+            }
+          },
+          field1: {
+            required: false,
+            serializedName: 'field1',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = RefColorConstant;

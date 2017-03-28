@@ -8,37 +8,37 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestParameterizedCustomHostTestClient {
-        /**
-     * @class
-     * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
-     * @constructor
-     *
-     * @param {string} subscriptionId - The subscription id with value 'test12'.
-     *
-     * @param {object} [options] - The parameter options
-     *
-     * @param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @param {object} [options.requestOptions] - Options for the underlying request object
-     * {@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-     * @param {string} [options.dnsSuffix] - A string value that is used as a global part of the parameterized host. Default value 'host'.
-     *
-     */
-    constructor(subscriptionId: string, options?: ServiceClientOptions);
+  /**
+   * @class
+   * Initializes a new instance of the AutoRestParameterizedCustomHostTestClient class.
+   * @constructor
+   *
+   * @param {string} subscriptionId - The subscription id with value 'test12'.
+   *
+   * @param {object} [options] - The parameter options
+   *
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   * @param {string} [options.dnsSuffix] - A string value that is used as a global part of the parameterized host. Default value 'host'.
+   *
+   */
+  constructor(subscriptionId: string, options?: ServiceClientOptions);
 
-    subscriptionId: string;
+  subscriptionId: string;
 
-    dnsSuffix: string;
+  dnsSuffix: string;
 
-    // Operation groups
-    paths: operations.Paths;
-    }
+  // Operation groups
+  paths: operations.Paths;
+}
 
 export = AutoRestParameterizedCustomHostTestClient;

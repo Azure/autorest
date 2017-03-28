@@ -23,37 +23,39 @@
  * @member {string} tenant Sets the tenant to use.
  *
  */
-function CustomParameterGroup() {
-}
+class CustomParameterGroup {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of CustomParameterGroup
- *
- * @returns {object} metadata of CustomParameterGroup
- *
- */
-CustomParameterGroup.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'CustomParameterGroup',
-      modelProperties: {
-        apiVersion: {
-          required: true,
-          type: {
-            name: 'String'
-          }
-        },
-        tenant: {
-          required: true,
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of CustomParameterGroup
+   *
+   * @returns {object} metadata of CustomParameterGroup
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'CustomParameterGroup',
+        modelProperties: {
+          apiVersion: {
+            required: true,
+            type: {
+              name: 'String'
+            }
+          },
+          tenant: {
+            required: true,
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = CustomParameterGroup;

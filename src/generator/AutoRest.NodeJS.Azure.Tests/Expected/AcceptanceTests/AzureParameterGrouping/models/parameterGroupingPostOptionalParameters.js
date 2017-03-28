@@ -21,38 +21,40 @@
  * @member {number} [query] Query parameter with default. Default value: 30 .
  *
  */
-function ParameterGroupingPostOptionalParameters() {
-}
+class ParameterGroupingPostOptionalParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ParameterGroupingPostOptionalParameters
- *
- * @returns {object} metadata of ParameterGroupingPostOptionalParameters
- *
- */
-ParameterGroupingPostOptionalParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'ParameterGroupingPostOptionalParameters',
-      modelProperties: {
-        customHeader: {
-          required: false,
-          type: {
-            name: 'String'
-          }
-        },
-        query: {
-          required: false,
-          defaultValue: 30,
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of ParameterGroupingPostOptionalParameters
+   *
+   * @returns {object} metadata of ParameterGroupingPostOptionalParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'ParameterGroupingPostOptionalParameters',
+        modelProperties: {
+          customHeader: {
+            required: false,
+            type: {
+              name: 'String'
+            }
+          },
+          query: {
+            required: false,
+            defaultValue: 30,
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ParameterGroupingPostOptionalParameters;

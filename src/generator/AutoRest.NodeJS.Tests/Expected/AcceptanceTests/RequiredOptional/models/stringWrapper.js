@@ -17,33 +17,35 @@
  * @member {string} value
  *
  */
-function StringWrapper() {
-}
+class StringWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StringWrapper
- *
- * @returns {object} metadata of StringWrapper
- *
- */
-StringWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'string-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'StringWrapper',
-      modelProperties: {
-        value: {
-          required: true,
-          serializedName: 'value',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of StringWrapper
+   *
+   * @returns {object} metadata of StringWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'string-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'StringWrapper',
+        modelProperties: {
+          value: {
+            required: true,
+            serializedName: 'value',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StringWrapper;

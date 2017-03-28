@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -23,34 +23,36 @@ var models = require('./index');
  * @member {string} [value.name]
  *
  */
-function ClassWrapper() {
-}
+class ClassWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ClassWrapper
- *
- * @returns {object} metadata of ClassWrapper
- *
- */
-ClassWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'class-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'ClassWrapper',
-      modelProperties: {
-        value: {
-          required: true,
-          serializedName: 'value',
-          type: {
-            name: 'Composite',
-            className: 'Product'
+  /**
+   * Defines the metadata of ClassWrapper
+   *
+   * @returns {object} metadata of ClassWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'class-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'ClassWrapper',
+        modelProperties: {
+          value: {
+            required: true,
+            serializedName: 'value',
+            type: {
+              name: 'Composite',
+              className: 'Product'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ClassWrapper;

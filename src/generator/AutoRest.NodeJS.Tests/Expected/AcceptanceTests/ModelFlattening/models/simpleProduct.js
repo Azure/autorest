@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -27,73 +25,73 @@ var util = require('util');
  * @member {string} [odatavalue] URL value.
  *
  */
-function SimpleProduct() {
-  SimpleProduct['super_'].call(this);
-}
+class SimpleProduct extends models['BaseProduct'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(SimpleProduct, models['BaseProduct']);
-
-/**
- * Defines the metadata of SimpleProduct
- *
- * @returns {object} metadata of SimpleProduct
- *
- */
-SimpleProduct.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'SimpleProduct',
-    type: {
-      name: 'Composite',
-      className: 'SimpleProduct',
-      modelProperties: {
-        productId: {
-          required: true,
-          serializedName: 'base_product_id',
-          type: {
-            name: 'String'
-          }
-        },
-        description: {
-          required: false,
-          serializedName: 'base_product_description',
-          type: {
-            name: 'String'
-          }
-        },
-        maxProductDisplayName: {
-          required: true,
-          serializedName: 'details.max_product_display_name',
-          type: {
-            name: 'String'
-          }
-        },
-        capacity: {
-          required: true,
-          isConstant: true,
-          serializedName: 'details.max_product_capacity',
-          defaultValue: 'Large',
-          type: {
-            name: 'String'
-          }
-        },
-        genericValue: {
-          required: false,
-          serializedName: 'details.max_product_image.generic_value',
-          type: {
-            name: 'String'
-          }
-        },
-        odatavalue: {
-          required: false,
-          serializedName: 'details.max_product_image.@odata\\.value',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of SimpleProduct
+   *
+   * @returns {object} metadata of SimpleProduct
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'SimpleProduct',
+      type: {
+        name: 'Composite',
+        className: 'SimpleProduct',
+        modelProperties: {
+          productId: {
+            required: true,
+            serializedName: 'base_product_id',
+            type: {
+              name: 'String'
+            }
+          },
+          description: {
+            required: false,
+            serializedName: 'base_product_description',
+            type: {
+              name: 'String'
+            }
+          },
+          maxProductDisplayName: {
+            required: true,
+            serializedName: 'details.max_product_display_name',
+            type: {
+              name: 'String'
+            }
+          },
+          capacity: {
+            required: true,
+            isConstant: true,
+            serializedName: 'details.max_product_capacity',
+            defaultValue: 'Large',
+            type: {
+              name: 'String'
+            }
+          },
+          genericValue: {
+            required: false,
+            serializedName: 'details.max_product_image.generic_value',
+            type: {
+              name: 'String'
+            }
+          },
+          odatavalue: {
+            required: false,
+            serializedName: 'details.max_product_image.@odata\\.value',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = SimpleProduct;

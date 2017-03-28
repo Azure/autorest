@@ -29,48 +29,50 @@
  * in more detail.
  *
  */
-function CheckNameAvailabilityResult() {
-}
+class CheckNameAvailabilityResult {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of CheckNameAvailabilityResult
- *
- * @returns {object} metadata of CheckNameAvailabilityResult
- *
- */
-CheckNameAvailabilityResult.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'CheckNameAvailabilityResult',
-    type: {
-      name: 'Composite',
-      className: 'CheckNameAvailabilityResult',
-      modelProperties: {
-        nameAvailable: {
-          required: false,
-          serializedName: 'nameAvailable',
-          type: {
-            name: 'Boolean'
-          }
-        },
-        reason: {
-          required: false,
-          serializedName: 'reason',
-          type: {
-            name: 'Enum',
-            allowedValues: [ 'AccountNameInvalid', 'AlreadyExists' ]
-          }
-        },
-        message: {
-          required: false,
-          serializedName: 'message',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of CheckNameAvailabilityResult
+   *
+   * @returns {object} metadata of CheckNameAvailabilityResult
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'CheckNameAvailabilityResult',
+      type: {
+        name: 'Composite',
+        className: 'CheckNameAvailabilityResult',
+        modelProperties: {
+          nameAvailable: {
+            required: false,
+            serializedName: 'nameAvailable',
+            type: {
+              name: 'Boolean'
+            }
+          },
+          reason: {
+            required: false,
+            serializedName: 'reason',
+            type: {
+              name: 'Enum',
+              allowedValues: [ 'AccountNameInvalid', 'AlreadyExists' ]
+            }
+          },
+          message: {
+            required: false,
+            serializedName: 'message',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = CheckNameAvailabilityResult;

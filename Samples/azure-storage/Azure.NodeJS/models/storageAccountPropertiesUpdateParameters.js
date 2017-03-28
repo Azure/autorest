@@ -3,7 +3,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -28,42 +28,44 @@ var models = require('./index');
  * on updates
  *
  */
-function StorageAccountPropertiesUpdateParameters() {
-}
+class StorageAccountPropertiesUpdateParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StorageAccountPropertiesUpdateParameters
- *
- * @returns {object} metadata of StorageAccountPropertiesUpdateParameters
- *
- */
-StorageAccountPropertiesUpdateParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccountPropertiesUpdateParameters',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccountPropertiesUpdateParameters',
-      modelProperties: {
-        accountType: {
-          required: false,
-          serializedName: 'accountType',
-          type: {
-            name: 'Enum',
-            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
-          }
-        },
-        customDomain: {
-          required: false,
-          serializedName: 'customDomain',
-          type: {
-            name: 'Composite',
-            className: 'CustomDomain'
+  /**
+   * Defines the metadata of StorageAccountPropertiesUpdateParameters
+   *
+   * @returns {object} metadata of StorageAccountPropertiesUpdateParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccountPropertiesUpdateParameters',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccountPropertiesUpdateParameters',
+        modelProperties: {
+          accountType: {
+            required: false,
+            serializedName: 'accountType',
+            type: {
+              name: 'Enum',
+              allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+            }
+          },
+          customDomain: {
+            required: false,
+            serializedName: 'customDomain',
+            type: {
+              name: 'Composite',
+              className: 'CustomDomain'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccountPropertiesUpdateParameters;

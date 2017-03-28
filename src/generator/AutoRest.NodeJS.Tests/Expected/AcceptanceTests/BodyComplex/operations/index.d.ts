@@ -8,7 +8,7 @@
  * regenerated.
 */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as moment from 'moment';
 import * as models from '../models';
 
@@ -21,6 +21,7 @@ import * as models from '../models';
  */
 export interface BasicOperations {
 
+
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
      *
@@ -29,11 +30,48 @@ export interface BasicOperations {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Basic>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Basic>>;
+
+    /**
+     * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Basic} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Basic} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Basic} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Basic>;
     getValid(callback: ServiceCallback<models.Basic>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}
@@ -54,11 +92,58 @@ export interface BasicOperations {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(complexBody: models.Basic, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(complexBody: models.Basic, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Please put {id: 2, name: 'abc', color: 'Magenta'}
+     *
+     * @param {object} complexBody Please put {id: 2, name: 'abc', color:
+     * 'Magenta'}
+     *
+     * @param {number} [complexBody.id] Basic Id
+     *
+     * @param {string} [complexBody.name] Name property with a very long
+     * description that does not fit on a single line and a line break.
+     *
+     * @param {string} [complexBody.color] Possible values include: 'cyan',
+     * 'Magenta', 'YELLOW', 'blacK'
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(complexBody: models.Basic, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(complexBody: models.Basic, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Basic, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get a basic complex type that is invalid for the local strong type
@@ -68,11 +153,48 @@ export interface BasicOperations {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Basic>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+    getInvalidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Basic>>;
+
+    /**
+     * Get a basic complex type that is invalid for the local strong type
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Basic} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Basic} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Basic} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getInvalid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Basic>;
     getInvalid(callback: ServiceCallback<models.Basic>): void;
+    getInvalid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+
 
     /**
      * Get a basic complex type that is empty
@@ -82,11 +204,48 @@ export interface BasicOperations {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Basic>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+    getEmptyWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Basic>>;
+
+    /**
+     * Get a basic complex type that is empty
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Basic} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Basic} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Basic} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getEmpty(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Basic>;
     getEmpty(callback: ServiceCallback<models.Basic>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+
 
     /**
      * Get a basic complex type whose properties are null
@@ -96,11 +255,48 @@ export interface BasicOperations {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Basic>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+    getNullWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Basic>>;
+
+    /**
+     * Get a basic complex type whose properties are null
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Basic} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Basic} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Basic} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNull(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Basic>;
     getNull(callback: ServiceCallback<models.Basic>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload
@@ -110,11 +306,47 @@ export interface BasicOperations {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Basic>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
+    getNotProvidedWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Basic>>;
+
+    /**
+     * Get a basic complex type while the server doesn't provide a response payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Basic} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Basic} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Basic} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNotProvided(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Basic>;
     getNotProvided(callback: ServiceCallback<models.Basic>): void;
+    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Basic>): void;
 }
 
 /**
@@ -125,6 +357,7 @@ export interface BasicOperations {
  */
 export interface Primitive {
 
+
     /**
      * Get complex types with integer properties
      *
@@ -133,11 +366,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<IntWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getInt(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.IntWrapper>): void;
+    getIntWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.IntWrapper>>;
+
+    /**
+     * Get complex types with integer properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {IntWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {IntWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link IntWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getInt(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.IntWrapper>;
     getInt(callback: ServiceCallback<models.IntWrapper>): void;
+    getInt(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.IntWrapper>): void;
+
 
     /**
      * Put complex types with integer properties
@@ -153,11 +423,53 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putInt(complexBody: models.IntWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putIntWithHttpOperationResponse(complexBody: models.IntWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with integer properties
+     *
+     * @param {object} complexBody Please put -1 and 2
+     *
+     * @param {number} [complexBody.field1]
+     *
+     * @param {number} [complexBody.field2]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putInt(complexBody: models.IntWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putInt(complexBody: models.IntWrapper, callback: ServiceCallback<void>): void;
+    putInt(complexBody: models.IntWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with long properties
@@ -167,11 +479,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<LongWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getLong(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.LongWrapper>): void;
+    getLongWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.LongWrapper>>;
+
+    /**
+     * Get complex types with long properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {LongWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {LongWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link LongWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getLong(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.LongWrapper>;
     getLong(callback: ServiceCallback<models.LongWrapper>): void;
+    getLong(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.LongWrapper>): void;
+
 
     /**
      * Put complex types with long properties
@@ -187,11 +536,53 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putLong(complexBody: models.LongWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putLongWithHttpOperationResponse(complexBody: models.LongWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with long properties
+     *
+     * @param {object} complexBody Please put 1099511627775 and -999511627788
+     *
+     * @param {number} [complexBody.field1]
+     *
+     * @param {number} [complexBody.field2]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putLong(complexBody: models.LongWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putLong(complexBody: models.LongWrapper, callback: ServiceCallback<void>): void;
+    putLong(complexBody: models.LongWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with float properties
@@ -201,11 +592,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<FloatWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getFloat(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.FloatWrapper>): void;
+    getFloatWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.FloatWrapper>>;
+
+    /**
+     * Get complex types with float properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {FloatWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {FloatWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link FloatWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getFloat(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.FloatWrapper>;
     getFloat(callback: ServiceCallback<models.FloatWrapper>): void;
+    getFloat(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.FloatWrapper>): void;
+
 
     /**
      * Put complex types with float properties
@@ -221,11 +649,53 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putFloat(complexBody: models.FloatWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putFloatWithHttpOperationResponse(complexBody: models.FloatWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with float properties
+     *
+     * @param {object} complexBody Please put 1.05 and -0.003
+     *
+     * @param {number} [complexBody.field1]
+     *
+     * @param {number} [complexBody.field2]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putFloat(complexBody: models.FloatWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putFloat(complexBody: models.FloatWrapper, callback: ServiceCallback<void>): void;
+    putFloat(complexBody: models.FloatWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with double properties
@@ -235,11 +705,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DoubleWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDouble(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DoubleWrapper>): void;
+    getDoubleWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DoubleWrapper>>;
+
+    /**
+     * Get complex types with double properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DoubleWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DoubleWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DoubleWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDouble(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DoubleWrapper>;
     getDouble(callback: ServiceCallback<models.DoubleWrapper>): void;
+    getDouble(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DoubleWrapper>): void;
+
 
     /**
      * Put complex types with double properties
@@ -257,11 +764,55 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putDouble(complexBody: models.DoubleWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putDoubleWithHttpOperationResponse(complexBody: models.DoubleWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with double properties
+     *
+     * @param {object} complexBody Please put 3e-100 and
+     * -0.000000000000000000000000000000000000000000000000000000005
+     *
+     * @param {number} [complexBody.field1]
+     *
+     * @param {number}
+     * [complexBody.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDouble(complexBody: models.DoubleWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putDouble(complexBody: models.DoubleWrapper, callback: ServiceCallback<void>): void;
+    putDouble(complexBody: models.DoubleWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with bool properties
@@ -271,11 +822,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<BooleanWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getBool(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.BooleanWrapper>): void;
+    getBoolWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.BooleanWrapper>>;
+
+    /**
+     * Get complex types with bool properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {BooleanWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {BooleanWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link BooleanWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getBool(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.BooleanWrapper>;
     getBool(callback: ServiceCallback<models.BooleanWrapper>): void;
+    getBool(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.BooleanWrapper>): void;
+
 
     /**
      * Put complex types with bool properties
@@ -291,11 +879,53 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putBool(complexBody: models.BooleanWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putBoolWithHttpOperationResponse(complexBody: models.BooleanWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with bool properties
+     *
+     * @param {object} complexBody Please put true and false
+     *
+     * @param {boolean} [complexBody.fieldTrue]
+     *
+     * @param {boolean} [complexBody.fieldFalse]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putBool(complexBody: models.BooleanWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putBool(complexBody: models.BooleanWrapper, callback: ServiceCallback<void>): void;
+    putBool(complexBody: models.BooleanWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with string properties
@@ -305,11 +935,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<StringWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StringWrapper>): void;
+    getStringWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.StringWrapper>>;
+
+    /**
+     * Get complex types with string properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {StringWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {StringWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link StringWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getString(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.StringWrapper>;
     getString(callback: ServiceCallback<models.StringWrapper>): void;
+    getString(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.StringWrapper>): void;
+
 
     /**
      * Put complex types with string properties
@@ -327,11 +994,55 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putString(complexBody: models.StringWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putStringWithHttpOperationResponse(complexBody: models.StringWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with string properties
+     *
+     * @param {object} complexBody Please put 'goodrequest', '', and null
+     *
+     * @param {string} [complexBody.field]
+     *
+     * @param {string} [complexBody.empty]
+     *
+     * @param {string} [complexBody.nullProperty]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putString(complexBody: models.StringWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putString(complexBody: models.StringWrapper, callback: ServiceCallback<void>): void;
+    putString(complexBody: models.StringWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with date properties
@@ -341,11 +1052,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DateWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DateWrapper>): void;
+    getDateWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DateWrapper>>;
+
+    /**
+     * Get complex types with date properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DateWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DateWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DateWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDate(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DateWrapper>;
     getDate(callback: ServiceCallback<models.DateWrapper>): void;
+    getDate(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DateWrapper>): void;
+
 
     /**
      * Put complex types with date properties
@@ -361,11 +1109,53 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putDate(complexBody: models.DateWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putDateWithHttpOperationResponse(complexBody: models.DateWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with date properties
+     *
+     * @param {object} complexBody Please put '0001-01-01' and '2016-02-29'
+     *
+     * @param {date} [complexBody.field]
+     *
+     * @param {date} [complexBody.leap]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDate(complexBody: models.DateWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putDate(complexBody: models.DateWrapper, callback: ServiceCallback<void>): void;
+    putDate(complexBody: models.DateWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with datetime properties
@@ -375,11 +1165,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DatetimeWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDateTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DatetimeWrapper>): void;
+    getDateTimeWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DatetimeWrapper>>;
+
+    /**
+     * Get complex types with datetime properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DatetimeWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DatetimeWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DatetimeWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDateTime(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DatetimeWrapper>;
     getDateTime(callback: ServiceCallback<models.DatetimeWrapper>): void;
+    getDateTime(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DatetimeWrapper>): void;
+
 
     /**
      * Put complex types with datetime properties
@@ -396,11 +1223,54 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putDateTime(complexBody: models.DatetimeWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putDateTimeWithHttpOperationResponse(complexBody: models.DatetimeWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with datetime properties
+     *
+     * @param {object} complexBody Please put '0001-01-01T12:00:00-04:00' and
+     * '2015-05-18T11:38:00-08:00'
+     *
+     * @param {date} [complexBody.field]
+     *
+     * @param {date} [complexBody.now]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDateTime(complexBody: models.DatetimeWrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putDateTime(complexBody: models.DatetimeWrapper, callback: ServiceCallback<void>): void;
+    putDateTime(complexBody: models.DatetimeWrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with datetimeRfc1123 properties
@@ -410,11 +1280,49 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Datetimerfc1123Wrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDateTimeRfc1123(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Datetimerfc1123Wrapper>): void;
+    getDateTimeRfc1123WithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Datetimerfc1123Wrapper>>;
+
+    /**
+     * Get complex types with datetimeRfc1123 properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Datetimerfc1123Wrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Datetimerfc1123Wrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Datetimerfc1123Wrapper} for more
+     *                      information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDateTimeRfc1123(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Datetimerfc1123Wrapper>;
     getDateTimeRfc1123(callback: ServiceCallback<models.Datetimerfc1123Wrapper>): void;
+    getDateTimeRfc1123(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Datetimerfc1123Wrapper>): void;
+
 
     /**
      * Put complex types with datetimeRfc1123 properties
@@ -431,11 +1339,54 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putDateTimeRfc1123WithHttpOperationResponse(complexBody: models.Datetimerfc1123Wrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with datetimeRfc1123 properties
+     *
+     * @param {object} complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
+     * 'Mon, 18 May 2015 11:38:00 GMT'
+     *
+     * @param {date} [complexBody.field]
+     *
+     * @param {date} [complexBody.now]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, callback: ServiceCallback<void>): void;
+    putDateTimeRfc1123(complexBody: models.Datetimerfc1123Wrapper, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with duration properties
@@ -445,11 +1396,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DurationWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getDuration(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DurationWrapper>): void;
+    getDurationWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DurationWrapper>>;
+
+    /**
+     * Get complex types with duration properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DurationWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DurationWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DurationWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getDuration(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DurationWrapper>;
     getDuration(callback: ServiceCallback<models.DurationWrapper>): void;
+    getDuration(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DurationWrapper>): void;
+
 
     /**
      * Put complex types with duration properties
@@ -461,11 +1449,49 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putDuration(options: { field? : moment.Duration, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putDurationWithHttpOperationResponse(options?: { field? : moment.Duration, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with duration properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {moment.duration} [options.field]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putDuration(options?: { field? : moment.Duration, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putDuration(callback: ServiceCallback<void>): void;
+    putDuration(options: { field? : moment.Duration, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with byte properties
@@ -475,11 +1501,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ByteWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getByte(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ByteWrapper>): void;
+    getByteWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ByteWrapper>>;
+
+    /**
+     * Get complex types with byte properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ByteWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ByteWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ByteWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getByte(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ByteWrapper>;
     getByte(callback: ServiceCallback<models.ByteWrapper>): void;
+    getByte(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ByteWrapper>): void;
+
 
     /**
      * Put complex types with byte properties
@@ -491,11 +1554,48 @@ export interface Primitive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putByte(options: { field? : Buffer, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putByteWithHttpOperationResponse(options?: { field? : Buffer, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with byte properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {buffer} [options.field]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putByte(options?: { field? : Buffer, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putByte(callback: ServiceCallback<void>): void;
+    putByte(options: { field? : Buffer, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -506,6 +1606,7 @@ export interface Primitive {
  */
 export interface ArrayModel {
 
+
     /**
      * Get complex types with array property
      *
@@ -514,11 +1615,48 @@ export interface ArrayModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ArrayWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ArrayWrapper>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ArrayWrapper>>;
+
+    /**
+     * Get complex types with array property
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ArrayWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ArrayWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ArrayWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ArrayWrapper>;
     getValid(callback: ServiceCallback<models.ArrayWrapper>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ArrayWrapper>): void;
+
 
     /**
      * Put complex types with array property
@@ -530,11 +1668,49 @@ export interface ArrayModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(options?: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with array property
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {array} [options.arrayProperty]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(options?: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(callback: ServiceCallback<void>): void;
+    putValid(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with array property which is empty
@@ -544,11 +1720,48 @@ export interface ArrayModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ArrayWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ArrayWrapper>): void;
+    getEmptyWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ArrayWrapper>>;
+
+    /**
+     * Get complex types with array property which is empty
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ArrayWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ArrayWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ArrayWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getEmpty(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ArrayWrapper>;
     getEmpty(callback: ServiceCallback<models.ArrayWrapper>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ArrayWrapper>): void;
+
 
     /**
      * Put complex types with array property which is empty
@@ -560,11 +1773,49 @@ export interface ArrayModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putEmpty(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putEmptyWithHttpOperationResponse(options?: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with array property which is empty
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {array} [options.arrayProperty]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putEmpty(options?: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putEmpty(callback: ServiceCallback<void>): void;
+    putEmpty(options: { arrayProperty? : string[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with array property while server doesn't provide a
@@ -575,11 +1826,48 @@ export interface ArrayModel {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ArrayWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ArrayWrapper>): void;
+    getNotProvidedWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ArrayWrapper>>;
+
+    /**
+     * Get complex types with array property while server doesn't provide a
+     * response payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ArrayWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ArrayWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ArrayWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNotProvided(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ArrayWrapper>;
     getNotProvided(callback: ServiceCallback<models.ArrayWrapper>): void;
+    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ArrayWrapper>): void;
 }
 
 /**
@@ -590,6 +1878,7 @@ export interface ArrayModel {
  */
 export interface Dictionary {
 
+
     /**
      * Get complex types with dictionary property
      *
@@ -598,11 +1887,48 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DictionaryWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DictionaryWrapper>>;
+
+    /**
+     * Get complex types with dictionary property
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DictionaryWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DictionaryWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DictionaryWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DictionaryWrapper>;
     getValid(callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+
 
     /**
      * Put complex types with dictionary property
@@ -614,11 +1940,49 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(options: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(options?: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with dictionary property
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.defaultProgram]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(options?: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(callback: ServiceCallback<void>): void;
+    putValid(options: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with dictionary property which is empty
@@ -628,11 +1992,48 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DictionaryWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getEmptyWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DictionaryWrapper>>;
+
+    /**
+     * Get complex types with dictionary property which is empty
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DictionaryWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DictionaryWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DictionaryWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getEmpty(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DictionaryWrapper>;
     getEmpty(callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getEmpty(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+
 
     /**
      * Put complex types with dictionary property which is empty
@@ -644,11 +2045,49 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putEmpty(options: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putEmptyWithHttpOperationResponse(options?: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types with dictionary property which is empty
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.defaultProgram]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putEmpty(options?: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putEmpty(callback: ServiceCallback<void>): void;
+    putEmpty(options: { defaultProgram? : { [propertyName: string]: string }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Get complex types with dictionary property which is null
@@ -658,11 +2097,48 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DictionaryWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getNullWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DictionaryWrapper>>;
+
+    /**
+     * Get complex types with dictionary property which is null
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DictionaryWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DictionaryWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DictionaryWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNull(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DictionaryWrapper>;
     getNull(callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getNull(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+
 
     /**
      * Get complex types with dictionary property while server doesn't provide a
@@ -673,11 +2149,48 @@ export interface Dictionary {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<DictionaryWrapper>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getNotProvidedWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.DictionaryWrapper>>;
+
+    /**
+     * Get complex types with dictionary property while server doesn't provide a
+     * response payload
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {DictionaryWrapper} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {DictionaryWrapper} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link DictionaryWrapper} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getNotProvided(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.DictionaryWrapper>;
     getNotProvided(callback: ServiceCallback<models.DictionaryWrapper>): void;
+    getNotProvided(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.DictionaryWrapper>): void;
 }
 
 /**
@@ -688,6 +2201,7 @@ export interface Dictionary {
  */
 export interface Inheritance {
 
+
     /**
      * Get complex types that extend others
      *
@@ -696,11 +2210,48 @@ export interface Inheritance {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Siamese>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Siamese>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Siamese>>;
+
+    /**
+     * Get complex types that extend others
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Siamese} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Siamese} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Siamese} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Siamese>;
     getValid(callback: ServiceCallback<models.Siamese>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Siamese>): void;
+
 
     /**
      * Put complex types that extend others
@@ -721,11 +2272,57 @@ export interface Inheritance {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(complexBody: models.Siamese, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(complexBody: models.Siamese, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types that extend others
+     *
+     * @param {object} complexBody Please put a siamese with id=2, name="Siameee",
+     * color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato"
+     * with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
+     *
+     * @param {string} [complexBody.breed]
+     *
+     * @param {string} [complexBody.color]
+     *
+     * @param {array} [complexBody.hates]
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(complexBody: models.Siamese, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(complexBody: models.Siamese, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Siamese, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -736,6 +2333,7 @@ export interface Inheritance {
  */
 export interface Polymorphism {
 
+
     /**
      * Get complex types that are polymorphic
      *
@@ -744,11 +2342,48 @@ export interface Polymorphism {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Fish>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Fish>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Fish>>;
+
+    /**
+     * Get complex types that are polymorphic
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Fish} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Fish} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Fish} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Fish>;
     getValid(callback: ServiceCallback<models.Fish>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Fish>): void;
+
 
     /**
      * Put complex types that are polymorphic
@@ -800,11 +2435,89 @@ export interface Polymorphism {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(complexBody: models.Fish, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types that are polymorphic
+     *
+     * @param {object} complexBody Please put a salmon that looks like this:
+     * {
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };
+     *
+     * @param {string} [complexBody.species]
+     *
+     * @param {number} complexBody.length
+     *
+     * @param {array} [complexBody.siblings]
+     *
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(complexBody: models.Fish, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(complexBody: models.Fish, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+
 
     /**
      * Put complex types that are polymorphic, attempting to omit required
@@ -851,11 +2564,83 @@ export interface Polymorphism {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValidMissingRequired(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidMissingRequiredWithHttpOperationResponse(complexBody: models.Fish, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types that are polymorphic, attempting to omit required
+     * 'birthday' field - the request should not be allowed from the client
+     *
+     * @param {object} complexBody Please attempt put a sawshark that looks like
+     * this, the client should not allow this data to be sent:
+     * {
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }
+     *
+     * @param {string} [complexBody.species]
+     *
+     * @param {number} complexBody.length
+     *
+     * @param {array} [complexBody.siblings]
+     *
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValidMissingRequired(complexBody: models.Fish, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValidMissingRequired(complexBody: models.Fish, callback: ServiceCallback<void>): void;
+    putValidMissingRequired(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -866,6 +2651,7 @@ export interface Polymorphism {
  */
 export interface Polymorphicrecursive {
 
+
     /**
      * Get complex types that are polymorphic and have recursive references
      *
@@ -874,11 +2660,48 @@ export interface Polymorphicrecursive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<Fish>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Fish>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.Fish>>;
+
+    /**
+     * Get complex types that are polymorphic and have recursive references
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {Fish} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {Fish} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link Fish} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.Fish>;
     getValid(callback: ServiceCallback<models.Fish>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Fish>): void;
+
 
     /**
      * Put complex types that are polymorphic and have recursive references
@@ -950,11 +2773,108 @@ export interface Polymorphicrecursive {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(complexBody: models.Fish, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types that are polymorphic and have recursive references
+     *
+     * @param {object} complexBody Please put a salmon that looks like this:
+     * {
+     * "fishtype": "salmon",
+     * "species": "king",
+     * "length": 1,
+     * "age": 1,
+     * "location": "alaska",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6,
+     * "siblings": [
+     * {
+     * "fishtype": "salmon",
+     * "species": "coho",
+     * "length": 2,
+     * "age": 2,
+     * "location": "atlantic",
+     * "iswild": true,
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
+     * }
+     *
+     * @param {string} [complexBody.species]
+     *
+     * @param {number} complexBody.length
+     *
+     * @param {array} [complexBody.siblings]
+     *
+     * @param {string} complexBody.fishtype Polymorphic Discriminator
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(complexBody: models.Fish, options?: { customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(complexBody: models.Fish, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -965,6 +2885,7 @@ export interface Polymorphicrecursive {
  */
 export interface Readonlyproperty {
 
+
     /**
      * Get complex types that have readonly properties
      *
@@ -973,11 +2894,48 @@ export interface Readonlyproperty {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<ReadonlyObj>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ReadonlyObj>): void;
+    getValidWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<models.ReadonlyObj>>;
+
+    /**
+     * Get complex types that have readonly properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {ReadonlyObj} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {ReadonlyObj} [result]   - The deserialized result object if an error did not occur.
+     *                      See {@link ReadonlyObj} for more information.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    getValid(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<models.ReadonlyObj>;
     getValid(callback: ServiceCallback<models.ReadonlyObj>): void;
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ReadonlyObj>): void;
+
 
     /**
      * Put complex types that have readonly properties
@@ -989,9 +2947,46 @@ export interface Readonlyproperty {
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      *
-     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-     * doc in ms-rest index.d.ts for details
+     * @returns {Promise} A promise is returned
+     *
+     * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+     *
+     * @reject {Error|ServiceError} - The error object.
      */
-    putValid(options: { size? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValidWithHttpOperationResponse(options?: { size? : number, customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<void>>;
+
+    /**
+     * Put complex types that have readonly properties
+     *
+     * @param {object} [options] Optional Parameters.
+     *
+     * @param {number} [options.size]
+     *
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     *
+     * @param {ServiceCallback} [optionalCallback] - The optional callback.
+     *
+     * @returns {ServiceCallback|Promise} If a callback was passed as the last
+     * parameter then it returns the callback else returns a Promise.
+     *
+     * {Promise} A promise is returned.
+     *
+     *                      @resolve {null} - The deserialized result object.
+     *
+     *                      @reject {Error|ServiceError} - The error object.
+     *
+     * {ServiceCallback} optionalCallback(err, result, request, response)
+     *
+     *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+     *
+     *                      {null} [result]   - The deserialized result object if an error did not occur.
+     *
+     *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+     *
+     *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+     */
+    putValid(options?: { size? : number, customHeaders? : { [headerName: string]: string; } }): Promise<void>;
     putValid(callback: ServiceCallback<void>): void;
+    putValid(options: { size? : number, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
 }

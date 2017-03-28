@@ -1,10 +1,7 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
     using System.Linq;
-    using System.Xml;
-    using System.Xml.Linq;
 
     public partial class Order
     {
@@ -23,12 +20,12 @@ namespace Petstore.Models
         /// 'placed', 'approved', 'delivered'</param>
         public Order(long? id = default(long?), long? petId = default(long?), int? quantity = default(int?), System.DateTime? shipDate = default(System.DateTime?), string status = default(string), bool? complete = default(bool?))
         {
-            Id = id;
-            PetId = petId;
-            Quantity = quantity;
-            ShipDate = shipDate;
-            Status = status;
-            Complete = complete;
+            this.Id = id;
+            this.PetId = petId;
+            this.Quantity = quantity;
+            this.ShipDate = shipDate;
+            this.Status = status;
+            this.Complete = complete;
             CustomInit();
         }
 
@@ -39,64 +36,64 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public long? Id { get; private set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "petId")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "petId")]
         public long? PetId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "quantity")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "quantity")]
         public int? Quantity { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "shipDate")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "shipDate")]
         public System.DateTime? ShipDate { get; set; }
 
         /// <summary>
         /// Gets or sets order Status. Possible values include: 'placed',
         /// 'approved', 'delivered'
         /// </summary>
-        [JsonProperty(PropertyName = "status")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "status")]
         public string Status { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "complete")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "complete")]
         public bool? Complete { get; set; }
 
         /// <summary>
         /// Serializes the object to an XML node
         /// </summary>
-        internal XElement XmlSerialize(XElement result)
+        internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {
             if( null != Id )
             {
-                result.Add(new XElement("id", Id) );
+                result.Add(new System.Xml.Linq.XElement("id", Id) );
             }
             if( null != PetId )
             {
-                result.Add(new XElement("petId", PetId) );
+                result.Add(new System.Xml.Linq.XElement("petId", PetId) );
             }
             if( null != Quantity )
             {
-                result.Add(new XElement("quantity", Quantity) );
+                result.Add(new System.Xml.Linq.XElement("quantity", Quantity) );
             }
             if( null != ShipDate )
             {
-                result.Add(new XElement("shipDate", ShipDate) );
+                result.Add(new System.Xml.Linq.XElement("shipDate", ShipDate) );
             }
             if( null != Status )
             {
-                result.Add(new XElement("status", Status) );
+                result.Add(new System.Xml.Linq.XElement("status", Status) );
             }
             if( null != Complete )
             {
-                result.Add(new XElement("complete", Complete) );
+                result.Add(new System.Xml.Linq.XElement("complete", Complete) );
             }
             return result;
         }
@@ -106,9 +103,9 @@ namespace Petstore.Models
         internal static Order XmlDeserialize(string payload)
         {
             // deserialize to xml and use the overload to do the work
-            return XmlDeserialize( XElement.Parse( payload ) );
+            return XmlDeserialize( System.Xml.Linq.XElement.Parse( payload ) );
         }
-        internal static Order XmlDeserialize(XElement payload)
+        internal static Order XmlDeserialize(System.Xml.Linq.XElement payload)
         {
             var result = new Order();
             var deserializeId = XmlSerialization.ToDeserializer(e => (long?)e);

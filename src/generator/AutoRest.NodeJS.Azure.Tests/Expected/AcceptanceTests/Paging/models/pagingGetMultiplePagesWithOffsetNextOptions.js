@@ -24,38 +24,40 @@
  * value: 30 .
  *
  */
-function PagingGetMultiplePagesWithOffsetNextOptions() {
-}
+class PagingGetMultiplePagesWithOffsetNextOptions {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of PagingGetMultiplePagesWithOffsetNextOptions
- *
- * @returns {object} metadata of PagingGetMultiplePagesWithOffsetNextOptions
- *
- */
-PagingGetMultiplePagesWithOffsetNextOptions.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'PagingGetMultiplePagesWithOffsetNextOptions',
-      modelProperties: {
-        maxresults: {
-          required: false,
-          type: {
-            name: 'Number'
-          }
-        },
-        timeout: {
-          required: false,
-          defaultValue: 30,
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of PagingGetMultiplePagesWithOffsetNextOptions
+   *
+   * @returns {object} metadata of PagingGetMultiplePagesWithOffsetNextOptions
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'PagingGetMultiplePagesWithOffsetNextOptions',
+        modelProperties: {
+          maxresults: {
+            required: false,
+            type: {
+              name: 'Number'
+            }
+          },
+          timeout: {
+            required: false,
+            defaultValue: 30,
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = PagingGetMultiplePagesWithOffsetNextOptions;

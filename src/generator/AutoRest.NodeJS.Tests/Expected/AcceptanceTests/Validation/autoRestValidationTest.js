@@ -14,59 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
+const WebResource = msRest.WebResource;
 
-var models = require('./models');
+const models = require('./models');
 
-/**
- * @class
- * Initializes a new instance of the AutoRestValidationTest class.
- * @constructor
- *
- * @param {string} subscriptionId - Subscription ID.
- *
- * @param {string} apiVersion - Required string following pattern \d{2}-\d{2}-\d{4}
- *
- * @param {string} [baseUri] - The base URI of the service.
- *
- * @param {object} [options] - The parameter options
- *
- * @param {Array} [options.filters] - Filters to be added to the request pipeline
- *
- * @param {object} [options.requestOptions] - Options for the underlying request object
- * {@link https://github.com/request/request#requestoptions-callback Options doc}
- *
- * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
- *
- */
-function AutoRestValidationTest(subscriptionId, apiVersion, baseUri, options) {
-  if (subscriptionId === null || subscriptionId === undefined) {
-    throw new Error('\'subscriptionId\' cannot be null.');
-  }
-  if (apiVersion === null || apiVersion === undefined) {
-    throw new Error('\'apiVersion\' cannot be null.');
-  }
-
-  if (!options) options = {};
-
-  AutoRestValidationTest['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.subscriptionId = subscriptionId;
-  this.apiVersion = apiVersion;
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  this.models = models;
-  msRest.addSerializationMixin(this);
-}
-
-util.inherits(AutoRestValidationTest, ServiceClient);
 
 /**
  * Validates input parameters on the method. See swagger for details.
@@ -81,21 +34,22 @@ util.inherits(AutoRestValidationTest, ServiceClient);
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.validationOfMethodParameters = function (resourceGroupName, id, options, callback) {
-  var client = this;
+function _validationOfMethodParameters(resourceGroupName, id, options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -156,25 +110,25 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'fakepath/{subscriptionId}/{resourceGroupName}/{id}';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'fakepath/{subscriptionId}/{resourceGroupName}/{id}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
-  var queryParameters = [];
+  let queryParameters = [];
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -183,52 +137,52 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['Product']().mapper();
+          let resultMapper = new client.models['Product']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -237,7 +191,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Validates body parameters on the method. See swagger for details.
@@ -269,21 +223,22 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName, id, options, callback) {
-  var client = this;
+function _validationOfBody(resourceGroupName, id, options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -291,7 +246,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var body = (options && options.body !== undefined) ? options.body : undefined;
+  let body = (options && options.body !== undefined) ? options.body : undefined;
   // Validate
   try {
     if (this.subscriptionId === null || this.subscriptionId === undefined || typeof this.subscriptionId.valueOf() !== 'string') {
@@ -345,25 +300,25 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   }
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'fakepath/{subscriptionId}/{resourceGroupName}/{id}';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'fakepath/{subscriptionId}/{resourceGroupName}/{id}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
-  var queryParameters = [];
+  let queryParameters = [];
   queryParameters.push('apiVersion=' + encodeURIComponent(this.apiVersion));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PUT';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -371,67 +326,67 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (body !== null && body !== undefined) {
-      var requestModelMapper = new client.models['Product']().mapper();
+      let requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(body, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(body, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['Product']().mapper();
+          let resultMapper = new client.models['Product']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -440,7 +395,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * @param {object} [options] Optional Parameters.
@@ -448,20 +403,21 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.getWithConstantInPath = function (options, callback) {
-  var client = this;
+function _getWithConstantInPath(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -469,21 +425,21 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var constantParam = 'constant';
+  let constantParam = 'constant';
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'validation/constantsInPath/{constantParam}/value';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'validation/constantsInPath/{constantParam}/value';
   requestUrl = requestUrl.replace('{constantParam}', encodeURIComponent(constantParam));
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'GET';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -492,40 +448,40 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * @param {object} [options] Optional Parameters.
@@ -550,21 +506,22 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {object} [result]   - The deserialized result object.
+ *                      {object} [result]   - The deserialized result object if an error did not occur.
  *                      See {@link Product} for more information.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.postWithConstantInBody = function (options, callback) {
-  var client = this;
+function _postWithConstantInBody(options, callback) {
+   /* jshint validthis: true */
+  let client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -572,22 +529,22 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var body = (options && options.body !== undefined) ? options.body : undefined;
-  var constantParam = 'constant';
+  let body = (options && options.body !== undefined) ? options.body : undefined;
+  let constantParam = 'constant';
 
   // Construct URL
-  var baseUrl = this.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'validation/constantsInPath/{constantParam}/value';
+  let baseUrl = this.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'validation/constantsInPath/{constantParam}/value';
   requestUrl = requestUrl.replace('{constantParam}', encodeURIComponent(constantParam));
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -595,63 +552,63 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (body !== null && body !== undefined) {
-      var requestModelMapper = new client.models['Product']().mapper();
+      let requestModelMapper = new client.models['Product']().mapper();
       requestModel = client.serialize(requestModelMapper, body, 'body');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(body, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(body, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
     // Deserialize Response
     if (statusCode === 200) {
-      var parsedResponse = null;
+      let parsedResponse = null;
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client.models['Product']().mapper();
+          let resultMapper = new client.models['Product']().mapper();
           result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
-        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        let deserializationError = new Error(`Error ${error} occurred in deserializing the responseBody - ${responseBody}`);
         deserializationError.request = msRest.stripRequest(httpRequest);
         deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
@@ -660,6 +617,450 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
+
+/**
+ * @class
+ * Initializes a new instance of the AutoRestValidationTest class.
+ * @constructor
+ *
+ * @param {string} subscriptionId - Subscription ID.
+ *
+ * @param {string} apiVersion - Required string following pattern \d{2}-\d{2}-\d{4}
+ *
+ * @param {string} [baseUri] - The base URI of the service.
+ *
+ * @param {object} [options] - The parameter options
+ *
+ * @param {Array} [options.filters] - Filters to be added to the request pipeline
+ *
+ * @param {object} [options.requestOptions] - Options for the underlying request object
+ * {@link https://github.com/request/request#requestoptions-callback Options doc}
+ *
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ */
+class AutoRestValidationTest extends ServiceClient {
+  constructor(subscriptionId, apiVersion, baseUri, options) {
+    if (subscriptionId === null || subscriptionId === undefined) {
+      throw new Error('\'subscriptionId\' cannot be null.');
+    }
+    if (apiVersion === null || apiVersion === undefined) {
+      throw new Error('\'apiVersion\' cannot be null.');
+    }
+
+    if (!options) options = {};
+
+    super(null, options);
+
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+    this.subscriptionId = subscriptionId;
+    this.apiVersion = apiVersion;
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    this.models = models;
+    this._validationOfMethodParameters = _validationOfMethodParameters;
+    this._validationOfBody = _validationOfBody;
+    this._getWithConstantInPath = _getWithConstantInPath;
+    this._postWithConstantInBody = _postWithConstantInBody;
+    msRest.addSerializationMixin(this);
+  }
+
+  /**
+   * Validates input parameters on the method. See swagger for details.
+   *
+   * @param {string} resourceGroupName Required string between 3 and 10 chars
+   * with pattern [a-zA-Z0-9]+.
+   *
+   * @param {number} id Required int multiple of 10 from 100 to 1000.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Product>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  validationOfMethodParametersWithHttpOperationResponse(resourceGroupName, id, options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._validationOfMethodParameters(resourceGroupName, id, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Validates input parameters on the method. See swagger for details.
+   *
+   * @param {string} resourceGroupName Required string between 3 and 10 chars
+   * with pattern [a-zA-Z0-9]+.
+   *
+   * @param {number} id Required int multiple of 10 from 100 to 1000.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Product} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link Product} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  validationOfMethodParameters(resourceGroupName, id, options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._validationOfMethodParameters(resourceGroupName, id, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._validationOfMethodParameters(resourceGroupName, id, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Validates body parameters on the method. See swagger for details.
+   *
+   * @param {string} resourceGroupName Required string between 3 and 10 chars
+   * with pattern [a-zA-Z0-9]+.
+   *
+   * @param {number} id Required int multiple of 10 from 100 to 1000.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.body]
+   *
+   * @param {array} [options.body.displayNames] Non required array of unique
+   * items from 0 to 6 elements.
+   *
+   * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+   * exclusive.
+   *
+   * @param {string} [options.body.image] Image URL representing the product.
+   *
+   * @param {object} options.body.child
+   *
+   * @param {number} [options.body.child.count] Count
+   *
+   * @param {string} [options.body.constStringAsEnum] Constant string as Enum.
+   * Possible values include: 'constant_string_as_enum'
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Product>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  validationOfBodyWithHttpOperationResponse(resourceGroupName, id, options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._validationOfBody(resourceGroupName, id, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Validates body parameters on the method. See swagger for details.
+   *
+   * @param {string} resourceGroupName Required string between 3 and 10 chars
+   * with pattern [a-zA-Z0-9]+.
+   *
+   * @param {number} id Required int multiple of 10 from 100 to 1000.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.body]
+   *
+   * @param {array} [options.body.displayNames] Non required array of unique
+   * items from 0 to 6 elements.
+   *
+   * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+   * exclusive.
+   *
+   * @param {string} [options.body.image] Image URL representing the product.
+   *
+   * @param {object} options.body.child
+   *
+   * @param {number} [options.body.child.count] Count
+   *
+   * @param {string} [options.body.constStringAsEnum] Constant string as Enum.
+   * Possible values include: 'constant_string_as_enum'
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Product} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link Product} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  validationOfBody(resourceGroupName, id, options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._validationOfBody(resourceGroupName, id, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._validationOfBody(resourceGroupName, id, options, optionalCallback);
+    }
+  }
+
+  /**
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  getWithConstantInPathWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._getWithConstantInPath(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getWithConstantInPath(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._getWithConstantInPath(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._getWithConstantInPath(options, optionalCallback);
+    }
+  }
+
+  /**
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.body]
+   *
+   * @param {array} [options.body.displayNames] Non required array of unique
+   * items from 0 to 6 elements.
+   *
+   * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+   * exclusive.
+   *
+   * @param {string} [options.body.image] Image URL representing the product.
+   *
+   * @param {object} options.body.child
+   *
+   * @param {number} [options.body.child.count] Count
+   *
+   * @param {string} [options.body.constStringAsEnum] Constant string as Enum.
+   * Possible values include: 'constant_string_as_enum'
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Product>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postWithConstantInBodyWithHttpOperationResponse(options) {
+    let client = this;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postWithConstantInBody(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.body]
+   *
+   * @param {array} [options.body.displayNames] Non required array of unique
+   * items from 0 to 6 elements.
+   *
+   * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+   * exclusive.
+   *
+   * @param {string} [options.body.image] Image URL representing the product.
+   *
+   * @param {object} options.body.child
+   *
+   * @param {number} [options.body.child.count] Count
+   *
+   * @param {string} [options.body.constStringAsEnum] Constant string as Enum.
+   * Possible values include: 'constant_string_as_enum'
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {Product} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {object} [result]   - The deserialized result object if an error did not occur.
+   *                      See {@link Product} for more information.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postWithConstantInBody(options, optionalCallback) {
+    let client = this;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postWithConstantInBody(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postWithConstantInBody(options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = AutoRestValidationTest;

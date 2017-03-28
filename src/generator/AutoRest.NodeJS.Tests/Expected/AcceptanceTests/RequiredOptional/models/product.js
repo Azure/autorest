@@ -19,40 +19,42 @@
  * @member {string} [name]
  *
  */
-function Product() {
-}
+class Product {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Product
- *
- * @returns {object} metadata of Product
- *
- */
-Product.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'product',
-    type: {
-      name: 'Composite',
-      className: 'Product',
-      modelProperties: {
-        id: {
-          required: true,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of Product
+   *
+   * @returns {object} metadata of Product
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'product',
+      type: {
+        name: 'Composite',
+        className: 'Product',
+        modelProperties: {
+          id: {
+            required: true,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Product;

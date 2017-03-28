@@ -1,13 +1,8 @@
 
 namespace Petstore
 {
-    using Microsoft.Rest;
     using Microsoft.Rest.Azure;
     using Models;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Extension methods for UsageOperations.
@@ -21,9 +16,9 @@ namespace Petstore
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IEnumerable<Usage> List(this IUsageOperations operations)
+            public static System.Collections.Generic.IEnumerable<Usage> List(this IUsageOperations operations)
             {
-                return operations.ListAsync().GetAwaiter().GetResult();
+                return ((IUsageOperations)operations).ListAsync().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -36,7 +31,7 @@ namespace Petstore
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IEnumerable<Usage>> ListAsync(this IUsageOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async System.Threading.Tasks.Task<System.Collections.Generic.IEnumerable<Usage>> ListAsync(this IUsageOperations operations, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
             {
                 using (var _result = await operations.ListWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

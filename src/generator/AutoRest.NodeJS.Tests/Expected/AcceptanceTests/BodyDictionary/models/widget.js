@@ -19,40 +19,42 @@
  * @member {string} [string]
  *
  */
-function Widget() {
-}
+class Widget {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Widget
- *
- * @returns {object} metadata of Widget
- *
- */
-Widget.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Widget',
-    type: {
-      name: 'Composite',
-      className: 'Widget',
-      modelProperties: {
-        integer: {
-          required: false,
-          serializedName: 'integer',
-          type: {
-            name: 'Number'
-          }
-        },
-        string: {
-          required: false,
-          serializedName: 'string',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of Widget
+   *
+   * @returns {object} metadata of Widget
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Widget',
+      type: {
+        name: 'Composite',
+        className: 'Widget',
+        modelProperties: {
+          integer: {
+            required: false,
+            serializedName: 'integer',
+            type: {
+              name: 'Number'
+            }
+          },
+          string: {
+            required: false,
+            serializedName: 'string',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Widget;

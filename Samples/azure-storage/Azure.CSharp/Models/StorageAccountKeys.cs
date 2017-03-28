@@ -1,7 +1,6 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
@@ -24,8 +23,8 @@ namespace Petstore.Models
         /// <param name="key2">Gets the value of key 2.</param>
         public StorageAccountKeys(string key1 = default(string), string key2 = default(string))
         {
-            Key1 = key1;
-            Key2 = key2;
+            this.Key1 = key1;
+            this.Key2 = key2;
             CustomInit();
         }
 
@@ -37,13 +36,13 @@ namespace Petstore.Models
         /// <summary>
         /// Gets the value of key 1.
         /// </summary>
-        [JsonProperty(PropertyName = "key1")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "key1")]
         public string Key1 { get; set; }
 
         /// <summary>
         /// Gets the value of key 2.
         /// </summary>
-        [JsonProperty(PropertyName = "key2")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "key2")]
         public string Key2 { get; set; }
 
     }

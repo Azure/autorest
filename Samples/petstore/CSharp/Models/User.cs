@@ -1,10 +1,7 @@
 
 namespace Petstore.Models
 {
-    using Newtonsoft.Json;
     using System.Linq;
-    using System.Xml;
-    using System.Xml.Linq;
 
     public partial class User
     {
@@ -22,14 +19,14 @@ namespace Petstore.Models
         /// <param name="userStatus">User Status</param>
         public User(long? id = default(long?), string username = default(string), string firstName = default(string), string lastName = default(string), string email = default(string), string password = default(string), string phone = default(string), int? userStatus = default(int?))
         {
-            Id = id;
-            Username = username;
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-            Phone = phone;
-            UserStatus = userStatus;
+            this.Id = id;
+            this.Username = username;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Email = email;
+            this.Password = password;
+            this.Phone = phone;
+            this.UserStatus = userStatus;
             CustomInit();
         }
 
@@ -40,81 +37,81 @@ namespace Petstore.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "id")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
         public long? Id { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "username")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "username")]
         public string Username { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "firstName")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "firstName")]
         public string FirstName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastName")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "lastName")]
         public string LastName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "email")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "password")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "phone")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "phone")]
         public string Phone { get; set; }
 
         /// <summary>
         /// Gets or sets user Status
         /// </summary>
-        [JsonProperty(PropertyName = "userStatus")]
+        [Newtonsoft.Json.JsonProperty(PropertyName = "userStatus")]
         public int? UserStatus { get; set; }
 
         /// <summary>
         /// Serializes the object to an XML node
         /// </summary>
-        internal XElement XmlSerialize(XElement result)
+        internal System.Xml.Linq.XElement XmlSerialize(System.Xml.Linq.XElement result)
         {
             if( null != Id )
             {
-                result.Add(new XElement("id", Id) );
+                result.Add(new System.Xml.Linq.XElement("id", Id) );
             }
             if( null != Username )
             {
-                result.Add(new XElement("username", Username) );
+                result.Add(new System.Xml.Linq.XElement("username", Username) );
             }
             if( null != FirstName )
             {
-                result.Add(new XElement("firstName", FirstName) );
+                result.Add(new System.Xml.Linq.XElement("firstName", FirstName) );
             }
             if( null != LastName )
             {
-                result.Add(new XElement("lastName", LastName) );
+                result.Add(new System.Xml.Linq.XElement("lastName", LastName) );
             }
             if( null != Email )
             {
-                result.Add(new XElement("email", Email) );
+                result.Add(new System.Xml.Linq.XElement("email", Email) );
             }
             if( null != Password )
             {
-                result.Add(new XElement("password", Password) );
+                result.Add(new System.Xml.Linq.XElement("password", Password) );
             }
             if( null != Phone )
             {
-                result.Add(new XElement("phone", Phone) );
+                result.Add(new System.Xml.Linq.XElement("phone", Phone) );
             }
             if( null != UserStatus )
             {
-                result.Add(new XElement("userStatus", UserStatus) );
+                result.Add(new System.Xml.Linq.XElement("userStatus", UserStatus) );
             }
             return result;
         }
@@ -124,9 +121,9 @@ namespace Petstore.Models
         internal static User XmlDeserialize(string payload)
         {
             // deserialize to xml and use the overload to do the work
-            return XmlDeserialize( XElement.Parse( payload ) );
+            return XmlDeserialize( System.Xml.Linq.XElement.Parse( payload ) );
         }
-        internal static User XmlDeserialize(XElement payload)
+        internal static User XmlDeserialize(System.Xml.Linq.XElement payload)
         {
             var result = new User();
             var deserializeId = XmlSerialization.ToDeserializer(e => (long?)e);

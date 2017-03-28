@@ -21,47 +21,49 @@
  * @member {string} [nullProperty]
  *
  */
-function StringWrapper() {
-}
+class StringWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StringWrapper
- *
- * @returns {object} metadata of StringWrapper
- *
- */
-StringWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'string-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'StringWrapper',
-      modelProperties: {
-        field: {
-          required: false,
-          serializedName: 'field',
-          type: {
-            name: 'String'
-          }
-        },
-        empty: {
-          required: false,
-          serializedName: 'empty',
-          type: {
-            name: 'String'
-          }
-        },
-        nullProperty: {
-          required: false,
-          serializedName: 'null',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of StringWrapper
+   *
+   * @returns {object} metadata of StringWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'string-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'StringWrapper',
+        modelProperties: {
+          field: {
+            required: false,
+            serializedName: 'field',
+            type: {
+              name: 'String'
+            }
+          },
+          empty: {
+            required: false,
+            serializedName: 'empty',
+            type: {
+              name: 'String'
+            }
+          },
+          nullProperty: {
+            required: false,
+            serializedName: 'null',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StringWrapper;
