@@ -22,9 +22,24 @@
         "operationId": "PostFoo",
         "summary": "Foo path",
         "description": "Foo operation",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "fooPost",
+            "schema": {
+              "type": "boolean",
+              "description": "A foo boolean"
+            },
+            "description": "Foo body parameter"
+          }
+        ],
         "responses": {
           "default": {
-            "description": "Unexpected error"
+            "description": "Unexpected error",
+            "schema": {
+              "type": "boolean",
+              "description": "A foo boolean"
+            }
           }
         }
       }
@@ -35,6 +50,11 @@
       "description": "Property for foo path 1",
       "properties": {
         "nameAvailable": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."
+        },
+        "anotherProp": {
           "readOnly": true,
           "type": "boolean",
           "description": "Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used."

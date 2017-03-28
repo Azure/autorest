@@ -78,6 +78,7 @@ namespace AutoRest.Swagger.Model
         /// new definition will override it, but can never remove it.
         /// </summary>
         [CollectionRule(typeof(OperationParametersValidation))]
+        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
         [CollectionRule(typeof(AnonymousBodyParameter))]
         public IList<SwaggerParameter> Parameters { get; set; }
 
