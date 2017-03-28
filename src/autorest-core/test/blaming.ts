@@ -9,7 +9,7 @@ import { parse } from "../lib/ref/jsonpath";
 
 @suite class Blaming {
 
-  @test @timeout(10000) async "end to end blaming with literate swagger"() {
+  @test @timeout(30000) async "end to end blaming with literate swagger"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-composite.md"));
     const view = await autoRest.view;
     await autoRest.Process().finish;
