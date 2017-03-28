@@ -44,7 +44,9 @@ async function main(): Promise<boolean> {
     fw = Installer.InstallFramework();
   }
 
-  if (!Installer.LatestAutorestVersion) {
+  const cur = Installer.LatestAutorestVersion;
+  if (!cur || semver.gt("1.0.1-20170328-1200", cur)) {
+    // minimum version required.
     let releases = await GetReleases();
     const version = releases.FirstOrDefault().name;
     ar = Installer.InstallAutoRest(version);

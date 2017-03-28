@@ -105,13 +105,17 @@ export class Installer {
 
   }
 
-  public static async InstallFramework() {
-    const pi = await Utility.PlatformInformation();
+  public static async InstallFramework(runtimeId?: string) {
+    if (!runtimeId) {
+      const pi = await Utility.PlatformInformation();
+      runtimeId = pi.runtimeId;
+    }
+
     const fwks = await Github.GetAssets('dotnet-runtime-1.0.3');
-    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${pi.runtimeId}.1.0.3`));
+    const runtime = fwks.FirstOrDefault(each => each.name.startsWith(`dotnet-${runtimeId}.1.0.3`));
 
     if (runtime == null) {
-      throw `Unable to find framework for ${pi.runtimeId}`
+      throw `Unable to find framework for ${runtimeId}`
     }
 
     return new Promise<string>((resolve, reject) => {

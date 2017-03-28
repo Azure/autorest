@@ -40,7 +40,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
 
   // load Swaggers
   let inputs = From(config.inputFileUris).ToArray();
-
   config.Debug.Dispatch({ Text: `Starting Pipeline - Inputs are ${inputs}` });
 
   const swaggers = await LoadLiterateSwaggers(
@@ -182,7 +181,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       await autoRestDotNetPlugin.Validate(swagger, config.DataStore.CreateScope("validate"), messageSink);
     }
   }
-
 
   outstandingTaskAwaiter.Exit();
   await outstandingTaskAwaiter.Wait();
