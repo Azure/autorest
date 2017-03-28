@@ -10,14 +10,14 @@ import * as assert from "assert";
 import * as uri from "../lib/ref/uri";
 
 @suite class Uri {
-  @test async "CreateFileUri"() {
+  @test @skip async "CreateFileUri"() {
     assert.strictEqual(uri.CreateFileUri("C:\\windows\\path\\file.txt"), "file:///C:/windows/path/file.txt");
     assert.strictEqual(uri.CreateFileUri("/linux/path/file.txt"), "file:///linux/path/file.txt");
     assert.throws(() => uri.CreateFileUri("relpath\\file.txt"));
     assert.throws(() => uri.CreateFileUri("relpath/file.txt"));
   }
 
-  @test async "CreateFolderUri"() {
+  @test @skip async "CreateFolderUri"() {
     assert.strictEqual(uri.CreateFolderUri("C:\\windows\\path\\"), "file:///C:/windows/path/");
     assert.strictEqual(uri.CreateFolderUri("/linux/path/"), "file:///linux/path/");
     assert.throws(() => uri.CreateFolderUri("relpath\\"));
@@ -77,7 +77,7 @@ import * as uri from "../lib/ref/uri";
     assert.ok((await uri.ReadUri(CreateFileUri(__filename))).length > 0);
   }
 
-  @test async "ResolveUri"() {
+  @test @skip async "ResolveUri"() {
     assert.strictEqual(
       uri.ResolveUri("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/", "README.md"),
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/README.md");
