@@ -220,6 +220,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void ArmResourcePropertiesBagValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "arm-resource-properties-bag.json"));
+            messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 1);
+        }
+
+        [Fact]
         public void CollectionObjectsPropertiesNamingValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
@@ -549,6 +556,50 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 0);
         }
 
+        [Fact]
+        public void ValidArmResourcePropertiesBag()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "arm-resource-properties-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 0);
+        }
+
+
+        /// <summary>
+        /// Verifies resource models are correctly identified
+        /// </summary>
+        [Fact]
+        public void ValidResourceModels()
+        {
+            var filePath = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-definitions.json");
+            var fileText = System.IO.File.ReadAllText(filePath);
+            var servDef = SwaggerParser.Parse(filePath, fileText);
+            Uri uriPath = null;
+            Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out uriPath);
+            var context = new RuleContext(servDef, uriPath);
+            Assert.Equal(4, context.ResourceModels.Count());
+            Assert.Equal(1, context.TrackedResourceModels.Count());
+            Assert.Equal(3, context.ProxyResourceModels.Count());
+        }
+        
+
+        /// <summary>
+        /// Verifies resource models are correctly identified
+        /// </summary>
+        [Fact]
+        public void ValidResourceModels()
+        {
+            var filePath = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-definitions.json");
+            var fileText = System.IO.File.ReadAllText(filePath);
+            var servDef = SwaggerParser.Parse(filePath, fileText);
+            Uri uriPath = null;
+            Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out uriPath);
+            var context = new RuleContext(servDef, uriPath);
+            Assert.Equal(4, context.ResourceModels.Count());
+            Assert.Equal(1, context.TrackedResourceModels.Count());
+            Assert.Equal(3, context.ProxyResourceModels.Count());
+        }
+        
+
         /// <summary>
         /// Verifies that sku object
         /// </summary>
@@ -558,7 +609,6 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
-
     }
 
     #endregion

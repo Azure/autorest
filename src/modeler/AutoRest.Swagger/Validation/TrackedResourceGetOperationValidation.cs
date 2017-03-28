@@ -43,11 +43,9 @@ namespace AutoRest.Swagger.Validation
         {
             ServiceDefinition serviceDefinition = context.Root;
             IEnumerable<Operation> getOperations = ValidationUtilities.GetOperationsByRequestMethod("get", serviceDefinition);
-            // filter out the model definitions that are not being returned as a response
-            var respDefinitions = ValidationUtilities.GetResponseModelDefinitions(serviceDefinition);
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
-                if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
+                if (context.TrackedResourceModels.Contains(definition.Key.StripDefinitionPath()))
                 {
                     // check for 200 status response models since they correspond to a successful get operation
                     if (!getOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))

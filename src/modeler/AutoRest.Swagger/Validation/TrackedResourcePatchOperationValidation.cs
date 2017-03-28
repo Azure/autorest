@@ -43,7 +43,8 @@ namespace AutoRest.Swagger.Validation
         {
             ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
             IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", serviceDefinition);
-            var respDefinitions = ValidationUtilities.GetResponseModelDefinitions(serviceDefinition);
+            var respDefinitions = ValidationUtilities.GetOperationResponseModels("get", serviceDefinition, "200");
+            
             foreach (KeyValuePair<string, Schema> definition in definitions)
             {
                 if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
