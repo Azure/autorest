@@ -29,6 +29,8 @@ namespace AutoRest.Core.Logging
 
         public override string ReadablePath => Property.StartsWith("/") ? Property : $"/{Property}";
 
+        public override object RawPath => Property;
+
         public override YamlNode SelectNode(ref YamlNode node)
         {
             var child = (node as YamlMappingNode)?.

@@ -6,7 +6,7 @@
 import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import * as assert from "assert";
 
-import { NewEmptyObject } from "../lib/approved-imports/stable-object";
+import { NewEmptyObject } from "../lib/parsing/stable-object";
 
 @suite class StableObject {
   @test async "insert order preservation"() {

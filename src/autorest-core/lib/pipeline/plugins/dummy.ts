@@ -4,16 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { createMessageConnection, Logger } from "vscode-jsonrpc";
-import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types, Message } from "../plugin-api";
-import { SmartPosition, Mapping, RawSourceMap } from "../../approved-imports/source-map";
-
+import { IAutoRestPluginInitiator, IAutoRestPluginInitiator_Types, IAutoRestPluginTarget, IAutoRestPluginTarget_Types } from "../plugin-api";
+import { SmartPosition, Mapping, RawSourceMap } from "../../ref/source-map";
+import { Message, Channel } from "../../message";
 
 class DummyPlugin {
   public static readonly Name = "dummy";
 
   public async Process(sessionId: string, initiator: IAutoRestPluginInitiator): Promise<boolean> {
     const setting: string = await initiator.GetValue(sessionId, "truth");
-    initiator.Message(sessionId, <Message<number>>{ channel: "DEBUG", message: setting, payload: 42 });
+    initiator.Message(sessionId, <Message>{ Channel: Channel.Debug, Text: setting, Details: 42 });
     return true;
   }
 }
@@ -63,7 +63,7 @@ async function main() {
     WriteFile(sessionId: string, filename: string, content: string, sourceMap?: Mapping[] | RawSourceMap): void {
       channel.sendNotification(IAutoRestPluginInitiator_Types.WriteFile, sessionId, filename, content, sourceMap);
     },
-    Message(sessionId: string, message: Message<any>, path?: SmartPosition, sourceFile?: string): void {
+    Message(sessionId: string, message: Message, path?: SmartPosition, sourceFile?: string): void {
       channel.sendNotification(IAutoRestPluginInitiator_Types.Message, sessionId, message, path, sourceFile);
     }
   };

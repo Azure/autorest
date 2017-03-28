@@ -32,20 +32,42 @@ public class AzureValidator : NewPlugin
     var pathComponentResourceType = pathComponents.Groups["resourceType"];
 
     // create the raw message
-    var rawMessage = new Dictionary<string, string>() {
+    var rawMessageDetails = new Dictionary<string, string>() {
         { "type", validationMessage.Severity.ToString() },
-        { "code",  validationMessage.Rule.GetType().Name},
-        { "message" , validationMessage.Message },
-        {"jsonref", validationMessage.Path.JsonReference },
-        {"json-path",  validationMessage.Path.ReadablePath},
-        {"id",validationMessage.Rule.Id },
-        {"validationCategory",  validationMessage.Rule.ValidationCategory.ToString()},
-        {"providerNamespace", pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null },
-        {"resourceType", pathComponentResourceType.Success ? pathComponentResourceType.Value : null}
+        { "code", validationMessage.Rule.GetType().Name },
+        { "message", validationMessage.Message },
+        { "jsonref", validationMessage.Path.JsonReference },
+        { "json-path", validationMessage.Path.ReadablePath },
+        { "id", validationMessage.Rule.Id },
+        { "validationCategory", validationMessage.Rule.ValidationCategory.ToString() },
+        { "providerNamespace", pathComponentProviderNamespace.Success ? pathComponentProviderNamespace.Value : null },
+        { "resourceType", pathComponentResourceType.Success ? pathComponentResourceType.Value : null }
     };
 
     // post it to the pipe
-    Message(rawMessage, new object[0]);
+    Message(new Message
+    {
+        Text = validationMessage.Message,
+        Channel = validationMessage.Severity.ToString().ToLowerInvariant(),
+        Details = rawMessageDetails,
+        Key = new string[] 
+        {
+            validationMessage.Rule.GetType().Name,
+            validationMessage.Rule.Id,
+            validationMessage.Rule.ValidationCategory.ToString()
+        },
+        Source = new[]
+        {
+            new SourceLocation
+            {
+                document = validationMessage.Path.FilePath.ToString(),
+                Position = new SmartPosition
+                {
+                    path = validationMessage.Path.ObjectPath.Path.Select(x => x.RawPath).ToArray()
+                }
+            }
+        }
+    }, new object[0]);
   }
 
   protected override async Task<bool> ProcessInternal()

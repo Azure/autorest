@@ -23,6 +23,8 @@ namespace AutoRest.Core.Logging
 
         public override string ReadablePath => JsonPath;
 
+        public override object RawPath => Index;
+
         public override YamlNode SelectNode(ref YamlNode node)
         {
             var snode = node as YamlSequenceNode;
