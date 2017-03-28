@@ -14,8 +14,6 @@ namespace AutoRest.Swagger.Logging.Core
     {
         private readonly List<Dictionary<string, string>> rawMessageCollection = new List<Dictionary<string, string>>();
 
-        private static readonly Regex resPathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)/((?<resourceType>[^{/]+)/)?");
-
         public void Log(LogMessage message)
         {
             var validationMessage = message as ValidationMessage;
@@ -27,7 +25,7 @@ namespace AutoRest.Swagger.Logging.Core
                     .SkipWhile(p => p != "paths")
                     .Skip(1)
                     .FirstOrDefault();
-                var pathComponents = resPathPattern.Match(path ?? "");
+                var pathComponents = AutoRest.Swagger.Model.Utilities.ValidationUtilities.ResourcePathPattern.Match(path ?? "");
                 var pathComponentProviderNamespace = pathComponents.Groups["providerNamespace"];
                 var pathComponentResourceType = pathComponents.Groups["resourceType"];
 
