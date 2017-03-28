@@ -8,17 +8,17 @@ using AutoRest.Swagger.Model;
 
 namespace AutoRest.Swagger.Validation
 {
-    public class AnonymousParameterTypes : TypedRule<SwaggerParameter>
+    public abstract class DescriptionRequired<T> : TypedRule<T>
     {
-        private static AvoidAnonymousTypes AnonymousTypesRule = new AvoidAnonymousTypes();
+        /// <summary>
+        /// Id of the Rule.
+        /// </summary>
+        public override string Id => "M4000";
 
         /// <summary>
-        /// An entity fails this rule if it has a schema, and that schema is an anonymous type
+        /// Violation category of the Rule.
         /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public override bool IsValid(SwaggerParameter entity) =>
-            entity == null || entity.Schema == null || AnonymousTypesRule.IsValid(entity.Schema);
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
 
         /// <summary>
         /// The template message for this Rule. 
@@ -26,11 +26,11 @@ namespace AutoRest.Swagger.Validation
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
         /// </remarks>
-        public override string MessageTemplate => Resources.AnonymousTypesDiscouraged;
+        public override string MessageTemplate => Resources.MissingDescription;
 
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Info;
+        public override Category Severity => Category.Warning;
     }
 }

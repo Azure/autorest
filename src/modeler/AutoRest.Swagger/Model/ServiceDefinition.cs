@@ -116,6 +116,7 @@ namespace AutoRest.Swagger.Model
         [Rule(typeof(GuidValidation))]
         [Rule(typeof(SkuModelValidation))]
         [Rule(typeof(DefinitionsPropertiesNamesCamelCase))]
+        [Rule(typeof(DescriptionMissing))]
         public Dictionary<string, Schema> Definitions { get; set; }
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace AutoRest.Swagger.Model
         /// This property does not define global parameters for all operations.
         /// </summary>
         [Rule(typeof(ServiceDefinitionParameters))]
-        [CollectionRule(typeof(AnonymousParameterTypes))]
+        [CollectionRule(typeof(AnonymousBodyParameter))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>
