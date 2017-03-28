@@ -71,7 +71,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For better generated code quality, define schemas instead of using anonymous types..
+        ///   Looks up a localized string similar to Inline/anonymous models must not be used, instead define a schema with a model name in the &quot;definitions&quot; section and refer to it. This allows operations to share the models..
         /// </summary>
         public static string AnonymousTypesDiscouraged {
             get {
@@ -449,7 +449,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete..
+        ///   Looks up a localized string similar to A &apos;{0}&apos; operation &apos;{1}&apos; with x-ms-long-running-operation extension must have a valid terminal success status code {2}..
         /// </summary>
         public static string LongRunningResponseNotValid {
             get {
@@ -674,7 +674,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non-HTTPS/HTTP schemes have limited support.
+        ///   Looks up a localized string similar to Azure Resource Management only supports HTTPS scheme..
         /// </summary>
         public static string SupportedSchemesWarningMessage {
             get {
