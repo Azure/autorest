@@ -656,7 +656,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parameter &quot;{0}&quot; is referenced but not defined in the global parameters section of Service Definition.
+        ///   Looks up a localized string similar to Parameters &quot;subscriptionId&quot; and &quot;api-version&quot; must be defined in the parameters section in the swagger for the Azure Management Plane service..
         /// </summary>
         public static string ServiceDefinitionParametersMissingMessage {
             get {

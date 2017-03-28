@@ -5,7 +5,6 @@ using AutoRest.Core.Logging;
 using AutoRest.Core.Properties;
 using AutoRest.Swagger.Validation.Core;
 using AutoRest.Swagger.Model;
-using AutoRest.Swagger.Model.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,34 +12,21 @@ namespace AutoRest.Swagger.Validation
 {
     public class ServiceDefinitionParameters : TypedRule<Dictionary<string, SwaggerParameter>>
     {
-        private const string SubscriptionId = "subscriptionid";
-        private const string ApiVersion = "api-version";
+        private static readonly string SubscriptionId = "subscriptionId";
+        private static readonly string ApiVersion = "api-version";
 
         /// <summary>
-        /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
+        /// Id of the Rule.
         /// </summary>
-        /// <param name="paths"></param>
-        /// <returns></returns>
-        public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, SwaggerParameter> ParametersMap, RuleContext context)
-        {
-            var serviceDefinition = (ServiceDefinition)context.Root;
-            // Check if subscriptionId is used but not defined in global parameters
-            bool isSubscriptionIdReferenced = serviceDefinition.Paths.Keys.Any(key => key.ToLower().Contains("{" + SubscriptionId.ToLower() + "}"));
-            if (isSubscriptionIdReferenced && (ParametersMap?.Values.Any(parameter => parameter.Name?.ToLower().Equals(SubscriptionId) == true)) == false)
-            {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, SubscriptionId);
-            }
-            // For ARM specs, api version is almost always required, call it out if it isn't defined in the global params
-            // We are not distinguishing between ARM and non-ARM specs currently, so let's apply this for all specs regardless
-            // and make appropriate changes in the future so this gets applied only for ARM specs
-            if (ParametersMap?.Values.Any(parameter => parameter.Name?.ToLower().Equals(ApiVersion) == true) == false)
-            {
-                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ApiVersion);
-            }
-        }
+        public override string Id => "M2014";
 
         /// <summary>
-        /// The template message for this Rule. 
+        /// Violation category of the Rule.
+        /// </summary>
+        public override ValidationCategory ValidationCategory => ValidationCategory.SDKViolation;
+
+        /// <summary>
+        /// The template message for this Rule.
         /// </summary>
         /// <remarks>
         /// This may contain placeholders '{0}' for parameterized messages.
@@ -50,7 +36,21 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Warning;
+        public override Category Severity => Category.Error;
 
+        /// <summary>
+        /// This rule passes if the parameters section contains both subscriptionId and api-version parameters
+        /// </summary>
+        /// <param name="ParametersMap">Dictionary of swagger parameters</param>
+        /// <param name="context">Rule context</param>
+        /// <param name="formatParameters">Formatted parameters</param>
+        /// <returns></returns>
+        public override bool IsValid(Dictionary<string, SwaggerParameter> ParametersMap, RuleContext context, out object[] formatParameters)
+        {
+            formatParameters = new object[0];
+            ServiceDefinition serviceDefinition = context.Root;
+
+            return true == (ParametersMap?.Values.Any(parameter => parameter.Name == SubscriptionId || parameter.Name == ApiVersion));
+        }
     }
 }
