@@ -6,7 +6,6 @@
 import * as path from "path";
 import { ResolveUri, GetFilenameWithoutExtension } from "./lib/ref/uri";
 import { DataHandleRead, DataStoreViewReadonly } from "./lib/data-store/data-store";
-import { MultiPromiseUtility } from "./lib/multi-promise";
 import { AutoRestConfigurationImpl } from "./lib/configuration";
 
 const regexLegacyArg = /^-[^-]/;
@@ -61,11 +60,18 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
   }
 
   const codegenerator = switches["g"] || switches["codegenerator"] || "CSharp";
+  const usedCodeGenerator = codegenerator.toLowerCase().replace("azure.", "").replace(".fluent", "");
   result.__specials = result.__specials || {};
   if (codegenerator.toLowerCase() === "none") {
     result.__specials.azureValidator = true;
   } else {
-    result.__specials.codeGenerator = codegenerator;
+    result[usedCodeGenerator] = {};
+    if (codegenerator.toLowerCase().startsWith("azure.")) {
+      result["azure-arm"] = true;
+    }
+    if (codegenerator.toLowerCase().endsWith(".fluent")) {
+      result["fluent"] = true;
+    }
   }
 
   result.__specials.header = switches["header"] || null;
@@ -82,7 +88,7 @@ export async function CreateConfiguration(baseFolderUri: string, inputScope: Dat
 
   if (codegenerator.toLowerCase() === "swaggerresolver") {
     result["output-artifact"] = "swagger-document";
-    result.__specials.codeGenerator = "none";
+    delete result[usedCodeGenerator];
   }
 
   return result;
