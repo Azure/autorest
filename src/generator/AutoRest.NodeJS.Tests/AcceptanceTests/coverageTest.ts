@@ -6,7 +6,7 @@
 import should = require('should');
 import http = require('http');
 import assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 var _ = require('underscore')
 
 import reportClient = require('../Expected/AcceptanceTests/Report/autoRestReportService');
@@ -26,15 +26,15 @@ describe('nodejs', function () {
         should.not.exist(error);
         var total = _.keys(result).length;
         var passed = 0;
-        _.keys(result).forEach(function(item: string) {
+        _.keys(result).forEach(function (item: string) {
           if (result[item] > 0) {
             passed++;
           } else {
             console.log('No coverage for scenario: ' + item + '\n');
           }
         });
-        var coverage =  Math.floor((passed/total)*100);
-        console.log('Passed: ' + passed + ', Total: ' + total + ', coverage: ' + coverage +  '% .');
+        var coverage = Math.floor((passed / total) * 100);
+        console.log('Passed: ' + passed + ', Total: ' + total + ', coverage: ' + coverage + '% .');
         coverage.should.equal(100);
         done();
       });

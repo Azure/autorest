@@ -6,7 +6,7 @@
 var should = require('should');
 var http = require('http');
 var assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 import moment = require('moment');
 import complexClient = require('../Expected/AcceptanceTests/BodyComplex/autoRestComplexTestService');
 import complexClientModels = require('../Expected/AcceptanceTests/BodyComplex/models');
@@ -155,7 +155,7 @@ describe('nodejs', function () {
           var complexBody = <complexClientModels.DateWrapper>{ 'field': new Date('0001-01-01'), 'leap': new Date('2016-02-29') }
           testClient.primitive.putDate(complexBody, function (error, result) {
             should.not.exist(error);
-          done();
+            done();
           });
         });
       });
@@ -181,7 +181,7 @@ describe('nodejs', function () {
           var dateFormat = 'ddd, DD MMM YYYY HH:mm:ss';
 
           //Have to use moment.js to construct the date object because NodeJS default Date constructor doesn't parse "old" RFC dates right
-          var fieldDate = moment.utc(timeStringOne, dateFormat).toDate(); 
+          var fieldDate = moment.utc(timeStringOne, dateFormat).toDate();
           testClient.primitive.putDateTimeRfc1123({ 'field': fieldDate, 'now': new Date(timeStringTwo) }, function (error, result) {
             should.not.exist(error);
             done();
@@ -195,7 +195,7 @@ describe('nodejs', function () {
           should.not.exist(error);
           //should.not.exist(result.field);
           assert.deepEqual(result.field, moment.duration(durationString));
-          testClient.primitive.putDuration({ field : moment.duration(durationString) }, function (error, result) {
+          testClient.primitive.putDuration({ field: moment.duration(durationString) }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -223,7 +223,7 @@ describe('nodejs', function () {
         testClient.arrayModel.getValid(function (error, result) {
           should.not.exist(error);
           assert.deepEqual(result.arrayProperty, testArray);
-          testClient.arrayModel.putValid({ arrayProperty : testArray }, function (error, result) {
+          testClient.arrayModel.putValid({ arrayProperty: testArray }, function (error, result) {
             should.not.exist(error);
             done();
           });
@@ -404,35 +404,35 @@ describe('nodejs', function () {
     });
 
     describe('Complex Types with recursive definitions', function () {
-      var bigfish = <complexClientModels.Fish> {
+      var bigfish = <complexClientModels.Fish>{
         'fishtype': 'salmon',
         'location': 'alaska',
         'iswild': true,
         'species': 'king',
         'length': 1,
         'siblings': [
-          <complexClientModels.Shark> {
+          <complexClientModels.Shark>{
             'fishtype': 'shark',
             'age': 6,
             'birthday': new Date('2012-01-05T01:00:00Z'),
             'species': 'predator',
             'length': 20,
             'siblings': [
-              <complexClientModels.Salmon> {
+              <complexClientModels.Salmon>{
                 'fishtype': 'salmon',
                 'location': 'atlantic',
                 'iswild': true,
                 'species': 'coho',
                 'length': 2,
                 'siblings': [
-                  <complexClientModels.Shark> {
+                  <complexClientModels.Shark>{
                     'fishtype': 'shark',
                     'age': 6,
                     'birthday': new Date('2012-01-05T01:00:00Z'),
                     'species': 'predator',
                     'length': 20
                   },
-                  <complexClientModels.Sawshark> {
+                  <complexClientModels.Sawshark>{
                     'fishtype': 'sawshark',
                     'age': 105,
                     'birthday': new Date('1900-01-05T01:00:00Z'),
@@ -442,7 +442,7 @@ describe('nodejs', function () {
                   }
                 ]
               },
-              <complexClientModels.Sawshark> {
+              <complexClientModels.Sawshark>{
                 'fishtype': 'sawshark',
                 'age': 105,
                 'birthday': new Date('1900-01-05T01:00:00Z'),
@@ -453,7 +453,7 @@ describe('nodejs', function () {
               }
             ]
           },
-          <complexClientModels.Sawshark> {
+          <complexClientModels.Sawshark>{
             'fishtype': 'sawshark',
             'age': 105,
             'birthday': new Date('1900-01-05T01:00:00Z'),
