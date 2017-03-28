@@ -221,7 +221,7 @@ Modelers:
     <value>Type '{0}' name should be assembly qualified. For example 'ClassName, AssemblyName'</value>
   </data>
   <data name="AnonymousTypesDiscouraged" xml:space="preserve">
-    <value>For better generated code quality, define schemas instead of using anonymous types.</value>
+    <value>Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.</value>
   </data>
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
@@ -319,7 +319,7 @@ Modelers:
     <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
-    <value>Non-HTTPS/HTTP schemes have limited support</value>
+    <value>Azure Resource Management only supports HTTPS scheme.</value>
   </data>
   <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
     <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
@@ -338,9 +338,6 @@ Modelers:
   </data>
   <data name="GetOperationNameNotValid" xml:space="preserve">
     <value>'GET' operation '{0}' must use method name 'Get' or Method name start with 'List'</value>
-  </data>
-  <data name="LongRunningResponseNotValid" xml:space="preserve">
-    <value>An operation with x-ms-long-running-operation extension must have a valid terminal success status code. 200 or 201 for Put/Patch. 200, 201 or 204 for Post. 200 or 204 or both for Delete.</value>
   </data>
   <data name="InvalidMutabilityValues" xml:space="preserve">
     <value>Valid values for an x-ms-mutability extension are 'create', 'read' and 'update'. Applied extension contains invalid value(s): '{0}'.</value>
@@ -383,5 +380,8 @@ Modelers:
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
     <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>
+  </data>
+  <data name="LongRunningResponseNotValid" xml:space="preserve">
+    <value>A '{0}' operation '{1}' with x-ms-long-running-operation extension must have a valid terminal success status code {2}.</value>
   </data>
 </root>

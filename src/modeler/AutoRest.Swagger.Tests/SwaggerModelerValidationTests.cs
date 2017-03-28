@@ -114,7 +114,7 @@ namespace AutoRest.Swagger.Tests
         public void AnonymousParameterSchemaValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "anonymous-parameter-type.json"));
-            messages.AssertOnlyValidationMessage(typeof(AnonymousParameterTypes));
+            messages.AssertOnlyValidationMessage(typeof(AnonymousBodyParameter));
         }
 
         [Fact]
@@ -288,22 +288,22 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void LongRunningResponseForPutValidation()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-invalid-response-put.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "long-running-invalid-response-put.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule));
         }
 
         [Fact]
         public void LongRunningResponseForPostValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-invalid-response-post.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule));
         }
 
         [Fact]
         public void LongRunningResponseForDeleteValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "long-running-invalid-response-delete.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule));
         }
 
         [Fact]
@@ -470,8 +470,8 @@ namespace AutoRest.Swagger.Tests
         [Fact]
         public void LongRunningResponseDefined()
         {
-            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "long-running-valid-response.json"));
-            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidation), 0);
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource","Swagger", "Validation", "positive", "long-running-valid-response.json"));
+            messages.AssertOnlyValidationMessage(typeof(LongRunningResponseValidationRule), 0);
         }
 
         /// <summary>
@@ -550,6 +550,24 @@ namespace AutoRest.Swagger.Tests
         }
 
         /// <summary>
+        /// Verifies resource models are correctly identified
+        /// </summary>
+        [Fact]
+        public void ValidResourceModels()
+        {
+            var filePath = Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "valid-resource-model-definitions.json");
+            var fileText = System.IO.File.ReadAllText(filePath);
+            var servDef = SwaggerParser.Parse(filePath, fileText);
+            Uri uriPath = null;
+            Uri.TryCreate(filePath, UriKind.RelativeOrAbsolute, out uriPath);
+            var context = new RuleContext(servDef, uriPath);
+            Assert.Equal(4, context.ResourceModels.Count());
+            Assert.Equal(1, context.TrackedResourceModels.Count());
+            Assert.Equal(3, context.ProxyResourceModels.Count());
+        }
+        
+
+        /// <summary>
         /// Verifies that sku object
         /// </summary>
         [Fact]
@@ -558,7 +576,6 @@ namespace AutoRest.Swagger.Tests
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "swagger-skumodel-validation-valid.json"));
             messages.AssertOnlyValidationMessage(typeof(SkuModelValidation), 0);
         }
-
     }
 
     #endregion
