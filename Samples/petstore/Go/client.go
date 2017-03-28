@@ -15,7 +15,6 @@ import (
 )
 
 const (
-
         // DefaultBaseURI is the default URI used for the service Petstore
         DefaultBaseURI = "http://petstore.swagger.io/v2"
 )

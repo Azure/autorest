@@ -28,7 +28,6 @@ import (
 const (
     @if (!Model.IsCustomBaseUri)
     {
-        @EmptyLine
         @:// DefaultBaseURI is the default URI used for the service @(Model.ServiceName)
         @:DefaultBaseURI = "@Model.BaseUrl"
     }

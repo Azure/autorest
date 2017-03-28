@@ -49,6 +49,9 @@ namespace AutoRest.Go.Model
         where name != null && name.IsApiVersion()
         select p.DefaultValue.Value?.Trim(new[]{'"'});
 
+      // When APIVersion is blank, it means that it was unavailable at the method level
+      // and we should default back to whatever is present at the client level. However,
+      // we will continue embedding that in each method to have broader support.
       APIVersion = apiVersionParam.SingleOrDefault();
       if(APIVersion == default(string))
       {

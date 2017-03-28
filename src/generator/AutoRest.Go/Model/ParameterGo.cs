@@ -43,13 +43,16 @@ namespace AutoRest.Go.Model
     public string GetParameterName()
     {
       string retval;
-      if (IsAPIVersion) {
+      if (IsAPIVersion) 
+      {
         retval = APIVersionName;
       }
-      else if (IsClientProperty) {
+      else if (IsClientProperty) 
+      {
         retval = "client." + Name.Value.Capitalize();
       }
-      else {
+      else 
+      {
         retval = Name.Value;
       }
       return retval;
@@ -236,9 +239,12 @@ namespace AutoRest.Go.Model
 
       foreach (var p in parameters)
       {
-        var name = p.IsAPIVersion
-            ? "APIVersion"
-            : !p.IsClientProperty
+        if (p.IsAPIVersion) 
+        {
+          continue;
+        }
+
+        var name = !p.IsClientProperty
                 ? p.Name.Value
                 : "client." + p.Name.Value.Capitalize();
 
