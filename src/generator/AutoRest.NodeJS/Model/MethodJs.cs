@@ -210,7 +210,7 @@ namespace AutoRest.NodeJS.Model
         public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
         {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
+            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(inModelsModule: false);
 
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));

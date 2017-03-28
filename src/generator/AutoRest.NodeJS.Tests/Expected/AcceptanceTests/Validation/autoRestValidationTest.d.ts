@@ -33,7 +33,7 @@ declare class AutoRestValidationTest {
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
      */
-    constructor(subscriptionId: string, apiVersion: string, baseUri: string, options: ServiceClientOptions);
+    constructor(subscriptionId: string, apiVersion: string, baseUri: string, options?: ServiceClientOptions);
 
     subscriptionId: string;
 

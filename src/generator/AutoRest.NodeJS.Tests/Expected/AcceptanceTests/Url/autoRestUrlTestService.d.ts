@@ -33,7 +33,7 @@ declare class AutoRestUrlTestService {
      * @param {string} [options.globalStringQuery] - should contain value null
      *
      */
-    constructor(globalStringPath: string, baseUri: string, options: ServiceClientOptions);
+    constructor(globalStringPath: string, baseUri: string, options?: ServiceClientOptions);
 
     globalStringPath: string;
 
