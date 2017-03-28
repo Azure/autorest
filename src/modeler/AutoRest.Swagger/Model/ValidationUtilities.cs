@@ -14,7 +14,10 @@ namespace AutoRest.Swagger.Model.Utilities
     {
         private const string XmsPageable = "x-ms-pageable";
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
-        
+
+        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
+
+
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
