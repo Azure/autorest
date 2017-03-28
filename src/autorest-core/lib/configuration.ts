@@ -150,7 +150,7 @@ export class ConfigurationView extends EventEmitter {
   private config: Array<AutoRestConfigurationImpl>;
 
   private ResolveAsFolder(path: string): string {
-    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, path));
+    return EnsureIsFolderUri(ResolveUri(this.BaseFolderUri, path));
   }
 
   private ResolveAsPath(path: string): string {
@@ -158,7 +158,7 @@ export class ConfigurationView extends EventEmitter {
   }
 
   private get BaseFolderUri(): string {
-    return this.ResolveAsFolder(SingleValue<string>(this.config, "base-folder") || "");
+    return EnsureIsFolderUri(ResolveUri(this.configFileFolderUri, SingleValue<string>(this.config, "base-folder") || "."));
   }
 
   // public methods
