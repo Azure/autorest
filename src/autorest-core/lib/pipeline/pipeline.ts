@@ -22,7 +22,7 @@ export async function RunPipeline(configurationUri: string, workingScope: DataSt
   const config = new AutoRestConfigurationManager(await hConfig.ReadObject<AutoRestConfiguration>(), configurationUri);
 
   // load Swaggers
-  const uriScope = (uri: string) => config.inputFileUris.indexOf(uri) !== -1 || /^http/.test(uri); // TODO: unlock further URIs here
+  const uriScope = (uri: string) => true; // will be removed
   const swaggers = await LoadLiterateSwaggers(
     workingScope.CreateScope(KnownScopes.Input).AsFileScopeReadThrough(uriScope),
     config.inputFileUris, workingScope.CreateScope("loader"));
