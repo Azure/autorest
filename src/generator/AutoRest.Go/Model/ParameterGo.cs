@@ -84,7 +84,7 @@ namespace AutoRest.Go.Model
     /// <returns></returns>
     public string ValueForMap()
     {
-      if (SerializedName.Value.IsApiVersion())
+      if (IsAPIVersion)
       {
         return APIVersionName;
       }
@@ -236,8 +236,8 @@ namespace AutoRest.Go.Model
 
       foreach (var p in parameters)
       {
-        var name = p.SerializedName.Value.IsApiVersion()
-            ? "client." + ParameterGo.APIVersionName
+        var name = p.IsAPIVersion
+            ? "APIVersion"
             : !p.IsClientProperty
                 ? p.Name.Value
                 : "client." + p.Name.Value.Capitalize();

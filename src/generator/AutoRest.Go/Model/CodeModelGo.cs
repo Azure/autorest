@@ -145,7 +145,7 @@ namespace AutoRest.Go.Model
     public string GlobalDefaultParameters
     {
       get
-      {   
+      {
         var declarations = new List<string>();
         foreach (var p in Properties)
         {
