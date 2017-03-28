@@ -161,15 +161,16 @@ module.exports =
     rm '-rf', workdir
     process.exit(1)
 
-  execute: (cmdline,options,callback)->
+  execute: (cmdline,options,callback, ondata)->
     if typeof options == 'function' 
+      ondata = callback
       callback = options
       options = { }
 
     # if we're busy, schedule again...
     if concurrency >= threshold
       queue.push(->
-          execute cmdline, options, callback
+          execute cmdline, options, callback, ondata
       )
       return
   
@@ -186,7 +187,7 @@ module.exports =
       if code and (options.retry or 0) > 0
         echo warning "retrying #{options.retry} #{cmdline}"
         options.retry--
-        return execute cmdline,options,callback
+        return execute cmdline,options,callback,ondata
 
       # run the next one in the queue
       if queue.length
@@ -205,6 +206,7 @@ module.exports =
         Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)
 
+    proc.stdout.on 'data', ondata if ondata
     return proc
 
 

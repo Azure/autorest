@@ -13,18 +13,15 @@ task 'build', 'typescript', (done)->
     .pipe foreach (each,next) ->
       cmd = "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path}"
       cmd = "#{basefolder}/node_modules/.bin/tsc --project #{folder each.path} --watch" if watch
-      proc = execute cmd,{retry:2} ,(code,stdout,stderr) ->
+      proc = execute cmd,{retry:2} ,(code,stdout,stderr)->
         # echo stdout.replace("src/","#{basefolder}/src/".trim()) 
         count--
         if count is 0
           done()
-
-      proc.stdout.on 'data', (data) => 
+      , (data)-> 
         echo data.replace(/^src\//mig, "#{basefolder}/src/")
 
       next null
-    
-
   return null
 
 task 'fix-line-endings', 'typescript', ->
