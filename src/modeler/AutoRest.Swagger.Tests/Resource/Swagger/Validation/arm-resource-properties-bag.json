@@ -120,9 +120,13 @@
         "prop0": {
           "type": "string"
         },
-        "name": {
-          "type": "string",
-          "description": "some dummy name"
+        "properties": {
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "some dummy name"
+            }
+          }
         }
       }
     },

@@ -39,17 +39,13 @@ namespace AutoRest.Swagger.Validation
 
         private static readonly IEnumerable<string> ArmPropertiesBag = new List<string>()
                                                                         { "name", "id", "type", "location", "tag" };
-
-        private bool ContainsReservedProperties(IEnumerable<string> propNames) => propNames?.Intersect(ArmPropertiesBag).Any() == true;
-
+        
         // Verifies if a tracked resource has a corresponding get operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             var resModels = context.ResourceModels;
-            var violatingModels = resModels.Where(res => ContainsReservedProperties(definitions[res].Properties?.Keys));
-
-            violatingModels.Concat(resModels.Where(res => definitions[res].Properties?.ContainsKey("properties") == true
-                                                            && ContainsReservedProperties(definitions[res].Properties["properties"]?.Properties?.Keys)).ToList());
+            var violatingModels = resModels.Where(res => definitions[res].Properties?.ContainsKey("properties") == true
+                                                         && definitions[res].Properties["properties"]?.Properties?.Keys.Intersect(ArmPropertiesBag).Any() == true);
             foreach (var violatingModel in violatingModels)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, violatingModel, 
