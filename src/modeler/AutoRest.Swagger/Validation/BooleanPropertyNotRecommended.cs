@@ -44,7 +44,7 @@ namespace AutoRest.Swagger.Validation
         /// <returns>true if there are no propeties of type boolean, false otherwise.</returns>
         public override IEnumerable<ValidationMessage> GetValidationMessages(SwaggerObject entity, RuleContext context)
         {
-            if (entity.Type != null && entity.Type.Equals(DataType.Boolean))
+            if (entity.Type?.Equals(DataType.Boolean) == true)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, context.Path.ReadablePath);
             }
@@ -52,14 +52,13 @@ namespace AutoRest.Swagger.Validation
             {
                 foreach (KeyValuePair<string, Schema> property in ((Schema)entity).Properties)
                 {
-                    if (property.Value?.Type != null && property.Value.Type.Equals(DataType.Boolean))
+                    if (property.Value?.Type?.Equals(DataType.Boolean) == true)
                     {
                         yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, property.Key);
                     }
                 }
             }
-            if (entity.GetType() == typeof(SwaggerParameter) && ((SwaggerParameter)entity).Schema?.Type != null &&
-                    (((SwaggerParameter)entity).Schema.Type.Equals(DataType.Boolean)))
+            if (entity.GetType() == typeof(SwaggerParameter) && ((SwaggerParameter)entity).Schema?.Type?.Equals(DataType.Boolean) == true)
             {
                 yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, ((SwaggerParameter)entity).Name);
             }
