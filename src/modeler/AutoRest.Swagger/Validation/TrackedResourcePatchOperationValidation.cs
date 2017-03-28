@@ -38,24 +38,23 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Error;
 
-        // Verifies if a tracked resource has a corresponding patch operation
+        // Verifies if a tracked resource has a corresponding PATCH operation
         public override IEnumerable<ValidationMessage> GetValidationMessages(Dictionary<string, Schema> definitions, RuleContext context)
         {
             ServiceDefinition serviceDefinition = (ServiceDefinition)context.Root;
+            // enumerate all the PATCH operations
             IEnumerable<Operation> patchOperations = ValidationUtilities.GetOperationsByRequestMethod("patch", serviceDefinition);
-            var respDefinitions = ValidationUtilities.GetOperationResponseModels("get", serviceDefinition, "200");
-            
-            foreach (KeyValuePair<string, Schema> definition in definitions)
+
+            // enumerate all the models returned by all PATCH operations (200/201 responses)
+            var respModels = patchOperations.Select(op => op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath());
+            respModels.Union(patchOperations.Select(op => op.Responses["201"]?.Schema?.Reference?.StripDefinitionPath())).Where(modelName=>!string.IsNullOrEmpty(modelName));
+
+            // find models that are not being returned by any of the PATCH operations
+            var violatingModels = context.TrackedResourceModels.Except(respModels);
+
+            foreach (var modelName in violatingModels)
             {
-                if (respDefinitions.Contains(definition.Key) && ValidationUtilities.IsTrackedResource(definition.Value, definitions))
-                {
-                    if(!patchOperations.Any(op => op.Responses.ContainsKey("200") && (op.Responses["200"]?.Schema?.Reference?.StripDefinitionPath()) == definition.Key))
-                    {
-                        // if no patch operation returns current tracked resource as a response, 
-                        // the tracked resource does not have a corresponding patch operation
-                        yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, definition.Key.StripDefinitionPath());
-                    }
-                }
+                yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, modelName);
             }
         }
     }
