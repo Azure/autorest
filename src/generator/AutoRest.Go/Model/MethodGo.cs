@@ -22,6 +22,8 @@ namespace AutoRest.Go.Model
 
     public string PackageName { get; private set; }
 
+    public string APIVersion {get; private set; }
+
     private readonly string lroDescription = " This method may poll for completion. Polling can be canceled by passing the cancel channel argument. " +
                                              "The channel will be used to cancel polling and any outstanding HTTP requests.";
 
@@ -40,6 +42,21 @@ namespace AutoRest.Go.Model
       Owner = (MethodGroup as MethodGroupGo).ClientName;
       PackageName = cmg.Namespace;
       NextAlreadyDefined = NextMethodExists(cmg.Methods.Cast<MethodGo>());
+
+      var apiVersionParam =
+        from p in Parameters
+        let name = p.SerializedName.Value
+        where name != null && name.IsApiVersion()
+        select p.DefaultValue.Value?.Trim(new[]{'"'});
+
+      // When APIVersion is blank, it means that it was unavailable at the method level
+      // and we should default back to whatever is present at the client level. However,
+      // we will continue embedding that in each method to have broader support.
+      APIVersion = apiVersionParam.SingleOrDefault();
+      if(APIVersion == default(string))
+      {
+        APIVersion = cmg.ApiVersion;
+      }
 
       var parameter = Parameters.ToList().Find(p => p.ModelType.PrimaryType(KnownPrimaryType.Stream)
                                           && !(p.Location == ParameterLocation.Body || p.Location == ParameterLocation.FormData));

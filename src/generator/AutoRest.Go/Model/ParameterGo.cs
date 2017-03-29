@@ -13,7 +13,7 @@ namespace AutoRest.Go.Model
 {
   public class ParameterGo : Parameter
   {
-    public const string ApiVersionName = "APIVersion";
+    public const string APIVersionName = "APIVersion";
     public ParameterGo()
     {
 
@@ -42,14 +42,27 @@ namespace AutoRest.Go.Model
 
     public string GetParameterName()
     {
-      return IsClientProperty
-                      ? "client." + Name.Value.Capitalize()
-                      : Name.Value;
+      string retval;
+      if (IsAPIVersion) 
+      {
+        retval = APIVersionName;
+      }
+      else if (IsClientProperty) 
+      {
+        retval = "client." + Name.Value.Capitalize();
+      }
+      else 
+      {
+        retval = Name.Value;
+      }
+      return retval;
     }
 
-    public override bool IsClientProperty => base.IsClientProperty == true || SerializedName.Value.IsApiVersion();
+    public override bool IsClientProperty => base.IsClientProperty == true && !IsAPIVersion;
 
-    public bool IsMethodArgument => !IsClientProperty;
+    public virtual bool IsAPIVersion => SerializedName.Value.IsApiVersion();
+
+    public virtual bool IsMethodArgument => !IsClientProperty && !IsAPIVersion;
 
     /// <summary>
     /// Get Name for parameter for Go map. 
@@ -58,9 +71,9 @@ namespace AutoRest.Go.Model
     /// <returns></returns>
     public string NameForMap()
     {
-      return SerializedName.Value.IsApiVersion()
-                  ? AzureExtensions.ApiVersion
-                  : SerializedName.Value;
+      return IsAPIVersion
+               ? AzureExtensions.ApiVersion
+               : SerializedName.Value;
     }
 
     public bool RequiresUrlEncoding()
@@ -74,10 +87,11 @@ namespace AutoRest.Go.Model
     /// <returns></returns>
     public string ValueForMap()
     {
-      if (SerializedName.Value.IsApiVersion())
+      if (IsAPIVersion)
       {
-        return "client." + ApiVersionName;
+        return APIVersionName;
       }
+
       var value = IsClientProperty
           ? "client." + CodeNamerGo.Instance.GetPropertyName(Name.Value)
           : Name.Value;
@@ -225,9 +239,12 @@ namespace AutoRest.Go.Model
 
       foreach (var p in parameters)
       {
-        var name = p.SerializedName.Value.IsApiVersion()
-            ? "client." + ParameterGo.ApiVersionName
-            : !p.IsClientProperty
+        if (p.IsAPIVersion) 
+        {
+          continue;
+        }
+
+        var name = !p.IsClientProperty
                 ? p.Name.Value
                 : "client." + p.Name.Value.Capitalize();
 
