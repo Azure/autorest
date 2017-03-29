@@ -263,7 +263,7 @@ namespace AutoRest.Swagger.Model.Utilities
         /// </summary>
         /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
         /// <returns>true if operation is x-ms-pageable</returns>
-        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions.GetValue<object>(XmsPageable) != null);
+        public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions != null && op.Extensions.GetValue<object>(XmsPageable) != null);
 
 
         /// <summary>
@@ -408,8 +408,7 @@ namespace AutoRest.Swagger.Model.Utilities
         {
             return getOperations.Any(operation =>
                        regEx.IsMatch(operation.OperationId) &&
-                       operation.Extensions != null &&
-                       operation.Extensions.Any(extension => extension.Key.ToLower().Equals(XmsPageable)) &&
+                       IsXmsPageableResponseOperation(operation) &&
                        operation.Responses.Any(
                            response => response.Key.Equals("200") &&
                            response.Value.Schema != null && IsArrayOf(response.Value.Schema.Reference, definitionKey, definitions))

@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace AutoRest.Swagger.Validation
 {
-    class TrackedResourceListByImmediateParent : TypedRule<Dictionary<string, Schema>>
+    class TrackedResourceListByImmediateParent : TypedRule<Dictionary<string, Dictionary<string, Operation>>>
     {
         /// <summary>
         /// Id of the Rule.
@@ -33,7 +33,7 @@ namespace AutoRest.Swagger.Validation
         /// <summary>
         /// The severity of this message (ie, debug/info/warning/error/fatal, etc)
         /// </summary>
-        public override Category Severity => Category.Error;
+        public override Category Severity => Category.Warning;
 
         /// <summary>
         /// Get the paths that fits the child resource criteria.
@@ -43,9 +43,60 @@ namespace AutoRest.Swagger.Validation
         /// <returns>the paths that fit the child resource criteria</returns>
         private IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> GetChildResourcesPaths(string childResource, ServiceDefinition serviceDefinition)
         {
-            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/.+/.+/{.+}.*/" + childResource + "s$", RegexOptions.IgnoreCase);
+            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
             IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> filteredPaths = serviceDefinition.Paths.Where(path => pathRegEx.IsMatch(path.Key));
             return filteredPaths;
+        }
+
+        private KeyValuePair<string, string> GetChildResourceName(string path, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
+        {
+            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)/{[^/]+}$", RegexOptions.IgnoreCase);
+            Match match = pathRegEx.Match(path);
+            KeyValuePair<string, string> result = new KeyValuePair<string, string>();
+            if (match.Success)
+            {
+                string childresourcename = match.Groups[1].Value;
+                string immediateparentresourcename_path = GetImmediateParentResourceName(path);
+                string immediateparentresourcename_actual = GetActualParentResourceName(immediateparentresourcename_path, paths, definitions);
+                result = new KeyValuePair<string, string>(childresourcename, immediateparentresourcename_actual);
+            }
+
+            return result;
+        }
+
+        private string GetActualParentResourceName(string nameinpath, Dictionary<string, Dictionary<string, Operation>> paths, Dictionary<string, Schema> definitions)
+        {
+            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/.*/" + nameinpath + "/{[^/]+}$", RegexOptions.IgnoreCase);
+
+            IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> pths = paths.Where((KeyValuePair<string, Dictionary<string, Operation>> pth) => pathRegEx.IsMatch(pth.Key));
+            if (pths.Count() == 0) return null;
+            KeyValuePair<string, Dictionary<string, Operation>> path = pths.First();
+
+            IEnumerable<KeyValuePair<string, Operation>> operations = path.Value.Where(op => op.Key.Equals("get", StringComparison.CurrentCultureIgnoreCase));
+            if (operations.Count() == 0) return null;
+            KeyValuePair<string, Operation>  operation = operations.First();
+
+            IEnumerable<KeyValuePair<string, OperationResponse>> responses = operation.Value.Responses.Where(resp => resp.Key.Equals("200"));
+            if (responses.Count() == 0) return null;
+            KeyValuePair<string, OperationResponse> response = responses.First();
+
+            return GetReferencedModel(response.Value.Schema.Reference, definitions);
+        }
+
+        private string GetReferencedModel(String schema, Dictionary<string, Schema> definitions)
+        {
+            Schema referencedSchema = Schema.FindReferencedSchema(schema, definitions);
+
+            if (referencedSchema == null) return null;
+
+            if (referencedSchema.Reference == null)
+            {
+                IEnumerable<KeyValuePair<string, Schema>> definition = definitions.Where(def => def.Value == referencedSchema);
+                if (definition.Count() == 0) return null;
+                return definition.First().Key;
+            }
+            
+            return GetReferencedModel(referencedSchema.Reference, definitions);
         }
 
         /// <summary>
@@ -53,10 +104,10 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         /// <param name="childResourcePaths">paths that fits the child resource criteria</param>
         /// <returns>name of the immediate parent resource name</returns>
-        private string GetImmediateParentResourceName(IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> childResourcePaths)
+        private string GetImmediateParentResourceName(string pathToEvaluate)
         {
-            string pathToEvaluate = childResourcePaths.First().Key;
-            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("s/{"));
+            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
+            pathToEvaluate = pathToEvaluate.Substring(0, pathToEvaluate.LastIndexOf("/{"));
             return pathToEvaluate.Substring(pathToEvaluate.LastIndexOf("/") + 1);
         }
 
@@ -66,41 +117,25 @@ namespace AutoRest.Swagger.Validation
         /// <param name="definitions"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override bool IsValid(Dictionary<string, Schema> definitions, RuleContext context, out object[] formatParameters)
+        public override bool IsValid(Dictionary<string, Dictionary<string, Operation>> paths, RuleContext context, out object[] formatParameters)
         {
-            // Retrieve the list of TrackedResources
-            IEnumerable<string> trackedResources = context.TrackedResourceModels;
-
-            foreach (string trackedResource in trackedResources)
+            foreach(KeyValuePair<string, Dictionary<string, Operation>> pathDefinition in paths)
             {
-                IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> childResourcePaths = GetChildResourcesPaths(trackedResource, context.Root);
-
-                // There must be only one path matching this criteria. If there is more than one path matching this criteria, there is
-                // something wrong with the swagger file. So, throw an exception.
-                if (childResourcePaths.Count() > 1)
+                KeyValuePair<string, string> childResourceMapping = GetChildResourceName(pathDefinition.Key, paths, context.Root.Definitions);
+                if(childResourceMapping.Key != null && childResourceMapping.Value != null)
                 {
-                    throw new Exception("Swagger file has more than one path for a resource: " + trackedResource);
-                }
+                    string operationIdToFind = childResourceMapping.Key + "_ListBy" + childResourceMapping.Value;
+                    bool listByImmediateParent = paths.Any(filteredPath =>
+                        filteredPath.Value.Where(operationKeyValuePair => operationKeyValuePair.Value.OperationId.Equals(operationIdToFind, StringComparison.CurrentCultureIgnoreCase)).Count() == 1
+                    );
+                    if (!listByImmediateParent)
+                    {
+                        formatParameters = new object[2];
+                        formatParameters[0] = childResourceMapping.Key;
+                        formatParameters[1] = childResourceMapping.Value;
+                        return false;
+                    }
 
-                // If there is no filtered path, then it means the tracked resource is not a child resource.
-                // so continue to the next tracked resource.
-                if (childResourcePaths.Count() == 0)
-                {
-                    continue;
-                }
-
-                string immediateParentResourceName = GetImmediateParentResourceName(childResourcePaths);
-                string operationIdToFind = trackedResource + "s_ListBy" + immediateParentResourceName;
-                bool listByImmediateParent = childResourcePaths.Any(filteredPath => 
-                    filteredPath.Value.Where(operationKeyValuePair => operationKeyValuePair.Value.OperationId.Equals(operationIdToFind, StringComparison.CurrentCultureIgnoreCase)).Count() == 1
-                );
-
-                if(!listByImmediateParent)
-                {
-                    formatParameters = new object[2];
-                    formatParameters[0] = trackedResource;
-                    formatParameters[1] = immediateParentResourceName;
-                    return false;
                 }
             }
 

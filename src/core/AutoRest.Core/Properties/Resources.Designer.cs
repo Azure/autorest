@@ -722,7 +722,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("TrackedResourceListByImmediateParentOperationMissing", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The tracked resource, &quot;{0}&quot;, must have a list by resource group operation..
         /// </summary>
@@ -731,7 +731,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("TrackedResourceListByResourceGroupOperationMissing", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to The tracked resource, &quot;{0}&quot;, must have a list by subscriptions operation..
         /// </summary>
@@ -740,7 +740,7 @@ namespace AutoRest.Core.Properties {
                 return ResourceManager.GetString("TrackedResourceListBySubscriptionsOperationMissing", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Tracked resource &apos;{0}&apos; must have patch operation that at least supports the update of tags..
         /// </summary>
@@ -750,15 +750,6 @@ namespace AutoRest.Core.Properties {
             }
         }
         
-        /// <summary>
-        ///   Looks up a localized string similar to The tracked resource, &quot;{0}&quot;, should not use properties &quot;type&quot;,&quot;location&quot;,&quot;tags&quot; in the RP property bag named &quot;properties&quot;..
-        /// </summary>
-        public static string TrackedResourcePropertiesValidation {
-            get {
-                return ResourceManager.GetString("TrackedResourcePropertiesValidation", resourceCulture);
-            }
-        }
-
         /// <summary>
         ///   Looks up a localized string similar to Type &apos;{0}&apos; name should be assembly qualified. For example &apos;ClassName, AssemblyName&apos;.
         /// </summary>
