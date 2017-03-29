@@ -1,3 +1,4 @@
+import { IdentitySourceMapping } from '../source-map/merging';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -33,10 +34,14 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
   outstandingTaskAwaiter.Enter();
 
   // artifact emitter
-  const emitArtifact: (artifactType: string, uri: string, content: string) => void = (artifactType, uri, content) =>
-    From(config.OutputArtifact).Contains(artifactType)
-      ? config.GeneratedFile.Dispatch({ uri: uri, content: content })
-      : null;
+  const emitArtifact: (artifactType: string, uri: string, handle: DataHandleRead) => Promise<void> = async (artifactType, uri, handle) => {
+    if (From(config.OutputArtifact).Contains(artifactType)) {
+      config.GeneratedFile.Dispatch({ uri: uri, content: await handle.ReadData() });
+    }
+    if (From(config.OutputArtifact).Contains(artifactType + ".map")) {
+      config.GeneratedFile.Dispatch({ uri: uri + ".map", content: JSON.stringify(await (await handle.ReadMetadata()).inputSourceMap, null, 2) });
+    }
+  };
 
   // load Swaggers
   let inputs = From(config.InputFileUris).ToArray();
@@ -65,7 +70,9 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
       config.__specials.outputFile ||
       (config.__specials.namespace ? config.__specials.namespace + ".json" : GetFilename([...config.InputFileUris][0]));
     const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
-    emitArtifact("swagger-document", outputFileUri, JSON.stringify(rawSwagger, null, 2));
+    const hw = await config.DataStore.Write("normalized-swagger.json");
+    const h = await hw.WriteData(JSON.stringify(rawSwagger, null, 2), IdentitySourceMapping(swagger.key, await swagger.ReadYamlAst()), [swagger]);
+    await emitArtifact("swagger-document", outputFileUri, h);
   }
 
   const azureValidator = config.AzureArm && !config.DisableValidation;
@@ -198,8 +205,8 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           const handle = await generatedFileScope.ReadStrict(fileName);
           const relPath = decodeURIComponent(handle.key.split("/output/")[1]);
           const outputFileUri = ResolveUri(config.OutputFolderUri, relPath);
-          emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
-            outputFileUri, await handle.ReadData());
+          await emitArtifact(`source-files-${codeGenerator.toLowerCase()}`, // TODO: uhm yeah
+            outputFileUri, handle);
         }
       }
     }
