@@ -83,6 +83,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
     // setup message pipeline (source map resolution, filter, forward)
     const processMessage = async (sink: IEvent<ConfigurationView, Message>, m: Message) => {
       outstandingTaskAwaiter.Enter();
+      config.Debug.Dispatch({ Text: `Incoming validation message (${m.Text}) - starting processing` });
 
       try {
         // update source locations to point to loaded Swagger
@@ -90,7 +91,6 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           const blameSources = await Promise.all(m.Source.map(async s => {
             try {
               const blameTree = await config.DataStore.Blame(s.document, s.Position);
-              console.log(JSON.stringify(blameTree, null, 2));
               const result = [...blameTree.BlameInputs()];
               if (result.length > 0) {
                 return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
@@ -135,6 +135,7 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
         console.error(e);
       }
 
+      config.Debug.Dispatch({ Text: `Incoming validation message (${m.Text}) - finished processing` });
       outstandingTaskAwaiter.Exit();
     };
 

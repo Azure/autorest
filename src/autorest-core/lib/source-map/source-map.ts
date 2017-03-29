@@ -63,7 +63,7 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
     target.addMapping({
       generated: compiledGenerated,
       original: compiledOriginal,
-      name: EncodeEnhancedPositionInName(mapping.name, compiledGenerated),
+      name: EncodeEnhancedPositionInName(mapping.name, compiledOriginal),
       source: mapping.source
     });
   }
