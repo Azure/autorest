@@ -24,7 +24,7 @@ namespace AutoRest.Swagger.Validation
             {
                 string key = definition.Key;
                 Schema schema = definition.Value;
-                if (string.IsNullOrWhiteSpace(schema.Description))
+                if (string.IsNullOrWhiteSpace(schema.Description) && string.IsNullOrWhiteSpace(schema.Reference))
                 {
                     yield return new ValidationMessage(new FileObjectPath(context.File, context.Path), this, string.Format(ModelTypeFormatter, key));
                 }

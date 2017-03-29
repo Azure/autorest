@@ -53,6 +53,14 @@
           "description": "description for property2"
         }
       }
+    },
+    "ParamWithRefProperties": {
+      "description": "Description for the param",
+      "properties": {
+        "propertywithref": {
+          "$ref": "#/definitions/ParamWithProperties"
+        }
+      }
     }
   },
   "parameters": {
