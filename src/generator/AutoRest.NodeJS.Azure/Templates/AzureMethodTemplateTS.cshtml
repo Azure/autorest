@@ -11,29 +11,13 @@
 else
 {
     <text>
-/**
- *
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
- @WrapComment(" * ", "@summary " + Model.Summary)@:
-@: *
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
- @WrapComment(" * ", Model.Description)@:
-@: *
-}
-@foreach (var parameter in Model.DocumentationParameters)
-{
- @MethodJs.ConstructParameterDocumentation(
-                      WrapComment(" * ", "@param {"
-                                        + MethodJs.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
-                                        + " " + parameter.Documentation))
-}
-@WrapComment(" * ", " @param {ServiceCallback} [callback] callback function; see ServiceCallback doc in ms-rest index.d.ts for details")
- */
-@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(true))): void;
-@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(false))): void;
+@EmptyLine
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.HttpOperationResponse, MethodJs.Language.TypeScript))
+@(Model.Name)WithHttpOperationResponse(@(Model.MethodParameterDeclarationTS(true))): Promise<HttpOperationResponse<@(Model.ReturnTypeTSString)>>;
+@EmptyLine
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Promise, MethodJs.Language.TypeScript))
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(includeOptions: true, includeCallback: false))): Promise<@(Model.ReturnTypeTSString)>;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(includeOptions: false))): void;
+@(Model.Name)(@(Model.MethodParameterDeclarationWithCallbackTS(includeOptions: true))): void;
     </text>
 }

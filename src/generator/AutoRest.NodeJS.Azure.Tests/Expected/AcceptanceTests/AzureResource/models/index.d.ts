@@ -8,9 +8,12 @@
  * regenerated.
  */
 
-import * as msRestAzure from 'ms-rest-azure';
-exports.BaseResource = msRestAzure.BaseResource;
-exports.CloudError = msRestAzure.CloudError;
+import { BaseResource } from 'ms-rest-azure';
+import { CloudError } from 'ms-rest-azure';
+
+export { BaseResource } from 'ms-rest-azure';
+export { CloudError } from 'ms-rest-azure';
+
 
 /**
  * @class
@@ -44,11 +47,11 @@ export interface ErrorModel {
  *
  */
 export interface Resource extends BaseResource {
-  id?: string;
-  type?: string;
+  readonly id?: string;
+  readonly type?: string;
   tags?: { [propertyName: string]: string };
   location?: string;
-  name?: string;
+  readonly name?: string;
 }
 
 /**

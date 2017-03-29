@@ -23,40 +23,42 @@
  * @member {string} [description] Description of product.
  *
  */
-function BaseProduct() {
-}
+class BaseProduct {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of BaseProduct
- *
- * @returns {object} metadata of BaseProduct
- *
- */
-BaseProduct.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'BaseProduct',
-    type: {
-      name: 'Composite',
-      className: 'BaseProduct',
-      modelProperties: {
-        productId: {
-          required: true,
-          serializedName: 'base_product_id',
-          type: {
-            name: 'String'
-          }
-        },
-        description: {
-          required: false,
-          serializedName: 'base_product_description',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of BaseProduct
+   *
+   * @returns {object} metadata of BaseProduct
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'BaseProduct',
+      type: {
+        name: 'Composite',
+        className: 'BaseProduct',
+        modelProperties: {
+          productId: {
+            required: true,
+            serializedName: 'base_product_id',
+            type: {
+              name: 'String'
+            }
+          },
+          description: {
+            required: false,
+            serializedName: 'base_product_description',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = BaseProduct;

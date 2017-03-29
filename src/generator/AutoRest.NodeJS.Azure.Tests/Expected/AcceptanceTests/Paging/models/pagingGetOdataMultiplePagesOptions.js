@@ -24,38 +24,40 @@
  * value: 30 .
  *
  */
-function PagingGetOdataMultiplePagesOptions() {
-}
+class PagingGetOdataMultiplePagesOptions {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of PagingGetOdataMultiplePagesOptions
- *
- * @returns {object} metadata of PagingGetOdataMultiplePagesOptions
- *
- */
-PagingGetOdataMultiplePagesOptions.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'PagingGetOdataMultiplePagesOptions',
-      modelProperties: {
-        maxresults: {
-          required: false,
-          type: {
-            name: 'Number'
-          }
-        },
-        timeout: {
-          required: false,
-          defaultValue: 30,
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of PagingGetOdataMultiplePagesOptions
+   *
+   * @returns {object} metadata of PagingGetOdataMultiplePagesOptions
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'PagingGetOdataMultiplePagesOptions',
+        modelProperties: {
+          maxresults: {
+            required: false,
+            type: {
+              name: 'Number'
+            }
+          },
+          timeout: {
+            required: false,
+            defaultValue: 30,
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = PagingGetOdataMultiplePagesOptions;

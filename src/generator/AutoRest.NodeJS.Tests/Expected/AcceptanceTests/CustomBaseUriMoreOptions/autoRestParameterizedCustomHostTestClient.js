@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -40,28 +40,30 @@ var operations = require('./operations');
  * @param {string} [options.dnsSuffix] - A string value that is used as a global part of the parameterized host. Default value 'host'.
  *
  */
-function AutoRestParameterizedCustomHostTestClient(subscriptionId, options) {
-  this.dnsSuffix = 'host';
-  if (subscriptionId === null || subscriptionId === undefined) {
-    throw new Error('\'subscriptionId\' cannot be null.');
+class AutoRestParameterizedCustomHostTestClient extends ServiceClient {
+  constructor(subscriptionId, options) {
+    if (subscriptionId === null || subscriptionId === undefined) {
+      throw new Error('\'subscriptionId\' cannot be null.');
+    }
+
+    if (!options) options = {};
+
+    super(null, options);
+
+    this.dnsSuffix = 'host';
+    this.baseUri = '{vault}{secret}{dnsSuffix}';
+    this.subscriptionId = subscriptionId;
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    if(options.dnsSuffix !== null && options.dnsSuffix !== undefined) {
+      this.dnsSuffix = options.dnsSuffix;
+    }
+    this.paths = new operations.Paths(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  if (!options) options = {};
-
-  AutoRestParameterizedCustomHostTestClient['super_'].call(this, null, options);
-  this.baseUri = '{vault}{secret}{dnsSuffix}';
-  this.subscriptionId = subscriptionId;
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  if(options.dnsSuffix !== null && options.dnsSuffix !== undefined) {
-    this.dnsSuffix = options.dnsSuffix;
-  }
-  this.paths = new operations.Paths(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestParameterizedCustomHostTestClient, ServiceClient);
 
 module.exports = AutoRestParameterizedCustomHostTestClient;

@@ -8,40 +8,40 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestComplexTestService {
-        /**
-     * @class
-     * Initializes a new instance of the AutoRestComplexTestService class.
-     * @constructor
-     *
-     * @param {string} [baseUri] - The base URI of the service.
-     *
-     * @param {object} [options] - The parameter options
-     *
-     * @param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @param {object} [options.requestOptions] - Options for the underlying request object
-     * {@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-     */
-    constructor(baseUri: string, options: ServiceClientOptions);
+  /**
+   * @class
+   * Initializes a new instance of the AutoRestComplexTestService class.
+   * @constructor
+   *
+   * @param {string} [baseUri] - The base URI of the service.
+   *
+   * @param {object} [options] - The parameter options
+   *
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   */
+  constructor(baseUri?: string, options?: ServiceClientOptions);
 
-    apiVersion: string;
+  apiVersion: string;
 
-    // Operation groups
-    basicOperations: operations.BasicOperations;
-    primitive: operations.Primitive;
-    arrayModel: operations.ArrayModel;
-    dictionary: operations.Dictionary;
-    inheritance: operations.Inheritance;
-    polymorphism: operations.Polymorphism;
-    polymorphicrecursive: operations.Polymorphicrecursive;
-    readonlyproperty: operations.Readonlyproperty;
-    }
+  // Operation groups
+  basicOperations: operations.BasicOperations;
+  primitive: operations.Primitive;
+  arrayModel: operations.ArrayModel;
+  dictionary: operations.Dictionary;
+  inheritance: operations.Inheritance;
+  polymorphism: operations.Polymorphism;
+  polymorphicrecursive: operations.Polymorphicrecursive;
+  readonlyproperty: operations.Readonlyproperty;
+}
 
 export = AutoRestComplexTestService;

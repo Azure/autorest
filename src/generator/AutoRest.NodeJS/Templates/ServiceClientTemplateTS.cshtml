@@ -18,62 +18,60 @@
 }
 @EmptyLine
 declare class @(Model.Name) {
-    @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
-    @{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
-    /**
-     * @@class
-     * Initializes a new instance of the @Model.Name class.
-     * @@constructor
-     *
-    @foreach (var param in requiredParameters)
-    {
-    @: * @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
-    @: *
-    }
-
+@{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant && string.IsNullOrEmpty(p.DefaultValue));}
+@{var optionalParameters = Model.Properties.Where(p => (!p.IsRequired || p.IsRequired && !string.IsNullOrEmpty(p.DefaultValue)) && !p.IsConstant);}
+  /**
+   * @@class
+   * Initializes a new instance of the @Model.Name class.
+   * @@constructor
+   *
+@foreach (var param in requiredParameters)
+{
+   @:* @@param {@param.ModelType.Name.ToCamelCase()} @param.Name - @param.Documentation
+   @:*
+}
 @if(!Model.IsCustomBaseUri)
 { 
-     @:* @@param {string} [baseUri] - The base URI of the service.
-     @:*
+   @:* @@param {string} [baseUri] - The base URI of the service.
+   @:*
+}
+   * @@param {object} [options] - The parameter options
+   *
+   * @@param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @@param {object} [options.requestOptions] - Options for the underlying request object
+   * {@@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+@foreach (var param in optionalParameters)
+{
+   @:* @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+   @:*
+}
+   */
+  constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options?: ServiceClientOptions);
+
+@foreach (var property in Model.Properties)
+{
+  @EmptyLine
+  @:@(property.Name): @property.ModelType.TSType(false);
 }
 
-     * @@param {object} [options] - The parameter options
-     *
-     * @@param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @@param {object} [options.requestOptions] - Options for the underlying request object
-     * {@@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-    @foreach (var param in optionalParameters)
-    {
-    @: * @@param {@param.ModelType.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
-    @: *
-    }
-     */
-    constructor(@(!string.IsNullOrEmpty(Model.RequiredConstructorParametersTS) ? Model.RequiredConstructorParametersTS + ", ": "")options: ServiceClientOptions);
-
-    @foreach (var property in Model.Properties)
-    {
-    @EmptyLine
-    @:@(property.Name): @property.ModelType.TSType(false);
-    }
-
-    @if (Model.MethodGroupModels.Any())
-    {
-    @EmptyLine
-    @:// Operation groups
-    foreach (var methodGroup in Model.MethodGroupModels)
-    {
-    @:@(methodGroup.NameForProperty): operations.@(methodGroup.TypeName);
-    }
-    }
-    @foreach (var method in Model.MethodTemplateModels)
-    {
-        @EmptyLine
-        @:@(Include(new MethodTemplateTS(), method))
-    }
+@if (Model.MethodGroupModels.Any())
+{
+  @EmptyLine
+  @:// Operation groups
+foreach (var methodGroup in Model.MethodGroupModels)
+{
+  @:@(methodGroup.NameForProperty): operations.@(methodGroup.TypeName);
+}
+}
+@foreach (var method in Model.MethodTemplateModels)
+{
+  @EmptyLine
+  @:@(Include(new MethodTemplateTS(), method))
+}
 }
 @EmptyLine
 export = @(Model.Name);

@@ -7,15 +7,18 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-var util = require('util');
-var msRest = require('ms-rest');
-var WebResource = msRest.WebResource;
-
+const msRest = require('ms-rest');
+const WebResource = msRest.WebResource;
 @if (Model.ContainsTimeSpan)
 {
-@:var moment = require('moment');
+@:const moment = require('moment');
 }
 @EmptyLine
+@foreach (var method in Model.MethodTemplateModels)
+{
+@:@(Include(new MethodTemplate(), method))
+@EmptyLine
+}
 /**
  * @@class
  * @Model.TypeName
@@ -26,15 +29,21 @@ var WebResource = msRest.WebResource;
  *
  * @@param {@Model.CodeModel.Name} client Reference to the service client.
  */
-function @(Model.TypeName)(client) {
-  this.client = client;
+class @(Model.TypeName) {
+  constructor(client) {
+    this.client = client;
+@foreach (var method in Model.MethodTemplateModels)
+{
+    @:this._@(method.Name) = _@(method.Name);
 }
+  }
 
 @EmptyLine
 @foreach (var method in Model.MethodTemplateModels)
 {
-@:@(Include(new MethodTemplate(), method))
-@EmptyLine
+  @:@(Include(new MethodPromiseWrapperTemplate(), method))
+  @EmptyLine
+}
 }
 @EmptyLine
 module.exports = @(Model.TypeName);

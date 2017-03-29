@@ -13,41 +13,11 @@
 else
 {
     <text>
-/**
- *
-@if (!String.IsNullOrEmpty(Model.Summary))
-{
- @WrapComment(" * ", "@summary " + Model.Summary)@:
-@: *
-}
-@if (!String.IsNullOrEmpty(Model.Description))
-{
- @WrapComment(" * ", Model.Description)@:
-@: *
-}
-@foreach (var parameter in Model.DocumentationParameters)
-{
- @MethodJs.ConstructParameterDocumentation(
-                      WrapComment(" * ", "@param {"
-                                        + MethodJs.GetParameterDocumentationType(parameter)
-                                        + "} " + MethodJs.GetParameterDocumentationName(parameter)
-                                        + " " + parameter.Documentation))
-}
-@WrapComment(" * ", " @param {function} callback")
- *
-@WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
- *
- *                      {Error}  err        - The Error object if an error occurred, null otherwise.
- *
- *                      {@Model.DocumentReturnTypeString} [result]   - The deserialized result object.
-@WrapComment(" *                      ", Model.ReturnTypeInfo)
- *
- *                      {object} [request]  - The HTTP Request object if an error did not occur.
- *
- *                      {stream} [response] - The HTTP Response stream if an error did not occur.
- */
-@(Model.MethodGroup.TypeName).prototype.@(Model.Name) = function (@(Model.MethodParameterDeclarationWithCallback)) {
-  var client = @(Model.ClientReference);
+@EmptyLine
+@(Model.GenerateMethodDocumentation(MethodJs.MethodFlavor.Callback))
+function _@(Model.Name.ToCamelCase())(@(Model.MethodParameterDeclarationWithCallback())) {
+   /* jshint validthis: true */
+  let client = @(Model.ClientReference);
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -58,21 +28,22 @@ else
   }
   @EmptyLine
   // Send request
-  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, parsedResult, httpRequest, response){
+  this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration), (err, parsedResult, httpRequest, response) => {
     if (err) return callback(err);
     @EmptyLine
-    var initialResult = new msRest.HttpOperationResponse();
+    let initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
     initialResult.body = response.body;
-    client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, function (err, pollingResult) {
+    client.@(Model.LongRunningOperationMethodNameInRuntime)(initialResult, options, (err, pollingResult) => {
       if (err) return callback(err);
       @EmptyLine
       // Create Result
-      var result = null;
+      let result = null;
+      @EmptyLine
       httpRequest = pollingResult.request;
       response = pollingResult.response;
-      var responseBody = pollingResult.body;
+      let responseBody = pollingResult.body;
       if (responseBody === '') responseBody = null;
       @EmptyLine
       // Deserialize Response
@@ -89,6 +60,6 @@ else
       return callback(null, result, httpRequest, response);
     });
   });
-};
+}
     </text>
 }

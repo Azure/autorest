@@ -23,47 +23,49 @@
  * 'YELLOW', 'blacK'
  *
  */
-function Basic() {
-}
+class Basic {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Basic
- *
- * @returns {object} metadata of Basic
- *
- */
-Basic.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'basic',
-    type: {
-      name: 'Composite',
-      className: 'Basic',
-      modelProperties: {
-        id: {
-          required: false,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        color: {
-          required: false,
-          serializedName: 'color',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of Basic
+   *
+   * @returns {object} metadata of Basic
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'basic',
+      type: {
+        name: 'Composite',
+        className: 'Basic',
+        modelProperties: {
+          id: {
+            required: false,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
+          color: {
+            required: false,
+            serializedName: 'color',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Basic;

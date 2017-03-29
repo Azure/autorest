@@ -119,7 +119,7 @@ export interface Pet {
  *
  */
 export interface Order {
-  id?: number;
+  readonly id?: number;
   petId?: number;
   quantity?: number;
   shipDate?: Date;

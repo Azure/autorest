@@ -19,40 +19,42 @@
  * @member {string} [name]
  *
  */
-function Pet() {
-}
+class Pet {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Pet
- *
- * @returns {object} metadata of Pet
- *
- */
-Pet.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'pet',
-    type: {
-      name: 'Composite',
-      className: 'Pet',
-      modelProperties: {
-        id: {
-          required: false,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of Pet
+   *
+   * @returns {object} metadata of Pet
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'pet',
+      type: {
+        name: 'Composite',
+        className: 'Pet',
+        modelProperties: {
+          id: {
+            required: false,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Pet;

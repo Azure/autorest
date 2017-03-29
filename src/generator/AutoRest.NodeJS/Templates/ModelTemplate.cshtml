@@ -11,12 +11,7 @@
 @EmptyLine
 @if (Model.ContainsPropertiesInCompositeType() || Model.BaseModelType != null)
 {
-@:var models = require('./index');
-@EmptyLine
-}
-@if (Model.ContainsPropertiesInSequenceType() || Model.BaseModelType != null)
-{
-@:var util = require('util');
+@:const models = require('./index');
 @EmptyLine
 }
 /**
@@ -36,35 +31,37 @@
 @foreach (var property in Model.DocumentationPropertyList)
 {
     @CompositeTypeJs.ConstructPropertyDocumentation(
-              WrapComment(" * ", "@member {" + CompositeTypeJs.GetPropertyDocumentationType(property)
-                                             + "} " + CompositeTypeJs.GetPropertyDocumentationName(property)
-                                             + " " + CompositeTypeJs.GetPropertyDocumentationString(property)))
+                      WrapComment(" * ", "@member {" + CompositeTypeJs.GetPropertyDocumentationType(property)
+                                                     + "} " + CompositeTypeJs.GetPropertyDocumentationName(property)
+                                                     + " " + CompositeTypeJs.GetPropertyDocumentationString(property)))
 }
  */
-function @(Model.Name)() {
 @{
-  if (Model.BaseModelType != null)
-  {
-  @:@(Model.Name)['super_'].call(this);
+    if (Model.BaseModelType != null)
+    {
+@:class @(Model.Name) extends models['@(Model.BaseModelType.Name)'] {
+    }
+    else
+    {
+@:class @(Model.Name) {
+    }
+  @:constructor() {
+    if (Model.BaseModelType != null)
+    {
+    @:super();
+    }
+  @:}
+}
+@EmptyLine
+  /**
+   * Defines the metadata of @Model.Name
+   *
+   * @@returns {object} metadata of @Model.Name
+   *
+   */
+  mapper() {
+    @(Model.ConstructModelMapper())
   }
 }
-}
-@EmptyLine
-@{
-if (Model.BaseModelType != null)
-{
-@:util.inherits(@(Model.Name), models['@(Model.BaseModelType.Name)']);
-@EmptyLine
-}
-}
-/**
- * Defines the metadata of @Model.Name
- *
- * @@returns {object} metadata of @Model.Name
- *
- */
-@(Model.Name).prototype.mapper = function () {
-  @(Model.ConstructModelMapper())
-};
 @EmptyLine
 module.exports = @(Model.Name);

@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -38,31 +38,33 @@ var operations = require('./operations');
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
  */
-function AutoRestComplexTestService(baseUri, options) {
-  this.apiVersion = '2014-04-01-preview';
+class AutoRestComplexTestService extends ServiceClient {
+  constructor(baseUri, options) {
 
-  if (!options) options = {};
+    if (!options) options = {};
 
-  AutoRestComplexTestService['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
+    super(null, options);
+
+    this.apiVersion = '2014-04-01-preview';
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    this.basicOperations = new operations.BasicOperations(this);
+    this.primitive = new operations.Primitive(this);
+    this.arrayModel = new operations.ArrayModel(this);
+    this.dictionary = new operations.Dictionary(this);
+    this.inheritance = new operations.Inheritance(this);
+    this.polymorphism = new operations.Polymorphism(this);
+    this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
+    this.readonlyproperty = new operations.Readonlyproperty(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  this.basicOperations = new operations.BasicOperations(this);
-  this.primitive = new operations.Primitive(this);
-  this.arrayModel = new operations.ArrayModel(this);
-  this.dictionary = new operations.Dictionary(this);
-  this.inheritance = new operations.Inheritance(this);
-  this.polymorphism = new operations.Polymorphism(this);
-  this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
-  this.readonlyproperty = new operations.Readonlyproperty(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestComplexTestService, ServiceClient);
 
 module.exports = AutoRestComplexTestService;

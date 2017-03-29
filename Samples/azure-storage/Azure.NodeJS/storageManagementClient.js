@@ -7,13 +7,13 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRestAzure.AzureServiceClient;
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const ServiceClient = msRestAzure.AzureServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -44,48 +44,50 @@ var operations = require('./operations');
  * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
  *
  */
-function StorageManagementClient(credentials, subscriptionId, baseUri, options) {
-  this.apiVersion = '2015-06-15';
-  this.acceptLanguage = 'en-US';
-  this.longRunningOperationRetryTimeout = 30;
-  this.generateClientRequestId = true;
-  if (credentials === null || credentials === undefined) {
-    throw new Error('\'credentials\' cannot be null.');
-  }
-  if (subscriptionId === null || subscriptionId === undefined) {
-    throw new Error('\'subscriptionId\' cannot be null.');
+class StorageManagementClient extends ServiceClient {
+  constructor(credentials, subscriptionId, baseUri, options) {
+    if (credentials === null || credentials === undefined) {
+      throw new Error('\'credentials\' cannot be null.');
+    }
+    if (subscriptionId === null || subscriptionId === undefined) {
+      throw new Error('\'subscriptionId\' cannot be null.');
+    }
+
+    if (!options) options = {};
+
+    super(credentials, options);
+
+    this.apiVersion = '2015-06-15';
+    this.acceptLanguage = 'en-US';
+    this.longRunningOperationRetryTimeout = 30;
+    this.generateClientRequestId = true;
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'https://management.azure.com';
+    }
+    this.credentials = credentials;
+    this.subscriptionId = subscriptionId;
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    if(options.apiVersion !== null && options.apiVersion !== undefined) {
+      this.apiVersion = options.apiVersion;
+    }
+    if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
+      this.acceptLanguage = options.acceptLanguage;
+    }
+    if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
+      this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
+    }
+    if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
+      this.generateClientRequestId = options.generateClientRequestId;
+    }
+    this.storageAccounts = new operations.StorageAccounts(this);
+    this.usageOperations = new operations.UsageOperations(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  if (!options) options = {};
-
-  StorageManagementClient['super_'].call(this, credentials, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'https://management.azure.com';
-  }
-  this.credentials = credentials;
-  this.subscriptionId = subscriptionId;
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  if(options.apiVersion !== null && options.apiVersion !== undefined) {
-    this.apiVersion = options.apiVersion;
-  }
-  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
-    this.acceptLanguage = options.acceptLanguage;
-  }
-  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
-    this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
-  }
-  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
-    this.generateClientRequestId = options.generateClientRequestId;
-  }
-  this.storageAccounts = new operations.StorageAccounts(this);
-  this.usageOperations = new operations.UsageOperations(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(StorageManagementClient, ServiceClient);
 
 module.exports = StorageManagementClient;

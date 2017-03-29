@@ -3,9 +3,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -36,51 +34,51 @@ var util = require('util');
  * only be set on updates
  *
  */
-function StorageAccountUpdateParameters() {
-  StorageAccountUpdateParameters['super_'].call(this);
-}
+class StorageAccountUpdateParameters extends models['BaseResource'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(StorageAccountUpdateParameters, models['BaseResource']);
-
-/**
- * Defines the metadata of StorageAccountUpdateParameters
- *
- * @returns {object} metadata of StorageAccountUpdateParameters
- *
- */
-StorageAccountUpdateParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccountUpdateParameters',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccountUpdateParameters',
-      modelProperties: {
-        tags: {
-          required: false,
-          serializedName: 'tags',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of StorageAccountUpdateParameters
+   *
+   * @returns {object} metadata of StorageAccountUpdateParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccountUpdateParameters',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccountUpdateParameters',
+        modelProperties: {
+          tags: {
+            required: false,
+            serializedName: 'tags',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
             }
-          }
-        },
-        properties: {
-          required: false,
-          serializedName: 'properties',
-          type: {
-            name: 'Composite',
-            className: 'StorageAccountPropertiesUpdateParameters'
+          },
+          properties: {
+            required: false,
+            serializedName: 'properties',
+            type: {
+              name: 'Composite',
+              className: 'StorageAccountPropertiesUpdateParameters'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccountUpdateParameters;
