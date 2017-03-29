@@ -4,7 +4,7 @@ import { suite, test, slow, timeout, skip, only } from "mocha-typescript";
 import { IFileSystem, MemoryFileSystem } from "../lib/file-system"
 import * as assert from "assert";
 if (!Symbol.asyncIterator) {
-  require("./polyfill.min.js")
+  require("./polyfill.min.js");
 }
 
 @suite class FileSystemTests {

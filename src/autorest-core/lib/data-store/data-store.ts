@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { JsonPath } from '../ref/jsonpath';
+import { LineIndices } from "../parsing/text-utility";
 import { CancellationToken } from "../ref/cancallation";
 import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
 import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
@@ -31,6 +31,7 @@ export interface Metadata {
   inputSourceMap: Lazy<RawSourceMap>;
   sourceMap: Lazy<RawSourceMap>;
   yamlAst: Lazy<YAMLNode>;
+  lineIndices: Lazy<number[]>;
 }
 
 interface Data {
@@ -154,8 +155,8 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // special URI handlers
     // - GitHub
-    if (uri.startsWith('https://github')) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    if (uri.startsWith("https://github")) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
     }
 
     // prope cache
@@ -184,8 +185,8 @@ class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
   public async Read(uri: string): Promise<DataHandleRead> {
     // special URI handlers
     // - GitHub
-    if (uri.startsWith('https://github')) {
-      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    if (uri.startsWith("https://github")) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, "https://raw.githubusercontent.com$2$3");
     }
 
     // prope cache
@@ -301,6 +302,7 @@ export class DataStore extends DataStoreView {
       });
       storeEntry.metadata.inputSourceMap = new Lazy(() => this.CreateInputSourceMapFor(key));
       storeEntry.metadata.yamlAst = new Lazy<YAMLNode>(async () => parseAst(data));
+      storeEntry.metadata.lineIndices = new Lazy<number[]>(async () => LineIndices(data));
       return result;
     });
   }

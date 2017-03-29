@@ -1,3 +1,4 @@
+import { Message } from '../lib/message';
 import { AutoRest } from '../lib/autorest-core';
 import { Configuration } from '../lib/configuration';
 import { RealFileSystem } from '../lib/file-system';
@@ -31,5 +32,13 @@ import { parse } from "../lib/ref/jsonpath";
       const blameInputs = [...blameTree.BlameInputs()];
       assert.equal(blameInputs.length, 2);
     }
+  }
+
+  @test @timeout(5000) async "large swagger performance"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
+    const messages: Message[] = [];
+    autoRest.Warning.Subscribe((_, m) => messages.push(m));
+    await autoRest.Process().finish;
+    assert.notEqual(messages.length, 0);
   }
 }

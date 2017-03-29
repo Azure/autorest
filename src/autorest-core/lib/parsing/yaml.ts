@@ -120,14 +120,13 @@ export function ReplaceNode(yamlAstRoot: YAMLNode, target: YAMLNode, value: YAML
  * Resolves the text position of a JSON path in raw YAML.
  */
 export async function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<EnhancedPosition> {
-  const yaml = await yamlFile.ReadData();
   const yamlAst = await yamlFile.ReadYamlAst();
   const node = ResolveRelativeNode(yamlAst, yamlAst, jsonPath);
 
   const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
   const endIdx = node.endPosition;
-  const startPos = IndexToPosition(yaml, startIdx);
-  const endPos = IndexToPosition(yaml, endIdx);
+  const startPos = await IndexToPosition(yamlFile, startIdx);
+  const endPos = await IndexToPosition(yamlFile, endIdx);
 
   const result: EnhancedPosition = { column: startPos.column, line: startPos.line };
   result.path = jsonPath;
