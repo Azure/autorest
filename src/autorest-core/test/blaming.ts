@@ -35,7 +35,7 @@ import { parse } from "../lib/ref/jsonpath";
     }
   }
 
-  @test @timeout(60000) async "large swagger performance"() {
+  @test @skip @timeout(60000) async "large swagger performance"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
     const messages: Message[] = [];
     autoRest.Warning.Subscribe((_, m) => messages.push(m));
@@ -43,7 +43,7 @@ import { parse } from "../lib/ref/jsonpath";
     assert.notEqual(messages.length, 0);
   }
 
-  @test @timeout(10000) async "generate resolved swagger with source map"() {
+  @test @timeout(60000) async "generate resolved swagger with source map"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/small-input/"));
     autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const files: Artifact[] = [];
