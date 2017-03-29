@@ -52,10 +52,6 @@ namespace AutoRest.Swagger.Validation.Core
         public static IEnumerable<Rule> GetValidationRules(this PropertyInfo property)
         {
             var propertyRules = property.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
-            if (propertyRules.IsNullOrEmpty())
-            {
-                propertyRules = DefaultRules.ReEnumerable();
-            }
             return propertyRules.Concat(UniversalRules).ReEnumerable();
         }
 
@@ -67,13 +63,6 @@ namespace AutoRest.Swagger.Validation.Core
 
         public static IEnumerable<Rule> GetValidationRules(this Type type)
             => type.GetCustomAttributes<RuleAttribute>(true).Select(each => each.Rule).ReEnumerable();
-
-        /// <summary>
-        /// The collection of default rules applies to all properties that do not define rules
-        /// These can impose global conditions on any property that has not been otherwise validated.
-        /// </summary>
-        /// <returns></returns>
-        public static IEnumerable<Rule> DefaultRules = new[] { new MissingValidator() };
 
         /// <summary>
         /// The collection of rules that apply to all properties regardless of other rules.
