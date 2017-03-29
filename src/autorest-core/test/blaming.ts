@@ -45,7 +45,7 @@ import { parse } from "../lib/ref/jsonpath";
 
   @test @timeout(60000) async "generate resolved swagger with source map"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/small-input/"));
-    autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
+    await autoRest.AddConfiguration({ "output-artifact": ["swagger-document", "swagger-document.map"] });
     const files: Artifact[] = [];
     autoRest.GeneratedFile.Subscribe((_, a) => files.push(a));
     await autoRest.Process().finish;

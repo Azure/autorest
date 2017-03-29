@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin / env node
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -9,14 +9,14 @@
 
 // this file should get 'required' by the boostrapper
 
+import { CreateObject, parse } from "./lib/ref/jsonpath";
 import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
-import { AutoRest } from './lib/autorest-core';
+import { AutoRest } from "./lib/autorest-core";
 import { resolve as currentDirectory } from "path";
 import { ChildProcess } from "child_process";
 import { CreateFolderUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { AutoRestConfigurationSwitches } from "./lib/configuration";
 import { DataStore } from "./lib/data-store/data-store";
 import { RealFileSystem } from "./lib/file-system";
 
@@ -67,11 +67,11 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
  * Current AutoRest
  */
 
-type CommandLineArgs = { configFile?: string, switches: AutoRestConfigurationSwitches };
+type CommandLineArgs = { configFile?: string, switches: any[] };
 
 function parseArgs(autorestArgs: string[]): CommandLineArgs {
   const result: CommandLineArgs = {
-    switches: {}
+    switches: []
   };
 
   for (const arg of autorestArgs) {
@@ -89,11 +89,7 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
     // switch
     const key = match[1];
     const value = match[3] || null;
-    result.switches[key] = !result.switches[key]
-      ? value
-      : (typeof result.switches[key] === "string"
-        ? [result.switches[key], value]
-        : (result.switches[key] as any).concat(value));
+    result.switches.push(CreateObject(key.split("."), value));
   }
 
   return result;
@@ -103,7 +99,7 @@ async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
   const currentDirUri = CreateFolderUri(currentDirectory());
   const api = new AutoRest(new RealFileSystem(), ResolveUri(currentDirUri, args.configFile || "."));
-  await api.AddConfiguration(args.switches);
+  args.switches.forEach(s => api.AddConfiguration(s));
   const outstanding = new OutstandingTaskAwaiter();
   api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
   //api.Debug.Subscribe((_, m) => console.log(m.Text));

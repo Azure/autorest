@@ -21,10 +21,6 @@ import { Message } from "./message";
 import { Artifact } from "./artifact";
 import { CancellationTokenSource, CancellationToken } from "./ref/cancallation";
 
-export interface AutoRestConfigurationSwitches {
-  [key: string]: string | null;
-}
-
 export interface AutoRestConfigurationSpecials {
   infoSectionOverride?: any; // from composite swagger file, no equivalent (yet) in config file; IF DOING THAT: also make sure source maps are pulling it! (see "composite swagger" method)
   header?: string | null;
@@ -215,7 +211,7 @@ export class Configuration {
     const defaults = require("../resources/default-configuration.json");
 
     if (configFileUri === null) {
-      return new ConfigurationView("file:///", defaults, ...configs);
+      return new ConfigurationView("file:///", ...configs, defaults);
     } else {
       const inputView = workingScope.CreateScope("input").AsFileScopeReadThroughFileSystem(this.fileSystem as IFileSystem);
 
@@ -231,7 +227,7 @@ export class Configuration {
         return block;
       }));
 
-      return new ConfigurationView(ResolveUri(configFileUri, "."), defaults, ...configs, ...blocks);
+      return new ConfigurationView(ResolveUri(configFileUri, "."), ...configs, ...blocks, defaults);
     }
   }
 

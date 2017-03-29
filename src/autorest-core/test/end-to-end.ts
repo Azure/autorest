@@ -33,4 +33,25 @@ import { Message } from "../lib/message";
 
     await autoRest.Process().finish;
   }
+
+  @test @timeout(60000) async "complicated configuration scenario"() {
+    const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/literate-example/readme-complicated.md"));
+    autoRest.AddConfiguration({
+      "cmd-line-true": true,
+      "cmd-line-false": false,
+      "cmd-line-complex": {
+        "true": true,
+        "false": false
+      }
+    });
+
+    const config = await autoRest.view;
+    assert.strictEqual(config.AzureArm, true);
+    assert.strictEqual([...config.InputFileUris].length, 1);
+
+    const messages: Message[] = [];
+    autoRest.Warning.Subscribe((_, m) => messages.push(m));
+    await autoRest.Process().finish;
+    assert.notEqual(messages.length, 0);
+  }
 }
