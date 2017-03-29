@@ -1,4 +1,4 @@
-import { SmartPosition, Position } from './ref/source-map';
+import { EnhancedPosition, Position, SmartPosition } from './ref/source-map';
 
 export enum Channel {
   Information = <any>"information",
@@ -11,7 +11,7 @@ export enum Channel {
 
 export interface SourceLocation {
   document: string;
-  Position: SmartPosition;
+  Position: EnhancedPosition;
 }
 
 export interface Range {

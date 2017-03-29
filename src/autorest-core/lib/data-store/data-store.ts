@@ -410,7 +410,7 @@ export class DataHandleRead {
     return await data.yamlAst;
   }
 
-  public async Blame(position: sourceMap.Position): Promise<(sourceMap.MappedPosition & { path?: JsonPath })[]> {
+  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
     const metadata = await this.ReadMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
 

@@ -22,7 +22,7 @@ import { AutoRestDotNetPlugin } from "./plugins/autorest-dotnet";
 import { ComposeSwaggers, LoadLiterateSwaggers } from "./swagger-loader";
 import { From } from "../ref/linq";
 import { IFileSystem } from "../file-system";
-import { TryDecodePathFromName } from "../source-map/source-map";
+import { TryDecodeEnhancedPositionFromName } from "../source-map/source-map";
 
 export type DataPromise = MultiPromise<DataHandleRead>;
 
@@ -90,9 +90,10 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
           const blameSources = await Promise.all(m.Source.map(async s => {
             try {
               const blameTree = await config.DataStore.Blame(s.document, s.Position);
+              console.log(JSON.stringify(blameTree, null, 2));
               const result = [...blameTree.BlameInputs()];
               if (result.length > 0) {
-                return result.map(r => <SourceLocation>{ document: r.source, Position: { line: r.line, column: r.column, path: r.path } });
+                return result.map(r => <SourceLocation>{ document: r.source, Position: Object.assign(TryDecodeEnhancedPositionFromName(r.name) || {}, { line: r.line, column: r.column }) });
               }
             } catch (e) {
               // TODO: activate as soon as .NET swagger loader stuff (inline responses, inline path level parameters, ...)
@@ -102,17 +103,25 @@ export async function RunPipeline(config: ConfigurationView, fileSystem: IFileSy
             return [s];
           }));
 
-          m.Source = blameSources.map(x => x[0]); // just take the first source of every issue (or take all of them? has impact on both supression and highlighting!)
+          //console.log("---");
+          //console.log(JSON.stringify(m.Source, null, 2));
+          m.Source = From(blameSources).SelectMany(x => x).ToArray();
+          //console.log(JSON.stringify(m.Source, null, 2));
+          //console.log("---");
         }
 
         // set range (dummy)
         if (m.Source) {
-          m.Range = m.Source.map(s =>
-            <Range>{
+          m.Range = m.Source.map(s => {
+            let positionStart = s.Position;
+            let positionEnd = <sourceMap.Position>{ line: s.Position.line, column: s.Position.column + (s.Position.length || 3) };
+
+            return <Range>{
               document: s.document,
-              start: s.Position,
-              end: { column: (s.Position as any).column + 3, line: (s.Position as any).line }
-            });
+              start: positionStart,
+              end: positionEnd
+            };
+          });
         }
 
         // filter

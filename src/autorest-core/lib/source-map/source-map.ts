@@ -3,7 +3,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Mappings, Position, SmartPosition } from "../ref/source-map";
+import { EnhancedPosition, Mappings, Position, SmartPosition } from '../ref/source-map';
 import { Descendants, ToAst } from "../ref/yaml";
 import { JsonPath, parse, stringify } from '../ref/jsonpath';
 import * as yaml from "../parsing/yaml";
@@ -11,36 +11,35 @@ import { DataHandleRead } from "../data-store/data-store";
 
 // for carrying over rich information into the realm of line/col based source maps
 // convention: <original name (contains no `nameWithPathSeparator`)>\n(<path>)
-const nameWithPathSeparator = "\n\n(";
-const nameWithPathEndMark = ")";
-export function TryDecodePathFromName(name: string | undefined): JsonPath | undefined {
+const enhancedPositionSeparator = "\n\n(";
+const enhancedPositionEndMark = ")";
+export function TryDecodeEnhancedPositionFromName(name: string | undefined): EnhancedPosition | undefined {
   try {
     if (!name) {
       return undefined;
     }
-    const sepIndex = name.indexOf(nameWithPathSeparator);
-    if (sepIndex === -1 || !name.endsWith(nameWithPathEndMark)) {
+    const sepIndex = name.indexOf(enhancedPositionSeparator);
+    if (sepIndex === -1 || !name.endsWith(enhancedPositionEndMark)) {
       return undefined;
     }
     const secondPart = name.slice(sepIndex + 3, name.length - 1);
-    return parse(secondPart);
+    return JSON.parse(secondPart);
   } catch (e) {
     return undefined;
   }
 }
-export function EncodePathInName(name: string | undefined, path: JsonPath): string {
-  if (name && name.indexOf(nameWithPathSeparator) !== -1) {
-    throw new Error("Cannot encode the path since the original name already contains the separator string.");
+export function EncodeEnhancedPositionInName(name: string | undefined, pos: EnhancedPosition): string {
+  if (name && name.indexOf(enhancedPositionSeparator) !== -1) {
+    name = name.split(enhancedPositionSeparator)[0];
   }
-  return (name || "") + nameWithPathSeparator + stringify(path) + nameWithPathEndMark;
+  return (name || "") + enhancedPositionSeparator + JSON.stringify(pos, null, 2) + enhancedPositionEndMark;
 }
 
-export async function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<Position> {
-  const path = (position as any).path;
-  if (path) {
-    return yaml.ResolvePath(yamlFile, path);
+export async function CompilePosition(position: SmartPosition, yamlFile: DataHandleRead): Promise<EnhancedPosition> {
+  if (!(position as EnhancedPosition).line) {
+    return yaml.ResolvePath(yamlFile, (position as any).path);
   }
-  return position as Position;
+  return position as EnhancedPosition;
 }
 
 export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGenerator, yamlFiles: DataHandleRead[] = []): Promise<void> {
@@ -56,15 +55,15 @@ export async function Compile(mappings: Mappings, target: sourceMap.SourceMapGen
       throw new Error(`File '${key}' was not passed along with 'yamlFiles' (got '${JSON.stringify(yamlFiles.map(x => x.key))}')`);
     }
     return CompilePosition(position, yamlFileLookup[key]);
-  }
+  };
 
   for (const mapping of mappings) {
-    const associatedPath: JsonPath | null = (mapping.original as any).path || (mapping.generated as any).path || null;
-
+    const compiledGenerated = await compilePos(mapping.generated, generatedFile);
+    const compiledOriginal = await compilePos(mapping.original, mapping.source);
     target.addMapping({
-      generated: await compilePos(mapping.generated, generatedFile),
-      original: await compilePos(mapping.original, mapping.source),
-      name: associatedPath !== null ? EncodePathInName(mapping.name, associatedPath) : mapping.name,
+      generated: compiledGenerated,
+      original: compiledOriginal,
+      name: EncodeEnhancedPositionInName(mapping.name, compiledGenerated),
       source: mapping.source
     });
   }

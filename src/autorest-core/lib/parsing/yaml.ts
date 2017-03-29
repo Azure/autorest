@@ -1,3 +1,4 @@
+import { EnhancedPosition, PositionEnhancements } from '../ref/source-map';
 /*---------------------------------------------------------------------------------------------
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
@@ -115,23 +116,33 @@ export function ReplaceNode(yamlAstRoot: YAMLNode, target: YAMLNode, value: YAML
   throw new Error(`unexpected YAML AST node kind '${parent.kind}' for a parent`);
 }
 
-export function ResolvePathParts(yamlAstRoot: YAMLNode, jsonPathParts: JsonPath): number {
-  // special treatment of root "$", so it gets mapped to the VERY beginning of the document (possibly "---")
-  // instead of the first YAML mapping node. This allows disambiguation of "$" and "$.<first prop>" in YAML.
-  if (jsonPathParts.length === 0) {
-    return 0;
-  }
-
-  return ResolveRelativeNode(yamlAstRoot, yamlAstRoot, jsonPathParts).startPosition;
-}
-
 /**
  * Resolves the text position of a JSON path in raw YAML.
  */
-export async function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<sourceMap.Position> {
+export async function ResolvePath(yamlFile: DataHandleRead, jsonPath: JsonPath): Promise<EnhancedPosition> {
   const yaml = await yamlFile.ReadData();
   const yamlAst = await yamlFile.ReadYamlAst();
-  const textIndex = ResolvePathParts(yamlAst, jsonPath);
-  const result = IndexToPosition(yaml, textIndex);
+  const node = ResolveRelativeNode(yamlAst, yamlAst, jsonPath);
+
+  const startIdx = jsonPath.length === 0 ? 0 : node.startPosition;
+  const endIdx = node.endPosition;
+  const startPos = IndexToPosition(yaml, startIdx);
+  const endPos = IndexToPosition(yaml, endIdx);
+
+  const result: EnhancedPosition = { column: startPos.column, line: startPos.line };
+  result.path = jsonPath;
+
+  // enhance
+  if (node.kind === Kind.MAPPING) {
+    const mappingNode = node as YAMLMapping;
+    result.length = mappingNode.key.endPosition - mappingNode.key.startPosition;
+    result.valueOffset = mappingNode.value.startPosition - mappingNode.key.startPosition;
+    result.valueLength = mappingNode.value.endPosition - mappingNode.value.startPosition;
+  } else {
+    result.length = endIdx - startIdx;
+    result.valueOffset = 0;
+    result.valueLength = result.length;
+  }
+
   return result;
 }
