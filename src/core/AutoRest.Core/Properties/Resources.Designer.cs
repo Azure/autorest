@@ -89,7 +89,7 @@ namespace AutoRest.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top level property names should not be repeated inside the properties bag for ARM resource &quot;{0}&quot;. Properties [{1}] conflict with ARM top level properties. Please rename these..
+        ///   Looks up a localized string similar to Top level property names should not be repeated inside the properties bag for ARM resource &apos;{0}&apos;. Properties [{1}] conflict with ARM top level properties. Please rename these..
         /// </summary>
         public static string ArmPropertiesBagValidationMessage {
             get {

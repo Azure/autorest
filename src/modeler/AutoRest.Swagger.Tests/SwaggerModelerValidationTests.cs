@@ -220,6 +220,13 @@ namespace AutoRest.Swagger.Tests
         }
 
         [Fact]
+        public void ArmResourcePropertiesBagValidation()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "arm-resource-properties-bag.json"));
+            messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 1);
+        }
+
+        [Fact]
         public void CollectionObjectsPropertiesNamingValidation()
         {
             var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "collection-objects-naming.json"));
@@ -549,6 +556,13 @@ namespace AutoRest.Swagger.Tests
             messages.AssertOnlyValidationMessage(typeof(OperationParametersValidation), 0);
         }
 
+        [Fact]
+        public void ValidArmResourcePropertiesBag()
+        {
+            var messages = ValidateSwagger(Path.Combine(Core.Utilities.Extensions.CodeBaseDirectory, "Resource", "Swagger", "Validation", "positive", "arm-resource-properties-valid.json"));
+            messages.AssertOnlyValidationMessage(typeof(ArmResourcePropertiesBag), 0);
+        }
+
         /// <summary>
         /// Verifies resource models are correctly identified
         /// </summary>
@@ -565,7 +579,6 @@ namespace AutoRest.Swagger.Tests
             Assert.Equal(1, context.TrackedResourceModels.Count());
             Assert.Equal(3, context.ProxyResourceModels.Count());
         }
-        
 
         /// <summary>
         /// Verifies that sku object
