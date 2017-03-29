@@ -35,6 +35,8 @@ namespace AutoRest.Swagger.Validation
         /// </summary>
         public override Category Severity => Category.Warning;
 
+        private Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
+
         /// <summary>
         /// Get the paths that fits the child resource criteria.
         /// </summary>
@@ -43,7 +45,6 @@ namespace AutoRest.Swagger.Validation
         /// <returns>the paths that fit the child resource criteria</returns>
         private IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> GetChildResourcesPaths(string childResource, ServiceDefinition serviceDefinition)
         {
-            Regex pathRegEx = new Regex("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/[^/]+/[^/]+/{[^/]+}.*/(\\w+)$", RegexOptions.IgnoreCase);
             IEnumerable<KeyValuePair<string, Dictionary<string, Operation>>> filteredPaths = serviceDefinition.Paths.Where(path => pathRegEx.IsMatch(path.Key));
             return filteredPaths;
         }
