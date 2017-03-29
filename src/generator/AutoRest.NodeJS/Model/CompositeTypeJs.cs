@@ -223,10 +223,14 @@ namespace AutoRest.NodeJS.Model
             }
 
             string typeString = property.ModelType.TSType(inModelsModule);
-
-            if (! property.IsRequired)
-                return property.Name + "?: " + typeString;
-            else return property.Name + ": " + typeString;
+            var propertyName = property.Name;
+            if (property.IsReadOnly)
+            {
+                propertyName = "readonly " + propertyName;
+            }
+            if (!property.IsRequired)
+                return propertyName + "?: " + typeString;
+            else return propertyName + ": " + typeString;
         }
 
         public virtual string ConstructModelMapper()
