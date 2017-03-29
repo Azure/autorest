@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -39,90 +37,90 @@ var util = require('util');
  * on updates
  *
  */
-function StorageAccountUpdateParameters() {
-  StorageAccountUpdateParameters['super_'].call(this);
-}
+class StorageAccountUpdateParameters extends models['Resource'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(StorageAccountUpdateParameters, models['Resource']);
-
-/**
- * Defines the metadata of StorageAccountUpdateParameters
- *
- * @returns {object} metadata of StorageAccountUpdateParameters
- *
- */
-StorageAccountUpdateParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccountUpdateParameters',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccountUpdateParameters',
-      modelProperties: {
-        id: {
-          required: false,
-          readOnly: true,
-          serializedName: 'id',
-          type: {
-            name: 'String'
-          }
-        },
-        name: {
-          required: false,
-          readOnly: true,
-          serializedName: 'name',
-          type: {
-            name: 'String'
-          }
-        },
-        type: {
-          required: false,
-          readOnly: true,
-          serializedName: 'type',
-          type: {
-            name: 'String'
-          }
-        },
-        location: {
-          required: true,
-          serializedName: 'location',
-          type: {
-            name: 'String'
-          }
-        },
-        tags: {
-          required: false,
-          serializedName: 'tags',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of StorageAccountUpdateParameters
+   *
+   * @returns {object} metadata of StorageAccountUpdateParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccountUpdateParameters',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccountUpdateParameters',
+        modelProperties: {
+          id: {
+            required: false,
+            readOnly: true,
+            serializedName: 'id',
+            type: {
+              name: 'String'
             }
-          }
-        },
-        accountType: {
-          required: false,
-          serializedName: 'properties.accountType',
+          },
+          name: {
+            required: false,
+            readOnly: true,
+            serializedName: 'name',
+            type: {
+              name: 'String'
+            }
+          },
           type: {
-            name: 'Enum',
-            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
-          }
-        },
-        customDomain: {
-          required: false,
-          serializedName: 'properties.customDomain',
-          type: {
-            name: 'Composite',
-            className: 'CustomDomain'
+            required: false,
+            readOnly: true,
+            serializedName: 'type',
+            type: {
+              name: 'String'
+            }
+          },
+          location: {
+            required: true,
+            serializedName: 'location',
+            type: {
+              name: 'String'
+            }
+          },
+          tags: {
+            required: false,
+            serializedName: 'tags',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
+            }
+          },
+          accountType: {
+            required: false,
+            serializedName: 'properties.accountType',
+            type: {
+              name: 'Enum',
+              allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+            }
+          },
+          customDomain: {
+            required: false,
+            serializedName: 'properties.customDomain',
+            type: {
+              name: 'Composite',
+              className: 'CustomDomain'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccountUpdateParameters;

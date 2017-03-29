@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -38,24 +38,26 @@ var operations = require('./operations');
  * @param {string} [options.host] - A string value that is used as a global part of the parameterized host
  *
  */
-function AutoRestParameterizedHostTestClient(options) {
-  this.host = 'host';
+class AutoRestParameterizedHostTestClient extends ServiceClient {
+  constructor(options) {
 
-  if (!options) options = {};
+    if (!options) options = {};
 
-  AutoRestParameterizedHostTestClient['super_'].call(this, null, options);
-  this.baseUri = 'http://{accountName}{host}';
+    super(null, options);
 
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  if(options.host !== null && options.host !== undefined) {
-    this.host = options.host;
+    this.host = 'host';
+    this.baseUri = 'http://{accountName}{host}';
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    if(options.host !== null && options.host !== undefined) {
+      this.host = options.host;
+    }
+    this.paths = new operations.Paths(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
-  this.paths = new operations.Paths(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
-}
 
-util.inherits(AutoRestParameterizedHostTestClient, ServiceClient);
+}
 
 module.exports = AutoRestParameterizedHostTestClient;

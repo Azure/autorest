@@ -25,50 +25,52 @@
  * @member {string} path Path parameter
  *
  */
-function ParameterGroupingPostRequiredParameters() {
-}
+class ParameterGroupingPostRequiredParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ParameterGroupingPostRequiredParameters
- *
- * @returns {object} metadata of ParameterGroupingPostRequiredParameters
- *
- */
-ParameterGroupingPostRequiredParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'ParameterGroupingPostRequiredParameters',
-      modelProperties: {
-        body: {
-          required: true,
-          type: {
-            name: 'Number'
-          }
-        },
-        customHeader: {
-          required: false,
-          type: {
-            name: 'String'
-          }
-        },
-        query: {
-          required: false,
-          defaultValue: 30,
-          type: {
-            name: 'Number'
-          }
-        },
-        path: {
-          required: true,
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of ParameterGroupingPostRequiredParameters
+   *
+   * @returns {object} metadata of ParameterGroupingPostRequiredParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'ParameterGroupingPostRequiredParameters',
+        modelProperties: {
+          body: {
+            required: true,
+            type: {
+              name: 'Number'
+            }
+          },
+          customHeader: {
+            required: false,
+            type: {
+              name: 'String'
+            }
+          },
+          query: {
+            required: false,
+            defaultValue: 30,
+            type: {
+              name: 'Number'
+            }
+          },
+          path: {
+            required: true,
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ParameterGroupingPostRequiredParameters;

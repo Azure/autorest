@@ -31,61 +31,63 @@
  * @member {string} [odatavalue] URL value.
  *
  */
-function FlattenParameterGroup() {
-}
+class FlattenParameterGroup {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of FlattenParameterGroup
- *
- * @returns {object} metadata of FlattenParameterGroup
- *
- */
-FlattenParameterGroup.prototype.mapper = function () {
-  return {
-    required: false,
-    type: {
-      name: 'Composite',
-      className: 'FlattenParameterGroup',
-      modelProperties: {
-        name: {
-          required: true,
-          type: {
-            name: 'String'
-          }
-        },
-        productId: {
-          required: true,
-          type: {
-            name: 'String'
-          }
-        },
-        description: {
-          required: false,
-          type: {
-            name: 'String'
-          }
-        },
-        maxProductDisplayName: {
-          required: true,
-          type: {
-            name: 'String'
-          }
-        },
-        genericValue: {
-          required: false,
-          type: {
-            name: 'String'
-          }
-        },
-        odatavalue: {
-          required: false,
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of FlattenParameterGroup
+   *
+   * @returns {object} metadata of FlattenParameterGroup
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      type: {
+        name: 'Composite',
+        className: 'FlattenParameterGroup',
+        modelProperties: {
+          name: {
+            required: true,
+            type: {
+              name: 'String'
+            }
+          },
+          productId: {
+            required: true,
+            type: {
+              name: 'String'
+            }
+          },
+          description: {
+            required: false,
+            type: {
+              name: 'String'
+            }
+          },
+          maxProductDisplayName: {
+            required: true,
+            type: {
+              name: 'String'
+            }
+          },
+          genericValue: {
+            required: false,
+            type: {
+              name: 'String'
+            }
+          },
+          odatavalue: {
+            required: false,
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = FlattenParameterGroup;

@@ -10,24 +10,9 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var WebResource = msRest.WebResource;
-
-/**
- * @class
- * ParameterGrouping
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestParameterGroupingTestService.
- * Initializes a new instance of the ParameterGrouping class.
- * @constructor
- *
- * @param {AutoRestParameterGroupingTestService} client Reference to the service client.
- */
-function ParameterGrouping(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const WebResource = msRest.WebResource;
 
 /**
  * Post a bunch of required parameters grouped
@@ -49,20 +34,21 @@ function ParameterGrouping(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequiredParameters, options, callback) {
-  var client = this.client;
+function _postRequired(parameterGroupingPostRequiredParameters, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -81,10 +67,10 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   } catch (error) {
     return callback(error);
   }
-    var body;
-  var customHeader;
-  var query;
-  var path;
+  let body;
+  let customHeader;
+  let query;
+  let path;
   try {
     if (parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined)
     {
@@ -119,10 +105,10 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postRequired/{path}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postRequired/{path}';
   requestUrl = requestUrl.replace('{path}', encodeURIComponent(path));
-  var queryParameters = [];
+  let queryParameters = [];
   if (query !== null && query !== undefined) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
   }
@@ -131,7 +117,7 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -146,7 +132,7 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
     httpRequest.headers['customHeader'] = customHeader;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -154,11 +140,11 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (body !== null && body !== undefined) {
-      var requestModelMapper = {
+      let requestModelMapper = {
         required: true,
         serializedName: 'body',
         type: {
@@ -169,50 +155,50 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(body, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(body, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Post a bunch of optional parameters grouped
@@ -231,20 +217,21 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postOptional = function (options, callback) {
-  var client = this.client;
+function _postOptional(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -252,7 +239,7 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var parameterGroupingPostOptionalParameters = (options && options.parameterGroupingPostOptionalParameters !== undefined) ? options.parameterGroupingPostOptionalParameters : undefined;
+  let parameterGroupingPostOptionalParameters = (options && options.parameterGroupingPostOptionalParameters !== undefined) ? options.parameterGroupingPostOptionalParameters : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -261,8 +248,8 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   } catch (error) {
     return callback(error);
   }
-    var customHeader;
-  var query;
+  let customHeader;
+  let query;
   try {
     if (parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined)
     {
@@ -283,9 +270,9 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postOptional';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postOptional';
+  let queryParameters = [];
   if (query !== null && query !== undefined) {
     queryParameters.push('query=' + encodeURIComponent(query.toString()));
   }
@@ -294,7 +281,7 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -309,7 +296,7 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
     httpRequest.headers['customHeader'] = customHeader;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -318,44 +305,44 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Post parameters from multiple different parameter groups
@@ -384,20 +371,21 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) {
-  var client = this.client;
+function _postMultiParamGroups(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -405,8 +393,8 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
-  var parameterGroupingPostMultiParamGroupsSecondParamGroup = (options && options.parameterGroupingPostMultiParamGroupsSecondParamGroup !== undefined) ? options.parameterGroupingPostMultiParamGroupsSecondParamGroup : undefined;
+  let firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
+  let parameterGroupingPostMultiParamGroupsSecondParamGroup = (options && options.parameterGroupingPostMultiParamGroupsSecondParamGroup !== undefined) ? options.parameterGroupingPostMultiParamGroupsSecondParamGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -415,10 +403,10 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   } catch (error) {
     return callback(error);
   }
-    var headerOne;
-  var queryOne;
-  var headerTwo;
-  var queryTwo;
+  let headerOne;
+  let queryOne;
+  let headerTwo;
+  let queryTwo;
   try {
     if (firstParameterGroup !== null && firstParameterGroup !== undefined)
     {
@@ -453,9 +441,9 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postMultipleParameterGroups';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/postMultipleParameterGroups';
+  let queryParameters = [];
   if (queryOne !== null && queryOne !== undefined) {
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));
   }
@@ -467,7 +455,7 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -485,7 +473,7 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
     httpRequest.headers['header-two'] = headerTwo;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -494,44 +482,44 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
 /**
  * Post parameters with a shared parameter group object
@@ -549,20 +537,21 @@ ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, callback) {
-  var client = this.client;
+function _postSharedParameterGroupObject(options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -570,7 +559,7 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
+  let firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -579,8 +568,8 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   } catch (error) {
     return callback(error);
   }
-    var headerOne;
-  var queryOne;
+  let headerOne;
+  let queryOne;
   try {
     if (firstParameterGroup !== null && firstParameterGroup !== undefined)
     {
@@ -601,9 +590,9 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/sharedParameterGroupObject';
-  var queryParameters = [];
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterGrouping/sharedParameterGroupObject';
+  let queryParameters = [];
   if (queryOne !== null && queryOne !== undefined) {
     queryParameters.push('query-one=' + encodeURIComponent(queryOne.toString()));
   }
@@ -612,7 +601,7 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   }
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'POST';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
@@ -627,7 +616,7 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
     httpRequest.headers['header-one'] = headerOne;
   }
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -636,44 +625,468 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
+          let resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * ParameterGrouping
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestParameterGroupingTestService.
+ * Initializes a new instance of the ParameterGrouping class.
+ * @constructor
+ *
+ * @param {AutoRestParameterGroupingTestService} client Reference to the service client.
+ */
+class ParameterGrouping {
+  constructor(client) {
+    this.client = client;
+    this._postRequired = _postRequired;
+    this._postOptional = _postOptional;
+    this._postMultiParamGroups = _postMultiParamGroups;
+    this._postSharedParameterGroupObject = _postSharedParameterGroupObject;
+  }
+
+  /**
+   * Post a bunch of required parameters grouped
+   *
+   * @param {object} parameterGroupingPostRequiredParameters Additional
+   * parameters for the operation
+   *
+   * @param {number} parameterGroupingPostRequiredParameters.body
+   *
+   * @param {string} [parameterGroupingPostRequiredParameters.customHeader]
+   *
+   * @param {number} [parameterGroupingPostRequiredParameters.query] Query
+   * parameter with default
+   *
+   * @param {string} parameterGroupingPostRequiredParameters.path Path parameter
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postRequiredWithHttpOperationResponse(parameterGroupingPostRequiredParameters, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postRequired(parameterGroupingPostRequiredParameters, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Post a bunch of required parameters grouped
+   *
+   * @param {object} parameterGroupingPostRequiredParameters Additional
+   * parameters for the operation
+   *
+   * @param {number} parameterGroupingPostRequiredParameters.body
+   *
+   * @param {string} [parameterGroupingPostRequiredParameters.customHeader]
+   *
+   * @param {number} [parameterGroupingPostRequiredParameters.query] Query
+   * parameter with default
+   *
+   * @param {string} parameterGroupingPostRequiredParameters.path Path parameter
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postRequired(parameterGroupingPostRequiredParameters, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postRequired(parameterGroupingPostRequiredParameters, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postRequired(parameterGroupingPostRequiredParameters, options, optionalCallback);
+    }
+  }
+
+  /**
+   * Post a bunch of optional parameters grouped
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.parameterGroupingPostOptionalParameters] Additional
+   * parameters for the operation
+   *
+   * @param {string}
+   * [options.parameterGroupingPostOptionalParameters.customHeader]
+   *
+   * @param {number} [options.parameterGroupingPostOptionalParameters.query]
+   * Query parameter with default
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postOptionalWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postOptional(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Post a bunch of optional parameters grouped
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.parameterGroupingPostOptionalParameters] Additional
+   * parameters for the operation
+   *
+   * @param {string}
+   * [options.parameterGroupingPostOptionalParameters.customHeader]
+   *
+   * @param {number} [options.parameterGroupingPostOptionalParameters.query]
+   * Query parameter with default
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postOptional(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postOptional(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postOptional(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Post parameters from multiple different parameter groups
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.firstParameterGroup] Additional parameters for the
+   * operation
+   *
+   * @param {string} [options.firstParameterGroup.headerOne]
+   *
+   * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+   * default
+   *
+   * @param {object}
+   * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup] Additional
+   * parameters for the operation
+   *
+   * @param {string}
+   * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo]
+   *
+   * @param {number}
+   * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo]
+   * Query parameter with default
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postMultiParamGroupsWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postMultiParamGroups(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Post parameters from multiple different parameter groups
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.firstParameterGroup] Additional parameters for the
+   * operation
+   *
+   * @param {string} [options.firstParameterGroup.headerOne]
+   *
+   * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+   * default
+   *
+   * @param {object}
+   * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup] Additional
+   * parameters for the operation
+   *
+   * @param {string}
+   * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo]
+   *
+   * @param {number}
+   * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo]
+   * Query parameter with default
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postMultiParamGroups(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postMultiParamGroups(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postMultiParamGroups(options, optionalCallback);
+    }
+  }
+
+  /**
+   * Post parameters with a shared parameter group object
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.firstParameterGroup] Additional parameters for the
+   * operation
+   *
+   * @param {string} [options.firstParameterGroup.headerOne]
+   *
+   * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+   * default
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  postSharedParameterGroupObjectWithHttpOperationResponse(options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._postSharedParameterGroupObject(options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Post parameters with a shared parameter group object
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.firstParameterGroup] Additional parameters for the
+   * operation
+   *
+   * @param {string} [options.firstParameterGroup.headerOne]
+   *
+   * @param {number} [options.firstParameterGroup.queryOne] Query parameter with
+   * default
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  postSharedParameterGroupObject(options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._postSharedParameterGroupObject(options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._postSharedParameterGroupObject(options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = ParameterGrouping;

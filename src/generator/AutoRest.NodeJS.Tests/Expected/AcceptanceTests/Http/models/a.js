@@ -17,33 +17,35 @@
  * @member {string} [statusCode]
  *
  */
-function A() {
-}
+class A {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of A
- *
- * @returns {object} metadata of A
- *
- */
-A.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'A',
-    type: {
-      name: 'Composite',
-      className: 'A',
-      modelProperties: {
-        statusCode: {
-          required: false,
-          serializedName: 'statusCode',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of A
+   *
+   * @returns {object} metadata of A
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'A',
+      type: {
+        name: 'Composite',
+        className: 'A',
+        modelProperties: {
+          statusCode: {
+            required: false,
+            serializedName: 'statusCode',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = A;

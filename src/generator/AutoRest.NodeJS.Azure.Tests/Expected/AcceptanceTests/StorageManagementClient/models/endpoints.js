@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -34,63 +34,65 @@ var models = require('./index');
  * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
  *
  */
-function Endpoints() {
-}
+class Endpoints {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Endpoints
- *
- * @returns {object} metadata of Endpoints
- *
- */
-Endpoints.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Endpoints',
-    type: {
-      name: 'Composite',
-      className: 'Endpoints',
-      modelProperties: {
-        blob: {
-          required: false,
-          serializedName: 'blob',
-          type: {
-            name: 'String'
-          }
-        },
-        queue: {
-          required: false,
-          serializedName: 'queue',
-          type: {
-            name: 'String'
-          }
-        },
-        table: {
-          required: false,
-          serializedName: 'table',
-          type: {
-            name: 'String'
-          }
-        },
-        dummyEndPoint: {
-          required: false,
-          serializedName: 'dummyEndPoint',
-          type: {
-            name: 'Composite',
-            className: 'Endpoints'
-          }
-        },
-        fooPoint: {
-          required: false,
-          serializedName: 'FooPoint',
-          type: {
-            name: 'Composite',
-            className: 'Foo'
+  /**
+   * Defines the metadata of Endpoints
+   *
+   * @returns {object} metadata of Endpoints
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Endpoints',
+      type: {
+        name: 'Composite',
+        className: 'Endpoints',
+        modelProperties: {
+          blob: {
+            required: false,
+            serializedName: 'blob',
+            type: {
+              name: 'String'
+            }
+          },
+          queue: {
+            required: false,
+            serializedName: 'queue',
+            type: {
+              name: 'String'
+            }
+          },
+          table: {
+            required: false,
+            serializedName: 'table',
+            type: {
+              name: 'String'
+            }
+          },
+          dummyEndPoint: {
+            required: false,
+            serializedName: 'dummyEndPoint',
+            type: {
+              name: 'Composite',
+              className: 'Endpoints'
+            }
+          },
+          fooPoint: {
+            required: false,
+            serializedName: 'FooPoint',
+            type: {
+              name: 'Composite',
+              className: 'Foo'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Endpoints;

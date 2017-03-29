@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -36,56 +36,58 @@ var models = require('./index');
  * the resource name.
  *
  */
-function Usage() {
-}
+class Usage {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Usage
- *
- * @returns {object} metadata of Usage
- *
- */
-Usage.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Usage',
-    type: {
-      name: 'Composite',
-      className: 'Usage',
-      modelProperties: {
-        unit: {
-          required: false,
-          serializedName: 'unit',
-          type: {
-            name: 'Enum',
-            allowedValues: [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ]
-          }
-        },
-        currentValue: {
-          required: false,
-          serializedName: 'currentValue',
-          type: {
-            name: 'Number'
-          }
-        },
-        limit: {
-          required: false,
-          serializedName: 'limit',
-          type: {
-            name: 'Number'
-          }
-        },
-        name: {
-          required: false,
-          serializedName: 'name',
-          type: {
-            name: 'Composite',
-            className: 'UsageName'
+  /**
+   * Defines the metadata of Usage
+   *
+   * @returns {object} metadata of Usage
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Usage',
+      type: {
+        name: 'Composite',
+        className: 'Usage',
+        modelProperties: {
+          unit: {
+            required: false,
+            serializedName: 'unit',
+            type: {
+              name: 'Enum',
+              allowedValues: [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ]
+            }
+          },
+          currentValue: {
+            required: false,
+            serializedName: 'currentValue',
+            type: {
+              name: 'Number'
+            }
+          },
+          limit: {
+            required: false,
+            serializedName: 'limit',
+            type: {
+              name: 'Number'
+            }
+          },
+          name: {
+            required: false,
+            serializedName: 'name',
+            type: {
+              name: 'Composite',
+              className: 'UsageName'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Usage;

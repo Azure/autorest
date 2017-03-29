@@ -19,40 +19,42 @@
  * @member {boolean} [fieldFalse]
  *
  */
-function BooleanWrapper() {
-}
+class BooleanWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of BooleanWrapper
- *
- * @returns {object} metadata of BooleanWrapper
- *
- */
-BooleanWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'boolean-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'BooleanWrapper',
-      modelProperties: {
-        fieldTrue: {
-          required: false,
-          serializedName: 'field_true',
-          type: {
-            name: 'Boolean'
-          }
-        },
-        fieldFalse: {
-          required: false,
-          serializedName: 'field_false',
-          type: {
-            name: 'Boolean'
+  /**
+   * Defines the metadata of BooleanWrapper
+   *
+   * @returns {object} metadata of BooleanWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'boolean-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'BooleanWrapper',
+        modelProperties: {
+          fieldTrue: {
+            required: false,
+            serializedName: 'field_true',
+            type: {
+              name: 'Boolean'
+            }
+          },
+          fieldFalse: {
+            required: false,
+            serializedName: 'field_false',
+            type: {
+              name: 'Boolean'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = BooleanWrapper;

@@ -8,58 +8,94 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, ServiceClientCredentials } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
 import * as models from "./models";
 
 declare class AutoRestReportServiceForAzure {
-        /**
-     * @class
-     * Initializes a new instance of the AutoRestReportServiceForAzure class.
-     * @constructor
-     *
-     * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
-     *
-     * @param {string} [baseUri] - The base URI of the service.
-     *
-     * @param {object} [options] - The parameter options
-     *
-     * @param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @param {object} [options.requestOptions] - Options for the underlying request object
-     * {@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-     * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
-     *
-     * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
-     *
-     * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
-     *
-     */
-    constructor(credentials: ServiceClientCredentials, baseUri: string, options: ServiceClientOptions);
+  /**
+   * Initializes a new instance of the AutoRestReportServiceForAzure class.
+   * @constructor
+   *
+   * @class
+   * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
+   *
+   * @param {string} [baseUri] - The base URI of the service.
+   *
+   * @param {object} [options] - The parameter options
+   *
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
+   *
+   * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+   *
+   * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+   *
+   */
+  constructor(credentials: ServiceClientCredentials, baseUri?: string, options?: ServiceClientOptions);
 
-    credentials: ServiceClientCredentials;
+  credentials: ServiceClientCredentials;
 
-    acceptLanguage: string;
+  acceptLanguage: string;
 
-    longRunningOperationRetryTimeout: number;
+  longRunningOperationRetryTimeout: number;
 
-    generateClientRequestId: boolean;
+  generateClientRequestId: boolean;
 
-            /**
-         * Get test coverage report
-         *
-         * @param {object} [options] Optional Parameters.
-         *
-         * @param {object} [options.customHeaders] Headers that will be added to the
-         * request
-         *
-         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
-         * doc in ms-rest index.d.ts for details
-         */
-        getReport(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
-        getReport(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+
+  /**
+   * Get test coverage report
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<Object>} - The deserialized result object.
+   *
+   * @reject {Error|ServiceError} - The error object.
+   */
+  getReportWithHttpOperationResponse(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<HttpOperationResponse<{ [propertyName: string]: number }>>;
+
+  /**
+   * Get test coverage report
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {ServiceCallback} [optionalCallback] - The optional callback.
+   *
+   * @returns {ServiceCallback|Promise} If a callback was passed as the last
+   * parameter then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned.
+   *
+   *                      @resolve {Object} - The deserialized result object.
+   *
+   *                      @reject {Error|ServiceError} - The error object.
+   *
+   * {ServiceCallback} optionalCallback(err, result, request, response)
+   *
+   *                      {Error|ServiceError}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {Object} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {WebResource} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {http.IncomingMessage} [response] - The HTTP Response stream if an error did not occur.
+   */
+  getReport(options?: { customHeaders? : { [headerName: string]: string; } }): Promise<{ [propertyName: string]: number }>;
+  getReport(callback: ServiceCallback<{ [propertyName: string]: number }>): void;
+  getReport(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<{ [propertyName: string]: number }>): void;
 }
 
 export = AutoRestReportServiceForAzure;

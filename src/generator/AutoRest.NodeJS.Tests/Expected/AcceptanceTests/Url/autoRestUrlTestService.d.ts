@@ -8,41 +8,41 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestUrlTestService {
-        /**
-     * @class
-     * Initializes a new instance of the AutoRestUrlTestService class.
-     * @constructor
-     *
-     * @param {string} globalStringPath - A string value 'globalItemStringPath' that appears in the path
-     *
-     * @param {string} [baseUri] - The base URI of the service.
-     *
-     * @param {object} [options] - The parameter options
-     *
-     * @param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @param {object} [options.requestOptions] - Options for the underlying request object
-     * {@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-     * @param {string} [options.globalStringQuery] - should contain value null
-     *
-     */
-    constructor(globalStringPath: string, baseUri: string, options: ServiceClientOptions);
+  /**
+   * @class
+   * Initializes a new instance of the AutoRestUrlTestService class.
+   * @constructor
+   *
+   * @param {string} globalStringPath - A string value 'globalItemStringPath' that appears in the path
+   *
+   * @param {string} [baseUri] - The base URI of the service.
+   *
+   * @param {object} [options] - The parameter options
+   *
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   * @param {string} [options.globalStringQuery] - should contain value null
+   *
+   */
+  constructor(globalStringPath: string, baseUri?: string, options?: ServiceClientOptions);
 
-    globalStringPath: string;
+  globalStringPath: string;
 
-    globalStringQuery: string;
+  globalStringQuery: string;
 
-    // Operation groups
-    paths: operations.Paths;
-    queries: operations.Queries;
-    pathItems: operations.PathItems;
-    }
+  // Operation groups
+  paths: operations.Paths;
+  queries: operations.Queries;
+  pathItems: operations.PathItems;
+}
 
 export = AutoRestUrlTestService;

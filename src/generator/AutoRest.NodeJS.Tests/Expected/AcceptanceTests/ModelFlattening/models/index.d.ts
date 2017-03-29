@@ -44,11 +44,11 @@ export interface ErrorModel {
  *
  */
 export interface Resource {
-  id?: string;
-  type?: string;
+  readonly id?: string;
+  readonly type?: string;
   tags?: { [propertyName: string]: string };
   location?: string;
-  name?: string;
+  readonly name?: string;
 }
 
 /**
@@ -71,7 +71,7 @@ export interface Resource {
 export interface FlattenedProduct extends Resource {
   pname?: string;
   flattenedProductType?: string;
-  provisioningStateValues?: string;
+  readonly provisioningStateValues?: string;
   provisioningState?: string;
 }
 

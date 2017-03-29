@@ -19,33 +19,35 @@
  * 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  *
  */
-function OperationResult() {
-}
+class OperationResult {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of OperationResult
- *
- * @returns {object} metadata of OperationResult
- *
- */
-OperationResult.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'OperationResult',
-    type: {
-      name: 'Composite',
-      className: 'OperationResult',
-      modelProperties: {
-        status: {
-          required: false,
-          serializedName: 'status',
-          type: {
-            name: 'String'
+  /**
+   * Defines the metadata of OperationResult
+   *
+   * @returns {object} metadata of OperationResult
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'OperationResult',
+      type: {
+        name: 'Composite',
+        className: 'OperationResult',
+        modelProperties: {
+          status: {
+            required: false,
+            serializedName: 'status',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = OperationResult;

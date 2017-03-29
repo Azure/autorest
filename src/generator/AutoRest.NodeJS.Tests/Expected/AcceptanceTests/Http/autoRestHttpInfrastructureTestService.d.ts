@@ -8,37 +8,37 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class AutoRestHttpInfrastructureTestService {
-        /**
-     * @class
-     * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
-     * @constructor
-     *
-     * @param {string} [baseUri] - The base URI of the service.
-     *
-     * @param {object} [options] - The parameter options
-     *
-     * @param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @param {object} [options.requestOptions] - Options for the underlying request object
-     * {@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-     */
-    constructor(baseUri: string, options: ServiceClientOptions);
+  /**
+   * @class
+   * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
+   * @constructor
+   *
+   * @param {string} [baseUri] - The base URI of the service.
+   *
+   * @param {object} [options] - The parameter options
+   *
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   */
+  constructor(baseUri?: string, options?: ServiceClientOptions);
 
-    // Operation groups
-    httpFailure: operations.HttpFailure;
-    httpSuccess: operations.HttpSuccess;
-    httpRedirects: operations.HttpRedirects;
-    httpClientFailure: operations.HttpClientFailure;
-    httpServerFailure: operations.HttpServerFailure;
-    httpRetry: operations.HttpRetry;
-    multipleResponses: operations.MultipleResponses;
-    }
+  // Operation groups
+  httpFailure: operations.HttpFailure;
+  httpSuccess: operations.HttpSuccess;
+  httpRedirects: operations.HttpRedirects;
+  httpClientFailure: operations.HttpClientFailure;
+  httpServerFailure: operations.HttpServerFailure;
+  httpRetry: operations.HttpRetry;
+  multipleResponses: operations.MultipleResponses;
+}
 
 export = AutoRestHttpInfrastructureTestService;

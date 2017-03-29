@@ -8,9 +8,12 @@
  * regenerated.
  */
 
-import * as msRestAzure from 'ms-rest-azure';
-exports.BaseResource = msRestAzure.BaseResource;
-exports.CloudError = msRestAzure.CloudError;
+import { BaseResource } from 'ms-rest-azure';
+import { CloudError } from 'ms-rest-azure';
+
+export { BaseResource } from 'ms-rest-azure';
+export { CloudError } from 'ms-rest-azure';
+
 
 /**
  * @class
@@ -28,11 +31,11 @@ exports.CloudError = msRestAzure.CloudError;
  *
  */
 export interface Resource extends BaseResource {
-  id?: string;
-  type?: string;
+  readonly id?: string;
+  readonly type?: string;
   tags?: { [propertyName: string]: string };
   location?: string;
-  name?: string;
+  readonly name?: string;
 }
 
 /**
@@ -62,7 +65,7 @@ export interface Sku {
  */
 export interface Product extends Resource {
   provisioningState?: string;
-  provisioningStateValues?: string;
+  readonly provisioningStateValues?: string;
 }
 
 /**
@@ -73,7 +76,7 @@ export interface Product extends Resource {
  *
  */
 export interface SubResource extends BaseResource {
-  id?: string;
+  readonly id?: string;
 }
 
 /**
@@ -89,7 +92,7 @@ export interface SubResource extends BaseResource {
  */
 export interface SubProduct extends SubResource {
   provisioningState?: string;
-  provisioningStateValues?: string;
+  readonly provisioningStateValues?: string;
 }
 
 /**

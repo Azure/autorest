@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -42,32 +42,34 @@ var operations = require('./operations');
  * @param {string} [options.globalStringQuery] - should contain value null
  *
  */
-function AutoRestUrlTestService(globalStringPath, baseUri, options) {
-  if (globalStringPath === null || globalStringPath === undefined) {
-    throw new Error('\'globalStringPath\' cannot be null.');
+class AutoRestUrlTestService extends ServiceClient {
+  constructor(globalStringPath, baseUri, options) {
+    if (globalStringPath === null || globalStringPath === undefined) {
+      throw new Error('\'globalStringPath\' cannot be null.');
+    }
+
+    if (!options) options = {};
+
+    super(null, options);
+
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+    this.globalStringPath = globalStringPath;
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    if(options.globalStringQuery !== null && options.globalStringQuery !== undefined) {
+      this.globalStringQuery = options.globalStringQuery;
+    }
+    this.paths = new operations.Paths(this);
+    this.queries = new operations.Queries(this);
+    this.pathItems = new operations.PathItems(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  if (!options) options = {};
-
-  AutoRestUrlTestService['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.globalStringPath = globalStringPath;
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  if(options.globalStringQuery !== null && options.globalStringQuery !== undefined) {
-    this.globalStringQuery = options.globalStringQuery;
-  }
-  this.paths = new operations.Paths(this);
-  this.queries = new operations.Queries(this);
-  this.pathItems = new operations.PathItems(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestUrlTestService, ServiceClient);
 
 module.exports = AutoRestUrlTestService;

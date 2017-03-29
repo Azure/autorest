@@ -17,40 +17,42 @@
  * @member {object} tags A set of tags. A description about the set of tags.
  *
  */
-function AvailabilitySetUpdateParameters() {
-}
+class AvailabilitySetUpdateParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of AvailabilitySetUpdateParameters
- *
- * @returns {object} metadata of AvailabilitySetUpdateParameters
- *
- */
-AvailabilitySetUpdateParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'AvailabilitySetUpdateParameters',
-    type: {
-      name: 'Composite',
-      className: 'AvailabilitySetUpdateParameters',
-      modelProperties: {
-        tags: {
-          required: true,
-          serializedName: 'tags',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of AvailabilitySetUpdateParameters
+   *
+   * @returns {object} metadata of AvailabilitySetUpdateParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'AvailabilitySetUpdateParameters',
+      type: {
+        name: 'Composite',
+        className: 'AvailabilitySetUpdateParameters',
+        modelProperties: {
+          tags: {
+            required: true,
+            serializedName: 'tags',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = AvailabilitySetUpdateParameters;

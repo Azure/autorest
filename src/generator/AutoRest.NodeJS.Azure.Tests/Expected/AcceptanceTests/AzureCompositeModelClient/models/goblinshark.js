@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -21,91 +19,91 @@ var util = require('util');
  * @member {number} [jawsize]
  *
  */
-function Goblinshark() {
-  Goblinshark['super_'].call(this);
-}
+class Goblinshark extends models['Shark'] {
+  constructor() {
+    super();
+  }
 
-util.inherits(Goblinshark, models['Shark']);
-
-/**
- * Defines the metadata of Goblinshark
- *
- * @returns {object} metadata of Goblinshark
- *
- */
-Goblinshark.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'goblin',
-    type: {
-      name: 'Composite',
-      className: 'Goblinshark',
-      modelProperties: {
-        species: {
-          required: false,
-          serializedName: 'species',
-          type: {
-            name: 'String'
-          }
-        },
-        length: {
-          required: true,
-          serializedName: 'length',
-          type: {
-            name: 'Number'
-          }
-        },
-        siblings: {
-          required: false,
-          serializedName: 'siblings',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'FishElementType',
-                type: {
-                  name: 'Composite',
-                  polymorphicDiscriminator: {
-                    serializedName: 'fishtype',
-                    clientName: 'fishtype'
-                  },
-                  uberParent: 'Fish',
-                  className: 'Fish'
-                }
+  /**
+   * Defines the metadata of Goblinshark
+   *
+   * @returns {object} metadata of Goblinshark
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'goblin',
+      type: {
+        name: 'Composite',
+        className: 'Goblinshark',
+        modelProperties: {
+          species: {
+            required: false,
+            serializedName: 'species',
+            type: {
+              name: 'String'
             }
-          }
-        },
-        fishtype: {
-          required: true,
-          serializedName: 'fishtype',
-          type: {
-            name: 'String'
-          }
-        },
-        age: {
-          required: false,
-          serializedName: 'age',
-          type: {
-            name: 'Number'
-          }
-        },
-        birthday: {
-          required: true,
-          serializedName: 'birthday',
-          type: {
-            name: 'DateTime'
-          }
-        },
-        jawsize: {
-          required: false,
-          serializedName: 'jawsize',
-          type: {
-            name: 'Number'
+          },
+          length: {
+            required: true,
+            serializedName: 'length',
+            type: {
+              name: 'Number'
+            }
+          },
+          siblings: {
+            required: false,
+            serializedName: 'siblings',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'FishElementType',
+                  type: {
+                    name: 'Composite',
+                    polymorphicDiscriminator: {
+                      serializedName: 'fishtype',
+                      clientName: 'fishtype'
+                    },
+                    uberParent: 'Fish',
+                    className: 'Fish'
+                  }
+              }
+            }
+          },
+          fishtype: {
+            required: true,
+            serializedName: 'fishtype',
+            type: {
+              name: 'String'
+            }
+          },
+          age: {
+            required: false,
+            serializedName: 'age',
+            type: {
+              name: 'Number'
+            }
+          },
+          birthday: {
+            required: true,
+            serializedName: 'birthday',
+            type: {
+              name: 'DateTime'
+            }
+          },
+          jawsize: {
+            required: false,
+            serializedName: 'jawsize',
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Goblinshark;

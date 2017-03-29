@@ -10,8 +10,6 @@
 
 'use strict';
 
-var util = require('util');
-
 /**
  * @class
  * Initializes a new instance of the ArrayOptionalWrapper class.
@@ -19,40 +17,42 @@ var util = require('util');
  * @member {array} [value]
  *
  */
-function ArrayOptionalWrapper() {
-}
+class ArrayOptionalWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ArrayOptionalWrapper
- *
- * @returns {object} metadata of ArrayOptionalWrapper
- *
- */
-ArrayOptionalWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'array-optional-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'ArrayOptionalWrapper',
-      modelProperties: {
-        value: {
-          required: false,
-          serializedName: 'value',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of ArrayOptionalWrapper
+   *
+   * @returns {object} metadata of ArrayOptionalWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'array-optional-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'ArrayOptionalWrapper',
+        modelProperties: {
+          value: {
+            required: false,
+            serializedName: 'value',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ArrayOptionalWrapper;
