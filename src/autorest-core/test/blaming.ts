@@ -34,7 +34,7 @@ import { parse } from "../lib/ref/jsonpath";
     }
   }
 
-  @test @timeout(5000) async "large swagger performance"() {
+  @test @timeout(60000) async "large swagger performance"() {
     const autoRest = new AutoRest(new RealFileSystem(), ResolveUri(CreateFolderUri(__dirname), "resources/large-input/"));
     const messages: Message[] = [];
     autoRest.Warning.Subscribe((_, m) => messages.push(m));
