@@ -8,7 +8,7 @@ import should = require('should');
 import http = require('http');
 import util = require('util');
 import assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 import moment = require('moment');
 import fs = require('fs');
 
@@ -38,23 +38,23 @@ var dummyToken = 'dummy12321343423';
 var credentials = new msRest.TokenCredentials(dummyToken);
 
 // TODO: Check types
-var readStreamToBuffer = function(strm: stream.Readable, callback: (err: Error, result: Buffer) => void) {
+var readStreamToBuffer = function (strm: stream.Readable, callback: (err: Error, result: Buffer) => void) {
   var bufs: Buffer[] = [];
-  strm.on('data', function(d: Buffer) {
-     bufs.push(d);
+  strm.on('data', function (d: Buffer) {
+    bufs.push(d);
   });
   strm.on('end', function () {
     callback(null, Buffer.concat(bufs));
   });
 };
 
-var readStreamCountBytes = function(stream: stream.Readable, callback: (err: Error, result: number) => void) {
+var readStreamCountBytes = function (stream: stream.Readable, callback: (err: Error, result: number) => void) {
   var bytesRead = 0;
   stream.on('data', function (d: Buffer) {
-   bytesRead = bytesRead + d.length;
+    bytesRead = bytesRead + d.length;
   });
 
-  stream.on('end', function() {
+  stream.on('end', function () {
     callback(null, bytesRead);
   });
 }
@@ -66,11 +66,11 @@ describe('nodejs', function () {
   describe('Swagger BAT', function () {
     describe('Custom BaseUri Client', function () {
       var customOptions = {
-          host: 'host:3000'
+        host: 'host:3000'
       };
       var testClient = new customBaseUriClient(customOptions);
       it('should return 200', function (done) {
-          testClient.paths.getEmpty('local', function (error, result, request, response) {
+        testClient.paths.getEmpty('local', function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -100,7 +100,7 @@ describe('nodejs', function () {
       };
       var testClient = new customBaseUriClientMoreOptions('test12', customOptions);
       it('should return 200', function (done) {
-          testClient.paths.getEmpty('http://lo','cal', 'key1', function (error, result, request, response) {
+        testClient.paths.getEmpty('http://lo', 'cal', 'key1', function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -882,7 +882,7 @@ describe('nodejs', function () {
           done();
         });
       });
-      
+
       it('should get overflow and underflow', function (done) {
         testClient.datetimerfc1123.getOverflow(function (error, result) {
           should.not.exist(error);
@@ -945,7 +945,7 @@ describe('nodejs', function () {
       });
 
       it('should properly put positive value for Duration', function (done) {
-        var duration = moment.duration({days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11});
+        var duration = moment.duration({ days: 123, hours: 22, minutes: 14, seconds: 12, milliseconds: 11 });
         testClient.duration.putPositiveDuration(duration, function (error, result) {
           should.not.exist(error);
           should.not.exist(result);
@@ -1105,18 +1105,18 @@ describe('nodejs', function () {
         });
 
         it('should get and put uuid arrays', function (done) {
-            var testArray = ["6dcc7237-45fe-45c4-8a6b-3a8a3f625652", "d1399005-30f7-40d6-8da6-dd7c89ad34db", "f42f6aa1-a5bc-4ddf-907e-5f915de43205"];
-            testClient.arrayModel.getUuidValid(function (error, result) {
+          var testArray = ["6dcc7237-45fe-45c4-8a6b-3a8a3f625652", "d1399005-30f7-40d6-8da6-dd7c89ad34db", "f42f6aa1-a5bc-4ddf-907e-5f915de43205"];
+          testClient.arrayModel.getUuidValid(function (error, result) {
+            should.not.exist(error);
+            assert.deepEqual(result, testArray);
+            testClient.arrayModel.putUuidValid(testArray, function (error, result) {
+              should.not.exist(error);
+              testClient.arrayModel.getUuidInvalidChars(function (error, result) {
                 should.not.exist(error);
-                assert.deepEqual(result, testArray);
-                testClient.arrayModel.putUuidValid(testArray, function (error, result) {
-                    should.not.exist(error);
-                    testClient.arrayModel.getUuidInvalidChars(function (error, result) {
-                        should.not.exist(error);
-                        done();
-                    });
-                });
+                done();
+              });
             });
+          });
         });
 
         it('should get and put date arrays', function (done) {
@@ -1126,15 +1126,15 @@ describe('nodejs', function () {
             assert.deepEqual(result, testArray);
             testClient.arrayModel.putDateValid(testArray, function (error, result) {
               should.not.exist(error);
-            testClient.arrayModel.getDateInvalidNull(function (error, result) {
-              should.not.exist(error);
-              assert.deepEqual(result, [new Date('2012-01-01'), null, new Date('1776-07-04')]);
-              testClient.arrayModel.getDateInvalidChars(function (error, result) {
+              testClient.arrayModel.getDateInvalidNull(function (error, result) {
                 should.not.exist(error);
-                JSON.stringify(result).should.equal(JSON.stringify([new Date('2011-03-22'), new Date('date')]));
-                done();
+                assert.deepEqual(result, [new Date('2012-01-01'), null, new Date('1776-07-04')]);
+                testClient.arrayModel.getDateInvalidChars(function (error, result) {
+                  should.not.exist(error);
+                  JSON.stringify(result).should.equal(JSON.stringify([new Date('2011-03-22'), new Date('date')]));
+                  done();
+                });
               });
-            });
             });
           });
         });
@@ -1158,7 +1158,7 @@ describe('nodejs', function () {
             });
           });
         });
-         
+
         it('should get and put dateTimeRfc1123 arrays', function (done) {
           var testArray = [new Date('Fri, 01 Dec 2000 00:00:01 GMT'), new Date('Wed, 02 Jan 1980 00:11:35 GMT'), new Date('Wed, 12 Oct 1492 10:15:01 GMT')];
           testClient.arrayModel.getDateTimeRfc1123Valid(function (error, result) {
@@ -1449,7 +1449,7 @@ describe('nodejs', function () {
         });
 
         it('should get and put long dictionaries', function (done) {
-          var testDictionary: { [propertyName: string]: number }  = { "0": 1, "1": -1, "2": 3, "3": 300 };
+          var testDictionary: { [propertyName: string]: number } = { "0": 1, "1": -1, "2": 3, "3": 300 };
           testClient.dictionary.getLongValid(function (error, result) {
             should.not.exist(error);
             assert.deepEqual(result, testDictionary);
@@ -1491,7 +1491,7 @@ describe('nodejs', function () {
         });
 
         it('should get float dictionaries with null value', function (done) {
-          var testDictionary: { [propertyName: string]: number }  = { "0": 0.0, "1": null, "2": -1.2e20 };
+          var testDictionary: { [propertyName: string]: number } = { "0": 0.0, "1": null, "2": -1.2e20 };
           testClient.dictionary.getFloatInvalidNull(function (error, result) {
             should.not.exist(error);
             assert.deepEqual(result, testDictionary);
@@ -1575,7 +1575,7 @@ describe('nodejs', function () {
             assert.deepEqual(result, testDictionary);
             testClient.dictionary.putDateValid(testDictionary, function (error, result) {
               should.not.exist(error);
-            done();
+              done();
             });
           });
         });
@@ -1740,7 +1740,7 @@ describe('nodejs', function () {
 
         it('should get arrays with empty and null items in dictionary', function (done) {
           var testNull: { [propertyName: string]: string[] } = { 0: ['1', '2', '3'], 1: null, 2: ['7', '8', '9'] };
-          var testEmpty: { [propertyName: string]: string[] }  = { 0: ['1', '2', '3'], 1: [], 2: ['7', '8', '9'] };
+          var testEmpty: { [propertyName: string]: string[] } = { 0: ['1', '2', '3'], 1: [], 2: ['7', '8', '9'] };
           testClient.dictionary.getArrayItemNull(function (error, result) {
             should.not.exist(error);
             assert.deepEqual(result, testNull);
@@ -1796,7 +1796,7 @@ describe('nodejs', function () {
         });
 
         it('should get and put valid dicitonary items in dictionaries', function (done) {
-          var testDictionary: { [propertyName: string]: { [propertyName: string]: string} } =
+          var testDictionary: { [propertyName: string]: { [propertyName: string]: string } } =
             { 0: { '1': 'one', '2': 'two', '3': 'three' }, 1: { '4': 'four', '5': 'five', '6': 'six' }, 2: { '7': 'seven', '8': 'eight', '9': 'nine' } };
           testClient.dictionary.getDictionaryValid(function (error, result) {
             should.not.exist(error);
@@ -1810,13 +1810,13 @@ describe('nodejs', function () {
       });
     });
 
-    describe('Files Client', function() {
+    describe('Files Client', function () {
       var testClient = new fileClient(baseUri, clientOptions);
-      it('should correctly deserialize binary streams', function(done) {
-        testClient.files.getFile(function(error, result) {
+      it('should correctly deserialize binary streams', function (done) {
+        testClient.files.getFile(function (error, result) {
           should.not.exist(error);
           should.exist(result);
-          readStreamToBuffer(result, function(err, buff) {
+          readStreamToBuffer(result, function (err, buff) {
             should.not.exist(err);
             assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
             done();
@@ -1835,7 +1835,7 @@ describe('nodejs', function () {
           });
         });
       });
-      
+
       it('should correctly deserialize large streams', function (done) {
         testClient.files.getFileLarge(function (error, result) {
           should.not.exist(error);
@@ -1849,13 +1849,13 @@ describe('nodejs', function () {
       });
     });
 
-    describe('Form Data Client', function() {
+    describe('Form Data Client', function () {
       var testClient = new formDataClient(baseUri, clientOptions);
-      it('should correctly accept file via form-data', function(done) {
-        testClient.formdata.uploadFile(fs.createReadStream(__dirname + '/sample.png'), 'sample.png', function(error, result) {
+      it('should correctly accept file via form-data', function (done) {
+        testClient.formdata.uploadFile(fs.createReadStream(__dirname + '/sample.png'), 'sample.png', function (error, result) {
           should.not.exist(error);
           should.exist(result);
-          readStreamToBuffer(result, function(err, buff) {
+          readStreamToBuffer(result, function (err, buff) {
             should.not.exist(err);
             assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
             done();
@@ -1863,11 +1863,11 @@ describe('nodejs', function () {
         });
       });
 
-      it('should correctly accept file via body', function(done) {
-        testClient.formdata.uploadFileViaBody(fs.createReadStream(__dirname + '/sample.png'), function(error, result) {
+      it('should correctly accept file via body', function (done) {
+        testClient.formdata.uploadFileViaBody(fs.createReadStream(__dirname + '/sample.png'), function (error, result) {
           should.not.exist(error);
           should.exist(result);
-          readStreamToBuffer(result, function(err, buff) {
+          readStreamToBuffer(result, function (err, buff) {
             should.not.exist(err);
             assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
             done();
@@ -2010,7 +2010,7 @@ describe('nodejs', function () {
       });
 
       it('should work when use values in different portion of url', function (done) {
-        var optionalParams = { localStringQuery: 'localStringQuery', pathItemStringQuery : 'pathItemStringQuery' };
+        var optionalParams = { localStringQuery: 'localStringQuery', pathItemStringQuery: 'pathItemStringQuery' };
         testClient.pathItems.getAllWithValues('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
           should.not.exist(error);
           done();
@@ -2018,14 +2018,14 @@ describe('nodejs', function () {
       });
       it('should work when use null values in different portion of url', function (done) {
         testClient.globalStringQuery = null;
-        var optionalParams = { localStringQuery: <string> null, pathItemStringQuery : 'pathItemStringQuery' };
+        var optionalParams = { localStringQuery: <string>null, pathItemStringQuery: 'pathItemStringQuery' };
         testClient.pathItems.getGlobalAndLocalQueryNull('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
           should.not.exist(error);
-          optionalParams = { localStringQuery: 'localStringQuery', pathItemStringQuery : 'pathItemStringQuery' };
+          optionalParams = { localStringQuery: 'localStringQuery', pathItemStringQuery: 'pathItemStringQuery' };
           testClient.pathItems.getGlobalQueryNull('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
             should.not.exist(error);
             testClient.globalStringQuery = 'globalStringQuery';
-            optionalParams = { localStringQuery: null, pathItemStringQuery : null };
+            optionalParams = { localStringQuery: null, pathItemStringQuery: null };
             testClient.pathItems.getLocalPathItemQueryNull('localStringPath', 'pathItemStringPath', optionalParams, function (error, result) {
               should.not.exist(error);
               done();
@@ -2308,84 +2308,84 @@ describe('nodejs', function () {
       it('should work for all client failure status codes (4xx) with different verbs', function (done) {
         testClient.httpClientFailure.head400(function (error, result) {
           should.exist(error);
-          (<msRest.ServiceError> error).statusCode.should.equal(400);
+          (<msRest.ServiceError>error).statusCode.should.equal(400);
           testClient.httpClientFailure.get400(function (error, result) {
             should.exist(error);
-            (<msRest.ServiceError> error).statusCode.should.equal(400);
+            (<msRest.ServiceError>error).statusCode.should.equal(400);
             testClient.httpClientFailure.put400(true, function (error, result) {
               should.exist(error);
-              (<msRest.ServiceError> error).statusCode.should.equal(400);
+              (<msRest.ServiceError>error).statusCode.should.equal(400);
               testClient.httpClientFailure.patch400(true, function (error, result) {
                 should.exist(error);
-                (<msRest.ServiceError> error).statusCode.should.equal(400);
+                (<msRest.ServiceError>error).statusCode.should.equal(400);
                 testClient.httpClientFailure.post400(true, function (error, result) {
                   should.exist(error);
-                  (<msRest.ServiceError> error).statusCode.should.equal(400);
+                  (<msRest.ServiceError>error).statusCode.should.equal(400);
                   testClient.httpClientFailure.delete400(true, function (error, result) {
                     should.exist(error);
-                    (<msRest.ServiceError> error).statusCode.should.equal(400);
+                    (<msRest.ServiceError>error).statusCode.should.equal(400);
                     testClient.httpClientFailure.head401(function (error, result) {
                       should.exist(error);
-                      (<msRest.ServiceError> error).statusCode.should.equal(401);
+                      (<msRest.ServiceError>error).statusCode.should.equal(401);
                       testClient.httpClientFailure.get402(function (error, result) {
                         should.exist(error);
-                        (<msRest.ServiceError> error).statusCode.should.equal(402);
+                        (<msRest.ServiceError>error).statusCode.should.equal(402);
                         testClient.httpClientFailure.get403(function (error, result) {
                           should.exist(error);
-                          (<msRest.ServiceError> error).statusCode.should.equal(403);
+                          (<msRest.ServiceError>error).statusCode.should.equal(403);
                           testClient.httpClientFailure.put404(true, function (error, result) {
                             should.exist(error);
-                            (<msRest.ServiceError> error).statusCode.should.equal(404);
+                            (<msRest.ServiceError>error).statusCode.should.equal(404);
                             testClient.httpClientFailure.patch405(true, function (error, result) {
                               should.exist(error);
-                              (<msRest.ServiceError> error).statusCode.should.equal(405);
+                              (<msRest.ServiceError>error).statusCode.should.equal(405);
                               testClient.httpClientFailure.post406(true, function (error, result) {
                                 should.exist(error);
-                                (<msRest.ServiceError> error).statusCode.should.equal(406);
+                                (<msRest.ServiceError>error).statusCode.should.equal(406);
                                 testClient.httpClientFailure.delete407(true, function (error, result) {
                                   should.exist(error);
-                                  (<msRest.ServiceError> error).statusCode.should.equal(407);
+                                  (<msRest.ServiceError>error).statusCode.should.equal(407);
                                   testClient.httpClientFailure.put409(true, function (error, result) {
                                     should.exist(error);
-                                    (<msRest.ServiceError> error).statusCode.should.equal(409);
+                                    (<msRest.ServiceError>error).statusCode.should.equal(409);
                                     testClient.httpClientFailure.head410(function (error, result) {
                                       should.exist(error);
-                                      (<msRest.ServiceError> error).statusCode.should.equal(410);
+                                      (<msRest.ServiceError>error).statusCode.should.equal(410);
                                       testClient.httpClientFailure.get411(function (error, result) {
                                         should.exist(error);
-                                        (<msRest.ServiceError> error).statusCode.should.equal(411);
+                                        (<msRest.ServiceError>error).statusCode.should.equal(411);
                                         testClient.httpClientFailure.get412(function (error, result) {
                                           should.exist(error);
-                                          (<msRest.ServiceError> error).statusCode.should.equal(412);
+                                          (<msRest.ServiceError>error).statusCode.should.equal(412);
                                           testClient.httpClientFailure.put413(true, function (error, result) {
                                             should.exist(error);
-                                            (<msRest.ServiceError> error).statusCode.should.equal(413);
+                                            (<msRest.ServiceError>error).statusCode.should.equal(413);
                                             testClient.httpClientFailure.patch414(true, function (error, result) {
                                               should.exist(error);
-                                              (<msRest.ServiceError> error).statusCode.should.equal(414);
+                                              (<msRest.ServiceError>error).statusCode.should.equal(414);
                                               testClient.httpClientFailure.post415(true, function (error, result) {
                                                 should.exist(error);
-                                                (<msRest.ServiceError> error).statusCode.should.equal(415);
+                                                (<msRest.ServiceError>error).statusCode.should.equal(415);
                                                 testClient.httpClientFailure.get416(function (error, result) {
                                                   should.exist(error);
-                                                  (<msRest.ServiceError> error).statusCode.should.equal(416);
+                                                  (<msRest.ServiceError>error).statusCode.should.equal(416);
                                                   testClient.httpClientFailure.delete417(true, function (error, result) {
                                                     should.exist(error);
-                                                    (<msRest.ServiceError> error).statusCode.should.equal(417);
+                                                    (<msRest.ServiceError>error).statusCode.should.equal(417);
                                                     testClient.httpClientFailure.head429(function (error, result) {
                                                       should.exist(error);
-                                                      (<msRest.ServiceError> error).statusCode.should.equal(429);
-                                                        testClient.httpFailure.getEmptyError(function(error, result) {
+                                                      (<msRest.ServiceError>error).statusCode.should.equal(429);
+                                                      testClient.httpFailure.getEmptyError(function (error, result) {
+                                                        should.exist(error);
+                                                        (<msRest.ServiceError>error).statusCode.should.equal(400);
+                                                        testClient.httpFailure.getNoModelError(function (error, result) {
                                                           should.exist(error);
                                                           (<msRest.ServiceError>error).statusCode.should.equal(400);
-                                                          testClient.httpFailure.getNoModelError(function (error, result) {
-                                                            should.exist(error);
-                                                            (<msRest.ServiceError>error).statusCode.should.equal(400);
-                                                                should.exist(error.message);
-                                                                // TODO, 4213049: Better default error message
-                                                                //error.message.should.match(/.*unexpected status code: 400.*/);
-                                                                done();
-                                                          });
+                                                          should.exist(error.message);
+                                                          // TODO, 4213049: Better default error message
+                                                          //error.message.should.match(/.*unexpected status code: 400.*/);
+                                                          done();
+                                                        });
                                                       });
                                                     });
                                                   });
@@ -2415,16 +2415,16 @@ describe('nodejs', function () {
       it('should work for all server failure status codes (5xx) with different verbs', function (done) {
         testClient.httpServerFailure.head501(function (error, result) {
           should.exist(error);
-          (<msRest.ServiceError> error).statusCode.should.equal(501);
+          (<msRest.ServiceError>error).statusCode.should.equal(501);
           testClient.httpServerFailure.get501(function (error, result) {
             should.exist(error);
-            (<msRest.ServiceError> error).statusCode.should.equal(501);
+            (<msRest.ServiceError>error).statusCode.should.equal(501);
             testClient.httpServerFailure.post505(true, function (error, result) {
               should.exist(error);
-              (<msRest.ServiceError> error).statusCode.should.equal(505);
+              (<msRest.ServiceError>error).statusCode.should.equal(505);
               testClient.httpServerFailure.delete505(true, function (error, result) {
                 should.exist(error);
-                (<msRest.ServiceError> error).statusCode.should.equal(505);
+                (<msRest.ServiceError>error).statusCode.should.equal(505);
                 done();
               });
             });
@@ -2475,10 +2475,10 @@ describe('nodejs', function () {
           //should use models.Error to deserialize and set it as body of javascript Error object
           testClient.multipleResponses.get200Model204NoModelDefaultError201Invalid(function (error, result) {
             should.exist(error);
-            (<msRest.ServiceError> error).statusCode.should.equal(201);
+            (<msRest.ServiceError>error).statusCode.should.equal(201);
             testClient.multipleResponses.get200Model204NoModelDefaultError202None(function (error, result) {
               should.exist(error);
-              (<msRest.ServiceError> error).statusCode.should.equal(202);
+              (<msRest.ServiceError>error).statusCode.should.equal(202);
               //should we set body property of msRest.HttpOperationResponse to {}.
               //C3 does this Assert.Null(client.MultipleResponses.Get200Model204NoModelDefaultError204Valid());
               testClient.multipleResponses.get200Model204NoModelDefaultError204Valid(function (error, result) {
@@ -2487,7 +2487,7 @@ describe('nodejs', function () {
                 //{"message":"client error","status":400} shouldn't we set this to error model defined in swagger?
                 testClient.multipleResponses.get200Model204NoModelDefaultError400Valid(function (error, result) {
                   should.exist(error);
-                  (<msRest.ServiceError> error).statusCode.should.equal(400);
+                  (<msRest.ServiceError>error).statusCode.should.equal(400);
                   testClient.multipleResponses.get200Model201ModelDefaultError200Valid(function (error, result) {
                     should.not.exist(error);
                     result.statusCode.should.equal("200");
@@ -2497,7 +2497,7 @@ describe('nodejs', function () {
                       assert.deepEqual(result, { 'statusCode': '201', 'textStatusCode': 'Created' });
                       testClient.multipleResponses.get200Model201ModelDefaultError400Valid(function (error, result) {
                         should.exist(error);
-                        (<msRest.ServiceError> error).statusCode.should.equal(400);
+                        (<msRest.ServiceError>error).statusCode.should.equal(400);
                         testClient.multipleResponses.get200ModelA201ModelC404ModelDDefaultError200Valid(function (error, result) {
                           should.not.exist(error);
                           should.exist(result);
@@ -2512,24 +2512,24 @@ describe('nodejs', function () {
                               result.httpStatusCode.should.equal("404");
                               testClient.multipleResponses.get200ModelA201ModelC404ModelDDefaultError400Valid(function (error, result) {
                                 should.exist(error);
-                                (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                (<msRest.ServiceError>error).statusCode.should.equal(400);
                                 testClient.multipleResponses.get202None204NoneDefaultError202None(function (error, result) {
                                   should.not.exist(error);
                                   testClient.multipleResponses.get202None204NoneDefaultError204None(function (error, result) {
                                     should.not.exist(error);
                                     testClient.multipleResponses.get202None204NoneDefaultError400Valid(function (error, result) {
                                       should.exist(error);
-                                      (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                      (<msRest.ServiceError>error).statusCode.should.equal(400);
                                       testClient.multipleResponses.get202None204NoneDefaultNone202Invalid(function (error, result) {
                                         should.not.exist(error);
                                         testClient.multipleResponses.get202None204NoneDefaultNone204None(function (error, result) {
                                           should.not.exist(error);
                                           testClient.multipleResponses.get202None204NoneDefaultNone400None(function (error, result) {
                                             should.exist(error);
-                                            (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                            (<msRest.ServiceError>error).statusCode.should.equal(400);
                                             testClient.multipleResponses.get202None204NoneDefaultNone400Invalid(function (error, result) {
                                               should.exist(error);
-                                              (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                              (<msRest.ServiceError>error).statusCode.should.equal(400);
                                               testClient.multipleResponses.getDefaultModelA200Valid(function (error, result) {
                                                 should.not.exist(error);
                                                 //result.statusCode.should.equal("200");
@@ -2537,20 +2537,20 @@ describe('nodejs', function () {
                                                   should.not.exist(error);
                                                   testClient.multipleResponses.getDefaultModelA400Valid(function (error, result) {
                                                     should.exist(error);
-                                                    (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                    (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                     testClient.multipleResponses.getDefaultModelA400None(function (error, result) {
                                                       should.exist(error);
-                                                      (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                      (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                       testClient.multipleResponses.getDefaultNone200Invalid(function (error, result) {
                                                         should.not.exist(error);
                                                         testClient.multipleResponses.getDefaultNone200None(function (error, result) {
                                                           should.not.exist(error);
                                                           testClient.multipleResponses.getDefaultNone400Invalid(function (error, result) {
                                                             should.exist(error);
-                                                            (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                            (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                             testClient.multipleResponses.getDefaultNone400None(function (error, result) {
                                                               should.exist(error);
-                                                              (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                              (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                               testClient.multipleResponses.get200ModelA200None(function (error, result) {
                                                                 should.not.exist(error);
                                                                 testClient.multipleResponses.get200ModelA200Valid(function (error, result) {
@@ -2560,16 +2560,16 @@ describe('nodejs', function () {
                                                                     should.not.exist(error);
                                                                     testClient.multipleResponses.get200ModelA400None(function (error, result) {
                                                                       should.exist(error);
-                                                                      (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                                      (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                                       testClient.multipleResponses.get200ModelA400Valid(function (error, result) {
                                                                         should.exist(error);
-                                                                        (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                                        (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                                         testClient.multipleResponses.get200ModelA400Invalid(function (error, result) {
                                                                           should.exist(error);
-                                                                          (<msRest.ServiceError> error).statusCode.should.equal(400);
+                                                                          (<msRest.ServiceError>error).statusCode.should.equal(400);
                                                                           testClient.multipleResponses.get200ModelA202Valid(function (error, result) {
                                                                             should.exist(error);
-                                                                            (<msRest.ServiceError> error).statusCode.should.equal(202);
+                                                                            (<msRest.ServiceError>error).statusCode.should.equal(202);
                                                                             done();
                                                                           });
                                                                         });

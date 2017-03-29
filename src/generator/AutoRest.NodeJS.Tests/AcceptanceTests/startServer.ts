@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-var util = require('util');
-var fs = require('fs');
-
+import fs = require('fs');
 import child_process = require('child_process');
 
 var child: child_process.ChildProcess;
@@ -11,7 +9,7 @@ var child: child_process.ChildProcess;
 before(function (done) {
   var isWin = /^win/.test(process.platform);
   var nodeCmd = 'node.exe';
-  if (!isWin) {
+  if(!isWin){
     nodeCmd = 'node'
   }
   var started = false;
