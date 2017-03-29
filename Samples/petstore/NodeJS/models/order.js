@@ -21,69 +21,71 @@
  * @member {boolean} [complete]
  *
  */
-function Order() {
-}
+class Order {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Order
- *
- * @returns {object} metadata of Order
- *
- */
-Order.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Order',
-    type: {
-      name: 'Composite',
-      className: 'Order',
-      modelProperties: {
-        id: {
-          required: false,
-          readOnly: true,
-          serializedName: 'id',
-          type: {
-            name: 'Number'
-          }
-        },
-        petId: {
-          required: false,
-          serializedName: 'petId',
-          type: {
-            name: 'Number'
-          }
-        },
-        quantity: {
-          required: false,
-          serializedName: 'quantity',
-          type: {
-            name: 'Number'
-          }
-        },
-        shipDate: {
-          required: false,
-          serializedName: 'shipDate',
-          type: {
-            name: 'DateTime'
-          }
-        },
-        status: {
-          required: false,
-          serializedName: 'status',
-          type: {
-            name: 'String'
-          }
-        },
-        complete: {
-          required: false,
-          serializedName: 'complete',
-          type: {
-            name: 'Boolean'
+  /**
+   * Defines the metadata of Order
+   *
+   * @returns {object} metadata of Order
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Order',
+      type: {
+        name: 'Composite',
+        className: 'Order',
+        modelProperties: {
+          id: {
+            required: false,
+            readOnly: true,
+            serializedName: 'id',
+            type: {
+              name: 'Number'
+            }
+          },
+          petId: {
+            required: false,
+            serializedName: 'petId',
+            type: {
+              name: 'Number'
+            }
+          },
+          quantity: {
+            required: false,
+            serializedName: 'quantity',
+            type: {
+              name: 'Number'
+            }
+          },
+          shipDate: {
+            required: false,
+            serializedName: 'shipDate',
+            type: {
+              name: 'DateTime'
+            }
+          },
+          status: {
+            required: false,
+            serializedName: 'status',
+            type: {
+              name: 'String'
+            }
+          },
+          complete: {
+            required: false,
+            serializedName: 'complete',
+            type: {
+              name: 'Boolean'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Order;

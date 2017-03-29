@@ -14,12 +14,12 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var ServiceClient = msRest.ServiceClient;
+const msRest = require('ms-rest');
+const ServiceClient = msRest.ServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -44,35 +44,37 @@ var operations = require('./operations');
  * @param {number} [options.optionalGlobalQuery] - number of items to skip
  *
  */
-function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQuery, baseUri, options) {
-  if (requiredGlobalPath === null || requiredGlobalPath === undefined) {
-    throw new Error('\'requiredGlobalPath\' cannot be null.');
-  }
-  if (requiredGlobalQuery === null || requiredGlobalQuery === undefined) {
-    throw new Error('\'requiredGlobalQuery\' cannot be null.');
+class AutoRestRequiredOptionalTestService extends ServiceClient {
+  constructor(requiredGlobalPath, requiredGlobalQuery, baseUri, options) {
+    if (requiredGlobalPath === null || requiredGlobalPath === undefined) {
+      throw new Error('\'requiredGlobalPath\' cannot be null.');
+    }
+    if (requiredGlobalQuery === null || requiredGlobalQuery === undefined) {
+      throw new Error('\'requiredGlobalQuery\' cannot be null.');
+    }
+
+    if (!options) options = {};
+
+    super(null, options);
+
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+    this.requiredGlobalPath = requiredGlobalPath;
+    this.requiredGlobalQuery = requiredGlobalQuery;
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) {
+      this.optionalGlobalQuery = options.optionalGlobalQuery;
+    }
+    this.implicit = new operations.Implicit(this);
+    this.explicit = new operations.Explicit(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  if (!options) options = {};
-
-  AutoRestRequiredOptionalTestService['super_'].call(this, null, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.requiredGlobalPath = requiredGlobalPath;
-  this.requiredGlobalQuery = requiredGlobalQuery;
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) {
-    this.optionalGlobalQuery = options.optionalGlobalQuery;
-  }
-  this.implicit = new operations.Implicit(this);
-  this.explicit = new operations.Explicit(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestRequiredOptionalTestService, ServiceClient);
 
 module.exports = AutoRestRequiredOptionalTestService;

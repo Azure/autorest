@@ -5,9 +5,8 @@
 
 import should = require('should');
 import http = require('http');
-import util = require('util');
 import assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 
 import reqOptClient = require('../Expected/AcceptanceTests/RequiredOptional/autoRestRequiredOptionalTestService');
 

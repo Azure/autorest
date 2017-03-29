@@ -96,8 +96,8 @@ export class PlatformInformation {
     public distribution: LinuxDistribution = null) {
     try {
       this.runtimeId = PlatformInformation.getRuntimeId(platform, architecture, distribution);
-    }
-    catch (err) {
+    } catch (err) {
+      console.error(err);
       this.runtimeId = null;
     }
   }

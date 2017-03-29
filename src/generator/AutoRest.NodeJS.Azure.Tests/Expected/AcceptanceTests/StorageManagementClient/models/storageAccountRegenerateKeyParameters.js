@@ -17,34 +17,36 @@
  * @member {string} [keyName] Possible values include: 'key1', 'key2'
  *
  */
-function StorageAccountRegenerateKeyParameters() {
-}
+class StorageAccountRegenerateKeyParameters {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of StorageAccountRegenerateKeyParameters
- *
- * @returns {object} metadata of StorageAccountRegenerateKeyParameters
- *
- */
-StorageAccountRegenerateKeyParameters.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'StorageAccountRegenerateKeyParameters',
-    type: {
-      name: 'Composite',
-      className: 'StorageAccountRegenerateKeyParameters',
-      modelProperties: {
-        keyName: {
-          required: false,
-          serializedName: 'keyName',
-          type: {
-            name: 'Enum',
-            allowedValues: [ 'key1', 'key2' ]
+  /**
+   * Defines the metadata of StorageAccountRegenerateKeyParameters
+   *
+   * @returns {object} metadata of StorageAccountRegenerateKeyParameters
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'StorageAccountRegenerateKeyParameters',
+      type: {
+        name: 'Composite',
+        className: 'StorageAccountRegenerateKeyParameters',
+        modelProperties: {
+          keyName: {
+            required: false,
+            serializedName: 'keyName',
+            type: {
+              name: 'Enum',
+              allowedValues: [ 'key1', 'key2' ]
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = StorageAccountRegenerateKeyParameters;

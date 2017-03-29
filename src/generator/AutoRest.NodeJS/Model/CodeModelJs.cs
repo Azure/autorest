@@ -178,7 +178,7 @@ namespace AutoRest.NodeJS.Model
 
                     requiredParams.Append(p.Name);
                     requiredParams.Append(": ");
-                    requiredParams.Append(p.ModelType.TSType(false));
+                    requiredParams.Append(p.ModelType.TSType(inModelsModule: false));
 
                     first = false;
                 }
@@ -188,7 +188,7 @@ namespace AutoRest.NodeJS.Model
                     if (!first)
                         requiredParams.Append(", ");
 
-                    requiredParams.Append("baseUri: string");
+                    requiredParams.Append("baseUri?: string");
                 }
 
                 return requiredParams.ToString();
@@ -198,7 +198,7 @@ namespace AutoRest.NodeJS.Model
         public string ConstructImportTS()
         {
             IndentedStringBuilder builder = new IndentedStringBuilder(IndentedStringBuilder.TwoSpaces);
-            builder.Append("import { ServiceClientOptions, RequestOptions, ServiceCallback");
+            builder.Append("import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse");
             if (Properties.Any(p => p.Name.EqualsIgnoreCase("credentials")))
             {
                 builder.Append(", ServiceClientCredentials");

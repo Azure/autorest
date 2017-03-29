@@ -356,6 +356,6 @@ export interface DictionaryWrapper {
  *
  */
 export interface ReadonlyObj {
-  id?: string;
+  readonly id?: string;
   size?: number;
 }

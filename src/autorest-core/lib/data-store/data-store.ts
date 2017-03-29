@@ -3,16 +3,17 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { CancellationToken } from "../approved-imports/cancallation";
-import { Mappings, Mapping, SmartPosition, Position } from "../approved-imports/source-map";
-import { ReadUri, ResolveUri } from "../approved-imports/uri";
-import { WriteString } from "../approved-imports/writefs";
-import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../approved-imports/yaml";
+import { JsonPath } from '../ref/jsonpath';
+import { CancellationToken } from "../ref/cancallation";
+import { Mappings, Mapping, SmartPosition, Position } from "../ref/source-map";
+import { ReadUri, ResolveUri, WriteString } from "../ref/uri";
+import { Parse, ParseToAst as parseAst, YAMLNode, Stringify } from "../ref/yaml";
 import { From } from "linq-es2015";
 import { RawSourceMap, SourceMapGenerator, SourceMapConsumer } from "source-map";
 import { Compile, CompilePosition } from "../source-map/source-map";
 import { BlameTree } from "../source-map/blaming";
-import { Lazy } from "../approved-imports/lazy";
+import { Lazy } from "../lazy";
+import { IFileSystem } from "../file-system";
 
 export const helloworld = "hi"; // TODO: wat?
 
@@ -48,6 +49,7 @@ type Store = { [key: string]: Data };
 
 export abstract class DataStoreViewReadonly {
   abstract Enum(): Promise<string[]>;
+  abstract Enum(prefix: string): Promise<string[]>;
   abstract Read(key: string): Promise<DataHandleRead | null>;
 
   public async ReadStrict(key: string): Promise<DataHandleRead> {
@@ -102,6 +104,10 @@ export abstract class DataStoreView extends DataStoreViewReadonly {
 
   public AsFileScopeReadThrough(customUriFilter?: (uri: string) => boolean): DataStoreViewReadonly {
     return new DataStoreViewReadThrough(this.AsFileScope(), customUriFilter);
+  }
+
+  public AsFileScopeReadThroughFileSystem(fs: IFileSystem): DataStoreViewReadonly {
+    return new DataStoreViewReadThroughFS(this.AsFileScope(), fs);
   }
 
   public AsReadonly(): DataStoreViewReadonly {
@@ -160,6 +166,43 @@ class DataStoreViewReadThrough extends DataStoreViewReadonly {
 
     // populate cache
     const data = await ReadUri(uri);
+    const writeHandle = await this.slave.Write(uri);
+    const readHandle = await writeHandle.WriteData(data);
+    return readHandle;
+  }
+
+  public async Enum(): Promise<string[]> {
+    return this.slave.Enum();
+  }
+}
+
+class DataStoreViewReadThroughFS extends DataStoreViewReadonly {
+  constructor(private slave: DataStoreFileView, private fs: IFileSystem) {
+    super();
+  }
+
+  public async Read(uri: string): Promise<DataHandleRead> {
+    // special URI handlers
+    // - GitHub
+    if (uri.startsWith('https://github')) {
+      uri = uri.replace(/^https:\/\/(github.com)(.*)blob\/(.*)/ig, 'https://raw.githubusercontent.com$2$3');
+    }
+
+    // prope cache
+    const existingData = await this.slave.Read(uri);
+    if (existingData !== null) {
+      return existingData;
+    }
+
+    // populate cache
+    let data: string | null = null;
+    try {
+      data = await this.fs.ReadFile(uri);
+    } finally {
+      if (!data) {
+        throw new Error(`FileSystem unable to read file ${uri}.`)
+      }
+    }
     const writeHandle = await this.slave.Write(uri);
     const readHandle = await writeHandle.WriteData(data);
     return readHandle;
@@ -367,7 +410,7 @@ export class DataHandleRead {
     return await data.yamlAst;
   }
 
-  public async Blame(position: sourceMap.Position): Promise<sourceMap.MappedPosition[]> {
+  public async Blame(position: sourceMap.Position): Promise<(sourceMap.MappedPosition & { path?: JsonPath })[]> {
     const metadata = await this.ReadMetadata();
     const sourceMapConsumer = new SourceMapConsumer(await metadata.sourceMap);
 

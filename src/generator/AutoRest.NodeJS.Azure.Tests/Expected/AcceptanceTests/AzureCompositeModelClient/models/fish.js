@@ -10,9 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
-
-var util = require('util');
+const models = require('./index');
 
 /**
  * @class
@@ -27,72 +25,74 @@ var util = require('util');
  * @member {string} fishtype Polymorphic Discriminator
  *
  */
-function Fish() {
-}
+class Fish {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of Fish
- *
- * @returns {object} metadata of Fish
- *
- */
-Fish.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Fish',
-    type: {
-      name: 'Composite',
-      polymorphicDiscriminator: {
-        serializedName: 'fishtype',
-        clientName: 'fishtype'
-      },
-      uberParent: 'Fish',
-      className: 'Fish',
-      modelProperties: {
-        species: {
-          required: false,
-          serializedName: 'species',
-          type: {
-            name: 'String'
-          }
-        },
-        length: {
-          required: true,
-          serializedName: 'length',
-          type: {
-            name: 'Number'
-          }
-        },
-        siblings: {
-          required: false,
-          serializedName: 'siblings',
-          type: {
-            name: 'Sequence',
-            element: {
-                required: false,
-                serializedName: 'FishElementType',
-                type: {
-                  name: 'Composite',
-                  polymorphicDiscriminator: {
-                    serializedName: 'fishtype',
-                    clientName: 'fishtype'
-                  },
-                  uberParent: 'Fish',
-                  className: 'Fish'
-                }
-            }
-          }
-        },
-        fishtype: {
-          required: true,
+  /**
+   * Defines the metadata of Fish
+   *
+   * @returns {object} metadata of Fish
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Fish',
+      type: {
+        name: 'Composite',
+        polymorphicDiscriminator: {
           serializedName: 'fishtype',
-          type: {
-            name: 'String'
+          clientName: 'fishtype'
+        },
+        uberParent: 'Fish',
+        className: 'Fish',
+        modelProperties: {
+          species: {
+            required: false,
+            serializedName: 'species',
+            type: {
+              name: 'String'
+            }
+          },
+          length: {
+            required: true,
+            serializedName: 'length',
+            type: {
+              name: 'Number'
+            }
+          },
+          siblings: {
+            required: false,
+            serializedName: 'siblings',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'FishElementType',
+                  type: {
+                    name: 'Composite',
+                    polymorphicDiscriminator: {
+                      serializedName: 'fishtype',
+                      clientName: 'fishtype'
+                    },
+                    uberParent: 'Fish',
+                    className: 'Fish'
+                  }
+              }
+            }
+          },
+          fishtype: {
+            required: true,
+            serializedName: 'fishtype',
+            type: {
+              name: 'String'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = Fish;

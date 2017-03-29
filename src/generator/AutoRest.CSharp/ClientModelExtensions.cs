@@ -410,7 +410,11 @@ namespace AutoRest.CSharp
             foreach (var constraint in constraints.Keys)
             {
                 string constraintCheck;
-                string constraintValue = ((type as PrimaryType)?.KnownFormat == KnownFormat.@char) ?$"'{constraints[constraint]}'" : constraints[constraint];
+                var knownFormat = (type as PrimaryType)?.KnownFormat;
+                string constraintValue =
+                    knownFormat == KnownFormat.@char ? $"'{constraints[constraint]}'" :
+                    knownFormat == KnownFormat.@decimal ? $"{constraints[constraint]}m" :
+                    constraints[constraint];
                 switch (constraint)
                 {
                     case Constraint.ExclusiveMaximum:

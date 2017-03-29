@@ -8,55 +8,55 @@
  * regenerated.
  */
 
-import { ServiceClientOptions, RequestOptions, ServiceCallback, ServiceClientCredentials } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse, ServiceClientCredentials } from 'ms-rest';
 import * as operations from "./operations";
 
 declare class MicrosoftAzureTestUrl {
-        /**
-     * @class
-     * Initializes a new instance of the MicrosoftAzureTestUrl class.
-     * @constructor
-     *
-     * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
-     *
-     * @param {string} subscriptionId - Subscription Id.
-     *
-     * @param {string} [baseUri] - The base URI of the service.
-     *
-     * @param {object} [options] - The parameter options
-     *
-     * @param {Array} [options.filters] - Filters to be added to the request pipeline
-     *
-     * @param {object} [options.requestOptions] - Options for the underlying request object
-     * {@link https://github.com/request/request#requestoptions-callback Options doc}
-     *
-     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
-     *
-     * @param {string} [options.apiVersion] - API Version with value '2014-04-01-preview'.
-     *
-     * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
-     *
-     * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
-     *
-     * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
-     *
-     */
-    constructor(credentials: ServiceClientCredentials, subscriptionId: string, baseUri: string, options: ServiceClientOptions);
+  /**
+   * Initializes a new instance of the MicrosoftAzureTestUrl class.
+   * @constructor
+   *
+   * @class
+   * @param {credentials} credentials - Credentials needed for the client to connect to Azure.
+   *
+   * @param {string} subscriptionId - Subscription Id.
+   *
+   * @param {string} [baseUri] - The base URI of the service.
+   *
+   * @param {object} [options] - The parameter options
+   *
+   * @param {Array} [options.filters] - Filters to be added to the request pipeline
+   *
+   * @param {object} [options.requestOptions] - Options for the underlying request object
+   * {@link https://github.com/request/request#requestoptions-callback Options doc}
+   *
+   * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+   *
+   * @param {string} [options.apiVersion] - API Version with value '2014-04-01-preview'.
+   *
+   * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
+   *
+   * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+   *
+   * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+   *
+   */
+  constructor(credentials: ServiceClientCredentials, subscriptionId: string, baseUri?: string, options?: ServiceClientOptions);
 
-    credentials: ServiceClientCredentials;
+  credentials: ServiceClientCredentials;
 
-    subscriptionId: string;
+  subscriptionId: string;
 
-    apiVersion: string;
+  apiVersion: string;
 
-    acceptLanguage: string;
+  acceptLanguage: string;
 
-    longRunningOperationRetryTimeout: number;
+  longRunningOperationRetryTimeout: number;
 
-    generateClientRequestId: boolean;
+  generateClientRequestId: boolean;
 
-    // Operation groups
-    group: operations.Group;
-    }
+  // Operation groups
+  group: operations.Group;
+}
 
 export = MicrosoftAzureTestUrl;

@@ -10,23 +10,8 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var WebResource = msRest.WebResource;
-
-/**
- * @class
- * AvailabilitySets
- * __NOTE__: An instance of this class is automatically created for an
- * instance of the AutoRestParameterFlattening.
- * Initializes a new instance of the AvailabilitySets class.
- * @constructor
- *
- * @param {AutoRestParameterFlattening} client Reference to the service client.
- */
-function AvailabilitySets(client) {
-  this.client = client;
-}
+const msRest = require('ms-rest');
+const WebResource = msRest.WebResource;
 
 /**
  * Updates the tags for an availability set.
@@ -42,20 +27,21 @@ function AvailabilitySets(client) {
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  *
- * @param {function} callback
+ * @param {function} callback - The callback.
  *
  * @returns {function} callback(err, result, request, response)
  *
  *                      {Error}  err        - The Error object if an error occurred, null otherwise.
  *
- *                      {null} [result]   - The deserialized result object.
+ *                      {null} [result]   - The deserialized result object if an error did not occur.
  *
  *                      {object} [request]  - The HTTP Request object if an error did not occur.
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, options, callback) {
-  var client = this.client;
+function _update(resourceGroupName, avset, tags, options, callback) {
+   /* jshint validthis: true */
+  let client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
     options = null;
@@ -80,7 +66,7 @@ AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, op
     if (tags === null || tags === undefined || typeof tags !== 'object') {
       throw new Error('tags cannot be null or undefined and it must be of type object.');
     }
-    for(var valueElement in tags) {
+    for(let valueElement in tags) {
       if (tags[valueElement] !== null && tags[valueElement] !== undefined && typeof tags[valueElement].valueOf() !== 'string') {
         throw new Error('tags[valueElement] must be of type string.');
       }
@@ -88,26 +74,26 @@ AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, op
   } catch (error) {
     return callback(error);
   }
-    var tags1;
+  let tags1;
   if (tags !== null && tags !== undefined) {
-      tags1 = new client.models['AvailabilitySetUpdateParameters']();
-      tags1.tags = tags;
+    tags1 = new client.models['AvailabilitySetUpdateParameters']();
+    tags1.tags = tags;
   }
 
   // Construct URL
-  var baseUrl = this.client.baseUri;
-  var requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterFlattening/{resourceGroupName}/{availabilitySetName}';
+  let baseUrl = this.client.baseUri;
+  let requestUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + 'parameterFlattening/{resourceGroupName}/{availabilitySetName}';
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{availabilitySetName}', encodeURIComponent(avset));
 
   // Create HTTP transport objects
-  var httpRequest = new WebResource();
+  let httpRequest = new WebResource();
   httpRequest.method = 'PATCH';
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
   if(options) {
-    for(var headerName in options['customHeaders']) {
+    for(let headerName in options['customHeaders']) {
       if (options['customHeaders'].hasOwnProperty(headerName)) {
         httpRequest.headers[headerName] = options['customHeaders'][headerName];
       }
@@ -115,55 +101,161 @@ AvailabilitySets.prototype.update = function (resourceGroupName, avset, tags, op
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
-  var requestModel = null;
+  let requestContent = null;
+  let requestModel = null;
   try {
     if (tags1 !== null && tags1 !== undefined) {
-      var requestModelMapper = new client.models['AvailabilitySetUpdateParameters']().mapper();
+      let requestModelMapper = new client.models['AvailabilitySetUpdateParameters']().mapper();
       requestModel = client.serialize(requestModelMapper, tags1, 'tags1');
       requestContent = JSON.stringify(requestModel);
     }
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' +
-        'payload - "%s"', error.message, util.inspect(tags1, {depth: null})));
+    let serializationError = new Error(`Error "${error.message}" occurred in serializing the ` +
+        `payload - ${JSON.stringify(tags1, null, 2)}.`);
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
   // Send Request
-  return client.pipeline(httpRequest, function (err, response, responseBody) {
+  return client.pipeline(httpRequest, (err, response, responseBody) => {
     if (err) {
       return callback(err);
     }
-    var statusCode = response.statusCode;
+    let statusCode = response.statusCode;
     if (statusCode !== 200) {
-      var error = new Error(responseBody);
+      let error = new Error(responseBody);
       error.statusCode = response.statusCode;
       error.request = msRest.stripRequest(httpRequest);
       error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
-      var parsedErrorResponse;
+      let parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
         if (parsedErrorResponse) {
-          var internalError = null;
+          let internalError = null;
           if (parsedErrorResponse.error) internalError = parsedErrorResponse.error;
           error.code = internalError ? internalError.code : parsedErrorResponse.code;
           error.message = internalError ? internalError.message : parsedErrorResponse.message;
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' +
-                         '- "%s" for the default response.', defaultError.message, responseBody);
+        error.message = `Error "${defaultError.message}" occurred in deserializing the responseBody ` +
+                         `- "${responseBody}" for the default response.`;
         return callback(error);
       }
       return callback(error);
     }
     // Create Result
-    var result = null;
+    let result = null;
     if (responseBody === '') responseBody = null;
 
     return callback(null, result, httpRequest, response);
   });
-};
+}
 
+/**
+ * @class
+ * AvailabilitySets
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestParameterFlattening.
+ * Initializes a new instance of the AvailabilitySets class.
+ * @constructor
+ *
+ * @param {AutoRestParameterFlattening} client Reference to the service client.
+ */
+class AvailabilitySets {
+  constructor(client) {
+    this.client = client;
+    this._update = _update;
+  }
+
+  /**
+   * Updates the tags for an availability set.
+   *
+   * @param {string} resourceGroupName The name of the resource group.
+   *
+   * @param {string} avset The name of the storage availability set.
+   *
+   * @param {object} tags A set of tags. A description about the set of tags.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @returns {Promise} A promise is returned
+   *
+   * @resolve {HttpOperationResponse<null>} - The deserialized result object.
+   *
+   * @reject {Error} - The error object.
+   */
+  updateWithHttpOperationResponse(resourceGroupName, avset, tags, options) {
+    let client = this.client;
+    let self = this;
+    return new Promise((resolve, reject) => {
+      self._update(resourceGroupName, avset, tags, options, (err, result, request, response) => {
+        let httpOperationResponse = new msRest.HttpOperationResponse(request, response);
+        httpOperationResponse.body = result;
+        if (err) { reject(err); }
+        else { resolve(httpOperationResponse); }
+        return;
+      });
+    });
+  }
+
+  /**
+   * Updates the tags for an availability set.
+   *
+   * @param {string} resourceGroupName The name of the resource group.
+   *
+   * @param {string} avset The name of the storage availability set.
+   *
+   * @param {object} tags A set of tags. A description about the set of tags.
+   *
+   * @param {object} [options] Optional Parameters.
+   *
+   * @param {object} [options.customHeaders] Headers that will be added to the
+   * request
+   *
+   * @param {function} [optionalCallback] - The optional callback.
+   *
+   * @returns {function|Promise} If a callback was passed as the last parameter
+   * then it returns the callback else returns a Promise.
+   *
+   * {Promise} A promise is returned
+   *
+   *                      @resolve {null} - The deserialized result object.
+   *
+   *                      @reject {Error} - The error object.
+   *
+   * {function} optionalCallback(err, result, request, response)
+   *
+   *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+   *
+   *                      {null} [result]   - The deserialized result object if an error did not occur.
+   *
+   *                      {object} [request]  - The HTTP Request object if an error did not occur.
+   *
+   *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+   */
+  update(resourceGroupName, avset, tags, options, optionalCallback) {
+    let client = this.client;
+    let self = this;
+    if (!optionalCallback && typeof options === 'function') {
+      optionalCallback = options;
+      options = null;
+    }
+    if (!optionalCallback) {
+      return new Promise((resolve, reject) => {
+        self._update(resourceGroupName, avset, tags, options, (err, result, request, response) => {
+          if (err) { reject(err); }
+          else { resolve(result); }
+          return;
+        });
+      });
+    } else {
+      return self._update(resourceGroupName, avset, tags, options, optionalCallback);
+    }
+  }
+
+}
 
 module.exports = AvailabilitySets;

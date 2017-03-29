@@ -9,16 +9,16 @@
 
 // this file should get 'required' by the boostrapper
 
+import { OutstandingTaskAwaiter } from "./lib/outstanding-task-awaiter";
+import { AutoRest } from './lib/autorest-core';
 import { resolve as currentDirectory } from "path";
-import { existsSync } from "fs";
 import { ChildProcess } from "child_process";
-import { MultiPromiseUtility } from "./lib/approved-imports/multi-promise";
-import { CreateFileUri, ResolveUri } from "./lib/approved-imports/uri";
+import { CreateFileUri, ResolveUri, WriteString } from "./lib/ref/uri";
 import { SpawnLegacyAutoRest } from "./interop/autorest-dotnet";
 import { isLegacy, CreateConfiguration } from "./legacyCli";
-import { AutoRestConfigurationSwitches } from "./lib/configuration/configuration";
+import { AutoRestConfigurationSwitches } from "./lib/configuration";
 import { DataStore } from "./lib/data-store/data-store";
-import { RunPipeline } from "./lib/pipeline/pipeline";
+import { RealFileSystem } from "./lib/file-system";
 
 
 /**
@@ -36,11 +36,15 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
   if (autorestArgs.indexOf("-FANCY") !== -1) {
     // generate virtual config file
     const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-    const configFileUri = ResolveUri(currentDirUri, "virtual-config.yaml");
     const dataStore = new DataStore();
     const config = await CreateConfiguration(currentDirUri, dataStore.CreateScope("input").AsFileScopeReadThrough(x => true /*unsafe*/), autorestArgs);
-    await (await dataStore.CreateScope("input").AsFileScope().Write(configFileUri)).WriteObject(config);
-    const restultStreams = await RunPipeline(configFileUri, dataStore);
+    config["base-folder"] = currentDirUri;
+    const api = new AutoRest(new RealFileSystem());
+    await api.AddConfiguration(config);
+    const outstanding = new OutstandingTaskAwaiter();
+    api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+    await api.Process().finish; // TODO: care about return value?
+    await outstanding.Wait();
   }
   else {
     // exec
@@ -58,8 +62,6 @@ async function legacyMain(autorestArgs: string[]): Promise<void> {
  */
 
 type CommandLineArgs = { configFile?: string, switches: AutoRestConfigurationSwitches };
-
-const defaultConfigurationFileName = "readme.md";
 
 function parseArgs(autorestArgs: string[]): CommandLineArgs {
   const result: CommandLineArgs = {
@@ -80,16 +82,12 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
     // switch
     const key = match[1];
-    const value = match[3];
-    if (result.switches[key] !== undefined) {
-      throw new Error(`Multiple definitions of switch '${key}': '${result.switches[key]}', 'value'`);
-    }
-    result.switches[key] = value === undefined ? null : value;
-  }
-
-  // default configuration file
-  if (!result.configFile && existsSync(defaultConfigurationFileName)) {
-    result.configFile = defaultConfigurationFileName;
+    const value = match[3] || null;
+    result.switches[key] = !result.switches[key]
+      ? value
+      : (typeof result.switches[key] === "string"
+        ? [result.switches[key], value]
+        : (result.switches[key] as any).concat(value));
   }
 
   return result;
@@ -97,16 +95,13 @@ function parseArgs(autorestArgs: string[]): CommandLineArgs {
 
 async function currentMain(autorestArgs: string[]): Promise<void> {
   const args = parseArgs(autorestArgs);
-  if (!args.configFile) {
-    throw new Error(`No configuration file specified and default ('${defaultConfigurationFileName}') not found`);
-  }
-
-  // resolve configuration file
   const currentDirUri = CreateFileUri(currentDirectory()) + "/";
-  const configFileUri = ResolveUri(currentDirUri, args.configFile);
-
-  // dispatch
-  await RunPipeline(configFileUri, new DataStore());
+  const api = new AutoRest(new RealFileSystem(), args.configFile);
+  await api.AddConfiguration(args.switches);
+  const outstanding = new OutstandingTaskAwaiter();
+  api.GeneratedFile.Subscribe((_, file) => outstanding.Await(WriteString(file.uri, file.content)));
+  await api.Process().finish; // TODO: care about return value?
+  await outstanding.Wait();
 }
 
 

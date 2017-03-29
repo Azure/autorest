@@ -21,8 +21,11 @@ namespace AutoRest.Swagger.Model.Utilities
         private static readonly Regex TrackedResRegEx = new Regex(@".+/Resource$", RegexOptions.IgnoreCase);
 
         // This needs to be deprecated in favor of context.TrackedResources
+        public static readonly Regex ResourcePathPattern = new Regex(@"/providers/(?<providerNamespace>[^{/]+)((/(?<resource>[^{/]+)/)((?<resourceName>[^/]+)))+(/(?<resource>[^{/]+))");
+
         private static readonly Regex resourceProviderPathPattern = new Regex(@"/providers/(?<resPath>[^{/]+)/", RegexOptions.IgnoreCase);
 
+        // This needs to be deprecated in favor of context.TrackedResources
         public static bool IsTrackedResource(Schema schema, Dictionary<string, Schema> definitions)
         {
             if (schema.AllOf != null)
@@ -264,7 +267,6 @@ namespace AutoRest.Swagger.Model.Utilities
         /// <param name="op">Operation for which to check the x-ms-pageable extension</param>
         /// <returns>true if operation is x-ms-pageable</returns>
         public static bool IsXmsPageableResponseOperation(Operation op) => (op.Extensions != null && op.Extensions.GetValue<object>(XmsPageable) != null);
-
 
         /// <summary>
         /// Determines if an operation returns an object of array type

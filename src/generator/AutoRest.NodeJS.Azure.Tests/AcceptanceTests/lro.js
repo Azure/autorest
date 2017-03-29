@@ -5,7 +5,6 @@
 
 var should = require('should');
 var http = require('http');
-var util = require('util');
 var assert = require('assert');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
@@ -39,7 +38,7 @@ describe('nodejs', function () {
     it('should work with Put201CreatingFailed200', function (done) {
       testClient.lROs.put201CreatingFailed200(product, function (error, result) {
         should.exist(error);
-        error.message.should.be.exactly('Long running operation failed with status: \'Failed\'.');
+        error.message.should.be.exactly('Long running operation failed with status: "Failed".');
         done();
       });
     });
@@ -54,7 +53,7 @@ describe('nodejs', function () {
     it('should work with Put200Acceptedcanceled200', function (done) {
       testClient.lROs.put200Acceptedcanceled200(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with status: \'Canceled\'.');
+        error.message.should.containEql('Long running operation failed with status: "Canceled".');
         done();
       });
     });
@@ -301,7 +300,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetrycanceled', function (done) {
       testClient.lROs.postAsyncRetrycanceled(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with status: \'Canceled\'');
+        error.message.should.containEql('Long running operation failed with status: "Canceled".');
         done();
       });
     });
@@ -309,7 +308,7 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetryFailed', function (done) {
       testClient.lROs.postAsyncRetryFailed(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with error: \'Internal Server Error\'.');
+        error.message.should.containEql('Long running operation failed with error: "Internal Server Error".');
         var errObject = error.body;
         errObject.error.code.should.be.exactly(500);
         errObject.error.message.should.be.exactly('Internal Server Error');
@@ -422,7 +421,7 @@ describe('nodejs', function () {
         should.exist(error);
         //For C# we get "Long running operation failed with status 'BadRequest'
         //TODO: see whether we can get the parity. Node.js has different exception system.
-        error.message.should.match(/^Long running operation failed with error: 'Invalid status code with response body.*/ig);
+        error.message.should.match(/^Long running operation failed with error: "Invalid status code with response body.*/ig);
         done();
       });
     });

@@ -1,6 +1,6 @@
 {
   "name": "autorest",
-  "version": "0.9.17",
+  "version": "0.9.21",
   "description": "The AutoRest tool generates client libraries for accessing RESTful web services. Input to AutoRest is a spec that describes the REST API using the Open API Initiative format.",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
     "url": "https://github.com/Azure/autorest/issues"
   },
   "homepage": "https://github.com/Azure/autorest/blob/master/README.md",
-  "main": "./app.js",
+  "main": "./index.js",
   "bin": {
     "autorest": "./app.js"
   },
@@ -30,6 +30,7 @@
     "@types/chalk": "*",
     "@types/marked": "*",
     "@types/node": "^7.0.5",
+    "@types/pify": "0.0.28",
     "@types/request": "0.0.39",
     "@types/semver": "^5.3.30",
     "@types/shelljs": "^0.6.0",
@@ -37,7 +38,8 @@
     "del": "^2.2.2",
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
-    "typescript": "^2.1.5"
+    "pify": "^2.3.0",
+    "typescript": "^2.3.0-dev.20170314"
   },
   "dependencies": {
     "chalk": "^1.1.2",

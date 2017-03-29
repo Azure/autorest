@@ -19,41 +19,43 @@
  * @member {number} [size]
  *
  */
-function ReadonlyObj() {
-}
+class ReadonlyObj {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ReadonlyObj
- *
- * @returns {object} metadata of ReadonlyObj
- *
- */
-ReadonlyObj.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'readonly-obj',
-    type: {
-      name: 'Composite',
-      className: 'ReadonlyObj',
-      modelProperties: {
-        id: {
-          required: false,
-          readOnly: true,
-          serializedName: 'id',
-          type: {
-            name: 'String'
-          }
-        },
-        size: {
-          required: false,
-          serializedName: 'size',
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of ReadonlyObj
+   *
+   * @returns {object} metadata of ReadonlyObj
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'readonly-obj',
+      type: {
+        name: 'Composite',
+        className: 'ReadonlyObj',
+        modelProperties: {
+          id: {
+            required: false,
+            readOnly: true,
+            serializedName: 'id',
+            type: {
+              name: 'String'
+            }
+          },
+          size: {
+            required: false,
+            serializedName: 'size',
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ReadonlyObj;

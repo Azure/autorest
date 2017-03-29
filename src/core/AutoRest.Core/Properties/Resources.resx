@@ -221,7 +221,7 @@ Modelers:
     <value>Type '{0}' name should be assembly qualified. For example 'ClassName, AssemblyName'</value>
   </data>
   <data name="AnonymousTypesDiscouraged" xml:space="preserve">
-    <value>For better generated code quality, define schemas instead of using anonymous types.</value>
+    <value>Inline/anonymous models must not be used, instead define a schema with a model name in the "definitions" section and refer to it. This allows operations to share the models.</value>
   </data>
   <data name="MsdnReferencesDiscouraged" xml:space="preserve">
     <value>For better generated code quality, remove all references to "msdn.microsoft.com".</value>
@@ -328,7 +328,7 @@ Modelers:
     <value>Please make sure that media types other than 'application/json' are supported by your service.</value>
   </data>
   <data name="SupportedSchemesWarningMessage" xml:space="preserve">
-    <value>Non-HTTPS/HTTP schemes have limited support</value>
+    <value>Azure Resource Management only supports HTTPS scheme.</value>
   </data>
   <data name="OperationParametersNotAllowedMessage" xml:space="preserve">
     <value>Parameters "subscriptionId" and "api-version" are not allowed in the operations section, define these in the global parameters section instead</value>
@@ -385,7 +385,7 @@ Modelers:
     <value>Property named: "{0}", for definition: "{1}" must follow camelCase style. Example: "{2}".</value>
   </data>
   <data name="ArmPropertiesBagValidationMessage" xml:space="preserve">
-    <value>Top level property names should not be repeated inside the properties bag for ARM resource "{0}". Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
+    <value>Top level property names should not be repeated inside the properties bag for ARM resource '{0}'. Properties [{1}] conflict with ARM top level properties. Please rename these.</value>
   </data>
   <data name="ListOperationsNamingWarningMessage" xml:space="preserve">
     <value>Since operation '{0}' response has model definition '{1}', it should be named as "list_*"</value>

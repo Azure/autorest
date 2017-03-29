@@ -3,12 +3,19 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "../approved-imports/yaml";
+import { Descendants, Kind, CloneAst, YAMLMapping, newScalar, ParseNode } from "../ref/yaml";
 import { MergeYamls, IdentitySourceMapping } from "../source-map/merging";
-import { Mapping } from "../approved-imports/source-map";
+import { Mapping } from "../ref/source-map";
 import { DataHandleRead, DataHandleWrite, DataStoreView } from "../data-store/data-store";
 import { Parse as parseLiterate } from "./literate";
 import { Lines } from "./text-utility";
+import { ConfigurationView } from '../autorest-core';
+import { Channel, Message, SourceLocation } from '../message';
+
+export class CodeBlock {
+  info: string | null;
+  data: DataHandleRead;
+}
 
 function TryMarkdown(rawMarkdownOrYaml: string): boolean {
   return /^#/gm.test(rawMarkdownOrYaml);
@@ -43,7 +50,7 @@ function* CommonmarkSubHeadings(startNode: commonmark.Node): Iterable<commonmark
             yield startNode;
           }
         } else {
-          return;
+          break;
         }
       }
       startNode = startNode.next;
@@ -110,15 +117,28 @@ function ResolveMarkdownPath(startNode: commonmark.Node, path: string[]): common
   return ResolveMarkdownPath(heading, path);
 }
 
-export async function Parse(literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
+export async function Parse(config: ConfigurationView, literate: DataHandleRead, workingScope: DataStoreView): Promise<DataHandleRead> {
   const docScope = workingScope.CreateScope(`doc_tmp`);
   const hwRawDoc = await workingScope.Write(`doc.yaml`);
-  const hRawDoc = await ParseInternal(literate, hwRawDoc, docScope);
+  const hRawDoc = await ParseInternal(config, literate, hwRawDoc, docScope);
   return hRawDoc;
 }
 
-async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
-  let hsConfigFileBlocks: DataHandleRead[] = [];
+export async function ParseCodeBlocks(config: ConfigurationView | null, literate: DataHandleRead, workingScope: DataStoreView): Promise<Array<CodeBlock>> {
+  const docScope = workingScope.CreateScope(`doc_tmp`);
+  const hwRawDoc = await workingScope.Write(`doc.yaml`);
+  return await ParseCodeBlocksInternal(config, literate, hwRawDoc, docScope);
+}
+
+async function ParseInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<DataHandleRead> {
+  // merge the parsed codeblocks
+  const blocks = (await ParseCodeBlocksInternal(config, hLiterate, hResult, intermediateScope)).map(each => each.data);
+  return await MergeYamls(blocks, hResult);
+}
+
+
+async function ParseCodeBlocksInternal(config: ConfigurationView | null, hLiterate: DataHandleRead, hResult: DataHandleWrite, intermediateScope: DataStoreView): Promise<CodeBlock[]> {
+  let hsConfigFileBlocks: CodeBlock[] = [];
 
   const rawMarkdown = await hLiterate.ReadData();
 
@@ -132,15 +152,24 @@ async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite
     let codeBlockIndex = 0;
     for (const { data, codeBlock } of hsConfigFileBlocksWithContext) {
       ++codeBlockIndex;
+
+      const deferredErrors: Message[] = []; // ...because the file we wanna blame is not yet written
+
       const yamlAst = CloneAst(await data.ReadYamlAst());
       let mapping: Mapping[] = [];
       for (const { path, node } of Descendants(yamlAst)) {
-        if (path[path.length - 1] === "description" && node.kind === Kind.SEQ) {
+        // RESOLVE MARKDOWN INTO THE YAML
+        if ((path[path.length - 1] === "description" || path[path.length - 1] === "summary") && node.kind === Kind.SEQ) {
           // resolve documentation
           const mdPath = ParseNode<string[]>(node);
           const heading = ResolveMarkdownPath(codeBlock, mdPath);
           if (heading == null) {
-            throw new Error(`Heading at path ${mdPath} not found`); // TODO: uniform error reporting with blaming!
+            deferredErrors.push({
+              Channel: Channel.Error,
+              Text: `Heading at path ${mdPath} not found`,
+              Source: [<SourceLocation>{ Position: { path: path }, document: hLiterate.key }]
+            });
+            continue;
           }
 
           // extract markdown part
@@ -161,22 +190,31 @@ async function ParseInternal(hLiterate: DataHandleRead, hResult: DataHandleWrite
           });
         }
       }
+
+      let outputKey: string;
+
       // detect changes. If any, remap, otherwise forward data
       if (mapping.length > 0) {
-        mapping = mapping.concat(Array.from(IdentitySourceMapping(data.key, yamlAst)));
+        mapping = mapping.concat([...IdentitySourceMapping(data.key, yamlAst)]);
         const hTarget = await scopeEnlightenedCodeBlocks.Write(`${codeBlockIndex}.yaml`);
-        hsConfigFileBlocks.push(await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]));
+        hsConfigFileBlocks.push({ info: codeBlock.info, data: await hTarget.WriteObject(ParseNode(yamlAst), mapping, [hLiterate, data]) });
+        outputKey = hTarget.key;
       } else {
-        hsConfigFileBlocks.push(data);
+        hsConfigFileBlocks.push({ info: codeBlock.info, data: data });
+        outputKey = data.key;
+      }
+
+      // post errors
+      if (config !== null) {
+        deferredErrors.forEach(err => config.Error.Dispatch(err));
       }
     }
   }
 
   // fall back to raw YAML
   if (hsConfigFileBlocks.length === 0) {
-    hsConfigFileBlocks = [hLiterate];
+    hsConfigFileBlocks = [{ info: null, data: hLiterate }];
   }
 
-  // merge
-  return await MergeYamls(hsConfigFileBlocks, hResult);
+  return hsConfigFileBlocks;
 }

@@ -17,40 +17,42 @@
  * @member {object} [defaultProgram]
  *
  */
-function DictionaryWrapper() {
-}
+class DictionaryWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of DictionaryWrapper
- *
- * @returns {object} metadata of DictionaryWrapper
- *
- */
-DictionaryWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'dictionary-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'DictionaryWrapper',
-      modelProperties: {
-        defaultProgram: {
-          required: false,
-          serializedName: 'defaultProgram',
-          type: {
-            name: 'Dictionary',
-            value: {
-                required: false,
-                serializedName: 'StringElementType',
-                type: {
-                  name: 'String'
-                }
+  /**
+   * Defines the metadata of DictionaryWrapper
+   *
+   * @returns {object} metadata of DictionaryWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'dictionary-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'DictionaryWrapper',
+        modelProperties: {
+          defaultProgram: {
+            required: false,
+            serializedName: 'defaultProgram',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'StringElementType',
+                  type: {
+                    name: 'String'
+                  }
+              }
             }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = DictionaryWrapper;

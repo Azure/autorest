@@ -58,7 +58,7 @@ module.exports =
     
     # add the new task.
     # gulp.task name, deps, fn
-    if name isnt "init" and name isnt "npm-install"
+    if name isnt "init" and name isnt "npm-install" and ! name.startsWith "clean"
       deps.unshift "init" 
 
     if fn.length # see if the task function has arguments (betcha never saw that before!)
@@ -161,15 +161,16 @@ module.exports =
     rm '-rf', workdir
     process.exit(1)
 
-  execute: (cmdline,options,callback)->
+  execute: (cmdline,options,callback, ondata)->
     if typeof options == 'function' 
+      ondata = callback
       callback = options
       options = { }
 
     # if we're busy, schedule again...
     if concurrency >= threshold
       queue.push(->
-          execute cmdline, options, callback
+          execute cmdline, options, callback, ondata
       )
       return
   
@@ -180,13 +181,13 @@ module.exports =
     
     options.silent = !verbose 
 
-    exec cmdline, options, (code,stdout,stderr)-> 
+    proc = exec cmdline, options, (code,stdout,stderr)-> 
       concurrency--
 
       if code and (options.retry or 0) > 0
         echo warning "retrying #{options.retry} #{cmdline}"
         options.retry--
-        return execute cmdline,options,callback
+        return execute cmdline,options,callback,ondata
 
       # run the next one in the queue
       if queue.length
@@ -204,6 +205,10 @@ module.exports =
 
         Fail "Execute Task failed, fast exit"
       callback(code,stdout,stderr)
+
+    proc.stdout.on 'data', ondata if ondata
+    return proc
+
 
 # build task for global build
 module.exports.task 'build', 'builds project', -> 

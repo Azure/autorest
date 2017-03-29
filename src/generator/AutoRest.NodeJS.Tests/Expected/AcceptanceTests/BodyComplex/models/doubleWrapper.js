@@ -20,40 +20,42 @@
  * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
  *
  */
-function DoubleWrapper() {
-}
+class DoubleWrapper {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of DoubleWrapper
- *
- * @returns {object} metadata of DoubleWrapper
- *
- */
-DoubleWrapper.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'double-wrapper',
-    type: {
-      name: 'Composite',
-      className: 'DoubleWrapper',
-      modelProperties: {
-        field1: {
-          required: false,
-          serializedName: 'field1',
-          type: {
-            name: 'Number'
-          }
-        },
-        field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: {
-          required: false,
-          serializedName: 'field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose',
-          type: {
-            name: 'Number'
+  /**
+   * Defines the metadata of DoubleWrapper
+   *
+   * @returns {object} metadata of DoubleWrapper
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'double-wrapper',
+      type: {
+        name: 'Composite',
+        className: 'DoubleWrapper',
+        modelProperties: {
+          field1: {
+            required: false,
+            serializedName: 'field1',
+            type: {
+              name: 'Number'
+            }
+          },
+          field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: {
+            required: false,
+            serializedName: 'field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose',
+            type: {
+              name: 'Number'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = DoubleWrapper;

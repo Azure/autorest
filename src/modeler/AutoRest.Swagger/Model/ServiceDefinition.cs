@@ -109,7 +109,9 @@ namespace AutoRest.Swagger.Model
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
         /// </summary>
+        [Rule(typeof(ArmResourcePropertiesBag))]
         [Rule(typeof(BooleanPropertyNotRecommended))]
+        [CollectionRule(typeof(BooleanPropertyNotRecommended))]
         [Rule(typeof(ResourceModelValidation))]
         [Rule(typeof(ResourceIsMsResourceValidation))]
         [Rule(typeof(GuidValidation))]
@@ -127,7 +129,7 @@ namespace AutoRest.Swagger.Model
         /// This property does not define global parameters for all operations.
         /// </summary>
         [Rule(typeof(ServiceDefinitionParameters))]
-        [CollectionRule(typeof(AnonymousParameterTypes))]
+        [CollectionRule(typeof(AnonymousBodyParameter))]
         public Dictionary<string, SwaggerParameter> Parameters { get; set; }
 
         /// <summary>

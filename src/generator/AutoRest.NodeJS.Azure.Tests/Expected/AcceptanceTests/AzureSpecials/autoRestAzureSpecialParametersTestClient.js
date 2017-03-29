@@ -14,13 +14,13 @@
 
 'use strict';
 
-var util = require('util');
-var msRest = require('ms-rest');
-var msRestAzure = require('ms-rest-azure');
-var ServiceClient = msRestAzure.AzureServiceClient;
+const msRest = require('ms-rest');
+const msRestAzure = require('ms-rest-azure');
+const ServiceClient = msRestAzure.AzureServiceClient;
 
-var models = require('./models');
-var operations = require('./operations');
+const models = require('./models');
+const operations = require('./operations');
+
 
 /**
  * @class
@@ -51,54 +51,56 @@ var operations = require('./operations');
  * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
  *
  */
-function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, baseUri, options) {
-  this.apiVersion = '2015-07-01-preview';
-  this.acceptLanguage = 'en-US';
-  this.longRunningOperationRetryTimeout = 30;
-  this.generateClientRequestId = true;
-  if (credentials === null || credentials === undefined) {
-    throw new Error('\'credentials\' cannot be null.');
-  }
-  if (subscriptionId === null || subscriptionId === undefined) {
-    throw new Error('\'subscriptionId\' cannot be null.');
+class AutoRestAzureSpecialParametersTestClient extends ServiceClient {
+  constructor(credentials, subscriptionId, baseUri, options) {
+    if (credentials === null || credentials === undefined) {
+      throw new Error('\'credentials\' cannot be null.');
+    }
+    if (subscriptionId === null || subscriptionId === undefined) {
+      throw new Error('\'subscriptionId\' cannot be null.');
+    }
+
+    if (!options) options = {};
+
+    super(credentials, options);
+
+    this.apiVersion = '2015-07-01-preview';
+    this.acceptLanguage = 'en-US';
+    this.longRunningOperationRetryTimeout = 30;
+    this.generateClientRequestId = true;
+    this.baseUri = baseUri;
+    if (!this.baseUri) {
+      this.baseUri = 'http://localhost';
+    }
+    this.credentials = credentials;
+    this.subscriptionId = subscriptionId;
+
+    let packageInfo = this.getPackageJsonInfo(__dirname);
+    this.addUserAgentInfo(`${packageInfo.name}/${packageInfo.version}`);
+    if(options.apiVersion !== null && options.apiVersion !== undefined) {
+      this.apiVersion = options.apiVersion;
+    }
+    if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
+      this.acceptLanguage = options.acceptLanguage;
+    }
+    if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
+      this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
+    }
+    if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
+      this.generateClientRequestId = options.generateClientRequestId;
+    }
+    this.xMsClientRequestId = new operations.XMsClientRequestId(this);
+    this.subscriptionInCredentials = new operations.SubscriptionInCredentials(this);
+    this.subscriptionInMethod = new operations.SubscriptionInMethod(this);
+    this.apiVersionDefault = new operations.ApiVersionDefault(this);
+    this.apiVersionLocal = new operations.ApiVersionLocal(this);
+    this.skipUrlEncoding = new operations.SkipUrlEncoding(this);
+    this.odata = new operations.Odata(this);
+    this.header = new operations.Header(this);
+    this.models = models;
+    msRest.addSerializationMixin(this);
   }
 
-  if (!options) options = {};
-
-  AutoRestAzureSpecialParametersTestClient['super_'].call(this, credentials, options);
-  this.baseUri = baseUri;
-  if (!this.baseUri) {
-    this.baseUri = 'http://localhost';
-  }
-  this.credentials = credentials;
-  this.subscriptionId = subscriptionId;
-
-  var packageInfo = this.getPackageJsonInfo(__dirname);
-  this.addUserAgentInfo(util.format('%s/%s', packageInfo.name, packageInfo.version));
-  if(options.apiVersion !== null && options.apiVersion !== undefined) {
-    this.apiVersion = options.apiVersion;
-  }
-  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) {
-    this.acceptLanguage = options.acceptLanguage;
-  }
-  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) {
-    this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
-  }
-  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) {
-    this.generateClientRequestId = options.generateClientRequestId;
-  }
-  this.xMsClientRequestId = new operations.XMsClientRequestId(this);
-  this.subscriptionInCredentials = new operations.SubscriptionInCredentials(this);
-  this.subscriptionInMethod = new operations.SubscriptionInMethod(this);
-  this.apiVersionDefault = new operations.ApiVersionDefault(this);
-  this.apiVersionLocal = new operations.ApiVersionLocal(this);
-  this.skipUrlEncoding = new operations.SkipUrlEncoding(this);
-  this.odata = new operations.Odata(this);
-  this.header = new operations.Header(this);
-  this.models = models;
-  msRest.addSerializationMixin(this);
 }
-
-util.inherits(AutoRestAzureSpecialParametersTestClient, ServiceClient);
 
 module.exports = AutoRestAzureSpecialParametersTestClient;

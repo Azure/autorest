@@ -5,7 +5,7 @@
 @Header(" * ")
 */
 @EmptyLine
-import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
+import { ServiceClientOptions, RequestOptions, ServiceCallback, HttpOperationResponse } from 'ms-rest';
 @foreach (var methodGroup in Model.MethodGroupModels)
 {
 @if (methodGroup.ContainsTimeSpan)

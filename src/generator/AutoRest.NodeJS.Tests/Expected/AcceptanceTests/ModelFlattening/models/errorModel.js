@@ -10,7 +10,7 @@
 
 'use strict';
 
-var models = require('./index');
+const models = require('./index');
 
 /**
  * @class
@@ -23,48 +23,50 @@ var models = require('./index');
  * @member {object} [parentError]
  *
  */
-function ErrorModel() {
-}
+class ErrorModel {
+  constructor() {
+  }
 
-/**
- * Defines the metadata of ErrorModel
- *
- * @returns {object} metadata of ErrorModel
- *
- */
-ErrorModel.prototype.mapper = function () {
-  return {
-    required: false,
-    serializedName: 'Error',
-    type: {
-      name: 'Composite',
-      className: 'ErrorModel',
-      modelProperties: {
-        status: {
-          required: false,
-          serializedName: 'status',
-          type: {
-            name: 'Number'
-          }
-        },
-        message: {
-          required: false,
-          serializedName: 'message',
-          type: {
-            name: 'String'
-          }
-        },
-        parentError: {
-          required: false,
-          serializedName: 'parentError',
-          type: {
-            name: 'Composite',
-            className: 'ErrorModel'
+  /**
+   * Defines the metadata of ErrorModel
+   *
+   * @returns {object} metadata of ErrorModel
+   *
+   */
+  mapper() {
+    return {
+      required: false,
+      serializedName: 'Error',
+      type: {
+        name: 'Composite',
+        className: 'ErrorModel',
+        modelProperties: {
+          status: {
+            required: false,
+            serializedName: 'status',
+            type: {
+              name: 'Number'
+            }
+          },
+          message: {
+            required: false,
+            serializedName: 'message',
+            type: {
+              name: 'String'
+            }
+          },
+          parentError: {
+            required: false,
+            serializedName: 'parentError',
+            type: {
+              name: 'Composite',
+              className: 'ErrorModel'
+            }
           }
         }
       }
-    }
-  };
-};
+    };
+  }
+}
 
 module.exports = ErrorModel;

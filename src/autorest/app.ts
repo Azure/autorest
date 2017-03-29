@@ -15,10 +15,14 @@ import { rm } from 'shelljs'
 import * as chalk from 'chalk'
 import { Console } from './console'
 import * as fs from 'fs'
+if (!Symbol.asyncIterator) {
+  require("./lib/polyfill.min.js")
+}
 
 class App {
   private static listAvailable: number = cli['list-available'] ? (Number.isInteger(cli['list-available']) ? cli['list-available'] : 10) : 0;
   private static listInstalled: number = cli['list-installed'] ? (Number.isInteger(cli['list-installed']) ? cli['list-installed'] : 10) : 0;
+  private static runtimeId?: string = cli['runtime-id'];
 
   private static version: string = cli.version || (cli.latest ? 'latest' : (cli['latest-release'] ? 'latest-release' : null));
   private static reset: boolean = cli.reset || false;
@@ -79,7 +83,7 @@ class App {
                           __latest-release__ - get latest release version
   *--reset*              remove all installed versions of AutoRest tools
                         and install the latest (override with *--version*)
-                        
+  *--runtime-id*=__id__        overrides the platform detection for the dotnet runtime.
 
 ## __Using AutoRest__`);
   }
@@ -114,7 +118,7 @@ class App {
       this.networkEnabled = networkEnabled;
       Console.Debug(`Network Enabled: ${this.networkEnabled}`);
 
-      const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--debug", "--verbose", "--quiet"]);
+      const RemoveArgs = From<string>(["--version", "--list-installed", "--list-available", "--reset", "--latest", "--latest-release", "--debug", "--verbose", "--quiet", "--runtime-id"]);
 
       // Remove bootstrapper args from cmdline
       process.argv = From<string>(process.argv).Where(each => !RemoveArgs.Any(i => each === i || each.startsWith(`${i}=`) || each.startsWith(`${i}:`))).ToArray();
@@ -217,7 +221,7 @@ class App {
       // ensure that the framework is Installed
       if (Installer.LatestFrameworkVersion == null) {
         Console.Verbose(`Dotnet Framework not installed. Attempting to install it.`);
-        installs.push(Installer.InstallFramework().then(txt => {
+        installs.push(Installer.InstallFramework(App.runtimeId).then(txt => {
           if (Installer.LatestFrameworkVersion == null) {
             Console.Exit(`Unable to install dotnet framework (required)`);
           }
@@ -241,6 +245,7 @@ class App {
           }
         }));
       }
+
 
       await Promise.all(installs);
 

@@ -5,9 +5,8 @@
 
 import should = require('should');
 import http = require('http');
-import util = require('util');
 import assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 import moment = require('moment');
 var _ = require('underscore');
 
@@ -35,7 +34,7 @@ describe('nodejs', function () {
         });
       });
 
-      it('should throw on changing protected headers', function(done) {
+      it('should throw on changing protected headers', function (done) {
         testClient.header.paramProtectedKey('text/html', function (error, result, request, response) {
           should.not.exist(error);
           testClient.header.responseProtectedKey(function (error, result, request, response) {
@@ -45,8 +44,8 @@ describe('nodejs', function () {
         });
       });
 
-      it('should send and receive integer type headers', function(done) {
-        testClient.header.paramInteger('positive', 1, function(error, result) {
+      it('should send and receive integer type headers', function (done) {
+        testClient.header.paramInteger('positive', 1, function (error, result) {
           should.not.exist(error);
           testClient.header.paramInteger('negative', -2, function (error, result) {
             should.not.exist(error);
@@ -63,8 +62,8 @@ describe('nodejs', function () {
         });
       });
 
-      it('should send and receive long type headers', function(done) {
-        testClient.header.paramLong('positive', 105, function(error, result) {
+      it('should send and receive long type headers', function (done) {
+        testClient.header.paramLong('positive', 105, function (error, result) {
           should.not.exist(error);
           testClient.header.paramLong('negative', -2, function (error, result) {
             should.not.exist(error);
@@ -81,8 +80,8 @@ describe('nodejs', function () {
         });
       });
 
-      it('should send and receive float type headers', function(done) {
-        testClient.header.paramFloat('positive', 0.07, function(error, result) {
+      it('should send and receive float type headers', function (done) {
+        testClient.header.paramFloat('positive', 0.07, function (error, result) {
           should.not.exist(error);
           testClient.header.paramFloat('negative', -3.0, function (error, result) {
             should.not.exist(error);
@@ -99,8 +98,8 @@ describe('nodejs', function () {
         });
       });
 
-      it('should send and receive double type headers', function(done) {
-        testClient.header.paramDouble('positive', 7e120, function(error, result) {
+      it('should send and receive double type headers', function (done) {
+        testClient.header.paramDouble('positive', 7e120, function (error, result) {
           should.not.exist(error);
           testClient.header.paramDouble('negative', -3.0, function (error, result) {
             should.not.exist(error);
@@ -117,8 +116,8 @@ describe('nodejs', function () {
         });
       });
 
-      it('should send and receive boolean type headers', function(done) {
-        testClient.header.paramBool('true', true, function(error, result) {
+      it('should send and receive boolean type headers', function (done) {
+        testClient.header.paramBool('true', true, function (error, result) {
           should.not.exist(error);
           testClient.header.paramBool('false', false, function (error, result) {
             should.not.exist(error);

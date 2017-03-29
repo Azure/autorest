@@ -6,9 +6,8 @@
 import should = require('should');
 
 import http = require('http');
-import util = require('util');
 import assert = require('assert');
-import msRest = require('ms-rest');
+import * as msRest from 'ms-rest';
 import fs = require('fs');
 
 import stream = require('stream');
@@ -83,7 +82,7 @@ describe('nodejs', function () {
 
     describe('Of Body Parameters', function () {
       it('should test the ExclusiveMinimum constraint on capacity', function (done) {
-        testClient.validationOfBody("123", 150, { body: { capacity: 0, child: {}}}, function (err, result) {
+        testClient.validationOfBody("123", 150, { body: { capacity: 0, child: {} } }, function (err, result) {
           should.exist(err);
           err.message.should.match(/.*capacity.*constraint.*ExclusiveMinimum.*0.*/ig);
           done();

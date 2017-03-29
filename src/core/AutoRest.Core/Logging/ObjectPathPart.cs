@@ -13,6 +13,8 @@ namespace AutoRest.Core.Logging
 
         public abstract string ReadablePath { get; }
 
+        public abstract object RawPath { get; }
+
         /// <summary>
         /// Selects the child node according to this path part.
         /// Returns null if such node was not found.
